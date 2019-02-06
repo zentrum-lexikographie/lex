@@ -69,7 +69,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter für die Fenstergröße des Dialogs.
+	 * Dies sind die Parameter fÃ¼r die FenstergrÃ¶ÃŸe des Dialogs.
 	 */
 	static int H_SIZE = 700;
 	static int V_SIZE = 400;
@@ -79,7 +79,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	private static String URI;
 	private static String COLLECTION;
 
-	static String[] captions = {"URL","Zeitstempel","Schreibung","Element","Status","Änderung"};
+	static String[] captions = {"URL","Zeitstempel","Schreibung","Element","Status","Ã„nderung"};
 	static String[][] content = new String[0][0];
 	@SuppressWarnings("serial")
 	JXTable descriptionTable = new JXTable(new DefaultTableModel(content, captions){
@@ -111,11 +111,11 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 		COLLECTION = collection;
 		FILTERLIST = filtersList;
 		
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
 		setTitle("eXist - Metadaten-Suche");
 
-		//Erzeugt Eingabemaske für Zeitraum
+		//Erzeugt Eingabemaske fÃ¼r Zeitraum
 		final JXPanel searchPanel = new JXPanel(new BorderLayout());
 		final JXPanel datePanel = new JXPanel(new FlowLayout());
 		final JXPanel filtersPanel = new JXPanel(new BorderLayout());
@@ -123,7 +123,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 		searchPanel.add("North", datePanel);
 		searchPanel.add("South", filtersPanel);
 		
-		// Richtet die Auswahlbox für die Knoten ein
+		// Richtet die Auswahlbox fÃ¼r die Knoten ein
 		nodeRestrictionText.setColumns(10);
 		nodeRestrictionList.push("");
 		nodeRestrictionList.add("Freitext");
@@ -141,7 +141,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 			}
 		});
 		
-		// Erzeugt das Feld für den Zeitraum-Startwert
+		// Erzeugt das Feld fÃ¼r den Zeitraum-Startwert
 		datePanel.add(dateCheckBox);
 		
 		startDate = new JXDatePicker(new Date());
@@ -203,7 +203,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 		datePanel.validate();
 			
 			
-		// In der Mitte wird das Auswahlfeld mit den Registereinträgen erzeugt, bei Doppelklick wird das Element geöffnet
+		// In der Mitte wird das Auswahlfeld mit den RegistereintrÃ¤gen erzeugt, bei Doppelklick wird das Element geÃ¶ffnet
 		descriptionTable.setFillsViewportHeight(true);
 		descriptionTable.setShowGrid(false);
 		descriptionTable.setIntercellSpacing(new Dimension(0, 0));
@@ -212,7 +212,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 		descriptionTable.getColumnModel().getColumn(0).setMaxWidth(0);
 		descriptionTable.getColumnModel().getColumn(1).setMaxWidth(80);
 		add("Center", new JScrollPane(descriptionTable));
-		// Öffnen mit Doppelklick
+		// Ã–ffnen mit Doppelklick
 		descriptionTable.addMouseListener(new MouseAdapter() {
 			   public void mouseClicked(MouseEvent e) {
 				      if (e.getClickCount() == 2) {
@@ -221,33 +221,33 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 				         }
 				   }
 				});
-        // Unten gibt es die 3 Knöpfe "Liste kopieren", "Öffnen" (Default) und "Schließen".
+        // Unten gibt es die 3 KnÃ¶pfe "Liste kopieren", "Ã–ffnen" (Default) und "SchlieÃŸen".
 		JXPanel panel = new JXPanel();
 		JButton copy = new JButton("Liste kopieren");
 		copy.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			copyAction(authorAccess);
 		}});
 		panel.add(copy);
-		JButton open = new JButton("Öffnen");
+		JButton open = new JButton("Ã–ffnen");
 		open.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			openAction(authorAccess,(String)descriptionTable.getValueAt(descriptionTable.getSelectedRow(), 0));
 		}});
 		panel.add(open);
-		JButton cancel = new JButton("Schließen");
+		JButton cancel = new JButton("SchlieÃŸen");
 		cancel.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			cancelAction();
 		}});
 		panel.add(cancel);
 		add("South", panel);
 
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die Schließaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶ÃŸe, der Ort in der Bildschirmmitte, die SchlieÃŸaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setAlwaysOnTop (true);
 		
-		// hübsches Symbol für das Fenster
+		// hÃ¼bsches Symbol fÃ¼r das Fenster
 		String decodedPath = "";
 		try {decodedPath = URLDecoder.decode(ICON_PATH, "UTF-8");} 
 			catch (UnsupportedEncodingException e) {e.printStackTrace();}
@@ -272,12 +272,12 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 		removeButton.setPreferredSize(new Dimension(45,1));
 		filterPanel.add("East", removeButton);
 		
-		// Erzeugt die Filter-ChoiceBox, fällt sie mit den wählbaren Filtern und fügt sie zum Panel hinzu
+		// Erzeugt die Filter-ChoiceBox, fÃ¤llt sie mit den wÃ¤hlbaren Filtern und fÃ¼gt sie zum Panel hinzu
 		JXComboBox filterBox = new JXComboBox();
 		filterMap.put("filterType", filterBox);
 		for(LinkedList<String> values : FILTERLIST) {
 			String filterName = values.get(0);
-			// Kürzt Bezeichnung ab auf den Namen des letztes Elements im XPath 
+			// KÃ¼rzt Bezeichnung ab auf den Namen des letztes Elements im XPath 
 			filterName = filterName.substring(filterName.lastIndexOf("/")+1);
 			filterName = filterName.substring(filterName.lastIndexOf(":")+1);
 			filterBox.addItem(filterName);
@@ -295,12 +295,12 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 			}});
 		filterBox.requestFocus();
 		
-		// Erzeuge Eingabe-Element für den Wert des Filters
+		// Erzeuge Eingabe-Element fÃ¼r den Wert des Filters
 		Object valueBox = filterSelected(filterMap);
 		filterMap.put("value", valueBox);
 		filterPanel.add("Center", (Component) valueBox);
 		
-		// Erzeuge neues Layout für das SearchPanel
+		// Erzeuge neues Layout fÃ¼r das SearchPanel
 		filtersPanel.removeAll();
 		filtersPanel.setLayout(new GridLayout(filters.size()+1,1));
 		for(HashMap<String, Object> filter : filters)
@@ -315,7 +315,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	}
 
 	/**
-	 * Bei der Auswahl eines Attributs wird die Werte-Auswahl mit den entsprechenden Werten gefÃ¼llt, vorrausgesetzt es handelt sich um eine Choice-Box und kein Eingabfeld
+	 * Bei der Auswahl eines Attributs wird die Werte-Auswahl mit den entsprechenden Werten gefÃƒÂ¼llt, vorrausgesetzt es handelt sich um eine Choice-Box und kein Eingabfeld
 	 */
 	@SuppressWarnings("unchecked")
 	private Object filterSelected(HashMap<String, Object> filter) {
@@ -338,12 +338,12 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	}
 
 	/**
-	 * Erzeugt die Info-Bar, mit Erklärungs-Label und Neuer-Filter-Button
+	 * Erzeugt die Info-Bar, mit ErklÃ¤rungs-Label und Neuer-Filter-Button
 	 * @param searchPanel
 	 * @return
 	 */
 	private JXPanel createInfoBar(final StandalonePluginWorkspace authorAccess, final JXPanel filtersPanel) {
-		// Erzeugt den Knopf, um eine neue Zeile hinzuzufügen
+		// Erzeugt den Knopf, um eine neue Zeile hinzuzufÃ¼gen
 		JXPanel infoBar = new JXPanel(new BorderLayout());
 		infoBar.add("West", search);
 		getRootPane().setDefaultButton(search);
@@ -359,15 +359,15 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Entfernt die entsprechende Filter-Eingabezeile und aktualisiert die GrafikoberflÃ¤che
+	 * Entfernt die entsprechende Filter-Eingabezeile und aktualisiert die GrafikoberflÃƒÂ¤che
 	 * @param filtersPanel - zugrunde liegendes Panel
-	 * @param filterMap - Filter-Oberfläche welche entfernt werden soll
+	 * @param filterMap - Filter-OberflÃ¤che welche entfernt werden soll
 	 */
 	private void removeFilter(final StandalonePluginWorkspace authorAccess, final JXPanel filtersPanel, HashMap<String,Object> filterMap) {
 		// Entfernt den filter aus der Filter-Liste
 		filters.remove(filterMap);
 		
-		// Erzeuge neues Layout für das SearchPanel
+		// Erzeuge neues Layout fÃ¼r das SearchPanel
 		filtersPanel.removeAll();
 		filtersPanel.setLayout(new GridLayout(filters.size()+1,1));
 		for(HashMap<String, Object> filter : filters)
@@ -499,7 +499,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
         	int index = ((JXComboBox) filterMap.get("filterType")).getSelectedIndex();
         	String xpath = FILTERLIST.get(index).get(0);
         	
-        	// Unterscheidung zwischen TextField- und Aufklapp-Menü-Eingabe
+        	// Unterscheidung zwischen TextField- und Aufklapp-MenÃ¼-Eingabe
         	String value = "";
         	if(filterMap.get("value") instanceof JXTextField)
         		value = (String) ((JXTextField) filterMap.get("value")).getText();
@@ -561,7 +561,7 @@ public class DWDSoXMetaSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Öffnet die Datei, in der sich die ausgewählte Lesart befindet
+	 * Ã–ffnet die Datei, in der sich die ausgewÃ¤hlte Lesart befindet
 	 * @param authorAccess
 	 */
 	private void openAction(StandalonePluginWorkspace authorAccess, String file) {

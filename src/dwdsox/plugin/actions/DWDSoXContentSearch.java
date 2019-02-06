@@ -61,7 +61,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter für die Fenstergröße des Dialogs.
+	 * Dies sind die Parameter fÃ¼r die FenstergrÃ¶ÃŸe des Dialogs.
 	 */
 	static int H_SIZE = 450;
 	static int V_SIZE = 350;
@@ -78,7 +78,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	final LinkedList<HashMap<String, Object>> filters = new LinkedList<HashMap<String, Object>>(); 
 	final JButton search = new JButton("Suchen");
 	final LinkedList<String> fileList = new LinkedList<String>();
-	final JLabel statusLabel = new JLabel(" Ein * am Beginn/Ende öffnet den Suchterm.");
+	final JLabel statusLabel = new JLabel(" Ein * am Beginn/Ende Ã¶ffnet den Suchterm.");
 	
 	public DWDSoXContentSearch(final StandalonePluginWorkspace authorAccess, String xqPath, String uri, String collection, LinkedList<LinkedList<String>> filterList) {
 		// Calls the parent telling it this dialog is modal(i.e true)
@@ -90,31 +90,31 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 		COLLECTION = collection;
 		FILTERLIST = filterList;
 		
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
 		setTitle("eXist - Content-Suche");
 		
-		// Erzeugt das Panel für die Filter-Zeilen 
+		// Erzeugt das Panel fÃ¼r die Filter-Zeilen 
 		final Panel searchPanel = new Panel();
 		add("North", searchPanel);
 		
 		createNewFilter(authorAccess, searchPanel);
 		
-		// In der Mitte wird das Auswahlfeld mit den Registereinträgen erzeugt, die bei Doppelklick die entsprechende Datei öffnen
+		// In der Mitte wird das Auswahlfeld mit den RegistereintrÃ¤gen erzeugt, die bei Doppelklick die entsprechende Datei Ã¶ffnen
 		descriptionList.setMultipleMode(false);
 		add("Center", descriptionList);
 		descriptionList.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			openAction(authorAccess);
 		}});
 		
-		// Unten gibt es die drei Knöpfe "ID einfügen", "Öffnen" (Default) und "Abbrechen".
+		// Unten gibt es die drei KnÃ¶pfe "ID einfÃ¼gen", "Ã–ffnen" (Default) und "Abbrechen".
 		Panel panel = new Panel();
 		JButton copy = new JButton("Liste kopieren");
 		copy.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			copyAction(authorAccess);
 		}});
 		panel.add(copy);
-		JButton open = new JButton("Öffnen");
+		JButton open = new JButton("Ã–ffnen");
 		open.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			statusLabel.setText("Suche gestartet. Warte auf Antwort der eXist-Datenbank...");
 			openAction(authorAccess);
@@ -125,21 +125,21 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 			insertIDAction(authorAccess);
 		}});
 		panel.add(insertID);
-		JButton cancel = new JButton("Schließen");
+		JButton cancel = new JButton("SchlieÃŸen");
 		cancel.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			cancelAction();
 		}});
 		panel.add(cancel);
 		add("South", panel);
 
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die Schließaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶ÃŸe, der Ort in der Bildschirmmitte, die SchlieÃŸaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setAlwaysOnTop (true);
 		
-		// hübsches Symbol für das Fenster
+		// hÃ¼bsches Symbol fÃ¼r das Fenster
 		String decodedPath = "";
 		try {decodedPath = URLDecoder.decode(ICON_PATH, "UTF-8");} 
 			catch (UnsupportedEncodingException e) {e.printStackTrace();}
@@ -148,15 +148,15 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	}
 
 	/**
-	 * Entfernt die entsprechende Filter-Eingabezeile und aktualisiert die GrafikoberflÃ¤che
+	 * Entfernt die entsprechende Filter-Eingabezeile und aktualisiert die GrafikoberflÃƒÂ¤che
 	 * @param searchPanel - zugrunde liegendes Panel
-	 * @param filterMap - Filter-Oberfläche welche entfernt werden soll
+	 * @param filterMap - Filter-OberflÃ¤che welche entfernt werden soll
 	 */
 	private void removeFilter(final StandalonePluginWorkspace authorAccess, final Panel searchPanel, HashMap<String,Object> filterMap) {
 		// Entfernt den filter aus der Filter-Liste
 		filters.remove(filterMap);
 		
-		// Erzeuge neues Layout für das SearchPanel
+		// Erzeuge neues Layout fÃ¼r das SearchPanel
 		searchPanel.removeAll();
 		searchPanel.setLayout(new GridLayout(filters.size()+1,1));
 		for(HashMap<String, Object> filter : filters)
@@ -170,7 +170,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Erzeugt eine Eingabezeile für eine neue Zeile und aktualisiert die Grafikoberfläche
+	 * Erzeugt eine Eingabezeile fÃ¼r eine neue Zeile und aktualisiert die GrafikoberflÃ¤che
 	 * @param searchPanel
 	 */
 	private void createNewFilter(final StandalonePluginWorkspace authorAccess, final Panel searchPanel) {
@@ -189,12 +189,12 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 		removeButton.setPreferredSize(new Dimension(45,1));
 		filterPanel.add("East", removeButton);
 		
-		// Erzeugt die Filter-ChoiceBox, fällt sie mit den wählbaren Filtern und fügt sie zum Panel hinzu
+		// Erzeugt die Filter-ChoiceBox, fÃ¤llt sie mit den wÃ¤hlbaren Filtern und fÃ¼gt sie zum Panel hinzu
 		Choice filterBox = new Choice();
 		filterMap.put("filterType", filterBox);
 		for(LinkedList<String> values : FILTERLIST) {
 			String filterName = values.get(0);
-			// Kürzt Bezeichnung ab auf den Namen des letztes Elements im XPath 
+			// KÃ¼rzt Bezeichnung ab auf den Namen des letztes Elements im XPath 
 			//filterName = filterName.substring(filterName.lastIndexOf("/")+1);
 			//filterName = filterName.substring(filterName.lastIndexOf(":")+1);
 			filterBox.add(filterName);
@@ -212,12 +212,12 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 			}});
 		filterBox.requestFocus();
 		
-		// Erzeuge Eingabe-Element für den Wert des Filters
+		// Erzeuge Eingabe-Element fÃ¼r den Wert des Filters
 		Object valueBox = filterSelected(filterMap);
 		filterMap.put("value", valueBox);
 		filterPanel.add("Center", (Component) valueBox);
 		
-		// Erzeuge neues Layout für das SearchPanel
+		// Erzeuge neues Layout fÃ¼r das SearchPanel
 		searchPanel.removeAll();
 		searchPanel.setLayout(new GridLayout(filters.size()+1,1));
 		for(HashMap<String, Object> filter : filters)
@@ -232,12 +232,12 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Erzeugt die Info-Bar, mit Erklärungs-Label und Neuer-Filter-Button
+	 * Erzeugt die Info-Bar, mit ErklÃ¤rungs-Label und Neuer-Filter-Button
 	 * @param searchPanel
 	 * @return
 	 */
 	private Panel createInfoBar(final StandalonePluginWorkspace authorAccess, final Panel searchPanel) {
-		// Erzeugt den Knopf, um eine neue Zeile hinzuzufügen
+		// Erzeugt den Knopf, um eine neue Zeile hinzuzufÃ¼gen
 		Panel infoBar = new Panel(new BorderLayout());
 		search.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			searchAction(authorAccess);
@@ -256,7 +256,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Bei der Auswahl eines Attributs wird die Werte-Auswahl mit den entsprechenden Werten gefÃ¼llt, vorrausgesetzt es handelt sich um eine Choice-Box und kein Eingabfeld
+	 * Bei der Auswahl eines Attributs wird die Werte-Auswahl mit den entsprechenden Werten gefÃƒÂ¼llt, vorrausgesetzt es handelt sich um eine Choice-Box und kein Eingabfeld
 	 */
 	private Object filterSelected(HashMap<String, Object> filter) {
 		Choice filterBox = (Choice) filter.get("filterType");
@@ -394,7 +394,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
         	String xpath = FILTERLIST.get(index).get(1);
         	String value = "";
         	
-        	// Unterscheidung zwischen TextField- und Aufklapp-Menü-Eingabe
+        	// Unterscheidung zwischen TextField- und Aufklapp-MenÃ¼-Eingabe
         	if(filterMap.get("value") instanceof TextField)
         		value = ((TextField) filterMap.get("value")).getText();
         	if(filterMap.get("value") instanceof Choice)
@@ -439,7 +439,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
     }
     
     /**
-     * Fügt die ID der ausgewÃ¤hlten Lesart an der Cursorposition ein
+     * FÃ¼gt die ID der ausgewÃƒÂ¤hlten Lesart an der Cursorposition ein
      * @param authorAccess
      */
 	private void insertIDAction(StandalonePluginWorkspace authorAccess) {
@@ -472,7 +472,7 @@ public class DWDSoXContentSearch extends JFrame implements ClipboardOwner {
 	}
 	
 	/**
-	 * Öffnet die Datei, in der sich die ausgewählte Lesart befindet
+	 * Ã–ffnet die Datei, in der sich die ausgewÃ¤hlte Lesart befindet
 	 * @param authorAccess
 	 */
 	private void openAction(StandalonePluginWorkspace authorAccess) {

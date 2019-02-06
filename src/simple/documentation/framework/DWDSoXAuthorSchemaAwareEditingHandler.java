@@ -125,7 +125,7 @@ public class DWDSoXAuthorSchemaAwareEditingHandler implements
 		return false;
 	}
 	
-	// Was zur Hölle soll das sein?
+	// Was zur HÃ¶lle soll das sein?
 	public boolean handleTypingFallback(int integer, char character, AuthorAccess authoraccess) {
 		return(false);
 	}

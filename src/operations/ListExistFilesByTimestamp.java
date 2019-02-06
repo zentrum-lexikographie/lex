@@ -48,7 +48,7 @@ public class ListExistFilesByTimestamp implements AuthorOperation{
 					"Xpath-Ausdruck:Wert1,Wert2,Wert3,...\n" +
 					"...\n" +
 					"Der Ausdruck geht von den gefundenen Lesart-Knoten aus. Der XPath der Definition einer Lesart muss also zum Beispiel mit '/s:Definition' angesteuert werden, die Schreibweise des Artikels mit '/ancestor::s:Artikel/s:Formangabe/s:Schreibweise'\n" +
-					"Werden keine Werte angegeben, generiert die Suchfunktion eine Text-Suche, anstatt eines Men�s zur Auswahl der Werte."),
+					"Werden keine Werte angegeben, generiert die Suchfunktion eine Text-Suche, anstatt eines Menüs zur Auswahl der Werte."),
 		new ArgumentDescriptor(
 				ARGUMENT_NODERESTRICTIONS,
 				ArgumentDescriptor.TYPE_STRING,
@@ -76,14 +76,14 @@ public class ListExistFilesByTimestamp implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die �bergebenen Argumente werden eingelesen ..
+		// Die ï¿½bergebenen Argumente werden eingelesen ..
 		Object xqPathArgVal = args.getArgumentValue(ARGUMENT_XQPATH);
 		Object urlArgVal = args.getArgumentValue(ARGUMENT_URL);
 		Object collectionArgVal = args.getArgumentValue(ARGUMENT_COLLECTION);
 		Object nodeRestrictions = args.getArgumentValue(ARGUMENT_NODERESTRICTIONS);
 		Object filters = args.getArgumentValue(ARGUMENT_FILTERS);
 		
-		// .. und �berpr�ft.
+		// .. und überprüft.
 		if (xqPathArgVal != null &&
 			xqPathArgVal instanceof String &&
 			urlArgVal != null && 
@@ -117,7 +117,7 @@ public class ListExistFilesByTimestamp implements AuthorOperation{
 				filtersList.add(valueList);
 			}
 			
-			// Dann wird der Such-Dialog geöffnet
+			// Dann wird der Such-Dialog geÃ¶ffnet
 			@SuppressWarnings("unused")
 			ListExistFilesByTimestampFrame attributeDialog = new ListExistFilesByTimestampFrame(authorAccess, nodeRestrictionList, filtersList, (String) xqPathArgVal, (String) urlArgVal, (String) collectionArgVal);
 			
@@ -142,6 +142,6 @@ public class ListExistFilesByTimestamp implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "�ffnet einen Dialog, in welchem ein Attribut via XQuery-Abfrage nach einem Element-Wert aus einer eXist-Collection ausgewählt werden kann. Das Attribut wird dann an Cursor-Position eingef�gt.";
+		return "Öffnet einen Dialog, in welchem ein Attribut via XQuery-Abfrage nach einem Element-Wert aus einer eXist-Collection ausgewÃ¤hlt werden kann. Das Attribut wird dann an Cursor-Position eingefügt.";
 	}
 }

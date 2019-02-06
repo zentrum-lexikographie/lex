@@ -53,7 +53,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter für die Fenstergröße des Dialogs.
+	 * Dies sind die Parameter fÃ¼r die FenstergrÃ¶ÃŸe des Dialogs.
 	 */
 	static int H_SIZE = 400;
 	static int V_SIZE = 250;
@@ -65,7 +65,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 	private static String FILENAME;
 	private static String TEMPDIRECTORY;
 	
-	final JButton open = new JButton("Revision Öffnen");
+	final JButton open = new JButton("Revision Ã–ffnen");
 	final TextField filenameField = new TextField("", 20);
 	//final Choice directoryChoice = new Choice();
 	final TextArea debug = new TextArea(); 
@@ -92,9 +92,9 @@ public class GetRevisionXQueryDialog extends JDialog {
 		FILENAME = file.getName();
 		TEMPDIRECTORY = System.getProperty("java.io.tmpdir");
 			
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
-		setTitle("Revisionen für " + FILENAME);
+		setTitle("Revisionen fÃ¼r " + FILENAME);
 				
 		ResourceSet resources = null;
 		try {
@@ -104,7 +104,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 				return;
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,"Ermitteln der Revisionen fehlgeschlagen.\n" + "Möglicherweise existiert Datei " + FILEPATH + " nicht in Datenbank.\n"+ e.getCause() + ": " + e.getMessage() + "\n" + e.getStackTrace(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Ermitteln der Revisionen fehlgeschlagen.\n" + "MÃ¶glicherweise existiert Datei " + FILEPATH + " nicht in Datenbank.\n"+ e.getCause() + ": " + e.getMessage() + "\n" + e.getStackTrace(),"Error",JOptionPane.ERROR_MESSAGE);
 			dispose();
 			return;
 		}
@@ -115,7 +115,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 		revisionTable.getColumnModel().getColumn(0).setMaxWidth(80);
 		revisionTable.getColumnModel().getColumn(1).setMaxWidth(120);
 		add("Center", new JScrollPane(revisionTable));
-		//Öffnen mit Doppelklick
+		//Ã–ffnen mit Doppelklick
 		revisionTable.addMouseListener(new MouseAdapter() {
 			   public void mouseClicked(MouseEvent e) {
 				      if (e.getClickCount() == 2) {
@@ -186,7 +186,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 		Thread fillThread = new FillListThread(resources);
 	    fillThread.start();
 		
-		// Unten gibt es die zwei Knöpfe "Öffnen" (Default) und "Abbrechen".
+		// Unten gibt es die zwei KnÃ¶pfe "Ã–ffnen" (Default) und "Abbrechen".
 		Panel panel = new Panel();
 		open.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			openRevisionAction(authorAccess, (String)revisionTable.getModel().getValueAt(revisionTable.getSelectedRow(), 0));
@@ -200,7 +200,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 		panel.add(cancel);
 		add("South", panel);
 
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die Schließaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶ÃŸe, der Ort in der Bildschirmmitte, die SchlieÃŸaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -281,7 +281,7 @@ public class GetRevisionXQueryDialog extends JDialog {
 			out.close();
 			authorAccess.getWorkspaceAccess().open(new URL("file:" + tempFile.getAbsolutePath()));
 		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null,"Erstellen der temporären Datei fehlgeschlagen.\n" + e.getMessage() + "\n" + e.getStackTrace() + "\n" + tempFile.getAbsolutePath(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Erstellen der temporÃ¤ren Datei fehlgeschlagen.\n" + e.getMessage() + "\n" + e.getStackTrace() + "\n" + tempFile.getAbsolutePath(),"Error",JOptionPane.ERROR_MESSAGE);
 		}
 		dispose();
 	}

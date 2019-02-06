@@ -44,7 +44,7 @@ public class DWDSoXCreateDocument extends JDialog {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter fï¿½r die Fenstergröße des Dialogs.
+	 * Dies sind die Parameter fÃ¯Â¿Â½r die FenstergrÃ¶ÃŸe des Dialogs.
 	 */
 	static int H_SIZE = 300;
 	static int V_SIZE = 180;
@@ -85,7 +85,7 @@ public class DWDSoXCreateDocument extends JDialog {
 		GROUP = group;
 		PERMISSIONS = permissions;
 			
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
 		setTitle("Datei in eXist erzeugen");
 		
@@ -93,7 +93,7 @@ public class DWDSoXCreateDocument extends JDialog {
 		//add("Center", debug);
 		//debug.setText(xqPath0 + "\n" + xqPath1 + "\n" + xqPath2 + "\n" + uri + "\n" + collection + "\n" + templateList.toString());
 		
-		// Erzeugt das Panel für die Filter-Zeilen
+		// Erzeugt das Panel fÃ¼r die Filter-Zeilen
 		final Panel inputPanel = new Panel();
 		inputPanel.setLayout(new GridLayout(4,2));
 		add("North", inputPanel);
@@ -110,7 +110,7 @@ public class DWDSoXCreateDocument extends JDialog {
 		inputPanel.add(passwordLabel);
 		inputPanel.add(passwordField);
 		
-		// Unten gibt es die zwei Knöpfe "Datei anlegen" (Default) und "Abbrechen".
+		// Unten gibt es die zwei KnÃ¶pfe "Datei anlegen" (Default) und "Abbrechen".
 		Panel panel = new Panel();
 		create.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			createAction(pluginWorkspaceAccess);
@@ -124,7 +124,7 @@ public class DWDSoXCreateDocument extends JDialog {
 		panel.add(cancel);
 		add("South", panel);
 
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die Schließaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶ÃŸe, der Ort in der Bildschirmmitte, die SchlieÃŸaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -132,7 +132,7 @@ public class DWDSoXCreateDocument extends JDialog {
 	}
 
 	/**
-	 * Bei "Datei Erstellen" wird die ID generiert und auf Eindeutigkeit geprüft und die Datei erstellt. Anschließend wird das Fenster geschlossen.
+	 * Bei "Datei Erstellen" wird die ID generiert und auf Eindeutigkeit geprÃ¼ft und die Datei erstellt. AnschlieÃŸend wird das Fenster geschlossen.
 	 */
 	private void createAction(StandalonePluginWorkspace pluginWorkspaceAccess){
 		
@@ -240,7 +240,7 @@ public class DWDSoXCreateDocument extends JDialog {
 	    String temp = Normalizer.normalize(filenameField.getText(), Normalizer.Form.NFD);
 	    Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 	    String filename = pattern.matcher(temp).replaceAll("");
-	    filename = filename.replace("ß", "ss");
+	    filename = filename.replace("ÃŸ", "ss");
 	    filename = filename.replace(" ", "-");
 	    filename = filename.replaceAll("[^\\p{Alpha}\\p{Digit}\\-]","_");
 
@@ -282,7 +282,7 @@ public class DWDSoXCreateDocument extends JDialog {
 			pluginWorkspaceAccess.open(new URL(file));
 		} catch (MalformedURLException e){
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null,"Erstellte Datei konnte nicht geöffnet werden: " + file,"Fehler",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Erstellte Datei konnte nicht geÃ¶ffnet werden: " + file,"Fehler",JOptionPane.ERROR_MESSAGE);
 		}
 		
         //[DEBUG]

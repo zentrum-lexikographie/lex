@@ -35,7 +35,7 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter für die Fenstergröße des Dialogs.
+	 * Dies sind die Parameter fÃ¼r die FenstergrÃ¶ÃŸe des Dialogs.
 	 */
 	static int H_SIZE = 200;
 	static int V_SIZE = 130;
@@ -44,7 +44,7 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 	private static String URI;
 	private static String FILEPATH;
 	
-	final JButton delete = new JButton("Datei löschen");
+	final JButton delete = new JButton("Datei lÃ¶schen");
 	final TextField filenameField = new TextField("", 20);
 	//final Choice directoryChoice = new Choice();
 	final TextArea debug = new TextArea(); 
@@ -63,14 +63,14 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 		URI = uri;
 		FILEPATH = authorAccess.getEditorAccess().getEditorLocation().getPath();
 			
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
-		setTitle("Datei in eXist löschen");
+		setTitle("Datei in eXist lÃ¶schen");
 				
-		// Erzeugt das Panel für die Filter-Zeilen
+		// Erzeugt das Panel fÃ¼r die Filter-Zeilen
 		final Panel inputPanel = new Panel();
 		inputPanel.setLayout(new GridLayout(2,2));
-		Label questionLabel = new Label("Löschen der Datei " + FILEPATH);
+		Label questionLabel = new Label("LÃ¶schen der Datei " + FILEPATH);
 		
 		//[DEBUG]
 		//add("North",debug);
@@ -84,7 +84,7 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 		inputPanel.add(passwordLabel);
 		inputPanel.add(passwordField);
 		
-		// Unten gibt es die zwei Knöpfe "Löschen" (Default) und "Abbrechen".
+		// Unten gibt es die zwei KnÃ¶pfe "LÃ¶schen" (Default) und "Abbrechen".
 		Panel panel = new Panel();
 		delete.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			deleteAction(authorAccess);
@@ -98,7 +98,7 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 		panel.add(cancel);
 		add("South", panel);
 
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die SchlieÃŸaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶ÃŸe, der Ort in der Bildschirmmitte, die SchlieÃƒÂŸaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -133,15 +133,15 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
 			//xQuery(authorAccess);
 			authorAccess.getEditorAccess().close(false);
 		} catch (ClassNotFoundException e) {
-			JOptionPane.showMessageDialog(null,"Löschen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"LÃ¶schen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		} catch (XMLDBException e) {
 			JOptionPane.showMessageDialog(null,"Datenbank-Zugriff fehlgeschlagen.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		} catch (InstantiationException e) {
-			JOptionPane.showMessageDialog(null,"Löschen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"LÃ¶schen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		} catch (IllegalAccessException e) {
-			JOptionPane.showMessageDialog(null,"Löschen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"LÃ¶schen der Datei fehlgeschlagen. Datenbank-Treiber konnte nicht initialisiert werden.\n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,"Löschen der Datei fehlgeschlagen. Unbekannter Fehler. (5) \n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"LÃ¶schen der Datei fehlgeschlagen. Unbekannter Fehler. (5) \n" + e.getMessage() + "\n" + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
 		} finally {
         	try {
 				collection.close();
@@ -191,7 +191,7 @@ public class DeleteEXistXDocumentXQueryDialog extends JDialog {
             xpqs.setProperty("indent", "no");
             ResourceSet resources = xpqs.query(xquery);
             if(resources.getSize()>0) {}
-			else JOptionPane.showMessageDialog(null,"Löschen der Datei fehlgeschlagen.","Error",JOptionPane.ERROR_MESSAGE);
+			else JOptionPane.showMessageDialog(null,"LÃ¶schen der Datei fehlgeschlagen.","Error",JOptionPane.ERROR_MESSAGE);
         } finally {
             //dont forget to cleanup
             if(col != null) {

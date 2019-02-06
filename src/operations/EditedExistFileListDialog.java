@@ -42,7 +42,7 @@ public class EditedExistFileListDialog extends JDialog {
 	private static final long serialVersionUID = -190895918216985737L;
 
 	/**
-	 * Dies sind die Parameter f�r die Fenstergr��e des Dialogs.
+	 * Dies sind die Parameter für die Fenstergröße des Dialogs.
 	 */
 	static int H_SIZE = 400;
 	static int V_SIZE = 300;
@@ -64,28 +64,28 @@ public class EditedExistFileListDialog extends JDialog {
 		URI = uri;
 		COLLECTION = collection;
 		
-		// Für den Dialog wird das Layout (North, South, .., Center) ausgewählt und der Titel gesetzt.
+		// FÃ¼r den Dialog wird das Layout (North, South, .., Center) ausgewÃ¤hlt und der Titel gesetzt.
 		setLayout(new BorderLayout());
-		setTitle("Ge�nderte Dateien �ffnen");
+		setTitle("Geänderte Dateien öffnen");
 
-		// In der Mitte wird das Auswahlfeld mit den Registereinträgen erzeugt, ..
+		// In der Mitte wird das Auswahlfeld mit den RegistereintrÃ¤gen erzeugt, ..
 		descriptionList.setMultipleMode(true);
 		add("Center", descriptionList);
 		
-		// Unten gibt es die drei Knöpfe "Alles/Nichts auswählen", "Öffnen" (als Default) und "Abbrechen".
+		// Unten gibt es die drei KnÃ¶pfe "Alles/Nichts auswÃ¤hlen", "Ãffnen" (als Default) und "Abbrechen".
 		Panel panel = new Panel();
-		final JButton select = new JButton("Alles ausw�hlen");
+		final JButton select = new JButton("Alles auswählen");
 		select.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			selectAction(select);
 		}});
 		panel.add(select);
-		JButton open = new JButton("�ffnen");
+		JButton open = new JButton("Öffnen");
 		open.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			openAction(authorAccess);
 		}});
 		getRootPane().setDefaultButton(open);
 		panel.add(open);
-		JButton close = new JButton("Schlie�en");
+		JButton close = new JButton("Schließen");
 		close.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent arg0) {
 			closeAction();
 		}});
@@ -132,7 +132,7 @@ public class EditedExistFileListDialog extends JDialog {
 	        }
 		}
 		
-		// Die Eigenschaften des Dialogfenster werden angepasst: die Größe, der Ort in der Bildschirmmitte, die Schließaktion und die Sichtbarkeit.
+		// Die Eigenschaften des Dialogfenster werden angepasst: die GrÃ¶Ãe, der Ort in der Bildschirmmitte, die SchlieÃaktion und die Sichtbarkeit.
 		setSize(H_SIZE, V_SIZE);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -185,15 +185,15 @@ public class EditedExistFileListDialog extends JDialog {
     }
 	
 	public void selectAction(JButton selectButton) {
-		if(selectButton.getText().equalsIgnoreCase("Alles auswählen")) {
+		if(selectButton.getText().equalsIgnoreCase("Alles auswÃ¤hlen")) {
 			for(int i=0; i<=descriptionList.getItemCount(); i++)
 				descriptionList.select(i);
-			selectButton.setText("Nichts auswählen");
+			selectButton.setText("Nichts auswÃ¤hlen");
 		} 
 		else {
 			for(int i=0; i<=descriptionList.getItemCount(); i++)
 				descriptionList.deselect(i);
-			selectButton.setText("Alles auswählen");
+			selectButton.setText("Alles auswÃ¤hlen");
 		}
 	}
     

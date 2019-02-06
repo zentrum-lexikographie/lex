@@ -52,12 +52,12 @@ public class DWDSWebViewXSLT implements AuthorOperation{
 		new ArgumentDescriptor(
 				TEMPLATEHTML_URL,
 				ArgumentDescriptor.TYPE_STRING,
-				"Pfad zur HTML-Datei, die das statische Template enthält, z.B.: " +
+				"Pfad zur HTML-Datei, die das statische Template enthÃ¤lt, z.B.: " +
 				"${frameworkDir}/scripts/webViewTemplate.html \n"),
 		new ArgumentDescriptor(
 				TARGETHTML_URL,
 				ArgumentDescriptor.TYPE_STRING,
-				"Pfad zur temporären HTML-Datei, z.B.: " +
+				"Pfad zur temporÃ¤ren HTML-Datei, z.B.: " +
 				"${frameworkDir}/scripts/webViewResult.html \n")
 	};
 
@@ -65,12 +65,12 @@ public class DWDSWebViewXSLT implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object xsltArgVal = args.getArgumentValue(ARGUMENT_XSLT);
 		Object targetHTMLArgVal = args.getArgumentValue(TARGETHTML_URL);
 		Object templateHTMLArgVal = args.getArgumentValue(TEMPLATEHTML_URL);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xsltArgVal != null && 
 			xsltArgVal instanceof String &&
 			templateHTMLArgVal != null && 
@@ -172,8 +172,8 @@ public class DWDSWebViewXSLT implements AuthorOperation{
 				if(Desktop.isDesktopSupported())
 					Desktop.getDesktop().open(tempHTML);
 				else {
-		        	JOptionPane.showMessageDialog(null,"Die Desktop-Library scheint nicht installiert oder funktionsuntüchtig zu sein. Daher kann der Browser nicht automatisch geöffnet werden. Dafür richten Sie bitte die java.awt.Desktop - Bilbiothek ein. Unter Ubuntu finden Sie diese Bibliothek im Paket 'libgnome2-0'.\n" + 
-		        			"Um die Voranschau ohne Desktop-Library anzusehen, öffnen Sie die Datei: \n" + (String) targetHTMLArgVal,"Information",JOptionPane.WARNING_MESSAGE);
+		        	JOptionPane.showMessageDialog(null,"Die Desktop-Library scheint nicht installiert oder funktionsuntÃ¼chtig zu sein. Daher kann der Browser nicht automatisch geÃ¶ffnet werden. DafÃ¼r richten Sie bitte die java.awt.Desktop - Bilbiothek ein. Unter Ubuntu finden Sie diese Bibliothek im Paket 'libgnome2-0'.\n" + 
+		        			"Um die Voranschau ohne Desktop-Library anzusehen, Ã¶ffnen Sie die Datei: \n" + (String) targetHTMLArgVal,"Information",JOptionPane.WARNING_MESSAGE);
 				}
 				
 				// try browsers until one works
@@ -182,7 +182,7 @@ public class DWDSWebViewXSLT implements AuthorOperation{
 			} catch (IOException e) {
 	        	JOptionPane.showMessageDialog(null,"Could not write to target File","Error",JOptionPane.ERROR_MESSAGE);
 			}
-			//Öffne neue Datei mit empfangenem Text, bzw. öffne Online-Datei
+			//Ã–ffne neue Datei mit empfangenem Text, bzw. Ã¶ffne Online-Datei
 			//authorAccess.getWorkspaceAccess().createNewEditor("html", null, webViewXml);
 
 		} else {
@@ -203,6 +203,6 @@ public class DWDSWebViewXSLT implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog, in dem anhand eines von mehreren Attributen und einem von dessen möglichen Werten, Dateien aufgelistet werden.";
+		return "Ã–ffnet einen Dialog, in dem anhand eines von mehreren Attributen und einem von dessen mÃ¶glichen Werten, Dateien aufgelistet werden.";
 	}
 }

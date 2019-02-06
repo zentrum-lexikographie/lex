@@ -54,25 +54,25 @@ public class DWDSExistXquery implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_ATTRIBUTELIST,
 				ArgumentDescriptor.TYPE_STRING,
-				"Liste der Elemente und ihrer möglichen Werte, einzutragen in der Form:\n" +
+				"Liste der Elemente und ihrer mÃ¶glichen Werte, einzutragen in der Form:\n" +
 				"Xpath-Ausdruck:Wert1,Wert2,Wert3,...\n" +
 				"Xpath-Ausdruck:Wert1,Wert2,Wert3,...\n" +
 				"...\n" +
 				"Der Ausdruck geht von den gefundenen Lesart-Knoten aus. Der XPath der Definition einer Lesart muss also zum Beispiel mit '/s:Definition' angesteuert werden, die Schreibweise des Artikels mit '/ancestor::s:Artikel/s:Formangabe/s:Schreibweise'\n" +
-				"Werden keine Werte angegeben, generiert die Suchfunktion eine Text-Suche, anstatt eines Menüs zur Auswahl der Werte.")
+				"Werden keine Werte angegeben, generiert die Suchfunktion eine Text-Suche, anstatt eines MenÃ¼s zur Auswahl der Werte.")
 	};
 
 	/**
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object xqPathArgVal = args.getArgumentValue(ARGUMENT_XQPATH);
 		Object urlArgVal = args.getArgumentValue(ARGUMENT_URL);
 		Object collectionArgVal = args.getArgumentValue(ARGUMENT_COLLECTION);
 		Object attributeListArgVal = args.getArgumentValue(ARGUMENT_ATTRIBUTELIST);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xqPathArgVal != null &&
 			xqPathArgVal instanceof String &&
 			urlArgVal != null && 
@@ -98,7 +98,7 @@ public class DWDSExistXquery implements AuthorOperation{
 				filterList.add(valueList);
 			}
 			
-			// Dann wird der Such-Dialog geöffnet
+			// Dann wird der Such-Dialog geÃ¶ffnet
 			@SuppressWarnings("unused")
 			DWDSEXistXQueryFrame attributeDialog = new DWDSEXistXQueryFrame(authorAccess, (String) xqPathArgVal, (String) urlArgVal, (String) collectionArgVal, filterList);
 			
@@ -122,6 +122,6 @@ public class DWDSExistXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog, in dem anhand eines von mehreren Attributen und einem von dessen möglichen Werten, Dateien aufgelistet werden.";
+		return "Ã–ffnet einen Dialog, in dem anhand eines von mehreren Attributen und einem von dessen mÃ¶glichen Werten, Dateien aufgelistet werden.";
 	}
 }

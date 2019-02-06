@@ -20,7 +20,7 @@ public class GenerateExclusiveID implements AuthorOperation{
 	/**
 	 * Argument describing the URL.
 	 */
-	private static final String ARGUMENT_ATTRNAME = "Name des einzufügenden Attributs für die ID";
+	private static final String ARGUMENT_ATTRNAME = "Name des einzufÃ¼genden Attributs fÃ¼r die ID";
 	/**
 	 * Argument describing the URL.
 	 */
@@ -37,7 +37,7 @@ public class GenerateExclusiveID implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_ATTRNAME,
 				ArgumentDescriptor.TYPE_STRING,
-				"Der Name des einzufügenden ID-Attributs, etwa: " + 
+				"Der Name des einzufÃ¼genden ID-Attributs, etwa: " + 
 				"xml:id"),
 		new ArgumentDescriptor(
 				ARGUMENT_BASEIDXPATH,
@@ -56,12 +56,12 @@ public class GenerateExclusiveID implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object attrName = args.getArgumentValue(ARGUMENT_ATTRNAME);
 		Object baseIDXPath = args.getArgumentValue(ARGUMENT_BASEIDXPATH);
 		Object compareIDXPath = args.getArgumentValue(ARGUMENT_COMPAREIDXPATH);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (attrName != null &&
 			attrName instanceof String &&
 			baseIDXPath != null &&
@@ -147,6 +147,6 @@ public class GenerateExclusiveID implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
+		return "Ã–ffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
 	}
 }

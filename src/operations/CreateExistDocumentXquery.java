@@ -47,12 +47,12 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_XQ0PATH,
 				ArgumentDescriptor.TYPE_STRING,
-				"Der Pfad zur XQuery-Datei für die Überprüfung der Existenz einer Collection auf dem eXist-Server, etwa: " + 
+				"Der Pfad zur XQuery-Datei fÃ¼r die ÃœberprÃ¼fung der Existenz einer Collection auf dem eXist-Server, etwa: " + 
 				"${frameworkDir}/scripts/checkcollection.xquery"),
 		new ArgumentDescriptor(
 				ARGUMENT_XQ1PATH,
 				ArgumentDescriptor.TYPE_STRING,
-				"Der Pfad zur XQuery-Datei für die Überprüfung der Eindeutigkeit einer ID, etwa: " + 
+				"Der Pfad zur XQuery-Datei fÃ¼r die ÃœberprÃ¼fung der Eindeutigkeit einer ID, etwa: " + 
 				"${frameworkDir}/scripts/idvalidation.xquery"),
 		new ArgumentDescriptor(
 				ARGUMENT_XQ2PATH,
@@ -72,7 +72,7 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_TEMPLATELIST,
 				ArgumentDescriptor.TYPE_STRING,
-				"Template auis denen die Datei erstellt wird, ergänzt durch die [ID] und die [SCHREIBUNG].\n" +
+				"Template auis denen die Datei erstellt wird, ergÃ¤nzt durch die [ID] und die [SCHREIBUNG].\n" +
 				"Mehrere Templates als Liste in der Form <Template-Name>:<Pfad zur Template-Datei> eintragen.")
 	};
 
@@ -81,7 +81,7 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 	 */
 	@SuppressWarnings("unused")
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object xq0PathArgVal = args.getArgumentValue(ARGUMENT_XQ0PATH);
 		Object xq1PathArgVal = args.getArgumentValue(ARGUMENT_XQ1PATH);
 		Object xq2PathArgVal = args.getArgumentValue(ARGUMENT_XQ2PATH);
@@ -89,7 +89,7 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 		Object collectionArgVal = args.getArgumentValue(ARGUMENT_COLLECTION);
 		Object templateListArgVal = args.getArgumentValue(ARGUMENT_TEMPLATELIST);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xq0PathArgVal != null &&
 			xq0PathArgVal instanceof String &&
 			xq1PathArgVal != null &&
@@ -113,7 +113,7 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 								 templateString.substring(templateString.indexOf(":")+1));
 			}
 
-			// Dann wird der Such-Dialog geöfnet
+			// Dann wird der Such-Dialog geÃ¶fnet
 			CreateEXistDocumentXQueryDialog creationDialog = new CreateEXistDocumentXQueryDialog(authorAccess, (String) xq0PathArgVal, (String) xq1PathArgVal, (String) xq2PathArgVal, (String) urlArgVal, (String) collectionArgVal, templateList);
 			
 		} else {
@@ -139,6 +139,6 @@ public class CreateExistDocumentXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
+		return "Ã–ffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
 	}
 }

@@ -26,7 +26,7 @@ public class DeleteEXistDocumentXquery implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_XQPATH,
 				ArgumentDescriptor.TYPE_STRING,
-				"Der Pfad zur XQuery-Datei zur Löschung einer Dateia aus eXist, etwa: " + 
+				"Der Pfad zur XQuery-Datei zur LÃ¶schung einer Dateia aus eXist, etwa: " + 
 				"${frameworkDir}/scripts/deletefile.xquery"),
 		new ArgumentDescriptor(
 				ARGUMENT_URL,
@@ -39,16 +39,16 @@ public class DeleteEXistDocumentXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object xqPathArgVal = args.getArgumentValue(ARGUMENT_XQPATH);
 		Object urlArgVal = args.getArgumentValue(ARGUMENT_URL);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xqPathArgVal != null &&
 			xqPathArgVal instanceof String &&
 			urlArgVal != null) {
 
-			// Dann wird der Such-Dialog geöfnet
+			// Dann wird der Such-Dialog geÃ¶fnet
 			@SuppressWarnings("unused")
 			DeleteEXistXDocumentXQueryDialog creationDialog = new DeleteEXistXDocumentXQueryDialog(authorAccess, (String) xqPathArgVal, (String) urlArgVal);
 			
@@ -71,6 +71,6 @@ public class DeleteEXistDocumentXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
+		return "Ã–ffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
 	}
 }

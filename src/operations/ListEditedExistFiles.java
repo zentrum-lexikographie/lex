@@ -50,12 +50,12 @@ public class ListEditedExistFiles implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die ï¿½bergebenen Argumente werden eingelesen ..
+		// Die Ã¯Â¿Â½bergebenen Argumente werden eingelesen ..
 		Object xqPathArgVal = args.getArgumentValue(ARGUMENT_XQPATH);
 		Object urlArgVal = args.getArgumentValue(ARGUMENT_URL);
 		Object collectionArgVal = args.getArgumentValue(ARGUMENT_COLLECTION);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xqPathArgVal != null &&
 			xqPathArgVal instanceof String &&
 			urlArgVal != null && 
@@ -63,7 +63,7 @@ public class ListEditedExistFiles implements AuthorOperation{
 			collectionArgVal != null &&
 			collectionArgVal instanceof String) {
 			
-			// Dann wird der Such-Dialog geöffnet
+			// Dann wird der Such-Dialog geÃ¶ffnet
 			@SuppressWarnings("unused")
 			EditedExistFileListDialog attributeDialog = new EditedExistFileListDialog(authorAccess, (String) xqPathArgVal, (String) urlArgVal, (String) collectionArgVal);
 			
@@ -86,6 +86,6 @@ public class ListEditedExistFiles implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog, in welchem ein Attribut via XQuery-Abfrage nach einem Element-Wert aus einer eXist-Collection ausgewählt werden kann. Das Attribut wird dann an Cursor-Position eingefügt.";
+		return "Ã–ffnet einen Dialog, in welchem ein Attribut via XQuery-Abfrage nach einem Element-Wert aus einer eXist-Collection ausgewÃ¤hlt werden kann. Das Attribut wird dann an Cursor-Position eingefÃ¼gt.";
 	}
 }

@@ -41,7 +41,7 @@ public class GetRevisionXquery implements AuthorOperation{
 		new ArgumentDescriptor(
 				ARGUMENT_URL,
 				ArgumentDescriptor.TYPE_STRING,
-				"Die URL der eXist-Datenbank, einschließlich der Collection, etwa: " +
+				"Die URL der eXist-Datenbank, einschlieÃŸlich der Collection, etwa: " +
 				"xmldb:exist://spock.dwds.de:8080/exist/xmlrpc/db/dwdswb/data")
 	};
 
@@ -49,19 +49,19 @@ public class GetRevisionXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#doOperation(AuthorAccess, ArgumentsMap)
 	 */
 	public void doOperation(AuthorAccess authorAccess, ArgumentsMap args) throws AuthorOperationException {
-		// Die übergebenen Argumente werden eingelesen ..
+		// Die Ã¼bergebenen Argumente werden eingelesen ..
 		Object xqPathListArgVal = args.getArgumentValue(ARGUMENT_XQPATH_LIST);
 		Object xqPathRevisionArgVal = args.getArgumentValue(ARGUMENT_XQPATH_REVISION);
 		Object urlArgVal = args.getArgumentValue(ARGUMENT_URL);
 		
-		// .. und überprüft.
+		// .. und Ã¼berprÃ¼ft.
 		if (xqPathListArgVal != null &&
 			xqPathListArgVal instanceof String &&
 			xqPathRevisionArgVal != null &&
 			xqPathRevisionArgVal instanceof String &&
 			urlArgVal != null) {
 
-			// Dann wird der Such-Dialog geöfnet
+			// Dann wird der Such-Dialog geÃ¶fnet
 			@SuppressWarnings("unused")
 			GetRevisionXQueryDialog creationDialog = new GetRevisionXQueryDialog(authorAccess, (String) xqPathListArgVal, (String) xqPathRevisionArgVal, (String) urlArgVal);
 			
@@ -85,6 +85,6 @@ public class GetRevisionXquery implements AuthorOperation{
 	 * @see ro.sync.ecss.extensions.api.AuthorOperation#getDescription()
 	 */
 	public String getDescription() {
-		return "Öffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
+		return "Ã–ffnet einen Dialog zur Generierung einer Datei auf einem eXist-Server.";
 	}
 }
