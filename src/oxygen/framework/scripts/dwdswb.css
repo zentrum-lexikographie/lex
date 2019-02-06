@@ -1,0 +1,55 @@
+h4 { border-bottom:1px solid #999 }
+.dwdswb-artikel { font-family:Verdana,sans-serif }
+.dwdswb-kopf { background:#f0f0ff; border:1px solid #ddd; padding:5px; margin-bottom:20px }
+.smor { background:#ffc }
+.dwdswb-quelle { float:right; font-size:smaller }
+.dwdswb-aussprache {  }
+.dwdswb-definition { font-weight:bold }
+.dwdswb-definition:after { content:"; " }
+.dwdswb-definition:last-child:after { content:"" }
+.dwdswb-definition-spezifizierung { font-weight:normal; color:#800; font-size:smaller }
+.dwdswb-definition-spezifizierung { font-weight:bold }
+.dwdswb-kollokationen { }
+.dwdswb-konstruktionsmuster { color:#800 }
+.dwdswb-lesarten  { margin-bottom:20px; /*border-bottom:1px solid #ccc*/ }
+.dwdswb-lesart    { margin-left:20px; margin-top:10px }
+.dwdswb-lesart-def { margin-bottom:5px }
+.dwdswb-lesart-n  { float:left }
+.dwdswb-lesart-content { margin-left:2em }
+.dwdswb-grammatik { color:#800 }
+.dwdswb-flexion:after { content:", " }
+.dwdswb-flexion:last-child:after { content:"" }
+.dwdswb-einschraenkung { color:#800 }
+.dwdswb-kollokation, .dwdswb-kompetenzbeispiel, .dwdswb-beleg { font-family:Georgia,"Times New Roman",Times,serif; margin-bottom:2px; padding:0px 10px; border:1px solid #eee; }
+.dwdswb-beleg { background:#f0f0f0 }
+.dwdswb-relation { font-style:italic }
+.dwdswb-verweise .dwdswb-verweis:after { content:", " }
+.dwdswb-verweise .dwdswb-verweis:last-child:after { content:"" }
+.dwdswb-verweis a { font-weight:bold }
+.dwdswb-kasuspraeferenz { color:#800 }
+.dwdswb-kasuspraeferenz:after { content:", " }
+.dwdswb-kasuspraeferenz:last-child:after { content:"" }
+.dwdswb-funktionspraeferenz { color:#800 }
+.dwdswb-stichwort { font-weight:bold }
+.dwdswb-diasystematik { color:green; font-size:smaller; font-family:Verdana,sans-serif }
+.dwdswb-diasystematik *:after { content:", " }
+.dwdswb-diasystematik *:last-child:after { content:"" }
+.dwdswb-phrasem * { font-style:italic; font-weight:normal }
+/* DEPRECATED .dwdswb-pragmatik { font-size:smaller } */
+.dwdswb-fundstelle *:after { content:", " }
+.dwdswb-fundstelle *:last-child:after { content:"" }
+.dwdswb-fundstelle-autor { font-variant:small-caps }
+.dwdswb-fundstelle-titel { font-style:italic }
+.dwdswb-belegtext { font-style:normal; color:#111 }
+.dwdswb-autorenzusatz { font-style:italic }
+.dwdswb-konstruktionsmuster .dwdswb-belegtext { font-style:italic }
+.dwdswb-paraphrase { font-style:italic }
+.dwdswb-schreibungen { font-size:larger }
+.dwdswb-schreibung { font-weight:bold }
+.dwdswb-schreibung-ungueltig { font-weight:normal }
+.dwdswb-schreibungen-container .dwdswb-schreibung:after { content:"; " }
+.dwdswb-schreibungen-container .dwdswb-schreibung:last-child:after { content:"" }
+.dwdswb-quelle { background:#f0f0ff; border:1px solid #ddd; float:right; font-size:smaller; padding:3px }
+
+.dwdswb-navbar { padding-left:15px }
+.dwdswb-navbar a { margin-right:10px }

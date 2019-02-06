@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DWDSoXPluginConfiguration>
+    <databaseURL>xmldb:exist://spock.dwds.de:8080/exist/xmlrpc</databaseURL>
+    <collection>/db/dwdswb/data</collection>
+    <contentSearch>
+	<icon>${PluginDir}/resources/DWDSeXist_content.png</icon>
+        <xqueryPath>${PluginDir}/scripts/Element-Value-Filter.xquery</xqueryPath>
+        <filters>
+            <!--filter name="Schreibung" xpath="s:Formangabe/s:Schreibung"/-->
+            <!--filter name="Bedeutungsebene" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Bedeutungsebene">
+                <item>bildlich</item>
+                <item>übertragen</item>
+                <item>sprichwörtlich</item>
+                <item>biblisch</item>
+            </filter>
+            <filter name="Stilebene" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Stilebene">
+                <item>dichterisch</item>
+                <item>gehoben</item>
+                <item>umgangssprachlich</item>
+                <item>salopp</item>
+                <item>vulgär</item>
+            </filter>
+            <filter name="Stilfärbung" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Stilfaerbung">
+                <item>abwertend</item>
+                <item>altertümelnd</item>
+                <item>derb</item>
+                <item>gespreizt</item>
+                <item>höflich</item>
+                <item>papierdeutsch</item>
+                <item>scherzhaft</item>
+                <item>Schimpfwort</item>
+                <item>spöttisch</item>
+                <item>übertrieben</item>
+                <item>verhüllend</item>
+                <item>vertraulich</item>
+            </filter>
+            <filter name="Gebrauchszeitraum" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Gebrauchszeitraum">
+                <item>historisch</item>
+                <item>DDR</item>
+                <item>nazistisch</item>
+                <item>veraltet</item>
+                <item>veraltend</item>
+            </filter>
+            <filter name="Sprachraum" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Sprachraum">
+                <item>berlinisch</item>
+                <item>besonders berlinisch</item>
+                <item>landschaftlich</item>
+                <item>mecklenburgisch</item>
+                <item>besonders mecklenburgisch</item>
+                <item>mitteldeutsch</item>
+                <item>besonders mitteldeutsch</item>
+                <item>norddeutsch</item>
+                <item>besonders norddeutsch</item>
+                <item>nordostdeutsch</item>
+                <item>besonders nordostdeutsch</item>
+                <item>nordwestdeutsch</item>
+                <item>besonders nordwestdeutsch</item>
+                <item>österreichisch</item>
+                <item>besonders österreichisch</item>
+                <item>ostmitteldeutsch</item>
+                <item>besonders ostmitteldeutsch</item>
+                <item>schweizerisch</item>
+                <item>besonders schweizerisch</item>
+                <item>süddeutsch</item>
+                <item>besonders süddeutsch</item>
+                <item>südwestdeutsch</item>
+                <item>besonders südwestdeutsch</item>
+                <item>westmitteldeutsch</item>
+                <item>besonders westmitteldeutsch</item>
+            </filter>
+            <filter name="Gruppensprache" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Gruppensprache">
+                <item>Bergmannssprache</item>
+                <item>Fliegersprache</item>
+                <item>Jägersprache</item>
+                <item>Kaufmannssprache</item>
+                <item>Kindersprache</item>
+                <item>Schülersprache</item>
+                <item>Seemannssprache</item>
+                <item>Soldatensprache</item>
+                <item>Studentensprache</item>
+            </filter>
+            <filter name="Fachgebiet" xpath="descendant::s:Diasystematik[parent::s:Formangabe|parent::s:Lesart]/s:Fachgebiet">
+                <item>fachsprachlich</item>
+                <item>dialektischer Materialismus</item>
+                <item>Druckerei</item>
+                <item>Gießerei</item>
+                <item>Hüttenwesen</item>
+                <item>Kybernetik</item>
+                <item>Marxismus</item>
+                <item>Metallurgie</item>
+                <item>politische </item>
+                <item>Schiffbau</item>
+                <item>Schneiderei</item>
+                <item>Tabakwarenindustrie</item>
+                <item>Textilindustrie</item>
+                <item>Wissenschaft</item>
+                <item>Anthropologie</item>
+                <item>Archäologie</item>
+                <item>Astronomie</item>
+                <item>Biologie</item>
+                <item>Bakteriologie</item>
+                <item>Botanik</item>
+                <item>Sexualkunde</item>
+                <item>Verhaltensforschung</item>
+                <item>Zoologie</item>
+                <item>Chemie</item>
+                <item>Ethnologie</item>
+                <item>Geografie</item>
+                <item>Geologie</item>
+                <item>Kunstgeschichte</item>
+                <item>Mathematik</item>
+                <item>Geometrie</item>
+                <item>Logik</item>
+                <item>Statistik</item>
+                <item>Medizin</item>
+                <item>Anatomie</item>
+                <item>Pharmazie</item>
+                <item>Physiologie</item>
+                <item>Sportmedizin</item>
+                <item>Tiermedizin</item>
+                <item>Zahnmedizin</item>
+                <item>Meereskunde</item>
+                <item>Meteorologie</item>
+                <item>Paläontologie</item>
+                <item>Philosophie</item>
+                <item>Physik</item>
+                <item>Geophysik</item>
+                <item>Kernphysik</item>
+                <item>Mechanik</item>
+                <item>Optik</item>
+                <item>Psychologie</item>
+                <item>Soziologie'</item>
+                <item>Sprachwissenschaft</item>
+                <item>Theologie</item>
+                <item>Wirtschaft</item>
+                <item>Bergbau</item>
+                <item>Fischerei</item>
+                <item>Forstwirtschaft</item>
+                <item>Jagdwesen</item>
+                <item>Landwirtschaft</item>
+                <item>Gartenbau</item>
+                <item>Imkerei</item>
+                <item>Tierzucht</item>
+                <item>Weinbau</item>
+                <item>Wasserwirtschaft</item>
+                <item>Bauwesen</item>
+                <item>Handwerk</item>
+                <item>Industrie</item>
+                <item>Finanzwirtschaft</item>
+                <item>Bank</item>
+                <item>Börse</item>
+                <item>Buchwesen</item>
+                <item>Geldwesen</item>
+                <item>Versicherungswesen</item>
+                <item>Rentenversicherung</item>
+                <item>Sozialversicherung</item>
+                <item>Gastronomie</item>
+                <item>Handel</item>
+                <item>Hauswirtschaft</item>
+                <item>Hotelwesen</item>
+                <item>Informationstechnologie</item>
+                <item>Technik</item>
+                <item>Elektrotechnik</item>
+                <item>Telekommunikation</item>
+                <item>Transportwesen</item>
+                <item>Post</item>
+                <item>Logistik</item>
+                <item>Verkehr</item>
+                <item>Eisenbahn</item>
+                <item>Flugwesen</item>
+                <item>Kraftfahrzeugwesen</item>
+                <item>Raumfahrt</item>
+                <item>Schifffahrt</item>
+                <item>Verlagswesen</item>
+                <item>Medien</item>
+                <item>Fernsehen</item>
+                <item>Radio</item>
+                <item>Rundfunk</item>
+                <item>Internet</item>
+                <item>Zeitungswesen</item>
+                <item>Astrologie</item>
+                <item>Handarbeit</item>
+                <item>Numismatik</item>
+                <item>Okkultismus</item>
+                <item>Philatelie</item>
+                <item>Spiel</item>
+                <item>Computerspiel</item>
+                <item>Gesellsschaftsspiel</item>
+                <item>Domino</item>
+                <item>Kartenspiel</item>
+                <item>Skat</item>
+                <item>Schach</item>
+                <item>Kinderspiel</item>
+                <item>Sport</item>
+                <item>Ballspiel</item>
+                <item>Fußball</item>
+                <item>Handball</item>
+                <item>Volleyball</item>
+                <item>Bergsport</item>
+                <item>Billard</item>
+                <item>Boxen</item>
+                <item>Eishockey</item>
+                <item>Eiskunstlauf</item>
+                <item>Eislauf</item>
+                <item>Fechten</item>
+                <item>Gymnastik</item>
+                <item>Hockey</item>
+                <item>Kegeln</item>
+                <item>Laufen</item>
+                <item>Motorsport</item>
+                <item>Radsport</item>
+                <item>Reiten</item>
+                <item>Rennen</item>
+                <item>Ringen</item>
+                <item>Rollschuhlauf</item>
+                <item>Rudern</item>
+                <item>Rugby</item>
+                <item>Schießsport</item>
+                <item>Schwimmen</item>
+                <item>Segelfliegen</item>
+                <item>Segeln</item>
+                <item>Ski</item>
+                <item>Tennis</item>
+                <item>Turnen</item>
+                <item>Kunst</item>
+                <item>Architektur</item>
+                <item>bildende Kunst</item>
+                <item>Fotografie</item>
+                <item>Film</item>
+                <item>Kochkunst</item>
+                <item>Literatur</item>
+                <item>Musik</item>
+                <item>Tanz</item>
+                <item>Theater</item>
+                <item>Varieté</item>
+                <item>Zirkus</item>
+                <item>Bildungswesen</item>
+                <item>Brauchtum</item>
+                <item>Mythologie</item>
+                <item>Religion</item>
+                <item>Politik</item>
+                <item>Diplomatie</item>
+                <item>Parlament</item>
+                <item>Militär</item>
+                <item>Polizei</item>
+                <item>Zollwesen</item>
+                <item>Steuerwesen</item>
+                <item>Jura</item>
+            </filter-->
+            <!--filter name="Definition" xpath="descendant::s:Definition"/>
+			<filter name="Definition[Basis]" xpath="descendant::s:Definition[@Typ='Basis']"/>
+			<filter name="Definition[Meta]" xpath="descendant::s:Definition[@Typ='Meta']"/>
+			<filter name="Definition[General.]" xpath="descendant::s:Definition[@Typ='Generalisierung']"/>
+			<filter name="Definition[Spez.]" xpath="descendant::s:Definition[@Typ='Spezifizierung']"/>
+			<filter name="Definition[Enzykl.]" xpath="descendant::s:Definition[@Typ='Enzyklopädie']"/>
+            <filter name="morphologische Links" xpath="self::s:Artikel/s:Verweise/s:Verweis/s:Ziellemma"/>
+            <filter name="semantische Links" xpath="descendant::s:Lesart/s:Verweise/s:Verweis/s:Ziellemma"/>
+            <filter name="Unterlesarten" xpath="descendant::s:Lesart//s:Lesart">
+				<item>*</item>
+			</filter-->
+        </filters>
+    </contentSearch>
+    <metaSearch>
+		<icon>${PluginDir}/resources/DWDSeXist_meta.png</icon>
+        <xqueryPath>${PluginDir}/scripts/timestampsearch.xquery</xqueryPath>
+		<indexedValues>indexedvalues.xml</indexedValues>
+		<timestampNodes>
+			<timestampNode>Artikel</timestampNode>
+			<timestampNode>Formangabe</timestampNode>
+			<timestampNode>Schreibung</timestampNode>
+			<timestampNode>Grammatik</timestampNode>
+			<timestampNode>Verweise</timestampNode>
+			<timestampNode>Diachronie_V2</timestampNode>
+			<timestampNode>Lesart</timestampNode>
+			<timestampNode>Kollokationen</timestampNode>
+			<timestampNode>Verwendungsbeispiele</timestampNode>
+		</timestampNodes>
+		<filters>
+			<!--filter name="Autor" xpath="@Autor">
+				<item>schroeder</item>
+				<item>grimm</item>
+				<item>unger</item>
+				<item>solf</item>
+				<item>billes</item>
+				<item>loos</item>
+				<item>lemnitzer</item>
+				<item>geyken</item>
+				<item>schrader</item>
+			</filter-->
+			<!--filter name="Status" xpath="@Status">
+				<item>Artikelrumpf</item>
+				<item>Lex-in_Arbeit</item>
+				<item>Lex-zur_Abgabe</item>
+				<item>Lex-zurückgestellt</item>
+				<item>Red-1</item>
+				<item>Red-2</item>
+				<item>Red-2-zurückgewiesen</item>
+				<item>Red-f</item>
+				<item>Red-f-zurückgewiesen</item>
+				<item>"wird_Vollartikel"</item>
+			</filter-->
+			<!--filter name="Quelle" xpath="@Quelle">
+				<item>DWDS</item>
+				<item>DWDS_auto</item>
+				<item>WDG</item>
+				<item>DUDEN_1999</item>
+			</filter-->
+			<!--filter name="Typ" xpath="@Typ">
+				<item>Vollartikel</item>
+				<item>Basisartikel</item>
+				<item>Minimalartikel</item>
+			</filter-->
+			<!--filter name="Tranche" xpath="@Tranche">
+				<item>003</item>
+				<item>Architektur</item>
+				<item>Basisartikel-003</item>
+				<item>Basisartikel-005</item>
+				<item>Bildung</item>
+				<item>Diverse</item>
+				<item>Diverse2</item>
+				<item>Ernährung</item>
+				<item>Geo</item>
+				<item>Gesellschaft</item>
+				<item>IT</item>
+				<item>Kommunikation</item>
+				<item>Kunst</item>
+				<item>Kunst2</item>
+				<item>Medien</item>
+				<item>Mix</item>
+				<item>Philosophie</item>
+				<item>Philosphie</item>
+				<item>Politik1a</item>
+				<item>Politik1b</item>
+				<item>Recht</item>
+				<item>Recht2</item>
+				<item>Recht3</item>
+				<item>Religion</item>
+				<item>Spiel</item>
+				<item>Verkehr</item>
+			</filter-->
+		</filters>
+    </metaSearch>
+    <createFile>
+		<icon>${PluginDir}/resources/newfile.png</icon>
+		<IDCheckXQueryPath>${PluginDir}/scripts/idvalidation.xquery</IDCheckXQueryPath>
+		<setPermissionsXQueryPath>${PluginDir}/scripts/setpermissions.xquery</setPermissionsXQueryPath>
+		<storeCollection>/db/dwdswb/data/Neuartikel</storeCollection>
+		<templates>
+			<template name="Standard">${PluginDir}/templates/template-generic.xml</template>
+			<template name="Nomen">${PluginDir}/templates/template-N.xml</template>
+			<template name="Verb">${PluginDir}/templates/template-V.xml</template>
+			<template name="Adjektiv">${PluginDir}/templates/template-ADJ.xml</template>
+		</templates>
+		<group>Neuartikel</group>
+		<permissions>rw-rw-r--</permissions>
+    </createFile>
+</DWDSoXPluginConfiguration>

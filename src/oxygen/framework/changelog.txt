@@ -1,0 +1,30 @@
+1.4.4
+
+Fix der Revisionen - Funktion
+Fix der Datei-Löschen - Funktion
+
+1.4.1 
+
+Baustein für Auxiliar eingefügt
+Bausteine für semantische Verweise eingefügt - Assoziation, Entsprechung, vgl.
+
+1.4.0
+
+Formbeschränkungsangabe eingefügt (getrennt von der "normalen" Formangabe)
+
+1.3
+- Schema wird nun von eXist-Datenbank bezogen
+- Stylesheet wird nun von eXist-Datenbank bezogen
+
+1.2
+- Neue Webview-Funktion auf Stand von zwei.dwds.de
+
+1.1.1
+- zusätzliches Element für Content-Completion
+
+1.1
+- Revisionskontrolle hinzugefügt
+- neue Debug-Technik eingeführt zur einfacheren Wartung
+
+1.0
+- Release
