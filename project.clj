@@ -9,7 +9,6 @@
   :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
                  ["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
-  :main ^:skip-aot dwdsox.core
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
   :target-path "target/%s"
@@ -18,9 +17,6 @@
              :dev {:source-paths ["src/clj", "src/build"]
                    :dependencies [[me.flowthing/sigel "0.2.2"]
                                   [me.raynes/fs "1.4.6"]]}}
-  :aliases {"package" ["do",
-                       "uberjar"
-                       ","
-                       "run" "-m" "dwdsox.packaging" :project/version]
+  :aliases {"package" ["run" "-m" "dwdsox.packaging" :project/version]
             "oxygen" ["run", "-m" "dwdsox.oxygen"]}
   :release-tasks [["uberjar"] ["package"]])
