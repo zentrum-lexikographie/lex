@@ -15,6 +15,12 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}
              :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]]}
-             :dev {:dependencies [[me.flowthing/sigel "0.2.2"]]}}
-  :aliases {"package" ["run" "-m" "dwdsox.packaging" :project/version]}
+             :dev {:source-paths ["src/clj", "src/build"]
+                   :dependencies [[me.flowthing/sigel "0.2.2"]
+                                  [me.raynes/fs "1.4.6"]]}}
+  :aliases {"package" ["do",
+                       "uberjar"
+                       ","
+                       "run" "-m" "dwdsox.packaging" :project/version]
+            "oxygen" ["run", "-m" "dwdsox.oxygen"]}
   :release-tasks [["uberjar"] ["package"]])
