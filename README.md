@@ -1,44 +1,31 @@
-# dwdsox
+# ZDL Oxygen XML Editor Extensions
 
-FIXME: description
+Provides access to an XML database of and editing support for lexikographic
+documents.
 
-## Installation
+## Build Requirements
 
-Download from http://example.com/FIXME.
+* [Clojure](https://clojure.org/)
+* [Leiningen](https://leiningen.org/)
 
-## Usage
+## Build and Test
 
-FIXME: explanation
-
-    $ java -jar dwdsox-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
+    $ lein clean uberjar package
+    $ OXYGEN_HOME=... lein oxygen
+    
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019 Zentrum für digitale Lexikographie der deutschen Sprache.
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.

@@ -1,8 +1,8 @@
-(defproject de.dwds/dwdsox "2.0-SNAPSHOT"
-  :description "FIXME: write description"
+(defproject de.dwds.zdl/oxygen-extensions "2.0-SNAPSHOT"
+  :description "Provides access to an XML database of and editing support for lexikographic documents."
   :url "http://example.com/FIXME"
-  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
+  :license {:name "GPL-3.0"
+            :url "https://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.swinglabs.swingx/swingx-all "1.6.5-1"]
                  [org.exist-db/existdb-core "2.2"]]
@@ -19,4 +19,4 @@
                                   [me.raynes/fs "1.4.6"]]}}
   :aliases {"package" ["run" "-m" "dwdsox.packaging" :project/version]
             "oxygen" ["run", "-m" "dwdsox.oxygen"]}
-  :release-tasks [["uberjar"] ["package"]])
+  :release-tasks [["clean"] ["uberjar"] ["package"]])
