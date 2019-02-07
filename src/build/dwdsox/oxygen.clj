@@ -10,6 +10,7 @@
             "-cp" (string/join ":" [(str home "/lib/oxygen.jar")
                                     (str home "/classes")
                                     home])
-            "ro.sync.exml.Oxygen"])
+            "ro.sync.exml.Oxygen"
+            "target/oxygen/test-project/project.xpr"])
       (.inheritIO)
       (.start))))
