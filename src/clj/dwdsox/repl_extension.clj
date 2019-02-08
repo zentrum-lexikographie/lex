@@ -1,18 +1,14 @@
-(ns dwdsox.repl-plugin
+(ns dwdsox.repl-extension
   (:require [nrepl.server :as repl]
-            [dwdsox.exist-db :as db])
+            [dwdsox.exist-db :as db]
+            [clojure.java.io :as io])
   (:gen-class
+   :name de.dwds.zdl.oxygen.ReplExtension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension]
    :state state
    :init init))
 
-(def sample-xquery "
-xquery version \"1.0\";
-let $message := 'Hello World!'
-return
-<results>
-  <message>{$message}</message>
-</results>")
+(def sample-xquery (-> "dwdsox/xquery/hello.xq" io/resource slurp))
 
 (defonce ws-access (atom nil))
 
@@ -24,7 +20,8 @@ return
     (let [{:keys [server]} @(.state this)]
       (reset! server (repl/start-server :port port)))
     (reset! ws-access app-ws-access))
-  (println (db/query sample-xquery)))
+  (println (db/query sample-xquery))
+  (println (db/get "indexedvalues.xml")))
 
 (defn -applicationClosing [this]
   (let [{:keys [server]} @(.state this)]
