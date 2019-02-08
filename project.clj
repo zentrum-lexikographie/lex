@@ -12,6 +12,7 @@
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
   :target-path "target/%s"
+  :uberjar-name "oxygen-extensions.jar"
   :profiles {:uberjar {:aot :all}
              :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]]}
              :dev {:source-paths ["src/clj", "src/build"]

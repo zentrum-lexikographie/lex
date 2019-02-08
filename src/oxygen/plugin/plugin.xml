@@ -9,7 +9,7 @@
     class="dwdsox.plugin.DWDSoXPlugin">
 
  <runtime>
-   <library name="lib/dwdsox.jar"/>
+   <library name="${system(user.dir)}/target/uberjar/oxygen-extensions.jar"/>
  </runtime>
 
  <extension

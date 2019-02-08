@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="17.0">
     <meta>
-        <filters directoryPatterns="" filePatterns="project.xpr" positiveFilePatterns="" showHiddenFiles="false"/>
+        <filters directoryPatterns="" filePatterns="test-project.xpr" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
             <serialized version="20.1" xml:space="preserve">
                 <serializableOrderedMap>
                     <entry>
                         <String>additional.frameworks.directories</String>
                         <String-array>
-                            <String>${pd}/../frameworks</String>
+                            <String>${pd}/src/oxygen</String>
                         </String-array>
                     </entry>
                     <entry>
@@ -19,7 +19,7 @@
             </serialized>
         </options>
     </meta>
-    <projectTree name="project.xpr">
+    <projectTree name="test-project.xpr">
         <folder path="."/>
     </projectTree>
 </project>

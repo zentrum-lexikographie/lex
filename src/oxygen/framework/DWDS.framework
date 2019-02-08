@@ -23,7 +23,7 @@
 					</field>
 					<field name="classpath">
 						<String-array>
-							<String>${framework}/lib/dwdsox.jar</String>
+							<String>${system(user.dir}/target/oxygen-extensions.jar</String>
 						</String-array>
 					</field>
 					<field name="parentClassLoaderID">
