@@ -19,7 +19,8 @@
      (xsl/template {:match "@version[parent::plugin]"}
                    (xsl/attribute {:name "version"} version))
      (xsl/template {:match "runtime"}
-                   [:runtime [:library {:name "lib/oxygen-extensions.jar"}]])))
+                   [:runtime [:library {:name "lib/oxygen-extensions.jar"
+                                        :scope "global"}]])))
    (io/file "src/oxygen/plugin/plugin.xml")
    (io/file "target/oxygen/plugins/dwdsox/plugin.xml")))
 

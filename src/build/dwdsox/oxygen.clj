@@ -15,15 +15,17 @@
    (throw (IllegalStateException. "Cannot find $OXYGEN_HOME."))))
 
 (defn run-oxygen [oxygen-home]
-  (let [oxygen (ProcessBuilder.
-            ["java"
-             "-Dcom.oxygenxml.editor.plugins.dir=src/oxygen"
-             "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
-             "-cp" (string/join ":" [(str oxygen-home "/lib/oxygen.jar")
-                                     (str oxygen-home "/classes")
-                                     oxygen-home])
-             "ro.sync.exml.Oxygen"
-             "test-project.xpr"])]
+  (let [oxygen
+        (ProcessBuilder.
+         ["java"
+          "-Ddwdsox.repl=true"
+          "-Dcom.oxygenxml.editor.plugins.dir=src/oxygen"
+          "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
+          "-cp" (string/join ":" [(str oxygen-home "/lib/oxygen.jar")
+                                  (str oxygen-home "/classes")
+                                  oxygen-home])
+          "ro.sync.exml.Oxygen"
+          "test-project.xpr"])]
     (.. oxygen (environment) (put "OXYGEN_HOME" oxygen-home))
     (doto oxygen (.inheritIO) (.start)))
   oxygen-home)

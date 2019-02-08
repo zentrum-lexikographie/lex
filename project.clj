@@ -5,7 +5,8 @@
             :url "https://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.swinglabs.swingx/swingx-all "1.6.5-1"]
-                 [org.exist-db/existdb-core "2.2"]]
+                 [org.exist-db/existdb-core "2.2"]
+                 [nrepl "0.6.0"]]
   :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
                  ["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]

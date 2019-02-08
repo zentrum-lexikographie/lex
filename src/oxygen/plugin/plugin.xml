@@ -9,12 +9,17 @@
     class="dwdsox.plugin.DWDSoXPlugin">
 
  <runtime>
-   <library name="${system(user.dir)}/target/uberjar/oxygen-extensions.jar"/>
+   <library name="${system(user.dir)}/target/uberjar/oxygen-extensions.jar"
+            scope="global"/>
  </runtime>
 
  <extension
      type="WorkspaceAccess"
      class="dwdsox.plugin.DWDSoXPluginExtension"/>
+
+ <extension
+     type="WorkspaceAccess"
+     class="dwdsox.repl_plugin"/>
 
  <toolbar id="DWDSoXPluginExtensionToolbar"
           initialSide="NORTH" initialRow="2"/>
