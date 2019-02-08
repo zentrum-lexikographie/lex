@@ -5,8 +5,9 @@
             :url "https://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.swinglabs.swingx/swingx-all "1.6.5-1"]
-                 [org.exist-db/existdb-core "2.2"]
-                 [nrepl "0.6.0"]]
+                 [org.clojure/data.codec "0.1.1"]
+                 [org.clojure/data.xml "0.2.0-alpha6"]
+                 [org.exist-db/existdb-core "2.2"]]
   :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
                  ["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
@@ -14,7 +15,8 @@
   :java-source-paths ["src/java"]
   :target-path "target/%s"
   :uberjar-name "oxygen-extensions.jar"
-  :profiles {:uberjar {:aot :all}
+  :profiles {:uberjar {:aot :all
+                       :dependencies [[nrepl "0.6.0"]]}
              :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]]}
              :dev {:source-paths ["src/clj", "src/build"]
                    :dependencies [[me.flowthing/sigel "0.2.2"]
