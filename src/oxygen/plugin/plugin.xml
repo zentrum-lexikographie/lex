@@ -6,16 +6,17 @@
     description="Access to DWDS documents at the DWDS eXist database"
     version="1.2.4"
     vendor="BBAW"
-    class="de.dwds.zdl.oxygen.Plugin">
+    class="dwdsox.plugin.DWDSoXPlugin">
+  <!-- class="de.dwds.zdl.oxygen.Plugin" -->
 
  <runtime>
    <library name="${system(user.dir)}/target/uberjar/oxygen-extensions.jar"
             scope="global"/>
  </runtime>
 
- <!-- extension
+ <extension
      type="WorkspaceAccess"
-     class="dwdsox.plugin.DWDSoXPluginExtension"/ -->
+     class="dwdsox.plugin.DWDSoXPluginExtension"/>
 
  <extension
      type="WorkspaceAccess"

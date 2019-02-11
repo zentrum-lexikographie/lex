@@ -12,6 +12,7 @@
   :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
                  ["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
+  :jvm-opts ["-Dawt.useSystemAAFontSettings=on" "-Dswing.aatext=true"]
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
   :target-path "target/%s"
