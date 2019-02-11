@@ -12,7 +12,7 @@
   [[] (ref {:server (atom nil)})])
 
 (defn -applicationStarted [this app-ws-access]
-  (when-let [port (-> (System/getProperty "dwdsox.repl.port") Integer/parseInt)]
+  (when-let [port (some-> (System/getProperty "dwdsox.repl.port") Integer/parseInt)]
     (let [{:keys [server]} @(.state this)]
       (reset! server (repl/start-server :port port)))))
 
