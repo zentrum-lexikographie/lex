@@ -19,7 +19,7 @@
 (defn -applicationClosing [this]
   (let [{:keys [server]} @(.state this)]
     (when-not (nil? @server)
-      (@server)
+      (repl/stop-server @server)
       (reset! server nil)))
   true)
 
