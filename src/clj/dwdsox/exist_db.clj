@@ -34,7 +34,10 @@
       (f con)
       (catch IOException e
         (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
-          (throw (Exception. (slurp err))))))))
+          (throw (ex-info "I/O error while talking to XML database"
+                          {:http-status (.getResponseCode con)
+                           :http-message (.getResponseMessage con)
+                           :http-body (slurp err)})))))))
 
 (defn resource [p]
   (with-connection
