@@ -26,6 +26,10 @@ if [ ! -d data ]; then
     rm $temp_backup_file
 fi
 
+docker exec exist\
+       java -jar start.jar client --no-gui\
+       --xpath "repo:install-and-deploy('http://exist-db.org/xquery/versioning', 'http://demo.exist-db.org/exist/apps/public-repo/modules/find.xql')"
+
 docker cp data exist:/exist/webapp/WEB-INF/data/prod
 docker exec exist\
        java -jar start.jar client --no-gui\
