@@ -15,6 +15,9 @@ services:
       - type: volume
         source: config
         target: ${EXIST_HOME}/${EXIST_CONFIG_DIR}
+      - type: bind
+        source: ./data
+        target: ${EXIST_HOME}/${EXIST_DATA_DIR}/production
 
 volumes:
   data:
