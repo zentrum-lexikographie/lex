@@ -12,6 +12,7 @@
   :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
                  ["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
+  :plugins [[lein-exec "0.3.7"]]
   :jvm-opts ["-Dawt.useSystemAAFontSettings=on" "-Dswing.aatext=true"]
   :source-paths ["src/clj"]
   :java-source-paths ["src/java"]
@@ -20,9 +21,8 @@
   :profiles {:uberjar {:aot :all
                        :dependencies [[nrepl "0.6.0"]]}
              :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]]}
-             :dev {:source-paths ["src/clj", "src/build"]
-                   :dependencies [[me.flowthing/sigel "0.2.2"]
+             :dev {:dependencies [[me.flowthing/sigel "0.2.2"]
                                   [me.raynes/fs "1.4.6"]]}}
-  :aliases {"package" ["run" "-m" "dwdsox.packaging" :project/version]
-            "oxygen" ["run", "-m" "dwdsox.oxygen"]}
+  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]
+            "oxygen" ["exec", "-p" "scripts/oxygen.clj"]}
   :release-tasks [["clean"] ["uberjar"] ["package"]])

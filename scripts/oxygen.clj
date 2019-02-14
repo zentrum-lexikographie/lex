@@ -1,8 +1,8 @@
-(ns dwdsox.oxygen
-  (:require [clojure.string :as string]
-            [clojure.java.io :as io]
-            [me.raynes.fs :as fs])
-  (:import [java.io File]))
+(require '[clojure.string :as string]
+         '[clojure.java.io :as io]
+         '[me.raynes.fs :as fs])
+
+(import '[java.io File])
 
 (defn find-oxygen-home []
   (or
@@ -30,5 +30,4 @@
     (doto oxygen (.inheritIO) (.start)))
   oxygen-home)
 
-(defn -main [& args]
-  (-> (find-oxygen-home) (run-oxygen)))
+(-> (find-oxygen-home) (run-oxygen))

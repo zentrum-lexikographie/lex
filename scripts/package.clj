@@ -1,9 +1,8 @@
-(ns dwdsox.packaging
-  (:require [clojure.java.io :as io]
-            [me.raynes.fs :as fs]
-            [sigel.xslt.core :as xslt]
-            [sigel.xslt.elements :as xsl]
-            [sigel.xslt.components :as xslc]))
+(require '[clojure.java.io :as io]
+         '[me.raynes.fs :as fs]
+         '[sigel.xslt.core :as xslt]
+         '[sigel.xslt.elements :as xsl]
+         '[sigel.xslt.components :as xslc])
 
 (def jar "target/uberjar/oxygen-extensions.jar")
 
@@ -39,9 +38,7 @@
    (io/file "src/oxygen/framework/DWDS.framework")
    (io/file "target/oxygen/frameworks/dwdsox/DWDS.framework")))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [version & args]
+(let [[version & args] *command-line-args*]
   (when-not (-> jar (io/file) (.isFile))
     (throw (IllegalStateException. (str "Oxygen Extensions not built: " jar))))
   (package-plugin version)
