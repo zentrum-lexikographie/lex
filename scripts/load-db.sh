@@ -40,9 +40,10 @@ docker exec exist\
        java -jar start.jar client --no-gui\
        --xpath "system:restore('/exist/webapp/WEB-INF/data/production', '', '')"
 
-# TODO: upload corrected data/db/system/config/db/dwdswb/collection.xconf.bak
+curl -u admin: -T data/db/system/config/db/dwdswb/collection.xconf.bak\
+     http://localhost:8080/exist/webdav/db/system/config/db/dwdswb/collection.xconf
 
 docker exec exist\
        java -jar start.jar client --no-gui\
-       --xpath "xmldb:reindex('/db/dwdsdb')"
+       --xpath "xmldb:reindex('/db/dwdswb')"
 
