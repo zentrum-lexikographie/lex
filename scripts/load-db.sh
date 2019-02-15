@@ -14,36 +14,15 @@ if [ ! -f data/backup.properties ]; then
     unzip -W $temp_backup_file\
           -x\
           db/apps/**\
-          db/system/config/db/apps/**\
-          db/system/security/exist/accounts/admin.xml\
-          db/system/security/exist/accounts/eXide.xml\
-          db/system/security/exist/accounts/guest.xml\
-          db/system/security/exist/accounts/monex.xml\
-          db/system/security/exist/groups/eXide.xml\
-          db/system/security/exist/groups/monex.xml\
-          db/system/versions/**\
+          db/system/**\
           db/__lost_and_found__/**\
+          **/__contents__.xml\
+          **/collection.xconf\
           -d data
 
-    mv data/db/dwdswb/xquery/collection.xconf\
-       data/db/dwdswb/xquery/collection.xconf.bak
-    mv data/db/system/config/db/dwdswb/collection.xconf\
-       data/db/system/config/db/dwdswb/collection.xconf.bak
     rm $temp_backup_file
 fi
 
-docker exec exist\
-       java -jar start.jar client --no-gui\
-       --xpath "repo:install-and-deploy('http://exist-db.org/xquery/versioning', 'http://demo.exist-db.org/exist/apps/public-repo/modules/find.xql')"
-
-docker exec exist\
-       java -jar start.jar client --no-gui\
-       --xpath "system:restore('/exist/webapp/WEB-INF/data/production', '', '')"
-
-curl -u admin: -T data/db/system/config/db/dwdswb/collection.xconf.bak\
-     http://localhost:8080/exist/webdav/db/system/config/db/dwdswb/collection.xconf
-
-docker exec exist\
-       java -jar start.jar client --no-gui\
-       --xpath "xmldb:reindex('/db/dwdswb')"
-
+docker-compose exec basex\
+               basexclient -Uadmin -Padmin -v -c\
+               'create database db /srv/production-data/db/dwdswb/'
