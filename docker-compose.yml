@@ -6,8 +6,6 @@ services:
     ports:
         - 127.0.0.1:1984:1984
         - 127.0.0.1:8984:8984
-    networks:
-      - www
     volumes:
       - type: volume
         source: data
@@ -20,7 +18,3 @@ volumes:
   data:
     driver: local
     name: basex-data
-
-networks:
-  www:
-    driver: bridge
