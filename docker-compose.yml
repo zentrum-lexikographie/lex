@@ -4,8 +4,8 @@ services:
     image: basex/basexhttp:latest
     container_name: basex
     ports:
-        - 1984:1984
-        - 8984:8984
+        - 127.0.0.1:1984:1984
+        - 127.0.0.1:8984:8984
     networks:
       - www
     volumes:
