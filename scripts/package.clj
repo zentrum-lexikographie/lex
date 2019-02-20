@@ -2,7 +2,8 @@
          '[me.raynes.fs :as fs]
          '[sigel.xslt.core :as xslt]
          '[sigel.xslt.elements :as xsl]
-         '[sigel.xslt.components :as xslc])
+         '[sigel.xslt.components :as xslc]
+         '[dwdsox.env :refer [xml-db-url]])
 
 (def jar "target/uberjar/oxygen-extensions.jar")
 
@@ -31,6 +32,11 @@
    (xslt/compile-sexp
     (xslc/xslt3-identity
      {:version 3.0}
+     (xsl/template {:match "text()[contains(., 'http://localhost:8984')]"}
+                   (xsl/value-of
+                    {:select (str "replace(., 'http://localhost:8984', '"
+                                  xml-db-url
+                                  "')")}))
      (xsl/template {:match "field[@name='classpath']"}
                    [:field {:name "classpath"}
                     [:String-array
@@ -38,7 +44,7 @@
    (io/file "src/oxygen/framework/DWDS.framework")
    (io/file "target/oxygen/frameworks/dwdsox/DWDS.framework")))
 
-(let [[version & args] *command-line-args*]
+(let [[_ version & args] *command-line-args*]
   (when-not (-> jar (io/file) (.isFile))
     (throw (IllegalStateException. (str "Oxygen Extensions not built: " jar))))
   (package-plugin version)
