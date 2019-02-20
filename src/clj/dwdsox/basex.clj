@@ -31,27 +31,31 @@
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
 
-(defn resource [p]
-  (with-connection
-    (str "rest/" collection "/" p)
-    (fn [con]
-      (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
-        (slurp resp)))))
+(defn query
+  ([p] (query p identity))
+  ([p request]
+   (with-connection
+     (str "rest/" collection "/" p)
+     (fn [con]
+       (request con)
+       (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
+         (slurp resp))))))
 
-(defn query [q]
-  (with-connection
-    (str "rest/" collection)
-    (fn [con]
-      (doto con
-        (.setRequestMethod "POST")
-        (.setRequestProperty "Content-Type" "application/xml")
-        (.setDoOutput true)
-        (.setDoInput true))
-      (with-open [req (io/writer (.getOutputStream con) :encoding "UTF-8")]
-        (xml/emit
-         (xml/sexp-as-element
-          [::bx/query {:xmlns/bx "http://basex.org/rest"}
-           [::bx/text [:-cdata q]]])
-         req))
-      (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
-        (slurp resp)))))
+(defn xml-query
+  [p xml-query]
+  (query
+   p
+   (fn [con]
+     (doto con
+       (.setRequestMethod "POST")
+       (.setRequestProperty "Content-Type" "application/xml")
+       (.setDoOutput true)
+       (.setDoInput true))
+     (with-open [req (io/writer (.getOutputStream con) :encoding "UTF-8")]
+       (xml/emit xml-query req))
+     con)))
+
+(defn simple-xml-query [p q]
+  (xml-query p (xml/sexp-as-element
+                [::bx/query {:xmlns/bx "http://basex.org/rest"}
+                 [::bx/text [:-cdata q]]])))

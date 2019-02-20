@@ -4,13 +4,13 @@
  [{:url "http://spock.dwds.de:8080/exist"
    :user nil
    :password nil
-   :collection "/db/dwdswb/data"}
+   :collection "/db/dwdswb"}
   #ref [:local :exist]]
 
  :basex #merge
  [{:url "http://localhost:8984"
    :user nil
    :password nil
-   :collection "db/dwdswb/data"}
+   :collection "/db/dwdswb"}
   #ref [:local :basex]]}
  
