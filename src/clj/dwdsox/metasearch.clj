@@ -1,11 +1,12 @@
 (ns dwdsox.metasearch
   (:require [clojure.java.io :as io]
             [clojure.string :as string]
-            [dwdsox.exist-db :as db]
+            [dwdsox.basex :as db]
             [clojure.data.xml :as xml]
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.mig :as uim]))
+
 
 (def xquery-template (-> "dwdsox/xquery/metasearch.xq" io/resource slurp))
 
@@ -15,9 +16,6 @@
                       (string/replace "[RESTRICTION]" "*")
                       (string/replace "[START]" "*")
                       (string/replace "[END]" "*")))
-
-(defn init []
-  (xml/parse-str (db/resource "indexedvalues.xml")))
 
 ;; …, Schreibung, Element, Status, Änderung
 ;; Liste kopieren, Öffnen, Schließen

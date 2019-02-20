@@ -24,6 +24,7 @@
              :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]]}
              :dev {:dependencies [[me.flowthing/sigel "0.2.2"]
                                   [me.raynes/fs "1.4.6"]]}}
-  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]
+  :aliases {"facets" ["exec", "-p" "scripts/facets.clj"]
+            "package" ["exec" "-p" "scripts/package.clj" :project/version]
             "oxygen" ["exec", "-p" "scripts/oxygen.clj"]}
   :release-tasks [["clean"] ["uberjar"] ["package"]])
