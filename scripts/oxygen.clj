@@ -8,7 +8,8 @@
   (or
    (->>
     (concat [(File. (or (System/getenv "OXYGEN_HOME") "oxygen"))]
-            (fs/find-files "/usr/local" #"Oxygen XML Editor [0-9\.]+"))
+            (sort-by #(.getName %) #(compare %2 %1)
+                     (fs/find-files "/usr/local" #"Oxygen XML Editor [0-9\.]+")))
     (filter #(.isDirectory %))
     (map #(.getAbsolutePath %))
     (first))
