@@ -23,6 +23,6 @@ if [ ! -f data/backup.properties ]; then
     rm $temp_backup_file
 fi
 
-docker-compose exec basex\
-               basexclient -Uadmin -Padmin -v -c\
-               'create database db /srv/production-data/db/dwdswb/'
+docker-compose exec basex basexclient -Uadmin -Padmin\
+               -c'SET ADDRAW true'\
+               -c'CREATE DB db /srv/production-data/db'
