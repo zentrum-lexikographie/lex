@@ -5,6 +5,7 @@
             :url "https://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [seesaw "1.5.0"]
+                 [aero "1.1.3"]
                  [org.swinglabs.swingx/swingx-all "1.6.5-1"]
                  [org.clojure/data.codec "0.1.1"]
                  [org.clojure/data.xml "0.2.0-alpha6"]

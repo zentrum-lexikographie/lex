@@ -2,27 +2,19 @@
   (:require [clojure.java.io :as io]
             [clojure.data.codec.base64 :as base64]
             [clojure.data.xml :as xml]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [dwdsox.env :refer [config]])
   (:import [java.io IOException]
            [java.net URL]))
 
-(def url (or (System/getProperty "dwdsox.existdb.url")
-             (System/getenv "DWDS_EXISTDB_URL")
-             "http://spock.dwds.de:8080/exist"))
+(def url (get-in config [:exist :url]))
 
-(def user (or (System/getProperty "dwdsox.existdb.user")
-              (System/getenv "DWDS_EXISTDB_USER")))
-
-(def password (or (System/getProperty "dwdsox.existdb.password")
-                  (System/getenv "DWDS_EXISTDB_PASSWORD")))
-
-(def collection (or (System/getProperty "dwdsox.existdb.collection")
-                    (System/getenv "DWDS_EXISTDB_COLLECTION")
-                    "/db/dwdswb/data"))
+(def collection (get-in config [:exist :collection]))
 
 (def basic-creds
-  (if (and user password)
-    (apply str (map char (base64/encode (.getBytes (str user ":" password)))))))
+  (let [{:keys [user password]} (config :exist)]
+    (if (and user password)
+      (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 
 (xml/alias-uri 'ex "http://exist.sourceforge.net/NS/exist")
 

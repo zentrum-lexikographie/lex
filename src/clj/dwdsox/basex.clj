@@ -2,29 +2,19 @@
   (:require [clojure.java.io :as io]
             [clojure.data.codec.base64 :as base64]
             [clojure.data.xml :as xml]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [dwdsox.env :refer [config]])
   (:import [java.io IOException]
            [java.net URL]))
 
-(def url (or (System/getProperty "dwdsox.basex.url")
-             (System/getenv "DWDS_BASEX_URL")
-             "http://localhost:8984"))
+(def url (get-in config [:basex :url]))
 
-(def user (or (System/getProperty "dwdsox.basex.user")
-              (System/getenv "DWDS_BASEX_USER")
-              "admin"))
-
-(def password (or (System/getProperty "dwdsox.basex.password")
-                  (System/getenv "DWDS_BASEX_PASSWORD")
-                  "admin"))
-
-(def collection (or (System/getProperty "dwdsox.basex.collection")
-                    (System/getenv "DWDS_BASEX_COLLECTION")
-                    "db/data"))
+(def collection (get-in config [:basex :collection]))
 
 (def basic-creds
-  (if (and user password)
-    (apply str (map char (base64/encode (.getBytes (str user ":" password)))))))
+  (let [{:keys [user password]} (config :basex)]
+    (if (and user password)
+      (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 
 (xml/alias-uri 'bx "http://basex.org/rest")
 
