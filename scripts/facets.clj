@@ -1,36 +1,6 @@
 (require '[dwdsox.basex :as db])
 
-(def metasearch-criteria
-  [["Autor" "@Autor"]
-   ["Quelle" "@Quelle"]
-   ["Status" "@Status"]
-   ["Tranche" "@Tranche"]
-   ["Typ" "@Typ"]
-   ["Wortfeld" "@Wortfeld" :disabled]])
-
-(def systematik-xpath
-  (partial str "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]"))
-
-(def contentsearch-criteria
-  [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
-   ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
-   ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
-   ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
-   ["Schreibung" "*:Formangabe/*:Schreibung" :disabled]
-   ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
-   ["Stilebene" (systematik-xpath "/*:Stilebene")]
-   ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
-   ["Definition" "descendant::*:Definition" :disabled]
-   ["Definition[Basis]" "descendant::*:Definition[@Typ='Basis']" :disabled]
-   ["Definition[Meta]" "descendant::*:Definition[@Typ='Meta']" :disabled]
-   ["Definition[General.]" "descendant::*:Definition[@Typ='Generalisierung']" :disabled]
-   ["Definition[Spez.]" "descendant::*:Definition[@Typ='Spezifizierung']" :disabled]
-   ["Definition[Enzykl.]" "descendant::*:Definition[@Typ='Enzyklopädie']" :disabled]
-   ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
-   ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
-   ["Unterlesarten" "descendant::*:Lesart//*:Lesart" :disabled]])
-
-(defn- distinct-values [xpath]
+(defn distinct-values [xpath]
   (into []
         (->>
          (->
@@ -47,14 +17,41 @@
            [title {:xpath xpath :values (if disabled [] (distinct-values xpath))}])
          criteria)))
 
+(def systematik-xpath
+  (partial str "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]"))
+
 (try
   (spit
 
    "resources/dwdsox/search-facets.edn"
 
    (pr-str
-    {:meta (facets metasearch-criteria)
-     :content (facets contentsearch-criteria)})
+    {:meta (facets
+            [["Autor" "@Autor"]
+             ["Quelle" "@Quelle"]
+             ["Status" "@Status"]
+             ["Tranche" "@Tranche"]
+             ["Typ" "@Typ"]
+             ["Wortfeld" "@Wortfeld" :disabled]])
+
+     :content (facets
+               [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
+                ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
+                ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
+                ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
+                ["Schreibung" "*:Formangabe/*:Schreibung" :disabled]
+                ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
+                ["Stilebene" (systematik-xpath "/*:Stilebene")]
+                ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
+                ["Definition" "descendant::*:Definition" :disabled]
+                ["Definition[Basis]" "descendant::*:Definition[@Typ='Basis']" :disabled]
+                ["Definition[Meta]" "descendant::*:Definition[@Typ='Meta']" :disabled]
+                ["Definition[General.]" "descendant::*:Definition[@Typ='Generalisierung']" :disabled]
+                ["Definition[Spez.]" "descendant::*:Definition[@Typ='Spezifizierung']" :disabled]
+                ["Definition[Enzykl.]" "descendant::*:Definition[@Typ='Enzyklopädie']" :disabled]
+                ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
+                ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
+                ["Unterlesarten" "descendant::*:Lesart//*:Lesart" :disabled]])})
 
    :encoding "UTF-8")
 
