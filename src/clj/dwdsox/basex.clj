@@ -6,7 +6,7 @@
             [taoensso.timbre :as timbre]
             [dwdsox.env :refer [config]])
   (:import [java.io IOException]
-           [java.net URL]))
+           [java.net URL ConnectException]))
 
 (def url (get-in config [:basex :url]))
 
@@ -25,6 +25,8 @@
       (when basic-creds
         (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
       (f con)
+      (catch ConnectException e
+        (throw (ex-info "I/O error while connecting to XML database" {} e)))
       (catch IOException e
         (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
           (throw (ex-info "I/O error while talking to XML database"
