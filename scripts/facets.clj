@@ -1,24 +1,25 @@
 (require '[dwdsox.basex :as db])
 
-(defn distinct-values [xpath]
-  (into []
-        (->>
-         (->
-          (db/simple-xml-query "" (str "distinct-values(//" xpath ")"))
-          (.split "\\n+"))
-         (map #(.trim  %))
-         (sort-by #(.toLowerCase %)))))
+(defn query [xpath]
+  "Queries distinct node values by a given XPath"
+  (let [query (str "distinct-values(//" xpath ")")
+        values (-> (db/simple-xml-query "" query) (.split "\\n+"))
+        sorted (->> values (map #(.trim  %)) (sort-by #(.toLowerCase %)))]
+    (into [] sorted)))
 
-(defn facets [criteria]
-  (into
-   (sorted-map)
-   (pmap (fn
-           [[title xpath disabled]]
-           [title {:xpath xpath :values (if disabled [] (distinct-values xpath))}])
-         criteria)))
+(defn with-values [[title xpath explicit-values]]
+  "Ammends a criterion specification with values for this criterion"
+  [title {:xpath xpath :values (or explicit-values (query xpath))}])
+
+(defn criteria [specs]
+  "Maps criteria specifications to its values"
+  (into (sorted-map) (pmap with-values specs)))
 
 (def systematik-xpath
   (partial str "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]"))
+
+(def definition-xpath
+  (partial str "descendant::*:Definition"))
 
 (try
   (spit
@@ -26,32 +27,32 @@
    "resources/dwdsox/search-facets.edn"
 
    (pr-str
-    {:meta (facets
+    {:meta (criteria
             [["Autor" "@Autor"]
              ["Quelle" "@Quelle"]
              ["Status" "@Status"]
              ["Tranche" "@Tranche"]
              ["Typ" "@Typ"]
-             ["Wortfeld" "@Wortfeld" :disabled]])
+             ["Wortfeld" "@Wortfeld" []]])
 
-     :content (facets
+     :content (criteria
                [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
                 ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
                 ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
                 ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
-                ["Schreibung" "*:Formangabe/*:Schreibung" :disabled]
+                ["Schreibung" "*:Formangabe/*:Schreibung" []]
                 ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
                 ["Stilebene" (systematik-xpath "/*:Stilebene")]
                 ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
-                ["Definition" "descendant::*:Definition" :disabled]
-                ["Definition[Basis]" "descendant::*:Definition[@Typ='Basis']" :disabled]
-                ["Definition[Meta]" "descendant::*:Definition[@Typ='Meta']" :disabled]
-                ["Definition[General.]" "descendant::*:Definition[@Typ='Generalisierung']" :disabled]
-                ["Definition[Spez.]" "descendant::*:Definition[@Typ='Spezifizierung']" :disabled]
-                ["Definition[Enzykl.]" "descendant::*:Definition[@Typ='Enzyklopädie']" :disabled]
-                ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
-                ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" :disabled]
-                ["Unterlesarten" "descendant::*:Lesart//*:Lesart" :disabled]])})
+                ["Definition" (definition-xpath) []]
+                ["Definition[Basis]" (definition-xpath "[@Typ='Basis']") []]
+                ["Definition[Meta]" (definition-xpath "[@Typ='Meta']") []]
+                ["Definition[General.]" (definition-xpath "[@Typ='Generalisierung']") []]
+                ["Definition[Spez.]" (definition-xpath "[@Typ='Spezifizierung']") []]
+                ["Definition[Enzykl.]" (definition-xpath "[@Typ='Enzyklopädie']") []]
+                ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" []]
+                ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" []]
+                ["Unterlesarten" "descendant::*:Lesart//*:Lesart" ["*"]]])})
 
    :encoding "UTF-8")
 
