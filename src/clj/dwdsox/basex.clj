@@ -3,6 +3,7 @@
             [clojure.data.codec.base64 :as base64]
             [clojure.data.xml :as xml]
             [clojure.string :as string]
+            [taoensso.timbre :as timbre]
             [dwdsox.env :refer [config]])
   (:import [java.io IOException]
            [java.net URL]))
@@ -56,6 +57,7 @@
      con)))
 
 (defn simple-xml-query [p q]
+  (timbre/debug {:path p :query q})
   (xml-query p (xml/sexp-as-element
                 [::bx/query {:xmlns/bx "http://basex.org/rest"}
                  [::bx/text [:-cdata q]]])))

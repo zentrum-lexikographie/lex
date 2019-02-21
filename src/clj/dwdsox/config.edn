@@ -12,5 +12,9 @@
    :user nil
    :password nil
    :collection "/db/dwdswb"}
-  #ref [:local :basex]]}
+  #ref [:local :basex]]
+
+ :log #merge
+ [{:level :info}
+  #ref [:local :log]]}
  
