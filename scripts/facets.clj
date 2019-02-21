@@ -1,4 +1,5 @@
-(require '[dwdsox.basex :as db])
+(require '[clojure.pprint :refer [pprint]]
+         '[dwdsox.basex :as db])
 
 (defn query [xpath]
   "Queries distinct node values by a given XPath"
@@ -22,38 +23,36 @@
   (partial str "descendant::*:Definition"))
 
 (try
-  (spit
+  (let [facets
+        {:meta (criteria
+                [["Autor" "@Autor"]
+                 ["Quelle" "@Quelle"]
+                 ["Status" "@Status"]
+                 ["Tranche" "@Tranche"]
+                 ["Typ" "@Typ"]
+                 ["Wortfeld" "@Wortfeld" []]])
 
-   "resources/dwdsox/search-facets.edn"
-
-   (pr-str
-    {:meta (criteria
-            [["Autor" "@Autor"]
-             ["Quelle" "@Quelle"]
-             ["Status" "@Status"]
-             ["Tranche" "@Tranche"]
-             ["Typ" "@Typ"]
-             ["Wortfeld" "@Wortfeld" []]])
-
-     :content (criteria
-               [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
-                ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
-                ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
-                ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
-                ["Schreibung" "*:Formangabe/*:Schreibung" []]
-                ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
-                ["Stilebene" (systematik-xpath "/*:Stilebene")]
-                ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
-                ["Definition" (definition-xpath) []]
-                ["Definition[Basis]" (definition-xpath "[@Typ='Basis']") []]
-                ["Definition[Meta]" (definition-xpath "[@Typ='Meta']") []]
-                ["Definition[General.]" (definition-xpath "[@Typ='Generalisierung']") []]
-                ["Definition[Spez.]" (definition-xpath "[@Typ='Spezifizierung']") []]
-                ["Definition[Enzykl.]" (definition-xpath "[@Typ='Enzyklopädie']") []]
-                ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" []]
-                ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" []]
-                ["Unterlesarten" "descendant::*:Lesart//*:Lesart" ["*"]]])})
-
-   :encoding "UTF-8")
+         :content (criteria
+                   [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
+                    ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
+                    ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
+                    ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
+                    ["Schreibung" "*:Formangabe/*:Schreibung" []]
+                    ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
+                    ["Stilebene" (systematik-xpath "/*:Stilebene")]
+                    ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
+                    ["Definition" (definition-xpath) []]
+                    ["Definition[Basis]" (definition-xpath "[@Typ='Basis']") []]
+                    ["Definition[Meta]" (definition-xpath "[@Typ='Meta']") []]
+                    ["Definition[General.]" (definition-xpath "[@Typ='Generalisierung']") []]
+                    ["Definition[Spez.]" (definition-xpath "[@Typ='Spezifizierung']") []]
+                    ["Definition[Enzykl.]" (definition-xpath "[@Typ='Enzyklopädie']") []]
+                    ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" []]
+                    ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" []]
+                    ["Unterlesarten" "descendant::*:Lesart//*:Lesart" ["*"]]])}]
+    (spit
+     "resources/dwdsox/search-facets.edn"
+     (with-out-str (pprint facets))
+     :encoding "UTF-8"))
 
   (finally (shutdown-agents)))
