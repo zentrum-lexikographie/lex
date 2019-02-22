@@ -110,8 +110,12 @@
       article-page))))
 
 (def sample-query
-  [{:type :timestamp :from "2017-01-01" :until "2018-01-01"}
-   {:type :content 
+  [{:type :timestamp :element "Artikel" :until "2018-01-01"}
+   {:type :meta
+    :title "Quelle"
+    :xpath "@Quelle"
+    :value "DWDS"}
+   {:type :content
     :title "Schreibung",
     :xpath "*:Formangabe/*:Schreibung"
     :value "*lexiko*"}])
