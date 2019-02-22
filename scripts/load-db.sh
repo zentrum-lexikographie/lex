@@ -25,4 +25,5 @@ fi
 
 docker-compose exec basex basexclient -Uadmin -Padmin\
                -c'SET ADDRAW true'\
+               -c'SET FTINDEX true'\
                -c'CREATE DB db /srv/production-data/db'
