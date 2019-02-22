@@ -8,9 +8,9 @@
         sorted (->> values (map #(.trim  %)) (sort-by #(.toLowerCase %)))]
     (into [] sorted)))
 
-(defn with-values [[title xpath explicit-values]]
+(defn with-values [[title xpath type explicit-values]]
   "Ammends a criterion specification with values for this criterion"
-  [title {:xpath xpath :values (or explicit-values (query xpath))}])
+  [title {:type type :xpath xpath :values (or explicit-values (query xpath))}])
 
 (defn criteria [specs]
   "Maps criteria specifications to its values"
@@ -24,32 +24,30 @@
 
 (try
   (let [facets
-        {:meta (criteria
-                [["Autor" "@Autor"]
-                 ["Quelle" "@Quelle"]
-                 ["Status" "@Status"]
-                 ["Tranche" "@Tranche"]
-                 ["Typ" "@Typ"]
-                 ["Wortfeld" "@Wortfeld" []]])
-
-         :content (criteria
-                   [["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene")]
-                    ["Fachgebiet" (systematik-xpath "/*:Fachgebiet")]
-                    ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum")]
-                    ["Gruppensprache" (systematik-xpath "/*:Gruppensprache")]
-                    ["Schreibung" "*:Formangabe/*:Schreibung" []]
-                    ["Sprachraum" (systematik-xpath "/*:Sprachraum")]
-                    ["Stilebene" (systematik-xpath "/*:Stilebene")]
-                    ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung")]
-                    ["Definition" (definition-xpath) []]
-                    ["Definition[Basis]" (definition-xpath "[@Typ='Basis']") []]
-                    ["Definition[Meta]" (definition-xpath "[@Typ='Meta']") []]
-                    ["Definition[General.]" (definition-xpath "[@Typ='Generalisierung']") []]
-                    ["Definition[Spez.]" (definition-xpath "[@Typ='Spezifizierung']") []]
-                    ["Definition[Enzykl.]" (definition-xpath "[@Typ='Enzyklopädie']") []]
-                    ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" []]
-                    ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" []]
-                    ["Unterlesarten" "descendant::*:Lesart//*:Lesart" ["*"]]])}]
+        (criteria
+         [["Autor" "@Autor" :meta]
+          ["Quelle" "@Quelle" :meta]
+          ["Status" "@Status" :meta]
+          ["Tranche" "@Tranche" :meta]
+          ["Typ" "@Typ" :meta]
+          ["Wortfeld" "@Wortfeld" :meta []]
+          ["Schreibung" "*:Formangabe/*:Schreibung" [] :content]
+          ["Unterlesarten" "descendant::*:Lesart//*:Lesart" :content ["*"]]
+          ["Definition" (definition-xpath) :content []]
+          ["Definition[Basis]" (definition-xpath "[@Typ='Basis']") :content []]
+          ["Definition[Meta]" (definition-xpath "[@Typ='Meta']") :content []]
+          ["Definition[General.]" (definition-xpath "[@Typ='Generalisierung']") :content []]
+          ["Definition[Spez.]" (definition-xpath "[@Typ='Spezifizierung']") :content []]
+          ["Definition[Enzykl.]" (definition-xpath "[@Typ='Enzyklopädie']") :content []]
+          ["Bedeutungsebene" (systematik-xpath "/*:Bedeutungsebene") :content]
+          ["Fachgebiet" (systematik-xpath "/*:Fachgebiet") :content]
+          ["Gebrauchszeitraum" (systematik-xpath "/*:Gebrauchszeitraum") :content]
+          ["Gruppensprache" (systematik-xpath "/*:Gruppensprache") :content]
+          ["Sprachraum" (systematik-xpath "/*:Sprachraum") :content]
+          ["Stilebene" (systematik-xpath "/*:Stilebene") :content]
+          ["Stilfärbung" (systematik-xpath "/*:Stilfaerbung") :content]
+          ["morphologische Links" "self::*:Artikel/*:Verweise/*:Verweis/*:Ziellemma" :content []]
+          ["semantische Links" "descendant::*:Lesart/*:Verweise/*:Verweis/*:Ziellemma" :content []]])]
     (spit
      "resources/dwdsox/search-facets.edn"
      (with-out-str (pprint facets))
