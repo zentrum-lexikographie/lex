@@ -23,7 +23,11 @@
 
 (defn xq-join [& lines] (string/join "\n" lines))
 
-(defn xq-escape-str [s] (str "'" (string/replace s "'" "\\'") "'"))
+(defn xq-escape-str [s]
+  (string/replace s "\"" "\\\""))
+
+(defn xq-escape-regex [re]
+  (string/replace re #"([.\"])" "\\\\$0"))
 
 (defn timestamp-expr [[{:keys [element from until]}]]
   (str
@@ -37,9 +41,13 @@
 
 (defn meta-exprs [filters]
   (map (fn [{:keys [xpath value]}]
-         (str "$article[" xpath "=" (xq-escape-str value) "]")) filters))
+         (str "$article[" xpath "=\"" (xq-escape-str value) "\"]")) filters))
 
-(defn content-exprs [filters] (meta-exprs filters))
+(defn content-exprs [filters]
+  (map (fn [{:keys  [xpath value]}]
+         (str "$article[" xpath " contains text \""
+              (.replace (xq-escape-regex value) "*" ".*")
+              "\" using wildcards]")) filters))
 
 (def article-title
   "string-join($article/s:Formangabe/s:Schreibung, ', ')")
@@ -74,6 +82,7 @@
                   "return ("
                   "<article>"
                   (str "<title>{ " article-title " }</title>")
+                  "<source>{ data($article/@Quelle) }</source>"
                   "<status>{ data($article/@Status) }</status>"
                   (str "<path>{ " article-path " }</path>")
                   (str "{ " article-definition " }")
@@ -103,6 +112,6 @@
 (def sample-query
   [{:type :timestamp :from "2017-01-01" :until "2018-01-01"}
    {:type :content 
-    :title "Bedeutungsebene",
-    :xpath "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]/*:Fachgebiet"
-    :value "Astronomie"}])
+    :title "Schreibung",
+    :xpath "*:Formangabe/*:Schreibung"
+    :value "*lexiko*"}])
