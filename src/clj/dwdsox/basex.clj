@@ -63,3 +63,6 @@
   (xml-query p (xml/sexp-as-element
                 [::bx/query {:xmlns/bx "http://basex.org/rest"}
                  [::bx/text [:-cdata q]]])))
+
+(defn whoami []
+  (simple-xml-query "" "user:current()"))
