@@ -59,7 +59,7 @@
      con)))
 
 (defn simple-xml-query [p q]
-  (timbre/debug {:path p :query q})
+  (timbre/debug (str "? /" p "\n" q))
   (xml-query p (xml/sexp-as-element
                 [::bx/query {:xmlns/bx "http://basex.org/rest"}
                  [::bx/text [:-cdata q]]])))

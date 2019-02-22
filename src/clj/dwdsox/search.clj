@@ -1,14 +1,14 @@
 (ns dwdsox.search
-  (:require [clojure.java.io :as io]
+  (:require [clojure.edn :as edn]
+            [clojure.java.io :as io]
             [clojure.string :as string]
             [dwdsox.basex :as db]
             [clojure.data.xml :as xml]))
 
-(def xquery-prolog
-  (string/join
-   "\n"
-   ["xquery version \"3.0\";"
-    "declare namespace s=\"http://www.dwds.de/ns/1.0\";"]))
+(def filters
+  (-> (io/resource "dwdsox/search-facets.edn")
+      (slurp :encoding "UTF-8")
+      edn/read-string))
 
 (def timestamp-types
   ["Artikel"
@@ -21,73 +21,88 @@
    "Kollokationen"
    "Verwendungsbeispiele"])
 
-(defn timestamp-xpath [{:keys [type from until]}]
+(defn xq-join [& lines] (string/join "\n" lines))
+
+(defn xq-escape-str [s] (str "'" (string/replace s "'" "\\'") "'"))
+
+(defn timestamp-expr [[{:keys [element from until]}]]
   (str
-   "/"
-   (if type (str "/s:" type) "")
-   "/@Zeitstempel"
+   (cond
+     (= "Artikel" element) "/"
+     (string? element) (str "//s:" element "/")
+     :else "//")
+   "@Zeitstempel"
    (if from (str "[.>='" from "']") "")
    (if until (str "[.<='" until "']") "")))
 
-(defn xquery-for [timestamp-filter]
+(defn meta-exprs [filters]
+  (map (fn [{:keys [xpath value]}]
+         (str "$article[" xpath "=" (xq-escape-str value) "]")) filters))
+
+(defn content-exprs [filters] (meta-exprs filters))
+
+(def article-title
+  "string-join($article/s:Formangabe/s:Schreibung, ', ')")
+
+(def article-definition
   (str
-   "for $hit in "
-   "collection(" db/collection ")"
-   (timestamp-xpath timestamp-filter)))
-
-(def xquery-order
-  "order by $hit descending")
-
-(def xquery-title
-  "string-join($hit/ancestor::s:Artikel/s:Formangabe/s:Schreibung, ', ')")
-
-(def xquery-definition
-  (str
-   "for $d in $hit/ancestor::s:Artikel/descendant::s:Definition "
+   "for $d in $article//s:Definition "
    "return <def>{normalize-space(string-join($d//text(), ' '))}</def>"))
 
-(def xquery-modified
-  "data(db:list-details(db:name($hit), db:path($hit))/@modified-date)")
+(def article-modified
+  "data(db:list-details(db:name($article), db:path($article))/@modified-date)")
 
-(def xquery-result
-  (string/join
-   "\n"
-   ["return ("
-    "<result>"
-    "<title>{ " xquery-title " }</title>"
-    "<status>{data($hit/ancestor::s:Artikel/@Status)}</status>"
-    "<path>{db:path($hit)}</path>"
-    (str "{ " xquery-definition " }")
-    "<timestamp>{data($hit)}</timestamp>"
-    "<timestampType>{$hit/parent::node()/name()}</timestampType>"
-    (str "<modified>{ " xquery-modified " }</modified>")
-    "</result>"
-    ")"]))
+(def article-path
+  (str "replace(base-uri($article), '" db/collection "/', '')"))
 
-(defn xquery-results [timestamp-filter]
-  (string/join "\n" [(xquery-for timestamp-filter) xquery-order xquery-result]))
+(defn xquery [collection filters filter-op page page-size]
+  (let [filters-by-type (group-by :type filters)
 
-(defn xquery-result-page [page page-size timestamp-filter]
-  (let [start (+ (* page page-size) 1)
-        num-records page-size]
-    (string/join
-     "\n"
-     ["let $results := "
-      (xquery-results timestamp-filter)
-      ""
-      "return ("
-      "<results>"
-      (str "{subsequence($results, " start ", " num-records ")}")
-      "<total>{count($results)}</total>"
-      (str "<page>" page "</page>")
-      (str "<pageSize>" page-size "</pageSize>")
-      "</results>"
-      ")"])))
+        filter-exprs (concat
+                      (meta-exprs (filters-by-type :meta))
+                      (content-exprs (filters-by-type :content)))
 
-(defn xquery [page page-size timestamp-filter]
-  (string/join
-   "\n\n"
-   [xquery-prolog (xquery-result-page page page-size timestamp-filter)]))
+        articles (xq-join
+                  "for $article in //s:Artikel"
+                  (str "let $ts := sort($article"
+                       (timestamp-expr (filters-by-type :timestamp))
+                       ")[last()]")
+                  "order by $ts descending"
+                  (str "where $ts and ("
+                       (string/join (if (= filter-op :or) " or " " and ")
+                                    filter-exprs) ")")
+                  "return ("
+                  "<article>"
+                  (str "<title>{ " article-title " }</title>")
+                  "<status>{ data($article/@Status) }</status>"
+                  (str "<path>{ " article-path " }</path>")
+                  (str "{ " article-definition " }")
+                  "<author>{ data($article/@Autor) }</author>"
+                  "<ts type=\"{ $ts/parent::node()/name() }\">{ data($ts) }</ts>"
+                  (str "<modified>{ " article-modified " }</modified>")
+                  "</article>"
+                  ")")
 
-(defn db-query []
-  (db/simple-xml-query "" (xquery 0 5 {:from "2019-01-15"})))
+        start (+ (* page page-size) 1)
+
+        article-page (xq-join
+                      (str "let $articles := " articles)
+                      "return ("
+                      "<articles>"
+                      "<total>{ count($articles) }</total>"
+                      (str "{subsequence($articles, " start ", " page-size ")}")
+                      "</articles>"
+                      ")")]
+    (db/simple-xml-query
+     collection
+     (xq-join
+      "xquery version \"3.0\";"
+      "declare namespace s=\"http://www.dwds.de/ns/1.0\";"
+      article-page))))
+
+(def sample-query
+  [{:type :timestamp :from "2017-01-01" :until "2018-01-01"}
+   {:type :content 
+    :title "Bedeutungsebene",
+    :xpath "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]/*:Fachgebiet"
+    :value "Astronomie"}])
