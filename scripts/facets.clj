@@ -10,11 +10,11 @@
 
 (defn with-values [[title xpath type explicit-values]]
   "Ammends a criterion specification with values for this criterion"
-  [title {:type type :xpath xpath :values (or explicit-values (query xpath))}])
+  {:type type :title title :xpath xpath :values (or explicit-values (query xpath))})
 
 (defn criteria [specs]
   "Maps criteria specifications to its values"
-  (into (sorted-map) (pmap with-values specs)))
+  (into [] (pmap with-values specs)))
 
 (def systematik-xpath
   (partial str "descendant::*:Diasystematik[parent::*:Formangabe|parent::*:Lesart]"))
