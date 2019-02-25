@@ -2,8 +2,8 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as string]
-            [dwdsox.basex :as db]
-            [clojure.data.xml :as xml]))
+            [clojure.data.xml :as xml]
+            [dwdsox.db :as db]))
 
 (def filters
   (-> (io/resource "dwdsox/search-facets.edn")
@@ -63,12 +63,14 @@
 (def article-path
   (str "replace(base-uri($article), '" db/collection "/', '')"))
 
-(defn xquery [collection filters filter-op page page-size]
+(defn articles [collection filters filter-op page page-size]
   (let [filters-by-type (group-by :type filters)
 
         filter-exprs (concat
                       (meta-exprs (filters-by-type :meta))
                       (content-exprs (filters-by-type :content)))
+
+        filter-junction (if (= filter-op :or) " or " " and ")
 
         articles (xq-join
                   "for $article in //s:Artikel"
@@ -76,9 +78,7 @@
                        (timestamp-expr (filters-by-type :timestamp))
                        ")[last()]")
                   "order by $ts descending"
-                  (str "where $ts and ("
-                       (string/join (if (= filter-op :or) " or " " and ")
-                                    filter-exprs) ")")
+                  (str "where $ts and (" (string/join filter-junction filter-exprs) ")")
                   "return ("
                   "<article>"
                   (str "<title>{ " article-title " }</title>")
@@ -88,7 +88,6 @@
                   (str "{ " article-definition " }")
                   "<author>{ data($article/@Autor) }</author>"
                   "<ts type=\"{ $ts/parent::node()/name() }\">{ data($ts) }</ts>"
-                  (str "<modified>{ " article-modified " }</modified>")
                   "</article>"
                   ")")
 
@@ -102,7 +101,7 @@
                       (str "{subsequence($articles, " start ", " page-size ")}")
                       "</articles>"
                       ")")]
-    (db/simple-xml-query
+    (db/query
      collection
      (xq-join
       "xquery version \"3.0\";"

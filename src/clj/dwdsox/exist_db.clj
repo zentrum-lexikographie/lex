@@ -3,9 +3,10 @@
             [clojure.data.codec.base64 :as base64]
             [clojure.data.xml :as xml]
             [clojure.string :as string]
+            [taoensso.timbre :as timbre]
             [dwdsox.env :refer [config]])
   (:import [java.io IOException]
-           [java.net URL]))
+           [java.net URL ConnectException]))
 
 (def url (get-in config [:exist :url]))
 
@@ -18,12 +19,14 @@
 
 (xml/alias-uri 'ex "http://exist.sourceforge.net/NS/exist")
 
-(defn- with-connection [p f]
-  (let [con (-> (str url "/" p) (URL.) (.openConnection))]
+(defn- with-db-connection [path tx]
+  (let [con (-> (str url "/" path) (URL.) (.openConnection))]
     (try
       (when basic-creds
         (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-      (f con)
+      (tx con)
+      (catch ConnectException e
+        (throw (ex-info "I/O error while connecting to XML database" {} e)))
       (catch IOException e
         (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
           (throw (ex-info "I/O error while talking to XML database"
@@ -31,29 +34,37 @@
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
 
-(defn resource [p]
-  (with-connection
-    (str "webdav/" collection "/" p)
-    (fn [con]
-      (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
-        (slurp resp)))))
+(defn db-request
+  ([path] (db-request "webdav" path identity))
+  ([type path] (db-request type path identity))
+  ([type path request]
+   (with-db-connection
+     (str type collection "/" path)
+     (fn [con]
+       (request con)
+       (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
+         (slurp resp))))))
 
-(defn query [q]
-  (with-connection
-    "rest/"
-    (fn [con]
-      (doto con
-        (.setRequestMethod "POST")
-        (.setRequestProperty "Content-Type" "application/xml")
-        (.setDoOutput true)
-        (.setDoInput true))
-      (with-open [req (io/writer (.getOutputStream con) :encoding "UTF-8")]
-        (xml/emit
-         (xml/sexp-as-element
-          [::ex/query {:xmlns/ex "http://exist.sourceforge.net/NS/exist"}
-           [::ex/text [:-cdata q]]
-           [::ex/properties
-            [::ex/property {:name "indent" :value "no"}]]])
-         req))
-      (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
-        (slurp resp)))))
+(defn db-post-xml
+  [type path xml-request]
+  (db-request
+   type path
+   (fn [con]
+     (doto con
+       (.setRequestMethod "POST")
+       (.setRequestProperty "Content-Type" "application/xml")
+       (.setDoOutput true)
+       (.setDoInput true))
+     (with-open [req (io/writer (.getOutputStream con) :encoding "UTF-8")]
+       (xml/emit xml-request req))
+     con)))
+
+(defn query [path xquery]
+  (timbre/debug (str "? /" path "\n" xquery))
+  (db-post-xml "rest" path
+               (xml/sexp-as-element
+                [::ex/query {:xmlns/ex "http://exist.sourceforge.net/NS/exist"}
+                 [::ex/text [:-cdata xquery]]])))
+
+(defn whoami []
+  (query "" "xmldb:get-current-user()"))

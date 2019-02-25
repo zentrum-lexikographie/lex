@@ -19,12 +19,12 @@
 
 (xml/alias-uri 'bx "http://basex.org/rest")
 
-(defn- with-connection [p f]
-  (let [con (-> (str url "/" p) (URL.) (.openConnection))]
+(defn- with-db-connection [path tx]
+  (let [con (-> (str url "/" path) (URL.) (.openConnection))]
     (try
       (when basic-creds
         (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-      (f con)
+      (tx con)
       (catch ConnectException e
         (throw (ex-info "I/O error while connecting to XML database" {} e)))
       (catch IOException e
@@ -34,20 +34,20 @@
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
 
-(defn query
-  ([p] (query p identity))
-  ([p request]
-   (with-connection
-     (str "rest/" collection "/" p)
+(defn db-request
+  ([path] (db-request path identity))
+  ([path request]
+   (with-db-connection
+     (str "rest/" collection "/" path)
      (fn [con]
        (request con)
        (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
          (slurp resp))))))
 
-(defn xml-query
-  [p xml-query]
-  (query
-   p
+(defn db-post-xml
+  [path xml-request]
+  (db-request
+   path
    (fn [con]
      (doto con
        (.setRequestMethod "POST")
@@ -55,14 +55,14 @@
        (.setDoOutput true)
        (.setDoInput true))
      (with-open [req (io/writer (.getOutputStream con) :encoding "UTF-8")]
-       (xml/emit xml-query req))
+       (xml/emit xml-request req))
      con)))
 
-(defn simple-xml-query [p q]
-  (timbre/debug (str "? /" p "\n" q))
-  (xml-query p (xml/sexp-as-element
-                [::bx/query {:xmlns/bx "http://basex.org/rest"}
-                 [::bx/text [:-cdata q]]])))
+(defn query [path xquery]
+  (timbre/debug (str "? /" path "\n" xquery))
+  (db-post-xml path (xml/sexp-as-element
+                     [::bx/query {:xmlns/bx "http://basex.org/rest"}
+                      [::bx/text [:-cdata xquery]]])))
 
 (defn whoami []
-  (simple-xml-query "" "user:current()"))
+  (query "" "user:current()"))

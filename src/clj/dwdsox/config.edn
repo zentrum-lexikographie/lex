@@ -1,5 +1,9 @@
 {:local #include #join [#env PWD "/config.local.edn"]
 
+ :env #merge
+ [{:dbtype :exist}
+  #ref [:local :env]]
+
  :exist #merge
  [{:url "http://spock.dwds.de:8080/exist"
    :user nil
