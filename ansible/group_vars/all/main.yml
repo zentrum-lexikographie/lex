@@ -28,6 +28,11 @@ apache_vhosts:
         Require valid-user
       </Location>
 
+      <DirectoryMatch ^\.|\/\.>
+        Order allow,deny
+        Deny from all
+      </DirectoryMatch>
+
       Alias /webdav {{ dav_root }}
       <Location /webdav>
         Dav On
