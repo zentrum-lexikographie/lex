@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/contrib-stretch64"
+  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.synced_folder "..", "/vagrant", mount_options: ["dmode=775", "fmode=664", "umask=002"], SharedFoldersEnableSymlinksCreate: false
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.default_nic_type = "Am79C973"
+  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yml"
+    ansible.groups = { "vagrant" => ["default"] }
+    ansible.become = true
+    ansible.compatibility_mode = "2.0"
+  end
+end

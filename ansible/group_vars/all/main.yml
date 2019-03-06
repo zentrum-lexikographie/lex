@@ -1,0 +1,45 @@
+---
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
+  - "443"
+
+apache_mods_enabled:
+  - rewrite.load
+  - ssl.load
+  - authz_groupfile.load
+  - dav.load
+  - dav_lock.load
+  - dav_fs.load
+  - dav_fs.conf
+
+apache_remove_default_vhost: true
+apache_vhosts:
+  - servername: "{{ ansible_fqdn }}"
+    documentroot: "{{ dav_root }}"
+    allow_override: "None"
+    extra_parameters: |
+      <Location />
+        AuthType Basic
+        AuthName ZDL-Lex-Server
+        AuthUserFile htpasswd
+        AuthGroupFile htgroup
+
+        Require valid-user
+      </Location>
+
+      Alias /webdav {{ dav_root }}
+      <Location /webdav>
+        Dav On
+        DavDepthInfinity on
+
+        Require group Lexikographen
+      </Location>
+
+solr_timezone: "Europe/Berlin"
+solr_cores:
+  - "articles"
+
+dav_root: "/var/www/html"
+dav_users: []
+dav_user_groups: []

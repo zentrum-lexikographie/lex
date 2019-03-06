@@ -1,0 +1,54 @@
+---
+- hosts: all
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.security
+    - oefenweb.postfix
+    - geerlingguy.java
+    - geerlingguy.git
+    - geerlingguy.apache
+    #- geerlingguy.certbot
+    - geerlingguy.solr
+  tasks:
+    - name: Adjust umask of apache server
+      lineinfile:
+        path: /etc/apache2/envvars
+        regexp: '^umask'
+        line: 'umask 0002'
+      when: "'vagrant' in group_names"
+      notify: restart apache        
+
+    - name: Add www-data user to vagrant group
+      user:
+        name: www-data
+        groups: vagrant
+        append: yes
+      when: "'vagrant' in group_names"
+      notify: restart apache
+
+    - name: Install python-passlib
+      apt:
+        package: python-passlib
+
+    - name: Create user database
+      htpasswd:
+        path: /etc/apache2/htpasswd
+        name: "{{ item.name }}"
+        password: "{{ item.password }}"
+        owner: root
+        group: www-data
+        mode: 0640
+      with_items: "{{ dav_users }}"
+      no_log: yes
+
+    - name: Create user/group mapping
+      lineinfile:
+        path: /etc/apache2/htgroup
+        regexp: '^{{ item.group }}'
+        line: '{{ item.group }}: {{ item.members|join(" ") }}'
+        create: yes
+        owner: root
+        group: www-data
+        mode: 0640
+      with_items: "{{ dav_user_groups }}"
+      

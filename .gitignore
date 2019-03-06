@@ -14,3 +14,7 @@ pom.xml.asc
 
 data
 config.local.edn
+ansible/.vagrant
+ansible/*.retry
+ansible/roles/*.*
+ansible/venv
