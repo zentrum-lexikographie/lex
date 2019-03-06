@@ -6,7 +6,6 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
 
                  [ring/ring-core "1.7.1"]
-                 [ring/ring-jetty-adapter "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
 
                  [com.taoensso/timbre "4.10.0"]
@@ -16,9 +15,10 @@
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
 
                  [http-kit "2.2.0"]
-                 [hawk "0.2.11"]]
-
-
+                 [hawk "0.2.11"]
+                 [me.raynes/fs "1.4.6"]]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  :aliases {"exist2git" ["run", "-m", "zdl-lex-server.exist2git"]})
+
