@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection xmlns="http://exist-db.org/collection-config/1.0">
+    <index xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dwds="http://www.dwds.de/ns/1.0">
+        <!-- AH 2015-04-17 ff., index definitions -->
+        <fulltext default="none" attributes="false"/>
+        <lucene>
+            <analyzer class="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
+            <text qname="dwds:Definition"/>
+            <text qname="dwds:BParaphrase"/>
+            <text qname="dwds:Belegtext"/>
+            <text qname="dwds:Autorenzusatz"/>
+            <text qname="dwds:Einschraenkung"/>
+            <text qname="dwds:Kurztitel"/>
+            <text qname="dwds:Fundstelle"/> <!-- TODO: dwds:Fundstelle will be merged with dwds:Kurztitel -->
+        </lucene>
+        <!--ngram qname="dwds:Definition"/-->
+        <range>
+            <create qname="dwds:Schreibung" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Stichwort" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:erwaehntes_Zeichen" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Aussprache" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Ziellemma" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Ziellemma" type="xs:string" whitespace="normalize"/>
+            <!-- grammatical information -->
+            <create qname="dwds:Wortklasse" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:FlexionsklasseSingular" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:FlexionsklassePlural" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Genitiv" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Plural" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Genus" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Numeruspraeferenz" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Kasuspraeferenz" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Artikelpraeferenz" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Funktionspraeferenz" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Komparativ" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Superlativ" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Komparationspraeferenz" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Praesens" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Praeteritum" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Partizip_II" type="xs:string" whitespace="normalize"/>
+            <!-- dia* information -->
+            <create qname="dwds:Frequenzangabe" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Bedeutungsebene" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Stilebene" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Stilfaerbung" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Gebrauchszeitraum" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Sprachraum" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Gruppensprache" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Fachgebiet" type="xs:string" whitespace="normalize"/>
+            <!-- bibliographical information -->
+            <create qname="dwds:Autor" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Titel" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Stelle" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Datum" type="xs:string" whitespace="normalize"/>
+            <create qname="dwds:Kurztitel" type="xs:string" whitespace="normalize"/>
+            <!-- metadata, ATTENTION: attributes *not* in dwds namespace! -->
+            <!-- whitespace="normalize" may be irrelevant here, I include it just in case -->
+            <create qname="@Datei" type="xs:string" whitespace="normalize"/>
+            <create qname="@Autor" type="xs:string" whitespace="normalize"/>
+            <create qname="@Status" type="xs:string" whitespace="normalize"/>
+            <create qname="@Quelle" type="xs:string" whitespace="normalize"/>
+            <create qname="@Tranche" type="xs:string" whitespace="normalize"/>
+            <create qname="@Typ" type="xs:string" whitespace="normalize"/> <!-- @Typ is not used context-free, for querying the index this is irrelevant, though-->
+            <create qname="@Zeitstempel" type="xs:string" whitespace="normalize"/>
+            <create qname="@Fundort" type="xs:string" whitespace="normalize"/>
+            <create qname="@Sigle" type="xs:string" whitespace="normalize"/>
+            <create qname="@Klasse" type="xs:string" whitespace="normalize"/>
+            <create qname="@Regel" type="xs:string" whitespace="normalize"/>
+            <create qname="@Sprache" type="xs:string" whitespace="normalize"/>
+            <create qname="@Frequenz" type="xs:string" whitespace="normalize"/>
+            <create qname="@Originaltext" type="xs:string" whitespace="normalize"/>
+            <create qname="@hidx" type="xs:string" whitespace="normalize"/>
+            <create qname="@n" type="xs:string" whitespace="normalize"/>
+            <create qname="@class" type="xs:string" whitespace="normalize"/> <!-- TODO: rename to Klasse -->
+            <create qname="@syntaktische_Relation" type="xs:string" whitespace="normalize"/>
+            <create qname="@semantische_Relation" type="xs:string" whitespace="normalize"/>
+            <create qname="@Wortfeld" type="xs:string" whitespace="normalize"/>
+        </range>
+    </index>
+    <triggers>
+        <!--trigger event="update" class="org.exist.collections.triggers.XQueryTrigger"-->
+            <!--parameter name="url" value="xmldb:exist:///db/xquery/commit-trigger.xql"/-->
+            <!--parameter name="query" value="module namespace trigger='http://exist-db.org/xquery/trigger'; declare function trigger:after-update-document($uri as xs:anyURI) { if(not(fn:contains($uri,'/.svn'))) then (xmldb:login('/db', 'admin', 'Weltinnenraum'), xmldb:store('/db/svn-info/', fn:concat(fn:analyze-string($uri,'.*/(..*)/..*')/fn:match/fn:group/text(),'-svn-info.xml'), fn:concat('<','version>','changed','<','/version>'))) else () };"/-->
+            <!--parameter name="query" value="return subversion:commit($uri, 'auto-commit', 'popp', 'BXXyq0')"/-->
+        <!--/trigger-->
+        <!-- versioning -->
+        <!--trigger event="create" class="org.exist.versioning.VersioningTrigger">
+            <parameter name="overwrite" value="no"/>
+        </trigger>
+        <trigger event="delete" class="org.exist.versioning.VersioningTrigger">
+            <parameter name="overwrite" value="no"/>
+        </trigger>
+        <trigger event="update" class="org.exist.versioning.VersioningTrigger">
+            <parameter name="overwrite" value="no"/>
+        </trigger-->
+    </triggers>
+    <!-- the serializer also has to support versioning by inserting version metadata when serving resources -->
+    <!--serializer add-exist-id="none" compress-output="no" enable-xinclude="yes" enable-xsl="no" indent="yes" match-tagging-attributes="no" match-tagging-elements="no">
+        <custom-filter class="org.exist.versioning.VersioningFilter"/>
+    </serializer-->
+</collection>

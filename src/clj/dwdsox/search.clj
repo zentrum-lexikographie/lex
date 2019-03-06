@@ -104,7 +104,7 @@
     (db/query
      collection
      (xq-join
-      "xquery version \"3.0\";"
+      "xquery version \"3.1\";"
       "declare namespace s=\"http://www.dwds.de/ns/1.0\";"
       article-page))))
 
@@ -118,3 +118,10 @@
     :title "Schreibung",
     :xpath "*:Formangabe/*:Schreibung"
     :value "*lexiko*"}])
+
+(def simple-sample-query
+  [{:type :timestamp :element "Artikel" :until "2018-01-01"}
+   {:type :meta
+    :title "Quelle"
+    :xpath "@Quelle"
+    :value "DWDS"}])

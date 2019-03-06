@@ -8,13 +8,36 @@ services:
         - 127.0.0.1:8984:8984
     volumes:
       - type: volume
-        source: data
+        source: basex-data
         target: /srv/basex/data
       - type: bind
         source: ./data
         target: /srv/production-data
+  exist:
+    image: existdb/existdb:latest
+    container_name: exist
+    ports:
+        - 127.0.0.1:8080:8080
+        - 127.0.0.1:8443:8443
+    volumes:
+      - type: volume
+        source: exist-data
+        target: /exist/webapp/WEB-INF/data
+      - type: volume
+        source: exist-config
+        target: /exist/config
+      - type: bind
+        source: ./data
+        target: /exist/production-data
+
 
 volumes:
-  data:
+  basex-data:
     driver: local
     name: basex-data
+  exist-data:
+    driver: local
+    name: exist-data
+  exist-config:
+    driver: local
+    name: exist-config

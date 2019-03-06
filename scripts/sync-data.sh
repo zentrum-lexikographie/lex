@@ -16,14 +16,8 @@ if [ ! -f data/backup.properties ]; then
           db/apps/**\
           db/system/**\
           db/__lost_and_found__/**\
-          **/__contents__.xml\
           **/collection.xconf\
           -d data
 
     rm $temp_backup_file
 fi
-
-docker-compose exec basex basexclient -Uadmin -Padmin\
-               -c'SET ADDRAW true'\
-               -c'SET FTINDEX true'\
-               -c'CREATE DB db /srv/production-data/db'
