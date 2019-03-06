@@ -1,16 +1,16 @@
-/target
-/classes
-/checkouts
+target
+classes
+checkouts
 profiles.clj
 pom.xml
 pom.xml.asc
 *.jar
 *.class
-/.lein-*
-/.nrepl-port
+.lein-*
+.nrepl-port
 
-/.idea
+.idea
 *.iml
 
-/data
+data
 config.local.edn
