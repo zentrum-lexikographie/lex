@@ -50,7 +50,7 @@
         exist-data-path-length (-> exist-data-dir path count inc)]
     (doseq [article-file (xml-files exist-data-dir)
             :let [rel-path (-> article-file path (.substring exist-data-path-length))
-                  git-file (fs/file git-checkout-dir rel-path)]]
+                  git-file (fs/file git-checkout-dir "articles" rel-path)]]
       (fs/copy+ article-file git-file)))
   (proc "chmod" "-R" "g+w" (path git-checkout-dir)))
 
