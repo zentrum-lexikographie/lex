@@ -7,6 +7,10 @@ firewall_allowed_tcp_ports:
 apache_mods_enabled:
   - rewrite.load
   - ssl.load
+  - headers.load
+  - proxy.load
+  - proxy_http.load
+  - proxy_http2.load
   - authz_groupfile.load
   - dav.load
   - dav_lock.load
@@ -39,6 +43,12 @@ apache_vhosts:
         DavDepthInfinity on
 
         Require group Lexikographen
+      </Location>
+
+      <Location /solr>
+        ProxyPass http://localhost:8983/solr
+        ProxyPassReverse http://localhost:8983/solr
+        Require group admin
       </Location>
 
 solr_timezone: "Europe/Berlin"

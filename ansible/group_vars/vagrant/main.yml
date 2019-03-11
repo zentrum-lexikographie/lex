@@ -13,6 +13,9 @@ dav_users:
     password: admin
 
 dav_user_groups:
+  - group: admin
+    members:
+      - admin
   - group: Lexikographen
     members:
       - admin
