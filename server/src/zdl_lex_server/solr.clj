@@ -12,28 +12,22 @@
 
 (def sample-article (partial rand-nth all-articles))
 
-(defn normalize-space [s] (.trim (str/replace s #"\s+" " ")))
-
-(defn text [loc]
-  (some-> loc zx/text normalize-space))
-
-(defn texts [& args]
-  (->> (apply zx/xml-> args) (map text) (remove empty?)
-       (into #{}) (vec) (sort) (seq)))
-
-(defn parse-article [article]
+(defn article-xml [article]
   (let [doc-loc (-> article io/input-stream
                     (xml/parse :namespace-aware false) zip/xml-zip)
         article-loc (zx/xml1-> doc-loc :DWDS :Artikel)]
     (or article-loc (throw (ex-info (str article) (zip/node doc-loc))))))
 
-(defn min-timestamp [a b] (if (> 0 (compare a b)) a b))
-(defn max-timestamp
-  ([] nil)
-  ([a] a)
-  ([a b] (if (< 0 (compare a b)) a b)))
+(defn- normalize-space [s] (.trim (str/replace s #"\s+" " ")))
 
-(defn article-attrs [article-loc attr]
+(defn- text [loc]
+  (some-> loc zx/text normalize-space))
+
+(defn- texts [& args]
+  (->> (apply zx/xml-> args) (map text) (remove empty?)
+       (into #{}) (vec) (sort) (seq)))
+
+(defn- article-attrs [article-loc attr]
   (let [attr-locs (zx/xml-> article-loc dz/descendants
                                  #(string? (zx/attr % attr)))
         attr-nodes (map zip/node attr-locs)
@@ -72,17 +66,17 @@
      :tranche Tranche
      :status Status}))
 
-(defn solr-field-name [k]
+(defn- solr-field-name [k]
   (let [field-name (str/replace (name k) "-" "_")
         field-suffix (condp = k
                        :definitions "_t"
                        "_ss")]
     (str field-name field-suffix)))
 
-(defn solr-basic-field [[k v]]
+(defn- solr-basic-field [[k v]]
   (if-not (nil? v) [(solr-field-name k) (if (string? v) [v] (vec v))]))
 
-(defn solr-attr-field [prefix suffix attrs]
+(defn- solr-attr-field [prefix suffix attrs]
   (let [all-values (->> attrs vals (apply concat) (seq))
         typed-values (for [[type values] attrs
                            :let [type (-> type name (.toLowerCase))
@@ -90,11 +84,16 @@
                        [field values])]
     (conj typed-values (if all-values [(str prefix "_" suffix) all-values]))))
 
-(defn field-xml [name contents] {:tag :field :attrs {:name name} :content contents})
+(defn- field-xml [name contents] {:tag :field :attrs {:name name} :content contents})
+
+(defn- max-timestamp
+  ([] nil)
+  ([a] a)
+  ([a b] (if (< 0 (compare a b)) a b)))
 
 (defn document [article]
-  (let [id (store/relative-article-path article)
-        excerpt (->> article parse-article article-excerpt)
+  (let [excerpt (->> article article-xml article-excerpt)
+        id (store/relative-article-path article)
 
         timestamps (excerpt :timestamps)
         timestamp-fields (solr-attr-field "timestamp" "dt" timestamps)
@@ -113,11 +112,10 @@
                                              author-fields
                                              source-fields
                                              basic-fields)))]
-    (xml/indent-str
-     {:tag :doc
-      :content
-      (concat [(field-xml "id" id) (field-xml "path" id)]
-              (for [[name values] (sort fields) :when (seq values)
-                    value (sort values)]
-                (field-xml name value)))})))
-  
+    {:tag :doc
+     :content
+     (concat [(field-xml "id" id)
+              (field-xml "path" id)]
+             (for [[name values] (sort fields) value (sort values)]
+               (field-xml name value)))}))
+
