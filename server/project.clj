@@ -16,7 +16,10 @@
 
                  [http-kit "2.2.0"]
                  [hawk "0.2.11"]
-                 [me.raynes/fs "1.4.6"]]
+                 [me.raynes/fs "1.4.6"]
+
+                 [org.clojure/data.xml "0.2.0-alpha6"]
+                 [org.clojure/data.zip "0.1.3"]]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
