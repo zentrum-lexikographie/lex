@@ -2,7 +2,7 @@
   (:require [taoensso.timbre :as timbre]
             [ring.middleware.defaults :as middleware]
             [ring.logger.timbre :as ring-logger]
-            [org.httpkit.server :as http])
+            [ring.adapter.jetty :as jetty])
   (:import [org.slf4j.bridge SLF4JBridgeHandler])
   (:gen-class))
 
@@ -38,11 +38,11 @@
 (defonce server (atom nil))
 
 (defn start-server []
-  (reset! server (http/run-server #'handler {:port 3000})))
+  (reset! server (jetty/run-jetty handler {:port 3000 :join? false})))
 
 (defn stop-server []
   (when-not (nil? @server)
-    (@server)
+    (.stop @server)
     (reset! server nil)))
 
 (def -main start-server)
