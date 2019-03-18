@@ -23,3 +23,7 @@
        (remove #(.endsWith % "indexedvalues.xml"))
        (remove #(.contains % ".git"))
        (map fs/file)))
+
+(def article-files (xml-files articles-dir))
+
+(def sample-article (partial rand-nth article-files))

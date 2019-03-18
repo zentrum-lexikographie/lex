@@ -7,6 +7,7 @@
 
                  [ring/ring-core "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
+                 [ring/ring-jetty-adapter "1.7.1"]
 
                  [com.taoensso/timbre "4.10.0"]
                  [com.fzakaria/slf4j-timbre "0.3.12"]
@@ -14,12 +15,14 @@
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
 
-                 [http-kit "2.2.0"]
+                 [clj-http "3.9.1"]
                  [hawk "0.2.11"]
                  [me.raynes/fs "1.4.6"]
 
                  [org.clojure/data.xml "0.2.0-alpha6"]
-                 [org.clojure/data.zip "0.1.3"]]
+                 [org.clojure/data.zip "0.1.3"]
+                 [com.climate/claypoole "1.1.4"]
+                 [tick "0.4.10-alpha"]]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}
