@@ -45,6 +45,8 @@ apache_vhosts:
         Dav On
         DavDepthInfinity on
 
+        Options +Indexes
+        
         Require group Lexikographen
       </Location>
 
@@ -63,8 +65,9 @@ solr_timezone: "Europe/Berlin"
 solr_cores:
   - "articles"
 
-dav_root: "/var/www/html"
+lex_data_dir: "/var/lex"
+
+dav_root: "{{ lex_data_dir }}/git/articles"
 dav_users: []
 dav_user_groups: []
 
-lex_data_dir: "/var/lex"
