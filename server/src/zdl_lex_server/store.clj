@@ -4,7 +4,6 @@
             [hawk.core :as hawk]
             [taoensso.timbre :as timbre]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]
             [clojure.java.shell :as sh]))
 
 (def data-dir (-> config :data-dir fs/file fs/absolute))
@@ -31,11 +30,13 @@
 (def sample-article (partial rand-nth article-files))
 
 (defstate git-clone
-  :start (when-not (fs/directory? store/git-dir)
-           (sh/sh "git" "clone"
-                  (config :git-repo)
-                  (.getAbsolutePath store/git-dir))))
-
+  :start (do
+           (when-not (fs/directory? git-dir)
+             (sh/sh "git" "clone"(config :git-repo) (.getAbsolutePath git-dir)))
+           (when-not (fs/directory? articles-dir)
+             (fs/mkdirs articles-dir))
+           git-dir))
+  
 (defstate watcher
   :start (hawk/watch! (config :watcher-opts)
                       [{:paths [articles-dir]
