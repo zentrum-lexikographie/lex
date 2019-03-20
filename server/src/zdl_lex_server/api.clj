@@ -3,7 +3,8 @@
             [ring.middleware.defaults :as middleware]
             [ring.logger.timbre :as ring-logger]
             [ring.adapter.jetty :as jetty]
-            [zdl-lex-server.env :refer [config]]))
+            [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.store :as store]))
 
 (def middleware-defaults
   (assoc middleware/site-defaults
