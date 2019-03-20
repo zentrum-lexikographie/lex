@@ -46,7 +46,7 @@ apache_vhosts:
         DavDepthInfinity on
 
         Options +Indexes
-        
+
         Require group Lexikographen
       </Location>
 
