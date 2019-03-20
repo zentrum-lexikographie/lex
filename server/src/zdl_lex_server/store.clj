@@ -1,29 +1,36 @@
 (ns zdl-lex-server.store
-  (:require [me.raynes.fs :as fs]))
+  (:require [mount.core :refer [defstate]]
+            [me.raynes.fs :as fs]
+            [hawk.core :as hawk]
+            [taoensso.timbre :as timbre]
+            [zdl-lex-server.env :refer [config]]))
 
-(def base-dir (fs/parent fs/*cwd*))
-(def data-dir (fs/file base-dir "data"))
+(def data-dir (-> config :data-dir fs/file fs/absolute))
 
-(def exist-export-file (fs/file data-dir "exist-db-export.zip"))
-(def exist-dir (fs/file data-dir "exist-db"))
-
-(def git-repo-dir (fs/file data-dir "repo.git"))
-(def git-checkout-dir (fs/file data-dir "git"))
-
-(def articles-dir (fs/file git-checkout-dir "articles"))
+(def git-dir (fs/file data-dir "git"))
+(def articles-dir (fs/file git-dir "articles"))
 
 (defn relative-article-path [article-file]
   (str (.. articles-dir (toPath) (relativize (.toPath article-file)))))
 
-(defn xml-files [dir]
-  (->> (file-seq dir)
-       (map #(.getAbsolutePath %))
-       (filter #(.endsWith % ".xml"))
-       (remove #(.endsWith % "__contents__.xml"))
-       (remove #(.endsWith % "indexedvalues.xml"))
-       (remove #(.contains % ".git"))
-       (map fs/file)))
+(defn xml-file? [f]
+  (let [name (.getName f)
+        path (.getAbsolutePath f)]
+    (and 
+     (.endsWith name ".xml")
+     (not (.startsWith name "."))
+     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
+     (not (.contains path ".git")))))
+
+(defn xml-files [dir] (filter xml-file? (file-seq (fs/file dir))))
 
 (def article-files (xml-files articles-dir))
 
 (def sample-article (partial rand-nth article-files))
+
+(defstate watcher
+  :start (hawk/watch! (config :watcher-opts)
+                      [{:paths [articles-dir]
+                        :filter #(xml-file? (:file %2))
+                        :handler (fn [ctx e] (timbre/debug e) ctx)}])
+  :stop (hawk/stop! watcher))

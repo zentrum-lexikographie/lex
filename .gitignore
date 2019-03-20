@@ -18,3 +18,5 @@ ansible/.vagrant
 ansible/*.retry
 ansible/roles/*.*
 ansible/venv
+
+server/zdl-lex-server.config.edn

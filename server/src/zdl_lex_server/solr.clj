@@ -6,6 +6,7 @@
             [clojure.java.io :as io]
             [me.raynes.fs :as fs]
             [zdl-lex-server.store :as store]
+            [zdl-lex-server.env :refer [config]]
             [clojure.string :as str]
             [taoensso.timbre :as timbre]
             [clj-http.client :as http]
@@ -121,25 +122,46 @@
 
 
 
-(def update-conversion-concurrency (max 1 (- (cp/ncpus) 2)))
-(def update-batch-size 500)
-(def update-concurrency 4)
+(def solr-update-pool (cp/threadpool 4))
+(def solr-update-url (str (config :solr-base) "/" (config :solr-core) "/update"))
+(def solr-req (config :solr-req))
+
+(defn solr-updates [reqs]
+  (cp/pdoseq
+   solr-update-pool
+   [req reqs]
+   (->> (merge solr-req req) (http/post solr-update-url) timbre/info)))
+
+(def solr-update-conversion-pool (cp/threadpool (max 1 (- (cp/ncpus) 2))))
+(def solr-update-batch-size 500)
+
+(defn commit-optimize []
+  (solr-updates [{:body "<update><commit/><optimize/></update>"
+                  :content-type :xml}]))
 
 (defn update-docs [articles]
   (let [article-to-doc #(try (document %) (catch Exception e (timbre/warn e (str %))))
         documents (->> articles
-                       (cp/upmap update-conversion-concurrency article-to-doc)
+                       (cp/upmap solr-update-conversion-pool article-to-doc)
                        (keep identity))
 
-        batches (partition-all update-batch-size documents)
-        batch-to-doc #(assoc {:tag :add :attrs {:commitWithin "1000"}} :content %)
-        update-docs (map batch-to-doc batches)]
+        batches (partition-all solr-update-batch-size documents)
+        batch-to-doc #(array-map :tag :add :attrs {:commitWithin "1000"} :content %)
+        update-docs (map batch-to-doc batches)
 
-    (cp/pdoseq
-     update-concurrency
-     [update update-docs]
-     (timbre/info
-      (http/post "http://192.168.33.10/solr/articles/update"
-                 {:body (xml/emit-str update)
-                  :content-type :xml
-                  :basic-auth ["admin" "admin"]})))))
+        doc-to-req #(array-map :body (xml/emit-str %) :content-type :xml)
+        update-reqs (map doc-to-req update-docs)]
+
+    (solr-updates update-reqs)))
+
+(defn delete-docs [articles]
+  (let [ids (map store/relative-article-path articles)
+        id-elements (map #(array-map :tag :id :content %) ids)
+
+        batches (partition-all solr-update-batch-size id-elements)
+        batch-to-doc #(array-map :tag :delete :content %)
+        update-docs (map batch-to-doc batches)
+
+        doc-to-req #(array-map :body (xml/emit-str %) :content-type :xml)
+        update-reqs (map doc-to-req update-docs)]
+    (solr-updates update-reqs)))

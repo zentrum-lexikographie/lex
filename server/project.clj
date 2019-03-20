@@ -22,7 +22,9 @@
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/data.zip "0.1.3"]
                  [com.climate/claypoole "1.1.4"]
-                 [tick "0.4.10-alpha"]]
+                 [tick "0.4.10-alpha"]
+                 [mount "0.1.16"]
+                 [aero "1.1.3"]]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}

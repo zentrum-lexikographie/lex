@@ -1,0 +1,20 @@
+{
+ ;; "/var/zdl-lex-server"
+ :data-dir "../data"
+
+ ;; "file:///home/middell/repositories/dwdsox/data/repo.git"
+ :git-repo "git@gorkon.bbaw.de:lex.git"
+
+ ;; {:port 8080}
+ :jetty-opts {:port 3000}
+
+ ;; {:watcher :polling :sensitivity :medium}
+ :watcher-opts {}
+
+ ;; "http://192.168.33.10/solr"
+ :solr-base "http://localhost:8983/solr"
+
+ :solr-core "articles"
+
+ ;; {:basic-auth ["admin" "admin"]}
+ :solr-req {}}
