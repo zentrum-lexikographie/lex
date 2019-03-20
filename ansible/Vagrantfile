@@ -10,8 +10,9 @@ Vagrant.configure("2") do |config|
     vb.default_nic_type = "Am79C973"
   end
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbook.yml"
-    ansible.groups = { "vagrant" => ["default"] }
+    ansible.playbook = "main.yml"
+    ansible.groups = { "zdl-lex" => ["default"],
+                       "vagrant" => ["default"] }
     ansible.become = true
     ansible.compatibility_mode = "2.0"
   end

@@ -1,0 +1,14 @@
+[Unit]
+Description=ZDL-Lex-Server
+After=network.target
+
+[Service]
+Type=simple
+User=lex
+WorkingDirectory=/home/lex
+UMask=0002
+Restart=Always
+ExecStart=/usr/bin/java -jar zdl-lex-server.jar
+
+[Install]
+WantedBy=multi-user.target

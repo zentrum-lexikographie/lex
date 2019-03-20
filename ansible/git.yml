@@ -1,0 +1,33 @@
+---
+- hosts: zdl-lex
+  tasks:
+    - name: Add git group
+      group:
+        name: git
+
+    - name: Add git user
+      user:
+        name: git
+        group: git
+        home: /home/git
+        shell: /usr/bin/git-shell
+
+    - name: Set mode on git home
+      file:
+        path: /home/git
+        mode: 0770
+
+    - name: Authorize git access
+      authorized_key:
+        user: git
+        key: '{{ item }}'
+      with_file:
+        - git-ssh-public-keys/middell.pub
+
+    - name: Create git repository
+      command: |
+        git init --bare --shared /home/git/lex.git
+      args:
+        creates: /home/git/lex.git
+      become: yes
+      become_user: git

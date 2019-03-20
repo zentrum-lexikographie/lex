@@ -54,6 +54,11 @@ apache_vhosts:
         Require group admin
       </Location>
 
+      <Location /api>
+        ProxyPass http://localhost:3000/api
+        ProxyPassReverse http://localhost:3000/api
+      </Location>
+
 solr_timezone: "Europe/Berlin"
 solr_cores:
   - "articles"
@@ -61,3 +66,5 @@ solr_cores:
 dav_root: "/var/www/html"
 dav_users: []
 dav_user_groups: []
+
+lex_data_dir: "/var/lex"

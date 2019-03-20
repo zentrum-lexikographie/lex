@@ -1,0 +1,2 @@
+{:data-dir "{{ lex_data_dir }}"
+ :git-repo "file:///home/git/lex.git"}
