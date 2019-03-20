@@ -1,22 +1,6 @@
 ---
 - hosts: zdl-lex
   tasks:
-    - name: Adjust umask of apache server
-      lineinfile:
-        path: /etc/apache2/envvars
-        regexp: '^umask'
-        line: 'umask 0002'
-      when: "'vagrant' in group_names"
-      notify: restart apache        
-
-    - name: Add www-data user to vagrant group
-      user:
-        name: www-data
-        groups: vagrant
-        append: yes
-      when: "'vagrant' in group_names"
-      notify: restart apache
-
     - name: Install python-passlib
       apt:
         package: python-passlib

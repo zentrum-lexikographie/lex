@@ -13,9 +13,27 @@
     - geerlingguy.git
     - geerlingguy.apache
     - geerlingguy.solr
+  tasks:
+    - name: Adjust umask of apache server
+      lineinfile:
+        path: /etc/apache2/envvars
+        regexp: '^umask'
+        line: 'umask 0002'
+      notify: restart apache        
+
+    - name: Add www-data user to vagrant group
+      user:
+        name: www-data
+        groups: vagrant
+        append: yes
+      when: "'vagrant' in group_names"
+      notify: restart apache
 
 - name: Configure Git repository
   import_playbook: git.yml
 
 - name: Configure WebDAV service
   import_playbook: webdav.yml      
+
+- name: Configure API service
+  import_playbook: api.yml      
