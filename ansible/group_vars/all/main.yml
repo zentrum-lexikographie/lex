@@ -4,6 +4,9 @@ firewall_allowed_tcp_ports:
   - "80"
   - "443"
 
+java_packages:
+  - openjdk-11-jdk
+
 apache_mods_enabled:
   - rewrite.load
   - ssl.load
