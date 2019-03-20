@@ -5,12 +5,6 @@
             [me.raynes.fs :as fs])
   (:import [org.slf4j.bridge SLF4JBridgeHandler]))
 
-(SLF4JBridgeHandler/removeHandlersForRootLogger)
-(SLF4JBridgeHandler/install)
-
-(timbre/handle-uncaught-jvm-exceptions!)
-(timbre/set-level! :info)
-
 (def config
   (let [config-resource (comp read-config io/resource)
         local-config (fs/file "zdl-lex-server.config.edn")]
