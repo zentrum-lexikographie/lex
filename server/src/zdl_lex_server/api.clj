@@ -6,4 +6,4 @@
 (defstate handler
   :start
   (fn [req]
-    (htstatus/ok (->> store/article-files (map #(.getName %)) sort))))
+    (htstatus/ok (->> (store/article-files) (map #(.getName %)) sort))))

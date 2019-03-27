@@ -25,9 +25,9 @@
 
 (defn xml-files [dir] (filter xml-file? (file-seq (fs/file dir))))
 
-(def article-files (xml-files articles-dir))
+(def article-files (partial xml-files articles-dir))
 
-(def sample-article (partial rand-nth article-files))
+(defn sample-article [] (rand-nth (article-files)))
 
 (defstate git-clone
   :start (do
