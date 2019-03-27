@@ -83,3 +83,4 @@ dav_root: "{{ lex_data_dir }}/git/articles"
 dav_users: []
 dav_user_groups: []
 
+zdl_lex_version: "{{ lookup('file', '../VERSION') }}"

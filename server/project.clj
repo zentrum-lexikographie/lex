@@ -1,4 +1,6 @@
-(defproject zdl-lex-server "0.1.0-SNAPSHOT"
+(def version (slurp "../VERSION"))
+
+(defproject zdl-lex-server version
 
   :description "FIXME: write description"
   :url "http://example.com/FIXME"

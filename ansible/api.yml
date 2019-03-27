@@ -32,7 +32,7 @@
 
     - name: Copy API
       copy:
-        src: ../server/target/uberjar/zdl-lex-server-0.1.0-SNAPSHOT-standalone.jar
+        src: "../server/target/uberjar/zdl-lex-server-{{ zdl_lex_version }}-standalone.jar"
         dest: /home/lex/zdl-lex-server.jar
         owner: lex
         group: www-data
