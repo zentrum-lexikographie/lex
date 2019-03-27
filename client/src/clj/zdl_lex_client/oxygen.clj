@@ -1,8 +1,8 @@
-(require '[clojure.string :as string]
-         '[clojure.java.io :as io]
-         '[me.raynes.fs :as fs])
-
-(import '[java.io File])
+(ns zdl-lex-client.oxygen
+  (:require [clojure.string :as str]
+            [clojure.java.io :as io]
+            [me.raynes.fs :as fs])
+  (:import [java.io File]))
 
 (defn find-oxygen-home []
   (or
@@ -22,13 +22,14 @@
           "-Ddwdsox.repl.port=7000"
           "-Dcom.oxygenxml.editor.plugins.dir=src/oxygen"
           "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
-          "-cp" (string/join ":" [(str oxygen-home "/lib/oxygen.jar")
-                                  (str oxygen-home "/classes")
-                                  oxygen-home])
+          "-cp" (str/join ":" [(str oxygen-home "/lib/oxygen.jar")
+                               (str oxygen-home "/classes")
+                               oxygen-home])
           "ro.sync.exml.Oxygen"
           "test-project.xpr"])]
     (.. oxygen (environment) (put "OXYGEN_HOME" oxygen-home))
     (doto oxygen (.inheritIO) (.start)))
   oxygen-home)
 
-(-> (find-oxygen-home) (run-oxygen))
+(defn -main [& args]
+  (-> (find-oxygen-home) (run-oxygen)))

@@ -1,34 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plugin SYSTEM "../plugin.dtd">
 <plugin
-    id="dwdsox"
-    name="DWDSoXPlugin"
-    description="Access to DWDS documents at the DWDS eXist database"
+    id="zdl-lex-client"
+    name="ZDL-Lex-Client"
+    description="Access to lexikographic resources of the ZDL"
     version="1.2.4"
     vendor="BBAW"
-    class="dwdsox.plugin.DWDSoXPlugin">
-  <!-- class="de.dwds.zdl.oxygen.Plugin" -->
+    class="de.zdl.oxygen.Plugin">
 
  <runtime>
-   <library name="${system(user.dir)}/target/uberjar/oxygen-extensions.jar"
+   <library name="${system(user.dir)}/target/uberjar/zdl-lex-client.jar"
             scope="global"/>
  </runtime>
 
  <extension
      type="WorkspaceAccess"
-     class="dwdsox.plugin.DWDSoXPluginExtension"/>
-
- <extension
-     type="WorkspaceAccess"
-     class="de.dwds.zdl.oxygen.ReplExtension"/>
+     class="de.zdl.oxygen.ReplExtension"/>
 
   <extension
      type="WorkspaceAccess"
-     class="de.dwds.zdl.oxygen.ViewExtension"/>
+     class="de.zdl.oxygen.ViewExtension"/>
 
- <toolbar id="DWDSoXPluginExtensionToolbar"
-          initialSide="NORTH" initialRow="2"/>
-
- <view id="DWDSoXPluginExtensionView"
-       initialSide="EAST" initialRow="0"/>
+ <view id="zdl-lex-client" initialSide="EAST" initialRow="0"/>
 </plugin>

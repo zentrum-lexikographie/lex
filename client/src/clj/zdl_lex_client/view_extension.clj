@@ -1,8 +1,8 @@
-(ns dwdsox.view-extension
-  (:require [dwdsox.metasearch :as metasearch])
+(ns zdl-lex-client.view-extension
+  (:require [zdl-lex-client.metasearch :as metasearch])
   (:import [ro.sync.exml.workspace.api.standalone ViewComponentCustomizer])
   (:gen-class
-   :name de.dwds.zdl.oxygen.ViewExtension
+   :name de.zdl.oxygen.ViewExtension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension]
    :state state
    :init init))
@@ -17,7 +17,7 @@
    app-ws-access
    (proxy [ViewComponentCustomizer] []
      (customizeView [viewInfo]
-       (when (= "DWDSoXPluginExtensionView" (.getViewID viewInfo))
+       (when (= "zdl-lex-client" (.getViewID viewInfo))
          (doto viewInfo
            (.setTitle "DWDS/ZDL")
            ;;(.setIcon nil)

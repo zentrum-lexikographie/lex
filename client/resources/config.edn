@@ -1,0 +1,3 @@
+{:server-base "http://gorkon.bbaw.de/"
+ :server-auth {}
+ :repl {:port 3001}}

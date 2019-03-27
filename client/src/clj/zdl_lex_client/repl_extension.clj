@@ -1,9 +1,8 @@
-(ns dwdsox.repl-extension
+(ns zdl-lex-client.repl-extension
   (:require [nrepl.server :as repl]
-            [dwdsox.exist-db :as db]
-            [clojure.java.io :as io])
+            [zdl-lex-client.env :refer [config]])
   (:gen-class
-   :name de.dwds.zdl.oxygen.ReplExtension
+   :name de.zdl.oxygen.ReplExtension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension]
    :state state
    :init init))
@@ -12,7 +11,7 @@
   [[] (ref {:server (atom nil)})])
 
 (defn -applicationStarted [this app-ws-access]
-  (when-let [port (some-> (System/getProperty "dwdsox.repl.port") Integer/parseInt)]
+  (when-let [port (get-in config [:repl :port])]
     (let [{:keys [server]} @(.state this)]
       (reset! server (repl/start-server :port port)))))
 

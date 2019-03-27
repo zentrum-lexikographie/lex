@@ -1,21 +1,8 @@
-(ns dwdsox.metasearch
-  (:require [clojure.java.io :as io]
-            [clojure.string :as string]
-            [dwdsox.basex :as db]
-            [clojure.data.xml :as xml]
-            [seesaw.core :as ui]
+(ns zdl-lex-client.metasearch
+  (:require [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.mig :as uim]))
 
-
-(def xquery-template (-> "dwdsox/xquery/metasearch.xq" io/resource slurp))
-
-(def sample-query (-> xquery-template
-                      (string/replace "[COLLECTION]" db/collection)
-                      (string/replace "[FILTER]" "*")
-                      (string/replace "[RESTRICTION]" "*")
-                      (string/replace "[START]" "*")
-                      (string/replace "[END]" "*")))
 
 ;; …, Schreibung, Element, Status, Änderung
 ;; Liste kopieren, Öffnen, Schließen

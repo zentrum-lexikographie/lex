@@ -1,9 +1,6 @@
-(ns dwdsox.plugin
-  (:require [nrepl.server :as repl]
-            [dwdsox.exist-db :as db]
-            [clojure.java.io :as io])
+(ns zdl-lex-client.plugin
   (:gen-class
-   :name de.dwds.zdl.oxygen.Plugin
+   :name de.zdl.oxygen.Plugin
    :extends ro.sync.exml.plugin.Plugin
    :constructors {[ro.sync.exml.plugin.PluginDescriptor]
                   [ro.sync.exml.plugin.PluginDescriptor]}
