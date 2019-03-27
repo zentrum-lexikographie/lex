@@ -1,32 +1,43 @@
 (defproject zdl-lex-server "0.1.0-SNAPSHOT"
+
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
+
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
-  :dependencies [[org.clojure/clojure "1.9.0"]
 
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/data.xml "0.2.0-alpha6"]
+                 [org.clojure/data.zip "0.1.3"]
+                 [com.taoensso/timbre "4.10.0"]
+                 [com.fzakaria/slf4j-timbre "0.3.12"]
+                 [org.slf4j/jul-to-slf4j "1.7.25"]
+                 [org.slf4j/jcl-over-slf4j "1.7.25"]
                  [ring/ring-core "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-jetty-adapter "1.7.1"]
-
-                 [com.taoensso/timbre "4.10.0"]
-                 [com.fzakaria/slf4j-timbre "0.3.12"]
                  [ring-logger-timbre "0.7.6"]
-                 [org.slf4j/jul-to-slf4j "1.7.25"]
-                 [org.slf4j/jcl-over-slf4j "1.7.25"]
-
+                 [ring-webjars "0.2.0"]
+                 [metosin/muuntaja "0.6.3"]
+                 [metosin/reitit "0.3.1"]
+                 [metosin/ring-http-response "0.9.1"]
+                 [org.webjars.npm/bulma "0.7.4"]
+                 [org.webjars.npm/material-icons "0.3.0"]
+                 [org.webjars/webjars-locator "0.36"]
                  [clj-http "3.9.1"]
                  [hawk "0.2.11"]
-                 [me.raynes/fs "1.4.6"]
-
-                 [org.clojure/data.xml "0.2.0-alpha6"]
-                 [org.clojure/data.zip "0.1.3"]
-                 [com.climate/claypoole "1.1.4"]
                  [tick "0.4.10-alpha"]
                  [mount "0.1.16"]
-                 [aero "1.1.3"]]
+                 [cprop "0.1.13"]
+                 [me.raynes/fs "1.4.6"]
+                 [com.climate/claypoole "1.1.4"]
+                 [hiccup "1.0.5"]]
+
+  :jvm-opts ["-Dconf=dev-config.edn"]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
+
   :profiles {:uberjar {:aot :all}}
+
   :aliases {"exist2git" ["run", "-m", "zdl-lex-server.exist2git"]})
 

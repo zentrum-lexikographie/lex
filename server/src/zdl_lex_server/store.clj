@@ -32,7 +32,7 @@
 (defstate git-clone
   :start (do
            (when-not (fs/directory? git-dir)
-             (sh/sh "git" "clone"(config :git-repo) (.getAbsolutePath git-dir)))
+             (sh/sh "git" "clone" (config :git-repo) (.getAbsolutePath git-dir)))
            (when-not (fs/directory? articles-dir)
              (fs/mkdirs articles-dir))
            git-dir))
