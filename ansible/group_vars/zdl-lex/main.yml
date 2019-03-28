@@ -3,6 +3,7 @@ firewall_allowed_tcp_ports:
   - "22"
   - "80"
   - "443"
+  - "8080" # eXist-db test instance
 
 java_packages:
   - openjdk-11-jdk
