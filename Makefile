@@ -7,7 +7,12 @@ client-jar = client/project.clj
 
 all: $(server-jar) $(client-jar)
 
-deploy: $(server-jar) $(client-jar)
+ansible/venv:
+	cd ansible &&\
+		virtualenv venv && source venv/bin/activate &&\
+		pip install -r requirements.txt
+
+deploy: ansible/venv $(server-jar) $(client-jar)
 	cd ansible &&\
 		source venv/bin/activate &&\
 		ansible-playbook main.yml -b -K --ask-vault-pass
