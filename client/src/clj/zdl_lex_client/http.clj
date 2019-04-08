@@ -1,6 +1,7 @@
 (ns zdl-lex-client.http
   (:require [clojure.java.io :as io]
             [clojure.data.codec.base64 :as base64]
+            [cemerick.url :refer [url]]
             [zdl-lex-client.env :refer [config]])
   (:import [java.io IOException]
            [java.net URL ConnectException]))
@@ -12,7 +13,7 @@
     (if (and user password)
       (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 
-(defn- tx [path f]
+(defn tx [path f]
   (let [con (-> (str server-base path) (URL.) (.openConnection))]
     (try
       (when basic-creds
