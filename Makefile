@@ -39,4 +39,4 @@ $(server-jar):
 $(client-pkg):
 	cd client && lein clean && lein uberjar && lein package
 
-.PHONY: all deploy clean oxygen
+.PHONY: all deploy clean oxygen vm vm-destroy
