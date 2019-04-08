@@ -7,13 +7,17 @@
    :state state
    :init init))
 
+(defn nrepl-handler []
+  (require 'cider.nrepl)
+  (ns-resolve 'cider.nrepl 'cider-nrepl-handler))
+
 (defn -init []
   [[] (ref {:server (atom nil)})])
 
 (defn -applicationStarted [this app-ws-access]
   (when-let [port (get-in config [:repl :port])]
     (let [{:keys [server]} @(.state this)]
-      (reset! server (repl/start-server :port port)))))
+      (reset! server (repl/start-server :port port :handler (nrepl-handler))))))
 
 (defn -applicationClosing [this]
   (let [{:keys [server]} @(.state this)]
