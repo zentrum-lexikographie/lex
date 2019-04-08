@@ -19,4 +19,5 @@ ansible/*.retry
 ansible/roles/*.*
 ansible/venv
 
+client/dev-config.edn
 server/dev-config.edn
