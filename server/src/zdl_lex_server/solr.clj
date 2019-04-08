@@ -10,7 +10,9 @@
             [clojure.string :as str]
             [taoensso.timbre :as timbre]
             [clj-http.client :as http]
-            [com.climate.claypoole :as cp]))
+            [tick.alpha.api :as t]
+            [com.climate.claypoole :as cp])
+  (:import java.time.temporal.ChronoUnit))
 
 (defn article-xml [article]
   (let [doc-loc (-> article io/input-stream
@@ -96,6 +98,10 @@
   ([a b] (if (< 0 (compare a b)) a b)))
 
 
+(def unix-epoch (t/parse "1970-01-01"))
+(defn days-since-epoch [date]
+  (.between ChronoUnit/DAYS unix-epoch date))
+
 (defn document [article]
   (let [excerpt (->> article article-xml article-excerpt)
         id (store/relative-article-path article)
@@ -105,6 +111,8 @@
 
         last-modified (reduce max-timestamp (apply concat (vals timestamps)))
         last-modified-fields [["last_modified_dt" [last-modified]]]
+
+        weight (-> last-modified t/parse days-since-epoch)
 
         author-fields (solr-attr-field "author" "ss" (excerpt :authors))
         source-fields (solr-attr-field "source" "ss" (excerpt :source))
@@ -124,6 +132,7 @@
      (concat [(field-xml "id" id)
               (field-xml "language" "de")
               (field-xml "xml_descendent_path" id)
+              (field-xml "weight_i" (str weight))
               (field-xml "abstract_ss" (pr-str abstract))]
              (for [[name values] (sort fields) value (sort values)]
                (field-xml name value)))}))
@@ -185,3 +194,4 @@
         doc-to-req #(array-map :body (xml/emit-str %) :content-type :xml)
         update-reqs (map doc-to-req update-docs)]
     (solr-updates update-reqs)))
+

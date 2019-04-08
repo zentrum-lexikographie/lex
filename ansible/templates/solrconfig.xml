@@ -833,7 +833,7 @@
       <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
       <str name="dictionaryImpl">DocumentDictionaryFactory</str>
       <str name="field">forms_ss</str>
-      <!-- str name="weightField">price</str -->
+      <str name="weightField">weight_i</str>
       <str name="payloadField">abstract_ss</str>
       <str name="suggestAnalyzerFieldType">text_general</str>
       <str name="buildOnStartup">true</str>
