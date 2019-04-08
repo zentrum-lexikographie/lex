@@ -27,52 +27,55 @@ apache_vhosts:
     documentroot: "{{ dav_root }}"
     allow_override: "None"
     extra_parameters: |
-      <Location />
-        AuthType Basic
-        AuthName ZDL-Lex-Server
-        AuthUserFile htpasswd
-        AuthGroupFile htgroup
+      {{ zdl_apache_vhost_config }}
 
-        Require valid-user
-      </Location>
+zdl_apache_vhost_config: |
+  <Location />
+    AuthType Basic
+    AuthName ZDL-Lex-Server
+    AuthUserFile htpasswd
+    AuthGroupFile htgroup
 
-      <DirectoryMatch ^\.|\/\.>
-        Order allow,deny
-        Deny from all
-      </DirectoryMatch>
+    Require valid-user
+  </Location>
 
-      Alias /webdav {{ dav_root }}
-      <Location /webdav>
-        Dav On
-        DavDepthInfinity on
+  <DirectoryMatch ^\.|\/\.>
+    Order allow,deny
+    Deny from all
+  </DirectoryMatch>
 
-        Options +Indexes
+  Alias /webdav {{ dav_root }}
+  <Location /webdav>
+    Dav On
+    DavDepthInfinity on
 
-        Require group Lexikographen
-      </Location>
+    Options +Indexes
 
-      RedirectMatch ^/$ /statistics
+    Require group Lexikographen
+  </Location>
 
-      <Location /solr>
-        ProxyPass http://localhost:8983/solr
-        ProxyPassReverse http://localhost:8983/solr
-        Require group admin
-      </Location>
+  RedirectMatch ^/$ /statistics
 
-      <Location /api>
-        ProxyPass http://localhost:3000/api
-        ProxyPassReverse http://localhost:3000/api
-      </Location>
+  <Location /solr>
+    ProxyPass http://localhost:8983/solr
+    ProxyPassReverse http://localhost:8983/solr
+    Require group admin
+  </Location>
 
-      <Location /assets>
-        ProxyPass http://localhost:3000/assets
-        ProxyPassReverse http://localhost:3000/assets
-      </Location>
+  <Location /api>
+    ProxyPass http://localhost:3000/api
+    ProxyPassReverse http://localhost:3000/api
+  </Location>
 
-      <Location /statistics>
-        ProxyPass http://localhost:3000/statistics
-        ProxyPassReverse http://localhost:3000/statistics
-      </Location>
+  <Location /assets>
+    ProxyPass http://localhost:3000/assets
+    ProxyPassReverse http://localhost:3000/assets
+  </Location>
+
+  <Location /statistics>
+    ProxyPass http://localhost:3000/statistics
+    ProxyPassReverse http://localhost:3000/statistics
+  </Location>
 
 solr_timezone: "Europe/Berlin"
 solr_cores:

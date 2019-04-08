@@ -3,3 +3,22 @@ security_ssh_password_authentication: "yes"
 security_ssh_permit_root_login: "yes"
 
 lex_data_dir: "/home/lex/data"
+
+apache_ignore_missing_ssl_certificate: false
+
+apache_vhosts:
+  - servername: "lex.dwds.de"
+    documentroot: "{{ dav_root }}"
+    allow_override: "None"
+    extra_parameters: |
+      RewriteEngine On 
+      RewriteRule ^/?(.*) https://lex.dwds.de/$1 [R,L]
+
+apache_vhosts_ssl:
+  - servername: "lex.dwds.de"
+    documentroot: "{{ dav_root }}"
+    allow_override: "None"
+    certificate_file: "/etc/ssl/certs/{{ ansible_fqdn }}.pem"
+    certificate_key_file: "/etc/ssl/private/{{ ansible_fqdn }}.key"
+    extra_parameters: |
+      {{ zdl_apache_vhost_config }}
