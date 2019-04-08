@@ -12,6 +12,15 @@ ansible/venv:
 		virtualenv venv && source venv/bin/activate &&\
 		pip install -r requirements.txt
 
+vm: ansible/venv $(server-jar) $(client-pkg)
+	cd ansible &&\
+		source venv/bin/activate &&\
+		vagrant up
+
+vm-destroy:
+	cd ansible &&\
+		vagrant destroy
+
 deploy: ansible/venv $(server-jar) $(client-pkg)
 	cd ansible &&\
 		source venv/bin/activate &&\
