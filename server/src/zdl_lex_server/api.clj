@@ -1,7 +1,13 @@
 (ns zdl-lex-server.api
-  (:require [mount.core :refer [defstate]]
-            [zdl-lex-server.store :as store]
+  (:require [zdl-lex-server.solr :as solr]
             [ring.util.http-response :as htstatus]))
 
-(defn handler [req]
-    (htstatus/ok (->> (store/article-files) (map #(.getName %)) sort)))
+(defn form-suggestions [{{:keys [q]} :params}]
+  (let [solr-response (solr/solr-suggest "forms" (or q ""))
+        path-prefix [:body :suggest :forms (keyword q)]
+        total (get-in solr-response (conj path-prefix :numFound) 0)
+        suggestions (get-in solr-response (conj path-prefix :suggestions) [])]
+    (htstatus/ok
+     {:total total
+      :result (for [{:keys [term payload]} suggestions]
+                (merge {:suggestion term} (read-string payload)))})))

@@ -3,13 +3,11 @@
             [ring.util.http-response :as htstatus]
             [hiccup.page :refer [html5 include-css]]))
 
-(defstate handler
-  :start
-  (fn [req]
-    (-> (htstatus/ok (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
-                            [:body
-                             [:div.hero.is-primary.is-bold.is-fullheight
-                              [:div.hero-body.container
-                               [:p.title "ZDL Lex-Server"]]]]))
-        (assoc :headers {"Content-Type" "text/html"}))))
+(defn handler [req]
+  (-> (htstatus/ok (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
+                          [:body
+                           [:div.hero.is-primary.is-bold.is-fullheight
+                            [:div.hero-body.container
+                             [:p.title "ZDL Lex-Server"]]]]))
+      (assoc :headers {"Content-Type" "text/html"})))
 

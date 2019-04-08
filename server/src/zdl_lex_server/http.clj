@@ -36,15 +36,14 @@
       ;; since they're not compatible with this middleware
       ((if (:websocket? request) handler wrapped) request))))
 
-(defstate handler
-  :start
+(def handler
   (wrap-base
    (ring/ring-handler
     (ring/router
      [[""
        {:middleware [wrap-formats]}
        ["/" {:get (fn [_] (htstatus/temporary-redirect "/statistics"))}]
-       ["/api" {:get api/handler}]
+       ["/articles/forms/suggestions" {:get api/form-suggestions}]
        ["/statistics" {:get stats/handler}]]])
     (ring/routes
      (ring/create-resource-handler {:path "/"})
