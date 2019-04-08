@@ -27,6 +27,7 @@
                  [org.webjars.npm/material-icons "0.3.0"]
                  [org.webjars/webjars-locator "0.36"]
                  [clj-http "3.9.1"]
+                 [cheshire "5.8.1"]
                  [hawk "0.2.11"]
                  [tick "0.4.10-alpha"]
                  [mount "0.1.16"]

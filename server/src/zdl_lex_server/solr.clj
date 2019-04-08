@@ -37,6 +37,7 @@
 
 (defn article-excerpt [article-loc]
   (let [forms (texts article-loc :Formangabe :Schreibung)
+        pos (texts article-loc :Formangabe :Grammatik :Wortklasse)
         definitions (texts article-loc dz/descendants :Definition)
         senses (texts article-loc dz/descendants :Bedeutungsebene)
         usage-period (texts article-loc dz/descendants :Gebrauchszeitraum)
@@ -51,6 +52,7 @@
         authors (article-attrs article-loc :Autor)
         sources (article-attrs article-loc :Quelle)]
     {:forms forms
+     :pos pos
      :definitions definitions
      :senses senses
      :usage-period usage-period
@@ -65,6 +67,8 @@
      :type Typ
      :tranche Tranche
      :status Status}))
+
+(def article-abstract-fields [:forms :pos :definitions :type :status])
 
 (defn- solr-field-name [k]
   (let [field-name (str/replace (name k) "-" "_")
@@ -91,6 +95,7 @@
   ([a] a)
   ([a b] (if (< 0 (compare a b)) a b)))
 
+
 (defn document [article]
   (let [excerpt (->> article article-xml article-excerpt)
         id (store/relative-article-path article)
@@ -111,20 +116,35 @@
                                              last-modified-fields
                                              author-fields
                                              source-fields
-                                             basic-fields)))]
+                                             basic-fields)))
+        abstract (merge {:id id :last-modified last-modified}
+                        (select-keys excerpt article-abstract-fields))]
     {:tag :doc
      :content
      (concat [(field-xml "id" id)
               (field-xml "language" "de")
-              (field-xml "xml_descendent_path" id)]
+              (field-xml "xml_descendent_path" id)
+              (field-xml "abstract_ss" (pr-str abstract))]
              (for [[name values] (sort fields) value (sort values)]
                (field-xml name value)))}))
 
 
+(def solr-req (config :solr-req))
+
+(def solr-query-url (str (config :solr-base) "/" (config :solr-core) "/query"))
+
+(defn solr-query [params]
+  (http/get solr-query-url (merge solr-req {:query-params params :as :json})))
+
+
+(def solr-suggest-url (str (config :solr-base) "/" (config :solr-core) "/suggest"))
+
+(defn solr-suggest [name q]
+  (let [params {"suggest.dictionary" name "suggest.q" q}]
+    (http/get solr-suggest-url (merge solr-req {:query-params params :as :json}))))
 
 (def solr-update-pool (cp/threadpool 4))
 (def solr-update-url (str (config :solr-base) "/" (config :solr-core) "/update"))
-(def solr-req (config :solr-req))
 
 (defn solr-updates [reqs]
   (cp/pdoseq

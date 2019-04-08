@@ -29,6 +29,11 @@ apache_vhosts:
     extra_parameters: |
       {{ zdl_apache_vhost_config }}
 
+zdl_api_context_paths:
+  - /articles/forms
+  - /assets
+  - /statistics
+
 zdl_apache_vhost_config: |
   <Location />
     AuthType Basic
@@ -44,8 +49,8 @@ zdl_apache_vhost_config: |
     Deny from all
   </DirectoryMatch>
 
-  Alias /webdav {{ dav_root }}
-  <Location /webdav>
+  Alias /articles {{ dav_root }}
+  <Location /articles>
     Dav On
     DavDepthInfinity on
 
@@ -56,25 +61,17 @@ zdl_apache_vhost_config: |
 
   RedirectMatch ^/$ /statistics
 
+  {% for cp in zdl_api_context_paths %}
+  <Location {{ cp }}>
+    ProxyPass http://localhost:3000{{ cp }}
+    ProxyPassReverse http://localhost:3000{{ cp }}
+  </Location>
+  {% endfor %}
+
   <Location /solr>
     ProxyPass http://localhost:8983/solr
     ProxyPassReverse http://localhost:8983/solr
     Require group admin
-  </Location>
-
-  <Location /api>
-    ProxyPass http://localhost:3000/api
-    ProxyPassReverse http://localhost:3000/api
-  </Location>
-
-  <Location /assets>
-    ProxyPass http://localhost:3000/assets
-    ProxyPassReverse http://localhost:3000/assets
-  </Location>
-
-  <Location /statistics>
-    ProxyPass http://localhost:3000/statistics
-    ProxyPassReverse http://localhost:3000/statistics
   </Location>
 
 solr_timezone: "Europe/Berlin"

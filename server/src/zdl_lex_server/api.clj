@@ -3,7 +3,5 @@
             [zdl-lex-server.store :as store]
             [ring.util.http-response :as htstatus]))
 
-(defstate handler
-  :start
-  (fn [req]
-    (htstatus/ok (->> (store/article-files) (map #(.getName %)) sort))))
+(defn handler [req]
+    (htstatus/ok (->> (store/article-files) (map #(.getName %)) sort)))

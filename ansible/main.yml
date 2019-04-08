@@ -29,6 +29,16 @@
       when: "'vagrant' in group_names"
       notify: restart apache
 
+    - name: Configure Solr
+      template:
+        src: solrconfig.xml
+        dest: /var/solr/data/{{ item }}/conf
+        owner: solr
+        group: solr
+        mode: 0644
+      with_items: "{{ solr_cores }}"
+      notify: restart solr
+
     - name: Install HTTP/TLS certificate
       copy:
         src: gorkon.bbaw.de.pem
