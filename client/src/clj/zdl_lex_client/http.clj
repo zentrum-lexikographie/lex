@@ -35,5 +35,5 @@
 
 (def get-edn (partial tx request-edn))
 
-(defn form-suggestion [q]
+(defn form-suggestions [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
