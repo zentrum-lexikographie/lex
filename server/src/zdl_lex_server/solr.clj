@@ -52,23 +52,24 @@
         {:keys [Typ Tranche Status]} (-> article-loc zip/node :attrs)
         timestamps (article-attrs article-loc :Zeitstempel)
         authors (article-attrs article-loc :Autor)
-        sources (article-attrs article-loc :Quelle)]
-    {:forms forms
-     :pos pos
-     :definitions definitions
-     :senses senses
-     :usage-period usage-period
-     :styles styles
-     :colouring colouring
-     :area area
-     :morphological-rels morphological-rels
-     :sense-rels sense-rels
-     :timestamps timestamps
-     :authors authors
-     :sources sources
-     :type Typ
-     :tranche Tranche
-     :status Status}))
+        sources (article-attrs article-loc :Quelle)
+        excerpt {:forms forms
+                 :pos pos
+                 :definitions definitions
+                 :senses senses
+                 :usage-period usage-period
+                 :styles styles
+                 :colouring colouring
+                 :area area
+                 :morphological-rels morphological-rels
+                 :sense-rels sense-rels
+                 :timestamps timestamps
+                 :authors authors
+                 :sources sources
+                 :type Typ
+                 :tranche Tranche
+                 :status Status}]
+    (apply dissoc excerpt (for [[k v] excerpt :when (nil? v)] k))))
 
 (def article-abstract-fields [:forms :pos :definitions :type :status])
 
