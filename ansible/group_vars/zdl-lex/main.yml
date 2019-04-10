@@ -33,6 +33,7 @@ zdl_api_context_paths:
   - /articles/forms
   - /assets
   - /statistics
+  - /status
 
 zdl_apache_vhost_config: |
   <Location />
@@ -42,6 +43,8 @@ zdl_apache_vhost_config: |
     AuthGroupFile htgroup
 
     Require valid-user
+
+    RequestHeader set X-Remote-User %{REMOTE_USER}s
   </Location>
 
   <DirectoryMatch ^\.|\/\.>
