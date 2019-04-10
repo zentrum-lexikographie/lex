@@ -17,9 +17,11 @@
      type="WorkspaceAccess"
      class="de.zdl.oxygen.ReplExtension"/>
 
-  <extension
+ <extension
      type="WorkspaceAccess"
      class="de.zdl.oxygen.ViewExtension"/>
 
  <view id="zdl-lex-client" initialSide="EAST" initialRow="0"/>
+
+ <toolbar id="zdl-lex-client" initialSide="SOUTH" initialRow="0"/> 
 </plugin>

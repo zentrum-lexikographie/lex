@@ -3,21 +3,20 @@
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.swingx :as uix]
             [seesaw.mig :as uim]
-            [taoensso.timbre :as timbre]
             [zdl-lex-client.http :as http]
             [clojure.string :as str])
-  (:import [javax.swing JLabel]
-           [com.jidesoft.hints AbstractListIntelliHints]))
+  (:import [com.jidesoft.hints AbstractListIntelliHints]))
+
+(def ^{:private true} input-len 40)
 
 (defn- suggestion-text [{:keys [suggestion pos type definitions 
                          status id last-modified]}]
   (let [suggestion (-> suggestion
                        (str/replace "<b>" "<u>")
                        (str/replace "</b>" "</u>"))
-        suggestion (str "<font size=\"+1\">" suggestion "</font>")
+        suggestion (str "<b>" suggestion "</b>")
 
         pos (-> pos first (or "?"))
-        pos (str "&lt;" pos "&gt;")
 
         source (re-find #"^[^/]+" id)
         source (str "<font color=\"blue\">[" source "]</font>")
@@ -28,8 +27,8 @@
 
         definition (-> definitions first (or "ohne Def."))
         definition-length (count definition)
-        definition (subs definition 0 (min 40 definition-length))
-        definition (str definition (if (< 40 definition-length) "…" ""))
+        definition (subs definition 0 (min input-len definition-length))
+        definition (str definition (if (< input-len definition-length) "…" ""))
         definition (str "<i>" definition "</i>")
 
         html (str/join "<br>" (remove nil? [title subtitle definition]))]
@@ -48,12 +47,17 @@
 (defn- render-suggestion [this {:keys [value index selected? focus?]}]
   (ui/config! this
               :text (suggestion-text value)
-              :font "Dialog-12"
+              :font :sans-serif
               :border [5 (line-border :color (suggestion-color value)
-                                      :left 5) 5]))
+                                      :right 10) 5]))
 
-(defn quick-search []
-  (let [input (ui/text :columns 40 :font "18" :border 5)]
+(defn input [f]
+  (let [action-handler (fn [e]
+                         (let [input (.getSource e)]
+                           (.selectAll input)
+                           (-> input ui/value f)))
+        input (ui/text :columns input-len
+                       :action (ui/action :handler action-handler))]
     (proxy [AbstractListIntelliHints] [input]
       (createList []
         (let [list (proxy-super createList)]
@@ -69,11 +73,8 @@
           (-> suggestions empty? not)))
       (acceptHint [hint]
         (proxy-super acceptHint (-> hint :suggestion (str/replace #"</?b>" "")))
-        (timbre/info hint)))
+        (.selectAll input)
+        (f hint)))
     input))
 
-(defn -main []
-  (ui/invoke-later
-   (-> (ui/frame :title "Quick Search" :content (quick-search))
-       ui/pack!
-       ui/show!)))
+;; (ui/invoke-later (-> (ui/frame :title "Quick Search" :content (input println)) ui/pack! ui/show!))

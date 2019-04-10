@@ -23,7 +23,7 @@
         (throw (ex-info "I/O error while connecting to XML database" {} e)))
       (catch IOException e
         (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
-          (throw (ex-info "I/O error while talking to XML database"
+          (throw (ex-info "I/O error while talking to server"
                           {:http-status (.getResponseCode con)
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
@@ -37,3 +37,6 @@
 
 (defn form-suggestions [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
+
+(defn status []
+  (get-edn #(merge % {:path "/status"})))
