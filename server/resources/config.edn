@@ -17,4 +17,7 @@
  :solr-core "articles"
 
  ;; {:basic-auth ["admin" "admin"]}
- :solr-req {}}
+ :solr-req {}
+
+ ;; "admin"
+ :anon-user "nobody"}

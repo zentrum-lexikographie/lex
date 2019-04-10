@@ -9,6 +9,7 @@
   (SLF4JBridgeHandler/removeHandlersForRootLogger)
   (SLF4JBridgeHandler/install)
 
+  (timbre/set-level! (read-string (or (System/getenv "TIMBRE_LEVEL") ":debug")))
   (timbre/handle-uncaught-jvm-exceptions!)
 
   (mount/start)

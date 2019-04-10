@@ -44,7 +44,8 @@
        {:middleware [wrap-formats]}
        ["/" {:get (fn [_] (htstatus/temporary-redirect "/statistics"))}]
        ["/articles/forms/suggestions" {:get api/form-suggestions}]
-       ["/statistics" {:get stats/handler}]]])
+       ["/statistics" {:get stats/handler}]
+       ["/status" {:get api/status}]]])
     (ring/routes
      (ring/create-resource-handler {:path "/"})
      (wrap-content-type (wrap-webjars (constantly nil)))
