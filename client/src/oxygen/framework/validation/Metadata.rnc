@@ -1,0 +1,104 @@
+default namespace = 'http://www.dwds.de/ns/1.0'
+namespace sch = 'http://www.ascc.net/xml/schematron'
+
+#####################################################################
+# Metadaten für die lexikografische Arbeit
+#####################################################################
+
+Homographenziffer = attribute hidx {
+	xsd:token { pattern = '[1-9]' }
+}
+
+Gliederungsmarke = attribute n {
+	# TODO: Punkte und Klammern entfernen
+	xsd:token {
+		pattern = '[A-Z]\.|(I|II|III|IV|V|VI)\.|[1-9][0-9]?\.|[a-z]\)|[αβγδε]\)' }
+}	
+
+#####################################################################
+# Verwaltungsinformationen für den Workflow
+#####################################################################
+
+Metadaten.allgemein = (
+	attribute Zeitstempel { xsd:date }
+	, attribute Quelle {
+		'DWDS'
+		| 'DWDS_auto'
+		| 'Duden_1999'
+		| 'Duden_1999/DWDS'
+		| 'EtymWB'
+		| 'Wahrig'
+		| 'Wahrig/DWDS'
+		| 'Wahrig/ZDL'
+		| 'WDG'
+		| 'WDG/DWDS'
+		| 'WDG/ZDL'
+		| 'ZDL'
+	}
+	, attribute Autor {
+		'DWDS'
+		| 'ast'
+		| 'billes'
+		| 'brockmeier'
+		| 'brosch'
+		| 'ermakova'
+		| 'fuhrmann'
+		| 'geyken'
+		| 'goettel'
+		| 'grimm'
+		| 'herold'
+		| 'lemnitzer'
+		| 'loos'
+		| 'mschulze'
+		| 'pfeiffer'
+		| 'roll'
+		| 'schrader'
+		| 'schroeder'
+		| 'siebel'
+		| 'solf'
+		| 'unger'
+		| 'wahrig'
+	} ?
+)
+
+sch:pattern [
+	sch:title [ 'Datumsregeln' ]
+	sch:rule [ context='Artikel'
+		sch:assert [ test='@Zeitstempel = 2012-12-12' #< current-date()'
+			'@Zeitstempel darf kein Datum aus der Zukunft enthalten!' ]
+	]
+]
+
+Metadaten.Artikel = (
+	attribute Typ {
+		'Vollartikel'
+		| 'Basisartikel'
+		| 'Basisartikel-D'
+		| 'Verweisartikel'
+		| 'Minimalartikel'
+	}
+	, attribute Status {
+		'Artikelrumpf'
+		| 'wird_Vollartikel'
+		| 'wird_gestrichen'
+		| 'Lex-in_Arbeit'
+		| 'Lex-zur_Abgabe'
+		| 'Lex-kommentiert'
+		| 'Lex-Wiedervorlage'
+		| 'Lex-zurückgestellt'
+		| 'Red-1'
+		| 'Red-2'
+		| 'Red-2-zurückgewiesen'
+		| 'Red-ex' # Expertenreview
+		| 'Red-f'
+		| 'Red-f-zurückgewiesen'
+	}
+	, attribute Empfehlung { 'ja' | 'nein' } ?
+	, attribute Erstellungsdatum { xsd:date } ? # (Zeitpunkt Red-1 zu Red-2) i. Ggs. zum Zeitstempel der Veröffentlichung
+	, attribute Tranche { token } ?
+)
+
+Metadaten.Modifikation = attribute Modifikation { xsd:date }
+
+Metadaten.Lesarten-ID = xsd:ID # { pattern = 'S_[a-z]_\d+(_\d+)?' } # (relaxed)
+Metadaten.Artikel-ID = xsd:ID # { pattern = 'E_[a-z]_\d+(_\d+)?' } # (relaxed)

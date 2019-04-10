@@ -17,7 +17,7 @@
 								<Integer>3</Integer>
 							</field>
 							<field name="uri">
-								<String>http://localhost:8984/webdav/db/dwdswb/validation/DWDSWB.rnc</String>
+								<String>file://${frameworkDir}/validation/DWDSWB.rnc</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -35,7 +35,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>http://localhost:8984/webdav/db/dwdswb/presentation/article.css</String>
+											<String>file://${frameworkDir}/presentation/article.css</String>
 										</field>
 										<field name="title">
 											<String>DWDS CSS</String>
@@ -5996,7 +5996,7 @@ Autor [nocontextvalidation]</String>
 						<null/>
 					</field>
 					<field name="extensionsBundleClassName">
-						<String>simple.documentation.framework.DWDSoXExtensionsBundle</String>
+						<String>de.zdl.oxygen.ExtensionBundle</String>
 					</field>
 					<field name="useImposedInitialPage">
 						<Boolean>true</Boolean>

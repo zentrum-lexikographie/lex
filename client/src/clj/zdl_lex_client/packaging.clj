@@ -44,11 +44,6 @@
    (xslt/compile-sexp
     (xslc/xslt3-identity
      {:version 3.0}
-     (xsl/template {:match "text()[contains(., 'http://localhost:8984/')]"}
-                   (xsl/value-of
-                    {:select (str "replace(., 'http://localhost:8984/', '"
-                                  server-base
-                                  "')")}))
      (xsl/template {:match "field[@name='classpath']"}
                    [:field {:name "classpath"}
                     [:String-array

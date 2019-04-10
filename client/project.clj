@@ -10,7 +10,6 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/data.codec "0.1.1"]
                  [org.clojure/data.xml "0.2.0-alpha6"]
-                 [com.taoensso/timbre "4.10.0"]
                  [org.swinglabs.swingx/swingx-all "1.6.5-1"]
                  [org.exist-db/existdb-core "2.2"]
                  [com.cemerick/url "0.1.1"]
@@ -35,7 +34,7 @@
                        :dependencies [[nrepl "0.6.0"]
                                       [cider/cider-nrepl "0.21.1"]]}
 
-             :provided {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.1"]
+             :provided {:dependencies [[com.oxygenxml/oxygen-sdk "19.1.0.4"]
                                        [me.flowthing/sigel "0.2.2"]
                                        [me.raynes/fs "1.4.6"]]}}
 
