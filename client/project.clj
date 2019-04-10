@@ -9,10 +9,8 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/data.codec "0.1.1"]
-                 [org.clojure/data.xml "0.2.0-alpha6"]
-                 [org.swinglabs.swingx/swingx-all "1.6.5-1"]
-                 [org.exist-db/existdb-core "2.2"]
-                 [com.cemerick/url "0.1.1"]
+                 [com.cemerick/url "0.1.1"
+                  :exclusions [[com.cemerick/clojurescript.test]]]
                  [seesaw "1.5.0"]
                  [cprop "0.1.13"]]
 
@@ -25,7 +23,6 @@
              "-Dswing.aatext=true"]
 
   :source-paths ["src/clj"]
-  :java-source-paths ["src/java"]
   :target-path "target/%s"
 
   :uberjar-name "zdl-lex-client.jar"

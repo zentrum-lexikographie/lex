@@ -6,6 +6,7 @@
                   [ro.sync.exml.plugin.PluginDescriptor]}
    :post-init init))
 
+()*use-context-classloader*
 (defonce descriptor (atom nil))
 
 (defn -init [this app-descriptor]

@@ -1,7 +1,6 @@
 (ns zdl-lex-client.quicksearch
   (:require [seesaw.core :as ui]
             [seesaw.border :refer [empty-border line-border]]
-            [seesaw.swingx :as uix]
             [seesaw.mig :as uim]
             [zdl-lex-client.http :as http]
             [clojure.string :as str])

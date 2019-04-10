@@ -6,11 +6,11 @@
     description="Access to lexikographic resources of the ZDL"
     version="1.2.4"
     vendor="BBAW"
-    class="de.zdl.oxygen.Plugin">
+    class="de.zdl.oxygen.Plugin"
+    classLoaderType="preferReferencedResources">
 
  <runtime>
-   <library name="${system(user.dir)}/target/uberjar/zdl-lex-client.jar"
-            scope="global"/>
+   <library name="${system(user.dir)}/target/uberjar/zdl-lex-client.jar"/>
  </runtime>
 
  <extension
