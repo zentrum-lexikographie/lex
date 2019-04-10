@@ -4020,60 +4020,6 @@ Adjektiv:${frameworkDir}/templates/template-ADJ.xml</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>ID_generieren [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>ID generieren</String>
-										</field>
-										<field name="description">
-											<String>Fügt an der Cursorposition eine in diesem Dokument nicht ergeben ID ein.</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>Attribut aus dem die Grund-ID gewonnen wird</String>
-																<String>/DWDS/Artikel:::xml:id</String>
-															</entry>
-															<entry>
-																<String>Attribute, von deren Werte sich die ID unterscheiden muss, eins pro Zeile</String>
-																<String>//Lesart:::xml:id</String>
-															</entry>
-															<entry>
-																<String>Name des einzufügenden Attributs für die ID</String>
-																<String>xml:id</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>operations.GenerateExclusiveID</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>Lesart mit ID</String>
 										</field>
 										<field name="name">
@@ -4455,60 +4401,6 @@ Autor [nocontextvalidation]</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>Revision [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>Revisionen</String>
-										</field>
-										<field name="description">
-											<String>Listet alle eXist-Revisionen der geöffnete Datei auf</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>Get - Revision - XQuery</String>
-																<String>${frameworkDir}/scripts/getrevision.xquery</String>
-															</entry>
-															<entry>
-																<String>Revision - List - XQuery</String>
-																<String>${frameworkDir}/scripts/getrevisionlist.xquery</String>
-															</entry>
-															<entry>
-																<String>URL</String>
-																<String>xmldb:exist://spock.dwds.de:8080/exist/xmlrpc/db/dwdswb/data</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>operations.GetRevisionXquery</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>morphAnalyse [nocontextvalidation]</String>
 										</field>
 										<field name="name">
@@ -4545,64 +4437,6 @@ Autor [nocontextvalidation]</String>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>WebViewXSLT [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>Web-Ansicht XSLT</String>
-										</field>
-										<field name="description">
-											<String>Zeigt den geöffneten Artikel so an, wie er auf zwei.DWDS.de veröffentlicht erscheinen würde</String>
-										</field>
-										<field name="largeIconPath">
-											<String>${framework}/presentation/webview.png</String>
-										</field>
-										<field name="smallIconPath">
-											<String>${framework}/presentation/webview_klein.png</String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>HTML-Ergebnis-Datei</String>
-																<String>${system(java.io.tmpdir)}/webViewResult.html</String>
-															</entry>
-															<entry>
-																<String>HTML-Template-Datei</String>
-																<String>${frameworkDir}/scripts/webViewTemplate.html</String>
-															</entry>
-															<entry>
-																<String>XSLT-Skript</String>
-																<String>${frameworkDir}/scripts/dwdswb.xsl</String>
-															</entry>
-															<entry>
-																<String>temporäre HTMl-Datei</String>
-																<String>${frameworkDir}/scripts/webViewResult.html</String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>operations.DWDSWebViewXSLT</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -4960,22 +4794,7 @@ Autor [nocontextvalidation]</String>
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>WebViewXSLT [nocontextvalidation]</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>Revision [nocontextvalidation]</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
 													<String>Datei_loeschen [nocontextvalidation]</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
-													<String>ID_generieren [nocontextvalidation]</String>
 												</field>
 											</menuItem>
 											<menuItem>
@@ -5443,11 +5262,6 @@ Autor [nocontextvalidation]</String>
 									</field>
 									<field name="toolbarEntriesDescriptorList">
 										<toolbarEntry-array>
-											<toolbarItem>
-												<field name="actionID">
-													<String>WebViewXSLT [nocontextvalidation]</String>
-												</field>
-											</toolbarItem>
 											<toolbar>
 												<field name="id">
 													<String>Formteil</String>
