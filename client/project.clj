@@ -9,14 +9,14 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/data.codec "0.1.1"]
-                 [com.cemerick/url "0.1.1"
-                  :exclusions [[com.cemerick/clojurescript.test]]]
                  [seesaw "1.5.0"]
+                 [pathetic "0.5.1"]
                  [cprop "0.1.13"]]
 
-  :repositories [["exist" "https://raw.github.com/eXist-db/mvn-repo/master"]
-                 ["oxygen" {:url "https://www.oxygenxml.com/maven"
+  :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
+
+  :plugins [[lein-exec "0.3.7"]]
 
   :jvm-opts ["-Dconf=dev-config.edn"
              "-Dawt.useSystemAAFontSettings=on"
@@ -27,13 +27,17 @@
 
   :uberjar-name "zdl-lex-client.jar"
 
-  :profiles {:uberjar {:aot :all
-                       :dependencies [[nrepl "0.6.0"]
-                                      [cider/cider-nrepl "0.21.1"]]}
+  :profiles {:uberjar
+             {:aot :all
+              :dependencies [[nrepl "0.6.0"]
+                             [cider/cider-nrepl "0.21.1"]]}
 
-             :provided {:dependencies [[com.oxygenxml/oxygen-sdk "19.1.0.4"]
-                                       [me.flowthing/sigel "0.2.2"]
-                                       [me.raynes/fs "1.4.6"]]}}
+             :dev
+             {:dependencies [[me.raynes/fs "1.4.6"]
+                             [me.flowthing/sigel "0.2.2"]]}
 
-  :aliases {"package" ["run" "-m" "zdl-lex-client.packaging" :project/version]
-            "oxygen" ["run" "-m" "zdl-lex-client.oxygen"]})
+             :provided
+             {:dependencies [[com.oxygenxml/oxygen-sdk "19.1.0.4"]]}}
+
+  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]
+            "oxygen" ["exec" "-p" "scripts/oxygen.clj"]})
