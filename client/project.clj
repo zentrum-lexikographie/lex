@@ -9,6 +9,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/data.codec "0.1.1"]
+                 [com.taoensso/timbre "4.10.0"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
                  [cprop "0.1.13"]]
@@ -20,7 +21,10 @@
 
   :jvm-opts ["-Dconf=dev-config.edn"
              "-Dawt.useSystemAAFontSettings=on"
-             "-Dswing.aatext=true"]
+             "-Dswing.aatext=true"
+             "-Dclojure.compiler.disable-locals-clearing=true"
+             "-Dclojure.compiler.elide-meta=[]" 
+             "-Dclojure.compiler.direct-linking=false"]
 
   :source-paths ["src/clj"]
   :target-path "target/%s"
