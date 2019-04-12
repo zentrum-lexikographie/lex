@@ -1,15 +1,22 @@
 (ns zdl-lex-client.extension-bundle
+  (:require [taoensso.timbre :as timbre]
+            [clojure.string :as str])
   (:import [ro.sync.ecss.extensions.api
             AuthorExtensionStateListener AuthorSchemaAwareEditingHandlerAdapter]
            [ro.sync.contentcompletion.xml SchemaManagerFilter])
   (:gen-class
    :name de.zdl.oxygen.ExtensionBundle
-   :extends ro.sync.ecss.extensions.api.ExtensionsBundle
-   :state state
-   :init init))
+   :extends ro.sync.ecss.extensions.api.ExtensionsBundle))
 
-(defn -init []
-  [[] (ref {:author-access (atom nil)})])
+(defonce author-access (atom {}))
+
+;;@author-access
+
+(defn with-author-access [bundle f]
+  (some-> (@author-access bundle) f))
+
+(defn with-some-author-access [f]
+  (with-author-access (-> @author-access keys first) f))
 
 (defn -getDescription [this]
   "A costum extension bundle extended by a context-sensitive grey-out of the lexicography menu and a manipulation of the content completion")
@@ -19,21 +26,35 @@
 
 (defn -createAuthorExtensionStateListener [bundle]
   (proxy [AuthorExtensionStateListener] []
-    (activated [author-access])
-      ;;(reset! (-> (.state bundle) deref :author-access) author-access))
-    (deactivated [_])))
-      ;;(reset! (-> (.state bundle) deref :author-access) nil))))
+    (activated [bundle-author-access]
+      (swap! author-access assoc bundle bundle-author-access))
+    (deactivated [_]
+      (swap! author-access dissoc bundle))))
+
+(defn action-based-element-filter [author-access]
+  (let [action-names (.. author-access
+                         getEditorAccess
+                         getActionsProvider
+                         getAuthorExtensionActions
+                         keySet)
+        action-tokens (mapcat #(str/split % #"\s+") action-names)
+        action-tokens (apply hash-set action-tokens)]
+    (fn [el]
+      (action-tokens (.getQName el)))))
 
 (defn -createSchemaManagerFilter [bundle]
-  (proxy [SchemaManagerFilter] []
-    (filterAttributes [attrs ctx]
-      attrs)
-    (filterAttributeValues [values ctx]
-      values)
-    (filterElements [elements ctx]
-      elements)
-    (filterElementValues [values ctx]
-      values)))
+  (let [element-filter (with-author-access bundle action-based-element-filter)]
+    (proxy [SchemaManagerFilter] []
+      (filterAttributes [attrs ctx]
+        attrs)
+      (filterAttributeValues [values ctx]
+        values)
+      (filterElements [elements ctx]
+        (timbre/info elements)
+        ;;(vec (filter element-filter elements)))
+        elements)
+      (filterElementValues [values ctx]
+        values))))
 
 (defn -getAuthorSchemaAwareEditingHandler [bundle]
   (proxy [AuthorSchemaAwareEditingHandlerAdapter] []
