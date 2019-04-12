@@ -9,11 +9,25 @@
             [zdl-lex-client.icon :as icon])
   (:import [com.jidesoft.hints AbstractListIntelliHints]))
 
-(def ^{:private true} input-len 40)
+(defonce query (atom ""))
 
-(defn- suggestion-text [{:keys [suggestion pos type definitions 
-                         status id last-modified]}]
-  (let [suggestion (-> suggestion
+(defonce article-reqs (async/chan (async/sliding-buffer 3)))
+
+(defonce search-reqs (async/chan (async/sliding-buffer 3)))
+
+(def action
+  (ui/action :icon icon/gmd-search
+             :name "Suchen"
+             :handler (fn [e]
+                        ;; FIXME: can originate from toolbar
+                        ;;(.. e getSource selectAll)
+                        (async/>!! search-reqs @query))))
+
+
+(defn- render-suggestion [this {:keys [value]}]
+  (let [{:keys [suggestion pos type definitions status id last-modified]} value
+
+        suggestion (-> suggestion
                        (str/replace "<b>" "<u>")
                        (str/replace "</b>" "</u>"))
         suggestion (str "<b>" suggestion "</b>")
@@ -29,46 +43,26 @@
 
         definition (-> definitions first (or "ohne Def."))
         definition-length (count definition)
-        definition (subs definition 0 (min input-len definition-length))
-        definition (str definition (if (< input-len definition-length) "…" ""))
+        definition (subs definition 0 (min 40 definition-length))
+        definition (str definition (if (< 40 definition-length) "…" ""))
         definition (str "<i>" definition "</i>")
 
-        html (str/join "<br>" (remove nil? [title subtitle definition]))]
+        html (str/join "<br>" (remove nil? [title subtitle definition]))
+        html (str "<html>" html "</html>")
 
-    (str "<html>" html "</html>")))
+        border-color (cond
+                       (= "Red-f" status) :green
+                       (= "Red-2" status) :yellow
+                       (= "Artikelrumpf" status) :lightgrey
+                       (.startsWith status "Lex-") :orange
+                       (.endsWith status "-zurückgewiesen") :red
+                       :else :white)
+        border [5 (line-border :color border-color :right 10) 5]]
 
-(defn- suggestion-color [{:keys [status]}]
-  (cond
-    (= "Red-f" status) :green
-    (= "Red-2" status) :yellow
-    (= "Artikelrumpf" status) :lightgrey
-    (.startsWith status "Lex-") :orange
-    (.endsWith status "-zurückgewiesen") :red
-    :else :white))
-
-(defn- render-suggestion [this {:keys [value index selected? focus?]}]
-  (ui/config! this
-              :text (suggestion-text value)
-              :font :sans-serif
-              :border [5 (line-border :color (suggestion-color value)
-                                      :right 10) 5]))
-
-(defonce query (atom ""))
-
-(defonce article-reqs (async/chan (async/sliding-buffer 3)))
-
-(defonce search-reqs (async/chan (async/sliding-buffer 3)))
-
-(def action
-  (ui/action :icon icon/gmd-search
-             :name "Suchen"
-             :handler (fn [e]
-                        ;; FIXME: can originate from toolbar
-                        ;;(.. e getSource selectAll)
-                        (async/>!! search-reqs @query))))
+    (ui/config! this :text html :border border)))
 
 (def input
-  (let [input (ui/text :columns input-len :action action)]
+  (let [input (ui/text :columns 40 :action action)]
     (uib/bind input query input)
     (proxy [AbstractListIntelliHints] [input]
       (createList []
