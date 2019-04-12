@@ -33,13 +33,24 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
+											<String>file://${frameworkDir}/presentation/zdl.css</String>
+										</field>
+										<field name="title">
+											<String>ZDL</String>
+										</field>
+										<field name="alternate">
+											<Boolean>false</Boolean>
+										</field>
+									</cssFile>
+									<cssFile>
+										<field name="href">
 											<String>file://${frameworkDir}/presentation/article.css</String>
 										</field>
 										<field name="title">
 											<String>DWDS CSS</String>
 										</field>
 										<field name="alternate">
-											<Boolean>false</Boolean>
+											<Boolean>true</Boolean>
 										</field>
 									</cssFile>
 								</cssFile-array>
