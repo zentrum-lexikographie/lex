@@ -1,9 +1,12 @@
-(ns zdl-lex-client.quicksearch
-  (:require [seesaw.core :as ui]
-            [seesaw.border :refer [empty-border line-border]]
+(ns zdl-lex-client.search
+  (:require [clojure.string :as str]
+            [clojure.core.async :as async]
+            [seesaw.core :as ui]
+            [seesaw.bind :as uib]
+            [seesaw.border :refer [line-border]]
             [seesaw.mig :as uim]
             [zdl-lex-client.http :as http]
-            [clojure.string :as str])
+            [zdl-lex-client.icon :as icon])
   (:import [com.jidesoft.hints AbstractListIntelliHints]))
 
 (def ^{:private true} input-len 40)
@@ -50,19 +53,27 @@
               :border [5 (line-border :color (suggestion-color value)
                                       :right 10) 5]))
 
-(defn input [f]
-  (let [action-handler (fn [e]
-                         (let [input (.getSource e)]
-                           (.selectAll input)
-                           (-> input ui/value f)))
-        input (ui/text :columns input-len
-                       :action (ui/action :handler action-handler))]
+(defonce query (atom ""))
+
+(defonce article-reqs (async/chan (async/sliding-buffer 3)))
+
+(defonce search-reqs (async/chan (async/sliding-buffer 3)))
+
+(def action
+  (ui/action :icon icon/gmd-search
+             :name "Suchen"
+             :handler (fn [e]
+                        ;; FIXME: can originate from toolbar
+                        ;;(.. e getSource selectAll)
+                        (async/>!! search-reqs @query))))
+
+(def input
+  (let [input (ui/text :columns input-len :action action)]
+    (uib/bind input query input)
     (proxy [AbstractListIntelliHints] [input]
       (createList []
         (let [list (proxy-super createList)]
-          (ui/config! list
-                      :background :white
-                      :renderer render-suggestion)))
+          (ui/config! list :background :white :renderer render-suggestion)))
       (updateHints [ctx]
         (let [q (str ctx)
               suggestions? (< 1 (count q))
@@ -72,8 +83,7 @@
           (-> suggestions empty? not)))
       (acceptHint [hint]
         (proxy-super acceptHint (-> hint :suggestion (str/replace #"</?b>" "")))
-        (.selectAll input)
-        (f hint)))
+        (async/>!! article-reqs hint)))
     input))
 
-;; (ui/invoke-later (-> (ui/frame :title "Quick Search" :content (input println)) ui/pack! ui/show!))
+;; (ui/invoke-later (-> (ui/frame :title "Quick Search" :content input) ui/pack! ui/show!))

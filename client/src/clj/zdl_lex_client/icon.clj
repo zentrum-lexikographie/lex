@@ -1,0 +1,18 @@
+(ns zdl-lex-client.icon
+  (:import [java.awt Color Font]
+           [jiconfont.swing IconFontSwing]
+           [jiconfont.icons.google_material_design_icons GoogleMaterialDesignIcons])
+  (:require [seesaw.core :as ui]
+            [seesaw.font :as font]))
+
+(IconFontSwing/register (.. GoogleMaterialDesignIcons getIconFont))
+
+(defn icon [name] (IconFontSwing/buildIcon name 20))
+
+(def gmd-add (icon GoogleMaterialDesignIcons/ADD))
+(def gmd-delete (icon GoogleMaterialDesignIcons/DELETE))
+(def gmd-search (icon GoogleMaterialDesignIcons/SEARCH))
+
+(def logo (ui/label :icon "zdl.png" :border 6 :size [32 :by 32]))
+
+;;(ui/invoke-later (-> (ui/frame :title "Test" :content (ui/button :icon gmd-delete :text "Hallo")) ui/pack! ui/show!))

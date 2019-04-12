@@ -8,11 +8,14 @@
             :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
 
   :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/core.async "0.4.490"]
                  [org.clojure/data.codec "0.1.1"]
                  [com.taoensso/timbre "4.10.0"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
-                 [cprop "0.1.13"]]
+                 [cprop "0.1.13"]
+                 [com.github.jiconfont/jiconfont-swing "1.0.1"]
+                 [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]]
 
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
