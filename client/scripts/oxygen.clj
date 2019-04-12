@@ -19,7 +19,7 @@
   (let [oxygen
         (ProcessBuilder.
          ["java"
-          "-Ddwdsox.repl.port=7000"
+          "-Dconf=oxygen-config.edn"
           "-Dcom.oxygenxml.editor.plugins.dir=src/oxygen"
           "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
           "-cp" (str/join ":" [(str oxygen-home "/lib/oxygen.jar")
