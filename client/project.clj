@@ -44,7 +44,7 @@
                              [me.flowthing/sigel "0.2.2"]]}
 
              :provided
-             {:dependencies [[com.oxygenxml/oxygen-sdk "19.1.0.4"]]}}
+             {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
 
   :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]
             "oxygen" ["exec" "-p" "scripts/oxygen.clj"]})

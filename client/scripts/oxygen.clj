@@ -23,6 +23,7 @@
           "-Dcom.oxygenxml.editor.plugins.dir=src/oxygen"
           "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
           "-cp" (str/join ":" [(str oxygen-home "/lib/oxygen.jar")
+                               (str oxygen-home "/lib/oxygen-basic-utilities.jar")
                                (str oxygen-home "/classes")
                                oxygen-home])
           "ro.sync.exml.Oxygen"
