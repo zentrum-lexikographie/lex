@@ -34,7 +34,8 @@
                  [cprop "0.1.13"]
                  [me.raynes/fs "1.4.6"]
                  [com.climate/claypoole "1.1.4"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [gremid/lucene-query "0.1.0"]]
 
   :jvm-opts ["-Dconf=dev-config.edn"]
   :main ^:skip-aot zdl-lex-server.core
