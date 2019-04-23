@@ -71,7 +71,7 @@
                  :status Status}]
     (apply dissoc excerpt (for [[k v] excerpt :when (nil? v)] k))))
 
-(def article-abstract-fields [:forms :pos :definitions :type :status])
+(def article-abstract-fields [:forms :pos :definitions :type :status :authors])
 
 (defn- solr-field-name [k]
   (let [field-name (str/replace (name k) "-" "_")
