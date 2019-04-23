@@ -18,6 +18,10 @@
   (htstatus/ok
    {:user (get-in req [:headers "x-remote-user"] (config :anon-user))}))
 
+(defn- facet-counts [[k v]] [k (:counts v)])
+
+(defn- facet-values [[k v]] [k (into (sorted-map) (->> v (partition 2) (map vec)))])
+
 (def solr-search-query
   {"facet" "true"
    "facet.field" ["author_ss" "type_ss" "pos_ss" "status_ss" "tranche_ss"]
@@ -37,8 +41,10 @@
 
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
-        {:keys [facet_fields facet_ranges]} facet_counts]
+        {:keys [facet_fields facet_ranges]} facet_counts
+        facets (concat (map facet-values facet_fields)
+                       (map (comp facet-values facet-counts) facet_ranges))]
     (htstatus/ok
      {:total numFound
       :result (for [{:keys [abstract_ss]} docs] (-> abstract_ss first read-string))
-      :facets (merge facet_fields facet_ranges)})))
+      :facets (into (sorted-map) facets)})))
