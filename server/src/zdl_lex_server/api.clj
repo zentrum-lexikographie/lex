@@ -17,3 +17,28 @@
 (defn status [req]
   (htstatus/ok
    {:user (get-in req [:headers "x-remote-user"] (config :anon-user))}))
+
+(def solr-search-query
+  {"facet" "true"
+   "facet.field" ["author_ss" "type_ss" "pos_ss" "status_ss" "tranche_ss"]
+   "facet.limit" "-1"
+   "facet.mincount" "1"
+   "facet.range" "timestamp_dts"
+   "facet.range.start" "NOW/MONTH-1YEAR"
+   "facet.range.end" "NOW"
+   "facet.range.gap" "+1MONTH"
+   "sort" "forms_ss asc,weight_i desc,id asc"})
+
+(defn search [{{:keys [q offset limit]
+                :or {q "id:*" offset "0" limit "10"}} :params}]
+  (let [solr-search-query (merge solr-search-query {"q" q
+                                             "start" offset
+                                             "rows" limit})
+        solr-response (solr/solr-query solr-search-query)
+        response (get-in solr-response [:body :response])
+        {:keys [numFound docs facet_counts]} response
+        {:keys [facet_fields facet_ranges]} facet_counts]
+    (htstatus/ok
+     {:total numFound
+      :result (for [{:keys [abstract_ss]} docs] (-> abstract_ss first read-string))
+      :facets (merge facet_fields facet_ranges)})))
