@@ -2,7 +2,11 @@
   (:require [clojure.java.io :as io]
             [clojure.data.codec.base64 :as base64]
             [cemerick.url :refer [url]]
-            [zdl-lex-client.env :refer [config]])
+            [zdl-lex-client.env :refer [config]]
+            [clojure.core.async :as async]
+            [taoensso.timbre :as timbre]
+            [tick.alpha.api :as t]
+            [zdl-lex-client.bus :as bus])
   (:import [java.io IOException]
            [java.net URL ConnectException]))
 
@@ -38,5 +42,21 @@
 (defn form-suggestions [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
 
-(defn status []
-  (get-edn #(merge % {:path "/status"})))
+(defn request-status []
+  (async/go-loop []
+    (try
+      (reset! bus/status (merge {:timestamp (t/now)}
+                                (get-edn #(merge % {:path "/status"}))))
+      (catch Exception e (timbre/warn e)))
+    (async/<! (async/timeout 10000))
+    (recur)))
+
+(defn request-search-results []
+  (async/go-loop []
+    (try
+      (let [q (async/<! bus/search-reqs)
+            results (get-edn #(merge % {:path "/articles/search"
+                                        :query {"q" q "limit" "100"}}))]
+        (bus/add-search-result (merge {:query q} results)))
+      (catch Exception e (timbre/warn e)))
+    (recur)))

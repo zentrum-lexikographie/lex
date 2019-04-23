@@ -14,6 +14,7 @@
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
                  [cprop "0.1.13"]
+                 [tick "0.4.10-alpha"]
                  [com.github.jiconfont/jiconfont-swing "1.0.1"]
                  [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]]
 

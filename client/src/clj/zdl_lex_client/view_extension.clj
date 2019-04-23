@@ -1,24 +1,28 @@
 (ns zdl-lex-client.view-extension
-  (:require [zdl-lex-client.metasearch :as metasearch]
-            [zdl-lex-client.search :as search]
-            [zdl-lex-client.article :as article]
-            [zdl-lex-client.url :as url]
-            [seesaw.core :as ui]
-            [zdl-lex-client.icon :as icon]
-            [clojure.core.async :as async])
-  (:import [java.net URL]
-           [javax.swing JComponent]
-           [ro.sync.exml.workspace.api.standalone
-            ViewComponentCustomizer ToolbarComponentsCustomizer]
-           [ro.sync.exml.workspace.api.standalone.ui ToolbarButton])
   (:gen-class
    :name de.zdl.oxygen.ViewExtension
-   :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension]))
+   :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
+  (:require [clojure.core.async :as async]
+            [zdl-lex-client.article :as article]
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.metasearch :as metasearch]
+            [zdl-lex-client.search :as search]
+            [zdl-lex-client.url :as url]
+            [zdl-lex-client.http :as http])
+  (:import java.net.URL
+           javax.swing.JComponent
+           [ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer]
+           ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
 (defonce ws (atom nil))
 
-(defn open [url]
-  (some-> @ws (.open url)))
+(defn open-articles []
+  (async/go
+    (while @ws
+      (let [article-req (async/<! bus/article-reqs)
+            article-url (-> article-req :id url/article str (URL.))]
+        (some-> @ws (.open article-url))))))
 
 (defn -applicationStarted [this app-ws]
   (reset! ws app-ws)
@@ -30,16 +34,14 @@
 
         toolbar [icon/logo article-search search/input article-create article-delete]]
 
-    (async/go
-      (while @ws
-        (let [article-req (async/<! search/article-reqs)]
-          (-> article-req :id url/article str (URL.) open))))
+    (open-articles)
+    (http/request-status)
 
     (.addViewComponentCustomizer
      app-ws
      (proxy [ViewComponentCustomizer] []
        (customizeView [viewInfo]
-         (when (= "zdl-lex-client" (.getViewID viewInfo))
+         (when (= "zdl-lex-client-view" (.getViewID viewInfo))
            (doto viewInfo
              (.setTitle "ZDL/DWDS")
              ;;(.setIcon nil)
@@ -49,7 +51,7 @@
      app-ws
      (proxy [ToolbarComponentsCustomizer] []
        (customizeToolbar [toolbarInfo]
-         (when (= "zdl-lex-client" (.getToolbarID toolbarInfo))
+         (when (= "zdl-lex-client-toolbar" (.getToolbarID toolbarInfo))
            (doto toolbarInfo
              (.setTitle "ZDL/DWDS")
              (.setComponents (into-array JComponent toolbar)))))))))

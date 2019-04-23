@@ -1,28 +1,23 @@
 (ns zdl-lex-client.search
-  (:require [clojure.string :as str]
-            [clojure.core.async :as async]
-            [seesaw.core :as ui]
+  (:require [clojure.core.async :as async]
+            [clojure.string :as str]
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
-            [seesaw.mig :as uim]
+            [seesaw.core :as ui]
+            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon])
-  (:import [com.jidesoft.hints AbstractListIntelliHints]))
+  (:import com.jidesoft.hints.AbstractListIntelliHints))
 
 (defonce query (atom ""))
 
-(defonce article-reqs (async/chan (async/sliding-buffer 3)))
-
-(defonce search-reqs (async/chan (async/sliding-buffer 3)))
+(declare input)
 
 (def action
-  (ui/action :icon icon/gmd-search
-             :name "Suchen"
-             :handler (fn [e]
-                        ;; FIXME: can originate from toolbar
-                        ;;(.. e getSource selectAll)
-                        (async/>!! search-reqs @query))))
-
+  (ui/action
+   :icon icon/gmd-search
+   :name "Suchen"
+   :handler (fn [_] (.selectAll input) (async/>!! bus/search-reqs @query))))
 
 (defn- render-suggestion [this {:keys [value]}]
   (let [{:keys [suggestion pos type definitions status id last-modified]} value
@@ -63,7 +58,7 @@
 
 (def input
   (let [input (ui/text :columns 40 :action action)]
-    (uib/bind input query input)
+    (uib/bind input query)
     (proxy [AbstractListIntelliHints] [input]
       (createList []
         (let [list (proxy-super createList)]
@@ -77,7 +72,7 @@
           (-> suggestions empty? not)))
       (acceptHint [hint]
         (proxy-super acceptHint (-> hint :suggestion (str/replace #"</?b>" "")))
-        (async/>!! article-reqs hint)))
+        (async/>!! bus/article-reqs hint)))
     input))
 
 ;; (ui/invoke-later (-> (ui/frame :title "Quick Search" :content input) ui/pack! ui/show!))
