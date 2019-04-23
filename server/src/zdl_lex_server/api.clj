@@ -15,6 +15,5 @@
                 (merge {:suggestion term} (read-string payload)))})))
 
 (defn status [req]
-  (timbre/info req)
   (htstatus/ok
    {:user (get-in req [:headers "x-remote-user"] (config :anon-user))}))
