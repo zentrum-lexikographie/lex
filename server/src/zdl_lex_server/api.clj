@@ -20,14 +20,15 @@
 
 (defn- facet-counts [[k v]] [k (:counts v)])
 
-(defn- facet-values [[k v]] [k (into (sorted-map) (->> v (partition 2) (map vec)))])
+(defn- facet-values [[k v]] [(-> k name solr/solr-field-key)
+                             (into (sorted-map) (->> v (partition 2) (map vec)))])
 
 (def solr-search-query
   {"facet" "true"
-   "facet.field" ["author_ss" "type_ss" "pos_ss" "status_ss" "tranche_ss"]
+   "facet.field" ["authors_ss" "type_ss" "pos_ss" "status_ss" "tranche_ss"]
    "facet.limit" "-1"
    "facet.mincount" "1"
-   "facet.range" "timestamp_dts"
+   "facet.range" "timestamps_dts"
    "facet.range.start" "NOW/MONTH-1YEAR"
    "facet.range.end" "NOW"
    "facet.range.gap" "+1MONTH"

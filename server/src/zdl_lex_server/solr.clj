@@ -73,12 +73,24 @@
 
 (def article-abstract-fields [:forms :pos :definitions :type :status :authors])
 
-(defn- solr-field-name [k]
+(defn solr-field-name [k]
   (let [field-name (str/replace (name k) "-" "_")
         field-suffix (condp = k
+                       :id ""
+                       :language ""
+                       :xml_descendent_path ""
+                       :weight "_i"
                        :definitions "_t"
+                       :last_modified "_dt"
+                       :timestamps "_dts"
                        "_ss")]
     (str field-name field-suffix)))
+
+(defn solr-field-key [n]
+  (-> n
+      (str/replace #"_((dts)|(dt)|(ss)|(t)|(i))$" "")
+      (str/replace "_" "-")
+      keyword))
 
 (defn- solr-basic-field [[k v]]
   (if-not (nil? v) [(solr-field-name k) (if (string? v) [v] (vec v))]))
@@ -108,14 +120,14 @@
         id (store/relative-article-path article)
 
         timestamps (excerpt :timestamps)
-        timestamp-fields (solr-attr-field "timestamp" "dts" timestamps)
+        timestamp-fields (solr-attr-field "timestamps" "dts" timestamps)
 
         last-modified (reduce max-timestamp (apply concat (vals timestamps)))
-        last-modified-fields [["last_modified_dt" [last-modified]]]
+        last-modified-fields [[(solr-field-name :last_modified) [last-modified]]]
 
         weight (-> last-modified t/parse days-since-epoch)
 
-        author-fields (solr-attr-field "author" "ss" (excerpt :authors))
+        author-fields (solr-attr-field "authors" "ss" (excerpt :authors))
         source-fields (solr-attr-field "source" "ss" (excerpt :source))
 
         basic-fields (map solr-basic-field
