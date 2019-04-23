@@ -31,12 +31,12 @@
 
 (defn search [{{:keys [q offset limit]
                 :or {q "id:*" offset "0" limit "10"}} :params}]
-  (let [solr-search-query (merge solr-search-query {"q" q
-                                             "start" offset
-                                             "rows" limit})
+  (let [solr-search-query (merge solr-search-query
+                                 {"q" q "start" offset "rows" limit})
         solr-response (solr/solr-query solr-search-query)
-        response (get-in solr-response [:body :response])
-        {:keys [numFound docs facet_counts]} response
+
+        {:keys [response facet_counts]} (:body solr-response)
+        {:keys [numFound docs]} response
         {:keys [facet_fields facet_ranges]} facet_counts]
     (htstatus/ok
      {:total numFound
