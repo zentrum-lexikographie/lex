@@ -17,12 +17,12 @@
 
 (defonce ws (atom nil))
 
-(defn open-articles []
-  (async/go
-    (while @ws
-      (let [article-req (async/<! bus/article-reqs)
-            article-url (-> article-req :id url/article str (URL.))]
-        (some-> @ws (.open article-url))))))
+(defonce open-articles
+  (async/go-loop []
+    (let [article-req (async/<! bus/article-reqs)
+          article-url (-> article-req :id url/article str (URL.))]
+      (some-> @ws (.open article-url)))
+    (recur)))
 
 (defn -applicationStarted [this app-ws]
   (reset! ws app-ws)
@@ -33,9 +33,6 @@
         article-delete (ToolbarButton. article/delete false)
 
         toolbar [icon/logo article-search search/input article-create article-delete]]
-
-    (open-articles)
-    (http/request-status)
 
     (.addViewComponentCustomizer
      app-ws

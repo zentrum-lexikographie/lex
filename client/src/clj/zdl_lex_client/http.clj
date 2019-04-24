@@ -42,7 +42,7 @@
 (defn form-suggestions [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
 
-(defn request-status []
+(defonce request-status
   (async/go-loop []
     (try
       (reset! bus/status (merge {:timestamp (t/now)}
@@ -51,7 +51,7 @@
     (async/<! (async/timeout 10000))
     (recur)))
 
-(defn request-search-results []
+(defonce request-search-results
   (async/go-loop []
     (try
       (let [q (async/<! bus/search-reqs)

@@ -6,7 +6,8 @@
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
-            [zdl-lex-client.icon :as icon])
+            [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.results :as results])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
 
 (defonce query (atom ""))
@@ -75,4 +76,9 @@
         (async/>!! bus/article-reqs hint)))
     input))
 
-;; (ui/invoke-later (-> (ui/frame :title "Quick Search" :content input) ui/pack! ui/show!))
+(defn -main [& args]
+  (let [panel (ui/border-panel :north input :center results/output)]
+    (ui/invoke-later
+     (-> (ui/frame :title "Search" :content panel)
+         ui/pack!
+         ui/show!))))
