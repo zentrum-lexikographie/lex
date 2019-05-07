@@ -51,6 +51,10 @@
       (proc "git" "clone" (config :git-repo) (path store/git-dir)))
     (when (empty? (store/xml-files store/git-dir))
       (copy-articles-to-git)
-      (git/commit))))
+      (git/git "add" ".")
+      (git/git "commit" "-m" "" "--allow-empty-message")
+      (git/git "push" "-u" "origin"))))
 
-(when *command-line-args* (exist2git))
+(when *command-line-args*
+  (exist2git)
+  (shutdown-agents))
