@@ -41,7 +41,9 @@
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
 
+  :plugins [[lein-exec "0.3.7"]]
+
   :profiles {:uberjar {:aot :all}}
 
-  :aliases {"exist2git" ["run", "-m", "zdl-lex-server.exist2git"]})
+  :aliases {"exist2git" ["exec" "-p" "scripts/exist2git.clj"]})
 

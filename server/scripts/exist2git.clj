@@ -1,9 +1,8 @@
-(ns zdl-lex-server.exist2git
-  (:require [clojure.string :as str]
-            [me.raynes.fs :as fs]
-            [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.git :as git]
-            [zdl-lex-server.store :as store]))
+(require '[clojure.string :as str])
+(require '[me.raynes.fs :as fs])
+(require '[zdl-lex-server.env :refer [config]])
+(require '[zdl-lex-server.git :as git])
+(require '[zdl-lex-server.store :as store])
 
 (def exist-db-host "spock.dwds.de")
 (def exist-export-file (fs/file store/data-dir "exist-db-export.zip"))
@@ -39,7 +38,7 @@
       (fs/copy+ exist-file article-file)))
   (proc "chmod" "-R" "g+w" (path store/git-dir)))
 
-(defn -main [& args]
+(defn exist2git []
   (when-not (fs/directory? exist-dir)
     (when-not (fs/exists? exist-export-file)
       (when-let [last-backup (query-last-backup)]
@@ -54,3 +53,4 @@
       (copy-articles-to-git)
       (git/commit))))
 
+(when *command-line-args* (exist2git))
