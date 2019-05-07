@@ -36,10 +36,10 @@
            (when-not (fs/directory? articles-dir)
              (fs/mkdirs articles-dir))
            git-dir))
-  
+
 (defstate watcher
   :start (hawk/watch! (config :watcher-opts)
                       [{:paths [articles-dir]
                         :filter #(xml-file? (:file %2))
-                        :handler (fn [ctx e] (timbre/debug e) ctx)}])
+                        :handler (fn [_ e] (timbre/debug e))}])
   :stop (hawk/stop! watcher))
