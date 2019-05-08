@@ -1,23 +1,18 @@
 (ns zdl-lex-server.core
-  (:require [taoensso.timbre :as timbre]
-            [mount.core :as mount :refer [defstate]]
-            [zdl-lex-server.http :as http])
-  (:import [org.slf4j.bridge SLF4JBridgeHandler])
-  (:gen-class))
-
-(defstate ^{:on-reload :noop} logging
-  :start (do
-           (SLF4JBridgeHandler/removeHandlersForRootLogger)
-           (SLF4JBridgeHandler/install)
-           (timbre/set-level! (read-string (or (System/getenv "TIMBRE_LEVEL")
-                                               ":debug")))
-           (timbre/merge-config! {:ns-blacklist ["org.apache.http.*"
-                                                 "org.eclipse.jetty.*"
-                                                 "org.eclipse.jgit.*"]})))
+  (:gen-class)
+  (:require [mount.core :as mount]
+            [zdl-lex-server.env :as env]
+            [zdl-lex-server.git :as git]
+            [zdl-lex-server.http :as http]
+            [zdl-lex-server.solr :as solr]
+            [zdl-lex-server.store :as store]))
 
 (defn -main []
-  (timbre/handle-uncaught-jvm-exceptions!)
-  (mount/start)
+  (mount/start #'env/logging
+               #'store/git-clone
+               #'git/changes
+               #'solr/index-changes
+               #'http/server)
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))

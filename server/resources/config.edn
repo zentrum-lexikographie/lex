@@ -1,4 +1,6 @@
 {
+ :log-level :debug
+
  ;; "/var/zdl-lex-server"
  :data-dir "../data"
 

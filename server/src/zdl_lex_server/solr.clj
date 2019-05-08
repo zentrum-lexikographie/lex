@@ -175,7 +175,7 @@
   (cp/pdoseq
    solr-update-pool
    [req reqs]
-   (->> (merge solr-req req) (http/post solr-update-url) timbre/info)))
+   (->> (merge solr-req req) (http/post solr-update-url) timbre/debug)))
 
 (def solr-update-conversion-pool (cp/threadpool (max 1 (- (cp/ncpus) 2))))
 (def solr-update-batch-size 500)
