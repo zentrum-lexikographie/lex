@@ -1,55 +1,45 @@
 (ns zdl-lex-server.git
-  (:require [clojure.core.async :as async]
+  (:require [clj-jgit.porcelain :as jgit]
+            [clojure.core.async :as async]
             [clojure.java.shell :as sh]
-            [clojure.string :as str]
+            [clojure.set :refer [union]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [zdl-lex-server.bus :as bus]
+            [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]))
+
+(def jgit-repo (jgit/load-repo store/git-dir))
 
 (defn git [& args]
   (locking store/git-dir
     (sh/with-sh-dir store/git-dir
-      (let [result (apply sh/sh (concat ["git"] args))]
-        (when-not (= (result :exit) 0)
-          (throw (ex-info (str args) result)))
+      (let [result (apply sh/sh (concat ["git"] args))
+            exit-code (result :exit)
+            succeeded (= exit-code 0)]
+        (timbre/log (if succeeded :debug :warn) {:git args :result result})
+        (when-not succeeded (throw (ex-info (str args) result)))
         result))))
 
-(defn- status-text->vec [txt]
-  (as-> txt $
-    (str/trim $)
-    (str/split $ #"\s+" 2)
-    (vector (-> $ first keyword {:?? :added :M :modified :D :deleted})
-            (second $))))
-
-(defn status []
-  (as-> (git "status" "--porcelain") $
-    (:out $)
-    (str/split $ #"[\n\r]+")
-    (remove empty? $)
-    (map status-text->vec $)
-    (filter first $)
-    (vec $)))
-
-(def add (partial git "add"))
-
-(def rm (partial git "rm"))
-
 (defn commit []
-  (let [stat (status)]
-    (when-not (empty? stat)
-      (add ".")
-      (git "commit" "-m" "" "--allow-empty-message")
-      (git "fetch" "origin")
-      (git "rebase" "--allow-empty-message" "-s" "recursive" "-X" "theirs")
-      (git "push" "origin")
-      stat)))
+  (locking store/git-dir
+    (let [changed-files (->> (jgit/git-status jgit-repo) (vals) (apply union))]
+      (when-not (empty? changed-files)
+        (git "add" ".")
+        (git "commit" "-q" "-m" "zdl-lex-server")
+        (git "fetch" "-q" "origin")
+        (git "rebase" "-q" "-s" "recursive" "-X" "theirs")
+        (git "push" "-q" "origin")
+        changed-files))))
 
 (defstate changes
-  :start (let [stop-ch (async/chan)]
+  :start (let [stop-ch (async/chan)
+               interval (config :git-commit-interval)]
            (async/go-loop []
-             (when (async/alt! (async/timeout 10000) :tick stop-ch nil)
-               (some->> (commit) (async/>! bus/git-changes))
+             (when (async/alt! (async/timeout interval) :tick stop-ch nil)
+               (try 
+                 (some->> (commit) (async/>! bus/git-changes))
+                 (catch Throwable t))
                (recur)))
            stop-ch)
   :stop (async/close! changes))

@@ -1,7 +1,6 @@
 (ns zdl-lex-server.store
   (:require [mount.core :refer [defstate]]
             [me.raynes.fs :as fs]
-            [hawk.core :as hawk]
             [taoensso.timbre :as timbre]
             [zdl-lex-server.env :refer [config]]
             [clojure.java.shell :as sh]))
@@ -36,10 +35,3 @@
            (when-not (fs/directory? articles-dir)
              (fs/mkdirs articles-dir))
            git-dir))
-
-(defstate watcher
-  :start (hawk/watch! (config :watcher-opts)
-                      [{:paths [articles-dir]
-                        :filter #(xml-file? (:file %2))
-                        :handler (fn [_ e] (timbre/debug e))}])
-  :stop (hawk/stop! watcher))
