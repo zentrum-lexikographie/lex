@@ -10,8 +10,6 @@
             [zdl-lex-server.store :as store]
             [me.raynes.fs :as fs]))
 
-(def jgit-repo (jgit/load-repo store/git-dir))
-
 (defn git [& args]
   (locking store/git-dir
     (sh/with-sh-dir store/git-dir
@@ -22,9 +20,14 @@
         (when-not succeeded (throw (ex-info (str args) result)))
         result))))
 
+(defn changed-files []
+  (locking store/git-dir
+    (jgit/with-repo store/git-dir
+      (->> (jgit/git-status repo) (vals) (apply union)))))
+
 (defn commit []
   (locking store/git-dir
-    (let [changed-files (->> (jgit/git-status jgit-repo) (vals) (apply union))]
+    (let [changed-files (changed-files)]
       (when-not (empty? changed-files)
         (git "add" ".")
         (git "commit" "-q" "-m" "zdl-lex-server")

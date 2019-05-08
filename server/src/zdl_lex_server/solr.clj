@@ -1,20 +1,20 @@
 (ns zdl-lex-server.solr
-  (:require [clojure.core.async :as async]
-            [mount.core :refer [defstate]]
-            [clojure.zip :as zip]
+  (:require [clj-http.client :as http]
+            [clojure.core.async :as async]
+            [clojure.data.xml :as xml]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
-            [clojure.data.xml :as xml]
             [clojure.java.io :as io]
-            [me.raynes.fs :as fs]
-            [zdl-lex-server.store :as store]
-            [zdl-lex-server.env :refer [config]]
             [clojure.string :as str]
-            [taoensso.timbre :as timbre]
-            [clj-http.client :as http]
-            [tick.alpha.api :as t]
+            [clojure.zip :as zip]
             [com.climate.claypoole :as cp]
-            [zdl-lex-server.bus :as bus])
+            [me.raynes.fs :as fs]
+            [mount.core :refer [defstate]]
+            [taoensso.timbre :as timbre]
+            [tick.alpha.api :as t]
+            [zdl-lex-server.bus :as bus]
+            [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.store :as store])
   (:import java.time.temporal.ChronoUnit))
 
 (defn article-xml [article]
