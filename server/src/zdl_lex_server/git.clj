@@ -7,7 +7,8 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-server.bus :as bus]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [me.raynes.fs :as fs]))
 
 (def jgit-repo (jgit/load-repo store/git-dir))
 
@@ -32,13 +33,19 @@
         (git "push" "-q" "origin")
         changed-files))))
 
+(defn- absolute-path [f]
+  (->> f (fs/file store/git-dir) fs/absolute fs/normalized))
+
 (defstate changes
   :start (let [stop-ch (async/chan)
                interval (config :git-commit-interval)]
            (async/go-loop []
              (when (async/alt! (async/timeout interval) :tick stop-ch nil)
                (try 
-                 (some->> (commit) (async/>! bus/git-changes))
+                 (some->> (commit)
+                          (map absolute-path)
+                          (into (sorted-set))
+                          (async/>! bus/git-changes))
                  (catch Throwable t))
                (recur)))
            stop-ch)

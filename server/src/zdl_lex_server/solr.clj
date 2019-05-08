@@ -1,5 +1,7 @@
 (ns zdl-lex-server.solr
-  (:require [clojure.zip :as zip]
+  (:require [clojure.core.async :as async]
+            [mount.core :refer [defstate]]
+            [clojure.zip :as zip]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
             [clojure.data.xml :as xml]
@@ -11,7 +13,8 @@
             [taoensso.timbre :as timbre]
             [clj-http.client :as http]
             [tick.alpha.api :as t]
-            [com.climate.claypoole :as cp])
+            [com.climate.claypoole :as cp]
+            [zdl-lex-server.bus :as bus])
   (:import java.time.temporal.ChronoUnit))
 
 (defn article-xml [article]
@@ -208,3 +211,17 @@
         update-reqs (map doc-to-req update-docs)]
     (solr-updates update-reqs)))
 
+(defstate index-changes
+  :start (let [changes-ch (async/tap bus/git-changes-mult (async/chan))]
+           (async/go-loop []
+             (when-let [changes (async/<! changes-ch)]
+               (let [articles (filter store/article-file? changes)
+                     modified (filter fs/exists? articles)
+                     deleted (remove fs/exists? articles)]
+                 (update-docs modified)
+                 (delete-docs deleted))
+               (recur)))
+           changes-ch)
+  :stop (do
+          (async/untap bus/git-changes-mult index-changes)
+          (async/close! index-changes)))

@@ -5,7 +5,7 @@
             [zdl-lex-server.env :refer [config]]
             [clojure.java.shell :as sh]))
 
-(def data-dir (-> config :data-dir fs/file fs/absolute))
+(def data-dir (-> config :data-dir fs/file fs/absolute fs/normalized))
 
 (def git-dir (fs/file data-dir "git"))
 (def articles-dir (fs/file git-dir "articles"))
@@ -23,6 +23,8 @@
      (not (.contains path ".git")))))
 
 (defn xml-files [dir] (filter xml-file? (file-seq (fs/file dir))))
+
+(def article-file? (every-pred xml-file? (partial fs/child-of? articles-dir)))
 
 (def article-files (partial xml-files articles-dir))
 
