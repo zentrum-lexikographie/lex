@@ -5,7 +5,7 @@
             [taoensso.timbre :as timbre]))
 
 (defn form-suggestions [{{:keys [q]} :params}]
-  (let [solr-response (solr/solr-suggest "forms" (or q ""))
+  (let [solr-response (solr/suggest "forms" (or q ""))
         path-prefix [:body :suggest :forms (keyword q)]
         total (get-in solr-response (conj path-prefix :numFound) 0)
         suggestions (get-in solr-response (conj path-prefix :suggestions) [])]
@@ -20,7 +20,7 @@
 
 (defn- facet-counts [[k v]] [k (:counts v)])
 
-(defn- facet-values [[k v]] [(-> k name solr/solr-field-key)
+(defn- facet-values [[k v]] [(-> k name solr/field-key)
                              (into (sorted-map) (->> v (partition 2) (map vec)))])
 
 (def solr-search-query
@@ -38,7 +38,7 @@
                 :or {q "id:*" offset "0" limit "10"}} :params}]
   (let [solr-search-query (merge solr-search-query
                                  {"q" q "start" offset "rows" limit})
-        solr-response (solr/solr-query solr-search-query)
+        solr-response (solr/query solr-search-query)
 
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
