@@ -26,4 +26,7 @@
  :anon-user "nobody"
 
  ;; check for git changes every 10 seconds
- :git-commit-interval 10000}
+ :git-commit-interval 10000
+
+ ;; sync all articles to Solr every day
+ :solr-sync-interval 86400000}

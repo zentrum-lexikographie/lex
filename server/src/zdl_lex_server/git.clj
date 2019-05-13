@@ -47,16 +47,14 @@
                interval (config :git-commit-interval)]
            (async/go-loop [i 0]
              (when (async/alt! (async/timeout interval) :tick stop-ch nil)
-               (try
-                 (some->> (commit)
-                          (map absolute-path)
-                          (into (sorted-set))
-                          (async/>! bus/git-changes))
-                 (catch Throwable t))
+               (some->> (async/<!
+                         (async/thread (try (commit) (catch Throwable t #{}))))
+                        (map absolute-path)
+                        (into (sorted-set))
+                        (async/>! bus/git-changes))
                (when (= 0 (mod i 10))
-                 (try
-                   (rebase)
-                   (catch Throwable t)))
+                 (async/<!
+                  (async/thread (try (rebase) (catch Throwable t)))))
                (recur (inc i))))
            stop-ch)
   :stop (async/close! changes))

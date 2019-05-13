@@ -143,10 +143,8 @@
 (def delete-articles
   (partial update-articles
            :delete
-           (fn [article]
-             (->> article
-                  (map store/relative-article-path)
-                  (map #(array-map :tag :id :content %))))))
+           (comp #(array-map :tag :id :content %)
+                 store/relative-article-path)))
 
 (defn purge-articles [before-time]
   (update-articles :delete
@@ -174,3 +172,13 @@
   :stop (do
           (async/untap bus/git-changes-mult index-changes)
           (async/close! index-changes)))
+
+(defstate article-sync
+  :start (let [stop-ch (async/chan)
+               interval (config :solr-sync-interval)]
+           (async/go-loop []
+             (when (async/alt! (async/timeout interval) :tick stop-ch nil)
+               (async/<! (async/thread (try (sync-articles) (catch Throwable t))))
+               (recur)))
+           stop-ch)
+  :stop (async/close! article-sync))
