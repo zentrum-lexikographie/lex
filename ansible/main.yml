@@ -65,3 +65,6 @@
 
 - name: Configure API service
   import_playbook: api.yml      
+
+- name: Serve ZDL-Lex client
+  import_playbook: client.yml      

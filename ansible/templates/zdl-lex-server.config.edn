@@ -1,2 +1,7 @@
-{:data-dir "{{ lex_data_dir }}"
+{:log-level :info
+ :log-config {:ns-blacklist ["ring.logger.timbre"
+                             "org.apache.http.*"
+                             "org.eclipse.jetty.*"
+                             "org.eclipse.jgit.*"]}
+ :data-dir "{{ lex_data_dir }}"
  :git-repo "file:///home/git/lex.git"}

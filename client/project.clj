@@ -43,7 +43,8 @@
 
              :dev
              {:dependencies [[me.raynes/fs "1.4.6"]
-                             [me.flowthing/sigel "0.2.2"]]}
+                             [me.flowthing/sigel "0.2.2"]
+                             [org.apache.commons/commons-compress "1.18"]]}
 
              :provided
              {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
