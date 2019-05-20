@@ -1,8 +1,5 @@
 # ZDL/Lex – Lexikographic Workbench
 
-Provides access to an XML database of and editing support for lexikographic
-documents.
-
 ## Build Requirements
 
 * [Clojure](https://clojure.org/)
