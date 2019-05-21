@@ -45,7 +45,5 @@
 
   :plugins [[lein-exec "0.3.7"]]
 
-  :profiles {:uberjar {:aot :all}}
-
-  :aliases {"exist2git" ["exec" "-p" "scripts/exist2git.clj"]})
+  :profiles {:uberjar {:aot :all}})
 
