@@ -15,10 +15,6 @@
 
  <extension
      type="WorkspaceAccess"
-     class="de.zdl.oxygen.ReplExtension"/>
-
- <extension
-     type="WorkspaceAccess"
      class="de.zdl.oxygen.ViewExtension"/>
 
  <view id="zdl-lex-client-view" initialSide="EAST" initialRow="0"/>

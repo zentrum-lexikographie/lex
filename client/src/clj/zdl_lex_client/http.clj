@@ -2,6 +2,7 @@
   (:require [clojure.java.io :as io]
             [clojure.data.codec.base64 :as base64]
             [cemerick.url :refer [url]]
+            [mount.core :refer [defstate]]
             [zdl-lex-client.env :refer [config]]
             [clojure.core.async :as async]
             [taoensso.timbre :as timbre]
@@ -42,21 +43,30 @@
 (defn form-suggestions [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
 
-(defonce request-status
-  (async/go-loop []
-    (try
-      (reset! bus/status (merge {:timestamp (t/now)}
-                                (get-edn #(merge % {:path "/status"}))))
-      (catch Exception e (timbre/warn e)))
-    (async/<! (async/timeout 10000))
-    (recur)))
+(defstate status-requests
+  :start (let [stop-ch (async/chan)]
+           (async/go-loop []
+             (when (async/alt! stop-ch nil (async/timeout 10000) :tick)
+               (try
+                 (let [status (async/thread (get-edn #(merge % {:path "/status"})))
+                       status (merge {:timestamp (t/now)} status)]
+                   (reset! bus/status status))
+                 (catch Exception e (timbre/warn e)))
+                 (recur)))
+           stop-ch)
+  :stop (async/close! status-requests))
 
-(defonce request-search-results
-  (async/go-loop []
-    (try
-      (let [q (async/<! bus/search-reqs)
-            results (get-edn #(merge % {:path "/articles/search"
-                                        :query {"q" q "limit" "100"}}))]
-        (bus/add-search-result (merge {:query q} results)))
-      (catch Exception e (timbre/warn e)))
-    (recur)))
+(defstate search-results
+  :start (let [stop-ch (async/chan)]
+           (async/go-loop []
+             (when-let [q (async/alt! stop-ch nil bus/search-reqs ([r] r))]
+               (try
+                 (let [q-fn #(merge % {:path "/articles/search"
+                                       :query {"q" q "limit" "100"}})
+                       results (async/thread (get-edn q-fn))
+                       results (merge {:query q} results)]
+                   (bus/add-search-result results))
+                 (catch Exception e (timbre/warn e)))
+                 (recur)))
+           stop-ch)
+  :stop (async/close! search-results))

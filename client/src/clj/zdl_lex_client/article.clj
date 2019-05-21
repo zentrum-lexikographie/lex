@@ -14,4 +14,10 @@
              :icon icon/gmd-delete
              :handler (fn [_] (ui/alert "Artikel löschen!"))))
 
-;;(ui/invoke-later (-> (ui/frame :title "Test" :content (ui/toolbar :items (map #(ui/button :action %) [create delete]))) ui/pack! ui/show!))
+(comment
+  (ui/invoke-later
+   (-> (ui/toolbar :items (map #(ui/button :action %) [create delete]))
+       #(ui/frame :title "Test" :content %)
+       ui/pack!
+       ui/show!)))
+;;

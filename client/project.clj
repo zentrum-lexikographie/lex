@@ -11,6 +11,7 @@
                  [org.clojure/core.async "0.4.490"]
                  [org.clojure/data.codec "0.1.1"]
                  [com.taoensso/timbre "4.10.0"]
+                 [mount "0.1.16"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
                  [cprop "0.1.13"]

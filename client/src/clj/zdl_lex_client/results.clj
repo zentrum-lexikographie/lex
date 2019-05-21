@@ -1,9 +1,5 @@
 (ns zdl-lex-client.results
-  (:require [seesaw.bind :as uib]
-            [zdl-lex-client.bus :as bus]
-            [seesaw.core :as ui]
-            [taoensso.timbre :as timbre]
-            [clojure.set :as cs]))
+  (:require [seesaw.core :as ui]))
 
 (def output (ui/tabbed-panel :tabs []))
 

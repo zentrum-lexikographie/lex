@@ -2,7 +2,6 @@
   (:require [seesaw.core :as ui]
             [seesaw.mig :as uim]))
 
-
 ;; …, Schreibung, Element, Status, Änderung
 ;; Liste kopieren, Öffnen, Schließen
 (defn form []
@@ -44,9 +43,10 @@
                    (ui/button :text "Schließen" :mnemonic \s)]
            :align :right :hgap 5 :vgap 5)))
 
-(defn -main []
+(comment
   (ui/invoke-later
    (-> (ui/frame :title "Metadatensuche"
                  :size [400 :by 800]
                  :content (form))
+       ui/pack!
        ui/show!)))

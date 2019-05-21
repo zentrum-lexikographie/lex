@@ -10,8 +10,6 @@
 
 (defonce author-access (atom {}))
 
-;;@author-access
-
 (defn with-author-access [bundle f]
   (some-> (@author-access bundle) f))
 

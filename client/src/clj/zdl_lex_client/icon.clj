@@ -15,4 +15,8 @@
 
 (def logo (ui/label :icon "zdl.png" :border 6 :size [32 :by 32]))
 
-;;(ui/invoke-later (-> (ui/frame :title "Test" :content (ui/button :icon gmd-delete :text "Hallo")) ui/pack! ui/show!))
+(comment
+  (ui/invoke-later
+   (-> (ui/frame :title "Test" :content (ui/button :icon gmd-delete :text "Hallo"))
+       ui/pack!
+       ui/show!)))
