@@ -30,7 +30,8 @@
                  [clj-http "3.9.1"]
                  [clj-jgit "0.8.10"]
                  [cheshire "5.8.1"]
-                 [tick "0.4.10-alpha"]
+                 [tick "0.4.10-alpha" :exclusions [cljsjs/js-joda-locale-en-us
+                                                   cljsjs/js-joda-timezone]]
                  [mount "0.1.16"]
                  [cprop "0.1.13"]
                  [me.raynes/fs "1.4.6"]
