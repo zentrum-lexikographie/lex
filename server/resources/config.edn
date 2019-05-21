@@ -8,9 +8,6 @@
  ;; "/var/zdl-lex-server"
  :data-dir "../data"
 
- ;; "file:///home/middell/repositories/lex/data/repo.git"
- :git-repo "git@gorkon.bbaw.de:lex.git"
-
  ;; {:port 8080}
  :jetty-opts {:port 3000}
 
