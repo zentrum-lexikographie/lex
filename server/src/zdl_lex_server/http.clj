@@ -1,11 +1,11 @@
 (ns zdl-lex-server.http
   (:require [mount.core :refer [defstate]]
+            [org.httpkit.server :as httpkit]
             [reitit.ring :as ring]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.logger.timbre :refer [wrap-with-logger]]
-            [ring.adapter.jetty :as jetty]
             [ring.util.http-response :as htstatus]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [zdl-lex-server.env :refer [config]]
@@ -53,7 +53,6 @@
      (ring/create-default-handler)))))
 
 (defstate server
-  :start (jetty/run-jetty
-          handler (merge (config :jetty-opts) {:join? false}))
-  :stop (.stop server))
+  :start (httpkit/run-server handler (config :http-server-opts))
+  :stop (server))
 

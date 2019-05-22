@@ -1,15 +1,14 @@
 {
- :log-level :debug
+ :log-level :info
 
  :log-config {:ns-blacklist ["org.apache.http.*"
-                             "org.eclipse.jetty.*"
                              "org.eclipse.jgit.*"]}
 
  ;; "/var/zdl-lex-server"
  :data-dir "../data"
 
  ;; {:port 8080}
- :jetty-opts {:port 3000}
+ :http-server-opts {:port 3000}
 
  ;; "http://192.168.33.10/solr"
  :solr-base "http://localhost:8983/solr"

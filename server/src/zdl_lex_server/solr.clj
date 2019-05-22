@@ -13,7 +13,7 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-server.article :as article]
-            [zdl-lex-server.bus :as bus]
+            [zdl-lex-server.git :as git]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store])
   (:import [java.time.temporal ChronoUnit Temporal]))
@@ -55,8 +55,8 @@
   ([a] a)
   ([a b] (if (< 0 (compare a b)) a b)))
 
-(def ^Temporal unix-epoch (t/parse "1970-01-01"))
-(defn days-since-epoch [^Temporal date]
+(def ^:private ^Temporal unix-epoch (t/parse "1970-01-01"))
+(defn- days-since-epoch [^Temporal date]
   (.between ChronoUnit/DAYS unix-epoch date))
 
 (defn document [article]
@@ -96,29 +96,37 @@
 
 (def req
   (comp #(timbre/spy :debug %)
+        #(dissoc % :http-client)
         http/request
         (partial merge (config :solr-req))
         #(timbre/spy :debug %)))
 
 (def url (partial str (config :solr-base) "/" (config :solr-core)))
 
-(defn query [params]
-  (req {:method :get :url (url "/query")
-        :query-params params
-        :as :json}))
+(defn build-suggestions [name]
+  (req {:method :get :url (url "/suggest")
+        :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
+        :as :json }))
 
 (defn suggest [name q]
   (req {:method :get :url (url "/suggest")
         :query-params {"suggest.dictionary" name "suggest.q" q}
         :as :json }))
 
+(defn query [params]
+  (req {:method :get :url (url "/query")
+        :query-params params
+        :as :json}))
+
 (def ^:private update-pool (cp/threadpool 8))
-(def ^:private update-conversion-pool (cp/threadpool (max 1 (- (cp/ncpus) 2))))
 (def ^:private update-batch-size 2000)
 
 (defn batch-update [updates]
-  (cp/pdoseq update-pool [upd updates]
-             (req (merge {:method :post :url (url "/update")} upd))))
+  (cp/pfor update-pool [upd updates]
+           (req (merge {:method :post
+                        :url (url "/update")
+                        :query-params {:wt "json"}
+                        :as :json} upd))))
 
 (def commit-optimize
   (partial batch-update [{:body "<update><commit/><optimize/></update>"
@@ -126,7 +134,7 @@
 
 (defn update-articles [action article->el articles]
   (batch-update (->> articles
-                     (cp/upmap update-conversion-pool article->el)
+                     (map article->el)
                      (keep identity)
                      (partition-all update-batch-size)
                      (map #(array-map :tag action
@@ -154,31 +162,7 @@
 (defn sync-articles []
   (let [sync-start (System/currentTimeMillis)
         articles (store/article-files)]
-    (add-articles articles)
-    (purge-articles sync-start)
-    (commit-optimize)))
-
-(defstate index-changes
-  :start (let [changes-ch (async/tap bus/git-changes-mult (async/chan))]
-           (async/go-loop []
-             (when-let [changes (async/<! changes-ch)]
-               (let [articles (filter store/article-file? changes)
-                     modified (filter fs/exists? articles)
-                     deleted (remove fs/exists? articles)]
-                 (add-articles modified)
-                 (delete-articles deleted))
-               (recur)))
-           changes-ch)
-  :stop (do
-          (async/untap bus/git-changes-mult index-changes)
-          (async/close! index-changes)))
-
-(defstate article-sync
-  :start (let [stop-ch (async/chan)
-               interval (config :solr-sync-interval)]
-           (async/go-loop []
-             (when (async/alt! (async/timeout interval) :tick stop-ch nil)
-               (async/<! (async/thread (try (sync-articles) (catch Throwable t))))
-               (recur)))
-           stop-ch)
-  :stop (async/close! article-sync))
+    (if-not (empty? (add-articles articles))
+      (purge-articles sync-start)
+      (commit-optimize))
+    articles))

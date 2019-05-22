@@ -23,7 +23,7 @@
 (defn- facet-values [[k v]] [(-> k name solr/field-key)
                              (into (sorted-map) (->> v (partition 2) (map vec)))])
 
-(def solr-search-query
+(def ^:private solr-search-query
   {"facet" "true"
    "facet.field" ["authors_ss" "type_ss" "pos_ss" "status_ss" "tranche_ss"]
    "facet.limit" "-1"

@@ -5,7 +5,6 @@
             [clojure.set :refer [union]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.bus :as bus]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
             [me.raynes.fs :as fs]))
@@ -42,7 +41,9 @@
 (defn- absolute-path [f]
   (->> f (fs/file store/git-dir) fs/absolute fs/normalized))
 
-(defstate changes
+(defonce changes (async/chan))
+
+(defstate changes-provider
   :start (let [stop-ch (async/chan)
                interval (config :git-commit-interval)]
            (async/go-loop [i 0]
@@ -51,7 +52,7 @@
                          (async/thread (try (commit) (catch Throwable t #{}))))
                         (map absolute-path)
                         (into (sorted-set))
-                        (async/>! bus/git-changes))
+                        (async/>! changes))
                (when (= 0 (mod i 10))
                  (async/<!
                   (async/thread (try (rebase) (catch Throwable t)))))
