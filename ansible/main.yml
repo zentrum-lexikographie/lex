@@ -30,9 +30,9 @@
       notify: restart apache
 
     - name: Configure Solr
-      template:
-        src: solrconfig.xml
-        dest: /var/solr/data/{{ item }}/conf
+      copy:
+        src: ../solr/solrconfig.xml
+        dest: /var/solr/data/{{ item }}/conf/solrconfig.xml
         owner: solr
         group: solr
         mode: 0644

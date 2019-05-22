@@ -84,6 +84,7 @@ zdl_apache_vhost_config: |
     Require group admin
   </Location>
 
+solr_version: "7.7.1"
 solr_timezone: "Europe/Berlin"
 solr_cores:
   - "articles"

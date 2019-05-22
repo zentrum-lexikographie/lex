@@ -3,7 +3,7 @@ SHELL := /bin/bash
 version := $(shell cat VERSION)
 oxygen_home := $(shell bin/find-oxygen.sh)
 
-.PHONY: all deploy clean data-clean vm vm-destroy oxygen server client
+.PHONY: all deploy clean data-clean vm vm-destroy oxygen server client solr
 
 all: server client
 
@@ -69,6 +69,18 @@ vm: ansible/venv server client
 vm-destroy:
 	cd ansible &&\
 		vagrant destroy
+
+solr:
+	[ "$(shell docker ps -f name=zdl_lex_solr -q)" ] ||\
+		docker run -t -d --name zdl_lex_solr\
+			-p 8983:8983 -v ${CURDIR}/solr:/config\
+			solr:7.7.1\
+			solr-create -c articles -d /config
+
+solr-destroy:
+	[ "$(shell docker ps -f name=zdl_lex_solr -q)" ] &&\
+		docker stop zdl_lex_solr
+	docker rm zdl_lex_solr || true
 
 deploy: ansible/venv server client
 	cd ansible &&\
