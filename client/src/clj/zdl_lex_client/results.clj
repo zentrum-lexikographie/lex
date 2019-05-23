@@ -1,5 +1,8 @@
 (ns zdl-lex-client.results
-  (:require [seesaw.core :as ui]))
+  (:require [clojure.core.async :as async]
+            [mount.core :refer [defstate]]
+            [seesaw.core :as ui]
+            [tick.alpha.api :as t]))
 
 (def output (ui/tabbed-panel :tabs []))
 
@@ -18,9 +21,32 @@
        (.remove output tab))
      (doseq [id (reverse new-ids) :let [result (-> id results-by-id first)
                                         id (name id)]]
-       (.insertTab output id nil (ui/label :id (keyword id)
-                                           :class :result :text id) id 0)
-       (.setSelectedIndex output 0)))))
+       ))))
 
-;;(doseq [res (ui/select output [:.result])] (.remove output res))
-;;(defonce change-handler (uib/subscribe bus/search-results change-results))
+(def history (atom []))
+
+(defn result-tabs [] (ui/select output [:.result]))
+
+(def num-result-tabs (comp count result-tabs))
+
+(defn add-result [{:keys [id query] :as result}]
+  (let [tab (ui/label :id (keyword id) :class :result :text query)]
+    (swap! history
+           (fn [prev next] (as-> next $ (cons $ prev) (take 10 $) (vec $)))
+           result)
+    (ui/invoke-soon
+     (.insertTab output id nil tab id 0)
+     (loop [tabs (num-result-tabs)]
+       (when (< 10 tabs)
+         (.remove output (dec tabs))
+         (recur (num-result-tabs))))
+     (.setSelectedIndex output 0))))
+
+(defstate renderer
+  :start (let [ch (async/chan)]
+           (async/go-loop []
+             (when-let [result (async/<! ch)]
+               (add-result (merge result {:timestamp (t/now)}))
+               (recur)))
+           ch)
+  :end (async/close! renderer))

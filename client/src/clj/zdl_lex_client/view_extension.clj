@@ -2,34 +2,20 @@
   (:gen-class
    :name de.zdl.oxygen.ViewExtension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
-  (:require [clojure.core.async :as async]
-            [mount.core :refer [defstate]]
+  (:require [mount.core :as mount]
             [zdl-lex-client.article :as article]
-            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.metasearch :as metasearch]
-            [zdl-lex-client.repl :as repl]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.url :as url])
-  (:import java.net.URL
-           javax.swing.JComponent
+            [zdl-lex-client.workspace :as workspace])
+  (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone
             ToolbarComponentsCustomizer ViewComponentCustomizer]
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
-(defonce ws (atom nil))
-
-(defstate open-articles
-  :start (let [stop-ch (async/chan)]
-           (async/go-loop []
-             (when-let [article-req (async/alt! stop-ch nil bus/article-reqs ([r] r))]
-               (some-> @ws (.open (-> article-req :id url/article str (URL.))))
-               (recur)))
-           stop-ch)
-  :stop (async/close! open-articles))
-
 (defn -applicationStarted [this app-ws]
-  (reset! ws app-ws)
+  (reset! workspace/instance app-ws)
+  (mount/start)
   (let [metasearch (metasearch/form)
 
         article-search (ToolbarButton. search/action false)
@@ -58,6 +44,7 @@
              (.setComponents (into-array JComponent toolbar)))))))))
 
 (defn -applicationClosing [this]
-  (reset! ws nil)
+  (mount/stop)
+  (reset! workspace/instance nil)
   true)
 

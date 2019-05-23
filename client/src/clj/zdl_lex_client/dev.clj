@@ -1,0 +1,22 @@
+(ns zdl-lex-client.dev
+  (:require [mount.core :as mount]
+            [seesaw.core :as ui]
+            [zdl-lex-client.status :as status]
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.search :as search]
+            [zdl-lex-client.results :as results]))
+
+(comment
+  @workspace/instance
+  (mount/start)
+  @status/current
+  (search/new-query "forms:lexi*")
+  @results/history
+  results/output
+  (let [panel (ui/border-panel :north search/input :center results/output)]
+    (ui/invoke-later
+     (-> (ui/frame :title "Search" :content panel)
+         ui/pack!
+         ui/show!)))
+  (mount/stop))
+

@@ -25,6 +25,8 @@
 
   :plugins [[lein-exec "0.3.7"]]
 
+  :repl-options {:init-ns zdl-lex-client.dev}
+  
   :jvm-opts ["-Dconf=dev-config.edn"
              "-Dawt.useSystemAAFontSettings=on"
              "-Dswing.aatext=true"
