@@ -9,9 +9,11 @@
             [ring.util.http-response :as htstatus]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.api :as api]
+            [zdl-lex-server.status :as status]
+            [zdl-lex-server.solr :as solr]
             [zdl-lex-server.stats :as stats]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [zdl-lex-server.sync :as sync]))
 
 (defn wrap-base [handler]
   (-> handler
@@ -43,10 +45,11 @@
      [[""
        {:middleware [wrap-formats]}
        ["/" {:get (fn [_] (htstatus/temporary-redirect "/statistics"))}]
-       ["/articles/forms/suggestions" {:get api/form-suggestions}]
-       ["/articles/search" {:get api/search}]
-       ["/statistics" {:get stats/handler}]
-       ["/status" {:get api/status}]]])
+       ["/articles/forms/suggestions" {:get solr/handle-form-suggestions}]
+       ["/articles/index" {:delete sync/handle-index-trigger}]
+       ["/articles/search" {:get solr/handle-search}]
+       ["/statistics" {:get stats/handle}]
+       ["/status" {:get status/handle}]]])
     (ring/routes
      (ring/create-resource-handler {:path "/"})
      (wrap-content-type (wrap-webjars (constantly nil)))

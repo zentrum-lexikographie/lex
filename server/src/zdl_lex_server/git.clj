@@ -52,10 +52,11 @@
                          (async/thread (try (commit) (catch Throwable t #{}))))
                         (map absolute-path)
                         (into (sorted-set))
+                        (timbre/spy :info)
                         (async/>! changes))
                (when (= 0 (mod i 10))
                  (async/<!
                   (async/thread (try (rebase) (catch Throwable t)))))
                (recur (inc i))))
            stop-ch)
-  :stop (async/close! changes))
+  :stop (async/close! changes-provider))

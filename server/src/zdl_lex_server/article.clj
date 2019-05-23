@@ -4,7 +4,10 @@
             [clojure.data.zip.xml :as zx]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.zip :as zip]))
+            [clojure.zip :as zip]
+            [tick.alpha.api :as t]
+            [zdl-lex-server.store :as store])
+  (:import [java.time.temporal ChronoUnit Temporal]))
 
 (defn xml [article]
   (let [doc-loc (-> article io/input-stream
@@ -63,4 +66,81 @@
                  :status Status}]
     (apply dissoc excerpt (for [[k v] excerpt :when (nil? v)] k))))
 
-(def abstract-fields [:forms :pos :definitions :type :status :authors])
+(def abstract-fields [:forms :pos :definitions :type :status :authors :sources])
+
+(defn field-key [n]
+  (-> n
+      (str/replace #"_((dts)|(dt)|(ss)|(t)|(i))$" "")
+      (str/replace "_" "-")
+      keyword))
+
+(defn field-name [k]
+  (let [field-name (str/replace (name k) "-" "_")
+        field-suffix (condp = k
+                       :id ""
+                       :language ""
+                       :xml_descendent_path ""
+                       :weight "_i"
+                       :definitions "_t"
+                       :last_modified "_dt"
+                       :timestamps "_dts"
+                       "_ss")]
+    (str field-name field-suffix)))
+
+(defn basic-field [[k v]]
+  (if-not (nil? v) [(field-name k) (if (string? v) [v] (vec v))]))
+
+(defn attr-field [prefix suffix attrs]
+  (let [all-values (->> attrs vals (apply concat) (seq))
+        typed-values (for [[type values] attrs
+                           :let [type (-> type name str/lower-case)
+                                 field (str prefix "_" type "_" suffix)]]
+                       [field values])]
+    (conj typed-values (if all-values [(str prefix "_" suffix) all-values]))))
+
+(defn field-xml [name contents] {:tag :field :attrs {:name name} :content contents})
+
+(defn- max-timestamp
+  ([] nil)
+  ([a] a)
+  ([a b] (if (< 0 (compare a b)) a b)))
+
+(def ^:private ^Temporal unix-epoch (t/parse "1970-01-01"))
+(defn- days-since-epoch [^Temporal date]
+  (.between ChronoUnit/DAYS unix-epoch date))
+
+(defn document [article]
+  (let [excerpt (->> article xml excerpt)
+        id (store/relative-article-path article)
+
+        timestamps (excerpt :timestamps)
+        timestamp-fields (attr-field "timestamps" "dts" timestamps)
+
+        last-modified (reduce max-timestamp (apply concat (vals timestamps)))
+        last-modified-fields [[(field-name :last_modified) [last-modified]]]
+
+        weight (-> last-modified t/parse days-since-epoch)
+
+        author-fields (attr-field "authors" "ss" (excerpt :authors))
+        sources-fields (attr-field "sources" "ss" (excerpt :sources))
+
+        basic-fields (map basic-field (dissoc excerpt :timestamps :authors :sources))
+
+        fields (into {} (remove nil? (concat timestamp-fields
+                                             last-modified-fields
+                                             author-fields
+                                             sources-fields
+                                             basic-fields)))
+        abstract (merge {:id id :last-modified last-modified}
+                        (select-keys excerpt abstract-fields))]
+    {:tag :doc
+     :content
+     (concat [(field-xml "id" id)
+              (field-xml "language" "de")
+              (field-xml "time_l" (str (System/currentTimeMillis)))
+              (field-xml "xml_descendent_path" id)
+              (field-xml "weight_i" (str weight))
+              (field-xml "abstract_ss" (pr-str abstract))]
+             (for [[name values] (sort fields) value (sort values)]
+               (field-xml name value)))}))
+

@@ -5,7 +5,9 @@
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [ring.util.http-response :as htstatus]
+            [zdl-lex-server.status :as status]))
 
 (defstate index->suggestions
   "Synchronizes the forms suggestions with all indexed articles"
@@ -51,3 +53,11 @@
                (recur)))
            ch)
   :stop (async/close! git-all->solr))
+
+
+(defn handle-index-trigger [req]
+  (if (= "admin" (status/user req))
+    (htstatus/ok
+     {:index (async/>!! git-all->solr :sync)})
+    (htstatus/forbidden
+     {:index false})))

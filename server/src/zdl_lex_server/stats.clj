@@ -3,7 +3,7 @@
             [ring.util.http-response :as htstatus]
             [hiccup.page :refer [html5 include-css]]))
 
-(defn handler [req]
+(defn handle [req]
   (-> (htstatus/ok (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
                           [:body
                            [:div.hero.is-primary.is-bold.is-fullheight

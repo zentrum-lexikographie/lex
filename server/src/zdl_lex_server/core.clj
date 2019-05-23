@@ -20,10 +20,10 @@
 
 (defn -main []
   (configure-logging)
-  (mount/start)
   (.addShutdownHook
    (Runtime/getRuntime)
-   (Thread. (fn [] (mount/stop) (shutdown-agents)))))
+   (Thread. (fn [] (mount/stop) (shutdown-agents))))
+  (timbre/info (mount/start)))
 
 (comment
   (git/rebase)
