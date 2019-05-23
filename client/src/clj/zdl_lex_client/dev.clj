@@ -10,13 +10,11 @@
   @workspace/instance
   (mount/start)
   @status/current
-  (search/new-query "forms:lexi*")
-  @results/history
+  (search/new-query "forms:plexi*")
   results/output
   (let [panel (ui/border-panel :north search/input :center results/output)]
     (ui/invoke-later
-     (-> (ui/frame :title "Search" :content panel)
-         ui/pack!
+     (-> (ui/frame :title "Search" :content panel :size [800 :by 600])
          ui/show!)))
   (mount/stop))
 
