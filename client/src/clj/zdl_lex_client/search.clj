@@ -9,7 +9,8 @@
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.results :as results]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.article :as article])
   (:import com.jidesoft.hints.AbstractListIntelliHints
            java.util.UUID))
 
@@ -69,13 +70,7 @@
         html (str/join "<br>" (remove nil? [title subtitle definition]))
         html (str "<html>" html "</html>")
 
-        border-color (cond
-                       (= "Red-f" status) :green
-                       (= "Red-2" status) :yellow
-                       (= "Artikelrumpf" status) :lightgrey
-                       (.startsWith status "Lex-") :orange
-                       (.endsWith status "-zurückgewiesen") :red
-                       :else :white)
+        border-color (article/status->color value)
         border [5 (line-border :color border-color :right 10) 5]]
 
     (ui/config! this :text html :border border)))
