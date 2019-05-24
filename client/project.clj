@@ -15,6 +15,7 @@
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
                  [cprop "0.1.13"]
+                 [cronjure "0.1.1"]
                  [tick "0.4.10-alpha" :exclusions [cljsjs/js-joda-locale-en-us
                                                    cljsjs/js-joda-timezone]]
                  [com.github.jiconfont/jiconfont-swing "1.0.1"]
