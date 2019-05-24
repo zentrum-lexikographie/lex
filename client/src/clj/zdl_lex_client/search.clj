@@ -99,7 +99,7 @@
           (-> suggestions empty? not)))
       (acceptHint [hint]
         (proxy-super acceptHint (-> hint :suggestion (str/replace #"</?b>" "")))
-        (async/>!! workspace/article-opener hint)))
+        (workspace/open-article hint)))
     input))
 
 (comment

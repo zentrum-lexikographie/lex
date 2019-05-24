@@ -17,4 +17,3 @@
      (-> (ui/frame :title "Search" :content panel :size [800 :by 600])
          ui/show!)))
   (mount/stop))
-

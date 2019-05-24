@@ -7,7 +7,8 @@
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.metasearch :as metasearch]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.results :as results])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone
             ToolbarComponentsCustomizer ViewComponentCustomizer]
@@ -16,32 +17,33 @@
 (defn -applicationStarted [this app-ws]
   (reset! workspace/instance app-ws)
   (mount/start)
-  (let [metasearch (metasearch/form)
-
-        article-search (ToolbarButton. search/action false)
-        article-create (ToolbarButton. article/create false)
-        article-delete (ToolbarButton. article/delete false)
-
-        toolbar [icon/logo article-search search/input article-create article-delete]]
-
-    (.addViewComponentCustomizer
+  (.addViewComponentCustomizer
      app-ws
      (proxy [ViewComponentCustomizer] []
        (customizeView [viewInfo]
-         (when (= "zdl-lex-client-view" (.getViewID viewInfo))
+         (condp = (.getViewID viewInfo)
+           workspace/results-view
            (doto viewInfo
-             (.setTitle "ZDL/DWDS")
-             ;;(.setIcon nil)
-             (.setComponent metasearch))))))
-
-    (.addToolbarComponentsCustomizer
-     app-ws
-     (proxy [ToolbarComponentsCustomizer] []
-       (customizeToolbar [toolbarInfo]
-         (when (= "zdl-lex-client-toolbar" (.getToolbarID toolbarInfo))
+              (.setTitle "ZDL/DWDS – Suchergebnisse")
+              (.setIcon icon/gmd-result)
+              (.setComponent results/output))
+           viewInfo))))
+  (.addToolbarComponentsCustomizer
+   app-ws
+   (proxy [ToolbarComponentsCustomizer] []
+     (customizeToolbar [toolbarInfo]
+       (condp = (.getToolbarID toolbarInfo)
+         workspace/toolbar
+         (let [article-search (ToolbarButton. search/action false)
+               article-create (ToolbarButton. article/create false)
+               article-delete (ToolbarButton. article/delete false)
+               toolbar [icon/logo
+                        article-search search/input
+                        article-create article-delete]]
            (doto toolbarInfo
              (.setTitle "ZDL/DWDS")
-             (.setComponents (into-array JComponent toolbar)))))))))
+             (.setComponents (into-array JComponent toolbar))))
+         toolbarInfo)))))
 
 (defn -applicationClosing [this]
   (mount/stop)

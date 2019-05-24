@@ -1,16 +1,27 @@
 (ns zdl-lex-client.workspace
   (:require [clojure.core.async :as async]
             [mount.core :refer [defstate]]
-            [zdl-lex-client.url :as url])
-  (:import java.net.URL))
+            [cemerick.url :refer [url]]
+            [zdl-lex-client.env :refer [config]]
+            [taoensso.timbre :as timbre])
+  (:import java.net.URL
+           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
+
+(def toolbar "zdl-lex-client-toolbar")
+
+(def results-view "zdl-lex-results-view")
 
 (defonce instance (atom nil))
 
-(defstate article-opener
-  :start (let [ch (async/chan (async/sliding-buffer 3))]
-           (async/go-loop []
-             (when-let [article-req (async/<! ch)]
-               (some-> @instance (.open (-> article-req :id url/article str (URL.))))
-               (recur)))
-           ch)
-  :stop (async/close! article-opener))
+(defn open-article [{:keys [id] :as article}]
+  (if-let [^StandalonePluginWorkspace instance @instance]
+    (.open instance (-> (url (config :webdav-base) "/articles" id) str (URL.)))
+    (timbre/info article)))
+
+(defn show-view
+  ([id]
+   (show-view id true))
+  ([id request-focus]
+   (if-let [^StandalonePluginWorkspace instance @instance]
+     (.showView instance id request-focus)
+     (timbre/info {:id id :request-focus request-focus}))))

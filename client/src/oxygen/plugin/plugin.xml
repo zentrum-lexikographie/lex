@@ -17,7 +17,7 @@
      type="WorkspaceAccess"
      class="de.zdl.oxygen.ViewExtension"/>
 
- <view id="zdl-lex-client-view" initialSide="EAST" initialRow="0"/>
+ <toolbar id="zdl-lex-client-toolbar" initialSide="NORTH" initialRow="0"/>
 
- <toolbar id="zdl-lex-client-toolbar" initialSide="NORTH" initialRow="0"/> 
+ <view id="zdl-lex-results-view" initialSide="SOUTH" initialRow="0"/>
 </plugin>
