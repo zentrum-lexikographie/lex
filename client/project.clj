@@ -27,7 +27,7 @@
   :plugins [[lein-exec "0.3.7"]]
 
   :repl-options {:init-ns zdl-lex-client.dev}
-  
+
   :jvm-opts ["-Dconf=dev-config.edn"
              "-Dawt.useSystemAAFontSettings=on"
              "-Dswing.aatext=true"
@@ -53,5 +53,4 @@
              :provided
              {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
 
-  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]
-            "oxygen" ["exec" "-p" "scripts/oxygen.clj"]})
+  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]})
