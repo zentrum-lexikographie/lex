@@ -1,4 +1,4 @@
-{:webdav-base "https://lex.dwds.de/"
+{:webdav-base "https://lex.dwds.de/articles"
  :server-base "https://lex.dwds.de/"
  :server-auth {}
  :repl {:port 3001}}

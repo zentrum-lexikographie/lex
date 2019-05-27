@@ -11,17 +11,21 @@
 
 (def results-view "zdl-lex-results-view")
 
-(defonce instance (atom nil))
+(defstate instance
+  :start (proxy [StandalonePluginWorkspace] []
+           (open [url]
+             (timbre/info url))
+           (showView [id request-focus?]
+             (timbre/info {:id id :request-focus? request-focus?}))
+           (addEditorChangeListener [_ _])
+           (removeEditorChangeListener [_ _])))
 
 (defn open-article [{:keys [id] :as article}]
-  (if-let [^StandalonePluginWorkspace instance @instance]
-    (.open instance (-> (url (config :webdav-base) "/articles" id) str (URL.)))
-    (timbre/info article)))
+  (.open ^StandalonePluginWorkspace instance
+         (-> (url (config :webdav-base) id) str (URL.))))
 
 (defn show-view
   ([id]
    (show-view id true))
-  ([id request-focus]
-   (if-let [^StandalonePluginWorkspace instance @instance]
-     (.showView instance id request-focus)
-     (timbre/info {:id id :request-focus request-focus}))))
+  ([id request-focus?]
+   (.showView ^StandalonePluginWorkspace instance id request-focus?)))

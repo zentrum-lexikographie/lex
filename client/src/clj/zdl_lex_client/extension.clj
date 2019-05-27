@@ -1,22 +1,24 @@
-(ns zdl-lex-client.view-extension
+(ns zdl-lex-client.extension
   (:gen-class
-   :name de.zdl.oxygen.ViewExtension
+   :name de.zdl.oxygen.Extension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
   (:require [mount.core :as mount]
             [zdl-lex-client.article :as article]
+            [zdl-lex-client.editors :as editors]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.metasearch :as metasearch]
+            [zdl-lex-client.repl :as repl]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.workspace :as workspace]
-            [zdl-lex-client.results :as results])
+            [zdl-lex-client.results :as results]
+            [zdl-lex-client.status :as status])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone
             ToolbarComponentsCustomizer ViewComponentCustomizer]
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
 (defn -applicationStarted [this app-ws]
-  (reset! workspace/instance app-ws)
-  (mount/start)
+  (mount/start-with {#'zdl-lex-client.workspace/instance app-ws})
   (.addViewComponentCustomizer
      app-ws
      (proxy [ViewComponentCustomizer] []
@@ -36,10 +38,12 @@
          workspace/toolbar
          (let [article-search (ToolbarButton. search/action false)
                article-create (ToolbarButton. article/create false)
-               article-delete (ToolbarButton. article/delete false)
+               status-label status/label
                toolbar [icon/logo
-                        article-search search/input
-                        article-create article-delete]]
+                        status/label
+                        search/input
+                        article-search
+                        article-create]]
            (doto toolbarInfo
              (.setTitle "ZDL/DWDS")
              (.setComponents (into-array JComponent toolbar))))
@@ -47,6 +51,7 @@
 
 (defn -applicationClosing [this]
   (mount/stop)
-  (reset! workspace/instance nil)
   true)
 
+(comment repl/server
+         editors/listeners)

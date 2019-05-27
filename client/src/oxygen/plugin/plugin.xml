@@ -13,9 +13,7 @@
    <library name="${system(user.dir)}/target/uberjar/zdl-lex-client.jar"/>
  </runtime>
 
- <extension
-     type="WorkspaceAccess"
-     class="de.zdl.oxygen.ViewExtension"/>
+ <extension type="WorkspaceAccess" class="de.zdl.oxygen.Extension"/>
 
  <toolbar id="zdl-lex-client-toolbar" initialSide="NORTH" initialRow="0"/>
 

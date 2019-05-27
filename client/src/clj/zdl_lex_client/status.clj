@@ -4,9 +4,11 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-client.http :as http]
-            [zdl-lex-client.cron :as cron]))
+            [zdl-lex-client.cron :as cron]
+            [seesaw.core :as ui]
+            [seesaw.bind :as uib]))
 
-(defonce current (atom nil))
+(defonce current (atom {:user "-"}))
 
 (defstate requests
   :start (let [schedule (cron/parse "*/30 * * * * ?")
@@ -24,3 +26,7 @@
                (recur)))
            ch)
   :stop (async/close! requests))
+
+(def label (ui/label :text "–" :border 5))
+
+(uib/bind current (uib/transform :user) (uib/property label :text))

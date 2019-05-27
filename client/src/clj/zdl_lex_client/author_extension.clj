@@ -1,11 +1,11 @@
-(ns zdl-lex-client.extension-bundle
+(ns zdl-lex-client.author-extension
   (:require [taoensso.timbre :as timbre]
             [clojure.string :as str])
   (:import [ro.sync.ecss.extensions.api
             AuthorExtensionStateListener AuthorSchemaAwareEditingHandlerAdapter]
            [ro.sync.contentcompletion.xml SchemaManagerFilter])
   (:gen-class
-   :name de.zdl.oxygen.ExtensionBundle
+   :name de.zdl.oxygen.AuthorExtension
    :extends ro.sync.ecss.extensions.api.ExtensionsBundle))
 
 (defonce author-access (atom {}))
