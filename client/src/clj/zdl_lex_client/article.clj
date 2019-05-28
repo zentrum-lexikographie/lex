@@ -6,14 +6,19 @@
             [clojure.string :as str]))
 
 (def create
-  (ui/action :name "Artikel erstellen"
-             :icon icon/gmd-add
-             :handler  (fn [_] (ui/alert "Neuer Artikel!"))))
-
-(def delete
-  (ui/action :name "Artikel löschen"
-             :icon icon/gmd-delete
-             :handler (fn [_] (ui/alert "Artikel löschen!"))))
+  (ui/action
+   :name "Artikel erstellen"
+   :icon icon/gmd-add
+   :handler
+   (fn [_]
+     (->
+      (ui/dialog :content "Neuer Artikel!"
+                 :option-type :ok-cancel
+                 :modal? true
+                 :success-fn #(ui/dispose! %)
+                 :cancel-fn #(ui/dispose! %))
+      (ui/pack!)
+      (ui/show!)))))
 
 (defn status->color [{:keys [status]}]
   (uicolor/color
@@ -26,8 +31,7 @@
 
 (comment
   (ui/invoke-later
-   (-> (ui/toolbar :items (map #(ui/button :action %) [create delete]))
-       #(ui/frame :title "Test" :content %)
+   (-> (ui/frame :title "Test" :content (ui/button :action create))
        ui/pack!
        ui/show!)))
 ;;
