@@ -64,8 +64,8 @@
   :start (let [^StandalonePluginWorkspace ws workspace/instance
                editors (atom {})
                listener (editors-listener ws editors)]
-           (.. ws (addEditorChangeListener editors-listener editing-area))
-           {:editors editors :listener editors-listener})
+           (.. ws (addEditorChangeListener listener editing-area))
+           {:editors editors :listener listener})
   :stop (let [^StandalonePluginWorkspace ws workspace/instance
               {:keys [editors listener]} listeners]
           (doseq [[url listener] @editors]
