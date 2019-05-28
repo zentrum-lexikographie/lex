@@ -3,8 +3,6 @@ SHELL := /bin/bash
 version := $(shell cat VERSION)
 oxygen_home := $(shell bin/find-oxygen.sh)
 
-.PHONY: all deploy clean data-clean vm vm-destroy oxygen server client solr
-
 all: server client
 
 server:
@@ -25,6 +23,16 @@ oxygen: client
 			-cp "$(oxygen_home)/lib/oxygen.jar:$(oxygen_home)/lib/oxygen-basic-utilities.jar:$(oxygen_home)/classes:$(oxygen_home)"\
 			ro.sync.exml.Oxygen\
 			test-project.xpr
+
+ansible/venv:
+	cd ansible &&\
+		virtualenv venv && source venv/bin/activate &&\
+		pip install -r requirements.txt
+
+deploy: ansible/venv server client
+	cd ansible &&\
+		source venv/bin/activate &&\
+		ansible-playbook main.yml -b -K --ask-vault-pass
 
 data-clean:
 	rm -rf data/exist-db data/git data/repo.git || true
@@ -56,11 +64,6 @@ data/git: | data/exist-db/db data/repo.git
 		git push -u origin &&\
 		git gc
 
-ansible/venv:
-	cd ansible &&\
-		virtualenv venv && source venv/bin/activate &&\
-		pip install -r requirements.txt
-
 vm: ansible/venv server client
 	cd ansible &&\
 		source venv/bin/activate &&\
@@ -82,7 +85,12 @@ solr-destroy:
 		docker stop zdl_lex_solr
 	docker rm zdl_lex_solr || true
 
-deploy: ansible/venv server client
-	cd ansible &&\
-		source venv/bin/activate &&\
-		ansible-playbook main.yml -b -K --ask-vault-pass
+spock-tunnel:
+	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
+
+.PHONY: all server client
+.PHONY: clean data-clean
+.PHONY: oxygen deploy
+.PHONY: vm vm-destroy
+.PHONY: solr solr-destroy
+.PHONY: spock-tunnel
