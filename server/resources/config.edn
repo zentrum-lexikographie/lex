@@ -4,6 +4,9 @@
  :log-config {:ns-blacklist ["org.apache.http.*"
                              "org.eclipse.jgit.*"]}
 
+ ;; "https://lex.dwds.de/articles"
+ :webdav-base "http://spock.dwds.de:8080/exist/webdav/db/dwdswb/data"
+
  ;; "/var/zdl-lex-server"
  :data-dir "../data"
 
