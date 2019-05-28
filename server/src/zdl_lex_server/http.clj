@@ -11,7 +11,7 @@
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.status :as status]
             [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.stats :as stats]
+            [zdl-lex-server.home :as home]
             [zdl-lex-server.store :as store]
             [zdl-lex-server.sync :as sync]))
 
@@ -44,11 +44,11 @@
     (ring/router
      [[""
        {:middleware [wrap-formats]}
-       ["/" {:get (fn [_] (htstatus/temporary-redirect "/statistics"))}]
+       ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
        ["/articles/forms/suggestions" {:get solr/handle-form-suggestions}]
        ["/articles/index" {:delete sync/handle-index-trigger}]
        ["/articles/search" {:get solr/handle-search}]
-       ["/statistics" {:get stats/handle}]
+       ["/home" {:get home/handle}]
        ["/status" {:get status/handle}]]])
     (ring/routes
      (ring/create-resource-handler {:path "/"})

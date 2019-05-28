@@ -34,7 +34,7 @@ zdl_api_context_paths:
   - /articles/index
   - /articles/search
   - /assets
-  - /statistics
+  - /home
   - /status
 
 zdl_apache_vhost_config: |
@@ -70,7 +70,7 @@ zdl_apache_vhost_config: |
     Require group Lexikographen
   </Location>
 
-  RedirectMatch ^/$ /statistics
+  RedirectMatch ^/$ /home
 
   {% for cp in zdl_api_context_paths %}
   <Location {{ cp }}>
