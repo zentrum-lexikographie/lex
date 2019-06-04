@@ -79,10 +79,10 @@
         field-suffix (condp = k
                        :id ""
                        :language ""
-                       :xml_descendent_path ""
+                       :xml-descendent-path ""
                        :weight "_i"
                        :definitions "_t"
-                       :last_modified "_dt"
+                       :last-modified "_dt"
                        :timestamps "_dts"
                        "_ss")]
     (str field-name field-suffix)))
