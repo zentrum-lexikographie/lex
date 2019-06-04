@@ -1,6 +1,7 @@
 (ns zdl-lex-client.search
   (:require [clojure.core.async :as async]
             [clojure.string :as str]
+            [lucene-query.core :as lucene]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
@@ -35,7 +36,40 @@
 (defn new-query [q]
   (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
 
+(def ^:private field-name-mapping
+  {"def" "definitions"
+   "form" "forms"
+   "datum" "last-modified"
+   "klasse" "pos"
+   "bedeutung" "senses"
+   "quelle" "sources"
+   "status" "status"
+   "tranche" "tranche"
+   "typ" "type"})
+
+(def translate-query
+  (comp
+   lucene/ast->str
+   (fn translate-field-names [node]
+     (if (vector? node)
+       (let [[type args] node]
+         (condp = type
+           :field (let [[_ name] args]
+                    [:field [:term (or (field-name-mapping name) name)]])
+           (vec (map translate-field-names node))))
+       node))
+   lucene/str->ast))
+
+(defn validate-query [q]
+  (try (translate-query q) true (catch Throwable t false)))
+
 (defonce query (atom ""))
+
+(defonce query-valid? (atom true))
+
+(uib/bind query
+          (uib/transform validate-query)
+          query-valid?)
 
 (declare input)
 
@@ -43,7 +77,11 @@
   (ui/action
    :icon icon/gmd-search
    :name "Suchen"
-   :handler (fn [_] (.selectAll input) (new-query @query))))
+   :handler (fn [_]
+              (try
+                (-> @query translate-query new-query)
+                (.selectAll input)
+                (catch Throwable t)))))
 
 (defn- render-suggestion [this {:keys [value]}]
   (let [{:keys [suggestion pos type definitions status id last-modified]} value
@@ -82,6 +120,9 @@
 (def input
   (let [input (ui/text :columns 40 :action action)]
     (uib/bind input query)
+    (uib/bind query-valid?
+              (uib/transform #(if % :black :red))
+              (uib/property input :foreground))
     (proxy [AbstractListIntelliHints] [input]
       (createList []
         (let [list (proxy-super createList)]

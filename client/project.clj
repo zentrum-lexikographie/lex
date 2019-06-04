@@ -19,7 +19,8 @@
                  [tick "0.4.10-alpha" :exclusions [cljsjs/js-joda-locale-en-us
                                                    cljsjs/js-joda-timezone]]
                  [com.github.jiconfont/jiconfont-swing "1.0.1"]
-                 [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]]
+                 [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]
+                 [gremid/lucene-query "0.1.0"]]
 
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
