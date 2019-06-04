@@ -24,9 +24,9 @@
   (uicolor/color
    (condp = status
      "Artikelrumpf" "#ffcccc"
-     "Lex-zur_Abgabe" "#ffff00"
+     "Lex-zur_Abgabe" "#98fb98" ; "#ffff00"
      "Red-1" "#ffec8b"
-     "Red-f" "#ccffcc"
+     "Red-f" "#eeeeee" ; "#ccffcc"
      "#ffffff")))
 
 (comment
