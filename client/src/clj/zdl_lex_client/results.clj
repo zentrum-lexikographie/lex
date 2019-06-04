@@ -6,8 +6,7 @@
             [tick.alpha.api :as t]
             [zdl-lex-client.article :as article]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as workspace]
-            [taoensso.timbre :as timbre])
+            [zdl-lex-client.workspace :as workspace])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
@@ -31,7 +30,7 @@
                                :authors (some-> % :authors result-values)
                                :sources (some-> % :sources result-values)
                                :color (article/status->color %)}) result)
-        columns [{:key :num :text "#"
+        columns [{:key :num :text "#" :class clojure.lang.BigInt
                   :column-config (fn [{:keys [model table-width]}]
                                    (doto ^TableColumn model
                                      (.setMinWidth 50)
