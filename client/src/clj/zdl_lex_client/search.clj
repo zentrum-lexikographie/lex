@@ -47,18 +47,27 @@
    "tranche" "tranche"
    "typ" "type"})
 
+(defn- expand-date [v]
+  (-> v
+      (str/replace #"^(\d{4}-\d{2})$" "$1-01")
+      (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\:00\\:00Z")))
+
 (def ^:private translate-query
   (comp
    lucene/ast->str
-   (fn translate-field-names [node]
+   (fn translate-node [node]
      (if (vector? node)
-       (let [[type args] node]
+       (let [[type arg] node]
          (condp = type
-           :field (let [[_ name] args]
+           :field (let [[_ name] arg]
                     [:field [:term (or (field-name-mapping name) name)]])
-           (vec (map translate-field-names node))))
+           :term [:term (expand-date arg)]
+           (vec (map translate-node node))))
        node))
    lucene/str->ast))
+
+(comment
+  (translate-query "datum:[1999-01 TO 2018-01-01}"))
 
 (defn- validate-query [q]
   (try (translate-query q) true (catch Throwable t false)))
@@ -68,7 +77,7 @@
 (defonce query-valid? (atom true))
 
 (uib/bind query
-          (uib/transform #(try (translate-query %) true (catch Throwable t false))))
+          (uib/transform #(try (translate-query %) true (catch Throwable t false)))
           query-valid?)
 
 (declare input)
