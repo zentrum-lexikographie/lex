@@ -15,7 +15,7 @@
     - name: Set mode on git home
       file:
         path: /home/git
-        mode: 0770
+        mode: 0750
 
     - name: Authorize git access
       authorized_key:

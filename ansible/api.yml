@@ -7,6 +7,7 @@
         group: www-data
         groups: git
         home: /home/lex
+        shell: /bin/bash
 
     - name: Set mode on lex home
       file:
