@@ -47,7 +47,7 @@
    "tranche" "tranche"
    "typ" "type"})
 
-(def translate-query
+(def ^:private translate-query
   (comp
    lucene/ast->str
    (fn translate-field-names [node]
@@ -60,7 +60,7 @@
        node))
    lucene/str->ast))
 
-(defn validate-query [q]
+(defn- validate-query [q]
   (try (translate-query q) true (catch Throwable t false)))
 
 (defonce query (atom ""))
@@ -68,7 +68,7 @@
 (defonce query-valid? (atom true))
 
 (uib/bind query
-          (uib/transform validate-query)
+          (uib/transform #(try (translate-query %) true (catch Throwable t false))))
           query-valid?)
 
 (declare input)
