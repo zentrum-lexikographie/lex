@@ -121,6 +121,7 @@
         solr-response (query {"q" q
                               "start" offset
                               "rows" limit
+                              "sort" "forms_ss asc,weight_i desc,id asc"
                               "facet" "true"
                               "facet.field" ["authors_ss"
                                              "pos_ss"
@@ -133,8 +134,7 @@
                               "facet.range" "timestamps_dts"
                               "facet.range.start" "NOW/MONTH-1YEAR"
                               "facet.range.end" "NOW"
-                              "facet.range.gap" "+1MONTH"
-                              "sort" "weight_i desc,forms_ss asc,id asc"})
+                              "facet.range.gap" "+1MONTH"})
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
         {:keys [facet_fields facet_ranges]} facet_counts
