@@ -15,29 +15,9 @@
   (:import com.jidesoft.hints.AbstractListIntelliHints
            java.util.UUID))
 
-(defstate requests
-  :start (let [ch (async/chan (async/sliding-buffer 3))]
-           (async/go-loop []
-             (when-let [q (async/<! ch)]
-               (try
-                 (->> (async/<!
-                       (async/thread
-                         (http/get-edn
-                          #(merge % {:path "/articles/search"
-                                     :query {"q" (:query q)
-                                             "limit" "1000"}}))))
-                      (merge q)
-                      (async/>! results/renderer))
-                 (catch Exception e (timbre/warn e)))
-               (recur)))
-           ch)
-  :stop (async/close! requests))
-
-(defn new-query [q]
-  (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
-
 (def ^:private field-name-mapping
-  {"def" "definitions"
+  {"autor" "authors"
+   "def" "definitions"
    "form" "forms"
    "datum" "last-modified"
    "klasse" "pos"
@@ -80,6 +60,29 @@
           (uib/transform #(try (translate-query %) true (catch Throwable t false)))
           query-valid?)
 
+(defstate requests
+  :start (let [ch (async/chan (async/sliding-buffer 3))]
+           (async/go-loop []
+             (when-let [q (async/<! ch)]
+               (try
+                 (let [{:keys [query]} q
+                       query (translate-query query)]
+                   (->> (async/<!
+                         (async/thread
+                           (http/get-edn
+                            #(merge % {:path "/articles/search"
+                                       :query {"q" query
+                                               "limit" "1000"}}))))
+                        (merge q)
+                        (async/>! results/renderer)))
+                 (catch Exception e (timbre/warn e)))
+               (recur)))
+           ch)
+  :stop (async/close! requests))
+
+(defn new-query [q]
+  (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
+
 (declare input)
 
 (def action
@@ -88,8 +91,10 @@
    :name "Suchen"
    :handler (fn [_]
               (try
-                (-> @query translate-query new-query)
-                (.selectAll input)
+                (let [query @query]
+                  (translate-query query)
+                  (new-query query)
+                  (.selectAll input))
                 (catch Throwable t)))))
 
 (defn- render-suggestion [this {:keys [value]}]
