@@ -23,7 +23,8 @@
                        (async/thread
                          (http/get-edn
                           #(merge % {:path "/articles/search"
-                                     :query {"q" (:query q) "limit" "100"}}))))
+                                     :query {"q" (:query q)
+                                             "limit" "1000"}}))))
                       (merge q)
                       (async/>! results/renderer))
                  (catch Exception e (timbre/warn e)))
