@@ -26,7 +26,7 @@
      "Artikelrumpf" "#ffcccc"
      "Lex-zur_Abgabe" "#98fb98" ; "#ffff00"
      "Red-1" "#ffec8b"
-     "Red-f" "#eeeeee" ; "#ccffcc"
+     "Red-f" "#aeecff" ; "#ccffcc"
      "#ffffff")))
 
 (comment
