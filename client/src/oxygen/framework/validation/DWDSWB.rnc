@@ -1,5 +1,4 @@
 default namespace = 'http://www.dwds.de/ns/1.0'
-namespace sch = 'http://www.ascc.net/xml/schematron'
 
 include 'Metadata.rnc'
 include 'Diachrony.rnc'
@@ -37,7 +36,6 @@ start = element DWDS {
 		attribute xml:id { Metadaten.Artikel-ID }
 		, Metadaten.allgemein
 		, Metadaten.Artikel
-		, Metadaten.Modifikation ? # TODO: brauchen wir das wirklich?
 		, attribute Wortfeld { token } ?
 		# lexikografische Basisstruktur der Artikel
 		, Formangabe +
@@ -325,6 +323,7 @@ Illustration = element Illustration {
 		| 'CC BY-SA 3.0'
 		| 'CC BY-SA 3.0 DE'
 		| 'CC BY-SA 4.0'
+		| 'Vereinfachte Pixabay Lizenz'
 	}
 	, element Bildunterschrift { token }
 	, Fundstelle
@@ -391,7 +390,7 @@ Formangabe = element Formangabe {
 			pattern = '\d+(_\(\*?E?\d(\.\d)*\))?|Einzelfall|Stammprinzip'
 		} + } 
 	} ?
-	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' } ? # TODO: mandatory
+	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }
 	, Schreibung +
 	, Aussprache * # TODO oblig.?
 	, grammatische_Beschreibung
@@ -412,7 +411,6 @@ Formbeschränkung = element Formangabe {
 Schreibung = element Schreibung {
 	Metadaten.allgemein ?
 	, Rechtschreibstatus ?
-	, attribute Praeferenz { '1' | '2' | '3' | '4' } ? # TODO: remove (yeah!)
 	, attribute Trennung { list { Lemmatoken + } } ?
 	, Homographenziffer ?
 	, Lemmatoken

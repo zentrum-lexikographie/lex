@@ -48,8 +48,10 @@ Metadaten.allgemein = (
 		| 'grimm'
 		| 'herold'
 		| 'lemnitzer'
+		| 'lmartin'
 		| 'loos'
 		| 'mschulze'
+		| 'palmes'
 		| 'pfeiffer'
 		| 'roll'
 		| 'schrader'
@@ -58,16 +60,9 @@ Metadaten.allgemein = (
 		| 'solf'
 		| 'unger'
 		| 'wahrig'
+		| 'wulfert'
 	} ?
 )
-
-sch:pattern [
-	sch:title [ 'Datumsregeln' ]
-	sch:rule [ context='Artikel'
-		sch:assert [ test='@Zeitstempel = 2012-12-12' #< current-date()'
-			'@Zeitstempel darf kein Datum aus der Zukunft enthalten!' ]
-	]
-]
 
 Metadaten.Artikel = (
 	attribute Typ {
@@ -95,10 +90,61 @@ Metadaten.Artikel = (
 	}
 	, attribute Empfehlung { 'ja' | 'nein' } ?
 	, attribute Erstellungsdatum { xsd:date } ? # (Zeitpunkt Red-1 zu Red-2) i. Ggs. zum Zeitstempel der Veröffentlichung
-	, attribute Tranche { token } ?
+	, attribute Tranche {
+	    '45k-001'
+	    | '45k-002'
+	    | '45k-003'
+	    | '45k-004'
+	    | '45k-005'
+	    | '45k-006'
+	    | '45k-007'
+	    | '45k-008'
+	    | '45k-009'
+	    | '45k-010'
+	    | '45k-011'
+	    | '45k-012'
+	    | '45k-013'
+	    | '45k-014'
+	    | 'Adjektive'
+	    | 'Adverben'
+	    | 'Architektur'
+	    | 'Bildung'
+	    | 'Biologie'
+	    | 'Diverse-001'
+	    | 'Diverse-002'
+	    | 'Diverse-003'
+	    | 'Diverse-004'
+	    | 'Duden_1999/DWDS'
+	    | 'Ernährung'
+	    | 'Geo'
+	    | 'Gesellschaft'
+	    | 'IT-001'
+	    | 'IT-002'
+	    | 'Kommunikation'
+	    | 'Kunst-001'
+	    | 'Kunst-002'
+	    | 'Medien'
+	    | 'Mehrwortausdrücke'
+	    | 'Mix'
+	    | 'Movierung'
+	    | 'Philosophie'
+	    | 'Politik-001'
+	    | 'Politik-002'
+	    | 'Probeartikel'
+	    | 'Recht-001'
+	    | 'Recht-002'
+	    | 'Recht-003'
+	    | 'Recht-004'
+	    | 'Religion'
+	    | 'Spiel'
+	    | 'TV'
+	    | 'Verben'
+	    | 'Verkehr'
+	    | 'WDG-Überarbeitung'
+	    | 'Wahrig/DWDS'
+	    | 'Wahrig/ZDL'
+	} ? # TODO: mandatory?
 )
-
-Metadaten.Modifikation = attribute Modifikation { xsd:date }
 
 Metadaten.Lesarten-ID = xsd:ID # { pattern = 'S_[a-z]_\d+(_\d+)?' } # (relaxed)
 Metadaten.Artikel-ID = xsd:ID # { pattern = 'E_[a-z]_\d+(_\d+)?' } # (relaxed)

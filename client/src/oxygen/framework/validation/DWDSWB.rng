@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" xmlns:sch="http://www.ascc.net/xml/schematron" ns="http://www.dwds.de/ns/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <include href="Metadata.rng"/>
+  <include href="Diachrony.rng"/>
+  <include href="Grammar.rng"/>
+  <include href="Usage.rng"/>
+  <!-- spezielle Datentypen -->
+  <define name="Lemmatoken">
+    <data type="token">
+      <!--
+        this pattern triggers an infinite loop in jing
+        when there are "(" or ")" somewhere after whitespace
+        pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
+      -->
+      <param name="pattern">08/15|&amp;|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’ ]*[!\?]?</param>
+    </data>
+  </define>
+  <define name="Lemmatoken_relaxed">
+    <data type="token">
+      <param name="pattern">08/15|&amp;|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’ ]*([!\?]|\(r\))?</param>
+    </data>
+  </define>
+  <define name="formaler_Text">
+    <interleave>
+      <!--
+        we cannot have mixed content with typed data :(
+        xsd:token {
+        letters, numbers, currency signs, math. signs,
+        selected punctuation signs
+        # NOTE: EN-DASH, MINUS SIGN, FRACTION SLASH, RATIO ...
+        # instead of (free standing) HYPHEN-MINUS, SOLIDUS, COLON!
+        	pattern = '[\p{L}\p{N}\p{Sc}\p{Sm}\-–⁄\.,…!\?\(\)»«°′⏑&\s‍]*'
+        }
+      -->
+      <text/>
+      <zeroOrMore>
+        <ref name="semantischer_Verweis"/>
+      </zeroOrMore>
+    </interleave>
+  </define>
+  <start>
+    <element name="DWDS">
+      <oneOrMore>
+        <element name="Artikel">
+          <attribute name="xml:id">
+            <ref name="Metadaten.Artikel-ID"/>
+          </attribute>
+          <ref name="Metadaten.allgemein"/>
+          <ref name="Metadaten.Artikel"/>
+          <optional>
+            <ref name="Metadaten.Modifikation"/>
+          </optional>
+          <optional>
+            <!-- TODO: brauchen wir das wirklich? -->
+            <attribute name="Wortfeld">
+              <data type="token" datatypeLibrary=""/>
+            </attribute>
+          </optional>
+          <oneOrMore>
+            <!-- lexikografische Basisstruktur der Artikel -->
+            <ref name="Formangabe"/>
+          </oneOrMore>
+          <oneOrMore>
+            <ref name="morphologische_Verweise"/>
+          </oneOrMore>
+          <!-- getrennte morph. Analysen -->
+          <ref name="Diachronie"/>
+          <optional>
+            <ref name="Kommentar"/>
+          </optional>
+          <oneOrMore>
+            <ref name="Lesartangabe"/>
+          </oneOrMore>
+        </element>
+      </oneOrMore>
+    </element>
+  </start>
+  <define name="Lesartangabe">
+    <a:documentation/>
+    <!-- Lesarten ############################# -->
+    <a:documentation/>
+    <element name="Lesart">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="xml:id">
+          <ref name="Metadaten.Lesarten-ID"/>
+        </attribute>
+      </optional>
+      <optional>
+        <!-- TODO: obligatorisch machen -->
+        <ref name="Gliederungsmarke"/>
+      </optional>
+      <zeroOrMore>
+        <!-- formale Eigenschaften -->
+        <ref name="Formbeschränkung"/>
+      </zeroOrMore>
+      <ref name="Syntagmatik"/>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <!-- Semantik -->
+      <ref name="Diasystematik"/>
+      <zeroOrMore>
+        <ref name="Bedeutungsebene"/>
+      </zeroOrMore>
+      <ref name="semantische_Verweise"/>
+      <oneOrMore>
+        <ref name="Definition"/>
+      </oneOrMore>
+      <optional>
+        <ref name="Kommentar"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="Illustration"/>
+      </zeroOrMore>
+      <element name="Kollokationen">
+        <interleave>
+          <optional>
+            <ref name="Metadaten.allgemein"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="Kollokation1"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="Kollokation2"/>
+          </zeroOrMore>
+        </interleave>
+      </element>
+      <element name="Verwendungsbeispiele">
+        <interleave>
+          <optional>
+            <ref name="Metadaten.allgemein"/>
+          </optional>
+          <zeroOrMore>
+            <ref name="Beleg"/>
+          </zeroOrMore>
+          <zeroOrMore>
+            <ref name="Kompetenzbeispiel"/>
+          </zeroOrMore>
+        </interleave>
+      </element>
+      <zeroOrMore>
+        <ref name="Lesartangabe"/>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="Belegtext">
+    <a:documentation/>
+    <!-- Belege und Kollokationen ############# -->
+    <a:documentation/>
+    <element name="Belegtext">
+      <interleave>
+        <text/>
+        <zeroOrMore>
+          <ref name="Paraphrase"/>
+        </zeroOrMore>
+        <oneOrMore>
+          <element name="Stichwort">
+            <ref name="Lemmatoken"/>
+          </element>
+        </oneOrMore>
+        <zeroOrMore>
+          <element name="Streichung">
+            <data type="token" datatypeLibrary=""/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="Loeschung">
+            <data type="token" datatypeLibrary=""/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="Autorenzusatz">
+            <data type="token" datatypeLibrary=""/>
+          </element>
+        </zeroOrMore>
+        <zeroOrMore>
+          <element name="Hervorhebung">
+            <data type="token" datatypeLibrary=""/>
+          </element>
+        </zeroOrMore>
+      </interleave>
+      <!-- nur für rein typografische Markierungen -->
+    </element>
+  </define>
+  <define name="Beleg">
+    <element name="Beleg">
+      <group>
+        <optional>
+          <ref name="Metadaten.allgemein"/>
+        </optional>
+        <optional>
+          <!-- TODO: ungewöhnlich: engere Klassifikation (AG) -->
+          <attribute name="class">
+            <list>
+              <oneOrMore>
+                <choice>
+                  <value>invisible</value>
+                  <value>good_example</value>
+                  <value>ungewöhnlich</value>
+                  <value>sg_ungewöhnlich</value>
+                  <value>pl_ungewöhnlich</value>
+                  <value>genitiv_ungewöhnlich</value>
+                  <value>genus_ungewöhnlich</value>
+                </choice>
+              </oneOrMore>
+            </list>
+          </attribute>
+        </optional>
+        <ref name="Belegtext"/>
+        <ref name="Fundstelle"/>
+        <optional>
+          <element name="Kurztitel">
+            <data type="token" datatypeLibrary=""/>
+          </element>
+        </optional>
+        <optional>
+          <!-- TODO: move inside //Fundstelle -->
+          <ref name="Diasystematik"/>
+        </optional>
+      </group>
+      <!-- TODO: move before Fundstelle -->
+    </element>
+  </define>
+  <define name="Kompetenzbeispiel">
+    <element name="Kompetenzbeispiel">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Kollokation1">
+    <element name="Kollokation1">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <attribute name="syntaktische_Relation">
+        <ref name="syntaktische_Relationen"/>
+      </attribute>
+      <optional>
+        <attribute name="semantische_Relation">
+          <data type="token" datatypeLibrary=""/>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Kollokation2">
+    <element name="Kollokation2">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <attribute name="syntaktische_Relation">
+        <ref name="syntaktische_Relationen"/>
+      </attribute>
+      <optional>
+        <attribute name="semantische_Relation">
+          <data type="token" datatypeLibrary=""/>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <!-- TODO: hier stecken sicherlich auch Kollokationen drin -->
+  <define name="Konstruktionsmuster">
+    <element name="Konstruktionsmuster">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Idiom">
+    <element name="Idiom">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Phrasem">
+    <element name="Phrasem">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <ref name="Belegtext"/>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <optional>
+        <ref name="Diasystematik"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Syntagmatik">
+    <element name="Syntagmatik">
+      <interleave>
+        <optional>
+          <ref name="Metadaten.allgemein"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="Konstruktionsmuster"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Idiom"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Phrasem"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+  <define name="semantische_Verweise">
+    <a:documentation/>
+    <!-- Verweise ############################# -->
+    <a:documentation/>
+    <element name="Verweise">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <zeroOrMore>
+        <choice>
+          <ref name="semantischer_Verweis"/>
+          <ref name="externer_Verweis"/>
+        </choice>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="morphologische_Verweise">
+    <element name="Verweise">
+      <optional>
+        <!-- Klassifizierung des morphologischen Prozesses -->
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="Typ">
+          <choice>
+            <value>Simplex</value>
+            <value>Derivation</value>
+            <value>Diminutiv</value>
+            <value>Komposition</value>
+            <value>Konversion</value>
+            <value>Kurzwortbildung</value>
+            <value>lexikalisierte_Flexionsform</value>
+            <value>Movierung</value>
+            <value>neoklassische_Bildung</value>
+            <value>Rückbildung</value>
+            <value>Zusammenrückung</value>
+          </choice>
+        </attribute>
+      </optional>
+      <zeroOrMore>
+        <!-- TODO: obligatory -->
+        <element name="Verweis">
+          <!-- (Klassifizierung der) morphologische(n) Konstituenten -->
+          <attribute name="Typ">
+            <choice>
+              <value>Grundform</value>
+              <value>Erstglied</value>
+              <value>Binnenglied</value>
+              <value>Letztglied</value>
+              <value>formal_verwandt</value>
+            </choice>
+          </attribute>
+          <optional>
+            <attribute name="class">
+              <value>invisible</value>
+            </attribute>
+          </optional>
+          <ref name="Verweisziel"/>
+        </element>
+      </zeroOrMore>
+    </element>
+  </define>
+  <define name="semantischer_Verweis">
+    <element name="Verweis">
+      <attribute name="Typ">
+        <choice>
+          <value>Entsprechung</value>
+          <!-- semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse -->
+          <value>Antonym</value>
+          <value>Synonym</value>
+          <value>Hyponym</value>
+          <value>Hyperonym</value>
+          <value>Assoziation</value>
+          <!-- | 's' # D99 - -> lahme Ausrede, wenn man sich um die Frage der Rechtfertigung des Links drücken will (also die Antwort auf die Frage, *warum* man unter einem anderen Stichwort nachsehen soll) -->
+          <value>zu</value>
+          <value>vgl</value>
+        </choice>
+      </attribute>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <ref name="Verweisziel"/>
+    </element>
+  </define>
+  <define name="externer_Verweis">
+    <element name="Verweis_extern">
+      <attribute name="Typ">
+        <choice>
+          <value>Enzyklopädie</value>
+          <value>Etymologie</value>
+        </choice>
+      </attribute>
+      <optional>
+        <!-- TODO: "Etymologie" bisher nicht verwendet … -->
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <element name="Ziellemma">
+        <data type="token" datatypeLibrary=""/>
+      </element>
+      <element name="Ziellesart">
+        <data type="token" datatypeLibrary=""/>
+      </element>
+      <!-- remove? -->
+      <ref name="Fundstelle"/>
+    </element>
+  </define>
+  <define name="Verweisziel">
+    <element name="Ziellemma">
+      <optional>
+        <ref name="Homographenziffer"/>
+      </optional>
+      <optional>
+        <attribute name="Anzeigeform">
+          <ref name="Lemmatoken_relaxed"/>
+        </attribute>
+      </optional>
+      <ref name="Lemmatoken"/>
+    </element>
+    <element name="Ziellesart">
+      <data type="token" datatypeLibrary=""/>
+    </element>
+  </define>
+  <define name="Fundstelle">
+    <element name="Fundstelle">
+      <optional>
+        <attribute name="Fundort">
+          <choice>
+            <value>dwds</value>
+            <value>gbooks</value>
+            <value>online</value>
+            <value>Bibliothek</value>
+            <value>IDS-Archiv</value>
+            <value>WDG</value>
+          </choice>
+        </attribute>
+      </optional>
+      <optional>
+        <!-- TODO: mandatory, as element -->
+        <attribute name="Sigle">
+          <data type="token">
+            <param name="pattern">([A-Z]{9}|UNRESOLVED)</param>
+          </data>
+        </attribute>
+      </optional>
+      <choice>
+        <!-- xsd:token in lxml.etree doesn't allow \n -->
+        <data type="token" datatypeLibrary=""/>
+        <!-- deprecated TODO: parse it! -->
+        <group>
+          <optional>
+            <element name="Autor">
+              <data type="token" datatypeLibrary=""/>
+            </element>
+          </optional>
+          <optional>
+            <element name="Herausgeber">
+              <data type="token" datatypeLibrary=""/>
+            </element>
+          </optional>
+          <optional>
+            <element name="Zusatz">
+              <data type="token" datatypeLibrary=""/>
+            </element>
+          </optional>
+          <optional>
+            <element name="Titel">
+              <data type="token" datatypeLibrary=""/>
+            </element>
+          </optional>
+          <optional>
+            <element name="Stelle">
+              <data type="token" datatypeLibrary=""/>
+            </element>
+          </optional>
+          <optional>
+            <element name="Datum">
+              <choice>
+                <data type="token">
+                  <param name="pattern">(\d\d\.\d\d.)?\d{4}</param>
+                </data>
+                <empty/>
+              </choice>
+            </element>
+          </optional>
+          <optional>
+            <element name="URL">
+              <choice>
+                <data type="anyURI"/>
+                <empty/>
+              </choice>
+            </element>
+          </optional>
+          <optional>
+            <element name="Aufrufdatum">
+              <choice>
+                <data type="token">
+                  <param name="pattern">(\d\d\.\d\d.)?\d{4}</param>
+                </data>
+                <empty/>
+              </choice>
+            </element>
+          </optional>
+        </group>
+        <!-- kann man vlt. in Oxygen automatisch machen -->
+      </choice>
+    </element>
+  </define>
+  <define name="Definition">
+    <a:documentation/>
+    <!-- Bedeutungsangaben und Anmerkungen #### -->
+    <a:documentation/>
+    <element name="Definition">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <attribute name="Typ">
+        <choice>
+          <value>Basis</value>
+          <value>Meta</value>
+          <value>Generalisierung</value>
+          <value>Spezifizierung</value>
+          <value>Enzyklopädie</value>
+        </choice>
+      </attribute>
+      <ref name="formaler_Text"/>
+    </element>
+  </define>
+  <define name="Paraphrase">
+    <element name="Paraphrase">
+      <ref name="formaler_Text"/>
+    </element>
+  </define>
+  <define name="Illustration">
+    <optional>
+      <element name="Illustration">
+        <optional>
+          <ref name="Metadaten.allgemein"/>
+        </optional>
+        <attribute name="Datei">
+          <data type="anyURI"/>
+        </attribute>
+        <attribute name="Lizenz">
+          <choice>
+            <value>CC0</value>
+            <value>CC BY 2.0</value>
+            <value>CC BY 2.0 DE</value>
+            <value>CC BY 2.5</value>
+            <value>CC BY 2.5 DE</value>
+            <value>CC BY 3.0</value>
+            <value>CC BY 3.0 DE</value>
+            <value>CC BY 4.0</value>
+            <value>CC BY-NC 2.0</value>
+            <value>CC BY-NC 2.0 DE</value>
+            <value>CC BY-NC 2.5</value>
+            <value>CC BY-NC 2.5 DE</value>
+            <value>CC BY-NC 3.0</value>
+            <value>CC BY-NC 3.0 DE</value>
+            <value>CC BY-NC 4.0</value>
+            <value>CC BY-NC-SA 2.0</value>
+            <value>CC BY-NC-SA 2.0 DE</value>
+            <value>CC BY-NC-SA 2.5</value>
+            <value>CC BY-NC-SA 2.5 DE</value>
+            <value>CC BY-NC-SA 3.0</value>
+            <value>CC BY-NC-SA 3.0 DE</value>
+            <value>CC BY-NC-SA 4.0</value>
+            <value>CC BY-SA 1.0</value>
+            <value>CC BY-SA 2.0</value>
+            <value>CC BY-SA 2.0 DE</value>
+            <value>CC BY-SA 2.5</value>
+            <value>CC BY-SA 2.5 DE</value>
+            <value>CC BY-SA 3.0</value>
+            <value>CC BY-SA 3.0 DE</value>
+            <value>CC BY-SA 4.0</value>
+          </choice>
+        </attribute>
+        <element name="Bildunterschrift">
+          <data type="token" datatypeLibrary=""/>
+        </element>
+        <ref name="Fundstelle"/>
+      </element>
+    </optional>
+  </define>
+  <define name="Rechtschreibstatus">
+    <a:documentation/>
+    <!-- Lemmaform und Flexionsparadigma ###### -->
+    <a:documentation/>
+    <attribute name="Typ">
+      <choice>
+        <value>AR_G</value>
+        <value>NR_G</value>
+        <value>U</value>
+        <value>U_CH</value>
+        <value>U_AT</value>
+        <value>U_U</value>
+        <value>U_NR</value>
+      </choice>
+    </attribute>
+  </define>
+  <define name="Formangabe">
+    <element name="Formangabe">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="Klasse">
+          <!-- TODO: aus @Regel ableitbar? -->
+          <list>
+            <oneOrMore>
+              <choice>
+                <!-- Vokale/Diphtonge -->
+                <value>a/aa</value>
+                <value>ai/ä</value>
+                <value>à/a</value>
+                <value>au/o</value>
+                <value>aw/au</value>
+                <value>e/ä</value>
+                <value>ée/ee</value>
+                <value>é/ee</value>
+                <value>eu/äu</value>
+                <value>eu/ö</value>
+                <value>i/j</value>
+                <value>o/oo</value>
+                <value>ou/u</value>
+                <value>u/ü</value>
+                <!-- Konsonanten -->
+                <value>b/p</value>
+                <value>c/k</value>
+                <value>c/s</value>
+                <value>c/tz</value>
+                <value>cc/kk</value>
+                <value>c/ck</value>
+                <value>c/z</value>
+                <value>c/ss</value>
+                <value>ch/kh</value>
+                <value>ch/sch</value>
+                <value>d/t</value>
+                <value>ff/f</value>
+                <value>gh/g</value>
+                <value>gn/n</value>
+                <value>j/y</value>
+                <value>kk/ck</value>
+                <value>kh/k</value>
+                <value>l/ll</value>
+                <value>m/mm</value>
+                <value>n/nn</value>
+                <value>p/pp</value>
+                <value>ph/f</value>
+                <value>qu/k</value>
+                <value>rh/r</value>
+                <value>s/ss</value>
+                <value>ß/ss</value>
+                <value>s/z</value>
+                <value>sch/tsch</value>
+                <value>sh/sch</value>
+                <value>th/t</value>
+                <value>t/tt</value>
+                <value>t/z</value>
+                <value>z/tz</value>
+                <value>z/s</value>
+                <value>zz/s</value>
+                <value>v/w</value>
+                <value>y/i</value>
+                <value>y/j</value>
+                <!-- Sonderfälle -->
+                <value>oxyd/oxid</value>
+                <value>tia/zia</value>
+                <value>tie/zie</value>
+                <value>tiö/ziö</value>
+                <value>Sinfonie/Symphonie</value>
+                <!-- abstrakte Regeln -->
+                <value>G/Z</value>
+                <value>G/K</value>
+                <value>FM</value>
+                <!-- fremdsprachliches Material -->
+                <value>Bindestrich</value>
+                <value>Stammprinzip</value>
+                <value>Wortangleichung</value>
+                <value>Schwa-Tilgung</value>
+                <value>Fuge</value>
+              </choice>
+            </oneOrMore>
+          </list>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="Regel">
+          <list>
+            <oneOrMore>
+              <data type="token">
+                <param name="pattern">\d+(_\(\*?E?\d(\.\d)*\))?|Einzelfall|Stammprinzip</param>
+              </data>
+            </oneOrMore>
+          </list>
+        </attribute>
+      </optional>
+      <attribute name="Typ">
+        <choice>
+          <value>Hauptform</value>
+          <value>Nebenform</value>
+          <value>Abkürzung</value>
+        </choice>
+      </attribute>
+      <oneOrMore>
+        <ref name="Schreibung"/>
+      </oneOrMore>
+      <zeroOrMore>
+        <ref name="Aussprache"/>
+      </zeroOrMore>
+      <!-- TODO oblig.? -->
+      <ref name="grammatische_Beschreibung"/>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <ref name="Diasystematik"/>
+      <optional>
+        <ref name="Kommentar"/>
+      </optional>
+    </element>
+  </define>
+  <define name="Formbeschränkung">
+    <element name="Formangabe">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="Schreibung"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="Aussprache"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="freie_grammatische_Beschreibung"/>
+      </optional>
+      <optional>
+        <ref name="Frequenzangabe"/>
+      </optional>
+      <ref name="Diasystematik"/>
+    </element>
+  </define>
+  <define name="Schreibung">
+    <element name="Schreibung">
+      <optional>
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <ref name="Rechtschreibstatus"/>
+      </optional>
+      <optional>
+        <attribute name="Trennung">
+          <list>
+            <oneOrMore>
+              <ref name="Lemmatoken"/>
+            </oneOrMore>
+          </list>
+        </attribute>
+      </optional>
+      <optional>
+        <ref name="Homographenziffer"/>
+      </optional>
+      <ref name="Lemmatoken"/>
+    </element>
+  </define>
+  <define name="Aussprache">
+    <element name="Aussprache">
+      <optional>
+        <!--
+          relativer Pfad zur Aussprachedatei (ohne Dateinamenerweiterung)
+          Format: {Paketverzeichnis}/{Stimulus}
+          Beispiel: 026/der_Snob
+        -->
+        <ref name="Metadaten.allgemein"/>
+      </optional>
+      <optional>
+        <attribute name="class">
+          <value>invisible</value>
+        </attribute>
+      </optional>
+      <optional>
+        <attribute name="IPA">
+          <list>
+            <oneOrMore>
+              <data type="token"/>
+            </oneOrMore>
+          </list>
+        </attribute>
+      </optional>
+      <choice>
+        <empty/>
+        <data type="token">
+          <param name="pattern">[0-9]{3}/[A-Za-z\-_]*[1-9]?</param>
+        </data>
+      </choice>
+    </element>
+  </define>
+  <define name="Diasystematik">
+    <a:documentation/>
+    <!-- Diasystematik ######################## -->
+    <a:documentation/>
+    <element name="Diasystematik">
+      <interleave>
+        <optional>
+          <ref name="Metadaten.allgemein"/>
+        </optional>
+        <zeroOrMore>
+          <ref name="Bedeutungsebene"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Stilebene"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Stilfaerbung"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Gebrauchszeitraum"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Sprachraum"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Gruppensprache"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="Fachgebiet"/>
+        </zeroOrMore>
+      </interleave>
+    </element>
+  </define>
+</grammar>

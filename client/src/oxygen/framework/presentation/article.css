@@ -15,6 +15,7 @@ DWDS { background-color: #eee; }
 Artikel[Status="Artikelrumpf"]   { background-color: #ffcccc; }
 Artikel[Status="Lex-zur_Abgabe"] { background-color: #98fb98; }
 Artikel[Status="Red-1"]          { background-color: #ffec8b; }
+Artikel[Status="Red-f"]          { background-color: #aeecff; }
 
 /* Hauptblöcke, die als »Kasten« dargestellt werden */
 
@@ -31,8 +32,7 @@ Kollokationen, Konstruktionsmuster, Kommentar {
 
 /* Labels für die Hauptblöcke */
 
-Artikel > Formangabe[Typ]:before        { -oxy-append-content: attr('Typ')"angabe"; }
-Artikel > Formangabe:not([Typ]):before  { -oxy-append-content: "Hauptformangabe (implizit)"; }
+Artikel > Formangabe:before   { -oxy-append-content: attr('Typ')"angabe"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr('Regel'); }
 Formangabe[Klasse]:before     { -oxy-append-content: " – " attr('Klasse'); }
@@ -172,11 +172,10 @@ Artikel>Lesart>Lesart:before {
 Definition { font-weight: bold; }
 
 /* Markierung von Lemmazeichen */
-Schreibung { font-size: 2em; }
-Schreibung[Praeferenz="1"] { font-weight: bold; }
-Schreibung[Praeferenz="3"], Schreibung[Praeferenz="4"] { font-size: 1.6em; }
+Schreibung { font-size: 1.5em; }
+Formangabe[Typ="Hauptform"] > Schreibung { font-size: 2em; }
 Schreibung[Typ="AR_G"] { color: brown; }
-*[Typ="U"], *[Typ="U_U"], *[Typ="U_CH"], *[Typ="U_AT"] {
+Schreibung[Typ="U"], Schreibung[Typ="U_U"], Schreibung[Typ="U_CH"], Schreibung[Typ="U_AT"], Schreibung[Typ="U_NR"] {
 	text-decoration: line-through;
 	color: red;
 }

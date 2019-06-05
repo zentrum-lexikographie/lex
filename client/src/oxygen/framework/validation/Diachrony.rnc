@@ -344,11 +344,12 @@ Sprachen = (
 	| 'obsorb'       # hsb: Upper Sorbian
 	| 'obwald'
 	| 'oest'
+	| 'oestl_dt'   # TODO: keep?
 	| 'ostfries'       # frs: Eastern Frisian
 	| 'oirot'
+	| 'okzitan'
 	| 'omd'
 	| 'oriya'
-	| 'oestl_dt'
 	| 'osk'          # osc: Oscan
 	| 'osk-umbr'
 	| 'osset'        # oss: Ossetian
@@ -369,6 +370,7 @@ Sprachen = (
 	| 'pers-arab'
 	| 'pfaelz'
 	| 'phoen'        # phn: Phoenician
+	| 'piemont'
 	| 'pikard'       # pcd: Picard
 	| 'polab'
 	| 'polabopomoran'

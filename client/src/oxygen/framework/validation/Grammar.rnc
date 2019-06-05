@@ -178,11 +178,12 @@ Numeruspraeferenz = element Numeruspraeferenz {
 }
 
 Kasuspraeferenz = element Kasuspraeferenz {
-	'mit Gen.' | 'im Gen.' | 'oft mit Gen.'
+    Frequenzbeschraenkung ?
+	, ('mit Gen.' | 'im Gen.' | 'oft mit Gen.'
 	| 'mit Dat.' | 'im Dat.' | 'mit Dat. Pl.'
 	| 'mit Akk.' | 'im Akk.' | 'meist mit Akk.'
 	| 'mit Akk. eines artikellosen Nomens'
-	| 'im Nom.'
+	| 'im Nom.')
 }
 
 Genus = element Genus { 'mask.'	| 'fem.' | 'neutr.' }
@@ -240,13 +241,8 @@ allgemeine_grammatische_Angaben = (
 	element Wortbildung {
 	    Frequenzbeschraenkung ?
 	    , (
-	        'Kunstwort'
-		    | 'ohne Verkleinerungsform'
-    		| 'produktiv'
-		    | 'vor Fremdwörtern'
-    		| 'trennbar'
-    		| 'untrennbar'
-    		| 'vor Vokalen'
+		    
+    		'vor Vokalen'
     		| 'vor Konsonanten'
     		| 'vor Labialen'
     		| 'vor ›h‹'
@@ -359,11 +355,11 @@ Flexionsformen_Verb = (
 	# Achtung: in einigen Gruppen nur \p{L} statt \p{Ll} wg. /Hohn lachen/ usw.
 	element reflexiv { empty } ? # TODO: Wortklasse/@Typ
 	, element Praesens {
-		xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|besser|breit|da(her|hin|neben|rüber|von|zu)|dar|dazu|dicht|durch|ein|entgegen|ernst|fahren|fort|frei|fürlieb|gegen|gegeneinander|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|kalt|leid|maß|nach|nieder|ob|parallel|ran|rauf|raus|rein|rüber|rum|runter|tiefer|trocken|über|überein|überhand|um|umhin|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|weg|weich|weiter|wieder|wieder (auf|ein|gut|her)|weiter|wider|zu|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
+		xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|besser|blank|breit|da(her|hin|neben|rüber|von|zu)|dar|dazu|drauf|dicht|durch|ein|einher|entgegen|ernst|fahren|fort|frei|fürlieb|gegen|gegeneinander|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|kalt|leid|maß|mit|nach|nieder|ob|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tiefer|trocken|über|überein|überhand|um|umhin|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|zu|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
 		, Rechtschreibstatus ?
 	} *
 	, element Praeteritum {
-		xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|besser|breit|da(her|hin|neben|rüber|von|zu)|dar|dazu|dicht|durch|ein|entgegen|ernst|fahren|fort|frei|fürlieb|gegen|gegeneinander|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|kalt|leid|maß|nach|nieder|ob|parallel|ran|rauf|raus|rein|rüber|rum|runter|tiefer|trocken|über|überein|überhand|um|umhin|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|weg|weich|weiter|wieder|wieder (auf|ein|gut|her)|weiter|wider|zu|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte' }
+		xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|besser|blank|breit|da(her|hin|neben|rüber|von|zu)|dar|dazu|drauf|dicht|durch|ein|einher|entgegen|ernst|fahren|fort|frei|fürlieb|gegen|gegeneinander|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|kalt|leid|maß|mit|nach|nieder|ob|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tiefer|trocken|über|überein|überhand|um|umhin|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|zu|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
 		, Rechtschreibstatus ?
 	} *
 	, element Auxiliar {
@@ -377,7 +373,7 @@ Flexionsformen_Verb = (
 	# note: die Gruppe am Anfang des ersten Ausdrucks steht wg. neuer Rechtschreibvarianten
 	# note: der zweite Ausdruck steht wg. neuer Rechtschreibung für »ab sein« usw.
 	, element Partizip_II {
-		xsd:token { pattern = '(((Acht|breit|Brust|dicht|Delfin|Delphin|ernst|Gewähr|Halt|Hohn|kalt|Maß|parallel|Rad|Rücken|Staub|trocken|wach|weich|wieder) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
+		xsd:token { pattern = '(((Acht|blank|breit|Brust|dicht|Delfin|Delphin|ernst|Gewähr|Halt|Hohn|kalt|Maß|parallel|Rad|Rücken|Staub|trocken|wach|weich|wieder) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
 		, Rechtschreibstatus ?
 	} *
 )
