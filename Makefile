@@ -85,6 +85,17 @@ solr-destroy:
 		docker stop zdl_lex_solr
 	docker rm zdl_lex_solr || true
 
+existdb:
+	[ "$(shell docker ps -f name=zdl_lex_exist -q)" ] ||\
+		docker run -t -d -i --name zdl_lex_exist\
+			-p 8080:8080\
+			existdb/existdb:release
+
+existdb-destroy:
+	[ "$(shell docker ps -f name=zdl_lex_exist -q)" ] &&\
+		docker stop zdl_lex_exist
+	docker rm zdl_lex_exist || true
+
 spock-tunnel:
 	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
 

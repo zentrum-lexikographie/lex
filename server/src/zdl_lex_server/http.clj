@@ -9,6 +9,7 @@
             [ring.util.http-response :as htstatus]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.exist :as exist]
             [zdl-lex-server.status :as status]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.home :as home]
@@ -45,6 +46,7 @@
      [[""
        {:middleware [wrap-formats]}
        ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
+       ["/articles/exist/sync" {:post exist/handle-sync-trigger}]
        ["/articles/forms/suggestions" {:get solr/handle-form-suggestions}]
        ["/articles/index" {:delete sync/handle-index-trigger}]
        ["/articles/search" {:get solr/handle-search}]

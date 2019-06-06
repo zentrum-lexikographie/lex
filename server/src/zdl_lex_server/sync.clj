@@ -2,6 +2,7 @@
   (:require [clojure.core.async :as async]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
+            [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.solr :as solr]
@@ -11,16 +12,17 @@
 
 (defstate index->suggestions
   "Synchronizes the forms suggestions with all indexed articles"
-  :start (let [ch (async/chan (async/sliding-buffer 1))
-               interval (config :solr-sync-interval)]
+  :start (let [schedule (cron/parse "0 7 0 * * ?")
+               ch (async/chan (async/sliding-buffer 1))]
            (async/go-loop []
-             (when (async/alt! (async/timeout interval) :tick ch ([v] v))
+             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
+                               ch ([v] v))
                (async/<!
                 (async/thread
                   (try
                     (solr/build-suggestions "forms")
                     (catch Throwable t))))
-               (async/poll! ch) ;; we just finished a sync; remove pending reqs
+               (async/poll! ch) ;; we just finished a sync; remove pending req
                (recur)))
            ch)
   :stop (async/close! index->suggestions))
@@ -42,10 +44,11 @@
 
 (defstate git-all->solr
   "Synchronizes all articles with the Solr index"
-  :start (let [ch (async/chan (async/sliding-buffer 1))
-               interval (config :solr-sync-interval)]
+  :start (let [schedule (cron/parse "0 1 0 * * ?")
+               ch (async/chan (async/sliding-buffer 1))]
            (async/go-loop []
-             (when (async/alt! (async/timeout interval) :tick ch ([v] v))
+             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
+                               ch ([v] v))
                (async/<!
                 (async/thread (try (solr/sync-articles) (catch Throwable t))))
                (async/>! index->suggestions :sync)

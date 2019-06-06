@@ -10,8 +10,11 @@
 (def git-dir (fs/file data-dir "git"))
 (def articles-dir (fs/file git-dir "articles"))
 
-(defn relative-article-path [article-file]
+(defn file->id [article-file]
   (str (.. articles-dir (toPath) (relativize (.toPath article-file)))))
+
+(defn id->file [id]
+  (fs/file articles-dir id))
 
 (defn xml-file? [f]
   (let [name (.getName f)

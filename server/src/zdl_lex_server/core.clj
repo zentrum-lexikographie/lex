@@ -8,7 +8,8 @@
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
             [zdl-lex-server.sync :as sync]
-            [clojure.core.async :as async])
+            [clojure.core.async :as async]
+            [zdl-lex-server.exist :as exist])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
 (defn configure-logging []
@@ -26,6 +27,8 @@
   (timbre/info (mount/start)))
 
 (comment
+  (exist/xquery "xmldb:get-current-user()")
+  (async/>!! exist/exist->git "DWDS/billes-006/Nachbarland.xml")
   (git/rebase)
   http/server
   (->> (store/article-files) (take 10) solr/add-articles)

@@ -111,7 +111,7 @@
 
 (defn document [article]
   (let [excerpt (->> article xml excerpt)
-        id (store/relative-article-path article)
+        id (store/file->id article)
 
         timestamps (excerpt :timestamps)
         timestamp-fields (attr-field "timestamps" "dts" timestamps)

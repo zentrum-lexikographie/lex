@@ -21,6 +21,12 @@
  ;; {:basic-auth ["admin" "admin"]}
  :solr-req {}
 
+ ;; http://localhost:8080/exist
+ :exist-base "http://spock.dwds.de:8080/exist"
+
+ ;; {:basic-auth ["admin" ""]}
+ :exist-req {}
+
  ;; "admin"
  :anon-user "nobody"
 

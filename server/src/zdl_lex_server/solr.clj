@@ -66,8 +66,8 @@
 (def delete-articles
   (partial update-articles
            :delete
-           (comp #(array-map :tag :id :content %)
-                 store/relative-article-path)))
+           (comp (partial array-map :tag :id :content)
+                 store/file->id)))
 
 (defn purge-articles [before-time]
   (update-articles :delete
