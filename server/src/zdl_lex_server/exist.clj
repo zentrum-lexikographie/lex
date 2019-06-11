@@ -114,6 +114,18 @@
            ch)
   :stop (async/close! changed-in-exist->git))
 
-(defn handle-sync-trigger [{{:keys [id]} :params}]
+(defn handle-article-sync [{{:keys [id]} :params}]
   (htstatus/ok
    {id (async/>!! exist->git id)}))
+
+(defn handle-period-sync [{{:keys [amount unit] :as params} :path-params}]
+  (try
+    (htstatus/ok
+     {:since (t/new-duration (Integer/parseInt amount) (keyword unit))})
+    (catch AssertionError e
+      (htstatus/bad-request params))
+    (catch NumberFormatException e
+      (htstatus/bad-request params))))
+
+(comment
+  (handle-period-sync {:path-params {:amount "7" :unit "hours"}}))

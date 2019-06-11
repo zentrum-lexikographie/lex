@@ -46,10 +46,13 @@
      [[""
        {:middleware [wrap-formats]}
        ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
-       ["/articles/exist/sync" {:post exist/handle-sync-trigger}]
-       ["/articles/forms/suggestions" {:get solr/handle-form-suggestions}]
-       ["/articles/index" {:delete sync/handle-index-trigger}]
-       ["/articles/search" {:get solr/handle-search}]
+       ["/articles"
+        ["/exist"
+         ["/sync-id" {:post exist/handle-article-sync}]
+         ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]
+        ["/forms/suggestions" {:get solr/handle-form-suggestions}]
+        ["/index" {:delete sync/handle-index-trigger}]
+        ["/search" {:get solr/handle-search}]]
        ["/home" {:get home/handle}]
        ["/status" {:get status/handle}]]])
     (ring/routes
