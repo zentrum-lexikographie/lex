@@ -48,7 +48,7 @@
       (filterAttributeValues [values ctx]
         values)
       (filterElements [elements ctx]
-        (timbre/info elements)
+        (timbre/info {:elements elements})
         ;;(vec (filter element-filter elements)))
         elements)
       (filterElementValues [values ctx]

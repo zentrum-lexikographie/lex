@@ -18,7 +18,7 @@
            (async/go-loop []
              (when (async/alt! ch ([v] v)
                                (async/timeout (cron/millis-to-next schedule)) :tick)
-               (timbre/info "<solr> :suggestions")
+               (timbre/info {:solr :build-suggestions})
                (async/<!
                 (async/thread
                   (try
@@ -37,8 +37,8 @@
                (let [articles (filter store/article-file? changes)
                      modified (filter fs/exists? articles)
                      deleted (remove fs/exists? articles)]
-                 (doseq [m modified] (timbre/infof "<solr> M %s" (store/file->id m)))
-                 (doseq [d deleted] (timbre/infof "<solr> D %s" (store/file->id d)))
+                 (doseq [m modified] (timbre/info {:solr {:modified (store/file->id m)}}))
+                 (doseq [d deleted] (timbre/info {:solr {:deleted (store/file->id d)}}))
                  (when (async/<!
                         (async/thread
                           (try
@@ -56,7 +56,7 @@
            (async/go-loop []
              (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
                                ch ([v] v))
-               (timbre/info "<solr> :sync")
+               (timbre/info {:solr :sync})
                (when (async/<!
                       (async/thread (try (solr/sync-articles) (catch Throwable t)))))
                (async/poll! ch) ;; we just finished a sync; remove pending reqs

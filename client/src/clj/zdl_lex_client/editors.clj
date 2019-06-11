@@ -9,16 +9,29 @@
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
-(defn sync-id [id]
+(defonce active (atom nil))
+
+(defstate activations
+  :start (let [ch (async/chan)]
+           (async/go-loop []
+             (when-let [activation (async/<! ch)]
+               (let [[[url active?]] (seq activation)]
+                 (timbre/info {:url url :active? active?})
+                 (reset! active (if active? url)))
+               (recur)))
+           ch)
+  :stop (async/close! activations))
+
+(defn- sync-id [id]
   (http/post-edn #(merge % {:path "/articles/exist/sync-id" :query {"id" id}}) {}))
 
 (defstate save-events
   :start (let [ch (async/chan)]
            (async/go-loop []
              (when-let [url (async/<! ch)]
-               (timbre/infof "<save> %s" url)
+               (timbre/info {:saved url})
                (when-let [id (article/url->id url)]
-                 (timbre/infof "<sync> %s" id)
+                 (timbre/info {:sync id})
                  (async/<!
                   (async/thread
                     (sync-id id))))
@@ -59,9 +72,11 @@
       (editorsAboutToBeClosed [urls]
         (doseq [url urls] (remove! url)) true)
       (editorPageChanged [_])
-      (editorActivated [_])
+      (editorActivated [url]
+        (async/>!! activations {(str url) true}))
       (editorSelected [_])
-      (editorDeactivated [_])
+      (editorDeactivated [url]
+        (async/>!! activations {(str url) false}))
       (editorClosed [_])
       (editorOpened [url]
         (add! url))

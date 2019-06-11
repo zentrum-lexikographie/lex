@@ -87,7 +87,7 @@
   :start (let [ch (async/chan 1000)]
            (async/go-loop []
              (when-let [article (async/<! ch)]
-               (timbre/infof "<exist> %s" article)
+               (timbre/info {:exist article})
                (async/<!
                 (async/thread
                   (try

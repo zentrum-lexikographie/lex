@@ -15,7 +15,7 @@
 (defstate instance
   :start (proxy [StandalonePluginWorkspace] []
            (open [url]
-             (timbre/info url)
+             (timbre/info {:open url})
              true)
            (showView [id request-focus?]
              (timbre/info {:id id :request-focus? request-focus?}))
