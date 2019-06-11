@@ -3,11 +3,11 @@
             [clojure.core.async :as async]
             [clojure.java.shell :as sh]
             [clojure.set :refer [union]]
+            [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]
-            [me.raynes.fs :as fs]))
+            [zdl-lex-server.cron :as cron]
+            [zdl-lex-server.store :as store]))
 
 (defn git [& args]
   (locking store/git-dir
@@ -44,19 +44,31 @@
 (defonce changes (async/chan))
 
 (defstate changes-provider
-  :start (let [stop-ch (async/chan)
-               interval (config :git-commit-interval)]
-           (async/go-loop [i 0]
-             (when (async/alt! (async/timeout interval) :tick stop-ch nil)
+  :start (let [schedule (cron/parse "*/10 * * * * ?")
+               stop-ch (async/chan)]
+           (async/go-loop []
+             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
+                               stop-ch nil)
                (some->> (async/<!
                          (async/thread (try (commit) (catch Throwable t #{}))))
                         (map absolute-path)
                         (into (sorted-set))
-                        (timbre/spy :info)
+                        (timbre/spy :debug)
                         (async/>! changes))
-               (when (= 0 (mod i 10))
-                 (async/<!
-                  (async/thread (try (rebase) (catch Throwable t)))))
-               (recur (inc i))))
+               (recur)))
            stop-ch)
   :stop (async/close! changes-provider))
+
+(defstate rebase-scheduler
+  :start (let [schedule (cron/parse "0 0 * * * ?")
+               ch (async/chan)]
+           (async/go-loop []
+             (when (async/<! (async/timeout (cron/millis-to-next schedule)))
+               (async/<!
+                (async/thread
+                  (try
+                    (rebase)
+                    (catch Throwable t (timbre/warn t)))))
+               (recur)))
+           ch)
+  :stop (async/close! rebase-scheduler))

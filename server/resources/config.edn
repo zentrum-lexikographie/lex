@@ -1,5 +1,4 @@
-{
- :log-level :info
+{:log-level :info
 
  :log-config {:ns-blacklist ["org.apache.http.*"
                              "org.eclipse.jgit.*"]}
@@ -28,10 +27,4 @@
  :exist-req {}
 
  ;; "admin"
- :anon-user "nobody"
-
- ;; check for git changes every 10 seconds
- :git-commit-interval 10000
-
- ;; sync all articles to Solr every day
- :solr-sync-interval 86400000}
+ :anon-user "nobody"}

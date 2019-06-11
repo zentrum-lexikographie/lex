@@ -8,20 +8,22 @@
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
             [ring.util.http-response :as htstatus]
-            [zdl-lex-server.status :as status]))
+            [zdl-lex-server.status :as status]
+            [taoensso.timbre :as timbre]))
 
 (defstate index->suggestions
   "Synchronizes the forms suggestions with all indexed articles"
   :start (let [schedule (cron/parse "0 7 0 * * ?")
                ch (async/chan (async/sliding-buffer 1))]
            (async/go-loop []
-             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
-                               ch ([v] v))
+             (when (async/alt! ch ([v] v)
+                               (async/timeout (cron/millis-to-next schedule)) :tick)
+               (timbre/info "<solr> :suggestions")
                (async/<!
                 (async/thread
                   (try
                     (solr/build-suggestions "forms")
-                    (catch Throwable t))))
+                    (catch Throwable t (timbre/warn t)))))
                (async/poll! ch) ;; we just finished a sync; remove pending req
                (recur)))
            ch)
@@ -31,13 +33,19 @@
   "Synchronizes modified articles with the Solr index"
   :start (let [stop-ch (async/chan)]
            (async/go-loop []
-             (when-let [changes (async/alt! stop-ch nil git/changes ([v] v))]
+             (when-let [changes (async/alt! git/changes ([v] v) stop-ch nil)]
                (let [articles (filter store/article-file? changes)
                      modified (filter fs/exists? articles)
                      deleted (remove fs/exists? articles)]
-                 (solr/add-articles modified)
-                 (solr/delete-articles deleted)
-                 (async/>! index->suggestions :sync))
+                 (doseq [m modified] (timbre/infof "<solr> M %s" m))
+                 (doseq [d deleted] (timbre/infof "<solr> D %s" d))
+                 (when (async/<!
+                        (async/thread
+                          (try
+                            (solr/add-articles modified)
+                            (solr/delete-articles deleted)
+                            (catch Throwable t (timbre/warn t)))))
+                   (async/>! index->suggestions :sync)))
                (recur)))
            stop-ch)
   :stop (async/close! git-changes->solr))
@@ -49,9 +57,10 @@
            (async/go-loop []
              (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
                                ch ([v] v))
-               (async/<!
-                (async/thread (try (solr/sync-articles) (catch Throwable t))))
-               (async/>! index->suggestions :sync)
+               (timbre/info "<solr> :sync")
+               (when (async/<!
+                      (async/thread (try (solr/sync-articles) (catch Throwable t))))
+                 (async/>! index->suggestions :sync))
                (async/poll! ch) ;; we just finished a sync; remove pending reqs
                (recur)))
            ch)
