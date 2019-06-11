@@ -13,7 +13,7 @@
 
 (defstate index->suggestions
   "Synchronizes the forms suggestions with all indexed articles"
-  :start (let [schedule (cron/parse "0 7 0 * * ?")
+  :start (let [schedule (cron/parse "0 */10 * * * ?")
                ch (async/chan (async/sliding-buffer 1))]
            (async/go-loop []
              (when (async/alt! ch ([v] v)
@@ -44,8 +44,7 @@
                           (try
                             (solr/add-articles modified)
                             (solr/delete-articles deleted)
-                            (catch Throwable t (timbre/warn t)))))
-                   (async/>! index->suggestions :sync)))
+                            (catch Throwable t (timbre/warn t)))))))
                (recur)))
            stop-ch)
   :stop (async/close! git-changes->solr))
@@ -59,8 +58,7 @@
                                ch ([v] v))
                (timbre/info "<solr> :sync")
                (when (async/<!
-                      (async/thread (try (solr/sync-articles) (catch Throwable t))))
-                 (async/>! index->suggestions :sync))
+                      (async/thread (try (solr/sync-articles) (catch Throwable t)))))
                (async/poll! ch) ;; we just finished a sync; remove pending reqs
                (recur)))
            ch)
