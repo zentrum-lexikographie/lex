@@ -30,6 +30,7 @@ apache_vhosts:
       {{ zdl_apache_vhost_config }}
 
 zdl_api_context_paths:
+  - /articles/exist
   - /articles/forms
   - /articles/index
   - /articles/search
