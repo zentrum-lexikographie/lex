@@ -117,7 +117,7 @@
         timestamp-fields (attr-field "timestamps" "dts" timestamps)
 
         last-modified (reduce max-timestamp (apply concat (vals timestamps)))
-        last-modified-fields [[(field-name :last_modified) [last-modified]]]
+        last-modified-fields [[(field-name :last-modified) [last-modified]]]
 
         weight (-> last-modified t/parse days-since-epoch)
 
