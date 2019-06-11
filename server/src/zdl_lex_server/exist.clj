@@ -14,7 +14,8 @@
             [tick.alpha.api :as t]
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [zdl-lex-server.git :as git]))
 
 (def ^:private req
   (comp #(timbre/spy :debug %)
@@ -36,13 +37,16 @@
 
 (xml/alias-uri 'ex "http://exist.sourceforge.net/NS/exist")
 
-(defn copy [id to]
-  (let [xml-req {:method :get
-                 :url (url "/webdav" articles-path "/" id)
-                 :as :stream}]
-    (with-open [from (-> xml-req req :body)]
-      (io/copy from to)
-      to)))
+(defn copy [id]
+  (let [store-file (store/id->file id)
+        exist-xml-req {:method :get
+                       :url (url "/webdav" articles-path "/" id)
+                       :as :stream}]
+    (with-open [exist-xml (-> exist-xml-req req :body)]
+      (locking store/git-dir
+        (-> store-file fs/parent fs/mkdirs)
+        (io/copy exist-xml store-file)
+        store-file))))
 
 (defn xquery
   ([q] (xquery articles-path q))
@@ -83,12 +87,11 @@
   :start (let [ch (async/chan 1000)]
            (async/go-loop []
              (when-let [article (async/<! ch)]
+               (timbre/infof "<exist> %s" article)
                (async/<!
                 (async/thread
                   (try
-                    (let [store-file (store/id->file article)]
-                      (-> store-file fs/parent fs/mkdirs)
-                      (copy article store-file))
+                    (copy article)
                     (catch Throwable t (timbre/warn t)))))
                (recur)))
            ch)
@@ -120,12 +123,16 @@
 
 (defn handle-period-sync [{{:keys [amount unit] :as params} :path-params}]
   (try
-    (htstatus/ok
-     {:since (t/new-duration (Integer/parseInt amount) (keyword unit))})
+    (let [since (t/new-duration (Integer/parseInt amount) (keyword unit))
+          articles (changed-articles since)]
+      (doseq [article articles]
+        (async/>!! exist->git article))
+      (htstatus/ok
+       {:changed articles}))
     (catch AssertionError e
       (htstatus/bad-request params))
     (catch NumberFormatException e
       (htstatus/bad-request params))))
 
 (comment
-  (handle-period-sync {:path-params {:amount "7" :unit "hours"}}))
+  (handle-period-sync {:path-params {:amount "7" :unit "days"}}))
