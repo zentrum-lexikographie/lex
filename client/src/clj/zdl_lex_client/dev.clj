@@ -5,7 +5,9 @@
             [zdl-lex-client.status :as status]
             [zdl-lex-client.workspace :as workspace]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.results :as results]))
+            [zdl-lex-client.results :as results]
+            [zdl-lex-client.http :as http]
+            [clojure.core.async :as async]))
 
 (comment
   @workspace/instance
@@ -15,6 +17,11 @@
   (-> editors/listeners :editors deref)
   (search/new-query "forms:plexi*")
   results/output
+  (http/post-edn #(merge % {:path "/articles/exist/sync-id"
+                            :query {"id" "DWDS/MWA-001/der_Grosse_Teich.xml"}})
+                 {})
+  (async/>!! editors/save-events
+             "http://spock.dwds.de:8080/exist/webdav/db/dwdswb/data/DWDS/MWA-001/der_Grosse_Teich.xml")
   (let [panel (ui/border-panel :north search/input :center results/output)]
     (ui/invoke-later
      (-> (ui/frame :title "Search" :content panel :size [800 :by 600])

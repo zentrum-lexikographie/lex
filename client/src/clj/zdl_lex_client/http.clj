@@ -28,8 +28,28 @@
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
 
+(defn- read-edn [con]
+  (doto con
+    (.setRequestProperty "Accept" "application/edn"))
+  (-> (.getInputStream con)
+      (slurp :encoding "UTF-8")
+      (read-string)))
+
+(defn- write-and-read-edn [msg]
+  (fn [con]
+    (doto con
+      (.setDoOutput true)
+      (.setRequestMethod "POST")
+      (.setRequestProperty "Content-Type" "application/edn")
+      (.setRequestProperty "Accept" "application/edn"))
+    (-> (.getOutputStream con)
+        (spit (pr-str msg) :encoding "UTF-8"))
+    (-> (.getInputStream con)
+        (slurp :encoding "UTF-8")
+        (read-string))))
+
 (def get-edn
-  (partial tx (fn [con]
-                (.setRequestProperty con "Accept" "application/edn")
-                (with-open [resp (io/reader (.getInputStream con) :encoding "UTF-8")]
-                  (-> resp slurp read-string)))))
+  (partial tx read-edn))
+
+(defn post-edn [uf msg]
+  (tx (write-and-read-edn msg) uf))

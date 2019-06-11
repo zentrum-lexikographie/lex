@@ -3,7 +3,8 @@
             [mount.core :refer [defstate]]
             [cemerick.url :refer [url]]
             [zdl-lex-client.env :refer [config]]
-            [taoensso.timbre :as timbre])
+            [taoensso.timbre :as timbre]
+            [zdl-lex-client.article :as article])
   (:import java.net.URL
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
@@ -23,7 +24,7 @@
 
 (defn open-article [{:keys [id] :as article}]
   (.open ^StandalonePluginWorkspace instance
-         (-> (url (config :webdav-base) id) str (URL.))))
+         (-> id article/id->url (URL.))))
 
 (defn show-view
   ([id]

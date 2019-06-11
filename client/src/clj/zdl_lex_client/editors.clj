@@ -2,17 +2,26 @@
   (:require [clojure.core.async :as async]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-client.workspace :as workspace])
-  (:import ro.sync.exml.workspace.api.listeners.WSEditorListener
-           ro.sync.exml.workspace.api.listeners.WSEditorChangeListener
-           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace
-           ro.sync.exml.workspace.api.PluginWorkspace))
+            [zdl-lex-client.http :as http]
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.article :as article])
+  (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
+           ro.sync.exml.workspace.api.PluginWorkspace
+           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
+
+(defn sync-id [id]
+  (http/post-edn #(merge % {:path "/articles/exist/sync-id" :query {"id" id}}) {}))
 
 (defstate save-events
   :start (let [ch (async/chan)]
            (async/go-loop []
              (when-let [url (async/<! ch)]
-               (timbre/info url)
+               (timbre/infof "<save> %s" url)
+               (when-let [id (article/url->id url)]
+                 (timbre/infof "<sync> %s" id)
+                 (async/<!
+                  (async/thread
+                    (sync-id id))))
                (recur)))
            ch)
   :stop (async/close! save-events))
@@ -32,7 +41,7 @@
 (defn editors-listener [^StandalonePluginWorkspace ws editors]
   "A listener administering editor listeners"
   (let [add! (fn [url]
-               (let [listener (editor-listener url)]
+               (let [listener (editor-listener (str url))]
                      (.. ws
                          (getEditorAccess url editing-area)
                          (addEditorListener listener))
