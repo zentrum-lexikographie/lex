@@ -6,7 +6,6 @@
             [zdl-lex-client.article :as article]
             [zdl-lex-client.editors :as editors]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.metasearch :as metasearch]
             [zdl-lex-client.repl :as repl]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.workspace :as workspace]
