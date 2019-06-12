@@ -7,15 +7,13 @@
             [tick.alpha.api :as t]
             [zdl-lex-client.article :as article]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as workspace]
-            [taoensso.timbre :as timbre])
+            [zdl-lex-client.workspace :as workspace])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
            [javax.swing JTabbedPane JTable]
-           javax.swing.table.DefaultTableCellRenderer
-           [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]
-           org.jdesktop.swingx.JXTable$TableAdapter))
+           [org.jdesktop.swingx JXTable JXTable$TableAdapter]
+           [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
 
 (def output (doto (JideTabbedPane. JTabbedPane/BOTTOM)
               (.setShowCloseButtonOnTab true)))
@@ -35,9 +33,11 @@
 
 (defn- open-articles-in [result]
   (fn [^MouseEvent e]
-    (let [^JTable table (.getSource e)
+    (let [^JXTable table (.getSource e)
           ^Point point (.getPoint e)
+          ^JXTable$TableAdapter adapter (.getComponentAdapter table)
           row (.rowAtPoint table point)
+          row (.convertRowIndexToModel adapter row)
           clicks (.getClickCount e)]
       (when (and (<= 0 row) (= 2 clicks))
         (workspace/open-article (nth result row))))))
@@ -82,8 +82,10 @@
         [(proxy [AbstractHighlighter] []
            (doHighlight [component ^JXTable$TableAdapter adapter]
              (let [column (.column adapter)
+                   column (.convertColumnIndexToModel adapter column)
                    column (nth result-table-columns column)
                    row (.row adapter)
+                   row (.convertRowIndexToModel adapter row)
                    row (nth result row)
                    selected? (.isSelected adapter)]
                (condp = (:key column)
