@@ -40,8 +40,6 @@
 
 (defonce search-query (atom ""))
 
-(defonce search-query-valid? (atom true))
-
 (def action
   (ui/action
    :name "Suchen"
@@ -55,13 +53,9 @@
 
 (when-focused-select-all input)
 
-(uib/bind search-query (uib/transform query/valid?) search-query-valid?)
-
 (uib/bind input
-          search-query)
-
-(uib/bind search-query-valid?
-          (uib/transform #(if % :black :red))
+          search-query
+          (uib/transform #(if (query/valid? %) :black :red))
           (uib/property input :foreground))
 
 (defn form-suggestions [q]
