@@ -24,7 +24,7 @@
 
 (defn status->color [{:keys [status]}]
   (uicolor/color
-   (condp = status
+   (condp = (str/trim status)
      "Artikelrumpf" "#ffcccc"
      "Lex-zur_Abgabe" "#98fb98" ; "#ffff00"
      "Red-1" "#ffec8b"
