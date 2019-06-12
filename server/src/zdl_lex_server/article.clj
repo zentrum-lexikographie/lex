@@ -5,9 +5,11 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.zip :as zip]
+            [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-server.store :as store])
-  (:import [java.time.temporal ChronoUnit Temporal]))
+  (:import java.time.format.DateTimeParseException
+           [java.time.temporal ChronoUnit Temporal]))
 
 (defn xml [article]
   (let [doc-loc (-> article io/input-stream
@@ -119,7 +121,11 @@
         last-modified (reduce max-timestamp (apply concat (vals timestamps)))
         last-modified-fields [[(field-name :last-modified) [last-modified]]]
 
-        weight (-> last-modified t/parse days-since-epoch)
+        weight (try
+                 (-> last-modified t/parse days-since-epoch)
+                 (catch DateTimeParseException e
+                   (timbre/warn e)
+                   0))
 
         author-fields (attr-field "authors" "ss" (excerpt :authors))
         sources-fields (attr-field "sources" "ss" (excerpt :sources))
