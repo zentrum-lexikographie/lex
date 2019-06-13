@@ -1,12 +1,12 @@
 (ns zdl-lex-server.mantis
   (:require [clj-soap.client :as soap]
-            [zdl-lex-server.env :refer [config]]
-            [clojure.data.xml :as xml]
-            [clojure.zip :as zip]
-            [clojure.data.zip.xml :as zx]
             [clojure.data.zip :as dz]
+            [clojure.data.zip.xml :as zx]
+            [clojure.zip :as zip]
+            [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [taoensso.timbre :as timbre]))
+            [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.store :as store]))
 
 (def client
   (let [mantis-base (config :mantis-url)
@@ -75,4 +75,6 @@
                  :notes (-> (property item :notes_count) Integer/parseInt)})))))
 
 (comment
+  store/mantis-dump
+  (time (spit store/mantis-dump (pr-str (vec (issues)))))
   (take 10 (issues)))
