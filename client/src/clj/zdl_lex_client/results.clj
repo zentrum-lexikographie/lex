@@ -23,11 +23,11 @@
 (def num-result-tabs (comp count result-tabs))
 
 (def ^:private result-table-columns
-  [{:key :form :text "Schreibung"}
+  [{:key :status :text "Status"}
+   {:key :form :text "Schreibung"}
    {:key :pos :text "Wortklasse"}
    {:key :type :text "Typ"}
    {:key :last-modified :text "Datum"}
-   {:key :status :text "Status"}
    {:key :sources :text "Quellen"}
    {:key :authors :text "Autoren"}])
 
