@@ -26,5 +26,14 @@
  ;; {:basic-auth ["admin" ""]}
  :exist-req {}
 
+ :mantis-url "http://odo.dwds.de/mantis"
+
+ :mantis-user "zdl-lex"
+
+ :mantis-password "zdl-lex"
+
+ ;; LEX
+ :mantis-project 5
+
  ;; "admin"
  :anon-user "nobody"}
