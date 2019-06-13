@@ -1,0 +1,92 @@
+<html>
+    <h2>Suchfelder</h2>
+
+    <table cellspacing="5" width="100%">
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Artikeltyp</th>
+            <td><pre>typ:Minimalartikel</pre></th>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Formangabe</th>
+            <td><pre>form:Betr*</pre></th>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Autorenangabe</th>
+            <td><pre>autor:lemnitzer</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Datum der letzten Änderung</th>
+            <td><pre>datum:2018-12-24</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Worklasse</th>
+            <td><pre>klasse:Verb</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Bedeutungsebene</th>
+            <td><pre>bedeutung:übertragen</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Quellangabe</th>
+            <td><pre>quelle:Duden*</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Status</th>
+            <td><pre>status:(Lex* OR Red-2)</pre></td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Tranche</th>
+            <td><pre>tranche:Diverse*</pre></td>
+        </tr>
+    </table>
+
+    <h2>Suchoperatoren</h2>
+
+    <table cellspacing="5" width="100%">
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Platzhalter/Trunkierung</th>
+            <td>
+                <pre>*</pre>
+                <pre>form:Ver*</pre>
+                <pre>def:*abnahme</pre>
+            </td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Boolesche Operatoren</th>
+            <td>
+                <pre>status:Red-f AND autor:lemnitzer</pre>
+                <pre>klasse:(Verb OR Substantiv)</pre>
+            </td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Negation</th>
+            <td>
+                <pre>klasse:Adjektiv AND -status:Red-f</pre>
+                <pre>-klasse:Adjektiv AND form:*lich</pre>
+            </td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Phrasen</th>
+            <td>
+                <pre>def:"da sie"</pre>
+                <pre>def:"um sie"</pre>
+            </td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Reguläre Ausdrücke</th>
+            <td>
+                <pre>form:/[Vv]er.*ver.*/</pre>
+                <pre>form:/((be)|(zer)).*/ AND klasse:*Adjektiv</pre>
+            </td>
+        </tr>
+        <tr>
+            <th align="left" width="40%" bgcolor="#eeeeee">Datierungen</th>
+            <td>
+                <pre>datum:2019-06-11</pre>
+                <pre>datum:[2019-01 TO *]</pre>
+                <pre>datum:[2018-06 TO 2018-11-01]</pre>
+                <pre>datum:[* TO 2015-01] AND -quelle:(Duden* OR DWDS*)</pre>
+            </td>
+        </tr>
+    </table>
+</html>

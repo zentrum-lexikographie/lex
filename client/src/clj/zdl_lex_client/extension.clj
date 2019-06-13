@@ -5,6 +5,7 @@
   (:require [mount.core :as mount]
             [zdl-lex-client.article :as article]
             [zdl-lex-client.editors :as editors]
+            [zdl-lex-client.help :as help]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.repl :as repl]
             [zdl-lex-client.search :as search]
@@ -37,11 +38,13 @@
          workspace/toolbar
          (let [article-search (ToolbarButton. search/action false)
                article-create (ToolbarButton. article/create false)
+               open-help (ToolbarButton. help/action false)
                status-label status/label
                toolbar [icon/logo
                         status/label
                         search/input
                         article-search
+                        open-help
                         article-create]]
            (doto toolbarInfo
              (.setTitle "ZDL/DWDS")
