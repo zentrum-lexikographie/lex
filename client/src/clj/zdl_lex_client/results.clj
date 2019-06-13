@@ -15,13 +15,6 @@
            [org.jdesktop.swingx JXTable JXTable$TableAdapter]
            [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
 
-(def output (doto (JideTabbedPane. JTabbedPane/BOTTOM)
-              (.setShowCloseButtonOnTab true)))
-
-(defn result-tabs [] (ui/select output [:.result]))
-
-(def num-result-tabs (comp count result-tabs))
-
 (def ^:private result-table-columns
   [{:key :status :text "Status"}
    {:key :form :text "Schreibung"}
@@ -65,14 +58,12 @@
                           :sources (some-> % :sources result-values)
                           :color (article/status->color %)})))
 
-(defn result-table [result]
+(defn render-result [{:keys [result] :as data}]
   (let [result (result->table-model result)
-        table (uix/table-x :class :result
-                           :model [:rows result
+        table (uix/table-x :model [:rows result
                                    :columns result-table-columns]
                            :listen [:mouse-pressed (open-articles-in result)
-                                    :component-resized resize-columns]
-                           :user-data result)]
+                                    :component-resized resize-columns])]
     (doto table
       (.setAutoResizeMode
        JTable/AUTO_RESIZE_ALL_COLUMNS)
@@ -96,27 +87,43 @@
                    (ui/config! component :background (row :color))
                    component)
                  component))))])))
-       (->> table ui/scrollable)))
+    (ui/scrollable table :class :result :user-data data)))
 
-(defn add-result [{:keys [id query total result]}]
-  (let [id (keyword id)
-        title (format "%s (%d)" query total)
-        tip query
-        tab (result-table result)]
-    (ui/invoke-soon
-     (.addTab output title icon/gmd-result tab tip)
+(def output (doto (JideTabbedPane. JTabbedPane/BOTTOM)
+              (.setShowCloseButtonOnTab true)))
+
+(defn result-tabs [] (ui/select output [:.result]))
+
+(def num-result-tabs (comp count result-tabs))
+
+(defn result= [a b]
+  (= (:query a) (:query b)))
+
+(defn merge-result [{:keys [id query total result] :as data}]
+  (ui/invoke-soon
+   (let [id (keyword id)
+         title (format "%s (%d)" query total)
+         tip query
+         timestamp (t/now)
+         old-tabs (filter #(result= data (-> % ui/user-data)) (result-tabs))
+         insert-index (some->> old-tabs last (.indexOfComponent output))
+         new-tab (render-result data)]
+     (if insert-index
+       (.insertTab output title icon/gmd-result new-tab tip insert-index)
+       (.addTab output title icon/gmd-result new-tab tip))
+     (doseq [tab old-tabs] (.remove output tab))
      (loop [tabs (num-result-tabs)]
-       (when (< 10 tabs)
+       (when (> tabs 10)
          (.removeTabAt output 0)
          (recur (num-result-tabs))))
-     (ui/selection! output tab)
+     (ui/selection! output new-tab)
      (workspace/show-view workspace/results-view))))
 
 (defstate renderer
   :start (let [ch (async/chan)]
            (async/go-loop []
              (when-let [result (async/<! ch)]
-               (add-result (merge result {:timestamp (t/now)}))
+               (merge-result result)
                (recur)))
            ch)
   :end (async/close! renderer))
