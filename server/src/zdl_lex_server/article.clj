@@ -34,6 +34,28 @@
                          attr-nodes)]
     (if (empty? typed-attrs) {} (apply merge-with concat typed-attrs))))
 
+(def ^:private  format-timestamp (partial t/format :iso-local-date))
+
+(defn- timestamp [s]
+  (let [now (format-timestamp (t/date))]
+    (try
+      (let [ts (format-timestamp (t/parse s))
+            valid? (<= (compare ts now) 0)]
+        (if valid? ts now))
+      (catch Throwable t (timbre/warn t) now))))
+
+(comment
+  (timestamp "1900-01-01")
+  (timestamp "2050-06-07")
+  (timestamp "jfsjlj"))
+
+(defn- timestamps [attrs]
+  (into {}
+        (map #(vector
+               (first %)
+               (vec (map timestamp (second %)))))
+        attrs))
+
 (defn excerpt [article-loc]
   (let [forms (texts article-loc :Formangabe :Schreibung)
         pos (texts article-loc :Formangabe :Grammatik :Wortklasse)
@@ -47,7 +69,7 @@
         sense-rels (texts article-loc dz/descendants
                           :Lesart :Verweise :Verweis :Ziellemma)
         {:keys [Typ Tranche Status]} (-> article-loc zip/node :attrs)
-        timestamps (attrs article-loc :Zeitstempel)
+        timestamps (timestamps (attrs article-loc :Zeitstempel))
         authors (attrs article-loc :Autor)
         sources (attrs article-loc :Quelle)
         excerpt {:forms forms
@@ -125,11 +147,8 @@
         last-modified (reduce max-timestamp (apply concat (vals timestamps)))
         last-modified-fields [[(field-name :last-modified) [last-modified]]]
 
-        weight (try
-                 (-> last-modified t/parse days-since-epoch)
-                 (catch DateTimeParseException e
-                   (timbre/warn e)
-                   0))
+        weight (try (-> last-modified t/parse days-since-epoch)
+                    (catch Throwable t (timbre/warn t) 0))
 
         author-fields (attr-field "authors" "ss" (excerpt :authors))
         sources-fields (attr-field "sources" "ss" (excerpt :sources))

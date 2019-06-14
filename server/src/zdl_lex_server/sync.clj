@@ -58,7 +58,11 @@
                                ch ([v] v))
                (timbre/info {:solr :sync})
                (when (async/<!
-                      (async/thread (try (solr/sync-articles) (catch Throwable t)))))
+                      (async/thread
+                        (try
+                          (solr/sync-articles)
+                          (catch Throwable t
+                            (timbre/warn t))))))
                (async/poll! ch) ;; we just finished a sync; remove pending reqs
                (recur)))
            ch)

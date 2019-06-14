@@ -9,7 +9,8 @@
             [zdl-lex-server.store :as store]
             [zdl-lex-server.sync :as sync]
             [clojure.core.async :as async]
-            [zdl-lex-server.exist :as exist])
+            [zdl-lex-server.exist :as exist]
+            [zdl-lex-server.article :as article])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
 (defn configure-logging []
@@ -31,6 +32,6 @@
   (async/>!! exist/exist->git "DWDS/billes-006/Nachbarland.xml")
   (git/rebase)
   http/server
-  (->> (store/article-files) (take 10) solr/add-articles)
+  (time (->> (store/article-files) (pmap article/document) last))
   (solr/commit-optimize)
   (async/>!! sync/git-all->solr :sync))
