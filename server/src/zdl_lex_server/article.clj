@@ -71,23 +71,27 @@
 (def abstract-fields [:forms :pos :definitions :type :status :authors :sources])
 
 (defn field-key [n]
-  (-> n
-      (str/replace #"_((dts)|(dt)|(ss)|(t)|(i))$" "")
-      (str/replace "_" "-")
-      keyword))
+  (condp = n
+    "_text_" :text
+    (-> n
+        (str/replace #"_((dts)|(dt)|(ss)|(t)|(i))$" "")
+        (str/replace "_" "-")
+        keyword)))
 
 (defn field-name [k]
-  (let [field-name (str/replace (name k) "-" "_")
-        field-suffix (condp = k
-                       :id ""
-                       :language ""
-                       :xml-descendent-path ""
-                       :weight "_i"
-                       :definitions "_t"
-                       :last-modified "_dt"
-                       :timestamps "_dts"
-                       "_ss")]
-    (str field-name field-suffix)))
+  (condp = k
+    :text "_text_"
+    (let [field-name (str/replace (name k) "-" "_")
+          field-suffix (condp = k
+                         :id ""
+                         :language ""
+                         :xml-descendent-path ""
+                         :weight "_i"
+                         :definitions "_t"
+                         :last-modified "_dt"
+                         :timestamps "_dts"
+                         "_ss")]
+      (str field-name field-suffix))))
 
 (defn basic-field [[k v]]
   (if-not (nil? v) [(field-name k) (if (string? v) [v] (vec v))]))

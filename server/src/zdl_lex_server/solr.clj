@@ -112,13 +112,12 @@
     (-> s lucene/str->ast translate-field-names lucene/ast->str)
     (catch Throwable t s)))
 
-(comment
-  (translate-query "forms:t*"))
 
 (defn handle-search [{{:keys [q offset limit]
                 :or {q "id:*" offset "0" limit "10"}} :params}]
   (let [q (translate-query q)
         solr-response (query {"q" q
+                              "df" "forms_ss"
                               "start" offset
                               "rows" limit
                               "sort" "forms_ss asc,weight_i desc,id asc"
@@ -144,3 +143,8 @@
      {:total numFound
       :result (for [{:keys [abstract_ss]} docs] (-> abstract_ss first read-string))
       :facets (into (sorted-map) facets)})))
+
+(comment
+  (translate-query "forms:t*")
+  (translate-query "text:*")
+  (handle-search {:params {:q "suchen"}}))

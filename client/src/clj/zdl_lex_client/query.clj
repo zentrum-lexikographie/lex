@@ -12,7 +12,8 @@
    "quelle" "sources"
    "status" "status"
    "tranche" "tranche"
-   "typ" "type"})
+   "typ" "type"
+   "volltext" "text"})
 
 (defn- expand-date [v]
   (-> v
