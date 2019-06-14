@@ -4,14 +4,16 @@
             [mount.core :refer [defstate]]
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
+            [seesaw.util :refer [to-dimension]]
             [tick.alpha.api :as t]
             [zdl-lex-client.article :as article]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.search :as search])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
-           [javax.swing JTabbedPane JTable]
+           [javax.swing Box JTabbedPane JTable]
            [org.jdesktop.swingx JXTable JXTable$TableAdapter]
            [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
 
@@ -58,12 +60,15 @@
                           :sources (some-> % :sources result-values)
                           :color (article/status->color %)})))
 
-(defn render-result [{:keys [result] :as data}]
+(defn render-result [{:keys [result query total] :as data}]
   (let [result (result->table-model result)
         table (uix/table-x :model [:rows result
                                    :columns result-table-columns]
                            :listen [:mouse-pressed (open-articles-in result)
-                                    :component-resized resize-columns])]
+                                    :component-resized resize-columns])
+        query-action (ui/action
+                      :icon icon/gmd-refresh
+                      :handler (fn [_] (search/new-query query)))]
     (doto table
       (.setAutoResizeMode
        JTable/AUTO_RESIZE_ALL_COLUMNS)
@@ -87,7 +92,23 @@
                    (ui/config! component :background (row :color))
                    component)
                  component))))])))
-    (ui/scrollable table :class :result :user-data data)))
+    (ui/border-panel
+     :class :result :user-data data
+     :north (ui/horizontal-panel
+             :items [(Box/createRigidArea (to-dimension [5 :by 0]))
+                     (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))
+                               :font {:style :plain})
+                     (Box/createRigidArea (to-dimension [10 :by 0]))
+                     (ui/label :text query)
+                     (Box/createHorizontalGlue)
+                     (ui/label :text (format "%d Ergebnis(se)" total)
+                               :foreground (if (< (count result) total) :orange)
+                               :font {:style :plain})
+                     (Box/createRigidArea (to-dimension [10 :by 0]))
+                     (ui/toolbar
+                      :floatable? false
+                      :items [(ui/button :action query-action)])])
+     :center (ui/scrollable table))))
 
 (def output (doto (JideTabbedPane. JTabbedPane/BOTTOM)
               (.setShowCloseButtonOnTab true)))
@@ -102,7 +123,7 @@
 (defn merge-result [{:keys [id query total result] :as data}]
   (ui/invoke-soon
    (let [id (keyword id)
-         title (format "%s (%d)" query total)
+         title query
          tip query
          timestamp (t/now)
          old-tabs (filter #(result= data (-> % ui/user-data)) (result-tabs))
@@ -122,8 +143,8 @@
 (defstate renderer
   :start (let [ch (async/chan)]
            (async/go-loop []
-             (when-let [result (async/<! ch)]
+             (when-let [result (async/alt! [ch search/responses] ([v] v))]
                (merge-result result)
                (recur)))
            ch)
-  :end (async/close! renderer))
+  :stop (async/close! renderer))

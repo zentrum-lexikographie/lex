@@ -1,23 +1,24 @@
 (ns zdl-lex-client.search
   (:require [clojure.core.async :as async]
             [clojure.string :as str]
-            [lucene-query.core :as lucene]
             [mount.core :refer [defstate]]
-            [seesaw.bind :as uib]
             [seesaw.behave :refer [when-focused-select-all]]
+            [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
             [seesaw.core :as ui]
             [taoensso.timbre :as timbre]
+            [zdl-lex-client.article :as article]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.query :as query]
-            [zdl-lex-client.results :as results]
-            [zdl-lex-client.workspace :as workspace]
-            [zdl-lex-client.article :as article])
+            [zdl-lex-client.workspace :as workspace])
   (:import com.jidesoft.hints.AbstractListIntelliHints
            java.util.UUID))
 
+(defonce responses (async/chan))
+
 (defn search-request [q]
+  (timbre/info q)
   (http/get-edn #(merge % {:path "/articles/search" :query {"q" q "limit" "1000"}})))
 
 (defstate requests
@@ -29,16 +30,17 @@
                    (->> (async/thread (search-request q))
                         (async/<!)
                         (merge req)
-                        (async/>! results/renderer)))
+                        (async/>! responses)))
                  (catch Exception e (timbre/warn e)))
                (recur)))
            ch)
   :stop (async/close! requests))
 
-(defn new-query [q]
-  (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
-
 (defonce search-query (atom ""))
+
+(defn new-query [q]
+  (reset! search-query q)
+  (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
 
 (def action
   (ui/action
@@ -53,7 +55,8 @@
 
 (when-focused-select-all input)
 
-(uib/bind input
+(uib/bind search-query
+          input
           search-query
           (uib/transform #(if (query/valid? %) :black :red))
           (uib/property input :foreground))
