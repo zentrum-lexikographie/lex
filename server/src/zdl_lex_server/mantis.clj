@@ -8,11 +8,17 @@
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]))
 
-(def client
-  (let [mantis-base (config :mantis-url)
-        wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
-        endpoint (str mantis-base "/api/soap/mantisconnect.php")]
-    (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}})))
+(def client-instance (atom nil))
+
+(defn client []
+  (swap!
+   client-instance
+   (fn [instance]
+     (or instance
+         (let [mantis-base (config :mantis-url)
+               wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
+               endpoint (str mantis-base "/api/soap/mantisconnect.php")]
+           (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))))
 
 (def ^:private authenticate
   (partial merge {:username (config :mantis-user)
@@ -28,7 +34,7 @@
   ([op params] (results op params zip->items))
   ([op params zip->locs]
    (timbre/info {:op op :params (dissoc params :username :password)})
-   (-> (client op (authenticate params))
+   (-> ((client) op (authenticate params))
        (zip/xml-zip)
        (zip->locs))))
 
@@ -76,5 +82,6 @@
 
 (comment
   store/mantis-dump
+  @client-instance
   (time (spit store/mantis-dump (pr-str (vec (issues)))))
   (take 10 (issues)))
