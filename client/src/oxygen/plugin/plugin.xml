@@ -18,4 +18,6 @@
  <toolbar id="zdl-lex-client-toolbar" initialSide="NORTH" initialRow="0"/>
 
  <view id="zdl-lex-results-view" initialSide="SOUTH" initialRow="0"/>
+
+ <view id="zdl-lex-article-view" initialSide="EAST" initialRow="0"/>
 </plugin>

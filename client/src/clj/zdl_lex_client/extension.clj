@@ -3,8 +3,9 @@
    :name de.zdl.oxygen.Extension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
   (:require [mount.core :as mount]
+            [seesaw.core :as ui]
             [zdl-lex-client.article :as article]
-            [zdl-lex-client.editors :as editors]
+            [zdl-lex-client.details :as details]
             [zdl-lex-client.help :as help]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.repl :as repl]
@@ -29,6 +30,11 @@
               (.setTitle "ZDL/DWDS – Suchergebnisse")
               (.setIcon icon/gmd-result)
               (.setComponent results/output))
+           workspace/article-view
+           (doto viewInfo
+             (.setTitle "ZDL/DWDS – Artikel")
+             (.setIcon icon/gmd-details)
+             (.setComponent details/panel))
            viewInfo))))
   (.addToolbarComponentsCustomizer
    app-ws
@@ -55,5 +61,4 @@
   (mount/stop)
   true)
 
-(comment repl/server
-         editors/listeners)
+(comment repl/server)

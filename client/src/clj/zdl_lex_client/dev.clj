@@ -10,11 +10,12 @@
             [clojure.core.async :as async]))
 
 (comment
-  @workspace/instance
+  workspace/instance
   (mount/start)
   @status/current
   status/label
   (-> editors/listeners :editors deref)
+  @editors/active
   (search/new-query "forms:plexi*")
   results/output
   (http/post-edn #(merge % {:path "/articles/exist/sync-id"

@@ -63,7 +63,8 @@
                   (.. ws
                       (getEditorAccess url editing-area)
                       (removeEditorListener (@editors url)))
-                  (swap! editors dissoc url))]
+                  (swap! editors dissoc url)
+                  (async/>!! activations {(str url) false}))]
     (proxy [WSEditorChangeListener] []
       (editorAboutToBeOpened [_])
       (editorAboutToBeOpenedVeto [_] true)
@@ -75,8 +76,7 @@
       (editorActivated [url]
         (async/>!! activations {(str url) true}))
       (editorSelected [_])
-      (editorDeactivated [url]
-        (async/>!! activations {(str url) false}))
+      (editorDeactivated [_])
       (editorClosed [_])
       (editorOpened [url]
         (add! url))

@@ -10,6 +10,8 @@
 
 (def toolbar "zdl-lex-client-toolbar")
 
+(def article-view "zdl-lex-article-view")
+
 (def results-view "zdl-lex-results-view")
 
 (defstate instance
