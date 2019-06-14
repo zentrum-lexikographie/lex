@@ -33,6 +33,7 @@ zdl_api_context_paths:
   - /articles/exist
   - /articles/forms
   - /articles/index
+  - /articles/issues
   - /articles/search
   - /assets
   - /home
