@@ -8,10 +8,14 @@ all: server client
 server:
 	cd server && lein uberjar
 
-client:
+client: schema
 	cd client && lein uberjar && lein package
 
+schema:
+	make -C $@ install
+
 clean:
+	cd schema && make clean
 	cd client && lein clean
 	cd server && lein clean
 
@@ -102,7 +106,7 @@ spock-tunnel:
 release:
 	echo -n `date +%Y%m.%d.%H` >VERSION
 
-.PHONY: all server client
+.PHONY: all server client schema
 .PHONY: clean data-clean
 .PHONY: oxygen deploy
 .PHONY: vm vm-destroy
