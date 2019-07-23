@@ -5,13 +5,14 @@ oxygen_home := $(shell bin/find-oxygen.sh)
 
 all: server client
 
-server:
+server: schema
 	cd server && lein uberjar
 
 client: schema
 	cd client && lein uberjar && lein package
 
 schema:
+	git submodule update --recursive $@
 	make -C $@ install
 
 clean:

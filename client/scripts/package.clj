@@ -30,6 +30,7 @@
         server-base (config :server-base)
 
         source (fs/file "src" "oxygen")
+        schema-source (fs/file ".." "schema" "resources" "rng")
 
         target (fs/file "target")
         jar (fs/file target "uberjar" "zdl-lex-client.jar")
@@ -41,6 +42,7 @@
 
         frameworks (fs/file oxygen "frameworks")
         framework (fs/file frameworks "zdl-lex-client")
+        framework-schema (fs/file framework "validation")
         framework-zip (fs/file oxygen "zdl-lex-framework.zip")
 
         update-site-xml (fs/file oxygen  "updateSite.xml")]
@@ -67,6 +69,7 @@
 
   (fs/delete-dir frameworks)
   (fs/copy-dir (fs/file source "framework") framework)
+  (fs/copy-dir schema-source framework-schema)
 
   (zip framework-zip framework "zdl-lex-client")
 
