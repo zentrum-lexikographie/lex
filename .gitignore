@@ -19,6 +19,7 @@ ansible/*.retry
 ansible/roles/*.*
 ansible/venv
 
+client/src/oxygen/framework/validation/
 client/dev-config.edn
 client/oxygen-config.edn
 server/dev-config.edn

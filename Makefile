@@ -12,7 +12,7 @@ client: schema
 	cd client && lein uberjar && lein package
 
 schema:
-	git submodule update --recursive $@
+	git submodule update --init --recursive $@
 	make -C $@ install
 
 clean:

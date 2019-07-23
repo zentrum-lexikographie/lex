@@ -42,7 +42,6 @@
 
         frameworks (fs/file oxygen "frameworks")
         framework (fs/file frameworks "zdl-lex-client")
-        framework-schema (fs/file framework "validation")
         framework-zip (fs/file oxygen "zdl-lex-framework.zip")
 
         update-site-xml (fs/file oxygen  "updateSite.xml")]
@@ -68,8 +67,8 @@
   (zip plugin-zip plugin "zdl-lex-client")
 
   (fs/delete-dir frameworks)
+  (fs/copy-dir schema-source (fs/file source "framework" "validation"))
   (fs/copy-dir (fs/file source "framework") framework)
-  (fs/copy-dir schema-source framework-schema)
 
   (zip framework-zip framework "zdl-lex-client")
 

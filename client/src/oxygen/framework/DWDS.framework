@@ -14,7 +14,7 @@
 					<field name="schemaDescriptor">
 						<docTypeSchema>
 							<field name="type">
-								<Integer>3</Integer>
+								<Integer>6</Integer>
 							</field>
 							<field name="uri">
 								<String>file://${frameworkDir}/validation/DWDSWB-compiled.rng</String>
