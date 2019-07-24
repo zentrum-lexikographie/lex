@@ -7,6 +7,7 @@
             [zdl-lex-client.search :as search]
             [zdl-lex-client.results :as results]
             [zdl-lex-client.http :as http]
+            [zdl-lex-schema.validate :as validate]
             [clojure.core.async :as async]
             [clojure.java.io :as io]))
 
@@ -19,6 +20,7 @@
   @editors/active
   (search/new-query "forms:plexi*")
   results/output
+  (validate/validate-dirs "../data/git/articles/Neuartikel-002")
   (http/post-edn #(merge % {:path "/articles/exist/sync-id"
                             :query {"id" "DWDS/MWA-001/der_Grosse_Teich.xml"}})
                  {})
