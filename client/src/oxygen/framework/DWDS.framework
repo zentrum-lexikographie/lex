@@ -17,7 +17,7 @@
 								<Integer>6</Integer>
 							</field>
 							<field name="uri">
-								<String>file://${frameworkDir}/validation/DWDSWB-compiled.rng</String>
+								<String>file://${frameworkDir}/validation/DWDSWB.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
