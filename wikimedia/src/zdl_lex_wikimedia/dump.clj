@@ -61,11 +61,9 @@
   (comp
     (partial filter content-page?)
     (partial map #(array-map :title (page-property % ::mw/title)
+                             :timestamp (page-property % ::mw/revision ::mw/timestamp)
                              :content (page-property % ::mw/revision ::mw/text)))
     (partial filter (comp #{::mw/page} :tag))
     :content
     xml/parse
     io/input-stream))
-
-(def sample-pages
-  (partial pages (io/file "data/dewiktionary.xml")))

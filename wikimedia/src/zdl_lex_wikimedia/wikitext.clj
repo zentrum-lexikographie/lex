@@ -64,6 +64,8 @@
 
 (defmethod text WtText [^WtText n] (.getContent n))
 
+(defmethod text WtTemplate [^WtTemplate t] (str/join ", " (map text (.getArgs t))))
+
 (defmethod text WtExternalLink [^WtExternalLink n]
   (text (if (.hasTitle n) (.getTitle n) (.getTarget n))))
 
@@ -80,9 +82,10 @@
 
 (defn class= [clz]
   (fn [loc]
-    (or (instance? clz (-> loc zip/node))
-        (filter #(and (zip/branch? %) (instance? clz (-> % zip/node)))
-                (dz/children-auto loc)))))
+    (filter #(and (zip/branch? %) (instance? clz (zip/node %)))
+            (if (dz/auto? loc)
+              (dz/children-auto loc)
+              (list (dz/auto true loc))))))
 
 (defn text= [s]
   (fn [loc]

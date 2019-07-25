@@ -4,17 +4,23 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.zip :as zip]
+            [taoensso.timbre :as timbre]
             [zdl-lex-wikimedia.dump :as dump]
             [zdl-lex-wikimedia.util :refer [->clean-map]]
             [zdl-lex-wikimedia.wikitext :as wt])
   (:import [org.sweble.wikitext.parser.nodes
             WtDefinitionList WtDefinitionListDef
             WtExternalLink WtInternalLink
+            WtBody WtHeading
             WtName
+            WtParagraph
+            WtSection WtText
             WtTemplate WtTemplateArgument WtTemplateArguments
             WtValue]))
 
 (def >> dz/descendants)
+
+(defn normalize-space [s] (str/replace s #"\s+" " "))
 
 (def text (comp not-empty str/trim wt/loc->text))
 
@@ -35,10 +41,54 @@
           (instance? WtExternalLink node) true
           :else false)))
 
+(defn section-level [level]
+  (fn [loc]
+    (->> (.getLevel ^WtSection (zip/node loc))
+         (= level))))
+
 (defn links [loc]
   (seq (wt/nodes-> loc >> link-node? zip/node #(.getTarget %) wt/text)))
 
+(defn definitions [templates name]
+  (->>
+   (mapcat
+    #(wt/nodes-> % zip/up dz/right-locs WtDefinitionList WtDefinitionListDef)
+    (templates name))
+   (seq)))
+
+
+(defn parse-types [loc]
+  (let [heading (wt/node-> loc WtHeading)
+        body (wt/node-> loc WtBody)
+        types (wt/nodes-> heading WtTemplate [WtName "Wortart"] template-values)
+        templates (->> (wt/nodes-> body >> WtTemplate)
+                       (group-by #(wt/node-> % WtName text)))]
+    (->clean-map
+     {:type types
+      :pronounciation (some-> (first (templates "Aussprache"))
+                              (wt/nodes-> zip/up
+                                          dz/right-locs
+                                          WtDefinitionList WtDefinitionListDef
+                                          [WtTemplate WtName "IPA"]
+                                          WtTemplate [WtName "Lautschrift"]
+                                          text)
+                              (seq))
+      :descs (take 3 (sort (keys templates)))})))
+  
+(defn parse-entry [loc]
+  (let [heading (wt/node-> loc WtHeading)
+        title (text heading)
+        lang (wt/node-> heading WtTemplate [WtName "Sprache"] template-values)
+        types (wt/nodes-> loc WtBody WtSection (section-level 3) parse-types)]
+    {:title title :lang lang :types types}))
+
 (defn parse [{:keys [title content] :as page}]
+  (let [ast (wt/parse content)
+        loc (wt/zipper ast)]
+    (assoc page
+           :entries (wt/nodes-> loc WtSection (section-level 2) parse-entry))))
+
+(defn parse2 [{:keys [title content] :as page}]
   "Parses a Wiktionary page, extracting lexicographic data"
   (let [ast (wt/parse content)
         loc (wt/zipper ast)
@@ -98,15 +148,18 @@
 (def wiktionary-de (io/file "data/dewiktionary.xml"))
 
 (comment
+  (time (count (dump/pages wiktionary-de)))
+
   (time
    (->> (dump/pages wiktionary-de)
-        (filter (comp (partial = "Sinn") :title))
+        ;;(filter (comp (partial = "Sinn") :title))
         (map parse)
+        (filter (comp (partial < 1) count :entries))
         ;;(filter (comp (partial = "Deutsch") :lang))
-        ;;(map :ast)
         (map #(dissoc % :content))
         ;;(filter #(= "Verb" (:pos %)))
-        first)))
+        (drop 30)
+        (take 10))))
 
 (defn -main [& dumps]
   (doseq [dump dumps]
