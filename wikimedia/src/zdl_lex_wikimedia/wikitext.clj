@@ -1,17 +1,16 @@
 (ns zdl-lex-wikimedia.wikitext
-  (:require [clojure.string :as str]
-            [clojure.zip :as zip]
-            [zdl-lex-wikimedia.util :refer [->clean-map]]
-            [clojure.data.zip :as dz])
+  (:require [clojure.data.zip :as dz]
+            [clojure.string :as str]
+            [clojure.zip :as zip])
   (:import java.io.Writer
+           [org.sweble.wikitext.parser.nodes WikitextNodeFactory WtExternalLink WtInternalLink WtNode WtTemplate WtTemplateArgument WtText WtUrl]
            org.sweble.wikitext.parser.ParserConfig
-           [org.sweble.wikitext.parser.nodes WtExternalLink WtInternalLink WtNode WtTagExtension WtTemplate WtTemplateArgument WtText WtUrl WikitextNodeFactory]
-           [org.sweble.wikitext.parser.utils SimpleParserConfig NonExpandingParser WtRtDataPrinter]))
+           [org.sweble.wikitext.parser.utils NonExpandingParser WtRtDataPrinter]))
 
-(def parser (NonExpandingParser.))
+(def ^NonExpandingParser parser (NonExpandingParser.))
 
 (def ^WikitextNodeFactory node-factory
-  (.. parser (getConfig) (getNodeFactory)))
+  (.getNodeFactory ^ParserConfig (.getConfig parser)))
 
 (defn ^WtNode parse [^String content]
   (.parseArticle parser content ""))
@@ -20,43 +19,12 @@
   (WtRtDataPrinter/print w v))
 
 (defn zipper [^WtNode node]
+  "A read-only zipper for the given Wikitext node."
   (zip/zipper
    (complement empty?)
    seq
    (fn [_ _] (throw (UnsupportedOperationException.)))
    node))
-
-(defn camel->lisp [s]
-  "https://gist.github.com/idmitrievsky/2b444ef94316dad2cd31452d4ab86871"
-  (-> s
-      (str/replace #"(.)([A-Z][a-z]+)" "$1-$2")
-      (str/replace #"([a-z0-9])([A-Z])" "$1-$2")
-      (str/lower-case)))
-
-(defn node->type [^WtNode n]
-  (-> (.getNodeName n)
-      (camel->lisp)
-      (str/replace #"^wt-" "")
-      (keyword)))
-
-(defn node->attrs [^WtNode node]
-  (let [attrs (.getAttributes node)]
-    (if-not (empty? attrs) attrs)))
-
-(def ^:private excluded-prop?
-  #{:rtd :warnings :entityMap :precededByNewline})
-
-(defn- node->props [^WtNode node]
-  (let [iter (.propertyIterator node)
-        props (loop [props [] next? (.next iter)]
-                (if next?
-                  (recur (conj props [(keyword (.getName iter))
-                                      (str (.getValue iter))])
-                         (.next iter))
-                  props))
-        props (remove (comp excluded-prop? first) props)
-        props (remove (comp empty? second) props)]
-    (if-not (empty? props) (into {} props))))
 
 (defmulti text class)
 
@@ -64,7 +32,20 @@
 
 (defmethod text WtText [^WtText n] (.getContent n))
 
-(defmethod text WtTemplate [^WtTemplate t] (str/join ", " (map text (.getArgs t))))
+(def ^:private visible-templates
+  #{"kPl."})
+
+(defmethod text WtTemplate [^WtTemplate t]
+  (let [name (not-empty (text (.getName t)))
+        name (if (visible-templates name) name)
+        args (not-empty (str/join ", " (map text (.getArgs t))))]
+    (str/join ": " (remove nil? [name args]))))
+
+(defmethod text WtTemplateArgument [^WtTemplateArgument arg]
+  (->> [(.getName arg) (.getValue arg)]
+       (map text)
+       (remove empty?)
+       (str/join ": ")))
 
 (defmethod text WtExternalLink [^WtExternalLink n]
   (text (if (.hasTitle n) (.getTitle n) (.getTarget n))))

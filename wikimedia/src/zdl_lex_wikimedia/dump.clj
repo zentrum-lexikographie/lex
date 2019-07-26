@@ -4,9 +4,8 @@
             [clojure.data.zip.xml :as zx]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.zip :as zip])
-  (:import javax.xml.stream.XMLInputFactory
-           javax.xml.transform.stream.StreamSource))
+            [clojure.zip :as zip]
+            [zdl-lex-wikimedia.util :refer [->clean-map]]))
 
 (def ^:private namespace-filter
   "Administrative page namespaces"
@@ -43,27 +42,35 @@
             (partial re-seq #" \(Konjugation\)$")
             (partial re-seq #" \(Deklination\)$"))))
 
-(defn- content-page? [{:keys [title]}]
+(defn- content-page? [{:keys [title content]}]
   "Filters pages by title, removing administrative pages"
-  (let [[ns ln] (str/split title #":")]
-    (or (nil? ln) (and (namespace-filter ns) (regex-filter title)))))
-
-(defn- page-property [node & path]
-  (as-> node $
-    (zip/xml-zip $)
-    (apply zx/xml1-> $ path)
-    (zx/xml-> $ dz/descendants zip/node string?)
-    (apply str $)))
+  (and content
+       title
+       (let [[ns ln] (str/split title #":")]
+         (or (nil? ln) (and (namespace-filter ns) (regex-filter title))))))
 
 (xml/alias-uri :mw "http://www.mediawiki.org/xml/export-0.10/")
 
-(def pages
-  (comp
-    (partial filter content-page?)
-    (partial map #(array-map :title (page-property % ::mw/title)
-                             :timestamp (page-property % ::mw/revision ::mw/timestamp)
-                             :content (page-property % ::mw/revision ::mw/text)))
-    (partial filter (comp #{::mw/page} :tag))
-    :content
-    xml/parse
-    io/input-stream))
+(defn- page-property [loc & path]
+  (->> (concat path [dz/descendants zip/node string?])
+       (apply zx/xml-> loc)
+       (apply str)
+       (not-empty)))
+
+(defn- page->map [page]
+  (let [property (partial page-property (zip/xml-zip page))]
+    (->clean-map
+     {:title (property ::mw/title)
+      :content (property ::mw/revision ::mw/text)
+      :timestamp (property ::mw/revision ::mw/timestamp)
+      :author (property ::mw/revision ::mw/contributor ::mw/username)
+      :comment (property ::mw/revision ::mw/comment)})))
+
+(defn pages [source]
+  "Produces a seq of page data from a parsed XML source"
+  (->> (io/input-stream source)
+       (xml/parse)
+       (:content)
+       (filter (comp #{::mw/page} :tag))
+       (map page->map)
+       (filter content-page?)))

@@ -17,6 +17,7 @@
                  [org.sweble.wikitext/swc-parser-lazy "3.1.9"]
                  [org.dkpro.jwktl/dkpro-jwktl "1.1.1-SNAPSHOT"]
                  [org.apache.jena/jena-arq "3.12.0"]]
-  :main ^:skip-aot wiktionary.core
+  :global-vars {*warn-on-reflection* false}
+  :main ^:skip-aot zdl-lex-wikimedia.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})

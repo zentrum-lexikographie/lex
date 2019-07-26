@@ -1,6 +1,7 @@
 (ns zdl-lex-wikimedia.util)
 
-(def ->clean-map
-  (comp (partial into {})
-        (partial remove (comp nil? second))))
+(defn ->clean-map [m]
+  "A map with nil values removed."
+  (->> (remove (comp nil? second) m)
+       (into {})))
 
