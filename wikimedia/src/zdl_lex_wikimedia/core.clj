@@ -32,13 +32,14 @@
    (seq)))
 
 (defn remove-references [s]
-  (not-empty (str/replace s #"^\[[^\]]+\]\s+" "")))
+  (not-empty (str/replace s #"^\[[^\]]+\]\s*" "")))
 
 (defn ->data [loc]
-  (->clean-map
-   {:text (some-> loc text remove-references)
-    :links (seq (wt/nodes-> loc descendants WtInternalLink zip/node
-                            #(.getTarget ^WtInternalLink %) wt/text))}))
+  (-> {:text (some-> loc text remove-references not-empty)
+       :links (seq (wt/nodes-> loc descendants WtInternalLink zip/node
+                               #(.getTarget ^WtInternalLink %) wt/text))}
+      (->clean-map)
+      (not-empty)))
 
 (defn parse-types [loc]
   (let [types (wt/nodes-> loc WtHeading WtTemplate [WtName "Wortart"] template-values)
@@ -94,12 +95,18 @@
 
   (->> (dump/pages wiktionary-de)
        (drop 2000)
+       (take 1000)
        ;;(filter (comp #{"Achtung"} :title))
        (pmap #(merge % (parse %)))
        (map #(dissoc % :content))
+       (mapcat :entries)
+       (mapcat :types)
+       (mapcat (comp (partial take 1) :type))
+       (into #{})
+       (sort)
        ;;(filter (comp (partial some #{"Deutsch"}) (partial map :lang) :entries))
        ;;(filter (comp (partial < 1) count :entries))
-       (take 10)))
+       (take 100)))
 
 (defn -main [& dumps]
   (doseq [dump dumps]
