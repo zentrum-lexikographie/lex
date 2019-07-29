@@ -104,7 +104,7 @@ existdb-destroy:
 spock-tunnel:
 	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
 
-release:
+new-version:
 	echo -n `date +%Y%m.%d.%H` >VERSION
 
 .PHONY: all server client schema
