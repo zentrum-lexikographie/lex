@@ -34,3 +34,6 @@
 (defn sample-article [] (rand-nth (article-files)))
 
 (def mantis-dump (fs/file data-dir "mantis.edn"))
+
+(comment
+  (take 10 (article-files)))

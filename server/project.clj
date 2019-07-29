@@ -36,7 +36,6 @@
                  [mount "0.1.16"]
                  [cprop "0.1.13"]
                  [me.raynes/fs "1.4.6"]
-                 [com.climate/claypoole "1.1.4"]
                  [hiccup "1.0.5"]
                  [gremid/lucene-query "0.1.0"]
                  [io.xapix/clj-soap "1.1.0"]]

@@ -1,7 +1,6 @@
 (ns zdl-lex-server.solr
   (:require [clj-http.client :as http]
             [clojure.data.xml :as xml]
-            [com.climate.claypoole :as cp]
             [lucene-query.core :as lucene]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
@@ -33,15 +32,16 @@
         :query-params params
         :as :json}))
 
-(def ^:private update-pool (cp/threadpool 8))
 (def ^:private update-batch-size 2000)
 
+(def ^:private update-req
+  {:method :post
+   :url (url "/update")
+   :query-params {:wt "json"}
+   :as :json})
+
 (defn batch-update [updates]
-  (cp/pfor update-pool [upd updates]
-           (req (merge {:method :post
-                        :url (url "/update")
-                        :query-params {:wt "json"}
-                        :as :json} upd))))
+  (doall (pmap (comp req (partial merge update-req)) updates)))
 
 (def commit-optimize
   (partial batch-update [{:body "<update><commit/><optimize/></update>"
@@ -49,7 +49,7 @@
 
 (defn update-articles [action article->el articles]
   (batch-update (->> articles
-                     (map article->el)
+                     (pmap article->el)
                      (keep identity)
                      (partition-all update-batch-size)
                      (map #(array-map :tag action

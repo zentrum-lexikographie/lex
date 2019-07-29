@@ -7,36 +7,52 @@
             [clojure.zip :as zip]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [zdl-lex-server.store :as store])
+            [zdl-lex-server.store :as store]
+            [zdl-lex-server.util :refer [->clean-map]])
   (:import java.time.format.DateTimeParseException
            [java.time.temporal ChronoUnit Temporal]))
 
 (defn xml [article]
-  (let [doc-loc (-> article io/input-stream
-                    (xml/parse :namespace-aware false) zip/xml-zip)
-        article-loc (zx/xml1-> doc-loc :DWDS :Artikel)]
-    (or article-loc (throw (ex-info (str article) (zip/node doc-loc))))))
+  "Parses a lexicographic article file, returning a zipper pointing to
+   the article element"
+  (let [doc (-> (io/input-stream article)
+                (xml/parse :namespace-aware false))
+        article-loc (-> (zip/xml-zip doc)
+                        (zx/xml1-> :DWDS :Artikel))]
+    (or article-loc (throw (ex-info (str article) doc)))))
 
-(defn- normalize-space [s] (str/trim (str/replace s #"\s+" " ")))
+(defn- distinct-sorted [vs]
+  (->> (into #{} vs) (vec) (sort) (seq)))
+
+(comment (distinct-sorted [:a :b :b :d :d :c]))
+
+(defn- normalize-space [s]
+  "Replaces whitespace runs with a single space and trims s"
+  (str/trim (str/replace s #"\s+" " ")))
 
 (defn- text [loc]
-  (some-> loc zx/text normalize-space))
+  "The space-normalized, non-empty text content of loc"
+  (some-> loc zx/text normalize-space not-empty))
 
-(defn- texts [& args]
-  (->> (apply zx/xml-> args) (map text) (remove empty?)
-       (into #{}) (vec) (sort) (seq)))
+(defn- texts [vs]
+  "All distinct texts, sorted"
+  (->> (map text vs) (remove nil?) (distinct) (seq)))
 
-(defn- attrs [article-loc attr]
-  (let [attr-locs (zx/xml-> article-loc dz/descendants
-                                 #(string? (zx/attr % attr)))
-        attr-nodes (map zip/node attr-locs)
-        typed-attrs (map #(hash-map (:tag %) [(get-in % [:attrs attr])])
-                         attr-nodes)]
-    (if (empty? typed-attrs) {} (apply merge-with concat typed-attrs))))
+(defn- attrs [loc attr]
+  "All distinct attribute values, grouped by tag"
+  (let [attrs (->> (zx/xml-> loc dz/descendants zip/node)
+                   (map #(vector (:tag %) (get-in % [:attrs attr])))
+                   (filter second)
+                   (map #(hash-map (first %) [(second %)]))
+                   (apply merge-with concat))]
+    (into {} (for [[k v] attrs] [k (-> (distinct v))]))))
 
-(def ^:private format-timestamp (partial t/format :iso-local-date))
+(defn- format-timestamp [d]
+  "ISO-formatted date string"
+  (t/format :iso-local-date d))
 
-(defn- timestamp [s]
+(defn- past-timestamp [s]
+  "An ISO timestamp, guaranteed to be today or in the past"
   (let [now (format-timestamp (t/date))]
     (try
       (let [ts (format-timestamp (t/parse s))
@@ -45,52 +61,39 @@
       (catch Throwable t (timbre/warn t) now))))
 
 (comment
-  (timestamp "1900-01-01")
-  (timestamp "2050-06-07")
-  (timestamp "jfsjlj"))
+  (past-timestamp "1900-01-01")
+  (past-timestamp "2050-06-07")
+  (past-timestamp "jfsjlj"))
 
-(defn- timestamps [attrs]
-  (into {}
-        (map #(vector
-               (first %)
-               (vec (map timestamp (second %)))))
-        attrs))
+(defn- past-timestamps [attrs]
+  (->>
+   (for [[k v] attrs]
+     [k (-> (for [ts v] (past-timestamp ts)) (distinct))])
+   (into {})))
+
+(def ^:private >> dz/descendants)
 
 (defn excerpt [article-loc]
-  (let [forms (texts article-loc :Formangabe :Schreibung)
-        pos (texts article-loc :Formangabe :Grammatik :Wortklasse)
-        definitions (texts article-loc dz/descendants :Definition)
-        senses (texts article-loc dz/descendants :Bedeutungsebene)
-        usage-period (texts article-loc dz/descendants :Gebrauchszeitraum)
-        area (texts article-loc dz/descendants :Sprachraum)
-        styles (texts article-loc dz/descendants :Stilebene)
-        colouring (texts article-loc dz/descendants :Stilfaerbung)
-        morphological-rels (texts article-loc :Verweise :Verweis :Ziellemma)
-        sense-rels (texts article-loc dz/descendants
-                          :Lesart :Verweise :Verweis :Ziellemma)
-        {:keys [Typ Tranche Status]} (-> article-loc zip/node :attrs)
-        timestamps (timestamps (attrs article-loc :Zeitstempel))
-        authors (attrs article-loc :Autor)
-        sources (attrs article-loc :Quelle)
-        excerpt {:forms forms
-                 :pos pos
-                 :definitions definitions
-                 :senses senses
-                 :usage-period usage-period
-                 :styles styles
-                 :colouring colouring
-                 :area area
-                 :morphological-rels morphological-rels
-                 :sense-rels sense-rels
-                 :timestamps timestamps
-                 :authors authors
-                 :sources sources
-                 :type Typ
-                 :tranche Tranche
-                 :status Status}]
-    (apply dissoc excerpt (for [[k v] excerpt :when (nil? v)] k))))
-
-(def abstract-fields [:forms :pos :definitions :type :status :authors :sources])
+  (let [{:keys [Typ Tranche Status]} (-> article-loc zip/node :attrs)
+        texts (comp texts (fn [& args] (apply zx/xml-> (cons article-loc args))))
+        attrs (partial attrs article-loc)]
+    (->clean-map
+     {:type Typ
+      :tranche Tranche
+      :status Status
+      :authors (attrs :Autor)
+      :sources (attrs :Quelle)
+      :timestamps (past-timestamps (attrs :Zeitstempel))
+      :forms (texts :Formangabe :Schreibung)
+      :pos (texts :Formangabe :Grammatik :Wortklasse)
+      :definitions (texts >> :Definition)
+      :senses (texts >> :Bedeutungsebene)
+      :usage-period (texts >> :Gebrauchszeitraum)
+      :styles (texts >> :Stilebene)
+      :colouring (texts >> :Stilfaerbung)
+      :area (texts >> :Sprachraum)
+      :morphological-rels (texts :Verweise :Verweis :Ziellemma)
+      :sense-rels (texts >> :Lesart :Verweise :Verweis :Ziellemma)})))
 
 (defn field-key [n]
   (condp = n
@@ -126,7 +129,10 @@
                        [field values])]
     (conj typed-values (if all-values [(str prefix "_" suffix) all-values]))))
 
-(defn field-xml [name contents] {:tag :field :attrs {:name name} :content contents})
+(defn field-xml [name contents]
+  {:tag :field
+   :attrs {:name name}
+   :content contents})
 
 (defn- max-timestamp
   ([] nil)
@@ -136,6 +142,9 @@
 (def ^:private ^Temporal unix-epoch (t/parse "1970-01-01"))
 (defn- days-since-epoch [^Temporal date]
   (.between ChronoUnit/DAYS unix-epoch date))
+
+(def ^:private abstract-fields
+  [:forms :pos :definitions :type :status :authors :sources])
 
 (defn document [article]
   (let [excerpt (->> article xml excerpt)
@@ -150,8 +159,11 @@
         weight (try (-> last-modified t/parse days-since-epoch)
                     (catch Throwable t (timbre/warn t) 0))
 
-        author-fields (attr-field "authors" "ss" (excerpt :authors))
-        sources-fields (attr-field "sources" "ss" (excerpt :sources))
+        authors (excerpt :authors)
+        author-fields (attr-field "authors" "ss" authors)
+
+        sources (excerpt :sources)
+        sources-fields (attr-field "sources" "ss" sources)
 
         basic-fields (map basic-field (dissoc excerpt :timestamps :authors :sources))
 
@@ -160,8 +172,13 @@
                                              author-fields
                                              sources-fields
                                              basic-fields)))
-        abstract (merge {:id id :last-modified last-modified}
-                        (select-keys excerpt abstract-fields))]
+        abstract (->clean-map
+                  (merge {:id id
+                          :last-modified last-modified
+                          :timestamp (first (timestamps :Artikel))
+                          :author (first (authors :Artikel))
+                          :source (first (sources :Artikel))}
+                         (select-keys excerpt abstract-fields)))]
     {:tag :doc
      :content
      (concat [(field-xml "id" id)
