@@ -20,11 +20,11 @@
 (def ^:private result-table-columns
   [{:key :status :text "Status"}
    {:key :form :text "Schreibung"}
-   {:key :pos :text "Wortklasse"}
+   {:key :definition :text "Definition"}
    {:key :type :text "Typ"}
-   {:key :last-modified :text "Datum"}
-   {:key :sources :text "Quellen"}
-   {:key :authors :text "Autoren"}])
+   {:key :timestamp :text "Datum"}
+   {:key :source :text "Quelle"}
+   {:key :author :text "Autor"}])
 
 (defn- open-articles-in [result]
   (fn [^MouseEvent e]
@@ -47,6 +47,10 @@
         :form
         (doto model
           (.setMinWidth (int (* 0.25 table-width))))
+        :definition
+        (doto model
+          (.setMinWidth (int (* 0.25 table-width)))
+          (.setMaxWidth (int (* 0.5 table-width))))
         model))
     (ui/repaint! table)))
 
@@ -55,9 +59,9 @@
 
 (def ^:private result->table-model
   (partial map #(merge % {:form (some-> % :forms first)
-                          :pos (some-> % :pos first)
-                          :authors (some-> % :authors result-values)
-                          :sources (some-> % :sources result-values)
+                          :definition (some-> % :definitions first)
+                          :author (some-> % :author)
+                          :source (some-> % :source)
                           :color (article/status->color %)})))
 
 (defn render-result [{:keys [result query total] :as data}]
