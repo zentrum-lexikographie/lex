@@ -34,7 +34,7 @@
                          attr-nodes)]
     (if (empty? typed-attrs) {} (apply merge-with concat typed-attrs))))
 
-(def ^:private  format-timestamp (partial t/format :iso-local-date))
+(def ^:private format-timestamp (partial t/format :iso-local-date))
 
 (defn- timestamp [s]
   (let [now (format-timestamp (t/date))]
