@@ -17,17 +17,13 @@
 
 (defonce responses (async/chan))
 
-(defn search-request [q]
-  (timbre/info q)
-  (http/get-edn #(merge % {:path "/articles/search" :query {"q" q "limit" "1000"}})))
-
 (defstate requests
   :start (let [ch (async/chan (async/sliding-buffer 3))]
            (async/go-loop []
              (when-let [req (async/<! ch)]
                (try
                  (let [q (query/translate (req :query))]
-                   (->> (async/thread (search-request q))
+                   (->> (async/thread (http/search-articles q))
                         (async/<!)
                         (merge req)
                         (async/>! responses)))
@@ -51,18 +47,14 @@
                 (when (query/valid? search-query)
                   (new-query search-query))))))
 
-(def input (ui/text :columns 40 :action action))
-
-(when-focused-select-all input)
+(def input (doto (ui/text :columns 40 :action action)
+             (when-focused-select-all)))
 
 (uib/bind search-query
           input
           search-query
           (uib/transform #(if (query/valid? %) :black :red))
           (uib/property input :foreground))
-
-(defn form-suggestions [q]
-  (http/get-edn #(merge % {:path "/articles/forms/suggestions" :query {"q" q}})))
 
 (defn- suggestion->html [{:keys [suggestion pos type definitions
                                  status id last-modified]}]
@@ -86,28 +78,23 @@
 (defn- suggestion->border [suggestion]
   [5 (line-border :color (article/status->color suggestion) :right 10) 5])
 
-(defn with-suggestions [input]
+(defn- render-suggestion-list-entry [this {:keys [value]}]
+  (ui/config! this
+              :text (suggestion->html value)
+              :border (suggestion->border value)))
+
+(def ^:private input-hints
   (proxy [AbstractListIntelliHints] [input]
     (createList []
       (ui/config! (proxy-super createList)
                   :background :white
-                  :renderer (fn [this {:keys [value]}]
-                              (ui/config! this
-                                          :text (suggestion->html value)
-                                          :border (suggestion->border value)))))
+                  :renderer render-suggestion-list-entry))
     (updateHints [ctx]
       (let [q (str ctx)
             suggestions? (< 1 (count q))
-            suggestions (if suggestions? (-> q form-suggestions :result))
+            suggestions (if suggestions? (-> q http/suggest-forms :result))
             suggestions (or suggestions [])]
         (proxy-super setListData (into-array Object suggestions))
-        (-> suggestions empty? not)))
+        (not (empty? suggestions))))
     (acceptHint [hint]
-      (workspace/open-article hint)))
-  input)
-
-(with-suggestions input)
-
-(comment
-  (form-suggestions "ab"))
-
+      (workspace/open-article hint))))

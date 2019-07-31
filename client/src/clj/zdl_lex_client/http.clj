@@ -2,6 +2,7 @@
   (:require [cemerick.url :refer [url]]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
+            [taoensso.timbre :as timbre]
             [zdl-lex-client.env :refer [config]])
   (:import java.io.IOException
            [java.net ConnectException URL]))
@@ -53,3 +54,17 @@
 
 (defn post-edn [uf msg]
   (tx (write-and-read-edn msg) uf))
+
+(defn search-articles
+  ([q] (search-articles q 1000))
+  ([q limit]
+   (timbre/debug {:q q :limit limit})
+   (get-edn #(merge % {:path "/articles/search"
+                       :query {"q" q "limit" (str limit)}}))))
+
+(defn query-article-facets []
+  (-> (search-articles "id:*" 0) :facets))
+
+(defn suggest-forms [q]
+  (get-edn #(merge % {:path "/articles/forms/suggestions"
+                      :query {"q" q}})))

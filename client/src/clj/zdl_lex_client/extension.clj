@@ -29,7 +29,7 @@
            (doto viewInfo
               (.setTitle "ZDL/DWDS – Suchergebnisse")
               (.setIcon icon/gmd-result)
-              (.setComponent results/output))
+              (.setComponent results/tabbed-pane))
            workspace/article-view
            (doto viewInfo
              (.setTitle "ZDL/DWDS – Artikel")
