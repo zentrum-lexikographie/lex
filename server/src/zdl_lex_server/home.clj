@@ -4,16 +4,17 @@
             [hiccup.page :refer [html5 include-css]]))
 
 (defn handle [req]
-  (-> (htstatus/ok (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
-                          [:body
-                           [:div.hero.is-primary.is-bold.is-fullheight
-                            [:div.hero-body
-                             [:div.container 
-                              [:h1.title "ZDL Lex-Server"]
-                              [:h2.subtitle
-                               [:a
-                                {:href "/zdl-lex-client/updateSite.xml"
-                                 :title "Oxygen XML Editor - Update Site"}
-                                "Oxygen XML Editor - Update Site"]]]]]]))
+  (-> (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
+             [:body
+              [:div.hero.is-primary.is-bold.is-fullheight
+               [:div.hero-body
+                [:div.container 
+                 [:h1.title "ZDL Lex-Server"]
+                 [:h2.subtitle
+                  [:a
+                   {:href "/zdl-lex-client/updateSite.xml"
+                    :title "Oxygen XML Editor - Update Site"}
+                   "Oxygen XML Editor - Update Site"]]]]]])
+      (htstatus/ok)
       (assoc :headers {"Content-Type" "text/html"})))
 
