@@ -74,6 +74,8 @@ zdl_apache_vhost_config: |
 
   RedirectMatch ^/$ /home
 
+  ProxyTimeout 300
+
   {% for cp in zdl_api_context_paths %}
   <Location {{ cp }}>
     ProxyPass http://localhost:3000{{ cp }}
@@ -85,6 +87,14 @@ zdl_apache_vhost_config: |
     ProxyPass http://localhost:8983/solr
     ProxyPassReverse http://localhost:8983/solr
     Require group admin
+  </Location>
+
+  <Location /exist>
+    ProxyPass http://spock.dwds.de:8080/exist
+    ProxyPassReverse http://spock.dwds.de:8080/exist
+    #Require group Lexikographen
+    Order Allow,Deny
+    Deny from all
   </Location>
 
 solr_version: "7.7.1"
