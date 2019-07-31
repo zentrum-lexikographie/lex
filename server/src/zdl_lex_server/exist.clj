@@ -18,11 +18,11 @@
             [zdl-lex-server.git :as git]))
 
 (def ^:private req
-  (comp #(timbre/spy :debug %)
+  (comp #(timbre/spy :trace %)
         #(dissoc % :http-client)
         http/request
         (partial merge (config :exist-req))
-        #(timbre/spy :debug %)))
+        #(timbre/spy :trace %)))
 
 (def ^:private url (partial str (config :exist-base)))
 
@@ -87,7 +87,7 @@
   :start (let [ch (async/chan 1000)]
            (async/go-loop []
              (when-let [article (async/<! ch)]
-               (timbre/info {:exist article})
+               (timbre/trace {:exist article})
                (async/<!
                 (async/thread
                   (try

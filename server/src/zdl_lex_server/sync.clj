@@ -37,8 +37,10 @@
                (let [articles (filter store/article-file? changes)
                      modified (filter fs/exists? articles)
                      deleted (remove fs/exists? articles)]
-                 (doseq [m modified] (timbre/info {:solr {:modified (store/file->id m)}}))
-                 (doseq [d deleted] (timbre/info {:solr {:deleted (store/file->id d)}}))
+                 (doseq [m modified]
+                   (timbre/trace {:solr {:modified (store/file->id m)}}))
+                 (doseq [d deleted]
+                   (timbre/trace {:solr {:deleted (store/file->id d)}}))
                  (when (async/<!
                         (async/thread
                           (try

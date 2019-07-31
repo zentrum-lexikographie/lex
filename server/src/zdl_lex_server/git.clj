@@ -15,7 +15,7 @@
       (let [result (apply sh/sh (concat ["git"] args))
             exit-code (result :exit)
             succeeded (= exit-code 0)]
-        (timbre/log (if succeeded :debug :warn) {:git args :result result})
+        (timbre/log (if succeeded :trace :warn) {:git args :result result})
         (when-not succeeded (throw (ex-info (str args) result)))
         result))))
 
@@ -53,7 +53,7 @@
                          (async/thread (try (commit) (catch Throwable t #{}))))
                         (map absolute-path)
                         (into (sorted-set))
-                        (timbre/spy :debug)
+                        (timbre/spy :trace)
                         (async/>! changes))
                (recur)))
            stop-ch)

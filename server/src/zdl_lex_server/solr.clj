@@ -9,11 +9,11 @@
             [zdl-lex-server.store :as store]))
 
 (def req
-  (comp #(timbre/spy :debug %)
+  (comp #(timbre/spy :trace %)
         #(dissoc % :http-client)
         http/request
         (partial merge (config :solr-req))
-        #(timbre/spy :debug %)))
+        #(timbre/spy :trace %)))
 
 (def url (partial str (config :solr-base) "/" (config :solr-core)))
 

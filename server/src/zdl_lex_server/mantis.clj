@@ -37,7 +37,7 @@
   ([op] (results op {}))
   ([op params] (results op params zip->items))
   ([op params zip->locs]
-   (timbre/info {:op op :params (dissoc params :username :password)})
+   (timbre/trace {:op op :params (dissoc params :username :password)})
    (-> ((client) op (authenticate params))
        (zip/xml-zip)
        (zip->locs))))
