@@ -9,10 +9,12 @@
             [zdl-lex-client.article :as article]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.workspace :as workspace]
-            [zdl-lex-client.search :as search])
+            [zdl-lex-client.search :as search]
+            [taoensso.timbre :as timbre])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
+           java.awt.Event
            [javax.swing Box JTabbedPane JTable]
            [org.jdesktop.swingx JXTable JXTable$TableAdapter]
            [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
@@ -120,9 +122,20 @@
                 (.setAutoResizeMode JTable/AUTO_RESIZE_ALL_COLUMNS)
                 (.setHighlighters highlighters))))))
 
+(defn get-selected-result [pane]
+  (some-> pane ui/selection :content
+          (ui/select [:.result]) first
+          ui/user-data))
+
 (def tabbed-pane
-  (doto (JideTabbedPane. JTabbedPane/BOTTOM)
-    (.setShowCloseButtonOnTab true)))
+  (let [pane (JideTabbedPane. JTabbedPane/BOTTOM)]
+    (.setShowCloseButtonOnTab pane true)
+    (->> (fn [_]
+           (let [result (get-selected-result pane)]
+             (reset! search/query (or (some-> result :query) ""))
+             (reset! search/current-result (or result {}))))
+         (ui/listen pane :selection))
+    pane))
 
 (defn select-result-tabs []
   (ui/select tabbed-pane [:.result]))

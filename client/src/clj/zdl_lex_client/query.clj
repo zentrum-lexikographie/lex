@@ -20,25 +20,29 @@
       (str/replace #"^(\d{4}-\d{2})$" "$1-01")
       (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\:00\\:00Z")))
 
-(def translate
-  (comp
-   lucene/ast->str
-   (fn translate-node [node]
-     (if (vector? node)
-       (let [[type arg] node]
-         (condp = type
-           :field (let [[_ name] arg]
-                    [:field [:term (or (field-name-mapping name) name)]])
-           :term [:term (expand-date arg)]
-           (vec (map translate-node node))))
-       node))
-   lucene/str->ast))
+(defn translate-node [node]
+  (if (vector? node)
+    (let [[type arg] node]
+      (condp = type
+        :field (let [[_ name] arg]
+                 [:field [:term (or (field-name-mapping name) name)]])
+        :term [:term (expand-date arg)]
+        (vec (map translate-node node))))
+    node))
+
+(def str->ast (comp translate-node lucene/str->ast))
+
+(def ast->str (comp lucene/ast->str translate-node))
+
+(def translate (comp lucene/ast->str translate-node lucene/str->ast))
 
 (defn valid? [q]
   (try (translate q) true (catch Throwable t false)))
 
 (comment
+  (str->ast "autor:(a OR b) AND typ:c AND quelle:d")
   (translate "datum:[1999-01 TO 2018-01-01}")
+  (str->ast "def:test AND klasse:Verb")
   (valid? "def:test klasse:Verb"))
 
 

@@ -17,17 +17,15 @@
    :name "Suchen"
    :icon icon/gmd-search
    :handler (fn [_]
-              (let [q @search/query]
-                (when (query/valid? q)
-                  (search/request q))))))
+              (let [valid? @search/query-valid? q @search/query]
+                (when valid? (search/request q))))))
 
 (defonce input
   (let [input (ui/text :columns 40 :action action)]
     (when-focused-select-all input)
-    (uib/bind search/query
-              input
-              search/query
-              (uib/transform #(if (query/valid? %) :black :red))
+    (uib/bind search/query input search/query)
+    (uib/bind search/query-valid?
+              (uib/transform #(if % :black :red))
               (uib/property input :foreground))
     input))
 

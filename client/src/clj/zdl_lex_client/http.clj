@@ -15,7 +15,9 @@
       (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 
 (defn tx [rf uf]
-  (let [con (-> server-base url uf str (URL.) (.openConnection))]
+  (let [tx-url (-> server-base url uf)
+        con (.. (URL. (str tx-url)) (openConnection))]
+    (timbre/debug (select-keys tx-url [:path :query]))
     (try
       (when basic-creds
         (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
@@ -58,7 +60,6 @@
 (defn search-articles
   ([q] (search-articles q 1000))
   ([q limit]
-   (timbre/debug {:q q :limit limit})
    (get-edn #(merge % {:path "/articles/search"
                        :query {"q" q "limit" (str limit)}}))))
 

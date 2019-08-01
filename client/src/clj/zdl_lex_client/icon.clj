@@ -10,8 +10,10 @@
 (defn icon [name] (IconFontSwing/buildIcon name 20))
 
 (def gmd-add (icon GoogleMaterialDesignIcons/ADD))
+(def gmd-all (icon GoogleMaterialDesignIcons/STAR))
 (def gmd-delete (icon GoogleMaterialDesignIcons/DELETE))
 (def gmd-details (icon GoogleMaterialDesignIcons/DETAILS))
+(def gmd-filter (icon GoogleMaterialDesignIcons/FILTER_LIST))
 (def gmd-help (icon GoogleMaterialDesignIcons/HELP))
 (def gmd-search (icon GoogleMaterialDesignIcons/SEARCH))
 (def gmd-refresh (icon GoogleMaterialDesignIcons/REFRESH))

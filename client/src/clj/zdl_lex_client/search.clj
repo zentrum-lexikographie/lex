@@ -1,12 +1,19 @@
 (ns zdl-lex-client.search
   (:require [clojure.core.async :as async]
             [mount.core :refer [defstate]]
+            [seesaw.bind :as uib]
             [taoensso.timbre :as timbre]
+            [zdl-lex-client.cron :as cron]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.query :as query])
   (:import java.util.UUID))
 
 (defonce query (atom ""))
+
+(defonce query-valid?
+  (let [valid? (atom true)]
+    (uib/bind query (uib/transform query/valid?) valid?)
+    valid?))
 
 (defonce responses (async/chan))
 
@@ -28,3 +35,12 @@
 (defn request [q]
   (reset! query q)
   (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
+
+(defonce current-result (atom {}))
+
+(defonce facets-available?
+  (let [available? (atom false)]
+    (uib/bind current-result
+              (uib/transform #(some (comp (partial < 1) count) (vals %)))
+              available?)
+    available?))
