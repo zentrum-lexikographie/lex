@@ -1,4 +1,4 @@
-(ns zdl-lex-client.author-extension
+(ns zdl-lex-client.oxygen.author-extension
   (:require [taoensso.timbre :as timbre]
             [clojure.string :as str])
   (:import [ro.sync.ecss.extensions.api

@@ -5,50 +5,60 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-client.editors :as editors]
             [zdl-lex-client.http :as http]
-            [zdl-lex-client.results :as results]
+            [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.search :as search]
+            [zdl-lex-client.view.search :as search-view]
             [zdl-lex-client.status :as status]
-            [zdl-lex-client.workspace :as workspace])
-  (:import ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
+            [zdl-lex-client.workspace :as workspace]
+            [zdl-lex-client.article :as article]
+            [zdl-lex-client.view.toolbar :as toolbar]
+            [zdl-lex-client.view.article :as article-view])
+  (:import java.awt.Toolkit
+           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
-(defn show-search-testbed []
-  (let [ws (proxy [StandalonePluginWorkspace] []
+(defn show-testbed []
+  (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))
+        width  (max 800 (- (.getWidth screen-size) 200))
+        height (max 600 (- (.getHeight screen-size) 200))
+
+        main-panel (ui/splitter :left-right
+                                results-view/tabbed-pane
+                                article-view/panel
+                                :divider-location 0.8)
+        ws (proxy [StandalonePluginWorkspace] []
              (open [url]
-               (->
-                (ui/dialog :content (str url)
-                           :modal? true
-                           :success-fn #(ui/dispose! %)
-                           :cancel-fn #(ui/dispose! %))
-                (ui/pack!)
-                (ui/show!))
+               (ui/alert (str url))
                true)
              (showView [id request-focus?]
                (timbre/info {:id id :request-focus? request-focus?}))
              (addEditorChangeListener [_ _])
              (removeEditorChangeListener [_ _]))]
     (mount/stop)
-    (mount/start-with {#'zdl-lex-client.workspace/instance ws})
+    (mount/start-with {#'workspace/instance ws})
     (ui/invoke-later
      (ui/show!
       (ui/frame
-       :title "Search"
-       :size [800 :by 600]
-       :content (ui/border-panel :north search/input
-                                 :center results/tabbed-pane))))))
+       :title "zdl-lex-client/dev"
+       :size [width :by height]
+       :content (ui/border-panel
+                 :north toolbar/widget
+                 :center main-panel))))))
 
 (comment
-  workspace/instance
+  (show-testbed)
+
   (mount/start)
-  (show-search-testbed)
-  @status/current
-  status/label
-  (-> editors/listeners :editors deref)
+  (mount/stop)
+
   @editors/active
-  (search/new-query "forms:plexi*")
-  results/tabbed-pane
-  (http/post-edn #(merge % {:path "/articles/exist/sync-id"
-                            :query {"id" "DWDS/MWA-001/der_Grosse_Teich.xml"}})
-                 {})
+  (-> editors/listeners :editors deref)
   (async/>!! editors/save-events
-             "http://spock.dwds.de:8080/exist/webdav/db/dwdswb/data/DWDS/MWA-001/der_Grosse_Teich.xml")
-  (mount/stop))
+             (article/id->url "DWDS/MWA-001/der_Grosse_Teich.xml"))
+
+  (http/sync-with-exist "DWDS/MWA-001/der_Grosse_Teich.xml")
+
+  (search/request "forms:plexi*")
+
+  @status/current
+
+  workspace/instance)

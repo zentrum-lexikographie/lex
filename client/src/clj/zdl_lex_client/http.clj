@@ -68,3 +68,11 @@
 (defn suggest-forms [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions"
                       :query {"q" q}})))
+
+(defn sync-with-exist [id]
+  (post-edn #(merge % {:path "/articles/exist/sync-id"
+                       :query {"id" id}}) {}))
+
+(defn get-status []
+  (get-edn #(merge % {:path "/status"})))
+

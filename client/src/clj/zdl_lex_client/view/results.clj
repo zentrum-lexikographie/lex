@@ -1,4 +1,4 @@
-(ns zdl-lex-client.results
+(ns zdl-lex-client.view.results
   (:require [clojure.core.async :as async]
             [clojure.string :as str]
             [mount.core :refer [defstate]]
@@ -19,20 +19,20 @@
 
 (def ^:private result-table-columns
   [{:key :status :text "Status"}
+   {:key :source :text "Quelle"}
    {:key :form :text "Schreibung"}
    {:key :definition :text "Definition"}
    {:key :type :text "Typ"}
    {:key :timestamp :text "Datum"}
-   {:key :source :text "Quelle"}
    {:key :author :text "Autor"}])
 
 (defn- open-article [result ^MouseEvent e]
-  (let [^JXTable table (.getSource e)
+  (let [clicks (.getClickCount e)
+        ^JXTable table (.getSource e)
         ^Point point (.getPoint e)
         ^JXTable$TableAdapter adapter (.getComponentAdapter table)
         row (.rowAtPoint table point)
-        row (.convertRowIndexToModel adapter row)
-        clicks (.getClickCount e)]
+        row (if (<= 0 row) (.convertRowIndexToModel adapter row) row)]
     (when (and (<= 0 row) (= 2 clicks))
       (workspace/open-article (nth result row)))))
 
@@ -58,7 +58,7 @@
                  :definition (some-> result :definitions first)
                  :author (some-> result :author)
                  :source (some-> result :source)
-                 :color (article/status->color result)}))
+                 :color (some-> result :status article/status->color)}))
 
 (defn create-highlighter [model]
   (proxy [AbstractHighlighter] []
@@ -74,6 +74,9 @@
           ;; forms in bold style
           :form
           (ui/config! component :font {:style :bold})
+          ;; definitions in italic style
+          :definition
+          (ui/config! component :font {:style :italic})
           ;; status with color
           :status
           (if-not selected?
@@ -85,7 +88,7 @@
 (defn- render-result-summary [{:keys [query total result] :as data}]
   (let [query-action (ui/action
                       :icon icon/gmd-refresh
-                      :handler (fn [_] (search/new-query query)))]
+                      :handler (fn [_] (search/request query)))]
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
              (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))

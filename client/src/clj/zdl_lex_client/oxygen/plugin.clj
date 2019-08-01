@@ -1,4 +1,4 @@
-(ns zdl-lex-client.plugin
+(ns zdl-lex-client.oxygen.plugin
   (:gen-class
    :name de.zdl.oxygen.Plugin
    :extends ro.sync.exml.plugin.Plugin

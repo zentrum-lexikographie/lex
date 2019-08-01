@@ -2,9 +2,9 @@
   (:require [clojure.core.async :as async]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
+            [zdl-lex-client.article :as article]
             [zdl-lex-client.http :as http]
-            [zdl-lex-client.workspace :as workspace]
-            [zdl-lex-client.article :as article])
+            [zdl-lex-client.workspace :as workspace])
   (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
@@ -22,9 +22,6 @@
            ch)
   :stop (async/close! activations))
 
-(defn- sync-id [id]
-  (http/post-edn #(merge % {:path "/articles/exist/sync-id" :query {"id" id}}) {}))
-
 (defstate save-events
   :start (let [ch (async/chan)]
            (async/go-loop []
@@ -32,9 +29,7 @@
                (timbre/info {:saved url})
                (when-let [id (article/url->id url)]
                  (timbre/info {:sync id})
-                 (async/<!
-                  (async/thread
-                    (sync-id id))))
+                 (async/<! (async/thread (http/sync-with-exist id))))
                (recur)))
            ch)
   :stop (async/close! save-events))
