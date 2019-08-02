@@ -10,6 +10,7 @@
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.async "0.4.490"]
+                 [org.clojure/data.csv "0.1.4"]
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/data.zip "0.1.3"]
                  [com.taoensso/timbre "4.10.0"]

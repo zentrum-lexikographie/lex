@@ -1,12 +1,16 @@
 (ns zdl-lex-server.solr
   (:require [clj-http.client :as http]
             [clojure.data.xml :as xml]
+            [clojure.data.csv :as csv]
             [lucene-query.core :as lucene]
             [ring.util.http-response :as htstatus]
+            [ring.util.io :as htio]
             [taoensso.timbre :as timbre]
             [zdl-lex-server.article :as article]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [clojure.java.io :as io]
+            [clojure.string :as str]))
 
 (def req
   (comp #(timbre/spy :trace %)
@@ -31,6 +35,15 @@
   (req {:method :get :url (url "/query")
         :query-params params
         :as :json}))
+
+(defn scroll
+  ([params] (scroll params 10000))
+  ([params page-size] (scroll params page-size 0))
+  ([params page-size page]
+   (let [offset (* page page-size)
+         resp (query (merge params {"start" offset "rows" page-size}))]
+     (if-let [docs (seq (get-in resp [:body :response :docs] []))]
+       (concat docs (lazy-seq (scroll params page-size (inc page))))))))
 
 (def ^:private update-batch-size 2000)
 
@@ -113,27 +126,33 @@
     (catch Throwable t s)))
 
 
+(defn docs->results [docs]
+  (for [{:keys [abstract_ss]} docs]
+    (-> abstract_ss first read-string)))
+
+(def ^:private query-params
+  {"df" "forms_ss"
+   "sort" "forms_ss asc,weight_i desc,id asc"})
+
+(def ^:private facet-params
+  {"facet" "true"
+   "facet.field" ["authors_ss"
+                  "pos_ss"
+                  "sources_ss"
+                  "status_ss"
+                  "tranche_ss"
+                  "type_ss"]
+   "facet.limit" "-1"
+   "facet.mincount" "1"
+   "facet.range" "timestamps_dts"
+   "facet.range.start" "NOW/MONTH-1YEAR"
+   "facet.range.end" "NOW"
+   "facet.range.gap" "+1MONTH"})
+
 (defn handle-search [{{:keys [q offset limit]
                 :or {q "id:*" offset "0" limit "10"}} :params}]
-  (let [q (translate-query q)
-        solr-response (query {"q" q
-                              "df" "forms_ss"
-                              "start" offset
-                              "rows" limit
-                              "sort" "forms_ss asc,weight_i desc,id asc"
-                              "facet" "true"
-                              "facet.field" ["authors_ss"
-                                             "pos_ss"
-                                             "sources_ss"
-                                             "status_ss"
-                                             "tranche_ss"
-                                             "type_ss"]
-                              "facet.limit" "-1"
-                              "facet.mincount" "1"
-                              "facet.range" "timestamps_dts"
-                              "facet.range.start" "NOW/MONTH-1YEAR"
-                              "facet.range.end" "NOW"
-                              "facet.range.gap" "+1MONTH"})
+  (let [params {"q" (translate-query q)}
+        solr-response (query (merge query-params facet-params params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
         {:keys [facet_fields facet_ranges]} facet_counts
@@ -141,10 +160,32 @@
                        (map (comp facet-values facet-counts) facet_ranges))]
     (htstatus/ok
      {:total numFound
-      :result (for [{:keys [abstract_ss]} docs] (-> abstract_ss first read-string))
+      :result (docs->results docs)
       :facets (into (sorted-map) facets)})))
 
+(defn handle-export [{{:keys [q limit] :or {q "id:*" limit "10"}} :params}]
+  (let [params (merge query-params {"q" (translate-query q)})
+        limit (Integer/parseInt limit)
+        docs (->> (scroll params) (take limit))]
+    (->
+     (htio/piped-input-stream
+      (fn [out]
+        (let [w (io/writer out :encoding "UTF-8")]
+          (csv/write-csv w [["Schreibung"
+                             "Wortklasse"
+                             "Artikeltyp"
+                             "ID"]])
+          (doseq [d (docs->results docs)]
+            (csv/write-csv w [[(some->> d :forms (str/join "|"))
+                               (some->> d :pos (str/join "|"))
+                               (d :type)
+                               (d :id)]]))
+          (.flush w))))
+     (htstatus/ok)
+     (htstatus/update-header "Content-Type" str "text/csv"))))
+
 (comment
+  (->> (scroll {"q" "forms_ss:*"}) (take 55000) (last))
   (translate-query "forms:t*")
   (translate-query "text:*")
   (handle-search {:params {:q "suchen"}}))

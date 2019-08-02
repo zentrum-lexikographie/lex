@@ -51,6 +51,7 @@
         ["/exist"
          ["/sync-id" {:post exist/handle-article-sync}]
          ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]
+        ["/export" {:get solr/handle-export}]
         ["/forms/suggestions" {:get solr/handle-form-suggestions}]
         ["/index" {:delete sync/handle-index-trigger}]
         ["/issues/:lemma" {:get mantis/handle-issue-lookup}]
