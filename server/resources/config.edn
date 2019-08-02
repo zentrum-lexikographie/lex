@@ -1,6 +1,7 @@
 {:log-level :info
 
  :log-config {:ns-blacklist ["org.apache.http.*"
+                             "org.eclipse.jetty.*"
                              "org.eclipse.jgit.*"]}
 
  ;; "https://lex.dwds.de/articles"

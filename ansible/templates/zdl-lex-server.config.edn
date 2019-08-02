@@ -1,6 +1,7 @@
 {:log-level :info
  :log-config {:ns-blacklist ["ring.logger.timbre"
                              "org.apache.http.*"
+                             "org.eclipse.jetty.*"
                              "org.eclipse.jgit.*"]}
  :data-dir "{{ lex_data_dir }}"
  :exist-req {:basic-auth ["{{ exist_user }}" "{{ exist_password }}"]}}

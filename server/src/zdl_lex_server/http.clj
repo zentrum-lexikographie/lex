@@ -1,7 +1,7 @@
 (ns zdl-lex-server.http
   (:require [mount.core :refer [defstate]]
-            [org.httpkit.server :as httpkit]
             [reitit.ring :as ring]
+            [ring.adapter.jetty :as jetty]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.webjars :refer [wrap-webjars]]
@@ -64,6 +64,7 @@
      (ring/create-default-handler)))))
 
 (defstate server
-  :start (httpkit/run-server handler (config :http-server-opts))
-  :stop (server))
+  :start (jetty/run-jetty
+          handler (assoc (config :http-server-opts) :join? false))
+  :stop (.stop server))
 
