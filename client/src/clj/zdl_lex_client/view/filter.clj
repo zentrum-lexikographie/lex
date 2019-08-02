@@ -48,7 +48,7 @@
    (create-facet-list :type)
    (create-facet-list :tranche)])
 
-(defn get-filter-values []
+(defn facet-lists->ast []
   (->>
    (for [fl facet-lists
          fl (ui/select fl [:.facet-list])
@@ -66,17 +66,15 @@
    (interpose [:and]) (cons :query) (vec)))
 
 
-(defn do-filter! [e]
-  (some->> (get-filter-values)
-           (lucene/ast->str)
-           (vector @search/query)
-           (remove empty?)
-           (str/join " AND ")
-           (not-empty)
-           (search/request))
-  (ui/return-from-dialog e :filter))
+(defn do-filter!
+  ([e]
+   (do-filter! e (-> (facet-lists->ast) (lucene/ast->str))))
+  ([e filter]
+   (some->> [filter @search/query] (remove empty?) (str/join " AND ")
+            not-empty search/request)
+   (when e (ui/return-from-dialog e :filter))))
 
-(defn reset-filter! [& _]
+(defn reset-filter! []
   (doseq [fl facet-lists
           fl (ui/select fl [:.facet-list])]
     (ui/selection! fl [] {:multi? true})))
@@ -89,11 +87,15 @@
   (ui/dialog :title "Suchfilter"
              :type :question
              :size [800 :by 800]
-             :content (ui/horizontal-panel :items facet-lists)
+             :content (ui/border-panel
+                       :center (ui/horizontal-panel :items facet-lists)
+                       :south (ui/label :text "<html><b>Tipp:</b> Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;.</html>"
+                                        :font {:size 10}
+                                        :border 5))
              :options [(ui/button :text "Filtern"
                                   :listen [:action do-filter!])
-                       (ui/button :text "Zurücksetzen"
-                                  :listen [:action reset-filter!])
+                       ;;(ui/button :text "Zurücksetzen"
+                       ;;           :listen [:action reset-filter!])
                        (ui/button :text "Abbrechen"
                                   :listen [:action cancel-filter!])]))
 
