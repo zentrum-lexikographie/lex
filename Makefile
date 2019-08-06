@@ -3,23 +3,34 @@ SHELL := /bin/bash
 version := $(shell cat VERSION)
 oxygen_home := $(shell bin/find-oxygen.sh)
 
+.PHONY: all
 all: server client
 
-server: schema
-	cd server && lein uberjar
+bin/lein:
+	curl -s -o $@\
+		https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+	chmod +x $@
 
-client: schema
-	cd client && lein uberjar && lein package
+.PHONY: server
+server: schema bin/lein
+	cd server && ../bin/lein uberjar
 
+.PHONY: client
+client: schema bin/lein
+	cd client && ../bin/lein uberjar && ../bin/lein package
+
+.PHONY: schema
 schema:
 	git submodule update --init --recursive $@
 	make -C $@ install
 
-clean:
+.PHONY: clean
+clean: bin/lein
 	cd schema && make clean
-	cd client && lein clean
-	cd server && lein clean
+	cd client && ../bin/lein clean
+	cd server && ../bin/lein clean
 
+.PHONY: oxygen
 oxygen: client
 	cd client && OXYGEN_HOME="$(oxygen_home)"\
 		java -Dconf=oxygen-config.edn\
@@ -34,11 +45,13 @@ ansible/venv:
 		virtualenv venv && source venv/bin/activate &&\
 		pip install -r requirements.txt
 
+.PHONY: deploy
 deploy: ansible/venv server client
 	cd ansible &&\
 		source venv/bin/activate &&\
 		ansible-playbook main.yml -b -K --ask-vault-pass
 
+.PHONY: data-clean
 data-clean:
 	rm -rf data/exist-db data/git data/repo.git || true
 
@@ -69,15 +82,18 @@ data/git: | data/exist-db/db data/repo.git
 		git push -u origin &&\
 		git gc
 
+.PHONY: vm
 vm: ansible/venv server client
 	cd ansible &&\
 		source venv/bin/activate &&\
 		vagrant up
 
+.PHONY: vm-destroy
 vm-destroy:
 	cd ansible &&\
 		vagrant destroy
 
+.PHONY: solr
 solr:
 	[ "$(shell docker ps -f name=zdl_lex_solr -q)" ] ||\
 		docker run -t -d --name zdl_lex_solr\
@@ -85,32 +101,29 @@ solr:
 			solr:7.7.1\
 			solr-create -c articles -d /config
 
+.PHONY: solr-destroy
 solr-destroy:
 	[ "$(shell docker ps -f name=zdl_lex_solr -q)" ] &&\
 		docker stop zdl_lex_solr
 	docker rm zdl_lex_solr || true
 
+.PHONY: existdb
 existdb:
 	[ "$(shell docker ps -f name=zdl_lex_exist -q)" ] ||\
 		docker run -t -d -i --name zdl_lex_exist\
 			-p 8080:8080\
 			existdb/existdb:release
 
+.PHONY: existdb-destroy
 existdb-destroy:
 	[ "$(shell docker ps -f name=zdl_lex_exist -q)" ] &&\
 		docker stop zdl_lex_exist
 	docker rm zdl_lex_exist || true
 
+.PHONY: spock-tunnel
 spock-tunnel:
 	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
 
+.PHONY: new-version
 new-version:
 	echo -n `date +%Y%m.%d.%H` >VERSION
-
-.PHONY: all server client schema
-.PHONY: clean data-clean
-.PHONY: oxygen deploy
-.PHONY: vm vm-destroy
-.PHONY: solr solr-destroy
-.PHONY: spock-tunnel
-.PHONY: release
