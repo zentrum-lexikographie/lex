@@ -41,21 +41,21 @@
 
     - name: Install HTTP/TLS certificate
       copy:
-        src: gorkon.bbaw.de.pem
+        src: lex.dwds.de.pem
         dest: /etc/ssl/certs
         owner: root
         group: root
         mode: 0644
-      when: ansible_fqdn == "gorkon.bbaw.de"
+      when: ansible_fqdn == "lex.dwds.de"
 
     - name: Install HTTP/TLS key
       copy:
-        src: gorkon.bbaw.de.key
+        src: lex.dwds.de.key
         dest: /etc/ssl/private
         owner: root
         group: ssl-cert
         mode: 0640
-      when: ansible_fqdn == "gorkon.bbaw.de"
+      when: ansible_fqdn == "lex.dwds.de"
 
 - name: Configure Git repository
   import_playbook: git.yml
