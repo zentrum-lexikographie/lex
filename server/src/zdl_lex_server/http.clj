@@ -17,54 +17,44 @@
             [zdl-lex-server.store :as store]
             [zdl-lex-server.sync :as sync]))
 
-(defn wrap-base [handler]
-  (-> handler
-      (wrap-defaults (assoc site-defaults
-                            :proxy true
-                            :cookies false
-                            :params {:keywordize true
-                                     :multipart true
-                                     :urlencoded true}
-                            :responses {:absolute-redirects true
-                                        :content-types true
-                                        :default-charset "utf-8"
-                                        :not-modified-responses true}
-                            :sessions false
-                            :security false))
-      wrap-with-logger))
-
-(defn wrap-formats [handler]
-  (let [wrapped (-> handler wrap-params wrap-format)]
-    (fn [request]
-      ;; disable wrap-formats for websockets
-      ;; since they're not compatible with this middleware
-      ((if (:websocket? request) handler wrapped) request))))
+(def defaults
+  (assoc site-defaults
+         :proxy true
+         :cookies false
+         :params {:keywordize true
+                  :multipart true
+                  :urlencoded true}
+         :responses {:absolute-redirects true
+                     :content-types true
+                     :default-charset "utf-8"
+                     :not-modified-responses true}
+         :sessions false
+         :security false))
 
 (def handler
-  (wrap-base
-   (ring/ring-handler
-    (ring/router
-     [[""
-       {:middleware [wrap-formats]}
-       ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
-       ["/articles"
-        ["/exist"
-         ["/sync-id" {:post exist/handle-article-sync}]
-         ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]
-        ["/export" {:get solr/handle-export}]
-        ["/forms/suggestions" {:get solr/handle-form-suggestions}]
-        ["/index" {:delete sync/handle-index-trigger}]
-        ["/issues/:lemma" {:get mantis/handle-issue-lookup}]
-        ["/search" {:get solr/handle-search}]]
-       ["/home" {:get home/handle}]
-       ["/status" {:get status/handle}]]])
-    (ring/routes
-     (ring/create-resource-handler {:path "/"})
-     (wrap-content-type (wrap-webjars (constantly nil)))
-     (ring/create-default-handler)))))
+  (ring/ring-handler
+   (ring/router
+    [[""
+      {:middleware [wrap-params wrap-format]}
+      ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
+      ["/articles"
+       ["/exist"
+        ["/sync-id" {:post exist/handle-article-sync}]
+        ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]
+       ["/export" {:get solr/handle-export}]
+       ["/forms/suggestions" {:get solr/handle-form-suggestions}]
+       ["/index" {:delete sync/handle-index-trigger}]
+       ["/issues/:lemma" {:get mantis/handle-issue-lookup}]
+       ["/search" {:get solr/handle-search}]]
+      ["/home" {:get home/handle}]
+      ["/status" {:get status/handle}]]])
+   (ring/routes
+    (ring/create-resource-handler {:path "/"})
+    (wrap-content-type (wrap-webjars (constantly nil)))
+    (ring/create-default-handler))
+   {:middleware [#(wrap-defaults % defaults) wrap-with-logger]}))
 
 (defstate server
-  :start (jetty/run-jetty
-          handler (assoc (config :http-server-opts) :join? false))
+  :start (jetty/run-jetty handler (assoc (config :http-server-opts) :join? false))
   :stop (.stop server))
 

@@ -23,7 +23,7 @@
                  [ring-logger-timbre "0.7.6"]
                  [ring-webjars "0.2.0"]
                  [metosin/muuntaja "0.6.3"]
-                 [metosin/reitit "0.3.1"]
+                 [metosin/reitit "0.3.9"]
                  [metosin/ring-http-response "0.9.1"]
                  [org.webjars.npm/bulma "0.7.4"]
                  [org.webjars.npm/material-icons "0.3.0"]
