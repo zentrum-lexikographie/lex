@@ -1,6 +1,11 @@
 {:log-level :info
 
- :log-config {:ns-blacklist ["org.apache.http.*"
+ :log-config {:ns-blacklist ["clj-soap.client"
+                             "httpclient.*"
+                             "org.apache.axiom.*"
+                             "org.apache.axis2.*"
+                             "org.apache.commons.httpclient.*"
+                             "org.apache.http.*"
                              "org.eclipse.jetty.*"
                              "org.eclipse.jgit.*"]}
 

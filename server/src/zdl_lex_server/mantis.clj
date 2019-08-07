@@ -12,6 +12,9 @@
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]))
 
+(def issue-id->url
+  (partial str (config :mantis-url) "/view.php?id="))
+
 (def client-instance (atom nil))
 
 (defn client []
@@ -29,6 +32,9 @@
                   :password (config :mantis-password)}))
 
 (def ^:private project (config :mantis-project))
+
+(defn- zip->return [loc]
+  (zx/xml-> loc dz/children zip/branch? :return))
 
 (defn- zip->items [loc]
   (zx/xml-> loc dz/children zip/branch? :return :item))
@@ -54,8 +60,11 @@
        (concat results
                (lazy-seq (scroll op params zip->locs page-size (inc page))))))))
 
-(defn- property [loc k]
-  (zx/xml1-> loc k zx/text))
+(defn- property [& path]
+  (apply zx/xml1-> (concat path [zx/text])))
+
+(def ^:private int-property
+  (comp #(some-> % Integer/parseInt) property))
 
 (defn mantis-enum
   ([op] (mantis-enum op {}))
@@ -75,21 +84,43 @@
         users (mantis-enum :mc_project_get_users {:project_id project :access 0})]
     (->> (scroll :mc_project_get_issue_headers {:project_id project})
          (map (fn [item]
-                (let [summary (property item :summary)]
-                  {:id (-> (property item :id) Integer/parseInt)
+                (let [id (int-property item :id)
+                      summary (property item :summary)]
+                  {:id id
+                   :url (issue-id->url id)
                    :category (property item :category)
                    :summary summary
-                   :lemma (summary->lemma summary)
+                   :lemma (some-> summary summary->lemma)
                    :last-updated (property item :last_updated)
-                   :status (-> (property item :status) status)
-                   :severity (-> (property item :severity) severities)
-                   :reporter (-> (property item :reporter) users)
-                   :handler (-> (property item :handler) users)
-                   :resolution (-> (property item :resolution) resolutions)
-                   :attachments (-> (property item :attachments_count) Integer/parseInt)
-                   :notes (-> (property item :notes_count) Integer/parseInt)}))))))
+                   :status (some-> (property item :status) status)
+                   :severity (some-> (property item :severity) severities)
+                   :reporter (some-> (property item :reporter) users)
+                   :handler (some-> (property item :handler) users)
+                   :resolution (some-> (property item :resolution) resolutions)
+                   :attachments (int-property  item :attachments_count)
+                   :notes (int-property item :notes_count)}))))))
 
-(defn ->dump [data]
+(defn issue [id]
+  (->> (results :mc_issue_get {:issue_id id} zip->return)
+       (map (fn [item]
+              (let [id (int-property item :id)
+                    summary (property item :summary)]
+                {:id (int-property item :id)
+                 :url (issue-id->url id)
+                 :category (property item :category)
+                 :summary summary
+                 :lemma (some-> summary summary->lemma)
+                 :last-updated (property item :last_updated)
+                 :status (some-> (property item :status :name))
+                 :severity (some-> (property item :severity :name))
+                 :reporter (some-> (property item :reporter :name))
+                 :handler (some-> (property item :handler :name))
+                 :resolution (some-> (property item :resolution :name))
+                 :attachments (some-> (zx/xml-> item :attachments) count)
+                 :notes (some-> (zx/xml-> item :notes) count)})))
+       (first)))
+
+(defn store-dump [data]
   (let [data (->> data
                   (group-by :id) (vals) (map first)
                   (sort-by :last-updated #(compare %2 %1))
@@ -97,16 +128,16 @@
     (spit store/mantis-dump (pr-str data))
     data))
 
-(defn dump-> []
+(defn read-dump []
   (try (read-string (slurp store/mantis-dump))
        (catch Throwable t (timbre/warn t) [])))
 
 (defonce index (atom nil))
 
-(defn ->index [issues]
-  (reset! index (group-by :lemma issues)))
+(defn index-issues [issues]
+  (group-by :lemma issues))
 
-(reset! index (-> (dump->) ->index))
+(->> (read-dump) (index-issues) (reset! index))
 
 (defstate issues->dump->index
   "Synchronizes Mantis issues"
@@ -117,7 +148,7 @@
                                ch ([v] v))
                (async/<!
                 (async/thread
-                  (try (-> (issues) ->dump ->index)
+                  (try (->> (issues) (store-dump) (index-issues) (reset! index))
                        (catch Throwable t (timbre/warn t) {}))))
                (recur)))
            ch)
@@ -125,12 +156,12 @@
 
 (defn handle-issue-lookup [{{:keys [lemma]} :path-params}]
   (htstatus/ok
-   (or (@index lemma) [])))
+   (map (comp issue :id) (or (@index lemma) []))))
 
 (comment
   store/mantis-dump
   @client-instance
-  (-> (dump->) (->dump) last)
-  (-> (issues) ->dump ->index last)
+  (-> (read-dump) (store-dump) last)
+  (->> (issues) store-dump index-issues (reset! index) last)
   (-> @index keys sort)
-  (handle-issue-lookup {:path-params {:lemma "Strafzettel"}}))
+  (handle-issue-lookup {:path-params {:lemma "Leder"}}))
