@@ -151,7 +151,7 @@
 
 (defn handle-search [{{:keys [q offset limit]
                 :or {q "id:*" offset "0" limit "10"}} :params}]
-  (let [params {"q" (translate-query q)}
+  (let [params {"q" (translate-query q) "start" offset "rows" limit}
         solr-response (query (merge query-params facet-params params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
