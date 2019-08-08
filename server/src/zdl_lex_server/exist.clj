@@ -1,12 +1,8 @@
 (ns zdl-lex-server.exist
   (:require [clj-http.client :as http]
             [clojure.core.async :as async]
-            [clojure.data.xml :as xml]
-            [clojure.data.zip :as dz]
-            [clojure.data.zip.xml :as zx]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.zip :as zip]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
@@ -15,7 +11,7 @@
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [zdl-lex-server.git :as git]))
+            [zdl-lex-server.xml :as xml]))
 
 (def ^:private req
   (comp #(timbre/spy :trace %)
@@ -35,8 +31,6 @@
 (defn- uri->id [uri]
   (str/replace uri articles-path-prefix ""))
 
-(xml/alias-uri 'ex "http://exist.sourceforge.net/NS/exist")
-
 (defn copy [id]
   (let [store-file (store/id->file id)
         exist-xml-req {:method :get
@@ -48,37 +42,62 @@
         (io/copy exist-xml store-file)
         store-file))))
 
+(def ex-ns "http://exist.sourceforge.net/NS/exist")
+
 (defn xquery
   ([q] (xquery articles-path q))
   ([path q]
-   (let [xml-body [::ex/query {:xmlns/ex "http://exist.sourceforge.net/NS/exist"
-                               :max "1000000"
-                               :cache "no"}
-                   [::ex/text [:-cdata q]]]
-         xml-body (-> xml-body
-                      xml/sexp-as-element
-                      xml/emit-str)
+   (let [query-doc (xml/new-document)
+         element #(.createElementNS query-doc ex-ns %)
+         xml-body (-> (.appendChild query-doc
+                                    (doto (element "ex:query")
+                                      (.setAttribute "max" "1000000")
+                                      (.setAttribute "cache" "no")))
+                      (.appendChild (element "ex:text"))
+                      (.appendChild (.createCDATASection query-doc q))
+                      (.getOwnerDocument)
+                      (xml/doc-str))
          xml-req {:method :post
                    :url (url "/rest" path)
                    :content-type :xml
                    :body xml-body}]
      (-> xml-req req :body))))
 
-(def ^:private changed-articles-xquery
-  (-> "changed-articles.xq" io/resource slurp))
+(def ^:private articles-xquery
+  (->
+   (str/join
+    "\n"
+    ["xquery version '3.0';"
+     "for $doc in fn:collection('%s')"
+    "let $modified := xmldb:last-modified(util:collection-name($doc),util:document-name($doc))"
+     "return (<doc><uri>{fn:document-uri($doc)}</uri><modified>{$modified}</modified></doc>)"])
+   (format articles-path)))
+
+(def ^:private article-docs
+  (comp seq (xml/xpath-fn "//doc")))
+
+(def ^:private article-doc-uri
+  (comp str (xml/xpath-fn "uri/text()")))
+
+(def ^:private article-doc-modified
+  (comp t/instant t/parse str (xml/xpath-fn "modified/text()")))
+
+(defn articles []
+  (->>
+   (for [doc (-> (xquery articles-xquery) (xml/parse-str) (article-docs))]
+     {:id (uri->id (article-doc-uri doc))
+      :modified (article-doc-modified doc)})
+   (remove (comp #{"indexedvalues.xml"} :id))))
 
 (defn changed-articles [duration]
-  (let [threshold (t/- (t/now) duration)
-        q (format changed-articles-xquery threshold)]
-    (->>
-     (-> (xquery q)
-         (xml/parse-str :namespace-aware true)
-         (zip/xml-zip)
-         (zx/xml-> dz/children zip/branch? :doc :uri zx/text))
-     (map uri->id)
-     (sort))))
+  (let [threshold (t/- (t/now) duration)]
+    (->> (articles)
+         (filter (comp (partial t/< threshold) :modified))
+         (map :id))))
 
 (comment
+  (take 10 (articles))
+  (time (take 5 (changed-articles (t/new-duration 7 :days))))
   (doseq [id (changed-articles (t/new-duration 7 :days))]
     (async/>!! exist->git id)))
 
