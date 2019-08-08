@@ -1,38 +1,23 @@
 (ns zdl-lex-client.editors
-  (:require [clojure.core.async :as async]
-            [mount.core :refer [defstate]]
-            [taoensso.timbre :as timbre]
+  (:require [mount.core :refer [defstate]]
             [zdl-lex-client.article :as article]
-            [zdl-lex-client.http :as http]
-            [zdl-lex-client.workspace :as workspace])
-  (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.workspace :as workspace]
+            [manifold.stream :as s]
+            [taoensso.timbre :as timbre])
+  (:import java.net.URL
+           [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
-(defonce active (atom nil))
+(def ^:private editing-area PluginWorkspace/MAIN_EDITING_AREA)
 
-(defstate activations
-  :start (let [ch (async/chan)]
-           (async/go-loop []
-             (when-let [activation (async/<! ch)]
-               (let [[[url active?]] (seq activation)]
-                 (timbre/info {:url url :active? active?})
-                 (reset! active (if active? url)))
-               (recur)))
-           ch)
-  :stop (async/close! activations))
-
-(defstate save-events
-  :start (let [ch (async/chan)]
-           (async/go-loop []
-             (when-let [url (async/<! ch)]
-               (timbre/info {:saved url})
-               (when-let [id (article/url->id url)]
-                 (timbre/info {:sync id})
-                 (async/<! (async/thread (http/sync-with-exist id))))
-               (recur)))
-           ch)
-  :stop (async/close! save-events))
+(defn xml-str [^URL url]
+  (let [^StandalonePluginWorkspace ws workspace/instance]
+    (with-open [xml (.. ws
+                        (getEditorAccess url editing-area)
+                        (createContentReader))]
+      (slurp xml))))
 
 (defn editor-listener [url]
   "An editor listener for a given resource location"
@@ -42,24 +27,25 @@
     (editorPageChanged [])
     (editorAboutToBeClosedVeto [_] true)
     (editorAboutToBeSavedVeto [_] true)
-    (editorSaved [_] (async/>!! save-events url))))
-
-(def ^:private editing-area PluginWorkspace/MAIN_EDITING_AREA)
+    (editorSaved [_]
+      (bus/publish! :editor-saved url))))
 
 (defn editors-listener [^StandalonePluginWorkspace ws editors]
   "A listener administering editor listeners"
   (let [add! (fn [url]
-               (let [listener (editor-listener (str url))]
-                     (.. ws
-                         (getEditorAccess url editing-area)
-                         (addEditorListener listener))
-                     (swap! editors assoc url listener)))
+               (when (article/webdav? (str url))
+                 (let [listener (editor-listener url)]
+                   (.. ws
+                       (getEditorAccess url editing-area)
+                       (addEditorListener listener))
+                   (swap! editors assoc url listener))))
         remove! (fn [url]
-                  (.. ws
-                      (getEditorAccess url editing-area)
-                      (removeEditorListener (@editors url)))
-                  (swap! editors dissoc url)
-                  (async/>!! activations {(str url) false}))]
+                  (when (article/webdav? (str url))
+                    (.. ws
+                        (getEditorAccess url editing-area)
+                        (removeEditorListener (@editors url)))
+                    (swap! editors dissoc url)
+                    (bus/publish! :editor-active [url false])))]
     (proxy [WSEditorChangeListener] []
       (editorAboutToBeOpened [_])
       (editorAboutToBeOpenedVeto [_] true)
@@ -69,9 +55,12 @@
         (doseq [url urls] (remove! url)) true)
       (editorPageChanged [_])
       (editorActivated [url]
-        (async/>!! activations {(str url) true}))
+        (when (article/webdav? (str url))
+          (bus/publish! :editor-active [url true])))
       (editorSelected [_])
-      (editorDeactivated [_])
+      (editorDeactivated [url]
+        (when (article/webdav? (str url))
+          (bus/publish! :editor-active [url false])))
       (editorClosed [_])
       (editorOpened [url]
         (add! url))
@@ -93,3 +82,9 @@
                 (removeEditorListener listener)))
           (reset! editors {})
           (.. ws (removeEditorChangeListener listener editing-area))))
+
+(defstate activation-logger
+  :start (let [subscription (bus/subscribe :editor-active)]
+           (s/consume #(timbre/info %) subscription)
+           subscription)
+  :stop (activation-logger))

@@ -1,16 +1,17 @@
 (ns zdl-lex-client.view.article
-  (:require [seesaw.core :as ui]
-            [zdl-lex-client.editors :as editors]
+  (:require [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
-            [zdl-lex-client.article :as article]))
+            [seesaw.core :as ui]
+            [zdl-lex-client.article :as article]
+            [zdl-lex-client.bus :as bus]))
 
-(defonce ^:private active
-  (let [label (ui/label :text "-")]
-    (uib/bind
-     editors/active
-     (uib/transform #(some-> % article/url->id))
-     (uib/transform #(or % "-"))
-     (uib/property label :text))
-    label))
+(def active (ui/label :text "-"))
+
+(defstate active-text
+  :start (uib/bind (bus/bind :editor-active)
+                   (uib/transform
+                    #(if (second %) (some-> % first str article/url->id) "-"))
+                   (uib/property active :text))
+  :stop (active-text))
 
 (def panel (ui/scrollable (ui/border-panel :center active)))

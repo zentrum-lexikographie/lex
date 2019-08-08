@@ -1,9 +1,10 @@
 (ns zdl-lex-client.view.toolbar
   (:require [clojure.java.io :as io]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
+            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.status :as status]
             [zdl-lex-client.view.filter :as filter-view]
             [zdl-lex-client.view.search :as search-view]
             [zdl-lex-client.search :as search]
@@ -12,12 +13,13 @@
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
 
-(defonce ^:private status-label
-  (let [label (ui/label :text "–" :border 5)]
-    (uib/bind status/current
-              (uib/transform :user)
-              (uib/property label :text))
-    label))
+(def ^:private status-label (ui/label :text "–" :border 5))
+
+(defstate status-label-text
+  :start (uib/bind (bus/bind :status)
+                   (uib/transform :user)
+                   (uib/property status-label :text))
+  :stop (status-label-text))
 
 (def ^:private create-article-action
   (ui/action
@@ -34,15 +36,8 @@
       (ui/pack!)
       (ui/show!)))))
 
-(defonce ^:private filter-action
-  (let [handler (fn [_] (-> (filter-view/create-dialog) ui/pack! ui/show!))
-        action (ui/action :name "Filter" :icon icon/gmd-filter
-                          :enabled? @search/facets-available?
-                          :handler handler)]
-    (uib/bind search/facets-available? (uib/property action :enabled?))
-    action))
 
-(defonce ^:private search-all-action
+(def ^:private search-all-action
   (ui/action :name "Alle Artikel"
              :icon icon/gmd-all
              :handler (fn [_] (search/request "*"))))
@@ -63,12 +58,9 @@
    :name "Hilfe"
    :icon icon/gmd-help
    :handler (fn [_]
-              (ui/show!
-               (ui/dialog
-                :title "Hilfe"
-                :content help-text
-                :modal? true
-                :size [800 :by 600])))))
+              (-> (ui/dialog :title "Hilfe" :content help-text
+                             :modal? true :size [800 :by 600])
+                  (ui/show!)))))
 
 (def components
   [icon/logo
@@ -76,7 +68,7 @@
    search-view/input
    (ToolbarButton. search-view/action false)
    (ToolbarButton. search-all-action false)
-   (ToolbarButton. filter-action false)
+   (ToolbarButton. filter-view/action false)
    (ToolbarButton. show-help-action false)
    (ToolbarButton. create-article-action false)])
 

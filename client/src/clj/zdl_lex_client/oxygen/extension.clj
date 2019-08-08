@@ -5,6 +5,7 @@
   (:require [mount.core :as mount]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.repl :as repl]
+            [zdl-lex-client.editors :as editors]
             [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
@@ -45,4 +46,6 @@
   (mount/stop)
   true)
 
-(comment repl/server)
+(comment
+  repl/server
+  editors/listeners)

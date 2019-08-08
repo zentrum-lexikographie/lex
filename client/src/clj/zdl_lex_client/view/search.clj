@@ -1,5 +1,6 @@
 (ns zdl-lex-client.view.search
   (:require [clojure.string :as str]
+            [mount.core :refer [defstate]]
             [seesaw.behave :refer [when-focused-select-all]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
@@ -7,7 +8,6 @@
             [zdl-lex-client.article :as article]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.query :as query]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.workspace :as workspace])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
@@ -20,15 +20,21 @@
               (let [valid? @search/query-valid? q @search/query]
                 (when valid? (search/request q))))))
 
-(defonce input
-  (let [input (ui/text :columns 40 :action action)]
-    (when-focused-select-all input)
-    (uib/bind search/query input search/query)
-    (uib/bind search/query-valid?
-              (uib/transform #(if % :black :red))
-              (uib/property input :foreground))
-    input))
+(def input
+  (doto (ui/text :columns 40 :action action)
+    (when-focused-select-all)))
 
+
+(defstate input-value
+  :start (uib/bind search/query input search/query)
+  :stop (input-value))
+
+(defstate input-validity
+  :start (uib/bind search/query-valid?
+                   (uib/transform #(if % :black :red))
+                   (uib/property input :foreground))
+  :stop (input-validity))
+  
 (defn- suggestion->html [{:keys [suggestion pos type definitions
                                  status id last-modified]}]
   (let [suggestion (-> suggestion

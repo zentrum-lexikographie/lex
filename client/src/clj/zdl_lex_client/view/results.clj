@@ -1,20 +1,18 @@
 (ns zdl-lex-client.view.results
-  (:require [clojure.core.async :as async]
-            [clojure.string :as str]
+  (:require [manifold.stream :as s]
             [mount.core :refer [defstate]]
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.util :refer [to-dimension]]
             [tick.alpha.api :as t]
             [zdl-lex-client.article :as article]
+            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as workspace]
             [zdl-lex-client.search :as search]
-            [taoensso.timbre :as timbre])
+            [zdl-lex-client.workspace :as workspace])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
-           java.awt.Event
            [javax.swing Box JTabbedPane JTable]
            [org.jdesktop.swingx JXTable JXTable$TableAdapter]
            [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
@@ -35,7 +33,7 @@
         ^JXTable$TableAdapter adapter (.getComponentAdapter table)
         row (.rowAtPoint table point)
         row (if (<= 0 row) (.convertRowIndexToModel adapter row) row)]
-    (when (and (<= 0 row) (= 2 clicks))
+    (when (and (= 2 clicks) (<= 0 row))
       (workspace/open-article (nth result row)))))
 
 (defn- resize-columns [^ComponentEvent e]
@@ -129,13 +127,11 @@
 
 (def tabbed-pane
   (let [pane (JideTabbedPane. JTabbedPane/BOTTOM)]
-    (.setShowCloseButtonOnTab pane true)
-    (->> (fn [_]
-           (let [result (get-selected-result pane)]
-             (reset! search/query (or (some-> result :query) ""))
-             (reset! search/current-result (or result {}))))
-         (ui/listen pane :selection))
-    pane))
+    (doto pane
+      (.setShowCloseButtonOnTab true)
+      (ui/listen :selection
+                 (fn [_] (->> (or (get-selected-result pane) {})
+                              (bus/publish! :search-result)))))))
 
 (defn select-result-tabs []
   (ui/select tabbed-pane [:.result]))
@@ -171,10 +167,7 @@
      (workspace/show-view workspace/results-view))))
 
 (defstate renderer
-  :start (let [ch (async/chan)]
-           (async/go-loop []
-             (when-let [resp (async/alt! [ch search/responses] ([v] v))]
-               (merge-results resp)
-               (recur)))
-           ch)
-  :stop (async/close! renderer))
+  :start (let [subscription (bus/subscribe :search-response)]
+           (s/consume merge-results subscription)
+           subscription)
+  :stop (s/close! renderer))

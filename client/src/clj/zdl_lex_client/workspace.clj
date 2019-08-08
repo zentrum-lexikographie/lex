@@ -1,8 +1,6 @@
 (ns zdl-lex-client.workspace
-  (:require [clojure.core.async :as async]
+  (:require [cemerick.url :refer [url]]
             [mount.core :refer [defstate]]
-            [cemerick.url :refer [url]]
-            [zdl-lex-client.env :refer [config]]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.article :as article])
   (:import java.net.URL

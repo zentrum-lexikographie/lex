@@ -1,9 +1,13 @@
 (ns zdl-lex-client.view.filter
   (:require [clojure.string :as str]
             [lucene-query.core :as lucene]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl-lex-client.search :as search]))
+            [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.search :as search]
+            [zdl-lex-client.bus :as bus]
+            [taoensso.timbre :as timbre]))
 
 (def facet-title
   {:status "Status"
@@ -30,31 +34,29 @@
                 :font {:style :plain}
                 :border 5)))
 
-(defn- create-facet-list [k]
-  (let [list (ui/listbox :model (facet->model @search/current-result k)
-                         :selection-mode :multi-interval
-                         :renderer render-facet-list-entry
-                         :class :facet-list
-                         :user-data k)]
-    (uib/bind search/current-result
-              (uib/transform #(facet->model % k))
-              (uib/property list :model))
-    (ui/scrollable list :border [5 (facet-title k)])))
-
 (def facet-lists
-  [(create-facet-list :authors)
-   (create-facet-list :status)
-   (create-facet-list :sources)
-   (create-facet-list :type)
-   (create-facet-list :tranche)])
+  (for [k [:status :authors :sources :type :tranche]]
+    (ui/listbox :model []
+                :selection-mode :multi-interval
+                :renderer render-facet-list-entry
+                :class :facet-list
+                :user-data k)))
+
+(defstate result->facets
+  :start (doall
+          (for [fl facet-lists
+                :let [k (ui/user-data fl)]]
+            (uib/bind (bus/bind :search-result)
+                      (uib/transform #(facet->model % k))
+                      (uib/property fl :model))))
+  :stop (doseq [b result->facets] (b)))
 
 (defn facet-lists->ast []
   (->>
    (for [fl facet-lists
-         fl (ui/select fl [:.facet-list])
          :let [k (ui/user-data fl)
                vs (->> (ui/selection fl {:multi? true})
-                      (map first )
+                      (map first)
                       (map (fn [v] [:value [:term v]])))]
          :when (not (empty? vs))]
      [:clause
@@ -65,40 +67,56 @@
                          (interpose [:or]) (cons :query) (vec))])])
    (interpose [:and]) (cons :query) (vec)))
 
-
 (defn do-filter!
   ([e]
    (do-filter! e (-> (facet-lists->ast) (lucene/ast->str))))
   ([e filter]
    (some->> [filter @search/query] (remove empty?) (str/join " AND ")
             not-empty search/request)
-   (when e (ui/return-from-dialog e :filter))))
+   (when e (ui/dispose! (ui/to-root e)))))
 
 (defn reset-filter! []
-  (doseq [fl facet-lists
-          fl (ui/select fl [:.facet-list])]
+  (doseq [fl facet-lists]
     (ui/selection! fl [] {:multi? true})))
 
 (defn cancel-filter! [e]
-  (ui/return-from-dialog e :cancel))
+  (ui/dispose! (ui/to-root e)))
 
-(defn create-dialog []
-  (reset-filter!)
-  (ui/dialog :title "Suchfilter"
-             :type :question
-             :size [800 :by 800]
-             :content (ui/border-panel
-                       :center (ui/horizontal-panel :items facet-lists)
-                       :south (ui/label :text "<html><b>Tipp:</b> Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;.</html>"
-                                        :font {:size 10}
-                                        :border 5))
-             :options [(ui/button :text "Filtern"
-                                  :listen [:action do-filter!])
-                       ;;(ui/button :text "Zurücksetzen"
-                       ;;           :listen [:action reset-filter!])
-                       (ui/button :text "Abbrechen"
-                                  :listen [:action cancel-filter!])]))
+(def dialog
+  (let [lists (->>
+               (map #(ui/scrollable % :border [5 (-> % ui/user-data facet-title)])
+                    facet-lists)
+               (ui/horizontal-panel :items))
+        help (->> (str "<html>"
+                       "<b>Tipp:</b> "
+                       "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
+                       "</html>")
+                  (ui/label :font {:size 10} :border 5 :text))
+        content (ui/border-panel :center lists :south help)
+        options [(ui/button :text "Filtern" :listen [:action do-filter!])
+                 (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
+    (ui/dialog :title "Suchfilter"
+               :type :question
+               :size [800 :by 800]
+               :content content
+               :options options)))
+
+(def action
+  (ui/action :name "Filter"
+             :icon icon/gmd-filter
+             :enabled? false
+             :handler (fn [_]
+                        (reset-filter!)
+                        (-> dialog ui/pack! ui/show!))))
+
+
+(defstate action-enabled?
+  :start (uib/bind (bus/bind :search-result)
+                   (uib/transform :facets)
+                   (uib/transform some?)
+                   (uib/property action :enabled?))
+  :stop (action-enabled?))
 
 (comment
   (lucene/str->ast "autor:rast")
-  (-> (create-dialog) ui/pack! ui/show!))
+  (-> dialog ui/pack! ui/show!))

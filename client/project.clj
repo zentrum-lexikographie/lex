@@ -8,9 +8,9 @@
             :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
 
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/core.async "0.4.490"]
                  [org.clojure/data.codec "0.1.1"]
                  [com.taoensso/timbre "4.10.0"]
+                 [manifold "0.1.8"]
                  [mount "0.1.16"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]

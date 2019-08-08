@@ -13,11 +13,14 @@
 
 (def ^:private base (config :webdav-base))
 
-(defn id->url [id] (->> id (url base) str))
+(defn webdav? [u]
+  (str/starts-with? u base))
+
+(defn id->url [id]
+  (->> id (url base) str))
 
 (defn url->id [u]
-  (if (str/starts-with? u base)
-    (subs u (inc (count base)))))
+  (if (webdav? u) (subs u (inc (count base)))))
 
 (comment
   (id->url "test.xml")

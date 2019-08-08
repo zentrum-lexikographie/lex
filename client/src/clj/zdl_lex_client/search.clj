@@ -1,46 +1,27 @@
 (ns zdl-lex-client.search
-  (:require [clojure.core.async :as async]
+  (:require [seesaw.bind :as uib]
             [mount.core :refer [defstate]]
-            [seesaw.bind :as uib]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-client.cron :as cron]
-            [zdl-lex-client.http :as http]
+            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query])
   (:import java.util.UUID))
 
-(defonce query (atom ""))
+(def query (atom ""))
 
-(defonce query-valid?
-  (let [valid? (atom true)]
-    (uib/bind query (uib/transform query/valid?) valid?)
-    valid?))
+(def query-valid? (atom true))
 
-(defonce responses (async/chan))
+(defstate result->query
+  :start (uib/bind (bus/bind :search-result)
+                   (uib/transform :query)
+                   (uib/filter identity)
+                   query)
+  :stop (result->query))
 
-(defstate requests
-  :start (let [ch (async/chan (async/sliding-buffer 3))]
-           (async/go-loop []
-             (when-let [req (async/<! ch)]
-               (try
-                 (let [q (query/translate (req :query))]
-                   (->> (async/thread (http/search-articles q))
-                        (async/<!)
-                        (merge req)
-                        (async/>! responses)))
-                 (catch Exception e (timbre/warn e)))
-               (recur)))
-           ch)
-  :stop (async/close! requests))
+(defstate query->valid?
+  :start (uib/bind query
+                   (uib/transform query/valid?)
+                   query-valid?)
+  :stop (query->valid?))
 
 (defn request [q]
   (reset! query q)
-  (async/>!! requests {:query q :id (str (UUID/randomUUID))}))
-
-(defonce current-result (atom {}))
-
-(defonce facets-available?
-  (let [available? (atom false)]
-    (uib/bind current-result
-              (uib/transform #(some (comp (partial < 1) count) (vals %)))
-              available?)
-    available?))
+  (bus/publish! :search-request {:query q :id (str (UUID/randomUUID))}))

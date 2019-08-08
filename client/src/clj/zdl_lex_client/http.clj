@@ -1,8 +1,15 @@
 (ns zdl-lex-client.http
   (:require [cemerick.url :refer [url]]
+            [mount.core :refer [defstate]]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
             [taoensso.timbre :as timbre]
+            [manifold.deferred :as d]
+            [manifold.stream :as s]
+            [manifold.time :as mt]
+            [tick.alpha.api :as t]
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.query :as query]
             [zdl-lex-client.env :refer [config]])
   (:import java.io.IOException
            [java.net ConnectException URL]))
@@ -57,15 +64,6 @@
 (defn post-edn [uf msg]
   (tx (write-and-read-edn msg) uf))
 
-(defn search-articles
-  ([q] (search-articles q 1000))
-  ([q limit]
-   (get-edn #(merge % {:path "/articles/search"
-                       :query {"q" q "limit" (str limit)}}))))
-
-(defn query-article-facets []
-  (-> (search-articles "id:*" 0) :facets))
-
 (defn suggest-forms [q]
   (get-edn #(merge % {:path "/articles/forms/suggestions"
                       :query {"q" q}})))
@@ -76,4 +74,27 @@
 
 (defn get-status []
   (get-edn #(merge % {:path "/status"})))
+
+(defstate get-status
+  :start (mt/every
+          (mt/seconds 30)
+          (fn []
+            (d/chain (d/future (get-edn #(merge % {:path "/status"})))
+                     (partial merge {:timestamp (t/now)})
+                     (partial bus/publish! :status))))
+  :stop (get-status))
+
+(defstate search-articles
+  :start (let [subscription (bus/subscribe :search-request)
+               q->uf (fn [q] #(merge % {:path "/articles/search"
+                                        :query {"q" q "limit" "1000"}}))
+               cb #(d/chain (query/translate (% :query))
+                            (fn [q] (future (get-edn (q->uf q))))
+                            (partial merge %)
+                            (partial bus/publish! :search-response))]
+           (s/consume cb subscription)
+           subscription)
+  :stop (s/close! search-articles))
+
+
 
