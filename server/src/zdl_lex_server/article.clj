@@ -1,5 +1,5 @@
 (ns zdl-lex-server.article
-  (:require [clojure.data.xml :as xml]
+  (:require [clojure.data.xml :as cxml]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
             [clojure.java.io :as io]
@@ -8,7 +8,8 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-server.store :as store]
-            [zdl-lex-server.util :refer [->clean-map]])
+            [zdl-lex-server.util :refer [->clean-map]]
+            [zdl-lex-server.xml :as xml])
   (:import java.time.format.DateTimeParseException
            [java.time.temporal ChronoUnit Temporal]))
 
@@ -16,7 +17,7 @@
   "Parses a lexicographic article file, returning a zipper pointing to
    the article element"
   (let [doc (-> (io/input-stream article)
-                (xml/parse :namespace-aware false))
+                (cxml/parse :namespace-aware false))
         article-loc (-> (zip/xml-zip doc)
                         (zx/xml1-> :DWDS :Artikel))]
     (or article-loc (throw (ex-info (str article) doc)))))
@@ -30,22 +31,27 @@
   "Replaces whitespace runs with a single space and trims s"
   (str/trim (str/replace s #"\s+" " ")))
 
-(defn- text [loc]
-  "The space-normalized, non-empty text content of loc"
-  (some-> loc zx/text normalize-space not-empty))
+(defn text [s]
+  (not-empty (normalize-space s)))
 
-(defn- texts [vs]
-  "All distinct texts, sorted"
-  (->> (map text vs) (remove nil?) (distinct) (seq)))
+(defn- texts->seq [xpath ctx]
+  (->> (seq (xpath ctx)) (map text) (remove nil?) (distinct) (seq)))
 
-(defn- attrs [loc attr]
-  "All distinct attribute values, grouped by tag"
-  (let [attrs (->> (zx/xml-> loc dz/descendants zip/node)
-                   (map #(vector (:tag %) (get-in % [:attrs attr])))
-                   (filter second)
-                   (map #(hash-map (first %) [(second %)]))
-                   (apply merge-with concat))]
-    (into {} (for [[k v] attrs] [k (-> (distinct v))]))))
+(defn- texts-fn [xp-expr]
+  (partial texts->seq (xml/xpath-fn (str xp-expr "/text()"))))
+
+(defn- attrs->map [attr xpath ctx]
+  (some->> (for [node (-> ctx xpath seq)]
+             [(.. node (getNodeName) (getLocalName))
+              (.. node (attribute attr))])
+           (map #(hash-map (keyword (first %)) [(second %)]))
+           (apply merge-with concat)
+           (map (fn [[k v]] [k (distinct v)]))
+           (seq)
+           (into {})))
+
+(defn- attrs-fn [attr]
+  (partial attrs->map attr (xml/xpath-fn (str ".//*[@" attr "]"))))
 
 (defn- format-timestamp [d]
   "ISO-formatted date string"
@@ -71,29 +77,40 @@
      [k (-> (for [ts v] (past-timestamp ts)) (distinct))])
    (into {})))
 
-(def ^:private >> dz/descendants)
-
-(defn excerpt [article-loc]
-  (let [{:keys [Typ Tranche Status]} (-> article-loc zip/node :attrs)
-        texts (comp texts (fn [& args] (apply zx/xml-> (cons article-loc args))))
-        attrs (partial attrs article-loc)]
+(let [type (comp text str (xml/xpath-fn "@Typ/string()"))
+      tranche (comp text str (xml/xpath-fn "@Tranche/string()"))
+      status (comp text str (xml/xpath-fn "@Status/string()"))
+      authors (attrs-fn "Autor")
+      sources (attrs-fn "Quelle")
+      timestamps (comp past-timestamps (attrs-fn "Zeitstempel"))
+      forms (texts-fn "d:Formangabe/d:Schreibung")
+      pos (texts-fn "d:Formangabe/d:Grammatik/d:Wortklasse")
+      definitions (texts-fn ".//d:Definition")
+      senses (texts-fn ".//d:Bedeutungsebene")
+      usage-period (texts-fn ".//d:Gebrauchszeitraum")
+      styles (texts-fn ".//d:Stilebene")
+      colouring (texts-fn ".//d:Stilfaerbung")
+      area (texts-fn ".//d:Sprachraum")
+      morphological-rels (texts-fn ".//d:Verweise/d:Verweis/d:Ziellemma")
+      sense-rels (texts-fn ".//d:Lesart/d:Verweise/d:Verweis/d:Ziellemma")]
+  (defn excerpt [article]
     (->clean-map
-     {:type Typ
-      :tranche Tranche
-      :status Status
-      :authors (attrs :Autor)
-      :sources (attrs :Quelle)
-      :timestamps (past-timestamps (attrs :Zeitstempel))
-      :forms (texts :Formangabe :Schreibung)
-      :pos (texts :Formangabe :Grammatik :Wortklasse)
-      :definitions (texts >> :Definition)
-      :senses (texts >> :Bedeutungsebene)
-      :usage-period (texts >> :Gebrauchszeitraum)
-      :styles (texts >> :Stilebene)
-      :colouring (texts >> :Stilfaerbung)
-      :area (texts >> :Sprachraum)
-      :morphological-rels (texts :Verweise :Verweis :Ziellemma)
-      :sense-rels (texts >> :Lesart :Verweise :Verweis :Ziellemma)})))
+     {:type (type article)
+      :tranche (tranche article)
+      :status (status article)
+      :authors (authors article)
+      :sources (sources article)
+      :timestamps (timestamps article)
+      :forms (forms article)
+      :pos (pos article)
+      :definitions (definitions article)
+      :senses (senses article)
+      :usage-period (usage-period article)
+      :styles (styles article)
+      :colouring (colouring article)
+      :area (area article)
+      :morphological-rels (morphological-rels article)
+      :sense-rels (sense-rels article)})))
 
 (defn field-key [n]
   (condp = n
@@ -190,3 +207,12 @@
              (for [[name values] (sort fields) value (sort values)]
                (field-xml name value)))}))
 
+(comment
+  (let [article (first (store/article-files))
+        doc (.. xml/doc-builder-factory (newDocumentBuilder) (parse article))]
+    ((attrs-fn "Quelle") doc))
+  (let [articles (xml/xpath-fn "/d:DWDS/d:Artikel")
+        article (store/sample-article)
+        doc (.. xml/doc-builder-factory (newDocumentBuilder) (parse article))]
+    (for [article (seq (articles doc))]
+      (excerpt article))))
