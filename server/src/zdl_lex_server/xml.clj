@@ -5,39 +5,53 @@
            javax.xml.transform.stream.StreamResult
            javax.xml.transform.TransformerFactory
            net.sf.saxon.Configuration
-           [net.sf.saxon.s9api DocumentBuilder Processor XdmValue XPathCompiler XPathExecutable]
+           [net.sf.saxon.s9api Processor XdmValue XPathCompiler XPathExecutable]
            org.xml.sax.InputSource))
 
-(def doc-builder-factory
+(def ^DocumentBuilderFactory doc-builder-factory
   (doto (DocumentBuilderFactory/newInstance)
     (.setNamespaceAware true)
     (.setExpandEntityReferences false)
     (.setXIncludeAware false)
     (.setValidating false)))
 
-(defn new-document []
-  (.. doc-builder-factory (newDocumentBuilder) (newDocument)))
+(defn ^javax.xml.parsers.DocumentBuilder new-document-builder []
+  (.. doc-builder-factory (newDocumentBuilder)))
 
-(defn parse-str [^String s]
-  (.. doc-builder-factory (newDocumentBuilder)
-      (parse (InputSource. (StringReader. s)))))
+(defn new-document []
+  (.. (new-document-builder) (newDocument)))
+
+(defprotocol Parseable
+  (parse [this]))
+
+(extend-protocol Parseable
+  java.lang.String
+  (parse [this]
+    (.. (new-document-builder) (parse (InputSource. (StringReader. this)))))
+
+  java.io.File
+  (parse [this]
+    (.. (new-document-builder) (parse this)))
+
+  java.io.InputStream
+  (parse [this]
+    (.. (new-document-builder) (parse this))))
 
 (def transformer-factory (TransformerFactory/newInstance))
 
-(defn serialize [doc result]
-  (.. transformer-factory
-      (newTransformer)
-      (transform (DOMSource. doc) result)))
-
-(defn doc-str [doc]
-  (let [writer (StringWriter.)
-        result (StreamResult. writer)]
-    (serialize doc result)
-    (str writer)))
+(defn serialize
+  ([doc result]
+   (.. transformer-factory (newTransformer) (transform (DOMSource. doc) result)))
+  ([doc]
+   (let [writer (StringWriter.)
+         result (StreamResult. writer)]
+     (serialize doc result)
+     (str writer))))
 
 (def ^Processor saxon-processor (Processor. (Configuration.)))
 
-(def ^DocumentBuilder saxon-doc-builder (.newDocumentBuilder saxon-processor))
+(def ^net.sf.saxon.s9api.DocumentBuilder saxon-doc-builder
+  (.newDocumentBuilder saxon-processor))
 
 (def ^XPathCompiler xpath-compiler
   (doto (.newXPathCompiler saxon-processor)
@@ -55,4 +69,4 @@
   (partial eval-xpath (compile-xpath s)))
 
 (comment
-  (-> "<root/>" parse-str doc-str))
+  (-> "<root/>" parse serialize))

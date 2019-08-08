@@ -56,7 +56,7 @@
                       (.appendChild (element "ex:text"))
                       (.appendChild (.createCDATASection query-doc q))
                       (.getOwnerDocument)
-                      (xml/doc-str))
+                      (xml/serialize))
          xml-req {:method :post
                    :url (url "/rest" path)
                    :content-type :xml
@@ -84,7 +84,7 @@
 
 (defn articles []
   (->>
-   (for [doc (-> (xquery articles-xquery) (xml/parse-str) (article-docs))]
+   (for [doc (-> (xquery articles-xquery) (xml/parse) (article-docs))]
      {:id (uri->id (article-doc-uri doc))
       :modified (article-doc-modified doc)})
    (remove (comp #{"indexedvalues.xml"} :id))))

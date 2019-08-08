@@ -22,11 +22,6 @@
                         (zx/xml1-> :DWDS :Artikel))]
     (or article-loc (throw (ex-info (str article) doc)))))
 
-(defn- distinct-sorted [vs]
-  (->> (into #{} vs) (vec) (sort) (seq)))
-
-(comment (distinct-sorted [:a :b :b :d :d :c]))
-
 (defn- normalize-space [s]
   "Replaces whitespace runs with a single space and trims s"
   (str/trim (str/replace s #"\s+" " ")))
@@ -211,8 +206,7 @@
   (let [article (first (store/article-files))
         doc (.. xml/doc-builder-factory (newDocumentBuilder) (parse article))]
     ((attrs-fn "Quelle") doc))
-  (let [articles (xml/xpath-fn "/d:DWDS/d:Artikel")
-        article (store/sample-article)
-        doc (.. xml/doc-builder-factory (newDocumentBuilder) (parse article))]
-    (for [article (seq (articles doc))]
+  (let [articles (xml/xpath-fn "/d:DWDS/d:Artikel")]
+    (for [doc (take 10 (map xml/parse (drop 150000 (store/article-files))))
+          article (seq (articles doc))]
       (excerpt article))))

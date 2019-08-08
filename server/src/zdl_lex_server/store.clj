@@ -31,7 +31,8 @@
 
 (def article-files (partial xml-files articles-dir))
 
-(defn sample-article [] (rand-nth (article-files)))
+(defn sample-article []
+  (->> (article-files) (drop (rand-int 100000)) (first)))
 
 (def mantis-dump (fs/file data-dir "mantis.edn"))
 
