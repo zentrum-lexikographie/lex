@@ -44,7 +44,7 @@
        ["/export" {:get solr/handle-export}]
        ["/forms/suggestions" {:get solr/handle-form-suggestions}]
        ["/index" {:delete sync/handle-index-trigger}]
-       ["/issues/:lemma" {:get mantis/handle-issue-lookup}]
+       ["/issues" {:get mantis/handle-issue-lookup}]
        ["/search" {:get solr/handle-search}]]
       ["/home" {:get home/handle}]
       ["/status" {:get status/handle}]]])

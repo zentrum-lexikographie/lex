@@ -154,9 +154,9 @@
            ch)
   :stop (async/close! issues->dump->index))
 
-(defn handle-issue-lookup [{{:keys [lemma]} :path-params}]
+(defn handle-issue-lookup [{{:keys [q]} :params}]
   (htstatus/ok
-   (map (comp issue :id) (or (@index lemma) []))))
+   (pmap (comp issue :id) (or (@index q) []))))
 
 (comment
   store/mantis-dump
@@ -164,4 +164,4 @@
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)
   (-> @index keys sort)
-  (handle-issue-lookup {:path-params {:lemma "Leder"}}))
+  (handle-issue-lookup {:params {:q "Leder"}}))

@@ -21,8 +21,9 @@
   (timbre/set-level! (config :log-level))
   (timbre/merge-config! (config :log-config)))
 
+(configure-logging)
+
 (defn -main []
-  (configure-logging)
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))
