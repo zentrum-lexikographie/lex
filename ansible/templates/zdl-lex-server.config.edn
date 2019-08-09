@@ -4,4 +4,6 @@
                              "org.eclipse.jetty.*"
                              "org.eclipse.jgit.*"]}
  :data-dir "{{ lex_data_dir }}"
- :exist-req {:basic-auth ["{{ exist_user }}" "{{ exist_password }}"]}}
+ :exist-req {:basic-auth ["{{ exist_user }}" "{{ exist_password }}"]}
+ :mantis-user "{{ mantis_user }}"
+ :mantis-password "{{ mantis_password }}"}
