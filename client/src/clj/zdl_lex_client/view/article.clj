@@ -1,15 +1,13 @@
 (ns zdl-lex-client.view.article
-  (:require [mount.core :refer [defstate]]
+  (:require [manifold.deferred :as d]
+            [manifold.stream :as s]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl-lex-client.article :as carticle]
-            [zdl-lex-common.article :as article]
-            [zdl-lex-client.bus :as bus]
-            [manifold.stream :as s]
-            [manifold.deferred :as d]
-            [zdl-lex-client.workspace :as ws]
             [taoensso.timbre :as timbre]
-            [zdl-lex-common.xml :as xml]))
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-common.article :as article]))
 
 (def active (ui/text :multi-line? true
                      :editable? false

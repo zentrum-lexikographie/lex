@@ -5,11 +5,11 @@
             [seesaw.swingx :as uix]
             [seesaw.util :refer [to-dimension]]
             [tick.alpha.api :as t]
-            [zdl-lex-client.article :as article]
+            [zdl-lex-common.article :as article]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as ws])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
@@ -35,7 +35,7 @@
         row (if (<= 0 row) (.convertRowIndexToModel adapter row) row)]
     (when (and (= 2 clicks) (<= 0 row))
       (let [{:keys [id]} (nth result row)]
-        (workspace/open-article workspace/instance id)))))
+        (ws/open-article ws/instance id)))))
 
 (defn- resize-columns [^ComponentEvent e]
   (let [^JTable table (.getSource e)
@@ -165,7 +165,7 @@
          (.removeTabAt tabbed-pane 0)
          (recur (count-result-tabs))))
      (ui/selection! tabbed-pane new-tab)
-     (workspace/show-view workspace/instance :results))))
+     (ws/show-view ws/instance :results))))
 
 (defstate renderer
   :start (let [subscription (bus/subscribe :search-response)]

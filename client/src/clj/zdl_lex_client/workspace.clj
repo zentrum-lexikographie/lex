@@ -2,7 +2,6 @@
   (:require [cemerick.url :refer [url]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-client.article :as article]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.xml :as xml])
@@ -41,7 +40,7 @@
      (.. this (showView (views id) request-focus?))))
   (open-article
     [^StandalonePluginWorkspace this id]
-    (.. this (open (URL. (article/id->url id)))))
+    (.. this (open (http/id->url id))))
   (add-editor-change-listener
     [^StandalonePluginWorkspace this listener]
     (.. this (addEditorChangeListener listener editing-area)))
@@ -64,7 +63,7 @@
   :start
   (reify Workspace
     (open-article [_ id]
-      (bus/publish! :editor-active [(URL. (article/id->url id)) true])
+      (bus/publish! :editor-active [(http/id->url id) true])
       true)
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]

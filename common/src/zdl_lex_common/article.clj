@@ -7,6 +7,14 @@
   (:import [java.time.temporal ChronoUnit Temporal]
            net.sf.saxon.s9api.QName))
 
+(defn status->color [status]
+  (condp = (str/trim status)
+    "Artikelrumpf" "#ffcccc"
+    "Lex-zur_Abgabe" "#98fb98" ; "#ffff00"
+    "Red-1" "#ffec8b"
+    "Red-f" "#aeecff" ; "#ccffcc"
+    "#ffffff"))
+
 (def doc->articles
   "Selects the DWDS article elements in a XML document."
   (comp seq (xml/xpath-fn "/d:DWDS/d:Artikel")))

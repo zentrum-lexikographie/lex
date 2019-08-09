@@ -9,7 +9,7 @@
             [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as ws])
   (:import java.awt.Toolkit
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
@@ -43,4 +43,4 @@
 
   (search/request "forms:plexi*")
 
-  workspace/instance)
+  ws/instance)

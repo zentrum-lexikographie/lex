@@ -1,19 +1,31 @@
 (ns zdl-lex-client.http
   (:require [cemerick.url :refer [url]]
-            [mount.core :refer [defstate]]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
-            [taoensso.timbre :as timbre]
+            [clojure.string :as str]
             [manifold.deferred :as d]
             [manifold.stream :as s]
             [manifold.time :as mt]
+            [mount.core :refer [defstate]]
+            [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.query :as query]
             [zdl-lex-client.env :refer [config]]
+            [zdl-lex-client.query :as query]
             [zdl-lex-common.xml :as xml])
   (:import java.io.IOException
            [java.net ConnectException URL]))
+
+(def ^:private webdav-base (config :webdav-base))
+
+(defn webdav? [^URL u]
+  (str/starts-with? (str u) webdav-base))
+
+(defn id->url [id]
+  (URL. (str (url webdav-base id))))
+
+(defn url->id [^URL u]
+  (if (webdav? u) (subs (str u) (inc (count webdav-base)))))
 
 (def server-base (config :server-base))
 

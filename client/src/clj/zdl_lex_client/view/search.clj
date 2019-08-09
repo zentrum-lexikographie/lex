@@ -5,11 +5,11 @@
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
             [seesaw.core :as ui]
-            [zdl-lex-client.article :as article]
+            [zdl-lex-common.article :as article]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.workspace :as workspace])
+            [zdl-lex-client.workspace :as ws])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
 
 (def action
@@ -34,7 +34,7 @@
                    (uib/transform #(if % :black :red))
                    (uib/property input :foreground))
   :stop (input-validity))
-  
+
 (defn- suggestion->html [{:keys [suggestion pos type definitions
                                  status id last-modified]}]
   (let [suggestion (-> suggestion
@@ -76,5 +76,5 @@
         (proxy-super setListData (into-array Object suggestions))
         (not (empty? suggestions))))
     (acceptHint [{:keys [id]}]
-      (workspace/open-article workspace/instance id))))
+      (ws/open-article ws/instance id))))
 

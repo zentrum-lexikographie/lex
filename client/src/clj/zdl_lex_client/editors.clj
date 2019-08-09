@@ -1,14 +1,11 @@
 (ns zdl-lex-client.editors
-  (:require [mount.core :refer [defstate]]
-            [zdl-lex-client.article :as article]
+  (:require [manifold.stream :as s]
+            [mount.core :refer [defstate]]
+            [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.workspace :as workspace]
-            [manifold.stream :as s]
-            [taoensso.timbre :as timbre])
-  (:import java.net.URL
-           [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
-           ro.sync.exml.workspace.api.PluginWorkspace
-           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
+            [zdl-lex-client.http :as http]
+            [zdl-lex-client.workspace :as ws])
+  (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]))
 
 (def editors (atom {}))
 
@@ -24,20 +21,20 @@
       (bus/publish! :editor-saved url))))
 
 (defn- add-listener [url]
-  (when (article/webdav? (str url))
+  (when (http/webdav? url)
     (let [listener (editor-listener url)]
-      (workspace/add-editor-listener workspace/instance url listener)
+      (ws/add-editor-listener ws/instance url listener)
       (swap! editors assoc url listener))))
 
 (defn- remove-listener [url]
-  (when (article/webdav? (str url))
-    (workspace/remove-editor-listener workspace/instance url (@editors url))
+  (when (http/webdav? url)
+    (ws/remove-editor-listener ws/instance url (@editors url))
     (swap! editors dissoc url)
     (bus/publish! :editor-active [url false])))
 
 (defn- remove-all-listeners []
   (doseq [[url listener] @editors]
-    (workspace/remove-editor-listener workspace/instance url listener))
+    (ws/remove-editor-listener ws/instance url listener))
   (reset! editors {}))
 
 (def editor-change-listener
@@ -50,11 +47,11 @@
       (doseq [url urls] (remove-listener url)) true)
     (editorPageChanged [_])
     (editorActivated [url]
-      (when (article/webdav? (str url))
+      (when (http/webdav? url)
         (bus/publish! :editor-active [url true])))
     (editorSelected [_])
     (editorDeactivated [url]
-      (when (article/webdav? (str url))
+      (when (http/webdav? url)
         (bus/publish! :editor-active [url false])))
     (editorClosed [_])
     (editorOpened [url]
@@ -66,12 +63,10 @@
 (defstate listeners
   :start (do
            (remove-all-listeners)
-           (workspace/add-editor-change-listener workspace/instance
-                                                 editor-change-listener))
+           (ws/add-editor-change-listener ws/instance editor-change-listener))
   :stop (do
-          (remove-all-listeners)
-          (workspace/remove-editor-change-listener workspace/instance
-                                                   editor-change-listener)))
+          (ws/remove-editor-change-listener ws/instance editor-change-listener)
+          (remove-all-listeners)))
 
 (defstate activation-logger
   :start (let [subscription (bus/subscribe :editor-active)]
