@@ -11,12 +11,16 @@ bin/lein:
 		https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 	chmod +x $@
 
+.PHONY: common
+common: bin/lein
+	cd common && ../bin/lein install
+
 .PHONY: server
-server: schema bin/lein
+server: common schema bin/lein
 	cd server && ../bin/lein uberjar
 
 .PHONY: client
-client: schema bin/lein
+client: common schema bin/lein
 	cd client && ../bin/lein uberjar && ../bin/lein package
 
 .PHONY: schema

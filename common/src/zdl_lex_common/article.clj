@@ -1,9 +1,9 @@
-(ns zdl-lex-server.article
+(ns zdl-lex-common.article
   (:require [clojure.string :as str]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [zdl-lex-server.util :refer [->clean-map]]
-            [zdl-lex-server.xml :as xml])
+            [zdl-lex-common.util :refer [->clean-map]]
+            [zdl-lex-common.xml :as xml])
   (:import [java.time.temporal ChronoUnit Temporal]))
 
 (def doc->articles
@@ -62,7 +62,7 @@
       (let [ts (format-timestamp (t/parse s))
             valid? (<= (compare ts now) 0)]
         (if valid? ts now))
-      (catch Throwable t (timbre/warn t) now))))
+      (catch Throwable t now))))
 
 (defn- past-timestamps
   "Maps attribute timestamp values via `past-timestamp`."

@@ -7,10 +7,10 @@
             [ring.util.http-response :as htstatus]
             [ring.util.io :as htio]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.article :as article]
+            [zdl-lex-common.article :as article]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [zdl-lex-server.xml :as xml]))
+            [zdl-lex-common.xml :as xml]))
 
 (defn- field-name->key
   "Translates a Solr field name into a keyword."

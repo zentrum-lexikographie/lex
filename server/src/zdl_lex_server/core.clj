@@ -11,7 +11,7 @@
             [clojure.core.async :as async]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.mantis :as mantis]
-            [zdl-lex-server.article :as article])
+            [zdl-lex-common.article :as article])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
 (defn configure-logging []

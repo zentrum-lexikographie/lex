@@ -1,4 +1,4 @@
-(ns zdl-lex-server.xml
+(ns zdl-lex-common.xml
   (:import [java.io StringReader StringWriter]
            javax.xml.parsers.DocumentBuilderFactory
            javax.xml.transform.dom.DOMSource

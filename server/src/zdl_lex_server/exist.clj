@@ -11,7 +11,7 @@
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [zdl-lex-server.xml :as xml]))
+            [zdl-lex-common.xml :as xml]))
 
 (def ^:private req
   (comp #(timbre/spy :trace %)
