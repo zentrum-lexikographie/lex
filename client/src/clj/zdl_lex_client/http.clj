@@ -10,7 +10,8 @@
             [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query]
-            [zdl-lex-client.env :refer [config]])
+            [zdl-lex-client.env :refer [config]]
+            [zdl-lex-common.xml :as xml])
   (:import java.io.IOException
            [java.net ConnectException URL]))
 
@@ -21,14 +22,19 @@
     (if (and user password)
       (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 
-(defn tx [rf uf]
-  (let [tx-url (-> server-base url uf)
-        con (.. (URL. (str tx-url)) (openConnection))]
-    (timbre/debug (select-keys tx-url [:path :query]))
+(defn server-url
+  ([path]
+   (server-url path {}))
+  ([path params]
+   (URL. (str (merge (url server-base) {:path path :query params})))))
+
+(defn tx [callback url]
+  (let [con (.. url (openConnection))]
+    (timbre/debug (str url))
     (try
       (when basic-creds
         (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-      (rf con)
+      (callback con)
       (catch ConnectException e
         (throw (ex-info "I/O error while connecting to XML database" {} e)))
       (catch IOException e
@@ -37,6 +43,14 @@
                           {:http-status (.getResponseCode con)
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
+
+(defn- read-xml [con]
+  (doto con
+    (.setRequestProperty "Accept" "application/xml"))
+  (-> (.getInputStream con)
+      (xml/parse)))
+
+(def get-xml (partial tx read-xml))
 
 (defn- read-edn [con]
   (doto con
@@ -61,40 +75,32 @@
 (def get-edn
   (partial tx read-edn))
 
-(defn post-edn [uf msg]
-  (tx (write-and-read-edn msg) uf))
+(defn post-edn [url msg]
+  (tx (write-and-read-edn msg) url))
 
 (defn suggest-forms [q]
-  (get-edn #(merge % {:path "/articles/forms/suggestions"
-                      :query {"q" q}})))
+  (get-edn (server-url "/articles/forms/suggestions" {"q" q})))
 
 (defn sync-with-exist [id]
-  (post-edn #(merge % {:path "/articles/exist/sync-id"
-                       :query {"id" id}}) {}))
-
-(defn get-status []
-  (get-edn #(merge % {:path "/status"})))
+  (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
 
 (defstate get-status
   :start (mt/every
           (mt/seconds 30)
           (fn []
-            (d/chain (d/future (get-edn #(merge % {:path "/status"})))
+            (d/chain (d/future (get-edn (server-url "/status")))
                      (partial merge {:timestamp (t/now)})
                      (partial bus/publish! :status))))
   :stop (get-status))
 
 (defstate search-articles
-  :start (let [subscription (bus/subscribe :search-request)
-               q->uf (fn [q] #(merge % {:path "/articles/search"
-                                        :query {"q" q "limit" "1000"}}))
-               cb #(d/chain (query/translate (% :query))
-                            (fn [q] (future (get-edn (q->uf q))))
-                            (partial merge %)
-                            (partial bus/publish! :search-response))]
-           (s/consume cb subscription)
+  :start (let [subscription (bus/subscribe :search-request)]
+           (-> (fn [req]
+                 (d/chain (query/translate (req :query))
+                          #(server-url "/articles/search" {"q" % "limit" "1000"})
+                          #(future (get-edn %))
+                          (partial merge req)
+                          (partial bus/publish! :search-response)))
+               (s/consume subscription))
            subscription)
   :stop (s/close! search-articles))
-
-
-

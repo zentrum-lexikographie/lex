@@ -4,7 +4,8 @@
             [tick.alpha.api :as t]
             [zdl-lex-common.util :refer [->clean-map]]
             [zdl-lex-common.xml :as xml])
-  (:import [java.time.temporal ChronoUnit Temporal]))
+  (:import [java.time.temporal ChronoUnit Temporal]
+           net.sf.saxon.s9api.QName))
 
 (def doc->articles
   "Selects the DWDS article elements in a XML document."
@@ -36,7 +37,7 @@
   [attr xpath ctx]
   (some->> (for [node (-> ctx xpath seq)]
              [(.. node (getNodeName) (getLocalName))
-              (.. node (attribute attr))])
+              (.. node (getAttributeValue (QName. attr)))])
            (map #(hash-map (keyword (first %)) [(second %)]))
            (apply merge-with concat)
            (map (fn [[k v]] [k (distinct v)]))

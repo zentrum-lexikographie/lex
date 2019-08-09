@@ -75,6 +75,6 @@
             suggestions (or suggestions [])]
         (proxy-super setListData (into-array Object suggestions))
         (not (empty? suggestions))))
-    (acceptHint [hint]
-      (workspace/open-article hint))))
+    (acceptHint [{:keys [id]}]
+      (workspace/open-article workspace/instance id))))
 

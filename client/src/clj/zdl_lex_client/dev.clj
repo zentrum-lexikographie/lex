@@ -21,17 +21,9 @@
         main-panel (ui/splitter :left-right
                                 results-view/tabbed-pane
                                 article-view/panel
-                                :divider-location 0.8)
-        ws (proxy [StandalonePluginWorkspace] []
-             (open [url]
-               (bus/publish! :editor-active [(str url) true])
-               true)
-             (showView [id request-focus?]
-               (timbre/info {:id id :request-focus? request-focus?}))
-             (addEditorChangeListener [_ _])
-             (removeEditorChangeListener [_ _]))]
+                                :divider-location 0.8)]
     (mount/stop)
-    (mount/start-with {#'workspace/instance ws})
+    (mount/start)
     (ui/invoke-later
      (ui/show!
       (ui/frame
@@ -46,8 +38,6 @@
 
   (mount/start)
   (mount/stop)
-
-  (-> editors/listeners :editors deref)
 
   (http/sync-with-exist "DWDS/MWA-001/der_Grosse_Teich.xml")
 

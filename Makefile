@@ -31,6 +31,7 @@ schema:
 .PHONY: clean
 clean: bin/lein
 	cd schema && make clean
+	cd common && ../bin/lein clean
 	cd client && ../bin/lein clean
 	cd server && ../bin/lein clean
 

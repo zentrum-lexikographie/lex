@@ -34,7 +34,8 @@
         row (.rowAtPoint table point)
         row (if (<= 0 row) (.convertRowIndexToModel adapter row) row)]
     (when (and (= 2 clicks) (<= 0 row))
-      (workspace/open-article (nth result row)))))
+      (let [{:keys [id]} (nth result row)]
+        (workspace/open-article workspace/instance id)))))
 
 (defn- resize-columns [^ComponentEvent e]
   (let [^JTable table (.getSource e)
@@ -164,7 +165,7 @@
          (.removeTabAt tabbed-pane 0)
          (recur (count-result-tabs))))
      (ui/selection! tabbed-pane new-tab)
-     (workspace/show-view workspace/results-view))))
+     (workspace/show-view workspace/instance :results))))
 
 (defstate renderer
   :start (let [subscription (bus/subscribe :search-response)]

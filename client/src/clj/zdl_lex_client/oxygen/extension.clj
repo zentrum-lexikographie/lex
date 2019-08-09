@@ -20,12 +20,12 @@
      (proxy [ViewComponentCustomizer] []
        (customizeView [viewInfo]
          (condp = (.getViewID viewInfo)
-           workspace/results-view
+           (workspace/views :results)
            (doto viewInfo
               (.setTitle "ZDL/DWDS – Suchergebnisse")
               (.setIcon icon/gmd-result)
               (.setComponent results-view/tabbed-pane))
-           workspace/article-view
+           (workspace/views :article)
            (doto viewInfo
              (.setTitle "ZDL/DWDS – Artikel")
              (.setIcon icon/gmd-details)
@@ -36,7 +36,7 @@
    (proxy [ToolbarComponentsCustomizer] []
      (customizeToolbar [toolbarInfo]
        (condp = (.getToolbarID toolbarInfo)
-         workspace/toolbar
+         (workspace/views :toolbar)
          (doto toolbarInfo
            (.setTitle "ZDL/DWDS")
            (.setComponents (into-array JComponent toolbar/components)))
