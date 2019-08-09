@@ -1,7 +1,8 @@
 (ns zdl-lex-server.solr
   (:require [clj-http.client :as http]
-            [clojure.data.xml :as xml]
             [clojure.data.csv :as csv]
+            [clojure.java.io :as io]
+            [clojure.string :as str]
             [lucene-query.core :as lucene]
             [ring.util.http-response :as htstatus]
             [ring.util.io :as htio]
@@ -9,8 +10,73 @@
             [zdl-lex-server.article :as article]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [clojure.java.io :as io]
-            [clojure.string :as str]))
+            [zdl-lex-server.xml :as xml]))
+
+(defn- field-name->key
+  "Translates a Solr field name into a keyword."
+  [n]
+  (condp = n
+    "_text_" :text
+    (-> n
+        (str/replace #"_((dts)|(dt)|(ss)|(t)|(i)|(l))$" "")
+        (str/replace "_" "-")
+        keyword)))
+
+(defn- field-key->name
+  "Translates a keyword into a Solr field name."
+  [k]
+  (condp = k
+    :text "_text_"
+    (let [field-name (str/replace (name k) "-" "_")
+          field-suffix (condp = k
+                         :id ""
+                         :language ""
+                         :xml-descendent-path ""
+                         :weight "_i"
+                         :time "_l"
+                         :definitions "_t"
+                         :last-modified "_dt"
+                         :timestamps "_dts"
+                         "_ss")]
+      (str field-name field-suffix))))
+
+(let [abstract-fields [:last-modified :timestamp
+                       :author :source
+                       :forms :pos :definitions
+                       :type :status :authors :sources]
+      basic-field (fn [[k v]]
+                    (if-not (nil? v)
+                      [(field-key->name k) (if (coll? v) (vec v) [(str v)])]))
+      attr-field (fn [prefix suffix attrs]
+                   (let [all-values (->> attrs vals (apply concat) (seq))]
+                     (-> (for [[type values] attrs]
+                           (let [type (-> type name str/lower-case)
+                                 field (str prefix "_" type "_" suffix)]
+                             [field values]))
+                         (conj (if all-values
+                                 [(str prefix "_" suffix) all-values])))))]
+  (defn article->fields
+    "Returns Solr fields/values for a given article ID and excerpt."
+    [id excerpt]
+    (let [abstract (select-keys excerpt abstract-fields)
+          fields (->> [(map basic-field {:id id
+                                         :language "de"
+                                         :time (str (System/currentTimeMillis))
+                                         :xml-descendent-path id
+                                         :abstract (pr-str abstract)})
+                       (map basic-field (dissoc excerpt
+                                                :timestamps :timestamp
+                                                :authors :author
+                                                :sources :source))
+                       (attr-field "timestamps" "dts" (excerpt :timestamps))
+                       (attr-field "authors" "ss" (excerpt :authors))
+                       (attr-field "sources" "ss" (excerpt :sources))]
+                      (mapcat identity)
+                      (remove nil?)
+                      (into {}))]
+      (for [[name values] (sort fields)
+            value (sort values)]
+        [name value]))))
 
 (def req
   (comp #(timbre/spy :trace %)
@@ -60,32 +126,56 @@
   (partial batch-update [{:body "<update><commit/><optimize/></update>"
                           :content-type :xml}]))
 
-(defn update-articles [action article->el articles]
+(defn update-articles [articles->xml articles]
   (batch-update (->> articles
-                     (pmap article->el)
-                     (keep identity)
                      (partition-all update-batch-size)
-                     (map #(array-map :tag action
-                                      :attrs {:commitWithin "10000"}
-                                      :content %))
-                     (map #(array-map :body (xml/emit-str %)
+                     (pmap articles->xml)
+                     (map #(array-map :body (xml/serialize %)
                                       :content-type :xml)))))
 
-(def add-articles
-  (partial update-articles
-           :add
-           #(try (article/document %) (catch Exception e (timbre/warn e (str %))))))
+(defn- articles->add-xml [article-files]
+  (let [doc (xml/new-document)
+        el #(.createElement doc %)
+        add (doto (el "add") (.setAttribute "commitWithin" "10000"))]
+    (doseq [f article-files :let [id (store/file->id f)]]
+      (try
+        (doseq [a (-> (xml/parse f) (article/doc->articles))
+                :let [article-doc (el "doc")]]
+          (doseq [[n v] (->> (article/excerpt a) (article->fields id))]
+            (doto article-doc
+              (.appendChild
+               (doto (el "field")
+                 (.setAttribute "name" n)
+                 (.setTextContent v)))))
+            (doto add (.appendChild article-doc)))
+        (catch Exception e (timbre/warn e id))))
+    (doto doc (.appendChild add))))
 
-(def delete-articles
-  (partial update-articles
-           :delete
-           (comp (partial array-map :tag :id :content)
-                 store/file->id)))
+(def add-articles (partial update-articles articles->add-xml))
+
+(defn- articles->delete-xml [article-files]
+  (let [doc (xml/new-document)
+        el #(.createElement doc %)
+        del (doto (el "delete") (.setAttribute "commitWithin" "10000"))]
+    (doseq [f article-files :let [id (store/file->id f)]]
+      (doto del
+        (.appendChild
+         (doto (el "id") (.setTextContent id)))))
+    (doto doc (.appendChild del))))
+
+(def delete-articles (partial update-articles articles->delete-xml))
+
+(defn- query->delete-xml [[query]]
+  (let [doc (xml/new-document)
+        el #(.createElement doc %)]
+    (doto doc
+      (.appendChild
+       (doto (doto (el "delete") (.setAttribute "commitWithin" "10000"))
+         (.appendChild
+          (doto (el "query") (.setTextContent query))))))))
 
 (defn purge-articles [before-time]
-  (update-articles :delete
-                   #(array-map :tag :query :content %)
-                   [(format "time_l:[* TO %s}" before-time)]))
+  (update-articles query->delete-xml [(format "time_l:[* TO %s}" before-time)]))
 
 (defn sync-articles []
   (let [sync-start (System/currentTimeMillis)
@@ -105,18 +195,19 @@
       :result (for [{:keys [term payload]} suggestions]
                 (merge {:suggestion term} (read-string payload)))})))
 
-(defn- facet-counts [[k v]] [k (:counts v)])
+(defn- facet-counts [[k v]]
+  [k (:counts v)])
 
-(defn- facet-values [[k v]] [(-> k name article/field-key)
-                             (into (sorted-map) (->> v (partition 2) (map vec)))])
-
+(defn- facet-values [[k v]]
+  [(-> k name field-name->key)
+   (into (sorted-map) (->> v (partition 2) (map vec)))])
 
 (defn- translate-field-names [node]
   (if (vector? node)
     (let [[type args] node]
       (condp = type
         :field (let [[_ name] args]
-                 [:field [:term (-> name keyword article/field-name)]])
+                 [:field [:term (-> name keyword field-key->name)]])
         (vec (map translate-field-names node))))
     node))
 
@@ -185,7 +276,21 @@
      (htstatus/update-header "Content-Type" str "text/csv"))))
 
 (comment
+  (for [f (store/article-files)
+        :let [id (store/file->id f)]
+        :when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
+        a (-> (xml/parse f) (article/doc->articles))
+        :let [ex (article/excerpt a)]]
+    (do
+      (article->fields id ex)
+      ex))
+  (xml/serialize
+   (query->delete-xml [(format "time_l:[* TO %s}" "now")]))
+  (time
+   (xml/serialize
+    (articles->add-xml (take 2 (store/article-files)))))
+  (time (last (sync-articles)))
   (->> (scroll {"q" "forms_ss:*"}) (take 55000) (last))
   (translate-query "forms:t*")
   (translate-query "text:*")
-  (handle-search {:params {:q "suchen"}}))
+  (handle-search {:params {:q "id:*"}}))

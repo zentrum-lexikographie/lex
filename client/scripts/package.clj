@@ -1,6 +1,5 @@
 (require '[clojure.java.io :as io])
 (require '[me.raynes.fs :as fs])
-(require '[clojure.data.xml :as xml])
 (require '[sigel.xslt.core :as xslt])
 (require '[sigel.xslt.elements :as xsl])
 (require '[sigel.xslt.components :as xslc])
