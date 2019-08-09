@@ -90,6 +90,9 @@
 (defn post-edn [url msg]
   (tx (write-and-read-edn msg) url))
 
+(defn get-issues [q]
+  (get-edn (server-url "/articles/issues" {"q" q})))
+
 (defn suggest-forms [q]
   (get-edn (server-url "/articles/forms/suggestions" {"q" q})))
 

@@ -10,7 +10,8 @@
             [tick.alpha.api :as t]
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store]
+            [clojure.string :as str]))
 
 (def issue-id->url
   (partial str (config :mantis-url) "/view.php?id="))
@@ -75,7 +76,7 @@
                    (property item :name))))))
 
 (def ^:private summary->lemma
-  (comp #(or % "-") second first (partial re-seq #"([^\-\s]+) --")))
+  (comp #(or % "-") first #(str/split % #" --")))
 
 (defn issues []
   (let [status (mantis-enum :mc_enum_status)
@@ -161,7 +162,8 @@
 (comment
   store/mantis-dump
   @client-instance
+  (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)
   (-> @index keys sort)
-  (handle-issue-lookup {:params {:q "Leder"}}))
+  (handle-issue-lookup {:params {:q "parkinsonsche Krankheit"}}))

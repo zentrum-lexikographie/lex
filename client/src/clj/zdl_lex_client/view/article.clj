@@ -15,7 +15,7 @@
                      :margin 5
                      :text "-"))
 
-(defstate editor-xml
+(defstate editor->article
   :start (let [subscription (bus/subscribe :editor-active)]
            (-> (fn [[url active?]]
                  (when active?
@@ -25,14 +25,14 @@
                                        (map article/excerpt)
                                        (first)
                                        (merge {:url url}))
-                             (partial bus/publish! :article-excerpt))
+                             (partial bus/publish! :article))
                     (d/catch #(timbre/warn %)))))
                (s/consume subscription))
            subscription)
-  :stop (s/close! editor-xml))
+  :stop (s/close! editor->article))
 
 (defstate active-text
-  :start (uib/bind (bus/bind :article-excerpt)
+  :start (uib/bind (bus/bind :article)
                    (uib/transform str)
                    (uib/property active :text))
   :stop (active-text))

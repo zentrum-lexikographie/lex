@@ -36,6 +36,7 @@
 (comment
   (show-testbed)
 
+  (http/get-issues "Krankheit")
   (mount/start)
   (mount/stop)
 
