@@ -5,7 +5,8 @@
             [zdl-lex-common.util :refer [->clean-map]]
             [zdl-lex-common.xml :as xml])
   (:import [java.time.temporal ChronoUnit Temporal]
-           net.sf.saxon.s9api.QName))
+           net.sf.saxon.s9api.QName
+           net.sf.saxon.s9api.XdmItem))
 
 (defn status->color [status]
   (condp = (str/trim status)
@@ -31,13 +32,18 @@
   "Given an xpath fn and a evaluation context, returns a seq of distinct
    text values."
   [xpath ctx]
-  (->> (seq (xpath ctx)) (map text) (remove nil?) (distinct) (seq)))
+  (->> (seq (xpath ctx))
+       (map (fn [^XdmItem i] (.getStringValue i)))
+       (map text)
+       (remove nil?)
+       (distinct)
+       (seq)))
 
 (defn- texts-fn
   "Create a fn for the given xpath expression, which returns distinct
    text values."
   [xp-expr]
-  (partial texts->seq (xml/xpath-fn (str xp-expr "/text()"))))
+  (partial texts->seq (xml/xpath-fn xp-expr)))
 
 (defn- attrs->map
   "Returns a mapping of tagname to distinct values for the given attribute
