@@ -40,10 +40,10 @@
                          "_ss")]
       (str field-name field-suffix))))
 
-(let [abstract-fields [:last-modified :timestamp
-                       :author :source
-                       :forms :pos :definitions
-                       :type :status :authors :sources]
+(let [abstract-fields [:type :status
+                       :last-modified :timestamp
+                       :author :authors :sources :source
+                       :forms :pos :definitions]
       basic-field (fn [[k v]]
                     (if-not (nil? v)
                       [(field-key->name k) (if (coll? v) (vec v) [(str v)])]))
@@ -58,7 +58,7 @@
   (defn article->fields
     "Returns Solr fields/values for a given article ID and excerpt."
     [id excerpt]
-    (let [abstract (select-keys excerpt abstract-fields)
+    (let [abstract (merge {:id id} (select-keys excerpt abstract-fields))
           fields (->> [(map basic-field {:id id
                                          :language "de"
                                          :time (str (System/currentTimeMillis))
