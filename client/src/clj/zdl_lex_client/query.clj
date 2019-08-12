@@ -6,7 +6,7 @@
   {"autor" "authors"
    "def" "definitions"
    "form" "forms"
-   "datum" "last-modified"
+   "datum" "timestamp"
    "klasse" "pos"
    "bedeutung" "senses"
    "quelle" "sources"
@@ -41,7 +41,7 @@
 
 (comment
   (str->ast "autor:(a OR b) AND typ:c AND quelle:d")
-  (translate "datum:[1999-01 TO 2018-01-01}")
+  (str->ast "datum:[1999-01 TO 2018-01-01}")
   (str->ast "def:test AND klasse:Verb")
   (valid? "def:test klasse:Verb"))
 

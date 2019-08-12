@@ -7,25 +7,38 @@
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.bus :as bus]
-            [taoensso.timbre :as timbre]))
+            [taoensso.timbre :as timbre]
+            [tick.alpha.api :as t]
+            [tick.format :as tf]))
 
 (def facet-title
   {:status "Status"
    :authors "Autor"
    :sources "Quelle"
    :type "Typ"
-   :tranche "Tranche"})
+   :tranche "Tranche"
+   :timestamps "Zeitstempel"})
 
 (def facet-field
   {:status "status"
    :authors "autor"
    :sources "quelle"
    :type "typ"
-   :tranche "tranche"})
+   :tranche "tranche"
+   :timestamps "datum"})
 
 (defn facet->model [result k]
   (->> (or (some-> result :facets k) {})
        (into []) (sort-by first)))
+
+(defn- render-ts-facet-list-entry [this {:keys [value]}]
+  (let [[v n] value
+        v (str "ab " (t/format (tf/formatter "dd.MM.yy")
+                               (t/in (t/parse v) "Europe/Berlin")))]
+    (ui/config! this
+                :text (str v " (" n ")")
+                :font {:style :plain}
+                :border 5)))
 
 (defn- render-facet-list-entry [this {:keys [value]}]
   (let [[v n] value]
@@ -35,12 +48,19 @@
                 :border 5)))
 
 (def facet-lists
-  (for [k [:status :authors :sources :type :tranche]]
-    (ui/listbox :model []
-                :selection-mode :multi-interval
-                :renderer render-facet-list-entry
-                :class :facet-list
-                :user-data k)))
+  (for [k [:status :authors :sources :type :tranche :timestamps]]
+    (condp = k
+      :timestamps
+      (ui/listbox :model []
+                  :selection-mode :single
+                  :renderer render-ts-facet-list-entry
+                  :class :facet-list
+                  :user-data k)
+      (ui/listbox :model []
+                  :selection-mode :multi-interval
+                  :renderer render-facet-list-entry
+                  :class :facet-list
+                  :user-data k))))
 
 (defstate result->facets
   :start (doall
@@ -55,16 +75,22 @@
   (->>
    (for [fl facet-lists
          :let [k (ui/user-data fl)
-               vs (->> (ui/selection fl {:multi? true})
-                      (map first)
-                      (map (fn [v] [:value [:term v]])))]
+               vs (map first (ui/selection fl {:multi? true}))]
          :when (not (empty? vs))]
      [:clause
       [:field [:term (facet-field k)]]
-      (if (= 1 (count vs))
-        (first vs)
-        [:sub-query (->> (map (fn [v] [:clause v]) vs)
-                         (interpose [:or]) (cons :query) (vec))])])
+      (condp = k
+        :timestamps
+        [:range
+         "["
+         [:term (t/format :iso-date (-> vs first t/parse t/date))]
+         [:all "*"]
+         "]"]
+        (let [vs (map (fn [v] [:value [:term v]]) vs)]
+          (if (= 1 (count vs))
+            (first vs)
+            [:sub-query (->> (map (fn [v] [:clause v]) vs)
+                             (interpose [:or]) (cons :query) (vec))])))])
    (interpose [:and]) (cons :query) (vec)))
 
 (defn do-filter!
@@ -119,4 +145,5 @@
 
 (comment
   (lucene/str->ast "autor:rast")
+  (lucene/str->ast "datum:[2019-01-01 TO *]")
   (-> dialog ui/pack! ui/show!))
