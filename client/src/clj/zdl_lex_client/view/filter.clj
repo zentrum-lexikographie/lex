@@ -17,7 +17,7 @@
    :sources "Quelle"
    :type "Typ"
    :tranche "Tranche"
-   :timestamps "Zeitstempel"})
+   :timestamp "Zeitstempel"})
 
 (def facet-field
   {:status "status"
@@ -25,7 +25,7 @@
    :sources "quelle"
    :type "typ"
    :tranche "tranche"
-   :timestamps "datum"})
+   :timestamp "datum"})
 
 (defn facet->model [result k]
   (->> (or (some-> result :facets k) {})
@@ -48,9 +48,9 @@
                 :border 5)))
 
 (def facet-lists
-  (for [k [:status :authors :sources :type :tranche :timestamps]]
+  (for [k [:status :authors :sources :type :tranche :timestamp]]
     (condp = k
-      :timestamps
+      :timestamp
       (ui/listbox :model []
                   :selection-mode :single
                   :renderer render-ts-facet-list-entry
@@ -80,7 +80,7 @@
      [:clause
       [:field [:term (facet-field k)]]
       (condp = k
-        :timestamps
+        :timestamp
         [:range
          "["
          [:term (t/format :iso-date (-> vs first t/parse t/date))]

@@ -19,7 +19,7 @@
   (condp = n
     "_text_" :text
     (-> n
-        (str/replace #"_((dts)|(dt)|(ss)|(t)|(i)|(l))$" "")
+        (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
         (str/replace "_" "-")
         keyword)))
 
@@ -37,7 +37,10 @@
                          :time "_l"
                          :definitions "_t"
                          :last-modified "_dt"
+                         :timestamp "_dt"
                          :timestamps "_dts"
+                         :author "_s"
+                         :source "_s"
                          "_ss")]
       (str field-name field-suffix))))
 
@@ -66,9 +69,9 @@
                                          :xml-descendent-path id
                                          :abstract (pr-str abstract)})
                        (map basic-field (dissoc excerpt
-                                                :timestamps :timestamp
-                                                :authors :author
-                                                :sources :source))
+                                                :timestamps
+                                                :authors
+                                                :sources))
                        (attr-field "timestamps" "dts" (excerpt :timestamps))
                        (attr-field "authors" "ss" (excerpt :authors))
                        (attr-field "sources" "ss" (excerpt :sources))]
@@ -252,7 +255,7 @@
                     "type_ss" "pos_ss" "status_ss"]
      "facet.limit" "-1"
      "facet.mincount" "1"
-     "facet.interval" "timestamps_dts"
+     "facet.interval" "timestamp_dt"
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
@@ -299,8 +302,7 @@
         a (-> (xml/parse f) (article/doc->articles))
         :let [ex (article/excerpt a)]]
     (do
-      (article->fields id ex)
-      ex))
+      (article->fields id ex)))
   (xml/serialize
    (query->delete-xml [(format "time_l:[* TO %s}" "now")]))
   (time
