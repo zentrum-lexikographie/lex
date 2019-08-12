@@ -10,7 +10,8 @@
             [zdl-lex-common.article :as article]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [zdl-lex-common.xml :as xml]))
+            [zdl-lex-common.xml :as xml]
+            [tick.alpha.api :as t]))
 
 (defn- field-name->key
   "Translates a Solr field name into a keyword."
@@ -202,6 +203,10 @@
   [(-> k name field-name->key)
    (into (sorted-map) (->> v (partition 2) (map vec)))])
 
+(defn- facet-intervals [[k v]]
+  [(-> k name field-name->key)
+   (into (sorted-map) (for [[k v] v] [(name k) v]))])
+
 (defn- translate-field-names [node]
   (if (vector? node)
     (let [[type args] node]
@@ -225,29 +230,41 @@
   {"df" "forms_ss"
    "sort" "forms_ss asc,weight_i desc,id asc"})
 
-(def ^:private facet-params
-  {"facet" "true"
-   "facet.field" ["authors_ss"
-                  "pos_ss"
-                  "sources_ss"
-                  "status_ss"
-                  "tranche_ss"
-                  "type_ss"]
-   "facet.limit" "-1"
-   "facet.mincount" "1"
-   "facet.range" "timestamps_dts"
-   "facet.range.start" "NOW/MONTH-1YEAR"
-   "facet.range.end" "NOW"
-   "facet.range.gap" "+1MONTH"})
+(defn- ->timestamp [dt]
+  (-> dt (t/at (t/midnight)) (t/in "UTC")))
+
+(def timestamp->str (partial t/format :iso-offset-date-time))
+
+(defn- facet-params []
+  (let [today (->timestamp (t/today))
+        year (->timestamp (.. (t/year) (atDay 1)))
+        tomorrow (->timestamp (t/tomorrow))
+        boundaries (concat
+                    [today
+                     (t/- tomorrow (t/new-period 7 :days))
+                     (t/- tomorrow (t/new-period 1 :months))]
+                    (for [i (range 4)]
+                      (let [year (t/- year (t/new-period i :years))] year)))
+        tomorrow (timestamp->str tomorrow)
+        boundaries (map timestamp->str boundaries)]
+    {"facet" "true"
+     "facet.field" ["authors_ss" "sources_ss" "tranche_ss"
+                    "type_ss" "pos_ss" "status_ss"]
+     "facet.limit" "-1"
+     "facet.mincount" "1"
+     "facet.interval" "timestamps_dts"
+     "facet.interval.set" (for [b boundaries]
+                            (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
 (defn handle-search [{{:keys [q offset limit]
                 :or {q "id:*" offset "0" limit "10"}} :params}]
   (let [params {"q" (translate-query q) "start" offset "rows" limit}
-        solr-response (query (merge query-params facet-params params))
+        solr-response (query (merge query-params (facet-params) params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
-        {:keys [facet_fields facet_ranges]} facet_counts
+        {:keys [facet_fields facet_ranges facet_intervals]} facet_counts
         facets (concat (map facet-values facet_fields)
+                       (map facet-intervals facet_intervals)
                        (map (comp facet-values facet-counts) facet_ranges))]
     (htstatus/ok
      {:total numFound
@@ -276,9 +293,9 @@
      (htstatus/update-header "Content-Type" str "text/csv"))))
 
 (comment
-  (for [f (store/article-files)
+  (for [f (take 10 (drop 10000 (store/article-files)))
         :let [id (store/file->id f)]
-        :when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
+        ;;:when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
         a (-> (xml/parse f) (article/doc->articles))
         :let [ex (article/excerpt a)]]
     (do
