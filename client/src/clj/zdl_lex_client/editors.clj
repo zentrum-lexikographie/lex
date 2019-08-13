@@ -1,7 +1,9 @@
 (ns zdl-lex-client.editors
   (:require [manifold.stream :as s]
+            [manifold.deferred :as d]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
+            [zdl-lex-common.article :as article]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.workspace :as ws])
@@ -18,7 +20,7 @@
     (editorAboutToBeClosedVeto [_] true)
     (editorAboutToBeSavedVeto [_] true)
     (editorSaved [_]
-      (bus/publish! :editor-saved url))))
+      (bus/publish! :editor-saved [url true]))))
 
 (defn- add-listener [url]
   (when (http/webdav? url)
@@ -73,3 +75,23 @@
            (s/consume #(timbre/info %) subscription)
            subscription)
   :stop (s/close! activation-logger))
+
+(defn- editor-event->excerpt [[url active?]]
+  (when active?
+    (->
+     (d/chain (d/future (ws/xml-document ws/instance url))
+              #(some->> (article/doc->articles %)
+                        (map article/excerpt)
+                        (first)
+                        (merge {:url url}))
+              (partial bus/publish! :article))
+     (d/catch #(timbre/warn %)))))
+
+(defstate editor->article
+  :start (let [subscriptions [(bus/subscribe :editor-active)
+                              (bus/subscribe :editor-saved)]]
+           (doseq [s subscriptions]
+             (s/consume editor-event->excerpt s))
+           subscriptions)
+  :stop (doseq [s editor->article] (s/close! s)))
+
