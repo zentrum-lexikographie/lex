@@ -43,32 +43,17 @@
 
 (defonce changes (async/chan))
 
+(defn- commit-changes []
+  (some->> (try (commit) (catch Throwable t #{}))
+           (map absolute-path)
+           (into (sorted-set))
+           (timbre/spy :trace)
+           (async/>!! changes)))
+
 (defstate changes-provider
-  :start (let [schedule (cron/parse "*/10 * * * * ?")
-               stop-ch (async/chan)]
-           (async/go-loop []
-             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
-                               stop-ch nil)
-               (some->> (async/<!
-                         (async/thread (try (commit) (catch Throwable t #{}))))
-                        (map absolute-path)
-                        (into (sorted-set))
-                        (timbre/spy :trace)
-                        (async/>! changes))
-               (recur)))
-           stop-ch)
+  :start (cron/schedule "*/10 * * * * ?" "Git commit" commit-changes)
   :stop (async/close! changes-provider))
 
 (defstate rebase-scheduler
-  :start (let [schedule (cron/parse "0 0 * * * ?")
-               ch (async/chan)]
-           (async/go-loop []
-             (when (async/<! (async/timeout (cron/millis-to-next schedule)))
-               (async/<!
-                (async/thread
-                  (try
-                    (rebase)
-                    (catch Throwable t (timbre/warn t)))))
-               (recur)))
-           ch)
+  :start (cron/schedule "0 0 * * * ?" "Git rebase" rebase)
   :stop (async/close! rebase-scheduler))

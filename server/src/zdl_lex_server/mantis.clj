@@ -3,15 +3,14 @@
             [clojure.core.async :as async]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
+            [clojure.string :as str]
             [clojure.zip :as zip]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]
-            [clojure.string :as str]))
+            [zdl-lex-server.store :as store]))
 
 (def issue-id->url
   (partial str (config :mantis-url) "/view.php?id="))
@@ -140,19 +139,12 @@
 
 (->> (read-dump) (index-issues) (reset! index))
 
+(defn- sync-issues []
+  (->> (issues) (store-dump) (index-issues) (reset! index) (count)))
+
 (defstate issues->dump->index
   "Synchronizes Mantis issues"
-  :start (let [schedule (cron/parse "0 */15 * * * ?")
-               ch (async/chan)]
-           (async/go-loop []
-             (when (async/alt! (async/timeout (cron/millis-to-next schedule)) :tick
-                               ch ([v] v))
-               (async/<!
-                (async/thread
-                  (try (->> (issues) (store-dump) (index-issues) (reset! index))
-                       (catch Throwable t (timbre/warn t) {}))))
-               (recur)))
-           ch)
+  :start (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues)
   :stop (async/close! issues->dump->index))
 
 (defn handle-issue-lookup [{{:keys [q]} :params}]

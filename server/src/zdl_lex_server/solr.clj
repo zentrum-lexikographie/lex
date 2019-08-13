@@ -1,17 +1,23 @@
 (ns zdl-lex-server.solr
   (:require [clj-http.client :as http]
+            [clojure.core.async :as async]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [lucene-query.core :as lucene]
+            [me.raynes.fs :as fs]
+            [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [ring.util.io :as htio]
             [taoensso.timbre :as timbre]
+            [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
-            [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store]
             [zdl-lex-common.xml :as xml]
-            [tick.alpha.api :as t]))
+            [zdl-lex-server.cron :as cron]
+            [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.git :as git]
+            [zdl-lex-server.status :as status]
+            [zdl-lex-server.store :as store]))
 
 (defn- field-name->key
   "Translates a Solr field name into a keyword."
@@ -23,25 +29,27 @@
         (str/replace "_" "-")
         keyword)))
 
+(defn- field-name-suffix [k]
+  (condp = k
+    :id ""
+    :language ""
+    :xml-descendent-path ""
+    :weight "_i"
+    :time "_l"
+    :definitions "_t"
+    :last-modified "_dt"
+    :timestamp "_dt"
+    :timestamps "_dts"
+    :author "_s"
+    :source "_s"
+    "_ss"))
 (defn- field-key->name
   "Translates a keyword into a Solr field name."
   [k]
   (condp = k
     :text "_text_"
     (let [field-name (str/replace (name k) "-" "_")
-          field-suffix (condp = k
-                         :id ""
-                         :language ""
-                         :xml-descendent-path ""
-                         :weight "_i"
-                         :time "_l"
-                         :definitions "_t"
-                         :last-modified "_dt"
-                         :timestamp "_dt"
-                         :timestamps "_dts"
-                         :author "_s"
-                         :source "_s"
-                         "_ss")]
+          field-suffix (field-name-suffix k)]
       (str field-name field-suffix))))
 
 (let [abstract-fields [:type :status
@@ -63,23 +71,21 @@
     "Returns Solr fields/values for a given article ID and excerpt."
     [id excerpt]
     (let [abstract (merge {:id id} (select-keys excerpt abstract-fields))
-          fields (->> [(map basic-field {:id id
-                                         :language "de"
-                                         :time (str (System/currentTimeMillis))
-                                         :xml-descendent-path id
-                                         :abstract (pr-str abstract)})
-                       (map basic-field (dissoc excerpt
-                                                :timestamps
-                                                :authors
-                                                :sources))
+          preamble {:id id
+                    :language "de"
+                    :time (str (System/currentTimeMillis))
+                    :xml-descendent-path id
+                    :abstract (pr-str abstract)}
+          main-fields (dissoc excerpt :timestamps :authors :sources)
+          fields (->> [(map basic-field preamble)
+                       (map basic-field main-fields)
                        (attr-field "timestamps" "dts" (excerpt :timestamps))
                        (attr-field "authors" "ss" (excerpt :authors))
                        (attr-field "sources" "ss" (excerpt :sources))]
                       (mapcat identity)
                       (remove nil?)
                       (into {}))]
-      (for [[name values] (sort fields)
-            value (sort values)]
+      (for [[name values] (sort fields) value (sort values)]
         [name value]))))
 
 (def req
@@ -90,30 +96,6 @@
         #(timbre/spy :trace %)))
 
 (def url (partial str (config :solr-base) "/" (config :solr-core)))
-
-(defn build-suggestions [name]
-  (req {:method :get :url (url "/suggest")
-        :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
-        :as :json }))
-
-(defn suggest [name q]
-  (req {:method :get :url (url "/suggest")
-        :query-params {"suggest.dictionary" name "suggest.q" q}
-        :as :json }))
-
-(defn query [params]
-  (req {:method :get :url (url "/query")
-        :query-params params
-        :as :json}))
-
-(defn scroll
-  ([params] (scroll params 10000))
-  ([params page-size] (scroll params page-size 0))
-  ([params page-size page]
-   (let [offset (* page page-size)
-         resp (query (merge params {"start" offset "rows" page-size}))]
-     (if-let [docs (seq (get-in resp [:body :response :docs] []))]
-       (concat docs (lazy-seq (scroll params page-size (inc page))))))))
 
 (def ^:private update-batch-size 2000)
 
@@ -169,6 +151,28 @@
 
 (def delete-articles (partial update-articles articles->delete-xml))
 
+(defstate git-changes->solr
+  "Synchronizes modified articles with the Solr index"
+  :start (let [stop-ch (async/chan)]
+           (async/go-loop []
+             (when-let [changes (async/alt! git/changes ([v] v) stop-ch nil)]
+               (let [articles (filter store/article-file? changes)
+                     modified (filter fs/exists? articles)
+                     deleted (remove fs/exists? articles)]
+                 (doseq [m modified]
+                   (timbre/trace {:solr {:modified (store/file->id m)}}))
+                 (doseq [d deleted]
+                   (timbre/trace {:solr {:deleted (store/file->id d)}}))
+                 (when (async/<!
+                        (async/thread
+                          (try
+                            (add-articles modified)
+                            (delete-articles deleted)
+                            (catch Throwable t (timbre/warn t)))))))
+               (recur)))
+           stop-ch)
+  :stop (async/close! git-changes->solr))
+
 (defn- query->delete-xml [[query]]
   (let [doc (xml/new-document)
         el #(.createElement doc %)]
@@ -189,6 +193,37 @@
       (commit-optimize))
     articles))
 
+(defstate git-all->solr
+  "Synchronizes all articles with the Solr index"
+  :start (cron/schedule "0 1 0 * * ?" "Solr index rebuild" sync-articles)
+  :stop (async/close! git-all->solr))
+
+
+(defn handle-index-trigger [req]
+  (if (= "admin" (status/user req))
+    (htstatus/ok
+     {:index (async/>!! git-all->solr :sync)})
+    (htstatus/forbidden
+     {:index false})))
+
+(defn build-suggestions [name]
+  (req {:method :get :url (url "/suggest")
+        :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
+        :as :json }))
+
+(def ^:private build-forms-suggestions
+  (partial build-suggestions "forms"))
+
+(defstate index->suggestions
+  "Synchronizes the forms suggestions with all indexed articles"
+  :start (cron/schedule "0 */10 * * * ?" "Forms FSA update" build-forms-suggestions)
+  :stop (async/close! index->suggestions))
+
+(defn suggest [name q]
+  (req {:method :get :url (url "/suggest")
+        :query-params {"suggest.dictionary" name "suggest.q" q}
+        :as :json }))
+
 (defn handle-form-suggestions [{{:keys [q]} :params}]
   (let [solr-response (suggest "forms" (or q ""))
         path-prefix [:body :suggest :forms (keyword q)]
@@ -198,6 +233,20 @@
      {:total total
       :result (for [{:keys [term payload]} suggestions]
                 (merge {:suggestion term} (read-string payload)))})))
+
+(defn query [params]
+  (req {:method :get :url (url "/query")
+        :query-params params
+        :as :json}))
+
+(defn scroll
+  ([params] (scroll params 10000))
+  ([params page-size] (scroll params page-size 0))
+  ([params page-size page]
+   (let [offset (* page page-size)
+         resp (query (merge params {"start" offset "rows" page-size}))]
+     (if-let [docs (seq (get-in resp [:body :response :docs] []))]
+       (concat docs (lazy-seq (scroll params page-size (inc page))))))))
 
 (defn- facet-counts [[k v]]
   [k (:counts v)])
@@ -223,7 +272,6 @@
   (try
     (-> s lucene/str->ast translate-field-names lucene/ast->str)
     (catch Throwable t s)))
-
 
 (defn docs->results [docs]
   (for [{:keys [abstract_ss]} docs]

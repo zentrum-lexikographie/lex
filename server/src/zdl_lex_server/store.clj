@@ -1,9 +1,6 @@
 (ns zdl-lex-server.store
-  (:require [mount.core :refer [defstate]]
-            [me.raynes.fs :as fs]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-server.env :refer [config]]
-            [clojure.java.shell :as sh]))
+  (:require [me.raynes.fs :as fs]
+            [zdl-lex-server.env :refer [config]]))
 
 (def data-dir (-> config :data-dir fs/file fs/absolute fs/normalized))
 
