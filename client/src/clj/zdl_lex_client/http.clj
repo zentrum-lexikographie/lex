@@ -14,18 +14,23 @@
             [zdl-lex-client.query :as query]
             [zdl-lex-common.xml :as xml])
   (:import java.io.IOException
-           [java.net ConnectException URL]))
+           [java.net ConnectException URI URL]))
 
-(def ^:private webdav-base (config :webdav-base))
+(def ^:private webdav-uri (URI. (str (config :webdav-base) "/")))
 
 (defn webdav? [^URL u]
-  (str/starts-with? (str u) webdav-base))
+  (str/starts-with? (str (.toURI u)) (str webdav-uri)))
+
+(defn path->uri [path] (URI. nil nil path nil))
 
 (defn id->url [id]
-  (URL. (str (url webdav-base id))))
+  (.. webdav-uri (resolve (path->uri id)) (toURL)))
 
 (defn url->id [^URL u]
-  (if (webdav? u) (subs (str u) (inc (count webdav-base)))))
+  (.. webdav-uri (relativize (.toURI u)) (getPath)))
+
+(comment
+  (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->url))
 
 (def server-base (config :server-base))
 
