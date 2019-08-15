@@ -110,51 +110,54 @@
       :modified (article-doc-modified doc)})
    (remove (comp #{"indexedvalues.xml"} :id))))
 
-(defn changed-articles [duration]
-  (let [threshold (t/- (t/now) duration)]
-    (->> (articles)
-         (filter (comp (partial t/< threshold) :modified))
-         (map :id))))
+(defn articles->changeset [articles change-period]
+  (let [existing-ids (->> articles (map :id) (into #{}))
+        removed (->> (store/article-files)
+                     (map store/file->id)
+                     (remove existing-ids))
+        added (->> (map store/id->file existing-ids)
+                   (remove fs/exists?)
+                   (map store/file->id))
+        added-ids (into #{} added)
+        change-threshold (t/- (t/now) change-period)
+        changed (->> articles
+                     (filter (comp (partial t/< change-threshold) :modified))
+                     (map :id)
+                     (remove added-ids))]
+    {:added added :changed changed :removed removed}))
 
-(defn removed-articles []
-  (let [existing (->> (articles) (map :id) (into #{}))]
-    (->> (store/article-files)
-         (map store/file->id)
-         (remove existing))))
+(defn- sync-changes [change-threshold]
+  (let [changeset (articles->changeset (articles) change-threshold)
+        {:keys [added changed removed]} changeset]
+    (dorun (pmap copy (concat added changed)))
+    (dorun (pmap delete removed))
+    changeset))
 
-(defn- sync-changed-articles
-  ([] (sync-changed-articles (t/new-duration 1 :hours)))
-  ([since]
-   (->> (changed-articles since)
-        (pmap copy)
-        (doall))))
+(def ^:private short-term-sync (partial sync-changes (t/new-duration 1 :hours)))
 
-(defstate changed-in-exist->git
-  "Synchronizes changed articles in exist-db with git"
-  :start (cron/schedule
-          "0 */15 * * * ?" "eXist-db Synchronization (mod)" sync-changed-articles)
-  :stop (async/close! changed-in-exist->git))
+(def ^:private long-term-sync (partial sync-changes (t/new-duration 2 :days)))
 
-(defn- sync-removed-articles []
-  (->> (for [id (removed-articles)]
-         [id (delete id)])
-       (into {})))
+(defstate short-exist->git
+  :start (vector
+          (cron/schedule "0 */15 1-23 * * ?" "eXist-db Sync. (last hour)"
+                         short-term-sync)
+          (cron/schedule "0 30,45 0 * * ?" "eXist-db Sync. (last hour)"
+                         short-term-sync))
+  :stop (doall (map async/close! short-exist->git)))
 
-(defstate removed-in-exist->git
-  "Synchronizes removed articles in exist-db with git"
-  :start (cron/schedule
-          "0 10 * * * ?" "eXist-db Synchronization (del)" sync-removed-articles)
-  :stop (async/close! changed-in-exist->git))
+(defstate long-exist->git
+  :start (cron/schedule "0 0 0 * * ?" "eXist-db Sync. (last days)"
+                        long-term-sync)
+  :stop (async/close! long-exist->git))
 
 (defn handle-article-sync [{{:keys [id]} :params}]
-  (htstatus/ok
-   {id (copy id)}))
+  (htstatus/ok {id (copy id)}))
 
 (defn handle-period-sync [{{:keys [amount unit] :as params} :path-params}]
   (try
-    (let [since (t/new-duration (Integer/parseInt amount) (keyword unit))]
+    (let [period (t/new-duration (Integer/parseInt amount) (keyword unit))]
       (htstatus/ok
-       (sync-changed-articles since)))
+       (sync-changes period)))
     (catch AssertionError e
       (htstatus/bad-request params))
     (catch NumberFormatException e
@@ -162,4 +165,6 @@
 
 (comment
   (take 10 (articles))
+  (articles->changeset (articles) (t/new-duration 1 :hours))
+  (time (short-term-sync))
   (handle-period-sync {:path-params {:amount "1" :unit "hours"}}))
