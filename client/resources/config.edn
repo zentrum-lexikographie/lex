@@ -1,5 +1,5 @@
 {;; "https://lex.dwds.de/articles"
- :webdav-base "http://spock.dwds.de:8080/exist/webdav/db/dwdswb/data"
+ :webdav-base "https://lex.dwds.de/exist/webdav/db/dwdswb/data"
  :server-base "https://lex.dwds.de/"
  :server-auth {}
  :repl {:port 3001}}
