@@ -81,19 +81,19 @@ zdl_apache_vhost_config: |
 
   {% for cp in zdl_api_context_paths %}
   <Location {{ cp }}>
-    ProxyPass http://localhost:3000{{ cp }}
+    ProxyPass http://localhost:3000{{ cp }} retry=0
     ProxyPassReverse http://localhost:3000{{ cp }}
   </Location>
   {% endfor %}
 
   <Location /solr>
-    ProxyPass http://localhost:8983/solr
+    ProxyPass http://localhost:8983/solr retry=0
     ProxyPassReverse http://localhost:8983/solr
     Require group admin
   </Location>
 
   <Location /exist>
-    ProxyPass http://spock.dwds.de:8080/exist
+    ProxyPass http://spock.dwds.de:8080/exist retry=0
     ProxyPassReverse http://spock.dwds.de:8080/exist
     Require group Lexikographen
     #Order Allow,Deny
