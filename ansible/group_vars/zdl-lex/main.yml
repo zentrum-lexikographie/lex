@@ -92,9 +92,9 @@ zdl_apache_vhost_config: |
   <Location /exist>
     ProxyPass http://spock.dwds.de:8080/exist
     ProxyPassReverse http://spock.dwds.de:8080/exist
-    #Require group Lexikographen
-    Order Allow,Deny
-    Deny from all
+    Require group Lexikographen
+    #Order Allow,Deny
+    #Deny from all
   </Location>
 
 solr_version: "7.7.1"
