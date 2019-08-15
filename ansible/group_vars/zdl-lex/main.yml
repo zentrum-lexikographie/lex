@@ -42,7 +42,7 @@ zdl_api_context_paths:
 zdl_apache_vhost_config: |
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
-  
+
   <Location />
     AuthType Basic
     AuthName ZDL-Lex-Server

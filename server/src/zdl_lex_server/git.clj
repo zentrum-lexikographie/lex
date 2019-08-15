@@ -70,7 +70,7 @@
            (async/>!! changes)))
 
 (defstate changes-provider
-  :start (cron/schedule "*/10 * * * * ?" "Git commit" commit-changes)
+  :start (cron/schedule "0 * * * * ?" "Git commit" commit-changes)
   :stop (async/close! changes-provider))
 
 (defstate rebase-scheduler
