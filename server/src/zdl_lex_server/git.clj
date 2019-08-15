@@ -52,8 +52,10 @@
 
 (defn merge-origin []
   (locking store/git-dir
-    (git "pull" "-s" "recursive" "-X" "ours" "--no-edit")
-    (git "push" "origin")))
+    (try
+      (git "pull" "-s" "recursive" "-X" "ours" "--no-edit")
+      (git "push" "origin")
+      (catch Exception e (git "merge" "--abort")))))
 
 (defn- absolute-path [f]
   (->> f (fs/file store/git-dir) fs/absolute fs/normalized))
