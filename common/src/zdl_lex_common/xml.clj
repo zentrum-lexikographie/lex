@@ -2,8 +2,10 @@
   (:import [java.io StringReader StringWriter]
            javax.xml.parsers.DocumentBuilderFactory
            javax.xml.transform.dom.DOMSource
+           javax.xml.transform.Result
            javax.xml.transform.stream.StreamResult
            javax.xml.transform.TransformerFactory
+           org.w3c.dom.Document
            net.sf.saxon.Configuration
            [net.sf.saxon.s9api Processor XdmValue XPathCompiler XPathExecutable]
            org.xml.sax.InputSource))
@@ -18,7 +20,7 @@
 (defn ^javax.xml.parsers.DocumentBuilder new-document-builder []
   (.. doc-builder-factory (newDocumentBuilder)))
 
-(defn new-document []
+(defn ^Document new-document []
   (.. (new-document-builder) (newDocument)))
 
 (defprotocol Parseable
@@ -37,12 +39,13 @@
   (parse [this]
     (.. (new-document-builder) (parse this))))
 
-(def transformer-factory (TransformerFactory/newInstance))
+(def ^TransformerFactory transformer-factory
+  (TransformerFactory/newInstance))
 
 (defn serialize
-  ([doc result]
+  ([^Document doc ^Result result]
    (.. transformer-factory (newTransformer) (transform (DOMSource. doc) result)))
-  ([doc]
+  ([^Document doc]
    (let [writer (StringWriter.)
          result (StreamResult. writer)]
      (serialize doc result)
