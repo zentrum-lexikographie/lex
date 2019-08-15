@@ -158,7 +158,7 @@
          If both ramBufferSizeMB and maxBufferedDocs is set, then
          Lucene will flush based on whichever limit is hit first.  -->
     <!-- <ramBufferSizeMB>100</ramBufferSizeMB> -->
-    <!-- <maxBufferedDocs>1000</maxBufferedDocs> -->
+    <maxBufferedDocs>100000</maxBufferedDocs>
 
     <!-- Expert: Merge Policy
          The Merge Policy in Lucene controls how merging of segments is done.
@@ -298,21 +298,21 @@
          If the updateLog is enabled, then it's highly recommended to
          have some sort of hard autoCommit to limit the log size.
       -->
+    <!--
     <autoCommit>
       <maxTime>15000</maxTime>
       <openSearcher>false</openSearcher>
     </autoCommit>
+     -->
 
     <!-- softAutoCommit is like autoCommit except it causes a
          'soft' commit which only ensures that changes are visible
          but does not ensure that data is synced to disk.  This is
          faster and more near-realtime friendly than a hard commit.
       -->
-    <!--
       <autoSoftCommit>
-        <maxTime>1000</maxTime>
+        <maxTime>300000</maxTime>
       </autoSoftCommit>
-     -->
 
     <!-- Update Related Event Listeners
 
@@ -429,7 +429,7 @@
          this cache will not be autowarmed.
       -->
     <documentCache class="solr.LRUCache"
-                   size="512"
+                   size="150000"
                    initialSize="512"
                    autowarmCount="0"/>
 
@@ -502,12 +502,12 @@
          then documents 0 through 49 will be collected and cached.  Any further
          requests in that range can be satisfied via the cache.
       -->
-    <queryResultWindowSize>20</queryResultWindowSize>
+    <queryResultWindowSize>1000</queryResultWindowSize>
 
     <!-- Maximum number of documents to cache for any entry in the
          queryResultCache.
       -->
-    <queryResultMaxDocsCached>200</queryResultMaxDocsCached>
+    <queryResultMaxDocsCached>1000</queryResultMaxDocsCached>
 
     <!-- Query Related Event Listeners
 
@@ -553,7 +553,7 @@
          warming searcher and use it.  If "false" then all requests
          will block until the first searcher is done warming.
       -->
-    <useColdSearcher>false</useColdSearcher>
+    <useColdSearcher>true</useColdSearcher>
 
   </query>
 
@@ -1387,7 +1387,7 @@
        <str name="field">forms_ss</str>
        <str name="weightField">weight_i</str>
        <str name="payloadField">abstract_ss</str>
-       <str name="suggestAnalyzerFieldType">text_general</str>
+       <str name="suggestAnalyzerFieldType">string</str>
        <str name="buildOnStartup">true</str>
      </lst>
    </searchComponent>
