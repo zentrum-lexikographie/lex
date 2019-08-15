@@ -11,7 +11,8 @@
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]
-            [zdl-lex-common.xml :as xml])
+            [zdl-lex-common.xml :as xml]
+            [mount.core :as mount])
   (:import java.net.URI))
 
 (def ^:private req
@@ -138,15 +139,12 @@
 (def ^:private long-term-sync (partial sync-changes (t/new-duration 2 :days)))
 
 (defstate short-exist->git
-  :start (vector
-          (cron/schedule "0 */15 1-23 * * ?" "eXist-db Sync. (last hour)"
-                         short-term-sync)
-          (cron/schedule "0 30,45 0 * * ?" "eXist-db Sync. (last hour)"
-                         short-term-sync))
-  :stop (doall (map async/close! short-exist->git)))
+  :start (cron/schedule "0 */15 0,2-23 * * ?" "eXist-db Sync. (last hour)"
+                        short-term-sync)
+  :stop (async/close! short-exist->git))
 
 (defstate long-exist->git
-  :start (cron/schedule "0 0 0 * * ?" "eXist-db Sync. (last days)"
+  :start (cron/schedule "0 0 1 * * ?" "eXist-db Sync. (last days)"
                         long-term-sync)
   :stop (async/close! long-exist->git))
 
@@ -164,6 +162,8 @@
       (htstatus/bad-request params))))
 
 (comment
+  (mount/start #'short-exist->git)
+  (mount/stop)
   (take 10 (articles))
   (articles->changeset (articles) (t/new-duration 1 :hours))
   (time (short-term-sync))
