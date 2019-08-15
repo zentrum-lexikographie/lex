@@ -9,7 +9,8 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-client.font :as font])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
@@ -74,10 +75,10 @@
         (condp = (:key column)
           ;; forms in bold style
           :form
-          (ui/config! component :font {:style :bold})
+          (ui/config! component :font (font/derived :style :bold))
           ;; definitions in italic style
           :definition
-          (ui/config! component :font {:style :italic})
+          (ui/config! component :font (font/derived :style :italic))
           ;; status with color
           :status
           (if-not selected?
@@ -93,13 +94,13 @@
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
              (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))
-                       :font {:style :plain})
+                       :font (font/derived :style :plain))
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/label :text query)
              (Box/createHorizontalGlue)
              (ui/label :text (format "%d Ergebnis(se)" total)
                        :foreground (if (< (count result) total) :orange)
-                       :font {:style :plain})
+                       :font (font/derived :style :plain))
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/toolbar
               :floatable? false

@@ -9,7 +9,8 @@
             [zdl-lex-client.bus :as bus]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [tick.format :as tf]))
+            [tick.format :as tf]
+            [zdl-lex-client.font :as font]))
 
 (def facet-title
   {:status "Status"
@@ -37,14 +38,14 @@
                                (t/in (t/parse v) "Europe/Berlin")))]
     (ui/config! this
                 :text (str v " (" n ")")
-                :font {:style :plain}
+                :font (font/derived :style :plain)
                 :border 5)))
 
 (defn- render-facet-list-entry [this {:keys [value]}]
   (let [[v n] value]
     (ui/config! this
                 :text (str v " (" n ")")
-                :font {:style :plain}
+                :font (font/derived :style :plain)
                 :border 5)))
 
 (def facet-lists
@@ -117,7 +118,7 @@
                        "<b>Tipp:</b> "
                        "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
                        "</html>")
-                  (ui/label :font {:size 10} :border 5 :text))
+                  (ui/label :border 5 :text))
         content (ui/border-panel :center lists :south help)
         options [(ui/button :text "Filtern" :listen [:action do-filter!])
                  (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
