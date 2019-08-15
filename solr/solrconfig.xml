@@ -429,7 +429,7 @@
          this cache will not be autowarmed.
       -->
     <documentCache class="solr.LRUCache"
-                   size="150000"
+                   size="10000"
                    initialSize="512"
                    autowarmCount="0"/>
 
