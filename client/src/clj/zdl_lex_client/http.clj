@@ -124,3 +124,15 @@
                (s/consume subscription))
            subscription)
   :stop (s/close! search-articles))
+
+(defn- send-change-notification [[url _]]
+  (-> (d/future
+        (let [id (url->id url)]
+          (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {})))
+      (d/catch #(timbre/warn %))))
+
+(defstate send-change-notifications
+  :start (let [subscription (bus/subscribe :editor-saved)]
+           (s/consume send-change-notification subscription)
+           subscription)
+  :stop (s/close! send-change-notifications))
