@@ -15,7 +15,7 @@
 
  <extension type="WorkspaceAccess" class="de.zdl.oxygen.Extension"/>
 
- <toolbar id="zdl-lex-client-toolbar" initialSide="NORTH" initialRow="0"/>
+ <toolbar id="zdl-lex-client-toolbar" initialSide="SOUTH" initialRow="1"/>
 
  <view id="zdl-lex-results-view" initialSide="SOUTH" initialRow="0"/>
 
