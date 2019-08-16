@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<serialized version="17.0" xml:space="preserve">
+<serialized version="20.1" xml:space="preserve">
 	<serializableOrderedMap>
 		<entry>
 			<String>document.types</String>
@@ -9,7 +9,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>DWDSoX</String>
+						<String>ZDL/DWDS</String>
 					</field>
 					<field name="schemaDescriptor">
 						<docTypeSchema>
@@ -3230,7 +3230,7 @@
 											<String>Quelle einfügen</String>
 										</field>
 										<field name="description">
-											<String>Fügt einen Quellverweis mit dem Wert "DWDS" in das Element ein.</String>
+											<String>Fügt einen Quellverweis mit dem Wert "ZDL" in das Element ein.</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3262,7 +3262,7 @@
 															</entry>
 															<entry>
 																<String>value</String>
-																<String>DWDS</String>
+																<String>ZDL</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3284,7 +3284,7 @@
 											<String>Zeitstempel/Quelle/Autor einfügen</String>
 										</field>
 										<field name="description">
-											<String>Fügt Zeitstempel, DWDS-Quellverweis und Autorin das Element ein.</String>
+											<String>Fügt Zeitstempel, ZDL-Quellverweis und Autorin das Element ein.</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3316,88 +3316,6 @@ Autor [nocontextvalidation]</String>
 													</field>
 													<field name="operationID">
 														<String>ro.sync.ecss.extensions.commons.operations.ExecuteMultipleActionsOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Datei_loeschen [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>Datei löschen</String>
-										</field>
-										<field name="description">
-											<String>Löscht die geöffnete Datei aus der eXist-Datenbank</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap/>
-													</field>
-													<field name="operationID">
-														<String>de.zdl.oxygen.ArticleDeleteOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Datei_erstellen [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>Datei in eXist erstellen</String>
-										</field>
-										<field name="description">
-											<String>Legt die aktuell geöffnete Datei in der eXist-Datenbank ab.</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap/>
-													</field>
-													<field name="operationID">
-														<String>de.zdl.oxygen.ArticleCreateOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -4120,7 +4038,7 @@ Autor [nocontextvalidation]</String>
 							<field name="menubarDescriptor">
 								<menu>
 									<field name="label">
-										<String>DWDSoX</String>
+										<String>ZDL/DWDS</String>
 									</field>
 									<field name="accessKey">
 										<String>D</String>
@@ -4132,11 +4050,6 @@ Autor [nocontextvalidation]</String>
 										<menuEntry-array>
 											<menuItem>
 												<field name="actionID">
-													<String>Datei_loeschen [nocontextvalidation]</String>
-												</field>
-											</menuItem>
-											<menuItem>
-												<field name="actionID">
 													<String>Zeitstempel/Autor [nocontextvalidation]</String>
 												</field>
 											</menuItem>
@@ -4146,6 +4059,9 @@ Autor [nocontextvalidation]</String>
 												</field>
 											</menuItem>
 										</menuEntry-array>
+									</field>
+									<field name="context">
+										<null/>
 									</field>
 								</menu>
 							</field>
@@ -4285,6 +4201,9 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 													</menuEntry-array>
 												</field>
+												<field name="context">
+													<null/>
+												</field>
 											</menu>
 											<menu>
 												<field name="label">
@@ -4360,6 +4279,9 @@ Autor [nocontextvalidation]</String>
 															</field>
 														</menuItem>
 													</menuEntry-array>
+												</field>
+												<field name="context">
+													<null/>
 												</field>
 											</menu>
 											<menu>
@@ -4484,6 +4406,9 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 													</menuEntry-array>
 												</field>
+												<field name="context">
+													<null/>
+												</field>
 											</menu>
 											<menu>
 												<field name="label">
@@ -4539,6 +4464,9 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 													</menuEntry-array>
 												</field>
+												<field name="context">
+													<null/>
+												</field>
 											</menu>
 											<menu>
 												<field name="label">
@@ -4574,6 +4502,9 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 													</menuEntry-array>
 												</field>
+												<field name="context">
+													<null/>
+												</field>
 											</menu>
 											<menuItem>
 												<field name="actionID">
@@ -4582,12 +4513,15 @@ Autor [nocontextvalidation]</String>
 											</menuItem>
 										</menuEntry-array>
 									</field>
+									<field name="context">
+										<null/>
+									</field>
 								</menu>
 							</field>
 							<field name="toolbarDescriptor">
 								<toolbar>
 									<field name="id">
-										<String>DWDS</String>
+										<String>ZDL/DWDS</String>
 									</field>
 									<field name="type">
 										<Integer>2</Integer>
@@ -5080,10 +5014,16 @@ Autor [nocontextvalidation]</String>
 							<field name="tableSupportClassName">
 								<null/>
 							</field>
+							<field name="tableCellSeparatorSupportClassName">
+								<null/>
+							</field>
 							<field name="tableColWidthSupportClassName">
 								<null/>
 							</field>
 							<field name="customReferencesResolver">
+								<null/>
+							</field>
+							<field name="editPropertiesHandler">
 								<null/>
 							</field>
 							<field name="authorExtensionStateListener">
@@ -5092,18 +5032,22 @@ Autor [nocontextvalidation]</String>
 							<field name="attributesRecognizer">
 								<null/>
 							</field>
+							<field name="authorActionEventHandler">
+								<null/>
+							</field>
+							<field name="authorImageDecorator">
+								<null/>
+							</field>
 						</authorExtension>
 					</field>
 					<field name="templatesLocations">
-						<String-array>
-							<String>${frameworkDir}/templates/</String>
-						</String-array>
+						<String-array/>
 					</field>
 					<field name="xmlCatalogs">
 						<String-array/>
 					</field>
 					<field name="description">
-						<String>DWDS Lexikographenumgebung</String>
+						<String>ZDL/DWDS Lexikographenumgebung</String>
 					</field>
 					<field name="doctypeRules">
 						<documentTypeRule-array>
@@ -5187,6 +5131,9 @@ Autor [nocontextvalidation]</String>
 						<null/>
 					</field>
 					<field name="customAttributeValueEditor">
+						<null/>
+					</field>
+					<field name="textModeExternalObjectInsertionHandler">
 						<null/>
 					</field>
 				</documentTypeDescriptor>

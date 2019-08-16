@@ -4,6 +4,13 @@
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]))
 
+;;<templates>
+;;<template name="Standard">${PluginDir}/templates/template-generic.xml</template>
+;;<template name="Nomen">${PluginDir}/templates/template-N.xml</template>
+;;<template name="Verb">${PluginDir}/templates/template-V.xml</template>
+;;<template name="Adjektiv">${PluginDir}/templates/template-ADJ.xml</template>
+;;</templates>
+
 (def active (ui/text :multi-line? true
                      :editable? false
                      :wrap-lines? true
