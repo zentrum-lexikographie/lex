@@ -30,8 +30,11 @@
 
         source (fs/file "src" "oxygen")
 
+        css-source (fs/file ".." "schema" "resources" "css")
+        css-target (fs/file source "framework" "css")
+
         schema-source (fs/file ".." "schema" "resources" "rng")
-        schema-target (fs/file source "framework" "validation")
+        schema-target (fs/file source "framework" "rng")
 
         target (fs/file "target")
         jar (fs/file target "uberjar" "zdl-lex-client.jar")
@@ -66,6 +69,9 @@
    (fs/file plugin "plugin.xml"))
 
   (zip plugin-zip plugin "zdl-lex-client")
+
+  (fs/delete-dir css-target)
+  (fs/copy-dir css-source css-target)
 
   (fs/delete-dir schema-target)
   (fs/copy-dir schema-source schema-target)

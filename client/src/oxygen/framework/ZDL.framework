@@ -17,7 +17,7 @@
 								<Integer>6</Integer>
 							</field>
 							<field name="uri">
-								<String>${framework}/validation/DWDSWB.rng</String>
+								<String>${framework}/rng/DWDSWB.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -33,7 +33,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${framework}/presentation/zdl.css</String>
+											<String>${framework}/css/zdl.css</String>
 										</field>
 										<field name="title">
 											<String>ZDL</String>
@@ -44,7 +44,7 @@
 									</cssFile>
 									<cssFile>
 										<field name="href">
-											<String>${framework}/presentation/article.css</String>
+											<String>${framework}/css/article.css</String>
 										</field>
 										<field name="title">
 											<String>DWDS CSS</String>
