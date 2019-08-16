@@ -160,15 +160,15 @@
                      modified (filter fs/exists? articles)
                      deleted (remove fs/exists? articles)]
                  (doseq [m modified]
-                   (timbre/trace {:solr {:modified (store/file->id m)}}))
+                   (timbre/info {:solr {:modified (store/file->id m)}}))
                  (doseq [d deleted]
-                   (timbre/trace {:solr {:deleted (store/file->id d)}}))
-                 (when (async/<!
-                        (async/thread
-                          (try
-                            (add-articles modified)
-                            (delete-articles deleted)
-                            (catch Throwable t (timbre/warn t)))))))
+                   (timbre/info {:solr {:deleted (store/file->id d)}}))
+                 (async/<!
+                  (async/thread
+                    (try
+                      (add-articles modified)
+                      (delete-articles deleted)
+                      (catch Throwable t (timbre/warn t))))))
                (recur)))
            stop-ch)
   :stop (async/close! git-changes->solr))
