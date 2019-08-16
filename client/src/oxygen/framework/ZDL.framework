@@ -5092,7 +5092,7 @@ Autor [nocontextvalidation]</String>
 						<null/>
 					</field>
 					<field name="extensionsBundleClassName">
-						<String>de.zdl.oxygen.AuthorExtension</String>
+						<null/>
 					</field>
 					<field name="useImposedInitialPage">
 						<Boolean>true</Boolean>
