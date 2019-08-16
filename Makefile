@@ -38,7 +38,7 @@ clean: bin/lein
 .PHONY: oxygen
 oxygen: client
 	cd client && OXYGEN_HOME="$(oxygen_home)"\
-		java -Dconf=oxygen-config.edn\
+		"$(oxygen_home)/jre/bin/java" -Dconf=oxygen-config.edn\
 			-Dcom.oxygenxml.editor.plugins.dir=src/oxygen\
 			-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor\
 			-cp "$(oxygen_home)/lib/oxygen.jar:$(oxygen_home)/lib/oxygen-basic-utilities.jar:$(oxygen_home)/classes:$(oxygen_home)"\
