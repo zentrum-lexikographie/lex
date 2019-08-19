@@ -11,9 +11,10 @@
 (defn status->color [status]
   (condp = (str/trim status)
     "Artikelrumpf" "#ffcccc"
-    "Lex-zur_Abgabe" "#98fb98" ; "#ffff00"
+    "Lex-zur_Abgabe" "#ffff00"
+    "Red-0" "#ffec8b"
     "Red-1" "#ffec8b"
-    "Red-f" "#aeecff" ; "#ccffcc"
+    "Red-f" "#ccffcc"
     "#ffffff"))
 
 (def doc->articles

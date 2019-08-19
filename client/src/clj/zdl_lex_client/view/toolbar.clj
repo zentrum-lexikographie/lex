@@ -5,10 +5,12 @@
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.filter :as filter-view]
             [zdl-lex-client.view.search :as search-view]
             [zdl-lex-client.search :as search]
-            [taoensso.timbre :as timbre])
+            [taoensso.timbre :as timbre]
+            [zdl-lex-common.article :as article])
   (:import java.awt.Color
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
@@ -20,22 +22,6 @@
                    (uib/transform :user)
                    (uib/property status-label :text))
   :stop (status-label-text))
-
-(def ^:private create-article-action
-  (ui/action
-   :name "Artikel erstellen"
-   :icon icon/gmd-add
-   :handler
-   (fn [_]
-     (->
-      (ui/dialog :content "Neuer Artikel!"
-                 :option-type :ok-cancel
-                 :modal? true
-                 :success-fn #(ui/dispose! %)
-                 :cancel-fn #(ui/dispose! %))
-      (ui/pack!)
-      (ui/show!)))))
-
 
 (def ^:private search-all-action
   (ui/action :name "Alle Artikel"
@@ -70,7 +56,7 @@
    (ToolbarButton. search-all-action false)
    (ToolbarButton. filter-view/action false)
    (ToolbarButton. show-help-action false)
-   (ToolbarButton. create-article-action false)])
+   #_(ToolbarButton. article-view/create-action false)])
 
 (def widget
   (ui/toolbar :floatable? false

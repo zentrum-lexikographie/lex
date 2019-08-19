@@ -6,9 +6,11 @@
            javax.xml.transform.stream.StreamResult
            javax.xml.transform.TransformerFactory
            org.w3c.dom.Document
+           org.w3c.dom.NodeList
            net.sf.saxon.Configuration
            [net.sf.saxon.s9api Processor XdmValue XPathCompiler XPathExecutable]
-           org.xml.sax.InputSource))
+           org.xml.sax.InputSource)
+  (:require [clojure.string :as str]))
 
 (def ^DocumentBuilderFactory doc-builder-factory
   (doto (DocumentBuilderFactory/newInstance)
@@ -49,7 +51,9 @@
    (let [writer (StringWriter.)
          result (StreamResult. writer)]
      (serialize doc result)
-     (str writer))))
+     (str/replace (str writer)
+                  #"(<\?xml version=\"1\.0\" encoding=\"UTF-8\"\?>)\s*"
+                  "$1\n"))))
 
 (def ^Processor saxon-processor (Processor. (Configuration.)))
 
@@ -70,6 +74,9 @@
 
 (defn xpath-fn [^String s]
   (partial eval-xpath (compile-xpath s)))
+
+(defn nodes->seq [^NodeList nodes]
+  (map #(.. nodes (item %)) (range (.getLength nodes))))
 
 (comment
   (-> "<root/>" parse serialize))

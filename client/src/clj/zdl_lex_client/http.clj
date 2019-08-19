@@ -104,6 +104,16 @@
 (defn sync-with-exist [id]
   (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
 
+(defn id-exists? [id]
+  (let [q (str "id:*" id "*")]
+    (->> (server-url "/articles/search" {"q" q "limit" "1"})
+         (get-edn)
+         (:result)
+         (empty?)
+         (not))))
+
+(comment
+  (id-exists? "E_8911359"))
 (defstate get-status
   :start (mt/every
           (mt/seconds 30)
