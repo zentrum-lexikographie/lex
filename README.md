@@ -2,9 +2,12 @@
 
 ## Build Requirements
 
+* [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
 * [Clojure](https://clojure.org/)
 * [Leiningen](https://leiningen.org/)
 * [Ansible](https://www.ansible.com/)
+
+Java 8 is needed, as Oxygen XML does not work with newer versions.
 
 ## Build and Deploy
 

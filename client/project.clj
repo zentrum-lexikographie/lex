@@ -30,7 +30,6 @@
 
   :repl-options {:init-ns zdl-lex-client.dev}
 
-  :java-cmd "/usr/lib/jvm/java-8-oracle/bin/java"
   :jvm-opts ["-Dconf=dev-config.edn"
              "-Dawt.useSystemAAFontSettings=on"
              "-Dswing.aatext=true"
