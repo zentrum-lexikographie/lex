@@ -1,5 +1,6 @@
 (ns zdl-lex-server.http
-  (:require [mount.core :refer [defstate]]
+  (:require [clojure.data.codec.base64 :as base64]
+            [mount.core :refer [defstate]]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [reitit.ring :as ring]
             [ring.adapter.jetty :as jetty]
@@ -14,7 +15,9 @@
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.status :as status]
-            [mount.core :as mount]))
+            [mount.core :as mount]
+            [taoensso.timbre :as timbre]
+            [clojure.string :as str]))
 
 (def defaults
   (assoc site-defaults
@@ -30,11 +33,29 @@
          :sessions false
          :security false))
 
+(defn- decode [^String b64-s]
+  (-> (.getBytes b64-s "UTF-8") (base64/decode) (String.)))
+
+(defn assoc-auth [{:keys [headers] :as request}]
+  (if-let [auth (some->
+                 (get-in request [:headers "authorization"])
+                 (str/replace #"^Basic " "") (decode) (str/split #":" 2))]
+    (assoc request ::user (first auth) ::password (second auth))
+    request))
+
+(defn wrap-auth
+  [handler]
+  (fn
+    ([request]
+     (handler (assoc-auth request)))
+    ([request respond raise]
+     (handler (assoc-auth request) respond raise))))
+
 (def handler
   (ring/ring-handler
    (ring/router
     [[""
-      {:middleware [wrap-params wrap-format]}
+      {:middleware [wrap-params wrap-format wrap-auth]}
       ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
       ["/articles"
        ["/exist"

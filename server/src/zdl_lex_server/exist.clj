@@ -10,10 +10,13 @@
             [tick.alpha.api :as t]
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
+            [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
             [zdl-lex-common.xml :as xml]
             [mount.core :as mount])
-  (:import java.net.URI))
+  (:import java.net.URI
+           java.text.Normalizer
+           java.text.Normalizer$Form))
 
 (def ^:private req
   (comp #(timbre/spy :trace %)
@@ -82,14 +85,7 @@
       req :body))
 
 (def ^:private articles-xquery
-  (->
-   (str/join
-    "\n"
-    ["xquery version '3.0';"
-     "for $doc in fn:collection('%s')"
-    "let $modified := xmldb:last-modified(util:collection-name($doc),util:document-name($doc))"
-     "return (<doc><uri>{fn:document-uri($doc)}</uri><modified>{$modified}</modified></doc>)"])
-   (format articles-path)))
+  (-> "toc.xq" io/resource (slurp :encoding "UTF-8") (format articles-path)))
 
 (def ^:private article-docs
   (comp seq (xml/xpath-fn "//doc")))
@@ -161,7 +157,44 @@
     (catch NumberFormatException e
       (htstatus/bad-request params))))
 
+(def ^:private chown-chmod-xquery-template
+  "[article-path user password resource permissions group]"
+  (-> "chown-chmod.xq" io/resource (slurp :encoding "UTF-8")))
+
+(def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
+
+(defn generate-id []
+  (let [candidate #(str "E_" (rand-int 10000000))]
+    (loop [id (candidate)]
+      (if-not (solr/id-exists? id) id
+              (recur (candidate))))))
+
+(defn form->filename [form]
+  (-> form
+      (Normalizer/normalize Normalizer$Form/NFD)
+      (str/replace #"\p{InCombiningDiacriticalMarks}" "")
+      (str/replace "ß" "ss")
+      (str/replace " " "-")
+      (str/replace #"[^\p{Alpha}\p{Digit}\-]" "_")))
+
+(def ^:private new-article-collection "Neuartikel-004")
+
+(defn new-article [form pos author]
+  (let [xml-id (generate-id)
+        filename (form->filename form)
+        id (str new-article-collection "/" filename "-" xml-id ".xml")
+        doc (xml/parse xml-template)
+        element-by-name #(-> (.getElementsByTagName doc %) xml/nodes->seq first)]
+    (doto (element-by-name "Artikel")
+      (.setAttribute "xml:id" xml-id)
+      (.setAttribute "Zeitstempel" (t/format :iso-local-date (t/date)))
+      (.setAttribute "Autor" author))
+    (.. (element-by-name "Schreibung") (setTextContent form))
+    (.. (element-by-name "Wortklasse") (setTextContent pos))
+    [id (xml/serialize doc)]))
+
 (comment
+  (new-article "testen" "Verb" "middell")
   (mount/start #'short-exist->git)
   (mount/stop)
   (take 10 (articles))

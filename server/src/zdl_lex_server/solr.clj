@@ -343,6 +343,16 @@
      (htstatus/ok)
      (htstatus/update-header "Content-Type" str "text/csv"))))
 
+(defn id-exists? [id]
+  (let [q [:query
+           [:clause
+            [:field [:term "id"]]
+            [:value [:pattern (str "*" id "*")]]]]]
+    (some->>
+     (query {"q" (lucene/ast->str q) "rows" 0})
+     :body :response :numFound
+     (< 0))))
+
 (comment
   (for [f (take 10 (drop 10000 (store/article-files)))
         :let [id (store/file->id f)]

@@ -2,8 +2,8 @@
   (:require [zdl-lex-server.env :refer [config]]
             [ring.util.http-response :as htstatus]))
 
-(defn user [{:keys [headers]}]
-  (get headers "x-remote-user" (config :anon-user)))
+(defn user [{:keys [zdl-lex-server.http/user]}]
+  (or user (config :anon-user)))
 
 (defn handle [req]
   (htstatus/ok {:user (user req)}))
