@@ -130,21 +130,21 @@
 
 (defn read-dump []
   (try (read-string (slurp store/mantis-dump))
-       (catch Throwable t (timbre/warn t) [])))
+       (catch Throwable t (timbre/debug t) [])))
 
 (defonce index (atom nil))
 
 (defn index-issues [issues]
   (group-by :lemma issues))
 
-(->> (read-dump) (index-issues) (reset! index))
-
 (defn- sync-issues []
   (->> (issues) (store-dump) (index-issues) (reset! index) (count)))
 
 (defstate issues->dump->index
   "Synchronizes Mantis issues"
-  :start (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues)
+  :start (do
+           (->> (read-dump) (index-issues) (reset! index))
+           (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
   :stop (async/close! issues->dump->index))
 
 (defn handle-issue-lookup [{{:keys [q]} :params}]
