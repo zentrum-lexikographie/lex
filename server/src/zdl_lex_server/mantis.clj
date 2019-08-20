@@ -158,4 +158,5 @@
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)
   (-> @index keys sort)
-  (handle-issue-lookup {:params {:q "parkinsonsche Krankheit"}}))
+  (->> (read-dump) (index-issues) (reset! index) (count))
+  (handle-issue-lookup {:params {:q "spitzfingrig"}}))
