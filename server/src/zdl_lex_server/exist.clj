@@ -4,19 +4,15 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [me.raynes.fs :as fs]
-            [mount.core :refer [defstate]]
+            [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
+            [zdl-lex-common.xml :as xml]
             [zdl-lex-server.cron :as cron]
             [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.store :as store]
-            [zdl-lex-common.xml :as xml]
-            [mount.core :as mount])
-  (:import java.net.URI
-           java.text.Normalizer
-           java.text.Normalizer$Form))
+            [zdl-lex-server.store :as store])
+  (:import java.net.URI))
 
 (def ^:private req
   (comp #(timbre/spy :trace %)
@@ -161,40 +157,21 @@
   "[article-path user password resource permissions group]"
   (-> "chown-chmod.xq" io/resource (slurp :encoding "UTF-8")))
 
-(def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
+(defn chown-chmod [id user password]
+  (->> (format chown-chmod-xquery-template
+               articles-path
+               user
+               password
+               (str/join "/" [articles-path id])
+               "rw-rw-r--"
+               "Neuartikel")
+       (xquery)))
 
-(defn generate-id []
-  (let [candidate #(str "E_" (rand-int 10000000))]
-    (loop [id (candidate)]
-      (if-not (solr/id-exists? id) id
-              (recur (candidate))))))
-
-(defn form->filename [form]
-  (-> form
-      (Normalizer/normalize Normalizer$Form/NFD)
-      (str/replace #"\p{InCombiningDiacriticalMarks}" "")
-      (str/replace "ß" "ss")
-      (str/replace " " "-")
-      (str/replace #"[^\p{Alpha}\p{Digit}\-]" "_")))
-
-(def ^:private new-article-collection "Neuartikel-004")
-
-(defn new-article [form pos author]
-  (let [xml-id (generate-id)
-        filename (form->filename form)
-        id (str new-article-collection "/" filename "-" xml-id ".xml")
-        doc (xml/parse xml-template)
-        element-by-name #(-> (.getElementsByTagName doc %) xml/nodes->seq first)]
-    (doto (element-by-name "Artikel")
-      (.setAttribute "xml:id" xml-id)
-      (.setAttribute "Zeitstempel" (t/format :iso-local-date (t/date)))
-      (.setAttribute "Autor" author))
-    (.. (element-by-name "Schreibung") (setTextContent form))
-    (.. (element-by-name "Wortklasse") (setTextContent pos))
-    [id (xml/serialize doc)]))
+(defn create-article [id xml user password]
+  #_(req {:method :put :url (id->uri id) :content-type :xml :body xml})
+  #_(chown-chmod id user password))
 
 (comment
-  (new-article "testen" "Verb" "middell")
   (mount/start #'short-exist->git)
   (mount/stop)
   (take 10 (articles))
