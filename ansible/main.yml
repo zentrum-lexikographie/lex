@@ -64,7 +64,13 @@
   import_playbook: webdav.yml      
 
 - name: Configure API service
-  import_playbook: api.yml      
+  import_playbook: api.yml
+  tags:
+    - app
+    - api
 
 - name: Serve ZDL-Lex client
-  import_playbook: client.yml      
+  import_playbook: client.yml
+  tags:
+    - app
+    - client

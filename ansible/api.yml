@@ -21,6 +21,7 @@
         owner: lex
         group: www-data
         mode: 0770
+      register: data_dir
 
     - name: Configure git
       git_config:
@@ -34,6 +35,25 @@
           value: "noreply@lex.dwds.de"
       become: True
       become_user: lex
+
+    - name: Clone git repo
+      shell: >
+        git clone /home/git/lex.git {{ lex_data_dir }}/git
+      become: True
+      become_user: lex
+      when: "data_dir is changed"
+
+    - name: Copy test fixture
+      shell: >
+        cp -R /vagrant/data/git/articles . &&
+        git add . &&
+        git commit -m "Add test fixture" &&
+        git push origin
+      args:
+        chdir: "{{ lex_data_dir }}/git"
+      become: True
+      become_user: lex
+      when: "('vagrant' in group_names) and (data_dir is changed)"
 
     - name: Configure API
       template:

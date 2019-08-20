@@ -93,6 +93,12 @@ vm: ansible/venv server client
 		source venv/bin/activate &&\
 		vagrant up
 
+.PHONY: vm-provision
+vm-provision: ansible/venv server client
+	cd ansible &&\
+		source venv/bin/activate &&\
+		vagrant provision
+
 .PHONY: vm-destroy
 vm-destroy:
 	cd ansible &&\
