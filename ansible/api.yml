@@ -14,6 +14,11 @@
         path: /home/lex
         mode: 0770
 
+    - name: Check data dir
+      stat:
+        path: "{{ lex_data_dir }}"
+      register: data_dir
+
     - name: Create data dir
       file:
         path: "{{ lex_data_dir }}"
@@ -21,7 +26,6 @@
         owner: lex
         group: www-data
         mode: 0770
-      register: data_dir
 
     - name: Configure git
       git_config:
@@ -41,7 +45,7 @@
         git clone /home/git/lex.git {{ lex_data_dir }}/git
       become: True
       become_user: lex
-      when: "data_dir is changed"
+      when: not data_dir.stat.exists
 
     - name: Copy test fixture
       shell: >
@@ -53,7 +57,7 @@
         chdir: "{{ lex_data_dir }}/git"
       become: True
       become_user: lex
-      when: "('vagrant' in group_names) and (data_dir is changed)"
+      when: "('vagrant' in group_names) and (not data_dir.stat.exists)"
 
     - name: Configure API
       template:
