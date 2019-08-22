@@ -1,0 +1,68 @@
+---
+- name: Create group
+  group:
+    name: "{{ existdb_group }}"
+
+- name: Create user
+  user:
+    name: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+    home: "{{ existdb_home }}"
+    shell: "{{ existdb_shell }}"
+
+- name: Setup home directory
+  file:
+    path: "{{ existdb_home }}"
+    state: directory
+    owner: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+    mode: "0770"
+
+- name: Download installer
+  get_url:
+    url: "{{ existdb_download_url }}"
+    dest: "{{ existdb_installer_path }}"
+    owner: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+  register: installer_download
+
+- name: Configure installer
+  template:
+    src: "installer-options.properties"
+    dest: "{{ existdb_installer_options }}"
+    owner: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+    mode: "0400"
+  register: installer_config
+
+- name: Install
+  command: >-
+    java -jar {{ existdb_installer_path }} -options {{ existdb_installer_options }}
+  when: "(installer_download is changed) or (installer_config is changed)"
+  become: True
+  become_user: "{{ existdb_user }}"
+  register: installation
+
+- name: Reset data directory
+  file:
+    path: "{{ existdb_data_dir }}"
+    state: absent
+  register: installation is changed
+
+- name: Setup database
+  command: >-
+    bin/setup.sh pass:{{ existdb_admin_password }}
+  args:
+    chdir: "{{ existdb_home }}"
+  become: True
+  become_user: "{{ existdb_user }}"
+  when: installation is changed
+
+- name: Install service
+  shell: >-
+    EXIST_HOME={{ existdb_home }}
+    RUN_AS_USER={{ existdb_user }}
+    WRAPPER_UNATTENDED=1
+    WRAPPER_USE_SYSTEMD=1
+    {{ existdb_home }}/tools/yajsw/bin/installDaemon.sh
+  when: existdb_install_service

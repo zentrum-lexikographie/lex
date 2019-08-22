@@ -1,0 +1,17 @@
+---
+existdb_user: "existdb"
+existdb_group: "existdb"
+existdb_shell: "/bin/bash"
+existdb_home: "/opt/existdb"
+
+existdb_version: "4.7.1"
+existdb_installer_jar: "eXist-db-setup-{{ existdb_version }}.jar" 
+existdb_download_url: "https://dl.bintray.com/existdb/releases/{{ existdb_installer_jar }}"
+existdb_data_dir: "{{ existdb_home }}/webapp/WEB-INF/data"
+existdb_admin_password: "admin"
+
+existdb_tmp_dir: "/tmp"
+existdb_installer_path: "{{ existdb_tmp_dir }}/{{ existdb_installer_jar }}"
+existdb_installer_options: "{{ existdb_tmp_dir }}/existdb-installer-options.properties"
+
+existdb_install_service: yes

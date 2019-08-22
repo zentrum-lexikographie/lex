@@ -12,6 +12,8 @@ pom.xml.asc
 .idea
 *.iml
 
+*.pyc
+
 bin/lein
 data
 config.local.edn
