@@ -5,7 +5,8 @@
             [zdl-lex-common.xml :as xml]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
-            [zdl-lex-server.exist :as exist])
+            [zdl-lex-server.exist :as exist]
+            [ring.util.http-response :as htstatus])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
@@ -46,4 +47,8 @@
     (spit (store/id->file id) xml :encoding "UTF-8")
     id))
 
-(defn handle-article-creation [])
+(defn handle-creation [{:keys [zdl-lex-server.http/user
+                               zdl-lex-server.http/password]
+                        {:keys [form pos]} :params}]
+  (htstatus/ok
+   {:id (create-article form pos user password)}))

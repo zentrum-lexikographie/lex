@@ -9,6 +9,7 @@
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.util.http-response :as htstatus]
+            [zdl-lex-server.article :as article]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.home :as home]
@@ -58,6 +59,7 @@
       {:middleware [wrap-params wrap-format wrap-auth]}
       ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
       ["/articles"
+       ["/create" {:post article/handle-creation}]
        ["/exist"
         ["/sync-id" {:post exist/handle-article-sync}]
         ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]

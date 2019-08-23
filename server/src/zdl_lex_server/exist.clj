@@ -171,7 +171,11 @@
        (xquery)))
 
 (defn create-article [id xml user password]
-  (req {:method :put :url (id->uri id) :content-type :xml :body xml})
+  (req {:method :put
+        :url (id->uri id)
+        :content-type :xml
+        :body xml
+        :basic-auth [user password]})
   (chown-chmod id user password))
 
 (comment
