@@ -67,7 +67,7 @@
        ["/issues" {:get mantis/handle-issue-lookup}]
        ["/search" {:get solr/handle-search}]]
       ["/home" {:get home/handle}]
-      ["/status" {:get status/handle}]]])
+      ["/status" {:get status/handle-req}]]])
    (ring/routes
     (ring/create-resource-handler {:path "/"})
     (wrap-content-type (wrap-webjars (constantly nil)))

@@ -199,8 +199,8 @@
   :stop (async/close! git-all->solr))
 
 
-(defn handle-index-trigger [req]
-  (if (= "admin" (status/user req))
+(defn handle-index-trigger [{:keys [zdl-lex-server.http/user]}]
+  (if (= "admin" user)
     (htstatus/ok
      {:index (async/>!! git-all->solr :sync)})
     (htstatus/forbidden
