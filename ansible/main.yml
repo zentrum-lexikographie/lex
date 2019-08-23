@@ -63,6 +63,8 @@
 
 - name: Configure WebDAV service
   import_playbook: webdav.yml      
+  tags:
+    - webdav
 
 - name: Configure API service
   import_playbook: api.yml
