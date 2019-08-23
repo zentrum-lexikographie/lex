@@ -97,11 +97,14 @@
   (comp t/instant t/parse str (xml/xpath-fn "modified/text()")))
 
 (defn articles []
-  (->>
-   (for [doc (-> (xquery articles-xquery) (xml/parse) (article-docs))]
-     {:id (article-doc-uri doc)
-      :modified (article-doc-modified doc)})
-   (remove (comp #{"indexedvalues.xml"} :id))))
+  (let [xquery-result (xquery articles-xquery)
+        docs (-> xquery-result (xml/parse) (article-docs))
+        metadata (for [doc docs]
+                   {:id (article-doc-uri doc) :modified (article-doc-modified doc)})
+        metadata (remove (comp #{"indexedvalues.xml"} :id) metadata)]
+    (when (empty? metadata)
+      (throw (ex-info "Empty article set" {:xquery-result xquery-result})))
+    metadata))
 
 (defn articles->changeset [articles change-period]
   (let [existing-ids (->> articles (map :id) (into #{}))
@@ -174,7 +177,7 @@
 (comment
   (mount/start #'short-exist->git)
   (mount/stop)
-  (take 10 (articles))
+  (time (count (articles)))
   (articles->changeset (articles) (t/new-duration 1 :hours))
   (time (short-term-sync))
   (handle-period-sync {:path-params {:amount "1" :unit "hours"}}))
