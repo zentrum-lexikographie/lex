@@ -13,7 +13,7 @@
     - geerlingguy.git
     - geerlingguy.apache
     - geerlingguy.solr
-    - existdb
+    #- existdb
   tasks:
     - name: Adjust umask of apache server
       lineinfile:
