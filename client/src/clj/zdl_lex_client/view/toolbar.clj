@@ -56,7 +56,7 @@
    (ToolbarButton. search-all-action false)
    (ToolbarButton. filter-view/action false)
    (ToolbarButton. show-help-action false)
-   #_(ToolbarButton. article-view/create-action false)])
+   (ToolbarButton. article-view/create-action false)])
 
 (def widget
   (ui/toolbar :floatable? false
