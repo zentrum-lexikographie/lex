@@ -42,9 +42,8 @@
         xml (new-article-xml xml-id form pos user)
         filename (form->filename form)
         id (str new-article-collection "/" filename "-" xml-id ".xml")]
-    (spit (store/id->file) xml :encoding "UTF-8")
-    #_(exist/create-article id xml user password)
+    (exist/create-article id xml user password)
+    (spit (store/id->file id) xml :encoding "UTF-8")
     id))
- 
-(comment
-  (create-article "testen" "Verb" "middell" "test123"))
+
+(defn handle-article-creation [])

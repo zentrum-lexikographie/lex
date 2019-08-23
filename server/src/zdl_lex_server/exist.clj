@@ -168,8 +168,8 @@
        (xquery)))
 
 (defn create-article [id xml user password]
-  #_(req {:method :put :url (id->uri id) :content-type :xml :body xml})
-  #_(chown-chmod id user password))
+  (req {:method :put :url (id->uri id) :content-type :xml :body xml})
+  (chown-chmod id user password))
 
 (comment
   (mount/start #'short-exist->git)

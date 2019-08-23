@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <DWDS xmlns="http://www.dwds.de/ns/1.0">
-    <Artikel Quelle="ZDL" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="[ID]" Zeitstempel="[DATUM]">
+    <Artikel Quelle="ZDL" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="[ID]" Zeitstempel="[DATUM]" Erstfassung="ZDL">
         <Formangabe Typ="Hauptform">
             <Schreibung>[SCHREIBUNG]</Schreibung>
             <Grammatik>
