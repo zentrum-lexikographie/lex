@@ -19,9 +19,6 @@
   (open-article
     [this id]
     "Opens an article in an editor.")
-  (create-article
-    [this id document]
-    "Creates a new editor with the given XML")
   (show-view
     [this id]
     [this id request-focus?]
@@ -45,13 +42,6 @@
   (open-article
     [^StandalonePluginWorkspace this id]
     (.. this (open (http/id->url id))))
-  (create-article
-    [^StandalonePluginWorkspace this id document]
-    (let [url (http/id->url id)
-          xml (xml/serialize document)
-          editor-url (.. this (createNewEditor "xml" "text/xml" xml))
-          editor (.. this (getEditorAccess editor-url editing-area))]
-      (.. editor (saveAs url))))
   (add-editor-change-listener
     [^StandalonePluginWorkspace this listener]
     (.. this (addEditorChangeListener listener editing-area)))
@@ -76,8 +66,6 @@
     (open-article [_ id]
       (bus/publish! :editor-active [(http/id->url id) true])
       true)
-    (create-article [_ id document]
-      (timbre/info {:new-id id :xml (xml/serialize document)}))
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]
       (timbre/info {:id id :request-focus? request-focus?}))
