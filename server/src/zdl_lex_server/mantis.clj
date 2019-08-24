@@ -1,6 +1,6 @@
 (ns zdl-lex-server.mantis
   (:require [clj-soap.client :as soap]
-            [clojure.core.async :as async]
+            [clojure.core.async :as a]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
             [clojure.string :as str]
@@ -8,7 +8,7 @@
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.cron :as cron]
+            [zdl-lex-common.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]))
 
@@ -145,7 +145,7 @@
   :start (do
            (->> (read-dump) (index-issues) (reset! index))
            (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
-  :stop (async/close! issues->dump->index))
+  :stop (a/close! issues->dump->index))
 
 (defn handle-issue-lookup [{{:keys [q]} :params}]
   (htstatus/ok

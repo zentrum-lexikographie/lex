@@ -1,12 +1,10 @@
 (ns zdl-lex-client.editors
-  (:require [manifold.stream :as s]
-            [manifold.deferred :as d]
-            [mount.core :refer [defstate]]
+  (:require [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-common.article :as article]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-common.article :as article])
   (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]))
 
 (def editors (atom {}))
@@ -70,28 +68,19 @@
           (ws/remove-editor-change-listener ws/instance editor-change-listener)
           (remove-all-listeners)))
 
-(defstate activation-logger
-  :start (let [subscription (bus/subscribe :editor-active)]
-           (s/consume #(timbre/info %) subscription)
-           subscription)
-  :stop (s/close! activation-logger))
-
 (defn- editor-event->excerpt [[url active?]]
   (when active?
-    (->
-     (d/chain (d/future (ws/xml-document ws/instance url))
-              #(some->> (article/doc->articles %)
-                        (map article/excerpt)
-                        (first)
-                        (merge {:url url}))
-              (partial bus/publish! :article))
-     (d/catch #(timbre/warn %)))))
+    (try
+      (some->> (ws/xml-document ws/instance url)
+               (article/doc->articles)
+               (map article/excerpt)
+               (first)
+               (merge {:url url})
+               (bus/publish! :article))
+      (catch Exception e (timbre/warn e)))))
 
 (defstate editor->article
-  :start (let [subscriptions [(bus/subscribe :editor-active)
-                              (bus/subscribe :editor-saved)]]
-           (doseq [s subscriptions]
-             (s/consume editor-event->excerpt s))
-           subscriptions)
-  :stop (doseq [s editor->article] (s/close! s)))
+  :start [(bus/listen :editor-active editor-event->excerpt)
+          (bus/listen :editor-saved editor-event->excerpt)]
+  :stop (doseq [s editor->article] (s)))
 

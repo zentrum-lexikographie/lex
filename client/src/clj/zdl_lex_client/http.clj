@@ -1,18 +1,18 @@
 (ns zdl-lex-client.http
   (:require [cemerick.url :refer [url]]
+            [clojure.core.async :as a]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [manifold.deferred :as d]
-            [manifold.stream :as s]
-            [manifold.time :as mt]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.env :refer [config]]
             [zdl-lex-client.query :as query]
-            [zdl-lex-common.xml :as xml])
+            [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.xml :as xml]
+            [clojure.core.async :as a])
   (:import java.io.IOException
            [java.net ConnectException URI URL]))
 
@@ -107,35 +107,31 @@
 (defn create-article [form pos]
   (post-edn (server-url "/articles/create" {"form" form "pos" pos}) {}))
 
-(defstate get-status
-  :start (mt/every
-          (mt/seconds 30)
-          (fn []
-            (d/chain (d/future (get-edn (server-url "/status")))
-                     (partial merge {:timestamp (t/now)})
-                     (partial bus/publish! :status))))
-  :stop (get-status))
+(defn get-status []
+  (->> (get-edn (server-url "/status"))
+       (merge {:timestamp (t/now)})
+       (bus/publish! :status)))
 
-(defstate search-articles
-  :start (let [subscription (bus/subscribe :search-request)]
-           (-> (fn [req]
-                 (d/chain (query/translate (req :query))
-                          #(server-url "/articles/search" {"q" % "limit" "1000"})
-                          #(future (get-edn %))
-                          (partial merge req)
-                          (partial bus/publish! :search-response)))
-               (s/consume subscription))
-           subscription)
-  :stop (s/close! search-articles))
+(defstate ping-status
+  :start (cron/schedule "*/30 * * * * ?" "Get server status" get-status)
+  :stop (a/close! ping-status))
+
+(defn search-articles [req]
+  (let [q (query/translate (req :query))]
+    (->> (get-edn (server-url "/articles/search" {"q" q "limit" "1000"}))
+         (merge req)
+         (bus/publish! :search-response))))
+
+(defstate search-reqs->responses
+  :start (bus/listen :search-request search-articles)
+  :stop (search-reqs->responses))
 
 (defn- send-change-notification [[url _]]
-  (-> (d/future
-        (let [id (url->id url)]
-          (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {})))
-      (d/catch #(timbre/warn %))))
+  (try
+    (let [id (url->id url)]
+      (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
+    (catch Exception e (timbre/warn e))))
 
 (defstate send-change-notifications
-  :start (let [subscription (bus/subscribe :editor-saved)]
-           (s/consume send-change-notification subscription)
-           subscription)
-  :stop (s/close! send-change-notifications))
+  :start (bus/listen :editor-saved send-change-notification)
+  :stop (send-change-notifications))

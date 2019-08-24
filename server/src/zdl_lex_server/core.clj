@@ -7,7 +7,7 @@
             [zdl-lex-server.http :as http]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
-            [clojure.core.async :as async]
+            [clojure.core.async :as a]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-common.article :as article])
@@ -30,11 +30,10 @@
 
 (comment
   (exist/xquery "xmldb:get-current-user()")
-  (async/>!! exist/exist->git "DWDS/billes-006/Nachbarland.xml")
   (git/rebase)
   http/server
   (time (->> (store/article-files) (drop 150000) (take 3)))
   (@mantis/index "Sinnkrise")
   (-> (solr/sync-articles) (last))
   (solr/commit-optimize)
-  (async/>!! solr/git-all->solr :sync))
+  (a/>!! solr/git-all->solr :sync))

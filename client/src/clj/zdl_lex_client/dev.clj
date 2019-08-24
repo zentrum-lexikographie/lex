@@ -1,17 +1,13 @@
 (ns zdl-lex-client.dev
   (:require [mount.core :as mount]
             [seesaw.core :as ui]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.editors :as editors]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws])
-  (:import java.awt.Toolkit
-           ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
+  (:import java.awt.Toolkit))
 
 (defn show-testbed []
   (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))

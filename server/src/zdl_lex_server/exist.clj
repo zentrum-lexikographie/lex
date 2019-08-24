@@ -1,6 +1,6 @@
 (ns zdl-lex-server.exist
   (:require [clj-http.client :as http]
-            [clojure.core.async :as async]
+            [clojure.core.async :as a]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [me.raynes.fs :as fs]
@@ -9,7 +9,7 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.cron :as cron]
+            [zdl-lex-common.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store])
   (:import java.net.URI))
@@ -136,12 +136,12 @@
 (defstate short-exist->git
   :start (cron/schedule "0 */15 0,2-23 * * ?" "eXist-db Sync. (last hour)"
                         short-term-sync)
-  :stop (async/close! short-exist->git))
+  :stop (a/close! short-exist->git))
 
 (defstate long-exist->git
   :start (cron/schedule "0 0 1 * * ?" "eXist-db Sync. (last days)"
                         long-term-sync)
-  :stop (async/close! long-exist->git))
+  :stop (a/close! long-exist->git))
 
 (defn handle-article-sync [{{:keys [id]} :params}]
   (htstatus/ok {id (copy id)}))

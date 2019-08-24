@@ -1,27 +1,27 @@
 (ns zdl-lex-client.bus
-  (:require [manifold.bus :as b]
-            [manifold.stream :as s]
-            [seesaw.bind :as uib]
-            [manifold.deferred :as d]))
+  (:require [clojure.core.async :as a]
+            [seesaw.bind :as uib]))
 
-(defonce ^:private instance (b/event-bus))
+(defonce ^:private chan (a/chan))
 
-(def publish! (partial b/publish! instance))
+(defonce ^:private pubs (a/pub chan first))
 
-(def subscribe (partial b/subscribe instance))
+(defn publish! [topic v]
+  (a/>!! chan [topic v]))
+
+(defn listen [topic listener]
+  (let [c (a/chan)]
+    (a/sub pubs topic c)
+    (a/go-loop []
+      (when-let [msg (a/<! c)]
+        (a/thread (listener (second msg)))
+        (recur)))
+    (partial a/close! c)))
 
 (defn bind [topic]
   (reify uib/Bindable
     (subscribe [_ handler]
-      (let [subscription (subscribe topic)
-            subscribed? (atom true)]
-        (->> subscription
-             (s/consume-async
-              (fn [v]
-                (if @subscribed?
-                  (do (handler v) (d/success-deferred true))
-                  (do (s/close! subscription) (d/success-deferred false))))))
-        (fn [] (reset! subscribed? false))))
+      (listen topic handler))
     (notify [_ v]
       (publish! topic v))))
 

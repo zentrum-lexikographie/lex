@@ -1,11 +1,8 @@
-(ns zdl-lex-server.cron
+(ns zdl-lex-common.cron
   (:require [clojure.core.async :as a]
             [cronjure.core :as cron]
             [cronjure.definitions :as crondef]
-            [mount.core :refer [defstate]]
-            [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
-            [mount.core :as mount]))
+            [taoensso.timbre :as timbre]))
 
 (def parse (partial cron/parse crondef/quartz))
 

@@ -1,6 +1,6 @@
 (ns zdl-lex-server.solr
   (:require [clj-http.client :as http]
-            [clojure.core.async :as async]
+            [clojure.core.async :as a]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str]
@@ -13,7 +13,7 @@
             [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.cron :as cron]
+            [zdl-lex-common.cron :as cron]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.status :as status]
@@ -153,9 +153,9 @@
 
 (defstate git-changes->solr
   "Synchronizes modified articles with the Solr index"
-  :start (let [stop-ch (async/chan)]
-           (async/go-loop []
-             (when-let [changes (async/alt! git/changes ([v] v) stop-ch nil)]
+  :start (let [stop-ch (a/chan)]
+           (a/go-loop []
+             (when-let [changes (a/alt! git/changes ([v] v) stop-ch nil)]
                (let [articles (filter store/article-file? changes)
                      modified (filter fs/exists? articles)
                      deleted (remove fs/exists? articles)]
@@ -163,15 +163,15 @@
                    (timbre/info {:solr {:modified (store/file->id m)}}))
                  (doseq [d deleted]
                    (timbre/info {:solr {:deleted (store/file->id d)}}))
-                 (async/<!
-                  (async/thread
+                 (a/<!
+                  (a/thread
                     (try
                       (add-articles modified)
                       (delete-articles deleted)
                       (catch Throwable t (timbre/warn t))))))
                (recur)))
            stop-ch)
-  :stop (async/close! git-changes->solr))
+  :stop (a/close! git-changes->solr))
 
 (defn- query->delete-xml [[query]]
   (let [doc (xml/new-document)
@@ -196,13 +196,13 @@
 (defstate git-all->solr
   "Synchronizes all articles with the Solr index"
   :start (cron/schedule "0 1 0 * * ?" "Solr index rebuild" sync-articles)
-  :stop (async/close! git-all->solr))
+  :stop (a/close! git-all->solr))
 
 
 (defn handle-index-trigger [{:keys [zdl-lex-server.http/user]}]
   (if (= "admin" user)
     (htstatus/ok
-     {:index (async/>!! git-all->solr :sync)})
+     {:index (a/>!! git-all->solr :sync)})
     (htstatus/forbidden
      {:index false})))
 
@@ -217,7 +217,7 @@
 (defstate index->suggestions
   "Synchronizes the forms suggestions with all indexed articles"
   :start (cron/schedule "0 */10 * * * ?" "Forms FSA update" build-forms-suggestions)
-  :stop (async/close! index->suggestions))
+  :stop (a/close! index->suggestions))
 
 (defn suggest [name q]
   (req {:method :get :url (url "/suggest")

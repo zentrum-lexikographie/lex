@@ -1,16 +1,15 @@
 (ns zdl-lex-client.view.results
-  (:require [manifold.stream :as s]
-            [mount.core :refer [defstate]]
+  (:require [mount.core :refer [defstate]]
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.util :refer [to-dimension]]
             [tick.alpha.api :as t]
-            [zdl-lex-common.article :as article]
             [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.font :as font]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-client.font :as font])
+            [zdl-lex-common.article :as article])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
@@ -168,8 +167,6 @@
      (ui/selection! tabbed-pane new-tab)
      (ws/show-view ws/instance :results))))
 
-(defstate renderer
-  :start (let [subscription (bus/subscribe :search-response)]
-           (s/consume merge-results subscription)
-           subscription)
-  :stop (s/close! renderer))
+(defstate search-responses->results
+  :start (bus/listen :search-response merge-results)
+  :stop (search-responses->results))

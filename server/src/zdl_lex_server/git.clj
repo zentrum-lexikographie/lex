@@ -1,12 +1,12 @@
 (ns zdl-lex-server.git
   (:require [clj-jgit.porcelain :as jgit]
-            [clojure.core.async :as async]
+            [clojure.core.async :as a]
             [clojure.java.shell :as sh]
             [clojure.set :refer [union]]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.cron :as cron]
+            [zdl-lex-common.cron :as cron]
             [zdl-lex-server.store :as store]
             [clojure.string :as str]))
 
@@ -60,22 +60,22 @@
 (defn- absolute-path [f]
   (->> f (fs/file store/git-dir) fs/absolute fs/normalized))
 
-(defonce changes (async/chan))
+(defonce changes (a/chan))
 
 (defn- commit-changes []
   (some->> (try (commit) (catch Throwable t #{}))
            (map absolute-path)
            (into (sorted-set))
            (timbre/spy :trace)
-           (async/>!! changes)))
+           (a/>!! changes)))
 
 (defstate changes-provider
   :start (cron/schedule "0 * * * * ?" "Git commit" commit-changes)
-  :stop (async/close! changes-provider))
+  :stop (a/close! changes-provider))
 
 (defstate rebase-scheduler
   :start (cron/schedule "0 0 * * * ?" "Git merge" merge-origin)
-  :stop (async/close! rebase-scheduler))
+  :stop (a/close! rebase-scheduler))
 
 (comment
   (changed-files)
