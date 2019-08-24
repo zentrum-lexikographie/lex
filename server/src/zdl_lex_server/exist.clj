@@ -96,30 +96,37 @@
 (def ^:private article-doc-modified
   (comp t/instant t/parse str (xml/xpath-fn "modified/text()")))
 
+(defn article? [id]
+  (not (#{"indexedvalues.xml"} id)))
+
+(defn docs->articles [docs]
+  (for [doc docs
+        :let [id (article-doc-uri doc)
+              modified (article-doc-modified doc)]
+        :when (article? id)]
+    {:id id :modified modified}))
+
 (defn articles []
   (let [xquery-result (xquery articles-xquery)
-        docs (-> xquery-result (xml/parse) (article-docs))
-        metadata (for [doc docs]
-                   {:id (article-doc-uri doc) :modified (article-doc-modified doc)})
-        metadata (remove (comp #{"indexedvalues.xml"} :id) metadata)]
-    (when (empty? metadata)
+        articles (-> xquery-result (xml/parse)
+                     (article-docs) (docs->articles))]
+    (when (empty? articles)
       (throw (ex-info "Empty article set" {:xquery-result xquery-result})))
-    metadata))
+    articles))
 
 (defn articles->changeset [articles change-period]
-  (let [existing-ids (->> articles (map :id) (into #{}))
+  (let [existing (->> articles (map :id) (into #{}))
         removed (->> (store/article-files)
                      (map store/file->id)
-                     (remove existing-ids))
-        added (->> (map store/id->file existing-ids)
+                     (remove existing))
+        added (->> (map store/id->file existing)
                    (remove fs/exists?)
                    (map store/file->id))
-        added-ids (into #{} added)
-        change-threshold (t/- (t/now) change-period)
+        changed? (partial t/< (t/- (t/now) change-period))
         changed (->> articles
-                     (filter (comp (partial t/< change-threshold) :modified))
+                     (filter (comp changed? :modified))
                      (map :id)
-                     (remove added-ids))]
+                     (remove (into #{} added)))]
     {:added added :changed changed :removed removed}))
 
 (defn- sync-changes [change-threshold]
@@ -181,7 +188,7 @@
 (comment
   (mount/start #'short-exist->git)
   (mount/stop)
-  (time (count (articles)))
-  (articles->changeset (articles) (t/new-duration 1 :hours))
+  (take 10 (articles))
+  (articles->changeset (articles) (t/new-duration 2 :hours))
   (time (short-term-sync))
   (handle-period-sync {:path-params {:amount "1" :unit "hours"}}))
