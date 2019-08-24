@@ -86,4 +86,5 @@
     (add-editor-listener [_ _ _])
     (remove-editor-listener [_ _ _])
     (xml-document [_ url]
+      (timbre/info url)
       (http/get-xml url))))
