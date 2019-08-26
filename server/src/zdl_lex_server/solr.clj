@@ -8,16 +8,15 @@
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
-            [ring.util.io :as htio]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
-            [zdl-lex-common.xml :as xml]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.xml :as xml]
             [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.git :as git]
-            [zdl-lex-server.status :as status]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.store :as store])
+  (:import java.io.File))
 
 (defn- field-name->key
   "Translates a Solr field name into a keyword."
@@ -240,13 +239,16 @@
         :as :json}))
 
 (defn scroll
-  ([params] (scroll params 10000))
+  ([params] (scroll params 20000))
   ([params page-size] (scroll params page-size 0))
   ([params page-size page]
    (let [offset (* page page-size)
-         resp (query (merge params {"start" offset "rows" page-size}))]
-     (if-let [docs (seq (get-in resp [:body :response :docs] []))]
-       (concat docs (lazy-seq (scroll params page-size (inc page))))))))
+         resp (query (merge params {"start" offset "rows" page-size}))
+         docs (get-in resp [:body :response :docs] [])]
+     (concat
+      docs
+      (if-not (< (count docs) page-size)
+        (lazy-seq (scroll params page-size (inc page))))))))
 
 (defn- facet-counts [[k v]]
   [k (:counts v)])
@@ -322,26 +324,52 @@
       :result (docs->results docs)
       :facets (into (sorted-map) facets)})))
 
+(defonce export-temp-files (atom #{}))
+
+(defn- ^File make-export-temp-file []
+  (let [f (fs/temp-file "zdl-lex-server.export." ".csv")]
+    (swap! export-temp-files conj f)
+    f))
+
+(defn- export-temp-file-expired? [^File f]
+  (< (.lastModified f) (- (System/currentTimeMillis) 1800000)))
+
+(defn cleanup-export-temp-files []
+  (doseq [^File f @export-temp-files]
+    (when (export-temp-file-expired? f)
+      (.delete f)
+      (swap! export-temp-files disj f))))
+
+(defstate export-temp-file-cleanup
+  :start (cron/schedule "0 */30 * * * ?" "Clean up temporary export files"
+                        cleanup-export-temp-files)
+  :stop (a/close! export-temp-file-cleanup))
+
 (defn handle-export [{{:keys [q limit] :or {q "id:*" limit "10"}} :params}]
   (let [params (merge query-params {"q" (translate-query q)})
         limit (Integer/parseInt limit)
-        docs (->> (scroll params) (take limit))]
+        docs (->> (scroll params (min limit 50000)) (take limit))
+        csv-file (make-export-temp-file)]
+    (with-open [w (io/writer csv-file :encoding "UTF-8")]
+      (->> (for [d (docs->results docs)]
+             [(d :status)
+              (d :source)
+              (some->> d :forms (str/join ", "))
+              (some->> d :definitions first)
+              (d :type)
+              (d :timestamp)
+              (d :author)
+              (d :id)])
+           (cons ["Status" "Quelle" "Schreibung" "Definition" "Typ"
+                  "Datum" "Autor" "ID"])
+           (csv/write-csv w)))
     (->
-     (htio/piped-input-stream
-      (fn [out]
-        (let [w (io/writer out :encoding "UTF-8")]
-          (csv/write-csv w [["Schreibung"
-                             "Wortklasse"
-                             "Artikeltyp"
-                             "ID"]])
-          (doseq [d (docs->results docs)]
-            (csv/write-csv w [[(some->> d :forms (str/join "|"))
-                               (some->> d :pos (str/join "|"))
-                               (d :type)
-                               (d :id)]]))
-          (.flush w))))
-     (htstatus/ok)
-     (htstatus/update-header "Content-Type" str "text/csv"))))
+     (htstatus/ok csv-file)
+     (htstatus/update-header "Content-Type" str "text/csv")
+     (htstatus/update-header "Content-Disposition" str
+                             "attachment; filename=\"zdl-dwds-export-"
+                             (t/format :iso-date-time (t/date-time))
+                             ".csv\""))))
 
 (defn id-exists? [id]
   (let [q [:query
@@ -367,7 +395,7 @@
    (xml/serialize
     (articles->add-xml (take 2 (store/article-files)))))
   (time (last (sync-articles)))
-  (->> (scroll {"q" "forms_ss:*"}) (take 55000) (last))
+  (time (->> (scroll {"q" "forms_ss:*"}) (take 50000) (last)))
   (translate-query "forms:t*")
   (translate-query "text:*")
   (handle-search {:params {:q "id:*"}}))
