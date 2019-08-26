@@ -4,17 +4,19 @@
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.search :as search]
-            [zdl-lex-client.bus :as bus]
-            [taoensso.timbre :as timbre]
+            [seesaw.forms :as forms]
             [tick.alpha.api :as t]
             [tick.format :as tf]
-            [zdl-lex-client.font :as font]))
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.font :as font]
+            [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.search :as search])
+  (:import com.jgoodies.forms.layout.RowSpec))
 
 (def facet-title
   {:status "Status"
    :authors "Autor"
+   :editors "Redakteur"
    :sources "Quelle"
    :type "Typ"
    :tranche "Tranche"
@@ -23,6 +25,7 @@
 (def facet-field
   {:status "status"
    :authors "autor"
+   :editors "red"
    :sources "quelle"
    :type "typ"
    :tranche "tranche"
@@ -49,7 +52,7 @@
                 :border 5)))
 
 (def facet-lists
-  (for [k [:status :authors :sources :type :tranche :timestamp]]
+  (for [k [:status :authors :editors :timestamp :sources :tranche :type]]
     (condp = k
       :timestamp
       (ui/listbox :model []
@@ -112,14 +115,17 @@
 (def dialog
   (let [lists (->>
                (map #(ui/scrollable % :border [5 (-> % ui/user-data facet-title)])
-                    facet-lists)
-               (ui/horizontal-panel :items))
+                    facet-lists))
         help (->> (str "<html>"
                        "<b>Tipp:</b> "
                        "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
                        "</html>")
                   (ui/label :border 5 :text))
-        content (ui/border-panel :center lists :south help)
+        content (forms/forms-panel
+                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+                 :default-row-spec (RowSpec. "fill:pref")
+                 :default-dialog-border? true
+                 :items (concat lists [(forms/next-line) (forms/span help 7)]))
         options [(ui/button :text "Filtern" :listen [:action do-filter!])
                  (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
     (ui/dialog :title "Suchfilter"

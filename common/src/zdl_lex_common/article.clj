@@ -104,6 +104,7 @@
       tranche (comp text str (xml/xpath-fn "@Tranche/string()"))
       status (comp text str (xml/xpath-fn "@Status/string()"))
       authors (attrs-fn "Autor")
+      editors (attrs-fn "Redakteur")
       sources (attrs-fn "Quelle")
       timestamps (comp past-timestamps (attrs-fn "Zeitstempel"))
       forms (texts-fn "d:Formangabe/d:Schreibung")
@@ -121,6 +122,7 @@
     [article]
     (let [authors (authors article)
           sources (sources article)
+          editors (editors article)
           timestamps (timestamps article)
           last-modified (reduce max-timestamp (apply concat (vals timestamps)))
           weight (try (or (some-> last-modified t/parse days-since-epoch) 0)
@@ -135,6 +137,8 @@
         :status (status article)
         :author (article-attr authors)
         :authors authors
+        :editor (article-attr editors)
+        :editors editors
         :source (article-attr sources)
         :sources sources
         :forms (forms article)

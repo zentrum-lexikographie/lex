@@ -24,7 +24,8 @@
    {:key :definition :text "Definition"}
    {:key :type :text "Typ"}
    {:key :timestamp :text "Datum"}
-   {:key :author :text "Autor"}])
+   {:key :author :text "Autor"}
+   {:key :editor :text "Redakteur"}])
 
 (defn- open-article [result ^MouseEvent e]
   (let [clicks (.getClickCount e)
@@ -46,19 +47,17 @@
       (condp = (column :key)
         :form
         (doto model
-          (.setMinWidth (int (* 0.25 table-width))))
+          (.setMinWidth (int (* 0.20 table-width))))
         :definition
         (doto model
-          (.setMinWidth (int (* 0.25 table-width)))
-          (.setMaxWidth (int (* 0.5 table-width))))
+          (.setMinWidth (int (* 0.20 table-width)))
+          (.setMaxWidth (int (* 0.4 table-width))))
         model))
     (ui/repaint! table)))
 
 (defn- result->table-model [result]
   (merge result {:form (some-> result :forms first)
                  :definition (some-> result :definitions first)
-                 :author (some-> result :author)
-                 :source (some-> result :source)
                  :color (some-> result :status article/status->color)}))
 
 (defn create-highlighter [model]

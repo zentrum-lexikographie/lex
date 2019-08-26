@@ -4,6 +4,7 @@
 
 (def ^:private field-name-mapping
   {"autor" "authors"
+   "red" "editors"
    "def" "definitions"
    "form" "forms"
    "datum" "timestamp"

@@ -40,8 +40,10 @@
     :timestamp "_dt"
     :timestamps "_dts"
     :author "_s"
+    :editor "_s"
     :source "_s"
     "_ss"))
+
 (defn- field-key->name
   "Translates a keyword into a Solr field name."
   [k]
@@ -53,7 +55,8 @@
 
 (let [abstract-fields [:type :status
                        :last-modified :timestamp
-                       :author :authors :sources :source
+                       :author :authors :editors :editor
+                       :sources :source
                        :forms :pos :definitions]
       basic-field (fn [[k v]]
                     (if-not (nil? v)
@@ -75,11 +78,12 @@
                     :time (str (System/currentTimeMillis))
                     :xml-descendent-path id
                     :abstract (pr-str abstract)}
-          main-fields (dissoc excerpt :timestamps :authors :sources)
+          main-fields (dissoc excerpt :timestamps :authors :editors :sources)
           fields (->> [(map basic-field preamble)
                        (map basic-field main-fields)
                        (attr-field "timestamps" "dts" (excerpt :timestamps))
                        (attr-field "authors" "ss" (excerpt :authors))
+                       (attr-field "editors" "ss" (excerpt :editors))
                        (attr-field "sources" "ss" (excerpt :sources))]
                       (mapcat identity)
                       (remove nil?)
@@ -301,7 +305,8 @@
         tomorrow (timestamp->str tomorrow)
         boundaries (map timestamp->str boundaries)]
     {"facet" "true"
-     "facet.field" ["authors_ss" "sources_ss" "tranche_ss"
+     "facet.field" ["authors_ss" "editors_ss"
+                    "sources_ss" "tranche_ss"
                     "type_ss" "pos_ss" "status_ss"]
      "facet.limit" "-1"
      "facet.mincount" "1"
@@ -359,9 +364,10 @@
               (d :type)
               (d :timestamp)
               (d :author)
+              (d :editor)
               (d :id)])
            (cons ["Status" "Quelle" "Schreibung" "Definition" "Typ"
-                  "Datum" "Autor" "ID"])
+                  "Datum" "Autor" "Redakteur" "ID"])
            (csv/write-csv w)))
     (->
      (htstatus/ok csv-file)
