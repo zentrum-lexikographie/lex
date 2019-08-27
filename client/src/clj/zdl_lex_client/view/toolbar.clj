@@ -5,15 +5,11 @@
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.view.article :as article-view]
-            [zdl-lex-client.view.filter :as filter-view]
-            [zdl-lex-client.view.search :as search-view]
             [zdl-lex-client.search :as search]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-common.article :as article])
+            [zdl-lex-client.view.article :as article-view]
+            [zdl-lex-client.view.search :as search-view])
   (:import java.awt.Color
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
-
 
 (def ^:private status-label (ui/label :text "–" :border 5))
 
@@ -54,9 +50,8 @@
    search-view/input
    (ToolbarButton. search-view/action false)
    (ToolbarButton. search-all-action false)
-   (ToolbarButton. filter-view/action false)
-   (ToolbarButton. show-help-action false)
-   (ToolbarButton. article-view/create-action false)])
+   (ToolbarButton. article-view/create-action false)
+   (ToolbarButton. show-help-action false)])
 
 (def widget
   (ui/toolbar :floatable? false

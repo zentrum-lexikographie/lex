@@ -8,6 +8,7 @@
             [zdl-lex-client.font :as font]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
+            [zdl-lex-client.view.filter :as filter-view]
             [zdl-lex-client.workspace :as ws]
             [zdl-lex-common.article :as article])
   (:import com.jidesoft.swing.JideTabbedPane
@@ -86,7 +87,10 @@
           component)))))
 
 (defn- render-result-summary [{:keys [query total result] :as data}]
-  (let [query-action (ui/action
+  (let [filter-action (ui/action
+                       :icon icon/gmd-filter
+                       :handler (fn [_] (filter-view/open-dialog)))
+        query-action (ui/action
                       :icon icon/gmd-refresh
                       :handler (fn [_] (search/request query)))]
     (ui/horizontal-panel
@@ -102,7 +106,8 @@
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/toolbar
               :floatable? false
-              :items [(ui/button :action query-action)])])))
+              :items [(ui/button :action filter-action)
+                      (ui/button :action query-action)])])))
 
 (defn render-result [{:keys [query total] :as data}]
   (let [model (map result->table-model (data :result))

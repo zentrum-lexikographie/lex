@@ -134,21 +134,14 @@
                :content content
                :options options)))
 
+(defn open-dialog []
+  (reset-filter!)
+  (-> dialog ui/pack! ui/show!))
+
 (def action
-  (ui/action :name "Filter"
-             :icon icon/gmd-filter
-             :enabled? false
+  (ui/action :icon icon/gmd-filter
              :handler (fn [_]
-                        (reset-filter!)
-                        (-> dialog ui/pack! ui/show!))))
-
-
-(defstate action-enabled?
-  :start (uib/bind (bus/bind :search-result)
-                   (uib/transform :facets)
-                   (uib/transform some?)
-                   (uib/property action :enabled?))
-  :stop (action-enabled?))
+                        )))
 
 (comment
   (lucene/str->ast "autor:rast")
