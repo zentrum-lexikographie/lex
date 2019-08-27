@@ -1,6 +1,8 @@
 (ns zdl-lex-client.dev
   (:require [mount.core :as mount]
             [seesaw.core :as ui]
+            [etaoin.api :as web]
+            [etaoin.keys :as web-keys]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.view.article :as article-view]
@@ -31,6 +33,17 @@
 
 (comment
   (show-testbed)
+
+  (let [wb-form {:tag :form :action "http://zwei.dwds.de/wb"}
+        xml (slurp "../data/git/articles/Neuartikel-004/zufallsgesteuert-E_8306451.xml":encoding "UTF-8")]
+    (web/with-chrome {:profile "/home/middell/.config/google-chrome/Profile 1"} b
+      (doto b
+        (web/maximize)
+        (web/go "http://zwei.dwds.de/admin/wb")
+        (web/wait-visible {:id :xml})
+        (web/js-execute "document.querySelector(\"#xml\").value = arguments[0];" xml)
+        (web/click [wb-form {:tag :button :type :submit}])
+        (web/wait 30))))
 
   (time (http/get-issues "Leder"))
   (mount/start)
