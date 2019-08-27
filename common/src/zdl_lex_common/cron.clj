@@ -14,7 +14,7 @@
    (schedule cron-expr desc f (a/chan (a/dropping-buffer 0))))
   ([cron-expr desc f results]
    (let [schedule (parse cron-expr)
-         ctrl-ch (a/chan)]
+         ctrl-ch (a/chan (a/dropping-buffer 1))]
      (a/go-loop []
        (when-let [req (a/alt! (a/timeout (millis-to-next schedule)) :scheduled
                               ctrl-ch ([v] v))]

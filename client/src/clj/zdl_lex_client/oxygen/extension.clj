@@ -9,7 +9,9 @@
             [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-client.http :as http]
+            [clojure.core.async :as a])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer]))
 
@@ -40,7 +42,8 @@
          (doto toolbarInfo
            (.setTitle "ZDL/DWDS")
            (.setComponents (into-array JComponent toolbar/components)))
-         toolbarInfo)))))
+         toolbarInfo))))
+  (a/>!! http/ping-status :startup))
 
 (defn -applicationClosing [this]
   (mount/stop)
