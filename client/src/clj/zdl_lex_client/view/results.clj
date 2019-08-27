@@ -8,6 +8,7 @@
             [zdl-lex-client.font :as font]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
+            [zdl-lex-client.view.export :as export-view]
             [zdl-lex-client.view.filter :as filter-view]
             [zdl-lex-client.workspace :as ws]
             [zdl-lex-common.article :as article])
@@ -92,7 +93,11 @@
                        :handler (fn [_] (filter-view/open-dialog)))
         query-action (ui/action
                       :icon icon/gmd-refresh
-                      :handler (fn [_] (search/request query)))]
+                      :handler (fn [_] (search/request query)))
+        export-action (ui/action
+                       :icon icon/gmd-export
+                       :enabled? (< total 50000)
+                       :handler (fn [_] (export-view/open-dialog data)))]
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
              (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))
@@ -107,6 +112,7 @@
              (ui/toolbar
               :floatable? false
               :items [(ui/button :action filter-action)
+                      (ui/button :action export-action)
                       (ui/button :action query-action)])])))
 
 (defn render-result [{:keys [query total] :as data}]

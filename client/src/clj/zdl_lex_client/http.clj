@@ -11,9 +11,8 @@
             [zdl-lex-client.env :refer [config]]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
-            [zdl-lex-common.xml :as xml]
-            [clojure.core.async :as a])
-  (:import java.io.IOException
+            [zdl-lex-common.xml :as xml])
+  (:import [java.io File IOException]
            [java.net ConnectException URI URL]))
 
 (def ^:private webdav-uri (URI. (str (config :webdav-base) "/")))
@@ -135,3 +134,14 @@
 (defstate send-change-notifications
   :start (bus/listen :editor-saved send-change-notification)
   :stop (send-change-notifications))
+
+(defn save-csv-to-file [^File f]
+  (fn [con]
+    (doto con
+      (.setRequestProperty "Accept" "text/csv"))
+    (io/copy (.getInputStream con) (io/output-stream f))))
+
+(defn export [query ^File f]
+  (let [q (query/translate query)]
+    (tx (save-csv-to-file f)
+        (server-url "/articles/export" {"q" q "limit" "50000"}))))

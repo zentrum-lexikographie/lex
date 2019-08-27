@@ -32,6 +32,7 @@ apache_vhosts:
 zdl_api_context_paths:
   - /articles/create
   - /articles/exist
+  - /articles/export
   - /articles/forms
   - /articles/index
   - /articles/issues
