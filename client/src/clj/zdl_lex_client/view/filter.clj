@@ -134,14 +134,31 @@
                :content content
                :options options)))
 
-(defn open-dialog []
-  (reset-filter!)
-  (-> dialog ui/pack! ui/show!))
-
-(def action
-  (ui/action :icon icon/gmd-filter
-             :handler (fn [_]
-                        )))
+(defn open-dialog [& args]
+  (let [lists (->>
+               (map #(ui/scrollable % :border [5 (-> % ui/user-data facet-title)])
+                    facet-lists))
+        help (->> (str "<html>"
+                       "<b>Tipp:</b> "
+                       "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
+                       "</html>")
+                  (ui/label :border 5 :text))
+        content (forms/forms-panel
+                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+                 :default-row-spec (RowSpec. "fill:pref")
+                 :default-dialog-border? true
+                 :items (concat lists [(forms/next-line) (forms/span help 7)]))
+        options [(ui/button :text "Filtern" :listen [:action do-filter!])
+                 (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
+    (reset-filter!)
+    (-> (ui/dialog :title "Suchfilter"
+                   :type :question
+                   :parent (some-> args first ui/to-root)
+                   :size [800 :by 800]
+                   :content content
+                   :options options)
+        ui/pack!
+        ui/show!)))
 
 (comment
   (lucene/str->ast "autor:rast")

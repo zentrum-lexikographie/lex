@@ -9,6 +9,7 @@
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.async "0.4.490"]
+                 [org.clojure/core.memoize "0.7.2"]
                  [org.clojure/data.codec "0.1.1"]
                  [com.taoensso/timbre "4.10.0"]
                  [mount "0.1.16"]

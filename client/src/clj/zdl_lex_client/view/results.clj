@@ -90,14 +90,14 @@
 (defn- render-result-summary [{:keys [query total result] :as data}]
   (let [filter-action (ui/action
                        :icon icon/gmd-filter
-                       :handler (fn [_] (filter-view/open-dialog)))
+                       :handler filter-view/open-dialog)
         query-action (ui/action
                       :icon icon/gmd-refresh
                       :handler (fn [_] (search/request query)))
         export-action (ui/action
                        :icon icon/gmd-export
                        :enabled? (< total 50000)
-                       :handler (fn [_] (export-view/open-dialog data)))]
+                       :handler (partial export-view/open-dialog data))]
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
              (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))

@@ -60,26 +60,27 @@
   (mount/start #'create-enabled?)
   (mount/stop))
 
-(def dialog
+(defn open-create-dialog [& args]
   (let [content (forms/forms-panel
                  "right:pref, 4dlu, [100dlu, pref]"
                  :default-dialog-border? true
                  :items ["Formangabe" form-input
                          "Wortklasse" pos-input])]
-    (ui/dialog :title "Neuen Artikel anlegen"
-               :type :plain
-               :content content
-               :options [create-button cancel-button])))
+    (ui/config! form-input :text "")
+    (ui/config! pos-input :text "")
+    (-> (ui/dialog :title "Neuen Artikel anlegen"
+                   :type :plain
+                   :content content
+                   :parent (some-> args first ui/to-root)
+                   :options [create-button cancel-button])
+        (ui/pack!)
+        (ui/show!))))
 
 (def create-action
   (ui/action
    :name "Artikel erstellen"
    :icon icon/gmd-add
-   :handler
-   (fn [_]
-     (ui/config! form-input :text "")
-     (ui/config! pos-input :text "")
-     (-> dialog ui/pack! ui/show!))))
+   :handler open-create-dialog))
 
 (def active (ui/text :multi-line? true
                      :editable? false
