@@ -157,6 +157,6 @@
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)
-  (-> @index keys sort)
+  (->> @index (map vec) (sort-by (comp count second) #(compare %2 %1)) (take 10))
   (->> (read-dump) (index-issues) (reset! index) (count))
-  (handle-issue-lookup {:params {:q "spitzfingrig"}}))
+  (handle-issue-lookup {:params {:q "schwarz"}}))
