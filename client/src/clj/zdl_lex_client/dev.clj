@@ -23,13 +23,14 @@
     (mount/stop)
     (mount/start)
     (ui/invoke-later
-     (ui/show!
-      (ui/frame
-       :title "zdl-lex-client/dev"
-       :size [width :by height]
-       :content (ui/border-panel
-                 :north toolbar/widget
-                 :center main-panel))))))
+     (-> (ui/frame
+          :title "zdl-lex-client/dev"
+          :size [width :by height]
+          :content (ui/border-panel
+                    :north toolbar/widget
+                    :center main-panel))
+         (ui/pack!)
+         (ui/show!)))))
 
 (comment
   (show-testbed)

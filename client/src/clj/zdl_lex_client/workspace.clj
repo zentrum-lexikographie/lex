@@ -1,5 +1,6 @@
 (ns zdl-lex-client.workspace
   (:require [cemerick.url :refer [url]]
+            [clojure.java.browse :refer [browse-url]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
@@ -16,6 +17,9 @@
    :article "zdl-lex-article-view"})
 
 (defprotocol Workspace
+  (open-url
+    [this url]
+    "Opens URL in a browser.")
   (open-article
     [this id]
     "Opens an article in an editor.")
@@ -39,6 +43,9 @@
     ([this id] (show-view this id true))
     ([^StandalonePluginWorkspace this id request-focus?]
      (.. this (showView (views id) request-focus?))))
+  (open-url
+    [_ url]
+    (browse-url url))
   (open-article
     [^StandalonePluginWorkspace this id]
     (.. this (open (http/id->url id))))
@@ -63,6 +70,9 @@
 (defstate instance
   :start
   (reify Workspace
+    (open-url
+        [_ url]
+      (browse-url url))
     (open-article [_ id]
       (bus/publish! :editor-active [(http/id->url id) true])
       true)

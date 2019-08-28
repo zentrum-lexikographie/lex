@@ -7,6 +7,9 @@
 (defn default-size []
   (.. (default) (getSize)))
 
+(defn large-size []
+  (* 1.25 (default-size)))
+
 (defn derived [& args]
   (to-font (merge {:from (default)}
                   (apply hash-map args))))

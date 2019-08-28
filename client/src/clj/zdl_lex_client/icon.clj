@@ -11,6 +11,7 @@
 
 (def gmd-add (icon GoogleMaterialDesignIcons/ADD))
 (def gmd-all (icon GoogleMaterialDesignIcons/STAR))
+(def gmd-bug-report (icon GoogleMaterialDesignIcons/BUG_REPORT))
 (def gmd-delete (icon GoogleMaterialDesignIcons/DELETE))
 (def gmd-details (icon GoogleMaterialDesignIcons/DETAILS))
 (def gmd-export (icon GoogleMaterialDesignIcons/SAVE))
