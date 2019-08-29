@@ -12,6 +12,9 @@
                  [org.clojure/core.memoize "0.7.2"]
                  [org.clojure/data.codec "0.1.1"]
                  [com.taoensso/timbre "4.10.0"]
+                 [me.raynes/fs "1.4.6"]
+                 [org.apache.commons/commons-compress "1.19"]
+                 [org.tukaani/xz "1.8"]
                  [mount "0.1.16"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
@@ -49,9 +52,7 @@
 
              :dev [:project/dev :profiles/dev]
              :project/dev
-             {:dependencies [[me.raynes/fs "1.4.6"]
-                             [me.flowthing/sigel "0.2.2"]
-                             [org.apache.commons/commons-compress "1.18"]]}
+             {:dependencies [[me.flowthing/sigel "0.2.2"]]}
 
              :provided
              {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
