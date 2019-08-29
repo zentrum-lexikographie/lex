@@ -47,5 +47,6 @@
   :jvm-opts ["-Dconf=dev-config.edn"]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :profiles {:uberjar {:aot :all}}
+  :plugins [[lein-environ "1.1.0"]])
 

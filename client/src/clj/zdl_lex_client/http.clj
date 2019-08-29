@@ -4,18 +4,21 @@
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
             [clojure.string :as str]
+            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.env :refer [config]]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.xml :as xml])
   (:import [java.io File IOException]
            [java.net ConnectException URI URL]))
 
-(def ^:private webdav-uri (URI. (str (config :webdav-base) "/")))
+(def ^:private webdav-uri
+  (-> (env :zdl-lex-webdav-base "https://lex.dwds.de/exist/webdav/db/dwdswb/data")
+      (str "/")
+      (URI.)))
 
 (defn webdav? [^URL u]
   (str/starts-with? (str (.toURI u)) (str webdav-uri)))
@@ -31,10 +34,11 @@
 (comment
   (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->url))
 
-(def server-base (config :server-base))
+(def server-base (env :zdl-lex-server-base "https://lex.dwds.de/"))
 
 (def ^:private basic-creds
-  (let [{:keys [user password]} (config :server-auth)]
+  (let [user (env :zdl-lex-server-auth-user)
+        password (env :zdl-lex-server-auth-password)]
     (if (and user password)
       (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
 

@@ -3,7 +3,6 @@
 (require '[sigel.xslt.core :as xslt])
 (require '[sigel.xslt.elements :as xsl])
 (require '[sigel.xslt.components :as xslc])
-(require '[zdl-lex-client.env :refer [config]])
 
 (import '[org.apache.commons.compress.archivers ArchiveStreamProvider ArchiveStreamFactory])
 
@@ -26,8 +25,6 @@
 
 (defn -main [& args]
   (let [[_ version] args
-        server-base (config :server-base)
-
         source (fs/file "src" "oxygen")
 
         css-source (fs/file ".." "schema" "resources" "css")

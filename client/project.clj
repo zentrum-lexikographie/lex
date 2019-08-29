@@ -15,7 +15,6 @@
                  [mount "0.1.16"]
                  [seesaw "1.5.0"]
                  [pathetic "0.5.1"]
-                 [cprop "0.1.13"]
                  [etaoin "0.3.5"]
                  [tick "0.4.10-alpha" :exclusions [cljsjs/js-joda-locale-en-us
                                                    cljsjs/js-joda-timezone]]
@@ -27,7 +26,8 @@
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
 
-  :plugins [[lein-exec "0.3.7"]]
+  :plugins [[lein-exec "0.3.7"]
+            [lein-environ "1.1.0"]]
 
   :repl-options {:init-ns zdl-lex-client.dev}
 
@@ -48,7 +48,8 @@
               :dependencies [[nrepl "0.6.0"]
                              [cider/cider-nrepl "0.21.1"]]}
 
-             :dev
+             :dev [:project/dev :profiles/dev]
+             :project/dev
              {:dependencies [[me.raynes/fs "1.4.6"]
                              [me.flowthing/sigel "0.2.2"]
                              [org.apache.commons/commons-compress "1.18"]]}

@@ -15,10 +15,12 @@
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
                  [cronjure "0.1.1"]
+                 [environ "1.1.0"]
                  [tick "0.4.10-alpha"
                   :exclusions [cljsjs/js-joda-locale-en-us
                                cljsjs/js-joda-timezone]]
                  [net.sf.saxon/Saxon-HE "9.9.1-4"]]
   :repl-options {:init-ns zdl-lex-common.dev}
-  :target-path "target/%s")
+  :target-path "target/%s"
+  :plugins [[lein-environ "1.1.0"]])
 
