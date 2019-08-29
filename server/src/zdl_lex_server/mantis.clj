@@ -5,15 +5,16 @@
             [clojure.data.zip.xml :as zx]
             [clojure.string :as str]
             [clojure.zip :as zip]
+            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [zdl-lex-common.cron :as cron]
-            [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.store :as store]))
 
-(def issue-id->url
-  (partial str (config :mantis-url) "/view.php?id="))
+(def mantis-base (env :zdl-lex-mantis-base "http://odo.dwds.de/mantis"))
+
+(def issue-id->url (partial str mantis-base "/view.php?id="))
 
 (def client-instance (atom nil))
 
@@ -22,16 +23,15 @@
    client-instance
    (fn [instance]
      (or instance
-         (let [mantis-base (config :mantis-url)
-               wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
+         (let [wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
                endpoint (str mantis-base "/api/soap/mantisconnect.php")]
            (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))))
 
 (def ^:private authenticate
-  (partial merge {:username (config :mantis-user)
-                  :password (config :mantis-password)}))
+  (partial merge {:username (env :zdl-lex-mantis-auth-user "zdl-lex")
+                  :password (env :zdl-lex-mantis-auth-password "zdl-lex")}))
 
-(def ^:private project (config :mantis-project))
+(def ^:private project (-> (env :zdl-lex-mantis-project "5") Integer/parseInt))
 
 (defn- zip->return [loc]
   (zx/xml-> loc dz/children zip/branch? :return))

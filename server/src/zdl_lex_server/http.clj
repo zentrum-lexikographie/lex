@@ -1,5 +1,6 @@
 (ns zdl-lex-server.http
   (:require [clojure.data.codec.base64 :as base64]
+            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [reitit.ring :as ring]
@@ -10,7 +11,6 @@
             [ring.middleware.webjars :refer [wrap-webjars]]
             [ring.util.http-response :as htstatus]
             [zdl-lex-server.article :as article]
-            [zdl-lex-server.env :refer [config]]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.home :as home]
             [zdl-lex-server.mantis :as mantis]
@@ -52,6 +52,10 @@
     ([request respond raise]
      (handler (assoc-auth request) respond raise))))
 
+(def base-middleware
+  (concat [#(wrap-defaults % defaults)]
+          (if (env :zdl-lex-http-log) [wrap-with-logger])))
+
 (def handler
   (ring/ring-handler
    (ring/router
@@ -74,10 +78,12 @@
     (ring/create-resource-handler {:path "/"})
     (wrap-content-type (wrap-webjars (constantly nil)))
     (ring/create-default-handler))
-   {:middleware [#(wrap-defaults % defaults) wrap-with-logger]}))
+   {:middleware base-middleware}))
 
 (defstate server
-  :start (jetty/run-jetty handler (assoc (config :http-server-opts) :join? false))
+  :start (jetty/run-jetty handler {:port (-> (env :zdl-lex-http-port "3000")
+                                             Integer/parseInt)
+                                   :join? false})
   :stop (.stop server))
 
 (comment

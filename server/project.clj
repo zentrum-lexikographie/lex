@@ -36,7 +36,6 @@
                   :exclusions [cljsjs/js-joda-locale-en-us
                                cljsjs/js-joda-timezone]]
                  [mount "0.1.16"]
-                 [cprop "0.1.13"]
                  [me.raynes/fs "1.4.6"]
                  [hiccup "1.0.5"]
                  [gremid/lucene-query "0.1.1"]
@@ -44,9 +43,10 @@
                  [net.sf.saxon/Saxon-HE "9.9.1-4"]
                  [zdl-lex-common ~version]]
 
-  :jvm-opts ["-Dconf=dev-config.edn"]
   :main ^:skip-aot zdl-lex-server.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}}
+  :profiles {:uberjar {:aot :all}
+             :dev [:project/dev :profiles/dev]
+             :project/dev {}}
   :plugins [[lein-environ "1.1.0"]])
 

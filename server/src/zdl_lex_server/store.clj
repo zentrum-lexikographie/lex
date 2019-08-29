@@ -1,8 +1,9 @@
 (ns zdl-lex-server.store
   (:require [me.raynes.fs :as fs]
-            [zdl-lex-server.env :refer [config]]))
+            [environ.core :refer [env]]))
 
-(def data-dir (-> config :data-dir fs/file fs/absolute fs/normalized))
+(def data-dir (-> (env :zdl-lex-data-dir "../data")
+                  fs/file fs/absolute fs/normalized))
 
 (def git-dir (fs/file data-dir "git"))
 (def articles-dir (fs/file git-dir "articles"))

@@ -31,8 +31,7 @@
 
   :repl-options {:init-ns zdl-lex-client.dev}
 
-  :jvm-opts ["-Dconf=dev-config.edn"
-             "-Dawt.useSystemAAFontSettings=on"
+  :jvm-opts ["-Dawt.useSystemAAFontSettings=on"
              "-Dswing.aatext=true"
              "-Dclojure.compiler.disable-locals-clearing=true"
              "-Dclojure.compiler.elide-meta=[]" 

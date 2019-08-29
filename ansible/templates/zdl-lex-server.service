@@ -7,9 +7,9 @@ Type=simple
 User=lex
 WorkingDirectory=/home/lex
 UMask=0002
-Environment=TIMBRE_LEVEL=:info
+EnvironmentFile=/home/lex/zdl-lex-server.config.env
 Restart=on-failure
-ExecStart=/usr/bin/java -jar -Dconf=zdl-lex-server.config.edn zdl-lex-server.jar
+ExecStart=/usr/bin/java -jar zdl-lex-server.jar
 
 [Install]
 WantedBy=multi-user.target

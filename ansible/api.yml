@@ -61,7 +61,7 @@
 
     - name: Configure API
       template:
-        src: zdl-lex-server.config.edn
+        src: zdl-lex-server.config.env
         dest: /home/lex
         owner: lex
         group: www-data

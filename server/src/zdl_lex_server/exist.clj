@@ -3,6 +3,7 @@
             [clojure.core.async :as a]
             [clojure.java.io :as io]
             [clojure.string :as str]
+            [environ.core :refer [env]]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
@@ -10,24 +11,23 @@
             [tick.alpha.api :as t]
             [zdl-lex-common.xml :as xml]
             [zdl-lex-common.cron :as cron]
-            [zdl-lex-server.env :refer [config]]
-            [zdl-lex-server.store :as store])
+            [zdl-lex-server.store :as store]
+            [zdl-lex-server.http-client :as http-client])
   (:import java.net.URI))
 
 (def ^:private req
-  (comp #(timbre/spy :trace %)
-        #(dissoc % :http-client)
-        http/request
-        (partial merge (config :exist-req))
-        #(timbre/spy :trace %)))
+  (http-client/configure (env :zdl-lex-exist-auth-user)
+                         (env :zdl-lex-exist-auth-password)))
 
 (defn path->uri [path] (URI. nil nil path nil))
 
 (def ^:private articles-path "/db/dwdswb/data")
 
+(def ^:private exist-uri
+  (URI. (str (env :zdl-lex-exist-base "http://spock.dwds.de:8080/exist") "/")))
+
 (def ^:private webdav-uri
-  (.. (URI. (str (config :exist-base) "/"))
-      (resolve (path->uri (str "webdav" articles-path "/")))))
+  (.. exist-uri (resolve (path->uri (str "webdav" articles-path "/")))))
 
 (defn- id->uri [id]
   (.. webdav-uri (resolve (path->uri id)) (toString)))
@@ -56,11 +56,6 @@
 
 (def ex-ns "http://exist.sourceforge.net/NS/exist")
 
-(def ^:private rest-uri-str
-  (.. (URI. (str (config :exist-base) "/"))
-      (resolve (path->uri (str "rest" articles-path "/")))
-      (toString)))
-
 (defn- xquery->xml [q]
   (let [query-doc (xml/new-document)
         element #(.createElementNS query-doc ex-ns %)]
@@ -72,6 +67,9 @@
         (.appendChild (.createCDATASection query-doc q))
         (.getOwnerDocument)
         (xml/serialize))))
+
+(def ^:private rest-uri-str
+  (.. exist-uri (resolve (path->uri (str "rest" articles-path "/"))) (toString)))
 
 (defn xquery [q]
   (-> {:method :post

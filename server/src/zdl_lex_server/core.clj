@@ -2,7 +2,7 @@
   (:gen-class)
   (:require [mount.core :as mount]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.env :refer [config]]
+            [environ.core :refer [env]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http :as http]
             [zdl-lex-server.solr :as solr]
@@ -13,14 +13,19 @@
             [zdl-lex-common.article :as article])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
-(defn configure-logging []
-  (SLF4JBridgeHandler/removeHandlersForRootLogger)
-  (SLF4JBridgeHandler/install)
-  (timbre/handle-uncaught-jvm-exceptions!)
-  (timbre/set-level! (config :log-level))
-  (timbre/merge-config! (config :log-config)))
-
-(configure-logging)
+(SLF4JBridgeHandler/removeHandlersForRootLogger)
+(SLF4JBridgeHandler/install)
+(timbre/handle-uncaught-jvm-exceptions!)
+(timbre/set-level! (env :zdl-lex-log-level :info))
+(timbre/merge-config!
+ {:ns-blacklist ["clj-soap.client"
+                 "httpclient.*"
+                 "org.apache.axiom.*"
+                 "org.apache.axis2.*"
+                 "org.apache.commons.httpclient.*"
+                 "org.apache.http.*"
+                 "org.eclipse.jetty.*"
+                 "org.eclipse.jgit.*"]})
 
 (defn -main []
   (.addShutdownHook
