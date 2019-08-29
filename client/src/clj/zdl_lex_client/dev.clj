@@ -1,11 +1,10 @@
 (ns zdl-lex-client.dev
-  (:require [mount.core :as mount]
+  (:require [etaoin.api :as web]
+            [mount.core :as mount]
             [seesaw.core :as ui]
-            [etaoin.api :as web]
-            [etaoin.keys :as web-keys]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.search :as search]
-            [zdl-lex-client.view.article :as article-view]
+            [zdl-lex-client.view.issue :as issue-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws])
@@ -18,18 +17,17 @@
 
         main-panel (ui/splitter :left-right
                                 results-view/tabbed-pane
-                                article-view/panel
-                                :divider-location 0.8)]
+                                issue-view/panel
+                                :divider-location 0.75)]
     (mount/stop)
     (mount/start)
     (ui/invoke-later
      (-> (ui/frame
           :title "zdl-lex-client/dev"
-          :size [width :by height]
+          :size [1200 :by 800]
           :content (ui/border-panel
                     :north toolbar/widget
                     :center main-panel))
-         (ui/pack!)
          (ui/show!)))))
 
 (comment

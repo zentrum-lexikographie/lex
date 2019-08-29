@@ -1,0 +1,113 @@
+(ns zdl-lex-client.view.issue
+  (:require [clojure.core.memoize :as memoize]
+            [mount.core :as mount :refer [defstate]]
+            [seesaw.bind :as uib]
+            [seesaw.border :refer [empty-border line-border]]
+            [seesaw.core :as ui]
+            [seesaw.mig :as mig]
+            [tick.alpha.api :as t]
+            [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.font :as font]
+            [zdl-lex-client.http :as http]
+            [zdl-lex-client.icon :as icon]
+            [zdl-lex-client.workspace :as ws])
+  (:import java.net.URL))
+
+(defn- severity->border [severity]
+  (let [color (condp = severity
+                "feature" :grey
+                "trivial" :grey
+                "text"  :grey
+                "tweak" :grey
+                "minor" :yellow
+                "major" :orange
+                "crash" :red
+                "block" :red
+                :orange)]
+    [5
+     (line-border :color color :left 10)
+     (line-border :thickness 5 :color :white)]))
+
+(def visited-issues (atom #{}))
+
+(defn open-issue [{:keys [id last-updated url]}]
+  (swap! visited-issues conj [id last-updated])
+  (ws/open-url ws/instance url))
+
+(def date-time-formatter (t/formatter "dd.MM.yyyy, HH:mm"))
+
+(defn render-issue
+  [{:keys [active? last-updated resolution severity status summary visited?]
+    :as issue}]
+  (let [fg-color (if active? :black :lightgray)
+        bg-color (if active? :snow :white)
+        visited-color (if visited? :green fg-color)
+        label (partial ui/label :foreground fg-color)
+        text (partial label :font (font/derived :style :plain))
+        last-updated (t/format date-time-formatter last-updated)]
+    (mig/mig-panel
+     :cursor :hand
+     :background bg-color
+     :border (severity->border severity)
+     :listen [:mouse-pressed (partial open-issue issue)]
+     :items [[(label :icon icon/gmd-bug-report
+                     :foreground visited-color
+                     :text summary
+                     :tip summary
+                     :border [(empty-border :bottom 2)
+                              (line-border :color fg-color :bottom 1)])
+              "span 2, width ::(100% - 80), wrap"]
+             [(label :text "Datum")] [(text :text last-updated) "wrap"]
+             [(label :text "Severity")] [(text :text severity) "wrap"]
+             [(label :text "Status")] [(text :text status) "wrap"]
+             [(label :text "Resolution")] [(text :text resolution)]])))
+
+(def issues-panel
+  (ui/listbox
+   :model []
+   :listen [:selection #(some-> % ui/selection open-issue)]
+   :renderer
+   (proxy [javax.swing.DefaultListCellRenderer] []
+     (getListCellRendererComponent [component value index selected? focus?]
+       (render-issue value)))))
+
+(def cached-get-issues
+  (memoize/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
+
+(defn prepare-issues [[{:keys [forms]} visited?]]
+  (let [visited? (or visited? @visited-issues)]
+    (->> (mapcat cached-get-issues forms)
+         (map (fn [{:keys [id last-updated status url] :as issue}]
+                (let [last-updated (t/parse last-updated)]
+                  (assoc issue
+                         :url (URL. url)
+                         :last-updated last-updated
+                         :active? (not (#{"closed" "resolved"} status))
+                         :visited? (visited? [id last-updated])))))
+         (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))))
+
+(defstate article->issues
+  :start (uib/bind (uib/funnel (bus/bind :article) visited-issues)
+                   (uib/transform prepare-issues)
+                   (uib/property issues-panel :model))
+  :stop (article->issues))
+
+(def panel (ui/scrollable issues-panel))
+
+(comment
+  (let [sample {:category "MWA-Link",
+                :last-updated (t/parse "2019-08-21T12:02:10+02:00"),
+                :attachments 1,
+                :resolution "open",
+                :lemma "schwarz",
+                :summary "schwarz -- MWA-Link, gemeldet von Reckenthäler",
+                :reporter "dwdsweb",
+                :status "assigned",
+                :id 39947,
+                :notes 0,
+                :severity "minor",
+                :url "http://odo.dwds.de/mantis/view.php?id=39947",
+                :handler "herold"
+                :active? true
+                :visited? true}]
+    (->> (render-issue sample) (ui/frame :content) ui/pack! ui/show!)))

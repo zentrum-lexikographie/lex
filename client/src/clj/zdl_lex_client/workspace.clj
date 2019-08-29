@@ -7,18 +7,17 @@
             [zdl-lex-client.http :as http]
             [zdl-lex-common.xml :as xml])
   (:import java.net.URL
-           org.w3c.dom.Document
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
 
 (def views
   {:results "zdl-lex-results-view"
    :toolbar "zdl-lex-client-toolbar"
-   :article "zdl-lex-article-view"})
+   :issue "zdl-lex-issue-view"})
 
 (defprotocol Workspace
   (open-url
-    [this url]
+    [this ^URL url]
     "Opens URL in a browser.")
   (open-article
     [this id]
@@ -44,8 +43,8 @@
     ([^StandalonePluginWorkspace this id request-focus?]
      (.. this (showView (views id) request-focus?))))
   (open-url
-    [_ url]
-    (browse-url url))
+    [^StandalonePluginWorkspace this ^URL url]
+    (future (.. this (openInExternalApplication url false "text/html"))))
   (open-article
     [^StandalonePluginWorkspace this id]
     (.. this (open (http/id->url id))))
@@ -72,7 +71,7 @@
   (reify Workspace
     (open-url
         [_ url]
-      (browse-url url))
+      (future (browse-url url)))
     (open-article [_ id]
       (bus/publish! :editor-active [(http/id->url id) true])
       true)

@@ -6,7 +6,7 @@
             [zdl-lex-client.editors :as editors]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.repl :as repl]
-            [zdl-lex-client.view.article :as article-view]
+            [zdl-lex-client.view.issue :as issue-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws]
@@ -27,11 +27,11 @@
               (.setTitle "ZDL/DWDS – Suchergebnisse")
               (.setIcon icon/gmd-result)
               (.setComponent results-view/tabbed-pane))
-           (ws/views :article)
+           (ws/views :issue)
            (doto viewInfo
-             (.setTitle "ZDL/DWDS – Artikel")
-             (.setIcon icon/gmd-details)
-             (.setComponent article-view/panel))
+             (.setTitle "ZDL/DWDS – Mantis-Tickets")
+             (.setIcon icon/gmd-bug-report)
+             (.setComponent issue-view/panel))
            viewInfo))))
   (.addToolbarComponentsCustomizer
    app-ws
