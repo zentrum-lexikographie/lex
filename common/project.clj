@@ -10,16 +10,20 @@
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.async "0.4.490"]
-                 [com.taoensso/timbre "4.10.0"]
+                 [org.clojure/data.codec "0.1.1"]
                  [com.fzakaria/slf4j-timbre "0.3.12"]
+                 [com.taoensso/timbre "4.10.0"]
+                 [gremid/lucene-query "0.1.1"]
+                 [me.raynes/fs "1.4.6"]
+                 [net.sf.saxon/Saxon-HE "9.9.1-4"]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
                  [cronjure "0.1.1"]
                  [environ "1.1.0"]
+                 [mount "0.1.16"]
                  [tick "0.4.10-alpha"
                   :exclusions [cljsjs/js-joda-locale-en-us
-                               cljsjs/js-joda-timezone]]
-                 [net.sf.saxon/Saxon-HE "9.9.1-4"]]
+                               cljsjs/js-joda-timezone]]]
   :repl-options {:init-ns zdl-lex-common.dev}
   :target-path "target/%s"
   :plugins [[lein-environ "1.1.0"]])

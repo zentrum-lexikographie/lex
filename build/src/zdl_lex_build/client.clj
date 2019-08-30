@@ -1,10 +1,10 @@
-(require '[clojure.java.io :as io])
-(require '[me.raynes.fs :as fs])
-(require '[sigel.xslt.core :as xslt])
-(require '[sigel.xslt.elements :as xsl])
-(require '[sigel.xslt.components :as xslc])
-
-(import '[org.apache.commons.compress.archivers ArchiveStreamProvider ArchiveStreamFactory])
+(ns zdl-lex-build.client
+  (:require [clojure.java.io :as io]
+            [me.raynes.fs :as fs]
+            [sigel.xslt.core :as xslt]
+            [sigel.xslt.elements :as xsl]
+            [sigel.xslt.components :as xslc])
+  (:import [org.apache.commons.compress.archivers ArchiveStreamProvider ArchiveStreamFactory]))
 
 (defn zip [path dir prefix]
   (with-open [out (io/output-stream (io/file path))
@@ -24,16 +24,19 @@
       (.finish archive))))
 
 (defn -main [& args]
-  (let [[_ version] args
-        source (fs/file "src" "oxygen")
+  (let [version (slurp (fs/file "../VERSION"))
+        client-base (-> "../client" fs/file fs/absolute fs/normalized)
+        schema-base (-> "../schema" fs/file fs/absolute fs/normalized)
 
-        css-source (fs/file ".." "schema" "resources" "css")
+        source (fs/file client-base "src" "oxygen")
+
+        css-source (fs/file schema-base "resources" "css")
         css-target (fs/file source "framework" "css")
 
-        schema-source (fs/file ".." "schema" "resources" "rng")
+        schema-source (fs/file schema-base "resources" "rng")
         schema-target (fs/file source "framework" "rng")
 
-        target (fs/file "target")
+        target (fs/file client-base "target")
         jar (fs/file target "uberjar" "zdl-lex-client.jar")
         oxygen (fs/file target "oxygen")
 
@@ -45,10 +48,10 @@
         framework (fs/file frameworks "zdl-lex-client")
         framework-zip (fs/file oxygen "zdl-lex-framework.zip")
 
-        update-site-xml (fs/file oxygen  "updateSite.xml")]
+        update-site-xml (fs/file oxygen "updateSite.xml")]
 
   (when-not (.isFile jar)
-    (throw (IllegalStateException. (str "ZDL-Lex-Client not built: " jar))))
+    (throw (IllegalStateException. (str "zdl-lex-client not built: " jar))))
 
   (fs/delete-dir plugins)
   (fs/copy+ (fs/file source "plugin.dtd") (fs/file plugins "plugin.dtd"))
@@ -86,5 +89,3 @@
      (xsl/template {:match "xt:version"} [:xt:version version])))
    (fs/file source "updateSite.xml")
    (fs/file update-site-xml))))
-
-(when *command-line-args* (apply -main *command-line-args*))

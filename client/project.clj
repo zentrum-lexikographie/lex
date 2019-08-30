@@ -4,27 +4,18 @@
   :description "Provides access to lexikographic resources in Oxygen XML."
   :url "http://example.com/FIXME"
 
-  :license {:name "LGPL-3.0"
+   :license {:name "LGPL-3.0"
             :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
 
-  :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/core.async "0.4.490"]
-                 [org.clojure/core.memoize "0.7.2"]
-                 [org.clojure/data.codec "0.1.1"]
-                 [com.taoensso/timbre "4.10.0"]
-                 [me.raynes/fs "1.4.6"]
-                 [org.apache.commons/commons-compress "1.19"]
-                 [org.tukaani/xz "1.8"]
-                 [mount "0.1.16"]
-                 [seesaw "1.5.0"]
-                 [pathetic "0.5.1"]
-                 [etaoin "0.3.5"]
-                 [tick "0.4.10-alpha" :exclusions [cljsjs/js-joda-locale-en-us
-                                                   cljsjs/js-joda-timezone]]
-                 [com.github.jiconfont/jiconfont-swing "1.0.1"]
-                 [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]
-                 [gremid/lucene-query "0.1.1"]
-                 [zdl-lex-common ~version]]
+  :dependencies
+  [[org.clojure/clojure "1.10.1"]
+   [org.clojure/core.memoize "0.7.2"]
+   [com.github.jiconfont/jiconfont-swing "1.0.1"]
+   [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]
+   [etaoin "0.3.5"]
+   [seesaw "1.5.0"]
+   [pathetic "0.5.1"]
+   [zdl-lex-common ~version]]
 
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
@@ -51,10 +42,7 @@
                              [cider/cider-nrepl "0.21.1"]]}
 
              :dev [:project/dev :profiles/dev]
-             :project/dev
-             {:dependencies [[me.flowthing/sigel "0.2.2"]]}
+             :project/dev {}
 
              :provided
-             {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
-
-  :aliases {"package" ["exec" "-p" "scripts/package.clj" :project/version]})
+             {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}})
