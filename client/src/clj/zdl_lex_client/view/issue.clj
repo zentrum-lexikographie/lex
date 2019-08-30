@@ -13,17 +13,18 @@
             [zdl-lex-client.workspace :as ws])
   (:import java.net.URL))
 
-(defn- severity->border [severity]
-  (let [color (condp = severity
-                "feature" :grey
-                "trivial" :grey
-                "text"  :grey
-                "tweak" :grey
-                "minor" :yellow
-                "major" :orange
-                "crash" :red
-                "block" :red
-                :orange)]
+(defn- issue->border [{:keys [active? severity]}]
+  (let [color (if-not active? :lightgreen
+                      (condp = severity
+                        "feature" :grey
+                        "trivial" :grey
+                        "text"  :grey
+                        "tweak" :grey
+                        "minor" :yellow
+                        "major" :orange
+                        "crash" :red
+                        "block" :red
+                        :orange))]
     [5
      (line-border :color color :left 10)
      (line-border :thickness 5 :color :white)]))
@@ -48,7 +49,7 @@
     (mig/mig-panel
      :cursor :hand
      :background bg-color
-     :border (severity->border severity)
+     :border (issue->border issue)
      :listen [:mouse-pressed (partial open-issue issue)]
      :items [[(label :icon icon/gmd-bug-report
                      :foreground visited-color
