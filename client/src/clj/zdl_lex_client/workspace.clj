@@ -1,11 +1,13 @@
 (ns zdl-lex-client.workspace
   (:require [cemerick.url :refer [url]]
             [clojure.java.browse :refer [browse-url]]
+            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
-            [zdl-lex-common.xml :as xml])
+            [zdl-lex-common.xml :as xml]
+            [me.raynes.fs :as fs])
   (:import java.net.URL
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
@@ -16,6 +18,9 @@
    :issue "zdl-lex-issue-view"})
 
 (defprotocol Workspace
+  (preferences-dir
+    [this]
+    "A directory where user data can be stored")
   (open-url
     [this ^URL url]
     "Opens URL in a browser.")
@@ -38,6 +43,9 @@
 
 (extend-protocol Workspace
   StandalonePluginWorkspace
+  (preferences-dir
+    [^StandalonePluginWorkspace this]
+    (-> (.. this (getPreferencesDirectory)) fs/file fs/absolute fs/normalized))
   (show-view
     ([this id] (show-view this id true))
     ([^StandalonePluginWorkspace this id request-focus?]
@@ -69,8 +77,9 @@
 (defstate instance
   :start
   (reify Workspace
-    (open-url
-        [_ url]
+    (preferences-dir [_]
+      (fs/file (env :user-dir) "tmp" "ws-prefs"))
+    (open-url [_ url]
       (future (browse-url url)))
     (open-article [_ id]
       (bus/publish! :editor-active [(http/id->url id) true])

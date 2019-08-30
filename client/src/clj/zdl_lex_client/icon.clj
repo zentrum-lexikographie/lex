@@ -20,6 +20,7 @@
 (def gmd-search (icon GoogleMaterialDesignIcons/SEARCH))
 (def gmd-refresh (icon GoogleMaterialDesignIcons/REFRESH))
 (def gmd-result (icon GoogleMaterialDesignIcons/LIST))
+(def gmd-web (icon GoogleMaterialDesignIcons/WEB))
 
 (def logo (ui/label :icon "zdl.png" :border 6 :size [32 :by 32]))
 

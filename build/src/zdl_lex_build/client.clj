@@ -1,30 +1,14 @@
 (ns zdl-lex-build.client
-  (:require [clojure.java.io :as io]
-            [me.raynes.fs :as fs]
+  (:require [me.raynes.fs :as fs]
+            [sigel.xslt.components :as xslc]
             [sigel.xslt.core :as xslt]
             [sigel.xslt.elements :as xsl]
-            [sigel.xslt.components :as xslc])
-  (:import [org.apache.commons.compress.archivers ArchiveStreamProvider ArchiveStreamFactory]))
-
-(defn zip [path dir prefix]
-  (with-open [out (io/output-stream (io/file path))
-              archive (.. (ArchiveStreamFactory.)
-                          (createArchiveOutputStream "zip" out "UTF-8"))]
-    (let [prefix-path (.toPath (io/file prefix))
-          dir-path (.toPath dir)]
-      (doseq [entry (file-seq dir)
-              :let [file? (.isFile entry)
-                    relative-path (.. dir-path (relativize (.toPath entry)))
-                    archive-path (.. prefix-path (resolve relative-path))]]
-        (->>
-         (.createArchiveEntry archive entry (str archive-path))
-         (.putArchiveEntry archive))
-        (when file? (io/copy entry archive))
-        (.closeArchiveEntry archive))
-      (.finish archive))))
+            [zdl-lex-build.zip :refer [zip]]))
 
 (defn -main [& args]
   (let [version (slurp (fs/file "../VERSION"))
+
+        chrome-driver-base (-> "../chrome-driver" fs/file fs/absolute fs/normalized)
         client-base (-> "../client" fs/file fs/absolute fs/normalized)
         schema-base (-> "../schema" fs/file fs/absolute fs/normalized)
 
@@ -56,6 +40,7 @@
   (fs/delete-dir plugins)
   (fs/copy+ (fs/file source "plugin.dtd") (fs/file plugins "plugin.dtd"))
   (fs/copy-dir (fs/file source "plugin") plugin)
+  (fs/copy-dir chrome-driver-base plugin)
   (fs/copy+ jar (fs/file plugin "lib" "zdl-lex-client.jar"))
   (xslt/transform-to-file
    (xslt/compile-sexp

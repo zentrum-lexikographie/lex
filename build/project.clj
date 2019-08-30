@@ -9,7 +9,5 @@
 
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [me.flowthing/sigel "0.2.2"]
-                 [org.apache.commons/commons-compress "1.19"]
-                 [org.tukaani/xz "1.8"]
                  [zdl-lex-common ~version]]
   :repl-options {:init-ns zdl-lex-build.core})

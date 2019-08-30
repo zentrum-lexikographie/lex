@@ -20,11 +20,17 @@ server: bin/lein common schema
 	cd server && ../bin/lein uberjar
 
 .PHONY: client
-client: bin/lein client/target/zdl-lex-client.jar schema
+client: bin/lein client/target/zdl-lex-client.jar schema chrome-driver
 	cd build && ../bin/lein run -m zdl-lex-build.client
 
 client/target/zdl-lex-client.jar: bin/lein common
 	cd client && ../bin/lein uberjar
+
+.PHONY: chrome-driver
+chrome-driver: chrome-driver/chromedriver chrome-driver/chromedriver.exe
+
+chrome-driver/chromedriver chrome-driver/chromedriver.exe:
+	cd build && ../bin/lein run -m zdl-lex-build.chrome-driver
 
 .PHONY: schema
 schema:
@@ -33,6 +39,7 @@ schema:
 
 .PHONY: clean
 clean: bin/lein
+	$(RM) -r chrome-driver
 	make -C schema clean
 	cd common && ../bin/lein clean
 	cd client && ../bin/lein clean
@@ -44,7 +51,7 @@ oxygen: client
 	cd client && OXYGEN_HOME="$(oxygen_home)"\
 		"$(oxygen_home)/jre/bin/java"\
 			-Dzdl.lex.repl.port=3001\
-			-Dcom.oxygenxml.editor.plugins.dir=src/oxygen\
+			-Dcom.oxygenxml.editor.plugins.dir=target/oxygen/plugins\
 			-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor\
 			-cp "$(oxygen_home)/lib/oxygen.jar:$(oxygen_home)/lib/oxygen-basic-utilities.jar:$(oxygen_home)/classes:$(oxygen_home)"\
 			ro.sync.exml.Oxygen\

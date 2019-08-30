@@ -10,3 +10,5 @@
 
 (defn -init [this app-descriptor]
   (reset! descriptor app-descriptor))
+
+(defn base-dir [] (some->> @descriptor (.getBaseDir)))

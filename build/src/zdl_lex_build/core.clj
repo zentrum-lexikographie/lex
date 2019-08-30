@@ -1,6 +1,2 @@
-(ns zdl-lex-build.core)
-
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(ns zdl-lex-build.core
+  (:require [zdl-lex-build.client :as client]))

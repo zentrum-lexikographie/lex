@@ -7,8 +7,12 @@
             [zdl-lex-client.view.issue :as issue-view]
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-common.log :as log])
   (:import java.awt.Toolkit))
+
+(log/configure-slf4j-bridge)
+(log/configure-timbre)
 
 (defn show-testbed []
   (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))
@@ -32,17 +36,6 @@
 
 (comment
   (show-testbed)
-
-  (let [wb-form {:tag :form :action "http://zwei.dwds.de/wb"}
-        xml (slurp "../data/git/articles/Neuartikel-004/zufallsgesteuert-E_8306451.xml":encoding "UTF-8")]
-    (web/with-chrome {:profile "/home/middell/.config/google-chrome/Profile 1"} b
-      (doto b
-        (web/maximize)
-        (web/go "http://zwei.dwds.de/admin/wb")
-        (web/wait-visible {:id :xml})
-        (web/js-execute "document.querySelector(\"#xml\").value = arguments[0];" xml)
-        (web/click [wb-form {:tag :button :type :submit}])
-        (web/wait 30))))
 
   (time (http/get-issues "Leder"))
   (mount/start)

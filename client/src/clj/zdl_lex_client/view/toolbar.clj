@@ -4,6 +4,7 @@
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
+            [zdl-lex-client.chrome-driver :as chrome-driver]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.view.article :as article-view]
@@ -51,7 +52,8 @@
    (ToolbarButton. search-view/action false)
    (ToolbarButton. search-all-action false)
    (ToolbarButton. article-view/create-action false)
-   (ToolbarButton. show-help-action false)])
+   (ToolbarButton. show-help-action false)
+   (ToolbarButton. chrome-driver/preview-action false)])
 
 (def widget
   (ui/toolbar :floatable? false

@@ -11,11 +11,14 @@
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws]
             [zdl-lex-client.http :as http]
+            [zdl-lex-common.log :as log]
             [clojure.core.async :as a])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer]))
 
 (defn -applicationStarted [this app-ws]
+  (log/configure-slf4j-bridge)
+  (log/configure-timbre)
   (mount/start-with {#'ws/instance app-ws})
   (.addViewComponentCustomizer
      app-ws
