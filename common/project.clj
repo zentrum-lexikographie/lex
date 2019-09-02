@@ -16,6 +16,10 @@
                  [gremid/lucene-query "0.1.1"]
                  [me.raynes/fs "1.4.6"]
                  [net.sf.saxon/Saxon-HE "9.9.1-4"]
+                 [org.relaxng/jing "20181222"
+                  :exclusions [xml-apis net.sf.saxon/Saxon-HE]]
+                 [org.relaxng/trang "20181222"
+                  :exclusions [xml-apis net.sf.saxon/Saxon-HE]]
                  [org.slf4j/jul-to-slf4j "1.7.25"]
                  [org.slf4j/jcl-over-slf4j "1.7.25"]
                  [cronjure "0.1.1"]

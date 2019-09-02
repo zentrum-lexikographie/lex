@@ -1,16 +1,15 @@
 (ns zdl-lex-common.xml
-  (:import [java.io StringReader StringWriter]
+  (:require [clojure.string :as str])
+  (:import [java.io File StringReader StringWriter]
+           [java.net URI URL]
            javax.xml.parsers.DocumentBuilderFactory
+           [javax.xml.transform Result TransformerFactory URIResolver]
            javax.xml.transform.dom.DOMSource
-           javax.xml.transform.Result
-           javax.xml.transform.stream.StreamResult
-           javax.xml.transform.TransformerFactory
-           org.w3c.dom.Document
-           org.w3c.dom.NodeList
+           [javax.xml.transform.stream StreamResult StreamSource]
            net.sf.saxon.Configuration
-           [net.sf.saxon.s9api Processor XdmValue XPathCompiler XPathExecutable]
-           org.xml.sax.InputSource)
-  (:require [clojure.string :as str]))
+           [net.sf.saxon.s9api Processor Serializer XdmValue XPathCompiler XPathExecutable XsltCompiler XsltExecutable]
+           [org.w3c.dom Document NodeList]
+           org.xml.sax.InputSource))
 
 (def ^DocumentBuilderFactory doc-builder-factory
   (doto (DocumentBuilderFactory/newInstance)
@@ -55,10 +54,57 @@
                   #"(<\?xml version=\"1\.0\" encoding=\"UTF-8\"\?>)\s*"
                   "$1\n"))))
 
-(def ^Processor saxon-processor (Processor. (Configuration.)))
+(defprotocol SAXInputSource
+  (->input-source [src]))
+
+(defn- ^InputSource uri->input-source [^URI uri]
+  (InputSource. (str uri)))
+
+(extend-protocol SAXInputSource
+  File
+  (->input-source [^File src] (-> (.toURI src) (uri->input-source)))
+  URL
+  (->input-source [^URL src] (-> (.toURI src) (uri->input-source)))
+  URI
+  (->input-source [^URI src] (uri->input-source src))
+  String
+  (->input-source [^String src] (uri->input-source (URI. src))))
+
+
+(defn- ^URI resolve-uri [^URI base ^URI uri]
+  "Resolves URIs, with support for the jar URL scheme."
+  (if (= "jar" (.. base (getScheme)))
+    (let [[base-jar base-path] (str/split (str base) #"!")
+          resolved (.. (URI. base-path) (resolve uri))]
+      (if-not (.isAbsolute resolved) (URI. (str base-jar "!" resolved)) resolved))
+    (.resolve base uri)))
+
+(def ^URIResolver uri-resolver
+  "A URI resolver with support for resources from JARs on the classpath"
+  (proxy [URIResolver] []
+    (resolve [^String href ^String base]
+      (let [base (URI. (or (not-empty base) ""))
+            href (URI. (or (not-empty href) ""))]
+        (StreamSource. (str (resolve-uri base href)))))))
+
+(def ^Configuration saxon-configuration
+  (doto (Configuration.)
+    (.setURIResolver uri-resolver)))
+
+(def ^Processor saxon-processor
+  (Processor. saxon-configuration))
+
+(defn ^Serializer file-serializer [^File f]
+  (.newSerializer saxon-processor f))
 
 (def ^net.sf.saxon.s9api.DocumentBuilder saxon-doc-builder
   (.newDocumentBuilder saxon-processor))
+
+(def ^XsltCompiler saxon-xslt-compiler
+  (.newXsltCompiler saxon-processor))
+
+(defn ^XsltExecutable compile-xslt [^URI stylesheet-uri]
+  (.compile saxon-xslt-compiler (StreamSource. (str stylesheet-uri))))
 
 (def ^XPathCompiler xpath-compiler
   (doto (.newXPathCompiler saxon-processor)

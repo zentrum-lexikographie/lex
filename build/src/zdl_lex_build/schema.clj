@@ -1,0 +1,10 @@
+(ns zdl-lex-build.schema
+  (:require [zdl-lex-common.xml-validate :as xv]
+            [me.raynes.fs :as fs]))
+
+(defn -main [& args]
+  (let [src-dir (-> "../schema/src/rnc" fs/file fs/absolute fs/normalized)
+        dest-dir (-> "../schema/resources/rng" fs/file fs/absolute fs/normalized)]
+    (xv/rnc->rng (fs/file src-dir "DWDSWB.rnc")
+                 (fs/file dest-dir "DWDSWB.rng"))))
+
