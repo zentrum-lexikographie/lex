@@ -1,5 +1,5 @@
 ---
-- hosts: zdl-lex
+- hosts: all
   pre_tasks:
     - name: Add backports repository (for OpenJDK 11)
       apt_repository:
@@ -10,10 +10,16 @@
     - geerlingguy.security
     - oefenweb.postfix
     - geerlingguy.java
+
+- hosts: xml-db
+  roles:
+    - existdb
+
+- hosts: zdl-lex
+  roles:
     - geerlingguy.git
     - geerlingguy.apache
     - geerlingguy.solr
-    #- existdb
   tasks:
     - name: Adjust umask of apache server
       lineinfile:
