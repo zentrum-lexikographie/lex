@@ -98,7 +98,8 @@
   (.newSerializer saxon-processor f))
 
 (def ^net.sf.saxon.s9api.DocumentBuilder saxon-doc-builder
-  (.newDocumentBuilder saxon-processor))
+  (doto (.newDocumentBuilder saxon-processor)
+    (.setLineNumbering true)))
 
 (def ^XsltCompiler saxon-xslt-compiler
   (.newXsltCompiler saxon-processor))
@@ -106,10 +107,17 @@
 (defn ^XsltExecutable compile-xslt [^URI stylesheet-uri]
   (.compile saxon-xslt-compiler (StreamSource. (str stylesheet-uri))))
 
+(defn xslt-transform [^XsltExecutable stylesheet ^File source ^File destination]
+  (doto (.load stylesheet)
+    (.setSource (StreamSource. source))
+    (.setDestination (file-serializer destination))
+    (.transform)))
+
 (def ^XPathCompiler xpath-compiler
   (doto (.newXPathCompiler saxon-processor)
     (.declareNamespace "ex" "http://exist.sourceforge.net/NS/exist")
-    (.declareNamespace "d" "http://www.dwds.de/ns/1.0")))
+    (.declareNamespace "d" "http://www.dwds.de/ns/1.0")
+    (.declareNamespace "svrl" "http://purl.oclc.org/dsdl/svrl")))
 
 (defn ^XPathExecutable compile-xpath [^String s]
   (.compile xpath-compiler s))

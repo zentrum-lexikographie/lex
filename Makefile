@@ -33,9 +33,10 @@ chrome-driver/chromedriver chrome-driver/chromedriver.exe:
 	cd build && ../bin/lein run -m zdl-lex-build.chrome-driver
 
 .PHONY: schema
-schema:
+schema: bin/lein
 	git submodule update --init --recursive $@
 	make -C $@ install
+#	cd build && ../bin/lein run -m zdl-lex-build.schema
 
 .PHONY: clean
 clean: bin/lein
