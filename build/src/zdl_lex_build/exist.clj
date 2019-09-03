@@ -38,7 +38,6 @@
        (map parse-backup-sig)
        (remove nil?)
        (sort-by :date-time) ; chronological order
-       (drop-last 1) ; FIXME: remove today's full backup
        (partition-by :type) ; alternating full/incremental backups
        (take-last 2) ; last 2 sets of full and incremental backups
        (drop-while (comp (partial = "inc") :type first)) ; drop leading incremental
