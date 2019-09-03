@@ -1,7 +1,4 @@
 ---
-security_ssh_password_authentication: "yes"
-security_ssh_permit_root_login: "yes"
-
 lex_data_dir: "/home/lex/data"
 
 apache_ignore_missing_ssl_certificate: false

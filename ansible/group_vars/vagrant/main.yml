@@ -1,0 +1,9 @@
+---
+security_autoupdate_enabled: false
+security_fail2ban_enabled: false
+
+apache_global_vhost_settings: |
+  DirectoryIndex index.php index.html
+  EnableSendfile Off
+
+#dav_root: "/vagrant/data/git/articles"
