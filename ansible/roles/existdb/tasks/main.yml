@@ -66,3 +66,4 @@
     WRAPPER_USE_SYSTEMD=1
     {{ existdb_home }}/tools/yajsw/bin/installDaemon.sh
   when: existdb_install_service
+  notify: restart existdb

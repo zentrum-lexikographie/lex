@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "main.yml"
-    ansible.groups = { "zdl-lex" => ["default"],
+    ansible.groups = { "xml-db" => ["default"],
                        "vagrant" => ["default"] }
     ansible.raw_arguments = Shellwords.shellsplit(ENV['ANSIBLE_ARGS']) if ENV['ANSIBLE_ARGS']
     ansible.become = true

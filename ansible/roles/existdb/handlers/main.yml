@@ -1,2 +1,5 @@
 ---
-# handlers file for existdb
+- name: restart existdb
+  service:
+    name: "eXist-db"
+    state: "restarted"
