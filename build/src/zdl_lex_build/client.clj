@@ -8,7 +8,6 @@
 (defn -main [& args]
   (let [version (slurp (fs/file "../VERSION"))
 
-        chrome-driver-base (-> "../chrome-driver" fs/file fs/absolute fs/normalized)
         client-base (-> "../client" fs/file fs/absolute fs/normalized)
         schema-base (-> "../schema" fs/file fs/absolute fs/normalized)
 
@@ -40,7 +39,6 @@
   (fs/delete-dir plugins)
   (fs/copy+ (fs/file source "plugin.dtd") (fs/file plugins "plugin.dtd"))
   (fs/copy-dir (fs/file source "plugin") plugin)
-  (fs/copy-dir chrome-driver-base plugin)
   (fs/copy+ jar (fs/file plugin "lib" "zdl-lex-client.jar"))
   (xslt/transform-to-file
    (xslt/compile-sexp

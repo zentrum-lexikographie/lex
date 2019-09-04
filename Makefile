@@ -20,17 +20,11 @@ server: bin/lein common schema
 	cd server && ../bin/lein uberjar
 
 .PHONY: client
-client: bin/lein client/target/zdl-lex-client.jar schema chrome-driver
+client: bin/lein client/target/zdl-lex-client.jar schema
 	cd build && ../bin/lein run -m zdl-lex-build.client
 
 client/target/zdl-lex-client.jar: bin/lein common
 	cd client && ../bin/lein uberjar
-
-.PHONY: chrome-driver
-chrome-driver: chrome-driver/chromedriver chrome-driver/chromedriver.exe
-
-chrome-driver/chromedriver chrome-driver/chromedriver.exe:
-	cd build && ../bin/lein run -m zdl-lex-build.chrome-driver
 
 .PHONY: schema
 schema: bin/lein

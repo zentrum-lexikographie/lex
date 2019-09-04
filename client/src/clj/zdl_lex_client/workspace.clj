@@ -34,6 +34,9 @@
   (xml-document
     [this ^URL url]
     "Parses the editor content associated with the given URL into a DOM.")
+  (modified?
+    [this ^URL url]
+    "Checks whether the editor' content associated with the given URL is modified.")
   (add-editor-change-listener [this listener])
   (remove-editor-change-listener [this listener])
   (add-editor-listener [this url listener])
@@ -68,6 +71,8 @@
   (remove-editor-listener
     [^StandalonePluginWorkspace this url listener]
     (.. this (getEditorAccess url editing-area) (removeEditorListener listener)))
+  (modified? [^StandalonePluginWorkspace this ^URL url]
+    (.. this (getEditorAccess url editing-area) (isModified)))
   (xml-document [^StandalonePluginWorkspace this ^URL url]
     (with-open [editor-reader (.. this
                                   (getEditorAccess url editing-area)
@@ -91,6 +96,7 @@
     (remove-editor-change-listener [_ _])
     (add-editor-listener [_ _ _])
     (remove-editor-listener [_ _ _])
+    (modified? [_ _] false)
     (xml-document [_ url]
       (timbre/info url)
       (http/get-xml url))))

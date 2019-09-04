@@ -1,6 +1,5 @@
 (ns zdl-lex-client.dev
-  (:require [etaoin.api :as web]
-            [mount.core :as mount]
+  (:require [mount.core :as mount]
             [seesaw.core :as ui]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.search :as search]

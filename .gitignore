@@ -22,8 +22,6 @@ ansible/*.retry
 ansible/roles/*.*
 ansible/venv
 
-chrome-driver/
-
 client/src/oxygen/framework/css/
 client/src/oxygen/framework/rng/
 client/tmp
