@@ -19,7 +19,7 @@
 
 (def doc->articles
   "Selects the DWDS article elements in a XML document."
-  (comp seq (xml/xpath-fn "/d:DWDS/d:Artikel")))
+  (comp seq (xml/selector "/d:DWDS/d:Artikel")))
 
 (defn- normalize-space 
   "Replaces whitespace runs with a single space and trims s."
@@ -44,7 +44,7 @@
   "Create a fn for the given xpath expression, which returns distinct
    text values."
   [xp-expr]
-  (partial texts->seq (xml/xpath-fn xp-expr)))
+  (partial texts->seq (xml/selector xp-expr)))
 
 (defn- attrs->map
   "Returns a mapping of tagname to distinct values for the given attribute
@@ -63,7 +63,7 @@
   "Creates a fn for the given attribute, returning mappings of tagnames to
    distinct attribute values."
   [attr]
-  (partial attrs->map attr (xml/xpath-fn (str "descendant-or-self::*[@" attr "]"))))
+  (partial attrs->map attr (xml/selector (str "descendant-or-self::*[@" attr "]"))))
 
 (defn- format-timestamp
   "ISO-formats a date string."
@@ -100,9 +100,9 @@
     (.between ChronoUnit/DAYS unix-epoch date)))
 
 (let [article-attr #(some-> (:Artikel %) (first))
-      type (comp text str (xml/xpath-fn "@Typ/string()"))
-      tranche (comp text str (xml/xpath-fn "@Tranche/string()"))
-      status (comp text str (xml/xpath-fn "@Status/string()"))
+      type (comp text str (xml/selector "@Typ/string()"))
+      tranche (comp text str (xml/selector "@Tranche/string()"))
+      status (comp text str (xml/selector "@Status/string()"))
       authors (attrs-fn "Autor")
       editors (attrs-fn "Redakteur")
       sources (attrs-fn "Quelle")

@@ -82,17 +82,17 @@
   (-> "toc.xq" io/resource (slurp :encoding "UTF-8") (format articles-path)))
 
 (def ^:private article-docs
-  (comp seq (xml/xpath-fn "//doc")))
+  (comp seq (xml/selector "//doc")))
 
 (def ^:private article-doc-uri
   (comp uri->id
         #(.. webdav-uri (resolve (URI. %)) (toString))
         #(str/replace % articles-path ".")
         str
-        (xml/xpath-fn "uri/text()")))
+        (xml/selector "uri/text()")))
 
 (def ^:private article-doc-modified
-  (comp t/instant t/parse str (xml/xpath-fn "modified/text()")))
+  (comp t/instant t/parse str (xml/selector "modified/text()")))
 
 (defn article? [id]
   (not (#{"indexedvalues.xml"} id)))
@@ -106,7 +106,7 @@
 
 (defn articles []
   (let [xquery-result (xquery articles-xquery)
-        articles (-> xquery-result (xml/parse)
+        articles (-> xquery-result (xml/->dom)
                      (article-docs) (docs->articles))]
     (when (empty? articles)
       (throw (ex-info "Empty article set" {:xquery-result xquery-result})))

@@ -128,7 +128,7 @@
         add (doto (el "add") (.setAttribute "commitWithin" "10000"))]
     (doseq [f article-files :let [id (store/file->id f)]]
       (try
-        (doseq [a (-> (xml/parse f) (article/doc->articles))
+        (doseq [a (-> (xml/->dom f) (article/doc->articles))
                 :let [article-doc (el "doc")]]
           (doseq [[n v] (->> (article/excerpt a) (article->fields id))]
             (doto article-doc
@@ -391,7 +391,7 @@
   (for [f (take 10 (drop 10000 (store/article-files)))
         :let [id (store/file->id f)]
         ;;:when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
-        a (-> (xml/parse f) (article/doc->articles))
+        a (-> (xml/->dom f) (article/doc->articles))
         :let [ex (article/excerpt a)]]
     (do
       (article->fields id ex)))

@@ -1,5 +1,6 @@
 (ns zdl-lex-common.xml
-  (:require [clojure.string :as str])
+  (:require [clojure.string :as str]
+            [me.raynes.fs :as fs])
   (:import [java.io File StringReader StringWriter]
            [java.net URI URL]
            javax.xml.parsers.DocumentBuilderFactory
@@ -11,67 +12,7 @@
            [org.w3c.dom Document NodeList]
            org.xml.sax.InputSource))
 
-(def ^DocumentBuilderFactory doc-builder-factory
-  (doto (DocumentBuilderFactory/newInstance)
-    (.setNamespaceAware true)
-    (.setExpandEntityReferences false)
-    (.setXIncludeAware false)
-    (.setValidating false)))
-
-(defn ^javax.xml.parsers.DocumentBuilder new-document-builder []
-  (.. doc-builder-factory (newDocumentBuilder)))
-
-(defn ^Document new-document []
-  (.. (new-document-builder) (newDocument)))
-
-(defprotocol Parseable
-  (parse [this]))
-
-(extend-protocol Parseable
-  java.lang.String
-  (parse [this]
-    (.. (new-document-builder) (parse (InputSource. (StringReader. this)))))
-
-  java.io.File
-  (parse [this]
-    (.. (new-document-builder) (parse this)))
-
-  java.io.InputStream
-  (parse [this]
-    (.. (new-document-builder) (parse this))))
-
-(def ^TransformerFactory transformer-factory
-  (TransformerFactory/newInstance))
-
-(defn serialize
-  ([^Document doc ^Result result]
-   (.. transformer-factory (newTransformer) (transform (DOMSource. doc) result)))
-  ([^Document doc]
-   (let [writer (StringWriter.)
-         result (StreamResult. writer)]
-     (serialize doc result)
-     (str/replace (str writer)
-                  #"(<\?xml version=\"1\.0\" encoding=\"UTF-8\"\?>)\s*"
-                  "$1\n"))))
-
-(defprotocol SAXInputSource
-  (->input-source [src]))
-
-(defn- ^InputSource uri->input-source [^URI uri]
-  (InputSource. (str uri)))
-
-(extend-protocol SAXInputSource
-  File
-  (->input-source [^File src] (-> (.toURI src) (uri->input-source)))
-  URL
-  (->input-source [^URL src] (-> (.toURI src) (uri->input-source)))
-  URI
-  (->input-source [^URI src] (uri->input-source src))
-  String
-  (->input-source [^String src] (uri->input-source (URI. src))))
-
-
-(defn- ^URI resolve-uri [^URI base ^URI uri]
+(defn ^URI resolve-uri [^URI base ^URI uri]
   "Resolves URIs, with support for the jar URL scheme."
   (if (= "jar" (.. base (getScheme)))
     (let [[base-jar base-path] (str/split (str base) #"!")
@@ -87,15 +28,25 @@
             href (URI. (or (not-empty href) ""))]
         (StreamSource. (str (resolve-uri base href)))))))
 
+(def ^DocumentBuilderFactory doc-builder-factory
+  (doto (DocumentBuilderFactory/newInstance)
+    (.setNamespaceAware true)
+    (.setExpandEntityReferences false)
+    (.setXIncludeAware false)
+    (.setValidating false)))
+
+(defn ^javax.xml.parsers.DocumentBuilder new-document-builder []
+  (.. doc-builder-factory (newDocumentBuilder)))
+
+(defn ^Document new-document []
+  (.. (new-document-builder) (newDocument)))
+
 (def ^Configuration saxon-configuration
   (doto (Configuration.)
     (.setURIResolver uri-resolver)))
 
 (def ^Processor saxon-processor
   (Processor. saxon-configuration))
-
-(defn ^Serializer file-serializer [^File f]
-  (.newSerializer saxon-processor f))
 
 (def ^net.sf.saxon.s9api.DocumentBuilder saxon-doc-builder
   (doto (.newDocumentBuilder saxon-processor)
@@ -104,33 +55,139 @@
 (def ^XsltCompiler saxon-xslt-compiler
   (.newXsltCompiler saxon-processor))
 
-(defn ^XsltExecutable compile-xslt [^URI stylesheet-uri]
-  (.compile saxon-xslt-compiler (StreamSource. (str stylesheet-uri))))
-
-(defn xslt-transform [^XsltExecutable stylesheet ^File source ^File destination]
-  (doto (.load stylesheet)
-    (.setSource (StreamSource. source))
-    (.setDestination (file-serializer destination))
-    (.transform)))
-
-(def ^XPathCompiler xpath-compiler
+(def ^XPathCompiler saxon-xpath-compiler
   (doto (.newXPathCompiler saxon-processor)
     (.declareNamespace "ex" "http://exist.sourceforge.net/NS/exist")
     (.declareNamespace "d" "http://www.dwds.de/ns/1.0")
     (.declareNamespace "svrl" "http://purl.oclc.org/dsdl/svrl")))
 
-(defn ^XPathExecutable compile-xpath [^String s]
-  (.compile xpath-compiler s))
+(defprotocol Markup
+  (->source [this])
+  (->input-source [this])
+  (->dom [this])
+  (->serializer [this])
+  (->xdm [this])
+  (->seq [this]))
 
-(defn ^XdmValue eval-xpath [^XPathExecutable xp ctx]
-  (let [ctx (.. saxon-doc-builder (wrap ctx))]
-    (.. (doto (.load xp) (.setContextItem ctx)) (evaluate))))
+(extend-protocol Markup
+  java.lang.String
+  (->source [this]
+    (StreamSource. this))
+  (->input-source [this]
+    (InputSource. this))
+  (->dom [this]
+    (.. (new-document-builder) (parse (InputSource. (StringReader. this)))))
+  (->serializer [this]
+    (->serializer (fs/file this)))
+  (->xdm [this]
+    (-> this ->source ->xdm))
 
-(defn xpath-fn [^String s]
-  (partial eval-xpath (compile-xpath s)))
+  java.io.File
+  (->source [this]
+    (StreamSource. this))
+  (->input-source [this]
+    (->input-source (.. this (toURI))))
+  (->dom [this]
+    (.. (new-document-builder) (parse this)))
+  (->serializer [this]
+    (.. saxon-processor (newSerializer this)))
+  (->xdm [this]
+    (.. saxon-doc-builder (build this)))
 
-(defn nodes->seq [^NodeList nodes]
+  java.io.InputStream
+  (->source [this]
+    (StreamSource. this))
+  (->input-source [this]
+    (InputSource. this))
+  (->dom [this]
+    (.. (new-document-builder) (parse this)))
+  (->xdm [this]
+    (-> this ->source ->xdm))
+
+  java.io.OutputStream
+  (->serializer [this]
+    (.. saxon-processor (newSerializer this)))
+
+  java.io.Writer
+  (->serializer [this]
+    (.. saxon-processor (newSerializer this)))
+
+  java.net.URI
+  (->source [this]
+    (->source (str this)))
+  (->input-source [this]
+    (->input-source (str this)))
+  (->dom [this]
+    (.. (new-document-builder) (parse (->input-source this))))
+  (->xdm [this]
+    (-> this ->source ->xdm))
+
+  java.net.URL
+  (->source [this]
+    (->source (.. this (toURI))))
+  (->input-source [this]
+    (->input-source (.. this (toURI))))
+  (->dom [this]
+    (.. (new-document-builder) (parse (->input-source this))))
+  (->xdm [this]
+    (-> this ->source ->xdm))
+
+  org.w3c.dom.Document
+  (->source [this]
+    (DOMSource. this))
+  (->dom [this]
+    this)
+  (->xdm [this]
+    (.. saxon-doc-builder (wrap this)))
+
+  org.w3c.dom.Node
+  (->xdm [this]
+    (.. saxon-doc-builder (wrap this)))
+
+  net.sf.saxon.s9api.XdmNode
+  (->source [this]
+    (.. this (asSource)))
+  (->xdm [this]
+    this)
+  
+  javax.xml.transform.Source
+  (->source [this]
+    this)
+  (->xdm [this]
+    (.. saxon-doc-builder (build this))))
+
+
+(defn ^XsltExecutable ->xslt [stylesheet]
+  (.. saxon-xslt-compiler (compile (->source stylesheet))))
+
+(defn ^XPathExecutable ->xpath [^String s]
+  (.. saxon-xpath-compiler (compile s)))
+
+(defn ->seq [^NodeList nodes]
   (map #(.. nodes (item %)) (range (.getLength nodes))))
 
+(defn serialize
+  ([source destination]
+   (.. (->serializer destination) (serializeNode (->xdm source))))
+  ([source]
+   (let [writer (StringWriter.)]
+     (serialize source writer)
+     (str/replace (str writer)
+                  #"(<\?xml version=\"1\.0\" encoding=\"UTF-8\"\?>)\s*"
+                  "$1\n"))))
+
+(defn transform
+  ([^XsltExecutable stylesheet source]
+   (.. stylesheet (load30) (applyTemplates (->source source))))
+  ([^XsltExecutable stylesheet source destination]
+   (.. stylesheet (load30) (applyTemplates (->source source)
+                                           (->serializer destination)))))
+
+(defn ^XdmValue select [^XPathExecutable xp ctx]
+  (.. (doto (.load xp) (.setContextItem (->xdm ctx))) (evaluate)))
+
+(defn selector [^String s]
+  (partial select (->xpath s)))
+
 (comment
-  (-> "<root/>" parse serialize))
+  (-> "<root/>" ->dom serialize))

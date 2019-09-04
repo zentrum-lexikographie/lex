@@ -1,15 +1,12 @@
 (ns zdl-lex-common.xml-validate
   (:require [clojure.java.io :as io]
-            [zdl-lex-common.xml :as xml]
+            [clojure.string :as str]
             [me.raynes.fs :as fs]
-            [clojure.string :as str])
+            [zdl-lex-common.xml :as xml])
   (:import com.thaiopensource.relaxng.translate.Driver
-           java.io.File
-           javax.xml.transform.stream.StreamSource
            com.thaiopensource.util.PropertyMapBuilder
            [com.thaiopensource.validate ValidateProperty ValidationDriver]
            java.io.File
-           javax.xml.transform.stream.StreamSource
            net.sf.saxon.s9api.XdmNode
            [org.xml.sax ErrorHandler SAXParseException]))
 
@@ -19,25 +16,21 @@
       (throw (ex-info "Error while converting RNC to RNG"
                       {:rnc rnc :rng rng})))))
 
-(let [resource->xslt #(xml/compile-xslt (.toURI (io/resource %)))
+(let [resource->xslt #(xml/->xslt (.toURI (io/resource %)))
       rng->sch (resource->xslt "schematron/ExtractSchFromRNG-2.xsl")
       sch->sch-xslt (resource->xslt "schematron/iso_svrl_for_xslt2.xsl")]
-  (defn rng->sch-xslt [^File rng ^File sch-xslt]
-    (let [sch (fs/temp-file "zdl-lex-common." ".sch")]
-      (try
-        (xml/xslt-transform rng->sch rng sch)
-        (xml/xslt-transform sch->sch-xslt sch sch-xslt)
-        (finally (fs/delete sch))))))
+  (defn rng->sch-xslt [rng sch-xslt]
+    (-> (xml/transform rng->sch rng)
+        (xml/transform sch->sch-xslt sch-xslt))))
 
-(let [xp-str #(comp str/join xml/nodes->seq (xml/xpath-fn %))
-      xp-failures (xml/xpath-fn "//svrl:failed-assert")
+(let [xp-str #(comp str/join (xml/selector %))
+      xp-failures (xml/selector ".//svrl:failed-assert")
       xp-failure-loc (xp-str "string(@location)")
       xp-failure-text (xp-str "svrl:text/text()")
       sch->error (fn [source doc failure]
                    (let [location (xp-failure-loc failure)
-                         ^XdmNode node (->> ((xml/xpath-fn location) doc)
-                                            (xml/nodes->seq)
-                                            (first))]
+                         selector (xml/selector location)
+                         ^XdmNode node (-> doc selector first)]
                      {:source source
                       :line (.getLineNumber node)
                       :column (.getColumnNumber node)
@@ -52,7 +45,7 @@
                                          :column column
                                          :type :schema
                                          :message message})))]
-  (defn validator-fn [rng-uri sch-xsl-uri]
+  (defn validator [rng sch-xsl]
     (let [source (atom nil)
           errors (atom [])
           add-error (partial rng->error source errors)
@@ -65,17 +58,22 @@
                            (.put ValidateProperty/URI_RESOLVER xml/uri-resolver))
                          (.toPropertyMap))
           validator (doto (ValidationDriver. properties)
-                      (.loadSchema (xml/->input-source rng-uri)))
-          schematron (xml/compile-xslt sch-xsl-uri)]
+                      (.loadSchema (xml/->input-source rng)))
+          schematron (xml/->xslt sch-xsl)]
       (fn [src]
         (locking validator
           (try
             (reset! source src)
+            (reset! errors [])
             (.validate validator (xml/->input-source src))
-            (let [doc (.. xml/saxon-doc-builder (build src))
-                  sch-failures (-> (xml/xslt-transform schematron doc) (xp-failures))
-                  sch-errors (map (partial sch->error src doc) sch-failures)
-                  rng-errors @errors]
-              (reset! errors [])
-              (concat rng-errors sch-errors))
-            (catch SAXParseException e)))))))
+            (let [doc (xml/->xdm src)
+                  sch-report (xml/transform schematron doc)
+                  sch-failures (xp-failures sch-report)
+                  sch-errors (map (partial sch->error src doc) sch-failures)]
+              (concat @errors sch-errors))
+            (catch SAXParseException e @errors)))))))
+
+(comment
+  (let [validate (validator (fs/file "../schema/resources/rng/DWDSWB.rng")
+                            (fs/file "../schema/resources/rng/DWDSWB.sch.xsl"))]
+    (validate (fs/file "../data/git/articles/DWDS/MWA-001/halbe Portion.xml"))))

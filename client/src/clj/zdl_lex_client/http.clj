@@ -65,10 +65,8 @@
                            :http-body (slurp err)})))))))
 
 (defn- read-xml [con]
-  (doto con
-    (.setRequestProperty "Accept" "application/xml"))
-  (-> (.getInputStream con)
-      (xml/parse)))
+  (doto con (.setRequestProperty "Accept" "application/xml"))
+  (xml/->dom (.getInputStream con)))
 
 (def get-xml (partial tx read-xml))
 

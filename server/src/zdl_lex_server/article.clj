@@ -18,8 +18,8 @@
               (recur (candidate))))))
 
 (defn new-article-xml [xml-id form pos author]
-  (let [doc (xml/parse xml-template)
-        element-by-name #(-> (.getElementsByTagName doc %) xml/nodes->seq first)]
+  (let [doc (xml/->dom xml-template)
+        element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)]
     (doto (element-by-name "Artikel")
       (.setAttribute "xml:id" xml-id)
       (.setAttribute "Zeitstempel" (t/format :iso-local-date (t/date)))

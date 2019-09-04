@@ -16,16 +16,11 @@
 
 (def issue-id->url (partial str mantis-base "/view.php?id="))
 
-(def client-instance (atom nil))
-
-(defn client []
-  (swap!
-   client-instance
-   (fn [instance]
-     (or instance
-         (let [wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
-               endpoint (str mantis-base "/api/soap/mantisconnect.php")]
-           (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))))
+(def client
+  (delay
+    (let [wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
+          endpoint (str mantis-base "/api/soap/mantisconnect.php")]
+      (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))
 
 (def ^:private authenticate
   (partial merge {:username (env :zdl-lex-mantis-auth-user "zdl-lex")
@@ -44,7 +39,7 @@
   ([op params] (results op params zip->items))
   ([op params zip->locs]
    (timbre/trace {:op op :params (dissoc params :username :password)})
-   (-> ((client) op (authenticate params))
+   (-> (@client op (authenticate params))
        (zip/xml-zip)
        (zip->locs))))
 
@@ -153,7 +148,6 @@
 
 (comment
   store/mantis-dump
-  @client-instance
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)

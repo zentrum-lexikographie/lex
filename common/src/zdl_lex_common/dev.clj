@@ -6,9 +6,9 @@
 
 (comment
   (->> (io/file "../data/git/articles/Neuartikel/Abgastechnik-E_6900838.xml")
-      (xml/parse)
+      (xml/->dom)
       (article/doc->articles)
       (map article/excerpt))
   (util/->clean-map {:a nil})
-  (-> "<root/>" xml/parse xml/serialize))
+  (-> "<root/>" xml/->dom xml/serialize))
 

@@ -72,7 +72,7 @@
     (with-open [editor-reader (.. this
                                   (getEditorAccess url editing-area)
                                   (createContentInputStream))]
-      (xml/parse editor-reader))))
+      (xml/->dom editor-reader))))
 
 (defstate instance
   :start
