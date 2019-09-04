@@ -16,7 +16,9 @@
    [etaoin "0.3.5"]
    [seesaw "1.5.0"]
    [pathetic "0.5.1"]
-   [zdl-lex-common ~version]]
+   [zdl-lex-common ~version
+    :exclusions [org.relaxng/jing
+                 org.relaxng/trang]]]
 
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]
