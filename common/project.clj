@@ -11,6 +11,7 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/core.async "0.4.490"]
                  [org.clojure/data.codec "0.1.1"]
+                 [org.clojure/tools.cli "0.4.2"]
                  [com.fzakaria/slf4j-timbre "0.3.12"]
                  [com.taoensso/timbre "4.10.0"]
                  [gremid/lucene-query "0.1.1"]
