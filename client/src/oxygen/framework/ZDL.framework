@@ -4033,6 +4033,99 @@ Autor [nocontextvalidation]</String>
 											<Boolean>false</Boolean>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>Binnenglied Verweis</String>
+										</field>
+										<field name="name">
+											<String>Binnenglied</String>
+										</field>
+										<field name="description">
+											<String>Verweis auf das Binnenglied eines Kompositums</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::Verweise</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;Verweis Typ="Binnenglied" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>Erstglied/Letztglied Verweis</String>
+										</field>
+										<field name="name">
+											<String>Erstglied/Letztglied</String>
+										</field>
+										<field name="description">
+											<String>Verweise auf Erstglied und Letztglied eines Kompositums</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>self::Verweise</String>
+													</field>
+													<field name="argValues">
+														<serializableOrderedMap>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;Verweis Typ="Erstglied" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis>
+&lt;Verweis Typ="Letztglied" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
+															</entry>
+														</serializableOrderedMap>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+										<field name="enabledInReadOnlyContext">
+											<Boolean>false</Boolean>
+										</field>
+									</action>
 								</action-array>
 							</field>
 							<field name="menubarDescriptor">
@@ -4808,12 +4901,22 @@ Autor [nocontextvalidation]</String>
 														<toolbarSeparator/>
 														<toolbarItem>
 															<field name="actionID">
-																<String>Letztglied Verweis</String>
+																<String>Erstglied/Letztglied Verweis</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
 																<String>Erstglied Verweis</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>Binnenglied Verweis</String>
+															</field>
+														</toolbarItem>
+														<toolbarItem>
+															<field name="actionID">
+																<String>Letztglied Verweis</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
