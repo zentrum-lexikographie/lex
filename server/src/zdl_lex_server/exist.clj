@@ -61,6 +61,7 @@
         element #(.createElementNS query-doc ex-ns %)]
     (-> (.appendChild query-doc
                       (doto (element "ex:query")
+                        (.setAttribute "xmlns:ex" ex-ns)
                         (.setAttribute "max" "1000000")
                         (.setAttribute "cache" "no")))
         (.appendChild (element "ex:text"))

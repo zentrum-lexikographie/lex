@@ -149,7 +149,7 @@
     (.. this (asSource)))
   (->xdm [this]
     this)
-  
+
   javax.xml.transform.Source
   (->source [this]
     this)
