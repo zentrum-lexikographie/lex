@@ -7,7 +7,8 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [clojure.string :as str])
   (:import java.net.URL))
 
 (def id (atom nil))
@@ -22,15 +23,8 @@
           (fs/file (ws/preferences-dir ws/instance) "chrome-profile")))
 
 (defstate editor->id
-  :start [
-          (bus/listen :editor-active
-                      (fn [[url active?]]
-                        (let [saved? (not (ws/modified? ws/instance url))]
-                          (set-id (if (and active? saved?) url)))))
-          (bus/listen :editor-saved
-                      (fn [[url]]
-                        (set-id url)))]
-  :stop (doseq [listener editor->id] (listener)))
+  :start (bus/listen :editor-active (fn [[url active?]] (set-id (if active? url))))
+  :stop (editor->id))
 
 (defn render [id]
   (some->>
@@ -38,11 +32,24 @@
    (str) (URL.)
    (ws/open-url ws/instance)))
 
+(defn handle-action [e]
+  (let [id @id
+        modified? (ws/modified? ws/instance (http/id->url id))]
+    (if-not modified?
+      (render id)
+      (->> ["Der aktuelle Artikel ist nicht gespeichert."
+            "Bitte speichern Sie ihre Arbeit, um eine aktuelle Vorschau zu erhalten."]
+           (str/join \newline)
+           (ui/dialog :parent (ui/to-root e)
+                      :modal? true
+                      :type :error
+                      :content)
+           (ui/pack!)
+           (ui/show!)))))
+
 (def action
-  (ui/action :name "Artikelvorschau"
-             :enabled? false
-             :icon icon/gmd-web
-             :handler (fn [_] (render @id))))
+  (ui/action :name "Artikelvorschau" :icon icon/gmd-web
+             :enabled? false :handler handle-action))
 
 (defstate action-enabled?
   :start (uib/bind id
