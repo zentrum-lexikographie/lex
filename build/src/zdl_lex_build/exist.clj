@@ -3,19 +3,22 @@
             [clojure.string :as str]
             [tick.alpha.api :as t]
             [me.raynes.fs :as fs]
-            [taoensso.timbre :as timbre]))
+            [taoensso.timbre :as timbre]
+            [zdl-lex-common.log :as log]
+            [zdl-lex-common.args :as args]))
 
 (defn sh->out [& args]
-  (timbre/info args)
+  (timbre/debugf "sh: %s" args)
   (let [{:keys [exit out] :as result} (apply shell/sh args)]
     (when-not (= 0 exit) (throw (ex-info (pr-str args) result)))
     out))
 
-(defn ssh-xml-db [& args]
-  (apply sh->out (concat ["ssh" "spock.dwds.de"] args)))
+(let [xml-db-host "spock.dwds.de"]
+  (defn ssh-xml-db [& args]
+    (apply sh->out (concat ["ssh" xml-db-host] args)))
 
-(defn rsync-xml-db [source dest]
-  (sh->out "rsync" "-az" (str "spock.dwds.de:" source) dest))
+  (defn rsync-xml-db [source dest]
+    (sh->out "rsync" "-a" (str xml-db-host ":" source) dest)))
 
 (defn parse-backup-sig [sig]
   (if-let [sig (re-find #"((?:inc)|(?:full))(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})" sig)]
@@ -43,17 +46,33 @@
        (drop-while (comp (partial = "inc") :type first)) ; drop leading incremental
        (flatten)))
 
+(def parse-args
+  (partial args/parse
+           [["-l" "--list" "Just list the imported backup sets"]
+            ["-h" "--help"]]))
+
+(defn run [& args]
+  (let [{:keys [options]} (parse-args args)
+        backups (get-active-backup-chain)]
+    (if (:list options)
+      (->> backups
+           (map (fn [{:keys [type date-time]}] (format "%s: %s" date-time type)))
+           (str/join \newline)
+           (println))
+      (let [dest-dir (doto (-> "../data/exist-db" fs/file fs/absolute fs/normalized)
+                       (fs/delete-dir)
+                       (fs/mkdirs))]
+        (doseq [backup backups
+                dir ["db/system/config/db/dwdswb"
+                     "db/system/security"
+                     "db/dwdswb/data"]
+                :let [source-base (str export-dir "/" (backup :sig) "/" dir "/")
+                      dest-base (fs/file dest-dir dir)]]
+          (fs/mkdirs dest-base)
+          (rsync-xml-db source-base (str dest-base)))))))
+
 (defn -main [& args]
   (try
-    (let [dest-dir (doto (-> "../data/exist-db" fs/file fs/absolute fs/normalized)
-                     (fs/delete-dir)
-                     (fs/mkdirs))]
-      (doseq [backup (get-active-backup-chain)
-              :let [source-base (str export-dir "/" (backup :sig))]
-              dir ["db/system/config/db/dwdswb"
-                   "db/system/security"
-                   "db/dwdswb/data"]
-              :let [dest-base (fs/file dest-dir dir)]]
-        (fs/mkdirs dest-base)
-        (rsync-xml-db (str source-base "/" dir "/") (str dest-base))))
+    (log/configure)
+    (apply run args)
     (finally (shutdown-agents))))
