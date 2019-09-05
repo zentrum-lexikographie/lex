@@ -66,10 +66,10 @@
                 dir ["db/system/config/db/dwdswb"
                      "db/system/security"
                      "db/dwdswb/data"]
-                :let [source-base (str export-dir "/" (backup :sig) "/" dir "/")
-                      dest-base (fs/file dest-dir dir)]]
+                :let [source-base (str export-dir "/" (backup :sig) "/" dir)
+                      dest-base (fs/file dest-dir (backup :sig) dir)]]
           (fs/mkdirs dest-base)
-          (rsync-xml-db source-base (str dest-base)))))))
+          (rsync-xml-db (str source-base "/") (str dest-base)))))))
 
 (defn -main [& args]
   (try
