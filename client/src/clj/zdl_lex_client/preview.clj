@@ -28,7 +28,10 @@
 
 (defn render [id]
   (some->>
-   (merge url-base {:query {:d (-> (str "dwdswb/data/" id) (url-encode))}})
+   ;; article path needs double-encoding because zwei.dwds.de simply appends it
+   ;; to eXist's REST base URL
+   {:query {:d (-> (str "dwdswb/data/" id) (url-encode))}}
+   (merge url-base)
    (str) (URL.)
    (ws/open-url ws/instance)))
 
