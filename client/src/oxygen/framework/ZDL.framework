@@ -4432,12 +4432,22 @@ Autor [nocontextvalidation]</String>
 														<menuSeparator/>
 														<menuItem>
 															<field name="actionID">
-																<String>Letztglied Verweis</String>
+																<String>Erstglied/Letztglied Verweis</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
 																<String>Erstglied Verweis</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>Binnenglied Verweis</String>
+															</field>
+														</menuItem>
+														<menuItem>
+															<field name="actionID">
+																<String>Letztglied Verweis</String>
 															</field>
 														</menuItem>
 														<menuItem>
