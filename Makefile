@@ -27,8 +27,8 @@ client/target/zdl-lex-client.jar: bin/lein common
 	cd client && ../bin/lein uberjar
 
 .PHONY: schema
-schema: bin/lein
-	make -C $@ install
+schema:
+	make -C $@ all
 
 .PHONY: clean
 clean: bin/lein

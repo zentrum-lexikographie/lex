@@ -3,8 +3,8 @@
             [me.raynes.fs :as fs]))
 
 (defn -main [& args]
-  (let [src-dir (-> "../schema/src/rnc" fs/file fs/absolute fs/normalized)
-        dest-dir (-> "../schema/resources/rng" fs/file fs/absolute fs/normalized)
+  (let [src-dir (-> "../schema/rnc" fs/file fs/absolute fs/normalized)
+        dest-dir (-> "../schema/rng" fs/file fs/absolute fs/normalized)
         rnc (fs/file src-dir "DWDSWB.rnc")
         rng (fs/file dest-dir "DWDSWB.rng")
         sch-xslt (fs/file dest-dir "DWDSWB.sch.xsl")]

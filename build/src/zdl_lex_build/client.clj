@@ -13,10 +13,10 @@
 
         source (fs/file client-base "src" "oxygen")
 
-        css-source (fs/file schema-base "resources" "css")
+        css-source (fs/file schema-base "css")
         css-target (fs/file source "framework" "css")
 
-        schema-source (fs/file schema-base "resources" "rng")
+        schema-source (fs/file schema-base "rng")
         schema-target (fs/file source "framework" "rng")
 
         target (fs/file client-base "target")
