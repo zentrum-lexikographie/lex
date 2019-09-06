@@ -25,4 +25,7 @@ ansible/venv
 client/src/oxygen/framework/css/
 client/src/oxygen/framework/rng/
 client/tmp
+
+schema/rng
+
 wikimedia/data/

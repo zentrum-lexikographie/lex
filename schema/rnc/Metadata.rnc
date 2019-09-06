@@ -1,0 +1,176 @@
+default namespace = 'http://www.dwds.de/ns/1.0'
+namespace sch = 'http://purl.oclc.org/dsdl/schematron'
+
+#####################################################################
+# Metadaten für die lexikografische Arbeit
+#####################################################################
+
+Homographenziffer = attribute hidx {
+	xsd:token { pattern = '[1-9]' }
+}
+
+Gliederungsmarke = attribute n {
+	# TODO: Punkte und Klammern entfernen
+	xsd:token {
+		pattern = '[A-Z]\.|(I|II|III|IV|V|VI)\.|[1-9][0-9]?\.|[a-z]\)|[αβγδε]\)' }
+}	
+
+#####################################################################
+# Verwaltungsinformationen für den Workflow
+#####################################################################
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Artikel"
+      sch:assert [
+        test = "@Zeitstempel"
+        'Jeder Artikel muss einen Zeitstempel haben.'
+      ]
+    ]
+  ]
+]
+
+Mitarbeiterinnen = (
+	'DWDS'
+	| 'ast'
+	| 'billes'
+	| 'brockmeier'
+	| 'brosch'
+	| 'ermakova'
+	| 'fuhrmann'
+	| 'geyken'
+	| 'goettel'
+	| 'greiser'
+	| 'grimm'
+	| 'hartz'
+	| 'herold'
+	| 'hollos'
+	| 'jzaun'
+	| 'lemnitzer'
+	| 'lmartin'
+	| 'loos'
+	| 'mschulze'
+	| 'nau'
+	| 'osterwinter'
+	| 'palmes'
+	| 'pfeiffer'
+	| 'reckenthaeler'
+	| 'roll'
+	| 'schrader'
+	| 'schroeder'
+	| 'siebel'
+	| 'solf'
+	| 'unger'
+	| 'wahrig'
+	| 'wulfert'
+)
+
+Metadaten.allgemein = (
+	attribute Zeitstempel { xsd:date }
+	, attribute Quelle {
+		'DWDS'
+		| 'DWDS_auto'
+		| 'Duden_1999'
+		| 'Duden_1999/DWDS'
+		| 'EtymWB'
+		| 'Wahrig'
+		| 'Wahrig/DWDS'
+		| 'Wahrig/ZDL'
+		| 'WDG'
+		| 'WDG/DWDS'
+		| 'WDG/ZDL'
+		| 'ZDL'
+	}
+	, attribute Autor { Mitarbeiterinnen } ?
+)
+
+Metadaten.Artikel = (
+	attribute Typ {
+		'Vollartikel'
+		| 'Basisartikel'
+		| 'Basisartikel-D'
+		| 'Verweisartikel'
+		| 'Minimalartikel'
+	}
+	, attribute Redakteur { Mitarbeiterinnen } ?
+	, attribute Status {
+		'Artikelrumpf'
+		| 'wird_Vollartikel'
+		| 'wird_gestrichen'
+		| 'Lex-in_Arbeit'
+		| 'Lex-zur_Abgabe'
+		| 'Lex-kommentiert'
+		| 'Lex-Wiedervorlage'
+		| 'Lex-zurückgestellt'
+		| 'Red-0'
+		| 'Red-1'
+		| 'Red-2'
+		| 'Red-2-zurückgewiesen'
+		| 'Red-ex' # Expertenreview
+		| 'Red-f'
+		| 'Red-f-zurückgewiesen'
+	}
+	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ?
+	, attribute Erstellungsdatum { xsd:date }
+	, attribute Empfehlung { 'ja' | 'nein' } ? # TODO: mandatory
+	, attribute Tranche {
+	    '45k-001'
+	    | '45k-002'
+	    | '45k-003'
+	    | '45k-004'
+	    | '45k-005'
+	    | '45k-006'
+	    | '45k-007'
+	    | '45k-008'
+	    | '45k-009'
+	    | '45k-010'
+	    | '45k-011'
+	    | '45k-012'
+	    | '45k-013'
+	    | '45k-014'
+	    | 'Adjektive'
+	    | 'Adverben'
+	    | 'Architektur'
+	    | 'Bildung'
+	    | 'Biologie'
+	    | 'Diverse-001'
+	    | 'Diverse-002'
+	    | 'Diverse-003'
+	    | 'Diverse-004'
+	    | 'Duden_1999/DWDS'
+	    | 'Ernährung'
+	    | 'Geo'
+	    | 'Gesellschaft'
+	    | 'IT-001'
+	    | 'IT-002'
+	    | 'Kommunikation'
+	    | 'Kunst-001'
+	    | 'Kunst-002'
+	    | 'Medien'
+	    | 'Mix'
+	    | 'Movierung'
+	    | 'MWA'
+	    | 'MWA-NP'
+	    | 'MWA-N-PP'
+	    | 'Philosophie'
+	    | 'Politik-001'
+	    | 'Politik-002'
+	    | 'Probeartikel'
+	    | 'Recht-001'
+	    | 'Recht-002'
+	    | 'Recht-003'
+	    | 'Recht-004'
+	    | 'Religion'
+	    | 'Spiel'
+	    | 'TV'
+	    | 'Verben'
+	    | 'Verkehr'
+	    | 'WDG-Überarbeitung'
+	    | 'Wahrig/DWDS'
+	    | 'Wahrig/ZDL'
+	} ? # TODO: mandatory?
+)
+
+Metadaten.Lesarten-ID = xsd:ID # { pattern = 'S_[a-z]_\d+(_\d+)?' } # (relaxed)
+Metadaten.Artikel-ID = xsd:ID # { pattern = 'E_[a-z]_\d+(_\d+)?' } # (relaxed)

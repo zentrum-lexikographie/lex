@@ -28,9 +28,7 @@ client/target/zdl-lex-client.jar: bin/lein common
 
 .PHONY: schema
 schema: bin/lein
-	git submodule update --init --recursive $@
 	make -C $@ install
-#	cd build && ../bin/lein run -m zdl-lex-build.schema
 
 .PHONY: clean
 clean: bin/lein
