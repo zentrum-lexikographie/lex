@@ -20,8 +20,11 @@
       rng->sch (resource->xslt "schematron/ExtractSchFromRNG-2.xsl")
       sch->sch-xslt (resource->xslt "schematron/iso_svrl_for_xslt2.xsl")]
   (defn rng->sch-xslt [rng sch-xslt]
-    (-> (xml/transform rng->sch rng)
-        (xml/transform sch->sch-xslt sch-xslt))))
+    (let [sch (fs/temp-file "zdl-lex-common." ".sch")]
+      (try
+        (xml/transform rng->sch rng sch)
+        (xml/transform sch->sch-xslt sch sch-xslt)
+        (finally (fs/delete sch))))))
 
 (let [xp-str #(comp str/join (xml/selector %))
       xp-failures (xml/selector ".//svrl:failed-assert")
