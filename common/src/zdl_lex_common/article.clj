@@ -29,22 +29,32 @@
   "Returns non-empty, whitespace-normalized string."
   [s] (not-empty (normalize-space s)))
 
-(defn- texts->seq 
-  "Given an xpath fn and a evaluation context, returns a seq of distinct
-   text values."
-  [xpath ctx]
-  (->> (seq (xpath ctx))
-       (map (fn [^XdmItem i] (.getStringValue i)))
-       (map text)
-       (remove nil?)
-       (distinct)
-       (seq)))
+(defn- values->seq 
+  "Given an xpath selector and a evaluation context, returns a seq of distinct
+   values, extracted from the selected items via `str-fn`."
+  [str-fn selector ctx]
+  (->> (seq (selector ctx)) (map str-fn) (remove nil?) (distinct) (seq)))
+
+(defn- item->text [^XdmItem i]
+  (text (.getStringValue i)))
 
 (defn- texts-fn
   "Create a fn for the given xpath expression, which returns distinct
    text values."
   [xp-expr]
-  (partial texts->seq (xml/selector xp-expr)))
+  (partial values->seq item->text (xml/selector xp-expr)))
+
+(let [hidx (comp text str (xml/selector "@hidx/string()"))]
+  (defn- ref-id [^XdmItem ref]
+    (->> [(item->text ref) (hidx ref)]
+         (remove nil?)
+         (str/join \#))))
+
+(defn- ref-ids-fn
+  "Create a fn for the given xpath expression, which returns distinct
+   text values."
+  [xp-expr]
+  (partial values->seq ref-id (xml/selector xp-expr)))
 
 (defn- attrs->map
   "Returns a mapping of tagname to distinct values for the given attribute
@@ -99,6 +109,15 @@
     "The number of days since the UNIX epoch for a given date."
     (.between ChronoUnit/DAYS unix-epoch date)))
 
+(let [refs (xml/selector ".//d:Verweis")
+      ref-id (comp first (ref-ids-fn "./d:Ziellemma"))
+      sense (comp first (texts-fn "./d:Ziellesart"))]
+  (defn references
+    "Extracts all references from an article"
+    [article]
+    (for [ref (refs article)]
+      (->clean-map {:ref-id (ref-id ref) :sense (sense ref)}))))
+
 (let [article-attr #(some-> (:Artikel %) (first))
       type (comp text str (xml/selector "@Typ/string()"))
       tranche (comp text str (xml/selector "@Tranche/string()"))
@@ -108,6 +127,7 @@
       sources (attrs-fn "Quelle")
       timestamps (comp past-timestamps (attrs-fn "Zeitstempel"))
       forms (texts-fn "d:Formangabe/d:Schreibung")
+      ref-ids (ref-ids-fn "d:Formangabe/d:Schreibung")
       pos (texts-fn "d:Formangabe/d:Grammatik/d:Wortklasse")
       definitions (texts-fn ".//d:Definition")
       senses (texts-fn ".//d:Bedeutungsebene")
@@ -115,8 +135,7 @@
       styles (texts-fn ".//d:Stilebene")
       colouring (texts-fn ".//d:Stilfaerbung")
       area (texts-fn ".//d:Sprachraum")
-      morphological-rels (texts-fn ".//d:Verweise/d:Verweis/d:Ziellemma")
-      sense-rels (texts-fn ".//d:Lesart/d:Verweise/d:Verweis/d:Ziellemma")]
+      references (comp seq references)]
   (defn excerpt
     "Extracts key data from an article."
     [article]
@@ -142,6 +161,7 @@
         :source (article-attr sources)
         :sources sources
         :forms (forms article)
+        :ref-ids (ref-ids article)
         :pos (pos article)
         :definitions (definitions article)
         :senses (senses article)
@@ -149,5 +169,5 @@
         :styles (styles article)
         :colouring (colouring article)
         :area (area article)
-        :morphological-rels (morphological-rels article)
-        :sense-rels (sense-rels article)}))))
+        :references (references article)}))))
+

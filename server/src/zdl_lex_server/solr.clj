@@ -79,7 +79,9 @@
                     :time (str (System/currentTimeMillis))
                     :xml-descendent-path id
                     :abstract (pr-str abstract)}
-          main-fields (dissoc excerpt :timestamps :authors :editors :sources)
+          main-fields (dissoc excerpt
+                              :timestamps :authors :editors :sources
+                              :references :ref-ids)
           fields (->> [(map basic-field preamble)
                        (map basic-field main-fields)
                        (attr-field "timestamps" "dts" (excerpt :timestamps))
@@ -388,13 +390,15 @@
      (< 0))))
 
 (comment
-  (for [f (take 10 (drop 10000 (store/article-files)))
-        :let [id (store/file->id f)]
-        ;;:when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
-        a (-> (xml/->dom f) (article/doc->articles))
-        :let [ex (article/excerpt a)]]
-    (do
-      (article->fields id ex)))
+  (->> (for [f (store/article-files)
+             :let [id (store/file->id f)]
+             ;;:when (= id "DWDS/002-Minimalartikel/Ausbaustufe.xml")
+             a (-> (xml/->dom f) (article/doc->articles))
+             :let [ex (article/excerpt a)]
+             :when (and (not (= "WDG" (:source ex))) (:references ex))]
+         (do
+           (article->fields id ex)))
+       (take 10))
   (xml/serialize
    (query->delete-xml [(format "time_l:[* TO %s}" "now")]))
   (time
