@@ -1,5 +1,6 @@
 (ns zdl-lex-client.preview
-  (:require [cemerick.url :refer [url]]
+  (:require [cemerick.url :refer [url url-encode]]
+            [clojure.string :as str]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
@@ -7,8 +8,7 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as ws]
-            [clojure.string :as str])
+            [zdl-lex-client.workspace :as ws])
   (:import java.net.URL))
 
 (def id (atom nil))
@@ -28,7 +28,7 @@
 
 (defn render [id]
   (some->>
-   (merge url-base {:query {:d (str "dwdswb/data/" id)}})
+   (merge url-base {:query {:d (-> (str "dwdswb/data/" id) (url-encode))}})
    (str) (URL.)
    (ws/open-url ws/instance)))
 
@@ -60,4 +60,4 @@
 (comment
   (mount/start #'ws/instance #'remove-chrome-profile)
   (mount/stop)
-  (render "Neuartikel-004/Lokalgesprach-E_7637106.xml"))
+  (render "DWDS/MWA-001/heisser Draht.xml"))
