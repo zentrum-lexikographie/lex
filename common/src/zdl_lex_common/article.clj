@@ -52,7 +52,7 @@
 
 (defn- ref-ids-fn
   "Create a fn for the given xpath expression, which returns distinct
-   text values."
+   reference identifiers."
   [xp-expr]
   (partial values->seq ref-id (xml/selector xp-expr)))
 
