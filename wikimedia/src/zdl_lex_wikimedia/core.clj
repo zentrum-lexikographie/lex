@@ -94,19 +94,18 @@
   (time (count (dump/pages wiktionary-de)))
 
   (->> (dump/pages wiktionary-de)
-       (drop 2000)
-       (take 1000)
+       (drop 1000)
        ;;(filter (comp #{"Achtung"} :title))
        (pmap #(merge % (parse %)))
        (map #(dissoc % :content))
        (mapcat :entries)
        (mapcat :types)
-       (mapcat (comp (partial take 1) :type))
-       (into #{})
-       (sort)
+       #_(mapcat (comp (partial take 1) :type))
+       #_(into #{})
+       #_(sort)
        ;;(filter (comp (partial some #{"Deutsch"}) (partial map :lang) :entries))
        ;;(filter (comp (partial < 1) count :entries))
-       (take 100)))
+       (take 10)))
 
 (defn -main [& dumps]
   (doseq [dump dumps]
