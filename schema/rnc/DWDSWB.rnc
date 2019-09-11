@@ -43,7 +43,6 @@ start = element DWDS {
 		attribute xml:id { Metadaten.Artikel-ID }
 		, Metadaten.allgemein
 		, Metadaten.Artikel
-		, attribute Wortfeld { token } ? # Lexikonet concept, should be under //Lesart
 		# lexikografische Basisstruktur der Artikel
 		, Formangabe +
 		, morphologische_Verweise + # getrennte morph. Analysen
@@ -59,6 +58,7 @@ start = element DWDS {
 
 Lesartangabe = element Lesart {
 	Metadaten.allgemein ?
+	, attribute Wortfeld { token } ? # Lexikonet concept
 	, attribute class { 'invisible' } ?
 	, attribute xml:id { Metadaten.Lesarten-ID } ? # TODO: obligatorisch machen
 	, Gliederungsmarke ?
