@@ -32,7 +32,6 @@ schema:
 
 .PHONY: clean
 clean: bin/lein
-	$(RM) -r chrome-driver
 	make -C schema clean
 	cd common && ../bin/lein clean
 	cd client && ../bin/lein clean
@@ -51,12 +50,13 @@ oxygen: client
 			test-project.xpr
 
 venv:
-	virtualenv venv && source venv/bin/activate &&\
+	python3 -m venv venv && source venv/bin/activate &&\
 		pip install -r requirements.txt
 
 .PHONY: deploy
 deploy:
 	make -C ansible deploy
+
 .PHONY: spock-tunnel
 spock-tunnel:
 	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
