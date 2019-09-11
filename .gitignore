@@ -20,12 +20,13 @@ config.local.edn
 ansible/.vagrant
 ansible/*.retry
 ansible/roles/*.*
-ansible/venv
 
 client/src/oxygen/framework/css/
 client/src/oxygen/framework/rng/
 client/tmp
 
 schema/rng
+
+venv/
 
 wikimedia/data/

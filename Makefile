@@ -50,6 +50,10 @@ oxygen: client
 			ro.sync.exml.Oxygen\
 			test-project.xpr
 
+venv:
+	virtualenv venv && source venv/bin/activate &&\
+		pip install -r requirements.txt
+
 .PHONY: deploy
 deploy:
 	make -C ansible deploy
