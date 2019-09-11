@@ -18,6 +18,14 @@
     group: "{{ existdb_group }}"
     mode: "0770"
 
+- name: Setup installer directory
+  file:
+    path: "{{ existdb_installer_base }}"
+    state: directory
+    owner: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+    mode: "0770"
+
 - name: Download installer
   get_url:
     url: "{{ existdb_download_url }}"
@@ -33,12 +41,16 @@
     owner: "{{ existdb_user }}"
     group: "{{ existdb_group }}"
     mode: "0400"
-  register: installer_config
+
+- name: Check for data directory
+  stat:
+      path: "{{ existdb_data_dir }}"
+  register: data_dir
 
 - name: Install
   command: >-
     java -jar {{ existdb_installer_path }} -options {{ existdb_installer_options }}
-  when: "(installer_download is changed) or (installer_config is changed)"
+  when: "installer_download is changed"
   become: True
   become_user: "{{ existdb_user }}"
   register: installation
@@ -47,7 +59,7 @@
   file:
     path: "{{ existdb_data_dir }}"
     state: absent
-  register: installation is changed
+  when: "installation is changed"
 
 - name: Setup database
   command: >-
@@ -56,7 +68,16 @@
     chdir: "{{ existdb_home }}"
   become: True
   become_user: "{{ existdb_user }}"
-  when: installation is changed
+  when: "installation is changed"
+
+- name: Configure eXist-db
+  template:
+    src: "conf.xml"
+    dest: "{{ existdb_home }}/conf.xml"
+    owner: "{{ existdb_user }}"
+    group: "{{ existdb_group }}"
+    mode: "0660"
+  notify: restart existdb
 
 - name: Install service
   shell: >-
@@ -65,5 +86,5 @@
     WRAPPER_UNATTENDED=1
     WRAPPER_USE_SYSTEMD=1
     {{ existdb_home }}/tools/yajsw/bin/installDaemon.sh
-  when: existdb_install_service
+  when: "(installation is changed) and existdb_install_service"
   notify: restart existdb
