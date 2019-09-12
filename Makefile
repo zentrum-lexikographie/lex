@@ -61,6 +61,10 @@ deploy:
 spock-tunnel:
 	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v spock.dwds.de
 
+.PHONY: gorkon-tunnel
+gorkon-tunnel:
+	ssh -N -L 8080:localhost:8080 -o "ServerAliveInterval 60" -v gorkon.bbaw.de
+
 .PHONY: new-version
 new-version:
 	echo -n `date +%Y%m.%d.%H` >VERSION
