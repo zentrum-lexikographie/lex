@@ -107,7 +107,7 @@
                   cacheShrinkThreshold="-1"
                   doc-ids="default"
                   minDiskSpace="1024M"
-                  files="webapp/WEB-INF/data">
+                  files="{{ existdb_data_dir }}">
 
         <!--
             Startup Triggers are executed before the database becomes generally available
@@ -281,7 +281,7 @@
                 sync-on-commit="no"
                 force-restart="no"
                 consistency-check="yes"
-                journal-dir="webapp/WEB-INF/data"/>
+                journal-dir="{{ existdb_data_dir }}"/>
 
         <!--
             This is the global configuration for the query watchdog. The 
@@ -503,8 +503,9 @@
         <job type="system" name="backup" 
             class="org.exist.storage.ConsistencyCheckTask"
             cron-trigger="{{ existdb_backup_cron_trigger }}">
-            <parameter name="output" value="export"/>
+            <parameter name="output" value="{{ existdb_export_dir }}"/>
             <parameter name="backup" value="yes"/>
+            <parameter name="zip" value="no"/>
             <parameter name="incremental" value="no"/>
             <parameter name="incremental-check" value="no"/>
             <parameter name="max" value="2"/>

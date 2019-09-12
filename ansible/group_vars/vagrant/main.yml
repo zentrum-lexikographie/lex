@@ -1,4 +1,10 @@
 ---
+firewall_allowed_tcp_ports:
+  - "22"
+  - "80"
+  - "443"
+  - "8080" # eXist-db
+
 security_autoupdate_enabled: false
 security_fail2ban_enabled: false
 
@@ -7,3 +13,7 @@ apache_global_vhost_settings: |
   EnableSendfile Off
 
 #dav_root: "/vagrant/data/git/articles"
+
+java_packages:
+  - openjdk-11-jdk
+

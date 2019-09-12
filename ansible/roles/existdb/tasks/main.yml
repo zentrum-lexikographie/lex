@@ -10,21 +10,18 @@
     home: "{{ existdb_home }}"
     shell: "{{ existdb_shell }}"
 
-- name: Setup home directory
+- name: Setup directories
   file:
-    path: "{{ existdb_home }}"
+    path: "{{ item }}"
     state: directory
     owner: "{{ existdb_user }}"
     group: "{{ existdb_group }}"
     mode: "0770"
-
-- name: Setup installer directory
-  file:
-    path: "{{ existdb_installer_base }}"
-    state: directory
-    owner: "{{ existdb_user }}"
-    group: "{{ existdb_group }}"
-    mode: "0770"
+  with_items:
+    - "{{ existdb_home }}"
+    - "{{ existdb_data_dir }}"
+    - "{{ existdb_export_dir }}"
+    - "{{ existdb_installer_base }}"
 
 - name: Download installer
   get_url:
@@ -42,11 +39,6 @@
     group: "{{ existdb_group }}"
     mode: "0400"
 
-- name: Check for data directory
-  stat:
-      path: "{{ existdb_data_dir }}"
-  register: data_dir
-
 - name: Install
   command: >-
     java -jar {{ existdb_installer_path }} -options {{ existdb_installer_options }}
@@ -54,21 +46,6 @@
   become: True
   become_user: "{{ existdb_user }}"
   register: installation
-
-- name: Reset data directory
-  file:
-    path: "{{ existdb_data_dir }}"
-    state: absent
-  when: "installation is changed"
-
-- name: Setup database
-  command: >-
-    bin/setup.sh pass:{{ existdb_admin_password }}
-  args:
-    chdir: "{{ existdb_home }}"
-  become: True
-  become_user: "{{ existdb_user }}"
-  when: "installation is changed"
 
 - name: Configure eXist-db
   template:
@@ -79,6 +56,22 @@
     mode: "0660"
   notify: restart existdb
 
+- name: Setup database
+  command: >-
+    bin/setup.sh pass:{{ existdb_admin_password }}
+  args:
+    chdir: "{{ existdb_home }}"
+  become: True
+  become_user: "{{ existdb_user }}"
+  when: "installation is changed"
+
+- name: Configure memory settings in wrapper config
+  lineinfile:
+    path: "{{ existdb_wrapper_conf }}"
+    regexp: "^wrapper\\.java\\.maxmemory="
+    line: "wrapper.java.maxmemory={{ existdb_max_memory }}"
+  notify: restart existdb
+  
 - name: Install service
   shell: >-
     EXIST_HOME={{ existdb_home }}
