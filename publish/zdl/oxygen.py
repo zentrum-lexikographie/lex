@@ -1,12 +1,11 @@
 #! /usr/bin/env python
-#encoding: utf-8
 
 import datetime, pytz
-import lxml.etree as ET
+import lxml.etree as et
 
 def add_comment(element, comment, author='automatically inserted'):
-    start = ET.ProcessingInstruction('oxy_comment_start')
-    end = ET.ProcessingInstruction('oxy_comment_end')
+    start = et.ProcessingInstruction('oxy_comment_start')
+    end = et.ProcessingInstruction('oxy_comment_end')
     start.text = 'author="%s" timestamp="%s" comment="%s"' % (
             author,
             datetime.datetime.now(pytz.utc).strftime('%Y%m%dT%H%M%S+0000'),

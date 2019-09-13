@@ -11,7 +11,9 @@ for detailed information on the complete redaction process.
 
 import unicodedata, re
 import lxml.etree as ET
-import oxygen, ausnahmen
+
+from .oxygen import add_comment
+from .exceptions import TOKENIZATION_EXCEPTIONS
 
 class CheckerInfrastructure(object):
     '''
@@ -76,8 +78,8 @@ class CheckerInfrastructure(object):
             if comment in unicode(previous):
                 return # already commented
             previous = previous.getprevious()
-        
-        oxygen.add_comment(current, comment, author='Redaktion2')
+
+        add_comment(current, comment, author='Redaktion2')
 
     def reset(self):
         self.no_objections = True
@@ -330,8 +332,6 @@ class StructureChecker(CheckerInfrastructure):
 class TypographyChecker(CheckerInfrastructure):
     '''
     '''
-
-    TOKENIZATION_EXCEPTIONS = ausnahmen.TOKENIZATION_EXCEPTIONS
 
     # note: there's no decomposition for ø
     _LATIN_CHARS = u'abcdefghijklmnopqrstuvwxyzßABCDEFGHIJKLMNOPQRSTUVWXYZÆæĐđŁłŒœØø€£ðʒ'

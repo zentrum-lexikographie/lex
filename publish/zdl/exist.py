@@ -13,7 +13,6 @@ class ExistDB(object):
             'dwds': 'http://www.dwds.de/ns/1.0',
             'xml': 'http://www.w3.org/XML/1998/namespace',
     }
-    #LOCK_COMMAND = '<?xml version="1.0"?><lockinfo xmlns="DAV:"><lockscope><exclusive/></lockscope><locktype><write/></locktype><owner>exist.py client</owner></lockinfo>'
     LOCK_COMMAND = '<?xml version="1.0"?><lockinfo xmlns="DAV:"><lockscope><exclusive/></lockscope><locktype><write/></locktype><owner>exist.py client</owner></lockinfo>'
     XQuery_PREAMBLE = '''xquery version "3.0";
 declare namespace dwds="http://www.dwds.de/ns/1.0";

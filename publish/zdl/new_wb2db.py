@@ -9,7 +9,8 @@ import argparse, logging
 import collections, unicodedata, datetime
 import MySQLdb, _mysql_exceptions
 import lxml.etree as et
-import exist
+
+from .exist import ExistDB
 
 def text_only(element, strip=True):
     text = ''.join(et.ETXPath('.//text()')(element))
@@ -44,7 +45,7 @@ class Dictionary(object):
                 for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(tree.getroot()):
                     yield entry
         else:
-            db = exist.ExistDB('http://spock.dwds.de:8080/exist')
+            db = ExistDB('http://spock.dwds.de:8080/exist')
             for resource_name in db.__iter__(dirname='/dwdswb/data'):
                 if '=' in resource_name:
                     logging.warning('Bogus resource name: %s', resource_name)

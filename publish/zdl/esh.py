@@ -6,7 +6,9 @@ import datetime, pytz
 from requests.exceptions import ReadTimeout, HTTPError, ConnectionError
 import getpass, readline # readline modifies raw_input()
 import lxml.etree as et
-import exist, redaktion
+
+from .exist import ExistDB
+from .qa import StructureChecker, TypographyChecker
 
 
 class ExistShell(object):
@@ -453,8 +455,8 @@ help        shows a command overview
         
         query = u'for $a in collection("dwdswb")//dwds:Artikel[@Status="Red-1"] return fn:base-uri($a)'
         #resolver = LinkChecker(lemma_file=arguments.lemma_file)
-        typographer = redaktion.TypographyChecker()
-        restructurer = redaktion.StructureChecker()
+        typographer = TypographyChecker()
+        restructurer = StructureChecker()
 
         for metadata in self.db.xquery(query):
             name = metadata.text
@@ -541,7 +543,7 @@ help        shows a command overview
             password = getpass.getpass('password: ')
             auth = (username, password)
         
-        self.db = exist.ExistDB(api, auth)
+        self.db = ExistDB(api, auth)
         self.api = api
         self.rel_path = '/db'
         self.debug = False
