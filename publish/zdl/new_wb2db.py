@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# encoding: utf-8
-# @author: herold
 
-'''Fill the DWDSWB database with XML+Metadata for dictionary entries.
+'''
+Fill the DWDSWB database with XML+Metadata for dictionary entries.
 '''
 
 import argparse, logging
@@ -11,6 +10,7 @@ import MySQLdb, _mysql_exceptions
 import lxml.etree as et
 
 from .exist import ExistDB
+
 
 def text_only(element, strip=True):
     text = ''.join(et.ETXPath('.//text()')(element))
@@ -30,12 +30,13 @@ class Dictionary(object):
     def __iter__(self):
         '''Iterate over entries, a dictionary's basic building blocks.
         '''
-        parser = et.XMLParser(load_dtd=True,
-                remove_comments=True,
-                remove_pis=True,
-                resolve_entities=True
+        parser = et.XMLParser(
+            load_dtd=True,
+            remove_comments=True,
+            remove_pis=True,
+            resolve_entities=True
         )
-        
+
         # it doesn't make sense to use both local and remote articles
         # so we ignore local files if -r is given on the command line
         if not self.remote:
@@ -54,7 +55,6 @@ class Dictionary(object):
                     for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(root):
                         yield entry
 
-
     def set_version(self, cursor, version):
         '''
         '''
@@ -65,7 +65,7 @@ class Dictionary(object):
 
             logging.info('Setting version information: %s', version)
             cursor.execute('DROP FUNCTION IF EXISTS dictionary_version;')
-            cursor.execute('CREATE FUNCTION dictionary_version () RETURNS CHAR(%i) RETURN "%s";' % (len(version), version) )
+            cursor.execute('CREATE FUNCTION dictionary_version () RETURNS CHAR(%i) RETURN "%s";' % (len(version), version))
 
     def create_tables(self, cursor):
         '''
@@ -109,7 +109,7 @@ class Dictionary(object):
                         type VARCHAR(20) COLLATE utf8_unicode_ci NOT NULL,
                         KEY article1 (article1, article2, type),
                         KEY article2 (article2, article1, type)
-                        ) ENGINE=MyISAM;                
+                        ) ENGINE=MyISAM;
                 ''')
 
     def prune(self, article):
@@ -161,10 +161,9 @@ class DWDSWB(Dictionary):
         for element in et.ETXPath('.//*[@Originaltext]')(article):
             element.attrib.pop('Originaltext')
 
-
     def is_publishable(self, article):
         # see http://odo.dwds.de/mantis/view.php?id=30407
-        #return article.get('Status') in ('Red-f')
+        # return article.get('Status') in ('Red-f')
         return article.get('Status') in ('Red-f', 'Red-2', 'Lex-zur_Abgabe', u'Red-f-zurückgewiesen')
 
 
@@ -174,7 +173,7 @@ class EtymWB(Dictionary):
 
     DATABASE_NAME = 'etymwb_beta'
     ENTRY_ELEMENT = et.QName('http://www.tei-c.org/ns/1.0', 'entry')
-    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}orth' # all embedded forms
+    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}orth'  # all embedded forms
     USE_RELATIONS = False
 
     def __init__(self, file_names):
@@ -208,7 +207,7 @@ class DWB1(Dictionary):
 
     DATABASE_NAME = 'dwb1'
     ENTRY_ELEMENT = et.QName('http://www.tei-c.org/ns/1.0', 'entry')
-    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}orth' # all embedded forms
+    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}orth'  # all embedded forms
     USE_RELATIONS = False
 
     def __init__(self, file_names):
@@ -238,7 +237,7 @@ class Bucket(object):
         '''
         if len(self.data) >= self.max_size:
             self.flush()
-        if not data in self.data:
+        if data not in self.data:
             self.data.add(data)
 
     def flush(self):
@@ -266,7 +265,7 @@ if __name__ == '__main__':
     arguments = argument_parser.parse_args()
 
     # set up logging
-    if arguments.verbose == True:
+    if arguments.verbose is True:
         logging.basicConfig(format='%(message)s', level=logging.INFO)
     else:
         logging.basicConfig(format='%(message)s', level=logging.WARNING)
@@ -285,15 +284,12 @@ if __name__ == '__main__':
     cursor = None
     if arguments.write:
         database_credentials = {
-                'host': arguments.host,
-                'user': arguments.user,
-                'passwd': arguments.passwd,
+            'host': arguments.host,
+            'user': arguments.user,
+            'passwd': arguments.passwd,
         }
         try:
-            db = MySQLdb.connect(db=dictionary.DATABASE_NAME,
-#                    use_unicode=True,
-#                    charset='utf8',
-                    **database_credentials)
+            db = MySQLdb.connect(db=dictionary.DATABASE_NAME, **database_credentials)
             db.set_character_set('utf8')
             cursor = db.cursor()
             logging.debug('Using %s as DB cursor.', cursor)
@@ -305,12 +301,11 @@ if __name__ == '__main__':
             cursor.execute('SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";')
             dictionary.create_tables(cursor)
             dictionary.set_version(cursor, arguments.version)
-        except _mysql_exceptions.OperationalError, message:
-            logging.critical(message)
+        except _mysql_exceptions.OperationalError as error:
+            logging.critical(error)
             exit(-1)
     else:
         logging.warning('I will NOT actually write to DB.')
-
 
     # relations can only be heuristically determined based on lemmas at present
     lemma_index = collections.defaultdict(list)
@@ -322,21 +317,19 @@ if __name__ == '__main__':
     bucket_relation = Bucket('relation', cursor, 'INSERT INTO relation VALUES (%s, %s, %s);', max_size=50000)
 
     for index, article in enumerate(dictionary, 1):
-        
+
         dictionary.prune(article)
 
         if dictionary.is_publishable(article):
-            
+
             bucket_article.update(
-                    (
-                        index,
-                        article.get('Typ') or article.get('type'),
-                        article.get('Status'),
-                        article.get('Quelle'),
-                        True if article.get('Empfehlung') == 'ja' else False,
-                        article.get('Zeitstempel') or '1000-01-01',
-                        et.tostring(article) if article.get('Status') in ('Red-f', None) else '',
-                    )
+                (index,
+                 article.get('Typ') or article.get('type'),
+                 article.get('Status'),
+                 article.get('Quelle'),
+                 True if article.get('Empfehlung') == 'ja' else False,
+                 article.get('Zeitstempel') or '1000-01-01',
+                 et.tostring(article) if article.get('Status') in ('Red-f', None) else '')
             )
 
             # extract lemmas
@@ -345,33 +338,30 @@ if __name__ == '__main__':
                 htype = lemma.get('Typ') or 'AR_G'
                 # splitting and unicode mangling is needed for TEI dictionaries'
                 # use of orth@expand and the text compression present in headwords
-                headwords = [ headword.replace('_', ' ')
-                        for headword in (unicode(lemma.get('expand') or u'').split())
+                headwords = [
+                    headword.replace('_', ' ')
+                    for headword in (str(lemma.get('expand') or u'').split())
                 ]
                 if not headwords:
-                    headwords = [ unicode(text_only(lemma)) or u'', ]
+                    headwords = [str(text_only(lemma)) or u'']
                 for headword in headwords:
-                    headword = u''.join( [ character
+                    headword = u''.join([
+                        character
                         for character in unicodedata.normalize('NFC', headword)
-                        if unicodedata.category(character) in
-                                ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', )
-                                or character == u'’'
-                    ] ).replace(u'’', "'")
+                        if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
+                    ]).replace(u'’', "'")
                     if headword and not (headword, hidx, htype, index) in bucket_lemma.data:
-                        bucket_lemma.update(
-                                (headword, hidx, htype, index, )
-                        )
-                        lemma_index[ (headword, hidx) ].append(index)
-        
+                        bucket_lemma.update((headword, hidx, htype, index, ))
+                        lemma_index[(headword, hidx)].append(index)
+
             # extract morphological relations (first pass)
             if dictionary.USE_RELATIONS and article.get('Status') == 'Red-f':
                 for link in article.iterfind(dictionary.RELATION_PATH):
                     hidx = link[0].get('hidx')
-                    relation_index[ (index, link.get('Typ')) ].append( ( text_only(link[0]).replace(u'’', "'"), hidx) )
+                    relation_index[(index, link.get('Typ'))].append((text_only(link[0]).replace(u'’', "'"), hidx))
 
-        else: # not(dictionary.is_publishable(article))
-            logging.debug('Cannot publish article "%s"',
-                    dictionary.first_lemma(article))
+        else:  # not(dictionary.is_publishable(article))
+            logging.debug('Cannot publish article "%s"', dictionary.first_lemma(article))
 
     else:
         # flush the remaining (possible) half-full buckets
@@ -386,14 +376,15 @@ if __name__ == '__main__':
     if dictionary.USE_RELATIONS:
         for (article1, relation_type), targets in relation_index.iteritems():
             for target in targets:
-                article2 = lemma_index[ target ]
+                article2 = lemma_index[target]
                 if not article2:
-                    logging.warning('Cannot find %s word lemma "%s" (%s) in lemma index, skipping.',
-                            'single' if len(target[0].split()) <= 1 else 'multi',
-                            target[0],
-                            target[1],
+                    logging.warning(
+                        'Cannot find %s word lemma "%s" (%s) in lemma index, skipping.',
+                        'single' if len(target[0].split()) <= 1 else 'multi',
+                        target[0],
+                        target[1],
                     )
-                else: 
-                    bucket_relation.update( (article1, article2[0], relation_type) )
+                else:
+                    bucket_relation.update((article1, article2[0], relation_type))
         else:
             bucket_relation.flush()
