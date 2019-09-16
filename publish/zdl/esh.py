@@ -137,7 +137,7 @@ help        shows a command overview''')
         for count, result in enumerate(self.db.xquery(query), 1):
             print(et.tostring(result))
         else:
-            print(count, 'hit' if count == 1 else 'hits', end=' ')
+            print(count, ('hit' if count == 1 else 'hits'), end=' ')
             print('in %0.3f sec' % (time.time() - start_time))
 
     def _existing_collections_and_resources(self, path='', resources=True):
