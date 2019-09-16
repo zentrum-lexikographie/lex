@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 '''
 Fill the DWDSWB database with XML+Metadata for dictionary entries.

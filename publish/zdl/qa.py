@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 '''
 This script does the automatic steps for the redaction process step 2
@@ -10,7 +10,7 @@ for detailed information on the complete redaction process.
 '''
 
 import unicodedata, re
-import lxml.etree as ET
+import lxml.etree as et
 
 from .oxygen import add_comment
 from .exceptions import TOKENIZATION_EXCEPTIONS
@@ -20,7 +20,7 @@ class CheckerInfrastructure(object):
     '''
     '''
 
-    TAG = {t: ET.QName('http://www.dwds.de/ns/1.0', t)
+    TAG = {t: et.QName('http://www.dwds.de/ns/1.0', t)
            for t in ('DWDS', 'Artikel',
                      'Formangabe', 'Schreibung', 'Aussprache',
                      'Grammatik', 'Wortklasse',
@@ -34,8 +34,8 @@ class CheckerInfrastructure(object):
                      'Kompetenzbeispiel',
                      'Belegtext', 'Streichung', 'Loeschung', 'Fundstelle',
                      'Diasystematik', )}
-    TAG['id'] = ET.QName('http://www.w3.org/XML/1998/namespace', 'id')
-    TAG['xml:space'] = ET.QName('http://www.w3.org/XML/1998/namespace',
+    TAG['id'] = et.QName('http://www.w3.org/XML/1998/namespace', 'id')
+    TAG['xml:space'] = et.QName('http://www.w3.org/XML/1998/namespace',
                                 'space')
 
     CANONICAL_PI_LOCATIONS = (
@@ -209,7 +209,7 @@ class StructureChecker(CheckerInfrastructure):
         '''
         '''
         link_xpath = './/%(Lesart)s/%(Verweise)s/%(Verweis)s' % self.TAG
-        for link in ET.ETXPath(link_xpath)(element):
+        for link in et.ETXPath(link_xpath)(element):
             if not link.get('type') in ('Antonym', 'Synonym', 'Assoziation'):
                 link.set('class', 'invisible')
 
@@ -217,7 +217,7 @@ class StructureChecker(CheckerInfrastructure):
         '''
         '''
         grammar_xpath = './%(Formangabe)s/%(Grammatik)s' % self.TAG
-        for grammar in ET.ETXPath(grammar_xpath)(element):
+        for grammar in et.ETXPath(grammar_xpath)(element):
 
             word_class = grammar.find(self.TAG['Wortklasse']).text
 
@@ -287,7 +287,7 @@ class StructureChecker(CheckerInfrastructure):
             g_match = g_pattern.match(g.text)
             if g_match is not None:
                 parent = g.getparent()
-                new = ET.Element(self.TAG['Genitiv'])
+                new = et.Element(self.TAG['Genitiv'])
                 new.text = '-%(mandatory)s' % g_match.groupdict()
                 parent.insert(parent.index(g), new)
                 g.text = '-%(optional)s%(mandatory)s' % g_match.groupdict()
@@ -399,7 +399,7 @@ class TypographyChecker(CheckerInfrastructure):
         '''
         '''
         for definition in element.iter(self.TAG['Definition']):
-            for token in (''.join(ET.ETXPath('.//text()')(definition))).split():
+            for token in (''.join(et.ETXPath('.//text()')(definition))).split():
                 if token.endswith('.') and token not in self.EXPECTED_ABBREVIATIONS:
                     self.comment(definition, u'nicht erlaubte Abkürzung')
 
@@ -431,7 +431,7 @@ class TypographyChecker(CheckerInfrastructure):
 
     def _check_chars(self, root, norm):
 
-        string = ''.join(ET.ETXPath('.//text()')(root))
+        string = ''.join(et.ETXPath('.//text()')(root))
         string = unicodedata.normalize('NFKD', string)
 
         for char in string:
@@ -461,7 +461,7 @@ class TypographyChecker(CheckerInfrastructure):
         proper UNICODE.
         '''
 
-        for e in ET.ETXPath('.//*')(element):
+        for e in et.ETXPath('.//*')(element):
 
             if isinstance(element.tag, str):
                 text = e.text or ''
@@ -477,7 +477,7 @@ class TypographyChecker(CheckerInfrastructure):
         # for mixed content, more than one pass may be required
         for e in element.iter(str(self.TAG['Beleg'])):
 
-            text = ''.join(ET.ETXPath('.//text()')(e))
+            text = ''.join(et.ETXPath('.//text()')(e))
 
             for t in self.TRANSLITERATIONS:
                 if t in text:
@@ -487,8 +487,8 @@ class TypographyChecker(CheckerInfrastructure):
 
     def check_final_punctuation(self, element):
 
-        for e in ET.ETXPath('.//%(Beleg)s/%(Belegtext)s' % self.TAG)(element):
-            t = ' '.join((''.join(ET.ETXPath('.//text()')(e))).split())
+        for e in et.ETXPath('.//%(Beleg)s/%(Belegtext)s' % self.TAG)(element):
+            t = ' '.join((''.join(et.ETXPath('.//text()')(e))).split())
 
             if len(t) < 10:
                 self.comment(e, 'Beleg zu kurz?')
@@ -506,8 +506,8 @@ class TypographyChecker(CheckerInfrastructure):
 
             for e in element.iter(str(target)):
 
-                text = u' '.join((''.join(ET.ETXPath('.//text()')(e))).split())
-                bib_ref = u' '.join((''.join(ET.ETXPath('.//%(Fundstelle)s//text()' % self.TAG)(e))).split())
+                text = u' '.join((''.join(et.ETXPath('.//text()')(e))).split())
+                bib_ref = u' '.join((''.join(et.ETXPath('.//%(Fundstelle)s//text()' % self.TAG)(e))).split())
 
                 # no check within //Fundstelle and we also ignore explicitly
                 # given exceptions
@@ -539,7 +539,7 @@ class TypographyChecker(CheckerInfrastructure):
     def check_balanced_characters(self, article):
         for target in (self.TAG['Definition'], self.TAG['Beleg'], self.TAG['Kompetenzbeispiel'], self.TAG['Kollokation1'], self.TAG['Kollokation2']):
             for e in article.iter(str(target)):
-                text = ''.join(ET.ETXPath('.//text()')(e))
+                text = ''.join(et.ETXPath('.//text()')(e))
                 text = ' '.join([t for t in text.split() if t not in self.PARENTESIS_EXCEPTIONS])
                 balanced_chars = ''.join([char for char in text if char in u'»«()[]'])
                 length = 0

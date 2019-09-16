@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse, logging, time, collections, codecs, traceback
 from requests.exceptions import ReadTimeout, HTTPError, ConnectionError
