@@ -39,8 +39,9 @@ freie_Beschreibung = mixed {
 }
 
 Kommentar = element Kommentar {
-    attribute class { 'invisible' } ?
-    , freie_Beschreibung
+	Metadaten.allgemein
+	, attribute class { 'invisible' } ?
+	, freie_Beschreibung
 }
 
 erwaehntes_Zeichen = element erwaehntes_Zeichen {
