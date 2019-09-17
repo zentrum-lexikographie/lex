@@ -39,7 +39,7 @@ freie_Beschreibung = mixed {
 }
 
 Kommentar = element Kommentar {
-	Metadaten.allgemein
+	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
 	, freie_Beschreibung
 }
