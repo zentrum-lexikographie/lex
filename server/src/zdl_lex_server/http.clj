@@ -54,7 +54,8 @@
 
 (def base-middleware
   (concat [#(wrap-defaults % defaults)]
-          (if (env :zdl-lex-http-log) [wrap-with-logger])))
+          (if (Boolean/parseBoolean (env :zdl-lex-http-log "false"))
+            [wrap-with-logger])))
 
 (def handler
   (ring/ring-handler
