@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import logging, requests, urllib, re
+import logging, requests, urllib.parse, re
 import lxml.etree as et
 
+urlquote = urllib.parse.quote
 
 class ExistDB(object):
     '''
@@ -103,9 +104,9 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
         This is a low level retriever that works regardless of the data
         (Exist data or stored resources).
         '''
-        logging.debug(self.url + self.REST + urllib.quote(name))
+        logging.debug(self.url + self.REST + urlquote(name))
         r = self.session.get(
-            self.url + self.REST + urllib.quote(name),
+            self.url + self.REST + urlquote(name),
             cookies=self.cookies,
             timeout=timeout
         )
@@ -131,7 +132,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
 
         This is a low level uploader. It is indifferent to existing data.
         '''
-        logging.info('about to PUT %s', self.url + self.REST + urllib.quote(name))
+        logging.info('about to PUT %s', self.url + self.REST + urlquote(name))
         # don't urlencode names when putting!
         r = self.session.put(self.url + self.REST + name, et.tostring(data, encoding='utf8'))
         if not r.ok:
@@ -166,7 +167,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
             logging.debug('about to POST: %s', data)
 
             request = self.session.post(
-                self.url + self.REST + urllib.quote(name),
+                self.url + self.REST + urlquote(name),
                 data=data,
                 cookies=self.cookies,
             )
@@ -198,7 +199,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
         # TODO: make sure not to overwrite files unintentionally
         # there is no overwrite indication
         request = self.session.put(
-            self.url + self.REST + urllib.quote(name),
+            self.url + self.REST + urlquote(name),
             data=et.tostring(data, encoding='utf8'),
             cookies=self.cookies
         )
@@ -209,7 +210,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
     def remove_resource_or_collection(self, name):
         # TODO: sanity checks
         request = requests.delete(
-            self.url + self.REST + urllib.quote(name),
+            self.url + self.REST + urlquote(name),
             cookies=self.cookies,
             auth=self.session.auth
         )
@@ -222,7 +223,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
     def lock(self, name):
         request = self.session.request(
             'LOCK',
-            self.url + self.WebDAV + urllib.quote(name),
+            self.url + self.WebDAV + urlquote(name),
             data=self.LOCK_COMMAND
         )
         if request.ok:
@@ -235,7 +236,7 @@ declare namespace dwds="http://www.dwds.de/ns/1.0";
     def unlock(self, name, token=None):
         request = self.session.request(
             'UNLOCK',
-            self.url + self.WebDAV + urllib.quote(name),
+            self.url + self.WebDAV + urlquote(name),
             headers={} if token is None else {'Lock-Token': token}
         )
         if request.ok:

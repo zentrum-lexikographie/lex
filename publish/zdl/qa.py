@@ -467,7 +467,7 @@ class TypographyChecker(CheckerInfrastructure):
                 text = e.text or ''
                 tail = e.tail or ''
 
-                for char, subst in self.TRANSLITERATIONS.iteritems():
+                for char, subst in self.TRANSLITERATIONS.items():
                     text = text.replace(char, subst)
                     tail = tail.replace(char, subst)
 

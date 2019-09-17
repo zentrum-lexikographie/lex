@@ -89,7 +89,7 @@ help        shows a command overview''')
                 if ns == self.db.NS_MAP['exist']:
                     print('not a resource (try "ls"):', arg)
                 else:
-                    print(et.tostring(result, encoding='utf8'))
+                    print(et.tostring(result, encoding=str))
 
     def fn_get(self, args):
         if len(args) == 0:
@@ -289,12 +289,12 @@ help        shows a command overview''')
 
         # sanity checks
         print(len(headwords.keys()))
-        headword_duplicates = {k: v for k, v in headwords.iteritems() if len(v) > 1}
+        headword_duplicates = {k: v for k, v in headwords.items() if len(v) > 1}
 
         with codecs.open('headwords-exist-current.log', 'w', encoding='utf8') as outfile:
 
             counter = 0
-            for headword, refs in headword_duplicates.iteritems():
+            for headword, refs in headword_duplicates.items():
                 # inconsistent homographs
                 if not sorted(h for _, h in refs) == [str(i) for i in range(1, len(refs) + 1)]:
                     counter += 1
@@ -303,7 +303,7 @@ help        shows a command overview''')
                     outfile.write('inconsistent homographs: "%s" %s\n' % (headword, s_refs))
                     lemma_list = []
                     for ref in refs:
-                        for l, v in headwords.iteritems():
+                        for l, v in headwords.items():
                             for i in v:
                                 if i[0] == ref[0]:
                                     lemma_list.append(l)
@@ -340,7 +340,7 @@ help        shows a command overview''')
                     if not failed:
                         print
                     failed = True
-                    print('\tFAILED:', a.text.encode('utf-8'))
+                    print('\tFAILED:', a.text)
                 if not failed:
                     print('PASSED')
 
@@ -364,9 +364,9 @@ help        shows a command overview''')
                 for i in self.db.xquery(query % c):
                     ids[i.text].append(i.get('fn'))
 
-            id_duplicates = {k: v for k, v in ids.iteritems() if len(v) > 1}
+            id_duplicates = {k: v for k, v in ids.items() if len(v) > 1}
             counter = 0
-            for counter, offender in enumerate(id_duplicates.iteritems(), 1):
+            for counter, offender in enumerate(id_duplicates.items(), 1):
                 print('duplicate xml:id="%s" for %s' % offender)
             print(counter, 'duplicate%s' % ('s' if counter != 1 else ''))
 
@@ -409,7 +409,7 @@ help        shows a command overview''')
                     print(c)
                     for i in self.db.xquery(query % c):
                         if i.text != 'true':
-                            print('Failed validation:', i.get('fn').encode('utf-8'))
+                            print('Failed validation:', i.get('fn'))
                             outfile.write(i.get('fn') + '\n')
 
         print('took %i sec' % (time.time() - start_time))
@@ -503,7 +503,6 @@ help        shows a command overview''')
         'ls': fn_ls,
         'pcc': fn_pcc,
         'put': fn_put,
-        'pwd': fn_pcc,
         'quit': fn_exit,
         'red-2': fn_red2,
         'redaktion': fn_red2,
@@ -540,8 +539,7 @@ help        shows a command overview''')
         while True:
 
             try:
-                # TODO: encoding should be dynamically determined from terminal
-                input_line = input('exist-shell: ').decode('utf8')
+                input_line = input('exist-shell: ')
             except EOFError:
                 self.fn_exit([])
 

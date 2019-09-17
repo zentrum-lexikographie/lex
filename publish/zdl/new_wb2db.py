@@ -374,7 +374,7 @@ if __name__ == '__main__':
     # -- else the lookup for (lemma, hidx) tuples will fail, of course.
     # If only parts of dictionary are processed, this is expected.
     if dictionary.USE_RELATIONS:
-        for (article1, relation_type), targets in relation_index.iteritems():
+        for (article1, relation_type), targets in relation_index.items():
             for target in targets:
                 article2 = lemma_index[target]
                 if not article2:
