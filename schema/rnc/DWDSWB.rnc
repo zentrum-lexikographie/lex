@@ -76,7 +76,7 @@ Lesartangabe = element Lesart {
 	, Illustration *
 	, element Kollokationen {
 		Metadaten.allgemein ?
-		& Kollokation1 *
+		& Kollokation *
 		& Kollokation2 *
 	}
 	, element Verwendungsbeispiele {
@@ -132,7 +132,7 @@ Kompetenzbeispiel = element Kompetenzbeispiel {
 	, Diasystematik ?
 }
 
-Kollokation1 = element Kollokation1 {
+Kollokation = element Kollokation {
 	Metadaten.allgemein ?
 	, attribute syntaktische_Relation { syntaktische_Relationen }
 	, attribute semantische_Relation { token } ?
