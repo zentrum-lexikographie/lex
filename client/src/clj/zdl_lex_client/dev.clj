@@ -20,7 +20,7 @@
 
         main-panel (ui/splitter :left-right
                                 results-view/tabbed-pane
-                                issue-view/panel
+                                (issue-view/create-panel)
                                 :divider-location 0.75)]
     (mount/stop)
     (mount/start)
@@ -29,7 +29,7 @@
           :title "zdl-lex-client/dev"
           :size [1200 :by 800]
           :content (ui/border-panel
-                    :north toolbar/widget
+                    :north (toolbar/widget)
                     :center main-panel))
          (ui/show!)))))
 

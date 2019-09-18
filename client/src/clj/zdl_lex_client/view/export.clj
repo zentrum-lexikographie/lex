@@ -1,18 +1,9 @@
 (ns zdl-lex-client.view.export
-  (:require [mount.core :refer [defstate]]
-            [clojure.java.io :as io]
-            [seesaw.bind :as uib]
-            [seesaw.forms :as forms]
-            [seesaw.core :as ui]
+  (:require [clojure.java.io :as io]
             [seesaw.chooser :as chooser]
-            [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.font :as font]
-            [mount.core :as mount]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-client.http :as http]
-            [zdl-lex-client.workspace :as ws])
-  (:import com.jidesoft.hints.ListDataIntelliHints))
+            [seesaw.core :as ui]
+            [seesaw.forms :as forms]
+            [zdl-lex-client.http :as http]))
 
 (defn open-dialog [{:keys [query total]} & args]
   (let [parent (some-> args first ui/to-root)]

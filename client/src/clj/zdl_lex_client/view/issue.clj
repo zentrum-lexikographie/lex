@@ -1,6 +1,5 @@
 (ns zdl-lex-client.view.issue
   (:require [clojure.core.memoize :as memoize]
-            [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
@@ -12,6 +11,12 @@
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.workspace :as ws])
   (:import java.net.URL))
+
+(def visited-issues (atom #{}))
+
+(defn open-issue [{:keys [id last-updated url]}]
+  (swap! visited-issues conj [id last-updated])
+  (ws/open-url ws/instance url))
 
 (defn- issue->border [{:keys [active? severity]}]
   (let [color (if-not active? :lightgreen
@@ -28,12 +33,6 @@
     [5
      (line-border :color color :left 10)
      (line-border :thickness 5 :color :white)]))
-
-(def visited-issues (atom #{}))
-
-(defn open-issue [{:keys [id last-updated url]}]
-  (swap! visited-issues conj [id last-updated])
-  (ws/open-url ws/instance url))
 
 (def date-time-formatter (t/formatter "dd.MM.yyyy, HH:mm"))
 
@@ -63,15 +62,6 @@
              [(label :text "Status")] [(text :text status) "wrap"]
              [(label :text "Resolution")] [(text :text resolution)]])))
 
-(def issues-panel
-  (ui/listbox
-   :model []
-   :listen [:selection #(some-> % ui/selection open-issue)]
-   :renderer
-   (proxy [javax.swing.DefaultListCellRenderer] []
-     (getListCellRendererComponent [component value index selected? focus?]
-       (render-issue value)))))
-
 (def cached-get-issues
   (memoize/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
 
@@ -87,13 +77,20 @@
                          :visited? (visited? [id last-updated])))))
          (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))))
 
-(defstate article->issues
-  :start (uib/bind (uib/funnel (bus/bind :article) visited-issues)
-                   (uib/transform prepare-issues)
-                   (uib/property issues-panel :model))
-  :stop (article->issues))
-
-(def panel (ui/scrollable issues-panel))
+(defn create-panel []
+  (let [issue-renderer (proxy [javax.swing.DefaultListCellRenderer] []
+                         (getListCellRendererComponent
+                           [component value index selected? focus?]
+                           (render-issue value)))
+        open-selected #(some-> % ui/selection open-issue)
+        issues-panel (ui/listbox
+                      :model []
+                      :listen [:selection open-selected]
+                      :renderer issue-renderer)]
+    (uib/bind (uib/funnel (bus/bind :article) visited-issues)
+              (uib/transform prepare-issues)
+              (uib/property issues-panel :model))
+    (ui/scrollable issues-panel)))
 
 (comment
   (let [sample {:category "MWA-Link",

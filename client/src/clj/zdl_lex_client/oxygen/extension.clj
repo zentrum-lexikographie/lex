@@ -34,7 +34,7 @@
            (doto viewInfo
              (.setTitle "ZDL/DWDS – Mantis-Tickets")
              (.setIcon icon/gmd-bug-report)
-             (.setComponent issue-view/panel))
+             (.setComponent (issue-view/create-panel)))
            viewInfo))))
   (.addToolbarComponentsCustomizer
    app-ws
@@ -44,7 +44,7 @@
          (ws/views :toolbar)
          (doto toolbarInfo
            (.setTitle "ZDL/DWDS")
-           (.setComponents (into-array JComponent toolbar/components)))
+           (.setComponents (into-array JComponent (toolbar/components))))
          toolbarInfo))))
   (a/>!! http/ping-status :startup))
 

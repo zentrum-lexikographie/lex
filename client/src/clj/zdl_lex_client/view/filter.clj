@@ -9,7 +9,6 @@
             [tick.format :as tf]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.font :as font]
-            [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search])
   (:import com.jgoodies.forms.layout.RowSpec))
 
