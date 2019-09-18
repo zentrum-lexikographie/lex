@@ -19,16 +19,13 @@
 
 (defn show-help [& args]
   (let [help-text (ui/styled-text :editable? false :wrap-lines? true
-                                  :background :white :margin 10
-                                  :styles
-                                  [:base :size (font/default-size)])
+                                  :background :white :margin 10)
         scrollpane (ui/scrollable help-text)]
     (.. scrollpane (getViewport) (setBackground Color/WHITE))
     (doto help-text
       (.setContentType "text/html")
       (.setText (-> "help.html" io/resource slurp))
       (ui/scroll! :to :top))
-    (ui/style-text! help-text :base 0 )
     (-> (ui/dialog :title "Hilfe"
                    :content scrollpane
                    :parent (some-> args first ui/to-root)
