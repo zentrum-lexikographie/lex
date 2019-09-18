@@ -16,7 +16,7 @@ Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
 Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
 Artikel[Status="Red-0"]          { border-left: 10px solid #ffec8b; }
 Artikel[Status="Red-1"]          { border-left: 10px solid #ffec8b; }
-Artikel[Status="Red-f"]          { border-left: 10px solid #cfc; }
+Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
 
 /* Hauptblöcke, die als »Kasten« dargestellt werden */
 

@@ -14,7 +14,7 @@
     "Lex-zur_Abgabe" "#ffff00"
     "Red-0" "#ffec8b"
     "Red-1" "#ffec8b"
-    "Red-f" "#ccffcc"
+    "Red-f" "#aeecff"
     "#ffffff"))
 
 (def doc->articles
