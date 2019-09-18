@@ -4,12 +4,14 @@
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
             [seesaw.core :as ui]
+            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.font :as font]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article])
+            [zdl-lex-common.article :as article]
+            [zdl-lex-client.query :as query])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
 
 (defn- suggestion->html [{:keys [suggestion pos type definitions
@@ -44,8 +46,8 @@
    :name "Suchen"
    :icon icon/gmd-search
    :handler (fn [_]
-              (let [valid? @search/query-valid? q @search/query]
-                (when valid? (search/request q))))))
+              (let [q @search/query]
+                (when (query/valid? q) (search/request q))))))
 
 (defn input []
   (let [input (ui/text :columns 40
@@ -67,12 +69,15 @@
       (acceptHint [{:keys [id]}]
         (ui/config! input :text "")
         (ws/open-article ws/instance id)))
-    (uib/bind search/query
-              input
+    (uib/bind input
               search/query)
-    (uib/bind search/query-valid?
-              (uib/transform #(if % :black :red))
+    (uib/bind input
+              (uib/transform #(if (query/valid? %) :black :red))
               (uib/property input :foreground))
+    (uib/bind (bus/bind :search-result)
+              (uib/transform :query)
+              (uib/filter identity)
+              input)
     input))
 
 

@@ -90,7 +90,7 @@
 (defn- render-result-summary [{:keys [query total result] :as data}]
   (let [filter-action (ui/action
                        :icon icon/gmd-filter
-                       :handler filter-view/open-dialog)
+                       :handler (partial filter-view/open-dialog data))
         query-action (ui/action
                       :icon icon/gmd-refresh
                       :handler (fn [_] (search/request query)))
@@ -140,7 +140,7 @@
   (let [pane (JideTabbedPane. JTabbedPane/BOTTOM)]
     (doto pane
       (.setShowCloseButtonOnTab true)
-      (ui/listen :selection
+      (ui/listen #{:selection :component-shown}
                  (fn [_] (->> (or (get-selected-result pane) {})
                               (bus/publish! :search-result)))))))
 

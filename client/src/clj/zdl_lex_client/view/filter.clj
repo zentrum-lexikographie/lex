@@ -30,10 +30,6 @@
    :tranche "tranche"
    :timestamp "datum"})
 
-(defn facet->model [result k]
-  (->> (or (some-> result :facets k) {})
-       (into []) (sort-by first)))
-
 (defn- render-ts-facet-list-entry [this {:keys [value]}]
   (let [[v n] value
         v (str "ab " (t/format (tf/formatter "dd.MM.yy")
@@ -50,31 +46,7 @@
                 :font (font/derived :style :plain)
                 :border 5)))
 
-(def facet-lists
-  (for [k [:status :authors :editors :timestamp :sources :tranche :type]]
-    (condp = k
-      :timestamp
-      (ui/listbox :model []
-                  :selection-mode :single
-                  :renderer render-ts-facet-list-entry
-                  :class :facet-list
-                  :user-data k)
-      (ui/listbox :model []
-                  :selection-mode :multi-interval
-                  :renderer render-facet-list-entry
-                  :class :facet-list
-                  :user-data k))))
-
-(defstate result->facets
-  :start (doall
-          (for [fl facet-lists
-                :let [k (ui/user-data fl)]]
-            (uib/bind (bus/bind :search-result)
-                      (uib/transform #(facet->model % k))
-                      (uib/property fl :model))))
-  :stop (doseq [b result->facets] (b)))
-
-(defn facet-lists->ast []
+(defn facet-lists->query [facet-lists]
   (->>
    (for [fl facet-lists
          :let [k (ui/user-data fl)
@@ -94,25 +66,41 @@
             (first vs)
             [:sub-query (->> (map (fn [v] [:clause v]) vs)
                              (interpose [:or]) (cons :query) (vec))])))])
-   (interpose [:and]) (cons :query) (vec)))
+   (interpose [:and])
+   (cons :query)
+   (vec)
+   (lucene/ast->str)))
 
-(defn do-filter!
-  ([e]
-   (do-filter! e (-> (facet-lists->ast) (lucene/ast->str))))
-  ([e filter]
-   (some->> [filter @search/query] (remove empty?) (str/join " AND ")
-            not-empty search/request)
-   (when e (ui/dispose! (ui/to-root e)))))
+(defn dispose! [e]
+  (some-> e ui/to-root ui/dispose!))
 
-(defn reset-filter! []
-  (doseq [fl facet-lists]
-    (ui/selection! fl [] {:multi? true})))
+(defn filter! [query facet-lists e]
+  (some->>
+   (remove empty? [(facet-lists->query facet-lists) query])
+   (str/join " AND ")
+   not-empty
+   search/request)
+  (dispose! e))
 
-(defn cancel-filter! [e]
-  (ui/dispose! (ui/to-root e)))
-
-(def dialog
-  (let [lists (->>
+(defn open-dialog [{:keys [query facets]} & args]
+  (let [result->list-model #(->> (or (some-> facets %) {})
+                                 (into [])
+                                 (sort-by first))
+        facet-lists (for [k [:status :authors :editors :timestamp
+                             :sources :tranche :type]]
+                      (condp = k
+                        :timestamp
+                        (ui/listbox :model (result->list-model k)
+                                    :selection-mode :single
+                                    :renderer render-ts-facet-list-entry
+                                    :class :facet-list
+                                    :user-data k)
+                        (ui/listbox :model (result->list-model k)
+                                    :selection-mode :multi-interval
+                                    :renderer render-facet-list-entry
+                                    :class :facet-list
+                                    :user-data k)))
+        lists (->>
                (map #(ui/scrollable % :border [5 (-> % ui/user-data facet-title)])
                     facet-lists))
         help (->> (str "<html>"
@@ -125,31 +113,10 @@
                  :default-row-spec (RowSpec. "fill:pref")
                  :default-dialog-border? true
                  :items (concat lists [(forms/next-line) (forms/span help 7)]))
-        options [(ui/button :text "Filtern" :listen [:action do-filter!])
-                 (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
-    (ui/dialog :title "Suchfilter"
-               :type :question
-               :size [800 :by 800]
-               :content content
-               :options options)))
-
-(defn open-dialog [& args]
-  (let [lists (->>
-               (map #(ui/scrollable % :border [5 (-> % ui/user-data facet-title)])
-                    facet-lists))
-        help (->> (str "<html>"
-                       "<b>Tipp:</b> "
-                       "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
-                       "</html>")
-                  (ui/label :border 5 :text))
-        content (forms/forms-panel
-                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
-                 :default-row-spec (RowSpec. "fill:pref")
-                 :default-dialog-border? true
-                 :items (concat lists [(forms/next-line) (forms/span help 7)]))
-        options [(ui/button :text "Filtern" :listen [:action do-filter!])
-                 (ui/button :text "Abbrechen" :listen [:action cancel-filter!])]]
-    (reset-filter!)
+        options [(ui/button :text "Filtern"
+                            :listen [:action (partial filter! query facet-lists)])
+                 (ui/button :text "Abbrechen"
+                            :listen [:action dispose!])]]
     (-> (ui/dialog :title "Suchfilter"
                    :type :question
                    :parent (some-> args first ui/to-root)
@@ -161,5 +128,4 @@
 
 (comment
   (lucene/str->ast "autor:rast")
-  (lucene/str->ast "datum:[2019-01-01 TO *]")
-  (-> dialog ui/pack! ui/show!))
+  (lucene/str->ast "datum:[2019-01-01 TO *]"))
