@@ -1,25 +1,39 @@
 (ns zdl-lex-server.git-test
   (:require [clj-jgit.porcelain :as jgit]
             [clj-jgit.querying :as jgit-query]
+            [clojure.string :as str]
             [clojure.test :refer :all]
             [faker.lorem :as lorem]
             [me.raynes.fs :as fs]
-            [midje.sweet :as midje]
-            [clojure.string :as str]))
+            [taoensso.timbre :as timbre]
+            [zdl-lex-common.log :as log])
+  (:import org.eclipse.jgit.transport.RefSpec))
+
+(log/configure)
 
 (def test-dir (fs/file "target" "test-data" "git-test"))
 
 (def repo (fs/file test-dir "repo"))
 
-(def clones (map #(fs/file test-dir (str "clone-" %)) (range 2)))
+(def master (fs/file test-dir "master"))
+
+(def qa (fs/file test-dir "qa"))
 
 (defn git-env [f]
   (let [repo-uri (.. ^java.io.File repo (toURI) (toString))]
     (fs/mkdirs test-dir)
     (jgit/git-init :dir repo :bare? true)
-    (doseq [clone clones] (jgit/git-clone repo-uri :dir clone))
+    (jgit/git-clone repo-uri :dir master)
+    (jgit/with-repo master
+      (jgit/git-commit repo "Init repo" :allow-empty? true))
+    (jgit/git-clone repo-uri :dir qa)
+    (jgit/with-repo qa
+      (jgit/git-commit repo "Init repo" :allow-empty? true)
+      (jgit/git-checkout repo :name "qa"
+                         :upstream-mode :track
+                         :create-branch? true))
     (f)
-    (doseq [dir (cons repo clones)]
+    (doseq [dir [repo master qa]]
       (fs/delete-dir dir))))
 
 (defn write-rand-txt-file [f]
@@ -40,34 +54,44 @@
       (jgit/git-rm repo (str/join java.io.File/separator path))
       (jgit/git-commit repo (str "Removed " (str/join "/" path))))))
 
-(defn pull-git [git-dir & args]
-  (jgit/with-repo git-dir
-    (let [get-rev #(first (jgit-query/rev-list repo rev-walk))
-          rev-before (get-rev)
-          _ (apply jgit/git-pull (cons repo args))
-          rev-after (get-rev)]
-      (if rev-before
-        (jgit-query/changed-files-between-commits repo rev-before rev-after)
-        (jgit-query/changed-files repo rev-after)))))
+(defn fetch-all [repo]
+  (doto (jgit/fetch-cmd repo)
+    (.setRefSpecs [(RefSpec. "refs/tags/*:refs/tags/*")
+                   (RefSpec. "refs/heads/*:refs/remotes/origin/*")])
+    (.setThin true)
+    (.call)))
+
+(defn ff-git [git-dir refs]
+  (->> 
+   (jgit/with-repo git-dir
+     (fetch-all repo)
+     (let [head-before (jgit-query/find-rev-commit repo rev-walk "HEAD")
+           merge (jgit/git-merge repo refs)]
+       (if (.. merge (getMergeStatus) (isSuccessful))
+         (->> (jgit/git-log repo :since head-before)
+              (map :id)
+              (reverse)
+              (mapcat (partial jgit-query/changed-files repo)))
+         (throw (ex-info (str merge) {:git-dir git-dir :merge merge})))))
+   (vec)
+   (timbre/spy :info)))
 
 (defn push-git [git-dir]
   (jgit/with-repo git-dir
     (jgit/git-push repo)))
 
-(deftest git-merge
-  (let [clone-1 (first clones)
-        clone-2 (second clones)]
-    (write-git-file clone-1 "added" "test1.txt")
-    (push-git clone-1)
-    (println (pull-git clone-2))
-    (write-git-file clone-2 "added" "test1.txt")
-    (write-git-file clone-2 "added" "test2.txt")
-    (write-git-file clone-2 "added" "test1.txt")
-    (remove-git-file clone-2 "added" "test1.txt")
-    (push-git clone-2)
-    (println (pull-git clone-1))
-    (write-git-file clone-2 "added" "test1.txt")
-    (push-git clone-2)
-    (println (pull-git clone-1))))
+(deftest git-workflow
+  (write-git-file master "added" "test1.txt")
+  (write-git-file master "added" "test2.txt")
+  (push-git master)
+  (ff-git qa ["origin/master"])
+  (write-git-file qa "added" "test1.txt")
+  (remove-git-file qa "added" "test2.txt")
+  (write-git-file qa "added" "test3.txt")
+  (push-git qa)
+  (ff-git master ["origin/qa"])
+  (write-git-file master "added" "test4.txt")
+  (push-git master)
+  (ff-git qa ["origin/master"]))
 
 (use-fixtures :each git-env)
