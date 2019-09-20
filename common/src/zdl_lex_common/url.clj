@@ -3,16 +3,16 @@
             [environ.core :refer [env]])
   (:import [java.net URL URLStreamHandlerFactory URLStreamHandler]))
 
-(def ^:private lex-protocol "lex")
+(def protocol "lex")
 
-(def ^:private lex-host (env :zdl-lex-host "lex.dwds.de"))
+(def host (env :zdl-lex-host "lex.dwds.de"))
 
 (defn lex? [^URL u]
-  (and (= lex-protocol (.. u (getProtocol)))
-       (= lex-host (.. u (getHost)))))
+  (and (= protocol (.. u (getProtocol)))
+       (= host (.. u (getHost)))))
 
 (defn id->url [id]
-  (URL. lex-protocol lex-host (str/replace (str "/" id) "#^/+" "/")))
+  (URL. protocol host (str/replace (str "/" id) "#^/+" "/")))
 
 (defn url->id [^URL u]
   (if (lex? u) (str/replace (.. u (getFile)) #"^/" "")))
@@ -27,8 +27,8 @@
     ([handler]
      (URL/setURLStreamHandlerFactory
       (proxy [URLStreamHandlerFactory] []
-        (createURLStreamHandler [protocol]
-          (if (= protocol lex-protocol) handler)))))))
+        (createURLStreamHandler [requested-protocol]
+          (if (= protocol requested-protocol) handler)))))))
 
 (comment
   (install-stream-handler!)
