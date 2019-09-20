@@ -26,6 +26,7 @@
                  [cronjure "0.1.1"]
                  [environ "1.1.0"]
                  [mount "0.1.16"]
+                 [pathetic "0.5.1"]
                  [tick "0.4.10-alpha"
                   :exclusions [cljsjs/js-joda-locale-en-us
                                cljsjs/js-joda-timezone]]]
