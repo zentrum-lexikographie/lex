@@ -4,7 +4,8 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article])
+            [zdl-lex-common.article :as article]
+            [zdl-lex-common.url :as lexurl])
   (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]))
 
 (def editors (atom {}))
@@ -21,13 +22,13 @@
       (bus/publish! :editor-saved [url true]))))
 
 (defn- add-listener [url]
-  (when (http/webdav? url)
+  (when (lexurl/lex? url)
     (let [listener (editor-listener url)]
       (ws/add-editor-listener ws/instance url listener)
       (swap! editors assoc url listener))))
 
 (defn- remove-listener [url]
-  (when (http/webdav? url)
+  (when (lexurl/lex? url)
     (ws/remove-editor-listener ws/instance url (@editors url))
     (swap! editors dissoc url)
     (bus/publish! :editor-active [url false])))
@@ -47,11 +48,11 @@
       (doseq [url urls] (remove-listener url)) true)
     (editorPageChanged [_])
     (editorActivated [url]
-      (when (http/webdav? url)
+      (when (lexurl/lex? url)
         (bus/publish! :editor-active [url true])))
     (editorSelected [_])
     (editorDeactivated [url]
-      (when (http/webdav? url)
+      (when (lexurl/lex? url)
         (bus/publish! :editor-active [url false])))
     (editorClosed [_])
     (editorOpened [url]

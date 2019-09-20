@@ -6,6 +6,7 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
+            [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.xml :as xml]
             [me.raynes.fs :as fs])
   (:import java.net.URL
@@ -58,7 +59,7 @@
     (future (.. this (openInExternalApplication url false "text/html"))))
   (open-article
     [^StandalonePluginWorkspace this id]
-    (.. this (open (http/id->url id))))
+    (.. this (open (lexurl/id->url id))))
   (add-editor-change-listener
     [^StandalonePluginWorkspace this listener]
     (.. this (addEditorChangeListener listener editing-area)))
@@ -87,7 +88,7 @@
     (open-url [_ url]
       (future (browse-url url)))
     (open-article [_ id]
-      (bus/publish! :editor-active [(http/id->url id) true])
+      (bus/publish! :editor-active [(lexurl/id->url id) true])
       true)
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]

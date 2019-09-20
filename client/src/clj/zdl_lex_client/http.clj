@@ -11,28 +11,10 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.xml :as xml])
   (:import [java.io File IOException]
-           [java.net ConnectException URI URL]))
-
-(def ^:private webdav-uri
-  (-> (env :zdl-lex-webdav-base "https://lex.dwds.de/exist/webdav/db/dwdswb/data")
-      (str "/")
-      (URI.)))
-
-(defn webdav? [^URL u]
-  (str/starts-with? (str (.toURI u)) (str webdav-uri)))
-
-(defn path->uri [path] (URI. nil nil path nil))
-
-(defn id->url [id]
-  (.. webdav-uri (resolve (path->uri id)) (toURL)))
-
-(defn url->id [^URL u]
-  (.. webdav-uri (relativize (.toURI u)) (getPath)))
-
-(comment
-  (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->url))
+           [java.net ConnectException URI URL URLStreamHandler URLConnection]))
 
 (def server-base (env :zdl-lex-server-base "https://lex.dwds.de/"))
 
@@ -64,11 +46,11 @@
                            :http-message (.getResponseMessage con)
                            :http-body (slurp err)})))))))
 
-(defn- read-xml [con]
+(defn read-xml [con]
   (doto con (.setRequestProperty "Accept" "application/xml"))
-  (xml/->dom (.getInputStream con)))
+  (.getInputStream con))
 
-(def get-xml (partial tx read-xml))
+(def get-xml (partial tx (comp xml/->dom read-xml)))
 
 (defn- read-edn [con]
   (doto con
@@ -129,7 +111,7 @@
 
 (defn- send-change-notification [[url _]]
   (try
-    (let [id (url->id url)]
+    (let [id (lexurl/url->id url)]
       (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
     (catch Exception e (timbre/warn e))))
 
@@ -147,3 +129,30 @@
   (let [q (query/translate query)]
     (tx (save-csv-to-file f)
         (server-url "/articles/export" {"q" q "limit" "50000"}))))
+
+(def ^:private webdav-uri
+  (-> (env :zdl-lex-webdav-base "https://lex.dwds.de/exist/webdav/db/dwdswb/data")
+      (str "/")
+      (URI.)))
+
+(defn path->uri [path] (URI. nil nil path nil))
+
+(defn id->webdav-url [id]
+  (.. webdav-uri (resolve (path->uri id)) (toURL)))
+
+(comment
+  (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->webdav-url))
+
+(def webdav-lexurl-handler
+  (proxy [URLStreamHandler] []
+    (openConnection [url]
+      (proxy [URLConnection] [url]
+        (connect [])
+        (getInputStream []
+          (->> url
+               (lexurl/url->id)
+               (id->webdav-url)
+               (tx read-xml)))
+        (getOutputStream []
+          ;; returns a null sink
+          (java.io.ByteArrayOutputStream.))))))

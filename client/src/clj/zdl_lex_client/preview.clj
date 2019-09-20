@@ -5,6 +5,7 @@
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
+            [zdl-lex-common.url :as lexurl]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
@@ -14,7 +15,7 @@
 (def id (atom nil))
 
 (defn set-id [^URL url]
-  (reset! id (if url (http/url->id url))))
+  (reset! id (if url (lexurl/url->id url))))
 
 (def url-base (url "http://zwei.dwds.de/wb/existdb/"))
 
@@ -37,7 +38,7 @@
 
 (defn handle-action [e]
   (let [id @id
-        modified? (ws/modified? ws/instance (http/id->url id))]
+        modified? (ws/modified? ws/instance (lexurl/id->url id))]
     (if-not modified?
       (render id)
       (->> ["Der aktuelle Artikel ist nicht gespeichert."
