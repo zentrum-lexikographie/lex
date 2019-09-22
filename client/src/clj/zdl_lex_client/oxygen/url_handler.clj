@@ -8,21 +8,18 @@
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-client.http :as http])
   (:import [java.net URLConnection URLStreamHandler]
-           ro.sync.exml.plugin.lock.LockHandlerBase))
-
-(def lex-protocol "lex")
+           ro.sync.exml.plugin.lock.LockHandler))
 
 (defn -isLockingSupported [this protocol]
   (= lexurl/protocol protocol))
 
 (defn -getLockHandler [this]
-  (proxy [LockHandlerBase] []
-    (isLockEnabled []
-      true)
-    (isSaveAllowed [url timeoutSeconds]
-      true)
-    (unlock [url])
-    (updateLock [url timeoutSeconds])))
+  (proxy [LockHandler] []
+    (isLockEnabled [] true)
+    (unlock [url]
+      (timbre/info (format "Unlock! %s" url)))
+    (updateLock [url timeoutSeconds]
+      (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds)))))
 
 (defn -getURLStreamHandler [this protocol]
   (if (= lexurl/protocol protocol) http/webdav-lexurl-handler))
