@@ -13,6 +13,7 @@
             [zdl-lex-server.article :as article]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.home :as home]
+            [zdl-lex-server.lock :as lock]
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.status :as status]
@@ -37,12 +38,14 @@
 (defn- decode [^String b64-s]
   (-> (.getBytes b64-s "UTF-8") (base64/decode) (String.)))
 
+(def anonymous-user (env :zdl-lex-anon-user "nobody"))
+
 (defn assoc-auth [{:keys [headers] :as request}]
-  (if-let [auth (some->
-                 (get-in request [:headers "authorization"])
-                 (str/replace #"^Basic " "") (decode) (str/split #":" 2))]
-    (assoc request ::user (first auth) ::password (second auth))
-    request))
+  (let [auth (some-> (get-in request [:headers "authorization"])
+                     (str/replace #"^Basic " "") (decode) (str/split #":" 2))]
+    (assoc request
+           ::user (or (first auth) anonymous-user)
+           ::password (second auth))))
 
 (defn wrap-auth
   [handler]
@@ -74,6 +77,7 @@
        ["/issues" {:get mantis/handle-issue-lookup}]
        ["/search" {:get solr/handle-search}]]
       ["/home" {:get home/handle}]
+      lock/ring-handlers
       ["/status" {:get status/handle-req}]]])
    (ring/routes
     (ring/create-resource-handler {:path "/"})
