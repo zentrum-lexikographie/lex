@@ -19,7 +19,8 @@
             [zdl-lex-server.status :as status]
             [mount.core :as mount]
             [taoensso.timbre :as timbre]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [zdl-lex-server.store :as store]))
 
 (def defaults
   (assoc site-defaults
@@ -78,7 +79,8 @@
        ["/search" {:get solr/handle-search}]]
       ["/home" {:get home/handle}]
       lock/ring-handlers
-      ["/status" {:get status/handle-req}]]])
+      ["/status" {:get status/handle-req}]
+      store/ring-handlers]])
    (ring/routes
     (ring/create-resource-handler {:path "/"})
     (wrap-content-type (wrap-webjars (constantly nil)))

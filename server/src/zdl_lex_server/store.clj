@@ -1,6 +1,8 @@
 (ns zdl-lex-server.store
   (:require [me.raynes.fs :as fs]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [ring.util.request :as htreq]
+            [ring.util.http-response :as htstatus]))
 
 (def data-dir (-> (env :zdl-lex-data-dir "../data")
                   fs/file fs/absolute fs/normalized))
@@ -36,3 +38,18 @@
 
 (comment
   (take 10 (article-files)))
+
+(defn get-article [{{:keys [path]} :path-params}]
+  (let [f (id->file path)]
+    (if (fs/exists? f)
+      (htstatus/ok f)
+      (htstatus/not-found path))))
+
+(defn post-article [{{:keys [path]} :path-params :as req}]
+  (let [f (id->file path)]
+    (if (fs/exists? f)
+      (do (spit f (htreq/body-string req) :encoding "UTF-8") (htstatus/ok f))
+      (htstatus/not-found path))))
+
+(def ring-handlers
+  ["/store/*path" {:get get-article :post post-article}])
