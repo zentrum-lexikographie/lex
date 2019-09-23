@@ -42,38 +42,41 @@
 (defn- now []
   (System/currentTimeMillis))
 
-(defn- lock [req ttl]
-  (let [components (str/split (get-in req [:path-params :path] "") #"/+")
-        resource (some->> (drop-last components) (seq) (str/join \/))
-        token (not-empty (last components))
-        token (if (= "_" token) (uuid) token)
-        now (now)]
+(defn- lock [{{:keys [resource]} :path-params
+              {:keys [ttl token] :or {ttl "60"}} :params
+              owner :zdl-lex-server.http/user
+              owner_ip :remote-addr
+              :as req}]
+  (when-not (not-empty resource)
+    (throw (IllegalArgumentException. (str req))))
+  (let [now (now)]
     {:resource resource
-     :token token
+     :token (or token (uuid))
      :now now
-     :expires (+ now (* 1000 ttl))
-     :owner (:zdl-lex-server.http/user req)
-     :owner_ip (:remote-addr req)}))
+     :expires (+ now (* 1000 (Integer/parseInt ttl)))
+     :owner owner
+     :owner_ip owner_ip}))
 
 (defn get-list [_]
   (jdbc/with-db-transaction [c db {:read-only? true}]
     (htstatus/ok (list-active-locks db {:now (now)}))))
 
-(defn post-lock [{{:keys [ttl] :or {ttl "60"}} :params :as req}]
-  (let [lock (lock req (Integer/parseInt ttl))]
+(defn post-lock [req]
+  (let [lock (lock req)]
     (jdbc/with-db-transaction [c db {:isolation :serializable}]
       (if-let [other-lock (get-other-lock c lock)]
         (htstatus/bad-request other-lock)
         (do (merge-lock c lock) (htstatus/ok (get-active-lock c lock)))))))
 
 (defn delete-lock [req]
-  (let [lock (lock 0)]
+  (let [lock (lock req)]
     (jdbc/with-db-transaction [c db]
       (if-let [active-lock (get-active-lock c lock)]
-        (do (remove-lock c active-lock) (htstatus/ok active-lock))
+        (do (remove-lock c (assoc active-lock :now (now)))
+            (htstatus/ok active-lock))
         (htstatus/not-found lock)))))
 
 (def ring-handlers
   ["/lock"
    ["" {:get get-list}]
-   ["/*path" {:post post-lock :delete delete-lock}]])
+   ["/*resource" {:post post-lock :delete delete-lock}]])

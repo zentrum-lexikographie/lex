@@ -2,24 +2,25 @@
 -- :doc Creates the table for lock records
 create table if not exists lock (
   resource varchar(255) not null,
-  token varchar(36) not null,
   owner varchar(64) not null,
+  token varchar(36) not null,
   owner_ip varchar(64) not null,
   expires bigint not null,
-  primary key (resource, token)
+  primary key (resource, owner, token)
 )
 
 -- :name list-active-locks :? :*
 -- :doc Lists all active/non-expired locks
 select * from lock
 where expires > :now
-order by resource, token
+order by resource, owner, token
 
 -- :name get-active-lock :? :1
 -- :doc Retrieves an active lock
 select * from lock
 where expires > :now
 and resource = :resource
+and owner = :owner
 and token = :token
 
 -- :name get-other-lock :? :1
@@ -27,14 +28,15 @@ and token = :token
 select * from lock
 where expires > :now
 and resource = :resource
+and owner <> :owner
 and token <> :token
 
 -- :name merge-lock :!
 -- :doc Upserts a (new) lock
 merge into lock
-(resource, token, owner, owner_ip, expires)
+(resource, owner, token, owner_ip, expires)
 values
-(:resource, :token, :owner, :owner_ip, :expires)
+(:resource, :owner, :token, :owner_ip, :expires)
 
 
 -- :name remove-lock :! :n
@@ -42,8 +44,8 @@ values
 delete from lock
 where expires > :now
 and resource = :resource
-and token = :token
 and owner = :owner
+and token = :token
 
 -- :name remove-expired-locks :! :n
 -- :doc Purges expired lock records
@@ -53,5 +55,5 @@ where expires <= :now
 -- :name create-lock-query-index :!
 -- :doc Create index for speeding up lock lookup
 create index if not exists lock_query_index
-on lock (expires, resource, token)
+on lock (expires, resource, owner, token)
 
