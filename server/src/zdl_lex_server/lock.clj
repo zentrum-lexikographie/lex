@@ -29,7 +29,7 @@
 
 (defn cleanup-locks []
   (jdbc/with-db-transaction [c db]
-    (delete-expired-locks c {:now (System/currentTimeMillis)})))
+    (remove-expired-locks c {:now (System/currentTimeMillis)})))
 
 (defstate lock-cleanup
   :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup-locks)
@@ -39,39 +39,41 @@
   (mount/start #'db #'lock-cleanup)
   (mount/stop))
 
-(let [timestamps #(let [now (System/currentTimeMillis)]
-                    (hash-map :now now :expires (+ now (* 1000 %))))
-      owner #(hash-map :owner (:zdl-lex-server.http/user %)
-                       :owner_ip (:remote-addr %))
-      id #(let [components (str/split (get-in % [:path-params :path] "") #"/+")
-                resource (some->> (drop-last components) (seq) (str/join \/))
-                token (not-empty (last components))
-                token (if (= "_" token) (uuid) token)]
-            (hash-map :resource resource :token token))]
-  (def ring-handlers
-    ["/lock"
-     [""
-      {:get
-       (fn
-         [_]
-         (jdbc/with-db-transaction [c db {:read-only? true}]
-           (->> (timestamps 0) (list-active-locks db) (htstatus/ok))))}]
-     ["/*path"
-      {:post
-       (fn
-         [{{:keys [ttl] :or {ttl "60"}} :params :as req}]
-         (let [lock (merge (id req)
-                           (owner req)
-                           (timestamps (Integer/parseInt ttl)))]
-           (jdbc/with-db-transaction [c db {:isolation :serializable}]
-             (if-let [other-lock (get-other-lock c lock)]
-               (htstatus/bad-request other-lock)
-               (do (merge-lock c lock)
-                   (htstatus/ok (get-active-lock c lock)))))))
-       :delete
-       (fn [req]
-         (let [lock (merge (id req) (timestamps 0) (owner req))]
-           (jdbc/with-db-transaction [c db]
-             (if-let [lock (get-active-lock c lock)]
-               (do (delete-lock c lock) (htstatus/ok id))
-               (htstatus/not-found)))))}]]))
+(defn- now []
+  (System/currentTimeMillis))
+
+(defn- lock [req ttl]
+  (let [components (str/split (get-in req [:path-params :path] "") #"/+")
+        resource (some->> (drop-last components) (seq) (str/join \/))
+        token (not-empty (last components))
+        token (if (= "_" token) (uuid) token)
+        now (now)]
+    {:resource resource
+     :token token
+     :now now
+     :expires (+ now (* 1000 ttl))
+     :owner (:zdl-lex-server.http/user req)
+     :owner_ip (:remote-addr req)}))
+
+(defn get-list [_]
+  (jdbc/with-db-transaction [c db {:read-only? true}]
+    (htstatus/ok (list-active-locks db {:now (now)}))))
+
+(defn post-lock [{{:keys [ttl] :or {ttl "60"}} :params :as req}]
+  (let [lock (lock req (Integer/parseInt ttl))]
+    (jdbc/with-db-transaction [c db {:isolation :serializable}]
+      (if-let [other-lock (get-other-lock c lock)]
+        (htstatus/bad-request other-lock)
+        (do (merge-lock c lock) (htstatus/ok (get-active-lock c lock)))))))
+
+(defn delete-lock [req]
+  (let [lock (lock 0)]
+    (jdbc/with-db-transaction [c db]
+      (if-let [active-lock (get-active-lock c lock)]
+        (do (remove-lock c active-lock) (htstatus/ok active-lock))
+        (htstatus/not-found lock)))))
+
+(def ring-handlers
+  ["/lock"
+   ["" {:get get-list}]
+   ["/*path" {:post post-lock :delete delete-lock}]])

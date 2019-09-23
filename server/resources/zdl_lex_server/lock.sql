@@ -9,11 +9,6 @@ create table if not exists lock (
   primary key (resource, token)
 )
 
--- :name create-lock-query-index :!
--- :doc Create index for speeding up lock lookup
-create index if not exists lock_query_index
-on lock (resource, token, expires)
-
 -- :name list-active-locks :? :*
 -- :doc Lists all active/non-expired locks
 select * from lock
@@ -23,16 +18,16 @@ order by resource, token
 -- :name get-active-lock :? :1
 -- :doc Retrieves an active lock
 select * from lock
-where resource = :resource
+where expires > :now
+and resource = :resource
 and token = :token
-and expires > :now
 
 -- :name get-other-lock :? :1
 -- :doc Retrieves another lock
 select * from lock
-where resource = :resource
+where expires > :now
+and resource = :resource
 and token <> :token
-and expires > :now
 
 -- :name merge-lock :!
 -- :doc Upserts a (new) lock
@@ -42,14 +37,21 @@ values
 (:resource, :token, :owner, :owner_ip, :expires)
 
 
--- :name delete-lock :! :n
--- :doc Deletes a lock
+-- :name remove-lock :! :n
+-- :doc Removes a lock
 delete from lock
-where resource = :resource
+where expires > :now
+and resource = :resource
 and token = :token
 and owner = :owner
 
--- :name delete-expired-locks :! :n
+-- :name remove-expired-locks :! :n
 -- :doc Purges expired lock records
 delete from lock
 where expires <= :now
+
+-- :name create-lock-query-index :!
+-- :doc Create index for speeding up lock lookup
+create index if not exists lock_query_index
+on lock (expires, resource, token)
+
