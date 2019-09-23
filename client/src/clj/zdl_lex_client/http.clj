@@ -18,77 +18,108 @@
 
 (def server-base (env :zdl-lex-server-base "https://lex.dwds.de/"))
 
-(def ^:private basic-creds
-  (let [user (env :zdl-lex-server-auth-user)
-        password (env :zdl-lex-server-auth-password)]
-    (if (and user password)
-      (apply str (map char (base64/encode (.getBytes (str user ":" password))))))))
+(defn server-url [& args]
+  (-> (apply url (cons server-base (filter string? args)))
+      (assoc :query (apply merge (filter map? args)))))
 
-(defn server-url
-  ([path]
-   (server-url path {}))
-  ([path params]
-   (URL. (str (merge (url server-base) {:path path :query params})))))
+(comment
+  (str (server-url "lock/" "test/test2.xml" {:t "_"} {:ttl "500"})))
 
-(defn tx [callback url]
-  (let [con (.. url (openConnection))]
-    (timbre/debug (str url))
-    (try
-      (when basic-creds
-        (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-      (callback con)
-      (catch ConnectException e
-        (throw (ex-info "I/O error while connecting to XML database" {} e)))
-      (catch IOException e
-        (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
-          (throw (ex-info "I/O error while talking to server"
-                          {:http-status (.getResponseCode con)
-                           :http-message (.getResponseMessage con)
-                           :http-body (slurp err)})))))))
+(let [user (env :zdl-lex-server-auth-user)
+      password (env :zdl-lex-server-auth-password)
+      basic-creds (if (and user password)
+                    (->> (str user ":" password) (.getBytes)
+                         (base64/encode) (map char) (apply str)))]
+  (defn tx [callback url]
+    (timbre/debug url)
+    (let [con (.. (-> url str (java.net.URL.)) (openConnection))]
+      (try
+        (when basic-creds
+          (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
+        (callback con)
+        (catch ConnectException e
+          (throw (ex-info "I/O error while connecting to XML database" {} e)))
+        (catch IOException e
+          (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
+            (throw (ex-info "I/O error while talking to server"
+                            {:http-status (.getResponseCode con)
+                             :http-message (.getResponseMessage con)
+                             :http-body (slurp err)}))))))))
 
 (defn read-xml [con]
-  (doto con (.setRequestProperty "Accept" "application/xml"))
+  (doto con (.setRequestProperty "Accept" "text/xml"))
   (.getInputStream con))
 
 (def get-xml (partial tx (comp xml/->dom read-xml)))
 
-(defn- read-edn [con]
+(defn write-and-read-xml [msg con]
   (doto con
-    (.setRequestProperty "Accept" "application/edn"))
-  (-> (.getInputStream con)
-      (slurp :encoding "UTF-8")
-      (read-string)))
+    (.setDoOutput true)
+    (.setRequestMethod "POST")
+    (.setRequestProperty "Content-Type" "text/xml;charset=utf-8")
+    (.setRequestProperty "Accept" "text/xml"))
+  (-> (.getOutputStream con) (spit msg :encoding "UTF-8"))
+  (-> (.getInputStream con) (xml/->dom)))
 
-(defn- write-and-read-edn [msg]
-  (fn [con]
-    (doto con
-      (.setDoOutput true)
-      (.setRequestMethod "POST")
-      (.setRequestProperty "Content-Type" "application/edn")
-      (.setRequestProperty "Accept" "application/edn"))
-    (-> (.getOutputStream con)
-        (spit (pr-str msg) :encoding "UTF-8"))
-    (-> (.getInputStream con)
-        (slurp :encoding "UTF-8")
-        (read-string))))
+(defn- read-edn
+  ([con]
+   (read-edn "GET" con))
+  ([method con]
+   (doto con
+     (.setRequestMethod (str/upper-case method))
+     (.setRequestProperty "Accept" "application/edn"))
+   (-> (.getInputStream con) (slurp :encoding "UTF-8") (read-string))))
+
+(defn- write-and-read-edn [msg con]
+  (doto con
+    (.setDoOutput true)
+    (.setRequestMethod "POST")
+    (.setRequestProperty "Content-Type" "application/edn")
+    (.setRequestProperty "Accept" "application/edn"))
+  (-> (.getOutputStream con) (spit (pr-str msg) :encoding "UTF-8"))
+  (-> (.getInputStream con) (slurp :encoding "UTF-8") (read-string)))
 
 (def get-edn
   (partial tx read-edn))
 
 (defn post-edn [url msg]
-  (tx (write-and-read-edn msg) url))
+  (tx (partial write-and-read-edn msg) url))
+
+(def api-store-lexurl-handler
+  (proxy [URLStreamHandler] []
+    (openConnection [url]
+      (let [api-store-url (server-url "store/" (lexurl/url->id))]
+        (proxy [URLConnection] [url]
+          (connect
+            []
+            (comment "No-Op"))
+          (getInputStream
+            []
+            (tx read-xml api-store-url))
+          (getOutputStream
+            []
+            (proxy [java.io.ByteArrayOutputStream] []
+              (close []
+                (let [xml (.. this (toString "UTF-8"))]
+                  (tx (partial write-and-read-xml xml) api-store-url))))))))))
+
+(defn lock [id ttl]
+  (post-edn (server-url "lock/" id {:token "_" :ttl (str ttl)})))
+
+(defn unlock [id token]
+  (tx (partial read-edn "DELETE") (server-url "lock/" id {:token token})))
 
 (defn get-issues [q]
-  (get-edn (server-url "/articles/issues" {"q" q})))
+  (get-edn (server-url "/articles/issues" {:q q})))
 
 (defn suggest-forms [q]
-  (get-edn (server-url "/articles/forms/suggestions" {"q" q})))
+  (get-edn (server-url "/articles/forms/suggestions" {:q q})))
 
 (defn sync-with-exist [id]
-  (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
+  (post-edn (server-url "/articles/exist/sync-id" {:id id}) {}))
 
 (defn create-article [form pos]
-  (post-edn (server-url "/articles/create" {"form" form "pos" pos}) {}))
+  (post-edn (server-url "/articles/create" {:form form :pos pos}) {}))
 
 (defn get-status []
   (->> (get-edn (server-url "/status"))
@@ -101,7 +132,7 @@
 
 (defn search-articles [req]
   (let [q (query/translate (req :query))]
-    (->> (get-edn (server-url "/articles/search" {"q" q "limit" "1000"}))
+    (->> (get-edn (server-url "/articles/search" {:q q :limit "1000"}))
          (merge req)
          (bus/publish! :search-response))))
 
@@ -112,7 +143,7 @@
 (defn- send-change-notification [[url _]]
   (try
     (let [id (lexurl/url->id url)]
-      (post-edn (server-url "/articles/exist/sync-id" {"id" id}) {}))
+      (post-edn (server-url "/articles/exist/sync-id" {:id id}) {}))
     (catch Exception e (timbre/warn e))))
 
 (defstate send-change-notifications
@@ -128,31 +159,5 @@
 (defn export [query ^File f]
   (let [q (query/translate query)]
     (tx (save-csv-to-file f)
-        (server-url "/articles/export" {"q" q "limit" "50000"}))))
+        (server-url "/articles/export" {:q q :limit "50000"}))))
 
-(def ^:private webdav-uri
-  (-> (env :zdl-lex-webdav-base "https://lex.dwds.de/exist/webdav/db/dwdswb/data")
-      (str "/")
-      (URI.)))
-
-(defn path->uri [path] (URI. nil nil path nil))
-
-(defn id->webdav-url [id]
-  (.. webdav-uri (resolve (path->uri id)) (toURL)))
-
-(comment
-  (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->webdav-url))
-
-(def webdav-lexurl-handler
-  (proxy [URLStreamHandler] []
-    (openConnection [url]
-      (proxy [URLConnection] [url]
-        (connect [])
-        (getInputStream []
-          (->> url
-               (lexurl/url->id)
-               (id->webdav-url)
-               (tx read-xml)))
-        (getOutputStream []
-          ;; returns a null sink
-          (java.io.ByteArrayOutputStream.))))))

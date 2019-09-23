@@ -26,7 +26,7 @@
                                 (issue-view/create-panel)
                                 :divider-location 0.75)]
     (try
-      (lexurl/install-stream-handler! http/webdav-lexurl-handler)
+      (lexurl/install-stream-handler! http/api-store-lexurl-handler)
       (catch Throwable t))
 
     (mount/stop)

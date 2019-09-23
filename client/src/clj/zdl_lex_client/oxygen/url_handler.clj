@@ -22,4 +22,4 @@
       (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds)))))
 
 (defn -getURLStreamHandler [this protocol]
-  (if (= lexurl/protocol protocol) http/webdav-lexurl-handler))
+  (if (= lexurl/protocol protocol) http/api-store-lexurl-handler))
