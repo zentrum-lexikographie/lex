@@ -1,6 +1,6 @@
 (ns zdl-lex-common.log
   (:require [taoensso.timbre :as timbre]
-            [environ.core :refer [env]]
+            [zdl-lex-common.env :refer [env]]
             [clojure.string :as str])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
@@ -10,7 +10,7 @@
 
 (defn configure-timbre []
   (timbre/handle-uncaught-jvm-exceptions!)
-  (timbre/set-level! (-> (env :zdl-lex-log-level "INFO") str/lower-case keyword))
+  (timbre/set-level! (env :log-level))
   (timbre/merge-config!
    {:ns-blacklist ["clj-soap.client"
                    "httpclient.*"

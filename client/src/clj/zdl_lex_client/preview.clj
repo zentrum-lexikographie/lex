@@ -1,11 +1,11 @@
 (ns zdl-lex-client.preview
-  (:require [cemerick.url :refer [url url-encode]]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [zdl-lex-common.url :as lexurl]
+            [zdl-lex-common.util :refer [url url-encode]]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
@@ -17,7 +17,7 @@
 (defn set-id [^URL url]
   (reset! id (if url (lexurl/url->id url))))
 
-(def url-base (url "http://zwei.dwds.de/wb/existdb/"))
+(def base-url (URL. "http://zwei.dwds.de/wb/existdb/"))
 
 (defstate remove-chrome-profile
   :start (fs/delete-dir
@@ -28,13 +28,11 @@
   :stop (editor->id))
 
 (defn render [id]
-  (some->>
-   ;; article path needs double-encoding because zwei.dwds.de simply appends it
-   ;; to eXist's REST base URL
-   {:query {:d (-> (str "dwdswb/data/" id) (url-encode))}}
-   (merge url-base)
-   (str) (URL.)
-   (ws/open-url ws/instance)))
+  ;; article path needs double-encoding because zwei.dwds.de simply appends it
+  ;; to eXist's REST base URL
+  (let [q (url-encode (str "dwdswb/data/" id))]
+    (->> (url "http://zwei.dwds.de/wb/existdb/" {:q q})
+         (ws/open-url ws/instance))))
 
 (defn handle-action [e]
   (let [id @id

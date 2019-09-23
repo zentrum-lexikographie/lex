@@ -10,6 +10,7 @@
             [clojure.core.async :as a]
             [zdl-lex-server.exist :as exist]
             [zdl-lex-server.mantis :as mantis]
+            [zdl-lex-common.env :refer [env env->str]]
             [zdl-lex-common.log :as log]
             [zdl-lex-common.article :as article])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
@@ -21,6 +22,7 @@
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))
+  (timbre/info (env->str env))
   (timbre/info (mount/start)))
 
 (comment

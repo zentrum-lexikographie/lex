@@ -1,38 +1,34 @@
 (ns zdl-lex-client.http
-  (:require [cemerick.url :refer [url]]
-            [clojure.core.async :as a]
+  (:require [clojure.core.async :as a]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :as lexurl]
+            [zdl-lex-common.util :refer [url]]
             [zdl-lex-common.xml :as xml])
   (:import [java.io File IOException]
            [java.net ConnectException URI URL URLStreamHandler URLConnection]))
 
-(def server-base (env :zdl-lex-server-base "https://lex.dwds.de/"))
-
-(defn server-url [& args]
-  (-> (apply url (cons server-base (filter string? args)))
-      (assoc :query (apply merge (filter map? args)))))
+(def server-url (partial url (env :server-base)))
 
 (comment
-  (str (server-url "lock/" "test/test2.xml" {:t "_"} {:ttl "500"})))
+  (str (server-url "lock/" "test/test2.xml" {:ttl "300"} {:token "_"})))
 
-(let [user (env :zdl-lex-server-auth-user)
-      password (env :zdl-lex-server-auth-password)
+(let [user (env :server-user)
+      password (env :server-password)
       basic-creds (if (and user password)
                     (->> (str user ":" password) (.getBytes)
                          (base64/encode) (map char) (apply str)))]
   (defn tx [callback url]
     (timbre/debug url)
-    (let [con (.. (-> url str (java.net.URL.)) (openConnection))]
+    (let [con (.. url (openConnection))]
       (try
         (when basic-creds
           (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))

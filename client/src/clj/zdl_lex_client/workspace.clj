@@ -1,11 +1,10 @@
 (ns zdl-lex-client.workspace
-  (:require [cemerick.url :refer [url]]
-            [clojure.java.browse :refer [browse-url]]
-            [environ.core :refer [env]]
+  (:require [clojure.java.browse :refer [browse-url]]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
+            [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.xml :as xml]
             [me.raynes.fs :as fs])

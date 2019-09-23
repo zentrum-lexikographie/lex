@@ -16,6 +16,7 @@
                  [com.taoensso/timbre "4.10.0"]
                  [gremid/lucene-query "0.1.1"]
                  [me.raynes/fs "1.4.6"]
+                 [metosin/spec-tools "0.10.0"]
                  [net.sf.saxon/Saxon-HE "9.9.1-4"]
                  [org.relaxng/jing "20181222"
                   :exclusions [xml-apis net.sf.saxon/Saxon-HE]]

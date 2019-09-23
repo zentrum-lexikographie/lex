@@ -11,7 +11,7 @@
            ro.sync.exml.plugin.lock.LockHandler))
 
 (defn -isLockingSupported [this protocol]
-  (= lexurl/protocol protocol))
+  (= "lex" protocol))
 
 (defn -getLockHandler [this]
   (proxy [LockHandler] []
@@ -22,4 +22,4 @@
       (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds)))))
 
 (defn -getURLStreamHandler [this protocol]
-  (if (= lexurl/protocol protocol) http/api-store-lexurl-handler))
+  (if (= "lex" protocol) http/api-store-lexurl-handler))
