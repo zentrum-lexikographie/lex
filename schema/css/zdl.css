@@ -22,7 +22,7 @@ Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
 
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
-Beleg, Kollokation, Kollokation2, Kompetenzbeispiel, Idiom, Phrasem,
+Beleg, Kollokation, Kompetenzbeispiel, Idiom, Phrasem,
 Kollokationen, Konstruktionsmuster, Kommentar {
 	border: 1px dotted #999;
 	padding: 0.5em;
@@ -54,7 +54,6 @@ Phrasem:before                { content: "Phrasem"; }
 Konstruktionsmuster:before    { content: "Konstruktionsmuster"; }
 Kollokationen:before          { content: "Kollokationen"; }
 Kollokation:before            { content: "Kollokation"; }
-Kollokation2:before           { content: "Kollokation (Typ 2)"; }
 Verwendungsbeispiele:before   { content: "Verwendungsbeispiele"; }
 Beleg:before                  { content: "Beleg"; }
 Kompetenzbeispiel:before      { content: "Kompetenzbeispiel"; }
@@ -65,8 +64,7 @@ Illustration:before           { content: "Illustration"; }
 Formangabe >*:before,
 Grammatik > *:before, Diachronie > *:before, Diasystematik > *:before,
 Fundstelle:before, Kurztitel:before, Belegtext:before,
-Verweise > *:before, Verweis > *:before,
-Kollokation > *:before, Kollokation2 > *:before,
+Verweise > *:before, Verweis > *:before, Kollokation > *:before,
 Konstruktionsmuster > *:before, Idiom > *:before, Phrasem > *:before {
 	color: gray;
 }
@@ -194,7 +192,7 @@ Schreibung[Typ="AR_G"] { color: brown; }
 Grammatik, Syntagmatik { color: maroon; }
 
 /* Markierung von Kollokationsrelationen*/
-Kollokation:after, Kollokation2:after {
+Kollokation:after {
 	-oxy-append-content:"SYN: ["attr(syntaktische_Relation)"] ";
 	-oxy-append-content:"SEM: ["attr(semantische_Relation)"] ";
 	white-space: -oxy-trim-when-ws-only;
