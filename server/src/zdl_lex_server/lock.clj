@@ -6,16 +6,13 @@
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.util :refer [uuid]]
             [zdl-lex-server.store :as store]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
-            [mount.core :as mount])
-  (:import java.util.UUID))
+            [mount.core :as mount]))
 
 (def-db-fns "zdl_lex_server/lock.sql")
-
-(defn uuid []
-  (-> (UUID/randomUUID) str str/lower-case))
 
 (defstate db
   :start (let [db {:dbtype "h2"

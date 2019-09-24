@@ -21,109 +21,131 @@
 (comment
   (str (server-url "lock/" "test/test2.xml" {:ttl "300"} {:token "_"})))
 
+(defn str->stream [s stream]
+  (spit stream s :encoding "UTF-8"))
+
+(defn stream->str [stream]
+  (slurp stream :encoding "UTF-8"))
+
+(defn successful? [{:keys [status]}] (< status 400))
+
+(defn handle-on-success [handler response stream]
+  (if (successful? response) (handler stream) (stream->str stream)))
+
+(defn- respond [request con handler full-response? body-stream]
+  (let [head{:status (.getResponseCode con)
+             :message (.getResponseMessage con)
+             :headers (->> (into {} (.getHeaderFields con))
+                           (remove (comp nil? first))
+                           (into (sorted-map)))}
+        body (if handler
+               (handler head body-stream)
+               (stream->str body-stream))
+        response (assoc head :body body)]
+    (cond
+      full-response? response
+      (successful? response) body
+      :else (throw (ex-info "HTTP Client Error"
+                            (assoc request :response response))))))
+
 (let [user (env :server-user)
       password (env :server-password)
       basic-creds (if (and user password)
                     (->> (str user ":" password) (.getBytes)
                          (base64/encode) (map char) (apply str)))]
-
-  (defn- parse-response [con body-stream & {:keys [response-handler]}]
-    (let [response {:status (.getResponseCode con)
-                    :message (.getResponseMessage con)
-                    :headers (into (sorted-map) (.getHeaderFields con))}]
-      (->> (if response-handler
-             (response-handler response body-stream)
-             (slurp body-stream :encoding "UTF-8"))
-           (assoc response :body))))
-
   (defn request [method url &
-                 {:keys [content-type accept request-body] :as options}]
-    (timbre/debug (merge {:method method :url url} options))
-    (let [con (.. url (openConnection))]
+                 {:keys [headers request-body response-handler full-response?]
+                  :or {headers {} full-response? false}
+                  :as options}]
+    (let [con (.. url (openConnection))
+          request (merge {:method method :url url} options)
+          respond (partial respond request con response-handler full-response?)]
+      (timbre/debug request)
       (try
         (.setRequestMethod con method)
         (when basic-creds
           (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-        (when content-type
-          (.setRequestProperty con "Content-Type" content-type))
-        (when accept
-          (.setRequestProperty con "Accept" accept))
+        (doseq [[key value] headers]
+          (.setRequestProperty con key value))
         (when request-body
           (.setDoOutput con true)
           (with-open [request-stream (.getOutputStream con)]
             (request-body request-stream)))
         (with-open [response-stream (.getInputStream con)]
-          (parse-response con response-stream options))
+          (respond response-stream))
         (catch ConnectException e
-          (throw (ex-info "I/O error while connecting to XML database" {} e)))
+          (throw (ex-info "HTTP Client Error" request e)))
         (catch IOException e
           (with-open [response-stream (.getErrorStream con)]
-            (parse-response con response-stream options)))))))
+            (respond response-stream)))))))
 
-(defn read-xml [con]
-  (doto con (.setRequestProperty "Accept" "text/xml"))
-  (.getInputStream con))
+(def xml-response-handler
+  (partial handle-on-success xml/->dom))
 
-(def get-xml (partial tx (comp xml/->dom read-xml)))
+(defn get-xml [url]
+  (request
+   "GET" url
+   :headers {"Accept" "text/xml"}
+   :response-handler xml-response-handler))
 
-(defn write-and-read-xml [msg con]
-  (doto con
-    (.setDoOutput true)
-    (.setRequestMethod "POST")
-    (.setRequestProperty "Content-Type" "text/xml;charset=utf-8")
-    (.setRequestProperty "Accept" "text/xml"))
-  (-> (.getOutputStream con) (spit msg :encoding "UTF-8"))
-  (-> (.getInputStream con) (xml/->dom)))
+(defn post-xml [url xml]
+  (request
+   "POST" url
+   :headers {"Content-Type" "text/xml;charset=utf-8" "Accept" "text/xml"}
+   :request-body (partial str->stream xml)
+   :response-handler xml-response-handler))
 
-(defn- read-edn
-  ([con]
-   (read-edn "GET" con))
-  ([method con]
-   (doto con
-     (.setRequestMethod (str/upper-case method))
-     (.setRequestProperty "Accept" "application/edn"))
-   (-> (.getInputStream con) (slurp :encoding "UTF-8") (read-string))))
+(def edn-response-handler
+  (partial handle-on-success (comp read-string stream->str)))
 
-(defn- write-and-read-edn [msg con]
-  (doto con
-    (.setDoOutput true)
-    (.setRequestMethod "POST")
-    (.setRequestProperty "Content-Type" "application/edn")
-    (.setRequestProperty "Accept" "application/edn"))
-  (-> (.getOutputStream con) (spit (pr-str msg) :encoding "UTF-8"))
-  (-> (.getInputStream con) (slurp :encoding "UTF-8") (read-string)))
+(defn get-edn [url]
+  (request
+   "GET" url
+   :headers {"Accept" "application/edn"}
+   :response-handler edn-response-handler))
 
-(def get-edn
-  (partial tx read-edn))
+(defn post-edn [url d]
+  (request
+   "POST" url
+   :headers {"Content-Type" "application/edn" "Accept" "application/edn"}
+   :request-body (partial str->stream (pr-str d))
+   :response-handler edn-response-handler))
 
-(defn post-edn [url msg]
-  (tx (partial write-and-read-edn msg) url))
+(defn id->store-url [id]
+  (server-url "store/" id))
 
 (def api-store-lexurl-handler
   (proxy [URLStreamHandler] []
     (openConnection [url]
-      (let [api-store-url (server-url "store/" (lexurl/url->id url))]
+      (let [api-store-url (url lexurl/url->id id->store-url)]
         (proxy [URLConnection] [url]
           (connect
             []
             (comment "No-Op"))
           (getInputStream
             []
-            (tx read-xml api-store-url))
+            (request "GET" api-store-url
+                     :headers {"Accept" "text/xml"}
+                     :response-handler (partial handle-on-success identity)))
           (getOutputStream
             []
             (proxy [java.io.ByteArrayOutputStream] []
               (close []
-                (let [xml (.. this (toString "UTF-8"))]
-                  (tx (partial write-and-read-xml xml) api-store-url))))))))))
+                (post-xml api-store-url (.. this (toString "UTF-8")))))))))))
 
 (defn lock [id ttl token]
-  (->> (if token {:token token} {})
-       (server-url "lock/" id {:ttl (str ttl)})
-       (post-edn)))
+  (request
+   "POST" (server-url "lock/" id {:ttl (str ttl)} (if token {:token token} {}))
+   :headers {"Accept" "application/edn"}
+   :response-handler edn-response-handler
+   :full-response? true))
 
 (defn unlock [id token]
-  (tx (partial read-edn "DELETE") (server-url "lock/" id {:token token})))
+  (request
+   "DELETE" (server-url "lock/" id {:token token})
+   :headers {"Accept" "application/edn"}
+   :response-handler edn-response-handler
+   :full-response? true))
 
 (defn get-issues [q]
   (get-edn (server-url "/articles/issues" {:q q})))
@@ -132,7 +154,10 @@
   (get-edn (server-url "/articles/forms/suggestions" {:q q})))
 
 (defn create-article [form pos]
-  (post-edn (server-url "/articles/create" {:form form :pos pos}) {}))
+  (request
+   "POST" (server-url "/articles/create" {:form form :pos pos})
+   :headers {"Accept" "application/edn"}
+   :response-handler edn-response-handler))
 
 (defn get-status []
   (->> (get-edn (server-url "/status"))
@@ -153,14 +178,11 @@
   :start (bus/listen :search-request search-articles)
   :stop (search-reqs->responses))
 
-(defn save-csv-to-file [^File f]
-  (fn [con]
-    (doto con
-      (.setRequestProperty "Accept" "text/csv"))
-    (io/copy (.getInputStream con) (io/output-stream f))))
-
 (defn export [query ^File f]
   (let [q (query/translate query)]
-    (tx (save-csv-to-file f)
-        (server-url "/articles/export" {:q q :limit "50000"}))))
+    (request
+     "GET" (server-url "/articles/export" {:q q :limit "50000"})
+     :headers {"Accept" "text/csv"}
+     :response-hander (partial handle-on-success #(io/copy % f)))))
 
+(comment (search-articles {:query "spitz*"}))

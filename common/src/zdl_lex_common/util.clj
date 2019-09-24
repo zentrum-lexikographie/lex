@@ -1,6 +1,10 @@
 (ns zdl-lex-common.util
   (:require [clojure.string :as str])
-  (:import [java.net URL URLEncoder]))
+  (:import [java.net URL URLEncoder]
+           java.util.UUID))
+
+(defn uuid []
+  (-> (UUID/randomUUID) str str/lower-case))
 
 (defn ->clean-map [m]
   (apply dissoc m (for [[k v] m :when (nil? v)] k)))

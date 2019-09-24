@@ -99,4 +99,4 @@
     (modified? [_ _] false)
     (xml-document [_ url]
       (timbre/info url)
-      (http/get-xml url))))
+      (http/get-xml (-> url lexurl/url->id http/id->store-url)))))
