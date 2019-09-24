@@ -16,7 +16,7 @@
    :server-base "https://lex.dwds.de/"
    :exist-base "http://spock.dwds.de:8080/exist"
    :mantis-base "http://odo.dwds.de/mantis"
-   :mantis-project "5"
+   :mantis-project 5
    :mantis-password "test"
    :solr-base "http://localhost:8983/solr/"
    :solr-core "articles"})
@@ -50,7 +50,7 @@
 (s/def ::exist-password string?)
 
 (s/def ::mantis-base string?)
-(s/def ::mantis-project string?)
+(s/def ::mantis-project int?)
 (s/def ::mantis-user string?)
 (s/def ::mantis-password string?)
 

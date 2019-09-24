@@ -5,14 +5,14 @@
             [clojure.data.zip.xml :as zx]
             [clojure.string :as str]
             [clojure.zip :as zip]
-            [environ.core :refer [env]]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.env :refer [env]]
             [zdl-lex-server.store :as store]))
 
-(def mantis-base (env :zdl-lex-mantis-base "http://odo.dwds.de/mantis"))
+(def mantis-base (env :mantis-base))
 
 (def issue-id->url (partial str mantis-base "/view.php?id="))
 
@@ -23,10 +23,9 @@
       (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))
 
 (def ^:private authenticate
-  (partial merge {:username (env :zdl-lex-mantis-auth-user "zdl-lex")
-                  :password (env :zdl-lex-mantis-auth-password "zdl-lex")}))
+  (partial merge {:username (env :mantis-user) :password (env :mantis-password)}))
 
-(def ^:private project (-> (env :zdl-lex-mantis-project "5") Integer/parseInt))
+(def ^:private project (env :mantis-project))
 
 (defn- zip->return [loc]
   (zx/xml-> loc dz/children zip/branch? :return))

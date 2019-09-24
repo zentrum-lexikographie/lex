@@ -2,7 +2,6 @@
   (:gen-class)
   (:require [mount.core :as mount]
             [taoensso.timbre :as timbre]
-            [environ.core :refer [env]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http :as http]
             [zdl-lex-server.solr :as solr]
@@ -15,8 +14,7 @@
             [zdl-lex-common.article :as article])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
 
-(log/configure-slf4j-bridge)
-(log/configure-timbre)
+(log/configure)
 
 (defn -main []
   (.addShutdownHook

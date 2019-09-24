@@ -1,12 +1,10 @@
 (ns zdl-lex-server.store
   (:require [me.raynes.fs :as fs]
-            [environ.core :refer [env]]
+            [zdl-lex-common.env :refer [env]]
             [ring.util.request :as htreq]
             [ring.util.http-response :as htstatus]))
 
-(def data-dir (-> (env :zdl-lex-data-dir "../data")
-                  fs/file fs/absolute fs/normalized))
-
+(def data-dir (env :data-dir))
 (def git-dir (fs/file data-dir "git"))
 (def articles-dir (fs/file git-dir "articles"))
 

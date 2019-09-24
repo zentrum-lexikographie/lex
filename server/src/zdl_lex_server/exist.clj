@@ -3,12 +3,12 @@
             [clojure.core.async :as a]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [environ.core :refer [env]]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
+            [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.xml :as xml]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-server.store :as store]
@@ -16,15 +16,14 @@
   (:import java.net.URI))
 
 (def ^:private req
-  (http-client/configure (env :zdl-lex-exist-auth-user)
-                         (env :zdl-lex-exist-auth-password)))
+  (http-client/configure (env :exist-user) (env :exist-password)))
 
 (defn path->uri [path] (URI. nil nil path nil))
 
 (def ^:private articles-path "/db/dwdswb/data")
 
 (def ^:private exist-uri
-  (URI. (str (env :zdl-lex-exist-base "http://spock.dwds.de:8080/exist") "/")))
+  (URI. (env :exist-base)))
 
 (def ^:private webdav-uri
   (.. exist-uri (resolve (path->uri (str "webdav" articles-path "/")))))

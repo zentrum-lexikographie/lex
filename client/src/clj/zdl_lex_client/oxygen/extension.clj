@@ -3,6 +3,7 @@
    :name de.zdl.oxygen.Extension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
   (:require [mount.core :as mount]
+            [taoensso.timbre :as timbre]
             [zdl-lex-client.editors :as editors]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.repl :as repl]
@@ -11,14 +12,15 @@
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws]
             [zdl-lex-client.http :as http]
+            [zdl-lex-common.env :refer [env env->str]]
             [zdl-lex-common.log :as log]
             [clojure.core.async :as a])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer]))
 
 (defn -applicationStarted [this app-ws]
-  (log/configure-slf4j-bridge)
-  (log/configure-timbre)
+  (log/configure)
+  (timbre/info (env->str env))
   (mount/start-with {#'ws/instance app-ws})
   (.addViewComponentCustomizer
      app-ws

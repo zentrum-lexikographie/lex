@@ -4,7 +4,6 @@
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [environ.core :refer [env]]
             [lucene-query.core :as lucene]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
@@ -13,6 +12,7 @@
             [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.env :refer [env]]
             [zdl-lex-server.http-client :as http-client]
             [zdl-lex-common.xml :as xml]
             [zdl-lex-server.git :as git]
@@ -94,13 +94,11 @@
       (for [[name values] (sort fields) value (sort values)]
         [name value]))))
 
-(def req (http-client/configure (env :zdl-lex-solr-auth-user)
-                                (env :zdl-lex-solr-auth-password)))
+(def req
+  (http-client/configure (env :solr-user) (env :solr-password)))
 
 (def url
-  (partial str
-           (env :zdl-lex-solr-base "http://localhost:8983/solr") "/"
-           (env :zdl-lex-solr-core "articles")))
+  (partial str (env :solr-base) (env :solr-core)))
 
 (def ^:private update-batch-size 2000)
 
