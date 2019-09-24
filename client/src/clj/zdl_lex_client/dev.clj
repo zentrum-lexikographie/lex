@@ -47,8 +47,6 @@
   (mount/start)
   (mount/stop)
 
-  (http/sync-with-exist "DWDS/MWA-001/der_Grosse_Teich.xml")
-
   (search/request "forms:plexi*")
 
   ws/instance)

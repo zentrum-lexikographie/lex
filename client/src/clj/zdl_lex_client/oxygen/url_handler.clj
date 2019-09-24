@@ -10,6 +10,8 @@
   (:import [java.net URLConnection URLStreamHandler]
            ro.sync.exml.plugin.lock.LockHandler))
 
+(def tokens (atom {}))
+
 (defn -isLockingSupported [this protocol]
   (= "lex" protocol))
 
@@ -17,9 +19,17 @@
   (proxy [LockHandler] []
     (isLockEnabled [] true)
     (unlock [url]
-      (timbre/info (format "Unlock! %s" url)))
+      (timbre/info (format "Unlock! %s" url))
+      (let [id (lexurl/url->id url)]
+        (when-let [token (@tokens id)]
+          (future
+            (http/unlock id token)
+            (swap! tokens dissoc idx)))))
     (updateLock [url timeoutSeconds]
-      (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds)))))
+      (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
+      (let [id (lexurl/url->id url)]
+        (let [token (@tokens id)]
+          (http/lock id timeoutSeconds token))))))
 
 (defn -getURLStreamHandler [this protocol]
   (if (= "lex" protocol) http/api-store-lexurl-handler))

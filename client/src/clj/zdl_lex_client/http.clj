@@ -26,21 +26,39 @@
       basic-creds (if (and user password)
                     (->> (str user ":" password) (.getBytes)
                          (base64/encode) (map char) (apply str)))]
-  (defn tx [callback url]
-    (timbre/debug url)
+
+  (defn- parse-response [con body-stream & {:keys [response-handler]}]
+    (let [response {:status (.getResponseCode con)
+                    :message (.getResponseMessage con)
+                    :headers (into (sorted-map) (.getHeaderFields con))}]
+      (->> (if response-handler
+             (response-handler response body-stream)
+             (slurp body-stream :encoding "UTF-8"))
+           (assoc response :body))))
+
+  (defn request [method url &
+                 {:keys [content-type accept request-body] :as options}]
+    (timbre/debug (merge {:method method :url url} options))
     (let [con (.. url (openConnection))]
       (try
+        (.setRequestMethod con method)
         (when basic-creds
           (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
-        (callback con)
+        (when content-type
+          (.setRequestProperty con "Content-Type" content-type))
+        (when accept
+          (.setRequestProperty con "Accept" accept))
+        (when request-body
+          (.setDoOutput con true)
+          (with-open [request-stream (.getOutputStream con)]
+            (request-body request-stream)))
+        (with-open [response-stream (.getInputStream con)]
+          (parse-response con response-stream options))
         (catch ConnectException e
           (throw (ex-info "I/O error while connecting to XML database" {} e)))
         (catch IOException e
-          (with-open [err (io/reader (.getErrorStream con) :encoding "UTF-8")]
-            (throw (ex-info "I/O error while talking to server"
-                            {:http-status (.getResponseCode con)
-                             :http-message (.getResponseMessage con)
-                             :http-body (slurp err)}))))))))
+          (with-open [response-stream (.getErrorStream con)]
+            (parse-response con response-stream options)))))))
 
 (defn read-xml [con]
   (doto con (.setRequestProperty "Accept" "text/xml"))
@@ -84,7 +102,7 @@
 (def api-store-lexurl-handler
   (proxy [URLStreamHandler] []
     (openConnection [url]
-      (let [api-store-url (server-url "store/" (lexurl/url->id))]
+      (let [api-store-url (server-url "store/" (lexurl/url->id url))]
         (proxy [URLConnection] [url]
           (connect
             []
@@ -99,8 +117,10 @@
                 (let [xml (.. this (toString "UTF-8"))]
                   (tx (partial write-and-read-xml xml) api-store-url))))))))))
 
-(defn lock [id ttl]
-  (post-edn (server-url "lock/" id {:token "_" :ttl (str ttl)})))
+(defn lock [id ttl token]
+  (->> (if token {:token token} {})
+       (server-url "lock/" id {:ttl (str ttl)})
+       (post-edn)))
 
 (defn unlock [id token]
   (tx (partial read-edn "DELETE") (server-url "lock/" id {:token token})))
@@ -110,9 +130,6 @@
 
 (defn suggest-forms [q]
   (get-edn (server-url "/articles/forms/suggestions" {:q q})))
-
-(defn sync-with-exist [id]
-  (post-edn (server-url "/articles/exist/sync-id" {:id id}) {}))
 
 (defn create-article [form pos]
   (post-edn (server-url "/articles/create" {:form form :pos pos}) {}))
@@ -135,16 +152,6 @@
 (defstate search-reqs->responses
   :start (bus/listen :search-request search-articles)
   :stop (search-reqs->responses))
-
-(defn- send-change-notification [[url _]]
-  (try
-    (let [id (lexurl/url->id url)]
-      (post-edn (server-url "/articles/exist/sync-id" {:id id}) {}))
-    (catch Exception e (timbre/warn e))))
-
-(defstate send-change-notifications
-  :start (bus/listen :editor-saved send-change-notification)
-  :stop (send-change-notifications))
 
 (defn save-csv-to-file [^File f]
   (fn [con]
