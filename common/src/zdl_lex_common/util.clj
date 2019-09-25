@@ -1,5 +1,6 @@
 (ns zdl-lex-common.util
-  (:require [clojure.string :as str])
+  (:require [clojure.string :as str]
+            [zdl-lex-common.url :refer [path->uri]])
   (:import [java.net URL URLEncoder]
            java.util.UUID))
 
@@ -22,7 +23,7 @@
 
 (defn url [base & args]
   (let [base (.. (URL. base) (toURI))
-        uri (reduce #(.resolve %1 %2) base (filter string? args))
+        uri (reduce #(.resolve %1 (path->uri %2)) base (filter string? args))
         url (.. uri (toURL) (toString))
         query (some-> (apply merge (filter map? args)) map->query)]
     (URL. (str/join \? (remove nil? [url query])))))

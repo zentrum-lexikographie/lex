@@ -28,8 +28,7 @@ and token = :token
 select * from lock
 where expires > :now
 and resource = :resource
-and owner <> :owner
-and token <> :token
+and (owner <> :owner or token <> :token)
 
 -- :name merge-lock :!
 -- :doc Upserts a (new) lock

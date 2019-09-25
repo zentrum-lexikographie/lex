@@ -126,7 +126,7 @@
   (try (read-string (slurp store/mantis-dump))
        (catch Throwable t (timbre/debug t) [])))
 
-(defonce index (atom nil))
+(defonce index (atom {}))
 
 (defn index-issues [issues]
   (group-by :lemma issues))

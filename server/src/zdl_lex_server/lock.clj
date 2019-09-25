@@ -32,10 +32,6 @@
   :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup-locks)
   :stop (a/close! lock-cleanup))
 
-(comment
-  (mount/start #'db #'lock-cleanup)
-  (mount/stop))
-
 (defn- now []
   (System/currentTimeMillis))
 
@@ -58,12 +54,20 @@
   (jdbc/with-db-transaction [c db {:read-only? true}]
     (htstatus/ok (list-active-locks db {:now (now)}))))
 
+(defn get-lock [req]
+  (let [lock (lock req)]
+    (jdbc/with-db-transaction [c db {:read-only? true}]
+      (if-let [active-lock (get-active-lock c lock)]
+        (htstatus/ok lock)
+        (htstatus/not-found)))))
+
 (defn post-lock [req]
   (let [lock (lock req)]
     (jdbc/with-db-transaction [c db {:isolation :serializable}]
       (if-let [other-lock (get-other-lock c lock)]
-        (htstatus/bad-request other-lock)
-        (do (merge-lock c lock) (htstatus/ok (get-active-lock c lock)))))))
+        (htstatus/ok other-lock)
+        (do (merge-lock c lock)
+            (htstatus/ok (get-active-lock c lock)))))))
 
 (defn delete-lock [req]
   (let [lock (lock req)]
@@ -76,4 +80,17 @@
 (def ring-handlers
   ["/lock"
    ["" {:get get-list}]
-   ["/*resource" {:post post-lock :delete delete-lock}]])
+   ["/*resource" {:get get-lock :post post-lock :delete delete-lock}]])
+
+(comment
+  (mount/start #'db #'lock-cleanup)
+  (mount/stop)
+  (get-list {})
+  (jdbc/with-db-transaction [c db]
+    (merge-lock c {:resource "WDG/ab/Abenduniversitaet-E_a_421.xml",
+                   :owner "admin",
+                   :token "81184e67-2bbb-4531-a3c4-b11040250e94",
+                   :owner_ip "127.0.0.1",
+                   :expires 1579413482314
+                   :now 1579413482313})))
+

@@ -13,7 +13,7 @@
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :refer [url]]
             [zdl-lex-common.xml :as xml])
-  (:import [java.io File IOException]
+  (:import [java.io ByteArrayInputStream ByteArrayOutputStream File IOException]
            [java.net ConnectException URI URL URLStreamHandler URLConnection]))
 
 (def server-url (partial url (env :server-base)))
@@ -58,6 +58,7 @@
                   :or {headers {} full-response? false}
                   :as options}]
     (let [con (.. url (openConnection))
+          output? (or (#{"POST" "PUT"} method) request-body)
           request (merge {:method method :url url} options)
           respond (partial respond request con response-handler full-response?)]
       (timbre/debug request)
@@ -67,10 +68,11 @@
           (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
         (doseq [[key value] headers]
           (.setRequestProperty con key value))
-        (when request-body
+        (when output?
           (.setDoOutput con true)
           (with-open [request-stream (.getOutputStream con)]
-            (request-body request-stream)))
+            (when request-body
+              (request-body request-stream))))
         (with-open [response-stream (.getInputStream con)]
           (respond response-stream))
         (catch ConnectException e
@@ -117,19 +119,19 @@
 (def api-store-lexurl-handler
   (proxy [URLStreamHandler] []
     (openConnection [url]
-      (let [api-store-url (url lexurl/url->id id->store-url)]
+      (let [api-store-url (-> url lexurl/url->id id->store-url)]
         (proxy [URLConnection] [url]
           (connect
             []
             (comment "No-Op"))
           (getInputStream
             []
-            (request "GET" api-store-url
-                     :headers {"Accept" "text/xml"}
-                     :response-handler (partial handle-on-success identity)))
+            (let [xml (request "GET" api-store-url
+                               :headers {"Accept" "text/xml"})]
+              (ByteArrayInputStream. (.. xml (getBytes "UTF-8")))))
           (getOutputStream
             []
-            (proxy [java.io.ByteArrayOutputStream] []
+            (proxy [ByteArrayOutputStream] []
               (close []
                 (post-xml api-store-url (.. this (toString "UTF-8")))))))))))
 
@@ -137,8 +139,7 @@
   (request
    "POST" (server-url "lock/" id {:ttl (str ttl)} (if token {:token token} {}))
    :headers {"Accept" "application/edn"}
-   :response-handler edn-response-handler
-   :full-response? true))
+   :response-handler edn-response-handler))
 
 (defn unlock [id token]
   (request

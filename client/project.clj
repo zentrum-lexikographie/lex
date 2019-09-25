@@ -9,6 +9,7 @@
 
   :dependencies
   [[org.clojure/clojure "1.10.1"]
+   [org.clojure/core.cache "0.8.1"]
    [org.clojure/core.memoize "0.7.2"]
    [com.github.jiconfont/jiconfont-swing "1.0.1"]
    [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]
