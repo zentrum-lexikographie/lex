@@ -1,8 +1,15 @@
 (ns zdl-lex-server.store
-  (:require [me.raynes.fs :as fs]
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]
+            [me.raynes.fs :as fs]
+            [tick.alpha.api :as t]
+            [zdl-lex-common.xml :as xml]
             [zdl-lex-common.env :refer [env]]
             [ring.util.request :as htreq]
-            [ring.util.http-response :as htstatus]))
+            [ring.util.http-response :as htstatus])
+  (:import [java.text Normalizer Normalizer$Form]
+           java.util.concurrent.TimeUnit
+           java.util.concurrent.locks.ReentrantReadWriteLock))
 
 (def data-dir (env :data-dir))
 (def git-dir (fs/file data-dir "git"))
@@ -34,20 +41,21 @@
 
 (def mantis-dump (fs/file data-dir "mantis.edn"))
 
+(defonce lock (ReentrantReadWriteLock.))
+
+(defmacro with-lock
+  [lock-method & body]
+  `(let [lock# (~lock-method ^ReentrantReadWriteLock lock)]
+     (if (.tryLock lock# 30 TimeUnit/SECONDS)
+       (try ~@body
+            (finally
+              (.unlock lock#)))
+       (throw (ex-info "Storage lock timeout" {})))))
+
+(defmacro with-read-lock [& body] `(with-lock .readLock ~@body))
+
+(defmacro with-write-lock [& body] `(with-lock .writeLock ~@body))
+
 (comment
   (take 10 (article-files)))
 
-(defn get-article [{{:keys [path]} :path-params}]
-  (let [f (id->file path)]
-    (if (fs/exists? f)
-      (htstatus/ok f)
-      (htstatus/not-found path))))
-
-(defn post-article [{{:keys [path]} :path-params :as req}]
-  (let [f (id->file path)]
-    (if (fs/exists? f)
-      (do (spit f (htreq/body-string req) :encoding "UTF-8") (htstatus/ok f))
-      (htstatus/not-found path))))
-
-(def ring-handlers
-  ["/store/*path" {:get get-article :post post-article}])

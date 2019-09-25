@@ -1,22 +1,10 @@
 (ns zdl-lex-client.bus
-  (:require [clojure.core.async :as a]
+  (:require [zdl-lex-common.bus :as bus]
             [seesaw.bind :as uib]))
 
-(defonce ^:private chan (a/chan))
+(def listen bus/listen)
 
-(defonce ^:private pubs (a/pub chan first))
-
-(defn publish! [topic v]
-  (a/>!! chan [topic v]))
-
-(defn listen [topic listener]
-  (let [c (a/chan)]
-    (a/sub pubs topic c)
-    (a/go-loop []
-      (when-let [msg (a/<! c)]
-        (a/thread (listener (second msg)))
-        (recur)))
-    (partial a/close! c)))
+(def publish! bus/publish!)
 
 (defn bind [topic]
   (reify uib/Bindable

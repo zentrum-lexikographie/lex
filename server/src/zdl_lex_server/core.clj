@@ -7,7 +7,6 @@
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.store :as store]
             [clojure.core.async :as a]
-            [zdl-lex-server.exist :as exist]
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-common.env :refer [env env->str]]
             [zdl-lex-common.log :as log]
@@ -24,7 +23,6 @@
   (timbre/info (mount/start)))
 
 (comment
-  (exist/xquery "xmldb:get-current-user()")
   (git/rebase)
   http/server
   (time (->> (store/article-files) (drop 150000) (take 3)))

@@ -1,84 +1,67 @@
 (ns zdl-lex-server.git
   (:require [clj-jgit.porcelain :as jgit]
+            [clj-jgit.querying :as jgit-query]
             [clojure.core.async :as a]
-            [clojure.java.shell :as sh]
             [clojure.set :refer [union]]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
+            [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-server.store :as store]
-            [clojure.string :as str]))
+            [ring.util.http-response :as htstatus]))
 
-(defn- format-git-result [git-args {:keys [exit out err]}]
-  (str "\n" (apply str (map (constantly "-") (range 72)))
-       "\n"
-       "\n$ git " (str/join " " git-args)
-       "\n"
-       "\n-> exit code: " exit
-       (if (not-empty out) (str "\n\n" out))
-       (if (not-empty err) (str "\n\n" err))
-       "\n" (apply str (map (constantly "-") (range 72)))))
-
-(defn git-unchecked [& args]
-  (locking store/git-dir
-    (sh/with-sh-dir store/git-dir
-      (let [result (apply sh/sh (concat ["git"] args))]
-        (timbre/info (format-git-result args result))
-        result))))
-
-(defn git [& args]
-  (let [{:keys [exit] :as result} (apply git-unchecked args)]
-    (when-not (= exit 0)
-      (timbre/warn (format-git-result args result))
-      (throw (ex-info (str args) result)))
-    result))
-
-(defn changed-files []
-  (locking store/git-dir
-    (jgit/with-repo store/git-dir
-      (->> (jgit/git-status repo) (vals) (apply union)))))
-
-(defn commit* []
-  (git "add" ".")
-  (git "commit" "-m" "zdl-lex-server"))
+(let [absolute-path #(->> % (fs/file store/git-dir) fs/absolute fs/normalized)]
+  (defn- send-changes [changed-files]
+    (when-let [changeset (some->> changed-files
+                                  (map absolute-path)
+                                  (into (sorted-set)))]
+      (timbre/spy :trace changeset)
+      (bus/publish! :git-changes changeset)
+      changed-files)))
 
 (defn commit []
-  (locking store/git-dir
-    (let [changed-files (changed-files)]
-      (when-not (empty? changed-files)
-        (commit*)
-        changed-files))))
+  (store/with-write-lock
+    (jgit/with-repo store/git-dir
+      (let [changed-files (->> (jgit/git-status repo) (vals) (apply union))]
+        (when-not (empty? changed-files)
+          (jgit/with-repo store/git-dir
+            (jgit/git-add repo ".")
+            (jgit/git-commit repo "zdl-lex-server")
+            (jgit/git-push repo))
+          (send-changes changed-files))))))
 
-(defn merge-origin []
-  (locking store/git-dir
-    (try
-      (git "pull" "-s" "recursive" "-X" "ours" "--no-edit")
-      (git "push" "origin")
-      (catch Exception e (git "merge" "--abort")))))
+(let [all-refs ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"]]
+  (defn fast-forward [refs]
+    (store/with-write-lock
+      (jgit/with-repo store/git-dir
+        (jgit/git-fetch repo :ref-specs all-refs)
+        (when-let [head (jgit-query/find-rev-commit repo rev-walk "HEAD")]
+          (let [merge (jgit/git-merge repo refs :ff-mode :ff-only)]
+            (if (.. merge (getMergeStatus) (isSuccessful))
+              (do (jgit/git-push repo)
+                  (->> (jgit/git-log repo :since head)
+                       (map :id) (reverse)
+                       (mapcat (partial jgit-query/changed-files repo))
+                       (map first)
+                       (send-changes)))
+              (throw (ex-info "Error fast-forwarding git branch"
+                              {:head head :refs refs :merge merge})))))))))
 
-(defn- absolute-path [f]
-  (->> f (fs/file store/git-dir) fs/absolute fs/normalized))
+(defstate commit-scheduler
+  :start (cron/schedule "0 * * * * ?" "Git commit" commit)
+  :stop (a/close! commit-scheduler))
 
-(defonce changes (a/chan))
+(defn handle-fast-forward
+  [{{:keys [ref]} :path-params}]
+  (if (empty? ref)
+    (htstatus/bad-request {:ref ref})
+    (try 
+      (htstatus/ok (fast-forward ref))
+      (catch Throwable t
+        (timbre/warn t)
+        (htstatus/bad-request (ex-data t))))))
 
-(defn- commit-changes []
-  (some->> (try (commit) (catch Throwable t #{}))
-           (map absolute-path)
-           (into (sorted-set))
-           (timbre/spy :trace)
-           (a/>!! changes)))
-
-(defstate changes-provider
-  :start (cron/schedule "0 * * * * ?" "Git commit" commit-changes)
-  :stop (a/close! changes-provider))
-
-(defstate rebase-scheduler
-  :start (cron/schedule "0 0 * * * ?" "Git merge" merge-origin)
-  :stop (a/close! rebase-scheduler))
-
-(comment
-  (changed-files)
-  (commit)
-  (merge-origin)
-  (println (format-git-result ["status"] (git "status"))))
+(def ring-handlers
+  ["/git"
+   ["/*ref" {:post handle-fast-forward}]])

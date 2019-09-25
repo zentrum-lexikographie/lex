@@ -1,6 +1,5 @@
 (ns zdl-lex-server.solr
-  (:require [clj-http.client :as http]
-            [clojure.core.async :as a]
+  (:require [clojure.core.async :as a]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str]
@@ -11,11 +10,11 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
+            [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-server.http-client :as http-client]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.git :as git]
+            [zdl-lex-server.http-client :as http-client]
             [zdl-lex-server.store :as store])
   (:import java.io.File))
 
@@ -154,27 +153,24 @@
 
 (def delete-articles (partial update-articles articles->delete-xml))
 
-(defstate git-changes->solr
+(defn git-changes->solr
   "Synchronizes modified articles with the Solr index"
-  :start (let [stop-ch (a/chan)]
-           (a/go-loop []
-             (when-let [changes (a/alt! git/changes ([v] v) stop-ch nil)]
-               (let [articles (filter store/article-file? changes)
-                     modified (filter fs/exists? articles)
-                     deleted (remove fs/exists? articles)]
-                 (doseq [m modified]
-                   (timbre/info {:solr {:modified (store/file->id m)}}))
-                 (doseq [d deleted]
-                   (timbre/info {:solr {:deleted (store/file->id d)}}))
-                 (a/<!
-                  (a/thread
-                    (try
-                      (add-articles modified)
-                      (delete-articles deleted)
-                      (catch Throwable t (timbre/warn t))))))
-               (recur)))
-           stop-ch)
-  :stop (a/close! git-changes->solr))
+  [changes]
+  (let [articles (filter store/article-file? changes)
+        modified (filter fs/exists? articles)
+        deleted (remove fs/exists? articles)]
+    (doseq [m modified]
+      (timbre/info {:solr {:modified (store/file->id m)}}))
+    (doseq [d deleted]
+      (timbre/info {:solr {:deleted (store/file->id d)}}))
+    (try
+      (add-articles modified)
+      (delete-articles deleted)
+      (catch Throwable t (timbre/warn t)))))
+
+(defstate git-changes-listener
+  :start (bus/listen :git-changes git-changes->solr)
+  :stop (git-changes-listener))
 
 (defn- query->delete-xml [[query]]
   (let [doc (xml/new-document)
@@ -227,20 +223,20 @@
         :query-params {"suggest.dictionary" name "suggest.q" q}
         :as :json }))
 
-(defn handle-form-suggestions [{{:keys [q]} :params}]
-  (let [solr-response (suggest "forms" (or q ""))
-        path-prefix [:body :suggest :forms (keyword q)]
-        total (get-in solr-response (conj path-prefix :numFound) 0)
-        suggestions (get-in solr-response (conj path-prefix :suggestions) [])]
-    (htstatus/ok
-     {:total total
-      :result (for [{:keys [term payload]} suggestions]
-                (merge {:suggestion term} (read-string payload)))})))
-
 (defn query [params]
   (req {:method :get :url (url "/query")
         :query-params params
         :as :json}))
+
+(defn id-exists? [id]
+  (let [q [:query
+           [:clause
+            [:field [:term "id"]]
+            [:value [:pattern (str "*" id "*")]]]]]
+    (some->>
+     (query {"q" (lucene/ast->str q) "rows" 0})
+     :body :response :numFound
+     (< 0))))
 
 (defn scroll
   ([params] (scroll params 20000))
@@ -314,21 +310,6 @@
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
-(defn handle-search [{{:keys [q offset limit]
-                :or {q "id:*" offset "0" limit "10"}} :params}]
-  (let [params {"q" (translate-query q) "start" offset "rows" limit}
-        solr-response (query (merge query-params (facet-params) params))
-        {:keys [response facet_counts]} (:body solr-response)
-        {:keys [numFound docs]} response
-        {:keys [facet_fields facet_ranges facet_intervals]} facet_counts
-        facets (concat (map facet-values facet_fields)
-                       (map facet-intervals facet_intervals)
-                       (map (comp facet-values facet-counts) facet_ranges))]
-    (htstatus/ok
-     {:total numFound
-      :result (docs->results docs)
-      :facets (into (sorted-map) facets)})))
-
 (defonce export-temp-files (atom #{}))
 
 (defn- ^File make-export-temp-file []
@@ -349,6 +330,31 @@
   :start (cron/schedule "0 */30 * * * ?" "Clean up temporary export files"
                         cleanup-export-temp-files)
   :stop (a/close! export-temp-file-cleanup))
+
+(defn handle-form-suggestions [{{:keys [q]} :params}]
+  (let [solr-response (suggest "forms" (or q ""))
+        path-prefix [:body :suggest :forms (keyword q)]
+        total (get-in solr-response (conj path-prefix :numFound) 0)
+        suggestions (get-in solr-response (conj path-prefix :suggestions) [])]
+    (htstatus/ok
+     {:total total
+      :result (for [{:keys [term payload]} suggestions]
+                (merge {:suggestion term} (read-string payload)))})))
+
+(defn handle-search [{{:keys [q offset limit]
+                :or {q "id:*" offset "0" limit "10"}} :params}]
+  (let [params {"q" (translate-query q) "start" offset "rows" limit}
+        solr-response (query (merge query-params (facet-params) params))
+        {:keys [response facet_counts]} (:body solr-response)
+        {:keys [numFound docs]} response
+        {:keys [facet_fields facet_ranges facet_intervals]} facet_counts
+        facets (concat (map facet-values facet_fields)
+                       (map facet-intervals facet_intervals)
+                       (map (comp facet-values facet-counts) facet_ranges))]
+    (htstatus/ok
+     {:total numFound
+      :result (docs->results docs)
+      :facets (into (sorted-map) facets)})))
 
 (defn handle-export [{{:keys [q limit] :or {q "id:*" limit "10"}} :params}]
   (let [params (merge query-params {"q" (translate-query q)})
@@ -377,15 +383,11 @@
                              (t/format :iso-date-time (t/date-time))
                              ".csv\""))))
 
-(defn id-exists? [id]
-  (let [q [:query
-           [:clause
-            [:field [:term "id"]]
-            [:value [:pattern (str "*" id "*")]]]]]
-    (some->>
-     (query {"q" (lucene/ast->str q) "rows" 0})
-     :body :response :numFound
-     (< 0))))
+(def ring-handlers
+  ["/index"
+   ["" {:get handle-search :delete handle-index-trigger}]
+   ["/export" {:get handle-export}]
+   ["/forms/suggestions" {:get handle-form-suggestions}]])
 
 (comment
   (->> (for [f (store/article-files)

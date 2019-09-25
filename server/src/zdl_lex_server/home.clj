@@ -3,7 +3,7 @@
             [ring.util.http-response :as htstatus]
             [hiccup.page :refer [html5 include-css]]))
 
-(defn handle [req]
+(defn handle-home [req]
   (-> (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]
              [:body
               [:div.hero.is-primary.is-bold.is-fullheight
@@ -18,3 +18,8 @@
       (htstatus/ok)
       (assoc :headers {"Content-Type" "text/html"})))
 
+
+(def ring-handlers
+  [""
+   ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
+   ["/home" {:get handle-home}]])

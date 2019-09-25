@@ -12,8 +12,6 @@ apache_global_vhost_settings: |
   DirectoryIndex index.php index.html
   EnableSendfile Off
 
-#dav_root: "/vagrant/data/git/articles"
-
 java_packages:
   - openjdk-11-jdk
 

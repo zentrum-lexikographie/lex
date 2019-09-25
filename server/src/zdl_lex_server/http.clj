@@ -11,7 +11,7 @@
             [ring.util.http-response :as htstatus]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-server.article :as article]
-            [zdl-lex-server.exist :as exist]
+            [zdl-lex-server.git :as git]
             [zdl-lex-server.home :as home]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.mantis :as mantis]
@@ -20,7 +20,7 @@
             [mount.core :as mount]
             [taoensso.timbre :as timbre]
             [clojure.string :as str]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.git :as git]))
 
 (def defaults
   (assoc site-defaults
@@ -63,21 +63,13 @@
    (ring/router
     [[""
       {:middleware [wrap-params wrap-format wrap-auth]}
-      ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
-      ["/articles"
-       ["/create" {:post article/handle-creation}]
-       ["/exist"
-        ["/sync-id" {:post exist/handle-article-sync}]
-        ["/sync-last/:amount/:unit" {:post exist/handle-period-sync}]]
-       ["/export" {:get solr/handle-export}]
-       ["/forms/suggestions" {:get solr/handle-form-suggestions}]
-       ["/index" {:delete solr/handle-index-trigger}]
-       ["/issues" {:get mantis/handle-issue-lookup}]
-       ["/search" {:get solr/handle-search}]]
-      ["/home" {:get home/handle}]
+      article/ring-handlers
+      git/ring-handlers
+      home/ring-handlers
       lock/ring-handlers
-      ["/status" {:get status/handle-req}]
-      store/ring-handlers]])
+      mantis/ring-handlers
+      solr/ring-handlers
+      status/ring-handlers]])
    (ring/routes
     (ring/create-resource-handler {:path "/"})
     (wrap-content-type (wrap-webjars (constantly nil)))

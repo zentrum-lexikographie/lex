@@ -11,12 +11,10 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :as lexurl]
-            [zdl-lex-common.util :refer [url]]
+            [zdl-lex-common.util :refer [server-url]]
             [zdl-lex-common.xml :as xml])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream File IOException]
            [java.net ConnectException URI URL URLStreamHandler URLConnection]))
-
-(def server-url (partial url (env :server-base)))
 
 (comment
   (str (server-url "lock/" "test/test2.xml" {:ttl "300"} {:token "_"})))
@@ -114,7 +112,7 @@
    :response-handler edn-response-handler))
 
 (defn id->store-url [id]
-  (server-url "store/" id))
+  (server-url "article/" id))
 
 (def api-store-lexurl-handler
   (proxy [URLStreamHandler] []
@@ -149,14 +147,14 @@
    :full-response? true))
 
 (defn get-issues [q]
-  (get-edn (server-url "/articles/issues" {:q q})))
+  (get-edn (server-url "/mantis/issues" {:q q})))
 
 (defn suggest-forms [q]
-  (get-edn (server-url "/articles/forms/suggestions" {:q q})))
+  (get-edn (server-url "/index/forms/suggestions" {:q q})))
 
 (defn create-article [form pos]
   (request
-   "POST" (server-url "/articles/create" {:form form :pos pos})
+   "PUT" (server-url "/article" {:form form :pos pos})
    :headers {"Accept" "application/edn"}
    :response-handler edn-response-handler))
 
@@ -171,7 +169,7 @@
 
 (defn search-articles [req]
   (let [q (query/translate (req :query))]
-    (->> (get-edn (server-url "/articles/search" {:q q :limit "1000"}))
+    (->> (get-edn (server-url "/index" {:q q :limit "1000"}))
          (merge req)
          (bus/publish! :search-response))))
 
@@ -182,7 +180,7 @@
 (defn export [query ^File f]
   (let [q (query/translate query)]
     (request
-     "GET" (server-url "/articles/export" {:q q :limit "50000"})
+     "GET" (server-url "/index/export" {:q q :limit "50000"})
      :headers {"Accept" "text/csv"}
      :response-hander (partial handle-on-success #(io/copy % f)))))
 

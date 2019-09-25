@@ -12,29 +12,23 @@ apache_mods_enabled:
   - proxy_http.load
   - proxy_http2.load
   - authz_groupfile.load
-  - dav.load
-  - dav_lock.load
-  - dav_fs.load
-  - dav_fs.conf
 
 apache_remove_default_vhost: true
 apache_vhosts:
   - servername: "{{ ansible_fqdn }}"
-    documentroot: "{{ dav_root }}"
+    documentroot: "/var/www"
     allow_override: "None"
     extra_parameters: |
       {{ zdl_apache_vhost_config }}
 
 zdl_api_context_paths:
-  - /articles/create
-  - /articles/exist
-  - /articles/export
-  - /articles/forms
-  - /articles/index
-  - /articles/issues
-  - /articles/search
+  - /article
   - /assets
+  - /git
   - /home
+  - /lock
+  - /index
+  - /mantis
   - /status
 
 zdl_apache_vhost_config: |
@@ -63,16 +57,6 @@ zdl_apache_vhost_config: |
     Require all granted
   </Location>
 
-  Alias /articles {{ dav_root }}
-  <Location /articles>
-    Dav On
-    DavDepthInfinity on
-
-    Options +Indexes
-
-    Require group Lexikographen
-  </Location>
-
   RedirectMatch ^/$ /home
 
   ProxyTimeout 300
@@ -90,14 +74,6 @@ zdl_apache_vhost_config: |
     Require group admin
   </Location>
 
-  <Location /exist>
-    ProxyPass http://spock.dwds.de:8080/exist retry=0
-    ProxyPassReverse http://spock.dwds.de:8080/exist
-    Require group Lexikographen
-    #Order Allow,Deny
-    #Deny from all
-  </Location>
-
 solr_version: "7.7.1"
 solr_timezone: "Europe/Berlin"
 solr_cores:
@@ -105,7 +81,5 @@ solr_cores:
 
 lex_client_dir: "/home/lex/zdl-lex-client"
 lex_data_dir: "/var/lex"
-
-dav_root: "{{ lex_data_dir }}/git/articles"
 
 zdl_lex_version: "{{ lookup('file', '../VERSION') }}"

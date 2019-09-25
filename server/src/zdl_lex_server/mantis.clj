@@ -141,10 +141,12 @@
            (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
   :stop (a/close! issues->dump->index))
 
-(defn handle-issue-lookup [{{:keys [q]} :params}]
-  (htstatus/ok
-   (pmap (comp issue :id) (or (@index q) []))))
-
+(def ring-handlers
+  ["/mantis"
+   ["/issues"
+    {:get (fn [{{:keys [q]} :params}]
+            (htstatus/ok
+             (pmap (comp issue :id) (or (@index q) []))))}]])
 (comment
   store/mantis-dump
   (->> (issues) (take 100) (index-issues))
