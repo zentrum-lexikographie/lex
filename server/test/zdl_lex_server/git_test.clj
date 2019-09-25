@@ -54,17 +54,11 @@
       (jgit/git-rm repo (str/join java.io.File/separator path))
       (jgit/git-commit repo (str "Removed " (str/join "/" path))))))
 
-(defn fetch-all [repo]
-  (doto (jgit/fetch-cmd repo)
-    (.setRefSpecs [(RefSpec. "refs/tags/*:refs/tags/*")
-                   (RefSpec. "refs/heads/*:refs/remotes/origin/*")])
-    (.setThin true)
-    (.call)))
-
 (defn ff-git [git-dir refs]
   (->> 
    (jgit/with-repo git-dir
-     (fetch-all repo)
+     (jgit/git-fetch repo :ref-specs ["refs/tags/*:refs/tags/*"
+                                      "refs/heads/*:refs/remotes/origin/*"])
      (let [head-before (jgit-query/find-rev-commit repo rev-walk "HEAD")
            merge (jgit/git-merge repo refs)]
        (if (.. merge (getMergeStatus) (isSuccessful))
