@@ -118,8 +118,8 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <4"
 version = "1.25.6"
 
 [metadata]
-content-hash = "0909c8ef92016a7506b50e7d3b566dcd71ff68e3491a776f2fbf3af9a446b48b"
-python-versions = "^3.7"
+content-hash = "ceffc9b7b08613b09e73930af9608f4464c30e2c581fc21f2bdd392722ed99e1"
+python-versions = "^3.5"
 
 [metadata.hashes]
 autoflake = ["680cb9dade101ed647488238ccb8b8bfb4369b53d58ba2c8cdf7d5d54e01f95b"]
