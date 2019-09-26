@@ -12,6 +12,7 @@ pom.xml.asc
 .idea
 *.iml
 
+.python-version
 *.pyc
 
 bin/lein

@@ -1,26 +1,22 @@
 SHELL := /bin/bash
 
-../venv:
-	make -C .. venv
-
 .PHONY: deploy
-deploy: ../venv build
-	source ../venv/bin/activate &&\
-		ansible-playbook main.yml -b -K --ask-vault-pass
+deploy: build
+	ansible-playbook main.yml -b -K --ask-vault-pass
 
 .PHONY: build
 build:
-	[ -n $$NO_BUILD ] || make -C .. client server
+ifndef NO_BUILD
+	make -C .. client server
+endif
 
 .PHONY: vm
-vm: ../venv build
-	source ../venv/bin/activate &&\
-		vagrant up
+vm: build
+	vagrant up
 
 .PHONY: vm-provision
-vm-provision: ../venv build
-	source ../venv/bin/activate &&\
-		vagrant provision
+vm-provision: build
+	vagrant provision
 
 .PHONY: vm-destroy
 vm-destroy:
