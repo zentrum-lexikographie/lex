@@ -7,14 +7,12 @@
 * [Leiningen](https://leiningen.org/)
 * [Python 3](https://www.python.org/)
 * [Ansible](https://www.ansible.com/)
-* [Poetry](https://poetry.eustace.io/)
 
 Java 8 is needed, as Oxygen XML does not work with newer versions.
 
 ## Setup
 
-    $ pip install ansible
-    $ poetry install
+    $ pip install -r requirements.txt
 
 ## Build and Deploy
 
