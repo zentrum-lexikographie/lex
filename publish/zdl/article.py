@@ -76,6 +76,32 @@ def parse(p, strip=False):
             yield (document, article)
 
 
+_surface_form_els = xpath('.//d:Formangabe/d:Schreibung')
+_grammar_qn = qname('d', 'Grammatik')
+_pos_els = xpath('./d:Wortklasse')
+_genus_els = xpath('./d:Genus')
+_xml_id_qn = qname('xml', 'id')
+
+
+def metadata(article):
+    xml_id = article.get(str(_xml_id_qn))
+    typ = article.get('Typ', '')
+    status = article.get('Status', '')
+    source = article.get('Quelle', '')
+    for sf in _surface_form_els(article):
+        name = text(sf)
+        for gr in sf.itersiblings(str(_grammar_qn)):
+            yield {'name': name,
+                   'hidx': sf.get('hidx', ''),
+                   'pos': ''.join(map(text, _pos_els(gr))),
+                   'gen': ''.join(map(text, _genus_els(gr))),
+                   'type': typ,
+                   'status': status,
+                   'source': source,
+                   'id': xml_id}
+            break
+
+
 def has_status(status, article):
     return article.get('Status') == status
 
