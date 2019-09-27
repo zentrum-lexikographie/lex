@@ -44,6 +44,15 @@ def el_text(el):
     return ''.join(_text_nodes(el))
 
 
+_file_filter = set(["indexedvalues.xml", "__contents__.xml"])
+
+
+def files(articles_dir):
+    for f in articles_dir.glob('**/*.xml'):
+        if f.name not in _file_filter:
+            yield f
+
+
 _xml_parser = et.XMLParser(
     encoding='utf8',
     remove_comments=True,
@@ -95,6 +104,7 @@ def add_comment(element, comment, author, timestamp=None):
 
 
 def save(document, p):
-    p.write_bytes(et.tostring(
-        document, encoding='utf-8', xml_declaration=True
-    ))
+    p.write_text('\n'.join([
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        et.tostring(document, encoding=str, xml_declaration=False)
+    ]), encoding='utf-8')
