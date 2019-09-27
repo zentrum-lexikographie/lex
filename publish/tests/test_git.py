@@ -24,15 +24,15 @@ def test_red_2(articles_dir):
     See http://odo.dwds.de/twiki/bin/view/Lexikographen/RedaktionsProzess
     for detailed information on the complete redaction process.
     '''
-    print('')
     for p in zdl.git.article_files(articles_dir):
         for (document, article) in zdl.article.parse(p):
+            modified = False
             if zdl.article.has_status('Red-1', article):
                 comments = []
                 comments.extend(zdl.structure.check(article))
                 comments.extend(zdl.typography.check(article))
-                if len(comments) > 0:
-                    for target, comment in comments:
-                        zdl.article.add_comment(target, comment, 'Redaktion2')
-                    p.write_bytes(et.tostring(document, encoding='utf-8'))
-                    break
+                for target, comment in comments:
+                    zdl.article.add_comment(target, comment, 'Redaktion2')
+                    modified = True
+            if modified:
+                zdl.article.save(document, p)

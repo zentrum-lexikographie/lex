@@ -15,11 +15,26 @@ def qname(ns, ln):
     return et.QName('{%s}%s' % (_namespaces.get(ns, ''), ln))
 
 
+def content(s, default='', strip=True):
+    s = s or default
+    s = s.strip() if strip and s is not None else s
+    return s
+
+
 def text(el, default='', strip=True):
-    text = el.text if el is not None else ''
-    text = text.strip() if strip and text is not None else text
-    text = default if text is None else text
-    return text
+    return content(el.text, default, strip) if el is not None else default
+
+
+def tail(el, default='', strip=True):
+    return content(el.tail, default, strip) if el is not None else default
+
+
+def normalize_text(s):
+    return s if s and len(s) > 0 else None
+
+
+def is_pi(node):
+    return isinstance(node, et._ProcessingInstruction)
 
 
 _text_nodes = xpath('.//text()')
@@ -56,14 +71,18 @@ def has_status(status, article):
     return article.get('Status') == status
 
 
+def _escape_quotes(s):
+    return s.replace('"', '&quot;')
+
+
 def add_comment(element, comment, author, timestamp=None):
     timestamp = timestamp or datetime.datetime.now(pytz.utc)
     start = et.ProcessingInstruction('oxy_comment_start')
     end = et.ProcessingInstruction('oxy_comment_end')
     start.text = 'author="%s" timestamp="%s" comment="%s"' % (
-        author,
+        _escape_quotes(author),
         timestamp.strftime('%Y%m%dT%H%M%S+0000'),
-        comment
+        _escape_quotes(comment)
     )
     parent = element.getparent()
     if parent is not None:
@@ -73,3 +92,9 @@ def add_comment(element, comment, author, timestamp=None):
         parent.insert(index + 2, end)
     else:
         raise NotImplementedError
+
+
+def save(document, p):
+    p.write_bytes(et.tostring(
+        document, encoding='utf-8', xml_declaration=True
+    ))

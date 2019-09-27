@@ -1,5 +1,6 @@
+import lxml.etree as et
 import unicodedata
-from .article import xpath, qname, el_text
+from .article import xpath, qname, el_text, text, tail
 
 
 _expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.'))
@@ -17,23 +18,29 @@ def check_abbreviations_in_definitions(element):
 
 def strip_and_correct_whitespace(element):
     'Silently strip and correct whitespace anomalies.'
-    for e in element.iter():
-        if isinstance(element.tag, str) and len(e) == 0:
-            txt = e.text or ''
-            tail = e.tail or ''
-            left = e.getprevious()
-            parent = e.getparent()
-            if len(txt) > 0 and txt[0].isspace():
-                txt = txt.lstrip()
-                if left is not None:
+    for node in element.iter():
+        if not isinstance(node, et._Element) or len(node) > 0:
+            continue
+
+        txt = text(node, strip=False)
+        if txt == '':
+            continue
+
+        left = node.getprevious()
+        parent = node.getparent()
+        if txt[0].isspace():
+            txt = txt.lstrip()
+            if left is not None:
+                if left.tail is None or not left.tail[-1].isspace():
                     left.tail = (left.tail or '') + ' '
-                else:
-                    parent.text = (parent.text or '') + ' '
-            if len(txt) > 0 and txt[-1].isspace():
-                txt = txt.rstrip()
-                tail = ' ' + tail.lstrip()
-            e.text = txt if len(txt) > 0 else None
-            e.tail = tail if len(tail) > 0 else None
+            elif parent.text is None or not parent.text[-1].isspace():
+                parent.text = (parent.text or '') + ' '
+        if len(txt) > 0 and txt[-1].isspace():
+            txt = txt.rstrip()
+            if node.tail is None or not node.tail[-1].isspace():
+                node.tail = ' ' + (node.tail or '')
+        node.text = txt if len(txt) > 0 else None
+
     return []
 
 
@@ -126,16 +133,17 @@ def transliterate(element):
     '''
     comments = []
     for e in element.iter():
-        if isinstance(element.tag, str):
-            txt = e.text or ''
-            tail = e.tail or ''
+        if not isinstance(e, et._Element):
+            continue
+        txt = e.text or ''
+        tl = e.tail or ''
 
-            for char, subst in _transliterations.items():
-                txt = txt.replace(char, subst)
-                tail = tail.replace(char, subst)
+        for char, subst in _transliterations.items():
+            txt = txt.replace(char, subst)
+            tl = tl.replace(char, subst)
 
-            e.text = txt if len(txt) > 0 else None
-            e.tail = tail if len(tail) > 0 else None
+        e.text = txt if len(txt) > 0 else None
+        e.tail = tl if len(tl) > 0 else None
 
     # for mixed content, more than one pass may be required
     for e in element.iter(str(_sample_qn)):

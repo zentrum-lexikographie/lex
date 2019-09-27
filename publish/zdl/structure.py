@@ -1,6 +1,6 @@
 import re
 import lxml.etree as et
-from .article import xpath, qname, text
+from .article import xpath, qname, text, tail, is_pi
 
 _xml_space_els = xpath('//*[@xml:space]')
 _xml_space_qn = qname('xml', 'space')
@@ -26,6 +26,8 @@ _canonical_pi_locations = (
     qname('d', 'Kollokation1'),
     qname('d', 'Kollokation2'))
 
+_oxy_comment_pi_targets = set(["oxy_comment_start", "oxy_comment_end"])
+
 
 def reposition_pis(root):
     '''Move all PIs (i.e. oXygen comments) to canonical places.
@@ -37,39 +39,43 @@ def reposition_pis(root):
     the most general comments to stay in the sources.
     Those general comments are believed to focus on bigger units
     than spans of texts.'''
-    for element in root.iter():
-        if not isinstance(element.tag, str):
-            current = element
-            parent = current.getparent()
-            # when moving PIs, don't forget about the tail
-            previous = element.getprevious()
+    for node in root.iter():
+        if not is_pi(node):
+            continue
+        if node.target not in _oxy_comment_pi_targets:
+            continue
+
+        parent = node.getparent()
+        if parent.tag in _canonical_pi_locations:
+            continue
+
+        # when moving PIs, don't forget about the tail
+        pi_tail = tail(node, strip=False)
+        if pi_tail != '':
+            previous = node.getprevious()
             if previous is None:
-                txt = (parent.text or '') + (element.tail or '')
-                parent.text = txt if len(txt) > 0 else None
+                parent.text = text(parent, strip=False) + pi_tail
             else:
-                txt = (previous.tail or '') + (element.tail or '')
-                previous.tail = txt if len(txt) > 0 else None
-            element.tail = ''
-            # find target position
-            while parent.tag not in _canonical_pi_locations:
-                current = parent
-                parent = current.getparent()
-            if element.text:
-                # comment_start
-                parent.insert(parent.index(current), element)
-            else:
-                # comment_end
-                parent.insert(parent.index(current) + 1, element)
+                previous.tail = tail(previous, strip=False) + pi_tail
+            node.tail = None
+
+        # find target position
+        for parent in node.iterancestors():
+            if parent.tag not in _canonical_pi_locations:
+                continue
+            if node.target == 'oxy_comment_start':
+                gp = parent.getparent()
+                gp.insert(gp.index(parent), node)
+            elif node.target == 'oxy_comment_end':
+                gp = parent.getparent()
+                gp.insert(gp.index(parent) + 1, node)
+            break
     return []
 
 
 def remove_stylesheet_pis(element):
-    root = element
-
-    while root.getparent() is not None:
-        root = root.getparent()
+    root = element.getroottree().getroot()
     pi = root.getprevious()
-
     while pi is not None:
         if 'support/presentation/article.css' in pi.text:
             # we can only remove things from an element,
@@ -83,28 +89,24 @@ def remove_stylesheet_pis(element):
 
 
 def remove_redaction_pis(root):
-    for element in root.iter():
-        if isinstance(element.tag, str):
+    for node in root.iter():
+        if not is_pi(node) or not node.target == 'oxy_comment_start':
             continue
-        if 'author="Redaktion2"' not in element.text:
+        if not node.attrib.get('author') == 'Redaktion2':
             continue
-        parent = element.getparent()
-        n = element.getnext()
         level = 0
-        while n is not None:
-            if not isinstance(n.tag, str):
-                if (n.text or '') == '':
-                    if level == 0:
-                        parent.remove(element)
-                        parent.remove(n)
-                        break
-                    else:
-                        level -= 1
+        for end in node.itersiblings():
+            if not is_pi(end):
+                continue
+            if end.target == 'oxy_comment_start':
+                level += 1
+            elif end.target == 'oxy_comment_end':
+                if level == 0:
+                    node.getparent().remove(node)
+                    end.getparent().remove(end)
+                    break
                 else:
-                    level += 1
-            else:
-                pass
-            n = n.getnext()
+                    level -= 1
     return []
 
 
@@ -115,9 +117,9 @@ def remove_unneeded_deletions(element):
     for s in _loeschung_els(element):
         parent = s.getparent()
 
-        if (s.tail or '').strip() == '' and s.getnext() is None:
+        if tail(s) == '' and s.getnext() is None:
             parent.remove(s)
-        elif s.getprevious() is None and (parent.text or '').strip() == '':
+        elif s.getprevious() is None and text(parent) == '':
             parent.text = s.tail
             parent.remove(s)
     return []
