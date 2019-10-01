@@ -86,6 +86,7 @@ _xml_id_qn = qname('xml', 'id')
 def metadata(article):
     xml_id = article.get(str(_xml_id_qn))
     typ = article.get('Typ', '')
+    author = article.get('Autor', '')
     status = article.get('Status', '')
     source = article.get('Quelle', '')
     for sf in _surface_form_els(article):
@@ -96,6 +97,7 @@ def metadata(article):
                    'pos': ''.join(map(text, _pos_els(gr))),
                    'gen': ''.join(map(text, _genus_els(gr))),
                    'type': typ,
+                   'author': author,
                    'status': status,
                    'source': source,
                    'id': xml_id}

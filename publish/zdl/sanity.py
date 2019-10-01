@@ -71,6 +71,7 @@ def _single_surface_form_constraints(article):
         comments.append((el, 'no //Diasystematik/* on single /Formangabe'))
     if len(_frequency_els(article)) > 0:
         comments.append((el, 'no //Frequenzangabe on single /Formangabe'))
+    return comments
 
 
 def check(article):
