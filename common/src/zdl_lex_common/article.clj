@@ -3,10 +3,16 @@
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
             [zdl-lex-common.util :refer [->clean-map]]
-            [zdl-lex-common.xml :as xml])
-  (:import [java.time.temporal ChronoUnit Temporal]
+            [zdl-lex-common.xml :as xml]
+            [me.raynes.fs :as fs])
+  (:import java.io.File
+           java.text.Collator
+           java.util.Locale
+           [java.time.temporal ChronoUnit Temporal]
            net.sf.saxon.s9api.QName
            net.sf.saxon.s9api.XdmItem))
+
+(def collator (Collator/getInstance Locale/GERMAN))
 
 (defn status->color [status]
   (condp = (str/trim status)
@@ -129,6 +135,7 @@
       forms (texts-fn "d:Formangabe/d:Schreibung")
       ref-ids (ref-ids-fn "d:Formangabe/d:Schreibung")
       pos (texts-fn "d:Formangabe/d:Grammatik/d:Wortklasse")
+      gender (texts-fn "d:Formangabe/d:Grammatik/d:Genus")
       definitions (texts-fn ".//d:Definition")
       senses (texts-fn ".//d:Bedeutungsebene")
       usage-period (texts-fn ".//d:Gebrauchszeitraum")
@@ -163,6 +170,7 @@
         :forms (forms article)
         :ref-ids (ref-ids article)
         :pos (pos article)
+        :gender (gender article)
         :definitions (definitions article)
         :senses (senses article)
         :usage-period (usage-period article)
@@ -171,3 +179,35 @@
         :area (area article)
         :references (references article)}))))
 
+(defn article-xml-file? [^File f]
+  (let [name (.getName f)
+        path (.getAbsolutePath f)]
+    (and
+     (.endsWith name ".xml")
+     (not (.startsWith name "."))
+     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
+     (not (.contains path ".git")))))
+
+(defn article-xml-files [dir]
+  (let [dir (-> dir fs/file fs/absolute fs/normalized)
+        dir-path (.. dir (toPath))
+        file->id #(str (.. dir-path (relativize (.toPath %))))]
+    (->> (file-seq dir)
+         (filter article-xml-file?)
+         (map fs/normalized)
+         (map #(vector (file->id %) %)))))
+
+(defn excerpts [dir]
+  (for [[id file] (article-xml-files dir)
+        article (->> (xml/->dom file) (doc->articles) (map excerpt))]
+    (assoc article :id id :file file)))
+
+(comment
+  (->> (mapcat :forms (excerpts "../data/git/articles"))
+       (take 1000)
+       (sort collator)
+       (take 100))
+  (as-> (excerpts "../data/git/articles") $
+       #_(remove (comp (partial = "WDG") :source) $)
+       (map #(select-keys % [:forms :pos :gender :id]) $)
+       #_(filter (comp (partial < 1) count :gender) $)))
