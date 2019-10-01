@@ -63,7 +63,7 @@
 
 (defn class= [clz]
   (fn [loc]
-    (filter #(and (zip/branch? %) (instance? clz (zip/node %)))
+    (filter #(instance? clz (zip/node %))
             (if (dz/auto? loc)
               (dz/children-auto loc)
               (list (dz/auto true loc))))))

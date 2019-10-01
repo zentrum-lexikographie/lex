@@ -5,7 +5,7 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [clojure.zip :as zip]
-            [zdl-lex-wikimedia.util :refer [->clean-map]]))
+            [zdl-lex-common.util :refer [->clean-map]]))
 
 (def ^:private namespace-filter
   "Administrative page namespaces"
