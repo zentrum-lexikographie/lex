@@ -117,8 +117,8 @@ grammatische_Beschreibung = element Grammatik {
 	# ##################
 	# -e- bzw. -s- sind optional für Komparativ bzw. Superlativ
 	# wegen Fällen wie /mehr/ und /am größten/
-	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(länger|leichter|tiefer|schwerer|weiter) \p{Ll}+(t|nd)' } } *
-	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(längsten|leichtesten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))' } } *
+	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(länger|leichter|näher|tiefer|schwerer|weiter) \p{Ll}+(t|nd)|näher\p{Ll}+' } } *
+	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(längsten|leichtesten|nächsten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))|nächst\p{Ll}+' } } *
 	, element Komparationspraeferenz {
 		'ohne Steigerung'
 		| 'Steigerung selten'
