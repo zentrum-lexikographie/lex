@@ -36,4 +36,4 @@ values (:surface_form, :part_of_speech, :excerpt)
 -- :name select-entries :*
 select l.surface_form, l.part_of_speech, e.collection, (e.contents || '') as contents
 from lemma l join excerpt e on l.excerpt = e.id
-order by l.surface_form, l.part_of_speech
+order by l.surface_form

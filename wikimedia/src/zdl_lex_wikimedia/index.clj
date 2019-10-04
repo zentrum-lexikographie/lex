@@ -49,7 +49,7 @@
                     excerpt-params {:collection collection :contents contents}
                     {excerpt :id} (insert-excerpt c excerpt-params)]]
         (doseq [form forms]
-          (doseq [pos pos]
+          (doseq [pos (or pos ["-"])]
             (merge-lemma c {:surface_form form
                             :part_of_speech pos
                             :excerpt excerpt})))))))
@@ -58,6 +58,9 @@
 (def dump-file (fs/file "data" "dewiktionary.xml"))
 
 (comment
+  (jdbc/with-db-transaction [c (db)]
+    (take 5 (select-entries c {} {})))
+
   (jdbc/with-db-transaction [c (db)]
     (select-entries
      c {} {}
@@ -78,6 +81,10 @@
                       (partial map second)
                       (partial group-by :collection)
                       (partial apply hash-set))}))
+
+  (->> (zdl-article/excerpts "../../lex-data/articles")
+       (remove (partial :pos))
+       (count))
 
   (time
    (wiktionary->db
