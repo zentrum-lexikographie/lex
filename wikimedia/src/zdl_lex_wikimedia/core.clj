@@ -9,7 +9,7 @@
             [clj-excel.core :as xls]
             [zdl-lex-wikimedia.dump :as dump]
             [zdl-lex-common.util :refer [->clean-map]]
-            [zdl-lex-wikimedia.filter :as wkt-filter]
+            [zdl-lex-wikimedia.part-of-speech :as pos]
             [zdl-lex-wikimedia.wikitext :as wt]
             [taoensso.timbre :as timbre]
             [zdl-lex-common.article :as article])
@@ -214,7 +214,7 @@
 
   (with-open [wkt-toc (io/writer (io/file "wkt-toc.csv") :encoding "UTF-8")]
     (->> (parse-wiktionary-de)
-         (filter #(some wkt-filter/pos (% :pos)))
+         (filter #(some pos/wkt (% :pos)))
          (map #(vector (% :title)
                        (or (% :form) "")
                        (str/join "|" (% :pos))
@@ -235,7 +235,7 @@
          (csv/write-csv zdl-toc)))
 
   (->> (parse-wiktionary-de)
-       (filter #(some wkt-filter/pos (% :pos)))
+       (filter #(some pos/wkt (% :pos)))
        (count))) ;; => 108_875
 
 (comment
