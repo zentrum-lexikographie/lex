@@ -12,4 +12,5 @@
                  [throttler "1.0.0" :exclusions [org.clojure/core.async]]
                  [zdl-lex-common ~version]]
   :repl-options {:init-ns zdl-lex-corpus.dev}
-  :plugins [[lein-environ "1.1.0"]])
+  :plugins [[lein-environ "1.1.0"]]
+  :profiles {:dev [:project/dev :profiles/dev]})

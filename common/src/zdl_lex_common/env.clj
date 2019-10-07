@@ -57,6 +57,9 @@
 (s/def ::solr-base string?)
 (s/def ::solr-core string?)
 
+(s/def ::corpora-user string?)
+(s/def ::corpora-password string?)
+
 (s/def ::env
   (s/keys :req-un [::log-level ::repl-port
                    ::http-port ::http-log ::http-anon-user
@@ -67,7 +70,8 @@
                    ::solr-base ::solr-core]
           :opt-un [::server-user ::server-password
                    ::exist-user ::exist-password
-                   ::mantis-user ::mantis-password]))
+                   ::mantis-user ::mantis-password
+                   ::corpora-user ::corpora-password]))
 
 (defn secret? [k]
   (let [n (name k)]

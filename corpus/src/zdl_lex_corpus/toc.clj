@@ -1,6 +1,6 @@
 (ns zdl-lex-corpus.toc
   (:require [cheshire.core :as json]
-            [environ.core :refer [env]]
+            [zdl-lex-common.env :refer [env]]
             [clj-http.client :as http]))
 
 (defn- corpus->map [{:keys [host port internal]}]
@@ -14,10 +14,12 @@
   (merge
    {:method :get
     :url "https://kaskade.dwds.de/dstar/?f=json"}
-   (if-let [corpora-auth (env :corpora-auth)]
-     ;; Use authenticated request for all corpora (including private ones)
-     {:url "https://kaskade.dwds.de/dstar/intern.perl?f=json"
-      :basic-auth corpora-auth})))
+   (let [user (env :corpora-user)
+         password (env :corpora-password)]
+     (if (and user password)
+       ;; Use authenticated request for all corpora (including private ones)
+       {:url "https://kaskade.dwds.de/dstar/intern.perl?f=json"
+        :basic-auth [user password]}))))
 
 (defn corpora []
   "Queries the set of available copora"
