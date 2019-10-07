@@ -14,7 +14,8 @@
                  [com.outpace/clj-excel "0.0.9"]
                  [org.sweble.wikitext/swc-parser-lazy "3.1.9"]
                  [org.apache.jena/jena-arq "3.12.0"]
-                 [zdl-lex-common ~version]]
+                 [zdl-lex-common ~version]
+                 [zdl-lex-corpus ~version]]
   :main ^:skip-aot zdl-lex-wikimedia.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}}

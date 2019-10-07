@@ -5,6 +5,7 @@
             [zdl-lex-common.article :as article]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :refer [path->uri]]
+            [zdl-lex-corpus.lexdb :as lexdb]
             [clojure.java.jdbc :as jdbc]
             [me.raynes.fs :as fs]
             [clojure.string :as str]))
@@ -88,12 +89,61 @@
      #_(auto-size-cols)
      (xls/save xlsx-file))))
 
+(defn join-corpus-freqs [mismatches]
+  (let [corpora [:zeitungen :kernbasis :ibk_web_2016c]
+        mismatches (partition-all 1000 mismatches)]
+    (for [batch mismatches
+          :let [forms (map :form batch)
+                freqs (->> (pmap #(lexdb/query-frequencies % forms) corpora)
+                           (zipmap corpora))]
+          {:keys [form] :as mismatch} batch]
+      (assoc mismatch
+             :zeitungen (get-in freqs [:zeitungen form] 0)
+             :kernbasis (get-in freqs [:kernbasis form] 0)
+             :web (get-in freqs [:ibk_web_2016c form] 0)))))
+
 (comment
+  (let [mismatches (read-string (slurp (fs/file (env :data-dir) "zdl-wkt-mismatches.edn")))]
+    (spit (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.edn")
+          (pr-str (join-corpus-freqs mismatches))))
+
+  (let [mismatches (read-string (slurp (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.edn")))
+        xls-header (map #(array-map :value % :underline :single)
+                      ["Formangabe/Schreibung"
+                       "Wiktionary-Wortklasse"
+                       "Kern-Basis-Korpus"
+                       "Zeitungen-Korpus"
+                       "Web-Korpus"
+                       "Wiktionary-Link"])
+        link (fn [title base rel]
+             (.. (java.net.URI. base) (resolve (path->uri rel)) (toASCIIString)))
+        wkt-link (partial link "de.wiktionary.org" "https://de.wiktionary.org/wiki/")
+
+        relevant? (fn [{:keys [kernbasis zeitungen web]}]
+                    (some (partial <= 20) [kernbasis zeitungen web]))
+        interesting? #(and (relevant? %))
+        mismatch->row (fn [{:keys [form wkt-pos kernbasis zeitungen web] :as mm}]
+                        [{:value form
+                          :pattern :solid-foreground
+                          :foreground-color
+                          (if (interesting? mm) :light-yellow :white)}
+                         (some->> wkt-pos (str/join ", "))
+                         kernbasis
+                         zeitungen
+                         web
+                         (wkt-link form)])]
+    (->
+     (->> (cons xls-header (map mismatch->row mismatches))
+          (hash-map "Wiktionary-DE - ohne DWDS")
+          (xls/build-workbook (xls/workbook-sxssf)))
+     (xls/save (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.xlsx"))))p
+
   (time
    (jdbc/with-db-transaction [c (index/db)]
-     (let [match? #(and (:zdl? %) (:wkt? %))
-           only-matches (partial filter match?)
+     (let [wkt-only? (complement :zdl?)
+           wkt-only (partial filter wkt-only?)
            records (partial map match->record)
-           xls (partial matches->xls (fs/file (env :data-dir) "zdl-wkt-matches-1.xlsx"))
-           result-fn (comp xls records match-entries)]
+           edn (comp #(spit (fs/file (env :data-dir) "zdl-wkt-mismatches.edn") %) pr-str)
+           xls (partial matches->xls (fs/file (env :data-dir) "zdl-wkt-mismatches.xlsx"))
+           result-fn (comp edn #_xls wkt-only records match-entries)]
        (index/select-entries c {} {} {:result-set-fn result-fn})))))

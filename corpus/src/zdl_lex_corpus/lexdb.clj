@@ -13,28 +13,26 @@
 
 (defn query [corpus & {:keys [select from where groupby orderby limit offset]
                        :or {select "*" from "lex" limit 10}}]
-  (->> {:method :get
-        :as :json
-        :url (.. (URI. "http://kaskade.dwds.de/dstar/")
-                 (resolve (path->uri (str (name corpus) "/lexdb/export.perl")))
-                 (toASCIIString))
-        :query-params
-        (->clean-map
-         {"fmt" "json"
-          "select" select
-          "from" from
-          "where" where
-          "groupby" groupby
-          "orderby" orderby
-          "limit" limit
-          "offset" offset})}
+  (->> (merge
+        {:method :post :as :json}
+        {:url
+         (.. (URI. "http://kaskade.dwds.de/dstar/")
+             (resolve (path->uri (str (name corpus) "/lexdb/export.perl")))
+             (toASCIIString))}
+        {:form-params
+         (->clean-map
+          {"fmt" "json"
+           "select" select "from" from
+           "where" where
+           "groupby" groupby "orderby" orderby
+           "limit" limit "offset" offset})})
        (http/request)
        (parse-query-response)))
 
 (defn remove-quotes [s]
   (str/replace s "\"" ""))
 
-(defn frequencies [corpus lemmata]
+(defn query-frequencies [corpus lemmata]
   (let [lemmata (map #(str \" (remove-quotes %)  \") lemmata)
         select "l, SUM(f) as f"
         where (str "l in (" (str/join ", " lemmata) ")")
@@ -47,5 +45,5 @@
          (into (sorted-map)))))
 
 (comment
-  (frequencies :ibk_web_2016c ["Test" "Datenbank" "Frequenz" "\"sdfjsdj"]))
+  (query-frequencies :ibk_web_2016c ["Test" "Datenbank" "Frequenz" "\"sdfjsdj"]))
 
