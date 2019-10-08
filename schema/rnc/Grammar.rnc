@@ -154,36 +154,40 @@ grammatische_Beschreibung = element Grammatik {
 		)
 	} ?
 	, element Funktionspraeferenz {
-		'Sonderfunktionen'
-		| 'zeitlich' | 'steht oft zeitlichem Gebrauch nahe'
-		| 'räumlich'
-		| 'kausal' 
-		| 'konjunktional'
-		| 'relativ'
-		| 'modal' | 'ist eng mit der modalen Verwendung verbunden'
-		| 'konditional'
-		| 'interrogativ'
-		| 'instrumental'
-		| xsd:token { pattern = '((häufig|selten|nicht) )?attributiv' }
-		| xsd:token { pattern = '((häufig|selten|nicht) )?prädikativ' }
-		| xsd:token { pattern = '((häufig|selten|nicht) )?adverbiell' }
-		| 'adjektivisch'
-		| 'verbal'
-		| 'präpositional'
-		| 'konjunktional'
-		| 'substantivisch' | 'nominal'
-		| 'pronominal'
-		| 'partikelhaft'
-		| 'als Ausruf' | 'steht einem Ausruf nahe' # TODO: prag?
-		| 'als Interrogativpronomen'
-		| 'als Indefinitpronomen'
-		| 'als Kardinalzahl'
-		| 'als unbestimmter Artikel'
-		| 'als Relativpronomen'
-		| 'als Genitivattribut'
-		| 'im Übergang zum Indefinitpronomen'
-		| 'im Übergang zur Konjunktion'
-		| 'im Übergang zur Präposition'
+		Frequenzbeschraenkung ?
+		, (
+			'Sonderfunktionen'
+			| 'zeitlich' | 'steht oft zeitlichem Gebrauch nahe'
+			| 'räumlich'
+			| 'kausal' 
+			| 'konjunktional'
+			| 'relativ'
+			| 'modal' | 'ist eng mit der modalen Verwendung verbunden'
+			| 'konditional'
+			| 'interrogativ'
+			| 'instrumental'
+			# TODO: remove freq.
+			| xsd:token { pattern = '((häufig|selten|nicht) )?attributiv' }
+			| xsd:token { pattern = '((häufig|selten|nicht) )?prädikativ' }
+			| xsd:token { pattern = '((häufig|selten|nicht) )?adverbiell' }
+			| 'adjektivisch'
+			| 'verbal'
+			| 'präpositional'
+			| 'konjunktional'
+			| 'substantivisch' | 'nominal'
+			| 'pronominal'
+			| 'partikelhaft'
+			| 'als Ausruf' | 'steht einem Ausruf nahe' # TODO: prag?
+			| 'als Interrogativpronomen'
+			| 'als Indefinitpronomen'
+			| 'als Kardinalzahl'
+			| 'als unbestimmter Artikel'
+			| 'als Relativpronomen'
+			| 'als Genitivattribut'
+			| 'im Übergang zum Indefinitpronomen'
+			| 'im Übergang zur Konjunktion'
+			| 'im Übergang zur Präposition'
+		)
 	} *
 	, element Artikelpraeferenz {
 		attribute class { 'invisible' } ? # Why do we even need this?
