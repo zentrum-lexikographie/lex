@@ -1,5 +1,6 @@
 (ns zdl-lex-corpus.dev
   (:require [zdl-lex-common.log :as log]
+            [zdl-lex-corpus.ddc :as ddc]
             [zdl-lex-corpus.toc :refer [corpora]]
             [clojure.core.async :as a]
             [taoensso.timbre :as timbre])
