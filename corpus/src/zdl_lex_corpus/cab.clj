@@ -1,15 +1,15 @@
 (ns zdl-lex-corpus.cab
-  (:require [clj-http.client :as http]))
+  (:require [clj-http.client :as http]
+            [clojure.string :as str]))
 
-(defn query [q]
-  (http/request {:method :post
-                 :as :json
-                 :url "http://data.dwds.de:9096/query"
-                 :form-params
-                 {"fmt" "json"
-                  "a" "expand"
-                  "tokenize" 0
-                  "q" q}}))
+(let [base-request {:method :post :url "http://data.dwds.de:9096/query" :as :json}]
+  (defn query-lemmata [& forms]
+    (let [params {"fmt" "json" "a" "norm1" "tokenize" 0 "q" (str/join " " forms)}
+          request (assoc base-request :form-params params)
+          {{:keys [body]} :body} (http/request request)
+          tokens (some-> body first :tokens)]
+      (zipmap (map :text tokens) (map #(get-in % [:moot :lemma]) tokens)))))
 
 (comment
-  (query "Ärztepräsident"))
+  (query-lemmata "Ärztepräsident", "Leerverkäufe" "Schifffahrtsgesellschaften"
+         "Bevollmächtigter"))
