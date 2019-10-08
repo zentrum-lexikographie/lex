@@ -138,6 +138,7 @@ Kollokation = element Kollokation {
 	, Belegtext
 	, semantische_Verweise ?
 	, Diasystematik ?
+	, element Korpusabfrage { text } *
 }
 
 # TODO: hier stecken sicherlich auch Kollokationen drin
@@ -158,6 +159,7 @@ Idiom = element Idiom {
 	, Frequenzangabe ?
 	, semantische_Verweise ?
 	, Diasystematik ?
+	, element Korpusabfrage { text } *
 }
 
 Phrasem = element Phrasem {
@@ -167,6 +169,7 @@ Phrasem = element Phrasem {
 	, Frequenzangabe ?
 	, semantische_Verweise ?
 	, Diasystematik ?
+	, element Korpusabfrage { text } *
 }
 
 Syntagmatik = element Syntagmatik {
