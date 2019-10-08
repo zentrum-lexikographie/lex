@@ -221,13 +221,13 @@ morphologische_Verweise = element Verweise {
 
 semantischer_Verweis = element Verweis {
 	attribute Typ {
-		'Entsprechung' # semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse
+		'MWA'
+		| 'Entsprechung' # semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse
 		| 'Antonym'
 		| 'Synonym'
 		| 'Hyponym'
 		| 'Hyperonym'
 		| 'Assoziation'
-		# | 's' # D99 --> lahme Ausrede, wenn man sich um die Frage der Rechtfertigung des Links drücken will (also die Antwort auf die Frage, *warum* man unter einem anderen Stichwort nachsehen soll)
 		| 'zu'
 		| 'vgl'
 	}
