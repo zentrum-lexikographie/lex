@@ -9,7 +9,7 @@ import collections, unicodedata, datetime
 import MySQLdb, _mysql_exceptions
 import lxml.etree as et
 
-from .exist import ExistDB
+from exist import ExistDB
 
 
 def text_only(element, strip=True):

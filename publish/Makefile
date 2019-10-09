@@ -8,6 +8,7 @@ all:
 	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1)-update"
 
 environment:
+	/bin/mkdir -p backup/
 	@if [ -z "${src_pass}" ] ; then echo '\nPlease set $${src_pass}!\n' ; /bin/false ; fi
 	$(eval mysql += -h$(src_host) -u$(src_user) -p$(src_pass))
 

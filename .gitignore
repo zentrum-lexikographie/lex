@@ -15,6 +15,8 @@ pom.xml.asc
 .python-version
 *.pyc
 
+.*.swp
+
 bin/lein
 data/
 config.local.edn
@@ -31,3 +33,5 @@ schema/rng
 venv/
 
 wikimedia/data/
+
+publish/backup
