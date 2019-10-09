@@ -206,13 +206,14 @@ morphologische_Verweise = element Verweise {
 	    | 'Zusammenrückung'
 	} ? # TODO: obligatory
 	, element Verweis {
-	    # (Klassifizierung der) morphologische(n) Konstituenten
-	    attribute Typ {
-	        'Grundform'
-		    | 'Erstglied'
-		    | 'Binnenglied'
-    		| 'Letztglied'
-    	    | 'formal_verwandt'
+		# (Klassifizierung der) morphologische(n) Konstituenten
+		attribute Typ {
+			'Grundform'
+			| 'Erstglied'
+			| 'Binnenglied'
+			| 'Letztglied'
+			| 'formal_verwandt'
+			| 'MWA-Konstituente'
 	    }
 	    , attribute class { 'invisible' } ?
 	    , Verweisziel
