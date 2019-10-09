@@ -5,8 +5,8 @@
             [clojure.string :as str])
   (:import java.net.URI))
 
-(defn query [corpus & {:keys [select from where groupby orderby limit offset]
-                       :or {select "*" from "lex" limit 10}}]
+(defn query-lexdb [corpus & {:keys [select from where groupby orderby limit offset]
+                             :or {select "*" from "lex" limit 10}}]
   (let [url (.. (URI. "http://kaskade.dwds.de/dstar/")
                 (resolve (path->uri (str (name corpus) "/lexdb/export.perl")))
                 (toASCIIString))
@@ -25,13 +25,13 @@
 
 (defn query-frequencies [corpus lemmata]
   (let [lemmata (map #(str \" (str/replace % "\"" "") \") lemmata)
-        select "l, SUM(f) as f"
-        where (str "l in (" (str/join ", " lemmata) ")")
-        groupby "l"
-        limit (count lemmata)
-        response (query corpus :select select :where where :groupby groupby :limit limit)
-        results (response :result)]
-    (zipmap (map :l results) (map #(Integer/parseInt (:f %)) results))))
+        {:keys [result]} (query-lexdb
+                          corpus
+                          :select "l, SUM(f) as f"
+                          :where (str "l in (" (str/join ", " lemmata) ")")
+                          :groupby "l"
+                          :limit (count lemmata))]
+    (zipmap (map :l result) (map #(Integer/parseInt (:f %)) result))))
 
 (comment
   (query-frequencies :ibk_web_2016c ["Test" "Datenbank" "Frequenz" "\"sdfjsdj"]))
