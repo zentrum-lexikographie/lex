@@ -1,6 +1,4 @@
-(def version (slurp "../VERSION"))
-
-(defproject zdl-lex-corpus version
+(defproject zdl-lex-corpus :lein-v
   :description "Client library for DDC/TCP servers."
   :license {:name "LGPL-3.0"
             :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
@@ -10,7 +8,12 @@
                  [gloss "0.2.6"]
                  [cheshire "5.9.0"]
                  [throttler "1.0.0" :exclusions [org.clojure/core.async]]
-                 [zdl-lex-common ~version]]
+                 [zdl-lex-common nil]]
   :repl-options {:init-ns zdl-lex-corpus.dev}
-  :plugins [[lein-environ "1.1.0"]]
+  :prep-tasks [["v" "cache" "src" "edn"] "javac" "compile"]
+  :middleware [leiningen.v/version-from-scm
+               leiningen.v/dependency-version-from-scm
+               leiningen.v/add-workspace-data]
+  :plugins [[lein-environ "1.1.0"]
+            [com.roomkey/lein-v "7.1.0"]]
   :profiles {:dev [:project/dev :profiles/dev]})

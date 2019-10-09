@@ -9,6 +9,8 @@ pom.xml.asc
 .lein-*
 .nrepl-port
 
+version.edn
+
 .idea
 *.iml
 

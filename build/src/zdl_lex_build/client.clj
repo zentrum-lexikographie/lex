@@ -3,10 +3,11 @@
             [sigel.xslt.components :as xslc]
             [sigel.xslt.core :as xslt]
             [sigel.xslt.elements :as xsl]
-            [zdl-lex-build.zip :refer [zip]]))
+            [zdl-lex-build.zip :refer [zip]]
+            [clojure.java.io :as io]))
 
 (defn -main [& args]
-  (let [version (slurp (fs/file "../VERSION"))
+  (let [{:keys [version]} (-> "version.edn" io/resource slurp read-string)
 
         client-base (-> "../client" fs/file fs/absolute fs/normalized)
         schema-base (-> "../schema" fs/file fs/absolute fs/normalized)
