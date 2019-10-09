@@ -6,8 +6,8 @@ import getpass
 import readline  # NOQA: readline modifies input()
 import lxml.etree as et
 
-from .exist import ExistDB
-from .qa import StructureChecker, TypographyChecker
+from exist import ExistDB
+from qa import StructureChecker, TypographyChecker
 
 
 class ExistShell(object):

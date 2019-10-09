@@ -102,7 +102,6 @@ Belegtext = element Belegtext {
 
 Beleg = element Beleg {
 	Metadaten.allgemein ?
-	# TODO: ungewöhnlich: engere Klassifikation (AG)
 	, attribute class { 
 		list {
 			(
@@ -118,6 +117,7 @@ Beleg = element Beleg {
 		}
 	} ?
 	, Belegtext
+	, semantische_Verweise ?
 	, Fundstelle 
 	, element Kurztitel { token }? # TODO: move inside //Fundstelle
 	, Diasystematik ? # TODO: move before Fundstelle
