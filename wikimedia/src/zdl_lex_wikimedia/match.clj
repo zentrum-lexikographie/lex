@@ -5,10 +5,12 @@
             [zdl-lex-common.article :as article]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :refer [path->uri]]
+            [zdl-lex-corpus.cab :as cab]
             [zdl-lex-corpus.lexdb :as lexdb]
             [clojure.java.jdbc :as jdbc]
             [me.raynes.fs :as fs]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [taoensso.timbre :as timbre]))
 
 (defn normalize-pos [{:keys [part_of_speech collection] :as entry}]
   (condp = collection
@@ -94,15 +96,21 @@
         mismatches (partition-all 1000 mismatches)]
     (for [batch mismatches
           :let [forms (map :form batch)
-                freqs (->> (pmap #(lexdb/query-frequencies % forms) corpora)
+                lemmata (apply cab/query-lemmata forms)
+                freq-keys (map #(get lemmata % %) forms)
+                freqs (->> (pmap #(lexdb/query-frequencies % freq-keys) corpora)
                            (zipmap corpora))]
-          {:keys [form] :as mismatch} batch]
+          {:keys [form] :as mismatch} batch
+          :let [freq-key (get lemmata form form)]]
       (assoc mismatch
-             :zeitungen (get-in freqs [:zeitungen form] 0)
-             :kernbasis (get-in freqs [:kernbasis form] 0)
-             :web (get-in freqs [:ibk_web_2016c form] 0)))))
+             :zeitungen (get-in freqs [:zeitungen freq-key] 0)
+             :kernbasis (get-in freqs [:kernbasis freq-key] 0)
+             :web (get-in freqs [:ibk_web_2016c freq-key] 0)))))
 
 (comment
+  (let [mismatches (read-string (slurp (fs/file (env :data-dir) "zdl-wkt-mismatches.edn")))]
+    (take 10 (drop 800 (join-corpus-freqs (take 1000 mismatches)))))
+
   (let [mismatches (read-string (slurp (fs/file (env :data-dir) "zdl-wkt-mismatches.edn")))]
     (spit (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.edn")
           (pr-str (join-corpus-freqs mismatches))))
@@ -136,7 +144,7 @@
      (->> (cons xls-header (map mismatch->row mismatches))
           (hash-map "Wiktionary-DE - ohne DWDS")
           (xls/build-workbook (xls/workbook-sxssf)))
-     (xls/save (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.xlsx"))))p
+     (xls/save (fs/file (env :data-dir) "zdl-wkt-mismatch-freqs.xlsx"))))
 
   (time
    (jdbc/with-db-transaction [c (index/db)]
