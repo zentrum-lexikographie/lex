@@ -151,12 +151,7 @@ class DWDSWB(Dictionary):
         '''
 
         for element in et.ETXPath('.//*[@class="invisible"]')(article):
-            # TODO: skip test again
-            if element.tag == et.QName('http://www.dwds.de/ns/1.0', 'Diachronie_V2'):
-                for i in element:
-                    element.remove(i)
-            else:
-                element.getparent().remove(element)
+            element.getparent().remove(element)
 
         for element in et.ETXPath('.//*[@Originaltext]')(article):
             element.attrib.pop('Originaltext')
