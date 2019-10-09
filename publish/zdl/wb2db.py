@@ -75,6 +75,7 @@ class Dictionary(object):
             logging.info('Dropping existing tables.')
             cursor.execute('DROP TABLE IF EXISTS article;')
             cursor.execute('DROP TABLE IF EXISTS lemma;')
+            cursor.execute('DROP TABLE IF EXISTS token;')
             if self.USE_RELATIONS:
                 cursor.execute('DROP TABLE IF EXISTS relation;')
 
@@ -93,12 +94,21 @@ class Dictionary(object):
                     DEFAULT CHARSET=utf8;
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS lemma (
+                    id INT(11) NOT NULL,
                     lemma VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
                     hidx TINYINT(2) DEFAULT NULL,
                     type VARCHAR(10),
                     article_id INT(11) NOT NULL,
+                    PRIMARY KEY (id),
                     KEY lemma (lemma),
                     KEY article_id(article_id, lemma)
+                    ) ENGINE=MyISAM
+                    DEFAULT CHARSET=utf8;
+            ''')
+            cursor.execute('''CREATE TABLE IF NOT EXISTS token (
+                    token VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+                    lemma_id INT(11) NOT NULL,
+                    KEY token (token)
                     ) ENGINE=MyISAM
                     DEFAULT CHARSET=utf8;
             ''')
@@ -304,11 +314,13 @@ if __name__ == '__main__':
 
     # relations can only be heuristically determined based on lemmas at present
     lemma_index = collections.defaultdict(list)
+    lemma_count = 0
     relation_index = collections.defaultdict(list)
 
     # to speed up MySQL INSERTs we use a bucket and executemany()
     bucket_article = Bucket('article', cursor, 'INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s);', max_size=2000)
-    bucket_lemma = Bucket('lemma', cursor, 'INSERT INTO lemma VALUES (%s, %s, %s, %s);', max_size=50000)
+    bucket_lemma = Bucket('lemma', cursor, 'INSERT INTO lemma VALUES (%s, %s, %s, %s, %s);', max_size=10000)
+    bucket_token = Bucket('token', cursor, 'INSERT INTO token VALUES (%s, %s);', max_size=50000)
     bucket_relation = Bucket('relation', cursor, 'INSERT INTO relation VALUES (%s, %s, %s);', max_size=50000)
 
     for index, article in enumerate(dictionary, 1):
@@ -346,8 +358,13 @@ if __name__ == '__main__':
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
                     if headword and not (headword, hidx, htype, index) in bucket_lemma.data:
-                        bucket_lemma.update((headword, hidx, htype, index, ))
+                        bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
+
+                        for token in headword.split():
+                            bucket_token.update( (token, lemma_count) )
+
+                        lemma_count += 1
 
             # extract morphological relations (first pass)
             if dictionary.USE_RELATIONS and article.get('Status') == 'Red-f':
@@ -362,6 +379,7 @@ if __name__ == '__main__':
         # flush the remaining (possible) half-full buckets
         bucket_article.flush()
         bucket_lemma.flush()
+        bucket_token.flush()
 
     # update morphological relations (second pass)
     # NOTE: this only works if the lexical data are globally consistent
