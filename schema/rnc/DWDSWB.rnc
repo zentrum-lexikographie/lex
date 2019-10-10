@@ -93,6 +93,7 @@ Lesartangabe = element Lesart {
 Belegtext = element Belegtext {
 	text
 	& Paraphrase *
+	& semantischer_Verweis *
 	& element Stichwort { Lemmatoken } +
 	& element Streichung { token } *
 	& element Loeschung { token } *
