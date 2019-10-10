@@ -9,20 +9,17 @@
 (defn -main [& args]
   (let [{:keys [version]} (-> "version.edn" io/resource slurp read-string)
 
-        client-base (-> "../client" fs/file fs/absolute fs/normalized)
-        schema-base (-> "../schema" fs/file fs/absolute fs/normalized)
-
-        source (fs/file client-base "src" "oxygen")
+        project-base (-> ".." fs/file fs/absolute fs/normalized)
+        schema-base (fs/file project-base "schema")
+        oxygen-base (fs/file project-base "oxygen")
 
         css-source (fs/file schema-base "css")
-        css-target (fs/file source "framework" "css")
+        css-target (fs/file oxygen-base "framework" "css")
 
         schema-source (fs/file schema-base "rng")
-        schema-target (fs/file source "framework" "rng")
+        schema-target (fs/file oxygen-base "framework" "rng")
 
-        target (fs/file client-base "target")
-        jar (fs/file target "uberjar" "zdl-lex-client.jar")
-        oxygen (fs/file target "oxygen")
+        target (fs/file oxygen-base "update-site")
 
         plugins (fs/file oxygen "plugins")
         plugin (fs/file plugins "zdl-lex-client")
@@ -30,9 +27,9 @@
 
         frameworks (fs/file oxygen "frameworks")
         framework (fs/file frameworks "zdl-lex-client")
-        framework-zip (fs/file oxygen "zdl-lex-framework.zip")
+        framework-zip (fs/file target "zdl-lex-framework.zip")
 
-        update-site-xml (fs/file oxygen "updateSite.xml")]
+        update-site-xml (fs/file target "updateSite.xml")]
 
   (when-not (.isFile jar)
     (throw (IllegalStateException. (str "zdl-lex-client not built: " jar))))

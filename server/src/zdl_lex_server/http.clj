@@ -15,6 +15,7 @@
             [zdl-lex-server.home :as home]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.mantis :as mantis]
+            [zdl-lex-server.oxygen :as oxygen]
             [zdl-lex-server.solr :as solr]
             [zdl-lex-server.status :as status]
             [mount.core :as mount]
@@ -68,6 +69,7 @@
       home/ring-handlers
       lock/ring-handlers
       mantis/ring-handlers
+      oxygen/ring-handlers
       solr/ring-handlers
       status/ring-handlers]])
    (ring/routes

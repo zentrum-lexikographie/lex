@@ -2,7 +2,9 @@
   :plugins [[lein-modules "0.3.11"]
             [com.roomkey/lein-v "7.1.0"]]
 
-  :profiles {:dev
+  :profiles {:dev [:project/dev :profiles/dev]
+
+             :project/dev
              {:dependencies [[midje "1.9.8"]]}
 
              :inherited
@@ -30,11 +32,13 @@
               :middleware [leiningen.v/version-from-scm
                            leiningen.v/dependency-version-from-scm
                            leiningen.v/add-workspace-data]
+
               :prep-tasks [["v" "cache" "src" "edn"] "javac" "compile"]
+
               :plugins [[lein-environ "1.1.0"]
                         [com.roomkey/lein-v "7.1.0"]]}}
 
   :modules {:versions {org.slf4j "1.7.25"
                        org.relaxng "20181222"}
-            :dirs ["build" "common"]})
+            :dirs ["common" "build" "client" "corpus" "wikimedia" "server"]})
 

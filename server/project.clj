@@ -1,15 +1,10 @@
-(def version (slurp "../VERSION"))
+(defproject org.zdl.lex/server :lein-v
+  :plugins [[lein-modules "0.3.11"]
+            [lein-resource "17.06.1"]]
 
-(defproject zdl-lex-server version
+  :hooks [leiningen.resource]
 
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-
-  :license {:name "LGPL-3.0"
-            :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
-
-  :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/data.csv "0.1.4"]
+  :dependencies [[org.clojure/data.csv "0.1.4"]
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/data.zip "0.1.3"]
                  [com.h2database/h2 "1.4.199"]
@@ -24,20 +19,23 @@
                  [org.webjars.npm/bulma "0.7.4"]
                  [org.webjars.npm/material-icons "0.3.0"]
                  [org.webjars/webjars-locator "0.36"]
-                 [cheshire "5.8.1"]
+                 [cheshire "5.9.0"]
                  [clj-http "3.9.1"]
                  [clj-jgit "1.0.0-beta2"]
+                 [cpath-clj "0.1.2"]
                  [hiccup "1.0.5"]
                  [ring-logger-timbre "0.7.6"]
                  [ring-webjars "0.2.0"]
-                 [zdl-lex-common ~version]]
+                 [org.zdl.lex/common :version]]
 
-  :main ^:skip-aot zdl-lex-server.core
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}
-             :dev [:project/dev :profiles/dev]
+  :profiles {:uberjar {:aot :all
+                       :main zdl-lex-server.core}
              :project/dev
-             {:dependencies [[midje "1.9.8"]
-                             [faker "0.2.2"]]}}
-  :plugins [[lein-environ "1.1.0"]])
+             {:dependencies [[faker "0.2.2"]]}}
+  :resource
+  {:resource-paths ["../oxygen"]
+   :target-path "target/classes/oxygen" ;; optional default to the global one
+   :silent false
+   :verbose false
+   :skip-stencil [ #".*" ]})
 
