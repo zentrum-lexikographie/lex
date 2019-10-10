@@ -26,9 +26,11 @@ ansible/.vagrant
 ansible/*.retry
 ansible/roles/*.*
 
-client/src/oxygen/framework/css/
-client/src/oxygen/framework/rng/
 client/tmp
+
+oxygen/framework/css/
+oxygen/framework/rng/
+oxygen/plugin/lib/
 
 schema/rng
 
