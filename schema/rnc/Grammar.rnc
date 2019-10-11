@@ -90,11 +90,11 @@ grammatische_Beschreibung = element Grammatik {
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ
 	, (
 		element Praesens {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|entgegen|ernst|fahren|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tiefer|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|warm|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|wohl|zu|zueinander|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|entgegen|ernst|fahren|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|warm|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|wohl|zu|zueinander|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
 			, Rechtschreibstatus ?
 		} +
 		, element Praeteritum {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|entgegen|ernst|fahren|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tiefer|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|warm|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|wohl|zu|zueinander|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|entgegen|ernst|fahren|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor|vorlieb|vorüber|wach|wahr|warm|weg|weich|weiter|wieder|wieder (an|auf|ein|gut|her)|weiter|wider|wohl|zu|zueinander|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
 			, Rechtschreibstatus ?
 		} +
 	) ?
@@ -117,8 +117,8 @@ grammatische_Beschreibung = element Grammatik {
 	# ##################
 	# -e- bzw. -s- sind optional für Komparativ bzw. Superlativ
 	# wegen Fällen wie /mehr/ und /am größten/
-	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(länger|leichter|näher|tiefer|schwerer|weiter) \p{Ll}+(t|nd)|näher\p{Ll}+' } } *
-	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(längsten|leichtesten|nächsten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))|nächst\p{Ll}+' } } *
+	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(besser|länger|leichter|näher|tiefer|schwerer|weiter) ?\p{Ll}+(t|nd)' } } *
+	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(besten|längsten|leichtesten|nächsten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))|nächst\p{Ll}+|(best|tiefst)\p{Ll}+nd' } } *
 	, element Komparationspraeferenz {
 		'ohne Steigerung'
 		| 'Steigerung selten'
