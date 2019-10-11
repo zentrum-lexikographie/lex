@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# encoding: utf8
 
 '''
 Fill the DWDSWB database with XML+Metadata for dictionary entries.
@@ -357,14 +358,14 @@ if __name__ == '__main__':
                         for character in unicodedata.normalize('NFC', headword)
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
-                    if headword and not (headword, hidx, htype, index) in bucket_lemma.data:
+                    if headword and not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data:
+                        lemma_count += 1
                         bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
 
                         for token in headword.split():
                             bucket_token.update( (token, lemma_count) )
 
-                        lemma_count += 1
 
             # extract morphological relations (first pass)
             if dictionary.USE_RELATIONS and article.get('Status') == 'Red-f':
