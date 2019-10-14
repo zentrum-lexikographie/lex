@@ -77,6 +77,6 @@
             (catch SAXParseException e @errors)))))))
 
 (comment
-  (let [validate (validator (fs/file "../schema/resources/rng/DWDSWB.rng")
-                            (fs/file "../schema/resources/rng/DWDSWB.sch.xsl"))]
+  (let [validate (validator (fs/file "../schema/rng/DWDSWB.rng")
+                            (fs/file "../schema/rng/DWDSWB.sch.xsl"))]
     (validate (fs/file "../data/git/articles/DWDS/MWA-001/halbe Portion.xml"))))
