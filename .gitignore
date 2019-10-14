@@ -28,7 +28,6 @@ ansible/roles/*.*
 
 client/tmp
 
-oxygen/framework/css/
 oxygen/framework/rng/
 oxygen/plugin/lib/
 

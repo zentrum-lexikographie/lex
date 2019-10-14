@@ -1,0 +1,30 @@
+#!/usr/bin/env python
+
+from pathlib import Path
+from subprocess import check_call
+from urllib.parse import urljoin
+
+framework_dir = (Path(__file__) / '..' / '..' / 'oxygen' / 'framework').resolve()
+
+css_files = list((framework_dir / 'css').glob('*.css'))
+rnc_files = list((framework_dir / 'rnc').glob('*.rnc'))
+rng_files = list((framework_dir / 'rng').glob('*.rng'))
+
+if len(rng_files) == 0:
+    raise Exception(
+        'No *.rng files found; please compile the schema before uploading!'
+    )
+
+
+existdb_base = 'http://spock.dwds.de:8080/exist/webdav/db/dwdswb/'
+
+
+def upload(f, url):
+    check_call(['curl', '-n', '-v', '-T', f.as_posix(), urljoin(existdb_base, url)])
+
+
+for schema_file in (rnc_files + rng_files):
+    upload(schema_file, 'validation/' + schema_file.name)
+
+for css_file in css_files:
+    upload(schema_file, 'presentation/' + css_file.name)
