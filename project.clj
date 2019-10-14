@@ -24,6 +24,7 @@
                 :exclusions [cljsjs/js-joda-locale-en-us
                              cljsjs/js-joda-timezone]]]
 
+              :description "Lexikographic Workbench of the ZDL"
               :url "https://zdl.org/"
 
               :license {:name "LGPL-3.0"

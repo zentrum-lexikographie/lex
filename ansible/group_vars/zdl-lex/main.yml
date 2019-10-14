@@ -81,5 +81,3 @@ solr_cores:
 
 lex_client_dir: "/home/lex/zdl-lex-client"
 lex_data_dir: "/var/lex"
-
-zdl_lex_version: "{{ lookup('file', '../VERSION') }}"
