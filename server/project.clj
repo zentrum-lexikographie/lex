@@ -27,7 +27,7 @@
                  [hiccup "1.0.5"]
                  [ring-logger-timbre "0.7.6"]
                  [ring-webjars "0.2.0"]
-                 [org.zdl.lex/common :version]]
+                 [org.zdl.lex/common "_"]]
 
   :compile-path "classes"
   :target-path "../ansible/files/api"
@@ -36,6 +36,8 @@
   :uberjar-name "org.zdl.lex.server-standalone.jar"
 
   :clean-targets ^{:protect false} [:compile-path :target-path]
+
+  :repl-options {:init-ns zdl-lex-server.core}
 
   :profiles {:uberjar {:aot :all
                        :main zdl-lex-server.core}

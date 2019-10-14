@@ -7,8 +7,8 @@
                  [com.github.jiconfont/jiconfont-swing "1.0.1"]
                  [com.github.jiconfont/jiconfont-google_material_design_icons "2.2.0.2"]
                  [seesaw "1.5.0"]
-                 [org.zdl.lex/common :version :exclusions [org.relaxng/jing
-                                                           org.relaxng/trang]]]
+                 [org.zdl.lex/common "_" :exclusions [org.relaxng/jing
+                                                      org.relaxng/trang]]]
 
   :repositories [["oxygen" {:url "https://www.oxygenxml.com/maven"
                             :snapshots true}]]

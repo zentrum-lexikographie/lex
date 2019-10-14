@@ -1,7 +1,7 @@
-(defproject org.zdl.lex/corpus :lein-v
+(defproject org.zdl.lex/corpus "000000.00.00"
   :plugins [[lein-modules "0.3.11"]]
 
-  :dependencies [[org.zdl.lex/common :version]
+  :dependencies [[org.zdl.lex/common "_"]
                  [clj-http "3.10.0" :exclusions [riddley commons-logging]]
                  [aleph "0.4.6"]
                  [gloss "0.2.6"]

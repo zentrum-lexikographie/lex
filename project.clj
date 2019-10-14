@@ -30,9 +30,7 @@
               :license {:name "LGPL-3.0"
                         :url "https://www.gnu.org/licenses/lgpl-3.0.html"}
 
-              :middleware [leiningen.v/version-from-scm
-                           leiningen.v/dependency-version-from-scm
-                           leiningen.v/add-workspace-data]
+              :middleware [leiningen.v/add-workspace-data]
 
               :prep-tasks [["v" "cache" "src" "edn"] "javac" "compile"]
 
@@ -40,6 +38,8 @@
                         [com.roomkey/lein-v "7.1.0"]]}}
 
   :modules {:versions {org.slf4j "1.7.25"
-                       org.relaxng "20181222"}
+                       org.relaxng "20181222"
+                       org.zdl.lex/common "000000.00.00"
+                       org.zdl.lex/corpus "000000.00.00"}
             :dirs ["common" "build" "client" "corpus" "wikimedia" "server"]})
 

@@ -9,8 +9,8 @@
                  [com.outpace/clj-excel "0.0.9"]
                  [org.sweble.wikitext/swc-parser-lazy "3.1.9"]
                  [org.apache.jena/jena-arq "3.12.0"]
-                 [org.zdl.lex/common :version]
-                 [org.zdl.lex/corpus :version]]
+                 [org.zdl.lex/common "_"]
+                 [org.zdl.lex/corpus "_"]]
 
   :profiles {:uberjar {:aot :all
                        :main zdl-lex-wikimedia.core}}

@@ -1,4 +1,4 @@
-(defproject org.zdl.lex/common :lein-v
+(defproject org.zdl.lex/common "000000.00.00"
   :plugins [[lein-modules "0.3.11"]]
 
   :dependencies [[org.clojure/tools.cli "0.4.2"]
