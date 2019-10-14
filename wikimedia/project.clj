@@ -13,4 +13,5 @@
                  [org.zdl.lex/corpus :version]]
 
   :profiles {:uberjar {:aot :all
-                       :main zdl-lex-wikimedia.core}})
+                       :main zdl-lex-wikimedia.core}}
+  :aliases {"build" ["compile"]})

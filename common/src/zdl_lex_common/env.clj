@@ -75,7 +75,7 @@
 
 (defn secret? [k]
   (let [n (name k)]
-    (some #(str/includes? n %) ["password" "passwd" "secret" "key"])))
+    (some #(str/includes? n %) ["password" "passwd" "secret" "key" "ps1"])))
 
 (defn env->str [env]
   (let [key-width (reduce max (map (comp count name) (keys env)))

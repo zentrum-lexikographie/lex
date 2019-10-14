@@ -3,4 +3,5 @@
 
   :dependencies [[org.zdl.lex/common :version]
                  [me.flowthing/sigel "0.2.2"]]
-  :repl-options {:init-ns zdl-lex-build.core})
+  :repl-options {:init-ns zdl-lex-build.core}
+  :aliases {"build" ["compile"]})

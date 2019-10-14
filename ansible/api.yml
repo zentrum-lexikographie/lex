@@ -70,7 +70,7 @@
 
     - name: Copy API
       copy:
-        src: "../server/target/uberjar/zdl-lex-server-{{ zdl_lex_version }}-standalone.jar"
+        src: "api/org.zdl.lex.server-standalone.jar"
         dest: /home/lex/zdl-lex-server.jar
         owner: lex
         group: www-data

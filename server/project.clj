@@ -28,14 +28,23 @@
                  [ring-webjars "0.2.0"]
                  [org.zdl.lex/common :version]]
 
+  :compile-path "classes"
+  :target-path "../ansible/files/api"
+
+  :jar-name "org.zdl.lex.server.jar"
+  :uberjar-name "org.zdl.lex.server-standalone.jar"
+
+  :clean-targets ^{:protect false} [:compile-path :target-path]
+
   :profiles {:uberjar {:aot :all
                        :main zdl-lex-server.core}
              :project/dev
              {:dependencies [[faker "0.2.2"]]}}
   :resource
   {:resource-paths ["../oxygen"]
-   :target-path "target/classes/oxygen" ;; optional default to the global one
+   :target-path "classes/oxygen"
    :silent false
    :verbose false
-   :skip-stencil [ #".*" ]})
+   :skip-stencil [ #".*" ]}
+  :aliases {"build" ["uberjar"]})
 

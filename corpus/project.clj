@@ -7,4 +7,5 @@
                  [gloss "0.2.6"]
                  [cheshire "5.9.0"]
                  [throttler "1.0.0" :exclusions [org.clojure/core.async]]]
-  :repl-options {:init-ns zdl-lex-corpus.dev})
+  :repl-options {:init-ns zdl-lex-corpus.dev}
+  :aliases {"build" ["install"]})

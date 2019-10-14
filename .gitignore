@@ -24,6 +24,7 @@ data/
 config.local.edn
 ansible/.vagrant
 ansible/*.retry
+ansible/files/api/
 ansible/roles/*.*
 
 client/tmp

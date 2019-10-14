@@ -21,7 +21,7 @@
              "-Dclojure.compiler.elide-meta=[]" 
              "-Dclojure.compiler.direct-linking=false"]
 
-  :compile-path "target/classes"
+  :compile-path "classes"
   :target-path "../oxygen/plugin/lib"
 
   :jar-name "org.zdl.lex.client.jar"
@@ -35,4 +35,5 @@
                              [cider/cider-nrepl "0.21.1"]]}
 
              :provided
-             {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}})
+             {:dependencies [[com.oxygenxml/oxygen-sdk "20.1.0.3"]]}}
+  :aliases {"build" ["uberjar"]})

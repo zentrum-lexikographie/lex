@@ -8,5 +8,7 @@
                  [org.relaxng/trang "_":exclusions [xml-apis net.sf.saxon/Saxon-HE]]
                  [cronjure "0.1.1"]]
 
-  :repl-options {:init-ns zdl-lex-common.dev})
+  :repl-options {:init-ns zdl-lex-common.dev}
+
+  :aliases {"build" ["install"]})
 
