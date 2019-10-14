@@ -1,6 +1,8 @@
 (ns zdl-lex-server.oxygen
   (:require [ring.util.http-response :as htstatus]
+            [cpath-clj.core :as cp]
             [clojure.java.io :as io]
+            [ring.util.io :as rio]
             [zdl-lex-common.xml :as xml]))
 
 (defn generate-update-descriptor [_]
@@ -12,10 +14,14 @@
     (htstatus/ok (xml/serialize descriptor))))
 
 (defn download-plugin [_]
-  (htstatus/ok))
+  (-> (fn [stream] (spit stream (str (cp/resources "oxygen/plugin/lib/"))))
+      (rio/piped-input-stream)
+      (htstatus/ok)))
 
 (defn download-framework [_]
-  (htstatus/ok))
+  (-> (fn [stream] (spit stream (str (cp/resources "oxygen/framework/"))))
+      (rio/piped-input-stream)
+      (htstatus/ok)))
 
 (def ring-handlers
   ["/oxygen"

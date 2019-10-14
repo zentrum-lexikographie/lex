@@ -4,7 +4,8 @@
 
   :hooks [leiningen.resource]
 
-  :dependencies [[org.clojure/data.csv "0.1.4"]
+  :dependencies [[org.clojure/data.codec "0.1.1"]
+                 [org.clojure/data.csv "0.1.4"]
                  [org.clojure/data.xml "0.2.0-alpha6"]
                  [org.clojure/data.zip "0.1.3"]
                  [com.h2database/h2 "1.4.199"]
