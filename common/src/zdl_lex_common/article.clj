@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [zdl-lex-common.util :refer [->clean-map]]
+            [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-lex-common.xml :as xml]
             [me.raynes.fs :as fs])
   (:import java.io.File
@@ -179,19 +179,36 @@
         :area (area article)
         :references (references article)}))))
 
-(defn article-xml-file? [^File f]
-  (let [name (.getName f)
-        path (.getAbsolutePath f)]
-    (and
-     (.endsWith name ".xml")
-     (not (.startsWith name "."))
-     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
-     (not (.contains path ".git")))))
+(defn file->id
+  ([dir]
+   (partial file->id (.. (file dir) (toPath))))
+  ([dir-path f]
+   (str (.. dir-path (relativize (.toPath f))))))
+
+(defn id->file
+  ([dir]
+   (partial id->file (file dir)))
+  ([dir f]
+   (file dir f)))
+
+(defn article-xml-file?
+  ([dir]
+   (partial article-xml-file? (.getAbsolutePath (file dir))))
+  ([dir-path ^File f]
+   (let [name (.getName f)
+         path (.getAbsolutePath f)]
+     (and
+      (str/starts-with? path dir-path)
+      (.endsWith name ".xml")
+      (not (.startsWith name "."))
+      (not (#{"__contents__.xml" "indexedvalues.xml"} name))
+      (not (.contains path ".git"))))))
+
 
 (defn article-xml-files [dir]
-  (let [dir (-> dir fs/file fs/absolute fs/normalized)
-        dir-path (.. dir (toPath))
-        file->id #(str (.. dir-path (relativize (.toPath %))))]
+  (let [dir (file dir)
+        file->id (file->id dir)
+        article-xml-file? (article-xml-file? dir)]
     (->> (file-seq dir)
          (filter article-xml-file?)
          (map fs/normalized)
@@ -203,6 +220,9 @@
     (assoc article :id id :file file)))
 
 (comment
+  (->> (excerpts "../data/git/articles")
+       (drop 100)
+       (take 3))
   (->> (mapcat :forms (excerpts "../data/git/articles"))
        (take 1000)
        (sort collator)
