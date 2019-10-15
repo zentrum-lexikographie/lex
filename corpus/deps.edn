@@ -1,0 +1,7 @@
+{:deps
+ {org.zdl.lex/common {:local/root "../common"}
+  clj-http {:mvn/version "3.10.0" :exclusions [riddley commons-logging]}
+  aleph {:mvn/version "0.4.6"}
+  gloss {:mvn/version "0.2.6"}
+  cheshire {:mvn/version "5.9.0"}
+  throttler {:mvn/version "1.0.0" :exclusions [org.clojure/core.async]}}}

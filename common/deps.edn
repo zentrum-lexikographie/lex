@@ -1,0 +1,24 @@
+{:deps
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  org.clojure/core.async {:mvn/version "0.4.490"}
+  org.clojure/tools.cli {:mvn/version "0.4.2"}
+  com.taoensso/timbre {:mvn/version "4.10.0"}
+  com.fzakaria/slf4j-timbre {:mvn/version "0.3.12"}
+  gremid/lucene-query {:mvn/version "0.1.1"}
+  me.raynes/fs {:mvn/version "1.4.6"}
+  metosin/spec-tools {:mvn/version "0.10.0"}
+  net.sf.saxon/Saxon-HE {:mvn/version "9.9.1-4"}
+  org.relaxng/jing {:mvn/version "20181222"
+                    :exclusions [xml-apis net.sf.saxon/Saxon-HE]}
+  org.relaxng/trang {:mvn/version "20181222"
+                     :exclusions [xml-apis net.sf.saxon/Saxon-HE]}
+  org.slf4j/slf4j-api {:mvn/version "1.7.25"}
+  org.slf4j/jul-to-slf4j {:mvn/version "1.7.25"}
+  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.25"}
+  cronjure {:mvn/version "0.1.1"}
+  environ {:mvn/version "1.1.0"}
+  mount {:mvn/version "0.1.16"}
+  tick {:mvn/version "0.4.10-alpha"
+        :exclusions [cljsjs/js-joda-locale-en-us cljsjs/js-joda-timezone]}}
+ :aliases
+ {:test {:extra-deps {midje {:mvn/version "1.9.8"}}}}}

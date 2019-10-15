@@ -1,0 +1,5 @@
+{:deps
+ {org.zdl.lex/common {:local/root "../common"}
+  me.flowthing/sigel {:mvn/version "0.2.2"}}
+ :aliases
+ {:schema {:main-opts ["-m" "zdl-lex-build.schema"]}}}

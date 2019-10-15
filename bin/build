@@ -2,8 +2,15 @@
 
 from pathlib import Path
 
-import lein
+import clj
 
-project_dir = (Path(__file__) / '..' / '..').resolve().as_posix()
+project_dir = (Path(__file__) / '..' / '..').resolve()
 
-lein.run(['modules', 'build'], cwd=project_dir, check=True)
+# RNC --> RNG/Schematron
+clj.run(['-A:schema'], cwd=(project_dir / 'build').as_posix(), check=True)
+
+# Plugin for OxygenXML Editor
+clj.run(['-A:dev:prod:uberjar'], cwd=(project_dir / 'client').as_posix(), check=True)
+
+# Server component
+clj.run(['-A:dev:prod:uberjar'], cwd=(project_dir / 'server').as_posix(), check=True)

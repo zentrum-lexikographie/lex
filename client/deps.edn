@@ -1,0 +1,29 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/data.codec {:mvn/version "0.1.1"}
+  org.clojure/core.cache {:mvn/version "0.8.1"}
+  org.clojure/core.memoize {:mvn/version "0.7.2"}
+  com.github.jiconfont/jiconfont-swing {:mvn/version "1.0.1"}
+  com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+  org.zdl.lex/common {:local/root "../common"
+                      :exclusions [org.relaxng/jing org.relaxng/trang]}
+  seesaw {:mvn/version "1.5.0"}}
+
+ :mvn/repos
+ {"central" {:url "https://repo1.maven.org/maven2/"}
+  "clojars" {:url "https://clojars.org/repo"}
+  "oxygen" {:url "https://www.oxygenxml.com/maven"}}
+
+ :aliases
+ {:dev
+  {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "20.1.0.3"}
+                uberdeps {:mvn/version "0.1.4"
+                          :exclusions [org.slf4j/slf4j-nop commons-logging]}}
+   :jvm-opts ["-Dawt.useSystemAAFontSettings=on"
+              "-Dswing.aatext=true"]}
+  :prod
+  {:extra-paths ["classes"]
+   :extra-deps {nrepl {:mvn/version "0.6.0"}
+                cider/cider-nrepl {:mvn/version "0.21.1"}}}
+  :uberjar
+  {:main-opts ["-m" "zdl-lex-client.build"]}}}

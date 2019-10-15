@@ -12,8 +12,8 @@
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
 (defn generate-update-descriptor [_]
-  (let [{:keys [version]} (-> "version.edn" io/resource slurp read-string)
-        descriptor (-> "oxygen/updateSite.xml" io/resource xml/->dom)
+  (let [version "201910.10.10"
+        descriptor (-> "updateSite.xml" io/resource xml/->dom)
         elements-by-name #(-> (.getElementsByTagName descriptor %) xml/->seq)]
     (doseq [xt-version (elements-by-name "xt:version")]
       (.. xt-version (setTextContent version)))
@@ -29,7 +29,7 @@
      [path (first uri)])))
 
 (defn download-plugin [_]
-  (-> (fn [stream] (spit stream (vec (classpath-resources "oxygen/plugin/lib/"
+  (-> (fn [stream] (spit stream (vec (classpath-resources "plugin/lib/"
                                                           (constantly true)))))
       (rio/piped-input-stream)
       (htstatus/ok)))
@@ -38,7 +38,7 @@
   (-> (fn [stream]
         (try
           (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (doseq [[path uri] (classpath-resources "oxygen/framework/")
+            (doseq [[path uri] (classpath-resources "framework/")
                     :let [entry-path (str "zdl-lex-client/" path)]]
               (.. zip (putNextEntry (ZipEntry. entry-path)))
               (io/copy (io/input-stream uri) zip)

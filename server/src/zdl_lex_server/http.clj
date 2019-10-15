@@ -3,7 +3,6 @@
             [mount.core :refer [defstate]]
             [muuntaja.middleware :refer [wrap-format wrap-params]]
             [reitit.ring :as ring]
-            [ring.adapter.jetty :as jetty]
             [ring.logger.timbre :refer [wrap-with-logger]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
@@ -79,7 +78,11 @@
    {:middleware base-middleware}))
 
 (defstate server
-  :start (jetty/run-jetty handler {:port (env :http-port) :join? false})
+  :start
+  (do
+    (require 'ring.adapter.jetty)
+    ((ns-resolve 'ring.adapter.jetty 'run-jetty)
+     handler {:port (env :http-port) :join? false}))
   :stop (.. server (stop)))
 
 (comment

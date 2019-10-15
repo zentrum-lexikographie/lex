@@ -2,9 +2,9 @@
 
 from pathlib import Path
 
-import lein
+import clj
 
 
 build_dir = (Path(__file__) / '..' / '..' / 'build').resolve().as_posix()
 
-lein.run(['run', '-m', 'zdl-lex-build.schema'], cwd=build_dir)
+clj.run(['-A:schema'], cwd=build_dir)
