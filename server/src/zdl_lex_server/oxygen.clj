@@ -11,9 +11,10 @@
 
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
+(def version (-> "version.edn" io/resource slurp read-string :version))
+
 (defn generate-update-descriptor [_]
-  (let [version "201910.10.10"
-        descriptor (-> "updateSite.xml" io/resource xml/->dom)
+  (let [descriptor (-> "updateSite.xml" io/resource xml/->dom)
         elements-by-name #(-> (.getElementsByTagName descriptor %) xml/->seq)]
     (doseq [xt-version (elements-by-name "xt:version")]
       (.. xt-version (setTextContent version)))

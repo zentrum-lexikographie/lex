@@ -6,6 +6,9 @@ import clj
 
 project_dir = (Path(__file__) / '..' / '..').resolve()
 
+# Git tags --> version.edn
+clj.run(['-A:version'], cwd=(project_dir / 'build').as_posix(), check=True)
+
 # RNC --> RNG/Schematron
 clj.run(['-A:schema'], cwd=(project_dir / 'build').as_posix(), check=True)
 
