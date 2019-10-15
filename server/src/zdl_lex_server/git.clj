@@ -8,21 +8,34 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.env :refer [env]]
+            [zdl-lex-common.util :refer [file]]
             [zdl-lex-server.store :as store]
             [ring.util.http-response :as htstatus]))
 
-(let [absolute-path #(->> % (fs/file store/git-dir) fs/absolute fs/normalized)]
-  (defn- send-changes [changed-files]
-    (when-let [changeset (some->> changed-files
-                                  (map absolute-path)
-                                  (into (sorted-set)))]
-      (timbre/spy :trace changeset)
-      (bus/publish! :git-changes changeset)
-      changed-files)))
+(defstate git-dir
+  :start (store/with-write-lock
+           (let [git-dir (file (env :data-dir) "git")]
+             (when-not (fs/directory? (file git-dir ".git"))
+               (fs/mkdirs git-dir)
+               (jgit/git-init :dir git-dir)
+               (jgit/with-repo git-dir
+                 (fs/mkdirs (file git-dir "articles"))
+                 (jgit/git-add repo ".")
+                 (jgit/git-commit repo "Init")))
+             git-dir)))
+
+(defn- send-changes [changed-files]
+  (when-let [changeset (some->> changed-files
+                                (map (partial file git-dir))
+                                (into (sorted-set)))]
+    (timbre/spy :trace changeset)
+    (bus/publish! :git-changes changeset)
+    changed-files))
 
 (defn commit []
   (store/with-write-lock
-    (jgit/with-repo store/git-dir
+    (jgit/with-repo git-dir
       (let [changed-files (->> (jgit/git-status repo) (vals) (apply union))]
         (when-not (empty? changed-files)
           (jgit/with-repo store/git-dir
@@ -34,7 +47,7 @@
 (let [all-refs ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"]]
   (defn fast-forward [refs]
     (store/with-write-lock
-      (jgit/with-repo store/git-dir
+      (jgit/with-repo git-dir
         (jgit/git-fetch repo :ref-specs all-refs)
         (when-let [head (jgit-query/find-rev-commit repo rev-walk "HEAD")]
           (let [merge (jgit/git-merge repo refs :ff-mode :ff-only)]
