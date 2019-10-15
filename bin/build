@@ -1,19 +1,30 @@
 #!/usr/bin/env python
 
+import logging
 from pathlib import Path
 
 import clj
 
 project_dir = (Path(__file__) / '..' / '..').resolve()
 
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+
+
+def build_module(name, aliases):
+    logging.info({'name': name, 'aliases': aliases})
+    clj.run([':'.join(['-A'] + aliases)],
+            cwd=(project_dir / name).as_posix(),
+            check=True)
+
+
 # Git tags --> version.edn
-clj.run(['-A:version'], cwd=(project_dir / 'build').as_posix(), check=True)
+build_module('build', ['version'])
 
 # RNC --> RNG/Schematron
-clj.run(['-A:schema'], cwd=(project_dir / 'build').as_posix(), check=True)
+build_module('build', ['schema'])
 
 # Plugin for OxygenXML Editor
-clj.run(['-A:dev:prod:uberjar'], cwd=(project_dir / 'client').as_posix(), check=True)
+build_module('client', ['dev', 'prod', 'uberjar'])
 
 # Server component
-clj.run(['-A:dev:prod:uberjar'], cwd=(project_dir / 'server').as_posix(), check=True)
+build_module('server', ['dev', 'prod', 'uberjar'])
