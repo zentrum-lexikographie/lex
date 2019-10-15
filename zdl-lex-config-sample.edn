@@ -1,0 +1,15 @@
+{:exist-base "https://lex.dwds.de/exist"
+ :exist-user "herold"
+ :exist-password "secret"
+ :mantis-user "dwds"
+ :mantis-password "secret"
+ :solr-base "https://lex.dwds.de/solr"
+ :solr-user "admin"
+ :solr-password "secret"
+ :http-log "true"
+ :server-base "http://localhost:3000/"
+ :server-user "admin"
+ :server-password "secret"
+ :corpora-user "guest"
+ :corpora-password "guest"}
+

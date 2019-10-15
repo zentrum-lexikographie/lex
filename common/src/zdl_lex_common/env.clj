@@ -92,10 +92,15 @@
   (st/coerce ::env m st/string-transformer))
 
 (let [coerce #(st/coerce ::env % st/string-transformer)
-      normalize-key #(-> % name (str/replace #"^zdl-lex-" "") keyword)]
+      normalize-key #(-> % name (str/replace #"^zdl-lex-" "") keyword)
+      config (->> (conj (fs/parents ".") (fs/file "."))
+                  (map #(fs/file % "zdl-lex-config.edn"))
+                  (filter fs/file?)
+                  (map (comp read-string slurp))
+                  (apply merge))]
   (def env
     (->>
-     (map #(vector (-> % first normalize-key) (second %)) environ/env)
+     (map #(vector (-> % first normalize-key) (second %)) (merge environ/env config))
      (into defaults)
      (coerce) (s/assert* ::env)
      (into (sorted-map)))))

@@ -11,6 +11,7 @@ pom.xml.asc
 .cpcache
 
 version.edn
+zdl-lex-config.edn
 
 .idea
 *.iml
