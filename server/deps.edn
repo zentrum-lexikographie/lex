@@ -36,5 +36,6 @@
    :extra-deps {faker {:mvn/version "0.2.2"}}}
   :prod
   {:extra-paths ["../oxygen"]}
-  :uberjar
-  {:main-opts ["-m" "zdl-lex-server.build"]}}}
+  :package
+  {:extra-paths ["build"]
+   :main-opts ["-m" "package"]}}}
