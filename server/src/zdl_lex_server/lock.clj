@@ -1,22 +1,19 @@
 (ns zdl-lex-server.lock
   (:require [clojure.core.async :as a]
             [clojure.java.jdbc :as jdbc]
-            [clojure.string :as str]
             [hugsql.core :refer [def-db-fns]]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
-            [zdl-lex-common.cron :as cron]
-            [zdl-lex-common.util :refer [uuid]]
-            [zdl-lex-server.store :as store]
             [ring.util.http-response :as htstatus]
-            [taoensso.timbre :as timbre]
-            [mount.core :as mount]))
+            [zdl-lex-common.cron :as cron]
+            [zdl-lex-common.env :refer [env]]
+            [zdl-lex-common.util :refer [uuid]]))
 
 (def-db-fns "zdl_lex_server/lock.sql")
 
 (defstate db
   :start (let [db {:dbtype "h2"
-                   :dbname (str (fs/file store/data-dir "locks"))
+                   :dbname (str (fs/file (env :data-dir) "locks"))
                    :user "sa"
                    :password ""}]
            (jdbc/with-db-connection [c db]
@@ -28,9 +25,9 @@
   (jdbc/with-db-transaction [c db]
     (remove-expired-locks c {:now (System/currentTimeMillis)})))
 
-(defstate lock-cleanup
+(defstate lock-cleanup-scheduler
   :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup-locks)
-  :stop (a/close! lock-cleanup))
+  :stop (a/close! lock-cleanup-scheduler))
 
 (defn- now []
   (System/currentTimeMillis))
@@ -83,7 +80,7 @@
    ["/*resource" {:get get-lock :post post-lock :delete delete-lock}]])
 
 (comment
-  (mount/start #'db #'lock-cleanup)
+  (mount/start #'db #'lock-cleanup-scheduler)
   (mount/stop)
   (get-list {})
   (jdbc/with-db-transaction [c db]

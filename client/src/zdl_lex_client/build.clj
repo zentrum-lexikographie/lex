@@ -4,7 +4,9 @@
             [zdl-lex-common.log :as log]))
 
 (def compiled-ns
-  ['zdl-lex-client.oxygen.extension
+  ['clojure.core.cache
+   'clojure.core.memoize
+   'zdl-lex-client.oxygen.extension
    'zdl-lex-client.oxygen.plugin
    'zdl-lex-client.oxygen.url-handler])
 

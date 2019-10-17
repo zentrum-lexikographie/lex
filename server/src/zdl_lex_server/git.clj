@@ -25,6 +25,9 @@
                  (jgit/git-commit repo "Init")))
              git-dir)))
 
+(defstate articles-dir
+  :start (fs/file git-dir "articles"))
+
 (defn- send-changes [changed-files]
   (when-let [changeset (some->> changed-files
                                 (map (partial file git-dir))

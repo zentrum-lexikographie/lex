@@ -2,7 +2,8 @@
   (:gen-class
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
-  (:require [clojure.core.cache.wrapped :as cache]
+  (:require [clojure.core.memoize :as memo]
+            [clojure.core.cache :as cache]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [taoensso.timbre :as timbre]
@@ -13,7 +14,7 @@
   (:import [java.net URLConnection URLStreamHandler]
            [ro.sync.exml.plugin.lock LockException LockHandler]))
 
-(def tokens (cache/basic-cache-factory {}))
+(def tokens (memo/fifo (fn [_] (uuid)) :fifo/threshold 128))
 
 (defn -isLockingSupported [this protocol]
   (= "lex" protocol))
@@ -40,7 +41,7 @@
       [url timeoutSeconds]
       (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
       (let [id (lexurl/url->id url)
-            token (cache/lookup-or-miss tokens id (fn [_] (uuid)))
+            token (tokens id)
             lock (http/lock id timeoutSeconds token)]
         (when-not (= token (:token lock))
           (cache/evict tokens id)

@@ -1,32 +1,30 @@
 (ns zdl-lex-server.core
-  (:gen-class)
   (:require [mount.core :as mount]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.git :as git]
-            [zdl-lex-server.http :as http]
-            [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.store :as store]
-            [clojure.core.async :as a]
-            [zdl-lex-server.mantis :as mantis]
             [zdl-lex-common.env :refer [env env->str]]
             [zdl-lex-common.log :as log]
-            [zdl-lex-common.article :as article])
-  (:import org.slf4j.bridge.SLF4JBridgeHandler))
-
-(log/configure)
+            [zdl-lex-server.git :as git]
+            [zdl-lex-server.http :as http]
+            [zdl-lex-server.lock :as lock]
+            [zdl-lex-server.mantis :as mantis]
+            [zdl-lex-server.solr :as solr]))
 
 (defn -main []
+  (log/configure)
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))
   (timbre/info (env->str env))
-  (timbre/info (mount/start)))
-
-(comment
-  (git/rebase)
-  http/server
-  (time (->> (store/article-files) (drop 150000) (take 3)))
-  (@mantis/index "Sinnkrise")
-  (-> (solr/sync-articles) (last))
-  (solr/commit-optimize)
-  (a/>!! solr/git-all->solr :sync))
+  (timbre/info (mount/start
+                #'lock/db
+                #'lock/lock-cleanup-scheduler
+                #'git/git-dir
+                #'git/articles-dir
+                #'git/commit-scheduler
+                #'solr/index-rebuild-scheduler
+                #'solr/index-init
+                #'solr/git-change-indexer
+                #'solr/build-suggestions-scheduler
+                #'solr/export-cleanup-scheduler
+                #'mantis/issue-sync-scheduler
+                #'http/server)))

@@ -134,12 +134,12 @@
 (defn- sync-issues []
   (->> (issues) (store-dump) (index-issues) (reset! index) (count)))
 
-(defstate issues->dump->index
+(defstate issue-sync-scheduler
   "Synchronizes Mantis issues"
   :start (do
            (->> (read-dump) (index-issues) (reset! index))
            (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
-  :stop (a/close! issues->dump->index))
+  :stop (a/close! issue-sync-scheduler))
 
 (def ring-handlers
   ["/mantis"
