@@ -26,14 +26,9 @@
     (.. plugin-el (setAttribute "version" version))
     (xml/serialize descriptor)))
 
-(defn classpath-resources
-  ([prefix]
-   (classpath-resources prefix (constantly true)))
-  ([prefix include-path?]
-   (for [[path uri] (cp/resources prefix)
-         :let [path (str/replace path #"^/" "")]
-         :when (include-path? path)]
-     [path (first uri)])))
+(defn classpath-resources [prefix]
+  (for [[path uri] (cp/resources) :when (str/starts-with? path prefix)]
+    [(str/replace path #"^/" "") (first uri)]))
 
 (defn download-plugin [_]
   (-> (fn [stream]
@@ -43,7 +38,7 @@
               (.. zip (putNextEntry (ZipEntry. "zdl-lex-client/plugin.xml")))
               (io/copy (io/input-stream descriptor) zip)
               (.. zip (closeEntry)))
-            (doseq [[path uri] (classpath-resources "plugin/lib/")
+            (doseq [[path uri] (classpath-resources "/plugin/lib/")
                     :let [entry-path (str "zdl-lex-client/lib/" path)]]
               (.. zip (putNextEntry (ZipEntry. entry-path)))
               (io/copy (io/input-stream uri) zip)
@@ -56,7 +51,7 @@
   (-> (fn [stream]
         (try
           (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (doseq [[path uri] (classpath-resources "framework/")
+            (doseq [[path uri] (classpath-resources "/framework/")
                     :let [entry-path (str "zdl-lex-client/" path)]]
               (.. zip (putNextEntry (ZipEntry. entry-path)))
               (io/copy (io/input-stream uri) zip)
