@@ -26,7 +26,7 @@ build_module('build', ['schema'])
 # Plugin for OxygenXML Editor
 client_compile_dir = project_dir / 'client' / 'classes'
 if client_compile_dir.is_dir():
-    shutil.rmtree(client_compile_dir)
+    shutil.rmtree(client_compile_dir.as_posix())
 client_compile_dir.mkdir()
 
 build_module('client', ['dev', 'prod', 'compile'])
