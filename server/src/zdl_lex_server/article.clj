@@ -2,13 +2,14 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [me.raynes.fs :as fs]
-            [tick.alpha.api :as t]
-            [zdl-lex-common.util :refer [server-url]]
-            [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.store :as store]
+            [ring.util.http-response :as htstatus]
             [ring.util.request :as htreq]
-            [ring.util.http-response :as htstatus])
+            [tick.alpha.api :as t]
+            [zdl-lex-common.article :as article]
+            [zdl-lex-common.xml :as xml]
+            [zdl-lex-server.git :as git]
+            [zdl-lex-server.solr :as solr]
+            [zdl-lex-server.lock :as lock])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
@@ -48,20 +49,23 @@
   (let [xml-id (generate-id)
         xml (new-article-xml xml-id form pos user)
         filename (form->filename form)
-        id (str new-article-collection "/" filename "-" xml-id ".xml")]
-    (spit (store/id->file id) xml :encoding "UTF-8")
+        id (str new-article-collection "/" filename "-" xml-id ".xml")
+        id->file (article/id->file git/articles-dir)]
+    (spit (id->file id) xml :encoding "UTF-8")
     (htstatus/ok {:id id :form form :pos pos})))
 
 (defn get-article [{{:keys [path]} :path-params}]
-  (store/with-read-lock 
-    (let [f (store/id->file path)]
+  (lock/with-global-read-lock 
+    (let [id->file (article/id->file git/articles-dir)
+          f (id->file path)]
       (if (fs/exists? f)
         (htstatus/ok f)
         (htstatus/not-found path)))))
 
 (defn post-article [{{:keys [path]} :path-params :as req}]
-  (store/with-write-lock
-    (let [f (store/id->file path)]
+  (lock/with-global-write-lock
+    (let [id->file (article/id->file git/articles-dir)
+          f (id->file path)]
       (if (fs/exists? f)
         (do (spit f (htreq/body-string req) :encoding "UTF-8") (htstatus/ok f))
         (htstatus/not-found path)))))

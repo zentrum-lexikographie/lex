@@ -7,7 +7,24 @@
             [ring.util.http-response :as htstatus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [uuid]]))
+            [zdl-lex-common.util :refer [uuid]])
+  (:import java.util.concurrent.locks.ReentrantReadWriteLock
+           java.util.concurrent.TimeUnit))
+
+(defonce global-lock (ReentrantReadWriteLock.))
+
+(defmacro with-global-lock
+  [lock-method & body]
+  `(let [lock# (~lock-method ^ReentrantReadWriteLock global-lock)]
+     (if (.tryLock lock# 30 TimeUnit/SECONDS)
+       (try ~@body
+            (finally
+              (.unlock lock#)))
+       (throw (ex-info "Storage lock timeout" {})))))
+
+(defmacro with-global-read-lock [& body] `(with-global-lock .readLock ~@body))
+
+(defmacro with-global-write-lock [& body] `(with-global-lock .writeLock ~@body))
 
 (def-db-fns "zdl_lex_server/lock.sql")
 
@@ -80,8 +97,6 @@
    ["/*resource" {:get get-lock :post post-lock :delete delete-lock}]])
 
 (comment
-  (mount/start #'db #'lock-cleanup-scheduler)
-  (mount/stop)
   (get-list {})
   (jdbc/with-db-transaction [c db]
     (merge-lock c {:resource "WDG/ab/Abenduniversitaet-E_a_421.xml",

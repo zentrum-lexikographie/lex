@@ -11,7 +11,7 @@
                  [:h1.title "ZDL Lex-Server"]
                  [:h2.subtitle
                   [:a
-                   {:href "/zdl-lex-client/updateSite.xml"
+                   {:href "/oxygen/updateSite.xml"
                     :title "Oxygen XML Editor - Update Site"}
                    "Oxygen XML Editor - Update Site"]]]]]])
       (htstatus/ok)

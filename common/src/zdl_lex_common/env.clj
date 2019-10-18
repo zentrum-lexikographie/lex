@@ -30,7 +30,7 @@
 
 (s/def ::data-dir
   (st/spec
-   {:spec fs/directory?
+   {:spec some?
     :type :file
     :decode/string #(-> %2 fs/file fs/absolute fs/normalized)
     :encode/string #(.. %2 (getAbsolutePath))}))

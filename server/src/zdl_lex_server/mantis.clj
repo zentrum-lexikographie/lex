@@ -10,9 +10,11 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-common.util :refer [file]]))
 
 (def mantis-base (env :mantis-base))
+
+(def mantis-dump (file (env :data-dir) "mantis.edn"))
 
 (def issue-id->url (partial str mantis-base "/view.php?id="))
 
@@ -119,11 +121,11 @@
                   (group-by :id) (vals) (map first)
                   (sort-by :last-updated #(compare %2 %1))
                   (vec))]
-    (spit store/mantis-dump (pr-str data))
+    (spit mantis-dump (pr-str data))
     data))
 
 (defn read-dump []
-  (try (read-string (slurp store/mantis-dump))
+  (try (read-string (slurp mantis-dump))
        (catch Throwable t (timbre/debug t) [])))
 
 (defonce index (atom {}))
@@ -148,7 +150,6 @@
             (htstatus/ok
              (pmap (comp issue :id) (or (@index q) []))))}]])
 (comment
-  store/mantis-dump
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)

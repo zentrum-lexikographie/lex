@@ -20,6 +20,12 @@
       (.. xt-version (setTextContent version)))
     (htstatus/ok (xml/serialize descriptor))))
 
+(defn generate-plugin-descriptor []
+  (let [descriptor (-> "plugin/plugin.xml" io/resource xml/->dom)
+        plugin-el (.. descriptor (getDocumentElement))]
+    (.. plugin-el (setAttribute "version" version))
+    (xml/serialize descriptor)))
+
 (defn classpath-resources
   ([prefix]
    (classpath-resources prefix (constantly true)))
@@ -30,8 +36,19 @@
      [path (first uri)])))
 
 (defn download-plugin [_]
-  (-> (fn [stream] (spit stream (vec (classpath-resources "plugin/lib/"
-                                                          (constantly true)))))
+  (-> (fn [stream]
+        (try
+          (with-open [zip (ZipOutputStream. stream zip-charset)]
+            (let [descriptor (.. (generate-plugin-descriptor) (getBytes "UTF-8"))]
+              (.. zip (putNextEntry (ZipEntry. "zdl-lex-client/plugin.xml")))
+              (io/copy (io/input-stream descriptor) zip)
+              (.. zip (closeEntry)))
+            (doseq [[path uri] (classpath-resources "plugin/lib/")
+                    :let [entry-path (str "zdl-lex-client/lib/" path)]]
+              (.. zip (putNextEntry (ZipEntry. entry-path)))
+              (io/copy (io/input-stream uri) zip)
+              (.. zip (closeEntry))))
+          (catch Exception e (timbre/warn e))))
       (rio/piped-input-stream)
       (htstatus/ok)))
 
@@ -55,4 +72,5 @@
    ["/zdl-lex-framework.zip" {:get download-framework}]])
 
 (comment
+  (-> (download-plugin nil) :body slurp count)
   (-> (download-framework nil) :body slurp count))

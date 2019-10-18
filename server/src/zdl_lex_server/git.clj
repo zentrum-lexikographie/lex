@@ -10,11 +10,11 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [file]]
-            [zdl-lex-server.store :as store]
+            [zdl-lex-server.lock :as lock]
             [ring.util.http-response :as htstatus]))
 
 (defstate git-dir
-  :start (store/with-write-lock
+  :start (lock/with-global-write-lock
            (let [git-dir (file (env :data-dir) "git")]
              (when-not (fs/directory? (file git-dir ".git"))
                (fs/mkdirs git-dir)
@@ -37,19 +37,18 @@
     changed-files))
 
 (defn commit []
-  (store/with-write-lock
+  (lock/with-global-write-lock
     (jgit/with-repo git-dir
       (let [changed-files (->> (jgit/git-status repo) (vals) (apply union))]
         (when-not (empty? changed-files)
-          (jgit/with-repo store/git-dir
-            (jgit/git-add repo ".")
-            (jgit/git-commit repo "zdl-lex-server")
-            (jgit/git-push repo))
+          (jgit/git-add repo ".")
+          (jgit/git-commit repo "zdl-lex-server")
+          (jgit/git-push repo)
           (send-changes changed-files))))))
 
 (let [all-refs ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"]]
   (defn fast-forward [refs]
-    (store/with-write-lock
+    (lock/with-global-write-lock
       (jgit/with-repo git-dir
         (jgit/git-fetch repo :ref-specs all-refs)
         (when-let [head (jgit-query/find-rev-commit repo rev-walk "HEAD")]

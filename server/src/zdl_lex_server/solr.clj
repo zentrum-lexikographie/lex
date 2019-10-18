@@ -1,11 +1,12 @@
 (ns zdl-lex-server.solr
   (:require [clojure.core.async :as a]
-            [clojure.data.csv :as csv]
             [clojure.java.io :as io]
+            [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [lucene-query.core :as lucene]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
+            [muuntaja.core :as m]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
@@ -14,10 +15,9 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.http-client :as http-client]
-            [zdl-lex-server.store :as store]
+            [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
-            [mount.core :as mount])
+            [zdl-lex-server.http-client :as http-client])
   (:import java.io.File))
 
 (defn- field-name->key
@@ -350,9 +350,10 @@
       :result (for [{:keys [term payload]} suggestions]
                 (merge {:suggestion term} (read-string payload)))})))
 
-(defn handle-search [{{:keys [q offset limit]
-                :or {q "id:*" offset "0" limit "10"}} :params}]
-  (let [params {"q" (translate-query q) "start" offset "rows" limit}
+(defn handle-search [req]
+  (let [params (-> req :parameters :query)
+        {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
+        params {"q" (translate-query q) "start" offset "rows" limit}
         solr-response (query (merge query-params (facet-params) params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
@@ -365,43 +366,69 @@
       :result (docs->results docs)
       :facets (into (sorted-map) facets)})))
 
-(defn handle-export [{{:keys [q limit] :or {q "id:*" limit "10"}} :params}]
-  (let [params (merge query-params {"q" (translate-query q)})
-        limit (Integer/parseInt limit)
+(defn- doc->csv [d]
+  [(d :status)
+   (d :source)
+   (some->> d :forms (str/join ", "))
+   (some->> d :definitions first)
+   (d :type)
+   (d :timestamp)
+   (d :author)
+   (d :editor)
+   (d :id)])
+
+(def csv-header ["Status" "Quelle" "Schreibung" "Definition" "Typ"
+                 "Datum" "Autor" "Redakteur" "ID"])
+(defn handle-export [req]
+  (let [params (-> req :parameters :query)
+        {:keys [q limit] :or {q "id:*" limit 1000}} params
+        params (merge query-params {"q" (translate-query q)})
         docs (->> (scroll params (min limit 50000)) (take limit))
-        csv-file (make-export-temp-file)]
-    (with-open [w (io/writer csv-file :encoding "UTF-8")]
-      (->> (for [d (docs->results docs)]
-             [(d :status)
-              (d :source)
-              (some->> d :forms (str/join ", "))
-              (some->> d :definitions first)
-              (d :type)
-              (d :timestamp)
-              (d :author)
-              (d :editor)
-              (d :id)])
-           (cons ["Status" "Quelle" "Schreibung" "Definition" "Typ"
-                  "Datum" "Autor" "Redakteur" "ID"])
-           (csv/write-csv w)))
+        records (->> docs docs->results (map doc->csv) (cons csv-header))]
     (->
-     (htstatus/ok csv-file)
-     (htstatus/update-header "Content-Type" str "text/csv")
+     (htstatus/ok records)
      (htstatus/update-header "Content-Disposition" str
                              "attachment; filename=\"zdl-dwds-export-"
                              (t/format :iso-date-time (t/date-time))
                              ".csv\""))))
 
+(s/def ::pos-int (s/and int? (some-fn pos? zero?)))
+(s/def ::q string?)
+(s/def ::offset ::pos-int)
+(s/def ::limit ::pos-int)
+(s/def ::search-query (s/keys :opt-un [::q ::offset ::limit]))
+(s/def ::export-query (s/keys :opt-un [::q ::limit]))
+(s/def ::suggestion-query (s/keys :req-un [::q]))
+
 (def ring-handlers
   ["/index"
-   ["" {:get handle-search :delete handle-index-rebuild}]
-   ["/export" {:get handle-export}]
-   ["/forms/suggestions" {:get handle-form-suggestions}]])
+   [""
+    {:get {:summary "Query the full-text index"
+           :tags ["Index" "Query"]
+           :description "A __very__ cool feature!"
+           :parameters {:query ::search-query}
+           :handler handle-search}
+     :delete {:summary "Clears the index, forcing a rebuild"
+              :tags ["Index", "Admin"]
+              :handler handle-index-rebuild}}]
+
+   ["/export"
+    {:get {:summary "Export index metadata in CSV format"
+           :tags ["Index" "Query" "Export"]
+           :parameters {:query ::export-query}
+           :muuntaja (m/create (assoc m/default-options
+                                      :return :output-stream
+                                      :default-format "text/csv"
+                                      :formats {"text/csv" csv/format}))
+           :handler handle-export}}]
+
+   ["/forms/suggestions"
+    {:get {:summary "Retrieve suggestion for headwords based on prefix queries"
+           :tags ["Index" "Query" "Suggestions" "Headwords"]
+           :parameters {:query ::suggestion-query}
+           :handler handle-form-suggestions}}]])
 
 (comment
-  (mount/start #'git/git-dir #'git/articles-dir)
-  (mount/start #'index-rebuild-scheduler #'index-init)
-  (mount/stop)
   (->> (for [article (article/articles-in git/articles-dir)
              :when (and (not (= "WDG" (:source article))) (:references article))]
          (article->fields article))
