@@ -319,27 +319,6 @@
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
-(defonce export-temp-files (atom #{}))
-
-(defn- ^File make-export-temp-file []
-  (let [f (fs/temp-file "zdl-lex-server.export." ".csv")]
-    (swap! export-temp-files conj f)
-    f))
-
-(defn- export-temp-file-expired? [^File f]
-  (< (.lastModified f) (- (System/currentTimeMillis) 1800000)))
-
-(defn cleanup-export-temp-files []
-  (doseq [^File f @export-temp-files]
-    (when (export-temp-file-expired? f)
-      (.delete f)
-      (swap! export-temp-files disj f))))
-
-(defstate export-cleanup-scheduler
-  :start (cron/schedule "0 */30 * * * ?" "Clean up temporary export files"
-                        cleanup-export-temp-files)
-  :stop (a/close! export-cleanup-scheduler))
-
 (defn handle-form-suggestions [{{:keys [q]} :params}]
   (let [solr-response (suggest "forms" (or q ""))
         path-prefix [:body :suggest :forms (keyword q)]

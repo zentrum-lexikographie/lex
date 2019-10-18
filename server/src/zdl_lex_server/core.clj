@@ -19,7 +19,6 @@
                        #'solr/index-init
                        #'solr/git-change-indexer
                        #'solr/build-suggestions-scheduler
-                       #'solr/export-cleanup-scheduler
                        #'mantis/issue-sync-scheduler])
 
 (defn -main []
