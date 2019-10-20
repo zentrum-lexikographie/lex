@@ -23,7 +23,6 @@
   clj-http {:mvn/version "3.9.1"
             :exclusions [commons-logging]}
   clj-jgit {:mvn/version "1.0.0-beta2"}
-  cpath-clj {:mvn/version "0.1.2"}
   hiccup {:mvn/version "1.0.5"}
   ring-logger-timbre {:mvn/version "0.7.6"}
   ring-webjars {:mvn/version "0.2.0"

@@ -1,13 +1,13 @@
 (ns zdl-lex-server.oxygen
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [cpath-clj.core :as cp]
             [ring.util.http-response :as htstatus]
             [ring.util.io :as rio]
             [zdl-lex-common.xml :as xml]
             [taoensso.timbre :as timbre])
   (:import java.nio.charset.Charset
-           [java.util.zip ZipEntry ZipOutputStream]))
+           [java.util.zip ZipEntry ZipOutputStream]
+           io.github.classgraph.ClassGraph))
 
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
@@ -26,23 +26,32 @@
     (.. plugin-el (setAttribute "version" version))
     (xml/serialize descriptor)))
 
-(defn classpath-resources [prefix]
-  (for [[path uri] (cp/resources) :when (str/starts-with? path prefix)]
-    [(str/replace path #"^/" "") (first uri)]))
+
+(defmacro with-classpath-resources [path & body]
+  `(let [path-pattern# (re-pattern (str "^" ~path "/?"))
+         paths# (into-array String [~path])]
+     (with-open [cp-scan# (.. (ClassGraph.) (whitelistPaths paths#) (scan))]
+       (doseq [e# (.. cp-scan# (getAllResources) (asMap))
+               :let  [~'path (-> e# .getKey (str/replace path-pattern# ""))
+                      ~'resource (-> e# .getValue first)]]
+         ~@body))))
+
+(defn write-to-zip [zip path-prefix path stream]
+  (.. zip (putNextEntry (ZipEntry. (str path-prefix path))))
+  (io/copy stream zip)
+  (.. zip (closeEntry)))
 
 (defn download-plugin [_]
   (-> (fn [stream]
         (try
           (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (let [descriptor (.. (generate-plugin-descriptor) (getBytes "UTF-8"))]
-              (.. zip (putNextEntry (ZipEntry. "zdl-lex-client/plugin.xml")))
-              (io/copy (io/input-stream descriptor) zip)
-              (.. zip (closeEntry)))
-            (doseq [[path uri] (classpath-resources "/plugin/lib/")
-                    :let [entry-path (str "zdl-lex-client/lib/" path)]]
-              (.. zip (putNextEntry (ZipEntry. entry-path)))
-              (io/copy (io/input-stream uri) zip)
-              (.. zip (closeEntry))))
+            (let [write-to-zip (partial write-to-zip zip)
+                  descriptor (.. (generate-plugin-descriptor) (getBytes "UTF-8"))]
+              (with-open [stream (io/input-stream descriptor)]
+                (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
+              (with-classpath-resources "plugin/lib"
+                (with-open [stream (.. resource (open))]
+                  (write-to-zip "zdl-lex-client/lib/" path stream)))))
           (catch Exception e (timbre/warn e))))
       (rio/piped-input-stream)
       (htstatus/ok)))
@@ -51,11 +60,10 @@
   (-> (fn [stream]
         (try
           (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (doseq [[path uri] (classpath-resources "/framework/")
-                    :let [entry-path (str "zdl-lex-client/" path)]]
-              (.. zip (putNextEntry (ZipEntry. entry-path)))
-              (io/copy (io/input-stream uri) zip)
-              (.. zip (closeEntry))))
+            (let [write-to-zip (partial write-to-zip zip "zdl-lex-client/")]
+              (with-classpath-resources "framework"
+                (with-open [stream (.. resource (open))]
+                  (write-to-zip path stream)))))
           (catch Exception e (timbre/warn e))))
       (rio/piped-input-stream)
       (htstatus/ok)))
