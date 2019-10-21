@@ -36,7 +36,10 @@
   {:extra-paths ["test"]
    :extra-deps {faker {:mvn/version "0.2.2"}}}
   :prod
-  {:extra-paths ["../oxygen"]}
+  {:extra-paths ["classes" "../oxygen"]}
+  :compile
+  {:extra-paths ["build"]
+   :main-opts ["-m compile"]}
   :package
   {:extra-paths ["build"]
    :main-opts ["-m" "package"]}}}

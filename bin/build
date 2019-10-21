@@ -10,6 +10,13 @@ project_dir = (Path(__file__) / '..' / '..').resolve()
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
 
+def clean_classes(name):
+    classes_dir = project_dir / name / 'classes'
+    if classes_dir.is_dir():
+        shutil.rmtree(classes_dir.as_posix())
+    classes_dir.mkdir()
+
+
 def build_module(name, aliases):
     logging.info({'name': name, 'aliases': aliases})
     clj.run([':'.join(['-A'] + aliases)],
@@ -23,14 +30,8 @@ build_module('build', ['version'])
 # RNC --> RNG/Schematron
 build_module('build', ['schema'])
 
-# Plugin for OxygenXML Editor
-client_compile_dir = project_dir / 'client' / 'classes'
-if client_compile_dir.is_dir():
-    shutil.rmtree(client_compile_dir.as_posix())
-client_compile_dir.mkdir()
-
-build_module('client', ['dev', 'prod', 'compile'])
-build_module('client', ['dev', 'prod', 'package'])
-
-# Server component
-build_module('server', ['dev', 'prod', 'package'])
+# Plugin for OxygenXML Editor and Server component
+for module in ['client', 'server']:
+    clean_classes(module)
+    build_module(module, ['dev', 'prod', 'compile'])
+    build_module(module, ['dev', 'prod', 'package'])
