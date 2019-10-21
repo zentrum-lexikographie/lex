@@ -1,5 +1,5 @@
 (ns zdl-lex-client.view.issue
-  (:require [clojure.core.memoize :as memoize]
+  (:require [clojure.core.memoize :as memo]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
@@ -62,12 +62,12 @@
              [(label :text "Status")] [(text :text status) "wrap"]
              [(label :text "Resolution")] [(text :text resolution)]])))
 
-(def cached-get-issues
-  (memoize/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
+(def get-issues
+  (memo/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
 
 (defn prepare-issues [[{:keys [forms]} visited?]]
   (let [visited? (or visited? @visited-issues)]
-    (->> (mapcat cached-get-issues forms)
+    (->> (mapcat get-issues forms)
          (map (fn [{:keys [id last-updated status url] :as issue}]
                 (let [last-updated (t/parse last-updated)]
                   (assoc issue

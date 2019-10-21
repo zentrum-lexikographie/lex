@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+from os import chdir, environ, execle, getenv
+from pathlib import Path
+
+oxygen_home = getenv('OXYGEN_HOME')
+
+if oxygen_home is None:
+    candidate_dirs = [Path.home() / 'oxygen']
+    candidate_dirs.extend(
+        reversed(sorted(Path('/usr/local').glob('Oxygen XML Editor*')))
+    )
+    for candidate in candidate_dirs:
+        if candidate.is_dir():
+            oxygen_home = candidate
+            break
+
+
+if oxygen_home is None:
+    raise Exception(
+        'No Oxygen XML Editor installation ($OXYGEN_HOME) found'
+    )
+
+
+oxygen_env = dict(environ, OXYGEN_HOME=oxygen_home.as_posix())
+oxygen_classpath = ':'.join([
+    (oxygen_home / 'lib' / 'oxygen.jar').as_posix(),
+    (oxygen_home / 'lib' / 'oxygen-basic-utilities.jar').as_posix(),
+    (oxygen_home / 'classes').as_posix(),
+    oxygen_home.as_posix()
+])
+oxygen_dir = (Path(__file__) / '..' / '..' / 'oxygen').resolve().as_posix()
+
+chdir(oxygen_dir)
+
+execle(
+    (oxygen_home / 'jre' / 'bin' / 'java').as_posix(),
+    'java',
+    '-Dcom.oxygenxml.editor.plugins.dir=' + oxygen_dir,
+    '-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor',
+    '-cp', oxygen_classpath,
+    'ro.sync.exml.Oxygen', 'test-project.xpr',
+    oxygen_env
+)

@@ -30,7 +30,7 @@
 
 (s/def ::data-dir
   (st/spec
-   {:spec fs/directory?
+   {:spec some?
     :type :file
     :decode/string #(-> %2 fs/file fs/absolute fs/normalized)
     :encode/string #(.. %2 (getAbsolutePath))}))
@@ -75,7 +75,7 @@
 
 (defn secret? [k]
   (let [n (name k)]
-    (some #(str/includes? n %) ["password" "passwd" "secret" "key"])))
+    (some #(str/includes? n %) ["password" "passwd" "secret" "key" "ps1"])))
 
 (defn env->str [env]
   (let [key-width (reduce max (map (comp count name) (keys env)))
@@ -92,10 +92,15 @@
   (st/coerce ::env m st/string-transformer))
 
 (let [coerce #(st/coerce ::env % st/string-transformer)
-      normalize-key #(-> % name (str/replace #"^zdl-lex-" "") keyword)]
+      normalize-key #(-> % name (str/replace #"^zdl-lex-" "") keyword)
+      config (->> (conj (fs/parents ".") (fs/file "."))
+                  (map #(fs/file % "zdl-lex-config.edn"))
+                  (filter fs/file?)
+                  (map (comp read-string slurp))
+                  (apply merge))]
   (def env
     (->>
-     (map #(vector (-> % first normalize-key) (second %)) environ/env)
+     (map #(vector (-> % first normalize-key) (second %)) (merge environ/env config))
      (into defaults)
      (coerce) (s/assert* ::env)
      (into (sorted-map)))))

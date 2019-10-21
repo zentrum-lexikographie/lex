@@ -1,9 +1,12 @@
 (ns zdl-lex-common.util
   (:require [clojure.string :as str]
+            [me.raynes.fs :as fs]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :refer [path->uri]])
   (:import [java.net URL URLEncoder]
            java.util.UUID))
+
+(def file (comp fs/normalized fs/absolute fs/file))
 
 (defn uuid []
   (-> (UUID/randomUUID) str str/lower-case))

@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+
+from pathlib import Path
+
+import clj
+
+
+build_dir = (Path(__file__) / '..' / '..' / 'build').resolve().as_posix()
+
+clj.run(['-A:schema'], cwd=build_dir)

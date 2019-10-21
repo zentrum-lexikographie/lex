@@ -1,6 +1,7 @@
 (ns zdl-lex-common.xml
   (:require [clojure.string :as str]
-            [me.raynes.fs :as fs])
+            [me.raynes.fs :as fs]
+            [taoensso.timbre :as timbre])
   (:import [java.io File StringReader StringWriter]
            [java.net URI URL]
            javax.xml.parsers.DocumentBuilderFactory
@@ -8,7 +9,7 @@
            javax.xml.transform.dom.DOMSource
            [javax.xml.transform.stream StreamResult StreamSource]
            net.sf.saxon.Configuration
-           [net.sf.saxon.s9api Processor Serializer XdmValue XPathCompiler XPathExecutable XsltCompiler XsltExecutable]
+           [net.sf.saxon.s9api Processor Serializer XdmDestination XdmValue XPathCompiler XPathExecutable XsltCompiler XsltExecutable]
            [org.w3c.dom Document NodeList]
            org.xml.sax.InputSource))
 
@@ -178,10 +179,11 @@
 
 (defn transform
   ([^XsltExecutable stylesheet source]
-   (.. stylesheet (load30) (applyTemplates (->source source))))
+   (let [destination (XdmDestination.)]
+     (.. stylesheet (load30) (transform (->source source) destination))
+     (.. destination (getXdmNode))))
   ([^XsltExecutable stylesheet source destination]
-   (.. stylesheet (load30) (applyTemplates (->source source)
-                                           (->serializer destination)))))
+   (.. stylesheet (load30) (transform (->source source) (->serializer destination)))))
 
 (defn ^XdmValue select [^XPathExecutable xp ctx]
   (.. (doto (.load xp) (.setContextItem (->xdm ctx))) (evaluate)))

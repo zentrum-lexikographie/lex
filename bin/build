@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import logging
+from pathlib import Path
+import shutil
+import clj
+
+project_dir = (Path(__file__) / '..' / '..').resolve()
+
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+
+
+def build_module(name, aliases):
+    logging.info({'name': name, 'aliases': aliases})
+    clj.run([':'.join(['-A'] + aliases)],
+            cwd=(project_dir / name).as_posix(),
+            check=True)
+
+
+# Git tags --> version.edn
+build_module('build', ['version'])
+
+# RNC --> RNG/Schematron
+build_module('build', ['schema'])
+
+# Plugin for OxygenXML Editor
+client_compile_dir = project_dir / 'client' / 'classes'
+if client_compile_dir.is_dir():
+    shutil.rmtree(client_compile_dir.as_posix())
+client_compile_dir.mkdir()
+
+build_module('client', ['dev', 'prod', 'compile'])
+build_module('client', ['dev', 'prod', 'package'])
+
+# Server component
+build_module('server', ['dev', 'prod', 'package'])

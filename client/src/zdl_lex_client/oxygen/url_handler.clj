@@ -2,18 +2,20 @@
   (:gen-class
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
-  (:require [clojure.core.cache.wrapped :as cache]
-            [clojure.java.io :as io]
+  (:require [clojure.core.cache :as cache]
+            [clojure.core.memoize :as memo]
             [clojure.string :as str]
             [taoensso.timbre :as timbre]
-            [zdl-lex-common.url :as lexurl]
-            [zdl-lex-common.util :refer [uuid]]
+            [tick.alpha.api :as t]
             [zdl-lex-client.http :as http]
-            [tick.alpha.api :as t])
-  (:import [java.net URLConnection URLStreamHandler]
-           [ro.sync.exml.plugin.lock LockException LockHandler]))
+            [zdl-lex-common.url :as lexurl]
+            [zdl-lex-common.util :refer [uuid]])
+  (:import [ro.sync.exml.plugin.lock LockException LockHandler]))
 
-(def tokens (cache/basic-cache-factory {}))
+(def tokens (memo/ttl (fn [_] (uuid)) :ttl/threshold (* 60 60 1000)))
+
+(defn lookup-token [id]
+  (some-> tokens meta ::memo/cache deref (cache/lookup [id]) deref))
 
 (defn -isLockingSupported [this protocol]
   (= "lex" protocol))
@@ -40,17 +42,17 @@
       [url timeoutSeconds]
       (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
       (let [id (lexurl/url->id url)
-            token (cache/lookup-or-miss tokens id (fn [_] (uuid)))
+            token (tokens id)
             lock (http/lock id timeoutSeconds token)]
         (when-not (= token (:token lock))
-          (cache/evict tokens id)
+          (memo/memo-clear! tokens [id])
           (throw (lock->exception lock)))))
     (unlock
       [url]
       (let [id (lexurl/url->id url)]
-        (when-let [token (cache/lookup tokens id)]
+        (when-let [token (lookup-token id)]
           (timbre/info (format "Unlock! %s" url))
-          (cache/evict tokens id)
+          (memo/memo-clear! tokens [id])
           (future (http/unlock id token)))))))
 
 (defn -getURLStreamHandler [this protocol]

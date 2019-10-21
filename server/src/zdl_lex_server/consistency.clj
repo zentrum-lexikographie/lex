@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.store :as store]))
+            [zdl-lex-server.git :as git]))
 
 (let [numerals {\I 1, \V 5, \X 10, \L 50, \C 100, \D 500, \M 1000}
       add-numeral (fn [n t] (if (> n (* 4 t)) (- n t) (+ t n)))]
@@ -30,7 +30,7 @@
 ;; [A-Z] [IVX]
 (comment
   (roman "MMMCIX")
-  (for [article (->> (store/article-files) (take 100))
+  (for [article (->> (article/article-xml-files git/articles-dir) (take 100))
         ref (->> article xml/->xdm article/references)
         :let [{:keys [sense lemma]} ref]
         :when sense]

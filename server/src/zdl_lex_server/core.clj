@@ -1,32 +1,36 @@
 (ns zdl-lex-server.core
-  (:gen-class)
   (:require [mount.core :as mount]
             [taoensso.timbre :as timbre]
-            [zdl-lex-server.git :as git]
-            [zdl-lex-server.http :as http]
-            [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.store :as store]
-            [clojure.core.async :as a]
-            [zdl-lex-server.mantis :as mantis]
             [zdl-lex-common.env :refer [env env->str]]
             [zdl-lex-common.log :as log]
-            [zdl-lex-common.article :as article])
-  (:import org.slf4j.bridge.SLF4JBridgeHandler))
+            [zdl-lex-server.git :as git]
+            [zdl-lex-server.http :as http]
+            [zdl-lex-server.lock :as lock]
+            [zdl-lex-server.mantis :as mantis]
+            [zdl-lex-server.solr :as solr]))
 
-(log/configure)
+(def data-sources [#'lock/db #'git/git-dir #'git/articles-dir])
+
+(def services [#'http/server])
+
+(def background-tasks [#'lock/lock-cleanup-scheduler
+                       #'git/commit-scheduler
+                       #'solr/index-rebuild-scheduler
+                       #'solr/index-init
+                       #'solr/git-change-indexer
+                       #'solr/build-suggestions-scheduler
+                       #'mantis/issue-sync-scheduler])
 
 (defn -main []
+  (log/configure)
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))
   (timbre/info (env->str env))
-  (timbre/info (mount/start)))
+  (let [states (apply mount/start (concat data-sources background-tasks services))]
+    (timbre/info states)))
 
 (comment
-  (git/rebase)
-  http/server
-  (time (->> (store/article-files) (drop 150000) (take 3)))
-  (@mantis/index "Sinnkrise")
-  (-> (solr/sync-articles) (last))
-  (solr/commit-optimize)
-  (a/>!! solr/git-all->solr :sync))
+  (apply mount/start data-sources)
+  (apply mount/start services)
+  (mount/stop))

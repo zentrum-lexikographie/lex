@@ -1,6 +1,5 @@
 (ns zdl-lex-server.home
-  (:require [mount.core :refer [defstate]]
-            [ring.util.http-response :as htstatus]
+  (:require [ring.util.http-response :as htstatus]
             [hiccup.page :refer [html5 include-css]]))
 
 (defn handle-home [req]
@@ -12,7 +11,7 @@
                  [:h1.title "ZDL Lex-Server"]
                  [:h2.subtitle
                   [:a
-                   {:href "/zdl-lex-client/updateSite.xml"
+                   {:href "/oxygen/updateSite.xml"
                     :title "Oxygen XML Editor - Update Site"}
                    "Oxygen XML Editor - Update Site"]]]]]])
       (htstatus/ok)

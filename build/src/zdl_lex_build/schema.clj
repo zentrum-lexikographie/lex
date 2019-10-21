@@ -1,14 +1,16 @@
 (ns zdl-lex-build.schema
   (:require [zdl-lex-common.xml-validate :as xv]
+            [zdl-lex-common.util :refer [file]]
             [me.raynes.fs :as fs]))
 
 (defn -main [& args]
-  (let [src-dir (-> "../schema/rnc" fs/file fs/absolute fs/normalized)
-        dest-dir (-> "../schema/rng" fs/file fs/absolute fs/normalized)
-        rnc (fs/file src-dir "DWDSWB.rnc")
-        rng (fs/file dest-dir "DWDSWB.rng")
-        sch-xslt (fs/file dest-dir "DWDSWB.sch.xsl")]
-    (xv/rnc->rng (fs/file src-dir "DWDSWB.rnc")
-                 (fs/file dest-dir "DWDSWB.rng"))
+  (let [src-dir (file "../oxygen/framework/rnc")
+        dest-dir (file "../oxygen/framework/rng")
+        rnc (file src-dir "DWDSWB.rnc")
+        rng (file dest-dir "DWDSWB.rng")
+        sch-xslt (file dest-dir "DWDSWB.sch.xsl")]
+    (fs/delete-dir dest-dir)
+    (fs/mkdirs dest-dir)
+    (xv/rnc->rng rnc rng)
     (xv/rng->sch-xslt rng sch-xslt)))
 

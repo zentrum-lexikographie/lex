@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [taoensso.timbre :as timbre]
             [tick.alpha.api :as t]
-            [zdl-lex-common.util :refer [->clean-map]]
+            [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-lex-common.xml :as xml]
             [me.raynes.fs :as fs])
   (:import java.io.File
@@ -14,14 +14,39 @@
 
 (def collator (Collator/getInstance Locale/GERMAN))
 
-(defn status->color [status]
-  (condp = (str/trim status)
-    "Artikelrumpf" "#ffcccc"
-    "Lex-zur_Abgabe" "#ffff00"
-    "Red-0" "#ffec8b"
-    "Red-1" "#ffec8b"
-    "Red-f" "#aeecff"
-    "#ffffff"))
+(defn file->id
+  ([dir]
+   (partial file->id (.. (file dir) (toPath))))
+  ([dir-path f]
+   (str (.. dir-path (relativize (.toPath f))))))
+
+(defn id->file
+  ([dir]
+   (partial id->file (file dir)))
+  ([dir f]
+   (file dir f)))
+
+(defn article-xml-file?
+  ([dir]
+   (partial article-xml-file? (.getAbsolutePath (file dir))))
+  ([dir-path ^File f]
+   (let [name (.getName f)
+         path (.getAbsolutePath f)]
+     (and
+      (str/starts-with? path dir-path)
+      (.endsWith name ".xml")
+      (not (.startsWith name "."))
+      (not (#{"__contents__.xml" "indexedvalues.xml"} name))
+      (not (.contains path ".git"))))))
+
+
+(defn article-xml-files [dir]
+  (let [dir (file dir)
+        article-xml-file? (article-xml-file? dir)]
+    (->> (file-seq dir)
+         (filter article-xml-file?)
+         (map file))))
+
 
 (def doc->articles
   "Selects the DWDS article elements in a XML document."
@@ -143,8 +168,8 @@
       colouring (texts-fn ".//d:Stilfaerbung")
       area (texts-fn ".//d:Sprachraum")
       references (comp seq references)]
-  (defn excerpt
-    "Extracts key data from an article."
+  (defn excerpt 
+    "Extracts key article data."
     [article]
     (let [authors (authors article)
           sources (sources article)
@@ -179,35 +204,37 @@
         :area (area article)
         :references (references article)}))))
 
-(defn article-xml-file? [^File f]
-  (let [name (.getName f)
-        path (.getAbsolutePath f)]
-    (and
-     (.endsWith name ".xml")
-     (not (.startsWith name "."))
-     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
-     (not (.contains path ".git")))))
+(defn articles 
+  "Extracts articles and their key data from XML files."
+  ([dir]
+   (partial articles (file->id dir)))
+  ([file->id file]
+   (let [id (file->id file)]
+     (for [article (->> (xml/->dom file) (doc->articles))]
+       (assoc (excerpt article) :id id :file file)))))
 
-(defn article-xml-files [dir]
-  (let [dir (-> dir fs/file fs/absolute fs/normalized)
-        dir-path (.. dir (toPath))
-        file->id #(str (.. dir-path (relativize (.toPath %))))]
-    (->> (file-seq dir)
-         (filter article-xml-file?)
-         (map fs/normalized)
-         (map #(vector (file->id %) %)))))
+(defn status->color [status]
+  (condp = (str/trim status)
+    "Artikelrumpf" "#ffcccc"
+    "Lex-zur_Abgabe" "#ffff00"
+    "Red-0" "#ffec8b"
+    "Red-1" "#ffec8b"
+    "Red-f" "#aeecff"
+    "#ffffff"))
 
-(defn excerpts [dir]
-  (for [[id file] (article-xml-files dir)
-        article (->> (xml/->dom file) (doc->articles) (map excerpt))]
-    (assoc article :id id :file file)))
+(defn articles-in [dir]
+  (mapcat (articles dir) (article-xml-files dir)))
 
 (comment
-  (->> (mapcat :forms (excerpts "../data/git/articles"))
+  (->> (articles-in "../data/git/articles")
+       (drop 100)
+       (take 3))
+  (->> (mapcat :forms (articles-in "../data/git/articles"))
        (take 1000)
        (sort collator)
        (take 100))
-  (as-> (excerpts "../data/git/articles") $
+  (as-> (articles-in "../data/git/articles") $
        #_(remove (comp (partial = "WDG") :source) $)
        (map #(select-keys % [:forms :pos :gender :id]) $)
-       #_(filter (comp (partial < 1) count :gender) $)))
+       #_(filter (comp (partial < 1) count :gender) $)
+       (take 10 $)))

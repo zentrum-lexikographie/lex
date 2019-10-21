@@ -8,8 +8,10 @@ pom.xml.asc
 *.class
 .lein-*
 .nrepl-port
+.cpcache
 
 version.edn
+zdl-lex-config.edn
 
 .idea
 *.iml
@@ -19,16 +21,17 @@ version.edn
 
 .*.swp
 
+bin/clojure/
 bin/lein
 data/
 config.local.edn
 ansible/.vagrant
 ansible/*.retry
+ansible/files/api/
 ansible/roles/*.*
 
 client/tmp
 
-oxygen/framework/css/
 oxygen/framework/rng/
 oxygen/plugin/lib/
 
