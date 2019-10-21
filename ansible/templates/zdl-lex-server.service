@@ -9,7 +9,7 @@ WorkingDirectory=/home/lex
 UMask=0002
 EnvironmentFile=/home/lex/zdl-lex-server.config.env
 Restart=on-failure
-ExecStart=/usr/bin/java -jar zdl-lex-server.jar
+ExecStart=/usr/bin/java -cp zdl-lex-server.jar clojure.main -m zdl-lex-server.core
 
 [Install]
 WantedBy=multi-user.target

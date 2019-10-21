@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "main.yml"
-    ansible.groups = { "vagrant" => ["default"] }
+    ansible.groups = { "vagrant" => ["default"],
+                       "lex" => ["default"]}
     ansible.raw_arguments = Shellwords.shellsplit(ENV['ANSIBLE_ARGS']) if ENV['ANSIBLE_ARGS']
     ansible.become = true
     ansible.ask_vault_pass = true

@@ -21,16 +21,6 @@ apache_vhosts:
     extra_parameters: |
       {{ zdl_apache_vhost_config }}
 
-zdl_api_context_paths:
-  - /article
-  - /assets
-  - /git
-  - /home
-  - /lock
-  - /index
-  - /mantis
-  - /status
-
 zdl_apache_vhost_config: |
   ErrorLog ${APACHE_LOG_DIR}/error.log
   CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -51,22 +41,9 @@ zdl_apache_vhost_config: |
     Deny from all
   </DirectoryMatch>
 
-  Alias /zdl-lex-client {{ lex_client_dir }}
-  <Location /zdl-lex-client>
-    Options +Indexes
-    Require all granted
-  </Location>
-
   RedirectMatch ^/$ /home
 
   ProxyTimeout 300
-
-  {% for cp in zdl_api_context_paths %}
-  <Location {{ cp }}>
-    ProxyPass http://localhost:3000{{ cp }} retry=0
-    ProxyPassReverse http://localhost:3000{{ cp }}
-  </Location>
-  {% endfor %}
 
   <Location /solr>
     ProxyPass http://localhost:8983/solr retry=0
@@ -74,10 +51,14 @@ zdl_apache_vhost_config: |
     Require group admin
   </Location>
 
+  <Location />
+    ProxyPass http://localhost:3000/ retry=0
+    ProxyPassReverse http://localhost:3000/
+  </Location>
+
 solr_version: "7.7.1"
 solr_timezone: "Europe/Berlin"
 solr_cores:
   - "articles"
 
-lex_client_dir: "/home/lex/zdl-lex-client"
 lex_data_dir: "/var/lex"

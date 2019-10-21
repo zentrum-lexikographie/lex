@@ -1,5 +1,5 @@
 ---
-- hosts: zdl-lex
+- hosts: lex
   tasks:
     - name: Add git group
       group:

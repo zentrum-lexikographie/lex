@@ -1,5 +1,5 @@
 ---
-- hosts: zdl-lex
+- hosts: lex
   pre_tasks:
     - name: Add backports repository (for OpenJDK 11)
       apt_repository:
@@ -70,9 +70,3 @@
   tags:
     - app
     - api
-
-- name: Serve ZDL-Lex client
-  import_playbook: client.yml
-  tags:
-    - app
-    - client
