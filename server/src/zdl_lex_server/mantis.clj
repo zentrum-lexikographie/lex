@@ -3,6 +3,7 @@
             [clojure.core.async :as a]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
+            [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [clojure.zip :as zip]
             [mount.core :refer [defstate]]
@@ -10,7 +11,8 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [file]]))
+            [zdl-lex-common.util :refer [file]]
+            [zdl-lex-server.auth :as auth]))
 
 (def mantis-base (env :mantis-base))
 
@@ -25,7 +27,8 @@
       (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))
 
 (def ^:private authenticate
-  (partial merge {:username (env :mantis-user) :password (env :mantis-password)}))
+  (partial merge {:username (env :mantis-user)
+                  :password (env :mantis-password)}))
 
 (def ^:private project (env :mantis-project))
 
@@ -139,20 +142,39 @@
 (defstate issue-sync-scheduler
   "Synchronizes Mantis issues"
   :start (do
-           (->> (read-dump) (index-issues) (reset! index))
+           (future (->> (read-dump) (index-issues) (reset! index)))
            (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
   :stop (a/close! issue-sync-scheduler))
+
+(defn handle-query [req]
+  (htstatus/ok
+   (pmap (comp issue :id)
+         (get @index (get-in req [:parameters :query :q]) []))))
+
+(defn handle-index-rebuild [{:keys [auth/user]}]
+  (if (= "admin" user)
+    (htstatus/ok
+     {:index (a/>!! issue-sync-scheduler :sync)})
+    (htstatus/forbidden
+     {:index false})))
+
+(s/def ::q string?)
+(s/def ::issue-query (s/keys :req-un [::q]))
 
 (def ring-handlers
   ["/mantis"
    ["/issues"
-    {:get (fn [{{:keys [q]} :params}]
-            (htstatus/ok
-             (pmap (comp issue :id) (or (@index q) []))))}]])
+    {:get {:summary "Query internal index for Mantis issues based on headword"
+           :tags ["Mantis" "Query" "Headwords"]
+           :parameters {:query ::issue-query}
+           :handler handle-query}
+     :delete {:summary "Clears the internal Mantis issue index and re-synchronizes it"
+              :tags ["Mantis" "Admin"]
+              :handler handle-index-rebuild}}]])
 (comment
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
   (->> (issues) store-dump index-issues (reset! index) last)
   (->> @index (map vec) (sort-by (comp count second) #(compare %2 %1)) (take 10))
   (->> (read-dump) (index-issues) (reset! index) (count))
-  (handle-issue-lookup {:params {:q "schwarz"}}))
+  (handle-query {:parameters {:query {:q "schwarz"}}}))

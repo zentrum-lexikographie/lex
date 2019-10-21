@@ -7,7 +7,8 @@
             [ring.util.http-response :as htstatus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [uuid]])
+            [zdl-lex-common.util :refer [uuid]]
+            [zdl-lex-server.auth :as auth])
   (:import java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.TimeUnit))
 
@@ -28,7 +29,7 @@
 
 (def-db-fns "zdl_lex_server/lock.sql")
 
-(defstate db
+(defstate ^{:on-reload :noop} db
   :start (let [db {:dbtype "h2"
                    :dbname (str (fs/file (env :data-dir) "locks"))
                    :user "sa"
@@ -51,7 +52,7 @@
 
 (defn- lock [{{:keys [resource]} :path-params
               {:keys [ttl token] :or {ttl "60"}} :params
-              owner :zdl-lex-server.http/user
+              owner :auth/user
               owner_ip :remote-addr
               :as req}]
   (when-not (not-empty resource)

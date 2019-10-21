@@ -1,6 +1,6 @@
 (ns zdl-lex-server.home
-  (:require [ring.util.http-response :as htstatus]
-            [hiccup.page :refer [html5 include-css]]))
+  (:require [hiccup.page :refer [html5 include-css]]
+            [ring.util.http-response :as htstatus]))
 
 (defn handle-home [req]
   (-> (html5 [:head (include-css "/assets/bulma/css/bulma.min.css")]

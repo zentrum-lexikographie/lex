@@ -1,9 +1,8 @@
 (ns zdl-lex-server.csv
   (:refer-clojure :exclude [format])
   (:require [clojure.data.csv :as csv]
-            [muuntaja.format.core :as m-format]
             [clojure.java.io :as io]
-            [taoensso.timbre :as timbre]))
+            [muuntaja.format.core :as m-format]))
 
 (defn csv->stream [data charset stream]
   (let [w (io/writer stream :encoding charset)]

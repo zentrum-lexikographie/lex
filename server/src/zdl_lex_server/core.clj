@@ -33,4 +33,5 @@
 (comment
   (apply mount/start data-sources)
   (apply mount/start services)
+  (apply mount/start (concat data-sources services))
   (mount/stop))

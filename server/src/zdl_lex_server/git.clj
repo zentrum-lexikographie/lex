@@ -3,17 +3,18 @@
             [clj-jgit.querying :as jgit-query]
             [clojure.core.async :as a]
             [clojure.set :refer [union]]
+            [clojure.spec.alpha :as s]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
+            [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [file]]
-            [zdl-lex-server.lock :as lock]
-            [ring.util.http-response :as htstatus]))
+            [zdl-lex-server.lock :as lock]))
 
-(defstate git-dir
+(defstate ^{:on-reload :noop} git-dir 
   :start (lock/with-global-write-lock
            (let [git-dir (file (env :data-dir) "git")]
              (when-not (fs/directory? (file git-dir ".git"))
@@ -25,7 +26,7 @@
                  (jgit/git-commit repo "Init")))
              git-dir)))
 
-(defstate articles-dir
+(defstate ^{:on-reload :noop} articles-dir
   :start (fs/file git-dir "articles"))
 
 (defn- send-changes [changed-files]
@@ -67,16 +68,23 @@
   :start (cron/schedule "0 * * * * ?" "Git commit" commit)
   :stop (a/close! commit-scheduler))
 
-(defn handle-fast-forward
-  [{{:keys [ref]} :path-params}]
-  (if (empty? ref)
-    (htstatus/bad-request {:ref ref})
-    (try 
-      (htstatus/ok (fast-forward ref))
-      (catch Throwable t
-        (timbre/warn t)
-        (htstatus/bad-request (ex-data t))))))
+(defn handle-fast-forward [req]
+  (let [refs (-> req :parameters :path :refs)]
+    (timbre/warn refs)
+    (if (empty? refs)
+      (htstatus/bad-request {:ref refs})
+      (try
+        (htstatus/ok (fast-forward refs))
+        (catch Throwable t
+          (timbre/warn t)
+          (htstatus/bad-request (ex-data t)))))))
+  
+(s/def ::refs string?)
+(s/def ::fast-forward-cmd (s/keys :req-un [::refs]))
 
 (def ring-handlers
   ["/git"
-   ["/*ref" {:post handle-fast-forward}]])
+   ["/*refs" {:post {:summary "Fast-forwards the article master branch to the given refs"
+                     :tags ["Article" "Git" "Admin"]
+                     :parameters {:path ::fast-forward-cmd}
+                     :handler handle-fast-forward}}]])

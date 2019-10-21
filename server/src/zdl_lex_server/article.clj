@@ -7,9 +7,10 @@
             [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.xml :as xml]
+            [zdl-lex-server.auth :as auth]
             [zdl-lex-server.git :as git]
-            [zdl-lex-server.solr :as solr]
-            [zdl-lex-server.lock :as lock])
+            [zdl-lex-server.lock :as lock]
+            [zdl-lex-server.solr :as solr])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
@@ -43,8 +44,7 @@
 
 (def ^:private new-article-collection "Neuartikel")
 
-(defn create-article [{:keys [zdl-lex-server.http/user
-                              zdl-lex-server.http/password]
+(defn create-article [{:keys [auth/user auth/password]
                        {:keys [form pos]} :params}]
   (let [xml-id (generate-id)
         xml (new-article-xml xml-id form pos user)

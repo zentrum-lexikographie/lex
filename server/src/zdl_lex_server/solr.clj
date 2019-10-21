@@ -1,6 +1,5 @@
 (ns zdl-lex-server.solr
   (:require [clojure.core.async :as a]
-            [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [lucene-query.core :as lucene]
@@ -15,10 +14,10 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.xml :as xml]
+            [zdl-lex-server.auth :as auth]
             [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
-            [zdl-lex-server.http-client :as http-client])
-  (:import java.io.File))
+            [zdl-lex-server.http-client :as http-client]))
 
 (defn- field-name->key
   "Translates a Solr field name into a keyword."
@@ -229,7 +228,7 @@
 (defstate index-init
   :start (when (index-empty?) (a/>!! index-rebuild-scheduler :init)))
 
-(defn handle-index-rebuild [{:keys [zdl-lex-server.http/user]}]
+(defn handle-index-rebuild [{:keys [auth/user]}]
   (if (= "admin" user)
     (htstatus/ok
      {:index (a/>!! index-rebuild-scheduler :sync)})
@@ -239,7 +238,7 @@
 (defn build-suggestions [name]
   (req {:method :get :url (url "/suggest")
         :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
-        :as :json }))
+        :as :json}))
 
 (def ^:private build-forms-suggestions
   (partial build-suggestions "forms"))
@@ -384,7 +383,6 @@
    [""
     {:get {:summary "Query the full-text index"
            :tags ["Index" "Query"]
-           :description "A __very__ cool feature!"
            :parameters {:query ::search-query}
            :handler handle-search}
      :delete {:summary "Clears the index, forcing a rebuild"

@@ -3,11 +3,11 @@
             [clojure.string :as str]
             [ring.util.http-response :as htstatus]
             [ring.util.io :as rio]
-            [zdl-lex-common.xml :as xml]
-            [taoensso.timbre :as timbre])
-  (:import java.nio.charset.Charset
-           [java.util.zip ZipEntry ZipOutputStream]
-           io.github.classgraph.ClassGraph))
+            [taoensso.timbre :as timbre]
+            [zdl-lex-common.xml :as xml])
+  (:import io.github.classgraph.ClassGraph
+           java.nio.charset.Charset
+           [java.util.zip ZipEntry ZipOutputStream]))
 
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
