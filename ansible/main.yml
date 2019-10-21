@@ -1,7 +1,5 @@
 ---
-- hosts:
-    - xml-db
-    - zdl-lex
+- hosts: zdl-lex
   pre_tasks:
     - name: Add backports repository (for OpenJDK 11)
       apt_repository:
@@ -12,13 +10,6 @@
     - geerlingguy.security
     - oefenweb.postfix
     - geerlingguy.java
-
-- hosts: xml-db
-  roles:
-    - existdb
-
-- hosts: zdl-lex
-  roles:
     - geerlingguy.git
     - geerlingguy.apache
     - geerlingguy.solr
