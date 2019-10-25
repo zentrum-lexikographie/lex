@@ -32,22 +32,25 @@ dwdswb-update: dwdswb-backup
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.article;"
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.lemma;"
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.relation;"
+	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.token;"
 	# empty the target database
-	$(mysql) dwdswb -e "DROP TABLE IF EXISTS article;"
-	$(mysql) dwdswb -e "DROP TABLE IF EXISTS lemma;"
-	$(mysql) dwdswb -e "DROP TABLE IF EXISTS relation;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.lemma;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.relation;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.token;"
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE dwdswb_beta.article TO dwdswb.article;"
 	$(mysql) -e "RENAME TABLE dwdswb_beta.lemma TO dwdswb.lemma;"
 	$(mysql) -e "RENAME TABLE dwdswb_beta.relation TO dwdswb.relation;"
+	$(mysql) -e "RENAME TABLE dwdswb_beta.token TO dwdswb.token;"
 
 etymwb-update: etymwb-backup
 	# check whether the source database exists
 	$(mysql) -e "SELECT COUNT(*) FROM etymwb_beta.article;"
 	$(mysql) -e "SELECT COUNT(*) FROM etymwb_beta.lemma;"
 	# empty the target database
-	$(mysql) etymwb -e "DROP TABLE IF EXISTS article;"
-	$(mysql) etymwb -e "DROP TABLE IF EXISTS lemma;"
+	$(mysql) -e "DROP TABLE IF EXISTS etymwb.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS etymwb.lemma;"
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE etymwb_beta.article TO etymwb.article;"
 	$(mysql) -e "RENAME TABLE etymwb_beta.lemma TO etymwb.lemma;"
@@ -57,8 +60,8 @@ wdg-update: wdg-backup
 	$(mysql) -e "SELECT COUNT(*) FROM wdg_beta.article;"
 	$(mysql) -e "SELECT COUNT(*) FROM wdg_beta.lemma;"
 	# empty the target database
-	$(mysql) wdg -e "DROP TABLE IF EXISTS article;"
-	$(mysql) wdg -e "DROP TABLE IF EXISTS lemma;"
+	$(mysql) -e "DROP TABLE IF EXISTS wdg.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS wdg.lemma;"
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE wdg_beta.article TO wdg.article;"
 	$(mysql) -e "RENAME TABLE wdg_beta.lemma TO wdg.lemma;"
