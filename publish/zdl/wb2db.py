@@ -168,9 +168,7 @@ class DWDSWB(Dictionary):
             element.attrib.pop('Originaltext')
 
     def is_publishable(self, article):
-        # see http://odo.dwds.de/mantis/view.php?id=30407
-        # return article.get('Status') in ('Red-f')
-        return article.get('Status') in ('Red-f', 'Red-2', 'Lex-zur_Abgabe', u'Red-f-zurückgewiesen')
+        return article.get('Status') == 'Red-f'
 
 
 class EtymWB(Dictionary):
@@ -358,7 +356,8 @@ if __name__ == '__main__':
                         for character in unicodedata.normalize('NFC', headword)
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
-                    if headword and not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data:
+                    if headword and not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data and not (headword, hidx) in lemma_index:
+                        # maybe the second test suffices?
                         lemma_count += 1
                         bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
