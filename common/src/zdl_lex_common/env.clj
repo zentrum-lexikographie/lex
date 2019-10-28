@@ -83,7 +83,7 @@
     (->>
      [["" (apply str (map (constantly "-") (range 78)))]
       (for [[k v] env :let [v (if (secret? k) "***" v)]]
-        (format kv-format k v))
+        (format kv-format k (pr-str v)))
       [(apply str (map (constantly "-") (range 78)))]]
      (mapcat identity)
      (str/join \newline))))
@@ -100,7 +100,7 @@
                   (apply merge))]
   (def env
     (->>
-     (map #(vector (-> % first normalize-key) (second %)) (merge environ/env config))
+     (map #(vector (-> % first normalize-key) (second %)) (merge config environ/env))
      (into defaults)
      (coerce) (s/assert* ::env)
      (into (sorted-map)))))
