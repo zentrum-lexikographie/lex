@@ -45,7 +45,8 @@
              :grammar
              (let [start (some-> (.getStart p) parse*)
                    start (if start
-                           (list {:type :define :attrs {:name "start"}
+                           (list {:tag :define
+                                  :attrs {:name "start"}
                                   :content (list start)}))]
                {:content (seq (concat start (map parse* p)))})
              :define {:attrs {:name (.getName p)}
@@ -80,6 +81,23 @@
   "Shortcut notation for descendants of a zipper location."
   dz/descendants)
 
+(defn- resolve-node
+  "Resolves a reference pattern, avoiding cycles."
+  [pdefs-by-name resolved {:keys [tag attrs content] :as node}]
+  (let [target (some-> attrs :target)]
+    (if (and (some? target) (= :ref tag) (not (resolved target)))
+      (resolve-node pdefs-by-name (conj resolved target) (pdefs-by-name target))
+      (assoc node :content
+             (some->> content (map (partial resolve-node pdefs-by-name resolved)))))))
+
+(defn resolve-refs
+  "Resolve all reference patterns in a given schema."
+  [schema]
+  (let [pdefs (zx/xml-> (zip/xml-zip schema) >> :define zip/node)
+        pdefs-by-name (zipmap (map #(get-in % [:attrs :name]) pdefs)
+                              (map #(-> % :content first) pdefs))]
+    (resolve-node pdefs-by-name #{} schema)))
+
 (defn collect-values
   "Collects a sorted set of values in a subtree selected by the given path."
   [& path]
@@ -93,13 +111,25 @@
   ([name loc]
    (and (->> loc zip/node :tag (= :define)) (= (zx/attr loc :name) name))))
 
-(comment
-  (->> (file "../oxygen/framework/rng/DWDSWB.rng") (parse))
+(defn attr-of?
+  "Predicate for attributes belonging to elements with the given name."
+  [element-name]
+  (fn [attr-loc]
+    (if-let [parent-loc (zx/xml1-> attr-loc dz/ancestors [:element])]
+      (name= element-name parent-loc))))
 
-  (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng") (parse) (zip/xml-zip))
-        values (partial collect-values schema >>)]
-    {:sources (values (pdef? "Metadaten.allgemein") >> :attribute (name= "Quelle"))
-     :authors (values (pdef? "Mitarbeiterinnen"))
-     :types (values (pdef? "Metadaten.Artikel") >> :attribute (name= "Typ"))}))
+(defn -main [& args]
+  (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng")
+                    (parse) (resolve-refs) (zip/xml-zip))
+        article-attr? (attr-of? "{http://www.dwds.de/ns/1.0}Artikel")
+        attr-values #(collect-values schema >> :attribute article-attr? (name= %))]
+    (println
+     {:sources (attr-values "Quelle")
+      :authors (attr-values "Autor")
+      :types (attr-values "Typ")
+      :status (attr-values "Status")})))
+
+(comment
+  (->> (file "../oxygen/framework/rng/DWDSWB.rng") (parse) (resolve-refs)))
 
 
