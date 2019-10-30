@@ -17,83 +17,9 @@
             [zdl-lex-server.auth :as auth]
             [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
-            [zdl-lex-server.http-client :as http-client]))
-
-(defn- field-name->key
-  "Translates a Solr field name into a keyword."
-  [n]
-  (condp = n
-    "_text_" :text
-    (-> n
-        (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
-        (str/replace "_" "-")
-        keyword)))
-
-(defn- field-name-suffix [k]
-  (condp = k
-    :id ""
-    :language ""
-    :xml-descendent-path ""
-    :weight "_i"
-    :time "_l"
-    :definitions "_t"
-    :last-modified "_dt"
-    :timestamp "_dt"
-    :timestamps "_dts"
-    :author "_s"
-    :editor "_s"
-    :source "_s"
-    "_ss"))
-
-(defn- field-key->name
-  "Translates a keyword into a Solr field name."
-  [k]
-  (condp = k
-    :text "_text_"
-    (let [field-name (str/replace (name k) "-" "_")
-          field-suffix (field-name-suffix k)]
-      (str field-name field-suffix))))
-
-(let [abstract-fields [:id :type :status
-                       :last-modified :timestamp
-                       :author :authors :editors :editor
-                       :sources :source
-                       :forms :pos :definitions]
-      basic-field (fn [[k v]]
-                    (if-not (nil? v)
-                      [(field-key->name k) (if (coll? v) (vec v) [(str v)])]))
-      attr-field (fn [prefix suffix attrs]
-                   (let [all-values (->> attrs vals (apply concat) (seq))]
-                     (-> (for [[type values] attrs]
-                           (let [type (-> type name str/lower-case)
-                                 field (str prefix "_" type "_" suffix)]
-                             [field values]))
-                         (conj (if all-values
-                                 [(str prefix "_" suffix) all-values])))))]
-  (defn article->fields
-    "Returns Solr fields/values for a given article ID and excerpt."
-    [{:keys [id] :as excerpt}]
-    (let [abstract (select-keys excerpt abstract-fields)
-          preamble {:id id
-                    :language "de"
-                    :time (str (System/currentTimeMillis))
-                    :xml-descendent-path id
-                    :abstract (pr-str abstract)}
-          main-fields (dissoc excerpt
-                              :id :file
-                              :timestamps :authors :editors :sources
-                              :references :ref-ids)
-          fields (->> [(map basic-field preamble)
-                       (map basic-field main-fields)
-                       (attr-field "timestamps" "dts" (excerpt :timestamps))
-                       (attr-field "authors" "ss" (excerpt :authors))
-                       (attr-field "editors" "ss" (excerpt :editors))
-                       (attr-field "sources" "ss" (excerpt :sources))]
-                      (mapcat identity)
-                      (remove nil?)
-                      (into {}))]
-      (for [[name values] (sort fields) value (sort values)]
-        [name value]))))
+            [zdl-lex-server.http-client :as http-client]
+            [zdl-lex-server.solr.doc :refer [field-name->key field-key->name article->fields]]
+            [zdl-lex-server.solr.query :as query]))
 
 (def req
   (http-client/configure (env :solr-user) (env :solr-password)))
@@ -269,20 +195,6 @@
   [(-> k name field-name->key)
    (into (sorted-map) (for [[k v] v] [(name k) v]))])
 
-(defn- translate-field-names [node]
-  (if (vector? node)
-    (let [[type args] node]
-      (condp = type
-        :field (let [[_ name] args]
-                 [:field [:term (-> name keyword field-key->name)]])
-        (vec (map translate-field-names node))))
-    node))
-
-(defn- translate-query [s]
-  (try
-    (-> s lucene/str->ast translate-field-names lucene/ast->str)
-    (catch Throwable t s)))
-
 (defn docs->results [docs]
   (for [{:keys [abstract_ss]} docs]
     (-> abstract_ss first read-string)))
@@ -331,7 +243,7 @@
 (defn handle-search [req]
   (let [params (-> req :parameters :query)
         {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
-        params {"q" (translate-query q) "start" offset "rows" limit}
+        params {"q" (query/translate q) "start" offset "rows" limit}
         solr-response (query (merge query-params (facet-params) params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
@@ -360,7 +272,7 @@
 (defn handle-export [req]
   (let [params (-> req :parameters :query)
         {:keys [q limit] :or {q "id:*" limit 1000}} params
-        params (merge query-params {"q" (translate-query q)})
+        params (merge query-params {"q" (query/translate q)})
         docs (->> (scroll params (min limit 50000)) (take limit))
         records (->> docs docs->results (map doc->csv) (cons csv-header))]
     (->
