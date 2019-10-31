@@ -99,10 +99,9 @@
     (resolve-node pdefs-by-name #{} schema)))
 
 (defn collect-values
-  "Collects a sorted set of values in a subtree selected by the given path."
+  "Collects a set of values in a subtree selected by the given path."
   [& path]
-  (->> (apply zx/xml-> (concat path [>> :value (zx/attr :value)]))
-       (into (sorted-set))))
+  (into #{} (apply zx/xml-> (concat path [>> :value (zx/attr :value)]))))
 
 (defn pdef?
   "Predicate for pattern definitions, matched by their name."
