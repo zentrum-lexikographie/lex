@@ -8,8 +8,11 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.log :as log]
+            [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-common.util :refer [file]]
-            [zdl-lex-common.xml-schema :as schema])
+            [zdl-lex-common.xml-schema :as schema]
+            [zdl-lex-common.xml :as xml]
+            [zdl-lex-common.article :as article])
   (:import java.net.URL))
 
 (def ^:private article-attr?
@@ -48,30 +51,59 @@
      (gen/tuple (gen/char-alpha) (s/gen sources)))))
 
 
+(defn- http-on-response [ch resp]
+  (a/>!! ch resp))
+
+(defn- http-on-error [ch e]
+  (timbre/warn e)
+  (a/close! ch))
+
 (defn http-request
   "Async HTTP requests."
-  [ch req]
-  (->
-   (merge req {:async? true})
-   (http/request (partial a/>!! ch) #(do (timbre/warn %) (a/close! ch)))))
+  [author ch req]
+  (http/request
+   (merge req {:basic-auth [author author] :async? true})
+   (partial http-on-response ch)
+   (partial http-on-error ch))
+  ch)
 
-(def ^:private query-endpoint
-  "Server endpoint for querying the Solr index."
-  (.. (URL. (env :server-base)) (toURI) (resolve "/index") (toString)))
+(def ^:private query-template
+  {:url (.. (URL. (env :server-base)) (toURI) (resolve "/index") (toString))
+   :method :get
+   :query-params {:limit "1000"} :as :json})
+
+(defn query-article
+  [author q]
+  (a/go
+    (let [req (assoc-in query-template [:query-params :q] q)]
+      (when-let [resp (a/<! (http-request author (a/chan) req))]
+        (some->> resp :body :result not-empty rand-nth :id)))))
+
+(defn- download-req [id]
+  {:method :get
+   :url (.. (URL. (env :server-base)) (toURI)
+            (resolve "/article/")
+            (resolve (path->uri id))
+            (toString))})
+
+(defn download-article
+  [author id]
+  (a/go
+    (when-let [resp (a/<! (http-request author (a/chan) (download-req id)))]
+      (some->> resp :body xml/->dom
+               article/doc->articles
+               (map article/excerpt)
+               (mapcat :forms)
+               (vec)))))
 
 (defn run-query
   "Sends a given Solr index query as the given author."
   [author query]
-  (let [ch (a/chan 1)]
-    (http-request ch {:url query-endpoint :method :get
-                      :basic-auth [author author]
-                      :query-params {:q query :limit "1000"}
-                      :as :json})
-    (when-let [resp (a/<!! ch)]
-      (timbre/info {:server (env :server-base)
-                    :author author
-                    :query query
-                    :results (-> resp :body :total)}))))
+  (a/go
+    (some->> (query-article author query)
+             (a/<!)
+             (download-article author)
+             (a/<!))))
 
 (defn -main
   "Run a number of sample queries."
@@ -80,6 +112,6 @@
   (let [num-queries (Integer/parseInt num-queries)
         user-queries (gen/tuple author-generator query-generator)]
     (doseq [[author query] (gen/sample user-queries num-queries)]
-      (run-query author query))))
+      (timbre/info (a/<!! (run-query author query))))))
 
-(comment (-main))
+(comment (-main "100"))
