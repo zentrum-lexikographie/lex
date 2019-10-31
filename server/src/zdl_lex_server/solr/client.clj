@@ -6,7 +6,8 @@
             [zdl-lex-common.xml :as xml]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http-client :as http-client]
-            [zdl-lex-server.solr.doc :refer [article->fields]]))
+            [zdl-lex-server.solr.doc :refer [article->fields]]
+            [zdl-lex-server.solr.query :as query]))
 
 (def req
   (http-client/configure (env :solr-user) (env :solr-password)))
@@ -114,8 +115,11 @@
         :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
         :as :json}))
 
-(def ^:private build-forms-suggestions
-  (partial build-suggestions "forms"))
+(defn build-forms-suggestions []
+  (build-suggestions "forms"))
+
+(defn index-empty? []
+  (= 0 (get-in (query {"q" "id:*" "rows" "0"}) [:body :response :numFound] -1)))
 
 (defn id-exists? [id]
   (let [q [:query

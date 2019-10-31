@@ -1,6 +1,7 @@
 {:paths ["src"]
  :deps
- {org.clojure/data.codec {:mvn/version "0.1.1"}
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  org.clojure/data.codec {:mvn/version "0.1.1"}
   org.clojure/data.csv {:mvn/version "0.1.4"}
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
   org.clojure/data.zip {:mvn/version "0.1.1"}

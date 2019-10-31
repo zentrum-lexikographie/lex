@@ -10,7 +10,7 @@
             [zdl-lex-server.auth :as auth]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.lock :as lock]
-            [zdl-lex-server.solr :as solr])
+            [zdl-lex-server.solr.client :as solr-client])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
@@ -18,7 +18,7 @@
 (defn generate-id []
   (let [candidate #(str "E_" (rand-int 10000000))]
     (loop [id (candidate)]
-      (if-not (solr/id-exists? id) id
+      (if-not (solr-client/id-exists? id) id
               (recur (candidate))))))
 
 (defn new-article-xml [xml-id form pos author]
