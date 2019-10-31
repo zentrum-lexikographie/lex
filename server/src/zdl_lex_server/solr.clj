@@ -46,7 +46,10 @@
   :stop (a/close! index-rebuild-scheduler))
 
 (defstate index-init
-  :start (when (client/index-empty?) (a/>!! index-rebuild-scheduler :init)))
+  :start (try
+           (when (client/index-empty?)
+             (a/>!! index-rebuild-scheduler :init))
+           (catch Throwable t (timbre/warn t))))
 
 (defstate build-suggestions-scheduler
   "Synchronizes the forms suggestions with all indexed articles"
