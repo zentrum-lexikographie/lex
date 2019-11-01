@@ -13,7 +13,7 @@ grammatische_Beschreibung = element Grammatik {
 		, (
 			''
 			| 'Substantiv' | 'Eigenname'
-	    		| 'Verb' | 'Imperativ' | 'Partizip Präteritum' # TODO: only Verb
+	    		| 'Verb' | 'Imperativ'
 			| 'Adjektiv' | 'Adverb' | 'partizipiales Adjektiv' | 'partizipiales Adverb' | 'Komparativ' | 'Superlativ'
 			| 'Pronominaladverb'
 			| 'Präposition'
