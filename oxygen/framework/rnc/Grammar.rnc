@@ -133,9 +133,9 @@ grammatische_Beschreibung = element Grammatik {
 	, element Kasuspraeferenz {
 		Frequenzbeschraenkung ?
 		, (
-			'mit Gen.' | 'im Gen.' | 'oft mit Gen.'
+			'mit Gen.' | 'im Gen.'
 			| 'mit Dat.' | 'im Dat.' | 'mit Dat. Pl.'
-			| 'mit Akk.' | 'im Akk.' | 'meist mit Akk.'
+			| 'mit Akk.' | 'im Akk.'
 			| 'mit Akk. eines artikellosen Nomens'
 			| 'im Nom.'
 		)
@@ -166,10 +166,9 @@ grammatische_Beschreibung = element Grammatik {
 			| 'konditional'
 			| 'interrogativ'
 			| 'instrumental'
-			# TODO: remove freq.
-			| xsd:token { pattern = '((häufig|selten|nicht) )?attributiv' }
-			| xsd:token { pattern = '((häufig|selten|nicht) )?prädikativ' }
-			| xsd:token { pattern = '((häufig|selten|nicht) )?adverbiell' }
+			| 'attributiv'
+			| 'prädikativ'
+			| 'adverbiell'
 			| 'adjektivisch'
 			| 'verbal'
 			| 'präpositional'
