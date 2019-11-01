@@ -6,6 +6,7 @@
             [clojure.spec.gen.alpha :as gen]
             [clojure.zip :as zip]
             [taoensso.timbre :as timbre]
+            [tick.alpha.api :as t]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.log :as log]
             [zdl-lex-common.url :refer [path->uri]]
@@ -72,38 +73,48 @@
    :method :get
    :query-params {:limit "1000"} :as :json})
 
-(defn query-article
-  [author q]
+(defn query-random-article
+  [{:keys [author query] :as tx}]
+  (let [req (assoc-in query-template [:query-params :q] query)]
+    (a/go
+      (->> (some->> (a/<! (http-request author (a/chan) req))
+                    :body :result not-empty rand-nth :id)
+           (assoc tx :id)))))
+
+(defn transfer-article
+  [{:keys [author id xml] :as tx}]
   (a/go
-    (let [req (assoc-in query-template [:query-params :q] q)]
-      (when-let [resp (a/<! (http-request author (a/chan) req))]
-        (some->> resp :body :result not-empty rand-nth :id)))))
+    (if-not id
+      tx
+      (let [req {:method (if xml :post :get)
+                 :body xml
+                 :url (.. (URL. (env :server-base)) (toURI)
+                          (resolve "/article/")
+                          (resolve (path->uri id))
+                          (toString))}]
+        (->> (some->> (a/<! (http-request author (a/chan) req)) :body)
+             (assoc tx :xml))))))
 
-(defn- download-req [id]
-  {:method :get
-   :url (.. (URL. (env :server-base)) (toURI)
-            (resolve "/article/")
-            (resolve (path->uri id))
-            (toString))})
+(defn edit-article
+  [{:keys [id author xml] :as tx}]
+  (if-let [doc (some-> xml xml/->dom)]
+    (let [element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)
+          timestamp (t/format :iso-local-date (t/date))]
+      (doto (element-by-name "Artikel")
+        (.setAttribute "Zeitstempel" timestamp)
+        (.setAttribute "Autor" author))
+      (assoc tx :xml (xml/serialize doc)))
+    tx))
 
-(defn download-article
-  [author id]
-  (a/go
-    (when-let [resp (a/<! (http-request author (a/chan) (download-req id)))]
-      (some->> resp :body xml/->dom
-               article/doc->articles
-               (map article/excerpt)
-               (mapcat :forms)
-               (vec)))))
-
-(defn run-query
+(defn run-transaction
   "Sends a given Solr index query as the given author."
-  [author query]
+  [tx]
   (a/go
-    (some->> (query-article author query)
-             (a/<!)
-             (download-article author)
-             (a/<!))))
+    (->> tx
+         (query-random-article) (a/<!)
+         (transfer-article) (a/<!)
+         (edit-article)
+         (transfer-article) (a/<!))))
 
 (defn -main
   "Run a number of sample queries."
@@ -112,6 +123,6 @@
   (let [num-queries (Integer/parseInt num-queries)
         user-queries (gen/tuple author-generator query-generator)]
     (doseq [[author query] (gen/sample user-queries num-queries)]
-      (timbre/info (a/<!! (run-query author query))))))
+      (timbre/info (:id (a/<!! (run-transaction {:author author :query query})))))))
 
-(comment (-main "100"))
+(comment (-main "10"))
