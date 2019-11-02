@@ -26,26 +26,37 @@
                  (jgit/git-commit repo "Init")))
              git-dir)))
 
+(defn- git-path
+  "Path relative to the git directory."
+  [^java.io.File f]
+  (str (.. (.toPath git-dir)
+           (relativize (.toPath f)))))
+
 (defstate ^{:on-reload :noop} articles-dir
   :start (fs/file git-dir "articles"))
 
-(defn- send-changes [changed-files]
-  (when-let [changeset (some->> changed-files
-                                (map (partial file git-dir))
-                                (into (sorted-set)))]
-    (timbre/spy :trace changeset)
-    (bus/publish! :git-changes changeset)
-    changed-files))
+(defn- classify-changes [changes]
+  (let [files (map (partial file git-dir) changes)]
+    {:modified (vec (filter fs/exists? files))
+     :deleted (vec (remove fs/exists? files))}))
+
+(defn- send-changes [changes]
+  (->> changes
+       (timbre/spy :trace)
+       (bus/publish! :git-changes)))
 
 (defn commit []
   (lock/with-global-write-lock
     (jgit/with-repo git-dir
-      (let [changed-files (->> (jgit/git-status repo) (vals) (apply union))]
-        (when-not (empty? changed-files)
-          (jgit/git-add repo ".")
-          (jgit/git-commit repo "zdl-lex-server")
-          (jgit/git-push repo)
-          (send-changes changed-files))))))
+      (let [changes (->> (jgit/git-status repo) (vals) (apply union))]
+        (when-not (empty? changes)
+          (let [{:keys [modified deleted] :as changes} (classify-changes changes)]
+            ;; FIXME map files back to paths
+            (when-not (empty? modified) (jgit/git-add repo (map git-path modified)))
+            (when-not (empty? deleted) (jgit/git-rm repo (map git-path deleted)))
+            (jgit/git-commit repo "zdl-lex-server")
+            (jgit/git-push repo)
+            (send-changes changes)))))))
 
 (let [all-refs ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"]]
   (defn fast-forward [refs]
@@ -60,6 +71,7 @@
                        (map :id) (reverse)
                        (mapcat (partial jgit-query/changed-files repo))
                        (map first)
+                       (classify-changes)
                        (send-changes)))
               (throw (ex-info "Error fast-forwarding git branch"
                               {:head head :refs refs :merge merge})))))))))

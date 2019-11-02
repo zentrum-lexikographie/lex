@@ -125,4 +125,4 @@
     (doseq [[author query] (gen/sample user-queries num-queries)]
       (timbre/info (:id (a/<!! (run-transaction {:author author :query query})))))))
 
-(comment (-main "10"))
+(comment (-main "40"))
