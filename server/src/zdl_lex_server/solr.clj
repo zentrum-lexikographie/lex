@@ -55,12 +55,8 @@
   :start (cron/schedule "0 */10 * * * ?" "Forms FSA update" client/build-forms-suggestions)
   :stop (a/close! build-suggestions-scheduler))
 
-(defn handle-index-rebuild [{:keys [auth/user]}]
-  (if (= "admin" user)
-    (htstatus/ok
-     {:index (a/>!! index-rebuild-scheduler :sync)})
-    (htstatus/forbidden
-     {:index false})))
+(defn handle-index-rebuild [_]
+  {:index (a/>!! index-rebuild-scheduler :sync)})
 
 (defn handle-form-suggestions [{{:keys [q]} :params}]
   (let [solr-response (client/suggest "forms" (or q ""))
@@ -176,7 +172,8 @@
            :handler handle-search}
      :delete {:summary "Clears the index, forcing a rebuild"
               :tags ["Index", "Admin"]
-              :handler handle-index-rebuild}}]
+              :handler handle-index-rebuild
+              :middleware [auth/wrap-admin-only]}}]
 
    ["/export"
     {:get {:summary "Export index metadata in CSV format"

@@ -1,6 +1,7 @@
 (ns zdl-lex-server.auth
   (:require [clojure.data.codec.base64 :as base64]
             [clojure.string :as str]
+            [ring.util.http-response :as htstatus]
             [zdl-lex-common.env :refer [env]]))
 
 (let [anonymous-user (env :http-anon-user)
@@ -20,3 +21,14 @@
     ([request respond raise]
      (handler (assoc-auth request) respond raise))))
 
+(defn wrap-admin-only
+  [handler]
+  (fn
+    ([{:keys [::user] :as request}]
+     (if-not (= "admin" user)
+       (htstatus/forbidden)
+       (handler request)))
+    ([{:keys [::user] :as request} respond raise]
+     (if-not (= "admin" user)
+       (respond (htstatus/forbidden))
+       (handler request respond raise)))))
