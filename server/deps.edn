@@ -43,4 +43,6 @@
    :main-opts ["-m compile"]}
   :package
   {:extra-paths ["build"]
-   :main-opts ["-m" "package"]}}}
+   :main-opts ["-m" "package"]}
+  :server
+  {:main-opts ["-m" "zdl-lex-server.core"]}}}
