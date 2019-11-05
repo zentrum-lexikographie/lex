@@ -5,6 +5,6 @@
 (def ring-handlers
   ["/status" {:get {:summary "Provides status information, e.g. logged-in user"
                     :tags ["Status"]
-                    :handler (fn [{:keys [auth/user]}]
+                    :handler (fn [{:keys [::auth/user]}]
                                (htstatus/ok {:user user}))}}])
 
