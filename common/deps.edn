@@ -21,8 +21,6 @@
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.25"}
   cronjure {:mvn/version "0.1.1"}
   environ {:mvn/version "1.1.0"}
-  mount {:mvn/version "0.1.16"}
-  tick {:mvn/version "0.4.10-alpha"
-        :exclusions [cljsjs/js-joda-locale-en-us cljsjs/js-joda-timezone]}}
+  mount {:mvn/version "0.1.16"}}
  :aliases
  {:test {:extra-deps {midje {:mvn/version "1.9.8"}}}}}

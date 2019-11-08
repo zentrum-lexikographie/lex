@@ -1,16 +1,13 @@
 (ns zdl-lex-common.article
   (:require [clojure.string :as str]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
+            [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-lex-common.xml :as xml]
-            [me.raynes.fs :as fs])
+            [zdl-lex-common.xml :as xml])
   (:import java.io.File
            java.text.Collator
            java.util.Locale
-           [java.time.temporal ChronoUnit Temporal]
-           net.sf.saxon.s9api.QName
-           net.sf.saxon.s9api.XdmItem))
+           [net.sf.saxon.s9api QName XdmItem]))
 
 (def collator (Collator/getInstance Locale/GERMAN))
 
@@ -106,39 +103,13 @@
   [attr]
   (partial attrs->map attr (xml/selector (str "descendant-or-self::*[@" attr "]"))))
 
-(defn- format-timestamp
-  "ISO-formats a date string."
-  [d]
-  (t/format :iso-local-date d))
-
-(defn- past-timestamp
-  "Yields a ISO timestamp, guaranteed to be today or in the past."
-  [s]
-  (let [now (format-timestamp (t/date))]
-    (try
-      (let [ts (format-timestamp (t/parse s))
-            valid? (<= (compare ts now) 0)]
-        (if valid? ts now))
-      (catch Throwable t now))))
-
 (defn- past-timestamps
   "Maps attribute timestamp values via `past-timestamp`."
   [attrs]
   (->>
    (for [[k v] attrs]
-     [k (-> (for [ts v] (past-timestamp ts)) (distinct))])
+     [k (-> (for [ts v] (ts/past ts)) (distinct))])
    (into {})))
-
-(defn- max-timestamp
-  "A reducer fn, yielding the maximum timestamp"
-  ([] nil)
-  ([a] a)
-  ([a b] (if (< 0 (compare a b)) a b)))
-
-(let [^Temporal unix-epoch (t/parse "1970-01-01")]
-  (defn- days-since-epoch [^Temporal date]
-    "The number of days since the UNIX epoch for a given date."
-    (.between ChronoUnit/DAYS unix-epoch date)))
 
 (let [refs (xml/selector ".//d:Verweis")
       ref-id (comp first (ref-ids-fn "./d:Ziellemma"))
@@ -175,8 +146,9 @@
           sources (sources article)
           editors (editors article)
           timestamps (timestamps article)
-          last-modified (reduce max-timestamp (apply concat (vals timestamps)))
-          weight (try (or (some-> last-modified t/parse days-since-epoch) 0)
+          last-modified (some->> (vals timestamps) (apply concat)
+                                 not-empty (reduce max))
+          weight (try (or (some-> last-modified ts/parse ts/days-since-epoch) 0)
                       (catch Throwable t (timbre/warn t) 0))]
       (->clean-map
        {:timestamp (article-attr timestamps)

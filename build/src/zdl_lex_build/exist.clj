@@ -1,11 +1,10 @@
 (ns zdl-lex-build.exist
   (:require [clojure.java.shell :as shell]
             [clojure.string :as str]
-            [tick.alpha.api :as t]
             [me.raynes.fs :as fs]
             [taoensso.timbre :as timbre]
-            [zdl-lex-common.log :as log]
-            [zdl-lex-common.args :as args]))
+            [zdl-lex-common.args :as args]
+            [zdl-lex-common.log :as log]))
 
 (defn sh->out [& args]
   (timbre/debugf "sh: %s" args)
@@ -25,12 +24,13 @@
     (let [[sig type year month day hour minute] sig]
       {:sig sig
        :type type
-       :date-time 
-       (t/at (t/new-date (Integer/parseInt year)
-                         (Integer/parseInt month)
-                         (Integer/parseInt day))
-             (t/new-time (Integer/parseInt hour)
-                         (Integer/parseInt minute)))})))
+       :date-time
+       (java.time.LocalDateTime/of
+        (Integer/parseInt year)
+        (Integer/parseInt month)
+        (Integer/parseInt day)
+        (Integer/parseInt hour)
+        (Integer/parseInt minute))})))
 
 
 (def export-dir "/home/eXist-db-2.2/webapp/WEB-INF/data/export")

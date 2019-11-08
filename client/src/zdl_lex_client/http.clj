@@ -2,10 +2,8 @@
   (:require [clojure.core.async :as a]
             [clojure.data.codec.base64 :as base64]
             [clojure.java.io :as io]
-            [clojure.string :as str]
             [mount.core :refer [defstate]]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
@@ -14,7 +12,7 @@
             [zdl-lex-common.util :refer [server-url]]
             [zdl-lex-common.xml :as xml])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream File IOException]
-           [java.net ConnectException URI URL URLStreamHandler URLConnection]))
+           [java.net ConnectException URLConnection URLStreamHandler]))
 
 (comment
   (str (server-url "lock/" "test/test2.xml" {:ttl "300"} {:token "_"})))
@@ -160,7 +158,7 @@
 
 (defn get-status []
   (->> (get-edn (server-url "/status"))
-       (merge {:timestamp (t/now)})
+       (merge {:timestamp (java.time.Instant/now)})
        (bus/publish! :status)))
 
 (defstate ping-status

@@ -1,15 +1,11 @@
 (ns zdl-lex-client.view.filter
   (:require [clojure.string :as str]
             [lucene-query.core :as lucene]
-            [mount.core :refer [defstate]]
-            [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
-            [tick.alpha.api :as t]
-            [tick.format :as tf]
-            [zdl-lex-client.bus :as bus]
             [zdl-lex-client.font :as font]
-            [zdl-lex-client.search :as search])
+            [zdl-lex-client.search :as search]
+            [zdl-lex-common.timestamp :as ts])
   (:import com.jgoodies.forms.layout.RowSpec))
 
 (def facet-title
@@ -30,10 +26,23 @@
    :tranche "tranche"
    :timestamp "datum"})
 
+(def ^:private german-date-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "dd.MM.yy"))
+
+(defn- parse-ts-facet-value
+  [^String s]
+  (->> (.. java.time.format.DateTimeFormatter/ISO_ZONED_DATE_TIME
+           (parse s))
+       (java.time.LocalDateTime/from)))
+
+(defn- render-ts-facet-value
+  [^java.time.LocalDateTime dt]
+  (.. dt (atZone (java.time.ZoneId/of "Europe/Berlin"))
+      (format german-date-formatter)))
+
 (defn- render-ts-facet-list-entry [this {:keys [value]}]
   (let [[v n] value
-        v (str "ab " (t/format (tf/formatter "dd.MM.yy")
-                               (t/in (t/parse v) "Europe/Berlin")))]
+        v (str "ab " (-> v parse-ts-facet-value render-ts-facet-value))]
     (ui/config! this
                 :text (str v " (" n ")")
                 :font (font/derived :style :plain)
@@ -58,7 +67,7 @@
         :timestamp
         [:range
          "["
-         [:term (t/format :iso-date (-> vs first t/parse t/date))]
+         [:term (-> vs first parse-ts-facet-value ts/format)]
          [:all "*"]
          "]"]
         (let [vs (map (fn [v] [:value [:term v]]) vs)]

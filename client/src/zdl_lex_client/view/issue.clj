@@ -4,7 +4,6 @@
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
             [seesaw.mig :as mig]
-            [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.font :as font]
             [zdl-lex-client.http :as http]
@@ -34,7 +33,8 @@
      (line-border :color color :left 10)
      (line-border :thickness 5 :color :white)]))
 
-(def date-time-formatter (t/formatter "dd.MM.yyyy, HH:mm"))
+(def ^:private date-time-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "dd.MM.yyyy, HH:mm"))
 
 (defn render-issue
   [{:keys [active? last-updated resolution severity status summary visited?]
@@ -44,7 +44,7 @@
         visited-color (if visited? :green fg-color)
         label (partial ui/label :foreground fg-color)
         text (partial label :font (font/derived :style :plain))
-        last-updated (t/format date-time-formatter last-updated)]
+        last-updated (.. date-time-formatter (format last-updated))]
     (mig/mig-panel
      :cursor :hand
      :background bg-color
@@ -65,11 +65,16 @@
 (def get-issues
   (memo/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
 
+(defn- parse-update-ts
+  [^String ts]
+  (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
+       (java.time.OffsetDateTime/from)))
+
 (defn prepare-issues [[{:keys [forms]} visited?]]
   (let [visited? (or visited? @visited-issues)]
     (->> (mapcat get-issues forms)
          (map (fn [{:keys [id last-updated status url] :as issue}]
-                (let [last-updated (t/parse last-updated)]
+                (let [last-updated (parse-update-ts last-updated)]
                   (assoc issue
                          :url (URL. url)
                          :last-updated last-updated
@@ -94,7 +99,7 @@
 
 (comment
   (let [sample {:category "MWA-Link",
-                :last-updated (t/parse "2019-08-21T12:02:10+02:00"),
+                :last-updated (parse-update-ts "2019-08-21T12:02:10+02:00"),
                 :attachments 1,
                 :resolution "open",
                 :lemma "schwarz",

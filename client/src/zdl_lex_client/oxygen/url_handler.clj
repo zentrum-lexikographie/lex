@@ -6,7 +6,6 @@
             [clojure.core.memoize :as memo]
             [clojure.string :as str]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :refer [uuid]])
@@ -20,10 +19,14 @@
 (defn -isLockingSupported [this protocol]
   (= "lex" protocol))
 
+(def ^:private readable-date-time-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "dd.MM.YYYY', 'HH:mm' Uhr'"))
+
 (defn lock->exception [{:keys [resource owner owner_ip expires]}]
   (let [owner (format "%s (IP: %s)" owner owner_ip)
-        until (t/format "dd.MM.YYYY', 'HH:mm' Uhr'"
-                        (t/offset-date-time (t/instant expires)))
+        until (.. (java.time.Instant/ofEpochMilli expires)
+                  (atZone (java.time.ZoneId/systemDefault))
+                  (format readable-date-time-formatter))
         message (->> ["Artikel gesperrt"
                       ""
                       (format "Pfad: %s" resource)

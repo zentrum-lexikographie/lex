@@ -6,9 +6,9 @@
             [clojure.spec.gen.alpha :as gen]
             [clojure.zip :as zip]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.log :as log]
+            [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-common.util :refer [file]]
             [zdl-lex-common.xml-schema :as schema]
@@ -99,7 +99,7 @@
   [{:keys [id author xml] :as tx}]
   (if-let [doc (some-> xml xml/->dom)]
     (let [element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)
-          timestamp (t/format :iso-local-date (t/date))]
+          timestamp (ts/format (java.time.LocalDate/now))]
       (doto (element-by-name "Artikel")
         (.setAttribute "Zeitstempel" timestamp)
         (.setAttribute "Autor" author))

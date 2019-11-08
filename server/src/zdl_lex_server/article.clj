@@ -4,8 +4,8 @@
             [me.raynes.fs :as fs]
             [ring.util.http-response :as htstatus]
             [ring.util.request :as htreq]
-            [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
+            [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.xml :as xml]
             [zdl-lex-server.auth :as auth]
             [zdl-lex-server.git :as git]
@@ -24,7 +24,7 @@
 (defn new-article-xml [xml-id form pos author]
   (let [doc (xml/->dom xml-template)
         element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)
-        timestamp (t/format :iso-local-date (t/date))]
+        timestamp (ts/format (java.time.LocalDate/now))]
     (doto (element-by-name "Artikel")
       (.setAttribute "xml:id" xml-id)
       (.setAttribute "Zeitstempel" timestamp)

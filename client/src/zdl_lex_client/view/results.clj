@@ -3,7 +3,6 @@
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.util :refer [to-dimension]]
-            [tick.alpha.api :as t]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.font :as font]
             [zdl-lex-client.icon :as icon]
@@ -87,6 +86,12 @@
           ;; no-op by default
           component)))))
 
+(def ^:private time-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "[HH:mm:ss]"))
+
+(comment
+  (.. (java.time.LocalDateTime/now) (format time-formatter)))
+
 (defn- render-result-summary [{:keys [query total result] :as data}]
   (let [filter-action (ui/action
                        :icon icon/gmd-filter
@@ -100,7 +105,7 @@
                        :handler (partial export-view/open-dialog data))]
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
-             (ui/label :text (t/format "[HH:mm:ss]" (t/date-time))
+             (ui/label :text (.. (java.time.LocalDateTime/now) (format time-formatter))
                        :font (font/derived :style :plain))
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/label :text query)
@@ -161,7 +166,6 @@
    (let [id (-> resp :id keyword)
          title (resp :query)
          tip (resp :query)
-         timestamp (t/now)
          old-tabs (filter (comp (partial result= resp) ui/user-data)
                           (select-result-tabs))
          insert-index (some->> old-tabs last (get-result-tab-index))

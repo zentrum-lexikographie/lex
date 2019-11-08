@@ -2,12 +2,10 @@
   (:require [clojure.core.async :as a]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
-            [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [muuntaja.core :as m]
             [ring.util.http-response :as htstatus]
             [taoensso.timbre :as timbre]
-            [tick.alpha.api :as t]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
@@ -87,21 +85,25 @@
   {"df" "forms_ss"
    "sort" "forms_ss asc,weight_i desc,id asc"})
 
-(defn- ->timestamp [dt]
-  (-> dt (t/at (t/midnight)) (t/in "UTC")))
+(defn- ->timestamp
+  [^java.time.LocalDate dt]
+  (.. dt (atStartOfDay (java.time.ZoneId/of "UTC"))))
 
-(def timestamp->str (partial t/format :iso-offset-date-time))
+(defn- timestamp->str
+  [^java.time.OffsetDateTime odt]
+  (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (format odt)))
 
 (defn- facet-params []
-  (let [today (->timestamp (t/today))
-        year (->timestamp (.. (t/year) (atDay 1)))
-        tomorrow (->timestamp (t/tomorrow))
+  (let [now (java.time.LocalDate/now)
+        today (->timestamp now)
+        year (->timestamp (.. (java.time.Year/from now) (atDay 1)))
+        tomorrow (->timestamp (.. now (plusDays 1)))
         boundaries (concat
                     [today
-                     (t/- tomorrow (t/new-period 7 :days))
-                     (t/- tomorrow (t/new-period 1 :months))]
+                     (.. tomorrow (minusDays 7))
+                     (.. tomorrow (minusMonths 1))]
                     (for [i (range 4)]
-                      (let [year (t/- year (t/new-period i :years))] year)))
+                      (.. year (minusYears i))))
         tomorrow (timestamp->str tomorrow)
         boundaries (map timestamp->str boundaries)]
     {"facet" "true"
@@ -114,6 +116,8 @@
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
+(comment
+  (facet-params))
 (defn handle-search [req]
   (let [params (-> req :parameters :query)
         {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
@@ -148,13 +152,13 @@
         {:keys [q limit] :or {q "id:*" limit 1000}} params
         params (merge query-params {"q" (query/translate q)})
         docs (->> (client/scroll params (min limit 50000)) (take limit))
-        records (->> docs docs->results (map doc->csv) (cons csv-header))]
+        records (->> docs docs->results (map doc->csv) (cons csv-header))
+        ts (->> (java.time.LocalDateTime/now)
+                (.format java.time.format.DateTimeFormatter/ISO_DATE_TIME))]
     (->
      (htstatus/ok records)
      (htstatus/update-header "Content-Disposition" str
-                             "attachment; filename=\"zdl-dwds-export-"
-                             (t/format :iso-date-time (t/date-time))
-                             ".csv\""))))
+                             "attachment; filename=\"zdl-dwds-export-" ts ".csv\""))))
 
 (s/def ::q string?)
 (s/def ::offset ::spec/pos-int)
