@@ -8,7 +8,9 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [uuid]]
-            [zdl-lex-server.auth :as auth])
+            [zdl-lex-server.auth :as auth]
+            [clojure.spec.alpha :as s]
+            [zdl-lex-common.spec :as spec])
   (:import java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.TimeUnit))
 
@@ -26,6 +28,24 @@
 (defmacro with-global-read-lock [& body] `(with-global-lock .readLock ~@body))
 
 (defmacro with-global-write-lock [& body] `(with-global-lock .writeLock ~@body))
+
+(defn- now []
+  (System/currentTimeMillis))
+
+(def global-timeout-lock (atom 0))
+
+(defn lock-now-for
+  [seconds]
+  (let [until (+ (now) (* seconds 1000))]
+    (swap! global-timeout-lock max until)))
+
+(defn locked-now?
+  []
+  (< @global-timeout-lock (now)))
+
+(defn unlock-now
+  []
+  (reset! global-timeout-lock 0))
 
 (def-db-fns "zdl_lex_server/lock.sql")
 
@@ -47,9 +67,6 @@
   :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup-locks)
   :stop (a/close! lock-cleanup-scheduler))
 
-(defn- now []
-  (System/currentTimeMillis))
-
 (defn- lock [{{:keys [resource]} :path-params
               {:keys [ttl token] :or {ttl "60"}} :params
               owner :auth/user
@@ -65,9 +82,28 @@
      :owner owner
      :owner_ip owner_ip}))
 
-(defn get-list [_]
+(defn ->lock-state
+  [global-timeout-lock]
+  {:until (java.time.Instant/ofEpochMilli global-timeout-lock)})
+
+(defn get-global-lock-state
+  []
+  (->lock-state @global-timeout-lock))
+
+(defn post-global-lock
+  [req]
+  (let [{:keys [seconds]} (-> req :parameters :query)]
+    (htstatus/ok (-> (lock-now-for seconds) ->lock-state))))
+
+(defn delete-global-lock
+  [req]
+  (htstatus/ok (-> (unlock-now) ->lock-state)))
+
+(defn get-status [_]
   (jdbc/with-db-transaction [c db {:read-only? true}]
-    (htstatus/ok (list-active-locks db {:now (now)}))))
+    (htstatus/ok
+     {:locks (list-active-locks db {:now (now)})
+      :global (get-global-lock-state)})))
 
 (defn get-lock [req]
   (let [lock (lock req)]
@@ -92,10 +128,27 @@
             (htstatus/ok active-lock))
         (htstatus/not-found lock)))))
 
+(s/def ::seconds ::spec/pos-int)
+
 (def ring-handlers
   ["/lock"
-   ["" {:get get-list}]
-   ["/*resource" {:get get-lock :post post-lock :delete delete-lock}]])
+   [""
+    {:get {:summary "Retrieve list of active locks."
+           :tags ["Lock" "Global-Lock" "Query"]
+           :handler get-status}
+     :post {:summary "Set a global timeout-based lock"
+            :tags ["Lock" "Global-Lock" "Admin"]
+            :parameters {:query (s/keys :req-un [::seconds])}
+            :handler post-global-lock
+            :middleware [auth/wrap-admin-only]}
+     :delete {:summary "Reset/Remove a global timeout-based lock."
+              :tags ["Lock" "Global-Lock" "Admin"]
+              :handler delete-global-lock
+              :middleware [auth/wrap-admin-only]}}]
+   ["/*resource"
+    {:get get-lock
+     :post post-lock
+     :delete delete-lock}]])
 
 (comment
   (get-list {})

@@ -13,6 +13,18 @@
             [zdl-lex-server.solr.client :as solr-client])
   (:import [java.text Normalizer Normalizer$Form]))
 
+(defn wrap-global-lock
+  [handler]
+  (fn
+    ([request]
+     (if (lock/lockegd-now?)
+       (htstatus/locked (lock/get-global-lock-state))
+       (handler request)))
+    ([request respond raise]
+     (if (lock/locked-now?)
+       (respond (htstatus/locked (lock/get-global-lock-state)))
+       (handler request respond raise)))))
+
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
 
 (defn generate-id []
@@ -72,5 +84,8 @@
 
 (def ring-handlers
   ["/article"
-   ["" {:put create-article}]
-   ["/*path" {:get get-article :post post-article}]])
+   ["" {:put {:handler create-article
+              :middleware [wrap-global-lock]}}]
+   ["/*path" {:get get-article
+              :post {:handler post-article
+                     :middleware [wrap-global-lock]}}]])
