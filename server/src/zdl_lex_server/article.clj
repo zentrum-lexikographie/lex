@@ -50,13 +50,13 @@
         xml (new-article-xml xml-id form pos user)
         filename (form->filename form)
         id (str new-article-collection "/" filename "-" xml-id ".xml")
-        id->file (article/id->file git/articles-dir)]
+        id->file (article/id->file git/dir)]
     (spit (id->file id) xml :encoding "UTF-8")
     (htstatus/ok {:id id :form form :pos pos})))
 
 (defn get-article [{{:keys [path]} :path-params}]
   (lock/with-global-read-lock 
-    (let [id->file (article/id->file git/articles-dir)
+    (let [id->file (article/id->file git/dir)
           f (id->file path)]
       (if (fs/exists? f)
         (htstatus/ok f)
@@ -64,7 +64,7 @@
 
 (defn post-article [{{:keys [path]} :path-params :as req}]
   (lock/with-global-write-lock
-    (let [id->file (article/id->file git/articles-dir)
+    (let [id->file (article/id->file git/dir)
           f (id->file path)]
       (if (fs/exists? f)
         (do (spit f (htreq/body-string req) :encoding "UTF-8") (htstatus/ok f))

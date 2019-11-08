@@ -9,7 +9,7 @@
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-server.solr :as solr]))
 
-(def data-sources [#'lock/db #'git/git-dir #'git/articles-dir])
+(def data-sources [#'lock/db #'git/repo])
 
 (def services [#'http/server])
 

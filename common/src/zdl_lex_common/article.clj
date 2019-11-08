@@ -226,14 +226,14 @@
   (mapcat (articles dir) (article-xml-files dir)))
 
 (comment
-  (->> (articles-in "../data/git/articles")
+  (->> (articles-in "../data/git")
        (drop 100)
        (take 3))
-  (->> (mapcat :forms (articles-in "../data/git/articles"))
+  (->> (mapcat :forms (articles-in "../data/git"))
        (take 1000)
        (sort collator)
        (take 100))
-  (as-> (articles-in "../data/git/articles") $
+  (as-> (articles-in "../data/git") $
        #_(remove (comp (partial = "WDG") :source) $)
        (map #(select-keys % [:forms :pos :gender :id]) $)
        #_(filter (comp (partial < 1) count :gender) $)

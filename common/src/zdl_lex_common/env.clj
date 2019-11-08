@@ -6,6 +6,9 @@
             [clojure.string :as str]
             [me.raynes.fs :as fs]))
 
+(def ^:private host-name
+  (.. java.net.InetAddress getLocalHost getHostName))
+
 (def defaults
   {:log-level :info
    :repl-port 3001
@@ -13,6 +16,12 @@
    :http-log false
    :http-anon-user "nobody"
    :data-dir "../data"
+   :git-auth-user "lex"
+   :git-auth-password "lex"
+   :git-origin "git@lex.dwds.de:lex.git"
+   :git-branch (str "zdl-lex-server/" host-name)
+   :git-commit-user "ZDL-Lex"
+   :git-commit-email "noreply@lex.dwds.de"
    :server-base "https://lex.dwds.de/"
    :exist-base "http://spock.dwds.de:8080/exist"
    :mantis-base "http://odo.dwds.de/mantis"
@@ -42,13 +51,16 @@
 (s/def ::http-log boolean?)
 (s/def ::http-anon-user string?)
 
+(s/def ::git-auth-user string?)
+(s/def ::git-auth-password string?) 
+(s/def ::git-origin string?)
+(s/def ::git-branch string?)
+(s/def ::git-commit-user string?)
+(s/def ::git-commit-email string?)
+
 (s/def ::server-base string?)
 (s/def ::server-user string?)
 (s/def ::server-password string?)
-
-(s/def ::exist-base string?)
-(s/def ::exist-user string?)
-(s/def ::exist-password string?)
 
 (s/def ::mantis-base string?)
 (s/def ::mantis-project int?)
@@ -65,12 +77,13 @@
   (s/keys :req-un [::log-level ::repl-port
                    ::http-port ::http-log ::http-anon-user
                    ::data-dir
+                   ::git-auth-user ::git-auth-password
+                   ::git-origin ::git-branch
+                   ::git-commit-user ::git-commit-email
                    ::server-base
-                   ::exist-base
                    ::mantis-base ::mantis-project
                    ::solr-base ::solr-core]
           :opt-un [::server-user ::server-password
-                   ::exist-user ::exist-password
                    ::mantis-user ::mantis-password
                    ::corpora-user ::corpora-password]))
 

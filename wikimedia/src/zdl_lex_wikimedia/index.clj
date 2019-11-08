@@ -82,7 +82,7 @@
                       (partial group-by :collection)
                       (partial apply hash-set))}))
 
-  (->> (zdl-article/excerpts "../../lex-data/articles")
+  (->> (zdl-article/excerpts "../data/git")
        (remove (partial :pos))
        (count))
 
@@ -94,5 +94,5 @@
 
   (time
    (zdl->db
-    (zdl-article/excerpts "../../lex-data/articles")
+    (zdl-article/excerpts "../data/git")
     (db))))

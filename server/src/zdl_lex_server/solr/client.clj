@@ -60,7 +60,7 @@
                                       :content-type :xml)))))
 
 (defn- articles->add-xml [article-files]
-  (let [articles (article/articles git/articles-dir)
+  (let [articles (article/articles git/dir)
         doc (xml/new-document)
         el #(.createElement doc %)
         add (doto (el "add") (.setAttribute "commitWithin" "10000"))]
@@ -81,7 +81,7 @@
 (def add-articles (partial update-articles articles->add-xml))
 
 (defn- articles->delete-xml [article-files]
-  (let [file->id (article/file->id git/articles-dir)
+  (let [file->id (article/file->id git/dir)
         doc (xml/new-document)
         el #(.createElement doc %)
         del (doto (el "delete") (.setAttribute "commitWithin" "10000"))]
@@ -104,7 +104,7 @@
 
 (defn rebuild-index []
   (let [sync-start (System/currentTimeMillis)
-        articles (article/article-xml-files git/articles-dir)]
+        articles (article/article-xml-files git/dir)]
     (when-not (empty? (doall (add-articles articles)))
       (update-articles query->delete-xml [(format "time_l:[* TO %s}" sync-start)])
       (commit-optimize))

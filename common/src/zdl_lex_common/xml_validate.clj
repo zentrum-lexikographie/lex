@@ -130,7 +130,7 @@
   (let [validate (create-validator
                   (fs/file "../oxygen/framework/rng/DWDSWB.rng")
                   (fs/file "../oxygen/framework/rng/DWDSWB.sch.xsl"))
-        articles (article/article-xml-files "../data/git/articles")]
+        articles (article/article-xml-files "../data/git")]
     (time
      (->> articles
           (pmap validate)

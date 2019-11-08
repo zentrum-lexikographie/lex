@@ -5,7 +5,7 @@
             [clojure.java.io :as io]))
 
 (comment
-  (->> (io/file "../data/git/articles/Neuartikel/Abgastechnik-E_6900838.xml")
+  (->> (io/file "../data/git/Neuartikel/Abgastechnik-E_6900838.xml")
       (xml/->dom)
       (article/doc->articles)
       (map article/excerpt))

@@ -1,5 +1,6 @@
 (ns zdl-lex-server.git
-  (:require [clj-jgit.porcelain :as jgit]
+  (:require [clj-jgit.internal :as jgit-int]
+            [clj-jgit.porcelain :as jgit]
             [clj-jgit.querying :as jgit-query]
             [clojure.core.async :as a]
             [clojure.set :refer [union]]
@@ -15,28 +16,31 @@
             [zdl-lex-server.auth :as auth]
             [zdl-lex-server.lock :as lock]))
 
-(defstate ^{:on-reload :noop} git-dir 
-  :start (lock/with-global-write-lock
-           (let [git-dir (file (env :data-dir) "git")]
-             (when-not (fs/directory? (file git-dir ".git"))
-               (fs/mkdirs git-dir)
-               (jgit/git-init :dir git-dir)
-               (jgit/with-repo git-dir
-                 (fs/mkdirs (file git-dir "articles"))
-                 (jgit/git-add repo ".")
-                 (jgit/git-commit repo "Init")))
-             git-dir)))
+(def dir (file (env :data-dir) "git"))
 
-(defstate ^{:on-reload :noop} articles-dir
-  :start (fs/file git-dir "articles"))
+(def branch
+  (env :git-branch))
+
+(def ^:private credentials
+  {:login (env :git-auth-user) :pw (env :git-auth-password) :trust-all? true})
+
+(defstate ^{:on-reload :noop} repo
+  :start (lock/with-global-write-lock
+           (let [repo (if-not (fs/directory? (file dir ".git"))
+                        (jgit/with-credentials credentials
+                          (jgit/git-clone (env :git-origin) :dir (str dir)))
+                        (jgit/load-repo (str dir)))]
+             (when-not (= branch (jgit/git-branch-current repo))
+               (jgit/git-checkout repo :name branch :create-branch? true))
+             repo)))
 
 (defn- git-path
   "Path relative to the git directory."
   [^java.io.File f]
-  (str (.. (.toPath git-dir) (relativize (.toPath f)))))
+  (str (.. (.toPath dir) (relativize (.toPath f)))))
 
 (defn- classify-changes [changes]
-  (let [files (map (partial file git-dir) changes)
+  (let [files (map (partial file dir) changes)
         modified (filter fs/exists? files)
         deleted (remove fs/exists? files)]
     {:files
@@ -52,45 +56,50 @@
        (bus/publish! :git-changes))
   changes)
 
-(defn- git-status [repo]
+(defn- git-status []
   (->> (jgit/git-status repo) (vals) (apply union) (classify-changes)))
 
 (defn- git-changed? [changes]
   (not (every? empty? (-> changes :git vals))))
 
-(def branch
-  "The branch we operate on."
-  "zdl-lex-server")
-
-(defn commit []
-  (lock/with-global-write-lock
-    (jgit/with-repo git-dir
-      (when-not (= branch (jgit/git-branch-current repo))
-        (jgit/git-checkout repo :name branch :create-branch? true))
-      (let [changes (git-status repo)]
-        (when (git-changed? changes)
-          (when-let [modified (not-empty (get-in changes [:git :modified]))]
-            (jgit/git-add repo modified))
-          (when-let [deleted (not-empty (get-in changes [:git :deleted]))]
-            (jgit/git-rm repo deleted))
-          (jgit/git-commit repo "zdl-lex-server")
-          (jgit/git-push repo :refs branch)
-          (send-changes changes))
-        (changes :git)))))
-
 (def ^:private all-refs
   ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"])
 
+(defn git-fetch []
+  (jgit/with-credentials
+    (jgit/git-fetch repo :ref-specs all-refs)))
+
+(defn git-push []
+  (jgit/with-credentials credentials 
+    (jgit/git-push repo :refs branch)))
+
+(def committer
+  {:name (env :git-commit-user)
+   :email (env :git-commit-email)})
+
+(defn commit []
+  (lock/with-global-write-lock
+    (let [changes (git-status)]
+      (when (git-changed? changes)
+        (when-let [modified (not-empty (get-in changes [:git :modified]))]
+          (jgit/git-add repo modified))
+        (when-let [deleted (not-empty (get-in changes [:git :deleted]))]
+          (jgit/git-rm repo deleted))
+        (jgit/git-commit repo "zdl-lex-server" :committer committer)
+        (git-push)
+        (send-changes changes))
+      (changes :git))))
+
 (defn fast-forward [refs]
   (lock/with-global-write-lock
-    (jgit/with-repo git-dir
-      (when (->> repo git-status git-changed?)
-        (throw (IllegalStateException. "Uncommitted changes in server's working dir")))
-      (jgit/git-fetch repo :ref-specs all-refs)
+    (when (git-changed? (git-status))
+      (throw (IllegalStateException. "Uncommitted changes in server's working dir")))
+    (git-fetch)
+    (with-open [rev-walk (jgit-int/new-rev-walk repo)]
       (if-let [head (jgit-query/find-rev-commit repo rev-walk "HEAD")]
         (let [merge (jgit/git-merge repo refs :ff-mode :ff-only)]
           (if (.. merge (getMergeStatus) (isSuccessful))
-            (do (jgit/git-push repo)
+            (do (git-push)
                 (->> (jgit/git-log repo :since head)
                      (map :id) (reverse)
                      (mapcat (partial jgit-query/changed-files repo))

@@ -30,7 +30,7 @@
 ;; [A-Z] [IVX]
 (comment
   (roman "MMMCIX")
-  (for [article (->> (article/article-xml-files git/articles-dir) (take 100))
+  (for [article (->> (article/article-xml-files git/dir) (take 100))
         ref (->> article xml/->xdm article/references)
         :let [{:keys [sense lemma]} ref]
         :when sense]

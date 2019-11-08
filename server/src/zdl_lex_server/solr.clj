@@ -22,8 +22,8 @@
 (defn index-git-changes
   "Synchronizes modified articles with the Solr index"
   [{:keys [modified deleted]}]
-  (let [article-xml-file? (article/article-xml-file? git/articles-dir)
-        file->id (article/file->id git/articles-dir)
+  (let [article-xml-file? (article/article-xml-file? git/dir)
+        file->id (article/file->id git/dir)
         modified (filter article-xml-file? modified)
         deleted (filter article-xml-file? deleted)]
     (doseq [m modified]

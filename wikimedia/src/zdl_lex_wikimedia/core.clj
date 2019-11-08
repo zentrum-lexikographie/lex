@@ -223,7 +223,7 @@
          (csv/write-csv wkt-toc)))
 
   (with-open [zdl-toc (io/writer (io/file "zdl-toc.csv") :encoding "UTF-8")]
-    (->> (for [excerpt (article/excerpts "../../lex-data/articles")
+    (->> (for [excerpt (article/excerpts "../data/git")
                :let [{:keys [forms pos type source status gender]} excerpt]
                form forms]
            [form
