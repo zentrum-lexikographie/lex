@@ -114,6 +114,7 @@ Praeteritum:before                             { content: "3. Pers. Prät.: "; }
 Partizip_II:before                             { content: "Partizip II: "; }
 Numerus:before                                 { content: "Numerus: "; }
 Numeruspraeferenz:before                       { content: "Numeruspräferenz: "; }
+Kasuspraeferenz:before                         { content: "Kasuspräferenz: "; }
 reflexiv:before                                { content: "reflexiv"; }
 Komparativ:before                              { content: "Komparativ: "; }
 Superlativ:before                              { content: "Superlativ: "; }
