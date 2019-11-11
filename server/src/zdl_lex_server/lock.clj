@@ -41,7 +41,7 @@
 
 (defn locked-now?
   []
-  (< @global-timeout-lock (now)))
+  (> @global-timeout-lock (now)))
 
 (defn unlock-now
   []

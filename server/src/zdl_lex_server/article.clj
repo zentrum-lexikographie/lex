@@ -17,7 +17,7 @@
   [handler]
   (fn
     ([request]
-     (if (lock/lockegd-now?)
+     (if (lock/locked-now?)
        (htstatus/locked (lock/get-global-lock-state))
        (handler request)))
     ([request respond raise]

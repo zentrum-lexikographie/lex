@@ -146,8 +146,7 @@
           sources (sources article)
           editors (editors article)
           timestamps (timestamps article)
-          last-modified (some->> (vals timestamps) (apply concat)
-                                 not-empty (reduce max))
+          last-modified (some->> (vals timestamps) (apply concat) (sort) (last))
           weight (try (or (some-> last-modified ts/parse ts/days-since-epoch) 0)
                       (catch Throwable t (timbre/warn t) 0))]
       (->clean-map
