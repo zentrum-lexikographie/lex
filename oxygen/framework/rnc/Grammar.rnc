@@ -133,11 +133,10 @@ grammatische_Beschreibung = element Grammatik {
 	, element Kasuspraeferenz {
 		Frequenzbeschraenkung ?
 		, (
-			'mit Gen.' | 'im Gen.'
-			| 'mit Dat.' | 'im Dat.' | 'mit Dat. Pl.'
-			| 'mit Akk.' | 'im Akk.'
-			| 'mit Akk. eines artikellosen Nomens'
-			| 'im Nom.'
+			'mit Genitiv' | 'im Genitiv'
+			| 'mit Dativ' | 'im Dativ' | 'mit Dativ Plural'
+			| 'mit Akkusativ' | 'im Akkusativ'
+			| 'im Nominativ'
 		)
 	} *
 	, element Numeruspraeferenz {
