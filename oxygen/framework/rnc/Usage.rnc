@@ -3,7 +3,8 @@
 #############################
 
 Frequenzangaben = (
-	'besonders' # D99
+	'nur'
+	| 'besonders' # D99
 	| 'häufig'
 	| 'meist'
 	| 'oft' # D99, selten auch: öfter
