@@ -6,9 +6,9 @@ from git import Repo
 
 @fixture
 def git_dir():
-    p = (Path(__file__).parent) / '..' / '..' / 'data' / 'qa'
+    p = (Path(__file__).parent) / '..' / '..' / 'data' / 'git'
     return p.resolve()
 
 
-def test_red_2(git_dir):
-    assert 'zdl-lex-server' in Repo(git_dir.as_posix()).heads
+def test_git_dir(git_dir):
+    assert 'master' in Repo(git_dir.as_posix()).heads

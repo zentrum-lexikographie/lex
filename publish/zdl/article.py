@@ -65,15 +65,42 @@ _stripping_xml_parser = et.XMLParser(
     remove_pis=True,
 )
 
+
+def parser(strip=False):
+    return _stripping_xml_parser if strip else _xml_parser
+
+
 _article_els = xpath('//d:Artikel')
+
+
+def get_articles(document):
+    for article in _article_els(document):
+        yield (document, article)
+
+
+_xml_prolog = '<?xml version="1.0" encoding="UTF-8"?>'
+
+
+def fromstring(s, strip=False):
+    if s.startswith(_xml_prolog):
+        s = s[len(_xml_prolog):].lstrip()
+    return get_articles(et.fromstring(s, parser(strip)))
 
 
 def parse(p, strip=False):
     with p.open() as f:
-        parser = _stripping_xml_parser if strip else _xml_parser
-        document = et.parse(f, parser)
-        for article in _article_els(document):
-            yield (document, article)
+        return get_articles(et.parse(f, parser(strip)))
+
+
+def tostring(document):
+    return '\n'.join([
+        _xml_prolog,
+        et.tostring(document, encoding=str, xml_declaration=False)
+    ])
+
+
+def save(document, p):
+    p.write_text(tostring(document), encoding='utf-8')
 
 
 _surface_form_els = xpath('.//d:Formangabe/d:Schreibung')
@@ -131,8 +158,39 @@ def add_comment(element, comment, author, timestamp=None):
         raise NotImplementedError
 
 
-def save(document, p):
-    p.write_text('\n'.join([
-        '<?xml version="1.0" encoding="UTF-8"?>',
-        et.tostring(document, encoding=str, xml_declaration=False)
-    ]), encoding='utf-8')
+_template = '''
+<DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="ZDL" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="id" Zeitstempel="1970-01-01" Erstfassung="ZDL">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>[SCHREIBUNG]</Schreibung>
+            <Grammatik>
+              <Wortklasse>[WORTKLASSE]</Wortklasse>
+            </Grammatik>
+            <Diasystematik></Diasystematik>
+        </Formangabe>
+        <Verweise></Verweise>
+        <Diachronie class="invisible">
+            <Etymologie></Etymologie>
+            <Formgeschichte></Formgeschichte>
+            <Bedeutungsgeschichte></Bedeutungsgeschichte>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik></Syntagmatik>
+            <Diasystematik></Diasystematik>
+            <Verweise></Verweise>
+            <Definition Typ="Basis"></Definition>
+            <Kollokationen></Kollokationen>
+            <Verwendungsbeispiele></Verwendungsbeispiele>
+        </Lesart>
+    </Artikel>
+</DWDS>
+'''
+
+
+def create(source, id, timestamp=None):
+    timestamp = timestamp or datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+    document, article = next(fromstring(_template))
+    article.set('Quelle', source)
+    article.set('{http://www.w3.org/XML/1998/namespace}id', id)
+    article.set('Zeitstempel', timestamp.strftime('%Y-%m-%d'))
+    return document

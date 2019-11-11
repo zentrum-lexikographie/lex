@@ -51,8 +51,8 @@
       (Normalizer/normalize Normalizer$Form/NFD)
       (str/replace #"\p{InCombiningDiacriticalMarks}" "")
       (str/replace "ß" "ss")
-      (str/replace " " "-")
-      (str/replace #"[^\p{Alpha}\p{Digit}\-]" "_")))
+      (str/replace " " "_")
+      (str/replace #"[^\p{Alpha}\p{Digit}\-_]" "_")))
 
 (def ^:private new-article-collection "Neuartikel")
 
