@@ -1,0 +1,432 @@
+default namespace = 'http://www.dwds.de/ns/1.0'
+namespace sch = 'http://purl.oclc.org/dsdl/schematron'
+
+# spezielle Datentypen
+
+Lemmatoken = xsd:token {
+	# this pattern triggers an infinite loop in jing
+	# when there are "(" or ")" somewhere after whitespace
+	#pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
+	pattern = "08/15|&|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₂ ]*[!\?]?"
+}
+
+Lemmatoken_relaxed = xsd:token {
+    pattern = "08/15|&|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’ ]*([!\?]|\(r\))?"
+}
+
+formaler_Text = (
+	# we cannot have mixed content with typed data :(
+	#xsd:token {
+		# letters, numbers, currency signs, math. signs,
+		# selected punctuation signs
+		# # NOTE: EN-DASH, MINUS SIGN, FRACTION SLASH, RATIO ...
+		# # instead of (free standing) HYPHEN-MINUS, SOLIDUS, COLON!
+	#	pattern = '[\p{L}\p{N}\p{Sc}\p{Sm}\-–⁄\.,…!\?\(\)»«°′⏑&\s‍]*'
+	#}
+	text & semantischer_Verweis *
+)
+
+
+########################################
+# Lesarten #############################
+########################################
+
+Lesartangabe = element Lesart {
+	Metadaten.allgemein ?
+	, attribute Wortfeld { token } ? # Lexikonet concept
+	, attribute class { 'invisible' } ?
+	, attribute xml:id { Metadaten.Lesarten-ID } ? # TODO: obligatorisch machen
+	, Gliederungsmarke ?
+	# formale Eigenschaften
+	, Formbeschränkung *
+	, Syntagmatik
+	, Frequenzangabe ?
+	
+        # Semantik
+	, Diasystematik
+	, Bedeutungsebene *
+	, semantische_Verweise
+	, Definition +
+	, Kommentar ?
+	, Illustration *
+	, element Kollokationen {
+		Metadaten.allgemein ?
+		, Kollokation *
+	}
+	, element Verwendungsbeispiele {
+		Metadaten.allgemein ?
+		& Beleg *
+		& Kompetenzbeispiel *
+	}
+	, Lesartangabe *
+}
+
+########################################
+# Belege und Kollokationen #############
+########################################
+
+Belegtext = element Belegtext {
+	text
+	& Paraphrase *
+	& semantischer_Verweis *
+	& element Stichwort { Lemmatoken } +
+	& element Streichung { token } *
+	& element Loeschung { token } *
+	& element Autorenzusatz { token } *
+	& element Hervorhebung { token } * # nur für rein typografische Markierungen
+}
+
+Beleg = element Beleg {
+	Metadaten.allgemein ?
+	, attribute class { 
+		list {
+			(
+				'invisible'
+				| 'good_example'
+				| 'ungewöhnlich'
+				| 'sg_ungewöhnlich'
+				| 'pl_ungewöhnlich'
+				| 'genitiv_ungewöhnlich'
+				| 'genus_ungewöhnlich'
+				| 'schreibung_ungewöhnlich'
+			) + 
+		}
+	} ?
+	, Belegtext
+	, semantische_Verweise ?
+	, Fundstelle 
+	, element Kurztitel { token }? # TODO: move inside //Fundstelle
+	, Diasystematik ? # TODO: move before Fundstelle
+}
+
+Kompetenzbeispiel = element Kompetenzbeispiel {
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, Belegtext
+	, semantische_Verweise ?
+	, Diasystematik ?
+}
+
+Kollokation = element Kollokation {
+	Metadaten.allgemein ?
+	, attribute syntaktische_Relation { syntaktische_Relationen }
+	, attribute semantische_Relation { token } ?
+	, Belegtext
+	, semantische_Verweise ?
+	, Diasystematik ?
+	, Korpusabfrage *
+}
+
+# TODO: hier stecken sicherlich auch Kollokationen drin
+Konstruktionsmuster = element Konstruktionsmuster {
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, Belegtext
+	, Frequenzangabe ?
+	, semantische_Verweise ?
+	, Diasystematik ?
+	, Korpusabfrage *
+}
+
+Idiom = element Idiom {
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, Belegtext
+	, Frequenzangabe ?
+	, semantische_Verweise ?
+	, Diasystematik ?
+	, Korpusabfrage *
+}
+
+Phrasem = element Phrasem {
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, Belegtext
+	, Frequenzangabe ?
+	, semantische_Verweise ?
+	, Diasystematik ?
+	, Korpusabfrage *
+}
+
+Syntagmatik = element Syntagmatik {
+	Metadaten.allgemein ?
+	& Konstruktionsmuster *
+	& Idiom *
+	& Phrasem *
+}
+
+
+########################################
+# Verweise #############################
+########################################
+
+semantische_Verweise = element Verweise {
+	Metadaten.allgemein ?
+	, ( semantischer_Verweis | externer_Verweis ) *
+}
+
+morphologische_Verweise = element Verweise {
+    # Klassifizierung des morphologischen Prozesses
+	Metadaten.allgemein ?
+	, attribute Typ {
+	    'Simplex'
+	    | 'Derivation'
+	    | 'Diminutiv'
+	    | 'Komposition'
+	    | 'Konversion'
+	    | 'Kurzwortbildung'
+	    | 'lexikalisierte_Flexionsform'
+	    | 'Movierung'
+	    | 'neoklassische_Bildung'
+	    | 'Rückbildung'
+	    | 'Zusammenrückung'
+	} ? # TODO: obligatory
+	, element Verweis {
+		# (Klassifizierung der) morphologische(n) Konstituenten
+		attribute Typ {
+			'Grundform'
+			| 'Erstglied'
+			| 'Binnenglied'
+			| 'Letztglied'
+			| 'formal_verwandt'
+			| 'MWA-Konstituente'
+	    }
+	    , attribute class { 'invisible' } ?
+	    , Verweisziel
+    } *
+}
+
+semantischer_Verweis = element Verweis {
+	attribute Typ {
+		'MWA'
+		| 'Entsprechung' # semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse
+		| 'Antonym'
+		| 'Synonym'
+		| 'Hyponym'
+		| 'Hyperonym'
+		| 'Assoziation'
+		| 'zu'
+		| 'vgl'
+	}
+	, attribute class { 'invisible' } ?
+	, Verweisziel
+}
+
+externer_Verweis = element Verweis_extern {
+	attribute Typ { 'Enzyklopädie' | 'Etymologie' } # TODO: "Etymologie" bisher nicht verwendet …
+	, attribute class { 'invisible' } ?
+	, element Ziellemma { token }
+	, element Ziellesart { token } # remove?
+	, Fundstelle
+}
+
+Verweisziel = (
+	element Ziellemma {
+		Homographenziffer ?
+		, attribute Anzeigeform { Lemmatoken_relaxed } ?
+		, Lemmatoken
+	}
+	, element Ziellesart { token }
+)
+
+Fundstelle = element Fundstelle {
+	attribute Fundort {
+		'dwds'
+		| 'gbooks'
+		| 'online'
+		| 'Bibliothek'
+		| 'IDS-Archiv'
+		| 'WDG'
+	} ? # TODO: mandatory, as element
+	, attribute Sigle { xsd:token { pattern = '([A-Z]{9}|UNRESOLVED)' } } ?
+	, (
+		# xsd:token in lxml.etree doesn't allow \n
+		token # deprecated TODO: parse it!
+		| (
+			element Autor { token } ?
+			, element Herausgeber { token } ?
+			, element Zusatz { token } ?
+			, element Titel { token } ?
+			, element Stelle { token } ?
+			, element Datum { xsd:token { pattern = '(\d\d\.\d\d.)?\d{4}' } | empty } ?
+			, element URL {	xsd:anyURI | empty } ?
+			, element Aufrufdatum {	xsd:token { pattern = '(\d\d\.\d\d.)?\d{4}' } | empty } ? # kann man vlt. in Oxygen automatisch machen
+		)		
+	)
+}
+
+
+########################################
+# Bedeutungsangaben und Anmerkungen ####
+########################################
+
+Definition = element Definition {
+	Metadaten.allgemein ?
+	, attribute Typ { 
+		'Basis' 
+		| 'Meta' 
+		| 'Generalisierung' 
+		| 'Spezifizierung' 
+		| 'Enzyklopädie'
+	}
+	, formaler_Text
+}
+
+Paraphrase = element Paraphrase { formaler_Text }
+
+Illustration = element Illustration {
+	Metadaten.allgemein ?
+	, attribute Datei { xsd:anyURI }
+	, attribute Lizenz {
+		'CC0'
+		| 'CC BY 2.0'
+		| 'CC BY 2.0 DE'
+		| 'CC BY 2.5'
+		| 'CC BY 2.5 DE'
+		| 'CC BY 3.0'
+		| 'CC BY 3.0 DE'
+		| 'CC BY 4.0'
+		| 'CC BY-NC 2.0'
+		| 'CC BY-NC 2.0 DE'
+		| 'CC BY-NC 2.5'
+		| 'CC BY-NC 2.5 DE'
+		| 'CC BY-NC 3.0'
+		| 'CC BY-NC 3.0 DE'
+		| 'CC BY-NC 4.0'
+		| 'CC BY-NC-SA 2.0'
+		| 'CC BY-NC-SA 2.0 DE'
+		| 'CC BY-NC-SA 2.5'
+		| 'CC BY-NC-SA 2.5 DE'
+		| 'CC BY-NC-SA 3.0'
+		| 'CC BY-NC-SA 3.0 DE'
+		| 'CC BY-NC-SA 4.0'
+		| 'CC BY-SA 1.0'
+		| 'CC BY-SA 2.0'
+		| 'CC BY-SA 2.0 DE'
+		| 'CC BY-SA 2.5'
+		| 'CC BY-SA 2.5 DE'
+		| 'CC BY-SA 3.0'
+		| 'CC BY-SA 3.0 DE'
+		| 'CC BY-SA 4.0'
+		| 'GNU FDL'
+		| 'Vereinfachte Pixabay Lizenz'
+	}
+	, element Bildunterschrift { token }
+	, Fundstelle
+} ?
+
+########################################
+# Lemmaform und Flexionsparadigma ######
+########################################
+
+Rechtschreibstatus = attribute Typ { 'AR_G' | 'NR_G' | 'U' | 'U_CH' | 'U_AT' | 'U_U' | 'U_NR' }
+
+Formangabe = element Formangabe {
+	Metadaten.allgemein ?
+	, attribute Klasse { # TODO: aus @Regel ableitbar?
+		list {
+			(
+				# Vokale/Diphtonge
+				'a/aa' | 'ai/ä' | 'à/a' | 'au/o' | 'aw/au'
+				| 'e/ä' | 'ée/ee' | 'é/ee' | 'eu/äu' | 'eu/ö'
+				| 'i/j'
+				| 'o/oo' | 'ou/u'
+				| 'u/ü'
+				# Konsonanten
+				| 'b/p'
+				| 'c/k' | 'c/s' | 'c/tz' | 'cc/kk' | 'c/ck' | 'c/z' | 'c/ss'
+				| 'ch/kh' | 'ch/sch'
+				| 'd/t'
+				| 'ff/f'
+				| 'gh/g' | 'gn/n'
+				| 'j/y'
+				| 'kk/ck' | 'kh/k'
+				| 'l/ll'
+				| 'm/mm'
+				| 'n/nn'
+				| 'p/pp' | 'ph/f'
+				| 'qu/k'
+				| 'rh/r'
+				| 's/ss' | 'ß/ss' | 's/z'
+				| 'sch/tsch' | 'sh/sch'
+				| 'th/t' | 't/tt' | 't/z'
+				| 'z/tz' | 'z/s' | 'zz/s'
+				| 'v/w'
+				| 'y/i' | 'y/j'
+				# Sonderfälle
+				| 'oxyd/oxid'
+				| 'tia/zia'
+				| 'tie/zie'
+				| 'tiö/ziö'
+				| 'Sinfonie/Symphonie'
+				# abstrakte Regeln
+				| 'G/Z'
+				| 'G/K'
+				| 'FM' # fremdsprachliches Material
+				| 'Bindestrich'
+				| 'Stammprinzip'
+				| 'Wortangleichung'
+				| 'Schwa-Tilgung'
+				| 'Fuge'
+			) + 
+		} 
+	} ?
+	, attribute Regel { 
+		list { xsd:token {
+			pattern = '\d+(_\(\*?E?\d(\.\d)*\))?|Einzelfall|Stammprinzip'
+		} + } 
+	} ?
+	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }
+	, Schreibung +
+	, Aussprache * # TODO oblig.?
+	, Korpusabfrage *
+	, grammatische_Beschreibung
+	, Frequenzangabe ?
+	, Diasystematik
+	, Kommentar ?
+}
+
+Formbeschränkung = element Formangabe {
+	Metadaten.allgemein ?
+	, Schreibung *
+	, Aussprache *
+	, freie_grammatische_Beschreibung ?
+	, Frequenzangabe ?
+	, Diasystematik
+}
+
+Schreibung = element Schreibung {
+	Metadaten.allgemein ?
+	, Rechtschreibstatus ?
+	, attribute Trennung { list { Lemmatoken + } } ?
+	, Homographenziffer ?
+	, Lemmatoken
+}
+
+Korpusabfrage = element Korpusabfrage { text }
+
+Aussprache = element Aussprache {
+	# relativer Pfad zur Aussprachedatei (ohne Dateinamenerweiterung)
+	# Format: {Paketverzeichnis}/{Stimulus}
+	# Beispiel: 026/der_Snob
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, attribute IPA { list { xsd:token + } } ?
+	, ( empty | xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' } )
+}
+
+########################################
+# Diasystematik ########################
+########################################
+
+Diasystematik = element Diasystematik {
+	Metadaten.allgemein ?
+	& Bedeutungsebene *
+	& Stilebene *
+	& Stilfaerbung *
+	& Gebrauchszeitraum *
+	& Sprachraum *
+	& Gruppensprache *
+	& Fachgebiet *
+}
+
