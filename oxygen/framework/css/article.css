@@ -303,9 +303,9 @@ erwaehntes_Zeichen:after  {
 	content:attr(Sprache);
 }
 
-Diachronie > * > Paraphrase, Kommentar > Paraphrase  { text-decoration: underline; }
-Diachronie > * > Paraphrase:before, Kommentar > Paraphrase:before { content: "‘"; text-decoration: none; }
-Diachronie > * > Paraphrase:after, Kommentar > Paraphrase:after { content: "’"; text-decoration: none; }
+Paraphrase  { text-decoration: underline; }
+Paraphrase:before { content: "‘"; text-decoration: none; }
+Paraphrase:after { content: "’"; text-decoration: none; }
 
 /* Quelle, Zeitstempel und Status */
 
