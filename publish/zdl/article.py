@@ -1,7 +1,7 @@
+import baseconv
 import datetime, pytz
 import lxml.etree as et
-
-import click
+import uuid
 
 _namespaces = {'d': 'http://www.dwds.de/ns/1.0',
                'tei': 'http://www.tei-c.org/ns/1.0',
@@ -159,6 +159,16 @@ def add_comment(element, comment, author, timestamp=None):
         raise NotImplementedError
 
 
+# https://gist.github.com/gnrfan/7f6b7803109348e30c8f
+def _base62uuid():
+    converter = baseconv.BaseConverter(
+        '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    )
+    uuid4_as_hex = str(uuid.uuid4()).replace('-', '')
+    uuid4_as_int = int(uuid4_as_hex, 16)
+    return converter.encode(uuid4_as_int)
+
+
 _template = '''
 <DWDS xmlns="http://www.dwds.de/ns/1.0">
     <Artikel Quelle="ZDL" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="id" Zeitstempel="1970-01-01" Erstfassung="ZDL">
@@ -188,8 +198,14 @@ _template = '''
 '''
 
 
-def create(form, pos, source, author, id, timestamp=None):
-    timestamp = timestamp or datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+def _now():
+    return datetime.datetime.now(pytz.timezone('Europe/Berlin'))
+
+
+def create(form, pos, source='ZDL', author='ZDL', timestamp=None, id=None):
+    timestamp = timestamp or _now()
+    id = id or ('U_' + _base62uuid())
+
     document, article = next(fromstring(_template))
     article.set('Quelle', source)
     article.set('Autor', author)
@@ -200,4 +216,5 @@ def create(form, pos, source, author, id, timestamp=None):
         for gr_el in sf_el.itersiblings(str(_grammar_qn)):
             for pos_el in _pos_els(gr_el):
                 pos_el.text = pos
+
     return document
