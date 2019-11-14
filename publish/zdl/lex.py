@@ -65,14 +65,14 @@ class Server:
         ))
 
 
-def strip_accents(s):
+def _strip_accents(s):
     return ''.join(c for c in unicodedata.normalize('NFD', s)
                    if unicodedata.category(c) != 'Mn')
 
 
 def get_filename(form):
     form = form.replace('ß', 'ss')
-    form = strip_accents(form)
+    form = _strip_accents(form)
     form = form.replace(' ', '_')
     form = re.sub(r'[^\w\d\-_]', '_', form)
     return form
