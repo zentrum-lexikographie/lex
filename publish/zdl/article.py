@@ -1,6 +1,7 @@
 import datetime, pytz
 import lxml.etree as et
 
+import click
 
 _namespaces = {'d': 'http://www.dwds.de/ns/1.0',
                'tei': 'http://www.tei-c.org/ns/1.0',
@@ -187,10 +188,16 @@ _template = '''
 '''
 
 
-def create(source, id, timestamp=None):
+def create(form, pos, source, author, id, timestamp=None):
     timestamp = timestamp or datetime.datetime.now(pytz.timezone('Europe/Berlin'))
     document, article = next(fromstring(_template))
     article.set('Quelle', source)
+    article.set('Autor', author)
     article.set('{http://www.w3.org/XML/1998/namespace}id', id)
     article.set('Zeitstempel', timestamp.strftime('%Y-%m-%d'))
+    for sf_el in _surface_form_els(article):
+        sf_el.text = form
+        for gr_el in sf_el.itersiblings(str(_grammar_qn)):
+            for pos_el in _pos_els(gr_el):
+                pos_el.text = pos
     return document
