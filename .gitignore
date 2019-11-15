@@ -18,6 +18,7 @@ zdl-lex-config.edn
 
 .python-version
 *.pyc
+*.egg-info
 
 .*.swp
 
