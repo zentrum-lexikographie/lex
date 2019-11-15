@@ -120,12 +120,12 @@ def read_articles(articles):
 
 def import_articles(records, db_url=None, echo=False):
     db_url = db_url or 'mysql+pymysql://dwdswb:dwdswb@localhost/dwdswb'
-    engine = create_engine(db_url, echo=echo)
+    db = create_engine(db_url, echo=echo)
     for stmt in _ddl_statements:
-        engine.execute(stmt)
+        db.execute(stmt)
 
-    metadata = MetaData()
-    metadata.reflect(bind=engine)
+    schema = MetaData()
+    schema.reflect(bind=db)
 
     buckets = collections.defaultdict(list)
     bucket_sizes = {'article': 2000, 'lemma': 10000,
@@ -135,12 +135,12 @@ def import_articles(records, db_url=None, echo=False):
         bucket = buckets[record_type]
         bucket.append(record)
         if len(bucket) >= bucket_sizes[record_type]:
-            engine.execute(metadata.tables[record_type].insert(), bucket)
+            db.execute(schema.tables[record_type].insert(), bucket)
             bucket.clear()
 
     for (record_type, bucket) in buckets.items():
         if len(bucket) > 0:
-            engine.execute(metadata.tables[record_type].insert(), bucket)
+            db.execute(schema.tables[record_type].insert(), bucket)
 
 
 @click.command()
