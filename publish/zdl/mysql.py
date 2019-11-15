@@ -1,8 +1,6 @@
 import collections
 import datetime
-from pathlib import Path
 
-import click
 from sqlalchemy import create_engine, MetaData
 
 import zdl.article
@@ -143,20 +141,5 @@ def import_articles(records, db_url=None, echo=False):
             db.execute(schema.tables[record_type].insert(), bucket)
 
 
-@click.command()
-@click.argument('articles',
-                required=True,
-                type=click.Path(exists=True, file_okay=False, resolve_path=True))
-def main(articles):
-    num_articles = sum([1 for f in zdl.article.files(Path(articles))])
-    article_files = click.progressbar(
-        zdl.article.files(Path(articles)),
-        length=num_articles,
-        width=0, label='Red-f -> MySQL'
-    )
-    with article_files as articles:
-        import_articles(read_articles(articles))
-
-
-if __name__ == '__main__':
-    main()
+def wb2db(articles):
+    import_articles(read_articles(articles))

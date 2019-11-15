@@ -1,7 +1,4 @@
 from multiprocessing import Pool
-from pathlib import Path
-
-import click
 
 import zdl.article
 import zdl.sanity
@@ -39,11 +36,7 @@ def annotate_file(p):
     return p
 
 
-@click.command()
-@click.argument('articles',
-                required=True,
-                type=click.Path(exists=True, file_okay=False, resolve_path=True))
-def main(articles):
+def perform(articles):
     '''
     This script does the automatic steps for the redaction process step 2
     of the DWDS newly edited entries. This comprises all formal checks and
@@ -52,17 +45,6 @@ def main(articles):
     See http://odo.dwds.de/twiki/bin/view/Lexikographen/RedaktionsProzess
     for detailed information on the complete redaction process.
     '''
-    num_articles = sum([1 for f in zdl.article.files(Path(articles))])
-    article_files = click.progressbar(
-        zdl.article.files(Path(articles)),
-        length=num_articles,
-        width=0, label='Red-1 -> Red-2'
-    )
-    with article_files as articles:
-        with Pool() as pool:
-            for r in pool.imap_unordered(annotate_file, articles):
-                pass
-
-
-if __name__ == '__main__':
-    main()
+    with Pool() as pool:
+        for r in pool.imap_unordered(annotate_file, articles):
+            pass
