@@ -113,23 +113,42 @@ _xml_id_qn = qname('xml', 'id')
 
 def metadata(article):
     xml_id = article.get(str(_xml_id_qn))
-    typ = article.get('Typ', '')
+    typ = article.get('Typ') or article.get('type', '')
     author = article.get('Autor', '')
     status = article.get('Status', '')
     source = article.get('Quelle', '')
+    timestamp = article.get('Zeitstempel', '1000-01-01')
+    recommended = article.get('Empfehlung') == 'ja'
     for sf in _surface_form_els(article):
         name = text(sf)
         for gr in sf.itersiblings(str(_grammar_qn)):
             yield {'name': name,
-                   'hidx': sf.get('hidx', ''),
+                   'hidx': sf.get('hidx'),
+                   'htype': sf.get('Typ', 'AR_G'),
                    'pos': ''.join(map(text, _pos_els(gr))),
                    'gen': ''.join(map(text, _genus_els(gr))),
                    'type': typ,
                    'author': author,
                    'status': status,
                    'source': source,
+                   'timestamp': timestamp,
+                   'recommended': recommended,
                    'id': xml_id}
             break
+
+
+_relation_els = xpath('./d:Verweise/d:Verweis')
+_target_lemma_els = xpath('./d:Ziellemma')
+
+
+def relations(article):
+    for rel in _relation_els(article):
+        lemma, = _target_lemma_els(rel)
+        yield (
+            rel.get('Typ'),
+            text(lemma),
+            lemma.get('hidx')
+        )
 
 
 def has_status(status, article):
@@ -157,6 +176,17 @@ def add_comment(element, comment, author, timestamp=None):
         parent.insert(index + 2, end)
     else:
         raise NotImplementedError
+
+
+_invisible_els = xpath('.//*[@class="invisible"]')
+_orig_text_attrs = xpath('.//*[@Originaltext]')
+
+
+def prune(article):
+    for el in _invisible_els(article):
+        el.getparent().remove(el)
+    for el in _orig_text_attrs(article):
+        el.attrib.pop('Originaltext')
 
 
 # https://gist.github.com/gnrfan/7f6b7803109348e30c8f

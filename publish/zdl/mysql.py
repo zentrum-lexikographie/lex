@@ -1,6 +1,11 @@
+import collections
 import datetime
+from pathlib import Path
 
+import click
 from sqlalchemy import create_engine, MetaData
+
+import zdl.article
 
 _version = datetime.datetime.now().strftime('%Y-%m-%d')
 _ddl_statements = [
@@ -46,14 +51,112 @@ _ddl_statements = [
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8'''
 ]
 
-_engine = create_engine(
-    'mysql+pymysql://dwdswb:dwdswb@localhost/dwdswb',
-    echo=False
-)
 
-for stmt in _ddl_statements:
-    _engine.execute(stmt)
+def read_articles(articles):
+    article_count = 0
+    lemma_count = 0
+    lemma_index = collections.defaultdict(list)
+    relation_index = collections.defaultdict(list)
 
-metadata = MetaData()
-metadata.reflect(bind=_engine)
-print(metadata.tables.keys())
+    for article_file in articles:
+        for document, article in zdl.article.parse(article_file, strip=True):
+            zdl.article.prune(article)
+            article_id = None
+            for md in zdl.article.metadata(article):
+                if article_id is None:
+                    article_count += 1
+                    article_id = article_count
+                    xml = ''
+                    if md['status'] in ('Red-f', None):
+                        xml = zdl.article.tostring(article)
+                    yield ('article', {
+                        'id': article_id,
+                        'type': md['type'],
+                        'status': md['status'],
+                        'source': md['source'],
+                        'recommendation': md['recommended'],
+                        'date': md['timestamp'] or '1000-01-01',
+                        'xml': xml
+                    })
+                    relations = zdl.article.relations(article)
+                    for rel_type, headword, hidx in relations:
+                        headword = headword.replace('’', '\'')
+                        hidx = int(hidx) if hidx else None
+                        relation_index[
+                            (article_id, rel_type)
+                        ].append(
+                            (headword, hidx)
+                        )
+                lemma = md['name']
+                hidx = int(md['hidx']) if md['hidx'] else None
+
+                headword_sig = (lemma, hidx)
+                if headword_sig not in lemma_index:
+                    lemma_index[headword_sig].append(article_id)
+                    lemma_count += 1
+                    lemma_id = lemma_count
+                    yield ('lemma', {
+                        'id': lemma_id,
+                        'lemma': lemma,
+                        'hidx': hidx,
+                        'type': md['htype'],
+                        'article_id': article_id
+                    })
+                    for token in lemma.split():
+                        yield ('token', {
+                            'token': token,
+                            'lemma_id': lemma_id
+                        })
+    for (article_1, rel_type), targets in relation_index.items():
+        for target in targets:
+            article_2 = lemma_index[target]
+            if article_2:
+                yield ('relation', {
+                    'article1': article_1,
+                    'article2': article_2[0],
+                    'type': rel_type
+                })
+
+
+def import_articles(records, db_url=None, echo=False):
+    db_url = db_url or 'mysql+pymysql://dwdswb:dwdswb@localhost/dwdswb'
+    engine = create_engine(db_url, echo=echo)
+    for stmt in _ddl_statements:
+        engine.execute(stmt)
+
+    metadata = MetaData()
+    metadata.reflect(bind=engine)
+
+    buckets = collections.defaultdict(list)
+    bucket_sizes = {'article': 2000, 'lemma': 10000,
+                    'relation': 50000, 'token': 50000}
+
+    for (record_type, record) in records:
+        bucket = buckets[record_type]
+        bucket.append(record)
+        if len(bucket) >= bucket_sizes[record_type]:
+            engine.execute(metadata.tables[record_type].insert(), bucket)
+            bucket.clear()
+
+    for (record_type, bucket) in buckets.items():
+        if len(bucket) > 0:
+            engine.execute(metadata.tables[record_type].insert(), bucket)
+
+
+@click.command()
+@click.argument('articles',
+                required=True,
+                type=click.Path(exists=True, file_okay=False, resolve_path=True))
+def main(articles):
+    num_articles = sum([1 for f in zdl.article.files(Path(articles))])
+    article_files = click.progressbar(
+        zdl.article.files(Path(articles)),
+        length=num_articles,
+        width=0, label='Red-f -> MySQL'
+    )
+    with article_files as articles:
+        import_articles(read_articles(articles))
+
+
+if __name__ == '__main__':
+    main()
