@@ -58,6 +58,8 @@ def read_articles(articles):
 
     for article_file in articles:
         for document, article in zdl.article.parse(article_file, strip=True):
+            if not zdl.article.has_status('Red-f', article):
+                continue
             zdl.article.prune(article)
             article_id = None
             for md in zdl.article.metadata(article):
