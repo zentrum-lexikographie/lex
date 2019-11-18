@@ -7,6 +7,12 @@ include 'Diachrony.rnc'
 include 'Grammar.rnc'
 include 'Usage.rnc'
 
+[
+  sch:ns [
+    prefix = "d"
+    uri = "http://www.dwds.de/ns/1.0"
+  ]
+]
 start = element DWDS {
 	element Artikel {
 		attribute xml:id { Metadaten.Artikel-ID }
