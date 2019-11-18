@@ -104,7 +104,7 @@ def save(document, p):
     p.write_text(tostring(document), encoding='utf-8')
 
 
-_surface_form_els = xpath('.//d:Formangabe/d:Schreibung')
+_surface_form_els = xpath('./d:Formangabe/d:Schreibung')
 _grammar_qn = qname('d', 'Grammatik')
 _pos_els = xpath('./d:Wortklasse')
 _genus_els = xpath('./d:Genus')
