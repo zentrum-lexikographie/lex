@@ -85,7 +85,7 @@ def read_articles(articles):
                         ].append(
                             (headword, hidx)
                         )
-                lemma = md['name']
+                lemma = md['name'].replace('’', '\'')
                 hidx = int(md['hidx']) if md['hidx'] else None
 
                 headword_sig = (lemma, hidx)
