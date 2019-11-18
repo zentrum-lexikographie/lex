@@ -69,7 +69,7 @@
 
 (defn- lock [{{:keys [resource]} :path-params
               {:keys [ttl token] :or {ttl "60"}} :params
-              owner :auth/user
+              owner ::auth/user
               owner_ip :remote-addr
               :as req}]
   (when-not (not-empty resource)
