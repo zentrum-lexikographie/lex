@@ -30,6 +30,7 @@ ansible/.vagrant
 ansible/*.retry
 ansible/files/api/
 ansible/roles/*.*
+docker/*/*.jar
 
 client/tmp
 

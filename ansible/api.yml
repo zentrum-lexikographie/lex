@@ -70,7 +70,7 @@
 
     - name: Copy API
       copy:
-        src: "api/org.zdl.lex.server-standalone.jar"
+        src: "../docker/server/org.zdl.lex.server.jar"
         dest: /home/lex/zdl-lex-server.jar
         owner: lex
         group: www-data

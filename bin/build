@@ -2,19 +2,14 @@
 
 import logging
 from pathlib import Path
-import shutil
+import subprocess
+
+import clean
 import clj
 
 project_dir = (Path(__file__) / '..' / '..').resolve()
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
-
-
-def clean_classes(name):
-    classes_dir = project_dir / name / 'classes'
-    if classes_dir.is_dir():
-        shutil.rmtree(classes_dir.as_posix())
-    classes_dir.mkdir()
 
 
 def build_module(name, aliases):
@@ -24,14 +19,28 @@ def build_module(name, aliases):
             check=True)
 
 
+def build_docker(name, tag):
+    logging.info({'docker': name, 'tag': tag})
+    subprocess.run(
+        ['docker', 'build', '.', '-t', tag],
+        cwd=(project_dir / 'docker' / name).as_posix(),
+        check=True
+    )
+
+
+clean.all_classes()
+
 # Git tags --> version.edn
 build_module('build', ['version'])
 
 # RNC --> RNG/Schematron
 build_module('build', ['schema'])
 
-# Plugin for OxygenXML Editor and Server component
-for module in ['client', 'server']:
-    clean_classes(module)
+for module in ['client', 'server', 'validator']:
     build_module(module, ['dev', 'prod', 'compile'])
     build_module(module, ['dev', 'prod', 'package'])
+
+for module in ['server', 'validator']:
+    build_docker(module, 'zdl-lex-' + module)
+
+clean.all_classes()

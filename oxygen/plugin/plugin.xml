@@ -10,7 +10,7 @@
     classLoaderType="preferReferencedResources">
 
  <runtime>
-   <library name="lib/org.zdl.lex.client-standalone.jar"/>
+   <library name="lib/org.zdl.lex.client.jar"/>
  </runtime>
 
  <extension type="WorkspaceAccess" class="de.zdl.oxygen.Extension"/>
