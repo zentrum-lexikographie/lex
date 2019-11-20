@@ -1,4 +1,5 @@
 (ns zdl-lex-validator.core
+  "XML validator CLI"
   (:require [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [clojure.string :as str]
