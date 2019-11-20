@@ -15,9 +15,7 @@
    :http-port 3000
    :http-log false
    :http-anon-user "nobody"
-   :data-dir "../data"
-   :git-auth-user "lex"
-   :git-auth-password "lex"
+   :data-dir "zdl-lex-data"
    :git-origin "git@lex.dwds.de:lex.git"
    :git-branch (str "zdl-lex-server/" host-name)
    :git-commit-user "ZDL-Lex"
@@ -38,12 +36,14 @@
     :decode/string #(-> %2 name str/lower-case keyword)
     :encode/string #(-> %2 name str/upper-case)}))
 
-(s/def ::data-dir
+(def dir?-spec
   (st/spec
    {:spec some?
     :type :file
     :decode/string #(-> %2 fs/file fs/absolute fs/normalized)
     :encode/string #(.. %2 (getAbsolutePath))}))
+
+(s/def ::data-dir dir?-spec)
 
 (s/def ::repl-port int?)
 
@@ -52,7 +52,9 @@
 (s/def ::http-anon-user string?)
 
 (s/def ::git-auth-user string?)
-(s/def ::git-auth-password string?) 
+(s/def ::git-auth-password string?)
+(s/def ::git-auth-key-name string?)
+(s/def ::git-auth-key-dir dir?-spec)
 (s/def ::git-origin string?)
 (s/def ::git-branch string?)
 (s/def ::git-commit-user string?)
@@ -77,13 +79,14 @@
   (s/keys :req-un [::log-level ::repl-port
                    ::http-port ::http-log ::http-anon-user
                    ::data-dir
-                   ::git-auth-user ::git-auth-password
                    ::git-origin ::git-branch
                    ::git-commit-user ::git-commit-email
                    ::server-base
                    ::mantis-base ::mantis-project
                    ::solr-base ::solr-core]
-          :opt-un [::server-user ::server-password
+          :opt-un [::git-auth-user ::git-auth-password
+                   ::git-auth-key-name ::git-auth-key-dir
+                   ::server-user ::server-password
                    ::mantis-user ::mantis-password
                    ::corpora-user ::corpora-password]))
 
@@ -107,6 +110,7 @@
 
 (let [coerce #(st/coerce ::env % st/string-transformer)
       normalize-key #(-> % name (str/replace #"^zdl-lex-" "") keyword)
+      normalize-entry #(vector (-> % .getKey normalize-key) (.getValue %))
       config (->> (conj (fs/parents ".") (fs/file "."))
                   (map #(fs/file % "zdl-lex-config.edn"))
                   (filter fs/file?)
@@ -114,7 +118,7 @@
                   (apply merge))]
   (def env
     (->>
-     (map #(vector (-> % first normalize-key) (second %)) (merge config environ/env))
+     (map normalize-entry (mapcat seq [config environ/env]))
      (into defaults)
      (coerce) (s/assert* ::env)
      (into (sorted-map)))))

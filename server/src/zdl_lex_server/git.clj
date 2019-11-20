@@ -12,27 +12,65 @@
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [file]]
+            [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-lex-server.auth :as auth]
-            [zdl-lex-server.lock :as lock]))
+            [zdl-lex-server.lock :as lock]
+            [zdl-lex-common.log :as log]))
+
+(def ^:private credentials
+  (->clean-map
+   {:login (env :git-auth-user)
+    :pw (env :git-auth-password)
+    :name (env :git-auth-key-name)
+    :key-dir (env :git-auth-key-dir)
+    :trust-all? true}))
+
+(defmacro with-auth
+  [& body]
+  `(jgit/with-identity credentials
+     (jgit/with-credentials credentials
+       ~@body)))
 
 (def dir (file (env :data-dir) "git"))
 
 (def branch
   (env :git-branch))
 
-(def ^:private credentials
-  {:login (env :git-auth-user) :pw (env :git-auth-password) :trust-all? true})
+(def ^:private all-refs
+  ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"])
+
+(defn git-load
+  []
+  (timbre/info {:git {:load (str dir)}})
+  (jgit/load-repo (str dir)))
+
+(defn git-clone
+  []
+  (let [origin (env :git-origin)]
+    (timbre/info {:git {:clone origin}})
+    (with-auth
+      (jgit/git-clone origin :branch "HEAD" :dir (str dir)))))
+
+(defn git-checkout
+  [repo]
+  (when-not (= branch (jgit/git-branch-current repo))
+    (timbre/info {:git {:checkout branch}})
+    (jgit/git-checkout repo :name branch :create-branch? true)))
 
 (defstate ^{:on-reload :noop} repo
   :start (lock/with-global-write-lock
-           (let [repo (if-not (fs/directory? (file dir ".git"))
-                        (jgit/with-credentials credentials
-                          (jgit/git-clone (env :git-origin) :dir (str dir)))
-                        (jgit/load-repo (str dir)))]
-             (when-not (= branch (jgit/git-branch-current repo))
-               (jgit/git-checkout repo :name branch :create-branch? true))
+           (let [repo (if-not (fs/directory? (file dir ".git")) (git-clone) (git-load))]
+             (git-checkout repo)
+             (timbre/info {:git {:repo (str dir) :branch branch}})
              repo)))
+
+(defn git-fetch []
+  (with-auth
+    (jgit/git-fetch repo :ref-specs all-refs)))
+
+(defn git-push []
+  (with-auth
+    (jgit/git-push repo :refs branch)))
 
 (defn- git-path
   "Path relative to the git directory."
@@ -61,17 +99,6 @@
 
 (defn- git-changed? [changes]
   (not (every? empty? (-> changes :git vals))))
-
-(def ^:private all-refs
-  ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"])
-
-(defn git-fetch []
-  (jgit/with-credentials
-    (jgit/git-fetch repo :ref-specs all-refs)))
-
-(defn git-push []
-  (jgit/with-credentials credentials 
-    (jgit/git-push repo :refs branch)))
 
 (def committer
   {:name (env :git-commit-user)
