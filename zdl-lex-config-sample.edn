@@ -1,4 +1,5 @@
-{:exist-base "https://lex.dwds.de/exist"
+{:data-dir "../data"
+ :exist-base "https://lex.dwds.de/exist"
  :exist-user "herold"
  :exist-password "secret"
  :mantis-user "dwds"
