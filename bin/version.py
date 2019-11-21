@@ -27,6 +27,8 @@ def current_version():
 
 
 def set_next_version():
+    if repo.is_dirty():
+        raise Exception("Git repository/dir is dirty.")
     next_version = datetime.datetime.now().strftime('%Y%m.%d.%H')
     next_tag = 'v' + next_version
     if next_version in versions():
