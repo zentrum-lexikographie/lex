@@ -6,10 +6,14 @@ import subprocess
 
 import clean
 import clj
+import version
 
 project_dir = (Path(__file__) / '..' / '..').resolve()
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+
+current_version = version.current_version()
+logging.info({'version': current_version})
 
 
 def build_module(name, aliases):
@@ -20,9 +24,9 @@ def build_module(name, aliases):
 
 
 def build_docker(name, tag):
-    logging.info({'docker': name, 'tag': tag})
+    logging.info({'docker': name, 'tag': tag, 'version': current_version})
     subprocess.run(
-        ['docker', 'build', '.', '-t', tag],
+        ['docker', 'build', '.', '-t', ':'.join((tag, current_version))],
         cwd=(project_dir / 'docker' / name).as_posix(),
         check=True
     )
@@ -41,6 +45,6 @@ for module in ['client', 'server', 'validator']:
     build_module(module, ['dev', 'prod', 'package'])
 
 for module in ['server', 'validator']:
-    build_docker(module, 'zdl-lex-' + module)
+    build_docker(module, 'vm.local/zdl-lex/' + module)
 
 clean.all_classes()
