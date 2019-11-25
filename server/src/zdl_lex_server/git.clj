@@ -54,8 +54,10 @@
 (defn git-checkout
   [repo]
   (when-not (= branch (jgit/git-branch-current repo))
+    (when-not (some #{branch} (jgit/git-branch-list repo))
+      (jgit/git-branch-create repo branch))
     (timbre/info {:git {:checkout branch}})
-    (jgit/git-checkout repo :name branch :create-branch? true)))
+    (jgit/git-checkout repo :name branch)))
 
 (defstate ^{:on-reload :noop} repo
   :start (lock/with-global-write-lock
