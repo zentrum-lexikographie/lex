@@ -180,6 +180,6 @@
     (request
      "GET" (server-url "/index/export" {:q q :limit "50000"})
      :headers {"Accept" "text/csv"}
-     :response-hander (partial handle-on-success #(io/copy % f)))))
+     :response-handler (partial handle-on-success #(io/copy % f)))))
 
 (comment (search-articles {:query "spitz*"}))
