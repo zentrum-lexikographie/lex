@@ -68,11 +68,15 @@
       (rio/piped-input-stream)
       (htstatus/ok)))
 
-(def ring-handlers
-  ["/oxygen"
-   ["/updateSite.xml" {:get generate-update-descriptor}]
+(def oxygen-handlers
+  [["/updateSite.xml" {:get generate-update-descriptor}]
    ["/zdl-lex-plugin.zip" {:get download-plugin}]
    ["/zdl-lex-framework.zip" {:get download-framework}]])
+
+(def ring-handlers
+  [""
+   (conj ["/zdl-lex-client"] oxygen-handlers)
+   (conj ["/oxygen"] oxygen-handlers)])
 
 (comment
   (-> (download-plugin nil) :body slurp count)
