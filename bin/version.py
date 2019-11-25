@@ -9,10 +9,22 @@ from git import Repo
 project_dir = (Path(__file__) / '..' / '..').resolve()
 repo = Repo(project_dir.as_posix())
 
+_all_refs = ['refs/tags/*:refs/tags/*', 'refs/heads/*:refs/remotes/origin/*']
+
+
+def _git_fetch():
+    return [r.fetch(_all_refs) for r in repo.remotes]
+
+
+def _git_push():
+    return [r.push(_all_refs) for r in repo.remotes]
+
+
 _version_tag_re = re.compile(r'v\d{6}\.\d{2}\.\d{2}')
 
 
 def versions():
+    _git_fetch()
     tags = sorted([t.name for t in repo.tags])
     tags.reverse()
     for tag in tags:
@@ -21,9 +33,19 @@ def versions():
 
 
 def current_version():
-    for version in versions():
-        return version
-    return "000000.00.00"
+    current_version = '000000.00.00'
+    if not repo.is_dirty():
+        for version in versions():
+            current_version = version
+            break
+    return current_version
+
+
+_version_edn = project_dir / 'common' / 'src' / 'version.edn'
+
+
+def write_version_edn():
+    _version_edn.write_text('{:version "%s"}' % (current_version(), ))
 
 
 def set_next_version():
@@ -34,8 +56,5 @@ def set_next_version():
     if next_version in versions():
         raise Exception('%s already exists.' % (next_tag, ))
     repo.create_tag(next_tag)
+    _git_push()
     return next_version
-
-
-if __name__ == '__main__':
-    print(current_version())

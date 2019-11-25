@@ -1,4 +1,4 @@
-(ns zdl-lex-build.schema
+(ns schema
   (:require [zdl-lex-common.xml-validate :as xv]
             [zdl-lex-common.util :refer [file]]
             [me.raynes.fs :as fs]))

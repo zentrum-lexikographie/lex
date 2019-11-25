@@ -1,13 +1,8 @@
-#!/usr/bin/env python
-
 import logging
 from pathlib import Path
 import shutil
 
 project_dir = (Path(__file__) / '..' / '..').resolve()
-
-
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
 
 
 def classes(name):
@@ -22,7 +17,3 @@ def all_classes():
     # Plugin for OxygenXML Editor and Server component
     for module in ['client', 'server', 'validator']:
         classes(module)
-
-
-if __name__ == '__main__':
-    all_classes()
