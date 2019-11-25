@@ -45,6 +45,12 @@ class Server:
     def locks(self):
         return json(self.session.get(urljoin(self.base_url, '/lock')))
 
+    def acquire_lock(self, id, seconds):
+        pass
+
+    def release_lock(self, id):
+        pass
+
     def acquire_global_lock(self, seconds):
         return json(self.session.post(
             urljoin(self.base_url, '/lock'),
