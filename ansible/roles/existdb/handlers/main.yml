@@ -1,5 +1,0 @@
----
-- name: restart existdb
-  service:
-    name: "eXist-db"
-    state: "restarted"

@@ -1,7 +1,0 @@
----
-existdb_home: "/home/existdb"
-existdb_data_dir: "/home/existdb-data"
-existdb_export_dir: "/home/existdb-export"
-
-existdb_max_memory: "{{ (ansible_memtotal_mb * 0.3)|int }}"
-existdb_backup_cron_trigger: "0 30 4 * * ?"
