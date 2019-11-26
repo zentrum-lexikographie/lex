@@ -22,8 +22,6 @@ zdl-lex-config.edn
 
 .*.swp
 
-bin/clojure/
-bin/lein
 data/
 config.local.edn
 ansible/.vagrant
@@ -31,6 +29,7 @@ ansible/*.retry
 ansible/files/api/
 ansible/roles/*.*
 docker/*/*.jar
+vendor/
 
 client/tmp
 

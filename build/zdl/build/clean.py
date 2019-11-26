@@ -1,8 +1,7 @@
 import logging
-from pathlib import Path
 import shutil
 
-project_dir = (Path(__file__) / '..' / '..').resolve()
+from zdl.build import project_dir
 
 
 def classes(name):

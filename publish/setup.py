@@ -12,7 +12,6 @@ setup(
         'pytest==5.1.3',
         'python-baseconv==1.2.2',
         'pytz==2019.2',
-        'requests==2.22.0',
-
+        'requests==2.22.0'
     ]
 )

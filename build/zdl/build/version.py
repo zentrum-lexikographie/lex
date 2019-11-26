@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
 import datetime
-from pathlib import Path
 import re
 
 from git import Repo
 
-project_dir = (Path(__file__) / '..' / '..').resolve()
+from zdl.build import project_dir
+
 repo = Repo(project_dir.as_posix())
 
 _all_refs = ['refs/tags/*:refs/tags/*', 'refs/heads/*:refs/remotes/origin/*']

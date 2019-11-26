@@ -1,18 +1,16 @@
-#!/usr/bin/env python
-
 import datetime
 
 import click
 
-import clean
-import clj
-import deploy
-import oxygen
-import version
+import zdl.build.clean
+import zdl.build.clj
+import zdl.build.docker
+import zdl.build.oxygen
+import zdl.build.version
 
 
 def check_java_version():
-    java_version = clj.java_version()
+    java_version = zdl.build.clj.java_version()
     if java_version != '1.8':
         raise click.ClickException(
             'Java v1.8 is required for building the Oxygen Plugin '
@@ -25,41 +23,41 @@ def banner(msg):
 
 
 @click.group(chain=True)
-def cli():
+def main():
     pass
 
 
-@cli.command('init')
+@main.command('init')
 def cli_init():
     'Init build'
     banner('Init')
     check_java_version()
-    clean.all_classes()
-    version.write_version_edn()
+    zdl.build.clean.all_classes()
+    zdl.build.version.write_version_edn()
 
 
-@cli.command('clean')
+@main.command('clean')
 def cli_clean():
     'Clean compiler output'
     banner('Clean')
-    clean.all_classes()
+    zdl.build.clean.all_classes()
 
 
-@cli.command('schema')
+@main.command('schema')
 def cli_schema():
     'RNC --> RNG/Schematron'
     banner('Schema')
-    clj.run_module('common', ['schema'])
+    zdl.build.clj.run_module('common', ['schema'])
 
 
 def build_modules(modules=['client', 'server', 'validator']):
     for module in modules:
         banner('"%s" module' % (module,))
-        clj.run_module(module, ['dev', 'prod', 'compile'])
-        clj.run_module(module, ['dev', 'prod', 'package'])
+        zdl.build.clj.run_module(module, ['dev', 'prod', 'compile'])
+        zdl.build.clj.run_module(module, ['dev', 'prod', 'package'])
 
 
-@cli.command('build')
+@main.command('build')
 @click.pass_context
 def cli_build(ctx):
     'Compile and package modules'
@@ -69,42 +67,51 @@ def cli_build(ctx):
     ctx.invoke(cli_clean)
 
 
-@cli.command('version')
+@main.command('version')
 def cli_version():
     'Print current version'
-    click.secho(version.current_version())
+    click.secho(zdl.build.version.current_version())
 
 
-@cli.command('release')
+@main.command('release')
 def cli_release():
     'Tag and push next version'
-    click.secho(version.set_next_version())
+    click.secho(zdl.build.version.set_next_version())
 
 
-@cli.command('deploy')
+@main.command('docker')
 def cli_deploy():
     'Build Docker images'
-    banner('Deploy')
-    deploy.build_docker()
+    banner('Docker')
+    zdl.build.docker.build()
 
 
-@cli.command('client')
+@main.command('client')
 @click.pass_context
 def cli_client(ctx):
     'Runs the ZDL-Lex client (in Oxygen XML Editor)'
     ctx.invoke(cli_init)
     ctx.invoke(cli_schema)
     build_modules(['client'])
-    oxygen.run()
+    zdl.build.oxygen.run()
 
 
-@cli.command('server')
+@main.command('server')
 @click.pass_context
 def cli_server(ctx):
     'Runs the ZDL-Lex server'
     ctx.invoke(cli_init)
-    clj.run_module('server', ['prod', 'server'])
+    zdl.build.clj.run_module('server', ['prod', 'server'])
 
 
-if __name__ == '__main__':
-    cli()
+@main.command('solr')
+@click.argument('image')
+def cli_dwdswb(image):
+    'Runs a MySQL Docker container for staging dwdswb'
+    zdl.build.docker.run_solr(image)
+
+
+@main.command('dwdswb')
+def cli_dwdswb():
+    'Runs a MySQL Docker container for staging dwdswb'
+    zdl.build.docker.run_dwdswb_db()

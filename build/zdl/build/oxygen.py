@@ -4,6 +4,11 @@ from pathlib import Path
 import os
 import subprocess
 
+from zdl.build import project_dir
+
+
+oxygen_dir = project_dir / 'oxygen'
+
 
 def get_home():
     oxygen_home = os.getenv('OXYGEN_HOME')
@@ -32,12 +37,11 @@ def run():
         (oxygen_home / 'classes').as_posix(),
         oxygen_home.as_posix()
     ])
-    oxygen_dir = (Path(__file__) / '..' / '..' / 'oxygen').resolve().as_posix()
 
     subprocess.run([
         (oxygen_home / 'jre' / 'bin' / 'java').as_posix(),
-        '-Dcom.oxygenxml.editor.plugins.dir=' + oxygen_dir,
+        '-Dcom.oxygenxml.editor.plugins.dir=' + oxygen_dir.as_posix(),
         '-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor',
         '-cp', oxygen_classpath,
         'ro.sync.exml.Oxygen', 'test-project.xpr'
-    ], cwd=oxygen_dir, env=oxygen_env)
+    ], cwd=oxygen_dir.as_posix(), env=oxygen_env)
