@@ -261,6 +261,7 @@ syntaktische_Relationen = (
         | 'Stichwort_ist_Passivsubjekt_von'
         | 'Stichwort_ist_Prädikativ_von'
 	| 'Stichwort_ist_Präpositionalobjekt_von'
+	| 'Stichwort_ist_Präposition_zu'
         | 'Stichwort_ist_Subjekt_von_(Aktiv/Passiv)'
 	| 'Stichwort_hat_Adjektivattribut'
         | 'Stichwort_hat_Adverbialbestimmung'
