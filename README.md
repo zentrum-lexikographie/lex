@@ -4,43 +4,50 @@
 
 * [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
 * [Python 3](https://www.python.org/)
+* [Docker](https://www.docker.com/)
 
 Java 8 is needed, as Oxygen XML does not work with newer versions.
 
 For Python 3, it is recommended to use a project-specific virtual environment,
 e.g. via [pyenv](https://github.com/pyenv/pyenv):
 
-    $ pyenv virtualenv zdl-lex
-    $ pyenv local zdl-lex
+```plaintext
+$ pyenv virtualenv zdl-lex
+$ pyenv local zdl-lex
+```
 
 ## Setup
 
 Install Python dependencies and local modules.
 
-    $ pip install -r requirements.txt
+```plaintext
+$ pip install -r requirements.txt
+```
 
 ## Build and Deploy
 
-    $ zdl-lex-build
-    Usage: zdl-lex-build [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+```plaintext
+$ zdl-lex-build
+Usage: zdl-lex-build [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
-      Scripts for building, compiling, packaging ZDL-Lex.
+  Scripts for building, compiling, packaging ZDL-Lex.
 
-    Options:
-      --help  Show this message and exit.
+Options:
+  --help  Show this message and exit.
 
-    Commands:
-      build    Compile and package modules.
-      clean    Clean compiler output.
-      client   Runs the ZDL-Lex client (in Oxygen XML Editor).
-      docker   Build Docker images.
-      dwdswb   Runs a MySQL Docker container for testing.
-      init     Init build.
-      release  Tag and push next version.
-      schema   Compile RelaxNG/Schematron rules.
-      server   Runs the ZDL-Lex server.
-      solr     Runs Solr as a local Docker container for testing.
-      version  Print current version
+Commands:
+  build    Compile and package modules.
+  clean    Clean compiler output.
+  client   Runs the ZDL-Lex client (in Oxygen XML Editor).
+  docker   Build Docker images.
+  dwdswb   Runs a MySQL Docker container for testing.
+  init     Init build.
+  release  Tag and push next version.
+  schema   Compile RelaxNG/Schematron rules.
+  server   Runs the ZDL-Lex server.
+  solr     Runs Solr as a local Docker container for testing.
+  version  Print current version
+```
 
 ## License
 
