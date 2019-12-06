@@ -20,6 +20,12 @@ Diachronie = element Diachronie {
 	    attribute class { 'invisible' } ?
 	    , freie_Beschreibung
 	}
+	, element Verweise {
+		element Verweis {
+			attribute Typ { 'EtymWB' }
+			, Verweisziel
+		} *
+	} ?
 	, element Datierung { element * { token } * } ? # TODO: remove?
 }
 
