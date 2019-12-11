@@ -279,16 +279,6 @@
             (->rdf definition-node value (rdf-literal text))))
         (.finish rdf-stream)))))
 
-(defn- entry->pron [{:keys [head types]}]
-  (for [type types]
-    (merge {:head head} (select-keys type [:pos :summary :pronounciation]))))
-
-(defn- pron->csv [{:keys [head pos pronounciation summary]}]
-  (let [genus (some->> summary
-                       (filter (fn [[k v]] (str/starts-with? (or k "") "Genus")))
-                       (map second))]
-    (concat [head (str/join " – " pos) (str/join "|" genus)] pronounciation)))
-
 (comment
   (time (count (dump/pages wiktionary-de)))
 
@@ -296,7 +286,6 @@
        ;;(filter (comp #{"Achtung"} :title))
        (pmap #(merge % (parse %)))
        (map #(dissoc % :content))
-       (drop 1000)
        (take 10))
 
   (with-open [wkt-ipa (io/writer (io/file "wkt-ipa.csv") :encoding "UTF-8")]
@@ -305,9 +294,6 @@
          (pmap #(merge % (parse %)))
          (map #(dissoc % :content))
          (mapcat :entries)
-         (mapcat entry->pron)
-         (filter :pronounciation)
-         (map pron->csv)
          #_(mapcat :entries)
          #_(mapcat :types)
          #_(mapcat (comp (partial take 1) :type))
@@ -317,10 +303,19 @@
          ;;(filter (comp (partial < 1) count :entries))
          (csv/write-csv wkt-ipa))))
 
-(defn -main [& dumps]
-  (doseq [dump dumps]
-    (->> (io/file dump)
-         (dump/pages)
-         (pmap parse)
-         (map println)
-         (dorun))))
+(defn -main [& args]
+  (try
+    (with-open [wkt-toponyms (io/writer (io/file "wkt-toponyms.csv") :encoding "UTF-8")]
+      (->> (dump/pages wiktionary-de)
+           ;;(filter (comp #{"Achtung"} :title))
+           (pmap #(merge % (parse %)))
+           (map #(dissoc % :content))
+           (mapcat :entries)
+           (filter (comp (partial = "Deutsch") :lang))
+           (mapcat (fn [{:keys [head types]}] (map #(assoc % :head head) types)))
+           (filter (comp #(contains? % "Toponym") :pos))
+           (map #(concat (-> % :head vector) (some->> % :derived (mapcat :links))))
+           (filter (comp (partial < 1) count))
+           (map #(do (println (first %)) %))
+           (csv/write-csv wkt-toponyms)))
+    (finally (shutdown-agents))))
