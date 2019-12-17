@@ -5,7 +5,7 @@
             [me.raynes.fs :as fs]
             [zdl-lex-common.article :as zdl-article]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-wikimedia.article :as wkt-article]
+            [zdl-lex-wikimedia.wiktionary.article :as wkt-article]
             [zdl-lex-wikimedia.dump :as dump]))
 
 (def-db-fns "zdl_lex_wikimedia/index.sql")

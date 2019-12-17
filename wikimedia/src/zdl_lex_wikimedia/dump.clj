@@ -1,76 +1,183 @@
 (ns zdl-lex-wikimedia.dump
-  (:require [clojure.data.xml :as xml]
-            [clojure.data.zip :as dz]
-            [clojure.data.zip.xml :as zx]
-            [clojure.java.io :as io]
+  "Download Wikimedia dumps and parse XML-encoded page revisions."
+  (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.zip :as zip]
-            [zdl-lex-common.util :refer [->clean-map]]))
+            [clojure.tools.logging :as log])
+  (:import [java.io File InputStream]
+           [javax.xml.stream XMLEventReader XMLInputFactory]
+           [javax.xml.stream.events Attribute Characters EndElement StartElement XMLEvent]
+           javax.xml.transform.stream.StreamSource
+           org.apache.commons.compress.archivers.sevenz.SevenZFile
+           org.apache.commons.compress.compressors.CompressorStreamFactory))
 
-(def ^:private namespace-filter
-  "Administrative page namespaces"
-  (complement
-   #{
-     "Benutzer"
-     "Benutzer Diskussion"
-     "Datei"
-     "Datei Diskussion"
-     "Diskussion"
-     "Flexion"
-     "Hilfe"
-     "Hilfe Diskussion"
-     "Kategorie"
-     "Kategorie Diskussion"
-     "MediaWiki"
-     "MediaWiki Diskussion"
-     "Medium"
-     "Spezial"
-     "Thesaurus"
-     "Thesaurus Diskussion"
-     "Verzeichnis"
-     "Verzeichnis Diskussion"
-     "Vorlage"
-     "Vorlage Diskussion"
-     "Wiktionary"
-     "Wiktionary Diskussion"}))
+;; ## Dump Download
 
-(def ^:private regex-filter
-  "Regex-based page filter"
-  (complement
-   (some-fn (partial re-seq #"^Archiv ")
-            (partial re-seq #"^Liste ")
-            (partial re-seq #" \(Konjugation\)$")
-            (partial re-seq #" \(Deklination\)$"))))
+(def ^:private dump-dir
+  "Where downloads are stored: `$WIKIMEDIA_DUMP_DIR` (default:
+  `wikimedia-dumps/`)"
+  (-> "WIKIMEDIA_DUMP_DIR" System/getenv not-empty (or "wikimedia-dumps")))
 
-(defn- content-page? [{:keys [title content]}]
-  "Filters pages by title, removing administrative pages"
-  (and content
-       title
-       (let [[ns ln] (str/split title #":")]
-         (or (nil? ln) (and (namespace-filter ns) (regex-filter title))))))
+(defn download-dump
+  "Download non-existing dump files to the local store."
+  [{:keys [url ^File dump-file] :as coords}]
+  (when-not (.. dump-file (exists))
+    (.. dump-file (getParentFile) (mkdirs))
+    (log/tracef "Download Wikimedia dump %s (-> %s)" url (str dump-file))
+    (with-open [dump-stream (io/input-stream url)]
+      (io/copy dump-stream dump-file)))
+  coords)
 
-(xml/alias-uri :mw "http://www.mediawiki.org/xml/export-0.10/")
+(defn ^InputStream extract-dump
+  "Streaming extraction of a local dump-file."
+  [{:keys [^File dump-file ^String compression]}]
+  (condp = compression
+    "7z"
+    (let [dump-file (SevenZFile. dump-file)]
+      (.. dump-file (getNextEntry))
+      (proxy [InputStream] []
+        (read
+          ([] (.read dump-file))
+          ([^bytes b off len] (.read dump-file b (int off) (int len))))
+        (close [] (.close dump-file))))
+    "bz2"
+    (let [dump-stream (io/input-stream dump-file)
+          compressor-stream (.. (CompressorStreamFactory.)
+                                (createCompressorInputStream
+                                 CompressorStreamFactory/BZIP2
+                                 dump-stream))]
+      compressor-stream)
+    (throw (IllegalArgumentException. compression))))
 
-(defn- page-property [loc & path]
-  (->> (concat path [dz/descendants zip/node string?])
-       (apply zx/xml-> loc)
-       (apply str)
-       (not-empty)))
+(defn read-dump
+  "Construct URL from dump coordinates, download dump if required and extract it."
+  ([wiki dump-type]
+   (read-dump wiki dump-type "latest"))
+  ([wiki dump-type timestamp]
+   (read-dump wiki dump-type timestamp "xml" "7z"))
+  ([wiki dump-type timestamp fmt compression]
+   (let [filename (format "%s-%s-%s.%s.%s" wiki timestamp dump-type fmt compression)
+         url (format "https://dumps.wikimedia.org/%s/%s/%s" wiki timestamp filename)]
+     (->
+      {:wiki wiki
+       :type dump-type
+       :timestamp timestamp
+       :fmt fmt
+       :compression compression
+       :filename filename
+       :url url
+       :dump-file (io/file dump-dir filename)}
+      (download-dump)
+      (extract-dump)))))
 
-(defn- page->map [page]
-  (let [property (partial page-property (zip/xml-zip page))]
-    (->clean-map
-     {:title (property ::mw/title)
-      :content (property ::mw/revision ::mw/text)
-      :timestamp (property ::mw/revision ::mw/timestamp)
-      :author (property ::mw/revision ::mw/contributor ::mw/username)
-      :comment (property ::mw/revision ::mw/comment)})))
+;; ## XML parsing
 
-(defn pages [source]
-  "Produces a seq of page data from a parsed XML source"
-  (->> (io/input-stream source)
-       (xml/parse)
-       (:content)
-       (filter (comp #{::mw/page} :tag))
-       (map page->map)
-       (filter content-page?)))
+(def xml-size-limit-sys-props
+  "System properties related to XML parsing."
+  ["entityExpansionLimit" "totalEntitySizeLimit" "jdk.xml.totalEntitySizeLimit"])
+
+(defn config-xml-parser-for-large-dump!
+  "Maximize limits for parsing huge XML documents."
+  []
+  (log/tracef (str "Setting system properties to max values for "
+                   "parsing huge XML documents (%s)") xml-size-limit-sys-props)
+  (doseq [sys-prop xml-size-limit-sys-props]
+    (System/setProperty sys-prop (str (Integer/MAX_VALUE)))))
+
+;; Configure XML parser for huge XML documents via setting `$WIKIMEDIA_DUMP_HUGE`.
+
+(when (System/getenv "WIKIMEDIA_DUMP_HUGE")
+  (config-xml-parser-for-large-dump!))
+
+;; Convert XML stream processing events to Clojure data structures (maps, strings).
+
+(defn- xml-start-name
+  [^StartElement event]
+  (.. event getName getLocalPart))
+
+(defn- xml-end-name
+  [^EndElement event]
+  (.. event getName getLocalPart))
+
+(defn- xml-attrs
+  [^StartElement event]
+  (->>
+   (for [^Attribute attr (iterator-seq (.getAttributes event))]
+     [(keyword (.. attr getName getLocalPart)) (.getValue attr)])
+   (into (hash-map))))
+
+(defn- xml-text
+  [^Characters event]
+  (.getData event))
+
+(defn- xml-text-join
+  "Joins adjacent XML character events (strings)."
+  [evts]
+  (mapcat
+   (fn [p] (if (-> p first string?) [(apply str p)] p))
+   (partition-by string? evts)))
+
+(defn- xml-event
+  [^XMLEvent event]
+  (cond
+    (.isStartElement event) (merge {:< (xml-start-name event)} (xml-attrs event))
+    (.isEndElement event) {:> (xml-end-name event)}
+    (.isCharacters event) (xml-text event)
+    :else nil))
+
+(defn ^XMLEventReader xml-event-reader
+  "Read XML stream events from a given input stream."
+  [^InputStream is]
+  (.. (XMLInputFactory/newInstance) (createXMLEventReader (StreamSource. is))))
+
+(defn events->seq
+  "Convert XML stream events to Clojure data."
+  [^XMLEventReader events]
+  (->> (iterator-seq events) (map xml-event) (keep identity) (xml-text-join)))
+
+;; ## Revision extraction
+
+(def ^:private property-element?
+  "Elements in Wikimedia dumps for which we collect string contents."
+  #{"title" "timestamp" "text" "username" "comment"})
+
+(defn parse-revisions
+  "Parse XML stream events from a dump into a sequence of revisions."
+  ([events]
+   (parse-revisions events (transient {})))
+  ([events ctx]
+   (if-let [evt (first events)]
+     (if (map? evt)
+       (cond
+         (property-element? (evt :<))
+         (lazy-seq (parse-revisions (rest events) (assoc! ctx :sb (StringBuilder.))))
+
+         (property-element? (evt :>))
+         (let [text (-> (.toString ^StringBuilder (ctx :sb)) str/trim not-empty)
+               ctx (-> ctx (assoc! (-> evt :> keyword) text) (dissoc! :sb))]
+           (lazy-seq (parse-revisions (rest events) ctx)))
+
+         (= "revision" (evt :>))
+         (cons (select-keys ctx [:title :timestamp :text :username :comment])
+               (lazy-seq
+                (parse-revisions
+                 (rest events)
+                 (dissoc! ctx :timestamp :text :username :comment))))
+
+         (= "page" (evt :>))
+         (lazy-seq (parse-revisions (rest events) (dissoc! ctx :title)))
+
+         :else
+         (lazy-seq (parse-revisions (rest events) ctx)))
+
+       (do
+         (when-let [^StringBuilder sb (ctx :sb)] (.append sb ^String evt))
+         (lazy-seq (parse-revisions (rest events) ctx)))))))
+
+(defmacro with-revisions
+  "Download, extract and read a given Wikimedia dump, then parse it into a
+  sequence of `revisions`."
+  [coords & body]
+  `(with-open [is# (apply read-dump ~coords)
+               events# (xml-event-reader is#)]
+     (let [~'revisions (-> events# events->seq parse-revisions)]
+       ~@body)))

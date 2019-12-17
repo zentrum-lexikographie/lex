@@ -43,3 +43,5 @@ venv/
 wikimedia/data/
 
 publish/backup
+wikimedia/wikimedia-dumps/
+wikimedia/reports/

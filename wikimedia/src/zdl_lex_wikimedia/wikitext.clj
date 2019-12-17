@@ -3,7 +3,8 @@
             [clojure.string :as str]
             [clojure.zip :as zip])
   (:import java.io.Writer
-           [org.sweble.wikitext.parser.nodes WikitextNodeFactory WtExternalLink WtInternalLink WtNode WtTemplate WtTemplateArgument WtText WtUrl]
+           [org.sweble.wikitext.parser.nodes WikitextNodeFactory WtExternalLink
+           WtInternalLink WtNode WtTemplate WtTemplateArgument WtText WtUrl]
            org.sweble.wikitext.parser.ParserConfig
            [org.sweble.wikitext.parser.utils NonExpandingParser WtRtDataPrinter]))
 

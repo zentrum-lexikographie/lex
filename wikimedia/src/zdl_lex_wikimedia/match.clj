@@ -1,21 +1,113 @@
 (ns zdl-lex-wikimedia.match
   (:require [clj-excel.core :as xls]
-            [zdl-lex-wikimedia.index :as index]
-            [zdl-lex-wikimedia.part-of-speech :as pos]
-            [zdl-lex-common.article :as article]
+            [clojure.java.jdbc :as jdbc]
+            [clojure.string :as str]
+            [me.raynes.fs :as fs]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-corpus.cab :as cab]
             [zdl-lex-corpus.lexdb :as lexdb]
-            [clojure.java.jdbc :as jdbc]
-            [me.raynes.fs :as fs]
-            [clojure.string :as str]
-            [taoensso.timbre :as timbre]))
+            [zdl-lex-wikimedia.index :as index]))
+
+(def derived-forms
+  #{"Alte Schreibweise"
+    "Deklinierte Form"
+    "Dekliniertes Gerundivum"
+    "Erweiterter Infinitiv"
+    "Komparativ"
+    "Konjugierte Form"
+    "Partizip I"
+    "Partizip II"
+    "Schweizer und Liechtensteiner Schreibweise"
+    "Superlativ"
+    "Umschrift"})
+
+(defn basic?
+  [s]
+  (not (derived-forms s)))
+
+(def pos->zdl
+  {"Abkürzung" nil
+   "Abkürzung (Deutsch)" nil
+   "Adjektiv" "Adjektiv"
+   "Adverb" "Adverb"
+   "Affix" "Affix"
+   "Antwortpartikel" nil
+   "Artikel" nil
+   "Buchstabe" nil
+   "Deklinierte Form" nil
+   "Dekliniertes Gerundivum" nil
+   "Demonstrativpronomen" "Demonstrativpronomen"
+   "Eigenname" "Eigenname"
+   "Englisch" nil
+   "Enklitikon" nil
+   "Erweiterter Infinitiv" nil
+   "Fokuspartikel" "Adverb"
+   "Formel" nil
+   "Gebundenes Lexem" nil
+   "Geflügeltes Wort" nil
+   "Gradpartikel" "Adverb"
+   "Grußformel" "Ausruf"
+   "Hilfsverb" nil
+   "Indefinitpronomen" "Indefinitpronomen"
+   "Interjektion" nil
+   "International" nil
+   "Interrogativadverb" "Pronominaladverb"
+   "Interrogativpronomen" "Interrogativpronomen"
+   "Klitikon" nil
+   "Komparativ" "Komparativ"
+   "Konjugierte Form" nil
+   "Konjunktion"  "Konjunktion" 
+   "Konjunktionaladverb" "Konjunktion"
+   "Kontraktion" nil
+   "Lokaladverb" "Adverb"
+   "Merkspruch" nil
+   "Modaladverb" "Adverb"
+   "Modalpartikel" "Adverb"
+   "Nachname" "Eigenname"
+   "Negationspartikel" "Adverb"
+   "Numerale" "Kardinalzahl"
+   "Onomatopoetikum" nil
+   "Ortsnamengrundwort" nil
+   "Partikel" "Adverb"
+   "Partizip I" nil
+   "Partizip II" nil
+   "Personalpronomen" "Personalpronomen"
+   "Possessivpronomen" "Possessivpronomen"
+   "Postposition" nil
+   "Pronomen" "Pronomen"
+   "Pronominaladverb" "Pronominaladverb"
+   "Präfix" "Affix"
+   "Präfixoid" "Affix"
+   "Präposition" "Präposition"
+   "Pseudopartizip" "partizipiales Adjektiv"
+   "Redewendung" nil
+   "Reflexivpronomen" "Reflexivpronomen"
+   "Relativpronomen" "Relativpronomen"
+   "Reziprokpronomen" "reziprokes Pronomen"
+   "Sprichwort" nil
+   "Straßenname" "Eigenname"
+   "Subjunktion" "Konjunktion"
+   "Substantiv" "Substantiv"
+   "Suffix" "Affix"
+   "Suffixoid" "Affix"
+   "Superlativ" "Superlativ"
+   "Temporaladverb" "Adverb"
+   "Toponym" "Eigenname"
+   "Verb" "Verb"
+   "Vergleichspartikel" "Adverb"
+   "Vorname" "Eigenname"
+   "Wiederholungszahlwort" "Adverb"
+   "Wortverbindung" nil
+   "Zahlklassifikator" nil
+   "Zahlzeichen" nil
+   "Zirkumposition" nil
+   "gebundenes Lexem" nil})
 
 (defn normalize-pos [{:keys [part_of_speech collection] :as entry}]
   (condp = collection
     "de.wiktionary.org"
-    (assoc entry :part_of_speech (or (get pos/wkt->zdl part_of_speech) part_of_speech))
+    (assoc entry :part_of_speech (or (get pos->zdl part_of_speech) part_of_speech))
     entry))
 
 (defn match-entries [entries]
@@ -26,7 +118,7 @@
                 entries-by-collection (group-by :collection entries-of-form)
                 zdl (some-> (get entries-by-collection "zdl.org") first)
                 wkt (some->> (get entries-by-collection "de.wiktionary.org")
-                             (filter (comp pos/basic? :part_of_speech))
+                             (filter (comp basic? :part_of_speech))
                              (first))]
           :when (or zdl wkt)]
       [form zdl wkt])))

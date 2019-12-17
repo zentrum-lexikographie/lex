@@ -1,11 +1,19 @@
-all: data/dewiktionary.xml
+all: reports/dewiktionary-authors-2019.csv
+reports/dewiktionary-authors-2019.csv:
+	mkdir -p reports
+	WIKIMEDIA_DUMP_HUGE=1 clojure -J-Xmx10g\
+		-m zdl-lex-wikimedia.wiktionary.history\
+		--last-year authors\
+		>$@
 
-data/dewiktionary.xml:
-	mkdir -p data
-	curl -L\
-		https://dumps.wikimedia.org/dewiktionary/latest/dewiktionary-latest-pages-articles.xml.bz2 |\
-		bunzip2 >data/dewiktionary.xml
+all: reports/dewiktionary-edits.csv
+reports/dewiktionary-edits.csv:
+	mkdir -p reports
+	WIKIMEDIA_DUMP_HUGE=1 clojure -J-Xmx10g\
+		-m zdl-lex-wikimedia.wiktionary.history\
+		edits\
+		>$@
 
 .PHONY: clean
 clean:
-	rm -r data
+	$(RM) reports
