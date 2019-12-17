@@ -2,7 +2,8 @@
   (:require [clojure.data.csv :as csv]
             [clojure.string :as str]
             [clojure.tools.cli :refer [cli]]
-            [zdl-lex-wikimedia.wiktionary :as wkt]))
+            [zdl-lex-wikimedia.dump :as dump]
+            [zdl-lex-wikimedia.wiktionary.de :as de-wkt]))
 
 (defn ^java.time.OffsetDateTime parse-instant
   [^String s]
@@ -54,11 +55,11 @@
       (condp = mode
 
         "authors"
-        (wkt/with-wiktionary-history
+        (dump/with-revisions de-wkt/page-history-dump
           (->> revisions (edits opts) edits->author-freqs (csv/write-csv *out*)))
 
         "edits"
-        (wkt/with-wiktionary-history
+        (dump/with-revisions de-wkt/page-history-dump
           (->> revisions (edits opts) edits->years (csv/write-csv *out*)))
 
         (println (str/join \newline

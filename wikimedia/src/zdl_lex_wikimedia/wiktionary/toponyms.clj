@@ -1,7 +1,7 @@
 (ns zdl-lex-wikimedia.wiktionary.toponyms
   (:require [clojure.data.csv :as csv]
-            [zdl-lex-wikimedia.wiktionary :as wkt]
-            [zdl-lex-wikimedia.wiktionary.article :as wkt-article]))
+            [zdl-lex-wikimedia.dump :as dump]
+            [zdl-lex-wikimedia.wiktionary.de :as de-wkt]))
 
 (defn toponym?
   [{:keys [pos-set]}]
@@ -17,10 +17,10 @@
 
 (defn -main [& args]
   (try
-    (wkt/with-current-wiktionary
-      (->> (wkt-article/parse revisions)
-           (wkt-article/german-entries)
-           (wkt-article/types toponym?)
+    (dump/with-revisions de-wkt/current-page-dump
+      (->> (de-wkt/parse-revisions revisions)
+           (de-wkt/german-entries)
+           (de-wkt/types toponym?)
            (map toponym->csv)
            (filter has-derived?)
            (csv/write-csv *out*)))

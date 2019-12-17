@@ -1,6 +1,6 @@
 (ns zdl-lex-wikimedia.wiktionary.ld
-  (:require [zdl-lex-wikimedia.wiktionary :as wkt]
-            [zdl-lex-wikimedia.wiktionary.article :as wkt-article])
+  (:require [zdl-lex-wikimedia.dump :as dump]
+            [zdl-lex-wikimedia.wiktionary.de :as de-wkt])
   (:import java.net.URI
            org.apache.jena.riot.RDFFormat
            [org.apache.jena.riot.system FactoryRDFStd PrefixMapStd StreamOps StreamRDFWriter]))
@@ -97,11 +97,11 @@
 
 (defn -main [& args]
   (try
-    (wkt/with-current-wiktionary
+    (dump/with-revisions de-wkt/current-page-dump
       (with-ld-stream System/out
-        (->> (wkt-article/parse revisions)
-             (wkt-article/german-entries)
-             (wkt-article/german-base-forms)
+        (->> (de-wkt/parse-revisions revisions)
+             (de-wkt/german-entries)
+             (de-wkt/german-base-forms)
              (map (partial type->ld ->ld))
              (last))))
     (finally (shutdown-agents))))

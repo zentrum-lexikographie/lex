@@ -1,11 +1,56 @@
-(ns zdl-lex-wikimedia.wiktionary.article
+(ns zdl-lex-wikimedia.wiktionary.de
   (:refer-clojure :exclude [descendants])
   (:require [clojure.data.zip :refer [descendants right-locs]]
             [clojure.string :as str]
             [clojure.zip :as zip]
-            [zdl-lex-wikimedia.wiktionary :as wkt]
-            [zdl-lex-wikimedia.wikitext :as wt])
+            [zdl-lex-wikimedia.wikitext :as wt]
+            [zdl-lex-wikimedia.dump :as dump])
   (:import [org.sweble.wikitext.parser.nodes WtBody WtDefinitionList WtDefinitionListDef WtHeading WtInternalLink WtName WtSection WtTemplate WtTemplateArgument WtTemplateArguments WtValue]))
+
+(def current-page-dump ["dewiktionary" "pages-meta-current" "latest" "xml" "bz2"])
+
+(def page-history-dump ["dewiktionary" "pages-meta-history"])
+
+(def ^:private namespace-filter
+  "Administrative page namespaces"
+  (complement
+   #{
+     "Benutzer"
+     "Benutzer Diskussion"
+     "Datei"
+     "Datei Diskussion"
+     "Diskussion"
+     "Flexion"
+     "Hilfe"
+     "Hilfe Diskussion"
+     "Kategorie"
+     "Kategorie Diskussion"
+     "MediaWiki"
+     "MediaWiki Diskussion"
+     "Medium"
+     "Spezial"
+     "Thesaurus"
+     "Thesaurus Diskussion"
+     "Verzeichnis"
+     "Verzeichnis Diskussion"
+     "Vorlage"
+     "Vorlage Diskussion"
+     "Wiktionary"
+     "Wiktionary Diskussion"}))
+
+(def ^:private regex-filter
+  "Regex-based page filter"
+  (complement
+   (some-fn (partial re-seq #"^Archiv ")
+            (partial re-seq #"^Liste ")
+            (partial re-seq #" \(Konjugation\)$")
+            (partial re-seq #" \(Deklination\)$"))))
+
+(defn article? [{:keys [title]}]
+  "Filters pages by title, removing administrative pages"
+  (and title
+       (let [[ns ln] (str/split title #":")]
+         (or (nil? ln) (and (namespace-filter ns) (regex-filter title))))))
 
 (defn ->clean-map [m]
   (apply dissoc m (for [[k v] m :when (nil? v)] k)))
@@ -102,15 +147,15 @@
      :lang (wt/node-> heading WtTemplate [WtName "Sprache"] template-values)
      :types (wt/nodes-> loc WtBody WtSection (section-level 3) parse-types)}))
 
-(defn parse-revision [{:keys [title text] :as revision}]
+(defn parse-article [{:keys [title text] :as revision}]
   (if-let [loc (some-> text wt/parse wt/zipper)]
     (->> (wt/nodes-> loc WtSection (section-level 2) (partial parse-entry title))
          (assoc revision :entries))
     revision))
 
-(defn parse
+(defn parse-revisions
   [revisions]
-  (->> revisions (filter wkt/article?) (pmap parse-revision)))
+  (->> revisions (filter article?) (pmap parse-article)))
 
 (defn entries
   ([articles]

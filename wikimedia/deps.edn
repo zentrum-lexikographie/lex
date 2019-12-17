@@ -1,15 +1,11 @@
 {:deps
- {org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
-  org.clojure/data.zip {:mvn/version "0.1.1"}
-  org.clojure/data.csv {:mvn/version "0.1.4"}
-  org.clojure/tools.cli {:mvn/version "0.4.2"}
-  org.clojure/tools.logging {:mvn/version "0.5.0"}
-  com.h2database/h2 {:mvn/version "1.4.199"}
-  com.layerware/hugsql {:mvn/version "0.4.9"}
-  com.outpace/clj-excel {:mvn/version "0.0.9"}
-  org.sweble.wikitext/swc-parser-lazy {:mvn/version "3.1.9"}
-  org.apache.jena/jena-arq {:mvn/version "3.12.0"}
-  org.apache.commons/commons-compress {:mvn/version "1.19"}
-  org.tukaani/xz {:mvn/version "1.8"}
-  org.zdl.lex/common {:local/root "../common"}
-  org.zdl.lex/corpus {:local/root "../corpus"}}}
+  {org.clojure/data.zip {:mvn/version "0.1.1"}
+   org.clojure/data.csv {:mvn/version "0.1.4"}
+   org.clojure/tools.cli {:mvn/version "0.4.2"}
+   org.clojure/tools.logging {:mvn/version "0.5.0"}
+   org.sweble.wikitext/swc-parser-lazy {:mvn/version "3.1.9"}
+   org.apache.jena/jena-arq {:mvn/version "3.12.0"
+                             :exclusions [commons-logging/commons-logging]}
+   org.apache.commons/commons-compress {:mvn/version "1.19"}
+   org.tukaani/xz {:mvn/version "1.8"}
+   ch.qos.logback/logback-classic {:mvn/version "1.2.3"}}}
