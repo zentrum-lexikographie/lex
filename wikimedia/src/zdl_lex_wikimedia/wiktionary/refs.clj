@@ -33,7 +33,7 @@
   (try
     (dump/with-revisions de-wkt/current-page-dump
       (->> (filter de-wkt/article? revisions)
-           (map parse-references)
+           (pmap parse-references)
            (mapcat :references)
            (frequencies)
            (seq)
