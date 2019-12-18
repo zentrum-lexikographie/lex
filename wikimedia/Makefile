@@ -14,6 +14,11 @@ reports/dewiktionary-edits.csv:
 		edits\
 		>$@
 
+all: reports/refs.csv
+reports/refs.csv:
+	mkdir -p reports
+	clojure	-m zdl-lex-wikimedia.wiktionary.refs >$@
+
 .PHONY: clean
 clean:
 	$(RM) reports
