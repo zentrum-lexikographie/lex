@@ -260,6 +260,7 @@ syntaktische_Relationen = (
 	| 'Stichwort_ist_partitive_Apposition'
         | 'Stichwort_ist_Passivsubjekt_von'
         | 'Stichwort_ist_Prädikativ_von'
+	| 'Stichwort_ist_Präpositionalattribut_von'
 	| 'Stichwort_ist_Präpositionalobjekt_von'
 	| 'Stichwort_ist_Präposition_zu'
         | 'Stichwort_ist_Subjekt_von_(Aktiv/Passiv)'
