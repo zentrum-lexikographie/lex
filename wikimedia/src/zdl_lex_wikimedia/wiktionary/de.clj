@@ -46,8 +46,9 @@
             (partial re-seq #" \(Konjugation\)$")
             (partial re-seq #" \(Deklination\)$"))))
 
-(defn article? [{:keys [title]}]
+(defn article?
   "Filters pages by title, removing administrative pages"
+  [{:keys [title]}]
   (and title
        (let [[ns ln] (str/split title #":")]
          (or (nil? ln) (and (namespace-filter ns) (regex-filter title))))))
@@ -55,16 +56,19 @@
 (defn ->clean-map [m]
   (apply dissoc m (for [[k v] m :when (nil? v)] k)))
 
-(defn text [loc]
+(defn text
   "The trimmed text content of a WikiText node"
+  [loc]
   (-> loc wt/loc->text str/trim not-empty))
 
-(defn template-values [loc]
+(defn template-values
   "Extracts the argument values of a template node"
+  [loc]
   (wt/nodes-> loc WtTemplateArguments WtTemplateArgument WtValue text))
 
-(defn section-level [level]
+(defn section-level
   "A predicate matching a section (node) of a certain level"
+  [level]
   (fn [loc] (= level (.getLevel ^WtSection (zip/node loc)))))
 
 (defn definitions [templates name]

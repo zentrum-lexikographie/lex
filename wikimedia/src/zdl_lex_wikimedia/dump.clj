@@ -177,7 +177,7 @@
   "Download, extract and read a given Wikimedia dump, then parse it into a
   sequence of `revisions`."
   [coords & body]
-  `(with-open [is# (apply read-dump ~coords)
+  `(with-open [^InputStream is# (apply read-dump ~coords)
                events# (xml-event-reader is#)]
      (let [~'revisions (-> events# events->seq parse-revisions)]
        ~@body)))

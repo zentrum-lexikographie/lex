@@ -19,8 +19,9 @@
 (defmethod print-method WtNode [^WtNode v ^Writer w]
   (WtRtDataPrinter/print w v))
 
-(defn zipper [^WtNode node]
+(defn zipper
   "A read-only zipper for the given Wikitext node."
+  [^WtNode node]
   (zip/zipper
    (complement empty?)
    seq
