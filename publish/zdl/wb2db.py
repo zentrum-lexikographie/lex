@@ -143,6 +143,22 @@ class Dictionary(object):
         return (text_only(lemma) + '%' + hidx).rstrip('%')
 
 
+class Wortgeschichten(Dictionary):
+    '''
+    '''
+
+    DATABASE_NAME = 'wortgeschichten_beta'
+    ENTRY_ELEMENT = et.QName('http://www.dwds.de/ns/1.0', 'Artikel')
+    HEADWORD_PATH = './/{http://www.dwds.de/ns/1.0}Schreibung'
+    USE_RELATIONS = False
+
+    def __init__(self, file_names):
+        Dictionary.__init__(self, file_names)
+
+    def prune(self, article):
+        pass
+
+
 class DWDSWB(Dictionary):
     '''
     '''
@@ -261,7 +277,7 @@ if __name__ == '__main__':
     argument_parser.add_argument('--user', default='', metavar='USERNAME', type=str, help='username for the database server')
     argument_parser.add_argument('--passwd', default='', metavar='PASSWORD', type=str, help='passphrase for the database server')
     argument_parser.add_argument('input_files', metavar='FILE', type=str, nargs='*', help='(list of) file names')
-    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
+    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
     argument_parser.add_argument('-r', '--remote', action='store_true', default=False, help='use a remote repository (eXist, dwdswb only)')
     argument_parser.add_argument('-v', '--verbose', action='store_true', default=False, help='enable verbose diagnostic messages')
     argument_parser.add_argument('-V', '--version', type=str, metavar='VERSION_NUMBER', help='specify the version number')
@@ -283,6 +299,8 @@ if __name__ == '__main__':
         dictionary = WDG(arguments.input_files)
     elif arguments.dictionary_type == 'dwb1':
         dictionary = DWB1(arguments.input_files)
+    elif arguments.dictionary_type == 'wortgeschichten':
+        dictionary = Wortgeschichten(arguments.input_files)
 
     # set up DB connection
     cursor = None
@@ -343,10 +361,12 @@ if __name__ == '__main__':
                 hidx = lemma.get('hidx')
                 htype = lemma.get('Typ') or 'AR_G'
                 # splitting and unicode mangling is needed for TEI dictionaries'
-                # use of orth@expand and the text compression present in headwords
+                # use of orth/@expand and the text compression present in headwords
+                # use orth/@norm first if available
+                normalization = lemma.get('norm') or lemma.get('expand') or u''
                 headwords = [
                     headword.replace('_', ' ')
-                    for headword in (str(lemma.get('expand') or u'').split())
+                    for headword in normalization.split()
                 ]
                 if not headwords:
                     headwords = [str(text_only(lemma)) or u'']
