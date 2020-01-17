@@ -9,13 +9,20 @@ create table if not exists lock (
   primary key (resource, owner, token)
 )
 
--- :name list-active-locks :? :*
+-- :name select-active-locks :? :*
 -- :doc Lists all active/non-expired locks
 select * from lock
 where expires > :now
 order by resource, owner, token
 
--- :name get-active-lock :? :1
+-- :name select-resource-locks :? :*
+-- :doc Retrieves all active locks for a resource
+select * from lock
+where expires > :now
+and resource >= :resource
+order by resource, owner, token
+
+-- :name select-active-lock :? :1
 -- :doc Retrieves an active lock
 select * from lock
 where expires > :now
@@ -23,7 +30,7 @@ and resource = :resource
 and owner = :owner
 and token = :token
 
--- :name get-other-lock :? :1
+-- :name select-other-lock :? :1
 -- :doc Retrieves another lock
 select * from lock
 where expires > :now
@@ -38,7 +45,7 @@ values
 (:resource, :owner, :token, :owner_ip, :expires)
 
 
--- :name remove-lock :! :n
+-- :name delete-lock :! :n
 -- :doc Removes a lock
 delete from lock
 where expires > :now
@@ -46,7 +53,7 @@ and resource = :resource
 and owner = :owner
 and token = :token
 
--- :name remove-expired-locks :! :n
+-- :name delete-expired-locks :! :n
 -- :doc Purges expired lock records
 delete from lock
 where expires <= :now
