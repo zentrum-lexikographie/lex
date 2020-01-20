@@ -135,7 +135,7 @@ class Dictionary(object):
 
     def first_lemma(self, article):
         try:
-            lemma = article.findall(self.HEADWORD_PATH)[0]
+            lemma = et.ETXPath(self.HEADWORD_PATH)(article)[0]
         except IndexError:
             logging.critical('Entry without headword\n%s', et.tostring(article))
             raise
@@ -149,7 +149,7 @@ class Wortgeschichten(Dictionary):
 
     DATABASE_NAME = 'wortgeschichten_beta'
     ENTRY_ELEMENT = et.QName('http://www.dwds.de/ns/1.0', 'Artikel')
-    HEADWORD_PATH = './/{http://www.dwds.de/ns/1.0}Schreibung'
+    HEADWORD_PATH = './/{http://www.dwds.de/ns/1.0}Schreibung|//{http://www.dwds.de/ns/1.0}Verweise[@Typ="Wortfeld"]/*/{http://www.dwds.de/ns/1.0}Ziellemma'
     USE_RELATIONS = False
 
     def __init__(self, file_names):
@@ -357,7 +357,7 @@ if __name__ == '__main__':
             )
 
             # extract lemmas
-            for position, lemma in enumerate(article.iterfind(dictionary.HEADWORD_PATH)):
+            for position, lemma in enumerate(et.ETXPath(dictionary.HEADWORD_PATH)(article)):
                 hidx = lemma.get('hidx')
                 htype = lemma.get('Typ') or 'AR_G'
                 # splitting and unicode mangling is needed for TEI dictionaries'
