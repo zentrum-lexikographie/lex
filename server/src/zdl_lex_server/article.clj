@@ -10,20 +10,9 @@
             [zdl-lex-server.auth :as auth]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.lock :as lock]
-            [zdl-lex-server.solr.client :as solr-client])
+            [zdl-lex-server.solr.client :as solr-client]
+            [clojure.spec.alpha :as s])
   (:import [java.text Normalizer Normalizer$Form]))
-
-(defn wrap-global-lock
-  [handler]
-  (fn
-    ([request]
-     (if (lock/locked-now?)
-       (htstatus/locked (lock/get-global-lock-state))
-       (handler request)))
-    ([request respond raise]
-     (if (lock/locked-now?)
-       (respond (htstatus/locked (lock/get-global-lock-state)))
-       (handler request respond raise)))))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
 
@@ -56,36 +45,50 @@
 
 (def ^:private new-article-collection "Neuartikel")
 
-(defn create-article [{:keys [auth/user auth/password]
-                       {:keys [form pos]} :params}]
-  (let [xml-id (generate-id)
-        xml (new-article-xml xml-id form pos user)
-        filename (form->filename form)
-        id (str new-article-collection "/" filename "-" xml-id ".xml")
-        id->file (article/id->file git/dir)]
-    (spit (id->file id) xml :encoding "UTF-8")
-    (htstatus/ok {:id id :form form :pos pos})))
+(s/def ::resource string?)
+(s/def ::form string?)
+(s/def ::pos string?)
 
-(defn get-article [{{:keys [path]} :path-params}]
-  (lock/with-global-read-lock 
+(def existing-article-parameters
+  {:path (s/keys :req-un [::resource])})
+(def new-article-parameters
+  {:query (s/keys :req-un [::form ::pos])})
+
+(defn get-article [{{:keys [resource]} :path-params}]
+  (lock/with-global-read-lock
     (let [id->file (article/id->file git/dir)
-          f (id->file path)]
+          f (id->file resource)]
       (if (fs/exists? f)
         (htstatus/ok f)
-        (htstatus/not-found path)))))
+        (htstatus/not-found resource)))))
 
-(defn post-article [{{:keys [path]} :path-params :as req}]
+(defn create-article [{:keys [auth/user auth/password]
+                       {:keys [form pos]} :params}]
+  (lock/with-global-write-lock
+    (let [xml-id (generate-id)
+        xml (new-article-xml xml-id form pos user)
+          filename (form->filename form)
+          id (str new-article-collection "/" filename "-" xml-id ".xml")
+          id->file (article/id->file git/dir)]
+      (spit (id->file id) xml :encoding "UTF-8")
+      (htstatus/ok {:id id :form form :pos pos}))))
+
+(defn post-article [{{:keys [resource]} :path-params :as req}]
   (lock/with-global-write-lock
     (let [id->file (article/id->file git/dir)
-          f (id->file path)]
-      (if (fs/exists? f)
-        (do (spit f (htreq/body-string req) :encoding "UTF-8") (htstatus/ok f))
-        (htstatus/not-found path)))))
+          f (id->file resource)]
+      (cond
+        (not (fs/exists? f)) (htstatus/not-found resource)
+        (lock/locked? resource) (htstatus/locked resource)
+        :else (do
+                (spit f (htreq/body-string req) :encoding "UTF-8")
+                (htstatus/ok f))))))
 
 (def ring-handlers
-  ["/article"
-   ["" {:put {:handler create-article
-              :middleware [wrap-global-lock]}}]
-   ["/*path" {:get get-article
-              :post {:handler post-article
-                     :middleware [wrap-global-lock]}}]])
+  ["/article/*resource"
+   {:put {:handler create-article
+          :parameters new-article-parameters}
+    :get {:handler get-article
+          :parameters existing-article-parameters}
+    :post {:handler post-article
+           :parameters existing-article-parameters}}])
