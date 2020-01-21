@@ -35,7 +35,7 @@ order by resource, owner, token
 select * from lock
 where expires > :now
 and resource = :resource
-and (owner = :owner or token = :token)
+and (owner = :owner and token = :token)
 order by resource, owner, token
 
 -- :name select-other-locks :? :*

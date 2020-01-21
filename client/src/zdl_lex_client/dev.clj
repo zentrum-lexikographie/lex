@@ -1,8 +1,8 @@
 (ns zdl-lex-client.dev
   (:require [mount.core :as mount]
             [seesaw.core :as ui]
-            [clojure.java.io :as io]
             [zdl-lex-client.http :as http]
+            [zdl-lex-client.oxygen.url-handler :refer [lexurl-handler]]
             [zdl-lex-client.search :as search]
             [zdl-lex-client.view.issue :as issue-view]
             [zdl-lex-client.view.results :as results-view]
@@ -10,8 +10,7 @@
             [zdl-lex-client.workspace :as ws]
             [zdl-lex-common.log :as log]
             [zdl-lex-common.url :as lexurl])
-  (:import java.awt.Toolkit
-           [java.net URLStreamHandler URLConnection]))
+  (:import java.awt.Toolkit))
 
 (log/configure-slf4j-bridge)
 (log/configure-timbre)
@@ -26,7 +25,7 @@
                                 (issue-view/create-panel)
                                 :divider-location 0.75)]
     (try
-      (lexurl/install-stream-handler! http/api-store-lexurl-handler)
+      (lexurl/install-stream-handler! lexurl-handler)
       (catch Throwable t))
 
     (mount/stop)

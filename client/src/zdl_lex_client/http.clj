@@ -8,11 +8,10 @@
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :refer [server-url]]
             [zdl-lex-common.xml :as xml])
-  (:import [java.io ByteArrayInputStream ByteArrayOutputStream File IOException]
-           [java.net ConnectException URLConnection URLStreamHandler]))
+  (:import [java.io File IOException]
+           java.net.ConnectException))
 
 (comment
   (str (server-url "lock/" "test/test2.xml" {:ttl "300"} {:token "_"})))
@@ -59,6 +58,7 @@
           respond (partial respond request con response-handler full-response?)]
       (timbre/debug request)
       (try
+        (.setInstanceFollowRedirects con false)
         (.setRequestMethod con method)
         (when basic-creds
           (.setRequestProperty con "Authorization" (str "Basic " basic-creds)))
@@ -112,28 +112,9 @@
 (defn id->store-url [id]
   (server-url "article/" id))
 
-(def api-store-lexurl-handler
-  (proxy [URLStreamHandler] []
-    (openConnection [url]
-      (let [api-store-url (-> url lexurl/url->id id->store-url)]
-        (proxy [URLConnection] [url]
-          (connect
-            []
-            (comment "No-Op"))
-          (getInputStream
-            []
-            (let [xml (request "GET" api-store-url
-                               :headers {"Accept" "text/xml"})]
-              (ByteArrayInputStream. (.. xml (getBytes "UTF-8")))))
-          (getOutputStream
-            []
-            (proxy [ByteArrayOutputStream] []
-              (close []
-                (post-xml api-store-url (.. this (toString "UTF-8")))))))))))
-
 (defn lock [id ttl token]
   (request
-   "POST" (server-url "lock/" id {:ttl (str ttl)} (if token {:token token} {}))
+   "POST" (server-url "lock/" id {:ttl (str ttl) :token token})
    :headers {"Accept" "application/edn"}
    :response-handler edn-response-handler))
 

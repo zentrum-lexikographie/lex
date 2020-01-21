@@ -75,28 +75,47 @@
      :token token :owner owner :owner_ip owner_ip
      :now now :expires expires}))
 
+(defn- dissoc-token
+  [lock]
+  (dissoc lock :token))
+
 (defn locked-by-other?
   [req]
   (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db {:read-only? true}]
-      (not-empty (select-other-locks c lock)))))
+      (let [locks (select-other-locks c lock)]
+        (some-> locks last dissoc-token)))))
+
+(defn wrap-resource-lock
+  [handler]
+  (fn
+    ([request]
+     (if-let [lock (locked-by-other? request)]
+       (htstatus/locked lock)
+       (handler request)))
+    ([request respond raise]
+     (if-let [lock (locked-by-other? request)]
+       (respond (htstatus/locked lock))
+       (handler request respond raise)))))
 
 (defn read-locks [_]
   (jdbc/with-db-transaction [c db {:read-only? true}]
-    (htstatus/ok (select-locks db {:now (now)}))))
+    (let [locks (select-locks db {:now (now)})
+          locks (map dissoc-token locks)]
+      (htstatus/ok locks))))
 
 (defn read-lock [req]
   (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db {:read-only? true}]
       (if-let [lock (last (select-active-locks c lock))]
-        (htstatus/ok lock)
+        (htstatus/ok (dissoc-token lock))
         (htstatus/not-found)))))
 
 (defn create-lock [req]
   (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db {:isolation :serializable}]
       (if-let [other-lock (last (select-other-locks c lock))]
-        (htstatus/locked other-lock)
+        (htstatus/locked (dissoc-token other-lock))
         (do (merge-lock c lock)
             (htstatus/ok lock))))))
 
@@ -144,7 +163,7 @@
   (read-locks {})
   (jdbc/with-db-transaction [c db]
     (let [now (now)]
-      (merge-lock c {:resource "WDG/ab/Abenduniversitaet-E_a_421.xml",
+      (merge-lock c {:resource "",
                      :owner "admin",
                      :token "81184e67-2bbb-4531-a3c4-b11040250e94",
                      :owner_ip "127.0.0.1",

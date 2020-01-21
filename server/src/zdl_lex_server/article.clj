@@ -74,16 +74,14 @@
       (htstatus/ok {:id id :form form :pos pos}))))
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
-  (if (lock/locked-by-other? req)
-    (htstatus/locked resource)
-    (lock/with-global-write-lock
-      (let [id->file (article/id->file git/dir)
-            f (id->file resource)]
-        (if (fs/exists? f)
-          (do
-            (spit f (htreq/body-string req) :encoding "UTF-8")
-            (htstatus/ok f))
-          (htstatus/not-found resource))))))
+  (lock/with-global-write-lock
+    (let [id->file (article/id->file git/dir)
+          f (id->file resource)]
+      (if (fs/exists? f)
+        (do
+          (spit f (htreq/body-string req) :encoding "UTF-8")
+          (htstatus/ok f))
+        (htstatus/not-found resource)))))
 
 (def ring-handlers
   ["/article/*resource"
@@ -92,4 +90,5 @@
     :get {:handler get-article
           :parameters existing-article-parameters}
     :post {:handler post-article
-           :parameters existing-article-parameters}}])
+           :parameters existing-article-parameters
+           :middleware [lock/wrap-resource-lock]}}])
