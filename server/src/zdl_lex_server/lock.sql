@@ -9,33 +9,42 @@ create table if not exists lock (
   primary key (resource, owner, token)
 )
 
--- :name select-active-locks :? :*
+-- :name select-locks :? :*
 -- :doc Lists all active/non-expired locks
 select * from lock
 where expires > :now
 order by resource, owner, token
 
--- :name select-resource-locks :? :*
--- :doc Retrieves all active locks for a resource
+-- :name select-active-locks :? :*
+-- :doc Retrieves active locks applying to a given resource
 select * from lock
 where expires > :now
-and resource >= :resource
+and resource in (:v*:paths)
+order by resource, owner, token
+
+-- :name select-other-locks :? :*
+-- :doc Retrieves active locks applying to a given resource
+select * from lock
+where expires > :now
+and resource in (:v*:paths)
+and (owner <> :owner or token <> :token)
 order by resource, owner, token
 
 -- :name select-active-lock :? :1
--- :doc Retrieves an active lock
-select * from lock
-where expires > :now
-and resource = :resource
-and owner = :owner
-and token = :token
-
--- :name select-other-lock :? :1
 -- :doc Retrieves another lock
 select * from lock
 where expires > :now
 and resource = :resource
+and (owner = :owner or token = :token)
+order by resource, owner, token
+
+-- :name select-other-locks :? :*
+-- :doc Retrieves another lock
+select * from lock
+where expires > :now
+and resource in (:v*:paths)
 and (owner <> :owner or token <> :token)
+order by resource, owner, token
 
 -- :name merge-lock :!
 -- :doc Upserts a (new) lock

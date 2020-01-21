@@ -66,7 +66,7 @@
                        {:keys [form pos]} :params}]
   (lock/with-global-write-lock
     (let [xml-id (generate-id)
-        xml (new-article-xml xml-id form pos user)
+          xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
           id->file (article/id->file git/dir)]
@@ -74,15 +74,16 @@
       (htstatus/ok {:id id :form form :pos pos}))))
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
-  (lock/with-global-write-lock
-    (let [id->file (article/id->file git/dir)
-          f (id->file resource)]
-      (cond
-        (not (fs/exists? f)) (htstatus/not-found resource)
-        (lock/locked? resource) (htstatus/locked resource)
-        :else (do
-                (spit f (htreq/body-string req) :encoding "UTF-8")
-                (htstatus/ok f))))))
+  (if (lock/locked-by-other? req)
+    (htstatus/locked resource)
+    (lock/with-global-write-lock
+      (let [id->file (article/id->file git/dir)
+            f (id->file resource)]
+        (if (fs/exists? f)
+          (do
+            (spit f (htreq/body-string req) :encoding "UTF-8")
+            (htstatus/ok f))
+          (htstatus/not-found resource))))))
 
 (def ring-handlers
   ["/article/*resource"

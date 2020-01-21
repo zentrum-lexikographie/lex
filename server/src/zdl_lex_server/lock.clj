@@ -10,7 +10,8 @@
             [zdl-lex-common.util :refer [uuid]]
             [zdl-lex-server.auth :as auth]
             [clojure.spec.alpha :as s]
-            [zdl-lex-common.spec :as spec])
+            [zdl-lex-common.spec :as spec]
+            [clojure.string :as str])
   (:import java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.TimeUnit))
 
@@ -25,9 +26,13 @@
               (.unlock lock#)))
        (throw (ex-info "Storage lock timeout" {})))))
 
-(defmacro with-global-read-lock [& body] `(with-global-lock .readLock ~@body))
+(defmacro with-global-read-lock
+  [& body]
+  `(with-global-lock .readLock ~@body))
 
-(defmacro with-global-write-lock [& body] `(with-global-lock .writeLock ~@body))
+(defmacro with-global-write-lock
+  [& body]
+  `(with-global-lock .writeLock ~@body))
 
 (defn- now []
   (System/currentTimeMillis))
@@ -52,49 +57,55 @@
   :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup-locks)
   :stop (a/close! lock-cleanup-scheduler))
 
-(defn locked?
+(defn- resource->paths
   [resource]
-  (jdbc/with-db-transaction [c db {:read-only? true}]
-    (not (empty? (select-resource-locks c {:now (now) :resource resource})))))
+  (let [components (vec (str/split resource #"/"))
+        paths (for [i (range (-> components count inc))] (subvec components 0 i))
+        paths (map (partial str/join "/") paths)]
+    (apply sorted-set paths)))
 
-(defn- req->lock [{{:keys [resource]} :path-params
-                   {:keys [ttl token] :or {ttl 60}} :params
-                   owner ::auth/user
-                   owner_ip :remote-addr
-                   :as req}]
-  (let [now (now)]
-    {:resource resource
-     :token (or token (uuid))
-     :now now
-     :expires (+ now (* 1000 ttl))
-     :owner owner
-     :owner_ip owner_ip}))
+(defn- lock-from-req [{owner ::auth/user owner_ip :remote-addr :as req}]
+  (let [parameters (:parameters req)
+        {:keys [resource]} (:path parameters)
+        {:keys [ttl token] :or {ttl 60}} (:query parameters)
+        paths (resource->paths resource)
+        now (now)
+        expires (+ now (* 1000 ttl))]
+    {:resource resource :paths paths
+     :token token :owner owner :owner_ip owner_ip
+     :now now :expires expires}))
 
-(defn get-locks [_]
-  (jdbc/with-db-transaction [c db {:read-only? true}]
-    (htstatus/ok (select-active-locks db {:now (now)}))))
-
-(defn get-lock [req]
-  (let [lock (req->lock req)]
+(defn locked-by-other?
+  [req]
+  (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db {:read-only? true}]
-      (if-let [active-lock (select-active-lock c lock)]
+      (not-empty (select-other-locks c lock)))))
+
+(defn read-locks [_]
+  (jdbc/with-db-transaction [c db {:read-only? true}]
+    (htstatus/ok (select-locks db {:now (now)}))))
+
+(defn read-lock [req]
+  (let [lock (lock-from-req req)]
+    (jdbc/with-db-transaction [c db {:read-only? true}]
+      (if-let [lock (last (select-active-locks c lock))]
         (htstatus/ok lock)
         (htstatus/not-found)))))
 
-(defn post-lock [req]
-  (let [lock (req->lock req)]
+(defn create-lock [req]
+  (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db {:isolation :serializable}]
-      (if-let [other-lock (select-other-lock c lock)]
-        (htstatus/ok other-lock)
+      (if-let [other-lock (last (select-other-locks c lock))]
+        (htstatus/locked other-lock)
         (do (merge-lock c lock)
-            (htstatus/ok (select-active-lock c lock)))))))
+            (htstatus/ok lock))))))
 
-(defn delete-lock [req]
-  (let [lock (req->lock req)]
+(defn remove-lock [req]
+  (let [lock (lock-from-req req)]
     (jdbc/with-db-transaction [c db]
-      (if-let [active-lock (select-active-lock c lock)]
-        (do (delete-lock c (assoc active-lock :now (now)))
-            (htstatus/ok active-lock))
+      (if-let [lock (select-active-lock c lock)]
+        (let [lock (assoc lock :now (now))]
+          (delete-lock c lock) (htstatus/ok lock))
         (htstatus/not-found lock)))))
 
 (s/def ::resource string?)
@@ -114,23 +125,23 @@
    [""
     {:get {:summary "Retrieve list of active locks"
            :tags ["Lock" "Query"]
-           :handler get-locks}}]
+           :handler read-locks}}]
    ["/*resource"
     {:post {:summary "Set a resource lock"
             :tags ["Lock" "Resource"]
             :parameters new-lock-parameters
-            :handler post-lock}
+            :handler create-lock}
      :get {:summary "Read a resource lock"
            :tags ["Lock" "Query" "Resource"]
            :parameters existing-lock-parameters
-           :handler get-lock}
+           :handler read-lock}
      :delete {:summary "Remove a resource lock."
               :tags ["Lock" "Resource"]
               :parameters existing-lock-parameters
-              :handler delete-lock}}]])
+              :handler remove-lock}}]])
 
 (comment
-  (get-locks {})
+  (read-locks {})
   (jdbc/with-db-transaction [c db]
     (let [now (now)]
       (merge-lock c {:resource "WDG/ab/Abenduniversitaet-E_a_421.xml",
