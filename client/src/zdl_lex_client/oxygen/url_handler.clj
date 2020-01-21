@@ -11,7 +11,7 @@
             [zdl-lex-common.util :refer [uuid]])
   (:import [ro.sync.exml.plugin.lock LockException LockHandler]))
 
-(def tokens (memo/ttl (fn [_] (uuid)) :ttl/threshold (* 60 60 1000)))
+(def tokens (memo/lru (fn [_] (uuid)) :lru/threshold 1024))
 
 (defn lookup-token [id]
   (some-> tokens meta ::memo/cache deref (cache/lookup [id]) deref))

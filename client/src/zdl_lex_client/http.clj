@@ -29,11 +29,11 @@
   (if (successful? response) (handler stream) (stream->str stream)))
 
 (defn- respond [request con handler full-response? body-stream]
-  (let [head{:status (.getResponseCode con)
-             :message (.getResponseMessage con)
-             :headers (->> (into {} (.getHeaderFields con))
-                           (remove (comp nil? first))
-                           (into (sorted-map)))}
+  (let [head {:status (.getResponseCode con)
+              :message (.getResponseMessage con)
+              :headers (->> (into {} (.getHeaderFields con))
+                            (remove (comp nil? first))
+                            (into (sorted-map)))}
         body (if handler
                (handler head body-stream)
                (stream->str body-stream))
