@@ -10,7 +10,6 @@
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.spec :as spec]
-            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]
             [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.solr.client :as client]
@@ -173,12 +172,10 @@
     {:get {:summary "Query the full-text index"
            :tags ["Index" "Query"]
            :parameters {:query ::search-query}
-           :handler handle-search
-           :middleware [wrap-authenticated]}
+           :handler handle-search}
      :delete {:summary "Clears the index, forcing a rebuild"
               :tags ["Index", "Admin"]
-              :handler handle-index-rebuild
-              :middleware [wrap-admin-only wrap-authenticated]}}]
+              :handler handle-index-rebuild}}]
 
    ["/export"
     {:get {:summary "Export index metadata in CSV format"
@@ -188,12 +185,10 @@
                                       :return :output-stream
                                       :default-format "text/csv"
                                       :formats {"text/csv" csv/format}))
-           :handler handle-export
-           :middleware [wrap-authenticated]}}]
+           :handler handle-export}}]
 
    ["/forms/suggestions"
     {:get {:summary "Retrieve suggestion for headwords based on prefix queries"
            :tags ["Index" "Query" "Suggestions" "Headwords"]
            :parameters {:query ::suggestion-query}
-           :handler handle-form-suggestions
-           :middleware [wrap-authenticated]}}]])
+           :handler handle-form-suggestions}}]])

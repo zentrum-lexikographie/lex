@@ -11,6 +11,7 @@
             [ring.middleware.defaults :as defaults]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [zdl-lex-common.env :refer [env]]
+            [zdl-lex-server.auth :as auth]
             [zdl-lex-server.article :as article]
             [zdl-lex-server.exception :as exception]
             [zdl-lex-server.git :as git]
@@ -47,7 +48,8 @@
                   exception/middleware
                   muuntaja/format-request-middleware
                   coercion/coerce-response-middleware
-                  coercion/coerce-request-middleware]}
+                  coercion/coerce-request-middleware
+                  auth/wrap]}
     article/ring-handlers
     git/ring-handlers
     home/ring-handlers

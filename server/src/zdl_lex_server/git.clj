@@ -13,7 +13,6 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-common.log :as log]))
 
@@ -161,7 +160,6 @@
 
 (def ring-handlers
   ["/git"
-   {:middleware [wrap-admin-only wrap-authenticated]}
    [""
     {:patch {:summary "Commit pending changes on the server's branch"
              :tags ["Article" "Git" "Admin"]

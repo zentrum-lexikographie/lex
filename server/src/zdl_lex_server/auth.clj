@@ -1,31 +1,67 @@
 (ns zdl-lex-server.auth
-  (:require [clojure.data.codec.base64 :as base64]
-            [clojure.string :as str]
-            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
-            [ring.util.http-response :as htstatus]
+  (:require [buddy.auth.accessrules :refer [wrap-access-rules]]
+            [buddy.auth.backends.httpbasic :refer [http-basic-backend]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [zdl-lex-common.env :refer [env]]))
 
-(defn wrap-authenticated [handler]
-  (let [{:keys [http-anon-user server-user server-password]} env
-        authenticated? (if (and server-user server-password)
-                         #(if (and (= server-user %1) (= server-password %2))
-                            [server-user server-password])
-                         #(vector %1 %2))]
-    (wrap-basic-authentication handler authenticated?)))
+(def public?
+  (constantly true))
 
+(def admin?
+  (comp #{"admin"} :user :identity))
 
-(defn- admin?
-  [{:keys [basic-authentication]}]
-  (= "admin" (first basic-authentication)))
+(def authenticated?
+  (comp some? :identity))
 
-(defn wrap-admin-only
-  [handler]
-  (fn
-    ([request]
-     (if-not (admin? request)
-       (htstatus/forbidden)
-       (handler request)))
-    ([request respond raise]
-     (if-not (admin? request)
-       (respond (htstatus/forbidden))
-       (handler request respond raise)))))
+(def access-rules
+  [
+   ;; Public resources
+   {:uris
+    ["/"
+     "/assets/*"
+     "/docs/*"
+     "/home"
+     "/oxygen/*"
+     "/swagger.json"
+     "/zdl-lex-client/*"]
+    :handler public?}
+   ;; Admin resources
+   {:uris
+    ["/git"
+     "/git/*"]
+    :handler admin?}
+   {:uris
+    ["/index"
+     "/mantis/issues"]
+    :request-method :delete
+    :handler admin?}
+   ;; Authenticated resources
+   {:uris
+    ["/article/*"
+     "/index"
+     "/index/*"
+     "/lock"
+     "/lock/*"
+     "/mantis/*"
+     "/status"
+     "/status/*"]
+    :handler authenticated?}])
+
+(defn authenticate
+  [req {:keys [username password]}]
+  (let [{:keys [server-user server-password]} env]
+    (if-not (and server-user server-password)
+      ;; pass-through credentials from upstream
+      {:user username :password password}
+      ;; else authenticate against env credentials
+      (if (and (= server-user username) (= server-password password))
+        {:user username :password password}))))
+
+(def auth-backend
+  (http-basic-backend {:realm "ZDL-Lex-Server" :authfn authenticate}))
+
+(def wrap
+  (comp
+   #(wrap-authorization % auth-backend)
+   #(wrap-authentication % auth-backend)
+   #(wrap-access-rules % {:policy :reject :rules access-rules})))

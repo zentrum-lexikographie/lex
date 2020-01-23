@@ -20,12 +20,12 @@
   org.webjars.npm/bulma {:mvn/version "0.7.4"}
   org.webjars.npm/material-icons {:mvn/version "0.3.0"}
   org.webjars/webjars-locator-core {:mvn/version "0.41"}
+  buddy {:mvn/version "2.0.0"}
   cheshire {:mvn/version "5.9.0"}
   clj-http {:mvn/version "3.9.1"
             :exclusions [commons-logging]}
   clj-jgit {:mvn/version "1.0.0-beta2"}
   hiccup {:mvn/version "1.0.5"}
-  ring-basic-authentication {:mvn/version "1.0.5"}
   ring-logger-timbre {:mvn/version "0.7.6"}
   ring-webjars {:mvn/version "0.2.0"
                 :exclusions [org.webjars/webjars-locator]}

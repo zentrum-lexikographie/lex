@@ -11,8 +11,7 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [file]]
-            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]))
+            [zdl-lex-common.util :refer [file]]))
 
 (def mantis-base (env :mantis-base))
 
@@ -161,15 +160,16 @@
 (def ring-handlers
   ["/mantis"
    ["/issues"
-    {:get {:summary "Query internal index for Mantis issues based on headword"
-           :tags ["Mantis" "Query" "Headwords"]
-           :parameters {:query ::issue-query}
-           :handler handle-query
-           :middleware [wrap-authenticated]}
-     :delete {:summary "Clears the internal Mantis issue index and re-synchronizes it"
-              :tags ["Mantis" "Admin"]
-              :handler handle-index-rebuild
-              :middleware [wrap-admin-only wrap-authenticated]}}]])
+    {:get
+     {:summary "Query internal index for Mantis issues based on headword"
+      :tags ["Mantis" "Query" "Headwords"]
+      :parameters {:query ::issue-query}
+      :handler handle-query}
+     :delete
+     {:summary "Clears the internal Mantis issue index and re-synchronizes it"
+      :tags ["Mantis" "Admin"]
+      :handler handle-index-rebuild}}]])
+
 (comment
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)
