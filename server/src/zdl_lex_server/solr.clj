@@ -10,7 +10,7 @@
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.spec :as spec]
-            [zdl-lex-server.auth :as auth]
+            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]
             [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.solr.client :as client]
@@ -54,7 +54,7 @@
   :stop (a/close! build-suggestions-scheduler))
 
 (defn handle-index-rebuild [_]
-  {:index (a/>!! index-rebuild-scheduler :sync)})
+  (htstatus/ok {:index (a/>!! index-rebuild-scheduler :sync)}))
 
 (defn handle-form-suggestions [{{:keys [q]} :params}]
   (let [solr-response (client/suggest "forms" (or q ""))
@@ -173,11 +173,12 @@
     {:get {:summary "Query the full-text index"
            :tags ["Index" "Query"]
            :parameters {:query ::search-query}
-           :handler handle-search}
+           :handler handle-search
+           :middleware [wrap-authenticated]}
      :delete {:summary "Clears the index, forcing a rebuild"
               :tags ["Index", "Admin"]
               :handler handle-index-rebuild
-              :middleware [auth/wrap-admin-only]}}]
+              :middleware [wrap-admin-only wrap-authenticated]}}]
 
    ["/export"
     {:get {:summary "Export index metadata in CSV format"
@@ -187,10 +188,12 @@
                                       :return :output-stream
                                       :default-format "text/csv"
                                       :formats {"text/csv" csv/format}))
-           :handler handle-export}}]
+           :handler handle-export
+           :middleware [wrap-authenticated]}}]
 
    ["/forms/suggestions"
     {:get {:summary "Retrieve suggestion for headwords based on prefix queries"
            :tags ["Index" "Query" "Suggestions" "Headwords"]
            :parameters {:query ::suggestion-query}
-           :handler handle-form-suggestions}}]])
+           :handler handle-form-suggestions
+           :middleware [wrap-authenticated]}}]])

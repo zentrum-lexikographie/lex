@@ -13,7 +13,7 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-lex-server.auth :as auth]
+            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-common.log :as log]))
 
@@ -161,12 +161,13 @@
 
 (def ring-handlers
   ["/git"
-   ["" {:patch {:summary "Commit pending changes on the server's branch"
-                :tags ["Article" "Git" "Admin"]
-                :handler handle-commit
-                :middleware [auth/wrap-admin-only]}}]
-   ["/ff/*refs" {:post {:summary "Fast-forwards the server's branch to the given refs"
-                        :tags ["Article" "Git" "Admin"]
-                        :parameters {:path ::fast-forward-cmd}
-                        :handler handle-fast-forward
-                        :middleware [auth/wrap-admin-only]}}]])
+   {:middleware [wrap-admin-only wrap-authenticated]}
+   [""
+    {:patch {:summary "Commit pending changes on the server's branch"
+             :tags ["Article" "Git" "Admin"]
+             :handler handle-commit}}]
+   ["/ff/*refs"
+    {:post {:summary "Fast-forwards the server's branch to the given refs"
+            :tags ["Article" "Git" "Admin"]
+            :parameters {:path ::fast-forward-cmd}
+            :handler handle-fast-forward}}]])

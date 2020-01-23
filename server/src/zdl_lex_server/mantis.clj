@@ -12,7 +12,7 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [file]]
-            [zdl-lex-server.auth :as auth]))
+            [zdl-lex-server.auth :refer [wrap-authenticated wrap-admin-only]]))
 
 (def mantis-base (env :mantis-base))
 
@@ -151,12 +151,9 @@
    (pmap (comp issue :id)
          (get @index (get-in req [:parameters :query :q]) []))))
 
-(defn handle-index-rebuild [{:keys [auth/user]}]
-  (if (= "admin" user)
-    (htstatus/ok
-     {:index (a/>!! issue-sync-scheduler :sync)})
-    (htstatus/forbidden
-     {:index false})))
+(defn handle-index-rebuild
+  [_]
+  (htstatus/ok {:index (a/>!! issue-sync-scheduler :sync)}))
 
 (s/def ::q string?)
 (s/def ::issue-query (s/keys :req-un [::q]))
@@ -167,10 +164,12 @@
     {:get {:summary "Query internal index for Mantis issues based on headword"
            :tags ["Mantis" "Query" "Headwords"]
            :parameters {:query ::issue-query}
-           :handler handle-query}
+           :handler handle-query
+           :middleware [wrap-authenticated]}
      :delete {:summary "Clears the internal Mantis issue index and re-synchronizes it"
               :tags ["Mantis" "Admin"]
-              :handler handle-index-rebuild}}]])
+              :handler handle-index-rebuild
+              :middleware [wrap-admin-only wrap-authenticated]}}]])
 (comment
   (->> (issues) (take 100) (index-issues))
   (-> (read-dump) (store-dump) last)

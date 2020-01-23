@@ -8,7 +8,7 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [uuid]]
-            [zdl-lex-server.auth :as auth]
+            [zdl-lex-server.auth :refer [wrap-authenticated]]
             [clojure.spec.alpha :as s]
             [zdl-lex-common.spec :as spec]
             [clojure.string :as str])
@@ -64,7 +64,8 @@
         paths (map (partial str/join "/") paths)]
     (apply sorted-set paths)))
 
-(defn- lock-from-req [{owner ::auth/user owner_ip :remote-addr :as req}]
+(defn- lock-from-req
+  [{[owner] :basic-authentication owner_ip :remote-addr :as req}]
   (let [parameters (:parameters req)
         {:keys [resource]} (:path parameters)
         {:keys [ttl token] :or {ttl 60}} (:query parameters)
@@ -141,6 +142,7 @@
 
 (def ring-handlers
   ["/lock"
+   {:middleware [wrap-authenticated]}
    [""
     {:get {:summary "Retrieve list of active locks"
            :tags ["Lock" "Query"]

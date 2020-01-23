@@ -12,7 +12,6 @@
             [ring.middleware.webjars :refer [wrap-webjars]]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-server.article :as article]
-            [zdl-lex-server.auth :refer [wrap-auth]]
             [zdl-lex-server.exception :as exception]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.home :as home]
@@ -43,7 +42,6 @@
      :muuntaja m/instance
      :middleware [wrap-logger
                   wrap-defaults
-                  wrap-auth
                   muuntaja/format-negotiate-middleware
                   muuntaja/format-response-middleware
                   exception/middleware

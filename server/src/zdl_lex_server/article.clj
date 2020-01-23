@@ -7,7 +7,7 @@
             [zdl-lex-common.article :as article]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.xml :as xml]
-            [zdl-lex-server.auth :as auth]
+            [zdl-lex-server.auth :refer [wrap-authenticated]]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.solr.client :as solr-client]
@@ -62,10 +62,11 @@
         (htstatus/ok f)
         (htstatus/not-found resource)))))
 
-(defn create-article [{:keys [auth/user auth/password]
+(defn create-article [{:keys [basic-authentication]
                        {:keys [form pos]} :params}]
   (lock/with-global-write-lock
-    (let [xml-id (generate-id)
+    (let [user (first basic-authentication)
+          xml-id (generate-id)
           xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
@@ -84,11 +85,14 @@
         (htstatus/not-found resource)))))
 
 (def ring-handlers
-  ["/article/*resource"
-   {:put {:handler create-article
-          :parameters new-article-parameters}
-    :get {:handler get-article
-          :parameters existing-article-parameters}
-    :post {:handler post-article
-           :parameters existing-article-parameters
-           :middleware [lock/wrap-resource-lock]}}])
+  [""
+   {:middleware [wrap-authenticated]}
+   ["/article/*resource"
+    {:put {:handler create-article
+           :parameters new-article-parameters}
+     :get {:handler get-article
+           :parameters existing-article-parameters}
+     :post {:handler post-article
+            :parameters existing-article-parameters
+            :middleware [lock/wrap-resource-lock]}}]])
+  

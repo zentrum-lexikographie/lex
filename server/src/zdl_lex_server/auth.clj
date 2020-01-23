@@ -1,34 +1,31 @@
 (ns zdl-lex-server.auth
   (:require [clojure.data.codec.base64 :as base64]
             [clojure.string :as str]
+            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]]
             [ring.util.http-response :as htstatus]
             [zdl-lex-common.env :refer [env]]))
 
-(let [anonymous-user (env :http-anon-user)
-      decode #(-> (.getBytes ^String % "UTF-8") (base64/decode) (String.))]
-  (defn assoc-auth [{:keys [headers] :as request}]
-    (let [auth (some-> (get-in request [:headers "authorization"])
-                       (str/replace #"^Basic " "") (decode) (str/split #":" 2))]
-      (assoc request
-             ::user (or (first auth) anonymous-user)
-             ::password (second auth)))))
+(defn wrap-authenticated [handler]
+  (let [{:keys [http-anon-user server-user server-password]} env
+        authenticated? (if (and server-user server-password)
+                         #(if (and (= server-user %1) (= server-password %2))
+                            [server-user server-password])
+                         #(vector %1 %2))]
+    (wrap-basic-authentication handler authenticated?)))
 
-(defn wrap-auth
-  [handler]
-  (fn
-    ([request]
-     (handler (assoc-auth request)))
-    ([request respond raise]
-     (handler (assoc-auth request) respond raise))))
+
+(defn- admin?
+  [{:keys [basic-authentication]}]
+  (= "admin" (first basic-authentication)))
 
 (defn wrap-admin-only
   [handler]
   (fn
-    ([{:keys [::user] :as request}]
-     (if-not (= "admin" user)
+    ([request]
+     (if-not (admin? request)
        (htstatus/forbidden)
        (handler request)))
-    ([{:keys [::user] :as request} respond raise]
-     (if-not (= "admin" user)
+    ([request respond raise]
+     (if-not (admin? request)
        (respond (htstatus/forbidden))
        (handler request respond raise)))))
