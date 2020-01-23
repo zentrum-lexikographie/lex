@@ -6,7 +6,9 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.url :as lexurl]
-            [zdl-lex-common.util :as util])
+            [zdl-lex-common.util :as util]
+            [manifold.deferred :as d]
+            [byte-streams :as bs])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream]
            [java.net URLConnection URLStreamHandler]
            [ro.sync.exml.plugin.lock LockException LockHandler]))
@@ -42,14 +44,14 @@
       [url timeoutSeconds]
       (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
       (let [id (lexurl/url->id url)
-            lock (http/lock id timeoutSeconds token)]
+            lock @(http/lock id timeoutSeconds token)]
         (if-not (= token (:token lock))
           (throw (lock->exception lock)))))
     (unlock
       [url]
       (let [id (lexurl/url->id url)]
         (timbre/info (format "Unlock! %s" url))
-        (future (http/unlock id token))))))
+        (http/unlock id token)))))
 
 (defn- lexurl->httpurl
   [url]
@@ -59,14 +61,22 @@
 
 (defn store->stream
   [url]
-  (let [xml (http/request "GET" url :headers {"Accept" "text/xml"})]
-    (ByteArrayInputStream. (.getBytes xml "UTF-8"))))
+  (->
+   (http/request {:request-method :get :url url
+                  :accept "text/xml" :as :byte-array})
+   (d/chain :body #(ByteArrayInputStream. %))
+   (deref)))
 
 (defn stream->store
   [url]
   (proxy [ByteArrayOutputStream] []
     (close []
-      (http/post-xml url (.toString this "UTF-8")))))
+      (->
+       (http/request {:request-method :post :url url
+                      :content-type "text/xml" :body (.toString this "UTF-8")
+                      :accept "text/xml" :as :byte-array})
+       (d/chain :body #(bs/to-string % {:charset "UTF-8"}))
+       (deref)))))
 
 (def lexurl-handler
   (proxy [URLStreamHandler] []

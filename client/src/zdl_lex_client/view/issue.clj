@@ -63,7 +63,7 @@
              [(label :text "Resolution")] [(text :text resolution)]])))
 
 (def get-issues
-  (memo/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
+  (memo/ttl (comp deref http/get-issues) :ttl/threshold (* 15 60 1000)))
 
 (defn- parse-update-ts
   [^String ts]

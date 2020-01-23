@@ -14,6 +14,7 @@
   (timbre/merge-config!
    {:ns-blacklist ["clj-soap.client"
                    "httpclient.*"
+                   "io.netty.*"
                    "org.apache.axiom.*"
                    "org.apache.axis2.*"
                    "org.apache.commons.httpclient.*"

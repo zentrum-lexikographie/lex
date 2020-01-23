@@ -41,8 +41,6 @@
 
 (comment
   (show-testbed)
-
-  (time (http/get-issues "Leder"))
   (mount/start)
   (mount/stop)
 

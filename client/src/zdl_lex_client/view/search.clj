@@ -61,8 +61,10 @@
                     :renderer render-suggestion-list-entry))
       (updateHints [ctx]
         (let [q (str ctx)
-              suggestions? (and (< 1 (count q)) (re-matches #"^[^\s\*\?\"/:]+$"q ))
-              suggestions (if suggestions? (-> q http/suggest-forms :result))
+              suggestions? (and (< 1 (count q))
+                                (re-matches #"^[^\s\*\?\"/:]+$"q ))
+              suggestions (if suggestions?
+                            (-> q http/suggest-forms deref :result))
               suggestions (or suggestions [])]
           (proxy-super setListData (into-array Object suggestions))
           (not (empty? suggestions))))

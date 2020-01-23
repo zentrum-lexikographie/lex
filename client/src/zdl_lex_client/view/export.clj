@@ -23,7 +23,7 @@
                               :content content :options [])]
         (future
           (try
-            (http/export query csv-file)
+            @(http/export query csv-file)
             (catch Exception e (ui/alert (.getMessage e)))
             (finally
               (ui/dispose! dialog))))
