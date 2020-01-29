@@ -31,7 +31,9 @@ class Server:
         ))
 
     def get_article(self, id):
-        r = self.session.get(urljoin(self.base_url, '/'.join(['/article', quote(id)])))
+        r = self.session.get(
+            urljoin(self.base_url, '/'.join(['/article', quote(id)]))
+        )
         r.raise_for_status()
         r.encoding = 'utf-8'
         return zdl.article.fromstring(r.text)
@@ -88,7 +90,8 @@ def get_filename(form):
 def generate_id(lex_server):
     for _ in range(100):
         candidate = ''.join(['E_', str(randrange(0, 10000000))])
-        exists = lex_server.index(('id:*%s*' % candidate), limit=0).get('total') > 0
+        id_query = lex_server.index(('id:*%s*' % candidate), limit=0)
+        exists = id_query.get('total') > 0
         if not exists:
             return candidate
     raise Exception('No unique ID found after 100 random attempts')
