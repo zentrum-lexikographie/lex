@@ -43,8 +43,12 @@ class Dictionary(object):
         if not self.remote:
             for file_name in self.file_names:
 
-                tree = et.parse(file_name, parser)
-                for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(tree.getroot()):
+                root = et.parse(file_name, parser).getroot()
+                
+                if root.tag == self.ENTRY_ELEMENT:
+                    yield root
+                
+                for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(root):
                     yield entry
         else:
             db = ExistDB('http://spock.dwds.de:8080/exist')
@@ -141,6 +145,22 @@ class Dictionary(object):
             raise
         hidx = lemma.get('hidx') or ''
         return (text_only(lemma) + '%' + hidx).rstrip('%')
+
+
+class Neologismen(Dictionary):
+    '''
+    '''
+
+    DATABASE_NAME = 'neologismen_beta'
+    ENTRY_ELEMENT = 'artikel'
+    HEADWORD_PATH = './/stw'
+    USE_RELATIONS = False
+
+    def __init__(self, file_names):
+        Dictionary.__init__(self, file_names)
+
+    def prune(self, article):
+        pass
 
 
 class Wortgeschichten(Dictionary):
@@ -277,7 +297,7 @@ if __name__ == '__main__':
     argument_parser.add_argument('--user', default='', metavar='USERNAME', type=str, help='username for the database server')
     argument_parser.add_argument('--passwd', default='', metavar='PASSWORD', type=str, help='passphrase for the database server')
     argument_parser.add_argument('input_files', metavar='FILE', type=str, nargs='*', help='(list of) file names')
-    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
+    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'neologismen', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
     argument_parser.add_argument('-r', '--remote', action='store_true', default=False, help='use a remote repository (eXist, dwdswb only)')
     argument_parser.add_argument('-v', '--verbose', action='store_true', default=False, help='enable verbose diagnostic messages')
     argument_parser.add_argument('-V', '--version', type=str, metavar='VERSION_NUMBER', help='specify the version number')
@@ -299,6 +319,8 @@ if __name__ == '__main__':
         dictionary = WDG(arguments.input_files)
     elif arguments.dictionary_type == 'dwb1':
         dictionary = DWB1(arguments.input_files)
+    elif arguments.dictionary_type == 'neologismen':
+        dictionary = Neologismen(arguments.input_files)
     elif arguments.dictionary_type == 'wortgeschichten':
         dictionary = Wortgeschichten(arguments.input_files)
 

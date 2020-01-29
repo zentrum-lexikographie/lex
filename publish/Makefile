@@ -5,12 +5,15 @@ mysql = /usr/bin/mysql -sN
 mysqldump = /usr/bin/mysqldump
 
 all:
-	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|wortgeschichten)-update"
+	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|neologismen|wortgeschichten)-update"
 
 environment:
 	/bin/mkdir -p backup/
 	@if [ -z "${src_pass}" ] ; then echo '\nPlease set $${src_pass}!\n' ; /bin/false ; fi
 	$(eval mysql += -h$(src_host) -u$(src_user) -p$(src_pass))
+
+neologismen-backup: environment
+	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) neologismen > ./backup/backup-neologismen-`date -Iseconds`.sql
 
 wortgeschichten-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wortgeschichten > ./backup/backup-wortgeschichten-`date -Iseconds`.sql
@@ -29,6 +32,17 @@ wdg-backup: environment
 
 openthesaurus-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) openthesaurus > ./backup/backup-openthesaurus-`date -Iseconds`.sql
+
+neologismen-update: neologismen-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM neologismen_beta.article;"
+	$(mysql) -e "SELECT COUNT(*) FROM neologismen_beta.lemma;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS neologismen.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS neologismen.lemma;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE neologismen_beta.article TO neologismen.article;"
+	$(mysql) -e "RENAME TABLE neologismen_beta.lemma TO neologismen.lemma;"
 
 wortgeschichten-update: wortgeschichten-backup
 	# check whether the source database exists
