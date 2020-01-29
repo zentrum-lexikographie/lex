@@ -10,9 +10,13 @@
             [zdl-lex-common.util :refer [uuid]]
             [clojure.spec.alpha :as s]
             [zdl-lex-common.spec :as spec]
-            [clojure.string :as str])
+            [clojure.string :as str]
+            [taoensso.timbre :as timbre])
   (:import java.util.concurrent.locks.ReentrantReadWriteLock
-           java.util.concurrent.TimeUnit))
+           java.util.concurrent.TimeUnit
+           java.net.URI
+           org.h2.jdbcx.JdbcConnectionPool
+           org.h2.jdbcx.JdbcDataSource))
 
 (defonce global-lock (ReentrantReadWriteLock.))
 
@@ -38,15 +42,19 @@
 
 (def-db-fns "zdl_lex_server/lock.sql")
 
-(defstate ^{:on-reload :noop} db
-  :start (let [db {:dbtype "h2"
-                   :dbname (str (fs/file (env :data-dir) "locks"))
-                   :user "sa"
-                   :password ""}]
+(defstate datasource
+  :start
+  (-> (URI. "jdbc:h2" (str (fs/file (env :data-dir) "locks")) nil)
+      (str)
+      (JdbcConnectionPool/create "sa" ""))
+  :stop (.dispose datasource))
+
+(defstate db
+  :start (let [db {:datasource datasource}]
            (jdbc/with-db-connection [c db]
              (create-lock-table c)
-             (create-lock-query-index c))
-           db))
+             (create-lock-query-index c)
+             db)))
 
 (defn cleanup-locks []
   (jdbc/with-db-transaction [c db]
@@ -63,7 +71,7 @@
         paths (map (partial str/join "/") paths)]
     (apply sorted-set paths)))
 
-(defn- lock-from-req
+(defn- request->lock
   [{{owner :user} :identity owner_ip :remote-addr :as req}]
   (let [parameters (:parameters req)
         {:keys [resource]} (:path parameters)
@@ -75,16 +83,18 @@
      :token token :owner owner :owner_ip owner_ip
      :now now :expires expires}))
 
-(defn- dissoc-token
-  [lock]
-  (dissoc lock :token))
+(defn- lock->response
+  [lock & {:keys [token?] :or {token? false}}]
+  (->> [:resource :owner :owner_ip :expires]
+       (concat (if token? [:token]))
+       (select-keys lock)))
 
 (defn locked-by-other?
   [req]
-  (let [lock (lock-from-req req)]
+  (let [lock (request->lock req)]
     (jdbc/with-db-transaction [c db {:read-only? true}]
       (let [locks (select-other-locks c lock)]
-        (some-> locks last dissoc-token)))))
+        (some-> locks last lock->response)))))
 
 (defn wrap-resource-lock
   [handler]
@@ -101,30 +111,31 @@
 (defn read-locks [_]
   (jdbc/with-db-transaction [c db {:read-only? true}]
     (let [locks (select-locks db {:now (now)})
-          locks (map dissoc-token locks)]
+          locks (map lock->response locks)]
       (htstatus/ok locks))))
 
 (defn read-lock [req]
-  (let [lock (lock-from-req req)]
+  (let [lock (request->lock req)]
     (jdbc/with-db-transaction [c db {:read-only? true}]
-      (if-let [lock (last (select-active-locks c lock))]
-        (htstatus/ok (dissoc-token lock))
-        (htstatus/not-found)))))
+      (if-let [active (last (select-active-locks c lock))]
+        (htstatus/ok (lock->response active))
+        (htstatus/not-found (lock->response lock))))))
 
 (defn create-lock [req]
-  (let [lock (lock-from-req req)]
+  (let [lock (request->lock req)]
     (jdbc/with-db-transaction [c db {:isolation :serializable}]
       (if-let [other-lock (last (select-other-locks c lock))]
-        (htstatus/locked (dissoc-token other-lock))
+        (htstatus/locked (lock->response other-lock))
         (do (merge-lock c lock)
-            (htstatus/ok lock))))))
+            (htstatus/ok (lock->response lock :token? true)))))))
 
 (defn remove-lock [req]
-  (let [lock (lock-from-req req)]
+  (let [lock (request->lock req)]
     (jdbc/with-db-transaction [c db]
       (if-let [lock (select-active-lock c lock)]
         (let [lock (assoc lock :now (now))]
-          (delete-lock c lock) (htstatus/ok lock))
+          (delete-lock c lock)
+          (htstatus/ok (lock->response lock :token? true)))
         (htstatus/not-found lock)))))
 
 (s/def ::resource string?)

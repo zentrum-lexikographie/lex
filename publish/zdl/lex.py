@@ -1,6 +1,7 @@
 import re
 import unicodedata
 import requests
+import uuid
 
 from random import randrange
 from urllib.parse import urljoin, quote
@@ -18,6 +19,7 @@ class Server:
         self.base_url = base_url
         self.session = requests.Session()
         self.session.auth = http_auth
+        self.token = str(uuid.uuid1())
 
     def status(self):
         return json(self.session.get(urljoin(self.base_url, '/status')))
@@ -43,22 +45,21 @@ class Server:
         return zdl.article.fromstring(r.text)
 
     def locks(self):
-        return json(self.session.get(urljoin(self.base_url, '/lock')))
-
-    def acquire_lock(self, id, seconds):
-        pass
-
-    def release_lock(self, id):
-        pass
-
-    def acquire_global_lock(self, seconds):
-        return json(self.session.post(
-            urljoin(self.base_url, '/lock'),
-            params={'seconds': seconds}
+        return json(self.session.get(
+            urljoin(self.base_url, '/lock')
         ))
 
-    def release_global_lock(self):
-        return json(self.session.delete(urljoin(self.base_url, '/lock')))
+    def acquire_lock(self, id, seconds):
+        return json(self.session.post(
+            urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
+            params={'token': self.token, 'ttl': seconds}
+        ))
+
+    def release_lock(self, id):
+        return json(self.session.delete(
+            urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
+            params={'token': self.token}
+        ))
 
     def git_commit(self):
         return json(self.session.patch(

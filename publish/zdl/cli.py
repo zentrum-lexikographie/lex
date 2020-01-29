@@ -11,6 +11,10 @@ def home(ctx):
     return ctx.obj['home']
 
 
+def server(ctx):
+    return ctx.obj['server']
+
+
 def article_files(ctx):
     return zdl.article.files(home(ctx))
 
@@ -73,6 +77,19 @@ def qa(ctx):
 def wb2db(ctx):
     with article_progress(ctx, 'Red-f -> MySQL') as articles:
         zdl.mysql.wb2db(articles)
+
+
+@cli.command()
+@click.pass_context
+def lock(ctx):
+    try:
+        print(server(ctx).acquire_lock("", 90))
+        import time
+        time.sleep(60)
+    except Exception as e:
+        raise e
+    else:
+        print(server(ctx).release_lock(""))
 
 
 if __name__ == '__main__':

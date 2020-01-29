@@ -3,13 +3,14 @@
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
   (:require [clojure.string :as str]
+            [clojure.edn :as edn]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :as util]
             [manifold.deferred :as d]
             [byte-streams :as bs])
-  (:import [java.io ByteArrayInputStream ByteArrayOutputStream]
+  (:import [java.io ByteArrayInputStream ByteArrayOutputStream IOException]
            [java.net URLConnection URLStreamHandler]
            [ro.sync.exml.plugin.lock LockException LockHandler]))
 
@@ -21,18 +22,28 @@
 (def ^:private readable-date-time-formatter
   (java.time.format.DateTimeFormatter/ofPattern "dd.MM.YYYY', 'HH:mm' Uhr'"))
 
-(defn lock->exception [{:keys [resource owner owner_ip expires]}]
-  (let [owner (format "%s (IP: %s)" owner owner_ip)
+(defn lock->owner
+  [{:keys [owner owner_ip]}]
+  (format "%s (IP: %s)" owner owner_ip))
+
+(defn lock->message
+  [{:keys [resource expires] :as lock}]
+  (let [path (or (not-empty resource) "<alle>")
+        owner (lock->owner lock)
         until (.. (java.time.Instant/ofEpochMilli expires)
                   (atZone (java.time.ZoneId/systemDefault))
-                  (format readable-date-time-formatter))
-        message (->> ["Artikel gesperrt"
-                      ""
-                      (format "Pfad: %s" resource)
-                      (format "Von: %s" owner)
-                      (format "Ablaufdatum: %s" until)
-                      ""]
-                     (str/join \newline))]
+                  (format readable-date-time-formatter))]
+    (->> ["Artikel gesperrt"
+          ""
+          (format "Pfad: %s" path)
+          (format "Von: %s" owner)
+          (format "Ablaufdatum: %s" until)
+          ""]
+         (str/join \newline))))
+
+(defn lock->exception [lock]
+  (let [owner (lock->owner lock)
+        message (lock->message lock)]
     (doto (LockException. message true message) (.setOwnerName owner))))
 
 (defn -getLockHandler [this]
@@ -59,12 +70,25 @@
       (lexurl/url->id) (http/id->store-url)
       (str) (util/url {:token token})))
 
+(defn handle-store-response
+  [{:keys [status body] :as response}]
+  (condp = status
+    200 (ByteArrayInputStream. (bs/to-byte-array body))
+    423 (->>
+         (bs/to-string body)
+         (edn/read-string)
+         (lock->message)
+         (IOException.)
+         (d/error-deferred))
+    (d/error-deferred (IOException. (ex-info response)))))
+
 (defn store->stream
   [url]
   (->
    (http/request {:request-method :get :url url
-                  :accept "text/xml" :as :byte-array})
-   (d/chain :body #(ByteArrayInputStream. %))
+                  :accept "text/xml, application/edn"
+                  :throw-exceptions false})
+   (d/chain handle-store-response)
    (deref)))
 
 (defn stream->store
@@ -73,9 +97,11 @@
     (close []
       (->
        (http/request {:request-method :post :url url
-                      :content-type "text/xml" :body (.toString this "UTF-8")
-                      :accept "text/xml" :as :byte-array})
-       (d/chain :body #(bs/to-string % {:charset "UTF-8"}))
+                      :content-type "text/xml"
+                      :body (.toString this "UTF-8")
+                      :accept "text/xml, application/edn"
+                      :throw-exceptions false})
+       (d/chain handle-store-response)
        (deref)))))
 
 (def lexurl-handler

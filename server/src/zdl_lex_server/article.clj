@@ -45,11 +45,13 @@
 (def ^:private new-article-collection "Neuartikel")
 
 (s/def ::resource string?)
+(s/def ::token string?)
 (s/def ::form string?)
 (s/def ::pos string?)
 
 (def existing-article-parameters
-  {:path (s/keys :req-un [::resource])})
+  {:path (s/keys :req-un [::resource])
+   :query (s/keys :opt-un [::token])})
 (def new-article-parameters
   {:query (s/keys :req-un [::form ::pos])})
 
@@ -88,6 +90,5 @@
           :parameters new-article-parameters}
     :get {:handler get-article
           :parameters existing-article-parameters}
-    :post {:handler post-article
-           :parameters existing-article-parameters
-           :middleware [lock/wrap-resource-lock]}}])
+    :post {:handler (lock/wrap-resource-lock post-article)
+           :parameters existing-article-parameters}}])
