@@ -1,13 +1,13 @@
 (ns zdl-lex-client.http
-  (:require [clojure.core.async :as a]
-            [clojure.data.codec.base64 :as base64]
-            [clojure.java.io :as io]
-            [aleph.http :as http]
+  (:require [aleph.http :as http]
+            [aleph.http.client-middleware :refer [unexceptional-status?]]
             [byte-streams :as bs]
-            [manifold.stream :as s]
+            [clojure.core.async :as a]
+            [clojure.edn :as edn]
+            [clojure.java.io :as io]
+            [clojure.string :as str]
             [manifold.deferred :as d]
             [mount.core :refer [defstate]]
-            [taoensso.timbre :as timbre]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.query :as query]
             [zdl-lex-common.cron :as cron]
@@ -15,7 +15,7 @@
             [zdl-lex-common.util :refer [server-url]]
             [zdl-lex-common.xml :as xml])
   (:import [java.io File IOException]
-           [java.net ConnectException Authenticator Authenticator$RequestorType PasswordAuthentication URL]))
+           ro.sync.exml.plugin.lock.LockException))
 
 (def ^:private auth
   (atom 
@@ -34,11 +34,54 @@
               (-> status (bs/to-string {:charset "UTF-8"}) read-string)]
           (if (and user password) (reset! auth [user password])))))))
 
+(defn lock->owner
+  [{:keys [owner owner_ip]}]
+  (format "%s (IP: %s)" owner owner_ip))
+
+(def ^:private readable-date-time-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "dd.MM.YYYY', 'HH:mm' Uhr'"))
+
+(defn lock->message
+  [{:keys [resource expires] :as lock}]
+  (let [path (or (not-empty resource) "<alle>")
+        owner (lock->owner lock)
+        until (.. (java.time.Instant/ofEpochMilli expires)
+                  (atZone (java.time.ZoneId/systemDefault))
+                  (format readable-date-time-formatter))]
+    (->> ["Artikel gesperrt"
+          ""
+          (format "Pfad: %s" path)
+          (format "Von: %s" owner)
+          (format "Ablaufdatum: %s" until)
+          ""]
+         (str/join \newline))))
+
+(defn lock->exception [lock]
+  (let [owner (lock->owner lock)
+        message (lock->message lock)]
+    (doto (LockException. message true message) (.setOwnerName owner))))
+
+(defn handle-errors
+  [{:keys [status body] :as response}]
+  (cond
+    (unexceptional-status? status) response
+    (= 423 status) (->
+                    (if (map? body) body (-> body bs/to-string edn/read-string))
+                    (lock->exception)
+                    (d/error-deferred))
+    :else (->> (ex-info  (str "status: " status) response)
+               (IOException.)
+               (d/error-deferred))))
+
 (defn request
   [{:keys [url] :as req}]
-  (->> (if-let [auth (request-auth)] {:basic-auth auth})
-       (merge req {:url (str url) :character-encoding "utf-8"})
-       (http/request)))
+  (-> (if-let [auth (request-auth)] {:basic-auth auth})
+      (merge {:accept "application/edn"})
+      (merge req {:url (str url)
+                  :character-encoding "utf-8"
+                  :throw-exceptions false})
+      (http/request)
+      (d/chain handle-errors)))
 
 (defn get-xml [url]
   (->
@@ -72,8 +115,7 @@
   (->
    (request {:request-method :post
              :url (server-url "lock/" id {:ttl (str ttl) :token token})
-             :accept :edn :as :clojure
-             :throw-exceptions false})
+             :accept :edn :as :clojure})
    (d/chain :body)))
 
 (defn unlock [id token]
