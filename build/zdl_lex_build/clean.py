@@ -1,7 +1,7 @@
 import logging
 import shutil
 
-from zdl.build import project_dir
+from zdl_lex_build import project_dir
 
 
 def classes(name):

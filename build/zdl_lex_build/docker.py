@@ -2,8 +2,8 @@ import logging
 
 import docker
 
-from zdl.build import project_dir
-import zdl.build.version
+from zdl_lex_build import project_dir
+import zdl_lex_build.version
 
 _docker_registry = 'lex.dwds.de'
 
@@ -24,7 +24,7 @@ def docker_modules():
 
 
 def build():
-    current_version = zdl.build.version.current_version()
+    current_version = zdl_lex_build.version.current_version()
     for module in docker_modules():
         name = module.name
         tag = docker_tag(name, current_version)

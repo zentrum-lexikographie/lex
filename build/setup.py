@@ -10,7 +10,7 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        zdl-lex-build=zdl.build.cli:main
-        zdl-lex-clojure=zdl.build.clj:main
+        zdl-lex-build=zdl_lex_build.cli:main
+        zdl-lex-clojure=zdl_lex_build.clj:main
     '''
 )

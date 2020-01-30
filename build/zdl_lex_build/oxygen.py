@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 import subprocess
 
-from zdl.build import project_dir
+from zdl_lex_build import project_dir
 
 
 oxygen_dir = project_dir / 'oxygen'

@@ -6,7 +6,7 @@ import sys
 
 import requests
 
-from zdl.build import project_dir
+from zdl_lex_build import project_dir
 
 _java_version_re = re.compile(r'"(\d+\.\d+).*"')
 

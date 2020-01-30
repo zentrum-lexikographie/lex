@@ -5,7 +5,7 @@ import re
 
 from git import Repo
 
-from zdl.build import project_dir
+from zdl_lex_build import project_dir
 
 repo = Repo(project_dir.as_posix())
 
