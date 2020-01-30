@@ -5,6 +5,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Click==7.0',
+        'coloredlogs==10.0',
         'PyMySQL==0.9.3',
         'SQLAlchemy==1.3.11',
         'gitpython==3.0.4',
