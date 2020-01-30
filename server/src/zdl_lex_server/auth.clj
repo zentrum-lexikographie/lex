@@ -8,7 +8,7 @@
   (constantly true))
 
 (def admin?
-  (comp #{"admin"} :user :identity))
+  (comp some? #{"admin"} :user :identity))
 
 (def authenticated?
   (comp some? :identity))
