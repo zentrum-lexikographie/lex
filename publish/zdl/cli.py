@@ -1,10 +1,13 @@
 from pathlib import Path
+
 import click
 
 import zdl.lex
 import zdl.metadata
 import zdl.mysql
 import zdl.qa
+
+from zdl import logger
 
 
 def home(ctx):
@@ -83,13 +86,13 @@ def wb2db(ctx):
 @click.pass_context
 def lock(ctx):
     try:
-        print(server(ctx).acquire_lock("", 90))
+        logger.info(server(ctx).acquire_lock("", 90))
         import time
         time.sleep(60)
-    except Exception as e:
-        raise e
+    except Exception:
+        logger.exception('Error while acquiring lock')
     else:
-        print(server(ctx).release_lock(""))
+        logger.info(server(ctx).release_lock(""))
 
 
 if __name__ == '__main__':
