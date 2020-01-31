@@ -392,14 +392,24 @@ if __name__ == '__main__':
                 ]
                 if not headwords:
                     headwords = [str(text_only(lemma)) or u'']
+                
                 for headword in headwords:
+                    
                     headword = u''.join([
                         character
                         for character in unicodedata.normalize('NFC', headword)
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
-                    if headword and not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data and not (headword, hidx) in lemma_index:
-                        # maybe the second test suffices?
+                    
+                    if headword and (
+                            not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data
+                            # maybe the following test suffices?
+                            and not (headword, hidx) in lemma_index
+                            ) or (
+                                    # hook for neologismen which come without @hidx
+                                    (headword, hidx) in lemma_index and arguments.dictionary_type == 'neologismen'
+                            ):
+                        
                         lemma_count += 1
                         bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
