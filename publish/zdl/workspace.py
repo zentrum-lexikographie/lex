@@ -16,7 +16,7 @@ class Workspace:
         logger.info('Fetching from %s', self.origin)
         self.repo.remotes.origin.fetch()
 
-    def reset_to_remote(self):
+    def setup(self):
         dir_posix = self.dir.as_posix()
         if self.dir.is_dir():
             self.repo = git.Repo(dir_posix)
@@ -35,17 +35,19 @@ class Workspace:
         else:
             origin = self.repo.remotes.origin
 
+        logger.info('Setting up %s', self.remote_branch)
         self.fetch()
-
-        logger.info(
-            'Setting up %s and %s', self.remote_branch, self.local_branch
-        )
         assert (self.remote_branch in origin.refs)
         if self.remote_branch not in self.repo.heads:
             ref = origin.refs[self.remote_branch]
             head = self.repo.create_head(self.remote_branch, ref)
             head.set_tracking_branch(ref)
 
+        return self
+
+    def reset_to_remote(self):
+        logger.info('Setting up %s', self.local_branch)
+        self.fetch()
         if self.local_branch not in self.repo.heads:
             self.repo.create_head(
                 self.local_branch, self.repo.heads[self.remote_branch]
@@ -70,11 +72,16 @@ class Workspace:
             )
             self.repo.git.rebase(abort=True)
 
+        return self
+
     def push_to_remote(self):
         logger.info('Pushing %s to %s', self.local_branch, self.origin)
         if self.local_branch in self.repo.remotes.origin.refs:
             self.repo.git.push('origin', self.local_branch, delete=True)
+
         self.repo.git.push('origin', self.local_branch)
+
+        return self
 
 
 if __name__ == '__main__':
@@ -86,6 +93,7 @@ if __name__ == '__main__':
             'qa'
         )
 
+        ws.setup()
         ws.reset_to_remote()
         ws.rebase_on_remote()
         ws.push_to_remote()
