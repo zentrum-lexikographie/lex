@@ -109,7 +109,7 @@ grammatische_Beschreibung = element Grammatik {
 	# note: die Gruppe am Anfang des ersten Ausdrucks steht wg. neuer Rechtschreibvarianten
 	# note: der zweite Ausdruck steht wg. neuer Rechtschreibung für »ab sein« usw.
 	, element Partizip_II {
-		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|breit|Brust|dicht|Delfin|Delphin|ernst|Fahrrad|Gewähr|gut|Halt|Hohn|instand|in Stand|kalt|Maß|parallel|Rad|Rücken|Staub|trocken|wach|weich|wieder|wohl|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
+		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|breit|Brust|dicht|Delfin|Delphin|ernst|Fahrrad|Gewähr|gut|Halt|Hohn|instand|in Stand|kalt|Maß|Motorrad|parallel|Rad|Rücken|Staub|trocken|wach|weich|wieder|wohl|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
 		, Rechtschreibstatus ?
 	} *
 	# ##################
