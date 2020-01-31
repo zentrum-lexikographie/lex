@@ -8,6 +8,8 @@ from urllib.parse import urljoin, quote
 
 import zdl.article
 
+from zdl import logger
+
 
 def json(r):
     r.raise_for_status()
@@ -20,6 +22,9 @@ class Server:
         self.session = requests.Session()
         self.session.auth = http_auth
         self.token = str(uuid.uuid1())
+
+    def __str__(self):
+        return '<%s>' % self.base_url
 
     def status(self):
         return json(self.session.get(urljoin(self.base_url, '/status')))
@@ -52,23 +57,27 @@ class Server:
         ))
 
     def acquire_lock(self, id, seconds):
+        logger.info('%s: Locking "%s" for %d seconds', self, id, seconds)
         return json(self.session.post(
             urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
             params={'token': self.token, 'ttl': seconds}
         ))
 
     def release_lock(self, id):
+        logger.info('%s: Unlocking "%s"', self, id)
         return json(self.session.delete(
             urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
             params={'token': self.token}
         ))
 
     def git_commit(self):
+        logger.info('%s: Triggering git commit', self)
         return json(self.session.patch(
             urljoin(self.base_url, '/git')
         ))
 
     def git_rebase(self, object_id):
+        logger.info('%s: Rebasing git head on %s', self, object_id)
         return json(self.session.post(
             urljoin(urljoin(self.base_url, '/git/ff/'), object_id)
         ))

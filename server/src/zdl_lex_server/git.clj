@@ -152,7 +152,7 @@
       (htstatus/ok (fast-forward refs))
       (catch Throwable t
         (timbre/warn t)
-        (htstatus/bad-request (ex-data t))))
+        (htstatus/bad-request)))
     (htstatus/bad-request)))
 
 (s/def ::refs string?)
