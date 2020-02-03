@@ -20,7 +20,7 @@
                    "org.apache.commons.httpclient.*"
                    "org.apache.http.*"
                    "org.eclipse.jetty.*"
-                   "org.eclipse.jgit.*"]}))
+                   #_"org.eclipse.jgit.*"]}))
 
 (defn configure []
   (configure-slf4j-bridge)
