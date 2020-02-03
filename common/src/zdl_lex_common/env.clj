@@ -16,7 +16,7 @@
    :http-log false
    :http-anon-user "nobody"
    :data-dir "zdl-lex-data"
-   :git-origin "git@lex.dwds.de:lex.git"
+   :git-origin "git@git.zdl.org:zdl/wb.git"
    :git-branch (str "zdl-lex-server/" host-name)
    :git-commit-user "ZDL-Lex"
    :git-commit-email "noreply@lex.dwds.de"
