@@ -3,6 +3,7 @@
             [clj-jgit.porcelain :as jgit]
             [clj-jgit.querying :as jgit-query]
             [clojure.core.async :as a]
+            [clojure.java.shell :as sh]
             [clojure.set :refer [union]]
             [clojure.spec.alpha :as s]
             [me.raynes.fs :as fs]
@@ -14,41 +15,59 @@
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-lex-server.lock :as lock]
-            [zdl-lex-common.log :as log]))
-
-(def ^:private credentials
-  (->clean-map
-   {:login (env :git-auth-user)
-    :pw (env :git-auth-password)
-    :name (env :git-auth-key-name)
-    :key-dir (env :git-auth-key-dir)
-    :trust-all? true}))
-
-(defmacro with-auth
-  [& body]
-  `(jgit/with-identity credentials
-     (jgit/with-credentials credentials
-       ~@body)))
+            [zdl-lex-common.log :as log]
+            [clojure.string :as str]))
 
 (def dir (file (env :data-dir) "git"))
 
-(def branch
-  (env :git-branch))
+(def branch (env :git-branch))
 
-(def ^:private all-refs
-  ["refs/tags/*:refs/tags/*" "refs/heads/*:refs/remotes/origin/*"])
+(def cmd-env
+  (->>
+   (let [{:keys [git-auth-key-dir git-auth-key-name]} env]
+     (concat
+      ["ssh"
+       "-o" "UserKnownHostsFile=/dev/null"
+       "-o" "StrictHostKeyChecking=no"]
+      (if (and git-auth-key-dir git-auth-key-name)
+        ["-i" (str (fs/file git-auth-key-dir git-auth-key-name))])))
+   (str/join " ")
+   (array-map "GIT_SSH_COMMAND")
+   (merge (into {} (System/getenv)))))
 
-(defn git-load
-  []
-  (timbre/info {:git {:load (str dir)}})
-  (jgit/load-repo (str dir)))
+(defn git [& args]
+  (->>
+   (let [result (apply sh/sh (concat ["git"] args))
+         exit-code (result :exit)
+         succeeded? (= exit-code 0)]
+     (timbre/log (if succeeded? :debug :warn) {:git args :result result})
+     (when-not succeeded? (throw (ex-info (str args) result)))
+     result)
+   (sh/with-sh-env cmd-env)
+   (sh/with-sh-dir dir)))
+
+(defstate git-cmd
+  :start (let [{:keys [out]} (git "--version")]
+           (timbre/info {:git (str/trim out)})))
 
 (defn git-clone
   []
   (let [origin (env :git-origin)]
     (timbre/info {:git {:clone origin}})
-    (with-auth
-      (jgit/git-clone origin :branch "HEAD" :dir (str dir)))))
+    (git "clone" origin (str dir))))
+
+(defn git-fetch
+  []
+  (git "fetch" "origin" "--tags"))
+
+(defn git-push
+  []
+  (git "push" "origin" branch))
+
+(defn git-load
+  []
+  (timbre/info {:git {:load (str dir)}})
+  (jgit/load-repo (str dir)))
 
 (defn git-checkout
   [repo]
@@ -60,18 +79,11 @@
 
 (defstate ^{:on-reload :noop} repo
   :start (lock/with-global-write-lock
-           (let [repo (if-not (fs/directory? (file dir ".git")) (git-clone) (git-load))]
+           (let [repo (if-not (fs/directory? (file dir ".git")) (git-clone))
+                 repo (git-load)]
              (git-checkout repo)
              (timbre/info {:git {:repo (str dir) :branch branch}})
              repo)))
-
-(defn git-fetch []
-  (with-auth
-    (jgit/git-fetch repo :ref-specs all-refs)))
-
-(defn git-push []
-  (with-auth
-    (jgit/git-push repo :refs branch)))
 
 (defn- git-path
   "Path relative to the git directory."
@@ -114,8 +126,8 @@
         (when-let [deleted (not-empty (get-in changes [:git :deleted]))]
           (jgit/git-rm repo deleted))
         (jgit/git-commit repo "zdl-lex-server" :committer committer)
-        (git-push)
-        (send-changes changes))
+        (send-changes changes)
+        (git-push))
       (changes :git))))
 
 (defn fast-forward [refs]
