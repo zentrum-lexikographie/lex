@@ -1,4 +1,4 @@
-FROM openjdk:14-jdk-alpine
+FROM openjdk:14-jdk-buster
 COPY org.zdl.lex.server.jar /app/org.zdl.lex.server.jar
 
 ENV ZDL_LEX_DATA_DIR "/data"
