@@ -51,10 +51,8 @@
 (s/def ::http-log boolean?)
 (s/def ::http-anon-user string?)
 
-(s/def ::git-auth-user string?)
-(s/def ::git-auth-password string?)
-(s/def ::git-auth-key-name string?)
 (s/def ::git-auth-key-dir dir?-spec)
+(s/def ::git-auth-key-name string?)
 (s/def ::git-origin string?)
 (s/def ::git-branch string?)
 (s/def ::git-commit-user string?)
@@ -84,8 +82,7 @@
                    ::server-base
                    ::mantis-base ::mantis-project
                    ::solr-base ::solr-core]
-          :opt-un [::git-auth-user ::git-auth-password
-                   ::git-auth-key-name ::git-auth-key-dir
+          :opt-un [::git-auth-key-dir ::git-auth-key-name
                    ::server-user ::server-password
                    ::mantis-user ::mantis-password
                    ::corpora-user ::corpora-password]))

@@ -26,11 +26,9 @@
   (->>
    (let [{:keys [git-auth-key-dir git-auth-key-name]} env]
      (concat
-      ["ssh"
-       "-o" "UserKnownHostsFile=/dev/null"
-       "-o" "StrictHostKeyChecking=no"]
+      ["ssh" "-o" "StrictHostKeyChecking=no"]
       (if (and git-auth-key-dir git-auth-key-name)
-        ["-i" (str (fs/file git-auth-key-dir git-auth-key-name))])))
+        ["-i" (str (file git-auth-key-dir git-auth-key-name))])))
    (str/join " ")
    (array-map "GIT_SSH_COMMAND")
    (merge (into {} (System/getenv)))))
@@ -38,8 +36,7 @@
 (defn git [& args]
   (->>
    (let [result (apply sh/sh (concat ["git"] args))
-         exit-code (result :exit)
-         succeeded? (= exit-code 0)]
+         succeeded? (= (result :exit) 0)]
      (timbre/log (if succeeded? :debug :warn) {:git args :result result})
      (when-not succeeded? (throw (ex-info (str args) result)))
      result)
@@ -54,15 +51,15 @@
   []
   (let [origin (env :git-origin)]
     (timbre/info {:git {:clone origin}})
-    (git "clone" origin (str dir))))
+    (git "clone" "--quiet" origin (str dir))))
 
 (defn git-fetch
   []
-  (git "fetch" "origin" "--tags"))
+  (git "fetch" "--quiet" "origin" "--tags"))
 
 (defn git-push
   []
-  (git "push" "origin" branch))
+  (git "push" "--quiet" "origin" branch))
 
 (defn git-load
   []
@@ -79,8 +76,10 @@
 
 (defstate ^{:on-reload :noop} repo
   :start (lock/with-global-write-lock
-           (let [repo (if-not (fs/directory? (file dir ".git")) (git-clone))
-                 repo (git-load)]
+           (when-not (fs/directory? (file dir ".git"))
+             (fs/mkdirs dir)
+             (git-clone))
+           (let [repo (git-load)]
              (git-checkout repo)
              (timbre/info {:git {:repo (str dir) :branch branch}})
              repo)))
@@ -127,7 +126,8 @@
           (jgit/git-rm repo deleted))
         (jgit/git-commit repo "zdl-lex-server" :committer committer)
         (send-changes changes)
-        (git-push))
+        ;; Changes will be propagated, even if pushing to the remote fails
+        (try (git-push) (catch Throwable t)))
       (changes :git))))
 
 (defn fast-forward [refs]
