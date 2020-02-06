@@ -20,6 +20,7 @@
    :git-branch (str "zdl-lex-server/" host-name)
    :git-commit-user "ZDL-Lex"
    :git-commit-email "noreply@lex.dwds.de"
+   :git-auth-key-name "id_rsa"
    :server-base "https://lex.dwds.de/"
    :exist-base "http://spock.dwds.de:8080/exist"
    :mantis-base "http://odo.dwds.de/mantis"
