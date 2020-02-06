@@ -44,8 +44,11 @@
    (sh/with-sh-dir dir)))
 
 (defstate git-cmd
-  :start (let [{:keys [out]} (git "--version")]
-           (timbre/info {:git (str/trim out)})))
+  :start (do
+           (when-not (fs/exists? dir)
+             (fs/mkdirs dir))
+           (let [{:keys [out]} (git "--version")]
+             (timbre/info {:git (str/trim out)}))))
 
 (defn git-clone
   []
@@ -77,7 +80,6 @@
 (defstate ^{:on-reload :noop} repo
   :start (lock/with-global-write-lock
            (when-not (fs/directory? (file dir ".git"))
-             (fs/mkdirs dir)
              (git-clone))
            (let [repo (git-load)]
              (git-checkout repo)
