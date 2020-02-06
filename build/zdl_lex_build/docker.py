@@ -1,5 +1,4 @@
 import logging
-
 import docker
 
 from zdl_lex_build import project_dir
@@ -29,7 +28,9 @@ def build():
         name = module.name
         tag = docker_tag(name, current_version)
         logging.info({'tag': tag})
-        _docker_client.images.build(path=module.as_posix(), tag=tag)
+        _docker_client.images.build(
+            path=module.as_posix(), tag=tag, rm=True, forcerm=True
+        )
 
 
 def run_container(name, *args, **kwargs):
@@ -40,6 +41,26 @@ def run_container(name, *args, **kwargs):
     except docker.errors.NotFound:
         kwargs["name"] = name
         _docker_client.containers.run(*args, **kwargs)
+
+
+def run_server():
+    image = docker_tag('server', zdl_lex_build.version.current_version())
+    git_volume = (project_dir / 'data' / 'git').as_posix()
+    data_volume = (project_dir / 'data' / 'volume').as_posix()
+    run_container(
+        'zdl_lex_server',
+        image,
+        detach=True,
+        environment={
+            'ZDL_LEX_GIT_BRANCH': 'zdl-lex-server/docker',
+            'ZDL_LEX_GIT_ORIGIN': 'file:///git'
+        },
+        network_mode='host',
+        volumes={
+            data_volume: {'bind': '/data', 'mode': 'rw'},
+            git_volume: {'bind': '/git', 'mode': 'ro'}
+        }
+    )
 
 
 def run_solr(image):
@@ -66,3 +87,7 @@ def run_dwdswb_db():
         },
         network_mode='host'
     )
+
+
+if __name__ == '__main__':
+    run_server()
