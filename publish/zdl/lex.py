@@ -4,7 +4,7 @@ import requests
 import uuid
 
 from random import randrange
-from urllib.parse import urljoin, quote
+from urllib.parse import urljoin, urlparse, urlunparse, quote
 
 import zdl.article
 
@@ -17,14 +17,21 @@ def json(r):
 
 
 class Server:
-    def __init__(self, base_url='https://lex.dwds.de/', http_auth=None):
+    def __init__(self, base_url='https://lex.dwds.de/',
+                 http_auth=None, token=None):
         self.base_url = base_url
         self.session = requests.Session()
         self.session.auth = http_auth
-        self.token = str(uuid.uuid1())
+        self.token = token or str(uuid.uuid1())
 
     def __str__(self):
-        return '<%s>' % self.base_url
+        server_url = urlparse(self.base_url)
+        server_user, _ = self.session.auth or (None, None)
+        if server_user:
+            server_url = server_url._replace(
+                netloc='@'.join((server_user, server_url.netloc))
+            )
+        return "<%s>" % urlunparse(server_url)
 
     def status(self):
         return json(self.session.get(urljoin(self.base_url, '/status')))
