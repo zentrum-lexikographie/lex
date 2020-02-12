@@ -10,7 +10,7 @@
 
 (def facet-title
   {:status "Status"
-   :authors "Autor"
+   :author "Autor"
    :editors "Redakteur"
    :sources "Quelle"
    :type "Typ"
@@ -19,7 +19,7 @@
 
 (def facet-field
   {:status "status"
-   :authors "autor"
+   :author "autor"
    :editors "red"
    :sources "quelle"
    :type "typ"
@@ -95,7 +95,7 @@
   (let [result->list-model #(->> (or (some-> facets %) {})
                                  (into [])
                                  (sort-by first))
-        facet-lists (for [k [:status :authors :editors :timestamp
+        facet-lists (for [k [:status :author :editors :timestamp
                              :sources :tranche :type]]
                       (condp = k
                         :timestamp

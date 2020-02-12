@@ -106,7 +106,7 @@
         tomorrow (timestamp->str tomorrow)
         boundaries (map timestamp->str boundaries)]
     {"facet" "true"
-     "facet.field" ["authors_ss" "editors_ss"
+     "facet.field" ["author_s" "editors_ss"
                     "sources_ss" "tranche_ss"
                     "type_ss" "pos_ss" "status_ss"]
      "facet.limit" "-1"

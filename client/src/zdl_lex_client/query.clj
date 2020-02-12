@@ -3,7 +3,8 @@
             [clojure.string :as str]))
 
 (def ^:private field-name-mapping
-  {"autor" "authors"
+  {"autor" "author"
+   "autoren" "authors"
    "red" "editors"
    "def" "definitions"
    "form" "forms"
