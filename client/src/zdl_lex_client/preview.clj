@@ -28,11 +28,8 @@
   :stop (editor->id))
 
 (defn render [id]
-  ;; article path needs double-encoding because zwei.dwds.de simply appends it
-  ;; to eXist's REST base URL
-  (let [d (url-encode (str "dwdswb/data/" id))]
-    (->> (url "http://zwei.dwds.de/wb/existdb/" {:d d})
-         (ws/open-url ws/instance))))
+  (->> (url "http://zwei.dwds.de/wb/existdb/" {:d id})
+       (ws/open-url ws/instance)))
 
 (defn handle-action [e]
   (let [id @id
