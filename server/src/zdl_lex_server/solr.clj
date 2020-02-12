@@ -115,8 +115,6 @@
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
-(comment
-  (facet-params))
 (defn handle-search [req]
   (let [params (-> req :parameters :query)
         {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
