@@ -134,7 +134,7 @@
 (defn create-article [form pos]
   (->
    (request {:request-method :put
-             :url (server-url "/article" {:form form :pos pos})
+             :url (server-url "/article/" {:form form :pos pos})
              :accept :edn :as :clojure})
    (d/chain :body)))
 
