@@ -17,5 +17,9 @@ setup(
         'pytz==2019.2',
         'requests==2.22.0',
         'tabulate==0.8.6'
-    ]
+    ],
+    entry_points='''
+        [console_scripts]
+        zdl-duplicates=zdl.duplicates:cli
+    '''
 )
