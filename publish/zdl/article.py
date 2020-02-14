@@ -35,7 +35,7 @@ _ws_run = re.compile(r'\s+')
 
 
 def normalize_text(s):
-    return _ws_run.sub(' ', s or '')
+    return _ws_run.sub(' ', s or '').strip()
 
 
 def is_pi(node):
