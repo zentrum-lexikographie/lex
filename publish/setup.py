@@ -5,9 +5,10 @@ setup(
     packages=find_packages(),
     install_requires=[
         'Click==7.0',
-        'coloredlogs==10.0',
+        'PyICU==2.4.2',
         'PyMySQL==0.9.3',
         'SQLAlchemy==1.3.11',
+        'coloredlogs==10.0',
         'gitpython==3.0.4',
         'lxml==4.4.1',
         'parsimonious==0.8.1',
