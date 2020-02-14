@@ -42,6 +42,13 @@ def cli(csv_file, article_dirs):
             files = tuple(sorted(files))
             duplicates[files].append(lemma)
 
+        # check marked homographs against identical forms *without* index mark
+        if '#' in lemma:
+            baseform = lemma.split('#', 1)[0]
+            if baseform in lemma_index:
+                files = tuple(sorted(lemma_index[baseform]))
+                duplicates[files].append(lemma)
+
     if len(duplicates) == 0:
         return
 
