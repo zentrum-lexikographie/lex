@@ -1,3 +1,4 @@
+from collections import Iterable
 from pathlib import Path
 
 import click
@@ -6,6 +7,15 @@ from icu import Collator, Locale
 import zdl.article
 
 collator = Collator.createInstance(Locale('de_DE.UTF-8'))
+
+
+def icu_sortkey(v):
+    if isinstance(v, str):
+        return collator.getSortKey(v)
+    elif isinstance(v, Iterable):
+        return tuple(map(collator.getSortKey, v))
+    else:
+        return collator.getSortKey(v)
 
 
 def article_files(article_dirs):

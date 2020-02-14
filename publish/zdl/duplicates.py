@@ -1,10 +1,10 @@
-from pathlib import Path
 from collections import defaultdict
 
 import csv
 import click
 
 import zdl.article
+from zdl.util import article_progress, icu_sortkey
 
 
 @click.option(
@@ -19,35 +19,34 @@ import zdl.article
     type=click.Path(exists=True, file_okay=False, resolve_path=True)
 )
 @click.command()
-def cli(csv_file, article_dirs):
+def cli(article_dirs, csv_file):
     """Detects duplicate headwords defined in XML documents in the given
     ARTICLE_DIRS."""
 
-    # index all XML documents by lemma/headword
-    lemma_index = defaultdict(set)
-    for article_dir in (article_dirs or []):
-        article_dir = Path(article_dir)
-        for f in zdl.article.files(article_dir):
-            p = f.relative_to(article_dir).as_posix()
+    # index all XML documents by lemma and hidx
+    lemma_index = defaultdict(lambda: defaultdict(set))
+    with article_progress(article_dirs, 'Red-f -> Duplicates') as articles:
+        for (f, p) in articles:
             for (document, article) in zdl.article.parse(f):
                 for md in zdl.article.metadata(article):
                     if md['status'] == "Red-f":
-                        lemma_index[md['headword']].add(p)
+                        lemma_index[md['name']][md.get('hidx') or ''].add(p)
+
+    # Homographs match their equivalent without a hidx
+    for lemma, homographs in lemma_index.items():
+        if '' in homographs:
+            for hidx, files in homographs.items():
+                if hidx != '':
+                    homographs[''].update(files)
 
     # invert lemma index, unifying duplicates with multiple surface forms
-    duplicates = defaultdict(list)
-    for lemma, files in lemma_index.items():
-        if len(files) > 1:
-            # tuples can be hashed and thus function as keys
-            files = tuple(sorted(files))
-            duplicates[files].append(lemma)
-
-        # check marked homographs against identical forms *without* index mark
-        if '#' in lemma:
-            baseform = lemma.split('#', 1)[0]
-            if baseform in lemma_index:
-                files = tuple(sorted(lemma_index[baseform]))
-                duplicates[files].append(lemma)
+    duplicates = defaultdict(set)
+    for lemma, homographs in lemma_index.items():
+        for hidx, files in homographs.items():
+            if len(files) > 1:
+                # tuples can be hashed and thus function as keys
+                files = tuple(sorted(files))
+                duplicates[files].add(lemma)
 
     if len(duplicates) == 0:
         return
@@ -60,9 +59,10 @@ def cli(csv_file, article_dirs):
         return tuple(l) + ((pad, ) * (length - len(l)))
 
     duplicates = sorted([
-        (pad(lemmata, max_lemmata) + pad(dup, max_files))
+        (pad(sorted(lemmata, key=icu_sortkey), max_lemmata) + pad(sorted(dup), max_files))
         for dup, lemmata in duplicates.items()
-    ])
+    ], key=icu_sortkey)
+
     csv_file = csv.writer(csv_file)
     csv_file.writerow(
         pad([], max_lemmata, 'Lemma') + pad([], max_files, 'ID')
