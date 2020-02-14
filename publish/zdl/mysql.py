@@ -1,9 +1,11 @@
 import collections
 import datetime
 
+import click
 from sqlalchemy import create_engine, MetaData
 
 import zdl.article
+import zdl.util
 
 _version = datetime.datetime.now().strftime('%Y-%m-%d')
 _ddl_statements = [
@@ -56,7 +58,7 @@ def read_articles(articles):
     lemma_index = collections.defaultdict(list)
     relation_index = collections.defaultdict(list)
 
-    for article_file in articles:
+    for (article_file, article_path) in articles:
         for document, article in zdl.article.parse(article_file, strip=True):
             if not zdl.article.has_status('Red-f', article):
                 continue
@@ -118,8 +120,7 @@ def read_articles(articles):
                 })
 
 
-def import_articles(records, db_url=None, echo=False):
-    db_url = db_url or 'mysql+pymysql://dwdswb:dwdswb@localhost/dwdswb'
+def import_articles(records, db_url, echo=False):
     db = create_engine(db_url, echo=echo)
     for stmt in _ddl_statements:
         db.execute(stmt)
@@ -143,5 +144,34 @@ def import_articles(records, db_url=None, echo=False):
             db.execute(schema.tables[record_type].insert(), bucket)
 
 
-def wb2db(articles):
-    import_articles(read_articles(articles))
+@click.option('--mysql-host',
+              envvar='ZDL_LEX_MYSQL_HOST',
+              default='localhost')
+@click.option('--mysql-db',
+              envvar='ZDL_LEX_MYSQL_DB',
+              default='dwdswb')
+@click.option('--mysql-user',
+              envvar='ZDL_LEX_MYSQL_USER',
+              default='dwdswb')
+@click.option('--mysql-password',
+              envvar='ZDL_LEX_MYSQL_PASSWORD',
+              default='dwdswb')
+@click.argument(
+    'article_dirs',
+    nargs=-1,
+    type=click.Path(exists=True, file_okay=False, resolve_path=True)
+)
+@click.command()
+def cli(article_dirs, mysql_host, mysql_db, mysql_user, mysql_password):
+    mysql_url = 'mysql+pymysql://%s:%s@%s/%s' % (
+        mysql_user, mysql_password, mysql_host, mysql_db
+    )
+    with zdl.util.article_progress(article_dirs, 'Red-f -> MySQL') as articles:
+        import_articles(
+            read_articles(articles),
+            mysql_url
+        )
+
+
+if __name__ == '__main__':
+    cli()

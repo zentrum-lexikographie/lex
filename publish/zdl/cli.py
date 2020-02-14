@@ -77,13 +77,6 @@ def qa(ctx):
 
 @cli.command()
 @click.pass_context
-def wb2db(ctx):
-    with article_progress(ctx, 'Red-f -> MySQL') as articles:
-        zdl.mysql.wb2db(articles)
-
-
-@cli.command()
-@click.pass_context
 def lock(ctx):
     try:
         logger.info(server(ctx).acquire_lock("", 90))
