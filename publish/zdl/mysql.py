@@ -149,10 +149,10 @@ def import_articles(records, db_url, echo=False):
               default='localhost')
 @click.option('--mysql-db',
               envvar='ZDL_LEX_MYSQL_DB',
-              default='dwdswb')
+              default='dwdswb_beta')
 @click.option('--mysql-user',
               envvar='ZDL_LEX_MYSQL_USER',
-              default='dwdswb')
+              default='root')
 @click.option('--mysql-password',
               envvar='ZDL_LEX_MYSQL_PASSWORD',
               default='dwdswb')
