@@ -1,6 +1,7 @@
 import baseconv
 import datetime, pytz
 import lxml.etree as et
+import re
 import uuid
 
 _namespaces = {'d': 'http://www.dwds.de/ns/1.0',
@@ -30,8 +31,11 @@ def tail(el, default='', strip=True):
     return content(el.tail, default, strip) if el is not None else default
 
 
+_ws_run = re.compile(r'\s+')
+
+
 def normalize_text(s):
-    return s if s and len(s) > 0 else None
+    return _ws_run.sub(' ', s or '')
 
 
 def is_pi(node):
@@ -41,8 +45,8 @@ def is_pi(node):
 _text_nodes = xpath('.//text()')
 
 
-def el_text(el):
-    return ''.join(_text_nodes(el))
+def text_content(el):
+    return normalize_text(''.join(_text_nodes(el)))
 
 
 _file_filter = set(["indexedvalues.xml", "__contents__.xml"])
@@ -111,6 +115,10 @@ _genus_els = xpath('./d:Genus')
 _xml_id_qn = qname('xml', 'id')
 
 
+def _headword(name, hidx):
+    return '#'.join((name, hidx)) if hidx else name
+
+
 def metadata(article):
     xml_id = article.get(str(_xml_id_qn))
     typ = article.get('Typ') or article.get('type', '')
@@ -120,13 +128,15 @@ def metadata(article):
     timestamp = article.get('Zeitstempel', '1000-01-01')
     recommended = article.get('Empfehlung') == 'ja'
     for sf in _surface_form_els(article):
-        name = text(sf)
+        name = text_content(sf)
         for gr in sf.itersiblings(str(_grammar_qn)):
-            yield {'name': name,
-                   'hidx': sf.get('hidx'),
+            hidx = sf.get('hidx')
+            yield {'headword': _headword(name, hidx),
+                   'name': name,
+                   'hidx': hidx,
                    'htype': sf.get('Typ', 'AR_G'),
-                   'pos': ''.join(map(text, _pos_els(gr))),
-                   'gen': ''.join(map(text, _genus_els(gr))),
+                   'pos': ''.join(map(text_content, _pos_els(gr))),
+                   'gen': ''.join(map(text_content, _genus_els(gr))),
                    'type': typ,
                    'author': author,
                    'status': status,
@@ -146,7 +156,7 @@ def relations(article):
         lemma, = _target_lemma_els(rel)
         yield (
             rel.get('Typ'),
-            text(lemma),
+            text_content(lemma),
             lemma.get('hidx')
         )
 

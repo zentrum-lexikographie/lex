@@ -1,6 +1,6 @@
 import lxml.etree as et
 import unicodedata
-from .article import xpath, qname, el_text, text, tail
+from .article import xpath, qname, text_content, text
 
 
 _expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.'))
@@ -10,7 +10,7 @@ _definition_els = xpath('//d:Definition')
 def check_abbreviations_in_definitions(element):
     comments = []
     for definition in _definition_els(element):
-        for token in el_text(definition).split():
+        for token in text_content(definition).split():
             if token.endswith('.') and token not in _expected_abbreviations:
                 comments.append((definition, 'nicht erlaubte Abkürzung'))
     return comments
@@ -66,7 +66,7 @@ _expected_codepoints = {
 
 def _check_chars(root, norm):
     comments = []
-    txt = unicodedata.normalize('NFKD', el_text(root))
+    txt = unicodedata.normalize('NFKD', text_content(root))
     for char in txt:
         if char not in _expected_codepoints[norm]:
             comments.append((root, 'Zeichenfehler: %s' % repr(char)))
@@ -147,7 +147,7 @@ def transliterate(element):
 
     # for mixed content, more than one pass may be required
     for e in element.iter(str(_sample_qn)):
-        txt = el_text(e)
+        txt = text_content(e)
         for t in _transliterations:
             if t in txt:
                 comments.append((e, 'Zeichenkombinationsfehler: %s' % t))
@@ -163,7 +163,7 @@ _source_text_els = xpath('.//d:Beleg/d:Belegtext')
 def check_final_punctuation(element):
     comments = []
     for e in _source_text_els(element):
-        t = ' '.join(el_text(e)).split()
+        t = ' '.join(text_content(e)).split()
 
         if len(t) < 10:
             comments.append((e, 'Beleg zu kurz?'))
@@ -292,8 +292,8 @@ def check_for_missing_whitespace(element):
     comments = []
     for target in (_sample_qn, _definition_qn):
         for e in element.iter(str(target)):
-            txt = ' '.join(el_text(e).split())
-            bib_ref = ' '.join(''.join(map(el_text, _source_els(e))).split())
+            txt = ' '.join(text_content(e).split())
+            bib_ref = ' '.join(''.join(map(text_content, _source_els(e))).split())
 
             # no check within //Fundstelle and we also ignore explicitly
             # given exceptions
@@ -342,7 +342,7 @@ def check_balanced_characters(article):
                _collocation_qn, _collocation1_qn, _collocation2_qn)
     for target in targets:
         for e in article.iter(str(target)):
-            txt = el_text(e)
+            txt = text_content(e)
             txt = ' '.join([t for t in txt.split() if t not in _parentesis_exceptions])
             balanced_chars = ''.join([char for char in txt if char in '»«()[]'])
             length = 0

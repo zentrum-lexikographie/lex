@@ -32,11 +32,7 @@ def cli(csv_file, article_dirs):
             for (document, article) in zdl.article.parse(f):
                 for md in zdl.article.metadata(article):
                     if md['status'] == "Red-f":
-                        name = md['name']
-                        if len(name) > 0:
-                            hidx = md['hidx']
-                            headword = '#'.join((name, hidx)) if hidx else name
-                            lemma_index[headword].add(p)
+                        lemma_index[md['headword']].add(p)
 
     # invert lemma index, unifying duplicates with multiple surface forms
     duplicates = defaultdict(list)
