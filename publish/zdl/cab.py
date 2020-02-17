@@ -1,6 +1,5 @@
 from collections import defaultdict
 import csv
-from pathlib import Path
 
 import click
 import requests
@@ -12,9 +11,11 @@ cab_query_url = 'https://kaskade.dwds.de/dstar/cab/query'
 # cab_query_url = 'http://data.dwds.de:9096/query'
 
 
-def lemma(forms):
+def lemmatize(forms):
     data = {
-        'fmt': 'json', 'a': 'norm1', 'tokenize': '0',
+        'fmt': 'json',
+        'a': 'lemma1',  # 'default1' # 'norm1',
+        'tokenize': '0',
         'q': ' '.join(forms)
     }
     r = requests.post(cab_query_url, data=data)
@@ -44,20 +45,20 @@ def lemma(forms):
 @click.command()
 def cli(article_dirs, csv_file):
     lemma_index = defaultdict(set)
-
-    for article_dir in (article_dirs or []):
-        article_dir = Path(article_dir)
-        for f in zdl.article.files(article_dir):
-            p = f.relative_to(article_dir).as_posix()
+    with zdl.util.article_progress(article_dirs, 'WB -> Lemma') as articles:
+        for f, p in articles:
             for (document, article) in zdl.article.parse(f):
                 for md in zdl.article.metadata(article):
                     lemma_index[md['name']].add(p)
     csv_file = csv.writer(csv_file)
-    lemmata = sorted(
-        lemma_index.keys(), key=zdl.util.collator.getSortKey
-    )
-    for lemma in lemmata:
-        csv_file.writerow([lemma] + list(lemma_index.get(lemma)))
+    lemmata = sorted(lemma_index.keys(), key=zdl.util.icu_sortkey)
+    for i in range(0, len(lemmata), 1000):
+        batch = lemmata[i:i + 1000]
+        cab_lemmata = lemmatize(batch)
+        for lemma in batch:
+            csv_file.writerow(
+                [lemma, cab_lemmata.get(lemma, '')] + list(lemma_index.get(lemma))
+            )
 
 
 if __name__ == '__main__':

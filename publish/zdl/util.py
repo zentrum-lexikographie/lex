@@ -1,4 +1,4 @@
-from collections import Iterable
+from collections.abc import Iterable
 from pathlib import Path
 
 import click
@@ -19,7 +19,7 @@ def icu_sortkey(v):
 
 
 def article_files(article_dirs):
-    for d in article_dirs:
+    for d in (article_dirs or []):
         d = Path(d)
         for f in zdl.article.files(d):
             yield (f, f.relative_to(d).as_posix())
