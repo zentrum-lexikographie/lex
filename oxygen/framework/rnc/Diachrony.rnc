@@ -479,6 +479,7 @@ Sprachen = (
 	| 'venezian'
 	| 'vlat'
 	| 'vogtlaend'
+	| 'volapuek'
 	| 'vor-ie'
 	| 'vorlat'
 	| 'vorkelt'
