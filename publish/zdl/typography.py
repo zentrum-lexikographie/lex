@@ -178,13 +178,13 @@ def check_final_punctuation(element):
 
 _tokenization_exceptions = (
     # whitelist of capitalized chars within words
-    'SonntagsBlick', 'McCarthy-Ära', '(WoW)', 'AfD.',
-    'FrischeKiste', 'GraWe', 'McEnroe', 'HochschulabsolventInnen',
-    '(TransMIT)', 'BayBG', 'KfZ-Zulieferers',
-    '»BiF«', 'NeuLand', 'eRikm', 'YouGov-Umfrage', 'GoSMS',
-    '(MfS)', 'McCormack)', '(SchwbG)', 'HipHop-Künstler',
-    'DeLillos', '(IGfM)', '(vCJD),', 'KaDeWe', 'HändlerInnen',
-    'YouTube-Szene', 'YouTube-Trends', 'YouTubes',
+    'SonntagsBlick', 'McCarthy-Ära', '(WoW)', 'AfD.', 'CyberProfit', 'LfV',
+    'FrischeKiste', 'GraWe', 'McEnroe', 'HochschulabsolventInnen', 'StVRG',
+    '(TransMIT)', 'BayBG', 'KfZ-Zulieferers', 'HelloFresh', 'LoanDepot',
+    '»BiF«', 'NeuLand', 'eRikm', 'YouGov-Umfrage', 'GoSMS', 'VfB',
+    '(MfS)', 'McCormack)', '(SchwbG)', 'HipHop-Künstler', 'VfL-Spielerinnen',
+    'DeLillos', '(IGfM)', '(vCJD),', 'KaDeWe', 'HändlerInnen', 'KünstlerInnen',
+    'YouTube-Szene', 'YouTube-Trends', 'YouTubes', 'CareerCalling',
     'YouTube.', 'DuVernay', 'LiMo', 'GründerInnen',
     'KapitalgeberInnen', 'DradioWissen', 'StGB.',
     'ExVira', '(ExVira', 'eBook-Konvertierung',
