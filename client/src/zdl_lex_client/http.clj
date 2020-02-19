@@ -13,7 +13,7 @@
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [server-url]]
-            [zdl-lex-common.xml :as xml])
+            [zdl-xml.util :as xml])
   (:import [java.io File IOException]
            ro.sync.exml.plugin.lock.LockException))
 

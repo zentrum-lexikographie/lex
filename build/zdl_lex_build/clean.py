@@ -14,5 +14,5 @@ def classes(name):
 
 def all_classes():
     # Plugin for OxygenXML Editor and Server component
-    for module in ['client', 'server', 'validator']:
+    for module in ['client', 'server']:
         classes(module)

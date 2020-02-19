@@ -4,7 +4,7 @@
             [ring.util.http-response :as htstatus]
             [ring.util.io :as rio]
             [taoensso.timbre :as timbre]
-            [zdl-lex-common.xml :as xml])
+            [zdl-xml.util :as xml])
   (:import io.github.classgraph.ClassGraph
            java.nio.charset.Charset
            [java.util.zip ZipEntry ZipOutputStream]))

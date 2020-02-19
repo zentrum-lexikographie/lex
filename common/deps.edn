@@ -10,18 +10,14 @@
   gremid/lucene-query {:mvn/version "0.1.1"}
   me.raynes/fs {:mvn/version "1.4.6"}
   metosin/spec-tools {:mvn/version "0.10.0"}
-  net.sf.saxon/Saxon-HE {:mvn/version "9.9.1-4"}
-  org.kohsuke.rngom/rngom {:mvn/version "20100718"}
-  org.relaxng/jing {:mvn/version "20181222"
-                    :exclusions [xml-apis net.sf.saxon/Saxon-HE]}
-  org.relaxng/trang {:mvn/version "20181222"
-                     :exclusions [xml-apis net.sf.saxon/Saxon-HE]}
   org.slf4j/slf4j-api {:mvn/version "1.7.25"}
   org.slf4j/jul-to-slf4j {:mvn/version "1.7.25"}
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.25"}
   cronjure {:mvn/version "0.1.1"}
   environ {:mvn/version "1.1.0"}
-  mount {:mvn/version "0.1.16"}}
+  mount {:mvn/version "0.1.16"}
+  zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
+                   :sha "be763589fde843c5407569639dc3d337b2bca020"}}
  :aliases
  {:schema {:extra-paths ["build"]
            :main-opts ["-m" "schema"]}

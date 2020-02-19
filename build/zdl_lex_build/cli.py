@@ -51,7 +51,7 @@ def cli_schema():
     zdl_lex_build.clj.run_module('common', ['schema'])
 
 
-def build_modules(modules=['client', 'server', 'validator']):
+def build_modules(modules=['client', 'server']):
     for module in modules:
         banner('"%s" module' % (module,))
         zdl_lex_build.clj.run_module(module, ['dev', 'prod', 'compile'])

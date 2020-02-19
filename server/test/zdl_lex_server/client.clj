@@ -11,27 +11,27 @@
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-common.util :refer [file]]
-            [zdl-lex-common.xml-schema :as schema]
-            [zdl-lex-common.xml :as xml]
+            [zdl-xml.rngom :as rngom]
+            [zdl-xml.util :as xml]
             [zdl-lex-common.article :as article])
   (:import java.net.URL))
 
 (def ^:private article-attr?
   "Predicate for `<Article/>` attributes."
-  (schema/attr-of? "{http://www.dwds.de/ns/1.0}Artikel"))
+  (rngom/attr-of? "{http://www.dwds.de/ns/1.0}Artikel"))
 
 (defn- attr-values
   "Collect `<Article/>` attributes of a schema."
   [schema attr-name]
-  (schema/collect-values
+  (rngom/collect-values
    schema dz/descendants :attribute
-   article-attr? (schema/name= attr-name)))
+   article-attr? (rngom/name= attr-name)))
 
 (def ^:private schema-values
   "Essential values from RELAX NG schema, e.g. authors, article types etc."
   (delay
     (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng")
-                      (schema/parse) (schema/resolve-refs)
+                      (rngom/parse) (rngom/resolve-refs)
                       (zip/xml-zip))
           attr-values (partial attr-values schema)]
       {:sources (attr-values "Quelle")

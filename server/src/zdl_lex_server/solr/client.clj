@@ -3,7 +3,7 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.xml :as xml]
+            [zdl-xml.util :as xml]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http-client :as http-client]
             [zdl-lex-server.solr.doc :refer [article->fields]]

@@ -3,7 +3,7 @@
             [taoensso.timbre :as timbre]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-lex-common.xml :as xml])
+            [zdl-xml.util :as xml])
   (:import java.io.File
            java.text.Collator
            java.util.Locale

@@ -6,7 +6,7 @@
             [ring.util.request :as htreq]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.timestamp :as ts]
-            [zdl-lex-common.xml :as xml]
+            [zdl-xml.util :as xml]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.solr.client :as solr-client]

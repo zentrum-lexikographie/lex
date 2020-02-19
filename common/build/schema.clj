@@ -1,6 +1,6 @@
 (ns schema
-  (:require [zdl-lex-common.xml-validate :as xv]
-            [zdl-lex-common.util :refer [file]]
+  (:require [zdl-lex-common.util :refer [file]]
+            [zdl-xml.validate :as xv]
             [me.raynes.fs :as fs]))
 
 (defn -main [& args]
