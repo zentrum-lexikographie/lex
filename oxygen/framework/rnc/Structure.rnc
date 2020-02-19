@@ -171,12 +171,10 @@ morphologische_Verweise = element Verweise {
 	, attribute Typ {
 	    'Simplex'
 	    | 'Derivation'
-	    | 'Diminutiv'
 	    | 'Komposition'
 	    | 'Konversion'
 	    | 'Kurzwortbildung'
 	    | 'lexikalisierte_Flexionsform'
-	    | 'Movierung'
 	    | 'neoklassische_Bildung'
 	    | 'Rückbildung'
 	    | 'Zusammenrückung'
