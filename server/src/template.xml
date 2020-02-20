@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <DWDS xmlns="http://www.dwds.de/ns/1.0">
-    <Artikel Quelle="ZDL" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="[ID]" Zeitstempel="[DATUM]" Erstfassung="ZDL">
+    <Artikel Quelle="DWDS" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="[ID]" Zeitstempel="[DATUM]" Erstfassung="DWDS">
         <Formangabe Typ="Hauptform">
             <Schreibung>[SCHREIBUNG]</Schreibung>
             <Grammatik>
@@ -10,7 +10,7 @@
             <Diasystematik></Diasystematik>
         </Formangabe>
         <Verweise></Verweise>
-        <Diachronie class="invisible">
+        <Diachronie>
             <Etymologie></Etymologie>
             <Formgeschichte></Formgeschichte>
             <Bedeutungsgeschichte></Bedeutungsgeschichte>
