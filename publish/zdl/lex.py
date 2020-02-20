@@ -17,12 +17,10 @@ def json(r):
 
 
 class Server:
-    def __init__(self, base_url='https://lex.dwds.de/',
-                 http_auth=None, token=None):
+    def __init__(self, base_url='https://lex.dwds.de/', http_auth=None):
         self.base_url = base_url
         self.session = requests.Session()
         self.session.auth = http_auth
-        self.token = token or str(uuid.uuid1())
 
     def __str__(self):
         server_url = urlparse(self.base_url)
@@ -63,18 +61,18 @@ class Server:
             urljoin(self.base_url, '/lock')
         ))
 
-    def acquire_lock(self, id, seconds):
+    def acquire_lock(self, token, id, seconds):
         logger.info('%s: Locking "%s" for %d seconds', self, id, seconds)
         return json(self.session.post(
             urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
-            params={'token': self.token, 'ttl': seconds}
+            params={'token': token, 'ttl': seconds}
         ))
 
-    def release_lock(self, id):
+    def release_lock(self, token, id):
         logger.info('%s: Unlocking "%s"', self, id)
         return json(self.session.delete(
             urljoin(self.base_url, '/'.join(['/lock', quote(id)])),
-            params={'token': self.token}
+            params={'token': token}
         ))
 
     def git_commit(self):
