@@ -1,10 +1,8 @@
 (ns zdl-lex-server.client
   (:require [clj-http.client :as http]
             [clojure.core.async :as a]
-            [clojure.data.zip :as dz]
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
-            [clojure.zip :as zip]
             [taoensso.timbre :as timbre]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.log :as log]
@@ -12,41 +10,28 @@
             [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-common.util :refer [file]]
             [zdl-xml.rngom :as rngom]
-            [zdl-xml.util :as xml]
-            [zdl-lex-common.article :as article])
+            [zdl-xml.util :as xml])
   (:import java.net.URL))
-
-(def ^:private article-attr?
-  "Predicate for `<Article/>` attributes."
-  (rngom/attr-of? "{http://www.dwds.de/ns/1.0}Artikel"))
-
-(defn- attr-values
-  "Collect `<Article/>` attributes of a schema."
-  [schema attr-name]
-  (rngom/collect-values
-   schema dz/descendants :attribute
-   article-attr? (rngom/name= attr-name)))
 
 (def ^:private schema-values
   "Essential values from RELAX NG schema, e.g. authors, article types etc."
-  (delay
-    (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng")
-                      (rngom/parse) (rngom/resolve-refs)
-                      (zip/xml-zip))
-          attr-values (partial attr-values schema)]
-      {:sources (attr-values "Quelle")
-       :authors (attr-values "Autor")
-       :types (attr-values "Typ")
-       :status (attr-values "Status")})))
+  (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng")
+                    (rngom/parse-schema) (rngom/traverse))
+        attr-values #(into #{} (rngom/attribute-values
+                                "{http://www.dwds.de/ns/1.0}Artikel" % schema))]
+    {:sources (attr-values "Quelle")
+     :authors (attr-values "Autor")
+     :types (attr-values "Typ")
+     :status (attr-values "Status")}))
 
 (def author-generator
   "Generate authors."
-  (let [{:keys [authors]} @schema-values]
+  (let [{:keys [authors]} schema-values]
     (s/gen (disj authors "DWDS"))))
 
 (def query-generator
   "Generate queries (prefix patterns combined with source filter)."
-  (let [{:keys [sources]} @schema-values]
+  (let [{:keys [sources]} schema-values]
     (gen/fmap
      (fn [[c source]] (format "forms:%s* AND source:\"%s\"" c source))
      (gen/tuple (gen/char-alpha) (s/gen sources)))))
