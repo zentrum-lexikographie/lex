@@ -1,5 +1,5 @@
 from collections import defaultdict
-
+from statistics import mean
 import csv
 import click
 
@@ -26,6 +26,8 @@ status = [
 status = dict([(s, i) for i, s in enumerate(status)])
 num_status = len(status)
 
+corpus_sizes = (315189235, 6336726411, 3103432379)
+
 
 def candidate_sortkey(index_entry):
     status_minimal = num_status
@@ -34,7 +36,9 @@ def candidate_sortkey(index_entry):
     has_other = False
 
     headword, articles = index_entry
+    freq = 0
     for md, p, f, freq in articles:
+        freq = mean(map(lambda f: -f[0] / f[1], zip(freq, corpus_sizes)))
         md_status = status.get(md['status'])
         if md_status is None:
             continue
@@ -51,7 +55,7 @@ def candidate_sortkey(index_entry):
         duplicate = -1
 
     return (
-        duplicate, -freq, status_minimal, status_other, icu_sortkey(headword)
+        duplicate, status_minimal, freq, status_other, icu_sortkey(headword)
     )
 
 
@@ -75,7 +79,7 @@ def candidate_sortkey(index_entry):
 @click.command()
 def cli(csv_file, freq_csv_file, article_dirs):
     frequencies = dict([
-        (record[0], int(record[2]))
+        (record[0], tuple(map(int, record[2:5])))
         for record in csv.reader(freq_csv_file)
     ])
     lemma_index = defaultdict(list)
@@ -83,19 +87,20 @@ def cli(csv_file, freq_csv_file, article_dirs):
         for (document, article) in zdl.article.parse(f):
             for md in zdl.article.metadata(article):
                 lemma_index[md['headword']].append(
-                    (md, p, f, frequencies.get(md['name'], 0))
+                    (md, p, f, frequencies.get(md['name'], (0, 0, 0)))
                 )
 
     lemma_index_items = sorted(
         lemma_index.items(),
         key=candidate_sortkey
     )
+    csv_file = csv.writer(csv_file)
+    csv_file.writerow(['Lemma', 'Kern-Basis', 'Zeitungen', 'Web', 'Typ#Status*'])
     for headword, articles in lemma_index_items:
-        articles = set([
-            (md['type'], md['status'], freq)
-            for md, p, f, freq in articles
-        ])
-        print(repr([headword, articles]))
+        freq, *_ = [freq for _, _, _, freq in articles]
+        articles = sorted(set([(md['type'], md['status']) for md, *_ in articles]))
+        articles = ['#'.join([t, s]) for t, s in articles]
+        csv_file.writerow([headword] + list(freq) + list(articles))
 
 
 if __name__ == '__main__':

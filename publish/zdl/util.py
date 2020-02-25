@@ -9,6 +9,10 @@ import zdl.article
 collator = Collator.createInstance(Locale('de_DE.UTF-8'))
 
 
+def progress(iterable, label=None):
+    return click.progressbar(iterable, width=0, label=label)
+
+
 def icu_sortkey(v):
     if isinstance(v, str):
         return collator.getSortKey(v)
