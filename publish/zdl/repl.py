@@ -12,6 +12,7 @@ from prompt_toolkit import PromptSession
 from tabulate import tabulate
 
 import zdl.lex
+import zdl.log
 
 grammar = Grammar("""
 cmd = status / lock / unlock / git_cmd / exit
@@ -145,8 +146,13 @@ class REPL(NodeVisitor):
 @click.option('--server-token',
               envvar='ZDL_LEX_SERVER_TOKEN',
               default=(lambda: str(uuid.uuid1())))
+@click.option('--debug/--no-debug',
+              envvar='ZDL_DEBUG',
+              default=False)
 @click.argument('commands', nargs=-1)
-def main(server_base, server_user, server_password, server_token, commands):
+def main(server_base, server_user, server_password, server_token,
+         debug, commands):
+    zdl.log.debug(debug)
     server_auth = (server_user, server_password) if server_user else None
     server = zdl.lex.Server(server_base, server_auth)
     REPL(server, server_token).execute(commands or [])
