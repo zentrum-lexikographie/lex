@@ -143,6 +143,7 @@ Verweise>Verweis[Typ="Binnenglied"]:before     { content: "mit Binnenglied ↗";
 Verweise>Verweis[Typ="Letztglied"]:before      { content: "mit Letztglied ↗"; }
 Verweise>Verweis[Typ="formal_verwandt"]:before { content: "formal verwandt mit ↗"; }
 Verweise>Verweis[Typ="Grundform"]:before       { content: "Grundform ist ↗"; }
+Verweise>Verweis[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente ist ↗"; }
 
 Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
 Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "ext. Etym.artikel ↗"; }
