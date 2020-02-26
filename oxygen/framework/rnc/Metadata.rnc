@@ -119,7 +119,7 @@ Metadaten.Artikel = (
 	}
 	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ?
 	, attribute Erstellungsdatum { xsd:date }
-	, attribute Empfehlung { 'ja' | 'nein' } ? # TODO: mandatory
+	, attribute Empfehlung { 'ja' } ?
 	, attribute Tranche {
 	    '45k-001'
 	    | '45k-002'
