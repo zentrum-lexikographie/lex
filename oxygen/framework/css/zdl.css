@@ -38,7 +38,7 @@ Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); 
 Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
-Artikel Verweise:before       { content: "synchrone Zerlegung"; }
+Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
 Verweise[Typ]:before          { -oxy-append-content: " – " attr(Typ); }
 Lesart Verweise:before        { content: "semantische und enzyklopädische Verweise"; }
 Diachronie:before             { content: "Diachronie"; }
@@ -130,6 +130,8 @@ Datierung:before                               { content: "Datierung: "; }
 Etymologie:before                              { content: "Etymologie: "; }
 Formgeschichte:before                          { content: "Formgeschichte: "; }
 Bedeutungsgeschichte:before                    { content: "Bedeutungsgeschichte: "; }
+Diachronie>Verweise:before                     { content: "Querverweise: "; }
+Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="Synonym"]:before         { content: "Synonym ist ↗"; }
 Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
@@ -228,6 +230,9 @@ Definition Verweis:before { content: "↗"; }
 
 /* keine Lesart für morphologische Verweise */
 Artikel>Verweise>Verweis>Ziellesart { display: none; }
+
+/* etymologische Verweise im Diachronieteil */
+
 
 /* Markierung von Fundstellenangaben */
 Fundstelle, Kurztitel { color:blue; }
