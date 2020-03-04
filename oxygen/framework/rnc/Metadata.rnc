@@ -102,7 +102,6 @@ Metadaten.Artikel = (
 	, attribute Redakteur { Mitarbeiterinnen } ?
 	, attribute Status {
 		'Artikelrumpf'
-		| 'wird_Vollartikel'
 		| 'wird_gestrichen'
 		| 'Lex-in_Arbeit'
 		| 'Lex-zur_Abgabe'
