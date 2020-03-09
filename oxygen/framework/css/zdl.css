@@ -314,6 +314,7 @@ Paraphrase:after { content: "’"; text-decoration: none; }
 
 /* Quelle, Zeitstempel und Status */
 
+Artikel[Typ]:before { -oxy-append-content:" ["attr(Typ)"] "; }
 Artikel[Status]:before { -oxy-append-content:" ["attr(Status)"] "; }
 *:not(Schreibung)[Zeitstempel]:before { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 *:not(Schreibung)[Quelle]:before { -oxy-append-content:" ["attr(Quelle)"] "; }
