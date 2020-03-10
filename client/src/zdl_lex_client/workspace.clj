@@ -58,7 +58,7 @@
     (future (.. this (openInExternalApplication url false "text/html"))))
   (open-article
     [^StandalonePluginWorkspace this id]
-    (.. this (open (lexurl/id->url id))))
+    (future (.. this (open (lexurl/id->url id)))))
   (add-editor-change-listener
     [^StandalonePluginWorkspace this listener]
     (.. this (addEditorChangeListener listener editing-area)))
@@ -99,4 +99,4 @@
     (modified? [_ _] false)
     (xml-document [_ url]
       (timbre/info url)
-      @(http/get-xml (-> url lexurl/url->id http/id->store-url)))))
+      (http/get-xml (-> url lexurl/url->id http/id->store-url)))))

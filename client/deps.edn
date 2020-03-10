@@ -1,13 +1,12 @@
 {:paths ["src"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
-  org.clojure/data.codec {:mvn/version "0.1.1"}
   com.github.jiconfont/jiconfont-swing {:mvn/version "1.0.1"}
   com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
   org.zdl.lex/common {:local/root "../common"
                       :exclusions [org.relaxng/jing org.relaxng/trang]}
   seesaw {:mvn/version "1.5.0"}
-  aleph {:mvn/version "0.4.6"}}
+  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}}
 
  :mvn/repos
  {"central" {:url "https://repo1.maven.org/maven2/"}

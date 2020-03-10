@@ -64,7 +64,7 @@
               suggestions? (and (< 1 (count q))
                                 (re-matches #"^[^\*\?\"/:]+$" q))
               suggestions (if suggestions?
-                            (-> q http/suggest-forms deref :result))
+                            (-> q http/suggest-forms :result))
               suggestions (or suggestions [])]
           (proxy-super setListData (into-array Object suggestions))
           (not (empty? suggestions))))

@@ -32,7 +32,7 @@
         create-article (fn [evt]
                          (try 
                            (->>
-                            @(http/create-article
+                            (http/create-article
                              (ui/value form-input)
                              (ui/value pos-input))
                             (:id)

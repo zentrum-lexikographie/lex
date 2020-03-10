@@ -2,13 +2,12 @@
   (:gen-class
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
-  (:require [byte-streams :as bs]
-            [manifold.deferred :as d]
+  (:require [clojure.java.io :as io]
             [taoensso.timbre :as timbre]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :as util])
-  (:import [java.io ByteArrayInputStream ByteArrayOutputStream IOException]
+  (:import [java.io ByteArrayInputStream ByteArrayOutputStream InputStream IOException]
            [java.net URLConnection URLStreamHandler]
            [ro.sync.exml.plugin.lock LockException LockHandler]))
 
@@ -24,12 +23,16 @@
       true)
     (updateLock
       [url timeoutSeconds]
-      (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
-      @(http/lock (lexurl/url->id url) timeoutSeconds token))
+      (try
+        (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
+        (http/lock (lexurl/url->id url) timeoutSeconds token)
+        (catch IOException e (timbre/warn e))))
     (unlock
       [url]
-      (timbre/info (format "Unlock! %s" url))
-      (http/unlock (lexurl/url->id url) token))))
+      (try
+        (timbre/info (format "Unlock! %s" url))
+        (http/unlock (lexurl/url->id url) token)
+        (catch IOException e (timbre/warn e))))))
 
 (defn- lexurl->httpurl
   [url]
@@ -37,31 +40,37 @@
       (lexurl/url->id) (http/id->store-url)
       (str) (util/url {:token token})))
 
-(defn lock->io-exception
-  [d]
-  (d/catch d LockException #(d/error-deferred (IOException. %))))
+(defn in->buf-stream
+  [^InputStream in]
+  (let [buf (ByteArrayOutputStream.)]
+    (io/copy in buf)
+    (ByteArrayInputStream. (.toByteArray buf))))
 
 (defn store->stream
   [url]
-  (->
-   (http/request {:request-method :get :url url
-                  :accept "text/xml, application/edn"})
-   (d/chain :body bs/to-byte-array #(ByteArrayInputStream. %))
-   (lock->io-exception)
-   (deref)))
+  (try
+    (let [req {:request-method :get :url url
+               :accept "text/xml, application/edn"
+               :as :stream}]
+      (with-open [body-stream (-> req http/request :body)]
+        (in->buf-stream body-stream)))
+    (catch LockException e
+      (throw (IOException. e)))))
 
 (defn stream->store
   [url]
   (proxy [ByteArrayOutputStream] []
     (close []
-      (->
-       (http/request {:request-method :post :url url
-                      :content-type "text/xml"
-                      :body (.toString this "UTF-8")
-                      :accept "text/xml, application/edn"})
-       (d/chain :body bs/to-byte-array #(ByteArrayInputStream. %))
-       (lock->io-exception)
-       (deref)))))
+      (try
+        (let [req {:request-method :post :url url
+                   :content-type "text/xml"
+                   :body (.toString this "UTF-8")
+                   :accept "text/xml, application/edn"
+                   :as :stream}]
+          (with-open [body-stream (-> req http/request :body)]
+            (in->buf-stream body-stream)))
+        (catch LockException e
+          (throw (IOException. e)))))))
 
 (def lexurl-handler
   (proxy [URLStreamHandler] []
