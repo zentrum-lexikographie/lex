@@ -62,7 +62,7 @@
       (updateHints [ctx]
         (let [q (str ctx)
               suggestions? (and (< 1 (count q))
-                                (re-matches #"^[^\s\*\?\"/:]+$"q ))
+                                (re-matches #"^[^\*\?\"/:]+$" q))
               suggestions (if suggestions?
                             (-> q http/suggest-forms deref :result))
               suggestions (or suggestions [])]
