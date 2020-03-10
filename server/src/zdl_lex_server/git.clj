@@ -50,6 +50,14 @@
            (let [{:keys [out]} (git "--version")]
              (log/info {:git (str/trim out)}))))
 
+(deftimer [git local gc-timer])
+
+(defn git-gc
+  []
+  (->>
+   (git "gc" "--aggressive")
+   (time! gc-timer)))
+
 (defn git-clone
   []
   (let [origin (env :git-origin)]
