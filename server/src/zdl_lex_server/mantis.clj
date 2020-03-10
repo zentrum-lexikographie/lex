@@ -6,6 +6,7 @@
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [clojure.zip :as zip]
+            [metrics.timers :refer [deftimer time!]]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [clojure.tools.logging :as log]
@@ -135,8 +136,13 @@
 (defn index-issues [issues]
   (group-by :lemma issues))
 
+(deftimer [mantis issues sync-timer])
+
 (defn- sync-issues []
-  (->> (issues) (store-dump) (index-issues) (reset! index) (count)))
+  (->> (issues) (store-dump)
+       (index-issues)
+       (reset! index) (count)
+       (time! sync-timer)))
 
 (defstate issue-sync-scheduler
   "Synchronizes Mantis issues"

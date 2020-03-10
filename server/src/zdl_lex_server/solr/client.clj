@@ -1,6 +1,7 @@
 (ns zdl-lex-server.solr.client
   (:require [lucene-query.core :as lucene]
             [clojure.tools.logging :as log]
+            [metrics.timers :refer [deftimer time!]]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.env :refer [env]]
             [zdl-xml.util :as xml]
@@ -15,15 +16,23 @@
 (def url
   (partial str (env :solr-base) (env :solr-core)))
 
+(deftimer [solr client suggest-timer])
+
 (defn suggest [name q]
-  (req {:method :get :url (url "/suggest")
-        :query-params {"suggest.dictionary" name "suggest.q" q}
-        :as :json}))
+  (->>
+   (req {:method :get :url (url "/suggest")
+         :query-params {"suggest.dictionary" name "suggest.q" q}
+         :as :json})
+   (time! suggest-timer)))
+
+(deftimer [solr client query-timer])
 
 (defn query [params]
-  (req {:method :get :url (url "/query")
-        :query-params params
-        :as :json}))
+  (->>
+   (req {:method :get :url (url "/query")
+         :query-params params
+         :as :json})
+   (time! query-timer)))
 
 (defn scroll
   ([params] (scroll params 20000))
@@ -102,21 +111,30 @@
          (.appendChild
           (doto (el "query") (.setTextContent query))))))))
 
+(deftimer [solr client index-rebuild-timer])
+
 (defn rebuild-index []
-  (let [sync-start (System/currentTimeMillis)
-        articles (article/article-xml-files git/dir)]
-    (when-not (empty? (doall (add-articles articles)))
-      (update-articles query->delete-xml [(format "time_l:[* TO %s}" sync-start)])
-      (commit-optimize))
-    articles))
+  (->>
+   (let [sync-start (System/currentTimeMillis)
+         articles (article/article-xml-files git/dir)]
+     (when-not (empty? (doall (add-articles articles)))
+       (update-articles query->delete-xml
+                        [(format "time_l:[* TO %s}" sync-start)])
+       (commit-optimize))
+     articles)
+   (time! index-rebuild-timer)))
 
 (defn build-suggestions [name]
   (req {:method :get :url (url "/suggest")
         :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
         :as :json}))
 
+(deftimer [solr client forms-suggestions-build-timer])
+
 (defn build-forms-suggestions []
-  (build-suggestions "forms"))
+  (->>
+   (build-suggestions "forms")
+   (time! forms-suggestions-build-timer)))
 
 (defn index-empty? []
   (= 0 (get-in (query {"q" "id:*" "rows" "0"}) [:body :response :numFound] -1)))

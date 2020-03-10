@@ -6,11 +6,13 @@
             [zdl-lex-server.http :as http]
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.mantis :as mantis]
+            [zdl-lex-server.metrics :as metrics]
             [zdl-lex-server.solr :as solr]))
 
 (def data-sources [#'lock/datasource #'lock/db #'git/git-cmd #'git/repo])
 
-(def services [#'http/server])
+(def services [#'http/server
+               #'metrics/reporter])
 
 (def background-tasks [#'lock/lock-cleanup-scheduler
                        #'git/commit-scheduler

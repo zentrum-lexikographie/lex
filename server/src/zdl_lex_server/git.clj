@@ -8,6 +8,7 @@
             [clojure.spec.alpha :as s]
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
+            [metrics.timers :refer [deftimer time!]]
             [ring.util.http-response :as htstatus]
             [clojure.tools.logging :as log]
             [zdl-lex-common.bus :as bus]
@@ -55,13 +56,21 @@
     (log/info {:git {:clone origin}})
     (git "clone" "--quiet" origin (str dir))))
 
+(deftimer [git remote fetch-timer])
+
 (defn git-fetch
   []
-  (git "fetch" "--quiet" "origin" "--tags"))
+  (->>
+   (git "fetch" "--quiet" "origin" "--tags")
+   (time! fetch-timer)))
+
+(deftimer [git remote push-timer])
 
 (defn git-push
   []
-  (git "push" "--quiet" "origin" branch))
+  (->>
+   (git "push" "--quiet" "origin" branch)
+   (time! push-timer)))
 
 (defn git-load
   []
@@ -107,8 +116,14 @@
        (bus/publish! :git-changes))
   changes)
 
+(deftimer [git local status-timer])
+
 (defn- git-status []
-  (->> (jgit/git-status repo) (vals) (apply union) (classify-changes)))
+  (->> (jgit/git-status repo)
+       (vals)
+       (apply union)
+       (classify-changes)
+       (time! status-timer)))
 
 (defn- git-changed? [changes]
   (not (every? empty? (-> changes :git vals))))
@@ -116,6 +131,8 @@
 (def committer
   {:name (env :git-commit-user)
    :email (env :git-commit-email)})
+
+(deftimer [git local commit-timer])
 
 (defn commit []
   (lock/with-global-write-lock
@@ -125,7 +142,9 @@
           (jgit/git-add repo modified))
         (when-let [deleted (not-empty (get-in changes [:git :deleted]))]
           (jgit/git-rm repo deleted))
-        (jgit/git-commit repo "zdl-lex-server" :committer committer)
+        (->>
+         (jgit/git-commit repo "zdl-lex-server" :committer committer)
+         (time! commit-timer))
         (send-changes changes)
         ;; Changes will be propagated, even if pushing to the remote fails
         (try (git-push) (catch Throwable t)))

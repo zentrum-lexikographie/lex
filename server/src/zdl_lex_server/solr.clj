@@ -2,6 +2,7 @@
   (:require [clojure.core.async :as a]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
+            [metrics.timers :refer [deftimer time-fn!]]
             [mount.core :refer [defstate]]
             [muuntaja.core :as m]
             [ring.util.http-response :as htstatus]
