@@ -9,10 +9,8 @@
   (.. java.net.InetAddress getLocalHost getHostName))
 
 (def defaults
-  {:log-level :info
-   :repl-port 3001
+  {:repl-port 3001
    :http-port 3000
-   :http-log false
    :http-anon-user "nobody"
    :data-dir "zdl-lex-data"
    :git-origin "git@git.zdl.org:zdl/wb.git"
@@ -29,13 +27,6 @@
    :solr-base "http://localhost:8983/solr/"
    :solr-core "articles"})
 
-(s/def ::log-level
-  (st/spec
-   {:spec #{:trace :debug :info :warn :error :fatal}
-    :type :keyword
-    :decode/string #(-> %2 name str/lower-case keyword)
-    :encode/string #(-> %2 name str/upper-case)}))
-
 (def dir?-spec
   (st/spec
    {:spec some?
@@ -48,7 +39,6 @@
 (s/def ::repl-port int?)
 
 (s/def ::http-port int?)
-(s/def ::http-log boolean?)
 (s/def ::http-anon-user string?)
 
 (s/def ::git-auth-key-dir dir?-spec)
@@ -74,8 +64,8 @@
 (s/def ::corpora-password string?)
 
 (s/def ::env
-  (s/keys :req-un [::log-level ::repl-port
-                   ::http-port ::http-log ::http-anon-user
+  (s/keys :req-un [::repl-port
+                   ::http-port ::http-anon-user
                    ::data-dir
                    ::git-origin ::git-branch
                    ::git-commit-user ::git-commit-email
