@@ -1,8 +1,7 @@
 (ns zdl-lex-server.core
   (:require [mount.core :as mount]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.env :refer [env env->str]]
-            [zdl-lex-common.log :as log]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http :as http]
             [zdl-lex-server.lock :as lock]
@@ -22,13 +21,12 @@
                        #'mantis/issue-sync-scheduler])
 
 (defn -main []
-  (log/configure)
   (.addShutdownHook
    (Runtime/getRuntime)
    (Thread. (fn [] (mount/stop) (shutdown-agents))))
-  (timbre/info (env->str env))
+  (log/info (env->str env))
   (let [states (apply mount/start (concat data-sources background-tasks services))]
-    (timbre/info states)))
+    (log/info states)))
 
 (comment
   (apply mount/start data-sources)

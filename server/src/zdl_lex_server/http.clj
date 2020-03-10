@@ -7,7 +7,6 @@
             [reitit.ring.middleware.muuntaja :as muuntaja]
             [reitit.swagger :as swagger]
             [reitit.swagger-ui :as swagger-ui]
-            [ring.logger.timbre :refer [wrap-with-logger]]
             [ring.middleware.defaults :as defaults]
             [ring.middleware.webjars :refer [wrap-webjars]]
             [zdl-lex-common.env :refer [env]]
@@ -32,17 +31,13 @@
            (assoc-in [:security :ssl-redirect] false))
        (defaults/wrap-defaults handler)))
 
-(defn wrap-logger [handler]
-  (if (env :http-log) (wrap-with-logger handler) handler))
-
 (def handler
   (ring/ring-handler
    (ring/router
    [""
     {:coercion spec-coercion/coercion
      :muuntaja m/instance
-     :middleware [wrap-logger
-                  wrap-defaults
+     :middleware [wrap-defaults
                   muuntaja/format-negotiate-middleware
                   muuntaja/format-response-middleware
                   exception/middleware

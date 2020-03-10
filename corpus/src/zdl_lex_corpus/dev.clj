@@ -1,12 +1,8 @@
 (ns zdl-lex-corpus.dev
-  (:require [zdl-lex-common.log :as log]
-            [zdl-lex-corpus.ddc :as ddc]
+  (:require [zdl-lex-corpus.ddc :as ddc]
             [zdl-lex-corpus.toc :refer [corpora]]
-            [clojure.core.async :as a]
-            [taoensso.timbre :as timbre])
+            [clojure.core.async :as a])
   (:import org.slf4j.bridge.SLF4JBridgeHandler))
-
-(log/configure)
 
 (comment
   (let [corpora (corpora)]

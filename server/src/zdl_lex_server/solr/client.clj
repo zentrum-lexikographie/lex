@@ -1,6 +1,6 @@
 (ns zdl-lex-server.solr.client
   (:require [lucene-query.core :as lucene]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.env :refer [env]]
             [zdl-xml.util :as xml]
@@ -75,7 +75,7 @@
                  (.setAttribute "name" n)
                  (.setTextContent v)))))
             (doto add (.appendChild article-doc)))
-        (catch Exception e (timbre/warn e file))))
+        (catch Exception e (log/warn e file))))
     (doto doc (.appendChild add))))
 
 (def add-articles (partial update-articles articles->add-xml))

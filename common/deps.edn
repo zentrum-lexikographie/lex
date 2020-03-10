@@ -5,14 +5,10 @@
   org.clojure/data.zip {:mvn/version "0.1.1"}
   org.clojure/test.check {:mvn/version "0.9.0"}
   org.clojure/tools.cli {:mvn/version "0.4.2"}
-  com.taoensso/timbre {:mvn/version "4.10.0"}
-  com.fzakaria/slf4j-timbre {:mvn/version "0.3.12"}
+  org.clojure/tools.logging {:mvn/version "1.0.0"}
   gremid/lucene-query {:mvn/version "0.1.1"}
   me.raynes/fs {:mvn/version "1.4.6"}
   metosin/spec-tools {:mvn/version "0.10.0"}
-  org.slf4j/slf4j-api {:mvn/version "1.7.25"}
-  org.slf4j/jul-to-slf4j {:mvn/version "1.7.25"}
-  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.25"}
   cronjure {:mvn/version "0.1.1"}
   environ {:mvn/version "1.1.0"}
   mount {:mvn/version "0.1.16"}

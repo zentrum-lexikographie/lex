@@ -2,7 +2,7 @@
   (:require [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-client.font :as font]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
@@ -37,7 +37,7 @@
                              (ui/value pos-input))
                             (:id)
                             (ws/open-article ws/instance))
-                           (catch Exception e (timbre/warn e)))
+                           (catch Exception e (log/warn e)))
                          (ui/dispose! evt))
         create-button (ui/button :text "Erstellen"
                                  :listen [:action create-article]

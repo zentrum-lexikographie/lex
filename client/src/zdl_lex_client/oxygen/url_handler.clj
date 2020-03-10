@@ -3,7 +3,7 @@
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
   (:require [clojure.java.io :as io]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.url :as lexurl]
             [zdl-lex-common.util :as util])
@@ -24,15 +24,15 @@
     (updateLock
       [url timeoutSeconds]
       (try
-        (timbre/info (format "Lock! %s (%d s)" url timeoutSeconds))
+        (log/infof "Lock! %s (%d s)" url timeoutSeconds)
         (http/lock (lexurl/url->id url) timeoutSeconds token)
-        (catch IOException e (timbre/warn e))))
+        (catch IOException e (log/warn e))))
     (unlock
       [url]
       (try
-        (timbre/info (format "Unlock! %s" url))
+        (log/info (format "Unlock! %s" url))
         (http/unlock (lexurl/url->id url) token)
-        (catch IOException e (timbre/warn e))))))
+        (catch IOException e (log/warn e))))))
 
 (defn- lexurl->httpurl
   [url]

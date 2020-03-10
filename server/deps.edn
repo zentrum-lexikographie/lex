@@ -26,9 +26,10 @@
             :exclusions [commons-logging]}
   clj-jgit {:mvn/version "1.0.0-beta3"}
   hiccup {:mvn/version "1.0.5"}
-  ring-logger-timbre {:mvn/version "0.7.6"}
   ring-webjars {:mvn/version "0.2.0"
                 :exclusions [org.webjars/webjars-locator]}
+  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
+  org.apache.logging.log4j/log4j-slf4j-impl {:mvn/version "2.13.1"}
   org.zdl.lex/common {:local/root "../common"}}
  :aliases
  {:dev

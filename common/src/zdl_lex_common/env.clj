@@ -2,7 +2,6 @@
   (:require [clojure.spec.alpha :as s]
             [environ.core :as environ]
             [spec-tools.core :as st]
-            [taoensso.timbre :as timbre]
             [clojure.string :as str]
             [me.raynes.fs :as fs]))
 
@@ -32,7 +31,7 @@
 
 (s/def ::log-level
   (st/spec
-   {:spec timbre/valid-level?
+   {:spec #{:trace :debug :info :warn :error :fatal}
     :type :keyword
     :decode/string #(-> %2 name str/lower-case keyword)
     :encode/string #(-> %2 name str/upper-case)}))
@@ -122,4 +121,4 @@
      (into (sorted-map)))))
 
 (comment
-  (timbre/info (env->str env)))
+  (println (env->str env)))

@@ -8,12 +8,8 @@
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.log :as log]
             [zdl-lex-common.url :as lexurl])
   (:import java.awt.Toolkit))
-
-(log/configure-slf4j-bridge)
-(log/configure-timbre)
 
 (defn show-testbed []
   (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))

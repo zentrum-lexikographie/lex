@@ -5,7 +5,7 @@
             [mount.core :refer [defstate]]
             [muuntaja.core :as m]
             [ring.util.http-response :as htstatus]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
@@ -24,13 +24,13 @@
         modified (filter article-xml-file? modified)
         deleted (filter article-xml-file? deleted)]
     (doseq [m modified]
-      (timbre/info {:solr {:modified (file->id m)}}))
+      (log/info {:solr {:modified (file->id m)}}))
     (doseq [d deleted]
-      (timbre/info {:solr {:deleted (file->id d)}}))
+      (log/info {:solr {:deleted (file->id d)}}))
     (try
       (client/add-articles modified)
       (client/delete-articles deleted)
-      (catch Throwable t (timbre/warn t)))))
+      (catch Throwable t (log/warn t)))))
 
 (defstate git-change-indexer
   :start (bus/listen :git-changes index-git-changes)
@@ -45,7 +45,7 @@
   :start (try
            (when (client/index-empty?)
              (a/>!! index-rebuild-scheduler :init))
-           (catch Throwable t (timbre/warn t))))
+           (catch Throwable t (log/warn t))))
 
 (defstate build-suggestions-scheduler
   "Synchronizes the forms suggestions with all indexed articles"

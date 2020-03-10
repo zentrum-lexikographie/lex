@@ -1,12 +1,12 @@
 (ns zdl-lex-server.http-client
   (:require [clj-http.client :as http]
-            [taoensso.timbre :as timbre]))
+            [clojure.tools.logging :as log]))
 
 (defn configure [auth-user auth-password]
-  (comp #(timbre/spy :trace %)
+  (comp #(log/spy :trace %)
         #(dissoc % :http-client)
         http/request
         (if (and auth-user auth-password)
           (partial merge {:basic-auth [auth-user auth-password]})
           identity)
-        #(timbre/spy :trace %)))
+        #(log/spy :trace %)))

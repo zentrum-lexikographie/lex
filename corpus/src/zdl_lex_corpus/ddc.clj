@@ -8,7 +8,7 @@
             [manifold.deferred :as d]
             [manifold.stream :as s]
             [throttler.core :refer [throttle-chan]]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-corpus.toc :refer [corpora]]))
 
 ;; support core.async channels as manifold streams
@@ -41,7 +41,7 @@
 (defn send-async-req
   "Sends a command to a given corpus, putting the result onto the provided channel."
   [cmd corpus ch]
-  (timbre/debug {:corpus corpus :cmd cmd})
+  (log/debug {:corpus corpus :cmd cmd})
   (->
    (d/chain
     (tcp/client (select-keys corpus [:host :port]))
@@ -58,7 +58,7 @@
     (partial s/put! (s/->sink ch)))
    (d/catch
        (fn [e]
-         (timbre/debug
+         (log/debug
           (ex-info "Error in DDC request" (assoc corpus :cmd cmd) e))
          (a/close! ch)))))
 

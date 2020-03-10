@@ -1,6 +1,6 @@
 (ns zdl-lex-client.editors
   (:require [mount.core :refer [defstate]]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.workspace :as ws]
@@ -78,7 +78,7 @@
                (first)
                (merge {:url url})
                (bus/publish! :article))
-      (catch Exception e (timbre/warn e)))))
+      (catch Exception e (log/warn e)))))
 
 (defstate editor->article
   :start [(bus/listen :editor-active editor-event->excerpt)

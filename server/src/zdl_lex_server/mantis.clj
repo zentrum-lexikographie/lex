@@ -8,7 +8,7 @@
             [clojure.zip :as zip]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [file]]))
@@ -41,7 +41,7 @@
   ([op] (results op {}))
   ([op params] (results op params zip->items))
   ([op params zip->locs]
-   (timbre/trace {:op op :params (dissoc params :username :password)})
+   (log/trace {:op op :params (dissoc params :username :password)})
    (-> (@client op (authenticate params))
        (zip/xml-zip)
        (zip->locs))))
@@ -128,7 +128,7 @@
 
 (defn read-dump []
   (try (read-string (slurp mantis-dump))
-       (catch Throwable t (timbre/debug t) [])))
+       (catch Throwable t (log/debug t) [])))
 
 (defonce index (atom {}))
 

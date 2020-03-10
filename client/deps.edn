@@ -6,7 +6,9 @@
   org.zdl.lex/common {:local/root "../common"
                       :exclusions [org.relaxng/jing org.relaxng/trang]}
   seesaw {:mvn/version "1.5.0"}
-  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}}
+  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}
+  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
+  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}}
 
  :mvn/repos
  {"central" {:url "https://repo1.maven.org/maven2/"}

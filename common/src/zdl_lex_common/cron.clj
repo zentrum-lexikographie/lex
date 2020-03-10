@@ -1,8 +1,8 @@
 (ns zdl-lex-common.cron
   (:require [clojure.core.async :as a]
+            [clojure.tools.logging :as log]
             [cronjure.core :as cron]
-            [cronjure.definitions :as crondef]
-            [taoensso.timbre :as timbre]))
+            [cronjure.definitions :as crondef]))
 
 (def parse (partial cron/parse crondef/quartz))
 
@@ -18,7 +18,7 @@
      (a/go-loop []
        (when-let [req (a/alt! (a/timeout (millis-to-next schedule)) :scheduled
                               ctrl-ch ([v] v))]
-         (timbre/info {:cron cron-expr :desc desc :req req})
+         (log/info {:cron cron-expr :desc desc :req req})
          (if-let [result (a/<! (a/thread (f)))]
            (a/>! results result))
          (a/poll! ctrl-ch) ;; we just finished a job; remove pending req

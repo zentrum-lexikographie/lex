@@ -3,7 +3,7 @@
             [clojure.string :as str]
             [ring.util.http-response :as htstatus]
             [ring.util.io :as rio]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-xml.util :as xml])
   (:import io.github.classgraph.ClassGraph
            java.nio.charset.Charset
@@ -52,7 +52,7 @@
               (with-classpath-resources "plugin/lib"
                 (with-open [stream (.. resource (open))]
                   (write-to-zip "zdl-lex-client/lib/" path stream)))))
-          (catch Exception e (timbre/warn e))))
+          (catch Exception e (log/warn e))))
       (rio/piped-input-stream)
       (htstatus/ok)))
 
@@ -64,7 +64,7 @@
               (with-classpath-resources "framework"
                 (with-open [stream (.. resource (open))]
                   (write-to-zip path stream)))))
-          (catch Exception e (timbre/warn e))))
+          (catch Exception e (log/warn e))))
       (rio/piped-input-stream)
       (htstatus/ok)))
 

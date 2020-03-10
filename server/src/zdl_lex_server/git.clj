@@ -9,13 +9,12 @@
             [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-lex-server.lock :as lock]
-            [zdl-lex-common.log :as log]
             [clojure.string :as str]))
 
 (def dir (file (env :data-dir) "git"))
@@ -37,7 +36,7 @@
   (->>
    (let [result (apply sh/sh (concat ["git"] args))
          succeeded? (= (result :exit) 0)]
-     (timbre/log (if succeeded? :debug :warn) {:git args :result result})
+     (log/log (if succeeded? :debug :warn) {:git args :result result})
      (when-not succeeded? (throw (ex-info (str args) result)))
      result)
    (sh/with-sh-env cmd-env)
@@ -48,12 +47,12 @@
            (when-not (fs/exists? dir)
              (fs/mkdirs dir))
            (let [{:keys [out]} (git "--version")]
-             (timbre/info {:git (str/trim out)}))))
+             (log/info {:git (str/trim out)}))))
 
 (defn git-clone
   []
   (let [origin (env :git-origin)]
-    (timbre/info {:git {:clone origin}})
+    (log/info {:git {:clone origin}})
     (git "clone" "--quiet" origin (str dir))))
 
 (defn git-fetch
@@ -66,7 +65,7 @@
 
 (defn git-load
   []
-  (timbre/info {:git {:load (str dir)}})
+  (log/info {:git {:load (str dir)}})
   (jgit/load-repo (str dir)))
 
 (defn git-checkout
@@ -74,7 +73,7 @@
   (when-not (= branch (jgit/git-branch-current repo))
     (when-not (some #{branch} (jgit/git-branch-list repo))
       (jgit/git-branch-create repo branch))
-    (timbre/info {:git {:checkout branch}})
+    (log/info {:git {:checkout branch}})
     (jgit/git-checkout repo :name branch)))
 
 (defstate ^{:on-reload :noop} repo
@@ -83,7 +82,7 @@
              (git-clone))
            (let [repo (git-load)]
              (git-checkout repo)
-             (timbre/info {:git {:repo (str dir) :branch branch}})
+             (log/info {:git {:repo (str dir) :branch branch}})
              repo)))
 
 (defn- git-path
@@ -104,7 +103,7 @@
 
 (defn- send-changes [changes]
   (->> (changes :files)
-       (timbre/spy :trace)
+       (log/spy :trace)
        (bus/publish! :git-changes))
   changes)
 
@@ -165,7 +164,7 @@
     (try
       (htstatus/ok (fast-forward refs))
       (catch Throwable t
-        (timbre/warn t)
+        (log/warn t)
         (htstatus/bad-request)))
     (htstatus/bad-request)))
 

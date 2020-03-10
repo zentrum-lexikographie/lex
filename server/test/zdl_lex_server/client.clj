@@ -3,9 +3,8 @@
             [clojure.core.async :as a]
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.log :as log]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.url :refer [path->uri]]
             [zdl-lex-common.util :refer [file]]
@@ -41,7 +40,7 @@
   (a/>!! ch resp))
 
 (defn- http-on-error [ch e]
-  (timbre/warn e)
+  (log/warn e)
   (a/close! ch))
 
 (defn http-request
@@ -104,10 +103,9 @@
 (defn -main
   "Run a number of sample queries."
   [num-queries & args]
-  (log/configure)
   (let [num-queries (Integer/parseInt num-queries)
         user-queries (gen/tuple author-generator query-generator)]
     (doseq [[author query] (gen/sample user-queries num-queries)]
-      (timbre/info (:id (a/<!! (run-transaction {:author author :query query})))))))
+      (log/info (:id (a/<!! (run-transaction {:author author :query query})))))))
 
 (comment (-main "40"))

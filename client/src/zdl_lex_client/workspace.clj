@@ -1,7 +1,7 @@
 (ns zdl-lex-client.workspace
   (:require [clojure.java.browse :refer [browse-url]]
             [mount.core :refer [defstate]]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.http :as http]
             [zdl-lex-common.env :refer [env]]
@@ -91,12 +91,12 @@
       true)
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]
-      (timbre/info {:id id :request-focus? request-focus?}))
+      (log/info {:id id :request-focus? request-focus?}))
     (add-editor-change-listener [_ _])
     (remove-editor-change-listener [_ _])
     (add-editor-listener [_ _ _])
     (remove-editor-listener [_ _ _])
     (modified? [_ _] false)
     (xml-document [_ url]
-      (timbre/info url)
+      (log/info url)
       (http/get-xml (-> url lexurl/url->id http/id->store-url)))))

@@ -10,8 +10,7 @@
             [zdl-lex-common.util :refer [uuid]]
             [clojure.spec.alpha :as s]
             [zdl-lex-common.spec :as spec]
-            [clojure.string :as str]
-            [taoensso.timbre :as timbre])
+            [clojure.string :as str])
   (:import java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.TimeUnit
            java.net.URI

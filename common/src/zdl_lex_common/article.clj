@@ -1,6 +1,6 @@
 (ns zdl-lex-common.article
   (:require [clojure.string :as str]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-xml.util :as xml])
@@ -148,7 +148,7 @@
           timestamps (timestamps article)
           last-modified (some->> (vals timestamps) (apply concat) (sort) (last))
           weight (try (or (some-> last-modified ts/parse ts/days-since-epoch) 0)
-                      (catch Throwable t (timbre/warn t) 0))]
+                      (catch Throwable t (log/warn t) 0))]
       (->clean-map
        {:timestamp (article-attr timestamps)
         :timestamps timestamps

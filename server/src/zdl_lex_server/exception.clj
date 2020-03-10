@@ -1,9 +1,9 @@
 (ns zdl-lex-server.exception
   (:require [reitit.ring.middleware.exception :as exception]
-            [taoensso.timbre :as timbre]))
+            [clojure.tools.logging :as log]))
 
 (defn wrap-log-to-console [handler ^Throwable e req]
-  (timbre/warn e (select-keys req [:uri :request-method]))
+  (log/warn e (select-keys req [:uri :request-method]))
   (handler e req))
 
 (def middleware

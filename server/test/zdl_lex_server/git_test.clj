@@ -3,13 +3,10 @@
             [clj-jgit.querying :as jgit-query]
             [clojure.string :as str]
             [clojure.test :refer :all]
+            [clojure.tools.logging :as log]
             [faker.lorem :as lorem]
-            [me.raynes.fs :as fs]
-            [taoensso.timbre :as timbre]
-            [zdl-lex-common.log :as log])
+            [me.raynes.fs :as fs])
   (:import org.eclipse.jgit.transport.RefSpec))
-
-(log/configure)
 
 (def test-dir (fs/file "target" "test-data" "git-test"))
 
@@ -68,7 +65,7 @@
               (mapcat (partial jgit-query/changed-files repo)))
          (throw (ex-info (str merge) {:git-dir git-dir :merge merge})))))
    (vec)
-   (timbre/spy :info)))
+   (log/spy :info)))
 
 (defn push-git [git-dir]
   (jgit/with-repo git-dir
