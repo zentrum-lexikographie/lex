@@ -173,7 +173,7 @@
        (IllegalStateException. "Uncommitted changes in server's working dir")))
     (let [head (git-rev)]
       (git "merge" "--ff-only" "-q" ref)
-      (->> (git "diff" "--numstat" (str "3437d55d4c528" ".." "HEAD"))
+      (->> (git "diff" "--numstat" (str head ".." "HEAD"))
            :out str/split-lines
            (map not-empty) (remove nil?)
            (map #(str/split % #"\t"))
