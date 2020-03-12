@@ -1,6 +1,8 @@
 (ns compile)
 
-(def compiled-ns ['zdl-lex-server.core])
+(def compiled-ns
+  ['clojure.tools.logging.impl
+   'zdl-lex-server.core])
 
 (defn -main [& args]
   (binding [*compile-path* "classes"]

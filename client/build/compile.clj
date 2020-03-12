@@ -1,7 +1,8 @@
 (ns compile)
 
 (def compiled-ns
-  ['zdl-lex-client.oxygen.extension
+  ['clojure.tools.logging.impl
+   'zdl-lex-client.oxygen.extension
    'zdl-lex-client.oxygen.plugin
    'zdl-lex-client.oxygen.url-handler])
 
