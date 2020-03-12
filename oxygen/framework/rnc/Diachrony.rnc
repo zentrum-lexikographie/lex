@@ -234,7 +234,7 @@ Sprachen = (
 	| 'ir'           # gle: Irish
 	| 'isl'          # isl: Icelandic
 	| 'ital'         # ita: Italian
-	| 'italisch'
+	#| 'italisch'
 	| 'italo-alban'
 	| 'jakut'
 	| 'japan'        # jpn: Japanese
