@@ -39,7 +39,7 @@
 
 (defstate index-rebuild-scheduler
   "Synchronizes all articles with the Solr index"
-  :start (cron/schedule "0 1 0 * * ?" "Solr index rebuild" client/rebuild-index)
+  :start (cron/schedule "0 0 1 * * ?" "Solr index rebuild" client/rebuild-index)
   :stop (a/close! index-rebuild-scheduler))
 
 (defstate index-init
