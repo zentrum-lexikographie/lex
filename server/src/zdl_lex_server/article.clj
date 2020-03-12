@@ -56,31 +56,33 @@
   {:query (s/keys :req-un [::form ::pos])})
 
 (defn get-article [{{:keys [resource]} :path-params}]
-  (lock/with-global-read-lock
-    (let [id->file (article/id->file git/dir)
-          f (id->file resource)]
-      (if (fs/exists? f)
-        (htstatus/ok f)
-        (htstatus/not-found resource)))))
+  (let [id->file (article/id->file git/dir)
+        f (id->file resource)]
+    (if (fs/exists? f)
+      (htstatus/ok f)
+      (htstatus/not-found resource))))
 
 (defn create-article [{{:keys [user]} :identity
                        {:keys [form pos]} :params}]
-  (lock/with-global-write-lock
+  (locking git/dir
     (let [xml-id (generate-id)
           xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
-          id->file (article/id->file git/dir)]
-      (spit (id->file id) xml :encoding "UTF-8")
+          id->file (article/id->file git/dir)
+          f (id->file id)]
+      (spit f xml :encoding "UTF-8")
+      (git/publish-changes [f])
       (htstatus/ok {:id id :form form :pos pos}))))
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
-  (lock/with-global-write-lock
+  (locking git/dir
     (let [id->file (article/id->file git/dir)
           f (id->file resource)]
       (if (fs/exists? f)
         (do
           (spit f (htreq/body-string req) :encoding "UTF-8")
+          (git/publish-changes [f])
           (htstatus/ok f))
         (htstatus/not-found resource)))))
 

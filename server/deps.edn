@@ -26,7 +26,6 @@
   cheshire {:mvn/version "5.9.0"}
   clj-http {:mvn/version "3.9.1"
             :exclusions [commons-logging]}
-  clj-jgit {:mvn/version "1.0.0-beta3"}
   hiccup {:mvn/version "1.0.5"}
   ring-webjars {:mvn/version "0.2.0"
                 :exclusions [org.webjars/webjars-locator]}

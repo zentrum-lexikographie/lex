@@ -1,40 +1,17 @@
 (ns zdl-lex-server.lock
   (:require [clojure.core.async :as a]
             [clojure.java.jdbc :as jdbc]
+            [clojure.spec.alpha :as s]
+            [clojure.string :as str]
             [hugsql.core :refer [def-db-fns]]
             [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [uuid]]
-            [clojure.spec.alpha :as s]
-            [zdl-lex-common.spec :as spec]
-            [clojure.string :as str])
-  (:import java.util.concurrent.locks.ReentrantReadWriteLock
-           java.util.concurrent.TimeUnit
-           java.net.URI
-           org.h2.jdbcx.JdbcConnectionPool
-           org.h2.jdbcx.JdbcDataSource))
-
-(defonce global-lock (ReentrantReadWriteLock.))
-
-(defmacro with-global-lock
-  [lock-method & body]
-  `(let [lock# (~lock-method ^ReentrantReadWriteLock global-lock)]
-     (if (.tryLock lock# 30 TimeUnit/SECONDS)
-       (try ~@body
-            (finally
-              (.unlock lock#)))
-       (throw (ex-info "Storage lock timeout" {})))))
-
-(defmacro with-global-read-lock
-  [& body]
-  `(with-global-lock .readLock ~@body))
-
-(defmacro with-global-write-lock
-  [& body]
-  `(with-global-lock .writeLock ~@body))
+            [zdl-lex-common.spec :as spec])
+  (:import java.net.URI
+           org.h2.jdbcx.JdbcConnectionPool))
 
 (defn- now []
   (System/currentTimeMillis))

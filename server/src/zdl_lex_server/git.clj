@@ -1,22 +1,17 @@
 (ns zdl-lex-server.git
-  (:require [clj-jgit.internal :as jgit-int]
-            [clj-jgit.porcelain :as jgit]
-            [clj-jgit.querying :as jgit-query]
-            [clojure.core.async :as a]
+  (:require [clojure.core.async :as a]
             [clojure.java.shell :as sh]
-            [clojure.set :refer [union]]
             [clojure.spec.alpha :as s]
-            [me.raynes.fs :as fs]
-            [mount.core :refer [defstate]]
-            [metrics.timers :refer [deftimer time!]]
-            [ring.util.http-response :as htstatus]
+            [clojure.string :as str]
             [clojure.tools.logging :as log]
+            [me.raynes.fs :as fs]
+            [metrics.timers :refer [deftimer time!]]
+            [mount.core :refer [defstate]]
+            [ring.util.http-response :as htstatus]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-lex-server.lock :as lock]
-            [clojure.string :as str]))
+            [zdl-lex-common.util :refer [file]]))
 
 (def dir (file (env :data-dir) "git"))
 
@@ -50,6 +45,12 @@
            (let [{:keys [out]} (git "--version")]
              (log/info {:git (str/trim out)}))))
 
+(defn git-clone
+  []
+  (let [origin (env :git-origin)]
+    (log/info {:git {:clone origin}})
+    (git "clone" "--quiet" origin (str dir))))
+
 (deftimer [git local gc-timer])
 
 (defn git-gc
@@ -58,11 +59,9 @@
    (git "gc" "--aggressive")
    (time! gc-timer)))
 
-(defn git-clone
-  []
-  (let [origin (env :git-origin)]
-    (log/info {:git {:clone origin}})
-    (git "clone" "--quiet" origin (str dir))))
+(defstate gc-scheduler
+  :start (cron/schedule "0 0 5 * * ?" "Git GC" git-gc)
+  :stop (a/close! gc-scheduler))
 
 (deftimer [git remote fetch-timer])
 
@@ -80,123 +79,126 @@
    (git "push" "--quiet" "origin" branch)
    (time! push-timer)))
 
-(defn git-load
+(defn git-refs
   []
-  (log/info {:git {:load (str dir)}})
-  (jgit/load-repo (str dir)))
+  (->> (git "for-each-ref" "--format" "%(refname:short)")
+       :out str/split-lines
+       (apply sorted-set)))
 
-(defn git-checkout
-  [repo]
-  (when-not (= branch (jgit/git-branch-current repo))
-    (when-not (some #{branch} (jgit/git-branch-list repo))
-      (jgit/git-branch-create repo branch))
-    (log/info {:git {:checkout branch}})
-    (jgit/git-checkout repo :name branch)))
+(defn git-ref
+  []
+  (->> (git "symbolic-ref" "--short" "-q" "HEAD") :out str/trim))
+
+(defn git-rev
+  []
+  (->> (git "rev-parse" "HEAD") :out str/trim))
+
+(defn git-status
+  []
+  (let [{:keys [out]} (git "status" "-b" "-s" "--porcelain")
+        lines (str/split-lines out)
+        lines (->> lines (map not-empty) (remove nil?))
+        states (map #(hash-map :type (subs % 0 2) :id (subs % 3)) lines)]
+    states))
 
 (defstate ^{:on-reload :noop} repo
-  :start (lock/with-global-write-lock
+  :start (locking dir
            (when-not (fs/directory? (file dir ".git"))
              (git-clone))
-           (let [repo (git-load)]
-             (git-checkout repo)
-             (log/info {:git {:repo (str dir) :branch branch}})
-             repo)))
+           (when-not (#{branch} (git-ref))
+             (git "checkout" "--track" (str "origin/" branch)))
+           (log/info {:git {:repo (str dir) :branch branch}})))
 
-(defn- git-path
-  "Path relative to the git directory."
-  [^java.io.File f]
-  (str (.. (.toPath dir) (relativize (.toPath f)))))
+(defn publish-changes
+  [files]
+  (when (seq files)
+    (bus/publish!
+     :git-changes
+     {:modified (vec (filter fs/exists? files))
+      :deleted (vec (remove fs/exists? files))})
+    files))
 
-(defn- classify-changes [changes]
-  (let [files (map (partial file dir) changes)
-        modified (filter fs/exists? files)
-        deleted (remove fs/exists? files)]
-    {:files
-     {:modified (vec modified)
-      :deleted (vec deleted)}
-     :git
-     {:modified (vec (map git-path modified))
-      :deleted (vec (map git-path deleted))}}))
-
-(defn- send-changes [changes]
-  (->> (changes :files)
-       (log/spy :trace)
-       (bus/publish! :git-changes))
-  changes)
+(def publish-paths
+  (comp publish-changes (partial map (partial file dir))))
 
 (deftimer [git local status-timer])
 
+(def status->kw
+  {\space :ok
+   \A :added
+   \C :copied
+   \D :deleted
+   \M :modified
+   \R :renamed
+   \? :untracked
+   \! :ignored})
+
+(defn status->paths
+  [path]
+  (->> (str/split path #"->")
+       (map #(str/replace % #"\"" ""))
+       (map not-empty) (remove nil?)))
+
 (defn- git-status []
-  (->> (jgit/git-status repo)
-       (vals)
-       (apply union)
-       (classify-changes)
+  (->> (git "status" "-s" "--porcelain")
+       :out str/split-lines
+       (map not-empty) (remove nil?)
+       (map #(array-map :index (status->kw (nth % 0))
+                        :dir (status->kw (nth % 1))
+                        :paths (status->paths (subs % 3))))
        (time! status-timer)))
-
-(defn- git-changed? [changes]
-  (not (every? empty? (-> changes :git vals))))
-
-(def committer
-  {:name (env :git-commit-user)
-   :email (env :git-commit-email)})
 
 (deftimer [git local commit-timer])
 
-(defn commit []
-  (lock/with-global-write-lock
-    (let [changes (git-status)]
-      (when (git-changed? changes)
-        (when-let [modified (not-empty (get-in changes [:git :modified]))]
-          (jgit/git-add repo modified))
-        (when-let [deleted (not-empty (get-in changes [:git :deleted]))]
-          (jgit/git-rm repo deleted))
-        (->>
-         (jgit/git-commit repo "zdl-lex-server" :committer committer)
-         (time! commit-timer))
-        (send-changes changes)
-        ;; Changes will be propagated, even if pushing to the remote fails
-        (try (git-push) (catch Throwable t)))
-      (changes :git))))
+(def commit-author-arg
+  (format "--author=%s <%s>" (env :git-commit-user) (env :git-commit-email)))
 
-(defn fast-forward [refs]
-  (lock/with-global-write-lock
-    (when (git-changed? (git-status))
-      (throw (IllegalStateException. "Uncommitted changes in server's working dir")))
-    (git-fetch)
-    (with-open [rev-walk (jgit-int/new-rev-walk repo)]
-      (if-let [head (jgit-query/find-rev-commit repo rev-walk "HEAD")]
-        (let [merge (jgit/git-merge repo refs :ff-mode :ff-only)]
-          (if (.. merge (getMergeStatus) (isSuccessful))
-            (do (git-push)
-                (->> (jgit/git-log repo :since head)
-                     (map :id) (reverse)
-                     (mapcat (partial jgit-query/changed-files repo))
-                     (map first)
-                     (classify-changes)
-                     (send-changes)
-                     (:git)))
-            (throw (ex-info "Error fast-forwarding git branch"
-                            {:head head :refs refs :merge merge}))))
-        (throw (ex-info "Error fast-forwarding git branch: No HEAD found"))))))
+(defn commit []
+  (when
+      (->>
+       (locking dir
+         (when-let [changes (not-empty (git-status))]
+           (->> (git "commit" commit-author-arg "-a" "-m" "zdl-lex-server")
+                (time! commit-timer))
+           changes))
+       (mapcat :paths)
+       (publish-paths))
+    (git-push)))
+
+(defn fast-forward [ref]
+  (git-fetch)
+  (locking dir
+    (when (not-empty (git-status))
+      (throw
+       (IllegalStateException. "Uncommitted changes in server's working dir")))
+    (let [head (git-rev)]
+      (git "merge" "--ff-only" "-q" ref)
+      (->> (git "diff" "--numstat" (str "3437d55d4c528" ".." "HEAD"))
+           :out str/split-lines
+           (map not-empty) (remove nil?)
+           (map #(str/split % #"\t"))
+           (map #(nth % 2))
+           (publish-paths))))
+  (git-push))
 
 (defstate commit-scheduler
-  :start (cron/schedule "0 * * * * ?" "Git commit" commit)
+  :start (cron/schedule "0 */15 * * * ?" "Git commit" commit)
   :stop (a/close! commit-scheduler))
 
 (defn handle-commit [req]
   (htstatus/ok (commit)))
 
 (defn handle-fast-forward [req]
-  (if-let [refs (-> req :parameters :path :refs not-empty)]
+  (if-let [ref (-> req :parameters :path :ref)]
     (try
-      (htstatus/ok (fast-forward refs))
+      (htstatus/ok (fast-forward ref))
       (catch Throwable t
         (log/warn t)
         (htstatus/bad-request)))
     (htstatus/bad-request)))
 
-(s/def ::refs string?)
-(s/def ::fast-forward-cmd (s/keys :req-un [::refs]))
+(s/def ::ref string?)
+(s/def ::fast-forward-cmd (s/keys :req-un [::ref]))
 
 (def ring-handlers
   ["/git"
@@ -204,7 +206,7 @@
     {:patch {:summary "Commit pending changes on the server's branch"
              :tags ["Article" "Git" "Admin"]
              :handler handle-commit}}]
-   ["/ff/*refs"
+   ["/ff/:ref"
     {:post {:summary "Fast-forwards the server's branch to the given refs"
             :tags ["Article" "Git" "Admin"]
             :parameters {:path ::fast-forward-cmd}

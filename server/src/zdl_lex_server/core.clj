@@ -11,16 +11,17 @@
 
 (def data-sources [#'lock/datasource #'lock/db #'git/git-cmd #'git/repo])
 
-(def services [#'http/server
-               #'metrics/reporter])
+(def services [#'http/server])
 
 (def background-tasks [#'lock/lock-cleanup-scheduler
                        #'git/commit-scheduler
+                       #'git/gc-scheduler
                        #'solr/index-rebuild-scheduler
                        #'solr/index-init
                        #'solr/git-change-indexer
                        #'solr/build-suggestions-scheduler
-                       #'mantis/issue-sync-scheduler])
+                       #'mantis/issue-sync-scheduler
+                       #'metrics/reporter])
 
 (defn -main []
   (.addShutdownHook
