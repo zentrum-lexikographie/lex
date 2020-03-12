@@ -24,6 +24,7 @@
    :mantis-project 5
    :mantis-user "test"
    :mantis-password "test"
+   :metrics-report-interval 30
    :solr-base "http://localhost:8983/solr/"
    :solr-core "articles"})
 
@@ -57,6 +58,8 @@
 (s/def ::mantis-user string?)
 (s/def ::mantis-password string?)
 
+(s/def ::metrics-report-interval int?)
+
 (s/def ::solr-base string?)
 (s/def ::solr-core string?)
 
@@ -71,6 +74,7 @@
                    ::git-commit-user ::git-commit-email
                    ::server-base
                    ::mantis-base ::mantis-project
+                   ::metrics-report-interval
                    ::solr-base ::solr-core]
           :opt-un [::git-auth-key-dir ::git-auth-key-name
                    ::server-user ::server-password
