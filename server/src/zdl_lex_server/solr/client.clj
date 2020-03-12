@@ -22,6 +22,7 @@
   (->>
    (req {:method :get :url (url "/suggest")
          :query-params {"suggest.dictionary" name "suggest.q" q}
+         :throw-exceptions false :coerce :always
          :as :json})
    (time! suggest-timer)))
 
