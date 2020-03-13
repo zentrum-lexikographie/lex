@@ -65,6 +65,21 @@ Lesartangabe = element Lesart {
 # Belege und Kollokationen #############
 ########################################
 
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Loeschung"
+      sch:assert [
+        test = "string-join(./preceding-sibling::text()/normalize-space(), '') != ''"
+        'Kein Löschungen am Anfang eines Belegtextes'
+      ]
+      sch:assert [
+        test = "string-join(./following-sibling::text()/normalize-space(), '') != ''"
+        'Kein Löschungen am Ende eines Belegtextes'
+      ]
+    ]
+  ]
+]
 Belegtext = element Belegtext {
 	text
 	& Paraphrase *
@@ -106,6 +121,22 @@ Kompetenzbeispiel = element Kompetenzbeispiel {
 	, semantische_Verweise ?
 	, Diasystematik ?
 }
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Kollokation | //d:Konstruktionsmuster | //d:Phrasem"
+      sch:assert [
+        test = "not(contains(string-join(text(), ''), '/'))"
+        'Keine Schrägstriche in Kollokationen, Konstruktionsmustern, Phrasemen'
+      ]
+      sch:assert [
+        test = "not(contains(string-join(.//d:Belegtext/text(), ''), ';'))"
+        'Keine Semikolons in Belegtexten zu Kollokationen, Konstruktionsmustern, Phrasemen'
+      ]
+    ]
+  ]
+]
 
 Kollokation = element Kollokation {
 	Metadaten.allgemein ?
@@ -193,6 +224,18 @@ morphologische_Verweise = element Verweise {
 	    , Verweisziel
     } *
 }
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Lesart/d:Verweise/d:Verweis[not(matches(@Typ, '(Antonym)|(Synonym)|(Assoziation)'))]"
+      sch:assert [
+        test = "@class = 'invisible'"
+        'Semantische Verweise (außer Antonym, Synonym, Assoziation) müssen unsichtbar sein'
+      ]
+    ]
+  ]
+]
 
 semantischer_Verweis = element Verweis {
 	attribute Typ {
@@ -318,6 +361,25 @@ Illustration = element Illustration {
 ########################################
 
 Rechtschreibstatus = attribute Typ { 'AR_G' | 'NR_G' | 'U' | 'U_CH' | 'U_AT' | 'U_U' | 'U_NR' }
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Artikel//d:Formangabe/d:Diasystematik/*"
+      sch:assert [
+        test = "count(..//d:Formangabe) > 1"
+        'Keine diasystematischen Angaben für einzelne Formangaben'
+      ]
+    ]
+    sch:rule [
+      context = "//d:Artikel//d:Formangabe/d:Frequenzangabe"
+      sch:assert [
+        test = "count(..//d:Formangabe) > 1"
+        'Keine Frequenzangabe für einzelne Formangaben'
+      ]
+    ]
+  ]
+]
 
 Formangabe = element Formangabe {
 	Metadaten.allgemein ?

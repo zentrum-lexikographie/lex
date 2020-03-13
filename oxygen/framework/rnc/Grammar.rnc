@@ -1,6 +1,36 @@
+default namespace = 'http://www.dwds.de/ns/1.0'
+namespace sch = 'http://purl.oclc.org/dsdl/schematron'
+
 #####################################################################
 # wortklassenspezifische Grammatik-Gruppe auf Artikel-Ebene
 #####################################################################
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']]"
+      sch:assert [
+        test = "not(d:Numeruspraeferenz[text() = 'nur im Singular']) or not(d:Plural)"
+        'Inkonsistente Flexionsangabe (Numeruspräferenz und Plural)'
+      ]
+      sch:assert [
+        test = "not(d:Numeruspraeferenz[text() = 'nur im Plural']) or not(d:Genitiv)"
+        'Inkonsistente Flexionsangabe (Numeruspräferenz und Genitiv/Singular)'
+      ]
+      sch:assert [
+        test = "d:Plural or d:Genitiv"
+        'Fehlende Flexionsangaben (Genitiv/Singular oder Plural)'
+      ]
+    ]
+    sch:rule [
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Verb']]"
+      sch:assert [
+        test = "d:Praeteritum and d:Partizip_II"
+        'Fehlende Flexionsangaben (Präteritum und Partizip II)'
+      ]
+    ]
+  ]
+]
 
 grammatische_Beschreibung = element Grammatik {
 	Metadaten.allgemein ?

@@ -12,6 +12,15 @@ include 'Usage.rnc'
     prefix = "d"
     uri = "http://www.dwds.de/ns/1.0"
   ]
+  sch:pattern [
+    sch:rule [
+      context = "//*[@xml:space]"
+      sch:assert [
+        test = "@xml:space = 'preserve'"
+        'Kein @xml:space="preserve"'
+      ]
+    ]
+  ]
 ]
 start = element DWDS {
 	element Artikel {

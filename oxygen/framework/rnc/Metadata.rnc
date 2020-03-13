@@ -19,18 +19,6 @@ Gliederungsmarke = attribute n {
 # Verwaltungsinformationen für den Workflow
 #####################################################################
 
-[
-  sch:pattern [
-    sch:rule [
-      context = "//d:Artikel"
-      sch:assert [
-        test = "@Zeitstempel"
-        'Jeder Artikel muss einen Zeitstempel haben.'
-      ]
-    ]
-  ]
-]
-
 Mitarbeiterinnen = (
 	'DWDS'
 	| 'ast'
@@ -90,6 +78,18 @@ Metadaten.allgemein = (
 	}
 	, attribute Autor { Mitarbeiterinnen } ?
 )
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Artikel"
+      sch:assert [
+        test = "not(@Empfehlung = 'ja') or (@Status = 'Red-f' and @Typ = 'Vollartikel')"
+        '@Empfehlung nur für veröffentlichte Vollartikel'
+      ]
+    ]
+  ]
+]
 
 Metadaten.Artikel = (
 	attribute Typ {
