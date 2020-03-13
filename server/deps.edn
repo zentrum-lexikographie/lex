@@ -11,8 +11,8 @@
 
   io.xapix/clj-soap {:mvn/version "1.1.0"
                      :exclusions [javax.servlet/servlet-api]}
-  metrics-clojure {:mvn/version "2.10.0"}
-  metrics-clojure-jvm {:mvn/version "2.10.0"}
+  audiogum/metrics-clojure {:mvn/version "3.0.0"}
+  audiogum/metrics-clojure-jvm {:mvn/version "3.0.0"}
   metosin/muuntaja {:mvn/version "0.6.3"}
   metosin/reitit {:mvn/version "0.3.9"}
   metosin/ring-http-response {:mvn/version "0.9.1"}
