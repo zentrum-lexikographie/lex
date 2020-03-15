@@ -72,6 +72,7 @@
           id->file (article/id->file git/dir)
           f (id->file id)]
       (spit f xml :encoding "UTF-8")
+      (git/git-add f)
       (git/publish-changes [f])
       (htstatus/ok {:id id :form form :pos pos}))))
 
@@ -87,10 +88,12 @@
         (htstatus/not-found resource)))))
 
 (def ring-handlers
-  ["/article/*resource"
-   {:put {:handler create-article
-          :parameters new-article-parameters}
-    :get {:handler get-article
-          :parameters existing-article-parameters}
-    :post {:handler (lock/wrap-resource-lock post-article)
-           :parameters existing-article-parameters}}])
+  ["/article/"
+   [""
+    {:put {:handler create-article
+           :parameters new-article-parameters}}]
+   ["*resource"
+    {:get {:handler get-article
+           :parameters existing-article-parameters}
+     :post {:handler (lock/wrap-resource-lock post-article)
+            :parameters existing-article-parameters}}]])

@@ -93,14 +93,6 @@
   []
   (->> (git "rev-parse" "HEAD") :out str/trim))
 
-(defn git-status
-  []
-  (let [{:keys [out]} (git "status" "-b" "-s" "--porcelain")
-        lines (str/split-lines out)
-        lines (->> lines (map not-empty) (remove nil?))
-        states (map #(hash-map :type (subs % 0 2) :id (subs % 3)) lines)]
-    states))
-
 (defstate ^{:on-reload :noop} repo
   :start (locking dir
            (when-not (fs/directory? (file dir ".git"))
@@ -153,7 +145,13 @@
 (def commit-author-arg
   (format "--author=%s <%s>" (env :git-commit-user) (env :git-commit-email)))
 
-(defn commit []
+(defn git-add
+  [f]
+  (locking dir
+    (git "add" (-> f file str))))
+
+(defn commit
+  []
   (when
       (->>
        (locking dir
