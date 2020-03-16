@@ -67,7 +67,6 @@ Metadaten.allgemein = (
 		| 'DWDS_auto'
 		| 'Duden_1999'
 		| 'Duden_1999/DWDS'
-		| 'EtymWB'
 		| 'Wahrig'
 		| 'Wahrig/DWDS'
 		| 'Wahrig/ZDL'
