@@ -49,7 +49,7 @@
   "Selects the DWDS article elements in a XML document."
   (comp seq (xml/selector "/d:DWDS/d:Artikel")))
 
-(defn- normalize-space 
+(defn- normalize-space
   "Replaces whitespace runs with a single space and trims s."
   [s] (str/trim (str/replace s #"\s+" " ")))
 
@@ -57,7 +57,7 @@
   "Returns non-empty, whitespace-normalized string."
   [s] (not-empty (normalize-space s)))
 
-(defn- values->seq 
+(defn- values->seq
   "Given an xpath selector and a evaluation context, returns a seq of distinct
    values, extracted from the selected items via `str-fn`."
   [str-fn selector ctx]
@@ -97,7 +97,7 @@
            (seq)
            (into {})))
 
-(defn- attrs-fn 
+(defn- attrs-fn
   "Creates a fn for the given attribute, returning mappings of tagnames to
    distinct attribute values."
   [attr]
@@ -139,7 +139,7 @@
       colouring (texts-fn ".//d:Stilfaerbung")
       area (texts-fn ".//d:Sprachraum")
       references (comp seq references)]
-  (defn excerpt 
+  (defn excerpt
     "Extracts key article data."
     [article]
     (let [authors (authors article)
@@ -175,7 +175,7 @@
         :area (area article)
         :references (references article)}))))
 
-(defn articles 
+(defn articles
   "Extracts articles and their key data from XML files."
   ([dir]
    (partial articles (file->id dir)))
@@ -184,7 +184,8 @@
      (for [article (->> (xml/->dom file) (doc->articles))]
        (assoc (excerpt article) :id id :file file)))))
 
-(defn status->color [status]
+(defn status->color
+  [status]
   (condp = (str/trim status)
     "Artikelrumpf" "#ffcccc"
     "Lex-zur_Abgabe" "#ffff00"
@@ -193,17 +194,18 @@
     "Red-f" "#aeecff"
     "#ffffff"))
 
-(defn articles-in [dir]
+(defn articles-in
+  [dir]
   (mapcat (articles dir) (article-xml-files dir)))
 
 (comment
   (->> (articles-in "../data/git")
        (drop 100)
        (take 3))
-  (->> (mapcat :forms (articles-in "../data/git"))
+  (->> (mapcat :forms (articles-in "../../zdl-wb"))
        (take 1000)
        (sort collator)
-       (take 100))
+       (take 1000))
   (as-> (articles-in "../data/git") $
        #_(remove (comp (partial = "WDG") :source) $)
        (map #(select-keys % [:forms :pos :gender :id]) $)
