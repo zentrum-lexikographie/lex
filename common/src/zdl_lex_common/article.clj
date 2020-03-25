@@ -169,19 +169,16 @@
         :area (area article)
         :references (references article)}))))
 
+(def typography-checks
+  (concat typo-chars/char-checks typo-token/token-checks))
+
 (defn check-typography
   [article]
-  (for [[select-ctx check type] (concat typo-chars/char-checks
-                                        typo-token/token-checks)
+  (for [[select-ctx check type] typography-checks
         ctx (select-ctx article)
         :let [data (some->> ctx xml/->str xml/text check)]
         :when data]
     {:type type :ctx ctx :data data}))
-
-(defn validate
-  [article]
-  (let [errors (check-typography article)]
-    (->clean-map {:errors (seq errors)})))
 
 (defn articles
   "Extracts articles and their key data from XML files."
@@ -190,9 +187,7 @@
   ([file->id file]
    (let [id (file->id file)]
      (for [article (->> (xml/->xdm file) (doc->articles))]
-       (merge {:id id :file file}
-              (validate article)
-              (excerpt article))))))
+       (merge {:id id :file file} (excerpt article))))))
 
 (defn status->color
   [status]

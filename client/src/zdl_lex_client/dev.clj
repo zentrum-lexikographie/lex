@@ -1,6 +1,7 @@
 (ns zdl-lex-client.dev
-  (:require [mount.core :as mount]
+  (:require [mount.core :as mount :refer [defstate]]
             [seesaw.core :as ui]
+            [seesaw.swingx :as uix]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.oxygen.url-handler :refer [lexurl-handler]]
             [zdl-lex-client.search :as search]
@@ -8,8 +9,14 @@
             [zdl-lex-client.view.results :as results-view]
             [zdl-lex-client.view.toolbar :as toolbar]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.url :as lexurl])
+            [zdl-lex-common.url :as lexurl]
+            [zdl-lex-client.bus :as bus]
+            [clojure.tools.logging :as log])
   (:import java.awt.Toolkit))
+
+(defstate validation-logger
+  :start (bus/listen :validation (fn [errors] (log/info errors)))
+  :stop (validation-logger))
 
 (defn show-testbed []
   (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))

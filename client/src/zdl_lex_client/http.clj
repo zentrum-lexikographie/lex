@@ -78,7 +78,7 @@
   (->
    (request {:request-method :get :url url
              :accept "text/xml" :as :stream})
-   :body xml/->dom))
+   :body xml/->xdm))
 
 (defn post-xml [url xml]
   (->

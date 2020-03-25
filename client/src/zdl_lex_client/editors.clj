@@ -54,7 +54,9 @@
     (editorDeactivated [url]
       (when (lexurl/lex? url)
         (bus/publish! :editor-active [url false])))
-    (editorClosed [_])
+    (editorClosed [url]
+      (when (lexurl/lex? url)
+        (bus/publish! :editor-closed [url false])))
     (editorOpened [url]
       (add-listener url))
     (editorRelocated [from to]
@@ -69,7 +71,8 @@
           (ws/remove-editor-change-listener ws/instance editor-change-listener)
           (remove-all-listeners)))
 
-(defn- editor-event->excerpt [[url active?]]
+(defn- editor-event->excerpt
+  [[url active?]]
   (when active?
     (try
       (some->> (ws/xml-document ws/instance url)
@@ -80,8 +83,22 @@
                (bus/publish! :article))
       (catch Exception e (log/warn e)))))
 
+(defn- editor-event->validation
+  [[url active?]]
+  (when active?
+    (try
+      (some->> (ws/xml-document ws/instance url)
+               (article/doc->articles)
+               (mapcat article/check-typography)
+               (seq) (hash-map :errors)
+               (merge {:url url})
+               (bus/publish! :validation))
+      (catch Exception e (log/warn e)))))
+
 (defstate editor->article
-  :start [(bus/listen :editor-active editor-event->excerpt)
-          (bus/listen :editor-saved editor-event->excerpt)]
+  :start [(bus/listen :editor-active (juxt editor-event->excerpt
+                                           editor-event->validation))
+          (bus/listen :editor-saved (juxt editor-event->excerpt
+                                          editor-event->validation))]
   :stop (doseq [s editor->article] (s)))
 
