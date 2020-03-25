@@ -1,6 +1,8 @@
 (ns zdl-lex-common.article
   (:require [clojure.string :as str]
             [clojure.tools.logging :as log]
+            [zdl-lex-common.typography.chars :as typo-chars]
+            [zdl-lex-common.typography.token :as typo-token]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.util :refer [->clean-map file]]
             [zdl-xml.util :as xml])
@@ -49,22 +51,14 @@
   "Selects the DWDS article elements in a XML document."
   (comp seq (xml/selector "/d:DWDS/d:Artikel")))
 
-(defn- normalize-space
-  "Replaces whitespace runs with a single space and trims s."
-  [s] (str/trim (str/replace s #"\s+" " ")))
-
-(defn text
-  "Returns non-empty, whitespace-normalized string."
-  [s] (not-empty (normalize-space s)))
-
 (defn- values->seq
   "Given an xpath selector and a evaluation context, returns a seq of distinct
    values, extracted from the selected items via `str-fn`."
   [str-fn selector ctx]
-  (->> (seq (selector ctx)) (map str-fn) (remove nil?) (distinct) (seq)))
+  (->> (xml/->seq (selector ctx)) (map str-fn) (remove nil?) (distinct) (seq)))
 
 (defn- item->text [^XdmItem i]
-  (text (.getStringValue i)))
+  (xml/text (xml/->str i)))
 
 (defn- texts-fn
   "Create a fn for the given xpath expression, which returns distinct
@@ -72,7 +66,7 @@
   [xp-expr]
   (partial values->seq item->text (xml/selector xp-expr)))
 
-(let [hidx (comp text str (xml/selector "@hidx/string()"))]
+(let [hidx (comp xml/text str (xml/selector "@hidx/string()"))]
   (defn- ref-id [^XdmItem ref]
     (->> [(item->text ref) (hidx ref)]
          (remove nil?)
@@ -121,9 +115,9 @@
       (->clean-map {:ref-id (ref-id ref) :sense (sense ref)}))))
 
 (let [article-attr #(some-> (:Artikel %) (first))
-      type (comp text str (xml/selector "@Typ/string()"))
-      tranche (comp text str (xml/selector "@Tranche/string()"))
-      status (comp text str (xml/selector "@Status/string()"))
+      type (comp xml/text str (xml/selector "@Typ/string()"))
+      tranche (comp xml/text str (xml/selector "@Tranche/string()"))
+      status (comp xml/text str (xml/selector "@Status/string()"))
       authors (attrs-fn "Autor")
       editors (attrs-fn "Redakteur")
       sources (attrs-fn "Quelle")
@@ -175,14 +169,30 @@
         :area (area article)
         :references (references article)}))))
 
+(defn check-typography
+  [article]
+  (for [[select-ctx check type] (concat typo-chars/char-checks
+                                        typo-token/token-checks)
+        ctx (select-ctx article)
+        :let [data (some->> ctx xml/->str xml/text check)]
+        :when data]
+    {:type type :ctx ctx :data data}))
+
+(defn validate
+  [article]
+  (let [errors (check-typography article)]
+    (->clean-map {:errors (seq errors)})))
+
 (defn articles
   "Extracts articles and their key data from XML files."
   ([dir]
    (partial articles (file->id dir)))
   ([file->id file]
    (let [id (file->id file)]
-     (for [article (->> (xml/->dom file) (doc->articles))]
-       (assoc (excerpt article) :id id :file file)))))
+     (for [article (->> (xml/->xdm file) (doc->articles))]
+       (merge {:id id :file file}
+              (validate article)
+              (excerpt article))))))
 
 (defn status->color
   [status]
@@ -202,10 +212,19 @@
   (->> (articles-in "../data/git")
        (drop 100)
        (take 3))
-  (->> (mapcat :forms (articles-in "../../zdl-wb"))
-       (take 1000)
-       (sort collator)
-       (take 1000))
+  (->> (articles-in "../../zdl-wb")
+       (filter (comp #{"Red-1"} :status))
+       (mapcat :errors)
+       (map (fn [{:keys [ctx] :as err}]
+              (assoc err :ctx
+                     [(.getDocumentURI ctx)
+                      (.getLineNumber ctx)
+                      (.getColumnNumber ctx)])))
+       #_(filter (comp #{::typo-chars/unbalanced-parens} :type))
+       #_(drop 20)
+       #_(map #(select-keys % [:forms :pos :gender :id]))
+       (take 10)
+       (time))
   (as-> (articles-in "../data/git") $
        #_(remove (comp (partial = "WDG") :source) $)
        (map #(select-keys % [:forms :pos :gender :id]) $)
