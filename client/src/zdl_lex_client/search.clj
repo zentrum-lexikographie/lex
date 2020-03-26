@@ -8,12 +8,12 @@
 (def query (atom ""))
 
 (defstate result->query
-  :start (uib/bind (bus/bind :search-result)
-                   (uib/transform :query)
+  :start (uib/bind (bus/bind [:search-result])
+                   (uib/transform (comp :query second))
                    (uib/filter identity)
                    query)
   :stop (result->query))
 
 (defn request [q]
   (reset! query q)
-  (bus/publish! :search-request {:query q :id (uuid)}))
+  (bus/publish! [:search-request] {:query q :id (uuid)}))

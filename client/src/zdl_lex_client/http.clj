@@ -134,21 +134,21 @@
   (->>
    (get-edn (server-url "/status"))
    (merge {:timestamp (java.time.Instant/now)})
-   (bus/publish! :status)))
+   (bus/publish! [:status])))
 
 (defstate ping-status
   :start (cron/schedule "*/30 * * * * ?" "Get server status" get-status)
   :stop (a/close! ping-status))
 
-(defn search-articles [req]
+(defn search-articles [_ req]
   (let [q (query/translate (req :query))]
     (->>
      (get-edn (server-url "/index" {:q q :limit "1000"}))
      (merge req)
-     (bus/publish! :search-response))))
+     (bus/publish! [:search-response]))))
 
 (defstate search-reqs->responses
-  :start (bus/listen :search-request search-articles)
+  :start (bus/listen [:search-request] search-articles)
   :stop (search-reqs->responses))
 
 (defn export [query ^File f]
@@ -164,4 +164,4 @@
   (get-edn (server-url "/status"))
   (get-issues "spitzfingrig")
   (export "id:*" (io/file "test.csv"))
-  (search-articles {:query "spitz*"}))
+  (search-articles :search-request {:query "spitz*"}))

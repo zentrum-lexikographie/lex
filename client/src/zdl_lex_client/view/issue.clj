@@ -70,7 +70,7 @@
   (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
        (java.time.OffsetDateTime/from)))
 
-(defn prepare-issues [[{:keys [forms]} visited?]]
+(defn prepare-issues [[[_ {:keys [forms]}] visited?]]
   (let [visited? (or visited? @visited-issues)]
     (->> (mapcat get-issues forms)
          (map (fn [{:keys [id last-updated status url] :as issue}]
@@ -92,7 +92,7 @@
                       :model []
                       :listen [:selection open-selected]
                       :renderer issue-renderer)]
-    (uib/bind (uib/funnel (bus/bind :article) visited-issues)
+    (uib/bind (uib/funnel (bus/bind [:article]) visited-issues)
               (uib/transform prepare-issues)
               (uib/property issues-panel :model))
     (ui/scrollable issues-panel)))

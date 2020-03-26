@@ -92,7 +92,7 @@
     (open-url [_ url]
       (future (browse-url url)))
     (open-article [_ id]
-      (bus/publish! :editor-activated (lexurl/id->url id))
+      (bus/publish! [:editor-activated] (lexurl/id->url id))
       true)
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]

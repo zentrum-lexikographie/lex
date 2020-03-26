@@ -76,8 +76,8 @@
     (uib/bind input
               (uib/transform #(if (query/valid? %) :black :red))
               (uib/property input :foreground))
-    (uib/bind (bus/bind :search-result)
-              (uib/transform :query)
+    (uib/bind (bus/bind [:search-result])
+              (uib/transform (comp :query second))
               (uib/filter identity)
               input)
     input))

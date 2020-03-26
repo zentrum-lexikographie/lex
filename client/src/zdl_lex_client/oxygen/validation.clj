@@ -90,10 +90,13 @@
              ResultsManager$ResultType/PROBLEM))))
     (log/info ws/instance)))
 
-(defstate validation-results
-  :start
-  [(bus/listen :article add-results)
-   (bus/listen :editor-closed clear-results)]
+(defn handle-results
+  [topic payload]
+  (when (report-errors?)
+    (condp = topic
+      :article (add-results payload)
+      :editor-closed (clear-results payload))))
 
-  :stop
-  (doseq [unsubscribe! validation-results] (unsubscribe!)))
+(defstate validation-results
+  :start (bus/listen [:article :editor-closed] handle-results)
+  :stop (validation-results))

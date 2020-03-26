@@ -19,7 +19,7 @@
 
 (defn index-git-changes
   "Synchronizes modified articles with the Solr index"
-  [{:keys [modified deleted]}]
+  [_ {:keys [modified deleted]}]
   (let [article-xml-file? (article/article-xml-file? git/dir)
         file->id (article/file->id git/dir)
         modified (filter article-xml-file? modified)
@@ -34,7 +34,7 @@
       (catch Throwable t (log/warn t)))))
 
 (defstate git-change-indexer
-  :start (bus/listen :git-changes index-git-changes)
+  :start (bus/listen [:git-changes] index-git-changes)
   :stop (git-change-indexer))
 
 (defstate index-rebuild-scheduler

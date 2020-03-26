@@ -5,14 +5,19 @@
 
 (defonce ^:private pubs (a/pub chan first))
 
-(defn publish! [topic v]
-  (a/>!! chan [topic v]))
+(defn publish! [topics v]
+  (doseq [topic topics]
+    (a/>!! chan [topic v])))
 
-(defn listen [topic listener]
+(defn listen [topics listener]
   (let [c (a/chan)]
-    (a/sub pubs topic c)
+    (doseq [topic topics]
+      (a/sub pubs topic c))
     (a/go-loop []
       (when-let [msg (a/<! c)]
-        (a/thread (listener (second msg)))
+        (a/thread (apply listener msg))
         (recur)))
-    (partial a/close! c)))
+    (fn []
+      (doseq [topic topics]
+        (a/unsub pubs topic c))
+      (a/close! c))))

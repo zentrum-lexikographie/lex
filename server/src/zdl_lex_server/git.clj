@@ -104,10 +104,9 @@
 (defn publish-changes
   [files]
   (when (seq files)
-    (bus/publish!
-     :git-changes
-     {:modified (vec (filter fs/exists? files))
-      :deleted (vec (remove fs/exists? files))})
+    (->> {:modified (vec (filter fs/exists? files))
+          :deleted (vec (remove fs/exists? files))}
+         (bus/publish! [:git-changes]))
     files))
 
 (def publish-paths

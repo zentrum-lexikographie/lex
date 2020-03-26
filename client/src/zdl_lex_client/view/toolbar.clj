@@ -39,8 +39,8 @@
 
 (defn components []
   (let [status-label (ui/label :text "–" :border 5)
-        status-label-text (uib/bind (bus/bind :status)
-                                    (uib/transform :user)
+        status-label-text (uib/bind (bus/bind [:status])
+                                    (uib/transform (comp :user second))
                                     (uib/property status-label :text))]
     [icon/logo
      status-label

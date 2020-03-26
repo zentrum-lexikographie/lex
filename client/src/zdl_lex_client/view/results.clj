@@ -147,7 +147,7 @@
       (.setShowCloseButtonOnTab true)
       (ui/listen #{:selection :component-shown}
                  (fn [_] (->> (or (get-selected-result pane) {})
-                              (bus/publish! :search-result)))))))
+                              (bus/publish! [:search-result])))))))
 
 (defn select-result-tabs []
   (ui/select tabbed-pane [:.result]))
@@ -161,7 +161,7 @@
 (defn result= [a b]
   (= (:query a) (:query b)))
 
-(defn merge-results [resp]
+(defn merge-results [_ resp]
   (ui/invoke-soon
    (let [id (-> resp :id keyword)
          title (resp :query)
@@ -182,5 +182,5 @@
      (ws/show-view ws/instance :results))))
 
 (defstate search-responses->results
-  :start (bus/listen :search-response merge-results)
+  :start (bus/listen [:search-response] merge-results)
   :stop (search-responses->results))

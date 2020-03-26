@@ -19,20 +19,20 @@
     (editorAboutToBeClosedVeto [_] true)
     (editorAboutToBeSavedVeto [_] true)
     (editorSaved [_]
-      (bus/publish! :editor-saved url))))
+      (bus/publish! [:editor-saved] url))))
 
 (defn- add-editor [url]
   (when (lexurl/lex? url)
     (let [listener (editor-listener url)]
       (ws/add-editor-listener ws/instance url listener)
       (swap! editors assoc url listener)
-      (bus/publish! :editor-added url))))
+      (bus/publish! [:editor-added] url))))
 
 (defn- remove-editor [url]
   (when (lexurl/lex? url)
     (ws/remove-editor-listener ws/instance url (@editors url))
     (swap! editors dissoc url)
-    (bus/publish! :editor-removed url)))
+    (bus/publish! [:editor-removed] url)))
 
 (defn- remove-all-editors []
   (doseq [[url listener] @editors]
@@ -46,7 +46,7 @@
     (editorOpened [url]
       (add-editor url)
       (when (lexurl/lex? url)
-        (bus/publish! :editor-opened url)))
+        (bus/publish! [:editor-opened] url)))
     (editorPageChanged [_])
     (editorRelocated [from to]
       (remove-editor from)
@@ -57,14 +57,14 @@
       (doseq [url urls] (remove-editor url)) true)
     (editorClosed [url]
       (when (lexurl/lex? url)
-        (bus/publish! :editor-closed url)))
+        (bus/publish! [:editor-closed] url)))
     (editorActivated [url]
       (when (lexurl/lex? url)
-        (bus/publish! :editor-activated url)))
+        (bus/publish! [:editor-activated] url)))
     (editorSelected [_])
     (editorDeactivated [url]
       (when (lexurl/lex? url)
-        (bus/publish! :editor-deactivated url)))))
+        (bus/publish! [:editor-deactivated] url)))))
 
 (defstate listeners
   :start (do
@@ -75,7 +75,7 @@
           (remove-all-editors)))
 
 (defn- editor-changed
-  [url]
+  [_ url]
   (try
     (if-let [doc (ws/xml-document ws/instance url)]
       (let [articles (article/doc->articles doc)
@@ -83,11 +83,10 @@
             base-data (merge {:url url} (when errors {:errors errors}))]
         (doseq [article articles]
           (some->> (article/excerpt article) (merge base-data)
-           (bus/publish! :article)))))
+           (bus/publish! [:article])))))
     (catch Throwable t (log/warn "" t))))
 
 (defstate editor-changes
-  :start [(bus/listen :editor-activated editor-changed)
-          (bus/listen :editor-saved editor-changed)]
-  :stop (doseq [unsubscribe! editor-changes] (unsubscribe!)))
+  :start (bus/listen [:editor-activated :editor-saved] editor-changed)
+  :stop (editor-changes))
 

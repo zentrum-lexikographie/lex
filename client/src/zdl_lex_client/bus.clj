@@ -6,12 +6,12 @@
 
 (def publish! bus/publish!)
 
-(defn bind [topic]
+(defn bind [topics]
   (reify uib/Bindable
     (subscribe [_ handler]
-      (listen topic handler))
+      (listen topics (fn [& args] (handler args))))
     (notify [_ v]
-      (publish! topic v))))
+      (publish! topics v))))
 
 
 
