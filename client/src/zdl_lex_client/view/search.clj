@@ -1,5 +1,6 @@
 (ns zdl-lex-client.view.search
   (:require [clojure.string :as str]
+            [mount.core :refer [defstate]]
             [seesaw.behave :refer [when-focused-select-all]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
@@ -49,12 +50,12 @@
               (let [q @search/query]
                 (when (query/valid? q) (search/request q))))))
 
-(defn input []
-  (let [input (ui/text :columns 40
-                       :action action
-                       :font (font/derived :style :plain))]
-    (when-focused-select-all input)
-    (proxy [AbstractListIntelliHints] [input]
+(def input
+  (let [text-input (ui/text :columns 40
+                            :action action
+                            :font (font/derived :style :plain))]
+    (when-focused-select-all text-input)
+    (proxy [AbstractListIntelliHints] [text-input]
       (createList []
         (ui/config! (proxy-super createList)
                     :background :white
@@ -69,17 +70,20 @@
           (proxy-super setListData (into-array Object suggestions))
           (not (empty? suggestions))))
       (acceptHint [{:keys [id]}]
-        (ui/config! input :text "")
+        (ui/config! text-input :text "")
         (ws/open-article ws/instance id)))
-    (uib/bind input
-              search/query)
-    (uib/bind input
-              (uib/transform #(if (query/valid? %) :black :red))
-              (uib/property input :foreground))
-    (uib/bind (bus/bind [:search-result])
-              (uib/transform (comp :query second))
-              (uib/filter identity)
-              input)
-    input))
+    text-input))
 
-
+(defstate input-updates
+  :start
+  [(uib/bind input
+             search/query)
+   (uib/bind input
+             (uib/transform #(if (query/valid? %) :black :red))
+             (uib/property input :foreground))
+   (uib/bind (bus/bind [:search-result])
+             (uib/transform (comp :query second))
+             (uib/filter identity)
+             input)]
+  :stop
+  (doseq [unsubscribe! input-updates] (unsubscribe!)))

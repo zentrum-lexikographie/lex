@@ -1,5 +1,6 @@
 (ns zdl-lex-client.view.toolbar
   (:require [clojure.java.io :as io]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
@@ -37,22 +38,27 @@
 (def ^:private show-help-action
   (ui/action :name "Hilfe" :icon icon/gmd-help :handler show-help))
 
-(defn components []
-  (let [status-label (ui/label :text "–" :border 5)
-        status-label-text (uib/bind (bus/bind [:status])
-                                    (uib/transform (comp :user second))
-                                    (uib/property status-label :text))]
-    [icon/logo
-     status-label
-     (search-view/input)
-     (ToolbarButton. search-view/action false)
-     (ToolbarButton. search-all-action false)
-     (ToolbarButton. article-view/create-action false)
-     (ToolbarButton. show-help-action false)
-     (ToolbarButton. preview/action false)
-     (ToolbarButton. validation/activation-action false)]))
+(def status-label
+  (ui/label :text "–" :border 5))
 
-(defn widget []
+(defstate status-label-text
+  :start (uib/bind (bus/bind [:status])
+                   (uib/transform (comp :user second))
+                   (uib/property status-label :text))
+  :stop (status-label-text))
+
+(def components
+  [icon/logo
+   status-label
+   search-view/input
+   (ToolbarButton. search-view/action false)
+   (ToolbarButton. search-all-action false)
+   (ToolbarButton. article-view/create-action false)
+   (ToolbarButton. show-help-action false)
+   (ToolbarButton. preview/action false)
+   (ToolbarButton. validation/activation-action false)])
+
+(def widget
   (ui/toolbar :floatable? false
               :orientation :horizontal
-              :items (components)))
+              :items components))

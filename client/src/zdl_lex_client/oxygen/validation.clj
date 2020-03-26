@@ -16,22 +16,6 @@
 
 (def active? (atom false))
 
-(def activation-action
-  (ui/action :name "Typographieprüfung"
-             :tip "Typographieprüfung (deaktiviert)"
-             :icon icon/gmd-error-outline
-             :handler (fn [_] (swap! active? not))))
-
-(uib/bind
- active?
- (uib/transform #(str "Typographieprüfung (" (if-not % "de") "aktiviert)"))
- (uib/property activation-action :tip))
-
-(uib/bind
- active?
- (uib/transform #(if %  icon/gmd-error icon/gmd-error-outline))
- (uib/property activation-action :icon))
-
 (def tab-key
   "ZDL - Typographie")
 
@@ -96,6 +80,30 @@
     (condp = topic
       :article (add-results payload)
       :editor-closed (clear-results payload))))
+
+(defn handle-activation
+  [active?])
+
+(def activation-action
+  (ui/action :name "Typographieprüfung"
+             :tip "Typographieprüfung (deaktiviert)"
+             :icon icon/gmd-error-outline
+             :handler (fn [_] (swap! active? not))))
+
+(defstate activation-states
+  :start
+  [(uib/bind
+    active?
+    (uib/transform #(str "Typographieprüfung (" (if-not % "de") "aktiviert)"))
+    (uib/property activation-action :tip))
+   (uib/bind
+    active?
+    (uib/transform #(if %  icon/gmd-error icon/gmd-error-outline))
+    (uib/property activation-action :icon))
+   (uib/subscribe
+    active?
+    handle-activation)]
+  :stop (doseq [unsubscribe! activation-states] (unsubscribe!)))
 
 (defstate validation-results
   :start (bus/listen [:article :editor-closed] handle-results)

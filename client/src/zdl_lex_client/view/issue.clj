@@ -1,5 +1,6 @@
 (ns zdl-lex-client.view.issue
   (:require [clojure.core.memoize :as memo]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
@@ -82,20 +83,23 @@
                          :visited? (visited? [id last-updated])))))
          (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))))
 
-(defn create-panel []
-  (let [issue-renderer (proxy [javax.swing.DefaultListCellRenderer] []
-                         (getListCellRendererComponent
-                           [component value index selected? focus?]
-                           (render-issue value)))
-        open-selected #(some-> % ui/selection open-issue)
-        issues-panel (ui/listbox
-                      :model []
-                      :listen [:selection open-selected]
-                      :renderer issue-renderer)]
-    (uib/bind (uib/funnel (bus/bind [:article]) visited-issues)
-              (uib/transform prepare-issues)
-              (uib/property issues-panel :model))
-    (ui/scrollable issues-panel)))
+(def issue-list
+  (ui/listbox
+     :model []
+     :listen [:selection #(some-> % ui/selection open-issue)]
+     :renderer (proxy [javax.swing.DefaultListCellRenderer] []
+                 (getListCellRendererComponent
+                   [component value index selected? focus?]
+                   (render-issue value)))))
+
+(defstate issue-update
+  :start (uib/bind (uib/funnel (bus/bind [:article]) visited-issues)
+                   (uib/transform prepare-issues)
+                   (uib/property issue-list :model))
+  :stop (issue-update))
+
+(def panel
+  (ui/scrollable issue-list))
 
 (comment
   (let [sample {:category "MWA-Link",

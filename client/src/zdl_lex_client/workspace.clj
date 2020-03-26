@@ -31,6 +31,9 @@
     [this id]
     [this id request-focus?]
     "Opens/shows a workspace view.")
+  (editor-url
+    [this]
+    "URL of the current editor.")
   (editor-urls
     [this]
     "URLs of all currently opened editors.")
@@ -76,6 +79,8 @@
     (.. this (getEditorAccess url editing-area) (removeEditorListener listener)))
   (modified? [^StandalonePluginWorkspace this ^URL url]
     (.. this (getEditorAccess url editing-area) (isModified)))
+  (editor-url [^StandalonePluginWorkspace this]
+    (.. this (getCurrentEditorAccess editing-area) (getEditorLocation)))
   (editor-urls [^StandalonePluginWorkspace this]
     (. this (getAllEditorLocations editing-area)))
   (xml-document [^StandalonePluginWorkspace this ^URL url]
@@ -86,23 +91,32 @@
 
 (defstate instance
   :start
-  (reify Workspace
-    (preferences-dir [_]
-      (fs/file (env :user-dir) "tmp" "ws-prefs"))
-    (open-url [_ url]
-      (future (browse-url url)))
-    (open-article [_ id]
-      (bus/publish! [:editor-activated] (lexurl/id->url id))
-      true)
-    (show-view [_ id] (show-view _ id true))
-    (show-view [_ id request-focus?]
-      (log/info {:id id :request-focus? request-focus?}))
-    (add-editor-change-listener [_ _])
-    (remove-editor-change-listener [_ _])
-    (add-editor-listener [_ _ _])
-    (remove-editor-listener [_ _ _])
-    (modified? [_ _] false)
-    (editor-urls [_] [])
-    (xml-document [_ url]
-      (log/info url)
-      (http/get-xml (-> url lexurl/url->id http/id->store-url)))))
+  (let [editor-url (atom nil)]
+    (reify Workspace
+      (preferences-dir [_]
+        (fs/file (env :user-dir) "tmp" "ws-prefs"))
+      (open-url [_ url]
+        (future (browse-url url)))
+      (open-article [_ id]
+        (let [url (lexurl/id->url id)]
+          (reset! editor-url url)
+          (bus/publish! [:editor-activated] url)
+          true))
+      (show-view [_ id] (show-view _ id true))
+      (show-view [_ id request-focus?]
+        (log/info {:id id :request-focus? request-focus?}))
+      (add-editor-change-listener [_ _])
+      (remove-editor-change-listener [_ _])
+      (add-editor-listener [_ _ _])
+      (remove-editor-listener [_ _ _])
+      (modified? [_ _] false)
+      (editor-url [_]
+        @editor-url)
+      (editor-urls [_]
+        (some->> @editor-url vector))
+      (xml-document [_ url]
+        (http/get-xml (-> url lexurl/url->id http/id->store-url))))))
+
+(defn editor-xml-document
+  []
+  (some->> (editor-url instance) (xml-document instance)))
