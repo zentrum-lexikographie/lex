@@ -73,20 +73,3 @@
   :stop (do
           (ws/remove-editor-change-listener ws/instance editor-change-listener)
           (remove-all-editors)))
-
-(defn- editor-changed
-  [_ url]
-  (try
-    (if-let [doc (ws/xml-document ws/instance url)]
-      (let [articles (article/doc->articles doc)
-            errors (seq (mapcat article/check-typography articles))
-            base-data (merge {:url url} (when errors {:errors errors}))]
-        (doseq [article articles]
-          (some->> (article/excerpt article) (merge base-data)
-           (bus/publish! [:article])))))
-    (catch Throwable t (log/warn "" t))))
-
-(defstate editor-changes
-  :start (bus/listen [:editor-activated :editor-saved] editor-changed)
-  :stop (editor-changes))
-

@@ -9,7 +9,8 @@
             [zdl-lex-client.font :as font]
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
-            [zdl-lex-client.workspace :as ws])
+            [zdl-lex-client.workspace :as ws]
+            [zdl-lex-common.article :as article])
   (:import java.net.URL))
 
 (def visited-issues (atom #{}))
@@ -71,9 +72,13 @@
   (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
        (java.time.OffsetDateTime/from)))
 
-(defn prepare-issues [[[_ {:keys [forms]}] visited?]]
+(defn prepare-issues [[[_ url] visited?]]
   (let [visited? (or visited? @visited-issues)]
-    (->> (mapcat get-issues forms)
+    (->> (ws/xml-document ws/instance url)
+         (article/doc->articles)
+         (map article/excerpt)
+         (mapcat :forms)
+         (mapcat get-issues)
          (map (fn [{:keys [id last-updated status url] :as issue}]
                 (let [last-updated (parse-update-ts last-updated)]
                   (assoc issue
@@ -93,7 +98,8 @@
                    (render-issue value)))))
 
 (defstate issue-update
-  :start (uib/bind (uib/funnel (bus/bind [:article]) visited-issues)
+  :start (uib/bind (uib/funnel (bus/bind [:editor-activated :editor-saved])
+                               visited-issues)
                    (uib/transform prepare-issues)
                    (uib/property issue-list :model))
   :stop (issue-update))

@@ -1,12 +1,12 @@
 (ns zdl-lex-client.oxygen.validation
   (:require [clojure.string :as str]
-            [clojure.tools.logging :as log]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.workspace :as ws]
+            [zdl-lex-common.article :as article]
             [zdl-lex-common.typography.chars :as typo-chars]
             [zdl-lex-common.typography.token :as typo-token])
   (:import net.sf.saxon.s9api.XdmNode
@@ -44,45 +44,49 @@
      (error->message error)
      (str url) line-number column-number)))
 
-(defn report-errors?
-  []
-  (and @active? (instance? PluginWorkspace ws/instance)))
+(defn with-results-manager
+  [f]
+  (when (instance? PluginWorkspace ws/instance)
+    (f (. ^PluginWorkspace ws/instance (getResultsManager)))))
 
 (defn clear-results
   [url]
-  (if (report-errors?)
-    (let [manager (. ^PluginWorkspace ws/instance (getResultsManager))
-          results (. manager (getAllResults tab-key))
-          system-id (str url)
-          url-matches? (fn [^DocumentPositionedInfo dpi]
-                         (= system-id (.getSystemID dpi)))]
-      (doseq [dpi (filter url-matches? results)]
-        (. manager (removeResult tab-key dpi))))
-    (log/infof "- %s" url)))
+  (with-results-manager
+    (fn [manager]
+      (let [results (. manager (getAllResults tab-key))
+            system-id (str url)
+            url-matches? (fn [^DocumentPositionedInfo dpi]
+                           (= system-id (.getSystemID dpi)))]
+        (doseq [dpi (filter url-matches? results)]
+          (. manager (removeResult tab-key dpi)))))))
+
+(def result-type
+  ResultsManager$ResultType/PROBLEM)
+
+(defn reset-results!
+  ([manager] (reset-results! nil))
+  ([manager errors]
+   (. manager (setResults tab-key errors result-type))))
 
 (defn add-results
-  [{:keys [url errors status] :as article}]
-  (if (report-errors?)
-    (do
+  [url]
+  (with-results-manager
+    (fn [manager]
       (clear-results url)
-      (when errors
-        (.. ^PluginWorkspace ws/instance
-            (getResultsManager)
-            (setResults
-             tab-key
-             (vec (map (partial error->dpi url) errors))
-             ResultsManager$ResultType/PROBLEM))))
-    (log/info ws/instance)))
-
-(defn handle-results
-  [topic payload]
-  (when (report-errors?)
-    (condp = topic
-      :article (add-results payload)
-      :editor-closed (clear-results payload))))
+      (some->> (ws/xml-document ws/instance url)
+               (article/doc->articles)
+               (mapcat article/check-typography)
+               (map (partial error->dpi url))
+               (seq) (vec) (reset-results! manager)))))
 
 (defn handle-activation
-  [active?])
+  [active?]
+  (with-results-manager
+    (fn [manager]
+      (reset-results!)
+      (when active?
+        (doseq [url (ws/editor-urls ws/instance)]
+          (add-results url))))))
 
 (def activation-action
   (ui/action :name "Typographieprüfung"
@@ -105,6 +109,14 @@
     handle-activation)]
   :stop (doseq [unsubscribe! activation-states] (unsubscribe!)))
 
-(defstate validation-results
-  :start (bus/listen [:article :editor-closed] handle-results)
-  :stop (validation-results))
+(defn update-validation
+  [topic url]
+  (when @active?
+    (cond = topic
+      (#{:editor-opened :editor-saved} topic) (add-results url)
+      (#{:editor-closed} topic) (clear-results url))))
+
+(defstate validation-updates
+  :start (bus/listen [:editor-opened :editor-saved :editor-closed]
+                     update-validation)
+  :stop (validation-updates))
