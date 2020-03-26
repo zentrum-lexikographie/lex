@@ -19,7 +19,6 @@
 
 (defn -applicationStarted [this app-ws]
   (log/info (env->str env))
-  (require 'zdl-lex-client.oxygen.validation)
   (log/info (mount/start-with {#'ws/instance app-ws}))
   (.addViewComponentCustomizer
      app-ws

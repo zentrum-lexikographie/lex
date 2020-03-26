@@ -6,6 +6,7 @@
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.preview :as preview]
             [zdl-lex-client.search :as search]
+            [zdl-lex-client.oxygen.validation :as validation]
             [zdl-lex-client.view.article :as article-view]
             [zdl-lex-client.view.search :as search-view]
             [zdl-lex-client.font :as font])
@@ -48,7 +49,8 @@
      (ToolbarButton. search-all-action false)
      (ToolbarButton. article-view/create-action false)
      (ToolbarButton. show-help-action false)
-     (ToolbarButton. preview/action false)]))
+     (ToolbarButton. preview/action false)
+     (ToolbarButton. validation/activation-action false)]))
 
 (defn widget []
   (ui/toolbar :floatable? false

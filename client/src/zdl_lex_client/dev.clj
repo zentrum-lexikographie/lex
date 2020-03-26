@@ -14,10 +14,6 @@
             [clojure.tools.logging :as log])
   (:import java.awt.Toolkit))
 
-(defstate validation-logger
-  :start (bus/listen :validation (fn [errors] (log/info errors)))
-  :stop (validation-logger))
-
 (defn show-testbed []
   (let [screen-size (.. (Toolkit/getDefaultToolkit) (getScreenSize))
         width  (max 800 (- (.getWidth screen-size) 200))

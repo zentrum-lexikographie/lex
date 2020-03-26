@@ -24,8 +24,9 @@
           (fs/file (ws/preferences-dir ws/instance) "chrome-profile")))
 
 (defstate editor->id
-  :start (bus/listen :editor-active (fn [[url active?]] (set-id (if active? url))))
-  :stop (editor->id))
+  :start [(bus/listen :editor-activated (fn [url] (set-id url)))
+          (bus/listen :editor-deactivated (fn [_] (set-id nil)))]
+  :stop (doseq [unsubscribe! editor->id] (unsubscribe!)))
 
 (defn render [id]
   (->> (url "http://zwei.dwds.de/wb/existdb/" {:d id})

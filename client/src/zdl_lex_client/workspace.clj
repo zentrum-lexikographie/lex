@@ -31,6 +31,9 @@
     [this id]
     [this id request-focus?]
     "Opens/shows a workspace view.")
+  (editor-urls
+    [this]
+    "URLs of all currently opened editors.")
   (xml-document
     [this ^URL url]
     "Parses the editor content associated with the given URL into a DOM.")
@@ -73,6 +76,8 @@
     (.. this (getEditorAccess url editing-area) (removeEditorListener listener)))
   (modified? [^StandalonePluginWorkspace this ^URL url]
     (.. this (getEditorAccess url editing-area) (isModified)))
+  (editor-urls [^StandalonePluginWorkspace this]
+    (. this (getAllEditorLocations editing-area)))
   (xml-document [^StandalonePluginWorkspace this ^URL url]
     (with-open [editor-reader (.. this
                                   (getEditorAccess url editing-area)
@@ -87,7 +92,7 @@
     (open-url [_ url]
       (future (browse-url url)))
     (open-article [_ id]
-      (bus/publish! :editor-active [(lexurl/id->url id) true])
+      (bus/publish! :editor-activated (lexurl/id->url id))
       true)
     (show-view [_ id] (show-view _ id true))
     (show-view [_ id request-focus?]
@@ -97,6 +102,7 @@
     (add-editor-listener [_ _ _])
     (remove-editor-listener [_ _ _])
     (modified? [_ _] false)
+    (editor-urls [_] [])
     (xml-document [_ url]
       (log/info url)
       (http/get-xml (-> url lexurl/url->id http/id->store-url)))))

@@ -121,7 +121,7 @@
 (defn ends-with-punctuation
   [s]
   (if-not (re-seq #"(?:[….?!])|(?:[.?!]«)$" s)
-    (subs s (max 0 (- (count s) 2)))))
+    [(subs s (max 0 (- (count s) 2)))]))
 
 (defn unknown-abbreviations
   [s]
@@ -154,7 +154,9 @@
    (distinct) (seq) (vec)))
 
 (def token-checks
-  [[(xml/selector ".//d:Beleg/d:Belegtext")
+  [[(xml/selector ".//d:Definition")
+    unknown-abbreviations ::unknown-abbreviations]
+   [(xml/selector ".//d:Beleg/d:Belegtext")
     ends-with-punctuation ::final-punctuation]
    [(xml/selector "(.//d:Beleg/d:Belegtext)|(.//d:Definition)")
     missing-whitespace ::missing-whitespace]

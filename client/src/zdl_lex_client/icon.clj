@@ -18,6 +18,8 @@
 (def gmd-filter (icon GoogleMaterialDesignIcons/FILTER_LIST))
 (def gmd-help (icon GoogleMaterialDesignIcons/HELP))
 (def gmd-search (icon GoogleMaterialDesignIcons/SEARCH))
+(def gmd-error (icon GoogleMaterialDesignIcons/ERROR))
+(def gmd-error-outline (icon GoogleMaterialDesignIcons/ERROR_OUTLINE))
 (def gmd-refresh (icon GoogleMaterialDesignIcons/REFRESH))
 (def gmd-result (icon GoogleMaterialDesignIcons/LIST))
 (def gmd-web (icon GoogleMaterialDesignIcons/WEB))
@@ -26,6 +28,6 @@
 
 (comment
   (ui/invoke-later
-   (-> (ui/frame :title "Test" :content (ui/button :icon gmd-delete :text "Hallo"))
+   (-> (ui/frame :title "Test" :content (ui/toggle :selected? false :icon gmd-spellcheck :text "Typographieprüfung"))
        ui/pack!
        ui/show!)))
