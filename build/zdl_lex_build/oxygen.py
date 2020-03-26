@@ -21,6 +21,8 @@ def get_home():
             if candidate.is_dir():
                 oxygen_home = candidate
                 break
+    else:
+        oxygen_home = Path(oxygen_home)
     if oxygen_home is None:
         raise Exception(
             'No Oxygen XML Editor installation ($OXYGEN_HOME) found'
