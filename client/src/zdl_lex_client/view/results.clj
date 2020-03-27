@@ -10,7 +10,8 @@
             [zdl-lex-client.view.export :as export-view]
             [zdl-lex-client.view.filter :as filter-view]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article])
+            [zdl-lex-common.article :as article]
+            [clojure.string :as str])
   (:import com.jidesoft.swing.JideTabbedPane
            [java.awt.event ComponentEvent MouseEvent]
            java.awt.Point
@@ -26,7 +27,8 @@
    {:key :type :text "Typ"}
    {:key :timestamp :text "Datum"}
    {:key :author :text "Autor"}
-   {:key :editor :text "Redakteur"}])
+   {:key :editor :text "Redakteur"}
+   {:key :errors :text "Fehler"}])
 
 (defn- open-article [result ^MouseEvent e]
   (let [clicks (.getClickCount e)
@@ -59,7 +61,8 @@
 (defn- result->table-model [result]
   (merge result {:form (some-> result :forms first)
                  :definition (some-> result :definitions first)
-                 :color (some-> result :status article/status->color)}))
+                 :color (some-> result :status article/status->color)
+                 :errors (some->> result :errors sort (str/join ", "))}))
 
 (defn create-highlighter [model]
   (proxy [AbstractHighlighter] []

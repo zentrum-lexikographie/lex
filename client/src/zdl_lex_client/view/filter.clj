@@ -12,6 +12,7 @@
   {:status "Status"
    :author "Autor"
    :editors "Redakteur"
+   :errors "Fehler"
    :sources "Quelle"
    :type "Typ"
    :tranche "Tranche"
@@ -21,6 +22,7 @@
   {:status "status"
    :author "autor"
    :editors "red"
+   :errors "fehler"
    :sources "quelle"
    :type "typ"
    :tranche "tranche"
@@ -96,7 +98,7 @@
                                  (into [])
                                  (sort-by first))
         facet-lists (for [k [:status :author :editors :timestamp
-                             :sources :tranche :type]]
+                             :sources :tranche :type :errors]]
                       (condp = k
                         :timestamp
                         (ui/listbox :model (result->list-model k)

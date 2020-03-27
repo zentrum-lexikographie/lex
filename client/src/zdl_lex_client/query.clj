@@ -7,6 +7,7 @@
    "autoren" "authors"
    "red" "editors"
    "def" "definitions"
+   "fehler" "errors"
    "form" "forms"
    "datum" "timestamp"
    "klasse" "pos"
