@@ -127,11 +127,11 @@ Kompetenzbeispiel = element Kompetenzbeispiel {
     sch:rule [
       context = "//d:Kollokation | //d:Konstruktionsmuster | //d:Phrasem"
       sch:assert [
-        test = "not(contains(string-join(text(), ''), '/'))"
+        test = "not(contains(string-join(.//text(), ''), '/'))"
         'Keine Schrägstriche in Kollokationen, Konstruktionsmustern, Phrasemen'
       ]
       sch:assert [
-        test = "not(contains(string-join(.//d:Belegtext/text(), ''), ';'))"
+        test = "not(contains(string-join(.//d:Belegtext//text(), ''), ';'))"
         'Keine Semikolons in Belegtexten zu Kollokationen, Konstruktionsmustern, Phrasemen'
       ]
     ]
@@ -368,14 +368,14 @@ Rechtschreibstatus = attribute Typ { 'AR_G' | 'NR_G' | 'U' | 'U_CH' | 'U_AT' | '
     sch:rule [
       context = "//d:Artikel//d:Formangabe/d:Diasystematik/*"
       sch:assert [
-        test = "count(..//d:Formangabe) > 1"
+        test = "count(ancestor::d:Artikel//d:Formangabe) > 1"
         'Keine diasystematischen Angaben für einzelne Formangaben'
       ]
     ]
     sch:rule [
       context = "//d:Artikel//d:Formangabe/d:Frequenzangabe"
       sch:assert [
-        test = "count(..//d:Formangabe) > 1"
+        test = "count(ancestor::d:Artikel//d:Formangabe) > 1"
         'Keine Frequenzangabe für einzelne Formangaben'
       ]
     ]
