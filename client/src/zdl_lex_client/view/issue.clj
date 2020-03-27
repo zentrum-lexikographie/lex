@@ -43,7 +43,7 @@
     :as issue}]
   (let [fg-color (if active? :black :lightgray)
         bg-color (if active? :snow :white)
-        visited-color (if visited? :green fg-color)
+        visited-color (if visited? :grey fg-color)
         label (partial ui/label :foreground fg-color)
         text (partial label :font (font/derived :style :plain))
         last-updated (.. date-time-formatter (format last-updated))]
