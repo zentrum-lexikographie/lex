@@ -225,17 +225,17 @@ morphologische_Verweise = element Verweise {
     } *
 }
 
-[
-  sch:pattern [
-    sch:rule [
-      context = "//d:Lesart/d:Verweise/d:Verweis[not(matches(@Typ, '(Antonym)|(Synonym)|(Assoziation)'))]"
-      sch:assert [
-        test = "@class = 'invisible'"
-        'Semantische Verweise (außer Antonym, Synonym, Assoziation) müssen unsichtbar sein'
-      ]
-    ]
-  ]
-]
+#[
+#  sch:pattern [
+#    sch:rule [
+#      context = "//d:Lesart/d:Verweise/d:Verweis[not(matches(@Typ, '(Antonym)|(Synonym)|(Assoziation)'))]"
+#      sch:assert [
+#        test = "@class = 'invisible'"
+#        'Semantische Verweise (außer Antonym, Synonym, Assoziation) müssen unsichtbar sein'
+#      ]
+#    ]
+#  ]
+#]
 
 semantischer_Verweis = element Verweis {
 	attribute Typ {
