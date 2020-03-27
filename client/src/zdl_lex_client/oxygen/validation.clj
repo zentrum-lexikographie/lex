@@ -49,41 +49,50 @@
   (when (instance? PluginWorkspace ws/instance)
     (f (. ^PluginWorkspace ws/instance (getResultsManager)))))
 
-(defn clear-results
-  [url]
-  (with-results-manager
-    (fn [manager]
-      (let [results (. manager (getAllResults tab-key))
-            system-id (str url)
-            url-matches? (fn [^DocumentPositionedInfo dpi]
-                           (= system-id (.getSystemID dpi)))]
-        (doseq [dpi (filter url-matches? results)]
-          (. manager (removeResult tab-key dpi)))))))
+(defn dpi-matches-system-id?
+  [system-id ^DocumentPositionedInfo dpi]
+  (= system-id (.getSystemID dpi)))
+
+(defn remove-results!
+  [manager url]
+  (let [all-results (. manager (getAllResults tab-key))
+        matches-url? (partial dpi-matches-system-id? (str url))]
+    (doseq [dpi (filter matches-url? all-results)]
+      (. manager (removeResult tab-key dpi)))))
 
 (def result-type
   ResultsManager$ResultType/PROBLEM)
 
 (defn reset-results!
-  ([manager] (reset-results! nil))
-  ([manager errors]
-   (. manager (setResults tab-key errors result-type))))
+  ([manager] (reset-results! manager nil))
+  ([manager dpis]
+   (. manager (setResults tab-key dpis result-type)))
+  ([manager url dpis]
+   (remove-results! manager url)
+   (when (seq dpis)
+     (. manager (addResults tab-key dpis result-type true)))))
 
 (defn add-results
   [url]
   (with-results-manager
     (fn [manager]
-      (clear-results url)
-      (some->> (ws/xml-document ws/instance url)
-               (article/doc->articles)
-               (mapcat article/check-typography)
-               (map (partial error->dpi url))
-               (seq) (vec) (reset-results! manager)))))
+      (->> (ws/xml-document ws/instance url)
+           (article/doc->articles)
+           (mapcat article/check-typography)
+           (map (partial error->dpi url))
+           (vec) (reset-results! manager url)))))
+
+(defn clear-results
+  [url]
+  (with-results-manager
+    (fn [manager]
+      (reset-results! manager url nil))))
 
 (defn handle-activation
   [active?]
   (with-results-manager
     (fn [manager]
-      (reset-results!)
+      (reset-results! manager)
       (when active?
         (doseq [url (ws/editor-urls ws/instance)]
           (add-results url))))))
@@ -112,7 +121,7 @@
 (defn update-validation
   [topic url]
   (when @active?
-    (cond = topic
+    (cond
       (#{:editor-opened :editor-saved} topic) (add-results url)
       (#{:editor-closed} topic) (clear-results url))))
 
