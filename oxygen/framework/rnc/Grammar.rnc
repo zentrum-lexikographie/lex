@@ -55,7 +55,7 @@ grammatische_Beschreibung = element Grammatik {
 			| 'Affix'
 			| 'Mehrwortausdruck'
 		)
-	} ?
+	}
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus { 'mask.' | 'fem.' | 'neutr.' } *
@@ -120,11 +120,11 @@ grammatische_Beschreibung = element Grammatik {
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ
 	, (
 		element Praesens {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|beiseite|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leer|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlau|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor(auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|beiseite|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leer|leid|los|maß|mit|nach|nebenher|nieder|not|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlau|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor(auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
 			, Rechtschreibstatus ?
 		} +
 		, element Praeteritum {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|beiseite|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leer|leid|los|maß|mit|nach|nebenher|nieder|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlau|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor(auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|auf|aufeinander|aus|auseinander|bei|beieinander|beisammen|beiseite|bekannt|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dran|drauf|drin|dicht|durch|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|fern|fest|fort|frei|fürlieb|gegen|gegeneinander|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|ein|unter|über|unter|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kalt|klein|krank|leer|leid|los|maß|mit|nach|nebenher|nieder|not|ob|offen|parallel|ran|rauf|raus|rein|rüber|rum|runter|schlau|schlecht|schön|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|vor(auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurück|zusammen|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
 			, Rechtschreibstatus ?
 		} +
 	) ?
