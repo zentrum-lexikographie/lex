@@ -84,10 +84,13 @@
   (editor-urls [^StandalonePluginWorkspace this]
     (. this (getAllEditorLocations editing-area)))
   (xml-document [^StandalonePluginWorkspace this ^URL url]
-    (with-open [editor-reader (.. this
-                                  (getEditorAccess url editing-area)
-                                  (createContentInputStream))]
-      (xml/->xdm editor-reader))))
+    (try
+      (with-open [editor-reader (.. this
+                                    (getEditorAccess url editing-area)
+                                    (createContentInputStream))]
+        (xml/->xdm editor-reader))
+      (catch Throwable t
+        (log/debug (str url) t)))))
 
 (defstate instance
   :start

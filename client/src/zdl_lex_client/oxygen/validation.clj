@@ -76,11 +76,12 @@
   [url]
   (with-results-manager
     (fn [manager]
-      (->> (ws/xml-document ws/instance url)
-           (article/doc->articles)
-           (mapcat article/check-typography)
-           (map (partial error->dpi url))
-           (vec) (reset-results! manager url)))))
+      (some->>
+       (ws/xml-document ws/instance url)
+       (article/doc->articles)
+       (mapcat article/check-typography)
+       (map (partial error->dpi url))
+       (vec) (reset-results! manager url)))))
 
 (defn clear-results
   [url]

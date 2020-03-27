@@ -74,19 +74,22 @@
 
 (defn prepare-issues [[[_ url] visited?]]
   (let [visited? (or visited? @visited-issues)]
-    (->> (ws/xml-document ws/instance url)
-         (article/doc->articles)
-         (map article/excerpt)
-         (mapcat :forms)
-         (mapcat get-issues)
-         (map (fn [{:keys [id last-updated status url] :as issue}]
-                (let [last-updated (parse-update-ts last-updated)]
-                  (assoc issue
-                         :url (URL. url)
-                         :last-updated last-updated
-                         :active? (not (#{"closed" "resolved"} status))
-                         :visited? (visited? [id last-updated])))))
-         (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))))
+    (or
+     (some->>
+      (ws/xml-document ws/instance url)
+      (article/doc->articles)
+      (map article/excerpt)
+      (mapcat :forms)
+      (mapcat get-issues)
+      (map (fn [{:keys [id last-updated status url] :as issue}]
+             (let [last-updated (parse-update-ts last-updated)]
+               (assoc issue
+                      :url (URL. url)
+                      :last-updated last-updated
+                      :active? (not (#{"closed" "resolved"} status))
+                      :visited? (visited? [id last-updated])))))
+      (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))
+     [])))
 
 (def issue-list
   (ui/listbox
