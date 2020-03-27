@@ -138,7 +138,7 @@
    (remove camel-case-whitelist)
    (filter (some-fn
             ;; e.g. aB ,A )A -A
-            (partial re-seq #"[\p{Ll}\p{Pe}\p{Po}&&[^/]]\p{Lu}")
+            (partial re-seq #"[\p{Ll}\p{Pe}\p{Po}&&[^/\"']]\p{Lu}")
             ;; e.g. a( A( .( -(
             (partial re-seq #"[\p{Lu}\p{Ll}\p{Po}\p{Pd}]\p{Ps}")
             (partial re-seq #"«[^\p{Pe}\p{Po}]")
@@ -150,7 +150,7 @@
   (some->>
    (concat
     (re-seq #"[»(/]\s" s)
-    (re-seq #"\s[\p{Po}&&[^%&*†/…]]" s))
+    (re-seq #"\s[\p{Po}&&[^%&*†/…\"']]" s))
    (distinct) (seq) (vec)))
 
 (def token-checks

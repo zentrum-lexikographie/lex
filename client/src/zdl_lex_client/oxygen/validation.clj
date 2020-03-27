@@ -33,7 +33,7 @@
    " – "
    [(str "<" (.. ctx (getNodeName) (getLocalName)) "/>")
     (get error-type->desc type type)
-    (str/join ", " (map #(str "„…" % "…”") data))]))
+    (str/join ", " (map #(str "/" % "/") data))]))
 
 (defn error->dpi
   [url {:keys [^XdmNode ctx] :as error}]
