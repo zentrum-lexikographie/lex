@@ -5,7 +5,9 @@
             [zdl-lex-common.typography.token :as typo-token]
             [zdl-lex-common.timestamp :as ts]
             [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-xml.util :as xml])
+            [zdl-xml.util :as xml]
+            [zdl-xml.validate :as xv]
+            [clojure.java.io :as io])
   (:import java.io.File
            java.text.Collator
            java.util.Locale
@@ -169,6 +171,12 @@
         :area (area article)
         :references (references article)}))))
 
+(def rng-validate
+  (xv/create-rng-validator (io/resource "rng/DWDSWB.rng")))
+
+(def sch-validate
+  (xv/create-sch-validator (io/resource "rng/DWDSWB.sch.xsl")))
+
 (def typography-checks
   (concat typo-chars/char-checks typo-token/token-checks))
 
@@ -180,6 +188,16 @@
         :when data]
     {:type type :ctx ctx :data data}))
 
+(defn correctness
+  [file article]
+  (let [typography? (seq (check-typography article))
+        rng? (seq (rng-validate file))
+        sch? (seq (sch-validate file))]
+    (->clean-map
+     {:errors (seq (concat (when typography? ["Typographie"])
+                           (when rng? ["Schema"])
+                           (when sch? ["Schematron"])))})))
+
 (defn articles
   "Extracts articles and their key data from XML files."
   ([dir]
@@ -187,7 +205,9 @@
   ([file->id file]
    (let [id (file->id file)]
      (for [article (->> (xml/->xdm file) (doc->articles))]
-       (merge {:id id :file file} (excerpt article))))))
+       (merge {:id id :file file}
+              (excerpt article)
+              (correctness file article))))))
 
 (defn status->color
   [status]
@@ -208,17 +228,10 @@
        (drop 100)
        (take 3))
   (->> (articles-in "../../zdl-wb")
-       (filter (comp #{"Red-1"} :status))
-       (mapcat :errors)
-       (map (fn [{:keys [ctx] :as err}]
-              (assoc err :ctx
-                     [(.getDocumentURI ctx)
-                      (.getLineNumber ctx)
-                      (.getColumnNumber ctx)])))
-       #_(filter (comp #{::typo-chars/unbalanced-parens} :type))
-       #_(drop 20)
-       #_(map #(select-keys % [:forms :pos :gender :id]))
-       (take 10)
+       (remove (comp #{"Red-2" "Red-f"} :status))
+       (filter :errors)
+       (map #(select-keys % [:forms #_:pos #_:gender #_:id #_:status :errors]))
+       (take 100)
        (time))
   (as-> (articles-in "../data/git") $
        #_(remove (comp (partial = "WDG") :source) $)

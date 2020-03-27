@@ -109,7 +109,8 @@
     {"facet" "true"
      "facet.field" ["author_s" "editors_ss"
                     "sources_ss" "tranche_ss"
-                    "type_ss" "pos_ss" "status_ss"]
+                    "type_ss" "pos_ss" "status_ss"
+                    "errors_ss"]
      "facet.limit" "-1"
      "facet.mincount" "1"
      "facet.interval" "timestamp_dt"

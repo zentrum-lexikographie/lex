@@ -1,4 +1,5 @@
-{:deps
+{:paths ["src", "../oxygen/framework"]
+ :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
   org.clojure/core.async {:mvn/version "0.4.490"}
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
@@ -13,7 +14,7 @@
   environ {:mvn/version "1.1.0"}
   mount {:mvn/version "0.1.16"}
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "68ee81ba72f2b3b8fd0788da7354290c880f14f8"}}
+                   :sha "327e82d6a1b962a62d9be37f87402a40e3d4456a"}}
 
  :aliases
  {:schema {:extra-paths ["build"]

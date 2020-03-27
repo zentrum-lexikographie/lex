@@ -46,7 +46,8 @@
    :last-modified :timestamp
    :author :authors :editors :editor
    :sources :source
-   :forms :pos :definitions])
+   :forms :pos :definitions
+   :errors])
 
 (defn- basic-field
   "Mapping of basic Solr fields."
@@ -66,24 +67,24 @@
                 [(str prefix "_" suffix) all-values])))))
 
 (defn article->fields
-  "Returns Solr fields/values for a given article excerpt."
-  [{:keys [id] :as excerpt}]
-  (let [abstract (select-keys excerpt abstract-fields)
+  "Returns Solr fields/values for a given article."
+  [{:keys [id] :as article}]
+  (let [abstract (select-keys article abstract-fields)
         preamble {:id id
                   :language "de"
                   :time (str (System/currentTimeMillis))
                   :xml-descendent-path id
                   :abstract (pr-str abstract)}
-        main-fields (dissoc excerpt
+        main-fields (dissoc article
                             :id :file
                             :timestamps :authors :editors :sources
                             :references :ref-ids)
         fields (->> [(map basic-field preamble)
                      (map basic-field main-fields)
-                     (attr-field "timestamps" "dts" (excerpt :timestamps))
-                     (attr-field "authors" "ss" (excerpt :authors))
-                     (attr-field "editors" "ss" (excerpt :editors))
-                     (attr-field "sources" "ss" (excerpt :sources))]
+                     (attr-field "timestamps" "dts" (article :timestamps))
+                     (attr-field "authors" "ss" (article :authors))
+                     (attr-field "editors" "ss" (article :editors))
+                     (attr-field "sources" "ss" (article :sources))]
                     (mapcat identity)
                     (remove nil?)
                     (into {}))]
