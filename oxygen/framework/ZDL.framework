@@ -3453,7 +3453,7 @@ ID_generieren [nocontextvalidation]</String>
 															</entry>
 															<entry>
 																<String>value</String>
-																<String>${system(user.name)}</String>
+																<String>${zdl.user}</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
