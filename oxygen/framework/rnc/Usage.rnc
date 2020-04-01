@@ -20,6 +20,20 @@ Frequenzangaben = (
 Frequenzangabe = element Frequenzangabe { Frequenzangaben }
 Frequenzbeschraenkung = attribute Frequenz { Frequenzangaben }
 
+Sprachareal = element Sprachareal {
+	Frequenzbeschraenkung ?
+	, (
+		'D-Nordwest'
+		| 'D-Nordost'
+		| 'D-Mittelwest'
+		| 'D-Mittelost'
+		| 'D-Südwest'
+		| 'D-Südost'
+		| 'Österreich'
+		| 'Schweiz'
+	)
+}
+
 Bedeutungsebene = element Bedeutungsebene {
 	Frequenzbeschraenkung ?
 	, (

@@ -487,6 +487,7 @@ Diasystematik = element Diasystematik {
 	& Stilfaerbung *
 	& Gebrauchszeitraum *
 	& Sprachraum *
+	& Sprachareal *
 	& Gruppensprache *
 	& Fachgebiet *
 }
