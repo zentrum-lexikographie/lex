@@ -342,6 +342,7 @@ Schreibung[Trennung]:after { -oxy-append-content:" Trennung: "attr(Trennung)" ";
 .pl_ungewöhnlich { border-right: 2em solid blue; }
 .genitiv_ungewöhnlich { border-right: 2em solid blue; }
 .genus_ungewöhnlich { border-right: 2em solid blue; }
+.schreibung_ungewöhnlich { border-right: 2em solid blue; }
 
 Illustration {
 	content: url("http://zwei.dwds.de/thumbnails/" attr(Datei));
