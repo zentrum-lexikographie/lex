@@ -191,6 +191,16 @@ Syntagmatik = element Syntagmatik {
 # Verweise #############################
 ########################################
 
+[ sch:pattern [
+	sch:rule [
+      		context = "//d:URL"
+		sch:assert [
+			test = "not(contains(string-join(.//text(), ''), 'archive.org/save/'))"
+			'Archive.org-Link korrigieren!'
+		]
+	]
+] ]
+
 semantische_Verweise = element Verweise {
 	Metadaten.allgemein ?
 	, ( semantischer_Verweis | externer_Verweis ) *
