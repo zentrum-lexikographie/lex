@@ -51,6 +51,7 @@ Mitarbeiterinnen = (
 	| 'pfeiffer'
 	| 'reckenthaeler'
 	| 'roll'
+	| 'schneider'
 	| 'schrader'
 	| 'schroeder'
 	| 'siebel'
