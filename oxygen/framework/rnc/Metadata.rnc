@@ -166,6 +166,7 @@ Metadaten.Artikel = (
 	    | 'Recht-002'
 	    | 'Recht-003'
 	    | 'Recht-004'
+	    | 'Regio'
 	    | 'Religion'
 	    | 'Spiel'
 	    | 'TV'
