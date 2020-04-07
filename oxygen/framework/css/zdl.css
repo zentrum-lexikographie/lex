@@ -98,6 +98,7 @@ Diasystematik > Bedeutungsebene:before         { content: "Bedeutungsebene: "; }
 Diasystematik > Gruppensprache:before          { content: "Gruppensprache: "; }
 Diasystematik > Gebrauchszeitraum:before       { content: "Gebrauchszeitraum: "; }
 Diasystematik > Sprachraum:before              { content: "Sprachraum: "; }
+Diasystematik > Sprachareal:before             { content: "Sprachareal: "; }
 Aussprache:before                              { content: "Aussprache 🔈: "; }
 Auxiliar:before                                { content: "Auxiliar: "; }
 Wortklasse:before                              { content: "Wortklasse: "; }
@@ -291,7 +292,7 @@ Hervorhebung {
 
 /* farbliche Markierung für diasystematische Angaben */
 Frequenzangabe { color: green; }
-Fachgebiet, Stilebene, Stilfaerbung, Sprachraum, Gebrauchszeitraum, Bedeutungsebene, Gruppensprache { color: green; }
+Fachgebiet, Stilebene, Stilfaerbung, Sprachareal, Sprachraum, Gebrauchszeitraum, Bedeutungsebene, Gruppensprache { color: green; }
 
 /* wortgeschichtliche Prosatexte */
 Diachronie > * > *, Kommentar > * { display: inline; }
