@@ -412,6 +412,7 @@ Sprachen = (
 	| 'rumaen'       # ron: Romanian
 	| 'russ'         # rus: Russian
 	| 'russ-kslaw'
+	| 'saam'
 	| 'sagha'
 	| 'sanskrit'
 	| 'sard'
