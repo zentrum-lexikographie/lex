@@ -17,9 +17,7 @@
 
  :aliases
  {:dev
-  {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "20.1.0.3"}
-                uberdeps {:mvn/version "0.1.4"
-                          :exclusions [org.slf4j/slf4j-nop commons-logging]}}
+  {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "20.1.0.3"}}
    :jvm-opts ["-Dawt.useSystemAAFontSettings=on"
               "-Dswing.aatext=true"]}
   :prod

@@ -33,10 +33,7 @@
   org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}
   org.zdl.lex/common {:local/root "../common"}}
  :aliases
- {:dev
-  {:extra-deps {uberdeps {:mvn/version "0.1.4"
-                          :exclusions [org.slf4j/slf4j-nop commons-logging]}}}
-  :test
+ {:test
   {:extra-paths ["test"]
    :extra-deps {faker {:mvn/version "0.2.2"}}}
   :prod
