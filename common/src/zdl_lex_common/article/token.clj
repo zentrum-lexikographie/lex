@@ -1,4 +1,4 @@
-(ns zdl-lex-common.typography.token
+(ns zdl-lex-common.article.token
   (:require [clojure.string :as str]
             [zdl-xml.util :as xml]))
 
@@ -153,7 +153,7 @@
     (re-seq #"\s[\p{Po}&&[^%&*†/…\"']]" s))
    (distinct) (seq) (vec)))
 
-(def token-checks
+(def checks
   [[(xml/selector ".//d:Definition")
     unknown-abbreviations ::unknown-abbreviations]
    [(xml/selector ".//d:Beleg/d:Belegtext")

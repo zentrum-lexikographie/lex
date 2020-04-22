@@ -20,20 +20,21 @@
     (catch Throwable t))
   (mount/stop)
   (mount/start)
-  (ui/invoke-later
-   (-> (ui/frame
-        :title "zdl-lex-client/dev"
-        ;;:size [800 :by 600]
-        :content (ui/border-panel
-                  :north toolbar/widget
-                  :center (ui/splitter
-                           :left-right
-                           results-view/tabbed-pane
-                           issue-view/panel
-                           :divider-location 0.75
-                           :resize-weight 0.75)))
-       (ui/pack!)
-       (ui/show!))))
+  (->
+   (ui/frame
+    :title "zdl-lex-client/dev"
+    ;;:size [800 :by 600]
+    :content (ui/border-panel
+              :north toolbar/widget
+              :center (ui/splitter
+                       :left-right
+                       results-view/tabbed-pane
+                       issue-view/panel
+                       :divider-location 0.75
+                       :resize-weight 0.75)))
+   (ui/pack!)
+   (ui/show!)
+   (ui/invoke-later)))
 
 (comment
   (show-testbed))

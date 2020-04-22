@@ -1,84 +1,26 @@
 (ns zdl-lex-common.article
   (:require [clojure.string :as str]
             [clojure.tools.logging :as log]
-            [zdl-lex-common.typography.chars :as typo-chars]
-            [zdl-lex-common.typography.token :as typo-token]
+            [zdl-lex-common.article.fs :as afs]
+            [zdl-lex-common.article.refs :as arefs]
+            [zdl-lex-common.article.validate :as av]
+            [zdl-lex-common.article.xml :as axml]
             [zdl-lex-common.timestamp :as ts]
-            [zdl-lex-common.util :refer [->clean-map file]]
-            [zdl-xml.util :as xml]
-            [zdl-xml.validate :as xv]
-            [clojure.java.io :as io])
-  (:import java.io.File
-           java.text.Collator
+            [zdl-lex-common.util :refer [->clean-map relativize]]
+            [zdl-xml.util :as xml])
+  (:import java.text.Collator
            java.util.Locale
-           [net.sf.saxon.s9api QName XdmItem]))
+           net.sf.saxon.s9api.QName))
 
 (def collator (Collator/getInstance Locale/GERMAN))
-
-(defn file->id
-  ([dir]
-   (partial file->id (.. (file dir) (toPath))))
-  ([dir-path f]
-   (str (.. dir-path (relativize (.toPath f))))))
-
-(defn id->file
-  ([dir]
-   (partial id->file (file dir)))
-  ([dir f]
-   (file dir f)))
-
-(defn article-xml-file?
-  ([dir]
-   (partial article-xml-file? (.getAbsolutePath (file dir))))
-  ([dir-path ^File f]
-   (let [name (.getName f)
-         path (.getAbsolutePath f)]
-     (and
-      (str/starts-with? path dir-path)
-      (.endsWith name ".xml")
-      (not (.startsWith name "."))
-      (not (#{"__contents__.xml" "indexedvalues.xml"} name))
-      (not (.contains path ".git"))))))
-
-
-(defn article-xml-files [dir]
-  (let [dir (file dir)
-        article-xml-file? (article-xml-file? dir)]
-    (->> (file-seq dir)
-         (filter article-xml-file?)
-         (map file))))
-
-
-(def doc->articles
-  "Selects the DWDS article elements in a XML document."
-  (comp seq (xml/selector "/d:DWDS/d:Artikel")))
-
-(defn- values->seq
-  "Given an xpath selector and a evaluation context, returns a seq of distinct
-   values, extracted from the selected items via `str-fn`."
-  [str-fn selector ctx]
-  (->> (xml/->seq (selector ctx)) (map str-fn) (remove nil?) (distinct) (seq)))
-
-(defn- item->text [^XdmItem i]
-  (xml/text (xml/->str i)))
 
 (defn- texts-fn
   "Create a fn for the given xpath expression, which returns distinct
    text values."
   [xp-expr]
-  (partial values->seq item->text (xml/selector xp-expr)))
-
-(let [hidx (comp xml/text str (xml/selector "@hidx/string()"))]
-  (defn- ref-id [^XdmItem ref]
-    (->> [(item->text ref) (hidx ref)]
-         (remove nil?)
-         (str/join \#))))
-
-(defn- ref-ids-fn
-  "Create a fn for the given xpath expression, which returns distinct
-   reference identifiers."
-  [xp-expr]
-  (partial values->seq ref-id (xml/selector xp-expr)))
+  (let [select-contexts (comp seq (xml/selector xp-expr))]
+    (fn [node]
+      (-> node select-contexts axml/texts))))
 
 (defn- attrs->map
   "Returns a mapping of tagname to distinct values for the given attribute
@@ -107,15 +49,6 @@
      [k (-> (for [ts v] (ts/past ts)) (distinct))])
    (into {})))
 
-(let [refs (xml/selector ".//d:Verweis")
-      ref-id (comp first (ref-ids-fn "./d:Ziellemma"))
-      sense (comp first (texts-fn "./d:Ziellesart"))]
-  (defn references
-    "Extracts all references from an article"
-    [article]
-    (for [ref (refs article)]
-      (->clean-map {:ref-id (ref-id ref) :sense (sense ref)}))))
-
 (let [article-attr #(some-> (:Artikel %) (first))
       type (comp xml/text str (xml/selector "@Typ/string()"))
       tranche (comp xml/text str (xml/selector "@Tranche/string()"))
@@ -124,8 +57,10 @@
       editors (attrs-fn "Redakteur")
       sources (attrs-fn "Quelle")
       timestamps (comp past-timestamps (attrs-fn "Zeitstempel"))
-      forms (texts-fn "d:Formangabe/d:Schreibung")
-      ref-ids (ref-ids-fn "d:Formangabe/d:Schreibung")
+      main-forms (texts-fn "d:Formangabe[@Typ='Hauptform']/d:Schreibung")
+      forms (comp axml/texts axml/select-surface-forms)
+      ref-ids (comp seq (partial remove nil?) (partial map arefs/id)
+                    seq (xml/selector "./d:Formangabe/d:Schreibung"))
       pos (texts-fn "d:Formangabe/d:Grammatik/d:Wortklasse")
       gender (texts-fn "d:Formangabe/d:Grammatik/d:Genus")
       definitions (texts-fn ".//d:Definition")
@@ -133,12 +68,12 @@
       usage-period (texts-fn ".//d:Gebrauchszeitraum")
       styles (texts-fn ".//d:Stilebene")
       colouring (texts-fn ".//d:Stilfaerbung")
-      area (texts-fn ".//d:Sprachraum")
-      references (comp seq references)]
+      area (texts-fn ".//d:Sprachraum")]
   (defn excerpt
     "Extracts key article data."
     [article]
-    (let [authors (authors article)
+    (let [forms (forms article)
+          authors (authors article)
           sources (sources article)
           editors (editors article)
           timestamps (timestamps article)
@@ -159,7 +94,8 @@
         :editors editors
         :source (article-attr sources)
         :sources sources
-        :forms (forms article)
+        :form (or (first (main-forms article)) (first forms))
+        :forms forms
         :ref-ids (ref-ids article)
         :pos (pos article)
         :gender (gender article)
@@ -168,46 +104,15 @@
         :usage-period (usage-period article)
         :styles (styles article)
         :colouring (colouring article)
-        :area (area article)
-        :references (references article)}))))
-
-(def rng-validate
-  (xv/create-rng-validator (io/resource "rng/DWDSWB.rng")))
-
-(def sch-validate
-  (xv/create-sch-validator (io/resource "rng/DWDSWB.sch.xsl")))
-
-(def typography-checks
-  (concat typo-chars/char-checks typo-token/token-checks))
-
-(defn check-typography
-  [article]
-  (for [[select-ctx check type] typography-checks
-        ctx (select-ctx article)
-        :let [data (some->> ctx xml/->str xml/text check)]
-        :when data]
-    {:type type :ctx ctx :data data}))
-
-(defn correctness
-  [file article]
-  (let [typography? (seq (check-typography article))
-        rng? (seq (rng-validate file))
-        sch? (seq (sch-validate file))]
-    (->clean-map
-     {:errors (seq (concat (when typography? ["Typographie"])
-                           (when rng? ["Schema"])
-                           (when sch? ["Schematron"])))})))
+        :area (area article)}))))
 
 (defn articles
   "Extracts articles and their key data from XML files."
-  ([dir]
-   (partial articles (file->id dir)))
-  ([file->id file]
-   (let [id (file->id file)]
-     (for [article (->> (xml/->xdm file) (doc->articles))]
-       (merge {:id id :file file}
-              (excerpt article)
-              (correctness file article))))))
+  [dir]
+  (let [f->id (comp str (partial relativize dir))]
+    (for [f (afs/files dir) :let [id (f->id f)]
+          a (-> f xml/->xdm axml/doc->articles)]
+       (merge {:id id :file f} (excerpt a) (av/check f a)))))
 
 (defn status->color
   [status]
@@ -219,22 +124,27 @@
     "Red-f" "#aeecff"
     "#ffffff"))
 
-(defn articles-in
-  [dir]
-  (mapcat (articles dir) (article-xml-files dir)))
-
 (comment
-  (->> (articles-in "../data/git")
-       (drop 100)
+  (->> (articles "../data/git")
+       (filter (comp (partial < 1) count :definitions))
+       #_(drop 100)
+       (map (juxt :id :ref-ids))
+       #_(mapcat :ref-ids)
+       (take 100)
+       #_(sort collator))
+  (->> (articles "../../zdl-wb")
+       #_(filter (comp #_:sense seq :references))
+       #_(drop 1000)
+       #_(map (juxt :form :references))
        (take 3))
-  (->> (articles-in "../../zdl-wb")
+  (->> (articles "../../zdl-wb")
        (remove (comp #{"Red-2" "Red-f"} :status))
        (filter :errors)
-       (map #(select-keys % [:forms #_:pos #_:gender #_:id #_:status :errors]))
-       (take 100)
+       (map #(select-keys % [:form #_:pos #_:gender #_:id #_:status :errors]))
+       (take 10)
        (time))
-  (as-> (articles-in "../data/git") $
+  (as-> (articles "../../zdl-wb") $
        #_(remove (comp (partial = "WDG") :source) $)
-       (map #(select-keys % [:forms :pos :gender :id]) $)
+       (map #(select-keys % [:form :pos :gender :id]) $)
        #_(filter (comp (partial < 1) count :gender) $)
        (take 10 $)))

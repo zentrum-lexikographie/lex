@@ -3,7 +3,9 @@
             [clojure.tools.logging :as log]
             [metrics.timers :refer [deftimer time!]]
             [zdl-lex-common.article :as article]
+            [zdl-lex-common.article.fs :as afs]
             [zdl-lex-common.env :refer [env]]
+            [zdl-lex-common.util :refer [relativize]]
             [zdl-xml.util :as xml]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.http-client :as http-client]
@@ -91,11 +93,10 @@
 (def add-articles (partial update-articles articles->add-xml))
 
 (defn- articles->delete-xml [article-files]
-  (let [file->id (article/file->id git/dir)
-        doc (xml/new-document)
+  (let [doc (xml/new-document)
         el #(.createElement doc %)
         del (doto (el "delete") (.setAttribute "commitWithin" "10000"))]
-    (doseq [id (map file->id article-files)]
+    (doseq [id (map git/file->id article-files)]
       (doto del
         (.appendChild
          (doto (el "id") (.setTextContent id)))))
@@ -117,7 +118,7 @@
 (defn rebuild-index []
   (->>
    (let [sync-start (System/currentTimeMillis)
-         articles (article/article-xml-files git/dir)]
+         articles (afs/files git/dir)]
      (when-not (empty? (doall (add-articles articles)))
        (update-articles query->delete-xml
                         [(format "time_l:[* TO %s}" sync-start)])

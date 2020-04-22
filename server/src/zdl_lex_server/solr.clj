@@ -8,9 +8,11 @@
             [ring.util.http-response :as htstatus]
             [clojure.tools.logging :as log]
             [zdl-lex-common.article :as article]
+            [zdl-lex-common.article.fs :as afs]
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.spec :as spec]
+            [zdl-lex-common.util :refer [relativize]]
             [zdl-lex-server.csv :as csv]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.solr.client :as client]
@@ -20,14 +22,12 @@
 (defn index-git-changes
   "Synchronizes modified articles with the Solr index"
   [_ {:keys [modified deleted]}]
-  (let [article-xml-file? (article/article-xml-file? git/dir)
-        file->id (article/file->id git/dir)
-        modified (filter article-xml-file? modified)
-        deleted (filter article-xml-file? deleted)]
+  (let [modified (filter afs/article-file? modified)
+        deleted (filter afs/article-file? deleted)]
     (doseq [m modified]
-      (log/info {:solr {:modified (file->id m)}}))
+      (log/info {:solr {:modified (git/file->id m)}}))
     (doseq [d deleted]
-      (log/info {:solr {:deleted (file->id d)}}))
+      (log/info {:solr {:deleted (git/file->id d)}}))
     (try
       (client/add-articles modified)
       (client/delete-articles deleted)

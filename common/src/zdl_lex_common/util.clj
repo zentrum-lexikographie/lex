@@ -4,9 +4,21 @@
             [zdl-lex-common.env :refer [env]]
             [zdl-lex-common.url :refer [path->uri]])
   (:import [java.net URL URLEncoder]
+           java.io.File
+           java.nio.file.Path
            java.util.UUID))
 
-(def file (comp fs/normalized fs/absolute fs/file))
+(defn ^File file
+  [& args]
+  (-> (apply fs/file args) fs/absolute fs/normalized))
+
+(defn ^Path path
+  [& args]
+  (.toPath (apply file args)))
+
+(defn ^Path relativize
+  [base f]
+  (.relativize (path base) (path f)))
 
 (defn uuid []
   (-> (UUID/randomUUID) str str/lower-case))

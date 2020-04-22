@@ -28,6 +28,7 @@
     :timestamps "_dts"
     :author "_s"
     :editor "_s"
+    :form "_s"
     :source "_s"
     "_ss"))
 
@@ -46,7 +47,7 @@
    :last-modified :timestamp
    :author :authors :editors :editor
    :sources :source
-   :forms :pos :definitions
+   :form :forms :pos :definitions
    :errors])
 
 (defn- basic-field

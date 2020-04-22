@@ -11,9 +11,13 @@
             [zdl-lex-common.bus :as bus]
             [zdl-lex-common.cron :as cron]
             [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.util :refer [file]]))
+            [zdl-lex-common.util :refer [file relativize]]))
 
 (def dir (file (env :data-dir) "git"))
+
+(defn file->id
+  [f]
+  (str (relativize dir f)))
 
 (def branch (env :git-branch))
 

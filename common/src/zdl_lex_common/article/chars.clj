@@ -1,8 +1,7 @@
-(ns zdl-lex-common.typography.chars
-  (:require [zdl-xml.util :as xml]
-            [clojure.string :as str])
-  (:import [java.text Normalizer Normalizer$Form]
-           [net.sf.saxon.s9api XdmItem]))
+(ns zdl-lex-common.article.chars
+  (:require [clojure.string :as str]
+            [zdl-xml.util :as xml])
+  (:import [java.text Normalizer Normalizer$Form]))
 
 (def latin-chars
   ;; note: there's no decomposition for ø
@@ -82,7 +81,7 @@
    (str/replace non-parenthesis "")
    (remove-matching-parentheses)))
 
-(def char-checks
+(def checks
   [[(xml/selector ".//d:Formangabe")
     (check-chars :grammar) ::invalid]
    [(xml/selector "(.//d:Definition)|(.//d:Paraphrase)")

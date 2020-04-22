@@ -14,7 +14,7 @@
   environ {:mvn/version "1.1.0"}
   mount {:mvn/version "0.1.16"}
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "327e82d6a1b962a62d9be37f87402a40e3d4456a"}}
+                   :sha "69c22d663ba167eb72db8f22f910fb7bc2639f33"}}
 
  :aliases
  {:schema {:extra-paths ["build"]

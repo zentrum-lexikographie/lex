@@ -10,7 +10,7 @@
             [zdl-lex-client.http :as http]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article])
+            [zdl-lex-common.article.xml :as axml])
   (:import java.net.URL))
 
 (def visited-issues (atom #{}))
@@ -77,9 +77,10 @@
     (or
      (some->>
       (ws/xml-document ws/instance url)
-      (article/doc->articles)
-      (map article/excerpt)
-      (mapcat :forms)
+      (axml/doc->articles)
+      (mapcat axml/select-surface-forms)
+      (mapcat axml/texts)
+      (distinct)
       (mapcat get-issues)
       (map (fn [{:keys [id last-updated status url] :as issue}]
              (let [last-updated (parse-update-ts last-updated)]
@@ -122,7 +123,7 @@
                 :id 39947,
                 :notes 0,
                 :severity "minor",
-                :url "http://odo.dwds.de/mantis/view.php?id=39947",
+                :url "https://odo.dwds.de/mantis/view.php?id=39947",
                 :handler "herold"
                 :active? true
                 :visited? true}]

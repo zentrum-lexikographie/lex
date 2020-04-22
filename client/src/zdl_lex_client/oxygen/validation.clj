@@ -6,9 +6,10 @@
             [zdl-lex-client.bus :as bus]
             [zdl-lex-client.icon :as icon]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article]
-            [zdl-lex-common.typography.chars :as typo-chars]
-            [zdl-lex-common.typography.token :as typo-token])
+            [zdl-lex-common.article.chars :as chars]
+            [zdl-lex-common.article.token :as token]
+            [zdl-lex-common.article.validate :as av]
+            [zdl-lex-common.article.xml :as axml])
   (:import net.sf.saxon.s9api.XdmNode
            ro.sync.document.DocumentPositionedInfo
            ro.sync.exml.workspace.api.PluginWorkspace
@@ -20,12 +21,12 @@
   "ZDL - Typographie")
 
 (def error-type->desc
-  {::typo-chars/invalid "Zeichenfehler"
-   ::typo-chars/unbalanced-parens "Paarzeichenfehler"
-   ::typo-token/missing-whitespace "Fehlender Weißraum"
-   ::typo-token/redundant-whitespace "Unnötiger Weißraum"
-   ::typo-token/unknown-abbreviations "Nicht erlaubte Abkürzung"
-   ::typo-token/final-punctuation "Interpunktion am Belegende prüfen"})
+  {::chars/invalid "Zeichenfehler"
+   ::chars/unbalanced-parens "Paarzeichenfehler"
+   ::token/missing-whitespace "Fehlender Weißraum"
+   ::token/redundant-whitespace "Unnötiger Weißraum"
+   ::token/unknown-abbreviations "Nicht erlaubte Abkürzung"
+   ::token/final-punctuation "Interpunktion am Belegende prüfen"})
 
 (defn error->message
   [{:keys [^XdmNode ctx type data]}]
@@ -78,8 +79,8 @@
     (fn [manager]
       (some->>
        (ws/xml-document ws/instance url)
-       (article/doc->articles)
-       (mapcat article/check-typography)
+       (axml/doc->articles)
+       (mapcat av/check-typography)
        (map (partial error->dpi url))
        (vec) (reset-results! manager url)))))
 

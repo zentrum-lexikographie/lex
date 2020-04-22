@@ -20,7 +20,7 @@
    :git-auth-key-name "id_rsa"
    :server-base "https://lex.dwds.de/"
    :exist-base "http://spock.dwds.de:8080/exist"
-   :mantis-base "http://odo.dwds.de/mantis"
+   :mantis-base "https://odo.dwds.de/mantis"
    :mantis-project 5
    :mantis-user "test"
    :mantis-password "test"

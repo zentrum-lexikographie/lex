@@ -6,6 +6,7 @@
             [ring.util.request :as htreq]
             [zdl-lex-common.article :as article]
             [zdl-lex-common.timestamp :as ts]
+            [zdl-lex-common.util :refer [file]]
             [zdl-xml.util :as xml]
             [zdl-lex-server.git :as git]
             [zdl-lex-server.lock :as lock]
@@ -56,8 +57,7 @@
   {:query (s/keys :req-un [::form ::pos])})
 
 (defn get-article [{{:keys [resource]} :path-params}]
-  (let [id->file (article/id->file git/dir)
-        f (id->file resource)]
+  (let [f (file git/dir resource)]
     (if (fs/exists? f)
       (htstatus/ok f)
       (htstatus/not-found resource))))
@@ -69,8 +69,7 @@
           xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
-          id->file (article/id->file git/dir)
-          f (id->file id)]
+          f (file git/dir id)]
       (spit f xml :encoding "UTF-8")
       (git/git-add f)
       (git/publish-changes [f])
@@ -78,8 +77,7 @@
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
   (locking git/dir
-    (let [id->file (article/id->file git/dir)
-          f (id->file resource)]
+    (let [f (file git/dir resource)]
       (if (fs/exists? f)
         (do
           (spit f (htreq/body-string req) :encoding "UTF-8")
