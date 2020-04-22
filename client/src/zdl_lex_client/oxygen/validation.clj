@@ -56,10 +56,11 @@
 
 (defn remove-results!
   [manager url]
-  (let [all-results (. manager (getAllResults tab-key))
-        matches-url? (partial dpi-matches-system-id? (str url))]
-    (doseq [dpi (filter matches-url? all-results)]
-      (. manager (removeResult tab-key dpi)))))
+  (ui/invoke-now
+   (let [all-results (. manager (getAllResults tab-key))
+         matches-url? (partial dpi-matches-system-id? (str url))]
+     (doseq [dpi (filter matches-url? all-results)]
+       (. manager (removeResult tab-key dpi))))))
 
 (def result-type
   ResultsManager$ResultType/PROBLEM)
@@ -67,11 +68,13 @@
 (defn reset-results!
   ([manager] (reset-results! manager nil))
   ([manager dpis]
-   (. manager (setResults tab-key dpis result-type)))
+   (ui/invoke-later
+    (. manager (setResults tab-key dpis result-type))))
   ([manager url dpis]
-   (remove-results! manager url)
-   (when (seq dpis)
-     (. manager (addResults tab-key dpis result-type true)))))
+   (ui/invoke-later
+    (remove-results! manager url)
+    (when (seq dpis)
+      (. manager (addResults tab-key dpis result-type true))))))
 
 (defn add-results
   [url]

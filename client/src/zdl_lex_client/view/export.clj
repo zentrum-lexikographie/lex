@@ -27,4 +27,4 @@
             (catch Exception e (ui/alert (.getMessage e)))
             (finally
               (ui/dispose! dialog))))
-        (-> dialog (ui/pack!) (ui/show!))))))
+        (-> dialog (ui/pack!) (ui/show!) (ui/invoke-soon))))))

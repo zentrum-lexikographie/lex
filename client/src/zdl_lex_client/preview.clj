@@ -46,7 +46,8 @@
                       :type :error
                       :content)
            (ui/pack!)
-           (ui/show!)))))
+           (ui/show!)
+           (ui/invoke-later)))))
 
 (def action
   (ui/action :name "Artikelvorschau" :icon icon/gmd-web

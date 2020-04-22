@@ -30,7 +30,7 @@
     (unlock
       [url]
       (try
-        (log/info (format "Unlock! %s" url))
+        (log/infof "Unlock! %s" url)
         (http/unlock (lexurl/url->id url) token)
         (catch IOException e (log/warn e))))))
 

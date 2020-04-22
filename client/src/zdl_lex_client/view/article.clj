@@ -30,7 +30,7 @@
         pos-input (ui/text)
         pos-hints (ListDataIntelliHints. pos-input pos-hints)
         create-article (fn [evt]
-                         (try 
+                         (try
                            (->>
                             (http/create-article
                              (ui/value form-input)
@@ -59,7 +59,8 @@
                    :parent (some-> args first ui/to-root)
                    :options [create-button cancel-button])
         (ui/pack!)
-        (ui/show!))))
+        (ui/show!)
+        (ui/invoke-later))))
 
 (def create-action
   (ui/action

@@ -1,9 +1,7 @@
 (ns zdl-lex-client.icon
-  (:import [java.awt Color Font]
-           [jiconfont.swing IconFontSwing]
-           [jiconfont.icons.google_material_design_icons GoogleMaterialDesignIcons])
-  (:require [seesaw.core :as ui]
-            [seesaw.font :as font]))
+  (:require [seesaw.core :as ui])
+  (:import jiconfont.icons.google_material_design_icons.GoogleMaterialDesignIcons
+           jiconfont.swing.IconFontSwing))
 
 (IconFontSwing/register (.. GoogleMaterialDesignIcons getIconFont))
 
@@ -27,7 +25,11 @@
 (def logo (ui/label :icon "zdl.png" :border 6 :size [32 :by 32]))
 
 (comment
-  (ui/invoke-later
-   (-> (ui/frame :title "Test" :content (ui/toggle :selected? false :icon gmd-spellcheck :text "Typographieprüfung"))
-       ui/pack!
-       ui/show!)))
+  (->
+   (ui/frame
+    :title "Test"
+    :content (ui/toggle :selected? false :icon gmd-spellcheck
+                        :text "Typographieprüfung"))
+   ui/pack!
+   ui/show!
+   ui/invoke-later))

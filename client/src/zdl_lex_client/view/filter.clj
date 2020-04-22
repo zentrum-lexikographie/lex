@@ -135,7 +135,8 @@
                    :content content
                    :options options)
         ui/pack!
-        ui/show!)))
+        ui/show!
+        ui/invoke-later)))
 
 (comment
   (lucene/str->ast "autor:rast")

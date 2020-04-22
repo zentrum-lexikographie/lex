@@ -1,10 +1,8 @@
 (ns zdl-lex-client.editors
   (:require [mount.core :refer [defstate]]
-            [clojure.tools.logging :as log]
+            [seesaw.core :as ui]
             [zdl-lex-client.bus :as bus]
-            [zdl-lex-client.http :as http]
             [zdl-lex-client.workspace :as ws]
-            [zdl-lex-common.article :as article]
             [zdl-lex-common.url :as lexurl])
   (:import [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]))
 
@@ -24,20 +22,17 @@
 (defn- add-editor [url]
   (when (lexurl/lex? url)
     (let [listener (editor-listener url)]
-      (ws/add-editor-listener ws/instance url listener)
-      (swap! editors assoc url listener)
-      (bus/publish! [:editor-added] url))))
+      (ui/invoke-now
+       (ws/add-editor-listener ws/instance url listener)
+       (swap! editors assoc url listener)
+       (bus/publish! [:editor-added] url)))))
 
 (defn- remove-editor [url]
   (when (lexurl/lex? url)
-    (ws/remove-editor-listener ws/instance url (@editors url))
-    (swap! editors dissoc url)
-    (bus/publish! [:editor-removed] url)))
-
-(defn- remove-all-editors []
-  (doseq [[url listener] @editors]
-    (ws/remove-editor-listener ws/instance url listener))
-  (reset! editors {}))
+    (ui/invoke-now
+     (ws/remove-editor-listener ws/instance url (@editors url))
+     (swap! editors dissoc url)
+     (bus/publish! [:editor-removed] url))))
 
 (def editor-change-listener
   (proxy [WSEditorChangeListener] []
@@ -66,10 +61,15 @@
       (when (lexurl/lex? url)
         (bus/publish! [:editor-deactivated] url)))))
 
+(defn- remove-all-editors []
+  (doseq [[url listener] @editors]
+    (ws/remove-editor-listener ws/instance url listener))
+  (reset! editors {}))
+
 (defstate listeners
-  :start (do
+  :start (ui/invoke-now
            (remove-all-editors)
            (ws/add-editor-change-listener ws/instance editor-change-listener))
-  :stop (do
+  :stop (ui/invoke-now
           (ws/remove-editor-change-listener ws/instance editor-change-listener)
           (remove-all-editors)))

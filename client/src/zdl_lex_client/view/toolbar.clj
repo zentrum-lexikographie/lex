@@ -33,7 +33,8 @@
                    :parent (some-> args first ui/to-root)
                    :modal? true
                    :size [800 :by 600])
-        (ui/show!))))
+        ui/show!
+        ui/invoke-later)))
 
 (def ^:private show-help-action
   (ui/action :name "Hilfe" :icon icon/gmd-help :handler show-help))
