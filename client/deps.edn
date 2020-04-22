@@ -25,10 +25,4 @@
   :prod
   {:extra-paths ["classes"]
    :extra-deps {nrepl {:mvn/version "0.6.0"}
-                cider/cider-nrepl {:mvn/version "0.21.1"}}}
-  :compile
-  {:extra-paths ["build"]
-   :main-opts ["-m compile"]}
-  :package
-  {:extra-paths ["build"]
-   :main-opts ["-m package"]}}}
+                cider/cider-nrepl {:mvn/version "0.21.1"}}}}}
