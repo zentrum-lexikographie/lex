@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 # encoding: utf8
 
 '''
@@ -9,8 +9,6 @@ import argparse, logging
 import collections, unicodedata, datetime
 import MySQLdb, _mysql_exceptions
 import lxml.etree as et
-
-from exist import ExistDB
 
 
 def text_only(element, strip=True):
@@ -24,9 +22,8 @@ class Dictionary(object):
     '''
     '''
 
-    def __init__(self, file_names, remote=False):
+    def __init__(self, file_names):
         self.file_names = file_names
-        self.remote = remote
 
     def __iter__(self):
         '''Iterate over entries, a dictionary's basic building blocks.
@@ -38,28 +35,17 @@ class Dictionary(object):
             resolve_entities=True
         )
 
-        # it doesn't make sense to use both local and remote articles
-        # so we ignore local files if -r is given on the command line
-        if not self.remote:
-            for file_name in self.file_names:
+        for file_name in self.file_names:
 
-                root = et.parse(file_name, parser).getroot()
+            root = et.parse(file_name, parser).getroot()
                 
-                if root.tag == self.ENTRY_ELEMENT:
-                    yield root
+            if root.tag == self.ENTRY_ELEMENT:
+                yield root
                 
-                for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(root):
-                    yield entry
-        else:
-            db = ExistDB('http://spock.dwds.de:8080/exist')
-            for resource_name in db.__iter__(dirname='/dwdswb/data'):
-                if '=' in resource_name:
-                    logging.warning('Bogus resource name: %s', resource_name)
-                root = db.get(resource_name, strip=True)
-                if root is not None:
-                    for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(root):
-                        yield entry
+            for entry in et.ETXPath('.//%s' % self.ENTRY_ELEMENT)(root):
+                yield entry
 
+    
     def set_version(self, cursor, version):
         '''
         '''
@@ -190,8 +176,8 @@ class DWDSWB(Dictionary):
     RELATION_PATH = './{http://www.dwds.de/ns/1.0}Verweise/{http://www.dwds.de/ns/1.0}Verweis'
     USE_RELATIONS = True
 
-    def __init__(self, file_names, remote=False):
-        Dictionary.__init__(self, file_names, remote=remote)
+    def __init__(self, file_names):
+        Dictionary.__init__(self, file_names)
 
     def prune(self, article):
         '''
@@ -298,7 +284,6 @@ if __name__ == '__main__':
     argument_parser.add_argument('--passwd', default='', metavar='PASSWORD', type=str, help='passphrase for the database server')
     argument_parser.add_argument('input_files', metavar='FILE', type=str, nargs='*', help='(list of) file names')
     argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'neologismen', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
-    argument_parser.add_argument('-r', '--remote', action='store_true', default=False, help='use a remote repository (eXist, dwdswb only)')
     argument_parser.add_argument('-v', '--verbose', action='store_true', default=False, help='enable verbose diagnostic messages')
     argument_parser.add_argument('-V', '--version', type=str, metavar='VERSION_NUMBER', help='specify the version number')
     argument_parser.add_argument('-w', '--write', action='store_true', default=False, help='actually write to DB')
@@ -312,7 +297,7 @@ if __name__ == '__main__':
 
     # set up dictionary type
     if arguments.dictionary_type == 'dwdswb':
-        dictionary = DWDSWB(arguments.input_files, remote=arguments.remote)
+        dictionary = DWDSWB(arguments.input_files)
     elif arguments.dictionary_type == 'etymwb':
         dictionary = EtymWB(arguments.input_files)
     elif arguments.dictionary_type == 'wdg':
@@ -391,13 +376,13 @@ if __name__ == '__main__':
                     for headword in normalization.split()
                 ]
                 if not headwords:
-                    headwords = [str(text_only(lemma)) or u'']
+                    headwords = [unicode(text_only(lemma)) or u'']
                 
                 for headword in headwords:
                     
                     headword = u''.join([
                         character
-                        for character in unicodedata.normalize('NFC', headword)
+                        for character in unicodedata.normalize('NFC', unicode(headword))
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
                     
