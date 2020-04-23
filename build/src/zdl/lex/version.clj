@@ -29,11 +29,21 @@
   (when (git/dirty?) (throw (IllegalStateException. "Git dir is dirty.")))
   (let [v (str "v" (next-version))]
     (log/info "Tagging next version '%s'" v)
-    (git/sh! "tag" v)
-    (git/sh! "push" "--tags")))
+    (git/sh! "tag" v)))
 
 (defn write!
   []
   (let [version {:version (current)}]
     (log/info version)
     (spit version-edn (pr-str version) :encoding "UTF-8")))
+
+(defn -main
+  [& [action]]
+  (try
+    (condp = action
+      "next" (tag-next!)
+      (do
+        (.. (org.apache.log4j.Logger/getRootLogger)
+            (setLevel org.apache.log4j.Level/WARN))
+        (println (current))))
+    (finally (shutdown-agents))))
