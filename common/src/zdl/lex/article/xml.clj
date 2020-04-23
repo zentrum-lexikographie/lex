@@ -1,5 +1,5 @@
 (ns zdl.lex.article.xml
-  (:require [zdl-xml.util :as xml])
+  (:require [zdl.xml.util :as xml])
   (:import [net.sf.saxon.s9api XdmItem XdmNode XdmNodeKind]))
 
 (def select-articles

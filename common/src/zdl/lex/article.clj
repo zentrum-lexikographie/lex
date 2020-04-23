@@ -7,7 +7,7 @@
             [zdl.lex.article.xml :as axml]
             [zdl.lex.timestamp :as ts]
             [zdl.lex.util :refer [->clean-map relativize]]
-            [zdl-xml.util :as xml])
+            [zdl.xml.util :as xml])
   (:import java.text.Collator
            java.util.Locale
            net.sf.saxon.s9api.QName))

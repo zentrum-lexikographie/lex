@@ -8,7 +8,7 @@
             [zdl.lex.git :as git]
             [zdl.lex.sh :as sh]
             [zdl.lex.version :as version]
-            [zdl-xml.validate :as xv]
+            [zdl.xml.validate :as xv]
             [clojure.tools.logging :as log]
             [zdl.lex.git :as git])
   (:import java.io.File))

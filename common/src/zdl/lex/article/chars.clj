@@ -1,6 +1,6 @@
 (ns zdl.lex.article.chars
   (:require [clojure.string :as str]
-            [zdl-xml.util :as xml])
+            [zdl.xml.util :as xml])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def latin-chars

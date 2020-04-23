@@ -8,8 +8,8 @@
             [zdl.lex.timestamp :as ts]
             [zdl.lex.url :refer [path->uri]]
             [zdl.lex.util :refer [file]]
-            [zdl-xml.rngom :as rngom]
-            [zdl-xml.util :as xml])
+            [zdl.xml.rngom :as rngom]
+            [zdl.xml.util :as xml])
   (:import java.net.URL))
 
 (def ^:private schema-values

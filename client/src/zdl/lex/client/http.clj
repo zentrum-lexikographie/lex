@@ -10,7 +10,7 @@
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [env]]
             [zdl.lex.util :refer [server-url]]
-            [zdl-xml.util :as xml])
+            [zdl.xml.util :as xml])
   (:import [java.io File IOException PushbackReader]
            ro.sync.exml.plugin.lock.LockException))
 

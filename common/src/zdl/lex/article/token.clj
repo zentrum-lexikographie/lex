@@ -1,6 +1,6 @@
 (ns zdl.lex.article.token
   (:require [clojure.string :as str]
-            [zdl-xml.util :as xml]))
+            [zdl.xml.util :as xml]))
 
 (def abbreviation-whitelist
   #{"etw.", "jmd.", "jmds.", "jmdn.", "jmdm."})

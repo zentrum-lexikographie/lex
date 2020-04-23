@@ -3,8 +3,8 @@
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as token]
             [zdl.lex.util :refer [->clean-map file]]
-            [zdl-xml.util :as xml]
-            [zdl-xml.validate :as xv]))
+            [zdl.xml.util :as xml]
+            [zdl.xml.validate :as xv]))
 
 (def rng-validate
   (xv/create-rng-validator (io/resource "rng/DWDSWB.rng")))

@@ -1,7 +1,7 @@
 (ns zdl.lex.server.consistency
   (:require [clojure.string :as str]
             [zdl.lex.article :as article]
-            [zdl-xml.util :as xml]
+            [zdl.xml.util :as xml]
             [zdl.lex.server.git :as git]))
 
 (let [numerals {\I 1, \V 5, \X 10, \L 50, \C 100, \D 500, \M 1000}

@@ -4,6 +4,6 @@
   uberdeps {:mvn/version "0.1.8"
             :exclusions [commons-logging/commons-logging]}
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "69c22d663ba167eb72db8f22f910fb7bc2639f33"}
+                   :sha "4fd84e2e3b03f3cd1a2ce64778d7058024909376"}
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
   org.slf4j/slf4j-log4j12 {:mvn/version "1.7.25"}}}

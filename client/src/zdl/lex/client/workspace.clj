@@ -6,7 +6,7 @@
             [zdl.lex.client.http :as http]
             [zdl.lex.env :refer [env]]
             [zdl.lex.url :as lexurl]
-            [zdl-xml.util :as xml]
+            [zdl.xml.util :as xml]
             [me.raynes.fs :as fs])
   (:import java.net.URL
            ro.sync.exml.workspace.api.PluginWorkspace

@@ -6,7 +6,7 @@
             [zdl.lex.article.fs :as afs]
             [zdl.lex.env :refer [env]]
             [zdl.lex.util :refer [relativize]]
-            [zdl-xml.util :as xml]
+            [zdl.xml.util :as xml]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.http-client :as http-client]
             [zdl.lex.server.solr.doc :refer [article->fields]]

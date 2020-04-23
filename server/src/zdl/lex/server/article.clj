@@ -7,7 +7,7 @@
             [zdl.lex.article :as article]
             [zdl.lex.timestamp :as ts]
             [zdl.lex.util :refer [file]]
-            [zdl-xml.util :as xml]
+            [zdl.xml.util :as xml]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.solr.client :as solr-client]

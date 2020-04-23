@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [zdl.lex.article.xml :as axml]
             [zdl.lex.util :refer [->clean-map]]
-            [zdl-xml.util :as xml]))
+            [zdl.xml.util :as xml]))
 
 (def select-hidx
   (comp first seq (xml/selector "@hidx/string()")))
