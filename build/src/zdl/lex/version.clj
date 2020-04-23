@@ -26,7 +26,7 @@
 
 (defn tag-next!
   []
-  (when (git/dirty?) (throw (IllegalStateException. "Git dir is dirty.")))
+  (git/assert-clean)
   (let [v (str "v" (next-version))]
     (log/info "Tagging next version '%s'" v)
     (git/sh! "tag" v)))

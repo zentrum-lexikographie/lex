@@ -11,3 +11,6 @@
   []
   (-> (sh! "status" "--porcelain") :out str/trim not-empty some?))
 
+(defn assert-clean
+  []
+  (when (dirty?) (throw (IllegalStateException. "Git dir is dirty."))))

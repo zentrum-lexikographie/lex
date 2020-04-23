@@ -5,10 +5,12 @@
             [clojure.tools.deps.alpha.util.dir :as deps-dir]
             [uberdeps.api :as uberdeps]
             [zdl.lex.fs :refer :all]
+            [zdl.lex.git :as git]
             [zdl.lex.sh :as sh]
             [zdl.lex.version :as version]
             [zdl-xml.validate :as xv]
-            [clojure.tools.logging :as log])
+            [clojure.tools.logging :as log]
+            [zdl.lex.git :as git])
   (:import java.io.File))
 
 (defn compile-rnc!
@@ -46,7 +48,8 @@
     (clear-dir! classes)
     (sh/run! "clojure" "-A:dev:prod"
              (path scripts-dir "compile_server.clj") :dir server-dir)
-    (uberjar! server-dir (path server-jar) {:aliases #{:prod}})
+    (uberjar! server-dir (path server-jar)
+              {:aliases #{:prod} :main-class "zdl_lex_server.core"})
     (clear-dir! classes)))
 
 (defn client!
@@ -61,13 +64,20 @@
 
 (defn docker!
   []
-  (let [tag (str/join \/ ["lex.dwds.de" "zdl-api" "gateway"])
-        tag (str tag ":" (version/current))]
-    (sh/run! "docker" "build" "--rm" "--force-rm" "-t" tag ".")))
+  (git/assert-clean)
+  (let [version (version/current)]
+    (doseq [module ["solr" "server"]]
+      (let [tag (str/join \/ ["lex.dwds.de" "zdl-lex" module])
+            tag (str tag ":" (version/current))]
+        (sh/run! "docker" "build" "--rm" "--force-rm" "-t" tag "."
+                 :dir (file project-dir "docker" module))))))
 
 (defn -main
-  [& args]
+  [& [mode]]
   (try
-    (client!)
-    (server!)
+    (let [release? (= "release" mode)]
+      (when release? (version/tag-next!))
+      (client!)
+      (server!)
+      (when release? (docker!)))
     (finally (shutdown-agents))))

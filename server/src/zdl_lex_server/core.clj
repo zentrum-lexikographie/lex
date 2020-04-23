@@ -7,7 +7,8 @@
             [zdl-lex-server.lock :as lock]
             [zdl-lex-server.mantis :as mantis]
             [zdl-lex-server.metrics :as metrics]
-            [zdl-lex-server.solr :as solr]))
+            [zdl-lex-server.solr :as solr])
+  (:gen-class))
 
 (def data-sources [#'lock/datasource #'lock/db #'git/git-cmd #'git/repo])
 

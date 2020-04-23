@@ -19,4 +19,4 @@ RUN set -ex; \
   chown -R $ZDL_LEX_USER:$ZDL_LEX_GROUP /app /data
 
 USER $ZDL_LEX_USER
-ENTRYPOINT ["java", "-cp", "/app/org.zdl.lex.server.jar", "clojure.main", "-m", "zdl-lex-server.core"]
+ENTRYPOINT ["java", "-jar", "/app/org.zdl.lex.server.jar"]
