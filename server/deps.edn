@@ -1,37 +1,53 @@
 {:paths ["src"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
+
+  ;; Code in common with client and other components
+  org.zdl.lex/common {:local/root "../common"}
+
+  ;; Data handling
   org.clojure/data.codec {:mvn/version "0.1.1"}
   org.clojure/data.csv {:mvn/version "0.1.4"}
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
   org.clojure/data.zip {:mvn/version "0.1.1"}
+
+  ;; Data formats
+  cheshire {:mvn/version "5.9.0"}
+  hiccup {:mvn/version "1.0.5"}
+
+  ;; Embedded RDBMS h2
   com.h2database/h2 {:mvn/version "1.4.199"}
   com.layerware/hugsql {:mvn/version "0.4.9"}
-  io.github.classgraph/classgraph {:mvn/version "4.8.50"}
 
-  io.xapix/clj-soap {:mvn/version "1.1.0"
-                     :exclusions [javax.servlet/servlet-api]}
-  audiogum/metrics-clojure {:mvn/version "3.0.0"}
-  audiogum/metrics-clojure-jvm {:mvn/version "3.0.0"}
-  metosin/muuntaja {:mvn/version "0.6.3"}
-  metosin/reitit {:mvn/version "0.3.9"}
-  metosin/ring-http-response {:mvn/version "0.9.1"}
+  ;; Ring/HTTP
   ring/ring-core {:mvn/version "1.7.1"}
   ring/ring-defaults {:mvn/version "0.3.2"}
   ring/ring-jetty-adapter {:mvn/version "1.7.1"}
+
+  ;; Metosin Ring/HTTP extensions
+  metosin/muuntaja {:mvn/version "0.6.3"}
+  metosin/reitit {:mvn/version "0.3.9"}
+  metosin/ring-http-response {:mvn/version "0.9.1"}
+
+  ;; Ring/HTTP authentication
+  buddy {:mvn/version "2.0.0"}
+
+  ;; Webjar-based Assets
+  ring-webjars {:mvn/version "0.2.0" :exclusions [org.webjars/webjars-locator]}
   org.webjars.npm/bulma {:mvn/version "0.7.4"}
   org.webjars.npm/material-icons {:mvn/version "0.3.0"}
-  org.webjars/webjars-locator-core {:mvn/version "0.41"}
-  buddy {:mvn/version "2.0.0"}
-  cheshire {:mvn/version "5.9.0"}
-  clj-http {:mvn/version "3.9.1"
-            :exclusions [commons-logging]}
-  hiccup {:mvn/version "1.0.5"}
-  ring-webjars {:mvn/version "0.2.0"
-                :exclusions [org.webjars/webjars-locator]}
-  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
-  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}
-  org.zdl.lex/common {:local/root "../common"}}
+  org.webjars/webjars-locator-core {:mvn/version "0.41" :exclusions [org.webjars.npm/angular__http]}
+
+  ;; Classpath access (for embedded OxygenXML client components)
+  io.github.classgraph/classgraph {:mvn/version "4.8.50"}
+
+  ;; Runtime metrics
+  audiogum/metrics-clojure {:mvn/version "3.0.0"}
+  audiogum/metrics-clojure-jvm {:mvn/version "3.0.0"}
+
+  ;; SOAP-support (for Mantis Issue Tracker API)
+  io.xapix/clj-soap {:mvn/version "1.1.0" :exclusions [javax.servlet/servlet-api]}}
+
  :aliases
  {:test
   {:extra-paths ["test"]

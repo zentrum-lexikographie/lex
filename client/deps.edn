@@ -1,14 +1,16 @@
 {:paths ["src"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
-  com.github.jiconfont/jiconfont-swing {:mvn/version "1.0.1"}
-  com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
-  org.zdl.lex/common {:local/root "../common"
-                      :exclusions [org.relaxng/jing org.relaxng/trang]}
+
+  ;; Code in common with server and other components
+  org.zdl.lex/common {:local/root "../common" :exclusions [org.relaxng/jing org.relaxng/trang]}
+
+  ;; Swing UI support
   seesaw {:mvn/version "1.5.0"}
-  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}
-  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
-  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}}
+
+  ;; Icon fonts
+  com.github.jiconfont/jiconfont-swing {:mvn/version "1.0.1"}
+  com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}}
 
  :mvn/repos
  {"central" {:url "https://repo1.maven.org/maven2/"}
@@ -18,8 +20,7 @@
  :aliases
  {:dev
   {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "20.1.0.3"}}
-   :jvm-opts ["-Dawt.useSystemAAFontSettings=on"
-              "-Dswing.aatext=true"]}
+   :jvm-opts ["-Dawt.useSystemAAFontSettings=on" "-Dswing.aatext=true"]}
   :prod
   {:extra-paths ["classes"]
    :extra-deps {nrepl {:mvn/version "0.6.0"}

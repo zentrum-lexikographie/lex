@@ -2,16 +2,33 @@
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
   org.clojure/core.async {:mvn/version "0.4.490"}
+
+  ;; Data handling
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
   org.clojure/data.zip {:mvn/version "0.1.1"}
+
+  ;; Data formats (XML)
+  zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
+                   :sha "4fd84e2e3b03f3cd1a2ce64778d7058024909376"}
+
+  ;; Specs, randomized testing
+  metosin/spec-tools {:mvn/version "0.10.0"}
   org.clojure/test.check {:mvn/version "0.9.0"}
+
+  ;; Tools
   org.clojure/tools.cli {:mvn/version "0.4.2"}
   org.clojure/tools.logging {:mvn/version "1.0.0"}
-  gremid/lucene-query {:mvn/version "0.1.1"}
-  me.raynes/fs {:mvn/version "1.4.6"}
-  metosin/spec-tools {:mvn/version "0.10.0"}
+
+  ;; Infrastruture (HTTP client, cron scheduling, state management)
+  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}
   cronjure {:mvn/version "0.1.1"}
   environ {:mvn/version "1.1.0"}
   mount {:mvn/version "0.1.16"}
-  zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "4fd84e2e3b03f3cd1a2ce64778d7058024909376"}}}
+  me.raynes/fs {:mvn/version "1.4.6"}
+
+  ;; Apache Lucene Query parser
+  gremid/lucene-query {:mvn/version "0.1.1"}
+
+  ;; Logging
+  org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
+  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}}}
