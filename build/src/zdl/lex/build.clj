@@ -49,7 +49,7 @@
     (sh/run! "clojure" "-A:dev:prod"
              (path scripts-dir "compile_server.clj") :dir server-dir)
     (uberjar! server-dir (path server-jar)
-              {:aliases #{:prod} :main-class "zdl_lex_server.core"})
+              {:aliases #{:prod} :main-class "zdl.lex.server.core"})
     (clear-dir! classes)))
 
 (defn client!

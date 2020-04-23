@@ -1,13 +1,13 @@
-(ns zdl-lex-server.client
+(ns zdl.lex.server.client
   (:require [clj-http.client :as http]
             [clojure.core.async :as a]
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
             [clojure.tools.logging :as log]
-            [zdl-lex-common.env :refer [env]]
-            [zdl-lex-common.timestamp :as ts]
-            [zdl-lex-common.url :refer [path->uri]]
-            [zdl-lex-common.util :refer [file]]
+            [zdl.lex.env :refer [env]]
+            [zdl.lex.timestamp :as ts]
+            [zdl.lex.url :refer [path->uri]]
+            [zdl.lex.util :refer [file]]
             [zdl-xml.rngom :as rngom]
             [zdl-xml.util :as xml])
   (:import java.net.URL))
