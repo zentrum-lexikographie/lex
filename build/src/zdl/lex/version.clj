@@ -28,7 +28,7 @@
   []
   (git/assert-clean)
   (let [v (str "v" (next-version))]
-    (log/info "Tagging next version '%s'" v)
+    (log/infof "Tagging next version '%s'" v)
     (git/sh! "tag" v)))
 
 (defn write!
