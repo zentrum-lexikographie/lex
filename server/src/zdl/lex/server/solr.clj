@@ -166,29 +166,33 @@
 (s/def ::export-query (s/keys :opt-un [::q ::limit]))
 (s/def ::suggestion-query (s/keys :req-un [::q]))
 
+(def search-handler
+  {:summary "Query the full-text index"
+   :tags ["Index" "Query"]
+   :parameters {:query ::search-query}
+   :handler handle-search})
+
 (def ring-handlers
   ["/index"
    [""
-    {:get {:summary "Query the full-text index"
-           :tags ["Index" "Query"]
-           :parameters {:query ::search-query}
-           :handler handle-search}
+    {:get search-handler
+     :head search-handler
      :delete {:summary "Clears the index, forcing a rebuild"
               :tags ["Index", "Admin"]
               :handler handle-index-rebuild}}]
 
    ["/export"
-    {:get {:summary "Export index metadata in CSV format"
-           :tags ["Index" "Query" "Export"]
-           :parameters {:query ::export-query}
-           :muuntaja (m/create (assoc m/default-options
-                                      :return :output-stream
-                                      :default-format "text/csv"
-                                      :formats {"text/csv" csv/format}))
-           :handler handle-export}}]
+    {:summary "Export index metadata in CSV format"
+     :tags ["Index" "Query" "Export"]
+     :parameters {:query ::export-query}
+     :muuntaja (m/create (assoc m/default-options
+                                :return :output-stream
+                                :default-format "text/csv"
+                                :formats {"text/csv" csv/format}))
+     :handler handle-export}]
 
    ["/forms/suggestions"
-    {:get {:summary "Retrieve suggestion for headwords based on prefix queries"
-           :tags ["Index" "Query" "Suggestions" "Headwords"]
-           :parameters {:query ::suggestion-query}
-           :handler handle-form-suggestions}}]])
+    {:summary "Retrieve suggestion for headwords based on prefix queries"
+     :tags ["Index" "Query" "Suggestions" "Headwords"]
+     :parameters {:query ::suggestion-query}
+     :handler handle-form-suggestions}]])

@@ -20,5 +20,5 @@
 
 (def ring-handlers
   [""
-   ["/" {:get (fn [_] (htstatus/temporary-redirect "/home"))}]
-   ["/home" {:get handle-home}]])
+   ["/" (fn [_] (htstatus/temporary-redirect "/home"))]
+   ["/home" handle-home]])

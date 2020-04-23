@@ -85,13 +85,16 @@
           (htstatus/ok f))
         (htstatus/not-found resource)))))
 
+(def get-article-handler
+  {:handler get-article
+   :parameters existing-article-parameters})
 (def ring-handlers
   ["/article/"
    [""
     {:put {:handler create-article
            :parameters new-article-parameters}}]
    ["*resource"
-    {:get {:handler get-article
-           :parameters existing-article-parameters}
+    {:get get-article-handler
+     :head get-article-handler
      :post {:handler (lock/wrap-resource-lock post-article)
             :parameters existing-article-parameters}}]])

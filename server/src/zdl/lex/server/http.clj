@@ -54,12 +54,12 @@
     solr/ring-handlers
     status/ring-handlers
     ["/assets/**" {:no-doc true
-                   :get {:handler (constantly nil)}
+                   :handler (constantly nil)
                    :middleware [wrap-webjars]}]
     ["/swagger.json" {:no-doc true
-                      :get (swagger/create-swagger-handler)}]
+                      :handler (swagger/create-swagger-handler)}]
     ["/docs/api/*" {:no-doc true
-                    :get (swagger-ui/create-swagger-ui-handler)}]])
+                    :handler (swagger-ui/create-swagger-ui-handler)}]])
    (ring/routes
     (ring/create-default-handler))))
 

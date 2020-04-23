@@ -7,7 +7,7 @@
 
 (def ring-handlers
   ["/status"
-   {:get {:summary "Provides status information, e.g. logged-in user"
-          :tags ["Status"]
-          :handler get-status}}])
+   {:summary "Provides status information, e.g. logged-in user"
+    :tags ["Status"]
+    :handler get-status}])
 

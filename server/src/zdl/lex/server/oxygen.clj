@@ -69,9 +69,9 @@
       (htstatus/ok)))
 
 (def oxygen-handlers
-  [["/updateSite.xml" {:get generate-update-descriptor}]
-   ["/zdl-lex-plugin.zip" {:get download-plugin}]
-   ["/zdl-lex-framework.zip" {:get download-framework}]])
+  [["/updateSite.xml" generate-update-descriptor]
+   ["/zdl-lex-plugin.zip" download-plugin]
+   ["/zdl-lex-framework.zip" download-framework]])
 
 (def ring-handlers
   [""

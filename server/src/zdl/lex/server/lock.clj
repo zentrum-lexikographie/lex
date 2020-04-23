@@ -126,21 +126,29 @@
   {:path (s/keys :req-un [::resource])
    :query (s/keys :req-un [::token])})
 
+(def read-locks-handler
+  {:summary "Retrieve list of active locks"
+   :tags ["Lock" "Query"]
+   :handler read-locks})
+
+(def read-lock-handler
+  {:summary "Read a resource lock"
+   :tags ["Lock" "Query" "Resource"]
+   :parameters existing-lock-parameters
+   :handler read-lock})
+
 (def ring-handlers
   ["/lock"
    [""
-    {:get {:summary "Retrieve list of active locks"
-           :tags ["Lock" "Query"]
-           :handler read-locks}}]
+    {:get read-locks-handler
+     :head read-locks-handler}]
    ["/*resource"
-    {:post {:summary "Set a resource lock"
+    {:get read-lock-handler
+     :head read-lock-handler
+     :post {:summary "Set a resource lock"
             :tags ["Lock" "Resource"]
             :parameters new-lock-parameters
             :handler create-lock}
-     :get {:summary "Read a resource lock"
-           :tags ["Lock" "Query" "Resource"]
-           :parameters existing-lock-parameters
-           :handler read-lock}
      :delete {:summary "Remove a resource lock."
               :tags ["Lock" "Resource"]
               :parameters existing-lock-parameters

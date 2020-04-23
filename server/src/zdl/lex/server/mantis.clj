@@ -163,18 +163,23 @@
 (s/def ::q string?)
 (s/def ::issue-query (s/keys :req-un [::q]))
 
+(def query-handler
+  {:summary "Query internal index for Mantis issues based on headword"
+   :tags ["Mantis" "Query" "Headwords"]
+   :parameters {:query ::issue-query}
+   :handler handle-query})
+
+(def rebuild-handler
+  {:summary "Clears the internal Mantis issue index and re-synchronizes it"
+   :tags ["Mantis" "Admin"]
+   :handler handle-index-rebuild})
+
 (def ring-handlers
   ["/mantis"
    ["/issues"
-    {:get
-     {:summary "Query internal index for Mantis issues based on headword"
-      :tags ["Mantis" "Query" "Headwords"]
-      :parameters {:query ::issue-query}
-      :handler handle-query}
-     :delete
-     {:summary "Clears the internal Mantis issue index and re-synchronizes it"
-      :tags ["Mantis" "Admin"]
-      :handler handle-index-rebuild}}]])
+    {:get query-handler
+     :head query-handler
+     :delete rebuild-handler}]])
 
 (comment
   (->> (issues) (take 100) (index-issues))
