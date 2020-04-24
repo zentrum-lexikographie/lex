@@ -1,20 +1,19 @@
 (ns zdl.lex.url
   (:require [clojure.string :as str]
-            [zdl.lex.env :refer [env]])
-  (:import [java.net URL URI URLStreamHandler URLStreamHandlerFactory]))
+            [zdl.lex.util :refer [path->uri server-base]])
+  (:import [java.net URL URLStreamHandler URLStreamHandlerFactory]))
 
-(def base (str/replace (env :server-base) #"[^:]+://" "lex://"))
+(def base
+  (delay (str/replace @server-base #"[^:]+://" "lex://")))
 
 (defn lex? [^URL u]
-  (str/starts-with? (str u) base))
-
-(defn path->uri [path] (URI. nil nil path nil))
+  (str/starts-with? (str u) @base))
 
 (defn id->url [id]
-  (.. (URL. base) (toURI) (resolve (path->uri id)) (toURL)))
+  (.. (URL. @base) (toURI) (resolve (path->uri id)) (toURL)))
 
 (defn url->id [^URL u]
-  (if (lex? u) (.. (URL. base) (toURI) (relativize (.. u (toURI))) (getPath))))
+  (if (lex? u) (.. (URL. @base) (toURI) (relativize (.. u (toURI))) (getPath))))
 
 (let [noop (proxy [URLStreamHandler] [])]
   (defn install-stream-handler!

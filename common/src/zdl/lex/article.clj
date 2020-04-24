@@ -8,7 +8,8 @@
             [zdl.lex.timestamp :as ts]
             [zdl.lex.util :refer [->clean-map relativize]]
             [zdl.xml.util :as xml])
-  (:import java.text.Collator
+  (:import java.io.File
+           java.text.Collator
            java.util.Locale
            net.sf.saxon.s9api.QName))
 
@@ -106,13 +107,19 @@
         :colouring (colouring article)
         :area (area article)}))))
 
+(defn file->articles
+  "Extracts articles and their key data from an XML file."
+  [^File f id]
+  (for [a (-> f xml/->xdm axml/doc->articles)]
+    (merge {:id id :file f} (excerpt a) (av/check f a))))
+
 (defn articles
-  "Extracts articles and their key data from XML files."
+  "Extracts articles and their key data from XML files in a dir."
   [dir]
   (let [f->id (comp str (partial relativize dir))]
     (for [f (afs/files dir) :let [id (f->id f)]
-          a (-> f xml/->xdm axml/doc->articles)]
-       (merge {:id id :file f} (excerpt a) (av/check f a)))))
+          a (file->articles f id)]
+      a)))
 
 (defn status->color
   [status]

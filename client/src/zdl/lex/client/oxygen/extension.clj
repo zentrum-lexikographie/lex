@@ -3,7 +3,6 @@
    :name de.zdl.oxygen.Extension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
   (:require [clojure.core.async :as a]
-            [clojure.tools.logging :as log]
             [mount.core :as mount]
             [zdl.lex.client.editors :as editors]
             [zdl.lex.client.http :as http]
@@ -13,15 +12,13 @@
             [zdl.lex.client.view.issue :as issue-view]
             [zdl.lex.client.view.results :as results-view]
             [zdl.lex.client.view.toolbar :as toolbar]
-            [zdl.lex.client.workspace :as ws]
-            [zdl.lex.env :refer [env env->str]])
+            [zdl.lex.client.workspace :as ws])
   (:import javax.swing.JComponent
            [ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer]
            [ro.sync.exml.workspace.api.util EditorVariableDescription EditorVariablesResolver]))
 
 (defn -applicationStarted [this app-ws]
-  (log/info (env->str env))
-  (log/info (mount/start-with {#'ws/instance app-ws}))
+  (mount/start-with {#'ws/instance app-ws})
   (.addViewComponentCustomizer
      app-ws
      (proxy [ViewComponentCustomizer] []

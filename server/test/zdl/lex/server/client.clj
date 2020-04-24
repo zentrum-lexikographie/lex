@@ -4,10 +4,8 @@
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
             [clojure.tools.logging :as log]
-            [zdl.lex.env :refer [env]]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.url :refer [path->uri]]
-            [zdl.lex.util :refer [file]]
+            [zdl.lex.util :refer [file path->uri server-base]]
             [zdl.xml.rngom :as rngom]
             [zdl.xml.util :as xml])
   (:import java.net.URL))
@@ -53,13 +51,14 @@
   ch)
 
 (def ^:private query-template
-  {:url (.. (URL. (env :server-base)) (toURI) (resolve "/index") (toString))
-   :method :get
-   :query-params {:limit "1000"} :as :json})
+  (delay
+    {:url (.. (URL. @server-base) (toURI) (resolve "/index") (toString))
+     :method :get
+     :query-params {:limit "1000"} :as :json}))
 
 (defn query-random-article
   [{:keys [author query] :as tx}]
-  (let [req (assoc-in query-template [:query-params :q] query)]
+  (let [req (assoc-in @query-template [:query-params :q] query)]
     (a/go
       (->> (some->> (a/<! (http-request author (a/chan) req))
                     :body :result not-empty rand-nth :id)
@@ -72,7 +71,7 @@
       tx
       (let [req {:method (if xml :post :get)
                  :body xml
-                 :url (.. (URL. (env :server-base)) (toURI)
+                 :url (.. (URL. @server-base) (toURI)
                           (resolve "/article/")
                           (resolve (path->uri id))
                           (toString))}]

@@ -25,6 +25,7 @@
   environ {:mvn/version "1.1.0"}
   mount {:mvn/version "0.1.16"}
   me.raynes/fs {:mvn/version "1.4.6"}
+  io.github.cdimascio/java-dotenv {:mvn/version "5.1.4"}
 
   ;; Apache Lucene Query parser
   gremid/lucene-query {:mvn/version "0.1.1"}

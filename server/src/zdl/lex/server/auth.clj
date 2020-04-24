@@ -2,7 +2,7 @@
   (:require [buddy.auth.accessrules :refer [wrap-access-rules]]
             [buddy.auth.backends.httpbasic :refer [http-basic-backend]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-            [zdl.lex.env :refer [env]]))
+            [zdl.lex.env :refer [getenv]]))
 
 (def public?
   (constantly true))
@@ -47,21 +47,23 @@
      "/status/*"]
     :handler authenticated?}])
 
-(defn authenticate
-  [req {:keys [username password]}]
-  (let [{:keys [server-user server-password]} env]
-    (if-not (and server-user server-password)
-      ;; pass-through credentials from upstream
-      {:user username :password password}
-      ;; else authenticate against env credentials
-      (if (and (= server-user username) (= server-password password))
-        {:user username :password password}))))
+(def authenticate
+  (delay
+    (let [auth-user (getenv ::user "ZDL_LEX_SERVER_USER")
+          auth-password (getenv ::password "ZDL_LEX_SERVER_PASSWORD")]
+      (fn [req {:keys [username password]}]
+        (if-not (and auth-user auth-password)
+          ;; pass-through credentials from upstream
+          {:user username :password password}
+          ;; else authenticate against env credentials
+          (if (and (= auth-user username) (= auth-password password))
+            {:user username :password password}))))))
 
-(def auth-backend
-  (http-basic-backend {:realm "ZDL-Lex-Server" :authfn authenticate}))
-
-(def wrap
-  (comp
-   #(wrap-authorization % auth-backend)
-   #(wrap-authentication % auth-backend)
-   #(wrap-access-rules % {:policy :reject :rules access-rules})))
+(defn wrap
+  [handler]
+  (let [auth-backend (http-basic-backend {:realm "ZDL-Lex-Server"
+                                          :authfn @authenticate})]
+    (-> handler
+        (wrap-access-rules {:policy :reject :rules access-rules})
+        (wrap-authentication auth-backend)
+        (wrap-authorization auth-backend))))

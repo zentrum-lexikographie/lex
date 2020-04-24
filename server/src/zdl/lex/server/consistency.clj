@@ -1,8 +1,8 @@
 (ns zdl.lex.server.consistency
   (:require [clojure.string :as str]
             [zdl.lex.article :as article]
-            [zdl.xml.util :as xml]
-            [zdl.lex.server.git :as git]))
+            [zdl.lex.server.git :as git]
+            [zdl.xml.util :as xml]))
 
 (let [numerals {\I 1, \V 5, \X 10, \L 50, \C 100, \D 500, \M 1000}
       add-numeral (fn [n t] (if (> n (* 4 t)) (- n t) (+ t n)))]
@@ -30,7 +30,7 @@
 ;; [A-Z] [IVX]
 (comment
   (roman "MMMCIX")
-  (for [article (->> (article/article-xml-files git/dir) (take 100))
+  (for [article (->> (article/article-xml-files @git/dir) (take 100))
         ref (->> article xml/->xdm article/references)
         :let [{:keys [sense lemma]} ref]
         :when sense]

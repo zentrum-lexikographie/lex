@@ -4,63 +4,47 @@
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [clojure.tools.logging :as log]
-            [me.raynes.fs :as fs]
             [metrics.timers :refer [deftimer time!]]
             [mount.core :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [zdl.lex.bus :as bus]
             [zdl.lex.cron :as cron]
-            [zdl.lex.env :refer [env]]
-            [zdl.lex.util :refer [file relativize]]))
+            [zdl.lex.env :refer [getenv]]
+            [zdl.lex.fs :as fs]
+            [zdl.lex.util :refer [file fpath relativize]])
+  (:import java.io.File))
 
-(def dir (file (env :data-dir) "git"))
+(def dir
+  (delay (fs/data-dir "git")))
+
+(def origin
+  (delay (getenv ::origin "ZDL_LEX_GIT_ORIGIN")))
+
+(def branch
+  (delay (getenv ::branch "ZDL_LEX_GIT_BRANCH" "zdl-lex-server/development")))
 
 (defn file->id
   [f]
-  (str (relativize dir f)))
+  (str (relativize @dir f)))
 
-(def branch (env :git-branch))
-
-(def cmd-env
-  (->>
-   (let [{:keys [git-auth-key-dir git-auth-key-name]} env]
-     (concat
-      ["ssh" "-o" "StrictHostKeyChecking=no"]
-      (if (and git-auth-key-dir git-auth-key-name)
-        ["-i" (str (file git-auth-key-dir git-auth-key-name))])))
-   (str/join " ")
-   (array-map "GIT_SSH_COMMAND")
-   (merge (into {} (System/getenv)))))
-
-(defn git [& args]
+(defn git! [& args]
   (->>
    (let [result (apply sh/sh (concat ["git"] args))
          succeeded? (= (result :exit) 0)]
-     (log/log (if succeeded? :debug :warn) {:git args :result result})
+     (log/debug {:git! args})
      (when-not succeeded? (throw (ex-info (str args) result)))
      result)
-   (sh/with-sh-env cmd-env)
-   (sh/with-sh-dir dir)))
+   (sh/with-sh-dir @dir)))
 
 (defstate git-cmd
-  :start (do
-           (when-not (fs/exists? dir)
-             (fs/mkdirs dir))
-           (let [{:keys [out]} (git "--version")]
-             (log/info {:git (str/trim out)}))))
-
-(defn git-clone
-  []
-  (let [origin (env :git-origin)]
-    (log/info {:git {:clone origin}})
-    (git "clone" "--quiet" origin (str dir))))
+  :start (log/info {:git (-> (git! "--version") :out str/trim)}))
 
 (deftimer [git local gc-timer])
 
 (defn git-gc
   []
   (->>
-   (git "gc" "--aggressive")
+   (git! "gc" "--aggressive")
    (time! gc-timer)))
 
 (defstate gc-scheduler
@@ -71,50 +55,65 @@
 
 (defn git-fetch
   []
-  (->>
-   (git "fetch" "--quiet" "origin" "--tags")
-   (time! fetch-timer)))
+  (when @origin
+    (->>
+     (git! "fetch" "--quiet" "origin" "--tags")
+     (time! fetch-timer))))
 
 (deftimer [git remote push-timer])
 
 (defn git-push
   []
-  (->>
-   (git "push" "--quiet" "origin" branch)
-   (time! push-timer)))
+  (when @origin
+    (->>
+     (git! "push" "--quiet" "origin" @branch)
+     (time! push-timer))))
 
 (defn git-refs
   []
-  (->> (git "for-each-ref" "--format" "%(refname:short)")
+  (->> (git! "for-each-ref" "--format" "%(refname:short)")
        :out str/split-lines
        (apply sorted-set)))
 
 (defn git-ref
   []
-  (->> (git "symbolic-ref" "--short" "-q" "HEAD") :out str/trim))
+  (->> (git! "symbolic-ref" "--short" "-q" "HEAD") :out str/trim))
 
 (defn git-rev
   []
-  (->> (git "rev-parse" "HEAD") :out str/trim))
+  (->> (git! "rev-parse" "HEAD") :out str/trim))
 
 (defstate ^{:on-reload :noop} repo
-  :start (locking dir
-           (when-not (fs/directory? (file dir ".git"))
-             (git-clone))
-           (when-not (#{branch} (git-ref))
-             (git "checkout" "--track" (str "origin/" branch)))
-           (log/info {:git {:repo (str dir) :branch branch}})))
+  :start (locking @dir
+           (let [dir @dir
+                 path (fpath dir)
+                 branch @branch
+                 origin @origin]
+             (when-not (.isDirectory (file dir ".git"))
+               (if origin
+                 (do
+                   (log/info {:git {:clone origin}})
+                   (git! "clone" "--quiet" origin path))
+                 (do
+                   (log/info {:git {:init path}})
+                   (git! "init" "--quiet" dir))))
+             (when-not (= branch (git-ref))
+               (if origin
+                 (git! "checkout" "--track" (str "origin/" branch))
+                 (git! "checkout" "-b" branch)))
+             (log/info {:git {:repo path :branch branch}}))))
 
 (defn publish-changes
   [files]
   (when (seq files)
-    (->> {:modified (vec (filter fs/exists? files))
-          :deleted (vec (remove fs/exists? files))}
+    (->> {:modified (vec (filter #(.exists ^File %) files))
+          :deleted (vec (remove #(.exists ^File %) files))}
          (bus/publish! [:git-changes]))
     files))
 
-(def publish-paths
-  (comp publish-changes (partial map (partial file dir))))
+(defn publish-paths
+  [paths]
+  (publish-changes (map (partial file @dir) paths)))
 
 (deftimer [git local status-timer])
 
@@ -135,7 +134,7 @@
        (map not-empty) (remove nil?)))
 
 (defn- git-status []
-  (->> (git "status" "-s" "--porcelain")
+  (->> (git! "status" "-s" "--porcelain")
        :out str/split-lines
        (map not-empty) (remove nil?)
        (map #(array-map :index (status->kw (nth % 0))
@@ -145,21 +144,18 @@
 
 (deftimer [git local commit-timer])
 
-(def commit-author-arg
-  (format "--author=%s <%s>" (env :git-commit-user) (env :git-commit-email)))
-
 (defn git-add
   [f]
-  (locking dir
-    (git "add" (-> f file str))))
+  (locking @dir
+    (git! "add" (fpath f))))
 
 (defn commit
   []
   (when
       (->>
-       (locking dir
+       (locking @dir
          (when-let [changes (not-empty (git-status))]
-           (->> (git "commit" commit-author-arg "-a" "-m" "zdl-lex-server")
+           (->> (git! "commit" "-a" "-m" "zdl-lex-server")
                 (time! commit-timer))
            changes))
        (mapcat :paths)
@@ -168,13 +164,13 @@
 
 (defn fast-forward [ref]
   (git-fetch)
-  (locking dir
+  (locking @dir
     (when (not-empty (git-status))
       (throw
        (IllegalStateException. "Uncommitted changes in server's working dir")))
     (let [head (git-rev)]
-      (git "merge" "--ff-only" "-q" ref)
-      (->> (git "diff" "--numstat" (str head ".." "HEAD"))
+      (git! "merge" "--ff-only" "-q" ref)
+      (->> (git! "diff" "--numstat" (str head ".." "HEAD"))
            :out str/split-lines
            (map not-empty) (remove nil?)
            (map #(str/split % #"\t"))

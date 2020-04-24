@@ -2,11 +2,10 @@
   (:require [clojure.string :as str]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
-            [zdl.lex.client.bus :as bus]
-            [zdl.lex.env :refer [env]]))
+            [zdl.lex.client.bus :as bus]))
 
 (def system-user
-  (env :user-name))
+  (System/getProperty "user.name"))
 
 (def current-user
   (atom nil))

@@ -1,15 +1,16 @@
 (ns zdl.lex.client.repl
-  (:require [mount.core :refer [defstate]]
+  (:require [clojure.tools.logging :as log]
+            [mount.core :refer [defstate]]
             [nrepl.server :as repl]
-            [clojure.tools.logging :as log]
-            [zdl.lex.env :refer [env]]))
+            [zdl.lex.env :refer [getenv]]))
 
 (defn nrepl-handler []
   (require 'cider.nrepl)
   (ns-resolve 'cider.nrepl 'cider-nrepl-handler))
 
 (defstate server
-  :start (when-let [port (env :repl-port)]
+  :start (when-let [port (getenv "ZDL_LEX_REPL_PORT")]
            (log/info (format "Starting REPL server @%s/tcp" port))
-           (repl/start-server :port port :handler (nrepl-handler)))
+           (repl/start-server :port (Integer/parseInt port)
+                              :handler (nrepl-handler)))
   :stop (some-> server repl/stop-server))

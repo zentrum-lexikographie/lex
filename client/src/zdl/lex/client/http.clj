@@ -8,29 +8,33 @@
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.query :as query]
             [zdl.lex.cron :as cron]
-            [zdl.lex.env :refer [env]]
+            [zdl.lex.env :refer [getenv]]
             [zdl.lex.util :refer [server-url]]
             [zdl.xml.util :as xml])
   (:import [java.io File IOException PushbackReader]
            ro.sync.exml.plugin.lock.LockException))
 
+(def ^:private env-auth
+  (delay
+    (let [user (getenv ::server-user "ZDL_LEX_SERVER_USER")
+          password (getenv ::server-password "ZDL_LEX_SERVER_PASSWORD")]
+      (if (and user password) [user password]))))
+
 (def ^:private auth
-  (atom 
-   (let [user (env :server-user)
-         password (env :server-password)]
-     (if (and user password) [user password]))))
+  (atom nil))
 
 (defn request-auth
   []
   (if-let [auth @auth]
     auth
-    (let [status-con (.. (server-url "/status") (openConnection))]
-      (.. status-con (setRequestProperty "Accept" "application/edn"))
-      (with-open [status-stream (.. status-con (getInputStream))
-                  status-reader (io/reader status-stream :encoding "UTF-8")
-                  status-reader (PushbackReader. status-reader)]
-        (let [{:keys [user password]} (edn/read status-reader)]
-          (if (and user password) (reset! auth [user password])))))))
+    (if-not (reset! auth @env-auth)
+      (let [status-con (.. (server-url "/status") (openConnection))]
+        (.. status-con (setRequestProperty "Accept" "application/edn"))
+        (with-open [status-stream (.. status-con (getInputStream))
+                    status-reader (io/reader status-stream :encoding "UTF-8")
+                    status-reader (PushbackReader. status-reader)]
+          (let [{:keys [user password]} (edn/read status-reader)]
+            (if (and user password) (reset! auth [user password]))))))))
 
 (defn lock->owner
   [{:keys [owner owner_ip]}]

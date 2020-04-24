@@ -4,7 +4,14 @@ ENV ZDL_LEX_USER "lex"
 ENV ZDL_LEX_UID "1010"
 ENV ZDL_LEX_GROUP "lex"
 ENV ZDL_LEX_GID "1010"
+
 ENV ZDL_LEX_DATA_DIR "/data"
+
+ENV GIT_AUTHOR_NAME "ZDL-Lex"
+ENV GIT_AUTHOR_EMAIL "noreply@lex.dwds.de"
+
+ENV GIT_SSH_COMMAND "ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
+
 VOLUME "/data"
 WORKDIR "/data"
 

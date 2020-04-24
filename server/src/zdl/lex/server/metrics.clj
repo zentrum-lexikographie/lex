@@ -1,16 +1,22 @@
 (ns zdl.lex.server.metrics
-  (:require [mount.core :refer [defstate]]
-            [metrics.core :refer [default-registry]]
+  (:require [metrics.core :refer [default-registry]]
             [metrics.jvm.core :refer [instrument-jvm]]
-            [zdl.lex.env :refer [env]])
+            [mount.core :refer [defstate]]
+            [zdl.lex.env :refer [getenv]])
   (:import com.codahale.metrics.Slf4jReporter
            java.util.concurrent.TimeUnit))
 
+(def report-interval
+  (delay (getenv ::interval "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")))
+
 (defstate reporter
-  :start (let [interval (env :metrics-report-interval)
-               reporter (.build (Slf4jReporter/forRegistry default-registry))]
-           (instrument-jvm)
-           (.start reporter interval TimeUnit/MINUTES)
-           reporter)
-  :stop (.close reporter))
+  :start
+  (let [report-interval (Integer/parseInt @report-interval)]
+    (when (< 0 report-interval)
+      (let [reporter (.build (Slf4jReporter/forRegistry default-registry))]
+        (instrument-jvm)
+        (.start reporter report-interval TimeUnit/MINUTES)
+        reporter)))
+  :stop
+  (some-> reporter .close))
 

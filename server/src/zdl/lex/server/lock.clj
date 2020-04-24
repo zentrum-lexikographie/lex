@@ -4,12 +4,12 @@
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [hugsql.core :refer [def-db-fns]]
-            [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [zdl.lex.cron :as cron]
-            [zdl.lex.env :refer [env]]
-            [zdl.lex.spec :as spec])
+            [zdl.lex.fs :as fs]
+            [zdl.lex.spec :as spec]
+            [zdl.lex.util :refer [fpath]])
   (:import java.net.URI
            org.h2.jdbcx.JdbcConnectionPool))
 
@@ -20,7 +20,7 @@
 
 (defstate datasource
   :start
-  (-> (URI. "jdbc:h2" (str (fs/file (env :data-dir) "locks")) nil)
+  (-> (URI. "jdbc:h2" (fpath (fs/data-file "locks")) nil)
       (str)
       (JdbcConnectionPool/create "sa" ""))
   :stop (.dispose datasource))
