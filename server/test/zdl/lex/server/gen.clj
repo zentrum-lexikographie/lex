@@ -1,13 +1,13 @@
 (ns zdl.lex.server.gen
   (:require [clojure.spec.gen.alpha :as gen]
             [clojure.test :refer :all]
+            [clojure.tools.logging :as log]
             [zdl.lex.article.fs :as afs]
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer :all]
             [zdl.lex.git :as git]
-            [zdl.lex.server.git :as server-git]
-            [clojure.tools.logging :as log]))
+            [zdl.lex.server.git :as server-git]))
 
 (def prod-origin
   (delay (getenv "ZDL_LEX_PROD_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git")))
@@ -52,8 +52,8 @@
   (gen/fmap
    (fn [articles]
      (let [git-dir @server-git/dir]
-       (log/debugf "Copy %d articles to %s" (count articles) (path git-dir))
        (git/sh! "." "init" "--quiet" (path git-dir))
+       (log/debugf "Copy %d articles to %s" (count articles) (path git-dir))
        (let [article->dest (comp
                             (partial resolve-path (path-obj git-dir))
                             (partial relativize (path-obj @prod-dir)))]
@@ -63,14 +63,18 @@
          (afs/files git-dir))))
    (apply gen-prod-article-set args)))
 
+(defn generate-article-set
+  [[min-articles max-articles]]
+  (gen/generate
+   (gen-article-set {:min-elements min-articles :max-elements max-articles})))
+
 (defn create-article-set-fixture
   ([]
    (create-article-set-fixture [100 200]))
-  ([[min-articles max-articles]]
+  ([set-size-range]
    (fn [f]
      (delete! @server-git/dir)
-     (gen/generate
-      (gen-article-set {:min-elements min-articles :max-elements max-articles}))
+     (generate-article-set set-size-range)
      (f)
      (delete! @server-git/dir))))
 
