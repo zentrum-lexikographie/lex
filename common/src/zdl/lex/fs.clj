@@ -1,6 +1,8 @@
 (ns zdl.lex.fs
   (:require [clojure.java.io :as io])
   (:import java.io.File
+           java.nio.file.CopyOption
+           java.nio.file.Files
            java.nio.file.Path))
 
 (defn ^File file
@@ -19,6 +21,20 @@
 (defn ^Path relativize
   [base f]
   (.relativize (path-obj base) (path-obj f)))
+
+(defn ^Path resolve-path
+  [base ^Path p]
+  (.resolve (path-obj base) p))
+
+(def ^:private copy-options
+  (make-array CopyOption 0))
+
+(defn copy
+  [src dest]
+  (let [^File dest (file dest)
+        ^File dest-parent (.getParentFile dest)]
+    (.mkdirs dest-parent)
+    (Files/copy (path-obj src) (path-obj dest) copy-options)))
 
 (defn delete!
   [^File f & [silently]]
