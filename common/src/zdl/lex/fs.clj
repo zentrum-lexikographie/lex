@@ -5,6 +5,11 @@
            java.nio.file.Files
            java.nio.file.Path))
 
+(extend-protocol io/Coercions
+  Path
+  (as-file [^Path p] (.toFile p))
+  (as-url [^Path p] (.. p (toFile) (toURI) (toURL))))
+
 (defn ^File file
   [& args]
   (let [^File f (apply io/file args)]

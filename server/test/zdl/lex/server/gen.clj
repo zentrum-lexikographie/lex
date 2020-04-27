@@ -67,7 +67,6 @@
 
 (defn article-set-fixture
   [f]
-  (git/assert-clean @server-git/dir)
   (delete! @server-git/dir)
   (gen/generate
    (gen-article-set {:min-elements *article-set-min-elements*
