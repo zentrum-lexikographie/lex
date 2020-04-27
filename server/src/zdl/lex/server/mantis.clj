@@ -12,7 +12,7 @@
             [ring.util.http-response :as htstatus]
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.fs :as fs]))
+            [zdl.lex.data :as data]))
 
 (def mantis-base
   (delay (getenv "ZDL_LEX_MANTIS_BASE" "https://odo.dwds.de/mantis")))
@@ -126,7 +126,7 @@
        (first)))
 
 (def mantis-dump
-  (delay (fs/data-file "mantis.edn")))
+  (delay (data/file "mantis.edn")))
 
 (defn store-dump [data]
   (let [data (->> data

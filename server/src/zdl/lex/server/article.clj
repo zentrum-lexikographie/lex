@@ -2,16 +2,16 @@
   (:require [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
-            [me.raynes.fs :as fs]
             [ring.util.http-response :as htstatus]
             [ring.util.request :as htreq]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.solr.client :as solr-client]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.util :refer [file]]
+            [zdl.lex.fs :refer [file]]
             [zdl.xml.util :as xml])
-  (:import [java.text Normalizer Normalizer$Form]))
+  (:import [java.text Normalizer Normalizer$Form]
+           java.io.File))
 
 (def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
 
@@ -56,8 +56,8 @@
   {:query (s/keys :req-un [::form ::pos])})
 
 (defn get-article [{{:keys [resource]} :path-params}]
-  (let [f (file @git/dir resource)]
-    (if (fs/exists? f)
+  (let [^File f (file @git/dir resource)]
+    (if (.isFile f)
       (htstatus/ok f)
       (htstatus/not-found resource))))
 
@@ -70,14 +70,14 @@
           id (str new-article-collection "/" filename "-" xml-id ".xml")
           f (file @git/dir id)]
       (spit f xml :encoding "UTF-8")
-      (git/git-add f)
+      (git/add! f)
       (git/publish-changes [f])
       (htstatus/ok {:id id :form form :pos pos}))))
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
   (locking @git/dir
-    (let [f (file @git/dir resource)]
-      (if (fs/exists? f)
+    (let [^File f (file @git/dir resource)]
+      (if (.isFile f)
         (do
           (spit f (htreq/body-string req) :encoding "UTF-8")
           (git/publish-changes [f])

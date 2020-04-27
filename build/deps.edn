@@ -1,9 +1,14 @@
 {:deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
-  org.clojure/tools.logging {:mvn/version "1.0.0"}
+
+  ;; Code in common with server, client and other components
+  org.zdl.lex/common {:local/root "../common"}
+
+  ;; Uberjar packaging
   uberdeps {:mvn/version "0.1.8"
             :exclusions [commons-logging/commons-logging]}
-  zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "4fd84e2e3b03f3cd1a2ce64778d7058024909376"}
+
+  ;; Logging
+  org.clojure/tools.logging {:mvn/version "1.0.0"}
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
   org.slf4j/slf4j-log4j12 {:mvn/version "1.7.25"}}}

@@ -1,5 +1,5 @@
 (ns zdl.lex.article.fs
-  (:require [zdl.lex.util :refer [file]])
+  (:require [zdl.lex.fs :refer [file]])
   (:import java.io.File))
 
 (defn article-file?

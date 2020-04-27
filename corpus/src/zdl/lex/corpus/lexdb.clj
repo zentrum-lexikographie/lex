@@ -1,7 +1,8 @@
 (ns zdl.lex.corpus.lexdb
   (:require [clj-http.client :as http]
             [clojure.string :as str]
-            [zdl.lex.util :refer [->clean-map path->uri]])
+            [zdl.lex.url :refer [path->uri]]
+            [zdl.lex.util :refer [->clean-map]])
   (:import java.net.URI))
 
 (defn query-lexdb [corpus & {:keys [select from where groupby orderby limit offset]

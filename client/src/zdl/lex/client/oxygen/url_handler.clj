@@ -5,13 +5,14 @@
   (:require [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [zdl.lex.client.http :as http]
-            [zdl.lex.url :as lexurl]
-            [zdl.lex.util :as util])
+            [zdl.lex.url :as lexurl :refer [url url->id]]
+            [zdl.lex.util :refer [uuid]])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream InputStream IOException]
            [java.net URLConnection URLStreamHandler]
            [ro.sync.exml.plugin.lock LockException LockHandler]))
 
-(def token (util/uuid))
+(def token
+  (uuid))
 
 (defn -isLockingSupported [this protocol]
   (= "lex" protocol))
@@ -25,20 +26,19 @@
       [url timeoutSeconds]
       (try
         (log/infof "Lock! %s (%d s)" url timeoutSeconds)
-        (http/lock (lexurl/url->id url) timeoutSeconds token)
+        (http/lock (url->id url) timeoutSeconds token)
         (catch IOException e (log/warn e))))
     (unlock
       [url]
       (try
         (log/infof "Unlock! %s" url)
-        (http/unlock (lexurl/url->id url) token)
+        (http/unlock (url->id url) token)
         (catch IOException e (log/warn e))))))
 
 (defn- lexurl->httpurl
-  [url]
-  (-> url
-      (lexurl/url->id) (http/id->store-url)
-      (str) (util/url {:token token})))
+  [u]
+  (-> (url->id u) (http/id->store-url)
+      (str) (url {:token token})))
 
 (defn in->buf-stream
   [^InputStream in]

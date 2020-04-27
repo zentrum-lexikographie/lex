@@ -5,8 +5,7 @@
 
 (defn start
   []
-  (server/start
-   {}))
+  (server/start))
 
 (defn stop
   []

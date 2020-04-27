@@ -6,7 +6,8 @@
             [zdl.lex.article.validate :as av]
             [zdl.lex.article.xml :as axml]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.util :refer [->clean-map relativize]]
+            [zdl.lex.fs :refer [relativize]]
+            [zdl.lex.util :refer [->clean-map]]
             [zdl.xml.util :as xml])
   (:import java.io.File
            java.text.Collator

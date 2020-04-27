@@ -1,28 +1,32 @@
 (ns zdl.lex.fs
-  (:require [zdl.lex.env :refer [getenv]]
-            [zdl.lex.util :refer [file]])
-  (:import java.io.File))
+  (:require [clojure.java.io :as io])
+  (:import java.io.File
+           java.nio.file.Path))
 
-(def base-dir
-  (delay (getenv "ZDL_LEX_DATA_DIR" "zdl-lex-data")))
-
-(defn- ^File data-file*
+(defn ^File file
   [& args]
-  (apply file @base-dir args))
+  (let [^File f (apply io/file args)]
+    (.getCanonicalFile f)))
 
-(defn assert-dir
+(defn ^String path
+  [& args]
+  (.getPath (apply file args)))
+
+(defn ^Path path-obj
+  [& args]
+  (.toPath (apply file args)))
+
+(defn ^Path relativize
+  [base f]
+  (.relativize (path-obj base) (path-obj f)))
+
+(defn delete!
+  [^File f & [silently]]
+  (when (.isDirectory f)
+    (doseq [^File c (.listFiles f)] (delete! c)))
+  (io/delete-file f silently))
+
+(defn clear-dir!
   [^File d]
-  (.mkdirs d)
-  (when-not (.isDirectory d) (throw (IllegalArgumentException. d)))
-  d)
-
-(defn ^File data-dir
-  [& args]
-  (let [^File f (apply data-file* args)]
-    (assert-dir f)))
-
-(defn ^File data-file
-  [& args]
-  (let [^File f (apply data-file* args)]
-    (assert-dir (.getParentFile f))
-    f))
+  (when (.isDirectory d) (delete! d))
+  (.mkdirs d))

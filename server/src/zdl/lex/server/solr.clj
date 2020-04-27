@@ -12,7 +12,7 @@
             [zdl.lex.bus :as bus]
             [zdl.lex.cron :as cron]
             [zdl.lex.spec :as spec]
-            [zdl.lex.util :refer [relativize]]
+            [zdl.lex.fs :refer [relativize]]
             [zdl.lex.server.csv :as csv]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.solr.client :as client]

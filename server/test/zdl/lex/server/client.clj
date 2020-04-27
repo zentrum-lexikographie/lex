@@ -5,7 +5,8 @@
             [clojure.spec.gen.alpha :as gen]
             [clojure.tools.logging :as log]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.util :refer [file path->uri server-base]]
+            [zdl.lex.fs :refer [file]]
+            [zdl.lex.url :refer [path->uri server-base]]
             [zdl.xml.rngom :as rngom]
             [zdl.xml.util :as xml])
   (:import java.net.URL))

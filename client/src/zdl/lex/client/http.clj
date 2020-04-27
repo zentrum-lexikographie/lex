@@ -9,7 +9,7 @@
             [zdl.lex.client.query :as query]
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.util :refer [server-url]]
+            [zdl.lex.url :refer [server-url]]
             [zdl.xml.util :as xml])
   (:import [java.io File IOException PushbackReader]
            ro.sync.exml.plugin.lock.LockException))

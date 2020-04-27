@@ -1,24 +1,7 @@
-(ns zdl.lex.fs
-  (:require [clojure.java.io :as io])
+(ns zdl.lex.build.fs
+  (:require [clojure.java.io :as io]
+            [zdl.lex.fs :refer [file]])
   (:import java.io.File))
-
-(defn ^File file
-  [& args]
-  (let [^File f (apply io/file args)]
-    (.getCanonicalFile f)))
-
-(defn ^String path
-  [& args]
-  (.getPath (apply file args)))
-
-(defn delete!
-  [^File f]
-  (doseq [^File f (reverse (file-seq f))] (.delete f)))
-
-(defn clear-dir!
-  [^File d]
-  (when (.isDirectory d) (delete! d))
-  (.mkdirs d))
 
 (def ^File scripts-dir
   (file "scripts"))

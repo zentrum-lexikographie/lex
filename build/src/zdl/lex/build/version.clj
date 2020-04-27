@@ -1,17 +1,17 @@
-(ns zdl.lex.version
+(ns zdl.lex.build.version
   (:require [clojure.string :as str]
-            [zdl.lex.fs :refer [version-edn]]
+            [zdl.lex.build.fs :refer [project-dir version-edn]]
             [zdl.lex.git :as git]
-            [zdl.lex.sh :as sh]
+            [zdl.lex.sh :refer [sh!]]
             [clojure.tools.logging :as log])
   (:import java.time.OffsetDateTime
            java.time.format.DateTimeFormatter))
 
 (defn current
   []
-  (if (git/dirty?)
+  (if (git/dirty? project-dir)
     "000000.00.00"
-    (let [versions (-> (git/sh! "tag" "--list") :out (str/split #"\n"))
+    (let [versions (-> (git/sh! project-dir "tag" "-l") :out (str/split #"\n"))
           versions (map (comp #(str/replace % #"^v" "") str/trim) versions)
           versions (remove #{""} versions)
           versions (sort #(compare %2 %1) versions)]
@@ -26,10 +26,10 @@
 
 (defn tag-next!
   []
-  (git/assert-clean)
+  (git/assert-clean project-dir)
   (let [v (str "v" (next-version))]
     (log/infof "Tagging next version '%s'" v)
-    (git/sh! "tag" v)))
+    (git/sh! project-dir "tag" v)))
 
 (defn write!
   []

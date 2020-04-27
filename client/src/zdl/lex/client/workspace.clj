@@ -1,10 +1,10 @@
 (ns zdl.lex.client.workspace
   (:require [clojure.java.browse :refer [browse-url]]
             [clojure.tools.logging :as log]
-            [me.raynes.fs :as fs]
             [mount.core :refer [defstate]]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.http :as http]
+            [zdl.lex.fs :refer [file]]
             [zdl.lex.url :as lexurl]
             [zdl.xml.util :as xml])
   (:import java.net.URL
@@ -53,7 +53,7 @@
   StandalonePluginWorkspace
   (preferences-dir
     [^StandalonePluginWorkspace this]
-    (-> (.. this (getPreferencesDirectory)) fs/file fs/absolute fs/normalized))
+    (file (.getPreferencesDirectory this)))
   (show-view
     ([this id] (show-view this id true))
     ([^StandalonePluginWorkspace this id request-focus?]
@@ -96,7 +96,7 @@
   (let [editor-url (atom nil)]
     (reify Workspace
       (preferences-dir [_]
-        (fs/file (System/getProperty "user.dir") "tmp" "ws-prefs"))
+        (file (System/getProperty "user.dir") "tmp" "ws-prefs"))
       (open-url [_ url]
         (future (browse-url url)))
       (open-article [_ id]

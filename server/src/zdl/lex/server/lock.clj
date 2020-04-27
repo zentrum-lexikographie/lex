@@ -7,9 +7,9 @@
             [mount.core :as mount :refer [defstate]]
             [ring.util.http-response :as htstatus]
             [zdl.lex.cron :as cron]
-            [zdl.lex.fs :as fs]
+            [zdl.lex.data :as data]
             [zdl.lex.spec :as spec]
-            [zdl.lex.util :refer [fpath]])
+            [zdl.lex.fs :refer [path]])
   (:import java.net.URI
            org.h2.jdbcx.JdbcConnectionPool))
 
@@ -20,7 +20,7 @@
 
 (defstate datasource
   :start
-  (-> (URI. "jdbc:h2" (fpath (fs/data-file "locks")) nil)
+  (-> (URI. "jdbc:h2" (path (data/file "locks")) nil)
       (str)
       (JdbcConnectionPool/create "sa" ""))
   :stop (.dispose datasource))

@@ -1,6 +1,7 @@
-(ns zdl.lex.oxygen
-  (:require [zdl.lex.fs :refer [oxygen-dir file path]]
-            [zdl.lex.sh :as sh]
+(ns zdl.lex.build.oxygen
+  (:require [zdl.lex.fs :refer [file path]]
+            [zdl.lex.build.fs :refer [oxygen-dir]]
+            [zdl.lex.sh :refer [sh!]]
             [zdl.lex.build :as build]
             [clojure.string :as str]
             [clojure.tools.logging :as log])

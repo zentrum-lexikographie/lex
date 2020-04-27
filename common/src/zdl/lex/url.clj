@@ -1,19 +1,51 @@
 (ns zdl.lex.url
   (:require [clojure.string :as str]
-            [zdl.lex.util :refer [path->uri server-base]])
-  (:import [java.net URL URLStreamHandler URLStreamHandlerFactory]))
+            [zdl.lex.env :refer [getenv]])
+  (:import [java.net URI URL URLEncoder URLStreamHandler URLStreamHandlerFactory]))
 
-(def base
+(defn url-encode
+  [s]
+  (.. (URLEncoder/encode s "UTF-8") (replace "+" "%20")))
+
+(defn map->query
+  [m]
+  (some->> (seq m)
+           (sort)
+           (map (fn [[k v]] [(url-encode (name k)) "=" (url-encode (str v))]))
+           (interpose "&")
+           (flatten)
+           (apply str)))
+
+(defn path->uri
+  [path]
+  (URI. nil nil path nil))
+
+(defn url [base & args]
+  (let [base (.. (URL. base) (toURI))
+        uri (reduce #(.resolve %1 (path->uri %2)) base (filter string? args))
+        url (.. uri (toURL) (toString))
+        query (some-> (apply merge (filter map? args)) map->query)]
+    (URL. (str/join \? (remove nil? [url query])))))
+
+(def server-base
+  (delay (getenv "ZDL_LEX_SERVER_URL" "https://lex.dwds.de/")))
+
+(defn server-url
+  [& args]
+  (apply url @server-base args))
+
+(def url-base
   (delay (str/replace @server-base #"[^:]+://" "lex://")))
 
 (defn lex? [^URL u]
-  (str/starts-with? (str u) @base))
+  (str/starts-with? (str u) @url-base))
 
 (defn id->url [id]
-  (.. (URL. @base) (toURI) (resolve (path->uri id)) (toURL)))
+  (.. (URL. @url-base) (toURI) (resolve (path->uri id)) (toURL)))
 
 (defn url->id [^URL u]
-  (if (lex? u) (.. (URL. @base) (toURI) (relativize (.. u (toURI))) (getPath))))
+  (if (lex? u) (.. (URL. @url-base) (toURI)
+                   (relativize (.. u (toURI))) (getPath))))
 
 (let [noop (proxy [URLStreamHandler] [])]
   (defn install-stream-handler!

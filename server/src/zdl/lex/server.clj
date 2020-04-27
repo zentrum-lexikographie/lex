@@ -5,8 +5,8 @@
             [clojure.tools.logging :as log]
             [mount.core :as mount]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.fs :as fs]
-            [zdl.lex.util :refer [fpath]]
+            [zdl.lex.data :as data]
+            [zdl.lex.fs :refer [path]]
             [zdl.lex.server.http :as http]
             [zdl.lex.server.metrics :as metrics]))
 
@@ -69,7 +69,7 @@
    (start {}))
   ([args]
    (mount/start (mount/with-args args))
-   (log/infof "Started ZDL/Lex Server @[%s]" (fpath (fs/data-dir)))))
+   (log/infof "Started ZDL/Lex Server @[%s]" (path (data/dir)))))
 
 (defn stop
   []

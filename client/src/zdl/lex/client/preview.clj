@@ -1,11 +1,10 @@
 (ns zdl.lex.client.preview
   (:require [clojure.string :as str]
-            [me.raynes.fs :as fs]
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl.lex.url :as lexurl]
-            [zdl.lex.util :refer [url url-encode]]
+            [zdl.lex.fs :as fs]
+            [zdl.lex.url :refer [id->url url url->id url-encode]]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
@@ -15,13 +14,13 @@
 (def id (atom nil))
 
 (defn set-id [^URL url]
-  (reset! id (if url (lexurl/url->id url))))
+  (reset! id (if url (url->id url))))
 
 (def base-url (URL. "http://zwei.dwds.de/wb/existdb/"))
 
 (defstate remove-chrome-profile
-  :start (fs/delete-dir
-          (fs/file (ws/preferences-dir ws/instance) "chrome-profile")))
+  :start (-> (fs/file (ws/preferences-dir ws/instance) "chrome-profile")
+             (fs/delete! true)))
 
 (defstate editor->id
   :start (bus/listen [:editor-activated :editor-deactivated]
@@ -35,7 +34,7 @@
 
 (defn handle-action [e]
   (let [id @id
-        modified? (ws/modified? ws/instance (lexurl/id->url id))]
+        modified? (ws/modified? ws/instance (id->url id))]
     (if-not modified?
       (render id)
       (->> ["Der aktuelle Artikel ist nicht gespeichert."

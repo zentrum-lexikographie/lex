@@ -2,7 +2,8 @@
   (:require [clojure.java.io :as io]
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as token]
-            [zdl.lex.util :refer [->clean-map file]]
+            [zdl.lex.fs :refer [file]]
+            [zdl.lex.util :refer [->clean-map]]
             [zdl.xml.util :as xml]
             [zdl.xml.validate :as xv]))
 
