@@ -13,15 +13,15 @@
 (def cli-args
   [["-d" "--data DATA_DIR"
     "Path of data directory (git checkout, db files etc.)"
-    :id :data-dir
-    :default (getenv ::fs/data-dir "ZDL_LEX_DATA_DIR" "zdl-lex-data")]
+    :id "ZDL_LEX_DATA_DIR"
+    :default (getenv "ZDL_LEX_DATA_DIR" "zdl-lex-data")]
    ["-p" "--port HTTP_PORT"
     "HTTP port for embedded server"
-    :id ::http/port
-    :default (getenv ::http/port "ZDL_LEX_HTTP_PORT" "3000")]
+    :id "ZDL_LEX_HTTP_PORT"
+    :default (getenv "ZDL_LEX_HTTP_PORT" "3000")]
    ["-m" "--metrics MINS" "Report metrics every MIN minutes (0 = disabled)"
-    :id ::metrics/interval
-    :default (getenv ::metrics/interval "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")]
+    :id "ZDL_LEX_METRICS_REPORT_INTERVAL"
+    :default (getenv "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")]
    ["-h" "--help"]])
 
 (def year

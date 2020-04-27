@@ -49,8 +49,8 @@
 
 (def authenticate
   (delay
-    (let [auth-user (getenv ::user "ZDL_LEX_SERVER_USER")
-          auth-password (getenv ::password "ZDL_LEX_SERVER_PASSWORD")]
+    (let [auth-user (getenv "ZDL_LEX_SERVER_USER")
+          auth-password (getenv "ZDL_LEX_SERVER_PASSWORD")]
       (fn [req {:keys [username password]}]
         (if-not (and auth-user auth-password)
           ;; pass-through credentials from upstream

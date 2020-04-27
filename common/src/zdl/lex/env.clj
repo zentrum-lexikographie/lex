@@ -11,10 +11,8 @@
 
 (defn getenv
   ([k]
-   (getenv k nil nil))
-  ([k ek]
-   (getenv k ek nil))
-  ([k ek dv]
+   (getenv k nil))
+  ([k df]
    (or (some->> k (get (mount/args)))
-       (some->> ek (.get dot-env) str/trim not-empty)
-       dv)))
+       (some->> k (.get dot-env) str/trim not-empty)
+       df)))

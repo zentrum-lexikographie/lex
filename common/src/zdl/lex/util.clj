@@ -55,7 +55,7 @@
     (URL. (str/join \? (remove nil? [url query])))))
 
 (def server-base
-  (delay (getenv ::server-base "ZDL_LEX_SERVER_URL" "https://lex.dwds.de/")))
+  (delay (getenv "ZDL_LEX_SERVER_URL" "https://lex.dwds.de/")))
 
 (defn server-url
   [& args]

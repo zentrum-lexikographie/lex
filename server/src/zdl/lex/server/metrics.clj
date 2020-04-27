@@ -7,7 +7,7 @@
            java.util.concurrent.TimeUnit))
 
 (def report-interval
-  (delay (getenv ::interval "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")))
+  (delay (getenv "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")))
 
 (defstate reporter
   :start

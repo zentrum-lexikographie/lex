@@ -18,10 +18,10 @@
   (delay (fs/data-dir "git")))
 
 (def origin
-  (delay (getenv ::origin "ZDL_LEX_GIT_ORIGIN")))
+  (delay (getenv "ZDL_LEX_GIT_ORIGIN")))
 
 (def branch
-  (delay (getenv ::branch "ZDL_LEX_GIT_BRANCH" "zdl-lex-server/development")))
+  (delay (getenv "ZDL_LEX_GIT_BRANCH" "zdl-lex-server/development")))
 
 (defn file->id
   [f]

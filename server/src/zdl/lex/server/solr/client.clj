@@ -16,12 +16,12 @@
   (delay
     (let [client
           (http-client/configure
-           (getenv ::solr-user "ZDL_LEX_SOLR_USER")
-           (getenv ::solr-password "ZDL_LEX_SOLR_PASSWORD"))
+           (getenv "ZDL_LEX_SOLR_USER")
+           (getenv "ZDL_LEX_SOLR_PASSWORD"))
           base-url
           (str
-           (getenv ::solr-url "ZDL_LEX_SOLR_URL" "http://localhost:8983/solr/")
-           (getenv ::solr-core "ZDL_LEX_SOLR_CORE" "articles"))]
+           (getenv "ZDL_LEX_SOLR_URL" "http://localhost:8983/solr/")
+           (getenv "ZDL_LEX_SOLR_CORE" "articles"))]
       (fn [{:keys [url] :as req}]
         (client (assoc req :url (str base-url url)))))))
 

@@ -16,8 +16,8 @@
 
 (def ^:private env-auth
   (delay
-    (let [user (getenv ::server-user "ZDL_LEX_SERVER_USER")
-          password (getenv ::server-password "ZDL_LEX_SERVER_PASSWORD")]
+    (let [user (getenv "ZDL_LEX_SERVER_USER")
+          password (getenv "ZDL_LEX_SERVER_PASSWORD")]
       (if (and user password) [user password]))))
 
 (def ^:private auth

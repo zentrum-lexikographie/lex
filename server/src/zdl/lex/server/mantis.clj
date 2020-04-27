@@ -15,7 +15,7 @@
             [zdl.lex.fs :as fs]))
 
 (def mantis-base
-  (delay (getenv ::base "ZDL_LEX_MANTIS_BASE" "https://odo.dwds.de/mantis")))
+  (delay (getenv "ZDL_LEX_MANTIS_BASE" "https://odo.dwds.de/mantis")))
 
 (defn issue-id->url
   [id]
@@ -29,14 +29,14 @@
 
 (def authenticate
   (delay
-    (let [user (getenv ::user "ZDL_LEX_MANTIS_USER")
-          password (getenv ::password "ZDL_LEX_MANTIS_PASSWORD")]
+    (let [user (getenv "ZDL_LEX_MANTIS_USER")
+          password (getenv "ZDL_LEX_MANTIS_PASSWORD")]
       (if (and user password)
         (partial merge {:username user :password password})
         (throw (IllegalStateException. "No Mantis API credentials"))))))
 
 (def project
-  (delay (getenv ::project "ZDL_LEX_MANTIS_PROJECT" "5")))
+  (delay (getenv "ZDL_LEX_MANTIS_PROJECT" "5")))
 
 (defn- zip->return [loc]
   (zx/xml-> loc dz/children zip/branch? :return))

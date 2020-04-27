@@ -4,7 +4,7 @@
   (:import java.io.File))
 
 (def base-dir
-  (delay (getenv ::data-dir "ZDL_LEX_DATA_DIR" "zdl-lex-data")))
+  (delay (getenv "ZDL_LEX_DATA_DIR" "zdl-lex-data")))
 
 (defn- ^File data-file*
   [& args]
