@@ -45,6 +45,11 @@
   audiogum/metrics-clojure {:mvn/version "3.0.0"}
   audiogum/metrics-clojure-jvm {:mvn/version "3.0.0"}
 
+  ;; JanusGraph DB
+  org.janusgraph/janusgraph-berkeleyje {:mvn/version "0.5.1"}
+  org.janusgraph/janusgraph-lucene {:mvn/version "0.5.1"}
+  clojurewerkz/ogre {:mvn/version "3.4.6.0"}
+  
   ;; SOAP-support (for Mantis Issue Tracker API)
   io.xapix/clj-soap {:mvn/version "1.1.0" :exclusions [javax.servlet/servlet-api]}}
 
