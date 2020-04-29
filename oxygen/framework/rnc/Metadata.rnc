@@ -15,6 +15,14 @@ Gliederungsmarke = attribute n {
 		pattern = '[A-Z]\.|(I|II|III|IV|V|VI)\.|[1-9][0-9]?\.|[a-z]\)|[αβγδε]\)|\*' }
 }	
 
+Glossar = attribute Glossar {
+	list {
+		(
+			'Corona'
+		) +
+	}
+}
+
 #####################################################################
 # Verwaltungsinformationen für den Workflow
 #####################################################################
