@@ -4,7 +4,10 @@
             [clojurewerkz.ogre.core :as g]
             [mount.core :as mount :refer [defstate]]
             [zdl.lex.data :as data]
-            [zdl.lex.fs :refer [delete! path]])
+            [zdl.lex.fs :refer [delete! path]]
+            [zdl.lex.server.gen :refer [create-article-set-fixture]]
+            [zdl.lex.server.git :as git]
+            [zdl.lex.article :as article])
   (:import java.util.Map
            org.apache.commons.configuration.MapConfiguration
            org.apache.tinkerpop.gremlin.structure.util.GraphFactory
@@ -142,6 +145,13 @@
          (rollback-tx tx#)
          (throw t#)))))
 
+(defn upsert
+  [g label k v]
+  (g/traverse
+   g g/V (g/has label k v) (g/fold)
+   (g/coalesce (g/__  (g/unfold))
+               (g/__ (g/addV label) (g/property k v)))))
+
 (defn graph-fixture
   [f]
   (try
@@ -161,7 +171,7 @@
     :vertices {:lexeme {:properties [:uri]}
                :form {:properties [:repr]}}
 
-    :edges {:has-form {:multiplicity :one2many :properties [:type]}}
+    :edges {:has-form {:multiplicity :multi :properties [:type]}}
 
     :connections [{:edge :has-form :out :lexeme :in :form}]
 
@@ -170,15 +180,30 @@
    (create-schema! graph))
   (f))
 
-(use-fixtures :once graph-fixture graph-schema-fixture)
+(def article-set-fixture
+  (create-article-set-fixture [10 100]))
+
+(use-fixtures :once article-set-fixture graph-fixture graph-schema-fixture)
 
 (deftest graph-setup
   (is
    (thrown?
     SchemaViolationException
     (with-tx [g graph]
-      (doseq [i (range 2)]
-        (g/traverse
-         g
-         (g/addV :lexeme) (g/property :uri "urn:test")
-         (g/next!)))))))
+      (g/traverse g (g/addV :lexeme) (g/property :uri "urn:test") (g/next!))
+      (g/traverse g (g/addV :lexeme) (g/property :uri "urn:test") (g/next!)))))
+  (is
+   (with-tx [g graph]
+     (g/traverse (upsert g :lexeme :uri "urn:test") (g/next!))
+     (g/traverse (upsert g :lexeme :uri "urn:test") (g/next!))))
+  (is
+   (with-tx [g graph]
+     (doseq [{:keys [id forms]} (article/articles @git/dir)]
+       (let [lexeme (g/traverse (upsert g :lexeme :uri id) (g/id) (g/next!))]
+         (doseq [form forms]
+           (g/traverse g (g/V lexeme)
+                       (g/addE :has-form)
+                       (g/to (upsert g :form :repr form))
+                       (g/next!)))))
+     true)))
+

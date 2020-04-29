@@ -73,7 +73,7 @@
    (create-article-set-fixture [100 200]))
   ([set-size-range]
    (fn [f]
-     (delete! @server-git/dir)
+     (delete! @server-git/dir true)
      (generate-article-set set-size-range)
      (f)
      (delete! @server-git/dir))))
