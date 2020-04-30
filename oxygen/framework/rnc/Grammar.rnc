@@ -8,25 +8,47 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 [
   sch:pattern [
     sch:rule [
-      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']]"
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][not(d:Numeruspraeferenz[text() = 'nur im Singular'])][not(d:Numeruspraeferenz[text() = 'nur im Plural'])]"
       sch:assert [
-        test = "not(d:Numeruspraeferenz[text() = 'nur im Singular']) or not(d:Plural)"
-        'Inkonsistente Flexionsangabe (Numeruspräferenz und Plural)'
+        test = "d:Genus"
+        'Fehlende Genusangabe ergänzen!'
       ]
       sch:assert [
-        test = "not(d:Numeruspraeferenz[text() = 'nur im Plural']) or not(d:Genitiv)"
-        'Inkonsistente Flexionsangabe (Numeruspräferenz und Genitiv/Singular)'
+        test = "d:Genitiv"
+        'Fehlende Eckform(en) Genitiv/Singular ergänzen!'
       ]
       sch:assert [
-        test = "d:Plural or d:Genitiv"
-        'Fehlende Flexionsangaben (Genitiv/Singular oder Plural)'
+        test = "d:Plural"
+        'Fehlende Eckform(en) Nominativ/Plural ergänzen!'
+      ]
+    ]
+    sch:rule [
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][d:Numeruspraeferenz[text() = 'nur im Plural']]"
+      sch:assert [
+        test = "not(d:Genus) and not(d:Genitiv) and not(d:Plural)"
+        'Eckformen und/oder Genus entfernen (Pluraletantum)!'
+      ]
+    ]
+    sch:rule [
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][d:Numeruspraeferenz[text() = 'nur im Singular']]"
+      sch:assert [
+        test = "d:Genus"
+        'Fehlende Genusangabe ergänzen!'
+      ]
+      sch:assert [
+        test = "d:Genitiv"
+        'Fehlende Eckform(en) Genitiv/Singular ergänzen!'
+      ]
+      sch:assert [
+        test = "not(d:Plural)"
+        'Eckform Nominativ/Plural entfernen (Singularetantum)!'
       ]
     ]
     sch:rule [
       context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Verb']]"
       sch:assert [
-        test = "d:Praeteritum and d:Partizip_II"
-        'Fehlende Flexionsangaben (Präteritum und Partizip II)'
+        test = "d:Praesens and d:Praeteritum and d:Auxiliar and d:Partizip_II"
+        'Fehlende Flexionsangabe(n) (Präsens, Präteritum, Auxiliar, Partizip II)'
       ]
     ]
   ]
