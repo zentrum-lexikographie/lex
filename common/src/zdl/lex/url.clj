@@ -9,12 +9,13 @@
 
 (defn map->query
   [m]
-  (some->> (seq m)
-           (sort)
-           (map (fn [[k v]] [(url-encode (name k)) "=" (url-encode (str v))]))
-           (interpose "&")
-           (flatten)
-           (apply str)))
+  (some->>
+   (seq m)
+   (sort)
+   (map (fn [[k v]] [(url-encode (name k)) "=" (url-encode (str v))]))
+   (interpose "&")
+   (flatten)
+   (apply str)))
 
 (defn path->uri
   [path]
@@ -47,15 +48,14 @@
   (if (lex? u) (.. (URL. @url-base) (toURI)
                    (relativize (.. u (toURI))) (getPath))))
 
-(let [noop (proxy [URLStreamHandler] [])]
-  (defn install-stream-handler!
-    ([]
-     (install-stream-handler! noop))
-    ([handler]
-     (URL/setURLStreamHandlerFactory
-      (proxy [URLStreamHandlerFactory] []
-        (createURLStreamHandler [protocol]
-          (if (= "lex" protocol) handler)))))))
+(defn install-stream-handler!
+  ([]
+   (install-stream-handler! (proxy [URLStreamHandler] [])))
+  ([handler]
+   (URL/setURLStreamHandlerFactory
+    (proxy [URLStreamHandlerFactory] []
+      (createURLStreamHandler [protocol]
+        (if (= "lex" protocol) handler))))))
 
 (comment
   (install-stream-handler!)

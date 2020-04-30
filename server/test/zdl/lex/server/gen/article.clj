@@ -1,4 +1,4 @@
-(ns zdl.lex.server.gen
+(ns zdl.lex.server.gen.article
   (:require [clojure.spec.gen.alpha :as gen]
             [clojure.test :refer :all]
             [clojure.tools.logging :as log]

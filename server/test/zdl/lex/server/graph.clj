@@ -5,7 +5,7 @@
             [mount.core :as mount :refer [defstate]]
             [zdl.lex.data :as data]
             [zdl.lex.fs :refer [delete! path]]
-            [zdl.lex.server.gen :refer [create-article-set-fixture]]
+            [zdl.lex.server.gen.article :refer [create-article-set-fixture]]
             [zdl.lex.server.git :as git]
             [zdl.lex.article :as article])
   (:import java.util.Map
