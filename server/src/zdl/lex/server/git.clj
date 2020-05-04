@@ -80,7 +80,7 @@
                (if origin
                  (git/sh! dir "checkout" "--track" (str "origin/" branch))
                  (git/sh! dir "checkout" "-b" branch)))
-             (log/info {:git {:repo path :branch branch}}))))
+             (log/info {:git {:repo path :branch branch :origin origin}}))))
 
 (defn publish-changes
   [files]
