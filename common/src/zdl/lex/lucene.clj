@@ -79,15 +79,6 @@
          (remove #{""})
          (str/join "_"))))
 
-(defn expand-date-literals
-  "Date literals can be specified as month or day prefixes, i.e. `2020-10` or
-  `2020-11-01`."
-  [[_ v]]
-  [:term
-   (-> v
-       (str/replace #"^(\d{4}-\d{2})$" "$1-01")
-       (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\:00\\:00Z"))])
-
 (def field-aliases
   "Aliasing of index field names, mostly translations."
   {"autor" "author"
@@ -105,10 +96,21 @@
    "typ" "type"
    "volltext" "text"})
 
-(defn alias-fields
-  "Applies field aliases during AST transformation."
+(defn translate-fields
+  "Applies field aliases and data type suffixes during AST transformation."
   [[type v :as node]]
-  [:field (if (= type :term) [:term (get field-aliases v v)] node)])
+  [:field (if (= type :term)
+            [:term (-> (get field-aliases v v) field->kw kw->field)]
+            node)])
+
+(defn expand-date-literals
+  "Date literals can be specified as month or day prefixes, i.e. `2020-10` or
+  `2020-11-01`."
+  [[_ v]]
+  [:term
+   (-> v
+       (str/replace #"^(\d{4}-\d{2})$" "$1-01")
+       (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\:00\\:00Z"))])
 
 ;; ## Parsing queries into ASTs
 
@@ -123,7 +125,7 @@
 
 (def ast->ast
   (->>
-   {:field alias-fields
+   {:field translate-fields
     :term (comp expand-date-literals (str-node :term unescape-term))
     :pattern (str-node :pattern unescape-pattern)
     :regexp (str-node :regexp unescape-regexp)
@@ -170,7 +172,10 @@
   "String-to-string conversion, applying AST transformations."
   (comp ast->str str->ast))
 
+(comment
+  (str->ast "quelle:a/b"))
+
 (defn valid?
-  "A valid query can be parsed/transformed."
+  "A valid query can be parsed/transformed"
   [q]
   (try (translate q) true (catch Throwable t false)))
