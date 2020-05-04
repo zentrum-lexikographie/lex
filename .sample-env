@@ -10,8 +10,8 @@ ZDL_LEX_REPL_PORT=
 ZDL_LEX_METRICS_REPORT_INTERVAL=0
 
 # git@git.zdl.org:zdl/wb.git
-ZDL_LEX_PROD_GIT_ORIGIN=
-ZDL_LEX_PROD_GIT_BRANCH=zdl-lex-server/development
+ZDL_LEX_GIT_ORIGIN=
+ZDL_LEX_GIT_BRANCH=zdl-lex-server/development
 
 ZDL_LEX_SOLR_URL=http://localhost:8983/solr/
 ZDL_LEX_SOLR_CORE=articles
