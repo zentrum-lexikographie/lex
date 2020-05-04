@@ -320,6 +320,9 @@ Artikel[Status]:before { -oxy-append-content:" ["attr(Status)"] "; }
 *:not(Schreibung)[Zeitstempel]:before { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 *:not(Schreibung)[Quelle]:before { -oxy-append-content:" ["attr(Quelle)"] "; }
 *:not(Schreibung)[Autor]:before { -oxy-append-content:" ["attr(Autor)"] "; }
+
+Lesart[@Glossar] { -oxy-append-content: "[Glossar: "attr(Glossar)"] "; }
+
 /* //Schreibung ist ein Spezialfall, wo's dahinter steht */
 Schreibung:before {
 	content: attr(hidx); /* Homographenziffern */
