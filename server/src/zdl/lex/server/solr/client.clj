@@ -5,10 +5,10 @@
             [zdl.lex.article.fs :as afs]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [relativize]]
+            [zdl.lex.lucene :as lucene]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.http-client :as http-client]
             [zdl.lex.server.solr.doc :refer [article->fields]]
-            [zdl.lex.server.solr.query :as query]
             [zdl.xml.util :as xml]))
 
 (def req
@@ -152,6 +152,6 @@
            [:clause
             [:field [:term "id"]]
             [:value [:pattern (str "*" id "*")]]]]]
-    (some->> (query {"q" (query/ast->str q) "rows" 0})
+    (some->> (query {"q" (lucene/ast->str q) "rows" 0})
              :body :response :numFound
              (< 0))))

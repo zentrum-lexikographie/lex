@@ -1,10 +1,10 @@
 (ns zdl.lex.client.view.filter
   (:require [clojure.string :as str]
-            [lucene-query.core :as lucene]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
             [zdl.lex.client.font :as font]
             [zdl.lex.client.search :as search]
+            [zdl.lex.lucene :as lucene]
             [zdl.lex.timestamp :as ts])
   (:import com.jgoodies.forms.layout.RowSpec))
 

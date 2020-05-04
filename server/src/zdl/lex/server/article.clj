@@ -68,7 +68,9 @@
           xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
-          f (file @git/dir id)]
+          ^File f (file @git/dir id)
+          ^File d (.getParentFile f)]
+      (.mkdirs d)
       (spit f xml :encoding "UTF-8")
       (git/add! f)
       (git/publish-changes [f])

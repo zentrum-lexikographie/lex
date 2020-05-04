@@ -18,6 +18,8 @@
   ;; Tools
   org.clojure/tools.cli {:mvn/version "0.4.2"}
   org.clojure/tools.logging {:mvn/version "1.0.0"}
+  instaparse {:mvn/version "1.4.10"}
+  camel-snake-kebab {:mvn/version "0.4.1"}
 
   ;; Infrastruture (HTTP client, cron scheduling, state management)
   clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}
@@ -26,9 +28,8 @@
   mount {:mvn/version "0.1.16"}
   io.github.cdimascio/java-dotenv {:mvn/version "5.1.4"}
 
-  ;; Apache Lucene Query parser
-  gremid/lucene-query {:mvn/version "0.1.1"}
-
   ;; Logging
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}
-  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}}}
+  org.slf4j/slf4j-log4j12 {:mvn/version "1.7.30"}}
+
+ :aliases {:test {:extra-paths ["test"]}}}
