@@ -33,6 +33,7 @@ formaler_Text = (
 
 Lesartangabe = element Lesart {
 	Metadaten.allgemein ?
+	, Glossar ?
 	, attribute Wortfeld { token } ? # Lexikonet concept
 	, attribute class { 'invisible' } ?
 	, attribute xml:id { Metadaten.Lesarten-ID } ? # TODO: obligatorisch machen
