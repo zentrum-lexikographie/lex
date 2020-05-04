@@ -6,7 +6,7 @@
             [clojure.string :as str]
             [mount.core :refer [defstate]]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.query :as query]
+            [zdl.lex.lucene :as lucene]
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.url :refer [server-url]]
@@ -145,7 +145,7 @@
   :stop (a/close! ping-status))
 
 (defn search-articles [_ req]
-  (let [q (query/translate (req :query))]
+  (let [q (lucene/translate (req :query))]
     (->>
      (get-edn (server-url "/index" {:q q :limit "1000"}))
      (merge req)
@@ -156,7 +156,7 @@
   :stop (search-reqs->responses))
 
 (defn export [query ^File f]
-  (let [q (query/translate query)]
+  (let [q (lucene/translate query)]
     (->
      (request {:request-method :get
                :url (server-url "/index/export" {:q q :limit "50000"})

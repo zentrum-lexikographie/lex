@@ -2,7 +2,6 @@
   (:require [seesaw.bind :as uib]
             [mount.core :refer [defstate]]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.query :as query]
             [zdl.lex.util :refer [uuid]]))
 
 (def query (atom ""))

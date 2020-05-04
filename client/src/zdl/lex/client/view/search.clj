@@ -12,7 +12,7 @@
             [zdl.lex.client.search :as search]
             [zdl.lex.client.workspace :as ws]
             [zdl.lex.article :as article]
-            [zdl.lex.client.query :as query])
+            [zdl.lex.lucene :as lucene])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
 
 (defn- suggestion->html [{:keys [suggestion pos type definitions
@@ -48,7 +48,7 @@
    :icon icon/gmd-search
    :handler (fn [_]
               (let [q @search/query]
-                (when (query/valid? q) (search/request q))))))
+                (when (lucene/valid? q) (search/request q))))))
 
 (def input
   (let [text-input (ui/text :columns 40
@@ -79,7 +79,7 @@
   [(uib/bind input
              search/query)
    (uib/bind input
-             (uib/transform #(if (query/valid? %) :black :red))
+             (uib/transform #(if (lucene/valid? %) :black :red))
              (uib/property input :foreground))
    (uib/bind (bus/bind [:search-result])
              (uib/transform (comp :query second))

@@ -1,9 +1,30 @@
 (ns zdl.lex.client
-  (:require [clj-http.client :as http :refer [unexceptional-status?]]
+  (:require [clj-http.client :as http]
+            [clojure.core.async :as a]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.url :refer [server-url]]
             [zdl.lex.util :refer [uuid]]
-            [zdl.xml.util :as xml]))
+            [zdl.xml.util :as xml])
+  (:import java.util.concurrent.Future))
+
+(defn request->ch
+  ([req]
+   (request->ch (a/chan) req))
+  ([ch req]
+   (request->ch ch req nil))
+  ([ch req cancel-ch]
+   (let [req (merge req {:async? true})
+         complete! (fn [result]
+                     (when cancel-ch (a/close! cancel-ch))
+                     (a/>!! ch result)
+                     (a/close! ch))
+         error! (comp complete! (fn [e] {::error e}))]
+     (try
+       (let [^Future f (http/request req complete! error!)]
+         (when cancel-ch
+           (a/go (when (a/<! cancel-ch) (. f (cancel true))))))
+       (catch Throwable t (error! t)))
+     ch)))
 
 (def url
   (comp str server-url))
@@ -17,9 +38,7 @@
 (defn request
   [req]
   (-> (some->> auth deref (array-map :basic-auth))
-      (merge {:request-method :get :accept :edn :as :clojure} req)
-      (http/request)
-      :body))
+      (merge {:request-method :get :accept :edn :as :clojure} req)))
 
 (defn get-status
   []
@@ -48,23 +67,13 @@
 
 (defn get-article
   [id]
-  (xml/->dom
-   (request {:url (id->article-url id) :accept "text/xml" :as :stream})))
+  (request {:url (id->article-url id) :accept "text/xml" :as :byte-array}))
 
 (defn post-article
   [id xml]
-  (xml/->dom
-   (request {:request-method :post :url (id->article-url id)
-             :content-type "text/xml" :body xml
-             :accept "text/xml" :as :stream})))
-
-(defn edit-article
-  [id ttl ef]
-  (try
-    (lock-resource id ttl)
-    (->> (get-article id) (ef id) (post-article id))
-    (finally
-      (unlock-resource id))))
+  (request {:request-method :post :url (id->article-url id)
+            :content-type "text/xml" :body xml
+            :accept "text/xml" :as :byte-array}))
 
 (defn search-articles
   ([q]

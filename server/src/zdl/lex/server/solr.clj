@@ -11,13 +11,12 @@
             [zdl.lex.article.fs :as afs]
             [zdl.lex.bus :as bus]
             [zdl.lex.cron :as cron]
+            [zdl.lex.lucene :as lucene]
             [zdl.lex.spec :as spec]
             [zdl.lex.fs :refer [relativize]]
             [zdl.lex.server.csv :as csv]
             [zdl.lex.server.git :as git]
-            [zdl.lex.server.solr.client :as client]
-            [zdl.lex.server.solr.doc :refer [field-name->key]]
-            [zdl.lex.server.solr.query :as query]))
+            [zdl.lex.server.solr.client :as client]))
 
 (defn index-git-changes
   "Synchronizes modified articles with the Solr index"
@@ -70,11 +69,11 @@
   [k (:counts v)])
 
 (defn- facet-values [[k v]]
-  [(-> k name field-name->key)
+  [(-> k name lucene/field->kw)
    (into (sorted-map) (->> v (partition 2) (map vec)))])
 
 (defn- facet-intervals [[k v]]
-  [(-> k name field-name->key)
+  [(-> k name lucene/field->kw)
    (into (sorted-map) (for [[k v] v] [(name k) v]))])
 
 (defn docs->results [docs]
@@ -120,7 +119,7 @@
 (defn handle-search [req]
   (let [params (-> req :parameters :query)
         {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
-        params {"q" (query/translate q) "start" offset "rows" limit}
+        params {"q" (lucene/translate q) "start" offset "rows" limit}
         solr-response (client/query (merge query-params (facet-params) params))
         {:keys [response facet_counts]} (:body solr-response)
         {:keys [numFound docs]} response
@@ -149,7 +148,7 @@
 (defn handle-export [req]
   (let [params (-> req :parameters :query)
         {:keys [q limit] :or {q "id:*" limit 1000}} params
-        params (merge query-params {"q" (query/translate q)})
+        params (merge query-params {"q" (lucene/translate q)})
         docs (->> (client/scroll params (min limit 50000)) (take limit))
         records (->> docs docs->results (map doc->csv) (cons csv-header))
         ts (->> (java.time.LocalDateTime/now)

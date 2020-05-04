@@ -4,7 +4,8 @@
              [zdl.lex.client :as client]
              [zdl.lex.server.gen.article :refer [create-article-set-fixture]]
              [zdl.lex.server.solr.client :as solr-client]
-             [clojure.tools.logging :as log]))
+             [clojure.tools.logging :as log]
+             [clj-http.client :as http]))
 
 (defn server-fixture
   [f]
@@ -25,4 +26,4 @@
 (use-fixtures :once (backend-fixture))
 
 (deftest fixtures
-  (is (log/spy (client/search-articles "id:*" 1))))
+  (is (log/spy (http/request (client/search-articles "id:*" 1)))))
