@@ -12,7 +12,8 @@
   (:import java.io.File
            java.text.Collator
            java.util.Locale
-           net.sf.saxon.s9api.QName))
+           net.sf.saxon.s9api.QName
+           [net.sf.saxon.s9api XdmItem XdmNode XdmNodeKind]))
 
 (def collator (Collator/getInstance Locale/GERMAN))
 
@@ -51,6 +52,23 @@
      [k (-> (for [ts v] (ts/past ts)) (distinct))])
    (into {})))
 
+(defn parse-gloss
+  [^XdmNode el]
+  (if-let [txt (-> el axml/xdm->text not-empty)]
+    {:type (.attribute el "Typ") :text txt}))
+
+(defn senses
+  [ctx]
+  (seq
+   (for [[num sense] (map-indexed list (axml/select-senses ctx))
+         :let [gloss (->> (axml/select-glosses sense)
+                          (map parse-gloss) (remove nil?) (seq))]
+         :when gloss]
+     (->clean-map
+      {:num num
+       :gloss gloss
+       :senses (seq (senses sense))}))))
+
 (let [article-attr #(some-> (:Artikel %) (first))
       type (comp xml/text str (xml/selector "@Typ/string()"))
       tranche (comp xml/text str (xml/selector "@Tranche/string()"))
@@ -66,7 +84,6 @@
       pos (texts-fn "d:Formangabe/d:Grammatik/d:Wortklasse")
       gender (texts-fn "d:Formangabe/d:Grammatik/d:Genus")
       definitions (texts-fn ".//d:Definition")
-      senses (texts-fn ".//d:Bedeutungsebene")
       usage-period (texts-fn ".//d:Gebrauchszeitraum")
       styles (texts-fn ".//d:Stilebene")
       colouring (texts-fn ".//d:Stilfaerbung")
@@ -144,6 +161,10 @@
        #_(filter (comp #_:sense seq :references))
        #_(drop 1000)
        #_(map (juxt :form :references))
+       (filter :senses)
+       (drop 200)
+       (map (juxt :forms :gender :pos :status :senses))
+       #_(drop 200)
        (take 3))
   (->> (articles "../../zdl-wb")
        (remove (comp #{"Red-2" "Red-f"} :status))

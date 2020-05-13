@@ -17,6 +17,9 @@
 (def select-senses
   (comp seq (xml/selector "./d:Lesart")))
 
+(def select-glosses
+  (comp seq (xml/selector "./d:Definition")))
+
 (def select-refs
   (comp seq (xml/selector ".//d:Verweis")))
 
