@@ -43,6 +43,16 @@
     (uberjar! client-dir (path client-jar) {:aliases #{:prod}})
     (clear-dir! classes)))
 
+(defn package-cli!
+  []
+  (let [classes (file cli-dir "classes")]
+    (clear-dir! classes)
+    (with-sh-dir cli-dir
+      (sh! "clojure" "-A:dev:prod" (path scripts-dir "compile_cli.clj")))
+    (uberjar! cli-dir (path cli-jar)
+              {:aliases #{:prod} :main-class "zdl.lex.cli"})
+    (clear-dir! classes)))
+
 (defn package-server!
   []
   (let [classes (file server-dir "classes")]
@@ -58,6 +68,10 @@
   (version/write!)
   (compile-rnc!)
   (package-client!))
+
+(defn cli!
+  []
+  (package-cli!))
 
 (defn server!
   []
@@ -79,6 +93,7 @@
     (let [release? (= "release" mode)]
       (when release? (version/tag-next!))
       (client!)
+      (cli!)
       (server!)
       (when release? (docker!)))
     (finally (shutdown-agents))))

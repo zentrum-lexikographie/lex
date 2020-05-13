@@ -8,8 +8,6 @@
   ;; Data handling
   org.clojure/data.codec {:mvn/version "0.1.1"}
   org.clojure/data.csv {:mvn/version "0.1.4"}
-  org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
-  org.clojure/data.zip {:mvn/version "0.1.1"}
 
   ;; Data formats
   cheshire {:mvn/version "5.9.0"}
@@ -49,7 +47,7 @@
   org.janusgraph/janusgraph-berkeleyje {:mvn/version "0.5.1"}
   org.janusgraph/janusgraph-lucene {:mvn/version "0.5.1"}
   clojurewerkz/ogre {:mvn/version "3.4.6.0"}
-  
+
   ;; SOAP-support (for Mantis Issue Tracker API)
   io.xapix/clj-soap {:mvn/version "1.1.0" :exclusions [javax.servlet/servlet-api]}}
 
@@ -60,4 +58,4 @@
    {zdl/ots-nlp-pipeline {:git/url "git@git.zdl.org:zdl/ots-nlp-pipeline.git"
                           :sha "e3423b81e1fd62fcf8d17acdc684129db886229a"}}}
   :prod
-  {:extra-paths ["classes" "../oxygen"]}}}
+  {:extra-paths ["classes" "../oxygen" "../cli/build"]}}}

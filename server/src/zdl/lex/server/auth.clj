@@ -19,6 +19,7 @@
    {:uris
     ["/"
      "/assets/*"
+     "/cli/*"
      "/docs/*"
      "/home"
      "/oxygen/*"

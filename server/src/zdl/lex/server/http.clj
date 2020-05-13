@@ -12,6 +12,7 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.server.article :as article]
             [zdl.lex.server.auth :as auth]
+            [zdl.lex.server.cli-distrib :as cli-distrib]
             [zdl.lex.server.exception :as exception]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.home :as home]
@@ -51,6 +52,7 @@
                         coercion/coerce-request-middleware
                         auth/wrap]}
           article/ring-handlers
+          cli-distrib/ring-handlers
           git/ring-handlers
           home/ring-handlers
           lock/ring-handlers

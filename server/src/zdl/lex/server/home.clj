@@ -7,13 +7,18 @@
              [:body
               [:div.hero.is-primary.is-bold.is-fullheight
                [:div.hero-body
-                [:div.container 
+                [:div.container
                  [:h1.title "ZDL Lex-Server"]
                  [:h2.subtitle
                   [:a
                    {:href "/oxygen/updateSite.xml"
                     :title "Oxygen XML Editor - Update Site"}
-                   "Oxygen XML Editor - Update Site"]]]]]])
+                   "Oxygen XML Editor - Update Site"]
+                  [:br]
+                  [:a
+                   {:href "/cli/org.zdl.lex.cli.jar"
+                    :title "Command Line Interface – Client JAR"}
+                   "Command Line Interface – Client JAR"]]]]]])
       (htstatus/ok)
       (assoc :headers {"Content-Type" "text/html"})))
 
