@@ -7,11 +7,14 @@
             [zdl.lex.fs :refer [delete! path]]
             [zdl.lex.server.gen.article :refer [create-article-set-fixture]]
             [zdl.lex.server.git :as git]
-            [zdl.lex.article :as article])
+            [zdl.lex.article :as article]
+            [clojure.java.io :as io])
   (:import java.util.Map
            org.apache.commons.configuration.MapConfiguration
            org.apache.tinkerpop.gremlin.structure.util.GraphFactory
            org.apache.tinkerpop.gremlin.structure.Vertex
+           org.apache.tinkerpop.gremlin.process.traversal.IO
+           org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource
            [org.janusgraph.core Cardinality EdgeLabel JanusGraphTransaction Multiplicity PropertyKey SchemaViolationException VertexLabel]
            [org.janusgraph.core.schema JanusGraphManagement JanusGraphManagement$IndexBuilder]
            org.janusgraph.graphdb.database.StandardJanusGraph))
@@ -145,12 +148,25 @@
          (rollback-tx tx#)
          (throw t#)))))
 
-(defn upsert
+(defn upsert-vertex
   [g label k v]
   (g/traverse
    g g/V (g/has label k v) (g/fold)
    (g/coalesce (g/__  (g/unfold))
-               (g/__ (g/addV label) (g/property k v)))))
+               (g/__ (g/addV label) (g/property k v)))
+   (g/next!)))
+
+(defn upsert-edge
+  [g source label target]
+  (g/traverse
+   g (g/V source)
+   (g/coalesce (g/__ (g/outE) (g/filter (g/__ (g/inV) (g/has-id target))))
+               (g/__ (g/addE label) (g/to target)))
+   (g/next!)))
+
+(defn write-graphml
+  [^GraphTraversalSource g f]
+  (-> g (.io (path f)) (.with IO/writer IO/graphml) (.write) (.iterate)))
 
 (defn graph-fixture
   [f]
@@ -194,16 +210,15 @@
       (g/traverse g (g/addV :lexeme) (g/property :uri "urn:test") (g/next!)))))
   (is
    (with-tx [g graph]
-     (g/traverse (upsert g :lexeme :uri "urn:test") (g/next!))
-     (g/traverse (upsert g :lexeme :uri "urn:test") (g/next!))))
+     (upsert-vertex g :lexeme :uri "urn:test")
+     (upsert-vertex g :lexeme :uri "urn:test")))
   (is
    (with-tx [g graph]
      (doseq [{:keys [id forms]} (article/articles @git/dir)]
-       (let [lexeme (g/traverse (upsert g :lexeme :uri id) (g/id) (g/next!))]
+       (let [lexeme (upsert-vertex g :lexeme :uri id)]
          (doseq [form forms]
-           (g/traverse g (g/V lexeme)
-                       (g/addE :has-form)
-                       (g/to (upsert g :form :repr form))
-                       (g/next!)))))
+           (let [form (upsert-vertex g :form :repr form)]
+             (upsert-edge g lexeme :has-form form)))))
+     (write-graphml g "test.graphml")
      true)))
 
