@@ -49,15 +49,6 @@ contributor can easily derive the purpose of the branch and its author from its
 name, assuming that feature branches are normally private with only one
 contributor.
 
-Work on the feature branch is committed and pushed to the origin repository so
-that it can be reviewed by others and eventually integrated with the server
-branch.
-
-```plaintext
-$ git commit -a -m 'New audio files added'
-$ git push
-```
-
 ## Rebasing Feature Branches on the Main Branch
 
 While working on a feature branch, work on the main branch continues as well. As
@@ -94,4 +85,96 @@ $ git fetch
 $ git reset --hard origin/zdl-lex-server/production
 $ … # reapply changes
 ```
+
+## Publishing Rebased Feature Branches
+
+Work on the feature branch is committed and pushed to the origin repository so
+that it can be reviewed by others and eventually integrated with the server
+branch.
+
+```plaintext
+$ git commit -a -m 'New audio files added'
+$ git push --force-with-lease origin
+```
+
+The option `--force-with-lease` ensures that the remote reference of the feature
+branch is updated and no implicit merge of the local and remote feature branches
+is trigggered by deviating branch histories as they occur during rebases.
+
+## Synchronizing Main and Feature Branches
+
+Once work on the feature branch is completed, it can be integrated into the main
+branch.
+
+As the server commits to the repository in fixed intervals (currently every 15
+minutes), we first ensure that all changes from the lexicographers have been
+comitted and pushed to the main branch by triggering a server-side commit/push
+manually:
+
+```plaintext
+$ curl -u… -X PATCH https://lex.dwds.de/git
+```
+
+After the server-side state is synchronized with the origin repository, a final
+rebase of the feature branch is done:
+
+```plaintext
+$ git fetch
+$ git rebase origin/zdl-lex-server/production
+```
+
+Assuming that no conflicts have arisen, the rebased feature branch is pushed:
+
+```plaintext
+$ git push --force-with-lease origin
+```
+
+In the final step we instruct the server to fast-forward its branch to the head of the feature branch:
+
+```plaintext
+$ curl -u… -X POST https://lex.dwds.de/git/ff/$(git rev-parse HEAD)
+```
+
+Now the feature branch is integrated into the server's branch
+`zdl-lex-server/production`, all changes of the branch are visible to
+lexicographers and the feature branch can (optionally) be deleted.
+
+## Locking the Server-side Data Store
+
+There is the potential for a race condition during the described synchronization
+process. Should a user of the lexicographic workbench save changes to articles
+during the time of the manually triggered commit/push and the fast-forward of
+the server's branch, the latter will either fail or the synchronization of the
+server-side file system and the origin repository might break, as both could
+become out-of-sync.
+
+There are two options to avoid this scenario: Integrating feature branches
+during times of inactivity, i. e. in off-peak hours, or locking the server-side
+data store while integrating the feature branch.
+
+When integrating without locking, all that has to be ensured is the inactivity
+of other users during the required time slot. This can be established by looking
+at the set of pending locks on server resources:
+
+```plaintext
+$ curl -u… https://lex.dwds.de/lock
+```
+
+If this request returns an empty list, no lexicon articles are currently edited
+and the integration will very likely proceed successfully. If there are active
+locks on resources, the name of lock owner is listed as well, so one can contact
+that active user(s) in order to agree on a time slot during which she/he remains
+inactive.
+
+_ … TODO: Document lock/unlock of data store …_
+
+```plaintext
+$ export TOKEN=$(uuid)
+$ curl -u… -X POST https://lex.dwds.de/lock/?token=$TOKEN
+```
+
+```plaintext
+$ curl -u… -X DELETE https://lex.dwds.de/lock/?token=$TOKEN
+```
+
 
