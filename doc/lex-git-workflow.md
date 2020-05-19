@@ -39,7 +39,7 @@ in a clone of the `zdl/wb` repository:
 
 ```plaintext
 $ git fetch
-$ git checkout -b xhrld/audio-update-202005 --no-track origin/zdl-lex-server/production
+$ git checkout -b xlhrld/audio-update-2020-04-30 --no-track origin/zdl-lex-server/production
 ```
 
 The first command fetches the most recent revisions from the origin repository;
@@ -126,7 +126,7 @@ $ git rebase origin/zdl-lex-server/production
 Assuming that no conflicts have arisen, the rebased feature branch is pushed:
 
 ```plaintext
-$ git push --force-with-lease origin
+$ git push --force-with-lease --set-upstream origin xlhrld/audio-update-2020-04-30
 ```
 
 In the final step we instruct the server to fast-forward its branch to the head of the feature branch:
