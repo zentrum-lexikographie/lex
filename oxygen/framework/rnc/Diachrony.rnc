@@ -15,14 +15,13 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
       context = "//d:Diachronie"
       sch:assert [
         test = """not(contains(string-join(.//text(), ''), '"') or contains(string-join(.//text(), ''), '‘') or contains(string-join(.//text(), ''), "'") or contains(string-join(.//text(), ''), '«') or contains(string-join(.//text(), ''), '»'))"""
-        'Unzulässige Typografie in Diachronie: erwaehntes_Zeichen und Paraphrase nutzen'
+        'Unzulässige Typografie in Diachronie: erwaehntes_Zeichen und Paraphrase nutzen?'
       ]
     ]
   ]
 ]
 Diachronie = element Diachronie {
 	Metadaten.allgemein ?
-	, attribute class { 'invisible' } ? # TODO: remove @class here
 	, element Etymologie {
 	    attribute class { 'invisible' } ?
 	    , freie_Beschreibung
