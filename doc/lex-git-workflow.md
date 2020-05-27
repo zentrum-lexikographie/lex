@@ -94,7 +94,7 @@ branch.
 
 ```plaintext
 $ git commit -a -m 'New audio files added'
-$ git push --force-with-lease origin
+$ git push --force-with-lease --set-upstream origin xlhrld/audio-update-2020-04-30
 ```
 
 The option `--force-with-lease` ensures that the remote reference of the feature
