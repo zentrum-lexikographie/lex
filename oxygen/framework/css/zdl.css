@@ -342,11 +342,12 @@ Schreibung[Trennung]:after { -oxy-append-content:" Trennung: "attr(Trennung)" ";
 .invisible { border-right: 2em solid #ff8585; }
 .good_example {	border-right: 2em solid green; }
 .ungewöhnlich { border-right: 2em solid blue; }
-.sg_ungewöhnlich { border-right: 2em solid blue; }
-.pl_ungewöhnlich { border-right: 2em solid blue; }
+.singular_ungewöhnlich { border-right: 2em solid blue; }
+.plural_ungewöhnlich { border-right: 2em solid blue; }
 .genitiv_ungewöhnlich { border-right: 2em solid blue; }
 .genus_ungewöhnlich { border-right: 2em solid blue; }
 .schreibung_ungewöhnlich { border-right: 2em solid blue; }
+.schreibung_ungültig { border-right: 2em solid blue; }
 
 Illustration {
 	content: url("http://zwei.dwds.de/thumbnails/" attr(Datei));

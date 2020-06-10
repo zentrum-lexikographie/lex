@@ -100,11 +100,12 @@ Beleg = element Beleg {
 				'invisible'
 				| 'good_example'
 				| 'ungewöhnlich'
-				| 'sg_ungewöhnlich'
-				| 'pl_ungewöhnlich'
+				| 'singular_ungewöhnlich'
+				| 'plural_ungewöhnlich'
 				| 'genitiv_ungewöhnlich'
 				| 'genus_ungewöhnlich'
 				| 'schreibung_ungewöhnlich'
+				| 'schreibung_ungültig'
 			) + 
 		}
 	} ?
