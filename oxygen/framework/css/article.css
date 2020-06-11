@@ -33,7 +33,8 @@ Kollokationen, Konstruktionsmuster, Kommentar {
 
 /* Labels für die Hauptblöcke */
 
-Artikel > Formangabe:before   { -oxy-append-content: attr(Typ)"angabe"; }
+Artikel > Formangabe[Typ]:before        { -oxy-append-content: attr(Typ)"angabe"; }
+Artikel > Formangabe:not([Typ]):before  { -oxy-append-content: "Hauptformangabe (implizit)"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); }
 Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
@@ -132,8 +133,10 @@ Datierung:before                               { content: "Datierung: "; }
 Etymologie:before                              { content: "Etymologie: "; }
 Formgeschichte:before                          { content: "Formgeschichte: "; }
 Bedeutungsgeschichte:before                    { content: "Bedeutungsgeschichte: "; }
-Diachronie>Verweise:before                     { content: "etym. Links: "; }
+Diachronie>Verweise:before                     { content: "Querverweise: "; }
+Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
+Verweise>Verweis[Typ="MWA"]:before             { content: "auch in MWA ↗"; }
 Verweise>Verweis[Typ="Synonym"]:before         { content: "Synonym ist ↗"; }
 Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
 Verweise>Verweis[Typ="Hyponym"]:before         { content: "Hyponym ist ↗"; }
@@ -146,6 +149,7 @@ Verweise>Verweis[Typ="Binnenglied"]:before     { content: "mit Binnenglied ↗";
 Verweise>Verweis[Typ="Letztglied"]:before      { content: "mit Letztglied ↗"; }
 Verweise>Verweis[Typ="formal_verwandt"]:before { content: "formal verwandt mit ↗"; }
 Verweise>Verweis[Typ="Grundform"]:before       { content: "Grundform ist ↗"; }
+Verweise>Verweis[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente ist ↗"; }
 
 Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
 Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "ext. Etym.artikel ↗"; }
@@ -184,10 +188,11 @@ Artikel > Lesart > Lesart > Lesart::before {
 Definition { font-weight: bold; }
 
 /* Markierung von Lemmazeichen */
-Schreibung { font-size: 1.5em; }
-Formangabe[Typ="Hauptform"] > Schreibung { font-size: 2em; }
+Schreibung { font-size: xx-large; }
+Schreibung[Praeferenz="1"] { font-weight: bold; }
+Schreibung[Praeferenz="3"], Schreibung[Praeferenz="4"] { font-size: 1.6em; }
 Schreibung[Typ="AR_G"] { color: brown; }
-Schreibung[Typ="U"], Schreibung[Typ="U_U"], Schreibung[Typ="U_CH"], Schreibung[Typ="U_AT"], Schreibung[Typ="U_NR"] {
+*[Typ="U"], *[Typ="U_U"], *[Typ="U_CH"], *[Typ="U_AT"] {
 	text-decoration: line-through;
 	color: red;
 }
@@ -230,6 +235,9 @@ Definition Verweis:before { content: "↗"; }
 
 /* keine Lesart für morphologische Verweise */
 Artikel>Verweise>Verweis>Ziellesart { display: none; }
+
+/* etymologische Verweise im Diachronieteil */
+
 
 /* Markierung von Fundstellenangaben */
 Fundstelle, Kurztitel { color:blue; }
@@ -276,7 +284,6 @@ Loeschung {
 Autorenzusatz {
 	display:inline;
 	font-style: italic;
-	white-space: nowrap;
 }
 Autorenzusatz:before { content: "["; }
 Autorenzusatz:after { content: "]"; }
@@ -311,6 +318,8 @@ Paraphrase:after { content: "’"; text-decoration: none; }
 
 /* Quelle, Zeitstempel und Status */
 
+Artikel[Typ]:before { -oxy-append-content:" ["attr(Typ)"] "; }
+Artikel[Status]:before { -oxy-append-content:" ["attr(Status)"] "; }
 *:not(Schreibung)[Zeitstempel]:before { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 *:not(Schreibung)[Quelle]:before { -oxy-append-content:" ["attr(Quelle)"] "; }
 *:not(Schreibung)[Autor]:before { -oxy-append-content:" ["attr(Autor)"] "; }
@@ -336,11 +345,12 @@ Schreibung[Trennung]:after { -oxy-append-content:" Trennung: "attr(Trennung)" ";
 .invisible { background-color: #ff8585; } /* leicht roter Hintergrund */
 .good_example {	border-right: 2em solid green; }
 .ungewöhnlich { border-right: 2em solid blue; }
-.sg_ungewöhnlich { border-right: 2em solid blue; }
-.pl_ungewöhnlich { border-right: 2em solid blue; }
+.singular_ungewöhnlich { border-right: 2em solid blue; }
+.plural_ungewöhnlich { border-right: 2em solid blue; }
 .genitiv_ungewöhnlich { border-right: 2em solid blue; }
 .genus_ungewöhnlich { border-right: 2em solid blue; }
 .schreibung_ungewöhnlich { border-right: 2em solid blue; }
+.schreibung_ungültig { border-right: 2em solid blue; }
 
 Illustration {
 	content: url("http://zwei.dwds.de/thumbnails/" attr(Datei));
