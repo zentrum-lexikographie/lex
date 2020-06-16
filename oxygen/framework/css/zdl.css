@@ -157,29 +157,34 @@ Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "ext. Etym.artikel
  * Normalerweise sollte hier sehr selten etwas ergänzt werden müssen.
  ********************************************************************/
 
-/* Lesartennummerierung.
-   Achtung: so implementiert funktioniert das nur auf 3 Ebenen */
+/* Gliederungsmarken */
 
 Artikel {
-    counter-reset: sense;
+	--sense-level-one: "anonym";
+	--sense-level-two: "anonym";
 }
 
-Artikel > Lesart::before {
-    content: 'Lesart ' counter(sense);
-    counter-increment: sense;
-    counter-reset: subsense;
+Artikel > Lesart[n]::before {
+	content: "Lesart (" attr(n) ")";
+	--sense-level-one: attr(n);
+}
+Artikel > Lesart:not([n])::before {
+	content: "Lesart (anonym)";
+}
+Artikel > Lesart > Lesart[n]::before {
+	content: "Lesart (" var(--sense-level-one) " " attr(n) ")";
+	--sense-level-two: attr(n);
+}
+Artikel > Lesart > Lesart:not([n])::before {
+	content: "Lesart (" var(--sense-level-one) " anonym)";
+}
+Artikel > Lesart > Lesart > Lesart[n]::before {
+	content: "Lesart (" var(--sense-level-one) " " var(--sense-level-two) " " attr(n) ")";
+}
+Artikel > Lesart > Lesart > Lesart:not([n])::before {
+	content: "Lesart (" var(--sense-level-one) " " var(--sense-level-two) " anonym)";
 }
 
-Artikel > Lesart > Lesart::before {
-    content: 'Lesart ' counter(sense) ' ' counter(subsense, lower-latin) ')';
-    counter-increment: subsense;
-    counter-reset: subsubsense;
-}
-
-Artikel > Lesart > Lesart > Lesart::before {
-    content: 'Lesart ' counter(sense) ' ' counter(subsense, lower-latin) ') ' counter(subsubsense, lower-latin) ')';
-    counter-increment: subsubsense;
-}
 
 /* Markierung von Definitionen */
 Definition { font-weight: bold; }
