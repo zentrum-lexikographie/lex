@@ -23,10 +23,9 @@ RUN set -ex; \
   useradd -r --uid "$ZDL_LEX_UID" --gid "$ZDL_LEX_GID" \
     --home-dir /data "$ZDL_LEX_USER"
 
-COPY org.zdl.lex.server.jar /app/org.zdl.lex.server.jar
+RUN set -ex; chown -R $ZDL_LEX_USER:$ZDL_LEX_GROUP /data
 
-RUN set -ex; \
-  chown -R $ZDL_LEX_USER:$ZDL_LEX_GROUP /app /data
+COPY --chown=lex:lex org.zdl.lex.server.jar /app/org.zdl.lex.server.jar
 
 USER $ZDL_LEX_USER
 ENTRYPOINT ["java", "-jar", "/app/org.zdl.lex.server.jar"]
