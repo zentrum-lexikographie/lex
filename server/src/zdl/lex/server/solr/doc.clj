@@ -79,7 +79,7 @@
         main-fields (dissoc article
                             :id :file
                             :timestamps :authors :editors :sources
-                            :references :ref-ids)
+                            :references :ref-ids :senses)
         fields (->> [(map basic-field preamble)
                      (map basic-field main-fields)
                      (attr-field "timestamps" "dts" (article :timestamps))
