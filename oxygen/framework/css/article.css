@@ -252,7 +252,6 @@ Fundstelle > *:before {
 }
 Fundstelle > Autor:before { content: "Autor: " }
 Fundstelle > Herausgeber:before { content: "Herausgeber: " }
-Fundstelle > Zusatz:before { content: "Zusatz: " }
 Fundstelle > Titel:before { content: "Werkstitel: " }
 Fundstelle > Stelle:before { content: "Stelle: " }
 Fundstelle > Datum:before { content: "Datum: " }
