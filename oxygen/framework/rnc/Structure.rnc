@@ -299,7 +299,6 @@ Fundstelle = element Fundstelle {
 		| (
 			element Autor { token } ?
 			, element Herausgeber { token } ?
-			, element Zusatz { token } ?
 			, element Titel { token } ?
 			, element Kurztitel { token } ?
 			, element Stelle { token } ?
