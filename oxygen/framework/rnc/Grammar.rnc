@@ -61,7 +61,7 @@ grammatische_Beschreibung = element Grammatik {
 	    	attribute class { 'invisible' } ?
 		, attribute Typ {  # TODO: this belongs to word formation, actually
 			'deadjektivisch' | 'deverbal'
-		} ?
+		}
 		, (
 			''
 			| string 'Substantiv'
