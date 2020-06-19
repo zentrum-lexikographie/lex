@@ -2210,98 +2210,6 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>comp1 Verweis</String>
-										</field>
-										<field name="name">
-											<String>comp1</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf comp1</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis type="comp1" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>comp2 Verweis</String>
-										</field>
-										<field name="name">
-											<String>comp2</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf comp2</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis type="comp2" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>Frequenzangabe</String>
 										</field>
 										<field name="name">
@@ -4470,16 +4378,6 @@ Autor [nocontextvalidation]</String>
 																<String>formal_verwandt Verweis</String>
 															</field>
 														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>comp1 Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>comp2 Verweis</String>
-															</field>
-														</menuItem>
 														<menuSeparator/>
 														<menuItem>
 															<field name="actionID">
@@ -4947,16 +4845,6 @@ Autor [nocontextvalidation]</String>
 														<toolbarItem>
 															<field name="actionID">
 																<String>formal_verwandt Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>comp1 Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>comp2 Verweis</String>
 															</field>
 														</toolbarItem>
 														<toolbarSeparator/>
