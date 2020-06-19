@@ -3638,7 +3638,7 @@ Autor [nocontextvalidation]</String>
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;Beleg xmlns="http://www.dwds.de/ns/1.0">&lt;Belegtext>&lt;Stichwort/>&lt;/Belegtext>&lt;Fundstelle Fundort="online">&lt;Autor/>&lt;Titel/>&lt;Stelle/>&lt;Datum/>&lt;URL/>&lt;Aufrufdatum/>&lt;/Fundstelle>&lt;Kurztitel/>&lt;/Beleg>
+																<String>&lt;Beleg xmlns="http://www.dwds.de/ns/1.0">&lt;Belegtext>&lt;Stichwort/>&lt;/Belegtext>&lt;Fundstelle Fundort="online">&lt;Autor/>&lt;Titel/>&lt;Stelle/>&lt;Datum/>&lt;URL/>&lt;Aufrufdatum/>&lt;/Fundstelle>&lt;/Beleg>
 
 
 </String>

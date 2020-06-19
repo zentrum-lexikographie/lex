@@ -63,7 +63,7 @@ Illustration:before           { content: "Illustration"; }
 
 Formangabe >*:before,
 Grammatik > *:before, Diachronie > *:before, Diasystematik > *:before,
-Fundstelle:before, Kurztitel:before, Belegtext:before,
+Fundstelle:before, Belegtext:before,
 Verweise > *:before, Verweis > *:before, Kollokation > *:before,
 Konstruktionsmuster > *:before, Idiom > *:before, Phrasem > *:before {
 	color: gray;
@@ -237,9 +237,8 @@ Artikel>Verweise>Verweis>Ziellesart { display: none; }
 
 
 /* Markierung von Fundstellenangaben */
-Fundstelle, Kurztitel { color:blue; }
+Fundstelle { color:blue; }
 Fundstelle:after { content:attr(Fundort); color:green; font-size: 80%; line-height: normal; vertical-align: sub; }
-Fundstelle_Backup { display: none; } /* ist nur eine Sicherheitskopie für Jörg */
 
 /* strukturierte Fundstellenangaben */
 Fundstelle > * { display: block; }

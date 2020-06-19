@@ -112,7 +112,6 @@ Beleg = element Beleg {
 	, Belegtext
 	, semantische_Verweise ?
 	, Fundstelle 
-	, element Kurztitel { token }? # TODO: move inside //Fundstelle
 	, Diasystematik ? # TODO: move before Fundstelle
 }
 
