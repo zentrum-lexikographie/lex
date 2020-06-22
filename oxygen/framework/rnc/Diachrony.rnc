@@ -14,7 +14,7 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
     sch:rule [
       context = "//d:Diachronie"
       sch:assert [
-        test = """not(contains(string-join(.//text(), ''), '"') or contains(string-join(.//text(), ''), '‘') or contains(string-join(.//text(), ''), "'") or contains(string-join(.//text(), ''), '«') or contains(string-join(.//text(), ''), '»'))"""
+        test = """not(contains(string-join(.//text(), ''), '"') or contains(string-join(.//text(), ''), '‘') or contains(string-join(.//text(), ''), "'") )"""
         'Unzulässige Typografie in Diachronie: erwaehntes_Zeichen und Paraphrase nutzen?'
       ]
     ]
