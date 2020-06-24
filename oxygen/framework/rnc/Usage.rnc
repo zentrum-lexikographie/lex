@@ -23,7 +23,8 @@ Frequenzbeschraenkung = attribute Frequenz { Frequenzangaben }
 Sprachareal = element Sprachareal {
 	Frequenzbeschraenkung ?
 	, (
-		'D-Nordwest'
+		'D'
+		| 'D-Nordwest'
 		| 'D-Nordwest-Westfalen'
 		| 'D-Nordwest-Niedersachsen'
 		| 'D-Nordwest-Bremen'
