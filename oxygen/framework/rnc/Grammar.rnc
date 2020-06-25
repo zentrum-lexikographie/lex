@@ -61,7 +61,7 @@ grammatische_Beschreibung = element Grammatik {
 	    	attribute class { 'invisible' } ?
 		, attribute Typ {  # TODO: this belongs to word formation, actually
 			'deadjektivisch' | 'deverbal'
-		}
+		} ?
 		, (
 			''
 			| string 'Substantiv'
@@ -95,7 +95,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Affix'
 			| string 'Mehrwortausdruck'
 		)
-	} ? # TODO: mandatory
+	}
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus { 'mask.' | 'fem.' | 'neutr.' } *
