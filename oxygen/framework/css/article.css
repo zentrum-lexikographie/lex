@@ -138,6 +138,7 @@ Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="MWA"]:before             { content: "auch in MWA ↗"; }
 Verweise>Verweis[Typ="Synonym"]:before         { content: "Synonym ist ↗"; }
+Verweise>Verweis[Typ="Synonym_MWA_Variante"]:before { content: "Synonym (MWA-Variante) ist ↗"; }
 Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
 Verweise>Verweis[Typ="Hyponym"]:before         { content: "Hyponym ist ↗"; }
 Verweise>Verweis[Typ="Hyperonym"]:before       { content: "Hyperonym ist ↗"; }
