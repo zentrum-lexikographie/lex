@@ -95,7 +95,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Affix'
 			| string 'Mehrwortausdruck'
 		)
-	}
+	} ?
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus { 'mask.' | 'fem.' | 'neutr.' } *
