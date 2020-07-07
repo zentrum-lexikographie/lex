@@ -120,7 +120,7 @@ grammatische_Beschreibung = element Grammatik {
 			| '-(n)'
 			| '-(s)'
 			# Vollformen
-			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-ʼ]+\p{Ll}' }
+			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’]+\p{Ll}' }
 		)
 	} *
 	, element Plural {
@@ -150,7 +150,7 @@ grammatische_Beschreibung = element Grammatik {
 			| '-(n)'
 			| '-(s)'
 			# Vollformen
-			| xsd:token { pattern = '\p{Lu}[\p{L}\p{Nd} \-ʼ]+\p{Ll}' }
+			| xsd:token { pattern = '\p{Lu}[\p{L}\p{Nd} \-’]+\p{Ll}' }
         	)
 	} *
 	# ###############
