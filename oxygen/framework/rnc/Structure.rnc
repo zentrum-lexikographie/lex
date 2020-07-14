@@ -301,7 +301,7 @@ Fundstelle = element Fundstelle {
 			, element Titel { token } ?
 			, element Kurztitel { token } ?
 			, element Stelle { token } ?
-			, element Datum { xsd:token { pattern = '(\d\d\.\d\d.)?\d{4}' } | empty } ?
+			, element Datum { xsd:token { pattern = '((\d\d\.)?\d\d.)?\d{4}' } | empty } ?
 			, element URL {	xsd:anyURI | empty } ?
 			, element Aufrufdatum {	xsd:token { pattern = '(\d\d\.\d\d.)?\d{4}' } | empty } ? # kann man vlt. in Oxygen automatisch machen
 		)		
