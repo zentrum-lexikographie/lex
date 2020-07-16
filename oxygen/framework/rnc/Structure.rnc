@@ -133,7 +133,7 @@ Kompetenzbeispiel = element Kompetenzbeispiel {
       ]
       sch:assert [
         test = "not(contains(string-join(.//text(), ''), ';'))"
-        'Keine Semikolons in Kollokationen, Konstruktionsmustern, Phrasemen'
+        'Keine Semikolons in Kollokationen, Konstruktionsmustern, Phrasemen – separate Elemente ansetzen!'
       ]
     ]
   ]
@@ -206,6 +206,18 @@ semantische_Verweise = element Verweise {
 	Metadaten.allgemein ?
 	, ( semantischer_Verweis | externer_Verweis ) *
 }
+
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:Artikel/d:Verweise/d:Verweis/d:Ziellesart"
+      sch:assert [
+        test = "normalize-space(.) = ''"
+        'Keine Lesartendesambiguierung in morphologischen Zerlegungen vornehmen'
+      ]
+    ]
+  ]
+]
 
 morphologische_Verweise = element Verweise {
     # Klassifizierung des morphologischen Prozesses
