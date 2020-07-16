@@ -19,6 +19,7 @@ Glossar = attribute Glossar {
 	list {
 		(
 			'Corona'
+			| 'US-Wahl'
 		) +
 	}
 }
