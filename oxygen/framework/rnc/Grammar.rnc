@@ -266,26 +266,6 @@ grammatische_Beschreibung = element Grammatik {
 			| 'mit unbestimmtem Artikel'
 		)
 	} ?
-	, element Akzent { # TODO: --> Einschraenkung?
-		xsd:token { pattern = '((stets|meist) )?(un)?betont' }
-		| 'in unbetonter Stellung' 
-		| 'in fragendem Ton'
-		| 'steht im Satz gewöhnlich in unbetonter Stellung'
-		| 'in fragendem Ton' | 'kann betont sein'
-		| 'mit Hauptton im Satz'
-		| 'stets unbetont bei Verben und deren Ableitungen'
-		| 'kann bei Vorhandensein eines Gegensatzwortes den Hauptton tragen'
-		| 'kann je nach Zusammenhang und Stellung im Satz den Hauptton tragen'
-		| 'kann, wenn kein Akzent angegeben ist, je nach Zusammenhang und Stellung im Satz den Hauptton tragen'
-		| 'trägt nur dann den angegebenen Hauptton, wenn beim Grundwort kein Akzent steht'
-		| 'trägt meist den Hauptton des Satzes'
-		| 'trägt im Satz nie den Hauptton'
-		| 'trägt den angegebenen Hauptton, wenn beim Grundwort kein Akzent steht'
-		| 'unbetont, wenn mit einem trennbaren Verb verbunden'
-		| 'der Ton liegt auf ›unter‹'
-		| 'der Ton liegt auf ›von‹'
-		| 'der Ton liegt auf ›vor‹'
-	} ?
 	, element Einschraenkung {
 		Frequenzbeschraenkung ?
 		, formaler_Text
