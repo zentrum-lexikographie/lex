@@ -32,7 +32,7 @@
     "GitHub-Anwendungsfall", "AussiedlerInnen", "BürgerInnen",
     "StS.", "(StS.)", "AirPlay", "(iOS)", "KPdSU,",
     "AngehörigenInnen", "»eBook«", "neu(st)e", "L’Empéri",
-    "»Lunch In Time«-Menü,", "McDonald’s", "InterContintal-Hotels",
+    "»Lunch In Time«-Menü,", "InterContintal-Hotels",
     "LuftBO)", "grM", "BetrVG", "(BfR)", "(kW)", "mmHg",
     "TüV-Gebühren,", "FotoStation", "»AutoAusfüllen«,", "(BdV),",
     "»TextMaker", "OpenOffice.org", "Word-AutoFormen", "(BaT),",
