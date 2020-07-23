@@ -13,8 +13,7 @@
 
 (defn index-fixture
   [f]
-  (solr-client/rebuild-index)
-  (f))
+  (try (solr-client/rebuild-index) (f) (finally (solr-client/clear-index))))
 
 (defn backend-fixture
   ([]

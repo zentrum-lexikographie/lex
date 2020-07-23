@@ -133,6 +133,10 @@
 
 (deftimer [solr client index-rebuild-timer])
 
+(defn clear-index []
+  (update-articles query->delete-xml ["id:*"])
+  (commit-optimize))
+
 (defn rebuild-index []
   (->>
    (let [sync-start (System/currentTimeMillis)
