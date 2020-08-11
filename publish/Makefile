@@ -33,6 +33,50 @@ wdg-backup: environment
 openthesaurus-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) openthesaurus > ./backup/backup-openthesaurus-`date -Iseconds`.sql
 
+openthesaurus-update: openthesaurus-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.category;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.category_link;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.language;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.link_type;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.synset;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.synset_link;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.tag;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.term;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.term_level;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.term_link;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.term_link_type;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.term_tag;"
+	$(mysql) -e "SELECT COUNT(*) FROM openthesaurus_beta.word_mapping;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.category;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.category_link;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.language;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.link_type;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.synset;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.synset_link;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.tag;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.term;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.term_level;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.term_link;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.term_link_type;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.term_tag;"
+	$(mysql) -e "DROP TABLE IF EXISTS openthesaurus.word_mapping;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.category TO openthesaurus.category;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.category_link TO openthesaurus.category_link;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.language TO openthesaurus.language;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.link_type TO openthesaurus.link_type;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.synset TO openthesaurus.synset;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.synset_link TO openthesaurus.synset_link;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.tag TO openthesaurus.tag;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.term TO openthesaurus.term;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.term_level TO openthesaurus.term_level;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.term_link TO openthesaurus.term_link;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.term_link_type TO openthesaurus.term_link_type;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.term_tag TO openthesaurus.term_tag;"
+	$(mysql) -e "RENAME TABLE openthesaurus_beta.word_mapping TO openthesaurus.word_mapping;"
+
 neologismen-update: neologismen-backup
 	# check whether the source database exists
 	$(mysql) -e "SELECT COUNT(*) FROM neologismen_beta.article;"
