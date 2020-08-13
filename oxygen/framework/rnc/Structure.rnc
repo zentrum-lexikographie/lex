@@ -23,7 +23,9 @@ formaler_Text = (
 		# # instead of (free standing) HYPHEN-MINUS, SOLIDUS, COLON!
 	#	pattern = '[\p{L}\p{N}\p{Sc}\p{Sm}\-–⁄\.,…!\?\(\)»«°′⏑&\s‍]*'
 	#}
-	text & semantischer_Verweis *
+	text
+	& semantischer_Verweis *
+	& externer_Verweis *
 )
 
 
