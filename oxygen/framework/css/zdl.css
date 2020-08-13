@@ -46,7 +46,7 @@ Definition:before             { content: "Definition (" attr(Typ) ")"; }
 Artikel > Kommentar:before    { content: "Artikelkommentar:";}
 Formangabe > Kommentar:before { content: "Formkommentar:";}
 Grammatik > Kommentar:before  { content: "Grammatikkommentar:";}
-Lesart > Kommentar:before     { content: "Lesartenkommentar:";}
+Lesart > Kommentar:before     { content: "Lesartenkommentar (zur Pragmatik):";}
 Frequenzangabe:before         { content: "Frequenz"; }
 Syntagmatik:before            { content: "Syntagmatik"; }
 Idiom:before                  { content: "Idiom"; }
