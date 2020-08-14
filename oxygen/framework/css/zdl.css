@@ -201,7 +201,7 @@ Grammatik, Syntagmatik { color: maroon; }
 /* Markierung von Kollokationsrelationen*/
 Kollokation:after {
 	-oxy-append-content:"SYN: ["attr(syntaktische_Relation)"] ";
-	-oxy-append-content:"SEM: ["attr(semantische_Relation)"] ";
+	/*-oxy-append-content:"SEM: ["attr(semantische_Relation)"] ";*/
 	white-space: -oxy-trim-when-ws-only;
 	color:blue;
 	font-size: 80%;
