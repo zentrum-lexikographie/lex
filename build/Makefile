@@ -8,7 +8,12 @@ build:
 	clojure -m zdl.lex.build
 	$(clear-classpath-cache)
 
+.PHONY: release
+release:
+	$(clear-classpath-cache)
+	clojure -m zdl.lex.build release
+	$(clear-classpath-cache)
+
 .PHONY: build_env
 build_env:
 	docker build -t lex.dwds.de/zdl-lex/build:1.0 .
-#	docker push lex.dwds.de/zdl-lex/build:1.0
