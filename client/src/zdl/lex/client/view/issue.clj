@@ -123,7 +123,7 @@
                 :id 39947,
                 :notes 0,
                 :severity "minor",
-                :url "https://odo.dwds.de/mantis/view.php?id=39947",
+                :url "https://mantis.dwds.de/mantis/view.php?id=39947",
                 :handler "herold"
                 :active? true
                 :visited? true}]

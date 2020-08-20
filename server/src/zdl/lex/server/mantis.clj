@@ -15,7 +15,7 @@
             [zdl.lex.data :as data]))
 
 (def mantis-base
-  (delay (getenv "ZDL_LEX_MANTIS_BASE" "https://odo.dwds.de/mantis")))
+  (delay (getenv "ZDL_LEX_MANTIS_BASE" "https://mantis.dwds.de/mantis")))
 
 (defn issue-id->url
   [id]
