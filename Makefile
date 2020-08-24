@@ -33,3 +33,9 @@ docker_build:
 .PHONY: docker_release
 docker_release:
 	$(with-docker-env) $(MAKE) -C build release
+
+.PHONY: publish
+publish: VERSION = $(subst v,,$(shell git describe --tags --always))
+publish:
+	docker push lex.dwds.de/zdl-lex/solr:$(VERSION)
+	docker push lex.dwds.de/zdl-lex/server:$(VERSION)
