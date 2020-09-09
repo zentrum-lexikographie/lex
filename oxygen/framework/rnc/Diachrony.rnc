@@ -85,7 +85,7 @@ Sprachen = (
 	| 'afrk'
 	| 'afrz'         # fro: Old French (842-ca. 1400)
 	| 'agaskogn'
-	| 'agriech'      # grc: Ancient Greek (to 1453)
+	# | 'agriech'      # grc: Ancient Greek (to 1453)
 	| 'ahd'          # goh: Old High German (ca. 750-1050) [a-s]
 	| 'aimara'
 	| 'aind'
