@@ -5,7 +5,7 @@ mysql = /usr/bin/mysql -sN
 mysqldump = /usr/bin/mysqldump
 
 all:
-	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|neologismen|wortgeschichten)-update"
+	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|wortgeschichten)-update"
 
 environment:
 	/bin/mkdir -p backup/
@@ -26,6 +26,9 @@ etymwb-backup: environment
 
 dwb1-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwb1 > ./backup/backup-dwb1-`date -Iseconds`.sql
+
+dwb2-backup: environment
+	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwb2 > ./backup/backup-dwb2-`date -Iseconds`.sql
 
 wdg-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wdg > ./backup/backup-wdg-`date -Iseconds`.sql
@@ -148,3 +151,14 @@ dwb1-update: dwb1-backup
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE dwb1_beta.article TO dwb1.article;"
 	$(mysql) -e "RENAME TABLE dwb1_beta.lemma TO dwb1.lemma;"
+
+dwb2-update: dwb2-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM dwb2_beta.article;"
+	$(mysql) -e "SELECT COUNT(*) FROM dwb2_beta.lemma;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS dwb2.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwb2.lemma;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE dwb2_beta.article TO dwb2.article;"
+	$(mysql) -e "RENAME TABLE dwb2_beta.lemma TO dwb2.lemma;"
