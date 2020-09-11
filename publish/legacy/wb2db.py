@@ -231,7 +231,7 @@ class DWB1(Dictionary):
     '''
     '''
 
-    DATABASE_NAME = 'dwb1'
+    DATABASE_NAME = 'dwb1_beta'
     ENTRY_ELEMENT = et.QName('http://www.tei-c.org/ns/1.0', 'entry')
     HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}orth'  # all embedded forms
     USE_RELATIONS = False
@@ -240,6 +240,22 @@ class DWB1(Dictionary):
         Dictionary.__init__(self, file_names)
 
     # TODO: overload __iter__() to also catch <re> as separate entries?
+
+    def prune(self, article):
+        pass
+
+
+class DWB2(Dictionary):
+    '''
+    '''
+
+    DATABASE_NAME = 'dwb2_beta'
+    ENTRY_ELEMENT = et.QName('http://www.tei-c.org/ns/1.0', 'entry')
+    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}form[@type="lemma"]'
+    USE_RELATIONS = False
+
+    def __init__(self, file_names):
+        Dictionary.__init__(self, file_names)
 
     def prune(self, article):
         pass
@@ -283,7 +299,7 @@ if __name__ == '__main__':
     argument_parser.add_argument('--user', default='', metavar='USERNAME', type=str, help='username for the database server')
     argument_parser.add_argument('--passwd', default='', metavar='PASSWORD', type=str, help='passphrase for the database server')
     argument_parser.add_argument('input_files', metavar='FILE', type=str, nargs='*', help='(list of) file names')
-    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'neologismen', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
+    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'dwb2', 'neologismen', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
     argument_parser.add_argument('-v', '--verbose', action='store_true', default=False, help='enable verbose diagnostic messages')
     argument_parser.add_argument('-V', '--version', type=str, metavar='VERSION_NUMBER', help='specify the version number')
     argument_parser.add_argument('-w', '--write', action='store_true', default=False, help='actually write to DB')
@@ -304,6 +320,8 @@ if __name__ == '__main__':
         dictionary = WDG(arguments.input_files)
     elif arguments.dictionary_type == 'dwb1':
         dictionary = DWB1(arguments.input_files)
+    elif arguments.dictionary_type == 'dwb2':
+        dictionary = DWB2(arguments.input_files)
     elif arguments.dictionary_type == 'neologismen':
         dictionary = Neologismen(arguments.input_files)
     elif arguments.dictionary_type == 'wortgeschichten':
@@ -342,8 +360,8 @@ if __name__ == '__main__':
     relation_index = collections.defaultdict(list)
 
     # to speed up MySQL INSERTs we use a bucket and executemany()
-    bucket_article = Bucket('article', cursor, 'INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s);', max_size=2000)
-    bucket_lemma = Bucket('lemma', cursor, 'INSERT INTO lemma VALUES (%s, %s, %s, %s, %s);', max_size=10000)
+    bucket_article = Bucket('article', cursor, 'INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s);', max_size=1000)
+    bucket_lemma = Bucket('lemma', cursor, 'INSERT INTO lemma VALUES (%s, %s, %s, %s, %s);', max_size=20000)
     bucket_token = Bucket('token', cursor, 'INSERT INTO token VALUES (%s, %s);', max_size=50000)
     bucket_relation = Bucket('relation', cursor, 'INSERT INTO relation VALUES (%s, %s, %s);', max_size=50000)
 
@@ -366,6 +384,7 @@ if __name__ == '__main__':
             # extract lemmas
             for position, lemma in enumerate(et.ETXPath(dictionary.HEADWORD_PATH)(article)):
                 hidx = lemma.get('hidx')
+
                 htype = lemma.get('Typ') or 'AR_G'
                 # splitting and unicode mangling is needed for TEI dictionaries'
                 # use of orth/@expand and the text compression present in headwords
@@ -376,7 +395,7 @@ if __name__ == '__main__':
                     for headword in normalization.split()
                 ]
                 if not headwords:
-                    headwords = [unicode(text_only(lemma)) or u'']
+                    headwords = [ unicode(text_only(lemma)) or u'' ]
                 
                 for headword in headwords:
                     
@@ -385,6 +404,13 @@ if __name__ == '__main__':
                         for character in unicodedata.normalize('NFC', unicode(headword))
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
                     ]).replace(u'’', "'")
+
+                    # hooks for DWB2 where hidx is not explicitly marked (TODO: make class specific)
+                    if arguments.dictionary_type == 'dwb2':
+                        headword = headword.lower()
+                        if headword != '' and headword[0].isnumeric():
+                            hidx = headword[0]
+                            headword = headword[1 : ]
                     
                     if headword and (
                             not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data
