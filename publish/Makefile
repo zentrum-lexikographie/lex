@@ -137,3 +137,14 @@ wdg-update: wdg-backup
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE wdg_beta.article TO wdg.article;"
 	$(mysql) -e "RENAME TABLE wdg_beta.lemma TO wdg.lemma;"
+
+dwb1-update: dwb1-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM dwb1_beta.article;"
+	$(mysql) -e "SELECT COUNT(*) FROM dwb1_beta.lemma;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS dwb1.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS dwb1.lemma;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE dwb1_beta.article TO dwb1.article;"
+	$(mysql) -e "RENAME TABLE dwb1_beta.lemma TO dwb1.lemma;"
