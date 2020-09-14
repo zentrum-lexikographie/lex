@@ -417,8 +417,8 @@ if __name__ == '__main__':
                             # maybe the following test suffices?
                             and not (headword, hidx) in lemma_index
                             ) or (
-                                    # hook for neologismen which come without @hidx
-                                    (headword, hidx) in lemma_index and arguments.dictionary_type == 'neologismen'
+                                    # hook for neologismen which come without @hidx and for dwb2 where not *all* homographs are marked
+                                    (headword, hidx) in lemma_index and arguments.dictionary_type in ('neologismen', 'dwb2')
                             ):
                         
                         lemma_count += 1
