@@ -251,7 +251,7 @@ class DWB2(Dictionary):
 
     DATABASE_NAME = 'dwb2_beta'
     ENTRY_ELEMENT = et.QName('http://www.tei-c.org/ns/1.0', 'entry')
-    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}form[@type="lemma"]'
+    HEADWORD_PATH = './/{http://www.tei-c.org/ns/1.0}form[@type="lemma"]|.//{http://www.tei-c.org/ns/1.0}form[@type="lemma-variant"]|.//{http://www.tei-c.org/ns/1.0}form[@type="compound-lemma"]//{http://www.tei-c.org/ns/1.0}expan'
     USE_RELATIONS = False
 
     def __init__(self, file_names):
