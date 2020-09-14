@@ -421,7 +421,13 @@ if __name__ == '__main__':
                                     (headword, hidx) in lemma_index and arguments.dictionary_type in ('neologismen', 'dwb2')
                             ):
                         
+                        # normalization hooks for DWB2:
+                        headword = headword.replace(u'‐', '-')
+                        headword = headword.rstrip('.') # no abbrevs. in dwb2
+
                         lemma_count += 1
+                        #if not headword.isalpha():
+                        #    print headword.encode('utf-8')
                         bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
 
