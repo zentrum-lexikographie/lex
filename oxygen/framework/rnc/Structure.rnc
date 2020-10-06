@@ -162,16 +162,6 @@ Konstruktionsmuster = element Konstruktionsmuster {
 	, Korpusabfrage *
 }
 
-Idiom = element Idiom {
-	Metadaten.allgemein ?
-	, attribute class { 'invisible' } ?
-	, Belegtext
-	, Frequenzangabe ?
-	, semantische_Verweise ?
-	, Diasystematik ?
-	, Korpusabfrage *
-}
-
 Phrasem = element Phrasem {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
@@ -185,7 +175,6 @@ Phrasem = element Phrasem {
 Syntagmatik = element Syntagmatik {
 	Metadaten.allgemein ?
 	& Konstruktionsmuster *
-	& Idiom *
 	& Phrasem *
 }
 
