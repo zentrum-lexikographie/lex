@@ -29,7 +29,7 @@ _ddl_statements = [
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8''',
     '''CREATE TABLE IF NOT EXISTS lemma (
          id INT(11) NOT NULL,
-         lemma VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+         lemma VARCHAR(200) COLLATE utf8_unicode_ci NOT NULL,
          hidx TINYINT(2) DEFAULT NULL,
          type VARCHAR(10),
          article_id INT(11) NOT NULL,
