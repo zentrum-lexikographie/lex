@@ -20,6 +20,7 @@ Glossar = attribute Glossar {
 		(
 			'Corona'
 			| 'US-Wahl-2020'
+			| 'Weihnachten'
 		) +
 	}
 }
