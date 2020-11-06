@@ -288,6 +288,7 @@ Verweisziel = (
 Fundstelle = element Fundstelle {
 	attribute Fundort {
 		'dwds'
+		| 'amc' # Austrian Media Corpus
 		| 'gbooks'
 		| 'online'
 		| 'Bibliothek'
