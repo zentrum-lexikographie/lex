@@ -105,6 +105,7 @@ Stilfaerbung = element Stilfaerbung {
 		| 'gespreizt'
 		| 'höflich'
 		| 'ironisch'
+		| 'Kosewort' # ZDL/Wahrig
 		| 'papierdeutsch' # D99 == amtssprachlich?
 		| 'scherzhaft'
 		| 'Schimpfwort'
