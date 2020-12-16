@@ -18,7 +18,11 @@ Gliederungsmarke = attribute n {
 Glossar = attribute Glossar {
 	list {
 		(
-			'Corona'
+			'Atomkraft'
+			| 'Bundestagswahl-2021'
+			| 'Corona'
+			| 'Fußball'
+			| 'Klimawandel'
 			| 'US-Wahl-2020'
 			| 'Weihnachten'
 		) +
