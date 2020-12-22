@@ -425,6 +425,7 @@ Sprachen = (
 	| 'schwed'       # swe: Swedish
 	| 'schweiz'      # gsw: Swiss German 
 	| 'schweizerdt'  # == schweiz?
+	| 'schweiz-frz'
 	| 'semit'
 	| 'senegamb'
 	| 'serb-kslaw'
