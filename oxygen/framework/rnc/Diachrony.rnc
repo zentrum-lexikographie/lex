@@ -244,6 +244,7 @@ Sprachen = (
 	| 'ind'
 	| 'indian'
 	| 'indones'
+	| 'inuktitut'
 	| 'ion'
 	| 'ir'           # gle: Irish
 	| 'isl'          # isl: Icelandic
