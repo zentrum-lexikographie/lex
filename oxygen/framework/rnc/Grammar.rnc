@@ -304,6 +304,7 @@ syntaktische_Relationen = (
         | 'Stichwort_ist_Dativobjekt_von'
         | 'Stichwort_ist_Genitiv-/Akkusativ-/Dativobjekt_von'
         | 'Stichwort_ist_Genitivattribut_von'
+        | 'Stichwort_ist_Genitivobjekt_von'
         | 'Stichwort_ist_in_Koordination_mit'
         | 'Stichwort_ist_in_Präpositionalgruppe/-objekt_zu'
         | 'Stichwort_ist_in_vergleichender_Wort-/Nominalgruppe_zu'
