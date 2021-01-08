@@ -371,6 +371,7 @@ Sprachen = (
 	| 'oestl_dt'   # TODO: keep?
 	| 'ostfries'       # frs: Eastern Frisian
 	| 'oirot'
+	| 'ojibwa'
 	| 'okzitan'
 	| 'omd'
 	| 'oriya'
@@ -402,6 +403,7 @@ Sprachen = (
 	| 'polynes'
 	| 'pomoran'
 	| 'port'         # por: Portuguese
+	| 'powhatan'
 	| 'prov'
 	| 'pseudolat'
 	| 'raetoroman'
