@@ -10,8 +10,8 @@
   org.clojure/data.csv {:mvn/version "0.1.4"}
 
   ;; Data formats
-  cheshire {:mvn/version "5.9.0"}
-  hiccup {:mvn/version "1.0.5"}
+  cheshire/cheshire {:mvn/version "5.9.0"}
+  hiccup/hiccup {:mvn/version "1.0.5"}
 
   ;; Embedded RDBMS h2
   com.h2database/h2 {:mvn/version "1.4.199"}
@@ -28,13 +28,15 @@
   metosin/ring-http-response {:mvn/version "0.9.1"}
 
   ;; Ring/HTTP authentication
-  buddy {:mvn/version "2.0.0"}
+  buddy/buddy {:mvn/version "2.0.0"}
 
   ;; Webjar-based Assets
-  ring-webjars {:mvn/version "0.2.0" :exclusions [org.webjars/webjars-locator]}
+  ring-webjars {:mvn/version "0.2.0"
+                :exclusions [org.webjars/webjars-locator]}
   org.webjars.npm/bulma {:mvn/version "0.7.4"}
   org.webjars.npm/material-icons {:mvn/version "0.3.0"}
-  org.webjars/webjars-locator-core {:mvn/version "0.41" :exclusions [org.webjars.npm/angular__http]}
+  org.webjars/webjars-locator-core {:mvn/version "0.41"
+                                    :exclusions [org.webjars.npm/angular__http]}
 
   ;; Classpath access (for embedded OxygenXML client components)
   io.github.classgraph/classgraph {:mvn/version "4.8.50"}
@@ -49,7 +51,8 @@
   clojurewerkz/ogre {:mvn/version "3.4.6.0"}
 
   ;; SOAP-support (for Mantis Issue Tracker API)
-  io.xapix/clj-soap {:mvn/version "1.1.0" :exclusions [javax.servlet/servlet-api]}}
+  io.xapix/clj-soap {:mvn/version "1.1.0"
+                     :exclusions [javax.servlet/servlet-api]}}
 
  :aliases
  {:test

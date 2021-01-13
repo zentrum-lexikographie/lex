@@ -7,16 +7,15 @@
            java.util.concurrent.TimeUnit))
 
 (def report-interval
-  (delay (getenv "ZDL_LEX_METRICS_REPORT_INTERVAL" "0")))
+  (Integer/parseInt (getenv "METRICS_REPORT_INTERVAL" "0")))
 
 (defstate reporter
   :start
-  (let [report-interval (Integer/parseInt @report-interval)]
-    (when (< 0 report-interval)
-      (let [reporter (.build (Slf4jReporter/forRegistry default-registry))]
-        (instrument-jvm)
-        (.start reporter report-interval TimeUnit/MINUTES)
-        reporter)))
+  (when (< 0 report-interval)
+    (let [reporter (.build (Slf4jReporter/forRegistry default-registry))]
+      #_(instrument-jvm)
+      (.start reporter report-interval TimeUnit/MINUTES)
+      reporter))
   :stop
   (some-> reporter .close))
 

@@ -22,26 +22,26 @@
 (set! *warn-on-reflection* true)
 
 (def db-dir
-  (delay (data/dir "janus-db")))
+  (data/dir "janus-db"))
 
 (def index-dir
-  (delay (data/dir "janus-index")))
+  (data/dir "janus-index"))
 
 (defstate graph
   :start (let [^Map config
                {"gremlin.graph" "org.janusgraph.core.JanusGraphFactory"
                 "storage.backend" "berkeleyje"
-                "storage.directory" (path @db-dir)
+                "storage.directory" (path db-dir)
                 "index.lex.backend" "lucene"
-                "index.lex.directory" (path @index-dir)
+                "index.lex.directory" (path index-dir)
                 "schema.default" "none"}]
            (GraphFactory/open (MapConfiguration. config)))
   :stop (.close ^StandardJanusGraph graph))
 
 (defn delete-graph!
   []
-  (delete! @index-dir)
-  (delete! @db-dir))
+  (delete! index-dir)
+  (delete! db-dir))
 
 (defn enum->map
   [vals]
@@ -214,7 +214,7 @@
      (upsert-vertex g :lexeme :uri "urn:test")))
   (is
    (with-tx [g graph]
-     (doseq [{:keys [id forms]} (article/articles @git/dir)]
+     (doseq [{:keys [id forms]} (article/articles git/dir)]
        (let [lexeme (upsert-vertex g :lexeme :uri id)]
          (doseq [form forms]
            (let [form (upsert-vertex g :form :repr form)]

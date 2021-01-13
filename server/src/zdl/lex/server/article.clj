@@ -56,19 +56,19 @@
   {:query (s/keys :req-un [::form ::pos])})
 
 (defn get-article [{{:keys [resource]} :path-params}]
-  (let [^File f (file @git/dir resource)]
+  (let [^File f (file git/dir resource)]
     (if (.isFile f)
       (htstatus/ok f)
       (htstatus/not-found resource))))
 
 (defn create-article [{{:keys [user]} :identity
                        {:keys [form pos]} :params}]
-  (locking @git/dir
+  (locking git/dir
     (let [xml-id (generate-id)
           xml (new-article-xml xml-id form pos user)
           filename (form->filename form)
           id (str new-article-collection "/" filename "-" xml-id ".xml")
-          ^File f (file @git/dir id)
+          ^File f (file git/dir id)
           ^File d (.getParentFile f)]
       (.mkdirs d)
       (spit f xml :encoding "UTF-8")
@@ -77,8 +77,8 @@
       (htstatus/ok {:id id :form form :pos pos}))))
 
 (defn post-article [{{:keys [resource]} :path-params :as req}]
-  (locking @git/dir
-    (let [^File f (file @git/dir resource)]
+  (locking git/dir
+    (let [^File f (file git/dir resource)]
       (if (.isFile f)
         (do
           (spit f (htreq/body-string req) :encoding "UTF-8")

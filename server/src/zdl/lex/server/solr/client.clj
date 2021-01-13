@@ -11,43 +11,42 @@
             [zdl.lex.server.solr.doc :refer [article->fields]]
             [zdl.xml.util :as xml]))
 
-(def req
+(def ^:private client
+  (http-client/configure (getenv "SOLR_USER") (getenv "SOLR_PASSWORD")))
+
+(def ^:private base-url
+  (str
+   (getenv "SOLR_URL" "http://localhost:8983/solr/")
+   (getenv "SOLR_CORE" "articles")))
+
+(defn req
   "Solr client request fn with configurable base URL and authentication"
-  (delay
-    (let [client
-          (http-client/configure
-           (getenv "ZDL_LEX_SOLR_USER")
-           (getenv "ZDL_LEX_SOLR_PASSWORD"))
-          base-url
-          (str
-           (getenv "ZDL_LEX_SOLR_URL" "http://localhost:8983/solr/")
-           (getenv "ZDL_LEX_SOLR_CORE" "articles"))]
-      (fn [{:keys [url] :as req}]
-        (client (assoc req :url (str base-url url)))))))
+  [{:keys [url] :as req}]
+  (client (assoc req :url (str base-url url))))
 
 (deftimer [solr client query-timer])
 
 (defn query [params]
   (->>
-   (@req {:method :get :url "/query"
-          :query-params params
-          :as :json})
+   (req {:method :get :url "/query"
+         :query-params params
+         :as :json})
    (time! query-timer)))
 
 (deftimer [solr client suggest-timer])
 
 (defn suggest [name q]
   (->>
-   (@req {:method :get :url "/suggest"
-          :query-params {"suggest.dictionary" name "suggest.q" q}
-          :throw-exceptions false :coerce :always
-          :as :json})
+   (req {:method :get :url "/suggest"
+         :query-params {"suggest.dictionary" name "suggest.q" q}
+         :throw-exceptions false :coerce :always
+         :as :json})
    (time! suggest-timer)))
 
 (defn build-suggestions [name]
-  (@req {:method :get :url "/suggest"
-         :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
-         :as :json}))
+  (req {:method :get :url "/suggest"
+        :query-params {"suggest.dictionary" name "suggest.buildAll" "true"}
+        :as :json}))
 
 (deftimer [solr client forms-suggestions-build-timer])
 
@@ -77,7 +76,7 @@
    :as :json})
 
 (defn batch-update [updates]
-  (doall (pmap (comp @req (partial merge update-req)) updates)))
+  (doall (pmap (comp req (partial merge update-req)) updates)))
 
 (def commit-optimize
   (partial batch-update [{:body "<update><commit/><optimize/></update>"
@@ -91,7 +90,7 @@
                                       :content-type :xml)))))
 
 (defn- articles->add-xml [article-files]
-  (let [f->id (comp str (partial relativize @git/dir))
+  (let [f->id (comp str (partial relativize git/dir))
         doc (xml/new-document)
         el #(.createElement doc %)
         add (doto (el "add") (.setAttribute "commitWithin" "10000"))]
@@ -140,7 +139,7 @@
 (defn rebuild-index []
   (->>
    (let [sync-start (System/currentTimeMillis)
-         articles (afs/files @git/dir)]
+         articles (afs/files git/dir)]
      (when-not (empty? (doall (add-articles articles)))
        (update-articles query->delete-xml
                         [(format "time_l:[* TO %s}" sync-start)])

@@ -30,14 +30,13 @@
   (comp str server-url))
 
 (def auth
-  (delay
-    (let [user (getenv "ZDL_LEX_SERVER_USER")
-          password (getenv "ZDL_LEX_SERVER_PASSWORD")]
-      (if (and user password) [user password]))))
+  (let [user (getenv "SERVER_USER")
+        password (getenv "SERVER_PASSWORD")]
+    (when (and user password) [user password])))
 
 (defn request
   [req]
-  (-> (some->> auth deref (array-map :basic-auth))
+  (-> (some->> auth (array-map :basic-auth))
       (merge {:request-method :get :accept :edn :as :clojure} req)))
 
 (defn get-status

@@ -10,35 +10,30 @@
             [zdl.lex.server.git :as server-git]))
 
 (def prod-origin
-  (delay (getenv "ZDL_LEX_PROD_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git")))
+  (getenv "PROD_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git"))
 
 (def prod-branch
-  (delay (getenv "ZDL_LEX_PROD_GIT_BRANCH" "zdl-lex-server/production")))
+  (getenv "PROD_GIT_BRANCH" "zdl-lex-server/production"))
 
 (def prod-dir
-  (delay (data/dir "prod")))
+  (data/dir "prod"))
 
 (defn prod-articles
   []
-  (seq (sort (afs/files @prod-dir))))
+  (seq (sort (afs/files prod-dir))))
 
 (defn clone-prod!
   []
-  (let [dir @prod-dir
-        f (file dir)
-        path (path dir)
-        origin @prod-origin
-        branch @prod-branch]
-    (when-not (prod-articles)
-      (git/sh! dir "clone" "--quiet" origin path))
-    (git/assert-clean dir)
-    (when-not (= branch (git/head-ref dir))
-      (git/sh! dir "checkout" "--track" (str "origin/" branch)))))
+  (when-not (prod-articles)
+    (git/sh! prod-dir "clone" "--quiet" prod-origin (path prod-dir)))
+  (git/assert-clean prod-dir)
+  (when-not (= prod-branch (git/head-ref prod-dir))
+    (git/sh! prod-dir "checkout" "--track" (str "origin/" prod-branch))))
 
 (defn pull-prod!
   []
   (clone-prod!)
-  (git/sh! @prod-dir "pull"))
+  (git/sh! prod-dir "pull"))
 
 (defn gen-prod-article-set
   [& args]
@@ -47,21 +42,22 @@
 
 (defn gen-article-set
   [& args]
-  (when (.isDirectory (file @server-git/dir ".git"))
+  (when (.isDirectory (file server-git/dir ".git"))
     (throw (IllegalStateException. "Git data exists")))
   (gen/fmap
    (fn [articles]
-     (let [git-dir @server-git/dir]
-       (git/sh! "." "init" "--quiet" (path git-dir))
-       (log/debugf "Copy %d articles to %s" (count articles) (path git-dir))
-       (let [article->dest (comp
-                            (partial resolve-path (path-obj git-dir))
-                            (partial relativize (path-obj @prod-dir)))]
-         (doseq [article articles] (copy article (article->dest article)))
-         (git/sh! git-dir "add" ".")
-         (git/sh! git-dir "commit" "-m" "Sets up test")
-         (afs/files git-dir))))
-   (apply gen-prod-article-set args)))
+     (git/sh! "." "init" "--quiet" (path server-git/dir))
+     (log/debugf "Copy %d articles to %s"
+                 (count articles)
+                 (path server-git/dir))
+     (let [article->dest (comp
+                          (partial resolve-path (path-obj server-git/dir))
+                          (partial relativize (path-obj prod-dir)))]
+       (doseq [article articles] (copy article (article->dest article)))
+       (git/sh! server-git/dir "add" ".")
+       (git/sh! server-git/dir "commit" "-m" "Sets up test")
+       (afs/files server-git/dir))))
+   (apply gen-prod-article-set args))
 
 (defn generate-article-set
   [[min-articles max-articles]]
@@ -73,12 +69,12 @@
    (create-article-set-fixture [100 200]))
   ([set-size-range]
    (fn [f]
-     (delete! @server-git/dir true)
+     (delete! server-git/dir true)
      (generate-article-set set-size-range)
      (f)
-     (delete! @server-git/dir))))
+     (delete! server-git/dir))))
 
 (use-fixtures :once (create-article-set-fixture [1000 2000]))
 
 (deftest fixtures
-  (is (seq (afs/files @server-git/dir))))
+  (is (seq (afs/files server-git/dir))))

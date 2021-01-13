@@ -48,22 +48,25 @@
      "/status/*"]
     :handler authenticated?}])
 
-(def authenticate
-  (delay
-    (let [auth-user (getenv "ZDL_LEX_SERVER_USER")
-          auth-password (getenv "ZDL_LEX_SERVER_PASSWORD")]
-      (fn [req {:keys [username password]}]
-        (if-not (and auth-user auth-password)
-          ;; pass-through credentials from upstream
-          {:user username :password password}
-          ;; else authenticate against env credentials
-          (if (and (= auth-user username) (= auth-password password))
-            {:user username :password password}))))))
+(def auth-user
+  (getenv "SERVER_USER"))
+
+(def auth-password
+  (getenv "SERVER_PASSWORD"))
+
+(defn authenticate
+  [req {:keys [username password]}]
+  (if-not (and auth-user auth-password)
+    ;; pass-through credentials from upstream
+    {:user username :password password}
+    ;; else authenticate against env credentials
+    (if (and (= auth-user username) (= auth-password password))
+      {:user username :password password})))
 
 (defn wrap
   [handler]
   (let [auth-backend (http-basic-backend {:realm "ZDL-Lex-Server"
-                                          :authfn @authenticate})]
+                                          :authfn authenticate})]
     (-> handler
         (wrap-access-rules {:policy :reject :rules access-rules})
         (wrap-authentication auth-backend)

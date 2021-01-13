@@ -69,6 +69,6 @@
                           :handler (swagger-ui/create-swagger-ui-handler)}]])
         (ring/routes
          (ring/create-default-handler)))
-       (run-jetty {:port (Integer/parseInt (getenv "ZDL_LEX_HTTP_PORT" "3000"))
+       (run-jetty {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))
                    :join? false}))))
   :stop (.. server (stop)))

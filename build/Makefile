@@ -1,19 +1,16 @@
-define clear-classpath-cache =
-find .. -name .cpcache -exec rm -rf {} \; || true
-endef
-
 .PHONY: build
-build:
-	$(clear-classpath-cache)
-	clojure -m zdl.lex.build
-	$(clear-classpath-cache)
+build: clean-cpcache
+	@clojure -X:build
 
-.PHONY: release
-release:
-	$(clear-classpath-cache)
-	clojure -m zdl.lex.build release
-	$(clear-classpath-cache)
+.PHONY: client
+client: clean-cpcache
+	@clojure -X:oxygen
 
-.PHONY: build_env
-build_env:
-	docker build -t lex.dwds.de/zdl-lex/build:1.0 .
+.PHONY: solr
+solr:
+	@clojure -X:solr
+
+.PHONY: clean-cpcache
+clean-cpcache:
+	@find .. -name .cpcache -exec rm -rf {} \; 2>/dev/null || true
+

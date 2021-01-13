@@ -15,10 +15,9 @@
            ro.sync.exml.plugin.lock.LockException))
 
 (def ^:private env-auth
-  (delay
-    (let [user (getenv "ZDL_LEX_SERVER_USER")
-          password (getenv "ZDL_LEX_SERVER_PASSWORD")]
-      (if (and user password) [user password]))))
+  (let [user (getenv "SERVER_USER")
+        password (getenv "SERVER_PASSWORD")]
+    (if (and user password) [user password])))
 
 (def ^:private auth
   (atom nil))
@@ -27,7 +26,7 @@
   []
   (if-let [auth @auth]
     auth
-    (if-not (reset! auth @env-auth)
+    (if-not (reset! auth env-auth)
       (let [status-con (.. (server-url "/status") (openConnection))]
         (.. status-con (setRequestProperty "Accept" "application/edn"))
         (with-open [status-stream (.. status-con (getInputStream))

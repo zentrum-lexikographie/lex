@@ -15,27 +15,27 @@
   (:import java.io.File))
 
 (def dir
-  (delay (data/dir "git")))
+  (data/dir "git"))
 
 (def origin
-  (delay (getenv "ZDL_LEX_GIT_ORIGIN")))
+  (getenv "GIT_ORIGIN"))
 
 (def branch
-  (delay (getenv "ZDL_LEX_GIT_BRANCH" "zdl-lex-server/development")))
+  (getenv "GIT_BRANCH" "zdl-lex-server/development"))
 
 (defn file->id
   [f]
-  (str (relativize @dir f)))
+  (str (relativize dir f)))
 
 (defstate git-available?
-  :start (log/info (-> (git/sh! @dir "--version") :out str/trim)))
+  :start (log/info (-> (git/sh! dir "--version") :out str/trim)))
 
 (deftimer [git local gc-timer])
 
 (defn gc!
   []
   (->>
-   (git/sh! @dir "gc" "--aggressive")
+   (git/sh! dir "gc" "--aggressive")
    (time! gc-timer)))
 
 (defstate gc-scheduler
@@ -46,27 +46,24 @@
 
 (defn fetch!
   []
-  (when @origin
+  (when origin
     (->>
-     (git/sh! @dir "fetch" "--quiet" "origin" "--tags")
+     (git/sh! dir "fetch" "--quiet" "origin" "--tags")
      (time! fetch-timer))))
 
 (deftimer [git remote push-timer])
 
 (defn push!
   []
-  (when @origin
+  (when origin
     (->>
-     (git/sh! @dir "push" "--quiet" "origin" @branch)
+     (git/sh! dir "push" "--quiet" "origin" branch)
      (time! push-timer))))
 
 (defstate ^{:on-reload :noop} repo
-  :start (locking @dir
-           (let [dir @dir
-                 f (file dir)
-                 path (path dir)
-                 branch @branch
-                 origin @origin]
+  :start (locking dir
+           (let [f (file dir)
+                 path (path dir)]
              (when-not (.isDirectory (file f ".git"))
                (if origin
                  (do
@@ -92,29 +89,29 @@
 
 (defn publish-paths
   [paths]
-  (publish-changes (map (partial file @dir) paths)))
+  (publish-changes (map (partial file dir) paths)))
 
 (deftimer [git local status-timer])
 
 (defn- status
   []
-  (->> (git/status @dir)
+  (->> (git/status dir)
        (time! status-timer)))
 
 (deftimer [git local commit-timer])
 
 (defn add!
   [f]
-  (locking @dir
-    (git/sh! @dir "add" (path f))))
+  (locking dir
+    (git/sh! dir "add" (path f))))
 
 (defn commit!
   []
   (when
       (->>
-       (locking @dir
+       (locking dir
          (when-let [changes (not-empty (status))]
-           (->> (git/sh! @dir "commit" "-a" "-m" "zdl-lex-server")
+           (->> (git/sh! dir "commit" "-a" "-m" "zdl-lex-server")
                 (time! commit-timer))
            changes))
        (mapcat :paths)
@@ -124,9 +121,8 @@
 (defn fast-forward!
   [ref]
   (fetch!)
-  (locking @dir
-    (let [dir @dir
-          head (git/head-rev dir)]
+  (locking dir
+    (let [head (git/head-rev dir)]
       (git/assert-clean dir)
       (git/sh! dir "merge" "--ff-only" "-q" ref)
       (->> (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))

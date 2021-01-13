@@ -1,41 +1,26 @@
-.PHONY: build_env
-build_env:
-	$(MAKE) -C build build_env
-
-define with-build-env =
-docker run -it --rm\
-	-v $$SSH_AUTH_SOCK:/ssh-agent\
-	-e SSH_AUTH_SOCK=/ssh-agent\
-	-v $$PWD:/src\
-	-w /src\
-	lex.dwds.de/zdl-lex/build:1.0
-endef
-
 .PHONY: build
-build: build_env
-	$(with-build-env) make docker_build
+build:
+	@$(MAKE) -C build
+	@$(MAKE) -C docker/solr
+	@$(MAKE) -C docker/server
 
-.PHONY: release
-release: build_env
-	$(with-build-env) make docker_release
+.PHONY: client
+client:
+	@$(MAKE) -C build client
 
-define with-docker-env
-	mkdir -m 0700 /root/.ssh || true
-	ssh-keyscan -H git.zdl.org >>/root/.ssh/known_hosts
-	nohup Xvfb :99 -nolisten tcp >/dev/null &
-	DISPLAY=:99
-endef
+.PHONY: solr
+solr:
+	@$(MAKE) -C docker/solr
+	@$(MAKE) -C build solr
 
-.PHONY: docker_build
-docker_build:
-	$(with-docker-env) $(MAKE) -C build
+.PHONY: help
+help:
+	@echo 'Targets:'
+	@echo ''
+	@echo ' build  - Builds client, server and packages both in a Docker'
+	@echo '          container'
+	@echo ' client - Builds client and starts an OxygenXML Editor instance'
+	@echo '          with the built development version of the client'
+	@echo ' solr   - Starts local Apache Solr server as a Docker container'
 
-.PHONY: docker_release
-docker_release:
-	$(with-docker-env) $(MAKE) -C build release
 
-.PHONY: publish
-publish: VERSION = $(subst v,,$(shell git describe --tags --always))
-publish:
-	docker push lex.dwds.de/zdl-lex/solr:$(VERSION)
-	docker push lex.dwds.de/zdl-lex/server:$(VERSION)

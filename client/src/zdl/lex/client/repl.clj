@@ -9,7 +9,7 @@
   (ns-resolve 'cider.nrepl 'cider-nrepl-handler))
 
 (defstate server
-  :start (when-let [port (getenv "ZDL_LEX_REPL_PORT")]
+  :start (when-let [port (getenv "REPL_PORT")]
            (log/info (format "Starting REPL server @%s/tcp" port))
            (repl/start-server :port (Integer/parseInt port)
                               :handler (nrepl-handler)))

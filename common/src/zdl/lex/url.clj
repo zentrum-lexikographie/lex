@@ -29,23 +29,23 @@
     (URL. (str/join \? (remove nil? [url query])))))
 
 (def server-base
-  (delay (getenv "ZDL_LEX_SERVER_URL" "https://lex.dwds.de/")))
+  (getenv "SERVER_URL" "https://lex.dwds.de/"))
 
 (defn server-url
   [& args]
-  (apply url @server-base args))
+  (apply url server-base args))
 
 (def url-base
-  (delay (str/replace @server-base #"[^:]+://" "lex://")))
+  (str/replace server-base #"[^:]+://" "lex://"))
 
 (defn lex? [^URL u]
-  (str/starts-with? (str u) @url-base))
+  (str/starts-with? (str u) url-base))
 
 (defn id->url [id]
-  (.. (URL. @url-base) (toURI) (resolve (path->uri id)) (toURL)))
+  (.. (URL. url-base) (toURI) (resolve (path->uri id)) (toURL)))
 
 (defn url->id [^URL u]
-  (if (lex? u) (.. (URL. @url-base) (toURI)
+  (if (lex? u) (.. (URL. url-base) (toURI)
                    (relativize (.. u (toURI))) (getPath))))
 
 (defn install-stream-handler!

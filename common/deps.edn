@@ -9,7 +9,7 @@
 
   ;; Data formats (XML)
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
-                   :sha "4fd84e2e3b03f3cd1a2ce64778d7058024909376"}
+                   :sha "07b844a24817fa61553e96e91715c30c43ee83c4"}
 
   ;; Specs, randomized testing
   metosin/spec-tools {:mvn/version "0.10.0"}
@@ -18,15 +18,17 @@
   ;; Tools
   org.clojure/tools.cli {:mvn/version "0.4.2"}
   org.clojure/tools.logging {:mvn/version "1.0.0"}
-  instaparse {:mvn/version "1.4.10"}
-  camel-snake-kebab {:mvn/version "0.4.1"}
+  instaparse/instaparse {:mvn/version "1.4.10"}
+  camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
 
   ;; Infrastruture (HTTP client, cron scheduling, state management)
-  clj-http {:mvn/version "3.9.1" :exclusions [commons-logging]}
-  cronjure {:mvn/version "0.1.1"}
-  environ {:mvn/version "1.1.0"}
-  mount {:mvn/version "0.1.16"}
-  io.github.cdimascio/java-dotenv {:mvn/version "5.1.4"}
+  clj-http/clj-http {:mvn/version "3.9.1"
+                     :exclusions [commons-logging/commons-logging]}
+  cronjure/cronjure {:mvn/version "0.1.1"}
+  mount/mount {:mvn/version "0.1.16"}
+
+  ;; Configuration via .env
+  io.github.cdimascio/dotenv-java {:mvn/version "2.2.0"}
 
   ;; Logging
   org.slf4j/jcl-over-slf4j {:mvn/version "1.7.30"}

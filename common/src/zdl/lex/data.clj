@@ -4,11 +4,11 @@
   (:import java.io.File))
 
 (def base-dir
-  (delay (getenv "ZDL_LEX_DATA_DIR" "zdl-lex-data")))
+  (getenv "DATA_DIR" "zdl-lex-data"))
 
 (defn- ^File file*
   [& args]
-  (apply fs/file @base-dir args))
+  (apply fs/file base-dir args))
 
 (defn assert-dir
   [^File d]

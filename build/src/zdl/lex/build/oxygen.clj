@@ -4,6 +4,7 @@
             [zdl.lex.sh :refer [sh!]]
             [zdl.lex.build :as build]
             [clojure.string :as str]
+            [clojure.stacktrace :refer [print-stack-trace]]
             [clojure.tools.logging :as log])
   (:import java.io.File))
 
@@ -22,13 +23,13 @@
        (map file) (filter #(.isDirectory ^File %))
        (map path) (first)))
 
-(defn -main
-  [& args]
+(defn start!
+  [_]
   (try
     (when-not oxygen-home
       (log/error "Cannot locate $OXYGEN_HOME")
       (System/exit 1))
-    (build/client!)
+    (build/package-client!)
     (log/info [oxygen-home (path oxygen-dir)])
     (->>
      (..
@@ -45,6 +46,8 @@
       (directory oxygen-dir)
       (inheritIO)
       (start)
-      (waitFor))
-     (System/exit))
-    (finally (shutdown-agents))))
+      (waitFor)))
+     (System/exit 0)
+     (catch Throwable t
+       (print-stack-trace t)
+       (System/exit 1))))

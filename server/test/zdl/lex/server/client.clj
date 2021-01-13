@@ -52,14 +52,13 @@
   ch)
 
 (def ^:private query-template
-  (delay
-    {:url (.. (URL. @server-base) (toURI) (resolve "/index") (toString))
-     :method :get
-     :query-params {:limit "1000"} :as :json}))
+  {:url (.. (URL. server-base) (toURI) (resolve "/index") (toString))
+   :method :get
+   :query-params {:limit "1000"} :as :json})
 
 (defn query-random-article
   [{:keys [author query] :as tx}]
-  (let [req (assoc-in @query-template [:query-params :q] query)]
+  (let [req (assoc-in query-template [:query-params :q] query)]
     (a/go
       (->> (some->> (a/<! (http-request author (a/chan) req))
                     :body :result not-empty rand-nth :id)
@@ -72,7 +71,7 @@
       tx
       (let [req {:method (if xml :post :get)
                  :body xml
-                 :url (.. (URL. @server-base) (toURI)
+                 :url (.. (URL. server-base) (toURI)
                           (resolve "/article/")
                           (resolve (path->uri id))
                           (toString))}]

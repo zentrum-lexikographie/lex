@@ -15,28 +15,31 @@
             [zdl.lex.data :as data]))
 
 (def mantis-base
-  (delay (getenv "ZDL_LEX_MANTIS_BASE" "https://mantis.dwds.de/mantis")))
+  (getenv "MANTIS_BASE" "https://mantis.dwds.de/mantis"))
 
 (defn issue-id->url
   [id]
-  (str @mantis-base "/view.php?id=" id))
+  (str mantis-base "/view.php?id=" id))
 
 (def client
-  (delay
-    (let [wsdl (str @mantis-base "/api/soap/mantisconnect.wsdl")
-          endpoint (str @mantis-base "/api/soap/mantisconnect.php")]
-      (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}}))))
+  (let [wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
+        endpoint (str mantis-base "/api/soap/mantisconnect.php")]
+    (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}})))
 
-(def authenticate
-  (delay
-    (let [user (getenv "ZDL_LEX_MANTIS_USER")
-          password (getenv "ZDL_LEX_MANTIS_PASSWORD")]
-      (if (and user password)
-        (partial merge {:username user :password password})
-        (throw (IllegalStateException. "No Mantis API credentials"))))))
+(def ^:private user
+  (getenv "MANTIS_USER"))
+
+(def ^:private password
+  (getenv "MANTIS_PASSWORD"))
+
+(defn authenticate
+  [req]
+  (when-not (and user password)
+    (throw (IllegalStateException. "No Mantis API credentials")))
+  (merge {:username user :password password} req))
 
 (def project
-  (delay (getenv "ZDL_LEX_MANTIS_PROJECT" "5")))
+  (getenv "MANTIS_PROJECT" "5"))
 
 (defn- zip->return [loc]
   (zx/xml-> loc dz/children zip/branch? :return))
@@ -49,7 +52,7 @@
   ([op params] (results op params zip->items))
   ([op params zip->locs]
    (log/trace {:op op :params (dissoc params :username :password)})
-   (-> (@client op (@authenticate params))
+   (-> (client op (authenticate params))
        (zip/xml-zip)
        (zip->locs))))
 
@@ -86,8 +89,8 @@
   (let [status (mantis-enum :mc_enum_status)
         severities (mantis-enum :mc_enum_severities)
         resolutions (mantis-enum :mc_enum_resolutions)
-        users (mantis-enum :mc_project_get_users {:project_id @project :access 0})]
-    (->> (scroll :mc_project_get_issue_headers {:project_id @project})
+        users (mantis-enum :mc_project_get_users {:project_id project :access 0})]
+    (->> (scroll :mc_project_get_issue_headers {:project_id project})
          (map (fn [item]
                 (let [id (int-property item :id)
                       summary (property item :summary)]
@@ -126,21 +129,22 @@
        (first)))
 
 (def mantis-dump
-  (delay (data/file "mantis.edn")))
+  (data/file "mantis.edn"))
 
 (defn store-dump [data]
   (let [data (->> data
                   (group-by :id) (vals) (map first)
                   (sort-by :last-updated #(compare %2 %1))
                   (vec))]
-    (spit @mantis-dump (pr-str data))
+    (spit mantis-dump (pr-str data))
     data))
 
 (defn read-dump []
-  (try (read-string (slurp @mantis-dump))
+  (try (read-string (slurp mantis-dump))
        (catch Throwable t (log/debug t) [])))
 
-(defonce index (atom {}))
+(defonce index
+  (atom {}))
 
 (defn index-issues [issues]
   (group-by :lemma issues))
