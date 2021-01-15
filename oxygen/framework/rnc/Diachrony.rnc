@@ -98,6 +98,7 @@ Sprachen = (
 	| 'alat'         # ?== Old Latin
 	| 'alban'        # sqi: Albanian
 	| 'alem'         # gsw: Alemannic
+	| 'algonkin'
 	| 'alit' 
 	| 'altalem'
 	| 'altarmen'     # xcl: Classical Armenian
