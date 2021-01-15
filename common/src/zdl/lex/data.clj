@@ -13,7 +13,7 @@
 (defn assert-dir
   [^File d]
   (.mkdirs d)
-  (when-not (.isDirectory d) (throw (IllegalArgumentException. d)))
+  (when-not (.isDirectory d) (throw (IllegalArgumentException. (fs/path d))))
   d)
 
 (defn ^File dir

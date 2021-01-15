@@ -15,6 +15,9 @@
                      :exclusions [commons-logging/commons-logging]}}
  :aliases
  {:build {:exec-fn zdl.lex.build/build!}
+  :release {:exec-fn zdl.lex.build.release/next!}
   :oxygen {:exec-fn zdl.lex.build.oxygen/start!}
   :solr {:exec-fn zdl.lex.build.docker/start-solr!
-         :exec-args {:image "lex.dwds.de/zdl-lex/solr:latest"}}}}
+         :exec-args {:image "lex.dwds.de/zdl-lex/solr:latest"}}
+  :server {:exec-fn zdl.lex.build.docker/start-server!
+           :exec-args {:image "lex.dwds.de/zdl-lex/server:latest"}}}}

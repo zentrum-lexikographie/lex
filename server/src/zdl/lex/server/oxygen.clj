@@ -11,7 +11,9 @@
 
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
-(def version (-> "version.edn" io/resource slurp read-string :version))
+(def version
+  (or (some-> "version.edn" io/resource slurp read-string :version)
+      "000000.00.00"))
 
 (defn generate-update-descriptor [_]
   (let [descriptor (-> "updateSite.xml" io/resource xml/->dom)

@@ -10,10 +10,10 @@
             [zdl.lex.server.git :as server-git]))
 
 (def prod-origin
-  (getenv "PROD_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git"))
+  (getenv "TEST_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git"))
 
 (def prod-branch
-  (getenv "PROD_GIT_BRANCH" "zdl-lex-server/production"))
+  (getenv "TEST_GIT_BRANCH" "zdl-lex-server/production"))
 
 (def prod-dir
   (data/dir "prod"))

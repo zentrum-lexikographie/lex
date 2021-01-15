@@ -31,8 +31,8 @@
   buddy/buddy {:mvn/version "2.0.0"}
 
   ;; Webjar-based Assets
-  ring-webjars {:mvn/version "0.2.0"
-                :exclusions [org.webjars/webjars-locator]}
+  ring-webjars/ring-webjars {:mvn/version "0.2.0"
+                             :exclusions [org.webjars/webjars-locator]}
   org.webjars.npm/bulma {:mvn/version "0.7.4"}
   org.webjars.npm/material-icons {:mvn/version "0.3.0"}
   org.webjars/webjars-locator-core {:mvn/version "0.41"
@@ -61,4 +61,6 @@
    {zdl/ots-nlp-pipeline {:git/url "git@git.zdl.org:zdl/ots-nlp-pipeline.git"
                           :sha "e3423b81e1fd62fcf8d17acdc684129db886229a"}}}
   :prod
-  {:extra-paths ["classes" "../oxygen" "../cli/build"]}}}
+  {:extra-paths ["classes" "../oxygen" "../cli/build"]}
+  :server
+  {:exec-fn zdl.lex.server/-main}}}

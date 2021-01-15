@@ -1,20 +1,15 @@
 (ns zdl.lex.build
   (:require [clojure.edn :as edn]
-            [clojure.java.io :as io]
             [clojure.java.shell :refer [with-sh-dir with-sh-env]]
             [clojure.string :as str]
-            [clojure.stacktrace :refer [print-stack-trace]]
             [clojure.tools.deps.alpha.util.dir :as deps-dir]
+            [clojure.tools.logging :as log]
             [uberdeps.api :as uberdeps]
-            [zdl.lex.env :refer [getenv]]
-            [zdl.lex.fs :refer [file path clear-dir!]]
             [zdl.lex.build.fs :refer :all]
-            [zdl.lex.git :as git]
+            [zdl.lex.env :refer [getenv]]
+            [zdl.lex.fs :refer [clear-dir! file path]]
             [zdl.lex.sh :refer [sh!]]
-            [zdl.lex.build.version :as version]
-            [zdl.xml.validate :as xv]
-            [clojure.tools.logging :as log])
-  (:import java.io.File))
+            [zdl.xml.validate :as xv]))
 
 (defn compile-rnc!
   []
@@ -56,7 +51,6 @@
   []
   (let [classes (file client-dir "classes")]
     (clear-dir! classes)
-    (version/write!)
     (compile-rnc!)
     (with-sh-env (java-8-env)
       (when-not (java-8?)
@@ -88,11 +82,7 @@
 
 (defn build!
   [_]
-  (try
-    (package-client!)
-    (package-cli!)
-    (package-server!)
-    (System/exit 0)
-    (catch Throwable t
-      (print-stack-trace t)
-      (System/exit 1))))
+  (package-client!)
+  (package-cli!)
+  (package-server!)
+  (System/exit 0))

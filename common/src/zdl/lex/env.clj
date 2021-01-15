@@ -10,4 +10,7 @@
   ([k]
    (getenv k nil))
   ([k df]
-   (or (some->> k (str "ZDL_LEX_") System/getProperty str/trim not-empty) df)))
+   (let [k (str "ZDL_LEX_" k)]
+     (or (some->> k System/getProperty str/trim not-empty)
+         (some->> k System/getenv str/trim not-empty)
+         df))))
