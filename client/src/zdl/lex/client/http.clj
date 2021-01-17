@@ -78,7 +78,7 @@
 (defn request
   [{:keys [url] :as req}]
   (-> (when-let [auth (request-auth)] {:basic-auth auth})
-      (merge request-defaults {:url (str url)})
+      (merge request-defaults req {:url (str url)})
       (http/request)
       (handle-errors)))
 
