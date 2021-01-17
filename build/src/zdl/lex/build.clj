@@ -27,7 +27,8 @@
   [base-dir & args]
   (log/info (concat [(path base-dir)] args))
   (let [deps (-> (file base-dir "deps.edn") slurp edn/read-string)]
-    (binding [uberdeps/level :error]
+    (binding [uberdeps/level :error
+              uberdeps/exclusions (conj uberdeps/exclusions #"^\.env$")]
       (deps-dir/with-dir base-dir
         (apply uberdeps/package (concat [deps] args))))))
 
