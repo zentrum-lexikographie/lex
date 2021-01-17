@@ -69,11 +69,16 @@
     (= 423 status) (-> body lock->exception throw)
     :else (->> (ex-info (str "status: " status) response) (IOException.) throw)))
 
+(def request-defaults
+  (merge {:accept "application/edn"
+          :throw-exceptions false
+          :coerce :always}
+         (when (getenv "HTTPS_INSECURE") {:insecure? true})))
+
 (defn request
   [{:keys [url] :as req}]
-  (-> (if-let [auth (request-auth)] {:basic-auth auth})
-      (merge {:accept "application/edn"})
-      (merge req {:url (str url) :throw-exceptions false :coerce :always})
+  (-> (when-let [auth (request-auth)] {:basic-auth auth})
+      (merge request-defaults {:url (str url)})
       (http/request)
       (handle-errors)))
 
