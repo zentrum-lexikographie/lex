@@ -22,7 +22,7 @@ Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
 
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
-Beleg, Kollokation, Kompetenzbeispiel, Idiom, Phrasem,
+Beleg, Kollokation, Kompetenzbeispiel, Phrasem,
 Kollokationen, Konstruktionsmuster, Kommentar {
 	border: 1px dotted #999;
 	padding: 0.5em;
@@ -49,7 +49,6 @@ Grammatik > Kommentar:before  { content: "Grammatikkommentar:";}
 Lesart > Kommentar:before     { content: "Lesartenkommentar (zur Pragmatik):";}
 Frequenzangabe:before         { content: "Frequenz"; }
 Syntagmatik:before            { content: "Syntagmatik"; }
-Idiom:before                  { content: "Idiom"; }
 Phrasem:before                { content: "Phrasem"; }
 Konstruktionsmuster:before    { content: "Konstruktionsmuster"; }
 Kollokationen:before          { content: "Kollokationen"; }
@@ -65,7 +64,7 @@ Formangabe >*:before,
 Grammatik > *:before, Diachronie > *:before, Diasystematik > *:before,
 Fundstelle:before, Belegtext:before,
 Verweise > *:before, Verweis > *:before, Kollokation > *:before,
-Konstruktionsmuster > *:before, Idiom > *:before, Phrasem > *:before {
+Konstruktionsmuster > *:before, Phrasem > *:before {
 	color: gray;
 }
 Diasystematik > *, Grammatik > * {
