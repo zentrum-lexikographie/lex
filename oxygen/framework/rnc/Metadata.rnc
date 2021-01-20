@@ -85,6 +85,7 @@ Metadaten.allgemein = (
 		| 'Duden_1999/DWDS'
 		| 'Wahrig'
 		| 'Wahrig/DWDS'
+		| 'Wahrig/WDG'
 		| 'Wahrig/ZDL'
 		| 'WDG'
 		| 'WDG/DWDS'
