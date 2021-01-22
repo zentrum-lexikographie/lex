@@ -136,6 +136,7 @@ Sprachen = (
 	| 'arab'         # ara: Arabic
 	| 'arab-tuerk'
 	| 'aram'         # ?arc: Official Aramaic (700-300 BCE)
+	| 'arawak'
 	| 'armen'        # hye: Armenian
 	| 'aruak'        # == Taino?
 	| 'aruss'        # orv: Old Russian
@@ -235,7 +236,7 @@ Sprachen = (
 	| 'hindi'        # hin: Hindi
 	| 'hindust'
 	| 'hispano-arab' # ?xaa: Andalusian Arabic
-	| 'hochchin'
+	| 'hochchines'
 	| 'holl'
 	| 'holst'
 	| 'hunn'
@@ -451,7 +452,7 @@ Sprachen = (
 	| 'spaetmnd'
 	| 'spaetmnl'
 	| 'span'         # spa: Spanish
-	| 'suedchin'
+	| 'suedchines'
 	| 'suedd'
 	| 'suedhess'
 	| 'suedind'
