@@ -142,6 +142,7 @@ Verweise>Verweis[Typ="Hyperonym"]:before       { content: "Hyperonym ist ↗"; }
 Verweise>Verweis[Typ="Entsprechung"]:before    { content: "entspr. der Bed. von ↗"; }
 Verweise>Verweis[Typ="zu"]:before              { content: "zu ↗"; }
 Verweise>Verweis[Typ="vgl"]:before             { content: "vgl. ↗"; }
+Verweise>Verweis[Typ="mehr_sv"]:before         { content: "mehr unter ↗"; }
 Verweise>Verweis[Typ="Erstglied"]:before       { content: "mit Erstglied ↗"; }
 Verweise>Verweis[Typ="Binnenglied"]:before     { content: "mit Binnenglied ↗"; }
 Verweise>Verweis[Typ="Letztglied"]:before      { content: "mit Letztglied ↗"; }
