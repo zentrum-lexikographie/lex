@@ -92,6 +92,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Relativpronomen'
 			| string 'reziprokes Pronomen'
 			| string 'Ausruf'
+			| string 'Interjektion'
 			| string 'Affix'
 			| string 'Mehrwortausdruck'
 		)
