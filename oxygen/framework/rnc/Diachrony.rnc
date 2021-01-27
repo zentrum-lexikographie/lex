@@ -275,6 +275,7 @@ Sprachen = (
 	| 'kontinentalwestgerm'
 	| 'kopt'         # cop: Coptic
 	| 'korn'         # cor: Cornish
+	| 'korean'
 	| 'koybal'
 	| 'krimgot'
 	| 'krimtatar'
