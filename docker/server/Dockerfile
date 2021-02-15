@@ -15,7 +15,6 @@ ENV GIT_COMMITTER_EMAIL "noreply@lex.dwds.de"
 
 ENV GIT_SSH_COMMAND "ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
 
-VOLUME "/data"
 WORKDIR "/data"
 
 RUN set -ex; \
