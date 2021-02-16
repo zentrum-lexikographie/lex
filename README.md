@@ -1,53 +1,121 @@
 # ZDL/Lex – Lexikographic Workbench
 
-## Build Requirements
+_A client/server application serving as the authoring environment for
+lexicographic articles at the [ZDL](https://www.zdl.org/)_
+
+## Requirements/Dependencies
 
 * [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
-* [Python 3](https://www.python.org/)
 * [Docker](https://www.docker.com/)
 
-Java 8 is needed, as Oxygen XML does not work with newer versions.
+The application client is implemented as a plugin for [Oxygen XML
+Editor](https://www.oxygenxml.com/). We strive for compatibility with the
+editor's v20 which incorporates JDK v8. Thus, the client plugin has to be
+compiled with the apropriate JDK v8 API bindings. In the likely case that your
+default JDK is of a later version, you can install v8 in parallel and point the
+build scripts to its location. See below for configuration details.
 
-For Python 3, it is recommended to use a project-specific virtual environment,
-e.g. via [pyenv](https://github.com/pyenv/pyenv):
+### Optional Requirements for Tooling/Scripts
+
+* [Python 3](https://www.python.org/)
+
+For Python-based tooling and scripts in `publish/`, it is recommended to use a
+project-specific virtual environment, e.g. via
+[pyenv](https://github.com/pyenv/pyenv):
 
 ```plaintext
 $ pyenv virtualenv zdl-lex
 $ pyenv local zdl-lex
 ```
 
-## Setup
-
-Install Python dependencies and local modules.
+Then, install Python dependencies and local modules via
 
 ```plaintext
 $ pip install -r requirements.txt
 ```
 
-## Build and Deploy
+## Configuration
+
+ZDL/Lex is configured via environment variables, in line with the [Twelve-Factor
+App guidelines](https://12factor.net/). Variable settings are read from `.env`
+files in the current working directory as well the respective process
+environment.
+
+To configure the build and development environment, copy `.env.sample` to `.env`
+in the project directory and adjust the settings to your needs. See the comments
+in the sample file for a documentation of the available options. Example:
+
+```
+ZDL_LEX_JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+ZDL_LEX_SERVER_URL=http://localhost:3000/
+ZDL_LEX_SERVER_USER=admin
+ZDL_LEX_SERVER_PASSWORD=admin
+
+ZDL_LEX_DATA_DIR=../data
+
+ZDL_LEX_METRICS_REPORT_INTERVAL=0
+
+# disconnect test setup from production origin
+ZDL_LEX_GIT_ORIGIN=
+
+ZDL_LEX_MANTIS_USER=lexuser
+ZDL_LEX_MANTIS_PASSWORD=secret123!
+
+
+## Build
+
+Build tasks can be executed via `make`:
 
 ```plaintext
-$ zdl-lex-build
-Usage: zdl-lex-build [OPTIONS] COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+$ make help
+Targets:
 
-  Scripts for building, compiling, packaging ZDL-Lex.
-
-Options:
-  --help  Show this message and exit.
-
-Commands:
-  build    Compile and package modules.
-  clean    Clean compiler output.
-  client   Runs the ZDL-Lex client (in Oxygen XML Editor).
-  docker   Build Docker images.
-  dwdswb   Runs a MySQL Docker container for testing.
-  init     Init build.
-  release  Tag and push next version.
-  schema   Compile RelaxNG/Schematron rules.
-  server   Runs the ZDL-Lex server.
-  solr     Runs Solr as a local Docker container for testing.
-  version  Print current version
+ build    - Builds client, server and packages both in a Docker
+            container
+ release  - Runs a test build, creates a release tag for the current
+            git revision and reruns the build, pushing resulting
+            images in the end
+ client   - Builds client and starts an OxygenXML Editor instance
+            with the built development version of the client
+ server   - Starts local ZDL-Lex server as a Docker container
+ solr     - Starts local Apache Solr server as a Docker container
 ```
+
+Accordingly, to build the application's client and server components:
+
+```
+$ make build
+make[1]: Entering directory '/home/gregor/repositories/zdl-lex/build'
+[2021-02-16 13:10:58,116 | zdl.lex.build        ] Transpiling Artikel-XML schema (RNC -> RNG)
+[2021-02-16 13:10:58,402 | zdl.lex.build        ] Compiling Oxygen XML Editor plugin (client)
+[2021-02-16 13:11:24,778 | zdl.lex.build        ] Packaging Oxygen XML Editor plugin (client)
+[2021-02-16 13:11:28,268 | zdl.lex.build        ] Compiling CLI
+[2021-02-16 13:11:32,426 | zdl.lex.build        ] Packaging CLI
+[2021-02-16 13:11:34,730 | zdl.lex.build        ] Compiling server
+[2021-02-16 13:12:01,395 | zdl.lex.build        ] Packaging server
+make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/build'
+make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/solr'
+Sending build context to Docker daemon  213.5kB
+[…]
+Successfully built 66475cb0e5c1
+Successfully tagged lex.dwds.de/zdl-lex/solr:be91da8
+make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/solr'
+make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/server'
+Sending build context to Docker daemon  132.5MB
+[…]
+Successfully built 9cd3dbf51b66
+Successfully tagged lex.dwds.de/zdl-lex/server:be91da8
+make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
+```
+
+## Test
+
+[…]
+
+## Release
+
+[…]
 
 ## License
 
