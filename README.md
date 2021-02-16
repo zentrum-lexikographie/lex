@@ -3,6 +3,10 @@
 _A client/server application serving as the authoring environment for
 lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/320px-Schreibtisch_eines_Philologen.jpg"
+     title="Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0"
+     alt="Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0"
+     align="right">
 ## Requirements/Dependencies
 
 * [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
@@ -45,7 +49,7 @@ To configure the build and development environment, copy `.env.sample` to `.env`
 in the project directory and adjust the settings to your needs. See the comments
 in the sample file for a documentation of the available options. Example:
 
-```
+```plaintext
 ZDL_LEX_JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 ZDL_LEX_SERVER_URL=http://localhost:3000/
@@ -84,7 +88,7 @@ Targets:
 
 Accordingly, to build the application's client and server components:
 
-```
+```plaintext
 $ make build
 make[1]: Entering directory '/home/gregor/repositories/zdl-lex/build'
 [2021-02-16 13:10:58,116 | zdl.lex.build        ] Transpiling Artikel-XML schema (RNC -> RNG)
