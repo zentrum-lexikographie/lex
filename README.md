@@ -3,10 +3,8 @@
 _A client/server application serving as the authoring environment for
 lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/320px-Schreibtisch_eines_Philologen.jpg"
-     title="Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0"
-     alt="Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0"
-     align="right">
+![Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/640px-Schreibtisch_eines_Philologen.jpg)
+
 ## Requirements/Dependencies
 
 * [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
