@@ -475,6 +475,7 @@ Sprachen = (
 	| 'tamil'        # tam: Tamil
 	| 'tarantschi'
 	| 'tessin'
+	| 'thai'
 	| 'thuer'
 	| 'tibet'
 	| 'tirol'
