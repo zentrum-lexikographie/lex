@@ -61,7 +61,7 @@ ZDL_LEX_GIT_ORIGIN=
 
 ZDL_LEX_MANTIS_USER=lexuser
 ZDL_LEX_MANTIS_PASSWORD=secret123!
-
+```
 
 ## Build
 
