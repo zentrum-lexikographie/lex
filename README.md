@@ -50,10 +50,6 @@ in the sample file for a documentation of the available options. Example:
 ```plaintext
 ZDL_LEX_JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-ZDL_LEX_SERVER_URL=http://localhost:3000/
-ZDL_LEX_SERVER_USER=admin
-ZDL_LEX_SERVER_PASSWORD=admin
-
 ZDL_LEX_DATA_DIR=../data
 
 ZDL_LEX_METRICS_REPORT_INTERVAL=0
@@ -113,11 +109,51 @@ make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
 
 ## Test
 
-[…]
+Before releasing new versions of the application, its client and server
+components can be tested locally.
+
+To run a local server instance as a Docker container:
+
+```plaintext
+$ make solr
+$ make server
+```
+
+The server component relies on [Apache Solr](https://lucene.apache.org/solr/)
+for its facetted search functionality. The first command spawns a Solr Docker
+container, reachable via 
+
+http://localhost:8983/solr
+
+The second command spawns a server container, reachable at
+
+http://localhost:3000/
+
+Before starting Oxygen XML Editor with the client plugin installed from the
+current project sources, make sure settings in `.env` point to the local server
+instance and provide test credentials:
+
+```plaintext
+ZDL_LEX_SERVER_URL=http://localhost:3000/
+ZDL_LEX_SERVER_USER=admin
+ZDL_LEX_SERVER_PASSWORD=admin
+```
+
+Then, start the client via
+
+```plaintext
+$ make client
+```
 
 ## Release
 
-[…]
+Releasing a new version of ZDL/Lex entails a complete build of all components,
+packaging everything as a Docker container and pushing as well as tagging the
+container image to the ZDL's private Docker registry:
+
+```plaintext
+$ make release
+```
 
 ## License
 
