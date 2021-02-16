@@ -302,6 +302,7 @@ syntaktische_Relationen = (
         | 'Stichwort_ist_Adverbialbestimmung_von'
         | 'Stichwort_ist_Akkusativobjekt_von'
         | 'Stichwort_ist_Aktivsubjekt_von'
+        | 'Stichwort_ist_Apposition'
         | 'Stichwort_ist_Dativobjekt_von'
         | 'Stichwort_ist_Genitiv-/Akkusativ-/Dativobjekt_von' # TODO: remove
         | 'Stichwort_ist_Genitivattribut_von'
