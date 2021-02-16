@@ -7,7 +7,7 @@
            java.util.concurrent.TimeUnit))
 
 (def report-interval
-  (Integer/parseInt (getenv "METRICS_REPORT_INTERVAL" "0")))
+  (Integer/parseInt (getenv "METRICS_REPORT_INTERVAL" "5")))
 
 (defstate reporter
   :start
