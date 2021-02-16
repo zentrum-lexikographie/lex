@@ -129,6 +129,18 @@ The second command spawns a server container, reachable at
 
 http://localhost:3000/
 
+You can check the server logs via
+
+```plaintext
+$ docker logs zdl_lex_server 
+[…]
+[main       | INFO  | zdl.lex.server.git  ] git version 2.20.1
+[main       | INFO  | zdl.lex.server.git  ] {:git {:init /data/git}}
+[main       | INFO  | zdl.lex.server.git  ] {:git {:repo /data/git, :branch zdl-lex-server/development, :origin nil}}
+[dispatch-1 | INFO  | zdl.lex.cron        ] {:desc Solr index rebuild, :cron 0 0 1 * * ?, :req :init}
+[main       | INFO  | zdl.lex.server      ] Started ZDL/Lex Server @[/data]
+```
+
 Before starting Oxygen XML Editor with the client plugin installed from the
 current project sources, make sure settings in `.env` point to the local server
 instance and provide test credentials:
@@ -148,8 +160,8 @@ $ make client
 ## Release
 
 Releasing a new version of ZDL/Lex entails a complete build of all components,
-packaging everything as a Docker container and pushing as well as tagging the
-container image to the ZDL's private Docker registry:
+packaging everything as a Docker container and pushing the container images with
+updated tags to the ZDL's private Docker registry:
 
 ```plaintext
 $ make release
