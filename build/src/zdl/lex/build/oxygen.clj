@@ -30,7 +30,8 @@
       (log/error "Cannot locate $OXYGEN_HOME")
       (System/exit 1))
     (build/package-client!)
-    (log/info [oxygen-home (path oxygen-dir)])
+    (log/infof "Starting Oxygen XML Editor @%s (project: %s)"
+               oxygen-home (path oxygen-dir))
     (->>
      (..
       (ProcessBuilder.
