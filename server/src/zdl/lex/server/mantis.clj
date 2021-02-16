@@ -141,7 +141,7 @@
 
 (defn read-dump []
   (try (read-string (slurp mantis-dump))
-       (catch Throwable t (log/debug t) [])))
+       (catch Throwable t (log/trace t) [])))
 
 (defonce index
   (atom {}))
