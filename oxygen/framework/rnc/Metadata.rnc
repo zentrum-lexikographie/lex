@@ -12,7 +12,7 @@ Homographenziffer = attribute hidx {
 Gliederungsmarke = attribute n {
 	# TODO: Punkte und Klammern entfernen
 	xsd:token {
-		pattern = '[A-Z]\.|(I|II|III|IV|V|VI)\.|[1-9][0-9]?\.|[a-z]\)|[αβγδεζηθικλμνξοπρστυφχψω]\)|\*' }
+		pattern = '[A-Z]\.|(I|II|III|IV|V|VI|VII|VIII|IX|X)\.|[1-9][0-9]?\.|[a-z]\)|[αβγδεζηθικλμνξοπρστυφχψω]\)|\*' }
 }	
 
 Glossar = attribute Glossar {
