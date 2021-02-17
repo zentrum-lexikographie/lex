@@ -330,6 +330,7 @@ Sprachen = (
 	| 'nahuatl'
 	| 'nd'           # nds: Low German
 	| 'neapolitan'
+	| 'nepali'
 	| 'nfrk'
 	| 'ngriech'      # ell: Modern Greek (1453-)
 	| 'nhd'          # deu: German 
