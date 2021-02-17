@@ -395,6 +395,8 @@ Sprachen = (
 	| 'ostnd'
 	| 'ostpreuss'
 	| 'pali'
+	| 'panjabi'
+	| 'paschtun'
 	| 'pers'         # fas: Persian
 	| 'pers-arab'
 	| 'pfaelz'
@@ -475,6 +477,7 @@ Sprachen = (
 	| 'taino'        # == aruak?
 	| 'tamil'        # tam: Tamil
 	| 'tarantschi'
+	| 'telugu'
 	| 'tessin'
 	| 'thai'
 	| 'thuer'
