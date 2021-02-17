@@ -43,7 +43,7 @@
 
 (def ^:private abstract-fields
   "Solr fields which comprise the document abstract/summary."
-  [:id :type :status
+  [:id :type :status :provenance
    :last-modified :timestamp
    :author :authors :editors :editor
    :sources :source
@@ -91,5 +91,3 @@
                     (into {}))]
     (for [[name values] (sort fields) value (sort values)]
       [name value])))
-
-

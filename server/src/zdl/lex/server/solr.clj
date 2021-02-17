@@ -109,6 +109,7 @@
      "facet.field" ["author_s" "editors_ss"
                     "sources_ss" "tranche_ss"
                     "type_ss" "pos_ss" "status_ss"
+                    "provenance_ss"
                     "errors_ss"]
      "facet.limit" "-1"
      "facet.mincount" "1"
@@ -138,13 +139,14 @@
    (some->> d :forms (str/join ", "))
    (some->> d :definitions first)
    (d :type)
+   (d :provenance)
    (d :timestamp)
    (d :author)
    (d :editor)
    (d :id)])
 
 (def csv-header ["Status" "Quelle" "Schreibung" "Definition" "Typ"
-                 "Datum" "Autor" "Redakteur" "ID"])
+                 "Ersterfassung" "Datum" "Autor" "Redakteur" "ID"])
 (defn handle-export [req]
   (let [params (-> req :parameters :query)
         {:keys [q limit] :or {q "id:*" limit 1000}} params

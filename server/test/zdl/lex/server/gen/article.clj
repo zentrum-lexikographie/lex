@@ -56,8 +56,8 @@
        (doseq [article articles] (copy article (article->dest article)))
        (git/sh! server-git/dir "add" ".")
        (git/sh! server-git/dir "commit" "-m" "Sets up test")
-       (afs/files server-git/dir))))
-   (apply gen-prod-article-set args))
+       (afs/files server-git/dir)))
+   (apply gen-prod-article-set args)))
 
 (defn generate-article-set
   [[min-articles max-articles]]
@@ -73,6 +73,9 @@
      (generate-article-set set-size-range)
      (f)
      (delete! server-git/dir))))
+
+(comment
+  (generate-article-set [100 1000]))
 
 (use-fixtures :once (create-article-set-fixture [1000 2000]))
 
