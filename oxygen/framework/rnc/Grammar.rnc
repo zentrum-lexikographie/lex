@@ -91,10 +91,11 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Reflexivpronomen'
 			| string 'Relativpronomen'
 			| string 'reziprokes Pronomen'
-			| string 'Ausruf'
+			| string 'Ausruf' # TODO: → Interjektion
 			| string 'Interjektion'
 			| string 'Affix'
 			| string 'Mehrwortausdruck'
+			| string 'Partikel'
 		)
 	} ?
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
