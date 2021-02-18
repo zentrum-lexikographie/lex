@@ -18,14 +18,14 @@
         rnc (file source "DWDSWB.rnc")
         rng (file dest "DWDSWB.rng")
         sch (file dest "DWDSWB.sch.xsl")]
-    (log/info [(path rnc) (path dest)])
+    (log/info "Transpiling Artikel-XML schema (RNC -> RNG)")
     (clear-dir! dest)
     (xv/rnc->rng rnc rng)
     (xv/rng->sch-xslt rng sch)))
 
 (defn uberjar!
   [base-dir & args]
-  (log/info (concat [(path base-dir)] args))
+  (log/debug (concat [(path base-dir)] args))
   (let [deps (-> (file base-dir "deps.edn") slurp edn/read-string)]
     (binding [uberdeps/level :error
               uberdeps/exclusions (conj uberdeps/exclusions #"^\.env$")]
@@ -53,20 +53,24 @@
   (let [classes (file client-dir "classes")]
     (clear-dir! classes)
     (compile-rnc!)
+    (log/info "Compiling Oxygen XML Editor plugin (client)")
     (with-sh-env (java-8-env)
       (when-not (java-8?)
         (throw (ex-info "Java v8 required for building client" {})))
       (with-sh-dir client-dir
         (sh! "clojure" "-M:dev:prod" (path scripts-dir "compile_client.clj"))))
+    (log/info "Packaging Oxygen XML Editor plugin (client)")
     (uberjar! client-dir (path client-jar) {:aliases #{:prod}})
     (clear-dir! classes)))
 
 (defn package-cli!
   []
   (let [classes (file cli-dir "classes")]
+    (log/info "Compiling CLI")
     (clear-dir! classes)
     (with-sh-dir cli-dir
       (sh! "clojure" "-M:dev:prod" (path scripts-dir "compile_cli.clj")))
+    (log/info "Packaging CLI")
     (uberjar! cli-dir (path cli-jar)
               {:aliases #{:prod} :main-class "zdl.lex.cli"})
     (clear-dir! classes)))
@@ -74,9 +78,11 @@
 (defn package-server!
   []
   (let [classes (file server-dir "classes")]
+    (log/info "Compiling server")
     (clear-dir! classes)
     (with-sh-dir server-dir
       (sh! "clojure" "-M:dev:prod" (path scripts-dir "compile_server.clj")))
+    (log/info "Packaging server")
     (uberjar! server-dir (path server-jar)
               {:aliases #{:prod} :main-class "zdl.lex.server"})
     (clear-dir! classes)))

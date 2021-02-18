@@ -16,6 +16,7 @@
    :sources "Quelle"
    :type "Typ"
    :tranche "Tranche"
+   :provenance "Ersterfassung"
    :timestamp "Zeitstempel"})
 
 (def facet-field
@@ -26,6 +27,7 @@
    :sources "quelle"
    :type "typ"
    :tranche "tranche"
+   :provenance "ersterfassung"
    :timestamp "datum"})
 
 (def ^:private german-date-formatter
@@ -98,7 +100,7 @@
                                  (into [])
                                  (sort-by first))
         facet-lists (for [k [:status :author :editors :timestamp
-                             :sources :tranche :type :errors]]
+                             :sources :tranche :type :provenance :errors]]
                       (condp = k
                         :timestamp
                         (ui/listbox :model (result->list-model k)
@@ -120,10 +122,10 @@
                        "</html>")
                   (ui/label :border 5 :text))
         content (forms/forms-panel
-                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref"
+                 "pref, 4dlu, pref, 4dlu, pref"
                  :default-row-spec (RowSpec. "fill:pref")
                  :default-dialog-border? true
-                 :items (concat lists [(forms/next-line) (forms/span help 7)]))
+                 :items (concat lists [(forms/next-line) (forms/span help 5)]))
         options [(ui/button :text "Filtern"
                             :listen [:action (partial filter! query facet-lists)])
                  (ui/button :text "Abbrechen"

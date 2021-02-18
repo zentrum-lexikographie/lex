@@ -5,7 +5,7 @@
 
 (defn sh!
   [& args]
-  (log/info args)
+  (log/debug args)
   (let [{:keys [exit out err] :as result} (apply sh args)
         successful? (= 0 exit)]
     (when-not successful?

@@ -73,6 +73,7 @@
       type (comp xml/text str (xml/selector "@Typ/string()"))
       tranche (comp xml/text str (xml/selector "@Tranche/string()"))
       status (comp xml/text str (xml/selector "@Status/string()"))
+      provenance (comp xml/text str (xml/selector "@Erstfassung/string()"))
       authors (attrs-fn "Autor")
       editors (attrs-fn "Redakteur")
       sources (attrs-fn "Quelle")
@@ -107,6 +108,7 @@
         :type (type article)
         :tranche (tranche article)
         :status (status article)
+        :provenance (provenance article)
         :author (article-attr authors)
         :authors authors
         :editor (article-attr editors)

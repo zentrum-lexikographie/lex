@@ -140,10 +140,10 @@
   (->>
    (let [sync-start (System/currentTimeMillis)
          articles (afs/files git/dir)]
-     (when-not (empty? (doall (add-articles articles)))
-       (update-articles query->delete-xml
-                        [(format "time_l:[* TO %s}" sync-start)])
-       (commit-optimize))
+     (doall (add-articles articles))
+     (update-articles query->delete-xml
+                      [(format "time_l:[* TO %s}" sync-start)])
+     (commit-optimize)
      articles)
    (time! index-rebuild-timer)))
 

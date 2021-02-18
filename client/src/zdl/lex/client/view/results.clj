@@ -25,6 +25,7 @@
    {:key :form :text "Schreibung"}
    {:key :definition :text "Definition"}
    {:key :type :text "Typ"}
+   {:key :provenance :text "Ersterfassung"}
    {:key :timestamp :text "Datum"}
    {:key :author :text "Autor"}
    {:key :editor :text "Redakteur"}
