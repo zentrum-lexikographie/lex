@@ -3742,7 +3742,7 @@ Autor [nocontextvalidation]</String>
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;Formangabe xmlns="http://www.dwds.de/ns/1.0">&lt;Grammatik>&lt;/Grammatik>&lt;Diasystematik>&lt;/Diasystematik>&lt;Frequenz>&lt;/Frequenz>&lt;/Formangabe></String>
+																<String>&lt;Formangabe xmlns="http://www.dwds.de/ns/1.0">&lt;Grammatik>&lt;/Grammatik>&lt;Diasystematik>&lt;/Diasystematik>&lt;/Formangabe></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
