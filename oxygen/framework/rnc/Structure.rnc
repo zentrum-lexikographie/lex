@@ -451,7 +451,7 @@ Formangabe = element Formangabe {
 	} ?
 	, attribute Regel { 
 		list { xsd:token {
-			pattern = '\d+(_\(\*?E?\d?(\.\d)*\))?|Einzelfall|Stammprinzip'
+			pattern = '\d+(_\(\*?E?\d?(\.\d)*\))?'
 		} + } 
 	} ?
 	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }
