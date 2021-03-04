@@ -5,7 +5,7 @@ lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
 ![Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/640px-Schreibtisch_eines_Philologen.jpg)
 
-## Requirements/Dependencies
+## Prerequisites
 
 * [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
 * [Docker](https://www.docker.com/)
@@ -16,6 +16,14 @@ editor's v20 which incorporates JDK v8. Thus, the client plugin has to be
 compiled with the apropriate JDK v8 API bindings. In the likely case that your
 default JDK is of a later version, you can install v8 in parallel and point the
 build scripts to its location. See below for configuration details.
+
+### Build Requirements
+
+* [Clojure 1.10](https://clojure.org/)
+
+While the client and server component compile to Java bytecode and run natively
+on the Java Virtual Machine, for building the application a Clojure installation
+is required.
 
 ### Optional Requirements for Tooling/Scripts
 
