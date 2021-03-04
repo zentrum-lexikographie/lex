@@ -152,7 +152,7 @@ grammatische_Beschreibung = element Grammatik {
 			| '-(n)'
 			| '-(s)'
 			# Vollformen
-			| xsd:token { pattern = '\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}' }
+			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
         	)
 	} *
 	# ###############
