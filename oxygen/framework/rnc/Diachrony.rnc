@@ -73,10 +73,10 @@ Sprachen = (
 	'UNKNOWN'
 	| 'abret'        # obt: Old Breton
 	| 'abulg'        # chu: Old Bulgarian
-	| 'adaen'
-	| 'aegypt'       # egy: Egyptian (Ancient)
+	| 'adän'
+	| 'ägypt'       # egy: Egyptian (Ancient)
 	| 'aengl'        # ang: Old English (ca. 450-1100)
-	| 'aeol'
+	| 'äol'
 	| 'affade'
 	| 'afghan'       # prs: Afghan Persian
 	| 'afries'       # ofs: Old Frisian
@@ -85,7 +85,6 @@ Sprachen = (
 	| 'afrk'
 	| 'afrz'         # fro: Old French (842-ca. 1400)
 	| 'agaskogn'
-	# | 'agriech'      # grc: Ancient Greek (to 1453)
 	| 'ahd'          # goh: Old High German (ca. 750-1050) [a-s]
 	| 'aimara'
 	| 'aind'
@@ -104,10 +103,10 @@ Sprachen = (
 	| 'altarmen'     # xcl: Classical Armenian
 	| 'altgutn'
 	| 'altiran'      # ?== Old Persian (ca. 600-400 B.C.)
-	| 'altkoeln'     
+	| 'altköln'
 	| 'altkur'       # altkurisch
-	| 'altmaerk'
-	| 'altmailaend'
+	| 'altmärk'
+	| 'altmailänd'
 	| 'altnorm'
 	| 'altobital'
 	| 'altvenezian'
@@ -131,16 +130,16 @@ Sprachen = (
 	| 'apolab-apomoran'
 	| 'apoln'
 	| 'apomoran'
-	| 'apreuss'
+	| 'apreuß'
 	| 'aprov'        # pro: Old Provençal (to 1500)
 	| 'arab'         # ara: Arabic
-	| 'arab-tuerk'
+	| 'arab-türk'
 	| 'aram'         # ?arc: Official Aramaic (700-300 BCE)
 	| 'arawak'
 	| 'armen'        # hye: Armenian
 	| 'aruak'        # == Taino?
 	| 'aruss'        # orv: Old Russian
-	| 'asaechs'      # osx: Old Saxon
+	| 'asächs'      # osx: Old Saxon
 	| 'aschkenas'
 	| 'aschwed'
 	| 'aserbaidshan'
@@ -168,10 +167,10 @@ Sprachen = (
 	| 'berber'
 	| 'berlin'
 	| 'bibl-griech'
-	| 'boehm'        #
+	| 'böhm'       #
 	| 'bosn'         # Bosnian
 	| 'botan-lat'
-	| 'brabant-ostflaem'
+	| 'brabant-ostfläm'
 	| 'brandenburg'
 	| 'bret'         # bre: Breton
 	| 'brit-engl' 
@@ -182,34 +181,34 @@ Sprachen = (
 	| 'canarese'
 	| 'chines' 
 	| 'clev'
-	| 'daen'         # dan: Danish
+	| 'dän'         # dan: Danish
 	| 'dalmat'
 	| 'dhivehi'
 	| 'dor'
 	| 'drawid'
 	| 'dschagata'
 	| 'dt'           # 
-	| 'elsaess' 
+	| 'elsäss'
 	| 'engadin'
 	| 'engl'         # eng: English
 	| 'eskim'
 	| 'esperanto'
 	| 'estn'         # est: Estonian
 	| 'finn'         # fin: Finnish
-	| 'flaem'
+	| 'fläm'
 	| 'flandr'
 	| 'florentin'
 	| 'fries'
 	| 'frk'          # frk: Frankish
-	| 'fruehgalloroman'
-	| 'fruehmhd'     #
-	| 'fruehnhd'
+	| 'frühgalloroman'
+	| 'frühmhd'     # 
+	| 'frühnhd'
 	| 'frz'          # fra: French
-	| 'gael'         # gla: Gaelic
+	| 'gäl'         # gla: Gaelic
 	| 'galiz'
 	| 'gall'
 	| 'gall-lat'
-	| 'gall-spaetlat'
+	| 'gall-spätlat'
 	| 'galloroman'
 	| 'geg'          # # gegisch
 	| 'gemeingerm'
@@ -217,13 +216,13 @@ Sprachen = (
 	| 'germ'
 	| 'got'          # got: Gothic
 	| 'got-griech'
-	| 'goetting'
+	| 'götting'
 	| 'griech'       # ell: Modern Greek (1453-)
 	| 'griech-kirchenlat'
 	| 'griech-lat'
-	| 'griech-spaetlat'
-	| 'groedner'
-	| 'groenlaend'
+	| 'griech-spätlat'
+	| 'grödner'
+	| 'grönländ'
 	| 'guarani'      # grn: Guarani
 	| 'gujarati'
 	| 'hamit'
@@ -256,7 +255,7 @@ Sprachen = (
 	| 'jakut'
 	| 'japan'        # jpn: Japanese
 	| 'jidd'         # yid: Yiddish
-	| 'kaerntner'
+	| 'kärtner'
 	| 'kalabr'
 	| 'kalmyk'
 	| 'karel'
@@ -271,7 +270,7 @@ Sprachen = (
 	| 'kirchenlat'
 	| 'kolalapp'
 	| 'kongo'
-	| 'kontinentalingwaeon'
+	| 'kontinentalingwäon'
 	| 'kontinentalwestgerm'
 	| 'kopt'         # cop: Coptic
 	| 'korn'         # cor: Cornish
@@ -289,7 +288,7 @@ Sprachen = (
 	| 'lett'
 	| 'lit'          # lit: Lithuanian
 	| 'lombard'      # ?== lmo: Lombard
-	| 'lueneburg'
+	| 'lüneburg'
 	| 'luxemburg'
 	| 'maghrebin-arab'
 	| 'mal'          # msa: Malay (macrolanguage)
@@ -360,19 +359,17 @@ Sprachen = (
 	| 'norm'
 	| 'norw'         # nor: Norwegian
 	| 'norw-lapp'
-	| 'nsaechs'      # nds: Low Saxon
+	| 'nsächs'      # nds: Low Saxon
 	| 'nsorb'        # dsb: Lower Sorbian
 	| 'nub'
 	| 'obd'
-	| 'oberelsaess'
+	| 'obelsäss'
 	| 'obfrk'
 	| 'obhess'
 	| 'obital'
-	| 'obsaechs'
+	| 'obsächs'
 	| 'obsorb'       # hsb: Upper Sorbian
 	| 'obwald'
-	| 'oest'
-	| 'oestl_dt'   # TODO: keep?
 	| 'ostfries'       # frs: Eastern Frisian
 	| 'oirot'
 	| 'ojibwa'
@@ -385,7 +382,7 @@ Sprachen = (
 	| 'ostafrz'
 	| 'ostbair'
 	| 'ostd'
-	| 'ostflaem'
+	| 'ostfläm'
 	| 'ostfrk'
 	| 'ostfrz'
 	| 'ostgerm'
@@ -393,14 +390,14 @@ Sprachen = (
 	| 'ostlit'
 	| 'ostmnl'
 	| 'ostnd'
-	| 'ostpreuss'
+	| 'ostpreuß'
 	| 'pali'
 	| 'panjabi'
 	| 'paschtun'
 	| 'pers'         # fas: Persian
 	| 'pers-arab'
-	| 'pfaelz'
-	| 'phoen'        # phn: Phoenician
+	| 'pfälz'
+	| 'phön'       # phn: Phoenician
 	| 'piemont'
 	| 'pikard'       # pcd: Picard
 	| 'polab'
@@ -412,12 +409,12 @@ Sprachen = (
 	| 'powhatan'
 	| 'prov'
 	| 'pseudolat'
-	| 'raetoroman'
+	| 'rätoroman'
 	| 'rhein'
 	| 'roman'
 	| 'romani'
 	| 'rotw'
-	| 'rumaen'       # ron: Romanian
+	| 'rumän'       # ron: Romanian
 	| 'russ'         # rus: Russian
 	| 'russ-kslaw'
 	| 'saam'
@@ -428,9 +425,9 @@ Sprachen = (
 	| 'schles'
 	| 'schlesw-holst'
 	| 'schott'
-	| 'schwaeb'
-	| 'schwaeb-alem'
-	| 'schwaeb-bair'
+	| 'schwäb'
+	| 'schwäb-alem'
+	| 'schwäb-bair'
 	| 'schwed'       # swe: Swedish
 	| 'schweiz'      # gsw: Swiss German 
 	| 'schweizerdt'  # == schweiz?
@@ -447,29 +444,29 @@ Sprachen = (
 	| 'slowen'       # slv: Slovenian
 	| 'sojon'
 	| 'sorb'
-	| 'spaetahd'
-	| 'spaetgall'
-	| 'spaetgot'
-	| 'spaetgriech'
-	| 'spaetlat'
-	| 'spaetmhd'
-	| 'spaetmnd'
-	| 'spaetmnl'
+	| 'spätahd'
+	| 'spätgall'
+	| 'spätgot'
+	| 'spätgriech'
+	| 'spätlat'
+	| 'spätmhd'
+	| 'spätmnd'
+	| 'spätmnl'
 	| 'span'         # spa: Spanish
-	| 'suedchines'
-	| 'suedd'
-	| 'suedhess'
-	| 'suedind'
-	| 'suedital'
-	| 'suedmnl'
-	| 'suednl'
-	| 'suedostd'
-	| 'suedostfrz'
-	| 'suedrheinfrk'
-	| 'suedschwed'
-	| 'suedslaw'
-	| 'suedwestd'
-	| 'suedwestfrz'
+	| 'südchines'
+	| 'südd'
+	| 'südhess'
+	| 'südind'
+	| 'südital'
+	| 'südmnl'
+	| 'südnl'
+	| 'südostd'
+	| 'südostfrz'
+	| 'südrheinfrk'
+	| 'südschwed'
+	| 'südslaw'
+	| 'südwestd'
+	| 'südwestfrz'
 	| 'sumer'        # sux: Sumerian
 	| 'sumer-akkad'
 	| 'swahili'
@@ -480,7 +477,7 @@ Sprachen = (
 	| 'telugu'
 	| 'tessin'
 	| 'thai'
-	| 'thuer'
+	| 'thür'
 	| 'tibet'
 	| 'tirol'
 	| 'thrak'        # txh: Thracian
@@ -491,7 +488,7 @@ Sprachen = (
 	| 'tswana'       # tsn: Tswana
 	| 'tungus'
 	| 'tupi'         # tpw: Tupí
-	| 'tuerk'
+	| 'türk'
 	| 'turk'
 	| 'turkotatar'
 	| 'uigur'
@@ -505,22 +502,22 @@ Sprachen = (
 	| 'urslaw'
 	| 'venezian'
 	| 'vlat'
-	| 'vogtlaend'
-	| 'volapuek'
+	| 'vogtländ'
+	| 'volapük'
 	| 'vor-ie'
 	| 'vorlat'
 	| 'vorkelt'
 	| 'vorslaw'
 	| 'vorroman'
-	| 'vulgaerarab'
-	| 'vulgaergriech'
+	| 'vulgärarab'
+	| 'vulgärgriech'
 	| 'waldeck'
 	| 'wallon'       # wln: Walloon
 	| 'walis'
 	| 'westafrikan'
 	| 'westd'
-	| 'westfael'
-	| 'westflaem'
+	| 'westfäl'
+	| 'westfläm'
 	| 'westfrz'
 	| 'westfries'    # fry: Western Frisian
 	| 'westgerm'
@@ -529,7 +526,7 @@ Sprachen = (
 	| 'westnd'
 	| 'westobd'
 	| 'westroman'
-	| 'westsaechs'
+	| 'westsächs'
 	| 'westslaw'
 	| 'zigeuner'
 	| 'zoolog-lat'
