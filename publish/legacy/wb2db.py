@@ -165,6 +165,22 @@ class Wortgeschichten(Dictionary):
         pass
 
 
+class Wortgeschichten_preprint(Dictionary):
+    '''
+    '''
+
+    DATABASE_NAME = 'wortgeschichten_preprint_beta'
+    ENTRY_ELEMENT = et.QName('http://www.zdl.org/ns/1.0', 'Artikel')
+    HEADWORD_PATH = './/{http://www.zdl.org/ns/1.0}Schreibung|//{http://www.zdl.org/ns/1.0}Verweise[@Typ="Wortfeld"]/*/{http://www.zdl.org/ns/1.0}Ziellemma'
+    USE_RELATIONS = False
+
+    def __init__(self, file_names):
+        Dictionary.__init__(self, file_names)
+
+    def prune(self, article):
+        pass
+
+
 class DWDSWB(Dictionary):
     '''
     '''
@@ -299,7 +315,7 @@ if __name__ == '__main__':
     argument_parser.add_argument('--user', default='', metavar='USERNAME', type=str, help='username for the database server')
     argument_parser.add_argument('--passwd', default='', metavar='PASSWORD', type=str, help='passphrase for the database server')
     argument_parser.add_argument('input_files', metavar='FILE', type=str, nargs='*', help='(list of) file names')
-    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'dwb2', 'neologismen', 'wortgeschichten'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
+    argument_parser.add_argument('-t', '--dictionary-type', choices=('dwdswb', 'etymwb', 'wdg', 'dwb1', 'dwb2', 'neologismen', 'wortgeschichten', 'wortgeschichten_preprint'), help='set the type of dictionary that is used', metavar='TYPE', required=True)
     argument_parser.add_argument('-v', '--verbose', action='store_true', default=False, help='enable verbose diagnostic messages')
     argument_parser.add_argument('-V', '--version', type=str, metavar='VERSION_NUMBER', help='specify the version number')
     argument_parser.add_argument('-w', '--write', action='store_true', default=False, help='actually write to DB')
@@ -326,6 +342,8 @@ if __name__ == '__main__':
         dictionary = Neologismen(arguments.input_files)
     elif arguments.dictionary_type == 'wortgeschichten':
         dictionary = Wortgeschichten(arguments.input_files)
+    elif arguments.dictionary_type == 'wortgeschichten_preprint':
+        dictionary = Wortgeschichten_preprint(arguments.input_files)
 
     # set up DB connection
     cursor = None

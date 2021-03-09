@@ -5,7 +5,7 @@ mysql = /usr/bin/mysql -sN
 mysqldump = /usr/bin/mysqldump
 
 all:
-	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|wortgeschichten)-update"
+	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|wortgeschichten|wortgeschichten_preprint)-update"
 
 environment:
 	/bin/mkdir -p backup/
@@ -17,6 +17,9 @@ neologismen-backup: environment
 
 wortgeschichten-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wortgeschichten > ./backup/backup-wortgeschichten-`date -Iseconds`.sql
+
+wortgeschichten_preprint-backup: environment
+	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wortgeschichten_preprint > ./backup/backup-wortgeschichten_preprint-`date -Iseconds`.sql
 
 dwdswb-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwdswb > ./backup/backup-dwdswb-`date -Iseconds`.sql
@@ -101,6 +104,17 @@ wortgeschichten-update: wortgeschichten-backup
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE wortgeschichten_beta.article TO wortgeschichten.article;"
 	$(mysql) -e "RENAME TABLE wortgeschichten_beta.lemma TO wortgeschichten.lemma;"
+
+wortgeschichten_preprint-update: wortgeschichten_preprint-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM wortgeschichten_preprint_beta.article;"
+	$(mysql) -e "SELECT COUNT(*) FROM wortgeschichten_preprint_beta.lemma;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS wortgeschichten_preprint.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS wortgeschichten_preprint.lemma;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE wortgeschichten_preprint_beta.article TO wortgeschichten_preprint.article;"
+	$(mysql) -e "RENAME TABLE wortgeschichten_preprint_beta.lemma TO wortgeschichten_preprint.lemma;"
 
 dwdswb-update: dwdswb-backup
 	# check whether the source database exists
