@@ -76,6 +76,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Superlativ'
 			| string 'Pronominaladverb'
 			| string 'Präposition'
+			| string 'Präposition + Artikel'
 			| string 'bestimmter Artikel'
 			| string 'unbestimmter Artikel'
 			| string 'Konjunktion'
