@@ -124,6 +124,8 @@ grammatische_Beschreibung = element Grammatik {
 			| '-(s)'
 			# Vollformen
 			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’₀₂]+\p{Ll}' }
+			# »Voll«-Formen von Affix(oid)en
+			| xsd:token { pattern = '\-(chens|ei|els|elei|erei|erls|ers|fabrik|fritzen|hai\(e\)s|in|heinis|ik|iers|ins|isten|itis|keit|kunde|leins|lers|les|lings|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schwein\(e\)|silos|tums|tumes|ung|verschnitt\(e\)s|werks|wesens)' }
 		)
 	} *
 	, element Plural {
@@ -154,6 +156,8 @@ grammatische_Beschreibung = element Grammatik {
 			| '-(s)'
 			# Vollformen
 			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
+			# »Voll«-Formen von Affix(oid)en
+			| xsd:token { pattern = '\-(chen|eien|el|eleien|ereien|erl|fabriken|fritzen|haie|innen|heinis|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|linge|lysen|meter|nauten|nisse|onkels|osen|schweine|silos|tümer|ungen|verschnitte|werke|wesens)' }
         	)
 	} *
 	# ###############
