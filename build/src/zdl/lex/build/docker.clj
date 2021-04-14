@@ -49,7 +49,7 @@
   "zdl_lex_solr")
 
 (defn start-solr!
-  [{:keys [image] :or {image "docker.zdl.org/zdl-lex/solr:latest"}}]
+  [{:keys [image] :or {image "docker-registry.zdl.org/zdl-lex/solr:latest"}}]
   (let [{:keys [running?] :as process} (process-by-name solr-process-name)]
     (when-not running?
       (create-network!)
@@ -67,7 +67,7 @@
   "zdl_lex_server")
 
 (defn start-server!
-  [{:keys [image] :or {image "docker.zdl.org/zdl-lex/server:latest"}}]
+  [{:keys [image] :or {image "docker-registry.zdl.org/zdl-lex/server:latest"}}]
   (with-programs [docker]
     (when-let [process (process-by-name server-process-name)]
       (docker "rm" "-f" server-process-name))
