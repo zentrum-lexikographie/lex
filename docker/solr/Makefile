@@ -1,4 +1,4 @@
-NAME := lex.dwds.de/zdl-lex/solr
+NAME := docker-registry.zdl.org/zdl-lex/solr
 TAG := $$(git log -1 --pretty=%h)
 VERSION := $$(git describe --tags --abbrev=0 --always)
 

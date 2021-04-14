@@ -105,13 +105,13 @@ make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/solr'
 Sending build context to Docker daemon  213.5kB
 […]
 Successfully built 66475cb0e5c1
-Successfully tagged lex.dwds.de/zdl-lex/solr:be91da8
+Successfully tagged docker-registry.zdl.org/zdl-lex/solr:be91da8
 make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/solr'
 make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/server'
 Sending build context to Docker daemon  132.5MB
 […]
 Successfully built 9cd3dbf51b66
-Successfully tagged lex.dwds.de/zdl-lex/server:be91da8
+Successfully tagged docker-registry.zdl.org/zdl-lex/server:be91da8
 make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
 ```
 

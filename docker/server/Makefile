@@ -1,4 +1,4 @@
-NAME := lex.dwds.de/zdl-lex/server
+NAME := docker-registry.zdl.org/zdl-lex/server
 TAG := $$(git log -1 --pretty=%h)
 VERSION := $$(git describe --tags --abbrev=0 --always)
 
