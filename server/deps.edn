@@ -51,10 +51,7 @@
 
  :aliases
  {:test
-  {:extra-paths ["test"]
-   :extra-deps
-   {zdl/ots-nlp-pipeline {:git/url "git@git.zdl.org:zdl/ots-nlp-pipeline.git"
-                          :sha "e3423b81e1fd62fcf8d17acdc684129db886229a"}}}
+  {:extra-paths ["test"]}
   :prod
   {:extra-paths ["classes" "../oxygen" "../cli/build"]}
   :server
