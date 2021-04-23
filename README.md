@@ -7,8 +7,9 @@ lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
 ## Prerequisites
 
-* [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
+* [GNU/Linux](https://www.debian.org/) (tested on Debian-based distros)
 * [Docker](https://www.docker.com/)
+* [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
 
 The application client is implemented as a plugin for [Oxygen XML
 Editor](https://www.oxygenxml.com/). We strive for compatibility with the
@@ -17,13 +18,10 @@ compiled with the apropriate JDK v8 API bindings. In the likely case that your
 default JDK is of a later version, you can install v8 in parallel and point the
 build scripts to its location. See below for configuration details.
 
-### Build Requirements
-
-* [Clojure 1.10](https://clojure.org/)
-
 While the client and server component compile to Java bytecode and run natively
 on the Java Virtual Machine, for building the application a Clojure installation
-is required.
+is required. [Clojure](https://clojure.org/) is installed locally in the project
+as part of the build.
 
 ### Optional Requirements for Tooling/Scripts
 

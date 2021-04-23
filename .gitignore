@@ -29,6 +29,8 @@ ansible/*.retry
 ansible/files/api/
 ansible/roles/*.*
 docker/*/*.jar
+
+build/vendor/
 vendor/
 
 client/tmp
