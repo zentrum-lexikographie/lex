@@ -1,25 +1,26 @@
 SHELL := /bin/bash
-CLOJURE := vendor/clojure/bin/clojure
+
+export PATH := $(CURDIR)/vendor/clojure/bin:$(PATH)
 
 .PHONY: build
 build: clean-cpcache vendor/clojure
-	@$(CLOJURE) -X:build
+	@clojure -X:build
 
 .PHONY: client
 client: clean-cpcache vendor/clojure
-	@$(CLOJURE) -X:oxygen
+	@clojure -X:oxygen
 
 .PHONY: solr
 solr: vendor/clojure
-	@$(CLOJURE) -X:solr
+	@clojure -X:solr
 
 .PHONY: server
 server: vendor/clojure
-	@$(CLOJURE) -X:server
+	@clojure -X:server
 
 .PHONY: next-release
 next-release: vendor/clojure
-	@$(CLOJURE) -X:release
+	@clojure -X:release
 
 .PHONY: clean-cpcache
 clean-cpcache:
@@ -29,7 +30,7 @@ clean-cpcache:
 
 vendor/clojure: vendor/clojure-install.sh
 	mkdir -p $@ || /bin/true
-	vendor/clojure-install.sh --prefix $@
+	vendor/clojure-install.sh --prefix $(CURDIR)/$@
 
 vendor/clojure-install.sh:
 	mkdir -p vendor || /bin/true
