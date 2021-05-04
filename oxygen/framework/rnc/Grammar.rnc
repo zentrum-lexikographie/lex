@@ -186,7 +186,7 @@ grammatische_Beschreibung = element Grammatik {
 	# note: die Gruppe am Anfang des ersten Ausdrucks steht wg. neuer Rechtschreibvarianten
 	# note: der zweite Ausdruck steht wg. neuer Rechtschreibung für »ab sein« usw.
 	, element Partizip_II {
-		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|blau|bloß|breit|Brust|Delfin|Delphin|dicht|dick|dünn|ernst|Fahrrad|fein|fertig|fest|frei|gerade|Gewähr|glatt|groß|gut|Halt|hart|heiß|Hohn|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|Maß|Motorrad|offen|parallel|platt|Rad|rein|richtig|Rücken|ruhig|sauber|scharf|schief|schlank|schön|Staub|steif|straff|stramm|tief|tot|trocken|übrig|wach|warm|weich|weiß|wieder|wohl|wund|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
+		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|blau|bloß|breit|Brust|Delfin|Delphin|dicht|dick|dünn|ernst|Fahrrad|fein|fertig|fest|frei|ge?rade|Gewähr|glatt|groß|gut|Halt|hart|heiß|Hohn|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|Maß|Motorrad|offen|parallel|platt|Rad|rein|richtig|Rücken|ruhig|sauber|scharf|schief|schlank|schön|Staub|steif|straff|stramm|tief|tot|trocken|übrig|wach|warm|weich|weiß|wieder|wohl|wund|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
 		, Rechtschreibstatus ?
 	} *
 	# ##################
