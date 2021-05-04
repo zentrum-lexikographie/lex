@@ -314,6 +314,7 @@ Fachgebiet = element Fachgebiet {
 	| 'Sport'
 	| 'Angelsport' # D99, auch: Angeln
 	| 'Ballspiel' # D99: Ballspiele
+	| 'Ballsport' # neu: 2021-05-04
 	| 'Badminton' # D99
 	| 'Baseball' # D99
 	| 'Basketball' # D99
