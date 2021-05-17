@@ -5,7 +5,7 @@
 
   ;; Data handling
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
-  org.clojure/data.zip {:mvn/version "0.1.1"}
+  org.clojure/data.zip {:mvn/version "1.0.0"}
 
   ;; Data formats (XML)
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
@@ -20,6 +20,7 @@
   org.clojure/tools.logging {:mvn/version "1.0.0"}
   instaparse/instaparse {:mvn/version "1.4.10"}
   camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
+  com.taoensso/tufte {:mvn/version "2.2.0"}
 
   ;; Infrastruture (HTTP client, cron scheduling, state management)
   clj-http/clj-http {:mvn/version "3.9.1"

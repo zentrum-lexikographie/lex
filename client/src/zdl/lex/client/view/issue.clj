@@ -1,16 +1,19 @@
 (ns zdl.lex.client.view.issue
   (:require [clojure.core.memoize :as memo]
+            [clojure.data.xml :as dx]
+            [clojure.data.zip.xml :as zx]
+            [clojure.zip :as zip]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
             [seesaw.mig :as mig]
+            [zdl.lex.article.xml :as axml]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.font :as font]
             [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
-            [zdl.lex.client.workspace :as ws]
-            [zdl.lex.article.xml :as axml])
+            [zdl.lex.client.workspace :as ws])
   (:import java.net.URL))
 
 (def visited-issues (atom #{}))
@@ -72,15 +75,21 @@
   (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
        (java.time.OffsetDateTime/from)))
 
+(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
+
+(defn extract-surface-forms
+  [node]
+  (distinct
+   (axml/zip-texts
+    (zx/xml-> (zip/xml-zip node)
+              ::dwds/Artikel ::dwds/Formangabe ::dwds/Schreibung))))
+
 (defn prepare-issues [[[_ url] visited?]]
   (let [visited? (or visited? @visited-issues)]
     (or
      (some->>
       (ws/xml-document ws/instance url)
-      (axml/doc->articles)
-      (mapcat axml/select-surface-forms)
-      (mapcat axml/texts)
-      (distinct)
+      (extract-surface-forms)
       (mapcat get-issues)
       (map (fn [{:keys [id last-updated status url] :as issue}]
              (let [last-updated (parse-update-ts last-updated)]

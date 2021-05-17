@@ -3,8 +3,7 @@
             [clojure.core.async :as a]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.url :refer [server-url]]
-            [zdl.lex.util :refer [uuid]]
-            [zdl.xml.util :as xml])
+            [zdl.lex.util :refer [uuid]])
   (:import java.util.concurrent.Future))
 
 (defn request->ch

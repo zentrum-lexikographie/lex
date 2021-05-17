@@ -1,5 +1,6 @@
 (ns zdl.lex.server.solr.client
-  (:require [clojure.tools.logging :as log]
+  (:require [clojure.data.xml :as dx]
+            [clojure.tools.logging :as log]
             [metrics.timers :refer [deftimer time!]]
             [zdl.lex.article :as article]
             [zdl.lex.article.fs :as afs]
@@ -8,8 +9,7 @@
             [zdl.lex.lucene :as lucene]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.http-client :as http-client]
-            [zdl.lex.server.solr.doc :refer [article->fields]]
-            [zdl.xml.util :as xml]))
+            [zdl.lex.server.solr.doc :refer [article->fields]]))
 
 (def ^:private client
   (http-client/configure (getenv "SOLR_USER") (getenv "SOLR_PASSWORD")))
@@ -83,52 +83,37 @@
                           :content-type :xml}]))
 
 (defn update-articles [articles->xml articles]
-  (batch-update (->> articles
-                     (partition-all update-batch-size)
-                     (pmap articles->xml)
-                     (map #(array-map :body (xml/serialize %)
-                                      :content-type :xml)))))
+  (batch-update
+   (->>
+    articles
+    (partition-all update-batch-size)
+    (pmap articles->xml)
+    (map (fn [node]
+           {:body         (dx/emit-str (dx/sexp-as-element node))
+            :content-type :xml})))))
 
 (defn- articles->add-xml [article-files]
-  (let [f->id (comp str (partial relativize git/dir))
-        doc (xml/new-document)
-        el #(.createElement doc %)
-        add (doto (el "add") (.setAttribute "commitWithin" "10000"))]
-    (try
-      (doseq [f article-files :let [id (f->id f)]
-              a (article/file->articles f id) :let [article-doc (el "doc")]]
-        (doseq [[n v] (article->fields a)]
-          (doto article-doc
-            (.appendChild
-             (doto (el "field")
-               (.setAttribute "name" n)
-               (.setTextContent v)))))
-        (doto add (.appendChild article-doc)))
-      (catch Exception e (log/warn e)))
-    (doto doc (.appendChild add))))
+  [:add {:commitWithin "10000"}
+   (try
+     (for [f article-files :let [id (str (relativize git/dir f))]
+           a (article/extract-articles {:file f :id id})]
+       [:doc
+        (for [[n v] (article->fields a)]
+          [:field {:name n} v])])
+     (catch Exception e (log/warn e)))])
 
 (def add-articles (partial update-articles articles->add-xml))
 
 (defn- articles->delete-xml [article-files]
-  (let [doc (xml/new-document)
-        el #(.createElement doc %)
-        del (doto (el "delete") (.setAttribute "commitWithin" "10000"))]
-    (doseq [id (map git/file->id article-files)]
-      (doto del
-        (.appendChild
-         (doto (el "id") (.setTextContent id)))))
-    (doto doc (.appendChild del))))
+  [:delete {:commitWithin "10000"}
+   (for [id (map git/file->id article-files)]
+     [:id id])])
 
 (def delete-articles (partial update-articles articles->delete-xml))
 
 (defn- query->delete-xml [[query]]
-  (let [doc (xml/new-document)
-        el #(.createElement doc %)]
-    (doto doc
-      (.appendChild
-       (doto (doto (el "delete") (.setAttribute "commitWithin" "10000"))
-         (.appendChild
-          (doto (el "query") (.setTextContent query))))))))
+  [:delete {:commitWithin "10000"}
+   [:query query]])
 
 (deftimer [solr client index-rebuild-timer])
 

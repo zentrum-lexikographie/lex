@@ -1,6 +1,5 @@
 (ns zdl.lex.article.chars
-  (:require [clojure.string :as str]
-            [zdl.xml.util :as xml])
+  (:require [clojure.string :as str])
   (:import [java.text Normalizer Normalizer$Form]))
 
 (def latin-chars
@@ -39,25 +38,29 @@
   [& sets]
   (let [cs (into #{} (apply str sets))]
     (fn [s]
-      (some->>
-       (Normalizer/normalize s Normalizer$Form/NFKD)
-       (remove cs) (distinct) (seq) (vec)))))
+      (when-let [data (some->>
+                       (Normalizer/normalize s Normalizer$Form/NFKD)
+                       (remove cs) (distinct) (seq) (vec))]
+        {:type ::invalid :data data}))))
 
-(def check-chars
-  {:all (invalid-chars-fn
-         whitespace latin-chars greek-chars arabic-figures diacritics
-         punctuation punctuation-extended punctuation-extra)
+(def check-all
+  (invalid-chars-fn
+   whitespace latin-chars greek-chars arabic-figures diacritics
+   punctuation punctuation-extended punctuation-extra))
 
-   :phrase (invalid-chars-fn
-            whitespace arabic-figures latin-chars diacritics punctuation)
+(def check-phrase
+  (invalid-chars-fn
+   whitespace arabic-figures latin-chars diacritics punctuation))
 
-   :text (invalid-chars-fn
-          whitespace latin-chars greek-chars arabic-figures diacritics
-          punctuation punctuation-extended)
+(def check-text
+  (invalid-chars-fn
+   whitespace latin-chars greek-chars arabic-figures diacritics
+   punctuation punctuation-extended))
 
-   :grammar (invalid-chars-fn
-             whitespace latin-chars arabic-figures diacritics punctuation
-             grammar-symbols)})
+(def check-grammar
+  (invalid-chars-fn
+   whitespace latin-chars arabic-figures diacritics punctuation
+   grammar-symbols))
 
 (def parenthesis-exceptions
   #"(?:\s[a-c]\))|(?:\u200b:-?[()])")
@@ -73,26 +76,14 @@
         (not-empty before)
         (recur after)))))
 
-(defn balanced-parentheses
+(defn check-parentheses
   [s]
-  (some->
-   s
-   (str/replace parenthesis-exceptions "")
-   (str/replace non-parenthesis "")
-   (remove-matching-parentheses)))
-
-(def checks
-  [[(xml/selector ".//d:Formangabe")
-    (check-chars :grammar) ::invalid]
-   [(xml/selector "(.//d:Definition)|(.//d:Paraphrase)")
-    (check-chars :phrase) ::invalid]
-   [(xml/selector ".//d:Belegtext")
-    (check-chars :text) ::invalid]
-   [(xml/selector ".//d:Fundstelle")
-    (check-chars :all) ::invalid]
-   [(xml/selector (str "(.//d:Definition)|(.//d:Belegtext)|"
-                       "(.//d:Kompetenzbeispiel)|(.//d:Kollokation)"))
-    balanced-parentheses ::unbalanced-parens]])
+  (when-let [data (some->
+                   s
+                   (str/replace parenthesis-exceptions "")
+                   (str/replace non-parenthesis "")
+                   (remove-matching-parentheses))]
+    {:type ::unbalanced-parens :data data}))
 
 (comment
-  (balanced-parentheses "1)"))
+  (check-parentheses "1)"))

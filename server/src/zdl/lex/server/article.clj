@@ -1,38 +1,48 @@
 (ns zdl.lex.server.article
-  (:require [clojure.java.io :as io]
+  (:require [clojure.data.xml :as dx]
+            [clojure.java.io :as io]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
+            [clojure.walk :refer [postwalk]]
             [ring.util.http-response :as htstatus]
             [ring.util.request :as htreq]
+            [zdl.lex.fs :refer [file]]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.solr.client :as solr-client]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.fs :refer [file]]
-            [zdl.xml.util :as xml])
-  (:import [java.text Normalizer Normalizer$Form]
-           java.io.File))
+            [zdl.lex.article.xml :as axml])
+  (:import java.io.File
+           [java.text Normalizer Normalizer$Form]))
 
-(def xml-template (slurp (io/resource "template.xml") :encoding "UTF-8"))
+(def xml-template
+  (axml/read-xml (io/resource "template.xml")))
 
-(defn generate-id []
-  (let [candidate #(str "E_" (rand-int 10000000))]
-    (loop [id (candidate)]
-      (if-not (solr-client/id-exists? id) id
-              (recur (candidate))))))
+(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
+(dx/alias-uri :xxml "http://www.w3.org/XML/1998/namespace")
 
-(defn new-article-xml [xml-id form pos author]
-  (let [doc (xml/->dom xml-template)
-        element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)
-        timestamp (ts/format (java.time.LocalDate/now))]
-    (doto (element-by-name "Artikel")
-      (.setAttribute "xml:id" xml-id)
-      (.setAttribute "Zeitstempel" timestamp)
-      (.setAttribute "Erstellungsdatum" timestamp)
-      (.setAttribute "Autor" author))
-    (.. (element-by-name "Schreibung") (setTextContent form))
-    (.. (element-by-name "Wortklasse") (setTextContent pos))
-    (xml/serialize doc)))
+(def article-namespaces
+  {:xmlns "http://www.dwds.de/ns/1.0"})
+
+(defn new-article-xml
+  [xml-id form pos author]
+  (dx/emit-str
+     (postwalk
+      (fn [node]
+        (if (map? node)
+          (condp = (node :tag)
+            ::dwds/DWDS       (update node :attrs merge article-namespaces)
+            ::dwds/Artikel    (let [ts (ts/format (java.time.LocalDate/now))]
+                                (update node :attrs merge
+                                        {::xxml/id         xml-id
+                                         :Zeitstempel      ts
+                                         :Erstellungsdatum ts
+                                         :Autor            author}))
+            ::dwds/Schreibung (assoc node :content (list form))
+            ::dwds/Wortklasse (assoc node :content (list pos))
+            node)
+          node))
+      xml-template)))
 
 (defn form->filename [form]
   (-> form
@@ -60,6 +70,12 @@
     (if (.isFile f)
       (htstatus/ok f)
       (htstatus/not-found resource))))
+
+(defn generate-id []
+  (let [candidate #(str "E_" (rand-int 10000000))]
+    (loop [id (candidate)]
+      (if-not (solr-client/id-exists? id) id
+              (recur (candidate))))))
 
 (defn create-article [{{:keys [user]} :identity
                        {:keys [form pos]} :params}]
