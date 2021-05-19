@@ -1,6 +1,5 @@
 (ns zdl.lex.article.token
-  (:require [clojure.string :as str]
-            [zdl.xml.util :as xml]))
+  (:require [clojure.string :as str]))
 
 (def abbreviation-whitelist
   #{"etw.", "jmd.", "jmds.", "jmdn.", "jmdm."})
@@ -118,47 +117,41 @@
   (str/split s #"\s+"))
 
 
-(defn ends-with-punctuation
+(defn check-ends-with-punctuation
   [s]
-  (if-not (re-seq #"(?:[….?!])|(?:[.?!]«)$" s)
-    [(subs s (max 0 (- (count s) 2)))]))
+  (when-not (re-seq #"(?:[….?!])|(?:[.?!]«)$" s)
+    {:type ::final-punctuation :data [(subs s (max 0 (- (count s) 2)))]}))
 
-(defn unknown-abbreviations
+(defn check-unknown-abbreviations
   [s]
-  (some->>
-   (tokenize s)
-   (filter #(str/ends-with? % "."))
-   (remove abbreviation-whitelist)
-   (distinct) (seq) (vec)))
+  (when-let [data (some->>
+                   (tokenize s)
+                   (filter #(str/ends-with? % "."))
+                   (remove abbreviation-whitelist)
+                   (distinct) (seq) (vec))]
+    {:type ::unknown-abbreviations :data data}))
 
-(defn missing-whitespace
+(defn check-missing-whitespace
   [s]
-  (some->>
-   (tokenize s)
-   (remove camel-case-whitelist)
-   (filter (some-fn
-            ;; e.g. aB ,A )A -A
-            (partial re-seq #"[\p{Ll}\p{Pe}\p{Po}&&[^/\"']]\p{Lu}")
-            ;; e.g. a( A( .( -(
-            (partial re-seq #"[\p{Lu}\p{Ll}\p{Po}\p{Pd}]\p{Ps}")
-            (partial re-seq #"«[^\p{Pe}\p{Po}]")
-            (partial re-seq #"[^\p{Ps}]»")))
-   (distinct) (seq) (vec)))
+  (when-let [data (some->>
+                   (tokenize s)
+                   (remove camel-case-whitelist)
+                   (filter
+                    (some-fn
+                     ;; e.g. aB ,A )A -A
+                     (partial re-seq #"[\p{Ll}\p{Pe}\p{Po}&&[^/\"']]\p{Lu}")
+                     ;; e.g. a( A( .( -(
+                     (partial re-seq #"[\p{Lu}\p{Ll}\p{Po}\p{Pd}]\p{Ps}")
+                     (partial re-seq #"«[^\p{Pe}\p{Po}]")
+                     (partial re-seq #"[^\p{Ps}]»")))
+                   (distinct) (seq) (vec))]
+    {:type ::missing-whitespace :data data}))
 
-(defn redundant-whitespace
+(defn check-redundant-whitespace
   [s]
-  (some->>
-   (concat
-    (re-seq #"[»(/]\s" s)
-    (re-seq #"\s[\p{Po}&&[^%&*†/…\"']]" s))
-   (distinct) (seq) (vec)))
-
-(def checks
-  [[(xml/selector ".//d:Definition")
-    unknown-abbreviations ::unknown-abbreviations]
-   [(xml/selector ".//d:Beleg/d:Belegtext")
-    ends-with-punctuation ::final-punctuation]
-   [(xml/selector "(.//d:Beleg/d:Belegtext)|(.//d:Definition)")
-    missing-whitespace ::missing-whitespace]
-   [(xml/selector "(.//d:Beleg/d:Belegtext)|(.//d:Definition)")
-    redundant-whitespace ::redundant-whitespace]])
+  (when-let [data (some->>
+                   (concat
+                    (re-seq #"[»(/]\s" s)
+                    (re-seq #"\s[\p{Po}&&[^%&*†/…\"']]" s))
+                   (distinct) (seq) (vec))]
+    {:type ::redundant-whitespace :data data}))

@@ -1,5 +1,6 @@
 (ns zdl.lex.client.oxygen.validation
-  (:require [clojure.string :as str]
+  (:require [clojure.data.xml :as dx]
+            [clojure.string :as str]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
@@ -7,7 +8,7 @@
             [zdl.lex.client.icon :as icon]
             [zdl.lex.client.workspace :as ws]
             [zdl.lex.article.chars :as chars]
-            [zdl.lex.article.token :as token]
+            [zdl.lex.article.token :as tokens]
             [zdl.lex.article.validate :as av]
             [zdl.lex.article.xml :as axml])
   (:import net.sf.saxon.s9api.XdmNode
@@ -23,23 +24,22 @@
 (def error-type->desc
   {::chars/invalid "Zeichenfehler"
    ::chars/unbalanced-parens "Paarzeichenfehler"
-   ::token/missing-whitespace "Fehlender Weißraum"
-   ::token/redundant-whitespace "Unnötiger Weißraum"
-   ::token/unknown-abbreviations "Nicht erlaubte Abkürzung"
-   ::token/final-punctuation "Interpunktion am Belegende prüfen"})
+   ::tokens/missing-whitespace "Fehlender Weißraum"
+   ::tokens/redundant-whitespace "Unnötiger Weißraum"
+   ::tokens/unknown-abbreviations "Nicht erlaubte Abkürzung"
+   ::tokens/final-punctuation "Interpunktion am Belegende prüfen"})
 
 (defn error->message
-  [{:keys [^XdmNode ctx type data]}]
+  [{:keys [ctx type data]}]
   (str/join
    " – "
-   [(str "<" (.. ctx (getNodeName) (getLocalName)) "/>")
+   [(str "<" (name (get ctx :tag)) "/>")
     (get error-type->desc type type)
     (str/join ", " (map #(str "/" % "/") data))]))
 
 (defn error->dpi
-  [url {:keys [^XdmNode ctx] :as error}]
-  (let [line-number (.getLineNumber ctx)
-        column-number (.getColumnNumber ctx)]
+  [url {:keys [ctx] :as error}]
+  (let [{{:keys [line-number column-number]} ::dx/location-info} (meta ctx)]
     (DocumentPositionedInfo.
      DocumentPositionedInfo/SEVERITY_WARN
      (error->message error)
@@ -82,9 +82,8 @@
     (fn [manager]
       (some->>
        (ws/xml-document ws/instance url)
-       (axml/doc->articles)
-       (mapcat av/check-typography)
-       (map (partial error->dpi url))
+       (av/check-typography)
+       (map #(error->dpi url %))
        (vec) (reset-results! manager url)))))
 
 (defn clear-results

@@ -17,6 +17,9 @@
   com.h2database/h2 {:mvn/version "1.4.199"}
   com.layerware/hugsql {:mvn/version "0.4.9"}
 
+  ;; Datalog DB
+  datalevin/datalevin {:mvn/version "0.4.31"}
+  
   ;; Ring/HTTP
   ring/ring-core {:mvn/version "1.7.1"}
   ring/ring-defaults {:mvn/version "0.3.2"}

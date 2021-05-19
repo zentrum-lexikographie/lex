@@ -1,14 +1,16 @@
 (ns zdl.lex.server.client
   (:require [clj-http.client :as http]
             [clojure.core.async :as a]
+            [clojure.data.xml :as dx]
+            [clojure.data.zip.xml :as zx]
             [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
             [clojure.tools.logging :as log]
-            [zdl.lex.timestamp :as ts]
+            [clojure.zip :as zip]
             [zdl.lex.fs :refer [file]]
+            [zdl.lex.timestamp :as ts]
             [zdl.lex.url :refer [path->uri server-base]]
-            [zdl.xml.rngom :as rngom]
-            [zdl.xml.util :as xml])
+            [zdl.xml.rngom :as rngom])
   (:import java.net.URL))
 
 (def ^:private schema-values
@@ -78,15 +80,22 @@
         (->> (some->> (a/<! (http-request author (a/chan) req)) :body)
              (assoc tx :xml))))))
 
+(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
+
 (defn edit-article
   [{:keys [id author xml] :as tx}]
-  (if-let [doc (some-> xml xml/->dom)]
-    (let [element-by-name #(-> (.getElementsByTagName doc %) xml/->seq first)
-          timestamp (ts/format (java.time.LocalDate/now))]
-      (doto (element-by-name "Artikel")
-        (.setAttribute "Zeitstempel" timestamp)
-        (.setAttribute "Autor" author))
-      (assoc tx :xml (xml/serialize doc)))
+  (if-let [doc (some-> xml dx/parse-str)]
+    (let [timestamp (ts/format (java.time.LocalDate/now))]
+      (assoc
+       tx :xml
+       (dx/emit-str
+        (zip/root
+         (zip/edit
+          (zx/xml1-> (zip/xml-zip doc) ::dwds/Artikel)
+          (fn [a]
+            (-> a
+                (assoc-in [:attrs "Zeitstempel"] timestamp)
+                (assoc-in [:attrs "Autor"] author))))))))
     tx))
 
 (defn run-transaction

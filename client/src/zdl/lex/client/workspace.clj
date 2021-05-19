@@ -2,11 +2,11 @@
   (:require [clojure.java.browse :refer [browse-url]]
             [clojure.tools.logging :as log]
             [mount.core :refer [defstate]]
+            [zdl.lex.article.xml :as axml]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.http :as http]
             [zdl.lex.fs :refer [file]]
-            [zdl.lex.url :as lexurl]
-            [zdl.xml.util :as xml])
+            [zdl.lex.url :as lexurl])
   (:import java.net.URL
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
@@ -84,10 +84,9 @@
     (. this (getAllEditorLocations editing-area)))
   (xml-document [^StandalonePluginWorkspace this ^URL url]
     (try
-      (with-open [editor-reader (.. this
-                                    (getEditorAccess url editing-area)
-                                    (createContentInputStream))]
-        (xml/->xdm editor-reader))
+      (with-open [is (.. this (getEditorAccess url editing-area)
+                         (createContentInputStream))]
+        (axml/read-xml is))
       (catch Throwable t
         (log/debug (str url) t)))))
 

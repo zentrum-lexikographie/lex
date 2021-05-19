@@ -1,60 +1,63 @@
 (ns zdl.lex.article.xml
-  (:require [zdl.xml.util :as xml])
-  (:import [net.sf.saxon.s9api XdmItem XdmNode XdmNodeKind]))
+  (:require [clojure.data.xml :as dx]
+            [clojure.data.xml.tree :as dxt]
+            [clojure.java.io :as io]
+            [clojure.string :as str]
+            [clojure.zip :as zip]
+            [taoensso.tufte :as tufte :refer [defnp]]))
 
-(def select-articles
-  (comp seq (xml/selector "/d:DWDS/d:Artikel")))
+(defn read-xml
+  [& args]
+  (with-open [is (apply io/input-stream args)]
+    (dxt/event-tree (doall (dx/event-seq is {})))))
 
-(def select-forms
-  (comp seq (xml/selector "./d:Formangabe")))
+(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 
-(def select-surface-forms
-  (comp seq (xml/selector "./d:Formangabe/d:Schreibung")))
+(declare text*)
 
-(def select-morphological-links
-  (comp seq (xml/selector "./d:Verweise")))
+(defn text-content*
+  [{:keys [content]}]
+  (apply str (map text* content)))
 
-(def select-senses
-  (comp seq (xml/selector "./d:Lesart")))
-
-(def select-glosses
-  (comp seq (xml/selector "./d:Definition")))
-
-(def select-refs
-  (comp seq (xml/selector ".//d:Verweis")))
-
-(defn doc->articles
-  "Selects the DWDS article elements in a file."
-  [doc]
-  (->> doc xml/->xdm select-articles))
-
-(declare xdm->str)
-
-(defn element->str
-  [^XdmNode element]
-  (apply str (map xdm->str (.children element))))
-
-(defn xdm->str
-  [^XdmItem i]
-  (if (.isAtomicValue i)
-    (.getStringValue i)
-    (let [^XdmNode node i]
-      (condp = (.getNodeKind node)
-        XdmNodeKind/TEXT (.getStringValue node)
-        XdmNodeKind/ELEMENT
-        (condp = (.. node (getNodeName) (getLocalName))
-          "Streichung" ""
-          "Loeschung" ""
-          "Ziellesart" ""
-          "Ziellemma" (or (.attribute node "Anzeigeform") (element->str node))
-          (element->str node))
-        ""))))
-
-(defn xdm->text
+(defnp text*
   [node]
-  (some-> node xml/->xdm xdm->str xml/text))
+  (cond
+    (string? node) node
+    (map? node)    (let [{:keys [tag attrs]} node]
+                     (or
+                      (condp = tag
+                        ::dwds/Streichung ""
+                        ::dwds/Loeschung  ""
+                        ::dwds/Ziellesart ""
+                        ::dwds/Ziellemma  (get attrs :Anzeigeform)
+                        nil)
+                      (text-content* node)))
+    :else          ""))
 
-(defn texts
-  [col]
-  (some->> col seq (map xdm->text) (remove nil?) (distinct) (seq)))
+(defnp normalize-text
+  [s]
+  (some-> s (str/replace #"\s+" " ") (str/trim) (not-empty)))
 
+(defnp text
+  [node]
+  (normalize-text (text* node)))
+
+(defnp zip-text
+  [loc]
+  (text (zip/node loc)))
+
+(defnp zip-texts
+  [locs]
+  (remove nil? (map zip-text locs)))
+
+(defnp hid
+  [{{:keys [hidx]} :attrs :as node}]
+  (apply str (cond-> [(text node)] hidx (conj "#" hidx))))
+
+(defnp zip-hid
+  [loc]
+  (hid (zip/node loc)))
+
+(defnp zip-hids
+  [locs]
+  (remove nil? (map zip-hid locs)))

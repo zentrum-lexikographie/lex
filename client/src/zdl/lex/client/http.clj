@@ -5,12 +5,12 @@
             [clojure.java.io :as io]
             [clojure.string :as str]
             [mount.core :refer [defstate]]
+            [zdl.lex.article.xml :as axml]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.lucene :as lucene]
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.url :refer [server-url]]
-            [zdl.xml.util :as xml])
+            [zdl.lex.lucene :as lucene]
+            [zdl.lex.url :refer [server-url]])
   (:import [java.io File IOException PushbackReader]
            ro.sync.exml.plugin.lock.LockException))
 
@@ -86,14 +86,7 @@
   (->
    (request {:request-method :get :url url
              :accept "text/xml" :as :stream})
-   :body xml/->xdm))
-
-(defn post-xml [url xml]
-  (->
-   (request {:request-method :post :url url
-             :content-type "text/xml" :body xml
-             :accept "text/xml" :as :stream})
-   :body xml/->dom))
+   :body axml/read-xml))
 
 (defn get-edn [url]
   (->

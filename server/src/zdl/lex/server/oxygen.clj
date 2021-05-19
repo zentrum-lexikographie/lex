@@ -1,10 +1,11 @@
 (ns zdl.lex.server.oxygen
-  (:require [clojure.java.io :as io]
+  (:require [clojure.data.xml :as dx]
+            [clojure.java.io :as io]
             [clojure.string :as str]
-            [ring.util.http-response :as htstatus]
-            [ring.util.io :as rio]
             [clojure.tools.logging :as log]
-            [zdl.xml.util :as xml])
+            [clojure.walk :refer [postwalk]]
+            [ring.util.http-response :as htstatus]
+            [ring.util.io :as rio])
   (:import io.github.classgraph.ClassGraph
            java.nio.charset.Charset
            [java.util.zip ZipEntry ZipOutputStream]))
@@ -15,19 +16,32 @@
   (or (some-> "version.edn" io/resource slurp read-string :version)
       "000000.00.00"))
 
-(defn generate-update-descriptor [_]
-  (let [descriptor (-> "updateSite.xml" io/resource xml/->dom)
-        elements-by-name #(-> (.getElementsByTagName descriptor %) xml/->seq)]
-    (doseq [xt-version (elements-by-name "xt:version")]
-      (.. xt-version (setTextContent version)))
-    (htstatus/ok (xml/serialize descriptor))))
+(dx/alias-uri :xt "http://www.oxygenxml.com/ns/extension")
 
-(defn generate-plugin-descriptor []
-  (let [descriptor (-> "plugin/plugin.xml" io/resource xml/->dom)
-        plugin-el (.. descriptor (getDocumentElement))]
-    (.. plugin-el (setAttribute "version" version))
-    (xml/serialize descriptor)))
+(def update-descriptor-namespaces
+  {:xmlns/xt "http://www.oxygenxml.com/ns/extension"
+   :xmlns/xsi "http://www.w3.org/2001/XMLSchema-instance"})
 
+(def update-descriptor
+  (with-open [is (io/input-stream (io/resource "updateSite.xml"))]
+    (dx/emit-str
+     (postwalk
+      (fn [node]
+        (if (map? node)
+          (cond-> node
+            (= (node :tag) ::xt/extensions)
+            (update :attrs merge update-descriptor-namespaces)
+            (= (node :tag) ::xt/version)
+            (assoc :content (list version)))
+          node))
+      (dx/parse is)))))
+
+(def plugin-descriptor
+  (with-open [is (io/input-stream (io/resource "plugin/plugin.xml"))]
+    (->
+     (dx/parse is :support-dtd false)
+     (assoc-in [:attrs :version] version)
+     (dx/emit-str))))
 
 (defmacro with-classpath-resources [path & body]
   `(let [path-pattern# (re-pattern (str "^" ~path "/?"))
@@ -48,7 +62,7 @@
         (try
           (with-open [zip (ZipOutputStream. stream zip-charset)]
             (let [write-to-zip (partial write-to-zip zip)
-                  descriptor (.. (generate-plugin-descriptor) (getBytes "UTF-8"))]
+                  descriptor (.. plugin-descriptor (getBytes "UTF-8"))]
               (with-open [stream (io/input-stream descriptor)]
                 (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
               (with-classpath-resources "plugin/lib"
@@ -71,7 +85,7 @@
       (htstatus/ok)))
 
 (def oxygen-handlers
-  [["/updateSite.xml" generate-update-descriptor]
+  [["/updateSite.xml" (constantly {:status 200 :body update-descriptor})]
    ["/zdl-lex-plugin.zip" download-plugin]
    ["/zdl-lex-framework.zip" download-framework]])
 
