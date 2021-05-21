@@ -71,6 +71,7 @@
   (binding [*min-articles* 100000 *max-articles* 200000]
     (delete! server-git/dir true)
     (gen/generate (gen-article-set))))
+
 (defn article-set-fixture
   [f]
   (delete! server-git/dir true)

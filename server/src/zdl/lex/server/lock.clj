@@ -3,12 +3,8 @@
             [clojure.string :as str]
             [hugsql.core :refer [def-db-fns]]
             [mount.core :as mount :refer [defstate]]
-            [zdl.lex.data :as data]
-            [zdl.lex.fs :refer [path]]
             [zdl.lex.server.auth :as auth]
-            [zdl.lex.server.h2 :as h2])
-  (:import java.net.URI
-           org.h2.jdbcx.JdbcConnectionPool))
+            [zdl.lex.server.h2 :as h2]))
 
 (defn- now []
   (System/currentTimeMillis))

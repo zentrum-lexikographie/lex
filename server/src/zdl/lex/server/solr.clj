@@ -8,18 +8,23 @@
             [mount.core :refer [defstate]]
             [zdl.lex.lucene :as lucene]
             [zdl.lex.server.article :as article]
-            [zdl.lex.server.solr.client :as solr-client])
+            [zdl.lex.server.solr.client :as solr-client]
+            [zdl.lex.article.fs :as afs]
+            [zdl.lex.server.git :as git]
+            [clojure.tools.logging :as log])
   (:import java.time.format.DateTimeFormatter
            java.time.LocalDateTime))
 
 (defstate article-events->index
-  :start (let [updates  (bus/subscribe article/events :updated)
-               removals (bus/subscribe article/events :removed)
-               refreshs (bus/subscribe article/events :refresh)]
+  :start (let [updates  (s/batch
+                         10000 1000 (bus/subscribe article/events :updated))
+               removals (s/batch
+                         10000 1000 (bus/subscribe article/events :removed))
+               purges (bus/subscribe article/events :purge)]
            (s/consume-async solr-client/add-to-index updates)
            (s/consume-async solr-client/remove-from-index removals)
-           (s/consume-async #(solr-client/rebuild-index (%)) refreshs)
-           [updates removals refreshs])
+           (s/consume-async solr-client/remove-from-index-before purges)
+           [updates removals purges])
   :stop (doseq [s article-events->index]
           (s/close! s)))
 

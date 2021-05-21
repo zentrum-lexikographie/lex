@@ -24,7 +24,7 @@
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as git]
-            [zdl.lex.server.graph.article :as graph-article]
+            [zdl.lex.server.graph :as graph]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.mantis :as mantis]
             [zdl.lex.server.oxygen :as oxygen]
@@ -118,7 +118,7 @@
                                    {:status 400 :body ref}))))
               ::auth/roles #{:admin}}}]
      ["/graph"
-      {:handler graph-article/sample-entities}]
+      {:handler graph/get-sample-links}]
      ["/home"
       (constantly
        {:status                200

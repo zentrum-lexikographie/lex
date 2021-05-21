@@ -11,7 +11,8 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.lucene :as lucene]
             [zdl.lex.server.solr.doc :refer [article->doc]])
-  (:import java.util.concurrent.TimeUnit))
+  (:import java.util.concurrent.TimeUnit
+           java.util.Date))
 
 (def auth
   (let [user     (getenv "SOLR_USER")
@@ -186,47 +187,30 @@
   [query]
   (dx/sexp-as-element [:delete {:commitWithin "10000"} [:query query]]))
 
-(defn add-articles
-  [& args]
-  (throw (ex-info "Unsupported operation" {})))
-
-(defn delete-articles
-  [& args]
-  (throw (ex-info "Unsupported operation" {})))
-
 (defn add-to-index
   [articles]
+  (log/debugf "Adding %d article(s) to index" (count articles))
   (s/consume-async
    #(consume-update "Index addition" %)
    (request-updates (articles->add-xmls articles))))
 
 (defn remove-from-index
   [articles]
+  (log/debugf "Removing %d article(s) from index" (count articles))
   (s/consume-async
    #(consume-update "Index removal" %)
    (request-updates (articles->delete-xmls articles))))
 
-(deftimer [solr client index-rebuild-timer])
-
-(defn rebuild-index
-  [articles]
-  (let [start (System/currentTimeMillis)]
-    (->
-     (s/consume-async
-      #(consume-update "Index rebuild" %)
-      (request-updates
-       (concat
-        (articles->add-xmls articles)
-        [(query->delete-xml (format "time_l:[* TO %s}" start))
-         commit-optimize-xml])))
-     (d/catch #(log/warnf % "Error while rebuilding index"))
-     (d/finally
-       #(timers/update!
-         index-rebuild-timer
-         (- (System/currentTimeMillis) start) TimeUnit/MILLISECONDS)))))
+(defn remove-from-index-before
+  [^Date threshold]
+  (log/debugf "Purging articles before %s" threshold)
+  (let [q (format "time_l:[* TO %s}" (.getTime threshold))]
+    (s/consume-async
+     #(consume-update "Index purge" %)
+     (request-updates [(query->delete-xml q) commit-optimize-xml]))))
 
 (defn clear-index
   []
   (s/consume-async
-   #(consume-update "Index purge" %)
+   #(consume-update "Index clear" %)
    (request-updates [(query->delete-xml "id:*") commit-optimize-xml])))

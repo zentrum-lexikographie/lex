@@ -7,7 +7,8 @@
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [file path]]
-            [zdl.lex.git :as git])
+            [zdl.lex.git :as git]
+            [manifold.stream :as s])
   (:import java.io.File
            java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.Semaphore))
@@ -49,10 +50,8 @@
     (let [files   (map #(file dir %) paths)
           updated (filter #(.exists ^File %) files)
           removed (remove #(.exists ^File %) files)]
-      (when (seq updated)
-        (bus/publish! events :updated updated))
-      (when (seq removed)
-        (bus/publish! events :removed updated))
+      (s/consume-async #(bus/publish! events :updated %) updated)
+      (s/consume-async #(bus/publish! events :removed %) removed)
       files)))
 
 (deftimer [git local gc-timer])

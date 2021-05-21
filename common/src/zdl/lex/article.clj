@@ -74,8 +74,7 @@
 
 (defnp descendants-by-tag
   [loc tag]
-  (map zip/xml-zip
-       (filter (comp #{tag} :tag) (tree-seq :tag :content (zip/node loc)))))
+  (zx/xml-> loc dz/descendants tag))
 
 (defnp senses
   [loc]
@@ -97,7 +96,7 @@
         :when anchor
         :let  [link-ancestors (zx/xml-> link dz/ancestors zip/node)
                [context] (filter (comp link-contexts :tag) link-ancestors)
-               context (some-> context :tag name keyword)]
+               context (some-> context :tag name)]
         :when context
         :let  [link-type (zx/attr link :Typ)
                sense (zx/xml1-> link ::dwds/Ziellesart axml/zip-text)]]
@@ -188,11 +187,11 @@
   (profile
    {}
    (->>
-    (article-files "../../zdl-wb")
-    (take 10000)
-    (pmap #(extract-articles % :errors? true))
-    (mapcat identity)
-    (last)))
+    (article-files "../../zdl-wb/Duden-1999")
+    (mapcat #(extract-articles % :errors? false))
+    #_(take 10000)
+    (filter (comp seq :links))
+    (take 10)))
 
   (time (map :links (take 30 (drop 200 (articles )))))
   (->> (articles "../../zdl-wb")
