@@ -4,7 +4,6 @@
             [clojure.string :as str]
             [clojure.tools.logging :as log]
             [clojure.walk :refer [postwalk]]
-            [ring.util.http-response :as htstatus]
             [ring.util.io :as rio])
   (:import io.github.classgraph.ClassGraph
            java.nio.charset.Charset
@@ -57,43 +56,28 @@
   (io/copy stream zip)
   (.. zip (closeEntry)))
 
-(defn download-plugin [_]
-  (-> (fn [stream]
-        (try
-          (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (let [write-to-zip (partial write-to-zip zip)
-                  descriptor (.. plugin-descriptor (getBytes "UTF-8"))]
-              (with-open [stream (io/input-stream descriptor)]
-                (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
-              (with-classpath-resources "plugin/lib"
-                (with-open [stream (.. resource (open))]
-                  (write-to-zip "zdl-lex-client/lib/" path stream)))))
-          (catch Exception e (log/warn e))))
-      (rio/piped-input-stream)
-      (htstatus/ok)))
+(defn download-framework
+  [stream]
+  (try
+    (with-open [zip (ZipOutputStream. stream zip-charset)]
+      (let [write-to-zip (partial write-to-zip zip "zdl-lex-client/")]
+        (with-classpath-resources "framework"
+          (with-open [stream (.. resource (open))]
+            (write-to-zip path stream)))))
+    (catch Exception e
+      (log/warn e))))
 
-(defn download-framework [_]
-  (-> (fn [stream]
-        (try
-          (with-open [zip (ZipOutputStream. stream zip-charset)]
-            (let [write-to-zip (partial write-to-zip zip "zdl-lex-client/")]
-              (with-classpath-resources "framework"
-                (with-open [stream (.. resource (open))]
-                  (write-to-zip path stream)))))
-          (catch Exception e (log/warn e))))
-      (rio/piped-input-stream)
-      (htstatus/ok)))
+(defn download-plugin
+  [stream]
+  (try
+    (with-open [zip (ZipOutputStream. stream zip-charset)]
+      (let [write-to-zip (partial write-to-zip zip)
+            descriptor   (.. plugin-descriptor (getBytes "UTF-8"))]
+        (with-open [stream (io/input-stream descriptor)]
+          (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
+        (with-classpath-resources "plugin/lib"
+          (with-open [stream (.. resource (open))]
+            (write-to-zip "zdl-lex-client/lib/" path stream)))))
+    (catch Exception e
+      (log/warn e))))
 
-(def oxygen-handlers
-  [["/updateSite.xml" (constantly {:status 200 :body update-descriptor})]
-   ["/zdl-lex-plugin.zip" download-plugin]
-   ["/zdl-lex-framework.zip" download-framework]])
-
-(def ring-handlers
-  [""
-   (conj ["/zdl-lex-client"] oxygen-handlers)
-   (conj ["/oxygen"] oxygen-handlers)])
-
-(comment
-  (-> (download-plugin nil) :body slurp count)
-  (-> (download-framework nil) :body slurp count))

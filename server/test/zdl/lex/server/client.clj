@@ -3,38 +3,19 @@
             [clojure.core.async :as a]
             [clojure.data.xml :as dx]
             [clojure.data.zip.xml :as zx]
-            [clojure.spec.alpha :as s]
             [clojure.spec.gen.alpha :as gen]
             [clojure.tools.logging :as log]
             [clojure.zip :as zip]
-            [zdl.lex.fs :refer [file]]
+            [zdl.lex.server.gen.schema :as schema-gen]
             [zdl.lex.timestamp :as ts]
-            [zdl.lex.url :refer [path->uri server-base]]
-            [zdl.xml.rngom :as rngom])
+            [zdl.lex.url :refer [path->uri server-base]])
   (:import java.net.URL))
-
-(def ^:private schema-values
-  "Essential values from RELAX NG schema, e.g. authors, article types etc."
-  (let [schema (->> (file "../oxygen/framework/rng/DWDSWB.rng")
-                    (rngom/parse-schema) (rngom/traverse))
-        attr-values #(into #{} (rngom/attribute-values
-                                "{http://www.dwds.de/ns/1.0}Artikel" % schema))]
-    {:sources (attr-values "Quelle")
-     :authors (attr-values "Autor")
-     :types (attr-values "Typ")
-     :status (attr-values "Status")}))
-
-(def author-generator
-  "Generate authors."
-  (let [{:keys [authors]} schema-values]
-    (s/gen (disj authors "DWDS"))))
 
 (def query-generator
   "Generate queries (prefix patterns combined with source filter)."
-  (let [{:keys [sources]} schema-values]
-    (gen/fmap
-     (fn [[c source]] (format "forms:%s* AND source:\"%s\"" c source))
-     (gen/tuple (gen/char-alpha) (s/gen sources)))))
+  (gen/fmap
+   (fn [[c source]] (format "forms:%s* AND source:\"%s\"" c source))
+   (gen/tuple (gen/char-alpha) (schema-gen/gen-source))))
 
 
 (defn- http-on-response [ch resp]
@@ -112,7 +93,7 @@
   "Run a number of sample queries."
   [num-queries & args]
   (let [num-queries (Integer/parseInt num-queries)
-        user-queries (gen/tuple author-generator query-generator)]
+        user-queries (gen/tuple (schema-gen/gen-author) query-generator)]
     (doseq [[author query] (gen/sample user-queries num-queries)]
       (log/info (:id (a/<!! (run-transaction {:author author :query query})))))))
 

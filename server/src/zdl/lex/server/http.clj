@@ -1,74 +1,230 @@
 (ns zdl.lex.server.http
-  (:require [mount.core :as mount :refer [defstate]]
+  (:require [aleph.http :as aleph-http]
+            [clojure.core.async :as a]
+            [clojure.java.io :as io]
+            [clojure.tools.logging :as log]
+            [hiccup.page :refer [html5 include-css]]
+            [mount.core :as mount :refer [defstate]]
             [muuntaja.core :as m]
-            [reitit.coercion.spec :as spec-coercion]
+            [reitit.coercion.malli :as rcm]
+            [reitit.http.interceptors.dev :as dev]
+            [reitit.dev.pretty :as pretty]
+            [reitit.http :as http]
+            [reitit.http.coercion :as coercion]
+            [reitit.http.interceptors.exception :as exception]
+            [reitit.http.interceptors.muuntaja :as muuntaja]
+            [reitit.http.interceptors.parameters :as parameters]
+            [reitit.interceptor.sieppari :as sieppari]
             [reitit.ring :as ring]
-            [reitit.ring.coercion :as coercion]
-            [reitit.ring.middleware.muuntaja :as muuntaja]
             [reitit.swagger :as swagger]
             [reitit.swagger-ui :as swagger-ui]
-            [ring.middleware.defaults :as defaults]
-            [ring.middleware.webjars :refer [wrap-webjars]]
+            [ring.util.io :as rio]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.server.article :as article]
             [zdl.lex.server.auth :as auth]
-            [zdl.lex.server.cli-distrib :as cli-distrib]
-            [zdl.lex.server.exception :as exception]
+            [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as git]
-            [zdl.lex.server.home :as home]
+            [zdl.lex.server.graph.article :as graph-article]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.mantis :as mantis]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr :as solr]
-            [zdl.lex.server.status :as status]))
+            [zdl.lex.server.tasks :as tasks]))
 
-(defn wrap-defaults [handler]
-  (->> (-> defaults/secure-site-defaults
-           (assoc-in [:cookies] false)
-           (assoc-in [:session] false)
-           (assoc-in [:static] false)
-           (assoc-in [:proxy] true)
-           (assoc-in [:security :anti-forgery] false)
-           (assoc-in [:security :ssl-redirect] false))
-       (defaults/wrap-defaults handler)))
+(def homepage
+  [:html
+   [:head
+    [:meta {:charset "utf-8"}]
+    (include-css "/assets/bulma-0.7.4.min.css")
+    [:title "ZDL Lex-Server"]]
+   [:body
+    [:div.hero.is-primary.is-bold.is-fullheight
+     [:div.hero-body
+      [:div.container
+       [:h1.title "ZDL Lex-Server"]
+       [:h2.subtitle
+        [:a
+         {:href  "/oxygen/updateSite.xml"
+          :title "Oxygen XML Editor - Update Site"}
+         "Oxygen XML Editor - Update Site"]
+        [:br]
+        [:a
+         {:href  "/cli/org.zdl.lex.cli.jar"
+          :title "Command Line Interface – Client JAR"}
+         "Command Line Interface – Client JAR"]]]]]]])
+
+(defn wrap-log-exception [handler ^Throwable e req]
+  (log/warn e (select-keys req [:uri :request-method]))
+  (handler e req))
+
+(def exception-handlers
+  (assoc exception/default-handlers ::exception/wrap wrap-log-exception))
+
+(defn pipe-resource
+  [resource]
+  (rio/piped-input-stream
+   (fn [os]
+     (with-open [is (io/input-stream resource)]
+       (io/copy is os)))))
+
+(require 'sieppari.async.manifold)
+
+(def handler
+  (http/ring-handler
+   (http/router
+    [""
+     ["/"
+      (constantly
+       {:status  307
+        :headers {"Location" "/home"}})]
+     ["/article" {::auth/roles #{:user}}
+      ["/"
+       {:put    {:handler    article/create-article
+                 :parameters {:query [:map
+                                      [:form :string]
+                                      [:pos :string]]}}
+        :delete {:summary     "Refreshes all article data"
+                 :tags        ["Index", "Admin"]
+                 :handler     tasks/trigger-articles-refresh
+                 ::auth/roles #{:admin}}}]
+      ["/*resource"
+       {:get  {:handler    article/get-article
+               :parameters {:path [:map [:resource :string]]}}
+        :post {:handler    (lock/wrap-resource-lock article/post-article)
+               :parameters {:path  [:map [:resource :string]]
+                            :query [:map [:token :string]]}}}]]
+     ["/cli/org.zdl.lex.cli.jar"
+      (constantly
+       {:status 200
+        :body   (pipe-resource (io/resource "org.zdl.lex.cli.jar"))})]
+     ["/docs/api/*"
+      {:no-doc  true
+       :handler (swagger-ui/create-swagger-ui-handler)}]
+     ["/git"
+      {:patch {:summary     "Commit pending changes on the server's branch"
+               :tags        ["Article" "Git" "Admin"]
+               :handler     tasks/trigger-git-commit
+               ::auth/roles #{:admin}}}]
+     ["/git/ff/:ref"
+      {:post {:summary     "Fast-forwards the server's branch to the given refs"
+              :tags        ["Article" "Git" "Admin"]
+              :parameters  {:path [:map [:ref :string]]}
+              :handler     (fn [req]
+                             (let [ref (get-in req [:parameters :path :ref])]
+                               (try
+                                 {:status 200 :body (git/fast-forward! ref)}
+                                 (catch Throwable t
+                                   (log/warn t)
+                                   {:status 400 :body ref}))))
+              ::auth/roles #{:admin}}}]
+     ["/graph"
+      {:handler graph-article/sample-entities}]
+     ["/home"
+      (constantly
+       {:status                200
+        :muuntaja/encode       true
+        :muuntaja/content-type "text/html"
+        :body                  homepage})]
+     ["/index" {::auth/roles #{:user}}
+      [""
+       {:summary    "Query the full-text index"
+        :tags       ["Index" "Query"]
+        :parameters {:query [:map
+                             [:q {:optional true} :string]
+                             [:offset {:optional true} [:int {:min 0}]]
+                             [:limit {:optional true} [:int {:min 0}]]]}
+        :handler    solr/search-articles}]
+      ["/export"
+       {:summary    "Export index metadata in CSV format"
+        :tags       ["Index" "Query" "Export"]
+        :parameters {:query [:map
+                             [:q {:optional true} :string]
+                             [:limit {:optional true} :int]]}
+        :handler    solr/export-article-metadata}]
+      ["/forms/suggestions"
+       {:summary    "Retrieve suggestion for headwords based on prefix queries"
+        :tags       ["Index" "Query" "Suggestions" "Headwords"]
+        :parameters {:query [:map [:q {:optional true} :string]]}
+        :handler    solr/suggest-forms}]]
+     ["/lock" {::auth/roles #{:user}}
+      [""
+       {:summary "Retrieve list of active locks"
+        :tags    ["Lock" "Query"]
+        :handler lock/read-locks}]
+      ["/*resource"
+       {:get    {:summary    "Read a resource lock"
+                 :tags       ["Lock" "Query" "Resource"]
+                 :parameters {:path  [:map [:resource :string]]
+                              :query [:map [:token :string]]}
+                 :handler    lock/read-lock}
+        :post   {:summary    "Set a resource lock"
+                 :tags       ["Lock" "Resource"]
+                 :parameters {:path  [:map [:resource :string]]
+                              :query [:map
+                                      [:token :string]
+                                      [:ttl [:int {:min 1}]]]}
+                 :handler    lock/create-lock}
+        :delete {:summary    "Remove a resource lock."
+                 :tags       ["Lock" "Resource"]
+                 :parameters {:path  [:map [:resource :string]]
+                              :query [:map [:token :string]]}
+                 :handler    lock/remove-lock}}]]
+     ["/mantis/issues"
+      {:get
+       {:summary     "Query internal index for Mantis issues based on headword"
+        :tags        ["Mantis" "Query" "Headwords"]
+        :parameters  {:query [:map [:q :string]]}
+        :handler     mantis/get-issues
+        ::auth/roles #{:user}}
+       :delete
+       {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
+        :tags        ["Mantis" "Admin"]
+        :handler     tasks/trigger-mantis-sync
+        ::auth/roles #{:admin}}}]
+     ["/oxygen"
+      ["/updateSite.xml"
+       (constantly
+        {:status 200
+         :body   oxygen/update-descriptor})]
+      ["/zdl-lex-framework.zip"
+       (fn [_]
+         {:status 200
+          :body   (rio/piped-input-stream oxygen/download-framework)})]
+      ["/zdl-lex-plugin.zip"
+       (fn [_]
+         {:status 200
+          :body   (rio/piped-input-stream oxygen/download-plugin)})]]
+     ["/status"
+      {:summary     "Provides status information, e.g. logged-in user"
+       :tags        ["Status"]
+       :handler     auth/get-status
+       ::auth/roles #{:user}}]
+     ["/swagger.json"
+      {:no-doc  true
+       :handler (swagger/create-swagger-handler)}]]
+    {;;:reitit.interceptor/transform dev/print-context-diffs
+     ;;:exception pretty/exception
+     :data {:coercion rcm/coercion
+            :muuntaja format/customized-muuntaja}})
+   (ring/routes
+    (ring/create-resource-handler {:path "/assets"})
+    (ring/create-default-handler))
+   {:executor     sieppari/executor
+    :interceptors [swagger/swagger-feature
+                   (parameters/parameters-interceptor)
+                   (muuntaja/format-negotiate-interceptor)
+                   (muuntaja/format-response-interceptor)
+                   (exception/exception-interceptor exception-handlers)
+                   (muuntaja/format-request-interceptor)
+                   (coercion/coerce-response-interceptor)
+                   (coercion/coerce-request-interceptor)
+                   auth/interceptor]}))
 
 (defstate server
-  :start
-  (do
-    (require 'ring.adapter.jetty)
-    (let [run-jetty (ns-resolve 'ring.adapter.jetty 'run-jetty)]
-      (->
-       (ring/ring-handler
-        (ring/router
-         [""
-          {:coercion spec-coercion/coercion
-           :muuntaja m/instance
-           :middleware [wrap-defaults
-                        muuntaja/format-negotiate-middleware
-                        muuntaja/format-response-middleware
-                        exception/middleware
-                        muuntaja/format-request-middleware
-                        coercion/coerce-response-middleware
-                        coercion/coerce-request-middleware
-                        auth/wrap]}
-          article/ring-handlers
-          cli-distrib/ring-handlers
-          git/ring-handlers
-          home/ring-handlers
-          lock/ring-handlers
-          mantis/ring-handlers
-          oxygen/ring-handlers
-          solr/ring-handlers
-          status/ring-handlers
-          ["/assets/**" {:no-doc true
-                         :handler (constantly nil)
-                         :middleware [wrap-webjars]}]
-          ["/swagger.json" {:no-doc true
-                            :handler (swagger/create-swagger-handler)}]
-          ["/docs/api/*" {:no-doc true
-                          :handler (swagger-ui/create-swagger-ui-handler)}]])
-        (ring/routes
-         (ring/create-default-handler)))
-       (run-jetty {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))
-                   :join? false}))))
-  :stop (.. server (stop)))
+  :start (aleph-http/start-server
+          handler
+          {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))})
+  :stop (.close ^java.io.Closeable server))
+
+(comment
+  (mount/start #'server))

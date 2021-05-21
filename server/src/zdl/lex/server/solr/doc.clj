@@ -91,3 +91,9 @@
                     (into {}))]
     (for [[name values] (sort fields) value (sort values)]
       [name value])))
+
+(defn article->doc
+  [article]
+  [:doc
+   (for [[k v] (article->fields article)]
+     [:field {:name k} v])])

@@ -1,87 +1,52 @@
 (ns zdl.lex.server.solr
-  (:require [clojure.core.async :as a]
-            [clojure.spec.alpha :as s]
+  (:require [clojure.data.csv :as csv]
             [clojure.string :as str]
-            [metrics.timers :refer [deftimer time-fn!]]
+            [manifold.bus :as bus]
+            [manifold.deferred :as d]
+            [manifold.executor :refer [execute-pool]]
+            [manifold.stream :as s]
             [mount.core :refer [defstate]]
-            [muuntaja.core :as m]
-            [ring.util.http-response :as htstatus]
-            [clojure.tools.logging :as log]
-            [zdl.lex.article :as article]
-            [zdl.lex.article.fs :as afs]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.cron :as cron]
             [zdl.lex.lucene :as lucene]
-            [zdl.lex.spec :as spec]
-            [zdl.lex.fs :refer [relativize]]
-            [zdl.lex.server.csv :as csv]
-            [zdl.lex.server.git :as git]
-            [zdl.lex.server.solr.client :as client]))
+            [zdl.lex.server.article :as article]
+            [zdl.lex.server.solr.client :as solr-client])
+  (:import java.time.format.DateTimeFormatter
+           java.time.LocalDateTime))
 
-(defn index-git-changes
-  "Synchronizes modified articles with the Solr index"
-  [_ {:keys [modified deleted]}]
-  (let [modified (filter afs/article-file? modified)
-        deleted (filter afs/article-file? deleted)]
-    (doseq [m modified]
-      (log/info {:solr {:modified (git/file->id m)}}))
-    (doseq [d deleted]
-      (log/info {:solr {:deleted (git/file->id d)}}))
-    (try
-      (client/add-articles modified)
-      (client/delete-articles deleted)
-      (catch Throwable t (log/warn t)))))
+(defstate article-events->index
+  :start (let [updates  (bus/subscribe article/events :updated)
+               removals (bus/subscribe article/events :removed)
+               refreshs (bus/subscribe article/events :refresh)]
+           (s/consume-async solr-client/add-to-index updates)
+           (s/consume-async solr-client/remove-from-index removals)
+           (s/consume-async #(solr-client/rebuild-index (%)) refreshs)
+           [updates removals refreshs])
+  :stop (doseq [s article-events->index]
+          (s/close! s)))
 
-(defstate git-change-indexer
-  :start (bus/listen [:git-changes] index-git-changes)
-  :stop (git-change-indexer))
+(defn- facet-values
+  [[k v]]
+  [(lucene/field->kw (name k))
+   (into (sorted-map) (map vec (partition 2 v)))])
 
-(defstate index-rebuild-scheduler
-  "Synchronizes all articles with the Solr index"
-  :start (cron/schedule "0 0 1 * * ?" "Solr index rebuild" client/rebuild-index)
-  :stop (a/close! index-rebuild-scheduler))
+(defn parse-facet-response
+  [{:keys [facet_fields facet_ranges facet_intervals]}]
+  (into
+   (sorted-map)
+   (concat
+    (for [kv facet_fields]
+      (facet-values kv))
+    (for [[k v] facet_intervals]
+      [(lucene/field->kw (name k))
+       (into (sorted-map) (for [[k v] v] [(name k) v]))])
+    (for [[k v] facet_ranges]
+      (facet-values [k (v :counts)])))))
 
-(defstate index-init
-  :start (try
-           (when (client/index-empty?)
-             (a/>!! index-rebuild-scheduler :init))
-           (catch Throwable t (log/warn t))))
-
-(defstate build-suggestions-scheduler
-  "Synchronizes the forms suggestions with all indexed articles"
-  :start (cron/schedule "0 */10 * * * ?" "Forms FSA update" client/build-forms-suggestions)
-  :stop (a/close! build-suggestions-scheduler))
-
-(defn handle-index-rebuild [_]
-  (htstatus/ok {:index (a/>!! index-rebuild-scheduler :sync)}))
-
-(defn handle-form-suggestions [{{:keys [q]} :params}]
-  (let [solr-response (client/suggest "forms" (or q ""))
-        path-prefix [:body :suggest :forms (keyword q)]
-        total (get-in solr-response (conj path-prefix :numFound) 0)
-        suggestions (get-in solr-response (conj path-prefix :suggestions) [])]
-    (htstatus/ok
-     {:total total
-      :result (for [{:keys [term payload]} suggestions]
-                (merge {:suggestion term} (read-string payload)))})))
-
-(defn- facet-counts [[k v]]
-  [k (:counts v)])
-
-(defn- facet-values [[k v]]
-  [(-> k name lucene/field->kw)
-   (into (sorted-map) (->> v (partition 2) (map vec)))])
-
-(defn- facet-intervals [[k v]]
-  [(-> k name lucene/field->kw)
-   (into (sorted-map) (for [[k v] v] [(name k) v]))])
-
-(defn docs->results [docs]
-  (for [{:keys [abstract_ss]} docs]
-    (-> abstract_ss first read-string)))
+(defn doc->abstract
+  [{:keys [abstract_ss]}]
+  (read-string (first abstract_ss)))
 
 (def ^:private query-params
-  {"df" "forms_ss"
+  {"df"   "forms_ss"
    "sort" "forms_ss asc,weight_i desc,id asc"})
 
 (defn- ->timestamp
@@ -93,107 +58,112 @@
   (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (format odt)))
 
 (defn- facet-params []
-  (let [now (java.time.LocalDate/now)
-        today (->timestamp now)
-        year (->timestamp (.. (java.time.Year/from now) (atDay 1)))
-        tomorrow (->timestamp (.. now (plusDays 1)))
+  (let [now        (java.time.LocalDate/now)
+        today      (->timestamp now)
+        year       (->timestamp (.. (java.time.Year/from now) (atDay 1)))
+        tomorrow   (->timestamp (.. now (plusDays 1)))
         boundaries (concat
                     [today
                      (.. tomorrow (minusDays 7))
                      (.. tomorrow (minusMonths 1))]
                     (for [i (range 4)]
                       (.. year (minusYears i))))
-        tomorrow (timestamp->str tomorrow)
+        tomorrow   (timestamp->str tomorrow)
         boundaries (map timestamp->str boundaries)]
-    {"facet" "true"
-     "facet.field" ["author_s" "editors_ss"
-                    "sources_ss" "tranche_ss"
-                    "type_ss" "pos_ss" "status_ss"
-                    "provenance_ss"
-                    "errors_ss"]
-     "facet.limit" "-1"
-     "facet.mincount" "1"
-     "facet.interval" "timestamp_dt"
+    {"facet"              "true"
+     "facet.field"        ["author_s" "editors_ss"
+                           "sources_ss" "tranche_ss"
+                           "type_ss" "pos_ss" "status_ss"
+                           "provenance_ss"
+                           "errors_ss"]
+     "facet.limit"        "-1"
+     "facet.mincount"     "1"
+     "facet.interval"     "timestamp_dt"
      "facet.interval.set" (for [b boundaries]
                             (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
 
-(defn handle-search [req]
-  (let [params (-> req :parameters :query)
-        {:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} params
-        params {"q" (lucene/translate q) "start" offset "rows" limit}
-        solr-response (client/query (merge query-params (facet-params) params))
-        {:keys [response facet_counts]} (:body solr-response)
-        {:keys [numFound docs]} response
-        {:keys [facet_fields facet_ranges facet_intervals]} facet_counts
-        facets (concat (map facet-values facet_fields)
-                       (map facet-intervals facet_intervals)
-                       (map (comp facet-values facet-counts) facet_ranges))]
-    (htstatus/ok
-     {:total numFound
-      :result (docs->results docs)
-      :facets (into (sorted-map) facets)})))
+(defn search-articles
+  [{{{:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} :query} :parameters}]
+  (d/chain
+   (solr-client/query (assoc (merge query-params (facet-params))
+                             :q (lucene/translate q)
+                             :start offset
+                             :rows limit))
+   (fn [{{{:keys [numFound docs]} :response :keys [facet_counts]} :body}]
+     {:status 200
+      :body   {:total  numFound
+               :result (map doc->abstract docs)
+               :facets (parse-facet-response facet_counts)}})))
 
-(defn- doc->csv [d]
-  [(d :status)
-   (d :source)
-   (some->> d :forms (str/join ", "))
-   (some->> d :definitions first)
-   (d :type)
-   (d :provenance)
-   (d :timestamp)
-   (d :author)
-   (d :editor)
-   (d :id)])
+(defn csv-record->line
+  [record]
+  (with-out-str
+    (csv/write-csv *out* [record])))
 
-(def csv-header ["Status" "Quelle" "Schreibung" "Definition" "Typ"
-                 "Ersterfassung" "Datum" "Autor" "Redakteur" "ID"])
-(defn handle-export [req]
-  (let [params (-> req :parameters :query)
-        {:keys [q limit] :or {q "id:*" limit 1000}} params
-        params (merge query-params {"q" (lucene/translate q)})
-        docs (->> (client/scroll params (min limit 50000)) (take limit))
-        records (->> docs docs->results (map doc->csv) (cons csv-header))
-        ts (->> (java.time.LocalDateTime/now)
-                (.format java.time.format.DateTimeFormatter/ISO_DATE_TIME))]
-    (->
-     (htstatus/ok records)
-     (htstatus/update-header "Content-Disposition" str
-                             "attachment; filename=\"zdl-dwds-export-" ts ".csv\""))))
+(def csv-header
+  (csv-record->line
+   ["Status" "Quelle" "Schreibung" "Definition" "Typ"
+    "Ersterfassung" "Datum" "Autor" "Redakteur" "ID"]))
 
-(s/def ::q string?)
-(s/def ::offset ::spec/pos-int)
-(s/def ::limit ::spec/pos-int)
-(s/def ::search-query (s/keys :opt-un [::q ::offset ::limit]))
-(s/def ::export-query (s/keys :opt-un [::q ::limit]))
-(s/def ::suggestion-query (s/keys :req-un [::q]))
+(defn- doc->csv
+  [d]
+  (let [d (doc->abstract d)]
+    (csv-record->line
+     [(d :status)
+      (d :source)
+      (some->> d :forms (str/join ", "))
+      (some->> d :definitions first)
+      (d :type)
+      (d :provenance)
+      (d :timestamp)
+      (d :author)
+      (d :editor)
+      (d :id)])))
 
-(def search-handler
-  {:summary "Query the full-text index"
-   :tags ["Index" "Query"]
-   :parameters {:query ::search-query}
-   :handler handle-search})
+(defn export-article-metadata
+  [{{{:keys [q limit] :or {q "id:*" limit 1000}} :query} :parameters}]
+  (let [pages    (solr-client/scroll {:q (lucene/translate q)}
+                                     (min (max 1 limit) 50000))
+        records  (s/stream)
+        ts       (.format DateTimeFormatter/ISO_DATE_TIME (LocalDateTime/now))
+        filename (str "zdl-dwds-export-" ts ".csv")]
+    (d/chain
+     (s/put! records csv-header)
+     (fn [put?]
+       (when put?
+         (s/connect-via pages
+                        (let [n (atom 0)]
+                          (fn [page]
+                            (d/loop [page' page]
+                              (let [doc (first page')]
+                                (if (<= (swap! n inc) limit)
+                                  (if doc
+                                    (d/chain
+                                     (s/put! records (doc->csv doc))
+                                     (fn [put?]
+                                       (when put?
+                                         (d/recur (rest page')))))
+                                    (d/success-deferred true))
+                                  (do
+                                    (s/close! pages)
+                                    (s/close! records)
+                                    (d/success-deferred false)))))))
+                        records))))
+    {:status 200
+     :body   records
+     :headers
+     {"Content-Disposition" (str "attachment; filename=\"" filename "\"")
+      "Content-Type"        "text/csv"}}))
 
-(def ring-handlers
-  ["/index"
-   [""
-    {:get search-handler
-     :head search-handler
-     :delete {:summary "Clears the index, forcing a rebuild"
-              :tags ["Index", "Admin"]
-              :handler handle-index-rebuild}}]
-
-   ["/export"
-    {:summary "Export index metadata in CSV format"
-     :tags ["Index" "Query" "Export"]
-     :parameters {:query ::export-query}
-     :muuntaja (m/create (assoc m/default-options
-                                :return :output-stream
-                                :default-format "text/csv"
-                                :formats {"text/csv" csv/format}))
-     :handler handle-export}]
-
-   ["/forms/suggestions"
-    {:summary "Retrieve suggestion for headwords based on prefix queries"
-     :tags ["Index" "Query" "Suggestions" "Headwords"]
-     :parameters {:query ::suggestion-query}
-     :handler handle-form-suggestions}]])
+(defn suggest-forms
+  [{{{:keys [q]} :query} :parameters}]
+  (d/chain
+   (solr-client/suggest "forms" (or q ""))
+   (fn [{{{:keys [forms]} :suggest} :body}]
+     (let [q           (keyword q)
+           total       (get-in forms [q :numFound] 0)
+           suggestions (get-in forms [q :suggestions] [])]
+       {:status 200
+        :body   {:total  total
+                 :result (for [{:keys [term payload]} suggestions]
+                           (assoc (read-string payload) :suggestion term))}}))))

@@ -28,6 +28,16 @@
   []
   (gen-article-attr-val "Quelle"))
 
+(defn gen-status
+  []
+  (gen-article-attr-val "Status"))
+
+(defn gen-type
+  []
+  (gen-article-attr-val "Typ"))
+
 (deftest generators
-  (is (gen/generate (gen-author)))
-  (is (gen/generate (gen-source))))
+  (is [(gen/generate (gen-author))
+       (gen/generate (gen-source))
+       (gen/generate (gen-status))
+       (gen/generate (gen-type))]))

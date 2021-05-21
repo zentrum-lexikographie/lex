@@ -5,11 +5,9 @@
   ;; Code in common with client and other components
   org.zdl.lex/common {:local/root "../common"}
 
-  ;; Data handling
+  ;; Data handling and formats
   org.clojure/data.codec {:mvn/version "0.1.1"}
   org.clojure/data.csv {:mvn/version "0.1.4"}
-
-  ;; Data formats
   cheshire/cheshire {:mvn/version "5.9.0"}
   hiccup/hiccup {:mvn/version "1.0.5"}
 
@@ -19,27 +17,12 @@
 
   ;; Datalog DB
   datalevin/datalevin {:mvn/version "0.4.31"}
-  
-  ;; Ring/HTTP
-  ring/ring-core {:mvn/version "1.7.1"}
-  ring/ring-defaults {:mvn/version "0.3.2"}
-  ring/ring-jetty-adapter {:mvn/version "1.7.1"}
 
-  ;; Metosin Ring/HTTP extensions
-  metosin/muuntaja {:mvn/version "0.6.3"}
-  metosin/reitit {:mvn/version "0.3.9"}
-  metosin/ring-http-response {:mvn/version "0.9.1"}
+  ;; Metosin Ring/HTTP
+  metosin/reitit {:mvn/version "0.5.12"}
 
   ;; Ring/HTTP authentication
   buddy/buddy {:mvn/version "2.0.0"}
-
-  ;; Webjar-based Assets
-  ring-webjars/ring-webjars {:mvn/version "0.2.0"
-                             :exclusions [org.webjars/webjars-locator]}
-  org.webjars.npm/bulma {:mvn/version "0.7.4"}
-  org.webjars.npm/material-icons {:mvn/version "0.3.0"}
-  org.webjars/webjars-locator-core {:mvn/version "0.41"
-                                    :exclusions [org.webjars.npm/angular__http]}
 
   ;; Classpath access (for embedded OxygenXML client components)
   io.github.classgraph/classgraph {:mvn/version "4.8.50"}

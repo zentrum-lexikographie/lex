@@ -35,13 +35,21 @@
   (clone-prod!)
   (git/sh! prod-dir "pull"))
 
+(def ^:dynamic *min-articles*
+  100)
+
+(def ^:dynamic *max-articles*
+  200)
+
 (defn gen-prod-article-set
-  [& args]
-  (when-not (prod-articles) (clone-prod!))
-  (apply gen/set (gen/elements (prod-articles)) args))
+  []
+  (pull-prod!)
+  (gen/set
+   (gen/elements (prod-articles))
+   {:min-elements *min-articles* :max-elements *max-articles*}))
 
 (defn gen-article-set
-  [& args]
+  []
   (when (.isDirectory (file server-git/dir ".git"))
     (throw (IllegalStateException. "Git data exists")))
   (gen/fmap
@@ -57,27 +65,20 @@
        (git/sh! server-git/dir "add" ".")
        (git/sh! server-git/dir "commit" "-m" "Sets up test")
        (afs/files server-git/dir)))
-   (apply gen-prod-article-set args)))
-
-(defn generate-article-set
-  [[min-articles max-articles]]
-  (gen/generate
-   (gen-article-set {:min-elements min-articles :max-elements max-articles})))
-
-(defn create-article-set-fixture
-  ([]
-   (create-article-set-fixture [100 200]))
-  ([set-size-range]
-   (fn [f]
-     (delete! server-git/dir true)
-     (generate-article-set set-size-range)
-     (f)
-     (delete! server-git/dir))))
+   (gen-prod-article-set)))
 
 (comment
-  (generate-article-set [100 1000]))
+  (binding [*min-articles* 100000 *max-articles* 200000]
+    (delete! server-git/dir true)
+    (gen/generate (gen-article-set))))
+(defn article-set-fixture
+  [f]
+  (delete! server-git/dir true)
+  (gen/generate (gen-article-set))
+  (f)
+  (delete! server-git/dir))
 
-(use-fixtures :once (create-article-set-fixture [1000 2000]))
+(use-fixtures :once article-set-fixture)
 
 (deftest fixtures
   (is (seq (afs/files server-git/dir))))

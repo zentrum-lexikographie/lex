@@ -1,18 +1,13 @@
 (ns zdl.lex.server.mantis
   (:require [clj-soap.client :as soap]
-            [clojure.core.async :as a]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
-            [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [clojure.tools.logging :as log]
             [clojure.zip :as zip]
             [metrics.timers :refer [deftimer time!]]
-            [mount.core :refer [defstate]]
-            [ring.util.http-response :as htstatus]
-            [zdl.lex.cron :as cron]
-            [zdl.lex.env :refer [getenv]]
-            [zdl.lex.data :as data]))
+            [zdl.lex.data :as data]
+            [zdl.lex.env :refer [getenv]]))
 
 (def mantis-base
   (getenv "MANTIS_BASE" "https://mantis.dwds.de/mantis"))
@@ -22,7 +17,7 @@
   (str mantis-base "/view.php?id=" id))
 
 (def client
-  (let [wsdl (str mantis-base "/api/soap/mantisconnect.wsdl")
+  (let [wsdl     (str mantis-base "/api/soap/mantisconnect.wsdl")
         endpoint (str mantis-base "/api/soap/mantisconnect.php")]
     (soap/client-fn {:wsdl wsdl :options {:endpoint-url endpoint}})))
 
@@ -62,7 +57,7 @@
   ([op params zip->locs] (scroll op params zip->locs 1000))
   ([op params zip->locs page-size] (scroll op params zip->locs page-size 0))
   ([op params zip->locs page-size page]
-   (let [params (merge params {:page_number page :per_page page-size})
+   (let [params  (merge params {:page_number page :per_page page-size})
          results (seq (results op params zip->locs))]
      (if results
        (concat results
@@ -86,46 +81,46 @@
   (comp #(or % "-") first #(str/split % #" --")))
 
 (defn issues []
-  (let [status (mantis-enum :mc_enum_status)
-        severities (mantis-enum :mc_enum_severities)
+  (let [status      (mantis-enum :mc_enum_status)
+        severities  (mantis-enum :mc_enum_severities)
         resolutions (mantis-enum :mc_enum_resolutions)
-        users (mantis-enum :mc_project_get_users {:project_id project :access 0})]
+        users       (mantis-enum :mc_project_get_users {:project_id project :access 0})]
     (->> (scroll :mc_project_get_issue_headers {:project_id project})
          (map (fn [item]
-                (let [id (int-property item :id)
+                (let [id      (int-property item :id)
                       summary (property item :summary)]
-                  {:id id
-                   :url (issue-id->url id)
-                   :category (property item :category)
-                   :summary summary
-                   :lemma (some-> summary summary->lemma)
+                  {:id           id
+                   :url          (issue-id->url id)
+                   :category     (property item :category)
+                   :summary      summary
+                   :lemma        (some-> summary summary->lemma)
                    :last-updated (property item :last_updated)
-                   :status (some-> (property item :status) status)
-                   :severity (some-> (property item :severity) severities)
-                   :reporter (some-> (property item :reporter) users)
-                   :handler (some-> (property item :handler) users)
-                   :resolution (some-> (property item :resolution) resolutions)
-                   :attachments (int-property  item :attachments_count)
-                   :notes (int-property item :notes_count)}))))))
+                   :status       (some-> (property item :status) status)
+                   :severity     (some-> (property item :severity) severities)
+                   :reporter     (some-> (property item :reporter) users)
+                   :handler      (some-> (property item :handler) users)
+                   :resolution   (some-> (property item :resolution) resolutions)
+                   :attachments  (int-property  item :attachments_count)
+                   :notes        (int-property item :notes_count)}))))))
 
 (defn issue [id]
   (->> (results :mc_issue_get {:issue_id id} zip->return)
        (map (fn [item]
-              (let [id (int-property item :id)
+              (let [id      (int-property item :id)
                     summary (property item :summary)]
-                {:id (int-property item :id)
-                 :url (issue-id->url id)
-                 :category (property item :category)
-                 :summary summary
-                 :lemma (some-> summary summary->lemma)
+                {:id           (int-property item :id)
+                 :url          (issue-id->url id)
+                 :category     (property item :category)
+                 :summary      summary
+                 :lemma        (some-> summary summary->lemma)
                  :last-updated (property item :last_updated)
-                 :status (some-> (property item :status :name))
-                 :severity (some-> (property item :severity :name))
-                 :reporter (some-> (property item :reporter :name))
-                 :handler (some-> (property item :handler :name))
-                 :resolution (some-> (property item :resolution :name))
-                 :attachments (some-> (zx/xml-> item :attachments) count)
-                 :notes (some-> (zx/xml-> item :notes) count)})))
+                 :status       (some-> (property item :status :name))
+                 :severity     (some-> (property item :severity :name))
+                 :reporter     (some-> (property item :reporter :name))
+                 :handler      (some-> (property item :handler :name))
+                 :resolution   (some-> (property item :resolution :name))
+                 :attachments  (some-> (zx/xml-> item :attachments) count)
+                 :notes        (some-> (zx/xml-> item :notes) count)})))
        (first)))
 
 (def mantis-dump
@@ -149,50 +144,22 @@
 (defn index-issues [issues]
   (group-by :lemma issues))
 
+(defn init-issues
+  []
+  (reset! index (index-issues (read-dump))))
+
 (deftimer [mantis issues sync-timer])
 
-(defn- sync-issues []
-  (->> (issues) (store-dump)
-       (index-issues)
-       (reset! index) (count)
-       (time! sync-timer)))
+(defn sync-issues []
+  (time! sync-timer
+         (count (reset! index (index-issues (store-dump (issues)))))))
 
-(defstate issue-sync-scheduler
-  "Synchronizes Mantis issues"
-  :start (do
-           (future (->> (read-dump) (index-issues) (reset! index)))
-           (cron/schedule "0 */15 * * * ?" "Mantis Synchronization" sync-issues))
-  :stop (a/close! issue-sync-scheduler))
-
-(defn handle-query [req]
-  (htstatus/ok
-   (pmap (comp issue :id)
-         (get @index (get-in req [:parameters :query :q]) []))))
-
-(defn handle-index-rebuild
-  [_]
-  (htstatus/ok {:index (a/>!! issue-sync-scheduler :sync)}))
-
-(s/def ::q string?)
-(s/def ::issue-query (s/keys :req-un [::q]))
-
-(def query-handler
-  {:summary "Query internal index for Mantis issues based on headword"
-   :tags ["Mantis" "Query" "Headwords"]
-   :parameters {:query ::issue-query}
-   :handler handle-query})
-
-(def rebuild-handler
-  {:summary "Clears the internal Mantis issue index and re-synchronizes it"
-   :tags ["Mantis" "Admin"]
-   :handler handle-index-rebuild})
-
-(def ring-handlers
-  ["/mantis"
-   ["/issues"
-    {:get query-handler
-     :head query-handler
-     :delete rebuild-handler}]])
+(defn get-issues
+  [request]
+  (let [q      (get-in request [:parameters :query :q])
+        issues (get @index q [])]
+    {:status 200
+     :body   (pmap (comp issue :id) issues)}))
 
 (comment
   (->> (issues) (take 100) (index-issues))

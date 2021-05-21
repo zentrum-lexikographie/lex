@@ -21,8 +21,10 @@
   instaparse/instaparse {:mvn/version "1.4.10"}
   camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
   com.taoensso/tufte {:mvn/version "2.2.0"}
-
+  lambdaisland/uri {:mvn/version "1.4.54"}
+  
   ;; Infrastruture (HTTP client, cron scheduling, state management)
+  aleph/aleph {:mvn/version "0.4.7-alpha7"}
   clj-http/clj-http {:mvn/version "3.9.1"
                      :exclusions [commons-logging/commons-logging]}
   cronjure/cronjure {:mvn/version "0.1.1"}

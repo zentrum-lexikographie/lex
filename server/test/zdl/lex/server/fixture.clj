@@ -1,11 +1,10 @@
 (ns zdl.lex.server.fixture
-  (:require  [clojure.test :refer :all]
-             [zdl.lex.server :as server]
-             [zdl.lex.client :as client]
-             [zdl.lex.server.gen.article :refer [create-article-set-fixture]]
-             [zdl.lex.server.solr.client :as solr-client]
-             [clojure.tools.logging :as log]
-             [clj-http.client :as http]))
+  (:require [clojure.test :refer :all]
+            [zdl.lex.article :as article]
+            [zdl.lex.server :as server]
+            [zdl.lex.server.gen.article :refer [article-set-fixture]]
+            [zdl.lex.server.git :as git]
+            [zdl.lex.server.solr.client :as solr-client]))
 
 (defn server-fixture
   [f]
@@ -13,16 +12,12 @@
 
 (defn index-fixture
   [f]
-  (try (solr-client/rebuild-index) (f) (finally (solr-client/clear-index))))
+  (try
+    @(solr-client/rebuild-index
+      (mapcat article/extract-articles (article/article-files git/dir)))
+    (f)
+    (finally
+      @(solr-client/clear-index))))
 
-(defn backend-fixture
-  ([]
-   (backend-fixture [100 200]))
-  ([article-range]
-   (join-fixtures
-    [(create-article-set-fixture article-range) server-fixture index-fixture])))
-
-(use-fixtures :once (backend-fixture))
-
-(deftest fixtures
-  (is (log/spy (http/request (client/search-articles "id:*" 1)))))
+(def backend-fixture
+  (join-fixtures [article-set-fixture server-fixture index-fixture]))

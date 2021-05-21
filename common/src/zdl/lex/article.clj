@@ -164,10 +164,14 @@
         :always   (assoc-weight)
         nil       (clean-map)))))
 
+(defn describe-article-file
+  [dir f]
+  {:id (str (relativize dir f)) :file f})
+
 (defnp article-files
   "Extracts articles and their key data from XML files in a dir."
   [dir]
-  (map (fn [f] {:id (str (relativize dir f)) :file f}) (afs/files dir)))
+  (map #(describe-article-file dir %) (afs/files dir)))
 
 (defn status->color
   [status]
