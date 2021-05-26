@@ -59,13 +59,13 @@
               true))))
 
 (defn add-to-graph
-  ([articles]
-   (transact!
-    (fn [c]
-      (let [now (Date.)]
-        (log/debugf "Adding %d articles to graph" (count articles))
-        (doseq [article articles]
-          (article->db c now article)))))))
+  [articles]
+  (transact!
+   (fn [c]
+     (let [now (Date.)]
+       (log/debugf "Adding %d articles to graph" (count articles))
+       (doseq [article articles]
+         (article->db c now article))))))
 
 (defn remove-from-graph
   [articles]

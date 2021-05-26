@@ -36,10 +36,10 @@
   (git/sh! prod-dir "pull"))
 
 (def ^:dynamic *min-articles*
-  100)
+  1000)
 
 (def ^:dynamic *max-articles*
-  200)
+  2000)
 
 (defn gen-prod-article-set
   []
