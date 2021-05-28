@@ -3,12 +3,11 @@
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl.lex.fs :as fs]
-            [zdl.lex.url :refer [id->url url url->id url-encode]]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
-            [zdl.lex.client.workspace :as ws])
+            [zdl.lex.client.workspace :as ws]
+            [zdl.lex.fs :as fs]
+            [zdl.lex.url :refer [id->url url url->id]])
   (:import java.net.URL))
 
 (def id (atom nil))
@@ -23,7 +22,7 @@
              (fs/delete! true)))
 
 (defstate editor->id
-  :start (bus/listen [:editor-activated :editor-deactivated]
+  :start (bus/listen #{:editor-activated :editor-deactivated}
                      (fn [topic url]
                        (set-id (if (= :editor-activated topic) url))))
   :stop editor->id)

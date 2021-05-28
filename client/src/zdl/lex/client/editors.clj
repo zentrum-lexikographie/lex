@@ -17,7 +17,7 @@
     (editorAboutToBeClosedVeto [_] true)
     (editorAboutToBeSavedVeto [_] true)
     (editorSaved [_]
-      (bus/publish! [:editor-saved] url))))
+      (bus/publish! :editor-saved url))))
 
 (defn- add-editor [url]
   (when (lexurl/lex? url)
@@ -25,14 +25,14 @@
       (ui/invoke-now
        (ws/add-editor-listener ws/instance url listener)
        (swap! editors assoc url listener)
-       (bus/publish! [:editor-added] url)))))
+       (bus/publish! :editor-added url)))))
 
 (defn- remove-editor [url]
   (when (lexurl/lex? url)
     (ui/invoke-now
      (ws/remove-editor-listener ws/instance url (@editors url))
      (swap! editors dissoc url)
-     (bus/publish! [:editor-removed] url))))
+     (bus/publish! :editor-removed url))))
 
 (def editor-change-listener
   (proxy [WSEditorChangeListener] []
@@ -41,7 +41,7 @@
     (editorOpened [url]
       (add-editor url)
       (when (lexurl/lex? url)
-        (bus/publish! [:editor-opened] url)))
+        (bus/publish! :editor-opened url)))
     (editorPageChanged [_])
     (editorRelocated [from to]
       (remove-editor from)
@@ -52,14 +52,14 @@
       (doseq [url urls] (remove-editor url)) true)
     (editorClosed [url]
       (when (lexurl/lex? url)
-        (bus/publish! [:editor-closed] url)))
+        (bus/publish! :editor-closed url)))
     (editorActivated [url]
       (when (lexurl/lex? url)
-        (bus/publish! [:editor-activated] url)))
+        (bus/publish! :editor-activated url)))
     (editorSelected [_])
     (editorDeactivated [url]
       (when (lexurl/lex? url)
-        (bus/publish! [:editor-deactivated] url)))))
+        (bus/publish! :editor-deactivated url)))))
 
 (defn- remove-all-editors []
   (doseq [[url listener] @editors]

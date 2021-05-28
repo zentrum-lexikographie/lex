@@ -3,26 +3,32 @@
             [clojure.data.xml :as dx]
             [clojure.data.zip.xml :as zx]
             [clojure.zip :as zip]
+            [manifold.deferred :as d]
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
             [seesaw.mig :as mig]
             [zdl.lex.article.xml :as axml]
+            [zdl.lex.client :as client]
+            [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.font :as font]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
-            [zdl.lex.client.workspace :as ws])
+            [zdl.lex.client.workspace :as ws]
+            [clojure.tools.logging :as log])
   (:import java.net.URL))
 
-(def visited-issues (atom #{}))
+(def visited-issues
+  (atom #{}))
 
-(defn open-issue [{:keys [id last-updated url]}]
+(defn open-issue
+  [{:keys [id last-updated url]}]
   (swap! visited-issues conj [id last-updated])
   (ws/open-url ws/instance url))
 
-(defn- issue->border [{:keys [active? severity]}]
+(defn- issue->border
+  [{:keys [active? severity]}]
   (let [color (if-not active? :lightgreen
                       (condp = severity
                         "feature" :grey
@@ -68,7 +74,12 @@
              [(label :text "Resolution")] [(text :text resolution)]])))
 
 (def get-issues
-  (memo/ttl http/get-issues :ttl/threshold (* 15 60 1000)))
+  (memo/ttl
+   (fn [q]
+     (auth/with-authentication
+       (deref (d/chain (client/get-issues q) :body))))
+   :ttl/threshold
+   (* 15 60 1000)))
 
 (defn- parse-update-ts
   [^String ts]
@@ -111,7 +122,7 @@
                    (render-issue value)))))
 
 (defstate issue-update
-  :start (uib/bind (uib/funnel (bus/bind [:editor-activated :editor-saved])
+  :start (uib/bind (uib/funnel (bus/bind #{:editor-activated :editor-saved})
                                visited-issues)
                    (uib/transform prepare-issues)
                    (uib/property issue-list :model))
@@ -121,6 +132,7 @@
   (ui/scrollable issue-list))
 
 (comment
+  (get-issues "spitzfingrig")
   (let [sample {:category "MWA-Link",
                 :last-updated (parse-update-ts "2019-08-21T12:02:10+02:00"),
                 :attachments 1,

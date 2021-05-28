@@ -1,9 +1,9 @@
 (ns zdl.lex.server.solr.client
   (:require [aleph.http :as http]
             [byte-streams :as bs]
-            [cheshire.core :as json]
             [clojure.data.xml :as dx]
             [clojure.tools.logging :as log]
+            [jsonista.core :as json]
             [lambdaisland.uri :as uri :refer [uri]]
             [manifold.deferred :as d]
             [manifold.stream :as s]
@@ -33,9 +33,13 @@
      :always (update :request-method #(or % :get))
      auth    (assoc :basic-auth auth))))
 
+(defn read-json
+  [v]
+  (json/read-value v json/keyword-keys-object-mapper))
+
 (defn decode-json-response
   [response]
-  (update response :body (comp #(json/parse-stream % true) bs/to-reader)))
+  (update response :body (comp read-json bs/to-byte-array)))
 
 (defn update-timer!
   [timer {:keys [request-time] :as response}]

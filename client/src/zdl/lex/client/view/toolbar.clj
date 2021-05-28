@@ -3,14 +3,13 @@
             [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
-            [zdl.lex.client.bus :as bus]
             [zdl.lex.client.icon :as icon]
+            [zdl.lex.client.oxygen.validation :as validation]
             [zdl.lex.client.preview :as preview]
             [zdl.lex.client.search :as search]
-            [zdl.lex.client.oxygen.validation :as validation]
+            [zdl.lex.client.status :as status]
             [zdl.lex.client.view.article :as article-view]
-            [zdl.lex.client.view.search :as search-view]
-            [zdl.lex.client.font :as font])
+            [zdl.lex.client.view.search :as search-view])
   (:import java.awt.Color
            ro.sync.exml.workspace.api.standalone.ui.ToolbarButton))
 
@@ -43,9 +42,7 @@
   (ui/label :text "–" :border 5))
 
 (defstate status-label-text
-  :start (uib/bind (bus/bind [:status])
-                   (uib/transform (comp :user second))
-                   (uib/property status-label :text))
+  :start (uib/bind status/current-user (uib/property status-label :text))
   :stop (status-label-text))
 
 (def components

@@ -1,5 +1,5 @@
 (ns zdl.lex.server.gen.article
-  (:require [clojure.spec.gen.alpha :as gen]
+  (:require [clojure.test.check.generators :as gen]
             [clojure.test :refer :all]
             [clojure.tools.logging :as log]
             [zdl.lex.article.fs :as afs]
@@ -68,7 +68,7 @@
    (gen-prod-article-set)))
 
 (comment
-  (binding [*min-articles* 100000 *max-articles* 200000]
+  (binding [*min-articles* 1000 *max-articles* 2000]
     (delete! server-git/dir true)
     (gen/generate (gen-article-set))))
 

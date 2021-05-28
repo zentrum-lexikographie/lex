@@ -147,7 +147,7 @@
 (def ^:private new-article-collection "Neuartikel")
 
 (defn get-article
-  [{{:keys [resource]} :path-params}]
+  [{{{:keys [resource]} :path} :parameters}]
   (let [^File f (file git/dir resource)]
     (if (.isFile f)
       {:status 200 :body f}

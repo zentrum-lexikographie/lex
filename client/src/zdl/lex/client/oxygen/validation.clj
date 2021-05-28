@@ -80,11 +80,10 @@
   [url]
   (with-results-manager
     (fn [manager]
-      (some->>
-       (ws/xml-document ws/instance url)
-       (av/check-typography)
-       (map #(error->dpi url %))
-       (vec) (reset-results! manager url)))))
+      (when-let [doc (ws/xml-document ws/instance url)]
+        (let [errors (av/check-typography doc)
+              dpis (map #(error->dpi url %) errors)]
+          (reset-results! manager url (vec dpis)))))))
 
 (defn clear-results
   [url]
@@ -130,6 +129,6 @@
       (#{:editor-closed} topic) (clear-results url))))
 
 (defstate validation-updates
-  :start (bus/listen [:editor-opened :editor-saved :editor-closed]
+  :start (bus/listen #{:editor-opened :editor-saved :editor-closed}
                      update-validation)
   :stop (validation-updates))

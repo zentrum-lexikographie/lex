@@ -1,7 +1,6 @@
 {:paths ["src", "../oxygen/framework"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
-  org.clojure/core.async {:mvn/version "0.4.490"}
 
   ;; Data handling
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}
@@ -11,8 +10,7 @@
   zdl/clj-zdl-xml {:git/url "git@git.zdl.org:zdl/clj-zdl-xml.git"
                    :sha "07b844a24817fa61553e96e91715c30c43ee83c4"}
 
-  ;; Specs, randomized testing
-  metosin/spec-tools {:mvn/version "0.10.0"}
+  ;; Randomized, property-based testing
   org.clojure/test.check {:mvn/version "0.9.0"}
 
   ;; Tools
@@ -22,11 +20,9 @@
   camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
   com.taoensso/tufte {:mvn/version "2.2.0"}
   lambdaisland/uri {:mvn/version "1.4.54"}
-  
+
   ;; Infrastruture (HTTP client, cron scheduling, state management)
   aleph/aleph {:mvn/version "0.4.7-alpha7"}
-  clj-http/clj-http {:mvn/version "3.9.1"
-                     :exclusions [commons-logging/commons-logging]}
   cronjure/cronjure {:mvn/version "0.1.1"}
   mount/mount {:mvn/version "0.1.16"}
 

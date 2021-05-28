@@ -1,21 +1,28 @@
 {:paths ["src"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
+  org.clojure/core.memoize {:mvn/version "1.0.236"}
 
   ;; Code in common with server and other components
   org.zdl.lex/common {:local/root "../common" :exclusions [org.relaxng/jing org.relaxng/trang]}
 
   ;; Swing UI support
-  seesaw {:mvn/version "1.5.0"}
+  seesaw/seesaw {:mvn/version "1.5.0"}
 
   ;; Icon fonts
   com.github.jiconfont/jiconfont-swing {:mvn/version "1.0.1"}
-  com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}}
+  com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+
+  net.sf.jung/jung-algorithms {:mvn/version "2.1.1"}
+  net.sf.jung/jung-api {:mvn/version "2.1.1"}
+  net.sf.jung/jung-graph-impl {:mvn/version "2.1.1"}
+  net.sf.jung/jung-io {:mvn/version "2.1.1"}
+  net.sf.jung/jung-visualization {:mvn/version "2.1.1"}}
 
  :mvn/repos
  {"central" {:url "https://repo1.maven.org/maven2/"}
   "clojars" {:url "https://clojars.org/repo"}
-  "oxygen" {:url "https://www.oxygenxml.com/maven"}}
+  "oxygen"  {:url "https://www.oxygenxml.com/maven"}}
 
  :aliases
  {:dev

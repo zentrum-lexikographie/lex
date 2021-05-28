@@ -1,10 +1,11 @@
 (ns zdl.lex.client.view.article
-  (:require [seesaw.bind :as uib]
+  (:require [clojure.tools.logging :as log]
+            [seesaw.bind :as uib]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
-            [clojure.tools.logging :as log]
+            [zdl.lex.client :as client]
+            [zdl.lex.client.auth :as auth]
             [zdl.lex.client.font :as font]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
             [zdl.lex.client.workspace :as ws])
   (:import com.jidesoft.hints.ListDataIntelliHints))
@@ -32,9 +33,12 @@
         create-article (fn [evt]
                          (try
                            (->>
-                            (http/create-article
-                             (ui/value form-input)
-                             (ui/value pos-input))
+                            (auth/with-authentication
+                              (client/create-article
+                               (ui/value form-input)
+                               (ui/value pos-input)))
+                            (deref)
+                            (:body)
                             (:id)
                             (ws/open-article ws/instance))
                            (catch Exception e (log/warn e)))

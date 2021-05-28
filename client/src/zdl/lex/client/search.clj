@@ -1,18 +1,16 @@
 (ns zdl.lex.client.search
-  (:require [seesaw.bind :as uib]
-            [mount.core :refer [defstate]]
+  (:require [manifold.deferred :as d]
+            [zdl.lex.client :as client]
+            [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.util :refer [uuid]]))
+            [zdl.lex.util :refer [uuid]]
+            [clojure.tools.logging :as log]))
 
-(def query (atom ""))
-
-(defstate result->query
-  :start (uib/bind (bus/bind [:search-result])
-                   (uib/transform (comp :query second))
-                   (uib/filter identity)
-                   query)
-  :stop (result->query))
-
-(defn request [q]
-  (reset! query q)
-  (bus/publish! [:search-request] {:query q :id (uuid)}))
+(defn request
+  [q]
+  (let [id (uuid)]
+    (bus/publish! :search-request {:query q :id id})
+    (d/chain
+     (auth/with-authentication (client/search-articles q :limit 1000))
+     (fn [{result :body}]
+       (bus/publish! :search-response (assoc result :query q :id id))))))

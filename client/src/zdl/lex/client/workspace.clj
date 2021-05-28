@@ -3,8 +3,9 @@
             [clojure.tools.logging :as log]
             [mount.core :refer [defstate]]
             [zdl.lex.article.xml :as axml]
+            [zdl.lex.client :as client]
+            [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.http :as http]
             [zdl.lex.fs :refer [file]]
             [zdl.lex.url :as lexurl])
   (:import java.net.URL
@@ -101,7 +102,7 @@
       (open-article [_ id]
         (let [url (lexurl/id->url id)]
           (reset! editor-url url)
-          (bus/publish! [:editor-activated] url)
+          (bus/publish! :editor-activated url)
           true))
       (show-view [_ id] (show-view _ id true))
       (show-view [_ id request-focus?]
@@ -116,8 +117,5 @@
       (editor-urls [_]
         (some->> @editor-url vector))
       (xml-document [_ url]
-        (http/get-xml (-> url lexurl/url->id http/id->store-url))))))
-
-(defn editor-xml-document
-  []
-  (some->> (editor-url instance) (xml-document instance)))
+        (auth/with-authentication
+          (-> (client/get-article (lexurl/url->id url)) deref :body))))))

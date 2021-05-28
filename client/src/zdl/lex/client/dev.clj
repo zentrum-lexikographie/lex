@@ -1,40 +1,34 @@
 (ns zdl.lex.client.dev
-  (:require [mount.core :as mount :refer [defstate]]
+  (:require [mount.core :as mount]
             [seesaw.core :as ui]
-            [seesaw.swingx :as uix]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.oxygen.url-handler :refer [lexurl-handler]]
-            [zdl.lex.client.search :as search]
             [zdl.lex.client.view.issue :as issue-view]
             [zdl.lex.client.view.results :as results-view]
             [zdl.lex.client.view.toolbar :as toolbar]
-            [zdl.lex.client.workspace :as ws]
             [zdl.lex.url :as lexurl]
-            [zdl.lex.client.bus :as bus]
-            [clojure.tools.logging :as log])
-  (:import java.awt.Toolkit))
+            [zdl.lex.client.status :as status]))
 
-(defn show-testbed []
-  (try
-    (lexurl/install-stream-handler! lexurl-handler)
-    (catch Throwable t))
+(def graph-panel
+  (ui/label :text "Graph"))
+
+(def main-content
+  (ui/splitter :left-right
+               results-view/tabbed-pane
+               (ui/vertical-panel :items [issue-view/panel graph-panel])
+               :divider-location 0.75 :resize-weight 0.75))
+
+(def frame
+  (ui/frame
+   :title "zdl-lex-client/dev"
+   :content (ui/border-panel :north toolbar/widget :center main-content)))
+
+(defn show-testbed
+  []
+  (try (lexurl/install-stream-handler! lexurl-handler) (catch Throwable t))
   (mount/stop)
   (mount/start)
-  (->
-   (ui/frame
-    :title "zdl-lex-client/dev"
-    ;;:size [800 :by 600]
-    :content (ui/border-panel
-              :north toolbar/widget
-              :center (ui/splitter
-                       :left-right
-                       results-view/tabbed-pane
-                       issue-view/panel
-                       :divider-location 0.75
-                       :resize-weight 0.75)))
-   (ui/pack!)
-   (ui/show!)
-   (ui/invoke-later)))
+  (status/trigger!)
+  (ui/invoke-later (ui/show! (ui/pack! frame))))
 
 (comment
   (show-testbed))

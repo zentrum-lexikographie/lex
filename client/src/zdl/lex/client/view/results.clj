@@ -124,7 +124,8 @@
                       (ui/button :action export-action)
                       (ui/button :action query-action)])])))
 
-(defn render-result [{:keys [query total] :as data}]
+(defn render-result
+  [{:keys [query total] :as data}]
   (let [model (map result->table-model (data :result))
         highlighters (into-array Highlighter [(create-highlighter model)])
         table (uix/table-x
@@ -140,18 +141,19 @@
                 (.setAutoResizeMode JTable/AUTO_RESIZE_ALL_COLUMNS)
                 (.setHighlighters highlighters))))))
 
-(defn get-selected-result [pane]
-  (some-> pane ui/selection :content
-          (ui/select [:.result]) first
-          ui/user-data))
+(defn get-selected-result
+  [pane]
+  (when-let [selection (ui/selection pane)]
+    (ui/user-data (first (ui/select (get selection :content) [:.result])))))
 
 (def tabbed-pane
-  (let [pane (JideTabbedPane. JTabbedPane/BOTTOM)]
-    (doto pane
-      (.setShowCloseButtonOnTab true)
-      (ui/listen #{:selection :component-shown}
-                 (fn [_] (->> (or (get-selected-result pane) {})
-                              (bus/publish! [:search-result])))))))
+  (let [pane (doto (JideTabbedPane. JTabbedPane/BOTTOM)
+               (.setShowCloseButtonOnTab true))]
+    (ui/listen pane #{:selection :component-shown}
+               (fn [_]
+                 (when-let [result (get-selected-result pane)]
+                   (bus/publish! :search-result-selected result))))
+    pane))
 
 (defn select-result-tabs []
   (ui/select tabbed-pane [:.result]))
@@ -165,7 +167,8 @@
 (defn result= [a b]
   (= (:query a) (:query b)))
 
-(defn merge-results [_ resp]
+(defn merge-results
+  [_ resp]
   (ui/invoke-soon
    (let [id (-> resp :id keyword)
          title (resp :query)
@@ -177,7 +180,8 @@
      (if insert-index
        (.insertTab tabbed-pane title icon/gmd-result new-tab tip insert-index)
        (.addTab tabbed-pane title icon/gmd-result new-tab tip))
-     (doseq [tab old-tabs] (.remove tabbed-pane tab))
+     (doseq [tab old-tabs]
+       (.remove tabbed-pane tab))
      (loop [tabs (count-result-tabs)]
        (when (> tabs 10)
          (.removeTabAt tabbed-pane 0)
@@ -186,5 +190,5 @@
      (ws/show-view ws/instance :results))))
 
 (defstate search-responses->results
-  :start (bus/listen [:search-response] merge-results)
+  :start (bus/listen #{:search-response} merge-results)
   :stop (search-responses->results))

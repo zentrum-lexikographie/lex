@@ -2,13 +2,13 @@
   (:gen-class
    :name de.zdl.oxygen.Extension
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
-  (:require [clojure.core.async :as a]
+  (:require [manifold.stream :as s]
             [mount.core :as mount]
             [zdl.lex.client.editors :as editors]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
             [zdl.lex.client.oxygen.editor-variables :as editor-variables]
             [zdl.lex.client.repl :as repl]
+            [zdl.lex.client.status :as status]
             [zdl.lex.client.view.issue :as issue-view]
             [zdl.lex.client.view.results :as results-view]
             [zdl.lex.client.view.toolbar :as toolbar]
@@ -59,7 +59,7 @@
          (resolveEditorVariables
            [s editor-url]
            (editor-variables/resolve-vars editor-url s)))))
-  (a/>!! http/ping-status :startup))
+  (status/trigger!))
 
 (defn -applicationClosing [this]
   (mount/stop)

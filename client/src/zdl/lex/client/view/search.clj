@@ -5,18 +5,20 @@
             [seesaw.bind :as uib]
             [seesaw.border :refer [line-border]]
             [seesaw.core :as ui]
+            [zdl.lex.article :as article]
+            [zdl.lex.client :as client]
+            [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.client.font :as font]
-            [zdl.lex.client.http :as http]
             [zdl.lex.client.icon :as icon]
             [zdl.lex.client.search :as search]
             [zdl.lex.client.workspace :as ws]
-            [zdl.lex.article :as article]
-            [zdl.lex.lucene :as lucene])
+            [zdl.lex.lucene :as lucene]
+            [clojure.tools.logging :as log])
   (:import com.jidesoft.hints.AbstractListIntelliHints))
 
-(defn- suggestion->html [{:keys [suggestion pos type definitions
-                                 status id last-modified]}]
+(defn- suggestion->html
+  [{:keys [suggestion pos type definitions status id last-modified]}]
   (let [suggestion (-> suggestion
                        (str/replace "<b>" "<u>")
                        (str/replace "</b>" "</u>"))
@@ -34,21 +36,28 @@
         html (str/join "<br>" (remove nil? [title subtitle definition]))]
     (str "<html>" html "</html>")))
 
-(defn- suggestion->border [{:keys [status]}]
+(defn- suggestion->border
+  [{:keys [status]}]
   [5 (line-border :color (article/status->color status) :right 10) 5])
 
-(defn- render-suggestion-list-entry [this {:keys [value]}]
+(defn- render-suggestion-list-entry
+  [this {:keys [value]}]
   (ui/config! this
               :text (suggestion->html value)
               :border (suggestion->border value)))
+
+(def query
+  (atom ""))
 
 (def action
   (ui/action
    :name "Suchen"
    :icon icon/gmd-search
    :handler (fn [_]
-              (let [q @search/query]
-                (when (lucene/valid? q) (search/request q))))))
+              (let [q @query]
+                (when (lucene/valid? q)
+                  (log/infof "Search '%s'!" q)
+                  (search/request q))))))
 
 (def input
   (let [text-input (ui/text :columns 40
@@ -64,8 +73,10 @@
         (let [q (str ctx)
               suggestions? (and (< 1 (count q))
                                 (re-matches #"^[^\*\?\"/:]+$" q))
-              suggestions (if suggestions?
-                            (-> q http/suggest-forms :result))
+              suggestions (when suggestions?
+                            (auth/with-authentication
+                              (-> q client/get-forms-suggestions deref
+                                  :body :result)))
               suggestions (or suggestions [])]
           (proxy-super setListData (into-array Object suggestions))
           (not (empty? suggestions))))
@@ -74,16 +85,20 @@
         (ws/open-article ws/instance id)))
     text-input))
 
+(defn search->query
+  [[_ {:keys [query]}]]
+  query)
+
 (defstate input-updates
   :start
-  [(uib/bind input
-             search/query)
+  [(uib/bind input query)
    (uib/bind input
              (uib/transform #(if (lucene/valid? %) :black :red))
              (uib/property input :foreground))
-   (uib/bind (bus/bind [:search-result])
-             (uib/transform (comp :query second))
-             (uib/filter identity)
+   (uib/bind (bus/bind #{:search-request
+                         :search-response
+                         :search-result-selected})
+             (uib/transform search->query)
              input)]
   :stop
   (doseq [unsubscribe! input-updates] (unsubscribe!)))
