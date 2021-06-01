@@ -9,14 +9,16 @@
 	white-space: normal; /* TODO: wollen wir eigentlich nicht */
 }
 
-/* Hintergrundfarbe für den gesamten Artikel */
+/* Farbmarkierungen für Artikelstatus */
 
 DWDS { font-family: "Arial", sans-serif; }
+Artikel                          { border-left: 10px; }
 Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
 Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
 Artikel[Status="Red-0"]          { border-left: 10px solid #ffec8b; }
 Artikel[Status="Red-1"]          { border-left: 10px solid #ffec8b; }
 Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
+Artikel[Status="wird_gestrichen"]{ border-left: 10px solid #333; }
 
 /* Hauptblöcke, die als »Kasten« dargestellt werden */
 
