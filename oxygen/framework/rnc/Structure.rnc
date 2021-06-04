@@ -268,6 +268,7 @@ morphologische_Verweise = element Verweise {
 semantischer_Verweis = element Verweis {
 	attribute Typ {
 		'MWA' # Verweis aus Einzelwortartikeln auf Mehrwortartikel
+		| 'MWA-Zentralartikel'
 		| 'Entsprechung' # semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse
 		| 'Antonym'
 		| 'Synonym'

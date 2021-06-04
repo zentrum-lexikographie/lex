@@ -136,6 +136,7 @@ Diachronie>Verweise:before                     { content: "Querverweise: "; }
 Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="MWA"]:before             { content: "auch in MWA ↗"; }
+Verweise>Verweis[Typ="MWA-Zentralartikel"]:before { content: "MWA-Zentralartikel ↗"; }
 Verweise>Verweis[Typ="Synonym"]:before         { content: "Synonym ist ↗"; }
 Verweise>Verweis[Typ="Synonym_MWA_Variante"]:before { content: "Synonym (MWA-Variante) ist ↗"; }
 Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
