@@ -74,7 +74,7 @@
 
 (defnp descendants-by-tag
   [loc tag]
-  (zx/xml-> loc dz/descendants tag))
+  (filter #(= tag (:tag (zip/node %))) (dz/descendants loc)))
 
 (defnp senses
   [loc]
@@ -161,7 +161,7 @@
         lex-data? (merge (extract-lex-data loc))
         errors?   (merge (check-for-errors article file))
         :always   (assoc-weight)
-        nil       (clean-map)))))
+        :always   (clean-map)))))
 
 (defn describe-article-file
   [dir f]

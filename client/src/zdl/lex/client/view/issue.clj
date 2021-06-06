@@ -22,6 +22,9 @@
 (def visited-issues
   (atom #{}))
 
+(def current-graph
+  (atom nil))
+
 (defn open-issue
   [{:keys [id last-updated url]}]
   (swap! visited-issues conj [id last-updated])
@@ -29,17 +32,18 @@
 
 (defn- issue->border
   [{:keys [active? severity]}]
-  (let [color (if-not active? :lightgreen
-                      (condp = severity
-                        "feature" :grey
-                        "trivial" :grey
-                        "text"  :grey
-                        "tweak" :grey
-                        "minor" :yellow
-                        "major" :orange
-                        "crash" :red
-                        "block" :red
-                        :orange))]
+  (let [color (if-not active?
+                :lightgreen
+                (condp = severity
+                  "feature" :grey
+                  "trivial" :grey
+                  "text"    :grey
+                  "tweak"   :grey
+                  "minor"   :yellow
+                  "major"   :orange
+                  "crash"   :red
+                  "block"   :red
+                  :orange))]
     [5
      (line-border :color color :left 10)
      (line-border :thickness 5 :color :white)]))
@@ -73,44 +77,28 @@
              [(label :text "Status")] [(text :text status) "wrap"]
              [(label :text "Resolution")] [(text :text resolution)]])))
 
-(def get-issues
-  (memo/ttl
-   (fn [q]
-     (auth/with-authentication
-       (deref (d/chain (client/get-issues q) :body))))
-   :ttl/threshold
-   (* 15 60 1000)))
-
 (defn- parse-update-ts
   [^String ts]
   (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
        (java.time.OffsetDateTime/from)))
 
-(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
+(defn prepare-issue
+  [visited? {:keys [id last-updated status url] :as issue}]
+  (let [last-updated (parse-update-ts last-updated)]
+    (assoc issue
+           :url (URL. url)
+           :last-updated last-updated
+           :active? (not (#{"closed" "resolved"} status))
+           :visited? (visited? [id last-updated]))))
 
-(defn extract-surface-forms
-  [node]
-  (distinct
-   (axml/zip-texts
-    (zx/xml-> (zip/xml-zip node)
-              ::dwds/Artikel ::dwds/Formangabe ::dwds/Schreibung))))
-
-(defn prepare-issues [[[_ url] visited?]]
-  (let [visited? (or visited? @visited-issues)]
-    (or
-     (some->>
-      (ws/xml-document ws/instance url)
-      (extract-surface-forms)
-      (mapcat get-issues)
-      (map (fn [{:keys [id last-updated status url] :as issue}]
-             (let [last-updated (parse-update-ts last-updated)]
-               (assoc issue
-                      :url (URL. url)
-                      :last-updated last-updated
-                      :active? (not (#{"closed" "resolved"} status))
-                      :visited? (visited? [id last-updated])))))
-      (sort-by #(vector (:active? %) (:last-updated %)) #(compare %2 %1)))
-     [])))
+(defn prepare-issues
+  [[[_ [id graph]] visited?]]
+  (when graph (reset! current-graph graph))
+  (let [graph    @current-graph
+        visited? (or visited? @visited-issues)
+        issues   (filter (comp #{:issue} :type) (map second (:nodes graph)))
+        issues   (map #(prepare-issue visited? %) issues)]
+    (sort-by (juxt :active? :last-updated) #(compare %2 %1) issues)))
 
 (def issue-list
   (ui/listbox
@@ -122,8 +110,7 @@
                    (render-issue value)))))
 
 (defstate issue-update
-  :start (uib/bind (uib/funnel (bus/bind #{:editor-activated :editor-saved})
-                               visited-issues)
+  :start (uib/bind (uib/funnel (bus/bind #{:graph}) visited-issues)
                    (uib/transform prepare-issues)
                    (uib/property issue-list :model))
   :stop (issue-update))

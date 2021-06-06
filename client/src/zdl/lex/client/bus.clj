@@ -19,7 +19,7 @@
 
 (defn listen
   [subscribed? callback]
-  (let [messages (bus/subscribe instance ::messages)]
+  (let [messages (s/buffer 1 (bus/subscribe instance ::messages))]
     (s/consume-async
      (fn [[topic message]]
        (-> (if (subscribed? topic)

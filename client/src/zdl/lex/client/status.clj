@@ -5,8 +5,7 @@
             [zdl.lex.client :as client]
             [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.cron :as cron]
-            [seesaw.bind :as uib])
+            [zdl.lex.cron :as cron])
   (:import java.time.Instant))
 
 (defn ping!
@@ -27,13 +26,7 @@
 (def current-user
   (atom nil))
 
-(defn status->user
-  [[_ {:keys [user]}]]
-  user)
-
 (defstate status->current-user
-  :start (uib/bind (bus/bind #{:status})
-                   (uib/transform status->user)
-                   current-user)
+  :start (bus/listen #{:status} #(reset! current-user (get %2 :user)))
   :stop (status->current-user))
 

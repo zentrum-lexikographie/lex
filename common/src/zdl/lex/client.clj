@@ -87,6 +87,13 @@
    (request {:headers {"Accept" "text/xml"}})
    (d/chain decode-xml-response)))
 
+(defn get-graph
+  [id]
+  (->
+   (uri/join "graph/" id)
+   (request)
+   (d/chain decode-edn-response)))
+
 (defn post-article
   ([id xml]
    (post-article id xml *lock-token*))

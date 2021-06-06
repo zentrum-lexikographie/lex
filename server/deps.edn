@@ -13,6 +13,8 @@
   com.h2database/h2 {:mvn/version "1.4.199"}
   com.layerware/hugsql {:mvn/version "0.4.9"}
 
+  ubergraph {:mvn/version "0.8.2"}
+
   ;; Metosin Ring/HTTP
   metosin/reitit {:mvn/version "0.5.12"}
 

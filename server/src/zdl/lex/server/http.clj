@@ -20,9 +20,9 @@
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as git]
-            [zdl.lex.server.graph :as graph]
+            [zdl.lex.server.graph.article :as graph-article]
             [zdl.lex.server.lock :as lock]
-            [zdl.lex.server.mantis :as mantis]
+            [zdl.lex.server.graph.mantis :as mantis]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr :as solr]
             [zdl.lex.server.tasks :as tasks]))
@@ -113,8 +113,9 @@
                                    (log/warn t)
                                    {:status 400 :body ref}))))
               ::auth/roles #{:admin}}}]
-     ["/graph"
-      {:handler graph/get-sample-links}]
+     ["/graph/*resource"
+      {:handler graph-article/get-article-graph
+       :parameters {:path [:map [:resource :string]]}}]
      ["/home"
       (constantly
        {:status                200
@@ -165,14 +166,8 @@
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
                  :handler    lock/remove-lock}}]]
-     ["/mantis/issues"
-      {:get
-       {:summary     "Query internal index for Mantis issues based on headword"
-        :tags        ["Mantis" "Query" "Headwords"]
-        :parameters  {:query [:map [:q :string]]}
-        :handler     mantis/get-issues
-        ::auth/roles #{:user}}
-       :delete
+     ["/mantis"
+      {:delete
        {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
         :tags        ["Mantis" "Admin"]
         :handler     tasks/trigger-mantis-sync

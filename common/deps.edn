@@ -1,6 +1,7 @@
 {:paths ["src", "../oxygen/framework"]
  :deps
  {org.clojure/clojure {:mvn/version "1.10.1"}
+  org.clojure/core.memoize {:mvn/version "1.0.236"}
 
   ;; Data handling
   org.clojure/data.xml {:mvn/version "0.2.0-alpha6"}

@@ -36,12 +36,12 @@
   (article/extract-articles (describe-git-file f)))
 
 (defn git-file-updated!
-  [f]
+  [f & {:keys [event] :or {event :updated}}]
   (->
    (d/future (git-file->articles f))
    (d/chain
     (fn [articles]
-      (s/consume-async #(bus/publish! events :updated %) articles)))
+      (s/consume-async #(bus/publish! events event %) articles)))
    (d/catch
      (fn [e]
        (log/warnf e "Error while updating %s" f)
@@ -59,7 +59,8 @@
   []
   (let [threshold (Date.)]
     (->
-     (s/consume-async git-file-updated! (afs/files git/dir))
+     (s/consume-async #(git-file-updated! % :event :refreshed)
+                      (afs/files git/dir))
      (d/chain
       (fn [_]
         (bus/publish! events :purge threshold))

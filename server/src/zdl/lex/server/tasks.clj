@@ -1,14 +1,13 @@
 (ns zdl.lex.server.tasks
-  (:require [clojure.tools.logging :as log]
-            [manifold.deferred :as d]
+  (:require [manifold.deferred :as d]
             [manifold.stream :as s]
             [mount.core :refer [defstate]]
             [zdl.lex.cron :as cron]
             [zdl.lex.server.article :as article]
-            [zdl.lex.server.solr.client :as solr-client]
             [zdl.lex.server.git :as git]
-            [zdl.lex.server.mantis :as mantis]
-            [zdl.lex.server.lock :as lock]))
+            [zdl.lex.server.graph.mantis :as mantis]
+            [zdl.lex.server.lock :as lock]
+            [zdl.lex.server.solr.client :as solr-client]))
 
 (defn trigger-schedule
   [s]
@@ -42,24 +41,13 @@
                                article/refresh-articles!)
   :stop (s/close! articles-refresh))
 
-#_(defstate index-init
-  :start (d/catch
-             (d/chain
-              (solr-client/index-empty?)
-              (fn [index-empty?]
-                (when index-empty? (s/put! articles-refresh "<Init>"))))
-             (fn [e] (log/warn e "Error while initializing index"))))
-
 (defn trigger-articles-refresh
   [_]
   (trigger-schedule articles-refresh))
 
-(defstate mantis-init
-  :start (d/future (mantis/init-issues)))
-
 (defstate mantis-sync
   :start (cron/schedule-stream "0 */15 * * * ?" "Mantis Synchronization"
-                               mantis/sync-issues)
+                               mantis/issues->db!)
   :stop (s/close! mantis-sync))
 
 (defn trigger-mantis-sync

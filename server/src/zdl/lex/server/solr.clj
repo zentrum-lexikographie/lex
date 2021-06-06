@@ -16,12 +16,13 @@
            java.time.LocalDateTime))
 
 (defstate article-events->index
-  :start (let [updates  (s/batch
-                         10000 1000 (bus/subscribe article/events :updated))
-               removals (s/batch
-                         10000 1000 (bus/subscribe article/events :removed))
-               purges (bus/subscribe article/events :purge)]
+  :start (let [updates  (bus/subscribe article/events :updated)
+               removals (bus/subscribe article/events :removed)
+               purges (bus/subscribe article/events :purge)
+               refreshs (s/batch 1000 10000
+                                 (bus/subscribe article/events :refreshed))]
            (s/consume-async solr-client/add-to-index updates)
+           (s/consume-async solr-client/add-to-index refreshs)
            (s/consume-async solr-client/remove-from-index removals)
            (s/consume-async solr-client/remove-from-index-before purges)
            [updates removals purges])
