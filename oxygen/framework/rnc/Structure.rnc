@@ -10,10 +10,6 @@ Lemmatoken = xsd:token {
 	pattern = "\d+%ig|50\+1\-Regel|08/15|&|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?]?"
 }
 
-Lemmatoken_relaxed = xsd:token { # TODO: drop this?
-	pattern = "\d+%ig|50\+1\-Regel|08/15|&|m³|cm³|m²|cm²|km²|[\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’ ]*([!\?]|\(r\))?"
-}
-
 formaler_Text = (
 	# we cannot have mixed content with typed data :(
 	#xsd:token {
@@ -295,7 +291,7 @@ externer_Verweis = element Verweis_extern {
 Verweisziel = (
 	element Ziellemma {
 		Homographenziffer ?
-		, attribute Anzeigeform { Lemmatoken_relaxed } ?
+		, attribute Anzeigeform { token } ?
 		, Lemmatoken
 	}
 	, element Ziellesart { token }
