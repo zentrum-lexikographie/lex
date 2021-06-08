@@ -24,7 +24,7 @@ Artikel[Status="wird_gestrichen"]{ border-left: 10px solid #333; }
 
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
-Beleg, Kollokation, Kompetenzbeispiel, Phrasem,
+Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift,
 Kollokationen, Konstruktionsmuster, Kommentar {
 	border: 1px dotted #999;
 	padding: 0.5em;
@@ -35,6 +35,7 @@ Kollokationen, Konstruktionsmuster, Kommentar {
 
 Artikel > Formangabe[Typ]:before        { -oxy-append-content: attr(Typ)"angabe"; }
 Artikel > Formangabe:not([Typ]):before  { -oxy-append-content: "Hauptformangabe (implizit)"; }
+Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); }
 Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
@@ -77,7 +78,7 @@ Diasystematik > *, Grammatik > * {
 
 Formangabe:before, Grammatik:before, Illustration:before,
 Diachronie:before, Verweise:before, Diasystematik:before,
-Syntagmatik:before, Syntagmatik > *:before,
+Syntagmatik:before, Syntagmatik > *:before, Ueberschrift:before,
 Verwendungsbeispiele:before, Verwendungsbeispiele > *:before,
 Kollokationen:before, Kollokationen > *:before,
 Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before {
@@ -86,7 +87,7 @@ Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before {
 	font-weight: normal;
 	vertical-align: top;
 }
-Definition, Frequenzangabe, Kommentar, Verweise {
+Definition, Frequenzangabe, Kommentar, Verweise, Ueberschrift {
 	-oxy-prepend-content: " "; /* ein bisschen vom Label abrücken */
 }
 

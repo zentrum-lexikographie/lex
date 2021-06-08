@@ -414,6 +414,12 @@ Rechtschreibstatus = attribute Typ { 'AR_G' | 'NR_G' | 'U' | 'U_CH' | 'U_AT' | '
   ]
 ]
 
+
+Ueberschrift = element Ueberschrift {
+	element Stichwort { token } +
+	& text
+}
+
 Formangabe = element Formangabe {
 	Metadaten.allgemein ?
 	, attribute Klasse { # TODO: aus @Regel ableitbar?

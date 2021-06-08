@@ -28,6 +28,7 @@ start = element DWDS {
 		, Metadaten.allgemein
 		, Metadaten.Artikel
 		# lexikografische Basisstruktur der Artikel
+		, Ueberschrift ?
 		, Formangabe +
 		, morphologische_Verweise + # getrennte morph. Analysen
 		, Diachronie
