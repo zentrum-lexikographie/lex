@@ -46,7 +46,7 @@ Lesart Verweise:before        { content: "semantische und enzyklopädische Verwe
 Diachronie:before             { content: "Diachronie"; }
 Definition:before             { content: "Definition (" attr(Typ) ")"; }
 Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):";}
-Artikel > Kommentar:before    { content: "Artikelkommentar:";}
+Artikel > Kommentar:before    { content: "Globaler Artikelkommentar:";}
 Formangabe > Kommentar:before { content: "Formkommentar:";}
 Grammatik > Kommentar:before  { content: "Grammatikkommentar:";}
 Lesart > Kommentar:before     { content: "Lesartenkommentar:";}

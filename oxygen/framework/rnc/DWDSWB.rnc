@@ -29,10 +29,10 @@ start = element DWDS {
 		, Metadaten.Artikel
 		# lexikografische Basisstruktur der Artikel
 		, Ueberschrift ?
+		, Kommentar ? # wird praktisch nicht genutzt
 		, Formangabe +
 		, morphologische_Verweise + # getrennte morph. Analysen
 		, Diachronie
-		, Kommentar ?
 		, Lesartangabe +
 	} +
 }

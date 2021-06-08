@@ -46,7 +46,7 @@ Verweise[Typ]:before          { -oxy-append-content: " – " attr(Typ); }
 Lesart Verweise:before        { content: "semantische und enzyklopädische Verweise"; }
 Diachronie:before             { content: "Diachronie"; }
 Definition:before             { content: "Definition (" attr(Typ) ")"; }
-Artikel > Kommentar:before    { content: "Artikelkommentar:";}
+Artikel > Kommentar:before    { content: "Globaler Artikelkommentar:";}
 Formangabe > Kommentar:before { content: "Formkommentar:";}
 Grammatik > Kommentar:before  { content: "Grammatikkommentar:";}
 Lesart > Kommentar:before     { content: "Lesartenkommentar (zur Pragmatik):";}
