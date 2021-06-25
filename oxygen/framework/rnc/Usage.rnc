@@ -307,7 +307,7 @@ Fachgebiet = element Fachgebiet {
 	| 'Problemschach' # -D99 TODO: --> Schach
 	| 'Computerspiel'
 	| 'Domino' #-DWDS @LL: prüfen
-	| 'Gesellsschaftsspiel'
+	| 'Gesellschaftsspiel'
 	| 'Glücksspiel' # D99
 	| 'Lotto' # -D99  
 	| 'Toto' # -D99  
