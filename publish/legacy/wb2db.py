@@ -78,15 +78,15 @@ class Dictionary(object):
                     source CHAR(32) DEFAULT "DWDS",
                     recommendation TINYINT(1) default 0,
                     date DATE NOT NULL,
-                    xml MEDIUMTEXT COLLATE utf8_unicode_ci NOT NULL,
+                    xml MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL,
                     PRIMARY KEY (id),
                     KEY status (status)
                     ) ENGINE=MyISAM
-                    DEFAULT CHARSET=utf8;
+                    DEFAULT CHARSET=utf8mb4;
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS lemma (
                     id INT(11) NOT NULL,
-                    lemma VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+                    lemma VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL,
                     hidx TINYINT(2) DEFAULT NULL,
                     type VARCHAR(10),
                     article_id INT(11) NOT NULL,
@@ -94,20 +94,20 @@ class Dictionary(object):
                     KEY lemma (lemma),
                     KEY article_id(article_id, lemma)
                     ) ENGINE=MyISAM
-                    DEFAULT CHARSET=utf8;
+                    DEFAULT CHARSET=utf8mb4;
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS token (
-                    token VARCHAR(50) COLLATE utf8_unicode_ci NOT NULL,
+                    token VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL,
                     lemma_id INT(11) NOT NULL,
                     KEY token (token)
                     ) ENGINE=MyISAM
-                    DEFAULT CHARSET=utf8;
+                    DEFAULT CHARSET=utf8mb4;
             ''')
             if self.USE_RELATIONS:
                 cursor.execute('''CREATE TABLE IF NOT EXISTS relation(
                         article1 INT(11) NOT NULL,
                         article2 INT(11) NOT NULL,
-                        type VARCHAR(20) COLLATE utf8_unicode_ci NOT NULL,
+                        type VARCHAR(20) COLLATE utf8mb4_unicode_ci NOT NULL,
                         KEY article1 (article1, article2, type),
                         KEY article2 (article2, article1, type)
                         ) ENGINE=MyISAM;
@@ -355,14 +355,14 @@ if __name__ == '__main__':
         }
         try:
             db = MySQLdb.connect(db=dictionary.DATABASE_NAME, **database_credentials)
-            db.set_character_set('utf8')
+            db.set_character_set('utf8mb4')
             cursor = db.cursor()
             logging.debug('Using %s as DB cursor.', cursor)
-            cursor.execute('SET NAMES utf8;')
-            cursor.execute('SET CHARACTER SET utf8;')
-            cursor.execute('SET CHARACTER_SET_SERVER=utf8;')
-            cursor.execute('SET CHARACTER_SET_DATABASE=utf8;')
-            cursor.execute('SET CHARACTER_SET_CONNECTION=utf8;')
+            cursor.execute('SET NAMES utf8mb4;')
+            cursor.execute('SET CHARACTER SET utf8mb4;')
+            cursor.execute('SET CHARACTER_SET_SERVER=utf8mb4;')
+            cursor.execute('SET CHARACTER_SET_DATABASE=utf8mb4;')
+            cursor.execute('SET CHARACTER_SET_CONNECTION=utf8mb4;')
             cursor.execute('SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";')
             dictionary.create_tables(cursor)
             dictionary.set_version(cursor, arguments.version)
