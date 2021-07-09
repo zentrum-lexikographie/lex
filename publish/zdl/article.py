@@ -197,6 +197,8 @@ def prune(article):
         el.getparent().remove(el)
     for el in _orig_text_attrs(article):
         el.attrib.pop('Originaltext')
+    for el in _surface_form_els(article):
+        el.text = text_content(el)
 
 
 # https://gist.github.com/gnrfan/7f6b7803109348e30c8f
