@@ -396,7 +396,7 @@ if __name__ == '__main__':
                  article.get('Quelle'),
                  True if article.get('Empfehlung') == 'ja' else False,
                  article.get('Zeitstempel') or '1000-01-01',
-                 et.tostring(article) if article.get('Status') in ('Red-f', None) else '')
+                 et.tostring(article, encoding='unicode', method='xml') if article.get('Status') in ('Red-f', None) else '')
             )
 
             # extract lemmas
@@ -445,7 +445,6 @@ if __name__ == '__main__':
 
                         lemma_count += 1
                         #if not headword.isalpha():
-                        #    print headword.encode('utf-8')
                         bucket_lemma.update((lemma_count, headword, hidx, htype, index, ))
                         lemma_index[(headword, hidx)].append(index)
 
