@@ -125,7 +125,7 @@ grammatische_Beschreibung = element Grammatik {
 			# Vollformen
 			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’₀₂]+\p{Ll}' }
 			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(chens|ei|els|elei|erei|erls|ers|fabrik|fritzen|hai\(e\)s|in|heinis|ik|iers|ins|isten|itis|keit|kunde|leins|lers|les|lings|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schwein\(e\)|silos|tums|tumes|ung|verschnitt\(e\)s|werks|wesens)' }
+			| xsd:token { pattern = '\-(anden|chens|ei|els|elei|erei|erls|ers|fabrik|fritzen|hai\(e\)s|in|heinis|hubers|ik|iers|ins|isten|itis|keit|kunde|leins|lers|les|lings|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schwein\(e\)|silos|tums|tumes|ung|verschnitt\(e\)s|werks|wesens)' }
 		)
 	} *
 	, element Plural {
@@ -157,7 +157,7 @@ grammatische_Beschreibung = element Grammatik {
 			# Vollformen
 			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
 			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(chen|eien|el|eleien|ereien|erl|fabriken|fritzen|haie|innen|heinis|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|linge|lysen|meter|nauten|nisse|onkels|osen|schweine|silos|tümer|ungen|verschnitte|werke|wesens)' }
+			| xsd:token { pattern = '\-(anden|chen|eien|el|eleien|ereien|erl|fabriken|fritzen|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|linge|lysen|meter|nauten|nisse|onkels|osen|schweine|silos|tümer|ungen|verschnitte|werke|wesens)' }
         	)
 	} *
 	# ###############
@@ -168,11 +168,11 @@ grammatische_Beschreibung = element Grammatik {
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ
 	, (
 		element Praesens {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|feil|fern|fest|fort|frei|frisch|fürlieb|gegen(einander|über)?|ge?rade|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|leer|leid|lieb|los|maß|matt|mit|nach|nahe|neben(einander|her)|nieder|not|ob|offen|parallel|platt|pleite|ran|rauf|raus|rein|rüber|rück|rum|rund|runter|schlau|schlecht|schön|schwarz|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|blau|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|feil|fern|fest|fort|frei|frisch|fürlieb|gegen(einander|über)?|ge?rade|glatt|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|leer|leid|lieb|los|maß|matt|mies|mit|nach|nahe|neben(einander|her)|neu|nieder|not|ob|offen|parallel|platt|pleite|ran|rauf|raus|rein|rüber|rück|rum|rund|runter|scharf|schlau|schlecht|schön|schwarz|steif|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?|e-mailt' }
 			, Rechtschreibstatus ?
 		} +
 		, element Praeteritum {
-			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|feil|fern|fest|fort|frei|frisch|fürlieb|gegen(einander|über)?|ge?rade|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|leer|leid|lieb|los|maß|matt|mit|nach|nahe|neben(einander|her)|nieder|not|ob|offen|parallel|platt|pleite|ran|rauf|raus|rein|rüber|rück|rum|rund|runter|schlau|schlecht|schön|schwarz|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
+			xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|blau|breit|da(heim|her|hin|neben|rauf|rüber|von|zu)|dar|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|fehl|feil|fern|fest|fort|frei|frisch|fürlieb|gegen(einander|über)?|ge?rade|glatt|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|leer|leid|lieb|los|maß|matt|mies|mit|nach|nahe|neben(einander|her)|neu|nieder|not|ob|offen|parallel|platt|pleite|ran|rauf|raus|rein|rüber|rück|rum|rund|runter|scharf|schlau|schlecht|schön|schwarz|steif|tief(er)?|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?|e-mailte|lachte Hohn' }
 			, Rechtschreibstatus ?
 		} +
 	) ?
@@ -187,7 +187,7 @@ grammatische_Beschreibung = element Grammatik {
 	# note: die Gruppe am Anfang des ersten Ausdrucks steht wg. neuer Rechtschreibvarianten
 	# note: der zweite Ausdruck steht wg. neuer Rechtschreibung für »ab sein« usw.
 	, element Partizip_II {
-		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|blau|bloß|breit|Brust|Delfin|Delphin|dicht|dick|dünn|ernst|Fahrrad|fein|fertig|fest|frei|ge?rade|Gewähr|glatt|groß|gut|Halt|hart|heiß|Hohn|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|Maß|Motorrad|offen|parallel|platt|Rad|rein|richtig|Rücken|ruhig|sauber|scharf|schief|schlank|schön|Staub|steif|straff|stramm|tief|tot|trocken|übrig|wach|warm|weich|weiß|wieder|wohl|wund|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
+		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|blau|bloß|breit|Brust|Delfin|Delphin|dicht|dick|dünn|ernst|Fahrrad|fein|fertig|fest|frei|ge?rade|Gewähr|glatt|groß|gut|Halt|hart|heiß|Hohn|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|Maß|Motorrad|offen|parallel|platt|Rad|rein|richtig|Rücken|ruhig|sauber|scharf|schief|schlank|schön|Staub|steif|straff|stramm|tief|tot|trocken|übrig|wach|warm|weich|weiß|wieder|wohl|wund|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|hinterher|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
 		, Rechtschreibstatus ?
 	} *
 	# ##################
