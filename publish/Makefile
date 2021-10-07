@@ -125,6 +125,7 @@ dwdswb-update: dwdswb-backup
 	# determine lemma difference
 	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb > dwdswb.current
 	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb_beta.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb_beta > dwdswb.new
+	diff --color=always dwdswb.current dwdswb.new | less -r
 	# empty the target database
 	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.article;"
 	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.lemma;"
@@ -135,7 +136,6 @@ dwdswb-update: dwdswb-backup
 	$(mysql) -e "RENAME TABLE dwdswb_beta.lemma TO dwdswb.lemma;"
 	$(mysql) -e "RENAME TABLE dwdswb_beta.relation TO dwdswb.relation;"
 	$(mysql) -e "RENAME TABLE dwdswb_beta.token TO dwdswb.token;"
-	diff --color=always dwdswb.current dwdswb.new | less -r
 
 etymwb-update: etymwb-backup
 	# check whether the source database exists
