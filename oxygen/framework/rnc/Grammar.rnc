@@ -240,6 +240,7 @@ grammatische_Beschreibung = element Grammatik {
 			| 'konjunktional'
 			| 'relativ'
 			| 'modal' | 'ist eng mit der modalen Verwendung verbunden'
+			| 'in Verbindung mit Modalverben' # MWA
 			| 'konditional'
 			| 'interrogativ'
 			| 'instrumental'
