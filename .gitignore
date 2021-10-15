@@ -1,3 +1,8 @@
+clojure
+clojure-install.sh
+
+.clj-kondo/.cache
+
 target
 classes
 checkouts

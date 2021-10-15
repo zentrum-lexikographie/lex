@@ -8,7 +8,7 @@ LATEST := ${NAME}:latest
 
 .PHONY: build
 build:
-	@docker build -t ${IMG} .
+	@docker build -f Dockerfile 	-t ${IMG} ../..
 	@docker tag ${IMG} ${RELEASE}
 	@docker tag ${IMG} ${LATEST}
 

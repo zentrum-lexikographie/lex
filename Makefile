@@ -1,35 +1,35 @@
-.PHONY: build
-build:
-	@$(MAKE) -C build
+SHELL := /bin/bash
+
+CLOJURE_VERSION := 1.10.3.943
+CLOJURE := clojure/bin/clojure
+
+all: clojure
+	@clojure -X:build 'zdl.lex.build/build!'
 	@$(MAKE) -C docker/solr
 	@$(MAKE) -C docker/server
 
-.PHONY: release
-release: build
-	@$(MAKE) -C build next-release
+release: build clojure
+	@clojure -X:build 'zdl.lex.build.release/next!'
 	@$(MAKE) build
 	@$(MAKE) -C docker/solr push
 	@$(MAKE) -C docker/server push
 
-.PHONY: client
-client:
-	@$(MAKE) -C build client
+client: clojure
+	@clojure -X:build 'zdl.lex.build.oxygen/start!'
 
-.PHONY: server
-server: build solr
-	@$(MAKE) -C build server
+server: all solr clojure
+	@clojure -X:build 'zdl.lex.build.docker/start-server!'
 
-.PHONY: solr
-solr:
+solr:  clojure
 	@$(MAKE) -C docker/solr
-	@$(MAKE) -C build solr
+	@clojure -X:build 'zdl.lex.build.docker/start-solr!'
 
 
 .PHONY: help
 help:
 	@echo 'Targets:'
 	@echo ''
-	@echo ' build    - Builds client, server and packages both in a Docker'
+	@echo ' all      - Builds client, server and packages both in a Docker'
 	@echo '            container'
 	@echo ' release  - Runs a test build, creates a release tag for the current'
 	@echo '            git revision and reruns the build, pushing resulting'
@@ -40,3 +40,17 @@ help:
 	@echo ' solr     - Starts local Apache Solr server as a Docker container'
 
 
+clojure: | clojure-install.sh
+	mkdir -p $@
+	./clojure-install.sh --prefix $(CURDIR)/$@
+
+clojure-install.sh:
+	curl -o $@ https://download.clojure.org/install/linux-install-$(CLOJURE_VERSION).sh
+	chmod +x $@
+
+.clj-kondo/.cache: | clojure
+	clj-kondo\
+		--lint "$$($(CLOJURE) -A:client:server:build:dev:test -Spath)"\
+		--dependencies\
+		--parallel\
+		--copy-configs

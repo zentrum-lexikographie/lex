@@ -1,4 +1,4 @@
-FROM openjdk:14-jdk-buster
+FROM clojure:openjdk-16-tools-deps
 
 ENV ZDL_LEX_USER "lex"
 ENV ZDL_LEX_UID "1010"
@@ -15,6 +15,11 @@ ENV GIT_COMMITTER_EMAIL "noreply@lex.dwds.de"
 
 ENV GIT_SSH_COMMAND "ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
 
+RUN apt-get update && apt-get install -y \
+    git \
+    openssh-client \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR "/data"
 
 RUN set -ex; \
@@ -24,7 +29,16 @@ RUN set -ex; \
 
 RUN set -ex; chown -R $ZDL_LEX_USER:$ZDL_LEX_GROUP /data
 
-COPY --chown=lex:lex org.zdl.lex.server.jar /app/org.zdl.lex.server.jar
+RUN mkdir -p /app; chown lex:lex /app
 
 USER $ZDL_LEX_USER
-ENTRYPOINT ["java", "-jar", "/app/org.zdl.lex.server.jar"]
+WORKDIR /app
+
+COPY --chown=lex:lex deps.edn /app
+RUN clojure -A:server -P
+
+COPY --chown=lex:lex src /app/src
+COPY --chown=lex:lex oxygen /app/oxygen
+
+ENTRYPOINT ["clojure", "-X:server", "zdl.lex.server/start!"]
+
