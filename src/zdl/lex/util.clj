@@ -1,8 +1,10 @@
 (ns zdl.lex.util
-  (:require [clojure.string :as str])
+  (:require [clojure.string :as str]
+            [clojure.tools.logging :as log])
   (:import java.util.UUID))
 
-(defn uuid []
+(defn uuid
+  []
   (-> (UUID/randomUUID) str str/lower-case))
 
 (defn ->clean-map
@@ -15,3 +17,8 @@
     (apply f args)
     (finally
       (shutdown-agents))))
+
+(Thread/setDefaultUncaughtExceptionHandler
+ (reify Thread$UncaughtExceptionHandler
+   (uncaughtException [_ thread ex]
+     (log/errorf ex "Uncaught exception on [%s]." (.getName thread)))))

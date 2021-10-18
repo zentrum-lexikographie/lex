@@ -1,32 +1,33 @@
-(ns zdl.lex.client.dev
+(ns zdl.lex.dev
   (:require [mount.core :as mount]
             [seesaw.core :as ui]
-            [zdl.lex.client.oxygen.url-handler :refer [lexurl-handler]]
-            [zdl.lex.client.view.graph :as graph-view]
-            [zdl.lex.client.view.issue :as issue-view]
-            [zdl.lex.client.view.results :as results-view]
-            [zdl.lex.client.view.toolbar :as toolbar]
-            [zdl.lex.url :as lexurl]
-            [zdl.lex.client.status :as status]))
+            [zdl.lex.client.io :refer [lexurl-handler]]
+            [zdl.lex.client.issue :as client.issue]
+            [zdl.lex.client.results :as client.results]
+            [zdl.lex.client.toolbar :as client.toolbar]
+            [zdl.lex.url :as lexurl]))
 
-(def main-content
-  (ui/splitter :left-right
-               results-view/tabbed-pane
-               (ui/top-bottom-split graph-view/panel issue-view/panel
-                                    :divider-location 0.5 :resize-weight 0.5)
-               :divider-location 0.75 :resize-weight 0.75))
-(def frame
-  (ui/frame
-   :title "zdl-lex-client/dev"
-   :content (ui/border-panel :north toolbar/widget :center main-content)))
+(require 'zdl.lex.client.oxygen)
+(require 'zdl.lex.util)
 
-(defn show-testbed
-  []
-  (try (lexurl/install-stream-handler! lexurl-handler) (catch Throwable t))
-  (mount/stop)
-  (mount/start)
-  (status/trigger!)
-  (ui/invoke-later (ui/show! (ui/pack! frame))))
+(try
+  (lexurl/install-stream-handler! lexurl-handler)
+  (catch Throwable _))
 
 (comment
-  (show-testbed))
+  ;; start client-side state management
+  (mount/start)
+  ;; display dev testbed
+  (ui/invoke-later
+   (ui/show!
+    (ui/pack!
+     (let [sidebar    client.issue/panel
+           main-panel (ui/splitter :left-right
+                                   client.results/tabbed-pane
+                                   sidebar
+                                   :divider-location 0.75
+                                   :resize-weight 0.75)]
+       (ui/frame
+        :title "zdl-lex-client/dev"
+        :content (ui/border-panel :north client.toolbar/widget
+                                  :center main-panel)))))))

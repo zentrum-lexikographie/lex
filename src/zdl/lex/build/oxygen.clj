@@ -34,14 +34,28 @@
        (..
         (ProcessBuilder.
          [(path oxygen-home "jre" "bin" "java")
-          "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
+          "--illegal-access=permit"
+          "--add-opens=java.base/java.net=ALL-UNNAMED"
+          "--add-opens=java.base/java.lang=ALL-UNNAMED"
+          "--add-opens=java.desktop/java.awt=ALL-UNNAMED"
+          "--add-opens=java.desktop/javax.swing=ALL-UNNAMED"
+          "--add-opens=java.desktop/javax.swing.text=ALL-UNNAMED"
+          "--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED"
+          "-Xmx1g"
+          "-XX:-OmitStackTraceInFastThrow"
+          "-XX:SoftRefLRUPolicyMSPerMB=10"
           (str "-Dcom.oxygenxml.editor.plugins.dir=" (path oxygen-dir))
-          "-cp" (->> [(path oxygen-home "lib" "oxygen.jar")
+          "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
+          "-Djava.net.preferIPv4Stack=true"
+          "-Dsun.io.useCanonCaches=true"
+          "-Dsun.io.useCanonPrefixCache=true"
+          "-cp" (->> [(path oxygen-home "classes")
+                      (path oxygen-home "lib" "oxygen.jar")
                       (path oxygen-home "lib" "oxygen-basic-utilities.jar")
-                      (path oxygen-home "classes")
                       (path oxygen-home)]
                      (str/join \:))
-          "ro.sync.exml.Oxygen" "test-project.xpr"])
+          "ro.sync.exml.Oxygen"
+          "test-project.xpr"])
         (directory oxygen-dir)
         (inheritIO)
         (start)

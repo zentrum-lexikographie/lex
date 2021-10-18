@@ -16,7 +16,7 @@
 
 (defn id->url
   [id]
-  (uri/join url-base id))
+  (str (uri/join url-base id)))
 
 (defn url->id
   [uri]

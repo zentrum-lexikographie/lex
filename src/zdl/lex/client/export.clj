@@ -1,12 +1,10 @@
-(ns zdl.lex.client.view.export
-  (:require [byte-streams :as bs]
-            [clojure.java.io :as io]
-            [manifold.deferred :as d]
+(ns zdl.lex.client.export
+  (:require [clojure.java.io :as io]
             [seesaw.chooser :as chooser]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
-            [zdl.lex.client :as client]
-            [zdl.lex.client.auth :as auth])
+            [zdl.lex.client.http :as client.http]
+            [clojure.core.async :as a])
   (:import java.io.File))
 
 (defn csv-ext?
@@ -33,21 +31,24 @@
                         (ui/label :text (str f))])
              :options []))
 
-(defn response-body->file
-  [{:keys [body]} ^File f]
-  (io/copy (bs/to-input-stream body) f))
-
 (defn open-dialog
   ([results]
    (open-dialog results nil))
-  ([{:keys [query total] :as results} parent]
+  ([{:keys [query] :as results} parent]
    (let [parent (some-> parent ui/to-root)]
      (when-let [csv-file (choose-csv-file parent)]
        (let [progress-dialog (create-progress-dialog parent csv-file results)]
-         (->
-          (auth/with-authentication
-            (client/export-article-metadata query :limit 50000))
-          (d/chain #(response-body->file % csv-file))
-          (d/catch #(ui/alert (.getMessage %)))
-          (d/finally #(ui/dispose! progress-dialog)))
+         (a/thread
+           (try
+             (let [request  {:method       :get
+                             :url          "index/export"
+                             :as           :input-stream
+                             :query-params {:q     query
+                                            :limit 50000}}
+                   response (client.http/request request)]
+               (io/copy (get response :body) csv-file))
+             (catch Throwable t
+               (ui/alert (.getMessage t)))
+             (finally
+               (ui/dispose! progress-dialog))))
          (-> progress-dialog (ui/pack!) (ui/show!) (ui/invoke-soon)))))))

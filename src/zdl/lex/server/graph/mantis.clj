@@ -5,13 +5,13 @@
             [clojure.string :as str]
             [clojure.tools.logging :as log]
             [clojure.zip :as zip]
-            [metrics.timers :refer [deftimer time!]]
+            [metrics.timers :as timers]
             [mount.core :refer [defstate]]
             [next.jdbc :as jdbc]
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :as fs]
-            [zdl.lex.server.graph :as graph]
+            [zdl.lex.server.graph.db :as graph.db]
             [zdl.lex.server.h2 :as h2]))
 
 (def mantis-base
@@ -158,33 +158,34 @@
            (issue :resolution)]))
    (partition-all 10000)))
 
-(deftimer [graph mantis sync-timer])
+(def sync-timer
+  (timers/timer ["graph" "mantis" "sync-timer"]))
 
-(defn issues->db!
+(defn update-graph
   []
-  (time!
-   sync-timer
-   (graph/transact!
-    (fn [c]
-      (h2/execute! c {:delete-from :mantis_issue})
-      (doseq [batch (sequence issues->db-batches (issues))]
-        (h2/execute! c {:insert-into :mantis_issue :values batch}))))))
+  (->>
+   (jdbc/with-transaction [c graph.db/pool]
+     (h2/execute! c {:delete-from :mantis_issue})
+     (doseq [batch (sequence issues->db-batches (issues))]
+       (h2/execute! c {:insert-into :mantis_issue :values batch})))
+   (timers/time! sync-timer)))
 
-(deftimer [graph mantis query-timer])
+(def query-timer
+  (timers/timer ["graph" "mantis" "query-timer"]))
 
 (defn find-issues-by-forms
   [forms]
-  (time!
-   query-timer
-   (jdbc/with-transaction [c graph/db {:read-only? true}]
+  (->>
+   (jdbc/with-transaction [c graph.db/pool {:read-only? true}]
      (let [issues (h2/query c {:select :*
                                :from   :mantis_issue
                                :where  [:in :form forms]})
            issues (map #(assoc % :url (issue-id->url (:id %))) issues)]
-       (sort-by :last-updated #(compare %2 %1) issues)))))
+       (sort-by :last-updated #(compare %2 %1) issues)))
+   (timers/time! query-timer)))
 
 (comment
-  (time @(issues->db!))
+  (time (update-graph))
   (time (find-issues-by-forms ["Test" "spitzfingrig" "schwarz"])))
 
 (defstate remove-mantis-dump

@@ -7,7 +7,7 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer :all]
             [zdl.lex.git :as git]
-            [zdl.lex.server.git :as server-git]))
+            [zdl.lex.server.git :as server.git]))
 
 (def prod-origin
   (getenv "TEST_GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git"))
@@ -50,36 +50,36 @@
 
 (defn gen-article-set
   []
-  (when (.isDirectory (file server-git/dir ".git"))
+  (when (.isDirectory (file server.git/dir ".git"))
     (throw (IllegalStateException. "Git data exists")))
   (gen/fmap
    (fn [articles]
-     (git/sh! "." "init" "--quiet" (path server-git/dir))
+     (git/sh! "." "init" "--quiet" (path server.git/dir))
      (log/debugf "Copy %d articles to %s"
                  (count articles)
-                 (path server-git/dir))
+                 (path server.git/dir))
      (let [article->dest (comp
-                          (partial resolve-path (path-obj server-git/dir))
+                          (partial resolve-path (path-obj server.git/dir))
                           (partial relativize (path-obj prod-dir)))]
        (doseq [article articles] (copy article (article->dest article)))
-       (git/sh! server-git/dir "add" ".")
-       (git/sh! server-git/dir "commit" "-m" "Sets up test")
-       (afs/files server-git/dir)))
+       (git/sh! server.git/dir "add" ".")
+       (git/sh! server.git/dir "commit" "-m" "Sets up test")
+       (afs/files server.git/dir)))
    (gen-prod-article-set)))
 
 (comment
   (binding [*min-articles* 1000 *max-articles* 2000]
-    (delete! server-git/dir true)
+    (delete! server.git/dir true)
     (gen/generate (gen-article-set))))
 
 (defn article-set-fixture
   [f]
-  (delete! server-git/dir true)
+  (delete! server.git/dir true)
   (gen/generate (gen-article-set))
   (f)
-  (delete! server-git/dir))
+  (delete! server.git/dir))
 
 (use-fixtures :once article-set-fixture)
 
 (deftest fixtures
-  (is (seq (afs/files server-git/dir))))
+  (is (seq (afs/files server.git/dir))))

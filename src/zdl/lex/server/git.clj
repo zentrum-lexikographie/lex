@@ -1,16 +1,14 @@
 (ns zdl.lex.server.git
   (:require [clojure.string :as str]
             [clojure.tools.logging :as log]
-            [manifold.bus :as bus]
-            [metrics.timers :refer [deftimer time!]]
+            [metrics.timers :as timers]
             [mount.core :refer [defstate]]
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [file path]]
             [zdl.lex.git :as git]
-            [manifold.stream :as s])
+            [zdl.lex.server.article :as server.article])
   (:import java.io.File
-           java.util.concurrent.locks.ReentrantReadWriteLock
            java.util.concurrent.Semaphore))
 
 (def dir
@@ -41,38 +39,46 @@
      (finally
        (unlock!))))
 
-(def events
-  (bus/event-bus))
-
 (defn publish-changes!
   [paths]
   (when (seq paths)
     (let [files   (map #(file dir %) paths)
           updated (filter #(.exists ^File %) files)
           removed (remove #(.exists ^File %) files)]
-      (s/consume-async #(bus/publish! events :updated %) updated)
-      (s/consume-async #(bus/publish! events :removed %) removed)
+      (when (seq updated)
+        (server.article/update! updated))
+      (when (seq removed)
+        (server.article/remove! removed))
       files)))
 
-(deftimer [git local gc-timer])
+(def gc-timer
+  (timers/timer ["git" "local" "gc-timer"]))
 
 (defn gc!
   []
-  (time! gc-timer (git/sh! dir "gc" "--aggressive")))
+  (->>
+   (git/sh! dir "gc" "--aggressive")
+   (timers/time! gc-timer)))
 
-(deftimer [git remote fetch-timer])
+(def fetch-timer
+  (timers/timer ["git" "remote" "fetch-timer"]))
 
 (defn fetch!
   []
   (when origin
-    (time! fetch-timer (git/sh! dir "fetch" "--quiet" "origin" "--tags"))))
+    (->>
+     (git/sh! dir "fetch" "--quiet" "origin" "--tags")
+     (timers/time! fetch-timer))))
 
-(deftimer [git remote push-timer])
+(def push-timer
+  (timers/timer ["git" "remote" "push-timer"]))
 
 (defn push!
   []
   (when origin
-    (time! push-timer (git/sh! dir "push" "--quiet" "origin" branch))))
+    (->>
+     (git/sh! dir "push" "--quiet" "origin" branch)
+     (timers/time! push-timer))))
 
 (defstate ^{:on-reload :noop} repo
   :start (with-lock
@@ -96,12 +102,14 @@
 (defstate git-available?
   :start (log/info (-> (git/sh! dir "--version") :out str/trim)))
 
-(deftimer [git local status-timer])
+(def status-timer
+  (timers/timer ["git" "local" "status-timer"]))
 
 (defn- status
   []
-  (->> (git/status dir)
-       (time! status-timer)))
+  (->>
+   (git/status dir)
+   (timers/time! status-timer)))
 
 (defn add!
   [f & {:keys [lock?] :or {lock? true}}]
@@ -109,13 +117,16 @@
     (with-lock (git/sh! dir "add" (path f)))
     (git/sh! dir "add" (path f))))
 
-(deftimer [git local commit-timer])
+(def commit-timer
+  (timers/timer ["git" "local" "commit-timer"]))
 
 (defn commit!
   []
   (with-lock
     (when-let [changes (not-empty (status))]
-      (time! commit-timer (git/sh! dir "commit" "-a" "-m" "zdl-lex-server"))
+      (->>
+       (git/sh! dir "commit" "-a" "-m" "zdl-lex-server")
+       (timers/time! commit-timer))
       (publish-changes! (mapcat :paths changes))
       (push!))))
 

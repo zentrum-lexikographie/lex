@@ -54,9 +54,9 @@
   #{:Autor :Redakteur :Quelle :Zeitstempel})
 
 (defnp extract-metadata-attrs
-  [node]
+  [elements]
   (->>
-   (filter :attrs (tree-seq :tag :content node))
+   (filter :attrs elements)
    (mapcat (fn [{:keys [tag attrs]}]
              (for [[ak av] attrs :when (metadata-keys ak)] [tag ak av])))
    (map (fn [[tag ak av]] [(keyword (name tag)) ak (axml/normalize-text av)]))
@@ -67,9 +67,9 @@
     {})))
 
 (defnp extract-metadata
-  [article]
+  [article elements]
   (let [article-attrs (get article :attrs)
-        metadata      (extract-metadata-attrs article)
+        metadata      (extract-metadata-attrs elements)
         timestamps    (into {} (map (fn [[k vs]] [k (map ts/past vs)]))
                             (get metadata :Zeitstempel))
         last-modified (last (sort (flatten (vals timestamps))))]
@@ -87,10 +87,6 @@
      :timestamps    timestamps
      :last-modified last-modified}))
 
-(defnp descendants-by-tag
-  [loc tag]
-  (filter #(= tag (:tag (zip/node %))) (dz/descendants loc)))
-
 (defnp senses
   [loc]
   (for [[num sense] (map-indexed list (zx/xml-> loc dz/children ::dwds/Lesart))]
@@ -105,43 +101,39 @@
   #{::dwds/Formangabe ::dwds/Lesart ::dwds/Verweise})
 
 (defnp links
-  [loc]
-  (for [link  (descendants-by-tag loc ::dwds/Verweis)
+  [elements]
+  (for [link  (map zip/xml-zip (elements ::dwds/Verweis))
         :let  [anchor (zx/xml1-> link ::dwds/Ziellemma axml/zip-hid)]
         :when anchor
-        :let  [link-ancestors (zx/xml-> link dz/ancestors zip/node)
-               [context] (filter (comp link-contexts :tag) link-ancestors)
-               context (some-> context :tag name)]
-        :when context
         :let  [link-type (zx/attr link :Typ)
                sense (zx/xml1-> link ::dwds/Ziellesart axml/zip-text)]]
-    {:context context
-     :type    link-type
+    {:type    link-type
      :anchor  anchor
      :sense   sense}))
 
+(defn texts-of-elements
+  [elements tag]
+  (some->> elements tag (map zip/xml-zip) (axml/zip-texts)))
+
 (defnp extract-lex-data
-  [loc]
-  (let [forms        (zx/xml-> loc ::dwds/Formangabe)
+  [article elements]
+  (let [loc          (zip/xml-zip article)
+        forms        (zx/xml-> loc ::dwds/Formangabe)
         reprs        (for [f forms] (zx/xml1-> f ::dwds/Schreibung))
         [main-form]  (or (filter (zx/attr= :Typ "Hauptform") forms) forms)
-        main-grammar (zx/xml1-> main-form ::dwds/Grammatik)]
+        main-grammar (zx/xml1-> main-form ::dwds/Grammatik)
+        element-idx  (group-by :tag elements)]
     {:form         (zx/xml1-> main-form ::dwds/Schreibung axml/zip-text)
      :pos          (zx/xml1-> main-grammar ::dwds/Wortklasse axml/zip-text)
      :gender       (zx/xml1-> main-grammar ::dwds/Genus axml/zip-text)
      :forms        (axml/zip-texts reprs)
      :senses       (senses loc)
-     :definitions  (axml/zip-texts
-                    (descendants-by-tag loc ::dwds/Definition))
-     :usage-period (axml/zip-texts
-                    (descendants-by-tag loc ::dwds/Gebrauchszeitraum))
-     :styles       (axml/zip-texts
-                    (descendants-by-tag loc ::dwds/Stilebene))
-     :colouring    (axml/zip-texts
-                    (descendants-by-tag loc ::dwds/Stilfaerbung))
-     :area         (axml/zip-texts
-                    (descendants-by-tag loc ::dwds/Sprachraum))
-     :links        (links loc)
+     :definitions  (texts-of-elements element-idx ::dwds/Definition)
+     :usage-period (texts-of-elements element-idx ::dwds/Gebrauchszeitraum)
+     :styles       (texts-of-elements element-idx ::dwds/Stilebene)
+     :colouring    (texts-of-elements element-idx ::dwds/Stilfaerbung)
+     :area         (texts-of-elements element-idx ::dwds/Sprachraum)
+     :links        (links element-idx)
      :anchors      (axml/zip-hids reprs)}))
 
 (defnp check-for-errors
@@ -167,16 +159,19 @@
 
 (defnp extract-articles
   "Extracts articles and their key data from an XML file."
-  [{:keys [id file] :as article-file} & opts]
-  (let [{:keys [lex-data? errors?] :or {lex-data? true errors? true}} opts]
-    (for [loc  (zx/xml-> (zip/xml-zip (axml/read-xml file)) ::dwds/Artikel)
-          :let [article (zip/node loc)]]
-      (cond-> article-file
-        :always   (merge (extract-metadata article))
-        lex-data? (merge (extract-lex-data loc))
-        errors?   (merge (check-for-errors article file))
-        :always   (assoc-weight)
-        :always   (clean-map)))))
+  [{:keys [file] :as article-file} & opts]
+  (let [lex-data? (get opts :lex-data? true)
+        errors?   (get opts :errors? true)
+        doc       (axml/read-xml file)
+        articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
+    (for [article articles]
+      (let [elements (filter :tag (tree-seq :tag :content article))]
+        (cond-> article-file
+          :always   (merge (extract-metadata article elements))
+          lex-data? (merge (extract-lex-data article elements))
+          errors?   (merge (check-for-errors article file))
+          :always   (assoc-weight)
+          :always   (clean-map))))))
 
 (defn describe-article-file
   [dir f]
@@ -202,37 +197,7 @@
   (profile
    {}
    (->>
-    (article-files "../../zdl-wb/Duden-1999")
-    (mapcat #(extract-articles % :errors? false))
-    #_(take 10000)
-    (filter (comp seq :links))
-    (take 10)))
-
-  (time (map :links (take 30 (drop 200 (articles )))))
-  (->> (articles "../../zdl-wb")
-       (filter (comp (partial < 1) count :definitions))
-       #_(drop 100)
-       (map (juxt :id :anchors :links))
-       #_(mapcat :ref-ids)
-       (take 100)
-       #_(sort collator))
-  (->> (articles "../../zdl-wb")
-       #_(filter (comp #_:sense seq :references))
-       (drop 1000)
-       #_(map (juxt :form :references))
-       (filter :senses)
-       (drop 200)
-       (map (juxt :forms :gender :pos :status :senses))
-       #_(drop 200)
-       (take 3))
-  (->> (articles "../../zdl-wb")
-       (remove (comp #{"Red-2" "Red-f"} :status))
-       (filter :errors)
-       (map #(select-keys % [:form #_:pos #_:gender #_:id #_:status :errors]))
-       (take 10)
-       (time))
-  (as-> (articles "../../zdl-wb") $
-    #_(remove (comp (partial = "WDG") :source) $)
-    (map #(select-keys % [:form :pos :gender :id]) $)
-    #_(filter (comp (partial < 1) count :gender) $)
-    (take 10 $)))
+    (article-files "../zdl-wb/Duden-1999")
+    (mapcat #(extract-articles %))
+    (take 10000)
+    (last))))

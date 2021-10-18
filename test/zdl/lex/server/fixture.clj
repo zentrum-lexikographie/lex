@@ -11,8 +11,8 @@
 
 (defn index-fixture
   [f]
-  @(solr-client/clear-index)
-  @(article/refresh-articles!)
+  (solr-client/clear!)
+  (article/refresh!)
   (f))
 
 (def backend-fixture

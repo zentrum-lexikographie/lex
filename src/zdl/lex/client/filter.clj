@@ -1,9 +1,9 @@
-(ns zdl.lex.client.view.filter
+(ns zdl.lex.client.filter
   (:require [clojure.string :as str]
             [seesaw.core :as ui]
             [seesaw.forms :as forms]
-            [zdl.lex.client.font :as font]
-            [zdl.lex.client.search :as search]
+            [zdl.lex.bus :as bus]
+            [zdl.lex.client.font :as client.font]
             [zdl.lex.lucene :as lucene]
             [zdl.lex.timestamp :as ts])
   (:import com.jgoodies.forms.layout.RowSpec))
@@ -49,14 +49,14 @@
         v (str "ab " (-> v parse-ts-facet-value render-ts-facet-value))]
     (ui/config! this
                 :text (str v " (" n ")")
-                :font (font/derived :style :plain)
+                :font (client.font/derived :style :plain)
                 :border 5)))
 
 (defn- render-facet-list-entry [this {:keys [value]}]
   (let [[v n] value]
     (ui/config! this
                 :text (str v " (" n ")")
-                :font (font/derived :style :plain)
+                :font (client.font/derived :style :plain)
                 :border 5)))
 
 (defn facet-lists->query [facet-lists]
@@ -64,7 +64,7 @@
    (for [fl facet-lists
          :let [k (ui/user-data fl)
                vs (map first (ui/selection fl {:multi? true}))]
-         :when (not (empty? vs))]
+         :when (seq vs)]
      [:clause
       [:field [:term (facet-field k)]]
       (condp = k
@@ -91,8 +91,9 @@
   (some->>
    (remove empty? [(facet-lists->query facet-lists) query])
    (str/join " AND ")
-   not-empty
-   search/request)
+   (not-empty)
+   (array-map :query)
+   (bus/publish! #{:search-request}))
   (dispose! e))
 
 (defn open-dialog [{:keys [query facets]} & args]

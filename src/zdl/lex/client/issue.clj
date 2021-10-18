@@ -1,34 +1,22 @@
-(ns zdl.lex.client.view.issue
-  (:require [clojure.core.memoize :as memo]
-            [clojure.data.xml :as dx]
-            [clojure.data.zip.xml :as zx]
-            [clojure.zip :as zip]
-            [manifold.deferred :as d]
-            [mount.core :refer [defstate]]
+(ns zdl.lex.client.issue
+  (:require [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
             [seesaw.mig :as mig]
-            [zdl.lex.article.xml :as axml]
-            [zdl.lex.client :as client]
-            [zdl.lex.client.auth :as auth]
-            [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.font :as font]
-            [zdl.lex.client.icon :as icon]
-            [zdl.lex.client.workspace :as ws]
-            [clojure.tools.logging :as log])
+            [zdl.lex.bus :as bus]
+            [zdl.lex.client.font :as client.font]
+            [zdl.lex.client.graph :as client.graph]
+            [zdl.lex.client.icon :as client.icon])
   (:import java.net.URL))
 
 (def visited-issues
   (atom #{}))
 
-(def current-graph
-  (atom nil))
-
 (defn open-issue
   [{:keys [id last-updated url]}]
   (swap! visited-issues conj [id last-updated])
-  (ws/open-url ws/instance url))
+  (bus/publish! #{:open-url} {:url url}))
 
 (defn- issue->border
   [{:keys [active? severity]}]
@@ -58,14 +46,14 @@
         bg-color (if active? :snow :white)
         visited-color (if visited? :grey fg-color)
         label (partial ui/label :foreground fg-color)
-        text (partial label :font (font/derived :style :plain))
+        text (partial label :font (client.font/derived :style :plain))
         last-updated (.. date-time-formatter (format last-updated))]
     (mig/mig-panel
      :cursor :hand
      :background bg-color
      :border (issue->border issue)
      :listen [:mouse-pressed (partial open-issue issue)]
-     :items [[(label :icon icon/gmd-bug-report
+     :items [[(label :icon client.icon/gmd-bug-report
                      :foreground visited-color
                      :text summary
                      :tip summary
@@ -92,13 +80,12 @@
            :visited? (visited? [id last-updated]))))
 
 (defn prepare-issues
-  [[[_ [id graph]] visited?]]
-  (when graph (reset! current-graph graph))
-  (let [graph    @current-graph
-        visited? (or visited? @visited-issues)
-        issues   (filter (comp #{:issue} :type) (map second (:nodes graph)))
-        issues   (map #(prepare-issue visited? %) issues)]
-    (sort-by (juxt :active? :last-updated) #(compare %2 %1) issues)))
+  [_]
+  (when-let [graph @client.graph/graph] 
+    (let [visited? @visited-issues
+          issues   (:issues graph)
+          issues   (map (partial prepare-issue visited?) issues)]
+      (sort-by (juxt :active? :last-updated) #(compare %2 %1) issues))))
 
 (def issue-list
   (ui/listbox
@@ -110,7 +97,7 @@
                    (render-issue value)))))
 
 (defstate issue-update
-  :start (uib/bind (uib/funnel (bus/bind #{:graph}) visited-issues)
+  :start (uib/bind (uib/funnel client.graph/graph visited-issues)
                    (uib/transform prepare-issues)
                    (uib/property issue-list :model))
   :stop (issue-update))
@@ -119,20 +106,19 @@
   (ui/scrollable issue-list))
 
 (comment
-  (get-issues "spitzfingrig")
-  (let [sample {:category "MWA-Link",
+  (let [sample {:category     "MWA-Link",
                 :last-updated (parse-update-ts "2019-08-21T12:02:10+02:00"),
-                :attachments 1,
-                :resolution "open",
-                :lemma "schwarz",
-                :summary "schwarz -- MWA-Link, gemeldet von Reckenthäler",
-                :reporter "dwdsweb",
-                :status "assigned",
-                :id 39947,
-                :notes 0,
-                :severity "minor",
-                :url "https://mantis.dwds.de/mantis/view.php?id=39947",
-                :handler "herold"
-                :active? true
-                :visited? true}]
+                :attachments  1,
+                :resolution   "open",
+                :lemma        "schwarz",
+                :summary      "schwarz -- MWA-Link, gemeldet von Reckenthäler",
+                :reporter     "dwdsweb",
+                :status       "assigned",
+                :id           39947,
+                :notes        0,
+                :severity     "minor",
+                :url          "https://mantis.dwds.de/mantis/view.php?id=39947",
+                :handler      "herold"
+                :active?      true
+                :visited?     true}]
     (->> (render-issue sample) (ui/frame :content) ui/pack! ui/show!)))

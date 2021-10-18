@@ -68,6 +68,7 @@
                   (decode [_ data charset]
                     (with-open [r (io/reader data :encoding charset)]
                       (dx/parse r)))))]}))
+
 (def customized-muuntaja
   (m/create
    (-> m/default-options

@@ -1,8 +1,9 @@
 (ns zdl.lex.server.solr.query
   "Facetted queries of articles."
-  (:require [manifold.deferred :as d]
+  (:require [clojure.core.async :as a]
             [zdl.lex.lucene :as lucene]
-            [zdl.lex.server.solr.client :as solr-client])
+            [zdl.lex.server.solr.client :as solr.client]
+            [zdl.lex.server.solr.fields :as solr.fields])
   (:import [java.time LocalDate OffsetDateTime Year ZoneId]
            java.time.format.DateTimeFormatter))
 
@@ -76,19 +77,19 @@
     (for [[k v] facet_ranges]
       (facet-values [k (v :counts)])))))
 
-(defn doc->abstract
-  [{:keys [abstract_ss]}]
-  (read-string (first abstract_ss)))
-
 (defn parse-response
   [{{{:keys [numFound docs]} :response :keys [facet_counts]} :body}]
   {:total  numFound
-   :result (map doc->abstract docs)
+   :result (map solr.fields/doc->abstract docs)
    :facets (parse-facet-response facet_counts)})
 
 ;; # Query
 
-(defn query
+(defn handle-query
   [req]
-  (d/chain (solr-client/query (request->query req)) parse-response))
+  (a/go
+    (if-let [response (a/<! (solr.client/query (request->query req)))]
+      {:status 200
+       :body (parse-response response)}
+      {:status 502})))
 

@@ -1,4 +1,4 @@
-(ns zdl.lex.client.oxygen.plugin
+(ns zdl.lex.client.plugin
   (:gen-class
    :name de.zdl.oxygen.Plugin
    :extends ro.sync.exml.plugin.Plugin
@@ -8,7 +8,10 @@
 
 (defonce descriptor (atom nil))
 
-(defn -init [this app-descriptor]
+(defn -init
+  [_ app-descriptor]
   (reset! descriptor app-descriptor))
 
-(defn base-dir [] (some->> @descriptor (.getBaseDir)))
+(defn base-dir
+  []
+  (some->> @descriptor (.getBaseDir)))

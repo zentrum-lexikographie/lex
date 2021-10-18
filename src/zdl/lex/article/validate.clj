@@ -4,13 +4,18 @@
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as tokens]
             [zdl.lex.article.xml :as axml]
-            [zdl.xml.validate :as xv]))
+            [zdl.xml.validate :as xml.validate]))
 
-(def rng-validate
-  (xv/create-rng-validator (io/resource "framework/rng/DWDSWB.rng")))
+(def rng-schema
+  (xml.validate/rng->schema (io/resource "framework/rng/DWDSWB.rng")))
+
+(defn rng-validate
+  [source]
+  (xml.validate/rng-validate rng-schema source))
 
 (def sch-validate
-  (xv/create-sch-validator (io/resource "framework/rng/DWDSWB.sch.xsl")))
+  (xml.validate/create-sch-validator
+   (io/resource "framework/rng/DWDSWB.sch.xsl")))
 
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 

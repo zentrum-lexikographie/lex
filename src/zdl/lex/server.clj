@@ -5,6 +5,7 @@
             [zdl.lex.fs :refer [path]]
             [zdl.lex.util :refer [exec!]]))
 
+(require 'zdl.lex.server.article)
 (require 'zdl.lex.server.http)
 (require 'zdl.lex.server.metrics)
 
@@ -24,7 +25,7 @@
 
 (defn start!
   [& _]
-  (exec! (fn [_]
+  (exec! (fn [& _]
            (stop-on-shutdown)
            (start)
            (.join (Thread/currentThread)))))

@@ -3,15 +3,10 @@
             [clojure.data.xml :as dx]
             [clojure.tools.logging :as log]
             [lambdaisland.uri :as uri :refer [uri]]
-            [manifold.deferred :as d]
-            [manifold.stream :as s]
             [metrics.timers :as timers]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.http :as http]
-            [zdl.lex.lucene :as lucene]
-            [zdl.lex.server.solr.doc :refer [article->doc]])
-  (:import java.util.concurrent.TimeUnit
-           java.util.Date))
+            [zdl.lex.http :as http])
+  (:import java.util.concurrent.TimeUnit))
 
 (def auth
   (let [user     (getenv "SOLR_USER")
@@ -35,7 +30,7 @@
       (let [[error? result] (a/alt! response ([v] [false v])
                                     error    ([v] [true v]))]
         (if error?
-          (log/warnf result (pr-str req))
+          (log/warn result (pr-str req))
           result)))))
 
 (defn update-timer!
@@ -51,172 +46,20 @@
   [params]
   (a/go
     (when-let [resp (a/<! (request {:url (uri/assoc-query* (uri "query") params)}))]
-      (update-timer! query-timer resp)
-      (update resp :body http/read-json))))
-
-(comment
-  (a/<!! (query {:q "id:*"})))
-
-(defn scroll
-  ([params]
-   (scroll params 20000))
-  ([params page-size]
-   (let [pages (s/stream)]
-     (d/loop [page 0]
-       (when-not (s/closed? pages)
-         (->
-          (query (assoc params
-                        :start (* page page-size)
-                        :rows page-size))
-          (d/chain (fn [response]
-                     (get-in response [:body :response :docs] []))
-                   (fn [docs]
-                     (when (seq docs)
-                       (s/put! pages docs))
-                     (if (< (count docs) page-size)
-                       (s/close! pages)
-                       (d/recur (inc page)))))
-          (d/catch (fn [e]
-                     (log/debugf e "Error while paging through %s" params)
-                     (s/close! pages))))))
-     (s/source-only pages))))
-
-(defn index-empty?
-  []
-  (d/chain
-   (query {:q "id:*" :rows 0})
-   (fn [response] (= 0 (get-in response [:body :response :numFound] -1)))))
-
-(defn id->query
-  [id]
-  (lucene/ast->str [:query
-                    [:clause
-                     [:field [:term "id"]]
-                     [:value [:pattern (str "*" id "*")]]]]))
-
-(defn id-exists?
-  [id]
-  (d/chain
-   (query {:q (id->query id) :rows 0})
-   (fn [response] (< 0 (get-in response [:body :response :numFound] -1)))))
-
-(def suggest-timer
-  (timers/timer ["solr" "client" "suggest-timer"]))
-
-(defn suggest
-  [name q]
-  (->
-   (request {:url (->
-                   (uri "suggest")
-                   (uri/assoc-query "suggest.dictionary" name
-                                    "suggest.q" q))})
-   (d/chain decode-json-response #(update-timer! suggest-timer %))))
-
-(def forms-suggestions-build-timer
-  (timers/timer ["solr" "client" "forms-suggestions-build-timer"]))
-
-(defn build-forms-suggestions
-  []
-  (->
-   (request {:url (->
-                   (uri "suggest")
-                   (uri/assoc-query "suggest.dictionary" "forms"
-                                    "suggest.buildAll" "true"))})
-   (d/chain decode-json-response
-            #(update-timer! forms-suggestions-build-timer %))))
+      (http/update-timer! query-timer resp)
+      (http/read-json resp))))
 
 (def update-timer
-  (timers/timer["solr" "client" "update-timer"]))
+  (timers/timer ["solr" "client" "update-timer"]))
 
-(defn request-update
+(defn update!
   [xml-node]
-  (try
-    (->
-     (request
-      {:request-method :post
-       :url            (uri/assoc-query (uri "update") :wt "json")
-       :headers        {"Content-Type" "text/xml"}
-       :body           (dx/emit-str xml-node)})
-     (d/chain decode-json-response #(update-timer! update-timer %)))
-    (catch Throwable t
-      (log/info xml-node)
-      (throw t))))
-
-(defn request-updates
-  [updates]
-  (let [s' (s/stream)]
-    (s/connect-via
-     updates
-     (fn [update]
-       (->
-        (request-update update)
-        (d/chain #(s/put! s' %))
-        (d/catch (fn [e]
-                   (s/put! s'
-                           (assoc (or (ex-data e) {::error e}) ::error? true))
-                   (s/close! s')))))
-     s')
-    (s/source-only s')))
-
-(defn consume-update
-  [description {::keys [error?] :as update}]
-  (let [level (if error? :warn :debug)]
-    (when (log/enabled? level)
-      (let [ks (cond-> [:status :request-time]
-                 error? (conj ::error :headers :body))]
-        (log/log level [description (select-keys update ks)]))))
-  (d/success-deferred true))
-
-(def commit-optimize-xml
-  (dx/sexp-as-element [:update [:commit] [:optimize]]))
-
-(defn articles->add-xmls
-  [articles]
-  (sequence
-   (comp
-    (map article->doc)
-    (partition-all 10000)
-    (map #(dx/sexp-as-element [:add {:commitWithin "10000"} (seq %)])))
-   articles))
-
-(defn articles->delete-xmls
-  [articles]
-  (sequence
-   (comp
-    (map :id)
-    (partition-all 10000)
-    (map #(dx/sexp-as-element [:delete {:commitWithin "10000"}
-                               (for [id %] [:id id])])))
-   articles))
-
-(defn query->delete-xml
-  [query]
-  (dx/sexp-as-element [:delete {:commitWithin "10000"} [:query query]]))
-
-(defn add-to-index
-  [articles]
-  (log/debugf "Adding %d article(s) to index" (count articles))
-  (s/consume-async
-   #(consume-update "Index addition" %)
-   (request-updates (articles->add-xmls articles))))
-
-(defn remove-from-index
-  [articles]
-  (log/debugf "Removing %d article(s) from index" (count articles))
-  (s/consume-async
-   #(consume-update "Index removal" %)
-   (request-updates (articles->delete-xmls articles))))
-
-(defn remove-from-index-before
-  [^Date threshold]
-  (log/debugf "Purging articles before %s" threshold)
-  (let [q (format "time_l:[* TO %s}" (.getTime threshold))]
-    (s/consume-async
-     #(consume-update "Index purge" %)
-     (request-updates [(query->delete-xml q) commit-optimize-xml]))))
-
-(defn clear-index
-  []
-  (s/consume-async
-   #(consume-update "Index clear" %)
-   (request-updates [(query->delete-xml "id:*") commit-optimize-xml])))
+  (a/go
+    (let [req {:request-method :post
+               :url            (uri "update")
+               :query-params   {:wt "json"}
+               :headers        {"Content-Type" "text/xml"}
+               :body           (dx/emit-str xml-node)}]
+      (when-let [resp (a/<! (request req))]
+        (http/update-timer! update-timer resp)
+        (http/read-json resp)))))

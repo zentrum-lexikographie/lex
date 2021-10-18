@@ -1,6 +1,5 @@
 (ns zdl.lex.server.http
-  (:require [aleph.http :as aleph-http]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [hiccup.page :refer [include-css]]
             [mount.core :as mount :refer [defstate]]
@@ -14,17 +13,21 @@
             [reitit.ring :as ring]
             [reitit.swagger :as swagger]
             [reitit.swagger-ui :as swagger-ui]
-            [ring.util.io :as rio]
+            [ring.adapter.jetty :as jetty]
+            [ring.util.io :as ring.io]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.server.article :as article]
+            [zdl.lex.server.article.update :as article.update]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
-            [zdl.lex.server.git :as git]
-            [zdl.lex.server.graph.article :as graph-article]
+            [zdl.lex.server.git :as server.git]
+            [zdl.lex.server.graph :as graph]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.oxygen :as oxygen]
-            [zdl.lex.server.index :as index]
-            [zdl.lex.server.tasks :as tasks]))
+            [zdl.lex.server.solr.export :as solr.export]
+            [zdl.lex.server.solr.query :as solr.query]
+            [zdl.lex.server.solr.suggest :as solr.suggest]
+            [zdl.lex.server.tasks :as tasks])
+  (:import org.eclipse.jetty.server.Server))
 
 (def homepage
   [:html
@@ -52,7 +55,7 @@
 
 (defn pipe-resource
   [resource]
-  (rio/piped-input-stream
+  (ring.io/piped-input-stream
    (fn [os]
      (with-open [is (io/input-stream resource)]
        (io/copy is os)))))
@@ -69,7 +72,7 @@
         :headers {"Location" "/home"}})]
      ["/article" {::auth/roles #{:user}}
       ["/"
-       {:put    {:handler    article/create-article
+       {:put    {:handler    article.update/handle-create
                  :parameters {:query [:map
                                       [:form :string]
                                       [:pos :string]]}}
@@ -78,9 +81,9 @@
                  :handler     tasks/trigger-articles-refresh
                  ::auth/roles #{:admin}}}]
       ["/*resource"
-       {:get  {:handler    article/get-article
+       {:get  {:handler    article.update/handle-read
                :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    (lock/wrap-resource-lock article/post-article)
+        :post {:handler    (lock/wrap-resource-lock article.update/handle-write)
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
      ["/docs/api/*"
@@ -98,13 +101,13 @@
               :handler     (fn [req]
                              (let [ref (get-in req [:parameters :path :ref])]
                                (try
-                                 {:status 200 :body (git/fast-forward! ref)}
+                                 {:status 200 :body (server.git/fast-forward! ref)}
                                  (catch Throwable t
                                    (log/warn t)
                                    {:status 400 :body ref}))))
               ::auth/roles #{:admin}}}]
      ["/graph/*resource"
-      {:handler graph-article/get-article-graph
+      {:handler graph/handle-graph-query
        :parameters {:path [:map [:resource :string]]}}]
      ["/home"
       (constantly
@@ -120,19 +123,19 @@
                              [:q {:optional true} :string]
                              [:offset {:optional true} [:int {:min 0}]]
                              [:limit {:optional true} [:int {:min 0}]]]}
-        :handler index/search-articles}]
+        :handler solr.query/handle-query}]
       ["/export"
        {:summary    "Export index metadata in CSV format"
         :tags       ["Index" "Query" "Export"]
         :parameters {:query [:map
                              [:q {:optional true} :string]
                              [:limit {:optional true} :int]]}
-        :handler    index/export-article-metadata}]
+        :handler    solr.export/handle-export}]
       ["/forms/suggestions"
        {:summary    "Retrieve suggestion for headwords based on prefix queries"
         :tags       ["Index" "Query" "Suggestions" "Headwords"]
         :parameters {:query [:map [:q {:optional true} :string]]}
-        :handler    index/suggest-forms}]]
+        :handler    solr.suggest/suggest-forms}]]
      ["/lock" {::auth/roles #{:user}}
       [""
        {:summary "Retrieve list of active locks"
@@ -172,11 +175,11 @@
       ["/zdl-lex-framework.zip"
        (fn [_]
          {:status 200
-          :body   (rio/piped-input-stream oxygen/download-framework)})]
+          :body   (ring.io/piped-input-stream oxygen/download-framework)})]
       ["/zdl-lex-plugin.zip"
        (fn [_]
          {:status 200
-          :body   (rio/piped-input-stream oxygen/download-plugin)})]]
+          :body   (ring.io/piped-input-stream oxygen/download-plugin)})]]
      ["/status"
       {:summary     "Provides status information, e.g. logged-in user"
        :tags        ["Status"]
@@ -204,10 +207,13 @@
                    auth/interceptor]}))
 
 (defstate server
-  :start (aleph-http/start-server
+  :start (jetty/run-jetty
           handler
-          {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))})
-  :stop (.close ^java.io.Closeable server))
+          {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))
+           :join? false})
+  :stop (do
+          (.stop ^Server server)
+          (.join ^Server server)))
 
 (comment
   (mount/start #'server))

@@ -8,9 +8,9 @@ all: clojure
 	@$(MAKE) -C docker/solr
 	@$(MAKE) -C docker/server
 
-release: build clojure
+release: all
 	@clojure -X:build 'zdl.lex.build.release/next!'
-	@$(MAKE) build
+	@$(MAKE) all
 	@$(MAKE) -C docker/solr push
 	@$(MAKE) -C docker/server push
 

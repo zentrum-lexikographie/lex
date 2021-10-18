@@ -27,6 +27,7 @@
            (into-array [(str "zdl/lex/server/h2/migration/" id)])))
         (Flyway.)
         (.migrate))
+    (jdbc/execute! ds [(format "SET CACHE_SIZE %d" (* 512 1024))])
     ds))
 
 (defn close!

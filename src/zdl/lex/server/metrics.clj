@@ -1,6 +1,5 @@
 (ns zdl.lex.server.metrics
   (:require [metrics.core :refer [default-registry]]
-            [metrics.jvm.core :refer [instrument-jvm]]
             [mount.core :refer [defstate]]
             [zdl.lex.env :refer [getenv]])
   (:import com.codahale.metrics.Slf4jReporter

@@ -1,8 +1,10 @@
 (ns zdl.lex.http
   (:require [clj-http.client :as http]
             [clojure.core.async :as a]
-            [jsonista.core :as json])
-  (:import java.util.concurrent.Future))
+            [jsonista.core :as json]
+            [metrics.timers :as timers])
+  (:import java.util.concurrent.Future
+           java.util.concurrent.TimeUnit))
 
 (defn async-request
   ([req]
@@ -21,12 +23,12 @@
      [result-ch error-ch cancel-ch])))
 
 (defn read-json
-  [v]
-  (json/read-value v json/keyword-keys-object-mapper))
+  [response]
+  (update response :body #(json/read-value % json/keyword-keys-object-mapper)))
 
 (defn read-edn
-  [v]
-  (read-string (String. v "UTF-8")))
+  [response]
+  (update response :body #(read-string (String. % "UTF-8"))))
 
 (defn sync-response
   [[result-ch error-ch]]
@@ -40,3 +42,9 @@
   (sync-response
     (async-request {:url    "http://localhost:8983/solr/articles/query"
                     :method :get})))
+
+(defn update-timer!
+  [timer {:keys [request-time] :as response}]
+  (when request-time
+    (timers/update! timer request-time TimeUnit/MILLISECONDS))
+  response)

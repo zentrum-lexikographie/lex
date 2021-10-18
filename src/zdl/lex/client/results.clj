@@ -1,15 +1,14 @@
-(ns zdl.lex.client.view.results
+(ns zdl.lex.client.results
   (:require [mount.core :refer [defstate]]
             [seesaw.core :as ui]
             [seesaw.swingx :as uix]
             [seesaw.util :refer [to-dimension]]
-            [zdl.lex.client.bus :as bus]
-            [zdl.lex.client.font :as font]
-            [zdl.lex.client.icon :as icon]
-            [zdl.lex.client.search :as search]
-            [zdl.lex.client.view.export :as export-view]
-            [zdl.lex.client.view.filter :as filter-view]
-            [zdl.lex.client.workspace :as ws]
+            [zdl.lex.bus :as bus]
+            [zdl.lex.client.font :as client.font]
+            [zdl.lex.client.icon :as client.icon]
+            [zdl.lex.client.http :as client.http]
+            [zdl.lex.client.export :as client.export]
+            [zdl.lex.client.filter :as client.filter]
             [zdl.lex.article :as article]
             [clojure.string :as str])
   (:import com.jidesoft.swing.JideTabbedPane
@@ -31,7 +30,8 @@
    {:key :editor :text "Redakteur"}
    {:key :errors :text "Fehler"}])
 
-(defn- open-article [result ^MouseEvent e]
+(defn- open-article
+  [result ^MouseEvent e]
   (let [clicks (.getClickCount e)
         ^JXTable table (.getSource e)
         ^Point point (.getPoint e)
@@ -40,7 +40,7 @@
         row (if (<= 0 row) (.convertRowIndexToModel adapter row) row)]
     (when (and (= 2 clicks) (<= 0 row))
       (let [{:keys [id]} (nth result row)]
-        (ws/open-article ws/instance id)))))
+        (bus/publish! #{:open-article} {:id id})))))
 
 (defn- resize-columns [^ComponentEvent e]
   (let [^JTable table (.getSource e)
@@ -78,10 +78,10 @@
         (condp = (:key column)
           ;; forms in bold style
           :form
-          (ui/config! component :font (font/derived :style :bold))
+          (ui/config! component :font (client.font/derived :style :bold))
           ;; definitions in italic style
           :definition
-          (ui/config! component :font (font/derived :style :italic))
+          (ui/config! component :font (client.font/derived :style :italic))
           ;; status with color
           :status
           (if-not selected?
@@ -98,25 +98,26 @@
 
 (defn- render-result-summary [{:keys [query total result] :as data}]
   (let [filter-action (ui/action
-                       :icon icon/gmd-filter
-                       :handler (partial filter-view/open-dialog data))
+                       :icon client.icon/gmd-filter
+                       :handler (partial client.filter/open-dialog data))
         query-action (ui/action
-                      :icon icon/gmd-refresh
-                      :handler (fn [_] (search/request query)))
+                      :icon client.icon/gmd-refresh
+                      :handler (fn [_]
+                                 (bus/publish! #{:search-request} {:query query})))
         export-action (ui/action
-                       :icon icon/gmd-export
+                       :icon client.icon/gmd-export
                        :enabled? (< total 50000)
-                       :handler (partial export-view/open-dialog data))]
+                       :handler (partial client.export/open-dialog data))]
     (ui/horizontal-panel
      :items [(Box/createRigidArea (to-dimension [5 :by 0]))
              (ui/label :text (.. (java.time.LocalDateTime/now) (format time-formatter))
-                       :font (font/derived :style :plain))
+                       :font (client.font/derived :style :plain))
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/label :text query)
              (Box/createHorizontalGlue)
              (ui/label :text (format "%d Ergebnis(se)" total)
-                       :foreground (if (< (count result) total) :orange)
-                       :font (font/derived :style :plain))
+                       :foreground (when (< (count result) total) :orange)
+                       :font (client.font/derived :style :plain))
              (Box/createRigidArea (to-dimension [10 :by 0]))
              (ui/toolbar
               :floatable? false
@@ -125,13 +126,13 @@
                       (ui/button :action query-action)])])))
 
 (defn render-result
-  [{:keys [query total] :as data}]
-  (let [model (map result->table-model (data :result))
+  [{:keys [result] :as data}]
+  (let [model        (map result->table-model result)
         highlighters (into-array Highlighter [(create-highlighter model)])
-        table (uix/table-x
-               :model [:rows model :columns result-table-columns]
-               :listen [:mouse-pressed (partial open-article model)
-                        :component-resized resize-columns])]
+        table        (uix/table-x
+                      :model [:rows model :columns result-table-columns]
+                      :listen [:mouse-pressed (partial open-article model)
+                               :component-resized resize-columns])]
     (ui/border-panel
      :class :result
      :user-data data
@@ -152,7 +153,7 @@
     (ui/listen pane #{:selection :component-shown}
                (fn [_]
                  (when-let [result (get-selected-result pane)]
-                   (bus/publish! :search-result-selected result))))
+                   (bus/publish! #{:search-result-selected} result))))
     pane))
 
 (defn select-result-tabs []
@@ -168,18 +169,18 @@
   (= (:query a) (:query b)))
 
 (defn merge-results
-  [_ resp]
+  [query result]
   (ui/invoke-soon
-   (let [id (-> resp :id keyword)
-         title (resp :query)
-         tip (resp :query)
-         old-tabs (filter (comp (partial result= resp) ui/user-data)
+   (let [title        query
+         tip          query
+         result       (assoc result :query query)
+         old-tabs     (filter (comp #(result= result %) ui/user-data)
                           (select-result-tabs))
          insert-index (some->> old-tabs last (get-result-tab-index))
-         new-tab (render-result resp)]
+         new-tab      (render-result result)]
      (if insert-index
-       (.insertTab tabbed-pane title icon/gmd-result new-tab tip insert-index)
-       (.addTab tabbed-pane title icon/gmd-result new-tab tip))
+       (.insertTab tabbed-pane title client.icon/gmd-result new-tab tip insert-index)
+       (.addTab tabbed-pane title client.icon/gmd-result new-tab tip))
      (doseq [tab old-tabs]
        (.remove tabbed-pane tab))
      (loop [tabs (count-result-tabs)]
@@ -187,8 +188,19 @@
          (.removeTabAt tabbed-pane 0)
          (recur (count-result-tabs))))
      (ui/selection! tabbed-pane new-tab)
-     (ws/show-view ws/instance :results))))
+     (bus/publish! #{:show-view} {:view :results}))))
 
-(defstate search-responses->results
-  :start (bus/listen #{:search-response} merge-results)
-  :stop (search-responses->results))
+(defn search
+  [_ {:keys [query]}]
+  (let [request  {:url          "index"
+                  :query-params {:q     query
+                                 :limit "1000"}}
+        response (client.http/request request)]
+    (merge-results query (response :body))))
+
+(defstate search-requests->results
+  :start (bus/listen #{:search-request} search)
+  :stop (search-requests->results))
+
+(comment
+  (search :search-request {:query "*"}))

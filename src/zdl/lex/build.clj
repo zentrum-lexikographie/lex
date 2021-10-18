@@ -5,11 +5,11 @@
             [clojure.tools.logging :as log]
             [uberdeps.api :as uberdeps]
             [zdl.lex.build.fs :refer [oxygen-dir scripts-dir client-jar server-jar]]
+            [zdl.lex.build.rng :as build.rng]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [clear-dir! file path]]
             [zdl.lex.sh :refer [sh!]]
-            [zdl.lex.util :refer [exec!]]
-            [zdl.xml.validate :as xv]))
+            [zdl.lex.util :refer [exec!]]))
 
 (def deps
   (-> (file "deps.edn") slurp edn/read-string))
@@ -23,8 +23,8 @@
         sch (file dest "DWDSWB.sch.xsl")]
     (log/info "Transpiling Artikel-XML schema (RNC -> RNG)")
     (clear-dir! dest)
-    (xv/rnc->rng rnc rng)
-    (xv/rng->sch-xslt rng sch)))
+    (build.rng/rnc->rng rnc rng)
+    (build.rng/rng->sch-xslt rng sch)))
 
 (defn uberjar!
   [& args]
@@ -80,7 +80,8 @@
   (let [classes (file "classes" "server")]
     (log/info "Compiling server")
     (clear-dir! classes)
-    (sh! "clojure" "-M:server:prod-server" (path scripts-dir "compile_server.clj"))
+    (sh! "clojure" "-M:server:prod-server"
+         (path scripts-dir "compile_server.clj"))
     (log/info "Packaging server")
     (binding [uberdeps/level :error]
       (uberdeps/package deps (path server-jar)

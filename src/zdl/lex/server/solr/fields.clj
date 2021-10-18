@@ -1,4 +1,4 @@
-(ns zdl.lex.server.solr.doc
+(ns zdl.lex.server.solr.fields
   (:require [clojure.string :as str]))
 
 (defn field-name->key
@@ -95,3 +95,8 @@
   [:doc
    (for [[k v] (article->fields article)]
      [:field {:name k} v])])
+
+(defn doc->abstract
+  [{:keys [abstract_ss]}]
+  (read-string (first abstract_ss)))
+

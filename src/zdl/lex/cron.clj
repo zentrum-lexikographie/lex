@@ -13,7 +13,7 @@
    (schedule cron-expr desc f (a/chan (a/dropping-buffer 0))))
   ([cron-expr desc f results]
    (let [schedule (cron/parse crondef/quartz cron-expr)
-         ctrl-ch  (a/chan (a/dropping-buffer 1))]
+         ctrl-ch  (a/chan)]
      (a/go-loop []
        (when-let [req (a/alt! (a/timeout (millis-to-next schedule)) :scheduled
                               ctrl-ch ([v] v))]
@@ -23,3 +23,7 @@
          (a/poll! ctrl-ch) ;; we just finished a job; remove pending req
          (recur)))
      ctrl-ch)))
+
+(defn trigger!
+  [ctrl-ch]
+  (a/offer! ctrl-ch :trigger))
