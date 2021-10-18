@@ -1,14 +1,13 @@
 (ns zdl.lex.server.solr.client
-  (:require [aleph.http :as http]
-            [byte-streams :as bs]
+  (:require [clojure.core.async :as a]
             [clojure.data.xml :as dx]
             [clojure.tools.logging :as log]
-            [jsonista.core :as json]
             [lambdaisland.uri :as uri :refer [uri]]
             [manifold.deferred :as d]
             [manifold.stream :as s]
-            [metrics.timers :as timers :refer [deftimer]]
+            [metrics.timers :as timers]
             [zdl.lex.env :refer [getenv]]
+            [zdl.lex.http :as http]
             [zdl.lex.lucene :as lucene]
             [zdl.lex.server.solr.doc :refer [article->doc]])
   (:import java.util.concurrent.TimeUnit
@@ -27,19 +26,17 @@
 (defn request
   "Solr client request fn with configurable base URL and authentication"
   [{:keys [url] :as req}]
-  (http/request
-   (cond-> req
-     :always (assoc :url (str (uri/join base-url url)))
-     :always (update :request-method #(or % :get))
-     auth    (assoc :basic-auth auth))))
-
-(defn read-json
-  [v]
-  (json/read-value v json/keyword-keys-object-mapper))
-
-(defn decode-json-response
-  [response]
-  (update response :body (comp read-json bs/to-byte-array)))
+  (let [req              (cond-> req
+                           :always (assoc :url (str (uri/join base-url url)))
+                           :always (update :request-method #(or % :get))
+                           auth    (assoc :basic-auth auth))
+        [response error] (http/async-request req)]
+    (a/go
+      (let [[error? result] (a/alt! response ([v] [false v])
+                                    error    ([v] [true v]))]
+        (if error?
+          (log/warnf result (pr-str req))
+          result)))))
 
 (defn update-timer!
   [timer {:keys [request-time] :as response}]
@@ -47,16 +44,18 @@
     (timers/update! timer request-time TimeUnit/MILLISECONDS))
   response)
 
-(deftimer [solr client query-timer])
+(def query-timer
+  (timers/timer ["solr" "client" "query-timer"]))
 
 (defn query
   [params]
-  (->
-   (request {:url (uri/assoc-query* (uri "query") params)})
-   (d/chain decode-json-response #(update-timer! query-timer %))))
+  (a/go
+    (when-let [resp (a/<! (request {:url (uri/assoc-query* (uri "query") params)}))]
+      (update-timer! query-timer resp)
+      (update resp :body http/read-json))))
 
 (comment
-  @(query {:q "id:*"}))
+  (a/<!! (query {:q "id:*"})))
 
 (defn scroll
   ([params]
@@ -101,7 +100,8 @@
    (query {:q (id->query id) :rows 0})
    (fn [response] (< 0 (get-in response [:body :response :numFound] -1)))))
 
-(deftimer [solr client suggest-timer])
+(def suggest-timer
+  (timers/timer ["solr" "client" "suggest-timer"]))
 
 (defn suggest
   [name q]
@@ -112,7 +112,8 @@
                                     "suggest.q" q))})
    (d/chain decode-json-response #(update-timer! suggest-timer %))))
 
-(deftimer [solr client forms-suggestions-build-timer])
+(def forms-suggestions-build-timer
+  (timers/timer ["solr" "client" "forms-suggestions-build-timer"]))
 
 (defn build-forms-suggestions
   []
@@ -124,7 +125,8 @@
    (d/chain decode-json-response
             #(update-timer! forms-suggestions-build-timer %))))
 
-(deftimer [solr client update-timer])
+(def update-timer
+  (timers/timer["solr" "client" "update-timer"]))
 
 (defn request-update
   [xml-node]

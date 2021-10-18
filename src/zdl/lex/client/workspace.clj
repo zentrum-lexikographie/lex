@@ -7,7 +7,8 @@
             [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
             [zdl.lex.fs :refer [file]]
-            [zdl.lex.url :as lexurl])
+            [zdl.lex.url :as lexurl]
+            [lambdaisland.uri :as uri])
   (:import java.net.URL
            ro.sync.exml.workspace.api.PluginWorkspace
            ro.sync.exml.workspace.api.standalone.StandalonePluginWorkspace))
@@ -22,7 +23,7 @@
     [this]
     "A directory where user data can be stored")
   (open-url
-    [this ^URL url]
+    [this url]
     "Opens URL in a browser.")
   (open-article
     [this id]
@@ -38,10 +39,10 @@
     [this]
     "URLs of all currently opened editors.")
   (xml-document
-    [this ^URL url]
+    [this url]
     "Parses the editor content associated with the given URL into a DOM.")
   (modified?
-    [this ^URL url]
+    [this url]
     "Checks whether the editor' content associated with the given URL is modified.")
   (add-editor-change-listener [this listener])
   (remove-editor-change-listener [this listener])
@@ -49,6 +50,10 @@
   (remove-editor-listener [this url listener]))
 
 (def ^:private editing-area PluginWorkspace/MAIN_EDITING_AREA)
+
+(defn get-editor-access
+  [^StandalonePluginWorkspace ws url]
+  (.getEditorAccess ws (URL. (str url)) editing-area))
 
 (extend-protocol Workspace
   StandalonePluginWorkspace
@@ -60,8 +65,9 @@
     ([^StandalonePluginWorkspace this id request-focus?]
      (.. this (showView (views id) request-focus?))))
   (open-url
-    [^StandalonePluginWorkspace this ^URL url]
-    (future (.. this (openInExternalApplication url false "text/html"))))
+    [^StandalonePluginWorkspace this url]
+    (future
+      (.openInExternalApplication this (URL. (str url)) false "text/html")))
   (open-article
     [^StandalonePluginWorkspace this id]
     (future (.. this (open (lexurl/id->url id)))))
@@ -76,29 +82,27 @@
     (.. this (getEditorAccess url editing-area) (addEditorListener listener)))
   (remove-editor-listener
     [^StandalonePluginWorkspace this url listener]
-    (.. this (getEditorAccess url editing-area) (removeEditorListener listener)))
-  (modified? [^StandalonePluginWorkspace this ^URL url]
-    (.. this (getEditorAccess url editing-area) (isModified)))
+    (.. (get-editor-access this url) (removeEditorListener listener)))
+  (modified? [^StandalonePluginWorkspace this url]
+    (.. (get-editor-access this url) (isModified)))
   (editor-url [^StandalonePluginWorkspace this]
     (.. this (getCurrentEditorAccess editing-area) (getEditorLocation)))
   (editor-urls [^StandalonePluginWorkspace this]
-    (. this (getAllEditorLocations editing-area)))
-  (xml-document [^StandalonePluginWorkspace this ^URL url]
+    (map uri/uri (.. this (getAllEditorLocations editing-area))))
+  (xml-document [^StandalonePluginWorkspace this url]
     (try
-      (with-open [is (.. this (getEditorAccess url editing-area)
-                         (createContentInputStream))]
+      (with-open [is (.. (get-editor-access this url) (createContentInputStream))]
         (axml/read-xml is))
       (catch Throwable t
-        (log/debug (str url) t)))))
+        (log/debug t url)))))
 
-(defstate instance
-  :start
+(def default-instance
   (let [editor-url (atom nil)]
     (reify Workspace
       (preferences-dir [_]
         (file (System/getProperty "user.dir") "tmp" "ws-prefs"))
       (open-url [_ url]
-        (future (browse-url url)))
+        (future (browse-url (URL. (str url)))))
       (open-article [_ id]
         (let [url (lexurl/id->url id)]
           (reset! editor-url url)
@@ -119,3 +123,6 @@
       (xml-document [_ url]
         (auth/with-authentication
           (-> (client/get-article (lexurl/url->id url)) deref :body))))))
+
+(defstate instance
+  :start default-instance)

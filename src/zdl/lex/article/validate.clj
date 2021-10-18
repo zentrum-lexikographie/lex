@@ -4,7 +4,6 @@
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as tokens]
             [zdl.lex.article.xml :as axml]
-            [zdl.lex.fs :refer [file]]
             [zdl.xml.validate :as xv]))
 
 (def rng-validate

@@ -10,9 +10,8 @@
             [manifold.stream :as s]
             [mount.core :refer [defstate]]
             [zdl.lex.article :as article]
-            [zdl.lex.article.fs :as afs]
             [zdl.lex.article.xml :as axml]
-            [zdl.lex.fs :refer [file]]
+            [zdl.lex.fs :refer [file file?]]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.git :as git]
             [zdl.lex.server.solr.client :as solr-client]
@@ -58,7 +57,7 @@
   (let [threshold (Date.)]
     (->
      (s/consume-async #(git-file-updated! % :event :refreshed)
-                      (afs/files git/dir))
+                      (article/files git/dir))
      (d/chain
       (fn [_]
         (bus/publish! events :purge threshold))
@@ -151,7 +150,7 @@
 (defn get-article
   [{{{:keys [resource]} :path} :parameters}]
   (let [^File f (file git/dir resource)]
-    (if (.isFile f)
+    (if (file? f)
       {:status 200 :body f}
       {:status 404 :body resource})))
 
@@ -194,10 +193,10 @@
                                             :pos  "Substantiv"}}}))
 
 (defn post-article
-  [{{{:keys [resource]} :path} :parameters :keys [body] :as req}]
+  [{{{:keys [resource]} :path} :parameters :keys [body]}]
   (git/with-lock
     (let [^File f (file git/dir resource)]
-      (if (.isFile f)
+      (if (file? f)
         (do
           (with-open [is (bs/to-input-stream body)
                       os (io/output-stream f)]

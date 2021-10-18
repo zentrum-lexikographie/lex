@@ -4,7 +4,7 @@
             [clojure.string :as str]
             [clojure.tools.logging :as log]
             [uberdeps.api :as uberdeps]
-            [zdl.lex.build.fs :refer [oxygen-dir scripts-dir cli-jar client-jar server-jar]]
+            [zdl.lex.build.fs :refer [oxygen-dir scripts-dir client-jar server-jar]]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [clear-dir! file path]]
             [zdl.lex.sh :refer [sh!]]
@@ -75,19 +75,6 @@
                         {:aliases #{:client :prod-client}}))
     (clear-dir! classes)))
 
-(defn package-cli!
-  []
-  (let [classes (file "classes" "cli")]
-    (log/info "Compiling CLI")
-    (clear-dir! classes)
-    (sh! "clojure" "-M:prod-cli" (path scripts-dir "compile_cli.clj"))
-    (log/info "Packaging CLI")
-    (binding [uberdeps/level :error]
-      (uberdeps/package deps (path cli-jar)
-                        {:aliases    #{:prod-cli}
-                         :main-class "zdl.lex.cli"}))
-    (clear-dir! classes)))
-
 (defn package-server!
   []
   (let [classes (file "classes" "server")]
@@ -104,7 +91,7 @@
 (defn build
   [_]
   (package-client!)
-  (package-cli!))
+  (package-server!))
 
 (def build!
   (partial exec! build))

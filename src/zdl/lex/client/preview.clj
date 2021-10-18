@@ -1,5 +1,6 @@
 (ns zdl.lex.client.preview
   (:require [clojure.string :as str]
+            [lambdaisland.uri :as uri]
             [mount.core :as mount :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.core :as ui]
@@ -7,15 +8,17 @@
             [zdl.lex.client.icon :as icon]
             [zdl.lex.client.workspace :as ws]
             [zdl.lex.fs :as fs]
-            [zdl.lex.url :refer [id->url url url->id]])
+            [zdl.lex.url :as lexurl])
   (:import java.net.URL))
 
 (def id (atom nil))
 
-(defn set-id [^URL url]
-  (reset! id (if url (url->id url))))
+(defn set-id
+  [^URL url]
+  (reset! id (when url (lexurl/url->id url))))
 
-(def base-url (URL. "http://zwei.dwds.de/wb/existdb/"))
+(def base-url
+  (uri/uri "http://zwei.dwds.de/wb/existdb/"))
 
 (defstate remove-chrome-profile
   :start (-> (fs/file (ws/preferences-dir ws/instance) "chrome-profile")
@@ -24,16 +27,16 @@
 (defstate editor->id
   :start (bus/listen #{:editor-activated :editor-deactivated}
                      (fn [topic url]
-                       (set-id (if (= :editor-activated topic) url))))
+                       (set-id (when (= :editor-activated topic) url))))
   :stop editor->id)
 
-(defn render [id]
-  (->> (url "http://zwei.dwds.de/wb/existdb/" {:d id})
-       (ws/open-url ws/instance)))
+(defn render
+  [id]
+  (ws/open-url ws/instance (uri/assoc-query base-url :d id)))
 
 (defn handle-action [e]
   (let [id @id
-        modified? (ws/modified? ws/instance (id->url id))]
+        modified? (ws/modified? ws/instance (lexurl/id->url id))]
     (if-not modified?
       (render id)
       (->> ["Der aktuelle Artikel ist nicht gespeichert."

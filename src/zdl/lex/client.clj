@@ -6,9 +6,8 @@
             [manifold.deferred :as d]
             [zdl.lex.article.xml :as axml]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.url :refer [server-base]]
-            [zdl.lex.util :refer [uuid]]
-            [clojure.tools.logging :as log]))
+            [zdl.lex.url :as lexurl]
+            [zdl.lex.util :refer [uuid]]))
 
 (def ^:dynamic *auth*
   (let [user (getenv "SERVER_USER")
@@ -24,7 +23,7 @@
   ([url req]
    (request url :get req))
   ([url method req]
-   (let [url (str (uri/join server-base url))]
+   (let [url (str (uri/join lexurl/server-base url))]
      (http/request
       (cond-> req
         :always     (assoc :url url :request-method method)

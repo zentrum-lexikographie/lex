@@ -1,7 +1,7 @@
 (ns zdl.xml.util
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [clojure.test :refer :all])
+            [clojure.test :refer [deftest is]])
   (:import [java.io File
             InputStream OutputStream Reader StringReader StringWriter Writer]
            [java.net URI URL]
@@ -17,8 +17,9 @@
            [org.w3c.dom Document Node NodeList]
            org.xml.sax.InputSource))
 
-(defn ^URI resolve-uri [^URI base ^URI uri]
+(defn ^URI resolve-uri
   "Resolves URIs, with support for the jar URL scheme."
+  [^URI base ^URI uri]
   (if (= "jar" (.. base (getScheme)))
     (let [[base-jar base-path] (str/split (str base) #"!")
           resolved (.. (URI. base-path) (resolve uri))]

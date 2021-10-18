@@ -13,6 +13,7 @@
   camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
   com.taoensso/tufte                  {:mvn/version "2.2.0"}
   lambdaisland/uri                    {:mvn/version "1.4.54"}
+  clj-http/clj-http                   {:mvn/version "3.12.3"}
   aleph/aleph                         {:mvn/version "0.4.7-alpha7"}
   cronjure/cronjure                   {:mvn/version "0.1.1"}
   mount/mount                         {:mvn/version "0.1.16"}

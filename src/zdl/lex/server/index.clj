@@ -1,4 +1,4 @@
-(ns zdl.lex.server.solr
+(ns zdl.lex.server.index
   (:require [clojure.data.csv :as csv]
             [clojure.string :as str]
             [manifold.bus :as bus]
@@ -25,78 +25,6 @@
            [updates removals purges refreshs])
   :stop (doseq [s article-events->index]
           (s/close! s)))
-
-(defn- facet-values
-  [[k v]]
-  [(lucene/field->kw (name k))
-   (into (sorted-map) (map vec (partition 2 v)))])
-
-(defn parse-facet-response
-  [{:keys [facet_fields facet_ranges facet_intervals]}]
-  (into
-   (sorted-map)
-   (concat
-    (for [kv facet_fields]
-      (facet-values kv))
-    (for [[k v] facet_intervals]
-      [(lucene/field->kw (name k))
-       (into (sorted-map) (for [[k v] v] [(name k) v]))])
-    (for [[k v] facet_ranges]
-      (facet-values [k (v :counts)])))))
-
-(defn doc->abstract
-  [{:keys [abstract_ss]}]
-  (read-string (first abstract_ss)))
-
-(def ^:private query-params
-  {"df"   "forms_ss"
-   "sort" "forms_ss asc,weight_i desc,id asc"})
-
-(defn- ->timestamp
-  [^java.time.LocalDate dt]
-  (.. dt (atStartOfDay (java.time.ZoneId/of "UTC"))))
-
-(defn- timestamp->str
-  [^java.time.OffsetDateTime odt]
-  (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (format odt)))
-
-(defn- facet-params []
-  (let [now        (java.time.LocalDate/now)
-        today      (->timestamp now)
-        year       (->timestamp (.. (java.time.Year/from now) (atDay 1)))
-        tomorrow   (->timestamp (.. now (plusDays 1)))
-        boundaries (concat
-                    [today
-                     (.. tomorrow (minusDays 7))
-                     (.. tomorrow (minusMonths 1))]
-                    (for [i (range 4)]
-                      (.. year (minusYears i))))
-        tomorrow   (timestamp->str tomorrow)
-        boundaries (map timestamp->str boundaries)]
-    {"facet"              "true"
-     "facet.field"        ["author_s" "editors_ss"
-                           "sources_ss" "tranche_ss"
-                           "type_ss" "pos_ss" "status_ss"
-                           "provenance_ss"
-                           "errors_ss"]
-     "facet.limit"        "-1"
-     "facet.mincount"     "1"
-     "facet.interval"     "timestamp_dt"
-     "facet.interval.set" (for [b boundaries]
-                            (format "{!key=\"%s\"}[%s,%s)" b b tomorrow))}))
-
-(defn search-articles
-  [{{{:keys [q offset limit] :or {q "id:*" offset 0 limit 1000}} :query} :parameters}]
-  (d/chain
-   (solr-client/query (assoc (merge query-params (facet-params))
-                             :q (lucene/translate q)
-                             :start offset
-                             :rows limit))
-   (fn [{{{:keys [numFound docs]} :response :keys [facet_counts]} :body}]
-     {:status 200
-      :body   {:total  numFound
-               :result (map doc->abstract docs)
-               :facets (parse-facet-response facet_counts)}})))
 
 (defn csv-record->line
   [record]

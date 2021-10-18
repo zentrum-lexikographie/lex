@@ -9,7 +9,7 @@
             [manifold.deferred :as d]
             [zdl.lex.client :as client]
             [zdl.lex.client.auth :as auth]
-            [zdl.lex.url :as lexurl :refer [server-base url url->id]])
+            [zdl.lex.url :as lexurl])
   (:import [java.io ByteArrayOutputStream IOException]
            [java.net URLConnection URLStreamHandler]
            [java.time Instant ZoneId]
@@ -69,7 +69,8 @@
     (updateLock
       [url timeout]
       (->
-       (auth/with-authentication (client/lock-resource (url->id url) timeout))
+       (auth/with-authentication
+         (client/lock-resource (lexurl/url->id url) timeout))
        (d/chain (constantly nil))
        (d/catch IOException handle-io-errors)
        (d/catch handle-lock-errors)
@@ -77,7 +78,8 @@
     (unlock
       [url]
       (->
-       (auth/with-authentication (client/unlock-resource (url->id url)))
+       (auth/with-authentication
+         (client/unlock-resource (lexurl/url->id url)))
        (d/chain (constantly nil))
        (d/catch IOException handle-io-errors)
        (d/catch handle-lock-errors)
@@ -85,8 +87,8 @@
 
 (defn- lexurl->httpurl
   [u]
-  (let [id (url->id u)
-        url (uri/join server-base "article/" id)
+  (let [id (lexurl/url->id u)
+        url (uri/join lexurl/server-base "article/" id)
         url (uri/assoc-query url :token client/*lock-token*)]
     (str url)))
 

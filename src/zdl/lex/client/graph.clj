@@ -5,14 +5,14 @@
             [zdl.lex.client :as client]
             [zdl.lex.client.auth :as auth]
             [zdl.lex.client.bus :as bus]
-            [zdl.lex.url :as lexurl :refer [url->id id->url]]))
+            [zdl.lex.url :as lexurl]))
 
 (def cache
   (cache/ttl-cache-factory {} :ttl (* 15 60 1000)))
 
 (defn update-graph!
   [_ url]
-  (let [id (url->id url)]
+  (let [id (lexurl/url->id url)]
     (d/chain
      (or
       (some-> (cache/lookup cache id) (d/success-deferred))
@@ -26,4 +26,4 @@
 
 (comment
   @cache
-  @(bus/publish! :editor-activated (id->url "WDG/ro/roh-E_r_5749.xml")))
+  @(bus/publish! :editor-activated (lexurl/id->url "WDG/ro/roh-E_r_5749.xml")))

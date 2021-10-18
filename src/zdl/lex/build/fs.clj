@@ -17,9 +17,6 @@
 (def ^File client-jar
   (file oxygen-dir "plugin" "lib" "org.zdl.lex.client.jar"))
 
-(def ^File cli-jar
-  (file project-dir "build" "org.zdl.lex.cli.jar"))
-
 (def ^File server-jar
   (file project-dir "docker" "server" "org.zdl.lex.server.jar"))
 

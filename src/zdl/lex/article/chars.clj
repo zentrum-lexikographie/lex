@@ -84,6 +84,3 @@
                    (str/replace non-parenthesis "")
                    (remove-matching-parentheses))]
     {:type ::unbalanced-parens :data data}))
-
-(comment
-  (check-parentheses "1)"))

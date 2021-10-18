@@ -15,6 +15,10 @@
   (let [^File f (apply io/file args)]
     (.getCanonicalFile f)))
 
+(defn file?
+  [& args]
+  (.isFile ^File (apply file args)))
+
 (defn ^String path
   [& args]
   (.getPath (apply file args)))

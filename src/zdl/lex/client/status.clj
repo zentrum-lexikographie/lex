@@ -1,6 +1,6 @@
 (ns zdl.lex.client.status
-  (:require [manifold.deferred :as d]
-            [manifold.stream :as s]
+  (:require [clojure.core.async :as a]
+            [manifold.deferred :as d]
             [mount.core :refer [defstate]]
             [zdl.lex.client :as client]
             [zdl.lex.client.auth :as auth]
@@ -16,12 +16,12 @@
      (bus/publish! :status (assoc status :timestamp (Instant/now))))))
 
 (defstate ping
-  :start (cron/schedule-stream "*/30 * * * * ?" "Ping Status" ping!)
-  :stop (s/close! ping))
+  :start (cron/schedule "*/30 * * * * ?" "Ping Status" ping!)
+  :stop (a/close! ping))
 
 (defn trigger!
   []
-  (s/put! ping "<Ping>"))
+  (a/>!! ping "<Ping>"))
 
 (def current-user
   (atom nil))

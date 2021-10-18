@@ -23,7 +23,7 @@
             [zdl.lex.server.graph.article :as graph-article]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.oxygen :as oxygen]
-            [zdl.lex.server.solr :as solr]
+            [zdl.lex.server.index :as index]
             [zdl.lex.server.tasks :as tasks]))
 
 (def homepage
@@ -41,12 +41,7 @@
         [:a
          {:href  "/oxygen/updateSite.xml"
           :title "Oxygen XML Editor - Update Site"}
-         "Oxygen XML Editor - Update Site"]
-        [:br]
-        [:a
-         {:href  "/cli/org.zdl.lex.cli.jar"
-          :title "Command Line Interface – Client JAR"}
-         "Command Line Interface – Client JAR"]]]]]]])
+         "Oxygen XML Editor - Update Site"]]]]]]])
 
 (defn wrap-log-exception [handler ^Throwable e req]
   (log/warn e (select-keys req [:uri :request-method]))
@@ -88,10 +83,6 @@
         :post {:handler    (lock/wrap-resource-lock article/post-article)
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
-     ["/cli/org.zdl.lex.cli.jar"
-      (constantly
-       {:status 200
-        :body   (pipe-resource (io/resource "org.zdl.lex.cli.jar"))})]
      ["/docs/api/*"
       {:no-doc  true
        :handler (swagger-ui/create-swagger-ui-handler)}]
@@ -129,19 +120,19 @@
                              [:q {:optional true} :string]
                              [:offset {:optional true} [:int {:min 0}]]
                              [:limit {:optional true} [:int {:min 0}]]]}
-        :handler    solr/search-articles}]
+        :handler index/search-articles}]
       ["/export"
        {:summary    "Export index metadata in CSV format"
         :tags       ["Index" "Query" "Export"]
         :parameters {:query [:map
                              [:q {:optional true} :string]
                              [:limit {:optional true} :int]]}
-        :handler    solr/export-article-metadata}]
+        :handler    index/export-article-metadata}]
       ["/forms/suggestions"
        {:summary    "Retrieve suggestion for headwords based on prefix queries"
         :tags       ["Index" "Query" "Suggestions" "Headwords"]
         :parameters {:query [:map [:q {:optional true} :string]]}
-        :handler    solr/suggest-forms}]]
+        :handler    index/suggest-forms}]]
      ["/lock" {::auth/roles #{:user}}
       [""
        {:summary "Retrieve list of active locks"

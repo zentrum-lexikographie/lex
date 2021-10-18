@@ -21,9 +21,10 @@
       (let [ts (->> s parse format)
             valid? (<= (compare ts now) 0)]
         (if valid? ts now))
-      (catch Throwable t now))))
+      (catch Throwable _ now))))
 
-(def ^:private unix-epoch (parse "1970-01-01"))
+(def ^:private unix-epoch
+  (parse "1970-01-01"))
 
 (defn days-since-epoch
   "The number of days since the UNIX epoch for a given date."

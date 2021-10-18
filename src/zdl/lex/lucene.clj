@@ -1,10 +1,9 @@
 (ns zdl.lex.lucene
   "Handling of Apache Lucene (Solr) Standard Query syntax"
-  (:require [clojure.java.io :as io]
-            [instaparse.core :as insta :refer [defparser transform]]
+  (:require [camel-snake-kebab.core :as csk]
+            [clojure.java.io :as io]
             [clojure.string :as str]
-            [camel-snake-kebab.core :as csk]
-            [clojure.tools.logging :as log]))
+            [instaparse.core :as insta :refer [defparser]]))
 
 ;; ## Escaping of special chars in regexps, terms etc.
 
@@ -133,7 +132,7 @@
     :quoted (str-node :quoted unescape-quoted)
     :fuzzy (str-node :fuzzy)
     :boost (str-node :boost)}
-   (partial transform)))
+   (partial insta/transform)))
 
 (defn error->ex
   [r]

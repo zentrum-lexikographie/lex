@@ -1,6 +1,5 @@
 (ns zdl.lex.env
-  (:require [clojure.string :as str]
-            [mount.core :as mount])
+  (:require [clojure.string :as str])
   (:import io.github.cdimascio.dotenv.Dotenv))
 
 ;; load `.env` into system properties

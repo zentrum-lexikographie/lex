@@ -6,13 +6,28 @@
             [clojure.tools.logging :as log]
             [clojure.zip :as zip]
             [taoensso.tufte :as tufte :refer [defnp profile]]
-            [zdl.lex.article.fs :as afs]
+            [zdl.lex.article :as article]
             [zdl.lex.article.validate :as av]
             [zdl.lex.article.xml :as axml]
-            [zdl.lex.fs :refer [relativize]]
+            [zdl.lex.fs :refer [file relativize]]
             [zdl.lex.timestamp :as ts])
-  (:import java.text.Collator
+  (:import java.io.File
+           java.text.Collator
            java.util.Locale))
+
+(defn article-file?
+  [^File f]
+  (let [name (.getName f)
+        path (.getAbsolutePath f)]
+    (and
+     (.endsWith name ".xml")
+     (not (.startsWith name "."))
+     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
+     (not (.contains path ".git")))))
+
+(defn files
+  [dir]
+  (->> dir file file-seq (filter article-file?) (map file)))
 
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 
@@ -170,7 +185,7 @@
 (defnp article-files
   "Extracts articles and their key data from XML files in a dir."
   [dir]
-  (map #(describe-article-file dir %) (afs/files dir)))
+  (map #(describe-article-file dir %) (article/files dir)))
 
 (defn status->color
   [status]

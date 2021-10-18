@@ -18,12 +18,16 @@
   (log/info "Stopping ZDL/Lex Server")
   (mount/stop))
 
-(def start!
-  (partial exec! (fn [_]
-                   (.addShutdownHook (Runtime/getRuntime)
-                                     (Thread. ^Runnable stop))
-                   (start)
-                   (.join (Thread/currentThread)))))
+(defn stop-on-shutdown
+  []
+  (.addShutdownHook (Runtime/getRuntime) (Thread. ^Runnable stop)))
+
+(defn start!
+  [& _]
+  (exec! (fn [_]
+           (stop-on-shutdown)
+           (start)
+           (.join (Thread/currentThread)))))
 
 (def -main
   start!)

@@ -1,6 +1,6 @@
 (ns zdl.lex.lucene-test
   (:require [zdl.lex.lucene :as lucene]
-            [clojure.test :refer :all]))
+            [clojure.test :refer [deftest is]]))
 
 (deftest translate
   (let [is= #(is (= %2 (lucene/translate %1)))]

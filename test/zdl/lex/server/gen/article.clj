@@ -2,7 +2,7 @@
   (:require [clojure.test.check.generators :as gen]
             [clojure.test :refer :all]
             [clojure.tools.logging :as log]
-            [zdl.lex.article.fs :as afs]
+            [zdl.lex.article :as article]
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer :all]
@@ -20,7 +20,7 @@
 
 (defn prod-articles
   []
-  (seq (sort (afs/files prod-dir))))
+  (seq (sort (article/files prod-dir))))
 
 (defn clone-prod!
   []
