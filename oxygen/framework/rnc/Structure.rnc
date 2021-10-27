@@ -7,7 +7,7 @@ Lemmatoken = xsd:token {
 	# this pattern triggers an infinite loop in jing
 	# when there are "(" or ")" somewhere after whitespace
 	#pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
-	pattern = "\d+%ig|50\+1\-Regel|08/15|&|m³|cm³|m²|cm²|km²|[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?]?"
+	pattern = "\d+%ig|50\+1\-Regel|Rh+|08/15|&|m³|cm³|m²|cm²|km²|[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?]?"
 }
 
 formaler_Text = (
