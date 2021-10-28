@@ -22,6 +22,7 @@ Glossar = attribute Glossar {
 			| 'Bundestagswahl-2021'
 			| 'Corona'
 			| 'Fußball'
+			| 'Jahreskalender'
 			| 'Klimawandel'
 			| 'US-Wahl-2020'
 			| 'Weihnachten'
