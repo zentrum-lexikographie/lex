@@ -1,8 +1,8 @@
 create table if not exists zdl_lex_article (
   id varchar(255) not null,
   last_modified timestamp not null,
-  status varchar(32) not null,
-  type varchar(32) not null,
+  status varchar(32),
+  type varchar(32),
   pos varchar(32),
   provenance varchar(32),
   source varchar(32),

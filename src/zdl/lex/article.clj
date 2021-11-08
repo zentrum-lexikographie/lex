@@ -160,18 +160,22 @@
 (defnp extract-articles
   "Extracts articles and their key data from an XML file."
   [{:keys [file] :as article-file} & opts]
-  (let [lex-data? (get opts :lex-data? true)
-        errors?   (get opts :errors? true)
-        doc       (axml/read-xml file)
-        articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
-    (for [article articles]
-      (let [elements (filter :tag (tree-seq :tag :content article))]
-        (cond-> article-file
-          :always   (merge (extract-metadata article elements))
-          lex-data? (merge (extract-lex-data article elements))
-          errors?   (merge (check-for-errors article file))
-          :always   (assoc-weight)
-          :always   (clean-map))))))
+  (try
+    (let [lex-data? (get opts :lex-data? true)
+          errors?   (get opts :errors? true)
+          doc       (axml/read-xml file)
+          articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
+      (for [article articles]
+        (let [elements (filter :tag (tree-seq :tag :content article))]
+          (cond-> article-file
+            :always   (merge (extract-metadata article elements))
+            lex-data? (merge (extract-lex-data article elements))
+            errors?   (merge (check-for-errors article file))
+            :always   (assoc-weight)
+            :always   (clean-map)))))
+    (catch Throwable t
+      (log/warnf t "Error extracting data from %s" file)
+      article-file)))
 
 (defn describe-article-file
   [dir f]
