@@ -1,6 +1,6 @@
 # ZDL/Lex – Lexikographic Workbench
 
-_A client/server application serving as the authoring environment for
+_A client/server application implementing an authoring environment for
 lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
 ![Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/640px-Schreibtisch_eines_Philologen.jpg)
@@ -75,41 +75,27 @@ Build tasks can be executed via `make`:
 $ make help
 Targets:
 
- build    - Builds client, server and packages both in a Docker
+ all      - Builds client, server and packages both in a Docker
             container
  release  - Runs a test build, creates a release tag for the current
             git revision and reruns the build, pushing resulting
             images in the end
  client   - Builds client and starts an OxygenXML Editor instance
             with the built development version of the client
- server   - Starts local ZDL-Lex server as a Docker container
- solr     - Starts local Apache Solr server as a Docker container
 ```
 
 Accordingly, to build the application's client and server components:
 
 ```plaintext
-$ make build
-make[1]: Entering directory '/home/gregor/repositories/zdl-lex/build'
-[2021-02-16 13:10:58,116 | zdl.lex.build        ] Transpiling Artikel-XML schema (RNC -> RNG)
-[2021-02-16 13:10:58,402 | zdl.lex.build        ] Compiling Oxygen XML Editor plugin (client)
-[2021-02-16 13:11:24,778 | zdl.lex.build        ] Packaging Oxygen XML Editor plugin (client)
-[2021-02-16 13:11:28,268 | zdl.lex.build        ] Compiling CLI
-[2021-02-16 13:11:32,426 | zdl.lex.build        ] Packaging CLI
-[2021-02-16 13:11:34,730 | zdl.lex.build        ] Compiling server
-[2021-02-16 13:12:01,395 | zdl.lex.build        ] Packaging server
-make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/build'
-make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/solr'
-Sending build context to Docker daemon  213.5kB
+$ make all
+[main            | INFO  | zdl.lex.build       ] Transpiling Artikel-XML schema (RNC -> RNG)
+[main            | INFO  | zdl.lex.build       ] Compiling Oxygen XML Editor plugin (client)
+[main            | INFO  | zdl.lex.build       ] Packaging Oxygen XML Editor plugin (client)
+[main            | INFO  | zdl.lex.build       ] Compiling server
+[main            | INFO  | zdl.lex.build       ] Packaging server
 […]
-Successfully built 66475cb0e5c1
-Successfully tagged docker-registry.zdl.org/zdl-lex/solr:be91da8
-make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/solr'
-make[1]: Entering directory '/home/gregor/repositories/zdl-lex/docker/server'
-Sending build context to Docker daemon  132.5MB
-[…]
-Successfully built 9cd3dbf51b66
-Successfully tagged docker-registry.zdl.org/zdl-lex/server:be91da8
+Successfully built a57682690b6e
+Successfully tagged docker-registry.zdl.org/zdl-lex/server:35695b8
 make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
 ```
 
@@ -121,31 +107,18 @@ components can be tested locally.
 To run a local server instance as a Docker container:
 
 ```plaintext
-$ make solr
-$ make server
+$ make all
+$ docker-compose up
 ```
 
 The server component relies on [Apache Solr](https://lucene.apache.org/solr/)
-for its facetted search functionality. The first command spawns a Solr Docker
-container, reachable via 
+for its facetted search functionality, reachable via 
 
 http://localhost:8983/solr
 
-The second command spawns a server container, reachable at
+The server container is reachable at
 
 http://localhost:3000/
-
-You can check the server logs via
-
-```plaintext
-$ docker logs zdl_lex_server 
-[…]
-[main       | INFO  | zdl.lex.server.git  ] git version 2.20.1
-[main       | INFO  | zdl.lex.server.git  ] {:git {:init /data/git}}
-[main       | INFO  | zdl.lex.server.git  ] {:git {:repo /data/git, :branch zdl-lex-server/development, :origin nil}}
-[dispatch-1 | INFO  | zdl.lex.cron        ] {:desc Solr index rebuild, :cron 0 0 1 * * ?, :req :init}
-[main       | INFO  | zdl.lex.server      ] Started ZDL/Lex Server @[/data]
-```
 
 Before starting Oxygen XML Editor with the client plugin installed from the
 current project sources, make sure settings in `.env` point to the local server

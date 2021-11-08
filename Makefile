@@ -17,14 +17,6 @@ release: all
 client: clojure
 	@clojure -X:build 'zdl.lex.build.oxygen/start!'
 
-server: all solr clojure
-	@clojure -X:build 'zdl.lex.build.docker/start-server!'
-
-solr:  clojure
-	@$(MAKE) -C docker/solr
-	@clojure -X:build 'zdl.lex.build.docker/start-solr!'
-
-
 .PHONY: help
 help:
 	@echo 'Targets:'
@@ -36,9 +28,6 @@ help:
 	@echo '            images in the end'
 	@echo ' client   - Builds client and starts an OxygenXML Editor instance'
 	@echo '            with the built development version of the client'
-	@echo ' server   - Starts local ZDL-Lex server as a Docker container'
-	@echo ' solr     - Starts local Apache Solr server as a Docker container'
-
 
 clojure: | clojure-install.sh
 	mkdir -p $@
