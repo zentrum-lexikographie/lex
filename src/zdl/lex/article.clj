@@ -165,17 +165,18 @@
           errors?   (get opts :errors? true)
           doc       (axml/read-xml file)
           articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
-      (for [article articles]
-        (let [elements (filter :tag (tree-seq :tag :content article))]
-          (cond-> article-file
-            :always   (merge (extract-metadata article elements))
-            lex-data? (merge (extract-lex-data article elements))
-            errors?   (merge (check-for-errors article file))
-            :always   (assoc-weight)
-            :always   (clean-map)))))
+      (vec
+       (for [article articles]
+         (let [elements (filter :tag (tree-seq :tag :content article))]
+           (cond-> article-file
+             :always   (merge (extract-metadata article elements))
+             lex-data? (merge (extract-lex-data article elements))
+             errors?   (merge (check-for-errors article file))
+             :always   (assoc-weight)
+             :always   (clean-map))))))
     (catch Throwable t
       (log/warnf t "Error extracting data from %s" file)
-      article-file)))
+      [article-file])))
 
 (defn describe-article-file
   [dir f]
@@ -201,7 +202,8 @@
   (profile
    {}
    (->>
-    (article-files "../zdl-wb/Duden-1999")
-    (mapcat #(extract-articles %))
-    (take 10000)
+    (article-files "../zdl-wb")
+    (pmap extract-articles)
+    (flatten)
+    #_(take 100)
     (last))))
