@@ -52,6 +52,7 @@
 
 (def client-jar-exclusions
   (conj uberdeps/exclusions
+        #"^\.env$"
         #"^plugin/.*"
         #"^plugin\.dtd"
         #"^test-project\.xpr"
@@ -75,6 +76,10 @@
                         {:aliases #{:client :prod-client}}))
     (clear-dir! classes)))
 
+(def server-jar-exclusions
+  (conj uberdeps/exclusions
+        #"^\.env$"))
+
 (defn package-server!
   []
   (let [classes (file "classes" "server")]
@@ -83,7 +88,8 @@
     (sh! "clojure" "-M:server:prod-server"
          (path scripts-dir "compile_server.clj"))
     (log/info "Packaging server")
-    (binding [uberdeps/level :error]
+    (binding [uberdeps/level      :error
+              uberdeps/exclusions server-jar-exclusions]
       (uberdeps/package deps (path server-jar)
                         {:aliases    #{:server :prod-server}
                          :main-class "zdl.lex.server"}))
