@@ -331,6 +331,7 @@ syntaktische_Relationen = (
         | 'Stichwort_hat_Adverbialbestimmung'
         | 'Stichwort_hat_Akkusativobjekt'
         | 'Stichwort_hat_Aktivsubjekt'
+        | 'Stichwort_hat_Apposition'
         | 'Stichwort_hat_Dativobjekt'
         | 'Stichwort_hat_Genitiv-/Akkusativ-/Dativobjekt'
         | 'Stichwort_hat_Genitivattribut'
