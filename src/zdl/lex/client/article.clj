@@ -58,7 +58,7 @@
                         "right:pref, 4dlu, [100dlu, pref]"
                         :default-dialog-border? true
                         :items ["Formangabe" form-input
-                                "Wortklxasse" pos-input])]
+                                "Wortklasse" pos-input])]
     (-> (ui/dialog :title "Neuen Artikel anlegen"
                    :type :plain
                    :content content
