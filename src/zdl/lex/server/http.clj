@@ -62,6 +62,24 @@
 
 (require 'sieppari.async.core-async)
 
+(defn client-resources
+  [context-path]
+  [context-path
+   ["/updateSite.xml"
+    (constantly
+     {:status                200
+      :body                  oxygen/update-descriptor
+      :muuntaja/encode       true
+      :muuntaja/content-type "application/xml"})]
+   ["/zdl-lex-framework.zip"
+    (fn [_]
+      {:status 200
+       :body   (ring.io/piped-input-stream oxygen/download-framework)})]
+   ["/zdl-lex-plugin.zip"
+    (fn [_]
+      {:status 200
+       :body   (ring.io/piped-input-stream oxygen/download-plugin)})]])
+
 (def handler
   (http/ring-handler
    (http/router
@@ -165,21 +183,8 @@
         :tags        ["Mantis" "Admin"]
         :handler     tasks/trigger-mantis-sync
         ::auth/roles #{:admin}}}]
-     ["/oxygen"
-      ["/updateSite.xml"
-       (constantly
-        {:status                200
-         :body                  oxygen/update-descriptor
-         :muuntaja/encode       true
-         :muuntaja/content-type "application/xml"})]
-      ["/zdl-lex-framework.zip"
-       (fn [_]
-         {:status 200
-          :body   (ring.io/piped-input-stream oxygen/download-framework)})]
-      ["/zdl-lex-plugin.zip"
-       (fn [_]
-         {:status 200
-          :body   (ring.io/piped-input-stream oxygen/download-plugin)})]]
+     (client-resources "/oxygen")
+     (client-resources "/zdl-lex-client")
      ["/status"
       {:summary     "Provides status information, e.g. logged-in user"
        :tags        ["Status"]
