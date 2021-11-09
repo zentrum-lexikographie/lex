@@ -1,0 +1,81 @@
+{:paths ["src"]
+ :deps
+ {org.clojure/clojure                 {:mvn/version "1.10.3"}
+  org.clojure/core.async              {:mvn/version "1.3.618"}
+  org.clojure/core.memoize            {:mvn/version "1.0.236"}
+  org.clojure/data.xml                {:mvn/version "0.2.0-alpha6"}
+  org.clojure/data.zip                {:mvn/version "1.0.0"}
+  org.clojure/data.csv                {:mvn/version "0.1.4"}
+  org.clojure/tools.cli               {:mvn/version "0.4.2"}
+  org.clojure/tools.logging           {:mvn/version "1.0.0"}
+  org.clojure/tools.reader            {:mvn/version "1.3.6"}
+  hiccup/hiccup                       {:mvn/version "1.0.5"}
+  instaparse/instaparse               {:mvn/version "1.4.10"}
+  camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.1"}
+  com.taoensso/tufte                  {:mvn/version "2.2.0"}
+  lambdaisland/uri                    {:mvn/version "1.4.54"}
+  clj-http/clj-http                   {:mvn/version "3.12.3"}
+  cronjure/cronjure                   {:mvn/version "0.1.1"}
+  mount/mount                         {:mvn/version "0.1.16"}
+  metosin/jsonista                    {:mvn/version "0.3.1"}
+  io.github.cdimascio/dotenv-java     {:mvn/version "2.2.0"}
+  org.slf4j/slf4j-api                 {:mvn/version "1.7.30"}
+  org.slf4j/jcl-over-slf4j            {:mvn/version "1.7.30"}
+  org.slf4j/slf4j-log4j12             {:mvn/version "1.7.30"}
+  net.sf.saxon/Saxon-HE               {:mvn/version "9.9.1-4"}
+  org.kohsuke.rngom/rngom             {:mvn/version "20100718"}}
+
+ :aliases
+ {:client
+  {:extra-paths ["oxygen"]
+   :extra-deps
+   {seesaw/seesaw                                               {:mvn/version "1.5.0"}
+    com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
+    com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+    net.sf.jung/jung-algorithms                                 {:mvn/version "2.1.1"}
+    net.sf.jung/jung-api                                        {:mvn/version "2.1.1"}
+    net.sf.jung/jung-graph-impl                                 {:mvn/version "2.1.1"}
+    net.sf.jung/jung-io                                         {:mvn/version "2.1.1"}
+    net.sf.jung/jung-visualization                              {:mvn/version "2.1.1"}}}
+  :server
+  {:extra-paths ["oxygen"]
+   :extra-deps
+   {metosin/reitit                    {:mvn/version "0.5.12"}
+    ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
+    com.h2database/h2                 {:mvn/version "1.4.199"}
+    com.github.seancorfield/next.jdbc {:mvn/version "1.1.646"}
+    com.github.seancorfield/honeysql  {:mvn/version "2.1.818"}
+    org.flywaydb/flyway-core          {:mvn/version "7.2.0"}
+    com.zaxxer/HikariCP               {:mvn/version "3.4.5"}
+    io.github.classgraph/classgraph   {:mvn/version "4.8.50"}
+    audiogum/metrics-clojure          {:mvn/version "3.0.0"}
+    audiogum/metrics-clojure-jvm      {:mvn/version "3.0.0"}
+    io.xapix/clj-soap                 {:mvn/version "1.1.0"
+                                       :exclusions  [javax.servlet/servlet-api]}
+    org.relaxng/jing                  {:mvn/version "20181222"
+                                       :exclusions  [xml-apis/xml-apis
+                                                     net.sf.saxon/Saxon-HE]}}}
+  :dev
+  {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "20.1.0.3"}}
+   :jvm-opts   ["-Dawt.useSystemAAFontSettings=on" "-Dswing.aatext=true"]}
+  :prod-client
+  {:extra-paths ["classes/client"]
+   :extra-deps  {cider/cider-nrepl {:mvn/version "0.26.0"}}}
+  :prod-cli
+  {:extra-paths ["classes/cli"]}
+  :build
+  {:extra-deps
+   {uberdeps/uberdeps {:mvn/version "0.1.8"
+                       :exclusions  [commons-logging/commons-logging]}
+    org.relaxng/trang {:mvn/version "20181222"
+                       :exclusions  [xml-apis/xml-apis
+                                     net.sf.saxon/Saxon-HE]}}}
+  :test
+  {:extra-paths ["test"]
+   :extra-deps
+   {org.clojure/test.check {:mvn/version "0.9.0"}}}}
+
+ :mvn/repos
+ {"central" {:url "https://repo1.maven.org/maven2/"}
+  "clojars" {:url "https://clojars.org/repo"}
+  "oxygen"  {:url "https://www.oxygenxml.com/maven"}}}

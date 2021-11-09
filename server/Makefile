@@ -1,2 +1,0 @@
-test:
-	@clojure -X:test

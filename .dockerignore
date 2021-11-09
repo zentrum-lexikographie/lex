@@ -1,0 +1,14 @@
+**/.git
+**/.gitignore
+**/.gitmodules
+
+.github
+.python-version
+
+**/.cpcache
+**/.clj-kondo
+**/.nrepl-port
+
+**/.env
+
+data

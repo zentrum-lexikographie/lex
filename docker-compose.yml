@@ -1,0 +1,19 @@
+version: "3"
+services:
+  solr:
+    image: docker-registry.zdl.org/zdl-lex/solr
+    volumes:
+      - index:/var/solr
+    ports:
+      - "8983:8983"
+  server:
+    image: docker-registry.zdl.org/zdl-lex/server:latest
+    environment:
+      - "ZDL_LEX_SOLR_URL=http://solr:8983/solr/"
+    volumes:
+      - server:/data
+    ports:
+      - "3000:3000"
+volumes:
+  index:
+  server:
