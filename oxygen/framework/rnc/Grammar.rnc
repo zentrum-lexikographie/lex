@@ -266,15 +266,15 @@ grammatische_Beschreibung = element Grammatik {
 			| 'im Übergang zur Präposition'
 		)
 	} *
-	, element Artikelpraeferenz { # TODO: rename
+	, element Artikelpraeferenz { # TODO: rename: Artikelwortpraeferenz
 		attribute class { 'invisible' } ? # Why do we even need this?
 		, Frequenzbeschraenkung ?
 		, (
 			'ohne Artikel'
 			| 'mit bestimmtem Artikel'
 			| 'mit unbestimmtem Artikel'
-			| xsd:token { pattern = '(auch )?mit .+pronomen ' }
-			| '(auch )?mit anderen Zahlwörtern'
+			| xsd:token { pattern = '(auch )?mit .+pronomen' }
+			| xsd:token { pattern = '(auch )?mit anderen Zahlwörtern' }
 		)
 	} *
 	, element Einschraenkung {
