@@ -119,7 +119,9 @@
   [article elements]
   (let [loc          (zip/xml-zip article)
         forms        (zx/xml-> loc ::dwds/Formangabe)
-        reprs        (for [f forms] (zx/xml1-> f ::dwds/Schreibung))
+        reprs        (for [form forms
+                           repr (zx/xml-> form ::dwds/Schreibung)]
+                       repr)
         [main-form]  (or (filter (zx/attr= :Typ "Hauptform") forms) forms)
         main-grammar (zx/xml1-> main-form ::dwds/Grammatik)
         element-idx  (group-by :tag elements)]
@@ -202,8 +204,9 @@
   (profile
    {}
    (->>
-    (article-files "../zdl-wb")
+    (article-files "../zdl-wb/Neuartikel-001")
     (pmap extract-articles)
     (flatten)
-    #_(take 100)
-    (last))))
+    (map :forms)
+    (filter #(some #{"3-D"} %))
+    #_(take 10))))
