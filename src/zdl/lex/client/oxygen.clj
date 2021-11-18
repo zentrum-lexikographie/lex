@@ -326,7 +326,7 @@
            (doto viewInfo
               (.setTitle "ZDL/DWDS – Suchergebnisse")
               (.setIcon client.icon/gmd-result)
-              (.setComponent client.results/tabbed-pane))
+              (.setComponent client.results/pane))
 
            (views :issue)
            (doto viewInfo

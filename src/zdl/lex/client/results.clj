@@ -147,7 +147,7 @@
   (when-let [selection (ui/selection pane)]
     (ui/user-data (first (ui/select (get selection :content) [:.result])))))
 
-(def tabbed-pane
+(def pane
   (let [pane (doto (JideTabbedPane. JTabbedPane/BOTTOM)
                (.setShowCloseButtonOnTab true))]
     (ui/listen pane #{:selection :component-shown}
@@ -157,13 +157,13 @@
     pane))
 
 (defn select-result-tabs []
-  (ui/select tabbed-pane [:.result]))
+  (ui/select pane [:.result]))
 
 (defn count-result-tabs []
   (count (select-result-tabs)))
 
 (defn get-result-tab-index [tab]
-  (.indexOfComponent tabbed-pane tab))
+  (.indexOfComponent pane tab))
 
 (defn result= [a b]
   (= (:query a) (:query b)))
@@ -179,15 +179,15 @@
          insert-index (some->> old-tabs last (get-result-tab-index))
          new-tab      (render-result result)]
      (if insert-index
-       (.insertTab tabbed-pane title client.icon/gmd-result new-tab tip insert-index)
-       (.addTab tabbed-pane title client.icon/gmd-result new-tab tip))
+       (.insertTab pane title client.icon/gmd-result new-tab tip insert-index)
+       (.addTab pane title client.icon/gmd-result new-tab tip))
      (doseq [tab old-tabs]
-       (.remove tabbed-pane tab))
+       (.remove pane tab))
      (loop [tabs (count-result-tabs)]
        (when (> tabs 10)
-         (.removeTabAt tabbed-pane 0)
+         (.removeTabAt pane 0)
          (recur (count-result-tabs))))
-     (ui/selection! tabbed-pane new-tab)
+     (ui/selection! pane new-tab)
      (bus/publish! #{:show-view} {:view :results}))))
 
 (defn search
