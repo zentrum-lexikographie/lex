@@ -494,6 +494,7 @@ Schreibung = element Schreibung {
 	Metadaten.allgemein ?
 	, Rechtschreibstatus ?
 	, attribute Trennung { list { Lemmatoken + } } ?
+	, attribute CAB-Lemma { xsd:token } ? # TODO: obligatory
 	, Homographenziffer ?
 	, Lemmatoken
 }
