@@ -22,7 +22,7 @@ Artikel[Status="Red-f"]          { background-color: #aeecff; }
 
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
-Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift,
+Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
 Kollokationen, Konstruktionsmuster, Kommentar {
 	border: 1px dotted black;
 	margin-bottom: 0.4em;
@@ -60,6 +60,7 @@ Verwendungsbeispiele:before   { content: "Verwendungsbeispiele"; }
 Beleg:before                  { content: "Beleg"; }
 Kompetenzbeispiel:before      { content: "Kompetenzbeispiel"; }
 Illustration:before           { content: "Illustration"; }
+Rohdaten:before               { content: "NLP-Rohdaten"; }
 
 /* Einzelfelder, die als vertikale Liste dargestellt werden */
 
@@ -80,7 +81,7 @@ Formangabe:before, Grammatik:before, Illustration:before,
 Diachronie:before, Verweise:before, Diasystematik:before,
 Syntagmatik:before, Syntagmatik > *:before, Ueberschrift:before,
 Verwendungsbeispiele:before, Verwendungsbeispiele > *:before,
-Kollokationen:before, Kollokationen > *:before,
+Kollokationen:before, Kollokationen > *:before, Rohdaten:before,
 Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before {
 	color: white;
 	background-color: gray;
@@ -162,6 +163,10 @@ Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "ext. Etym.artikel
  * Normalerweise sollte hier sehr selten etwas ergänzt werden müssen.
  ********************************************************************/
 
+Rohdaten {
+	border-color: #f00;
+	border-width: 2px;
+}
 
 /* Lesartennummerierung.
    Achtung: so implementiert funktioniert das nur auf 3 Ebenen */

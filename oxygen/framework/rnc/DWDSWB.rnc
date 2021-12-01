@@ -34,5 +34,6 @@ start = element DWDS {
 		, morphologische_Verweise + # getrennte morph. Analysen
 		, Diachronie
 		, Lesartangabe +
+		, Rohdaten ? # TODO: obligatorisch machen
 	} +
 }

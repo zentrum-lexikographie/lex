@@ -52,11 +52,7 @@ Lesartangabe = element Lesart {
 		Metadaten.allgemein ?
 		, Kollokation *
 	}
-	, element Verwendungsbeispiele {
-		Metadaten.allgemein ?
-		& Beleg *
-		& Kompetenzbeispiel *
-	}
+	, Verwendungsbeispiele
 	, Lesartangabe *
 }
 
@@ -79,6 +75,13 @@ Lesartangabe = element Lesart {
     ]
   ]
 ]
+
+Verwendungsbeispiele = element Verwendungsbeispiele {
+	Metadaten.allgemein ?
+	& Beleg *
+	& Kompetenzbeispiel *
+}
+
 Belegtext = element Belegtext {
 	text
 	& Paraphrase *
@@ -527,3 +530,11 @@ Diasystematik = element Diasystematik {
 	& Fachgebiet *
 }
 
+########################################
+# NLP-Rohdaten #########################
+########################################
+
+Rohdaten = element Rohdaten {
+	Verwendungsbeispiele
+	# eventuell später weiteres Material
+}
