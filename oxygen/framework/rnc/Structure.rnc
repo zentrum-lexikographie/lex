@@ -142,6 +142,7 @@ Kompetenzbeispiel = element Kompetenzbeispiel {
 
 Kollokation = element Kollokation {
 	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
 	, attribute syntaktische_Relation { syntaktische_Relationen }
 	, attribute semantische_Relation { token } ?
 	, Belegtext
