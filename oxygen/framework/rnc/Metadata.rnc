@@ -136,6 +136,7 @@ Metadaten.Artikel = (
 	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ?
 	, attribute Erstellungsdatum { xsd:date }
 	, attribute Empfehlung { 'ja' } ?
+	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
 	, attribute Tranche {
 	    '45k-001'
 	    | '45k-002'
@@ -192,7 +193,7 @@ Metadaten.Artikel = (
 	    | 'WDG-Überarbeitung'
 	    | 'Wahrig/DWDS'
 	    | 'Wahrig/ZDL'
-	} ? # TODO: mandatory?
+	} ?
 )
 
 Metadaten.Lesarten-ID = xsd:ID # { pattern = 'S_[a-z]_\d+(_\d+)?' } # (relaxed)
