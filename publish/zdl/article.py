@@ -188,7 +188,7 @@ def add_comment(element, comment, author, timestamp=None):
         raise NotImplementedError
 
 
-_invisible_els = xpath('.//*[@class="invisible"]')
+_invisible_els = xpath('.//*[contains(@class, "invisible")]')
 _orig_text_attrs = xpath('.//*[@Originaltext]')
 
 
