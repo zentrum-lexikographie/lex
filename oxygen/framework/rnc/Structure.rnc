@@ -219,10 +219,10 @@ morphologische_Verweise = element Verweise {
 	    | 'Komposition'
 	    | 'Konversion'
 	    | 'Kurzwortbildung'
-	    | 'lexikalisierte_Flexionsform'
-	    | 'neoklassische_Bildung'
 	    | 'Rückbildung'
 	    | 'Zusammenrückung'
+	    | 'lexikalisierte_Flexionsform'
+	    | 'neoklassische_Bildung'
 	} ? # TODO: obligatory
 	, ( 
 		element Verweis {
@@ -234,6 +234,7 @@ morphologische_Verweise = element Verweise {
 				| 'Letztglied'
 				| 'formal_verwandt'
 				| 'MWA-Konstituente'
+	    			| 'MWA-Zentralartikel'
 			}
 			, attribute class { 'invisible' } ?
 	    		, Verweisziel
@@ -268,7 +269,6 @@ morphologische_Verweise = element Verweise {
 semantischer_Verweis = element Verweis {
 	attribute Typ {
 		'MWA' # Verweis aus Einzelwortartikeln auf Mehrwortartikel
-		| 'MWA-Zentralartikel'
 		| 'Entsprechung' # semantische Äquivalenz bei gleichzeitigem Wechsel der Wortklasse
 		| 'Antonym'
 		| 'Synonym'
