@@ -393,7 +393,15 @@ Illustration = element Illustration {
 # Lemmaform und Flexionsparadigma ######
 ########################################
 
-Rechtschreibstatus = attribute Typ { 'AR_G' | 'NR_G' | 'U' | 'U_CH' | 'U_AT' | 'U_U' | 'U_NR' }
+Rechtschreibstatus = attribute Typ {
+	'AR_G'   # deprecated
+	| 'NR_G' # deprecated
+	| 'U'
+	| 'U_CH'
+	| 'U_AT'
+	| 'U_U'  # deprecated, use U_Falschschreibung
+	| 'U_NR' # deprecated
+}
 
 [
   sch:pattern [
