@@ -187,6 +187,7 @@ Metadaten.Artikel = (
 	    | 'Regio'
 	    | 'Religion'
 	    | 'Spiel'
+	    | 'Trendwörter'
 	    | 'TV'
 	    | 'Verben'
 	    | 'Verkehr'
