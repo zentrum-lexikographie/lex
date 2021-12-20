@@ -1,63 +1,12 @@
 (ns zdl.lex.server.solr.fields
-  (:require [clojure.string :as str]))
-
-(defn field-name->key
-  "Translates a Solr field name into a keyword.
-
-   Strips datatype-specific suffixes and replaces underscores."
-  [n]
-  (if (= n "_text_") :text
-      (-> n
-          (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
-          (str/replace "_" "-")
-          keyword)))
-
-(defn- field-name-suffix
-  "Suffix for a given field (keyword), expressing its datatype."
-  [k]
-  (condp = k
-    :id                  ""
-    :language            ""
-    :doc-type            ""
-    :xml-descendent-path ""
-    :weight              "_i"
-    :time                "_l"
-    :definitions         "_t"
-    :last-modified       "_dt"
-    :timestamp           "_dt"
-    :author              "_s"
-    :editor              "_s"
-    :form                "_s"
-    :source              "_s"
-    :type                "_s"
-    :provenance          "_s"
-    :last-updated        "_s"
-    :summary             "_s"
-    :category            "_s"
-    :status              "_s"
-    :severity            "_s"
-    :reporter            "_s"
-    :handler             "_s"
-    :resolution          "_s"
-    :attachments         "_i"
-    :notes               "_i"
-    "_ss"))
-
-(defn field-key->name
-  "Translates a keyword into a Solr field name."
-  [k]
-  (condp = k
-    :text "_text_"
-    (let [field-name   (str/replace (name k) "-" "_")
-          field-suffix (field-name-suffix k)]
-      (str field-name field-suffix))))
+  (:require [clojure.string :as str]
+            [zdl.lex.lucene :as lucene]))
 
 (def article-abstract-fields
   "Solr fields which comprise the document abstract/summary."
   [:id :type :status :provenance
    :last-modified :timestamp
-   :author :authors :editors :editor
-   :sources :source
+   :author :editor :source
    :form :forms :pos :definitions
    :errors])
 
@@ -123,7 +72,7 @@
          :when  (some? vs)
          v      (if (coll? vs) (sort vs) [vs])
          :when  (some? v)]
-     [:field {:name (field-key->name k)} v])])
+     [:field {:name (lucene/field-key->name k)} v])])
 
 (def article->doc
   (comp fields->doc article->fields))
@@ -134,4 +83,3 @@
 (defn doc->abstract
   [{:keys [abstract_ss]}]
   (read-string (first abstract_ss)))
-

@@ -2,8 +2,8 @@
   (:require [mount.core :as mount]
             [seesaw.core :as ui]
             [zdl.lex.client.io :refer [lexurl-handler]]
-            [zdl.lex.client.graph :as client.graph]
             [zdl.lex.client.issue :as client.issue]
+            [zdl.lex.client.links :as client.links]
             [zdl.lex.client.oxygen :as client.oxygen]
             [zdl.lex.client.results :as client.results]
             [zdl.lex.client.toolbar :as client.toolbar]
@@ -24,7 +24,11 @@
   (ui/invoke-later
    (ui/show!
     (ui/pack!
-     (let [sidebar    client.issue/panel
+     (let [sidebar    (ui/splitter :top-bottom
+                                   client.links/pane
+                                   client.issue/panel
+                                   :divider-location 0.6
+                                   :resize-weight 0.6)
            main-panel (ui/splitter :left-right
                                    client.results/pane
                                    sidebar

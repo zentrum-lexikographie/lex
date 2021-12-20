@@ -1,7 +1,6 @@
 (ns zdl.lex.lucene
   "Handling of Apache Lucene (Solr) Standard Query syntax"
-  (:require [camel-snake-kebab.core :as csk]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [instaparse.core :as insta :refer [defparser]]))
 
@@ -40,42 +39,56 @@
 
 ;; ## App-specifics
 
-(def field-types
-  {:id ""
-   :language ""
-   :xml-descendent-path ""
-   :weight "i"
-   :time "l"
-   :definitions "t"
-   :last-modified "dt"
-   :timestamp "dt"
-   :author "s"
-   :editor "s"
-   :form "s"
-   :source "s"})
+(defn field-name->key
+  "Translates a Solr field name into a keyword.
 
-(def field-suffix-pattern
-  "Match field suffixes denoting its data type"
-  (re-pattern
-   (str "_("
-        (->> field-types vals (remove #{""})
-             (into (sorted-set "ss"))
-             (str/join "|"))
-        ")$")))
-
-(defn field->kw
+   Strips datatype-specific suffixes and replaces underscores."
   [n]
-  (condp = n
-    "_text_" :text
-    (-> n (str/replace field-suffix-pattern "") (csk/->kebab-case) keyword)))
+  (if (= n "_text_") :text
+      (-> n
+          (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
+          (str/replace "_" "-")
+          keyword)))
 
-(defn kw->field
+(defn- field-name-suffix
+  "Suffix for a given field (keyword), expressing its datatype."
+  [k]
+  (condp = k
+    :id                  ""
+    :language            ""
+    :doc-type            ""
+    :xml-descendent-path ""
+    :weight              "_i"
+    :time                "_l"
+    :definitions         "_t"
+    :last-modified       "_dt"
+    :timestamp           "_dt"
+    :author              "_s"
+    :editor              "_s"
+    :form                "_s"
+    :source              "_s"
+    :type                "_s"
+    :provenance          "_s"
+    :last-updated        "_s"
+    :summary             "_s"
+    :category            "_s"
+    :status              "_s"
+    :severity            "_s"
+    :reporter            "_s"
+    :handler             "_s"
+    :resolution          "_s"
+    :attachments         "_i"
+    :notes               "_i"
+    "_ss"))
+
+(defn field-key->name
+  "Translates a keyword into a Solr field name."
   [k]
   (condp = k
     :text "_text_"
-    (->> [(->> k name csk/->snake_case) (get field-types k "ss")]
-         (remove #{""})
-         (str/join "_"))))
+    (let [field-name   (str/replace (name k) "-" "_")
+          field-suffix (field-name-suffix k)]
+      (str field-name field-suffix))))
 
 (def field-aliases
   "Aliasing of index field names, mostly translations."
@@ -98,7 +111,7 @@
   "Applies field aliases and data type suffixes during AST transformation."
   [[type v :as node]]
   [:field (if (= type :term)
-            [:term (-> (get field-aliases v v) field->kw kw->field)]
+            [:term (-> (get field-aliases v v) field-name->key field-key->name)]
             node)])
 
 (defn expand-date-literals

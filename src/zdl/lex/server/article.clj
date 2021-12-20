@@ -12,23 +12,15 @@
 (def dir
   (data/dir "git"))
 
-(defn describe-article-file
-  [f]
-  (article/describe-article-file dir f))
-
-(defn file->articles
-  [article-file]
-  (article/extract-articles (describe-article-file article-file)))
-
 (defn update!
   [article-files]
-  (let [articles (vec (flatten (pmap file->articles article-files)))]
+  (let [articles (vec (article/extract-articles-from-files dir article-files))]
     (log/debugf "Updating %d article(s)" (count articles))
     (solr.client/add! (map solr.fields/article->doc articles))))
 
 (defn remove!
   [article-files]
-  (let [article-files (map describe-article-file article-files)
+  (let [article-files (map #(article/file->metadata dir %) article-files)
         article-ids   (vec (map :id article-files))]
     (log/debugf "Removing %d article(s)" (count article-ids))
     (solr.client/remove! article-ids)))

@@ -22,15 +22,13 @@
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as server.git]
-            [zdl.lex.server.graph :as graph]
-            [zdl.lex.server.graph.mantis :as graph.mantis]
+            [zdl.lex.server.issue :as server.issue]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr.export :as solr.export]
             [zdl.lex.server.solr.query :as solr.query]
             [zdl.lex.server.solr.links :as solr.links]
-            [zdl.lex.server.solr.suggest :as solr.suggest]
-            [zdl.lex.server.issue :as server.issue])
+            [zdl.lex.server.solr.suggest :as solr.suggest])
   (:import org.eclipse.jetty.server.Server))
 
 (def homepage
@@ -134,9 +132,6 @@
                                    (log/warn t)
                                    {:status 400 :body ref}))))
               ::auth/roles #{:admin}}}]
-     ["/graph/*resource"
-      {:handler graph/handle-graph-query
-       :parameters {:path [:map [:resource :string]]}}]
      ["/home"
       (constantly
        {:status                200

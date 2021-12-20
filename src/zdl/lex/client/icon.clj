@@ -21,6 +21,9 @@
 (def gmd-refresh (icon GoogleMaterialDesignIcons/REFRESH))
 (def gmd-result (icon GoogleMaterialDesignIcons/LIST))
 (def gmd-web (icon GoogleMaterialDesignIcons/WEB))
+(def gmd-link-incoming (icon GoogleMaterialDesignIcons/ARROW_BACK))
+(def gmd-link-outgoing (icon GoogleMaterialDesignIcons/ARROW_FORWARD))
+(def gmd-link-bidi (icon GoogleMaterialDesignIcons/COMPARE_ARROWS))
 
 (def logo (ui/label :icon "zdl.png" :border 6 :size [32 :by 32]))
 

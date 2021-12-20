@@ -1,20 +1,19 @@
 (ns zdl.lex.client.issue
-  (:require [clojure.data.xml :as dx]
-            [clojure.data.zip.xml :as zx]
-            [clojure.tools.logging :as log]
-            [clojure.zip :as zip]
-            [lambdaisland.uri :as uri]
-            [mount.core :refer [defstate]]
-            [seesaw.bind :as uib]
-            [seesaw.border :refer [empty-border line-border]]
-            [seesaw.core :as ui]
-            [seesaw.mig :as mig]
-            [zdl.lex.article :as article]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.client.font :as client.font]
-            [zdl.lex.client.http :as client.http]
-            [zdl.lex.client.icon :as client.icon])
-  (:import java.net.URL))
+  (:require
+   [clojure.tools.logging :as log]
+   [lambdaisland.uri :as uri]
+   [mount.core :refer [defstate]]
+   [seesaw.bind :as uib]
+   [seesaw.border :refer [empty-border line-border]]
+   [seesaw.core :as ui]
+   [seesaw.mig :as mig]
+   [zdl.lex.article :as article]
+   [zdl.lex.bus :as bus]
+   [zdl.lex.client.font :as client.font]
+   [zdl.lex.client.http :as client.http]
+   [zdl.lex.client.icon :as client.icon])
+  (:import
+   (java.net URL)))
 
 (def issue-cache
   (atom {}))
@@ -22,12 +21,10 @@
 (def current-issues
   (atom []))
 
-(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
-
 (defn get-issues
   [url doc]
-  (when-let [loc (zx/xml1-> (zip/xml-zip doc) ::dwds/Artikel)]
-    (when-let [forms (get (article/extract-grammar-data loc) :forms)]
+  (when-let [articles (article/extract-articles doc :errors? false)]
+    (when-let [forms (seq (mapcat :forms articles))]
       (try
         (let [req {:url          "mantis"
                    :query-params {:q forms}}

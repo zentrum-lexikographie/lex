@@ -9,17 +9,19 @@
     class="de.zdl.oxygen.Plugin"
     classLoaderType="preferReferencedResources">
 
- <runtime>
-   <library name="lib/org.zdl.lex.client.jar"/>
- </runtime>
+    <runtime>
+        <library name="lib/org.zdl.lex.client.jar"/>
+    </runtime>
 
- <extension type="WorkspaceAccess" class="de.zdl.oxygen.Extension"/>
+    <extension type="WorkspaceAccess" class="de.zdl.oxygen.Extension"/>
 
- <extension type="URLHandler" class="de.zdl.oxygen.URLHandler"/>
+    <extension type="URLHandler" class="de.zdl.oxygen.URLHandler"/>
 
- <toolbar id="zdl-lex-client-toolbar" initialSide="SOUTH" initialRow="1"/>
+    <toolbar id="zdl-lex-client-toolbar" initialSide="SOUTH" initialRow="1"/>
 
- <view id="zdl-lex-results-view" initialSide="SOUTH" initialRow="0"/>
+    <view id="zdl-lex-results-view" initialSide="SOUTH" initialRow="0"/>
 
- <view id="zdl-lex-issue-view" initialSide="EAST" initialRow="0"/>
+    <view id="zdl-lex-issue-view" initialSide="EAST" initialRow="0"/>
+
+    <view id="zdl-lex-links-view" initialSide="WEST" initialRow="0"/>
 </plugin>

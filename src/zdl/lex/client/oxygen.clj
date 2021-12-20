@@ -23,7 +23,7 @@
             [zdl.lex.url :as lexurl]
             [clojure.core.async :as a]
             [zdl.lex.client.search :as client.search]
-            [zdl.lex.client.graph :as client.graph])
+            [zdl.lex.client.links :as client.links])
   (:import java.net.URL
            javax.swing.JComponent
            [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
@@ -85,7 +85,8 @@
 (def views
   {:results "zdl-lex-results-view"
    :toolbar "zdl-lex-client-toolbar"
-   :issue   "zdl-lex-issue-view"})
+   :issue   "zdl-lex-issue-view"
+   :links   "zdl-lex-links-view"})
 
 (def preview-url
   (uri/uri "http://zwei.dwds.de/wb/existdb/"))
@@ -263,9 +264,10 @@
         (when (lexurl/lex? url)
           (bus/publish! #{:editor-closed} {:url url}))))
     (editorActivated [url]
-      (let [url (uri/uri url)]
-        (when (lexurl/lex? url)
-          (bus/publish! #{:editor-activated} {:url url}))))
+      (let [url' (uri/uri url)]
+        (when (lexurl/lex? url')
+          (when-let [doc (xml-document workspace url)]
+            (bus/publish! #{:editor-content-changed} {:url url' :doc doc})))))
     (editorSelected [_])
     (editorDeactivated [url]
       (let [url (uri/uri url)]
@@ -337,9 +339,10 @@
     #'client.results/search-requests->results
     #'client.toolbar/status-label-text
     #'client.toolbar/validation-action-states
-    #_'client.graph/graph-update
     #'client.issue/issue-update
     #'client.issue/issue-renderer
+    #'client.links/link-update
+    #'client.links/link-renderer
     #'repl-server
     #'remove-chrome-profile
     #'workspace
@@ -374,6 +377,12 @@
              (.setTitle "ZDL/DWDS – Mantis-Tickets")
              (.setIcon client.icon/gmd-bug-report)
              (.setComponent client.issue/panel))
+
+           (views :links)
+           (doto viewInfo
+             (.setTitle "ZDL/DWDS – Verweise")
+             (.setIcon client.icon/gmd-link-bidi)
+             (.setComponent client.links/pane))
 
            viewInfo))))
   (.addToolbarComponentsCustomizer

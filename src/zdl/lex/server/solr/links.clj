@@ -29,7 +29,7 @@
           [:or]
           (cond-> []
             anchors (conj (set->field-query "anchors_ss" anchors))
-            links   (conj (set->field-query "links_ss"links))))))))
+            links   (conj (set->field-query "links_ss" links))))))))
 
 (defn request->query
   [{{:keys [query]} :parameters}]

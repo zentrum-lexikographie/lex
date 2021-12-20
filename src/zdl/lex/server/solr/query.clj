@@ -62,7 +62,7 @@
 
 (defn- facet-values
   [[k v]]
-  [(lucene/field->kw (name k))
+  [(lucene/field-name->key (name k))
    (into (sorted-map) (map vec (partition 2 v)))])
 
 (defn parse-facet-response
@@ -73,7 +73,7 @@
     (for [kv facet_fields]
       (facet-values kv))
     (for [[k v] facet_intervals]
-      [(lucene/field->kw (name k))
+      [(lucene/field-name->key (name k))
        (into (sorted-map) (for [[k v] v] [(name k) v]))])
     (for [[k v] facet_ranges]
       (facet-values [k (v :counts)])))))

@@ -5,9 +5,8 @@
             [zdl.lex.fs :refer [path]]
             [zdl.lex.server.article :as server.article]
             [zdl.lex.server.git :as server.git]
-            [zdl.lex.server.graph.db :as server.graph.db]
-            [zdl.lex.server.graph.mantis :as server.graph.mantis]
             [zdl.lex.server.http :as server.http]
+            [zdl.lex.server.issue :as server.issue]
             [zdl.lex.server.lock :as server.lock]
             [zdl.lex.server.metrics :as server.metrics]
             [zdl.lex.server.solr.suggest :as server.solr.suggest]
@@ -20,9 +19,8 @@
     #'server.git/repo
     #'server.git/scheduled-commit
     #'server.git/scheduled-gc
-    #'server.graph.db/pool
-    #'server.graph.mantis/scheduled-update
     #'server.http/server
+    #'server.issue/scheduled-sync
     #'server.lock/db
     #'server.lock/cleanup
     #'server.metrics/reporter

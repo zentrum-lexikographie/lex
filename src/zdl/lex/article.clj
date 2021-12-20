@@ -32,7 +32,12 @@
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 
 (def collator
-  (Collator/getInstance Locale/GERMAN))
+  (doto (Collator/getInstance Locale/GERMAN)
+    (.setStrength Collator/PRIMARY)))
+
+(defn collation-key
+  [s]
+  (.getCollationKey collator s))
 
 (defn clean-val
   [v]
@@ -162,41 +167,50 @@
 
 (defnp extract-articles
   "Extracts articles and their key data from an XML file."
-  [{:keys [file] :as article-file} & opts]
+  [doc & opts]
   (try
-    (let [lex-data? (get opts :lex-data? true)
+    (let [file      (get opts :file)
+          lex-data? (get opts :lex-data? true)
           errors?   (get opts :errors? true)
-          doc       (axml/read-xml file)
           articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
       (vec
        (for [article articles]
          (let [elements (filter :tag (tree-seq :tag :content article))]
-           (cond-> article-file
-             :always   (merge (extract-metadata article elements))
-             lex-data? (merge (extract-lex-data article elements))
-             errors?   (merge (check-for-errors article file))
-             :always   (clean-map))))))
+           (cond-> {}
+             :always            (merge (extract-metadata article elements))
+             lex-data?          (merge (extract-lex-data article elements))
+             (and file errors?) (merge (check-for-errors article file))
+             :always            (clean-map))))))
     (catch Throwable t
-      (log/warnf t "Error extracting data from %s" file)
-      [article-file])))
+      (log/warnf t "Error extracting data from %s" (or file "<XML/>")))))
 
-(defn describe-article-file
+(defn file->metadata
   [dir f]
   {:id (str (relativize dir f)) :file f})
 
-(defnp article-files
+(defn extract-articles-from-file
+  [dir f]
+  (let [file-data (file->metadata dir f)]
+    (into []
+          (map #(merge file-data %))
+          (extract-articles (axml/read-xml f) :file f))))
+
+(defnp extract-articles-from-files
   "Extracts articles and their key data from XML files in a dir."
-  [dir]
-  (map #(describe-article-file dir %) (article/files dir)))
+  ([dir]
+   (extract-articles-from-files dir (article/files dir)))
+  ([dir files]
+   (flatten (pmap #(extract-articles-from-file dir %) files))))
 
 (defn status->color
   [status]
   (condp = (str/trim status)
-    "Artikelrumpf"   "#ffcccc"
-    "Lex-zur_Abgabe" "#ffff00"
-    "Red-0"          "#ffec8b"
-    "Red-1"          "#ffec8b"
-    "Red-f"          "#aeecff"
+    "Artikelrumpf"    "#ffcccc"
+    "Lex-zur_Abgabe"  "#ffff00"
+    "Red-0"           "#ffec8b"
+    "Red-1"           "#ffec8b"
+    "Red-f"           "#aeecff"
+    "wird_gestrichen" "#cccccc"
     "#ffffff"))
 
 (comment
@@ -205,8 +219,6 @@
    {}
    (->>
     (article-files "../zdl-wb")
-    (pmap extract-articles)
-    (flatten)
     (map #(select-keys % [:author :last-modified]))
     (filter :author)
     (filter #(> 0 (compare "2020" (:last-modified %))))
