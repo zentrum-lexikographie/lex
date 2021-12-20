@@ -6,6 +6,9 @@
   (:import java.util.concurrent.Future
            java.util.concurrent.TimeUnit))
 
+(def request
+  http/request)
+
 (defn async-request
   ([req]
    (async-request req (a/chan 1) (a/chan 1)))
@@ -16,7 +19,7 @@
          complete!  (partial a/>!! result-ch)
          error!     (partial a/>!! error-ch)]
      (try
-       (let [^Future f (http/request req complete! error!)]
+       (let [^Future f (request req complete! error!)]
          (when cancel-ch
            (a/go (when (a/<! cancel-ch) (. f (cancel true))))))
        (catch Throwable t (error! t)))
@@ -24,11 +27,7 @@
 
 (defn read-json
   [response]
-  (update response :body #(json/read-value % json/keyword-keys-object-mapper)))
-
-(defn read-edn
-  [response]
-  (update response :body #(read-string (String. % "UTF-8"))))
+  (update response :body json/read-value json/keyword-keys-object-mapper))
 
 (defn sync-response
   [[result-ch error-ch]]

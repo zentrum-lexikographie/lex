@@ -66,6 +66,14 @@
         av (update-in [ak tag] (fnil conj []) av)))
     {})))
 
+(defnp last-modified->weight
+  [last-modified]
+  (or
+   (try
+     (some-> last-modified ts/parse ts/days-since-epoch)
+     (catch Throwable t (log/warn t)))
+   0))
+
 (defnp extract-metadata
   [article elements]
   (let [article-attrs (get article :attrs)
@@ -85,7 +93,8 @@
      :editors       (get metadata :Redakteur)
      :sources       (get metadata :Quelle)
      :timestamps    timestamps
-     :last-modified last-modified}))
+     :last-modified last-modified
+     :weight        (last-modified->weight last-modified)}))
 
 (defnp senses
   [loc]
@@ -115,28 +124,33 @@
   [elements tag]
   (some->> elements tag (map zip/xml-zip) (axml/zip-texts)))
 
-(defnp extract-lex-data
-  [article elements]
-  (let [loc          (zip/xml-zip article)
-        forms        (zx/xml-> loc ::dwds/Formangabe)
+(defn extract-grammar-data
+  [loc]
+  (let [forms        (zx/xml-> loc ::dwds/Formangabe)
         reprs        (for [form forms
                            repr (zx/xml-> form ::dwds/Schreibung)]
                        repr)
-        [main-form]  (or (filter (zx/attr= :Typ "Hauptform") forms) forms)
-        main-grammar (zx/xml1-> main-form ::dwds/Grammatik)
+        [main-form]  (or (seq (filter (zx/attr= :Typ "Hauptform") forms)) forms)
+        main-grammar (zx/xml1-> main-form ::dwds/Grammatik)]
+    {:form    (zx/xml1-> main-form ::dwds/Schreibung axml/zip-text)
+     :pos     (zx/xml1-> main-grammar ::dwds/Wortklasse axml/zip-text)
+     :gender  (zx/xml1-> main-grammar ::dwds/Genus axml/zip-text)
+     :forms   (axml/zip-texts reprs)
+     :anchors (axml/zip-hids reprs)}))
+
+(defnp extract-lex-data
+  [article elements]
+  (let [loc          (zip/xml-zip article)
         element-idx  (group-by :tag elements)]
-    {:form         (zx/xml1-> main-form ::dwds/Schreibung axml/zip-text)
-     :pos          (zx/xml1-> main-grammar ::dwds/Wortklasse axml/zip-text)
-     :gender       (zx/xml1-> main-grammar ::dwds/Genus axml/zip-text)
-     :forms        (axml/zip-texts reprs)
-     :senses       (senses loc)
-     :definitions  (texts-of-elements element-idx ::dwds/Definition)
-     :usage-period (texts-of-elements element-idx ::dwds/Gebrauchszeitraum)
-     :styles       (texts-of-elements element-idx ::dwds/Stilebene)
-     :colouring    (texts-of-elements element-idx ::dwds/Stilfaerbung)
-     :area         (texts-of-elements element-idx ::dwds/Sprachraum)
-     :links        (links element-idx)
-     :anchors      (axml/zip-hids reprs)}))
+    (merge
+     (extract-grammar-data loc)
+     {:senses       (senses loc)
+      :definitions  (texts-of-elements element-idx ::dwds/Definition)
+      :usage-period (texts-of-elements element-idx ::dwds/Gebrauchszeitraum)
+      :styles       (texts-of-elements element-idx ::dwds/Stilebene)
+      :colouring    (texts-of-elements element-idx ::dwds/Stilfaerbung)
+      :area         (texts-of-elements element-idx ::dwds/Sprachraum)
+      :links        (links element-idx)})))
 
 (defnp check-for-errors
   [article f]
@@ -145,19 +159,6 @@
      (seq (av/check-typography article)) (conj "Typographie")
      (seq (av/rng-validate f))           (conj "Schema")
      (seq (av/sch-validate f))           (conj "Schematron"))})
-
-(defnp assoc-weight
-  [{:keys [last-modified] :as article}]
-  (assoc
-   article :weight
-   (try
-     (or (some-> last-modified
-                 ts/parse
-                 ts/days-since-epoch)
-         0)
-     (catch Throwable t
-       (log/warn t)
-       0))))
 
 (defnp extract-articles
   "Extracts articles and their key data from an XML file."
@@ -174,7 +175,6 @@
              :always   (merge (extract-metadata article elements))
              lex-data? (merge (extract-lex-data article elements))
              errors?   (merge (check-for-errors article file))
-             :always   (assoc-weight)
              :always   (clean-map))))))
     (catch Throwable t
       (log/warnf t "Error extracting data from %s" file)
@@ -204,9 +204,11 @@
   (profile
    {}
    (->>
-    (article-files "../zdl-wb/Neuartikel-001")
+    (article-files "../zdl-wb")
     (pmap extract-articles)
     (flatten)
-    (map :forms)
-    (filter #(some #{"3-D"} %))
-    #_(take 10))))
+    (map #(select-keys % [:author :last-modified]))
+    (filter :author)
+    (filter #(> 0 (compare "2020" (:last-modified %))))
+    (map :author)
+    (frequencies))))

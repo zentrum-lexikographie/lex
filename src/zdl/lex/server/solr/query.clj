@@ -42,16 +42,17 @@
         offset (get query :offset 0)
         limit  (get query :limit 1000)]
     {"q"                  (lucene/translate q)
+     "fq"                 "doc_type:article"
      "start"              (str offset)
      "rows"               (str limit)
      "df"                 "forms_ss"
+     "fl"                 "abstract_ss"
      "sort"               "forms_ss asc,weight_i desc,id asc"
      "facet"              "true"
-     "facet.field"        ["author_s" "editors_ss"
-                           "sources_ss" "tranche_ss"
-                           "type_ss" "pos_ss" "status_ss"
-                           "provenance_ss"
-                           "errors_ss"]
+     "facet.field"        ["author_s" "editor_s"
+                           "source_s" "tranche_ss"
+                           "type_s" "status_s" "pos_ss"
+                           "provenance_s" "errors_ss"]
      "facet.limit"        "-1"
      "facet.mincount"     "1"
      "facet.interval"     "timestamp_dt"

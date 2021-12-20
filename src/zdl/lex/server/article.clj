@@ -1,10 +1,12 @@
 (ns zdl.lex.server.article
   (:require [clojure.core.async :as a]
             [clojure.tools.logging :as log]
+            [mount.core :refer [defstate]]
             [zdl.lex.article :as article]
             [zdl.lex.data :as data]
-            [zdl.lex.server.graph.article :as graph.article]
-            [zdl.lex.server.solr.article :as solr.article])
+            [zdl.lex.cron :as cron]
+            [zdl.lex.server.solr.client :as solr.client]
+            [zdl.lex.server.solr.fields :as solr.fields])
   (:import java.util.Date))
 
 (def dir
@@ -22,24 +24,14 @@
   [article-files]
   (let [articles (vec (flatten (pmap file->articles article-files)))]
     (log/debugf "Updating %d article(s)" (count articles))
-    (a/<!!
-     (a/into
-      []
-      (a/merge
-       [(solr.article/update! articles)
-        (a/thread (graph.article/update! articles))])))))
+    (solr.client/add! (map solr.fields/article->doc articles))))
 
 (defn remove!
   [article-files]
   (let [article-files (map describe-article-file article-files)
         article-ids   (vec (map :id article-files))]
     (log/debugf "Removing %d article(s)" (count article-ids))
-    (a/<!!
-     (a/into
-      []
-      (a/merge
-       [(solr.article/remove! article-ids)
-        (a/thread (graph.article/remove! article-ids))])))))
+    (solr.client/remove! article-ids)))
 
 (defn refresh!
   []
@@ -49,9 +41,8 @@
     (doseq [article-batch (partition-all 10000 article-files)]
       (update! article-batch))
     (log/debugf "Purging article(s) before %s" threshold)
-    (a/<!!
-     (a/into
-      []
-      (a/merge
-       [(solr.article/purge! threshold)
-        (a/thread (graph.article/purge! threshold))])))))
+    (solr.client/purge! "article" threshold)))
+
+(defstate scheduled-refresh
+  :start (cron/schedule "0 0 1 * * ?" "Refresh all articles" refresh!)
+  :stop (a/close! scheduled-refresh))

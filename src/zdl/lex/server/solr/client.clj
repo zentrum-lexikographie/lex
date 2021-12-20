@@ -2,7 +2,7 @@
   (:require [clojure.core.async :as a]
             [clojure.data.xml :as dx]
             [clojure.tools.logging :as log]
-            [lambdaisland.uri :as uri :refer [uri]]
+            [lambdaisland.uri :as uri]
             [metrics.timers :as timers]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.http :as http])
@@ -18,14 +18,16 @@
    (getenv "SOLR_URL" "http://localhost:8983/solr/")
    (str (getenv "SOLR_CORE" "articles") "/")))
 
-(defn request
-  "Solr client request fn with configurable base URL and authentication"
+(defn ->request
   [{:keys [url] :as req}]
-  (let [req              (cond-> req
-                           :always (assoc :url (str (uri/join base-url url)))
-                           :always (update :request-method #(or % :get))
-                           auth    (assoc :basic-auth auth))
-        [response error] (http/async-request req)]
+  (cond-> req
+    :always (assoc :url (str (uri/join base-url url)))
+    :always (update :request-method #(or % :get))
+    auth    (assoc :basic-auth auth)))
+
+(defn async-request
+  [req]
+  (let [[response error] (http/async-request req)]
     (a/go
       (let [[error? result] (a/alt! response ([v] [false v])
                                     error    ([v] [true v]))]
@@ -43,23 +45,51 @@
   (timers/timer ["solr" "client" "query-timer"]))
 
 (defn query
-  [params]
-  (a/go
-    (when-let [resp (a/<! (request {:url (uri/assoc-query* (uri "query") params)}))]
-      (http/update-timer! query-timer resp)
-      (http/read-json resp))))
+  [query-params]
+  (let [req (->request {:url "query" :query-params query-params})]
+    (a/go
+      (when-let [resp (a/<! (async-request req))]
+        (http/update-timer! query-timer resp)
+        (http/read-json resp)))))
 
 (def update-timer
   (timers/timer ["solr" "client" "update-timer"]))
 
 (defn update!
   [xml-node]
-  (a/go
-    (let [req {:request-method :post
-               :url            (uri "update")
-               :query-params   {:wt "json"}
-               :headers        {"Content-Type" "text/xml"}
-               :body           (dx/emit-str xml-node)}]
-      (when-let [resp (a/<! (request req))]
-        (http/update-timer! update-timer resp)
-        (http/read-json resp)))))
+  (->
+   {:request-method :post
+    :url            "update"
+    :query-params   {:wt "json"}
+    :headers        {"Content-Type" "text/xml"}
+    :body           (dx/emit-str xml-node)}
+   (->request)
+   (http/request)))
+
+(defn add!
+  [docs]
+  (update! (dx/sexp-as-element [:add (seq docs)])))
+
+(defn remove!
+  [ids]
+  (update! (dx/sexp-as-element [:delete (for [id ids] [:id id])])))
+
+(defn optimize!
+  []
+  (update! (dx/sexp-as-element [:update [:commit] [:optimize]])))
+
+(defn purge!
+  [doc-type threshold]
+  (update!
+   (dx/sexp-as-element
+    [:delete
+     [:query (format "doc_type:%s && time_l:[* TO %s}"
+                     doc-type (.getTime threshold))]])))
+
+(defn clear!
+  [doc-type]
+  (update!
+   (dx/sexp-as-element
+    [:delete
+     [:query (format "doc_type:%s" doc-type)]])))
+

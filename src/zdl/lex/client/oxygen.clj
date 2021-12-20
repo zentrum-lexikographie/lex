@@ -21,7 +21,9 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :as fs]
             [zdl.lex.url :as lexurl]
-            [clojure.core.async :as a])
+            [clojure.core.async :as a]
+            [zdl.lex.client.search :as client.search]
+            [zdl.lex.client.graph :as client.graph])
   (:import java.net.URL
            javax.swing.JComponent
            [ro.sync.exml.workspace.api.listeners WSEditorChangeListener WSEditorListener]
@@ -158,7 +160,9 @@
           (browse-url url)))
       (open-article [_ url]
         (reset! editor-url url)
-        (bus/publish! #{:editor-activated} {:url (uri/uri url)})
+        (let [message {:url (uri/uri url)}]
+          (bus/publish! #{:editor-opened} message)
+          (bus/publish! #{:editor-activated} message))
         true)
       (preview-article [this]
         (when-let [url @editor-url]
@@ -179,9 +183,11 @@
       (xml-document [_ url]
         (let [id       (lexurl/url->id (uri/uri url))
               request  {:url     (uri/join "article/" id)
-                        :headers {"Accept" "application/xml"}}
+                        :headers {"Accept" "application/xml"}
+                        :as      :stream}
               response (client.http/request request)]
-          (-> response :body axml/read-xml))))))
+          (with-open [body (get response :body)]
+            (axml/read-xml body)))))))
 
 (defstate workspace
   :start workspace-stub)
@@ -280,10 +286,22 @@
           (remove-editor-change-listener workspace editor-change-listener)
           (remove-all-editors)))
 
+;; # Editor content
+
+(defn on-editor-content-change-event
+  [_ {:keys [url] :as evt}]
+  (let [url (URL. (str url))]
+    (when-let [doc (xml-document workspace url)]
+      (bus/publish! #{:editor-content-changed} (assoc evt :doc doc)))))
+
+(defstate editor-content-changes
+  :start (bus/listen #{:editor-opened :editor-saved} on-editor-content-change-event)
+  :stop (editor-content-changes))
+
 ;; # Validation
 
 (defn on-validation-event
-  [manager topic {:keys [validate? url]}]
+  [manager topic {:keys [validate? url doc]}]
   (when (= topic :validate?)
     (client.validation/reset-results! manager)
     (when validate?
@@ -293,13 +311,12 @@
   (when (#{:editor-closed} topic)
     (client.validation/clear-results! manager url))
   (when @client.toolbar/validation-active?
-    (when (#{:editor-opened :editor-saved} topic)
+    (when (= topic :editor-content-changed)
       (let [url (URL. (str url))]
-        (when-let [doc (xml-document workspace url)]
-          (client.validation/add-results! manager url doc))))))
+        (client.validation/add-results! manager url doc)))))
 
 (def validation-events
-  #{:validate? :editor-opened :editor-saved :editor-closed})
+  #{:validate? :editor-content-changed :editor-closed})
 
 (defstate validation
   :start (when (instance? PluginWorkspace workspace)
@@ -309,12 +326,36 @@
   :stop (when validation
           (validation)))
 
+(defstate remove-chrome-profile
+  :start (-> (fs/file (preferences-dir workspace) "chrome-profile")
+             (fs/delete! true)))
+
+(def states
+  #{
+    #'client.search/input->
+    #'client.search/->input
+    #'client.results/search-requests->results
+    #'client.toolbar/status-label-text
+    #'client.toolbar/validation-action-states
+    #_'client.graph/graph-update
+    #'client.issue/issue-update
+    #'client.issue/issue-renderer
+    #'repl-server
+    #'remove-chrome-profile
+    #'workspace
+    #'workspace-events
+    #'editor-listeners
+    #'editor-content-changes
+    #'validation})
+
 ;; # Extension
 
 (defn -applicationStarted
   [_ ws]
   (try
-    (mount/start-with {#'workspace ws})
+    (-> (mount/only states)
+        (mount/swap {#'workspace ws})
+        (mount/start))
     (catch Throwable t
       (log/error t "Error starting app")))
   (.addViewComponentCustomizer
@@ -363,10 +404,100 @@
 
 (defn -applicationClosing
   [_]
-  (mount/stop)
+  (mount/stop (mount/only states))
   true)
 
-(defstate remove-chrome-profile
-  :start (-> (fs/file (preferences-dir workspace) "chrome-profile")
-             (fs/delete! true)))
 
+
+;; 18:23:03.754 [AWT-EventQueue-0] ERROR ro.sync.ui.application.action.q - Action enabled, even if editor does not support it.
+;; #error {
+;;  :cause "Cannot invoke \"Object.getClass()\" because \"target\" is null"
+;;  :via
+;;  [{:type clojure.lang.ExceptionInfo
+;;    :message "could not stop [#'zdl.lex.client.oxygen/editor-listeners] due to"
+;;    :data {}
+;;    :at [mount.core$down$fn__3440 invoke "core.cljc" 96]}
+;;   {:type java.lang.NullPointerException
+;;    :message "Cannot invoke \"Object.getClass()\" because \"target\" is null"
+;;    :at [clojure.lang.Reflector invokeInstanceMethod "Reflector.java" 97]}]
+;;  :trace
+;;  [[clojure.lang.Reflector invokeInstanceMethod "Reflector.java" 97]
+;;   [zdl.lex.client.oxygen$fn__23681 invokeStatic "oxygen.clj" 139]
+;;   [zdl.lex.client.oxygen$fn__23681 invoke "oxygen.clj" 93]
+;;   [zdl.lex.client.oxygen$fn__23538$G__23478__23547 invoke "oxygen.clj" 44]
+;;   [zdl.lex.client.oxygen$remove_all_editors invokeStatic "oxygen.clj" 278]
+;;   [zdl.lex.client.oxygen$remove_all_editors invoke "oxygen.clj" 275]
+;;   [zdl.lex.client.oxygen$fn__23818$fn__23819 invoke "oxygen.clj" 287]
+;;   [clojure.lang.AFn applyToHelper "AFn.java" 152]
+;;   [clojure.lang.AFn applyTo "AFn.java" 144]
+;;   [clojure.core$apply invokeStatic "core.clj" 667]
+;;   [clojure.core$apply invoke "core.clj" 662]
+;;   [seesaw.invoke$invoke_now_STAR_$invoker__5378 invoke "invoke.clj" 18]
+;;   [seesaw.invoke$invoke_now_STAR_ invokeStatic "invoke.clj" 20]
+;;   [seesaw.invoke$invoke_now_STAR_ doInvoke "invoke.clj" 16]
+;;   [clojure.lang.RestFn invoke "RestFn.java" 410]
+;;   [zdl.lex.client.oxygen$fn__23818 invokeStatic "oxygen.clj" 285]
+;;   [zdl.lex.client.oxygen$fn__23818 invoke "oxygen.clj" 281]
+;;   [mount.core$record_BANG_ invokeStatic "core.cljc" 74]
+;;   [mount.core$record_BANG_ invoke "core.cljc" 73]
+;;   [mount.core$down$fn__3440 invoke "core.cljc" 97]
+;;   [mount.core$down invokeStatic "core.cljc" 96]
+;;   [mount.core$down invoke "core.cljc" 86]
+;;   [mount.core$bring invokeStatic "core.cljc" 247]
+;;   [mount.core$bring invoke "core.cljc" 239]
+;;   [mount.core$stop invokeStatic "core.cljc" 300]
+;;   [mount.core$stop doInvoke "core.cljc" 291]
+;;   [clojure.lang.RestFn applyTo "RestFn.java" 137]
+;;   [clojure.core$apply invokeStatic "core.clj" 667]
+;;   [clojure.core$apply invoke "core.clj" 662]
+;;   [mount.core$stop invokeStatic "core.cljc" 295]
+;;   [mount.core$stop doInvoke "core.cljc" 291]
+;;   [clojure.lang.RestFn invoke "RestFn.java" 408]
+;;   [zdl.lex.client.oxygen$_applicationClosing invokeStatic "oxygen.clj" 407]
+;;   [zdl.lex.client.oxygen$_applicationClosing invoke "oxygen.clj" 405]
+;;   [de.zdl.oxygen.Extension applicationClosing nil -1]
+;;   [ro.sync.exml.z$2 applicationAboutToBeClosedOrHidden nil -1]
+;;   [ro.sync.exml.MainFrame ghu nil -1]
+;;   [ro.sync.exml.MainFrame mhu nil -1]
+;;   [ro.sync.exml.MainFrame qgu nil -1]
+;;   [ro.sync.exml.MainFrame xcf nil -1]
+;;   [ro.sync.exml.MainFrame handleQuit nil -1]
+;;   [ro.sync.exml.MainFrame$43 lbk nil -1]
+;;   [ro.sync.ui.application.action.r actionPerformed nil -1]
+;;   [javax.swing.AbstractButton fireActionPerformed "AbstractButton.java" 1972]
+;;   [javax.swing.AbstractButton$Handler actionPerformed "AbstractButton.java" 2313]
+;;   [javax.swing.DefaultButtonModel fireActionPerformed "DefaultButtonModel.java" 405]
+;;   [javax.swing.DefaultButtonModel setPressed "DefaultButtonModel.java" 262]
+;;   [javax.swing.AbstractButton doClick "AbstractButton.java" 374]
+;;   [javax.swing.plaf.basic.BasicMenuItemUI doClick "BasicMenuItemUI.java" 1028]
+;;   [javax.swing.plaf.basic.BasicMenuItemUI$Handler mouseReleased "BasicMenuItemUI.java" 1072]
+;;   [java.awt.Component processMouseEvent "Component.java" 6626]
+;;   [javax.swing.JComponent processMouseEvent "JComponent.java" 3389]
+;;   [java.awt.Component processEvent "Component.java" 6391]
+;;   [java.awt.Container processEvent "Container.java" 2266]
+;;   [java.awt.Component dispatchEventImpl "Component.java" 5001]
+;;   [java.awt.Container dispatchEventImpl "Container.java" 2324]
+;;   [java.awt.Component dispatchEvent "Component.java" 4833]
+;;   [java.awt.LightweightDispatcher retargetMouseEvent "Container.java" 4948]
+;;   [java.awt.LightweightDispatcher processMouseEvent "Container.java" 4575]
+;;   [java.awt.LightweightDispatcher dispatchEvent "Container.java" 4516]
+;;   [java.awt.Container dispatchEventImpl "Container.java" 2310]
+;;   [java.awt.Window dispatchEventImpl "Window.java" 2780]
+;;   [java.awt.Component dispatchEvent "Component.java" 4833]
+;;   [java.awt.EventQueue dispatchEventImpl "EventQueue.java" 773]
+;;   [java.awt.EventQueue$4 run "EventQueue.java" 722]
+;;   [java.awt.EventQueue$4 run "EventQueue.java" 716]
+;;   [java.security.AccessController doPrivileged "AccessController.java" 399]
+;;   [java.security.ProtectionDomain$JavaSecurityAccessImpl doIntersectionPrivilege "ProtectionDomain.java" 86]
+;;   [java.security.ProtectionDomain$JavaSecurityAccessImpl doIntersectionPrivilege "ProtectionDomain.java" 97]
+;;   [java.awt.EventQueue$5 run "EventQueue.java" 746]
+;;   [java.awt.EventQueue$5 run "EventQueue.java" 744]
+;;   [java.security.AccessController doPrivileged "AccessController.java" 399]
+;;   [java.security.ProtectionDomain$JavaSecurityAccessImpl doIntersectionPrivilege "ProtectionDomain.java" 86]
+;;   [java.awt.EventQueue dispatchEvent "EventQueue.java" 743]
+;;   [java.awt.EventDispatchThread pumpOneEventForFilters "EventDispatchThread.java" 203]
+;;   [java.awt.EventDispatchThread pumpEventsForFilter "EventDispatchThread.java" 124]
+;;   [java.awt.EventDispatchThread pumpEventsForHierarchy "EventDispatchThread.java" 113]
+;;   [java.awt.EventDispatchThread pumpEvents "EventDispatchThread.java" 109]
+;;   [java.awt.EventDispatchThread pumpEvents "EventDispatchThread.java" 101]
+;;   [java.awt.EventDispatchThread run "EventDispatchThread.java" 90]]}

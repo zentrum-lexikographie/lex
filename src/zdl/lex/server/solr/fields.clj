@@ -18,17 +18,29 @@
   (condp = k
     :id                  ""
     :language            ""
+    :doc-type            ""
     :xml-descendent-path ""
     :weight              "_i"
     :time                "_l"
     :definitions         "_t"
     :last-modified       "_dt"
     :timestamp           "_dt"
-    :timestamps          "_dts"
     :author              "_s"
     :editor              "_s"
     :form                "_s"
     :source              "_s"
+    :type                "_s"
+    :provenance          "_s"
+    :last-updated        "_s"
+    :summary             "_s"
+    :category            "_s"
+    :status              "_s"
+    :severity            "_s"
+    :reporter            "_s"
+    :handler             "_s"
+    :resolution          "_s"
+    :attachments         "_i"
+    :notes               "_i"
     "_ss"))
 
 (defn field-key->name
@@ -40,7 +52,7 @@
           field-suffix (field-name-suffix k)]
       (str field-name field-suffix))))
 
-(def abstract-fields
+(def article-abstract-fields
   "Solr fields which comprise the document abstract/summary."
   [:id :type :status :provenance
    :last-modified :timestamp
@@ -49,52 +61,75 @@
    :form :forms :pos :definitions
    :errors])
 
-(defn basic-field
-  "Mapping of basic Solr fields."
-  [[k v]]
-  (when-not (nil? v)
-    [(field-key->name k) (if (coll? v) (vec v) [(str v)])]))
+(def article-basic-fields
+  [:type :status :source
+   :author :editor
+   :timestamp :last-modified
+   :tranche :provenance
+   :form :forms :pos :gender
+   :definitions
+   :errors])
 
-(defn- attr-field
+(defn attr-fields
   "Mapping of Solr fields, differentiated by the type."
   [prefix suffix attrs]
-  (let [all-values (->> attrs vals (apply concat) (seq))]
-    (-> (for [[type values] attrs]
-          (let [type  (-> type name str/lower-case)
-                field (str prefix "_" type "_" suffix)]
-            [field values]))
-        (conj (when all-values [(str prefix "_" suffix) all-values])))))
+  (->>
+   (conj
+    (for [[type values] attrs]
+      (let [type (str/lower-case (name type))]
+        [(str prefix "_" type "_" suffix) values]))
+    [(str prefix "_" suffix) (seq (flatten (vals attrs)))])
+   (into {})))
 
 (defn article->fields
   "Returns Solr fields/values for a given article."
   [{:keys [id] :as article}]
-  (let [abstract    (select-keys article abstract-fields)
-        preamble    {:id                  id
-                     :language            "de"
-                     :time                (str (System/currentTimeMillis))
-                     :xml-descendent-path id
-                     :abstract            (pr-str abstract)}
-        main-fields (dissoc article
-                            :id :file
-                            :timestamps :authors :editors :sources
-                            :senses :links :anchors)
-        fields      (->> [(map basic-field preamble)
-                     (map basic-field main-fields)
-                     (attr-field "timestamps" "dts" (article :timestamps))
-                     (attr-field "authors" "ss" (article :authors))
-                     (attr-field "editors" "ss" (article :editors))
-                     (attr-field "sources" "ss" (article :sources))]
-                    (mapcat identity)
-                    (remove nil?)
-                    (into {}))]
-    (for [[name values] (sort fields) value (sort values)]
-      [name value])))
+  (merge
+   {:id                  id
+    :language            "de"
+    :doc-type            "article"
+    :time                (str (System/currentTimeMillis))
+    :xml-descendent-path id
+    :abstract            (pr-str (select-keys article article-abstract-fields))
+    :anchors             (seq (article :anchors))
+    :links               (seq (map :anchor (article :links)))}
+   (select-keys article article-basic-fields)
+   #_(attr-fields "timestamps" "dts" (article :timestamps))
+   #_(attr-fields "authors" "ss" (article :authors))
+   #_(attr-fields "editors" "ss" (article :editors))
+   #_(attr-fields "sources" "ss" (article :sources))))
 
-(defn article->doc
-  [article]
+(def issue-abstract-fields
+  [:id :form :last-updated :summary :status :category :severity :resolution])
+
+(def issue-basic-fields
+  [:form :last-updated :summary :category :status :severity
+   :reporter :handler :resolution :attachments :notes])
+
+(defn issue->fields
+  [issue]
+  (merge
+   {:id       (issue :id)
+    :language "de"
+    :doc-type "issue"
+    :time     (str (System/currentTimeMillis))
+    :abstract (pr-str (select-keys issue issue-abstract-fields))}
+   (select-keys issue issue-basic-fields)))
+
+(defn fields->doc
+  [fields]
   [:doc
-   (for [[k v] (article->fields article)]
-     [:field {:name k} v])])
+   (for [[k vs] (sort fields)
+         :when  (some? vs)
+         v      (if (coll? vs) (sort vs) [vs])
+         :when  (some? v)]
+     [:field {:name (field-key->name k)} v])])
+
+(def article->doc
+  (comp fields->doc article->fields))
+
+(def issue->doc
+  (comp fields->doc issue->fields))
 
 (defn doc->abstract
   [{:keys [abstract_ss]}]

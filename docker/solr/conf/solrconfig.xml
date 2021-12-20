@@ -298,12 +298,10 @@
          If the updateLog is enabled, then it's highly recommended to
          have some sort of hard autoCommit to limit the log size.
       -->
-    <!--
     <autoCommit>
       <maxTime>15000</maxTime>
       <openSearcher>false</openSearcher>
     </autoCommit>
-     -->
 
     <!-- softAutoCommit is like autoCommit except it causes a
          'soft' commit which only ensures that changes are visible
@@ -311,7 +309,7 @@
          faster and more near-realtime friendly than a hard commit.
       -->
       <autoSoftCommit>
-        <maxTime>300000</maxTime>
+        <maxTime>1000</maxTime>
       </autoSoftCommit>
 
     <!-- Update Related Event Listeners
@@ -987,13 +985,14 @@
        <str name="lookupImpl">AnalyzingInfixLookupFactory</str>
        <str name="dictionaryImpl">DocumentDictionaryFactory</str>
        <str name="field">forms_ss</str>
+       <str name="contextField">doc_type</str>
        <str name="weightField">weight_i</str>
        <str name="payloadField">abstract_ss</str>
        <str name="suggestAnalyzerFieldType">text_general</str>
        <str name="buildOnStartup">true</str>
      </lst>
    </searchComponent>
- 
+
    <requestHandler name="/suggest" class="solr.SearchHandler" >
      <lst name="defaults">
        <str name="suggest">true</str>

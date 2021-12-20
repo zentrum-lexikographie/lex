@@ -3,21 +3,40 @@
             [mount.core :as mount]
             [zdl.lex.data :as data]
             [zdl.lex.fs :refer [path]]
-            [zdl.lex.util :refer [exec!]]))
+            [zdl.lex.server.article :as server.article]
+            [zdl.lex.server.git :as server.git]
+            [zdl.lex.server.graph.db :as server.graph.db]
+            [zdl.lex.server.graph.mantis :as server.graph.mantis]
+            [zdl.lex.server.http :as server.http]
+            [zdl.lex.server.lock :as server.lock]
+            [zdl.lex.server.metrics :as server.metrics]
+            [zdl.lex.server.solr.suggest :as server.solr.suggest]
+            [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
 
-(require 'zdl.lex.server.article)
-(require 'zdl.lex.server.http)
-(require 'zdl.lex.server.metrics)
+(install-uncaught-exception-handler!)
+
+(def states
+  #{#'server.article/scheduled-refresh
+    #'server.git/repo
+    #'server.git/scheduled-commit
+    #'server.git/scheduled-gc
+    #'server.graph.db/pool
+    #'server.graph.mantis/scheduled-update
+    #'server.http/server
+    #'server.lock/db
+    #'server.lock/cleanup
+    #'server.metrics/reporter
+    #'server.solr.suggest/form-suggestions-update})
 
 (defn start
   []
-  (mount/start)
+  (mount/start (mount/only states))
   (log/infof "Started ZDL/Lex Server @[%s]" (path (data/dir))))
 
 (defn stop
   []
   (log/info "Stopping ZDL/Lex Server")
-  (mount/stop))
+  (mount/stop (mount/only states)))
 
 (defn stop-on-shutdown
   []

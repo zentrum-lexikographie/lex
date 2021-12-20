@@ -18,7 +18,9 @@
     (finally
       (shutdown-agents))))
 
-(Thread/setDefaultUncaughtExceptionHandler
- (reify Thread$UncaughtExceptionHandler
-   (uncaughtException [_ thread ex]
-     (log/errorf ex "Uncaught exception on [%s]." (.getName thread)))))
+(defn install-uncaught-exception-handler!
+  []
+  (Thread/setDefaultUncaughtExceptionHandler
+   (reify Thread$UncaughtExceptionHandler
+     (uncaughtException [_ thread ex]
+       (log/errorf ex "Uncaught exception on [%s]." (.getName thread))))))

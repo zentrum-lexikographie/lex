@@ -1,14 +1,54 @@
 (ns zdl.lex.client.issue
-  (:require [mount.core :refer [defstate]]
+  (:require [clojure.data.xml :as dx]
+            [clojure.data.zip.xml :as zx]
+            [clojure.tools.logging :as log]
+            [clojure.zip :as zip]
+            [lambdaisland.uri :as uri]
+            [mount.core :refer [defstate]]
             [seesaw.bind :as uib]
             [seesaw.border :refer [empty-border line-border]]
             [seesaw.core :as ui]
             [seesaw.mig :as mig]
+            [zdl.lex.article :as article]
             [zdl.lex.bus :as bus]
             [zdl.lex.client.font :as client.font]
-            [zdl.lex.client.graph :as client.graph]
+            [zdl.lex.client.http :as client.http]
             [zdl.lex.client.icon :as client.icon])
   (:import java.net.URL))
+
+(def issue-cache
+  (atom {}))
+
+(def current-issues
+  (atom []))
+
+(dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
+
+(defn get-issues
+  [url doc]
+  (when-let [loc (zx/xml1-> (zip/xml-zip doc) ::dwds/Artikel)]
+    (when-let [forms (get (article/extract-grammar-data loc) :forms)]
+      (try
+        (let [req {:url          "mantis"
+                   :query-params {:q forms}}
+              resp (client.http/request req)
+              issues (get-in resp [:body :result])]
+          (swap! issue-cache assoc url issues)
+          (reset! current-issues issues))
+        (catch Throwable t
+          (log/warnf t "Error while retrieving issues for %s" forms))))))
+
+(defn update-issues
+  [topic {:keys [url doc]}]
+  (condp = topic
+    :editor-content-changed (get-issues url doc)
+    :editor-activated       (reset! current-issues (get @issue-cache url []))
+    :editor-closed          (swap! issue-cache dissoc url)))
+
+(defstate issue-update
+  :start (bus/listen #{:editor-content-changed :editor-closed :editor-activated}
+                     update-issues)
+  :stop (issue-update))
 
 (def visited-issues
   (atom #{}))
@@ -70,22 +110,24 @@
   (->> (.. java.time.format.DateTimeFormatter/ISO_OFFSET_DATE_TIME (parse ts))
        (java.time.OffsetDateTime/from)))
 
+(def mantis-issue-view
+  (uri/uri "https://mantis.dwds.de/mantis/view.php"))
+
 (defn prepare-issue
-  [visited? {:keys [id last-updated status url] :as issue}]
-  (let [last-updated (parse-update-ts last-updated)]
+  [visited? {:keys [id last-updated status] :as issue}]
+  (let [id           (:path (uri/uri id))
+        last-updated (parse-update-ts last-updated)]
     (assoc issue
-           :url (URL. url)
+           :url (URL. (str (uri/assoc-query mantis-issue-view "id" id)))
            :last-updated last-updated
            :active? (not (#{"closed" "resolved"} status))
            :visited? (visited? [id last-updated]))))
 
 (defn prepare-issues
   [_]
-  (when-let [graph @client.graph/graph] 
-    (let [visited? @visited-issues
-          issues   (:issues graph)
-          issues   (map (partial prepare-issue visited?) issues)]
-      (sort-by (juxt :active? :last-updated) #(compare %2 %1) issues))))
+  (let [visited? @visited-issues
+        issues   (map (partial prepare-issue visited?) @current-issues)]
+    (sort-by (juxt :active? :last-updated) #(compare %2 %1) issues)))
 
 (def issue-list
   (ui/listbox
@@ -96,29 +138,12 @@
                    [component value index selected? focus?]
                    (render-issue value)))))
 
-(defstate issue-update
-  :start (uib/bind (uib/funnel client.graph/graph visited-issues)
+(defstate issue-renderer
+  :start (uib/bind (uib/funnel current-issues visited-issues)
                    (uib/transform prepare-issues)
                    (uib/property issue-list :model))
-  :stop (issue-update))
+  :stop (issue-renderer))
+
 
 (def panel
   (ui/scrollable issue-list))
-
-(comment
-  (let [sample {:category     "MWA-Link",
-                :last-updated (parse-update-ts "2019-08-21T12:02:10+02:00"),
-                :attachments  1,
-                :resolution   "open",
-                :lemma        "schwarz",
-                :summary      "schwarz -- MWA-Link, gemeldet von Reckenthäler",
-                :reporter     "dwdsweb",
-                :status       "assigned",
-                :id           39947,
-                :notes        0,
-                :severity     "minor",
-                :url          "https://mantis.dwds.de/mantis/view.php?id=39947",
-                :handler      "herold"
-                :active?      true
-                :visited?     true}]
-    (->> (render-issue sample) (ui/frame :content) ui/pack! ui/show!)))

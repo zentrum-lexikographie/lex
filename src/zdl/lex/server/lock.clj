@@ -1,7 +1,9 @@
 (ns zdl.lex.server.lock
   (:require [clojure.string :as str]
+            [clojure.core.async :as a]
             [mount.core :as mount :refer [defstate]]
             [next.jdbc :as jdbc]
+            [zdl.lex.cron :as cron]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.h2 :as h2]))
 
@@ -12,12 +14,6 @@
 (defstate db
   :start (h2/open! "locks")
   :stop  (h2/close! db))
-
-(defn cleanup
-  []
-  (jdbc/with-transaction [c db]
-    (h2/execute! c {:delete-from :lock
-                    :where       [:<= :expires (now)]})))
 
 (defn- resource->paths
   [resource]
@@ -153,6 +149,16 @@
           {:status 200 :body (lock->response lock :token? true)})
         {:status 404 :body lock}))))
 
+(defn cleanup!
+  []
+  (jdbc/with-transaction [c db]
+    (h2/execute! c {:delete-from :lock
+                    :where       [:<= :expires (now)]})))
+
+(defstate cleanup
+  :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup!)
+  :stop (a/close! cleanup))
+
 (comment
   (h2/delete! "locks")
   (mount/start #'db)
@@ -166,4 +172,3 @@
                      :token    "81184e67-2bbb-4531-a3c4-b11040250e94",
                      :owner_ip "127.0.0.1",
                      :expires  (+ now 300000)}))))
-

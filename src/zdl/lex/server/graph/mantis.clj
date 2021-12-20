@@ -12,10 +12,20 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :as fs]
             [zdl.lex.server.graph.db :as graph.db]
-            [zdl.lex.server.h2 :as h2]))
+            [zdl.lex.server.h2 :as h2]
+            [lambdaisland.uri :as uri]
+            [zdl.lex.cron :as cron]
+            [clojure.core.async :as a]))
 
 (def mantis-base
   (getenv "MANTIS_BASE" "https://mantis.dwds.de/mantis"))
+
+(defn issue-id->uri
+  [id]
+  (str (uri/->URI "mantis" nil nil nil nil (str id) nil nil)))
+
+(comment
+  (issue-id->uri 10))
 
 (defn issue-id->url
   [id]
@@ -158,18 +168,6 @@
            (issue :resolution)]))
    (partition-all 10000)))
 
-(def sync-timer
-  (timers/timer ["graph" "mantis" "sync-timer"]))
-
-(defn update-graph
-  []
-  (->>
-   (jdbc/with-transaction [c graph.db/pool]
-     (h2/execute! c {:delete-from :mantis_issue})
-     (doseq [batch (sequence issues->db-batches (issues))]
-       (h2/execute! c {:insert-into :mantis_issue :values batch})))
-   (timers/time! sync-timer)))
-
 (def query-timer
   (timers/timer ["graph" "mantis" "query-timer"]))
 
@@ -184,8 +182,26 @@
        (sort-by :last-updated #(compare %2 %1) issues)))
    (timers/time! query-timer)))
 
+(def sync-timer
+  (timers/timer ["graph" "mantis" "sync-timer"]))
+
+(defn update-graph!
+  []
+  (->>
+   (jdbc/with-transaction [c graph.db/pool]
+     (h2/execute! c {:delete-from :mantis_issue})
+     (doseq [batch (sequence issues->db-batches (issues))]
+       (h2/execute! c {:insert-into :mantis_issue :values batch})))
+   (timers/time! sync-timer)))
+
+
+(defstate scheduled-update
+  :start (cron/schedule "0 */15 * * * ?" "Mantis Synchronization"
+                        update-graph!)
+  :stop (a/close! scheduled-update))
+
 (comment
-  (time (update-graph))
+  (time (update-graph!))
   (time (find-issues-by-forms ["Test" "spitzfingrig" "schwarz"])))
 
 (defstate remove-mantis-dump

@@ -7,7 +7,9 @@
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.fs :refer [file path]]
             [zdl.lex.git :as git]
-            [zdl.lex.server.article :as server.article])
+            [zdl.lex.server.article :as server.article]
+            [zdl.lex.cron :as cron]
+            [clojure.core.async :as a])
   (:import java.io.File
            java.util.concurrent.Semaphore))
 
@@ -81,26 +83,25 @@
      (timers/time! push-timer))))
 
 (defstate ^{:on-reload :noop} repo
-  :start (with-lock
-           (let [f    (file dir)
-                 path (path dir)]
-             (when-not (.isDirectory (file f ".git"))
-               (if origin
-                 (do
-                   (log/info {:git {:clone origin}})
-                   (git/sh! dir "clone" "--quiet" origin path))
-                 (do
-                   (log/info {:git {:init path}})
-                   (.mkdirs f)
-                   (git/sh! dir "init" "--quiet" path))))
-             (when-not (= branch (git/head-ref dir))
-               (if origin
-                 (git/sh! dir "checkout" "--track" (str "origin/" branch))
-                 (git/sh! dir "checkout" "-b" branch)))
-             (log/info {:git {:repo path :branch branch :origin origin}}))))
-
-(defstate git-available?
-  :start (log/info (-> (git/sh! dir "--version") :out str/trim)))
+  :start (do
+           (log/info (-> (git/sh! dir "--version") :out str/trim))
+           (with-lock
+             (let [f    (file dir)
+                   path (path dir)]
+               (when-not (.isDirectory (file f ".git"))
+                 (if origin
+                   (do
+                     (log/info {:git {:clone origin}})
+                     (git/sh! dir "clone" "--quiet" origin path))
+                   (do
+                     (log/info {:git {:init path}})
+                     (.mkdirs f)
+                     (git/sh! dir "init" "--quiet" path))))
+               (when-not (= branch (git/head-ref dir))
+                 (if origin
+                   (git/sh! dir "checkout" "--track" (str "origin/" branch))
+                   (git/sh! dir "checkout" "-b" branch)))
+               (log/info {:git {:repo path :branch branch :origin origin}})))))
 
 (def status-timer
   (timers/timer ["git" "local" "status-timer"]))
@@ -146,3 +147,12 @@
            (map #(nth % 2)))
           (str/split-lines (get diff :out)))))))
   (push!))
+
+(defstate scheduled-commit
+  :start (cron/schedule "0 */15 * * * ?" "Git commit" commit!)
+  :stop (a/close! scheduled-commit))
+
+(defstate scheduled-gc
+  :start (cron/schedule "0 0 5 * * ?" "Git Garbage Collection" gc!)
+  :stop (a/close! scheduled-gc))
+

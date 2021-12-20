@@ -15,18 +15,22 @@
             [reitit.swagger-ui :as swagger-ui]
             [ring.adapter.jetty :as jetty]
             [ring.util.io :as ring.io]
+            [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
+            [zdl.lex.server.article :as server.article]
             [zdl.lex.server.article.update :as article.update]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as server.git]
             [zdl.lex.server.graph :as graph]
+            [zdl.lex.server.graph.mantis :as graph.mantis]
             [zdl.lex.server.lock :as lock]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr.export :as solr.export]
             [zdl.lex.server.solr.query :as solr.query]
+            [zdl.lex.server.solr.links :as solr.links]
             [zdl.lex.server.solr.suggest :as solr.suggest]
-            [zdl.lex.server.tasks :as tasks])
+            [zdl.lex.server.issue :as server.issue])
   (:import org.eclipse.jetty.server.Server))
 
 (def homepage
@@ -80,6 +84,11 @@
       {:status 200
        :body   (ring.io/piped-input-stream oxygen/download-plugin)})]])
 
+(defn trigger-cron-handler
+  [ch]
+  (fn [_]
+    {:status 200 :body {:triggered (some? (cron/trigger! ch))}}))
+
 (def handler
   (http/ring-handler
    (http/router
@@ -96,7 +105,8 @@
                                       [:pos :string]]}}
         :delete {:summary     "Refreshes all article data"
                  :tags        ["Index", "Admin"]
-                 :handler     tasks/trigger-articles-refresh
+                 :handler     (trigger-cron-handler
+                               server.article/scheduled-refresh)
                  ::auth/roles #{:admin}}}]
       ["/*resource"
        {:get  {:handler    article.update/handle-read
@@ -110,7 +120,7 @@
      ["/git"
       {:patch {:summary     "Commit pending changes on the server's branch"
                :tags        ["Article" "Git" "Admin"]
-               :handler     tasks/trigger-git-commit
+               :handler     (trigger-cron-handler server.git/scheduled-commit)
                ::auth/roles #{:admin}}}]
      ["/git/ff/:ref"
       {:post {:summary     "Fast-forwards the server's branch to the given refs"
@@ -153,7 +163,18 @@
        {:summary    "Retrieve suggestion for headwords based on prefix queries"
         :tags       ["Index" "Query" "Suggestions" "Headwords"]
         :parameters {:query [:map [:q {:optional true} :string]]}
-        :handler    solr.suggest/suggest-forms}]]
+        :handler    solr.suggest/suggest-forms}]
+      ["/links"
+       {:summary    "Retrieve articles based on anchors and links"
+        :tags       ["Index" "Query" "Links"]
+        :parameters {:query [:map
+                             [:anchors
+                              {:optional true}
+                              [:or :string [:sequential :string]]]
+                             [:links
+                              {:optional true}
+                              [:or :string [:sequential :string]]]]}
+        :handler    solr.links/handle-query}]]
      ["/lock" {::auth/roles #{:user}}
       [""
        {:summary "Retrieve list of active locks"
@@ -178,10 +199,15 @@
                               :query [:map [:token :string]]}
                  :handler    lock/remove-lock}}]]
      ["/mantis"
-      {:delete
+      {:get
+       {:summary    "Retrieve Mantis issues for a given set of surface forms"
+        :tags       ["Mantis" "Issue"]
+        :parameters {:query [:map [:q [:or :string [:sequential :string]]]]}
+        :handler    server.issue/handle-query}
+       :delete
        {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
         :tags        ["Mantis" "Admin"]
-        :handler     tasks/trigger-mantis-sync
+        :handler     (trigger-cron-handler server.issue/scheduled-sync)
         ::auth/roles #{:admin}}}]
      (client-resources "/oxygen")
      (client-resources "/zdl-lex-client")

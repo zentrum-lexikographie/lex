@@ -1,12 +1,12 @@
-(ns zdl.lex.server.gen.schema
-  (:require [clojure.test.check.generators :as gen]
-            [clojure.test :refer [deftest is]]
-            [zdl.lex.fs :refer [file]]
+(ns zdl.lex.fixture.article
+  (:require [clojure.test :refer [deftest is]]
+            [clojure.test.check.generators :as gen]
+            [zdl.lex.article.validate :as article.validate]
             [zdl.xml.rngom :as rngom]))
 
 (def model
   (delay
-    (->> (file "oxygen/framework/rng/DWDSWB.rng")
+    (->> article.validate/rng-schema-source
          (rngom/parse-schema) (rngom/traverse))))
 
 (def article-qn

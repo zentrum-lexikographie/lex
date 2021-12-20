@@ -6,8 +6,11 @@
             [zdl.lex.article.xml :as axml]
             [zdl.xml.validate :as xml.validate]))
 
+(def rng-schema-source
+  (io/resource "framework/rng/DWDSWB.rng"))
+
 (def rng-schema
-  (xml.validate/rng->schema (io/resource "framework/rng/DWDSWB.rng")))
+  (xml.validate/rng->schema rng-schema-source))
 
 (defn rng-validate
   [source]

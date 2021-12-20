@@ -66,6 +66,7 @@
   [{{{:keys [q limit] :or {q "id:*" limit 1000}} :query} :parameters}]
   (let [request   {:q    (lucene/translate q)
                    :df   "forms_ss"
+                   :fq   "doc_type:article"
                    :sort "forms_ss asc,weight_i desc,id asc"}
         page-size (min (max 1 limit) 50000)
         pages     (scroll request page-size)]

@@ -4,25 +4,27 @@
             [zdl.lex.client.io :refer [lexurl-handler]]
             [zdl.lex.client.graph :as client.graph]
             [zdl.lex.client.issue :as client.issue]
+            [zdl.lex.client.oxygen :as client.oxygen]
             [zdl.lex.client.results :as client.results]
             [zdl.lex.client.toolbar :as client.toolbar]
-            [zdl.lex.url :as lexurl]))
+            [zdl.lex.url :as lexurl]
+            [zdl.lex.util :refer [install-uncaught-exception-handler!]]))
 
-(require 'zdl.lex.client.oxygen)
-(require 'zdl.lex.util)
+(install-uncaught-exception-handler!)
 
 (try
   (lexurl/install-stream-handler! lexurl-handler)
   (catch Throwable _))
 
 (comment
-  ;; start client-side state management
-  (mount/start)
+  ;; start/stop client-side state management
+  (mount/start (mount/only client.oxygen/states))
+  (mount/stop (mount/only client.oxygen/states))
   ;; display dev testbed
   (ui/invoke-later
    (ui/show!
     (ui/pack!
-     (let [sidebar    client.graph/pane
+     (let [sidebar    client.issue/panel
            main-panel (ui/splitter :left-right
                                    client.results/pane
                                    sidebar

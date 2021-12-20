@@ -49,7 +49,6 @@
    :definitions "t"
    :last-modified "dt"
    :timestamp "dt"
-   :timestamps "dts"
    :author "s"
    :editor "s"
    :form "s"
@@ -81,15 +80,14 @@
 (def field-aliases
   "Aliasing of index field names, mostly translations."
   {"autor" "author"
-   "autoren" "authors"
-   "red" "editors"
+   "red" "editor"
    "def" "definitions"
    "fehler" "errors"
    "form" "forms"
    "datum" "timestamp"
    "klasse" "pos"
    "bedeutung" "senses"
-   "quelle" "sources"
+   "quelle" "source"
    "status" "status"
    "tranche" "tranche"
    "typ" "type"
@@ -178,4 +176,4 @@
 (defn valid?
   "A valid query can be parsed/transformed"
   [q]
-  (try (translate q) true (catch Throwable t false)))
+  (try (translate q) true (catch Throwable _ false)))

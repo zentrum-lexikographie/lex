@@ -2,22 +2,10 @@
   (:require [clojure.core.async :as a]
             [lambdaisland.uri :as uri :refer [uri]]
             [metrics.timers :as timers]
+            [mount.core :refer [defstate]]
+            [zdl.lex.cron :as cron]
             [zdl.lex.http :as http]
             [zdl.lex.server.solr.client :as solr.client]))
-
-(def forms-suggestions-build-timer
-  (timers/timer ["solr" "client" "forms-suggestions-build-timer"]))
-
-(defn build-forms-suggestions
-  []
-  (a/go
-    (let [request {:url          (uri "suggest")
-                   :query-params {"suggest.dictionary" "forms"
-                                  "suggest.buildAll"   "true"}}]
-      (when-let [response (a/<! (solr.client/request request))]
-        (http/update-timer! forms-suggestions-build-timer response)
-        (http/read-json response)))))
-  
 
 (def suggest-timer
   (timers/timer ["solr" "client" "suggest-timer"]))
@@ -25,10 +13,12 @@
 (defn suggest-forms
   [{{{:keys [q]} :query} :parameters}]
   (a/go
-    (let [request {:url          (uri "suggest")
-                   :query-params {"suggest.dictionary" "forms"
-                                  "suggest.q"          q}}]
-      (if-let [response (a/<! (solr.client/request request))]
+    (let [request (solr.client/->request
+                   {:url          (uri "suggest")
+                    :query-params {"suggest.dictionary" "forms"
+                                   "suggest.cfq"        "article"
+                                   "suggest.q"          q}})]
+      (if-let [response (a/<! (solr.client/async-request request))]
         (let [response    (http/update-timer! suggest-timer response)
               response    (http/read-json response)
               forms       (get-in response [:body :suggest :forms])
@@ -42,3 +32,21 @@
                     :result result}})
         {:status 500}))))
 
+(def forms-suggestions-build-timer
+  (timers/timer ["solr" "client" "forms-suggestions-build-timer"]))
+
+(defn build-forms-suggestions!
+  []
+  (->>
+   {:url          (uri "suggest")
+    :query-params {"suggest.dictionary" "forms"
+                   "suggest.buildAll"   "true"}}
+   (solr.client/->request)
+   (http/request)
+   (http/update-timer! forms-suggestions-build-timer)
+   (http/read-json)))
+
+(defstate form-suggestions-update
+  :start (cron/schedule "0 */10 * * * ?" "Form Suggestions FSA update"
+                        build-forms-suggestions!)
+  :stop (a/close! form-suggestions-update))
