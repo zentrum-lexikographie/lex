@@ -7,7 +7,7 @@
             [zdl.lex.server.git :as server.git]
             [zdl.lex.server.http :as server.http]
             [zdl.lex.server.issue :as server.issue]
-            [zdl.lex.server.lock :as server.lock]
+            [zdl.lex.server.article.lock :as article.lock]
             [zdl.lex.server.metrics :as server.metrics]
             [zdl.lex.server.solr.suggest :as server.solr.suggest]
             [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
@@ -21,8 +21,8 @@
     #'server.git/scheduled-gc
     #'server.http/server
     #'server.issue/scheduled-sync
-    #'server.lock/db
-    #'server.lock/cleanup
+    #'article.lock/db
+    #'article.lock/cleanup
     #'server.metrics/reporter
     #'server.solr.suggest/form-suggestions-update})
 

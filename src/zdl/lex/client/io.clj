@@ -14,17 +14,13 @@
            java.time.format.DateTimeFormatter
            [ro.sync.exml.plugin.lock LockException LockHandler]))
 
-(defn lock->owner
-  [{:keys [owner owner_ip]}]
-  (format "%s (IP: %s)" owner owner_ip))
-
 (def ^:private readable-date-time-formatter
   (DateTimeFormatter/ofPattern "dd.MM.YYYY', 'HH:mm' Uhr'"))
 
 (defn lock->message
   [{:keys [resource expires] :as lock}]
   (let [path  (or (not-empty resource) "<alle>")
-        owner (lock->owner lock)
+        owner (lock :owner)
         until (.. (Instant/ofEpochMilli expires)
                   (atZone (ZoneId/systemDefault))
                   (format readable-date-time-formatter))]
@@ -38,7 +34,7 @@
 
 (defn lock->exception
   [lock]
-  (let [owner   (lock->owner lock)
+  (let [owner   (lock :owner)
         message (lock->message lock)]
     (doto (LockException. message true message)
       (.setOwnerName owner))))

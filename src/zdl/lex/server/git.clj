@@ -3,15 +3,17 @@
             [clojure.tools.logging :as log]
             [metrics.timers :as timers]
             [mount.core :refer [defstate]]
+            [slingshot.slingshot :refer [try+ throw+]]
             [zdl.lex.data :as data]
             [zdl.lex.env :refer [getenv]]
-            [zdl.lex.fs :refer [file path]]
+            [zdl.lex.fs :refer [file path file?]]
             [zdl.lex.git :as git]
             [zdl.lex.server.article :as server.article]
             [zdl.lex.cron :as cron]
             [clojure.core.async :as a])
   (:import java.io.File
-           java.util.concurrent.Semaphore))
+           java.util.concurrent.locks.ReentrantLock
+           java.util.concurrent.TimeUnit))
 
 (def dir
   (data/dir "git"))
@@ -23,23 +25,28 @@
   (getenv "GIT_BRANCH" "zdl-lex-server/development"))
 
 (def lock
-  (Semaphore. 1))
+  (ReentrantLock.))
+
+(def default-timeout
+  30000)
 
 (defn lock!
-  []
-  (.acquire lock))
+  ([]
+   (lock! default-timeout))
+  ([timeout]
+   (.tryLock lock timeout TimeUnit/MILLISECONDS)))
 
 (defn unlock!
   []
-  (.release lock))
+  (.unlock lock))
 
-(defmacro with-lock
-  [& body]
-  `(try
-     (lock!)
-     ~@body
-     (finally
-       (unlock!))))
+(defn with-lock
+  ([f]
+   (with-lock default-timeout f))
+  ([timeout f]
+   (when-not (lock! timeout)
+     (throw+ {:type ::lock-timeout ::timeout timeout ::f f}))
+   (try (f) (finally (unlock!)))))
 
 (defn publish-changes!
   [paths]
@@ -86,22 +93,23 @@
   :start (do
            (log/info (-> (git/sh! dir "--version") :out str/trim))
            (with-lock
-             (let [f    (file dir)
-                   path (path dir)]
-               (when-not (.isDirectory (file f ".git"))
-                 (if origin
-                   (do
-                     (log/info {:git {:clone origin}})
-                     (git/sh! dir "clone" "--quiet" origin path))
-                   (do
-                     (log/info {:git {:init path}})
-                     (.mkdirs f)
-                     (git/sh! dir "init" "--quiet" path))))
-               (when-not (= branch (git/head-ref dir))
-                 (if origin
-                   (git/sh! dir "checkout" "--track" (str "origin/" branch))
-                   (git/sh! dir "checkout" "-b" branch)))
-               (log/info {:git {:repo path :branch branch :origin origin}})))))
+             (fn []
+               (let [f    (file dir)
+                     path (path dir)]
+                 (when-not (.isDirectory (file f ".git"))
+                   (if origin
+                     (do
+                       (log/info {:git {:clone origin}})
+                       (git/sh! dir "clone" "--quiet" origin path))
+                     (do
+                       (log/info {:git {:init path}})
+                       (.mkdirs f)
+                       (git/sh! dir "init" "--quiet" path))))
+                 (when-not (= branch (git/head-ref dir))
+                   (if origin
+                     (git/sh! dir "checkout" "--track" (str "origin/" branch))
+                     (git/sh! dir "checkout" "-b" branch)))
+                 (log/info {:git {:repo path :branch branch :origin origin}}))))))
 
 (def status-timer
   (timers/timer ["git" "local" "status-timer"]))
@@ -113,10 +121,8 @@
    (timers/time! status-timer)))
 
 (defn add!
-  [f & {:keys [lock?] :or {lock? true}}]
-  (if lock?
-    (with-lock (git/sh! dir "add" (path f)))
-    (git/sh! dir "add" (path f))))
+  [f]
+  (with-lock (fn [] (git/sh! dir "add" (path f)))))
 
 (def commit-timer
   (timers/timer ["git" "local" "commit-timer"]))
@@ -124,28 +130,30 @@
 (defn commit!
   []
   (with-lock
-    (when-let [changes (not-empty (status))]
-      (->>
-       (git/sh! dir "commit" "-a" "-m" "zdl-lex-server")
-       (timers/time! commit-timer))
-      (publish-changes! (mapcat :paths changes))
-      (push!))))
+    (fn []
+      (when-let [changes (not-empty (status))]
+        (->>
+         (git/sh! dir "commit" "-a" "-m" "zdl-lex-server")
+         (timers/time! commit-timer))
+        (publish-changes! (mapcat :paths changes))
+        (push!)))))
 
 (defn fast-forward!
   [ref]
   (fetch!)
   (with-lock
-    (let [head (git/head-rev dir)]
-      (git/assert-clean dir)
-      (git/sh! dir "merge" "--ff-only" "-q" ref)
-      (let [diff (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))]
-        (publish-changes!
-         (sequence
-          (comp
-           (map not-empty) (remove nil?)
-           (map #(str/split % #"\t"))
-           (map #(nth % 2)))
-          (str/split-lines (get diff :out)))))))
+    (fn []
+      (let [head (git/head-rev dir)]
+        (git/assert-clean dir)
+        (git/sh! dir "merge" "--ff-only" "-q" ref)
+        (let [diff (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))]
+          (publish-changes!
+           (sequence
+            (comp
+             (map not-empty) (remove nil?)
+             (map #(str/split % #"\t"))
+             (map #(nth % 2)))
+            (str/split-lines (get diff :out))))))))
   (push!))
 
 (defstate scheduled-commit
@@ -156,3 +164,23 @@
   :start (cron/schedule "0 0 5 * * ?" "Git Garbage Collection" gc!)
   :stop (a/close! scheduled-gc))
 
+(defn get-file
+  [path]
+  (when-let [f (file dir path)] f))
+
+(defn edit!
+  ([path editor]
+   (edit! default-timeout path editor))
+  ([lock-timeout path editor]
+  (with-lock
+    lock-timeout
+    (fn []
+      (let [f       (file dir path)
+            exists? (file? f)]
+        (when-not exists? (.. f (getParentFile) (mkdirs)))
+        (try+
+         (editor f)
+         (when-not exists? (add! f))
+         (server.article/update! [f])
+         (catch [:type ::unmodified] _))
+        f)))))

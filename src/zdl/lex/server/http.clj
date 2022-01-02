@@ -18,12 +18,12 @@
             [zdl.lex.cron :as cron]
             [zdl.lex.env :refer [getenv]]
             [zdl.lex.server.article :as server.article]
-            [zdl.lex.server.article.update :as article.update]
+            [zdl.lex.server.article.handler :as article.handler]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as server.git]
             [zdl.lex.server.issue :as server.issue]
-            [zdl.lex.server.lock :as lock]
+            [zdl.lex.server.article.lock :as article.lock]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr.export :as solr.export]
             [zdl.lex.server.solr.query :as solr.query]
@@ -97,7 +97,7 @@
         :headers {"Location" "/home"}})]
      ["/article" {::auth/roles #{:user}}
       ["/"
-       {:put    {:handler    article.update/handle-create
+       {:put    {:handler    article.handler/handle-create
                  :parameters {:query [:map
                                       [:form :string]
                                       [:pos :string]]}}
@@ -107,9 +107,9 @@
                                server.article/scheduled-refresh)
                  ::auth/roles #{:admin}}}]
       ["/*resource"
-       {:get  {:handler    article.update/handle-read
+       {:get  {:handler    article.handler/handle-read
                :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    (lock/wrap-resource-lock article.update/handle-write)
+        :post {:handler    article.handler/handle-write
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
      ["/docs/api/*"
@@ -174,25 +174,25 @@
       [""
        {:summary "Retrieve list of active locks"
         :tags    ["Lock" "Query"]
-        :handler lock/read-locks}]
+        :handler article.lock/read-locks}]
       ["/*resource"
        {:get    {:summary    "Read a resource lock"
                  :tags       ["Lock" "Query" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    lock/read-lock}
+                 :handler    article.lock/read-lock}
         :post   {:summary    "Set a resource lock"
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map
                                       [:token :string]
                                       [:ttl [:int {:min 1}]]]}
-                 :handler    lock/create-lock}
+                 :handler    article.lock/create-lock}
         :delete {:summary    "Remove a resource lock."
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    lock/remove-lock}}]]
+                 :handler    article.lock/remove-lock}}]]
      ["/mantis"
       {:get
        {:summary    "Retrieve Mantis issues for a given set of surface forms"

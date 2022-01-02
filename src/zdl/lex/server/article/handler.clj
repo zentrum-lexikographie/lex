@@ -1,21 +1,22 @@
-(ns zdl.lex.server.article.update
-  (:require [clojure.core.async :as a]
-            [clojure.data.xml :as dx]
-            [clojure.java.io :as io]
-            [clojure.string :as str]
-            [clojure.tools.logging :as log]
-            [clojure.walk :refer [postwalk]]
-            [zdl.lex.article.xml :as axml]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.fs :refer [file file?]]
-            [zdl.lex.lucene :as lucene]
-            [zdl.lex.server.auth :as auth]
-            [zdl.lex.server.article :as server.article]
-            [zdl.lex.server.git :as server.git]
-            [zdl.lex.server.solr.client :as solr.client]
-            [zdl.lex.timestamp :as ts])
-  (:import java.io.File
-           [java.text Normalizer Normalizer$Form]))
+(ns zdl.lex.server.article.handler
+  (:require
+   [clojure.core.async :as a]
+   [clojure.data.xml :as dx]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [clojure.tools.logging :as log]
+   [clojure.walk :refer [postwalk]]
+   [slingshot.slingshot :refer [try+]]
+   [zdl.lex.article.xml :as axml]
+   [zdl.lex.lucene :as lucene]
+   [zdl.lex.server.article.lock :as article.lock]
+   [zdl.lex.server.auth :as auth]
+   [zdl.lex.server.git :as server.git]
+   [zdl.lex.server.solr.client :as solr.client]
+   [zdl.lex.timestamp :as ts])
+  (:import
+   (java.io File)
+   (java.text Normalizer Normalizer$Form)))
 
 (def xml-template
   (axml/read-xml (io/resource "template.xml")))
@@ -73,45 +74,41 @@
                                             "generations exceeded"))
             :else           (recur (inc n))))))))
 
-(defn handle-create
-  [{{:keys [user]} ::auth/identity {{:keys [form pos]} :query} :parameters}]
-  (a/go
-    (server.git/lock!)
-    (try
-      (when-let [xml-id (a/<! (generate-id))]
-        (let [xml      (new-article-xml xml-id form pos user)
-              filename (form->filename form)
-              id       (str new-article-collection "/" filename "-" xml-id ".xml")
-              f        (file server.git/dir id)]
-          (doto (.getParentFile f) (.mkdirs))
-          (spit f xml :encoding "UTF-8")
-          (server.git/add! f :lock? false)
-          (server.article/update! [f])
-          {:status 200
-           :body   {:id   id
-                    :form form
-                    :pos  pos}}))
-      (finally
-        (server.git/unlock!)))))
-
 (defn handle-read
   [{{{:keys [resource]} :path} :parameters}]
-  (let [^File f (file server.git/dir resource)]
-    (if (file? f)
-      {:status 200 :body f}
-      {:status 404 :body resource})))
+  (if-let [^File f (server.git/get-file resource)]
+    {:status 200 :body f}
+    {:status 404 :body resource}))
+
+(defn create-editor
+  [xml]
+  (fn [f] (spit f xml :encoding "UTF-8")))
+
+(defn handle-create
+  [{{:keys [user]} ::auth/identity {{:keys [form pos]} :query} :parameters}]
+  (when-let [xml-id (a/<!! (generate-id))]
+    (let [filename (form->filename form)
+          path     (str new-article-collection "/" filename "-" xml-id ".xml")
+          xml      (new-article-xml xml-id form pos user)]
+      {:status 200
+       :body   (server.git/edit! path (create-editor xml))})))
+
+(defn write-editor
+  [lock body]
+  (article.lock/editor lock (fn [f] (io/copy body f))))
 
 (defn handle-write
-  [{{{:keys [resource]} :path} :parameters :keys [body]}]
-  (server.git/with-lock
-    (let [^File f (file server.git/dir resource)]
-      (if (file? f)
-        (do
-          (with-open [os (io/output-stream f)]
-            (io/copy body os))
-          (server.article/update! [f])
-          {:status 200 :body f})
-        {:status 404 :body resource}))))
+  [{:keys [body] :as req}]
+  (let [{:keys [resource] :as lock} (article.lock/request->lock req)]
+    (if-not (server.git/get-file resource)
+      {:status 404
+       :body   resource}
+      (try+
+       {:status 200
+        :body   (server.git/edit! resource (write-editor lock body))}
+       (catch [:type ::article.lock/locked] {:keys [lock]}
+         {:status 423
+          :body   lock})))))
 
 (comment
   (handle-create {::auth/identity {:user "middell"}
