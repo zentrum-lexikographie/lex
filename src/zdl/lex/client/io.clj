@@ -47,7 +47,7 @@
   (->
    request
    (assoc-in [:query-params :token] (str lock-token))
-   (assoc :unexceptional-status #{200 423})
+   (assoc :unexceptional-status #{200 404 423})
    (client.http/request)))
 
 (defn locked?
@@ -128,9 +128,11 @@
             (comment "No-Op"))
           (getInputStream
             []
+            (log/infof "Reading %s" http-url)
             (store->stream http-url))
           (getOutputStream
             []
+            (log/infof "Writing %s" http-url)
             (stream->store http-url)))))))
 
 
