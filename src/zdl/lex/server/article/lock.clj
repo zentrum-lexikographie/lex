@@ -1,4 +1,4 @@
-w(ns zdl.lex.server.article.lock
+(ns zdl.lex.server.article.lock
   (:require
    [clojure.core.async :as a]
    [mount.core :as mount :refer [defstate]]
