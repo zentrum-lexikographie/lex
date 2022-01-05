@@ -7,6 +7,7 @@
             [zdl.lex.client.oxygen :as client.oxygen]
             [zdl.lex.client.results :as client.results]
             [zdl.lex.client.toolbar :as client.toolbar]
+            [zdl.lex.client.util :as client.util]
             [zdl.lex.url :as lexurl]
             [zdl.lex.util :refer [install-uncaught-exception-handler!]]))
 
@@ -36,5 +37,6 @@
                                    :resize-weight 0.75)]
        (ui/frame
         :title "zdl-lex-client/dev"
+        :size (client.util/clip-to-screen-size)
         :content (ui/border-panel :north client.toolbar/widget
                                   :center main-panel)))))))

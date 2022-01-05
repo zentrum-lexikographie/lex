@@ -1,12 +1,12 @@
 (ns zdl.lex.client.filter
-  (:require [clojure.string :as str]
-            [seesaw.core :as ui]
-            [seesaw.forms :as forms]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.client.font :as client.font]
-            [zdl.lex.lucene :as lucene]
-            [zdl.lex.timestamp :as ts])
-  (:import com.jgoodies.forms.layout.RowSpec))
+  (:require
+   [clojure.string :as str]
+   [seesaw.core :as ui]
+   [zdl.lex.bus :as bus]
+   [zdl.lex.client.font :as client.font]
+   [zdl.lex.client.util :as client.util]
+   [zdl.lex.lucene :as lucene]
+   [zdl.lex.timestamp :as ts]))
 
 (def facet-title
   {:status "Status"
@@ -96,7 +96,8 @@
    (bus/publish! #{:search-request}))
   (dispose! e))
 
-(defn open-dialog [{:keys [query facets]} & args]
+(defn open-dialog
+  [{:keys [query facets]} & args]
   (let [result->list-model #(->> (or (some-> facets %) {})
                                  (into [])
                                  (sort-by first))
@@ -122,11 +123,16 @@
                        "Auswahl mehrerer Einträge einer Liste mit &lt;Strg&gt;."
                        "</html>")
                   (ui/label :border 5 :text))
-        content (forms/forms-panel
-                 "pref, 4dlu, pref, 4dlu, pref"
-                 :default-row-spec (RowSpec. "fill:pref")
-                 :default-dialog-border? true
-                 :items (concat lists [(forms/next-line) (forms/span help 5)]))
+        content (ui/border-panel
+                 :center (ui/grid-panel
+                          :rows 2
+                          :columns 5
+                          :items lists
+                          :hgap 5
+                          :vgap 5)
+                 :south help
+                 :hgap 5
+                 :vgap 5)
         options [(ui/button :text "Filtern"
                             :listen [:action (partial filter! query facet-lists)])
                  (ui/button :text "Abbrechen"
@@ -134,7 +140,7 @@
     (-> (ui/dialog :title "Suchfilter"
                    :type :question
                    :parent (some-> args first ui/to-root)
-                   :size [800 :by 800]
+                   :size (client.util/clip-to-screen-size [800 :by 600])
                    :content content
                    :options options)
         ui/pack!
