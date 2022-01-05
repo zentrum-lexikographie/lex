@@ -37,7 +37,7 @@
 
 (defn gen-prod-articles
   ([]
-   (gen-prod-articles {:min-elements 10000 :max-elements 20000}))
+   (gen-prod-articles {:min-elements 1000 :max-elements 2000}))
   ([opts]
    (pull-prod!)
    (gen/set (gen/elements (prod-articles)) opts)))
