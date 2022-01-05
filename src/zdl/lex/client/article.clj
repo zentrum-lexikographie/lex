@@ -33,7 +33,7 @@
                     :query-params {:form form
                                    :pos  pos}}
           response (client.http/request request)]
-      (bus/publish! #{:open-article} {:id (get-in response [:body :id])}))
+      (bus/publish! #{:open-article} {:id (get-in response [:headers "X-Lex-ID"])}))
     (catch Throwable t
       (log/warnf t "Error creating article '%s' (%s)" form pos))))
 

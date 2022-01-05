@@ -90,8 +90,9 @@
     (let [filename (form->filename form)
           path     (str new-article-collection "/" filename "-" xml-id ".xml")
           xml      (new-article-xml xml-id form pos user)]
-      {:status 200
-       :body   (server.git/edit! path (create-editor xml))})))
+      {:status  200
+       :headers {"X-Lex-ID" path}
+       :body    (server.git/edit! path (create-editor xml))})))
 
 (defn write-editor
   [lock body]
