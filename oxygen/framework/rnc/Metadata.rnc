@@ -176,6 +176,7 @@ Metadaten.Artikel = (
 	    | 'MWA'
 	    | 'MWA-NP'
 	    | 'MWA-N-PP'
+	    | 'MWA-Zentral-Satellit'
 	    | 'Philosophie'
 	    | 'Politik-001'
 	    | 'Politik-002'
