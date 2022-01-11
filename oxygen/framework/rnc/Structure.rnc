@@ -303,7 +303,7 @@ Verweisziel = (
 
 Fundstelle = element Fundstelle {
 	attribute Fundort {
-		xsd:token { pattern = 'dwds:dwds(:[^:]+(:[^:]+(:\d+)?)?)?' }
+		xsd:token { pattern = 'dwds(:[^:]+(:[^:]+(:\d+)?)?)?' }
 		| 'dwds' # legacy
 		| 'amc' # Austrian Media Corpus
 		| 'gbooks'
