@@ -303,14 +303,15 @@ Verweisziel = (
 
 Fundstelle = element Fundstelle {
 	attribute Fundort {
-		'dwds'
+		xsd:token { pattern = 'dwds:.*:.*:\d*' }
+		| 'dwds' # legacy
 		| 'amc' # Austrian Media Corpus
 		| 'gbooks'
 		| 'online'
 		| 'Bibliothek'
 		| 'IDS-Archiv'
 		| 'WDG'
-	} ? # TODO: mandatory, as element
+	} ? # TODO: mandatory (as an element?)
 	, attribute Sigle { xsd:token { pattern = '([A-Z]{9}|UNRESOLVED)' } } ?
 	, (
 		# xsd:token in lxml.etree doesn't allow \n
