@@ -80,7 +80,7 @@
     {:status 200 :body f}
     {:status 404 :body resource}))
 
-(defn create-editor
+(defn create-xml!
   [xml]
   (fn [f] (spit f xml :encoding "UTF-8")))
 
@@ -92,9 +92,9 @@
           xml      (new-article-xml xml-id form pos user)]
       {:status  200
        :headers {"X-Lex-ID" path}
-       :body    (server.git/edit! path (create-editor xml))})))
+       :body    (server.git/edit! path (create-xml! xml))})))
 
-(defn write-editor
+(defn write-xml!
   [lock body]
   (article.lock/editor lock (fn [f] (io/copy body f))))
 
@@ -106,7 +106,7 @@
        :body   resource}
       (try+
        {:status 200
-        :body   (server.git/edit! resource (write-editor lock body))}
+        :body   (server.git/edit! resource (write-xml! lock body))}
        (catch [:type ::article.lock/locked] {:keys [lock]}
          {:status 423
           :body   lock})))))
