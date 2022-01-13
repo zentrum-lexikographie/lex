@@ -83,9 +83,9 @@
        :body   (ring.io/piped-input-stream oxygen/download-plugin)})]])
 
 (defn trigger-cron-handler
-  [ch]
+  [ch-var]
   (fn [_]
-    {:status 200 :body {:triggered (some? (cron/trigger! ch))}}))
+    {:status 200 :body {:triggered (some? (cron/trigger! (var-get ch-var)))}}))
 
 (def handler
   (http/ring-handler
@@ -104,7 +104,7 @@
         :delete {:summary     "Refreshes all article data"
                  :tags        ["Index", "Admin"]
                  :handler     (trigger-cron-handler
-                               server.article/scheduled-refresh)
+                               #'server.article/scheduled-refresh)
                  ::auth/roles #{:admin}}}]
       ["/*resource"
        {:get  {:handler    article.handler/handle-read
@@ -118,7 +118,8 @@
      ["/git"
       {:patch {:summary     "Commit pending changes on the server's branch"
                :tags        ["Article" "Git" "Admin"]
-               :handler     (trigger-cron-handler server.git/scheduled-commit)
+               :handler     (trigger-cron-handler
+                             #'server.git/scheduled-commit)
                ::auth/roles #{:admin}}}]
      ["/git/ff/:ref"
       {:post {:summary     "Fast-forwards the server's branch to the given refs"
@@ -202,7 +203,8 @@
        :delete
        {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
         :tags        ["Mantis" "Admin"]
-        :handler     (trigger-cron-handler server.issue/scheduled-sync)
+        :handler     (trigger-cron-handler
+                      #'server.issue/scheduled-sync)
         ::auth/roles #{:admin}}}]
      (client-resources "/oxygen")
      (client-resources "/zdl-lex-client")
