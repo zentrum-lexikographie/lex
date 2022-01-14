@@ -167,7 +167,7 @@
 
 (defnp extract-articles
   "Extracts articles and their key data from an XML file."
-  [doc & opts]
+  [doc & {:as opts}]
   (try
     (let [file      (get opts :file)
           lex-data? (get opts :lex-data? true)
