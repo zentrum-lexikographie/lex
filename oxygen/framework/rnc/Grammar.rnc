@@ -92,7 +92,6 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Reflexivpronomen'
 			| string 'Relativpronomen'
 			| string 'reziprokes Pronomen'
-			| string 'Ausruf' # TODO: → Interjektion
 			| string 'Interjektion'
 			| string 'Affix'
 			| string 'Mehrwortausdruck'
