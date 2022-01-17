@@ -117,8 +117,9 @@
 (defnp links
   [elements]
   (for [link  (map zip/xml-zip (elements ::dwds/Verweis))
-        :let  [anchor (zx/xml1-> link ::dwds/Ziellemma axml/zip-hid)]
-        :when anchor
+        :let  [anchor (zx/xml1-> link ::dwds/Ziellemma axml/zip-hid)
+               invisible? (zx/xml1-> link (zx/attr= :class "invisible"))]
+        :when (and anchor (not invisible?))
         :let  [link-type (zx/attr link :Typ)
                sense (zx/xml1-> link ::dwds/Ziellesart axml/zip-text)]]
     {:type    link-type
