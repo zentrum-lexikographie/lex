@@ -182,7 +182,8 @@
              (and file errors?) (merge (check-for-errors article file))
              :always            (clean-map))))))
     (catch Throwable t
-      (log/warnf t "Error extracting data from %s" (or file "<XML/>")))))
+      (log/warnf t "Error extracting data from %s"
+                 (or (get opts :file) "<XML/>")))))
 
 (defn file->metadata
   [dir f]
@@ -214,6 +215,7 @@
     "#ffffff"))
 
 (comment
+  (mapcat :links (extract-articles-from-files (file "data/git")))
   (tufte/add-basic-println-handler! {})
   (profile
    {}

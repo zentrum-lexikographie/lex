@@ -1,10 +1,12 @@
 (ns zdl.lex.article.xml
-  (:require [clojure.data.xml :as dx]
-            [clojure.data.xml.tree :as dxt]
-            [clojure.java.io :as io]
-            [clojure.string :as str]
-            [clojure.zip :as zip]
-            [taoensso.tufte :as tufte :refer [defnp]]))
+  (:require
+   [clojure.data.xml :as dx]
+   [clojure.data.xml.tree :as dxt]
+   [clojure.data.zip.xml :as zx]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [clojure.zip :as zip]
+   [taoensso.tufte :as tufte :refer [defnp]]))
 
 (defn read-xml
   [& args]
@@ -13,17 +15,17 @@
 
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 
-(declare text*)
+(defnp normalize-text
+  [s]
+  (some-> s (str/replace #"\s+" " ") (str/trim) (not-empty)))
 
-(defn text-content*
-  [{:keys [content]}]
-  (apply str (map text* content)))
+(declare text')
 
-(defnp text*
+(defnp text'
   [node]
   (cond
     (string? node) node
-    (map? node)    (let [{:keys [tag attrs]} node]
+    (map? node)    (let [{:keys [tag attrs content]} node]
                      (or
                       (condp = tag
                         ::dwds/Streichung ""
@@ -31,16 +33,12 @@
                         ::dwds/Ziellesart ""
                         ::dwds/Ziellemma  (get attrs :Anzeigeform)
                         nil)
-                      (text-content* node)))
+                      (apply str (map text' content))))
     :else          ""))
-
-(defnp normalize-text
-  [s]
-  (some-> s (str/replace #"\s+" " ") (str/trim) (not-empty)))
 
 (defnp text
   [node]
-  (normalize-text (text* node)))
+  (normalize-text (text' node)))
 
 (defnp zip-text
   [loc]
@@ -52,7 +50,8 @@
 
 (defnp hid
   [{{:keys [hidx]} :attrs :as node}]
-  (apply str (cond-> [(text node)] hidx (conj "#" hidx))))
+  (apply str (cond-> [(normalize-text (zx/text (zip/xml-zip node)))]
+               hidx (conj "#" hidx))))
 
 (defnp zip-hid
   [loc]
