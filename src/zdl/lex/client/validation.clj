@@ -1,5 +1,5 @@
 (ns zdl.lex.client.validation
-  (:require [clojure.data.xml :as dx]
+  (:require [gremid.data.xml :as dx]
             [clojure.string :as str]
             [seesaw.core :as ui]
             [zdl.lex.article.chars :as chars]

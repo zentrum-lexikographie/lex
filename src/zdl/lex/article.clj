@@ -1,5 +1,5 @@
 (ns zdl.lex.article
-  (:require [clojure.data.xml :as dx]
+  (:require [gremid.data.xml :as dx]
             [clojure.data.zip :as dz]
             [clojure.data.zip.xml :as zx]
             [clojure.string :as str]
@@ -174,7 +174,9 @@
     (let [file      (get opts :file)
           lex-data? (get opts :lex-data? true)
           errors?   (get opts :errors? true)
-          articles  (filter (comp #{::dwds/Artikel} :tag) (get doc :content))]
+          articles  (zx/xml-> (zip/xml-zip doc)
+                              ::dwds/DWDS ::dwds/Artikel
+                              zip/node)]
       (vec
        (for [article articles]
          (let [elements (filter :tag (tree-seq :tag :content article))]

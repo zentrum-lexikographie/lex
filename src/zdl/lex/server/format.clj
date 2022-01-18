@@ -1,6 +1,6 @@
 (ns zdl.lex.server.format
   (:require [clojure.data.csv :as csv]
-            [clojure.data.xml :as dx]
+            [gremid.data.xml :as dx]
             [clojure.java.io :as io]
             [clojure.string :as str]
             [hiccup.core :refer [html]]
@@ -43,11 +43,11 @@
     :encoder [(create-encoder html->stream)]}))
 
 (defn xml->stream
-  [{:keys [tag] :as node} charset os]
-  (when-not tag
-    (throw (ex-info "No XML response" {})))
+  [{:keys [tag] :as doc} charset os]
+  (when-not (= :-document tag)
+    (throw (ex-info "No XML document response" {})))
   (with-open [w (io/writer os :encoding charset)]
-    (dx/emit node w :encoding (str/upper-case charset))))
+    (dx/emit (assoc-in doc [:attrs :encoding] (str/upper-case charset)) w)))
 
 (def xml-format
   (m-format/map->Format

@@ -1,7 +1,6 @@
 (ns zdl.lex.article.xml
   (:require
-   [clojure.data.xml :as dx]
-   [clojure.data.xml.tree :as dxt]
+   [gremid.data.xml :as dx]
    [clojure.data.zip.xml :as zx]
    [clojure.java.io :as io]
    [clojure.string :as str]
@@ -11,7 +10,7 @@
 (defn read-xml
   [& args]
   (with-open [is (apply io/input-stream args)]
-    (dxt/event-tree (doall (dx/event-seq is {})))))
+    (dx/pull-all (dx/parse is))))
 
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 

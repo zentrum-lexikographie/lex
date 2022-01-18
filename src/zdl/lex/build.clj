@@ -51,7 +51,7 @@
    :out str/trim (= "true")))
 
 (def client-jar-exclusions
-  (conj uberdeps/exclusions
+  (conj uberdeps/default-exclusions
         #"^\.env$"
         #"^plugin/.*"
         #"^plugin\.dtd"
@@ -70,14 +70,14 @@
       (sh! "clojure" "-M:dev:client:prod-client"
            (path scripts-dir "compile_client.clj")))
     (log/info "Packaging Oxygen XML Editor plugin (client)")
-    (binding [uberdeps/level      :error
-              uberdeps/exclusions client-jar-exclusions]
+    (binding [uberdeps/level :error]
       (uberdeps/package deps (path client-jar)
-                        {:aliases #{:client :prod-client}}))
+                        {:aliases    #{:client :prod-client}
+                         :exclusions client-jar-exclusions}))
     (clear-dir! classes)))
 
 (def server-jar-exclusions
-  (conj uberdeps/exclusions
+  (conj uberdeps/default-exclusions
         #"^\.env$"))
 
 (defn package-server!
@@ -88,10 +88,10 @@
     (sh! "clojure" "-M:server:prod-server"
          (path scripts-dir "compile_server.clj"))
     (log/info "Packaging server")
-    (binding [uberdeps/level      :error
-              uberdeps/exclusions server-jar-exclusions]
+    (binding [uberdeps/level :error]
       (uberdeps/package deps (path server-jar)
                         {:aliases    #{:server :prod-server}
+                         :exclusions server-jar-exclusions
                          :main-class "zdl.lex.server"}))
     (clear-dir! classes)))
 

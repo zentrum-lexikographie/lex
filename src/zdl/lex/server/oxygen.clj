@@ -1,12 +1,17 @@
 (ns zdl.lex.server.oxygen
-  (:require [clojure.data.xml :as dx]
-            [clojure.java.io :as io]
-            [clojure.string :as str]
-            [clojure.tools.logging :as log]
-            [clojure.walk :refer [postwalk]])
-  (:import [io.github.classgraph ClassGraph ScanResult]
-           java.nio.charset.Charset
-           [java.util.zip ZipEntry ZipOutputStream]))
+  (:require
+   [clojure.data.zip.xml :as zx]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [clojure.tools.logging :as log]
+   [clojure.zip :as zip]
+   [gremid.data.xml :as dx]
+   [gremid.data.xml.io :as dx.io])
+  (:import
+   (io.github.classgraph ClassGraph ScanResult)
+   (java.nio.charset Charset)
+   (java.util.zip ZipEntry ZipOutputStream)
+   (javax.xml.stream XMLInputFactory)))
 
 (def ^Charset zip-charset (Charset/forName "UTF-8"))
 
@@ -22,23 +27,25 @@
 
 (def update-descriptor
   (with-open [is (io/input-stream (io/resource "updateSite.xml"))]
-    (postwalk
-     (fn [node]
-       (if (map? node)
-         (cond-> node
-           (= (node :tag) ::xt/extensions)
-           (update :attrs merge update-descriptor-namespaces)
-           (= (node :tag) ::xt/version)
-           (assoc :content (list version)))
-         node))
-     (dx/parse is))))
+    (loop [doc (dx/pull-all (dx/parse is))]
+      (if-let [version-el (zx/xml1-> (zip/xml-zip doc)
+                                  ::xt/extensions ::xt/extension
+                                  ::xt/version
+                                  [(complement (zx/text= version))])]
+        (recur (zip/root (zip/edit version-el
+                                   #(assoc % :content (list version)))))
+        doc))))
+
+(def plugin-descriptor-input-factory
+  (doto (dx.io/new-input-factory)
+    (.setProperty XMLInputFactory/SUPPORT_DTD false)))
 
 (def plugin-descriptor
   (with-open [is (io/input-stream (io/resource "plugin/plugin.xml"))]
-    (->
-     (dx/parse is :support-dtd false)
-     (assoc-in [:attrs :version] version)
-     (dx/emit-str))))
+    (let [doc (zip/xml-zip (dx/parse plugin-descriptor-input-factory is))
+          plugin-el (zx/xml1-> doc :plugin)
+          plugin-el (zip/edit plugin-el #(assoc-in % [:attrs :version] version))]
+      (dx/emit-str (zip/root plugin-el)))))
 
 (defn classpath-resources
   [path]

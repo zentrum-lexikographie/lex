@@ -1,7 +1,7 @@
 (ns zdl.lex.server.article.handler
   (:require
    [clojure.core.async :as a]
-   [clojure.data.xml :as dx]
+   [gremid.data.xml :as dx]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [clojure.tools.logging :as log]

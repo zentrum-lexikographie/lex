@@ -1,5 +1,5 @@
 (ns zdl.lex.article.validate
-  (:require [clojure.data.xml :as dx]
+  (:require [gremid.data.xml :as dx]
             [clojure.java.io :as io]
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as tokens]
