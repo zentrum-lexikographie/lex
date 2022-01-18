@@ -395,13 +395,15 @@ Illustration = element Illustration {
 ########################################
 
 Rechtschreibstatus = attribute Typ {
-	'AR_G'   # deprecated
-	| 'NR_G' # deprecated
-	| 'U'
-	| 'U_CH'
-	| 'U_AT'
+	'AR_G'   # deprecated, stays unmarked
+	| 'NR_G' # deprecated, stays unmarked
+	| 'R'    # regional use and no norm applies
+	| 'U'    # once was valid but no longer is
+	| 'U_Falschschreibung' # was never valid
+	| 'U_CH' # TODO: keep or discard?
+	| 'U_AT' # TODO: keep or discard?
 	| 'U_U'  # deprecated, use U_Falschschreibung
-	| 'U_NR' # deprecated
+	| 'U_NR' # deprecated, use U
 }
 
 [
