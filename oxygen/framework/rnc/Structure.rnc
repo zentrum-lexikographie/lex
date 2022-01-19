@@ -210,6 +210,17 @@ semantische_Verweise = element Verweise {
   ]
 ]
 
+# (Klassifizierung der) morphologische(n) Konstituenten
+Konstituententyp = attribute Typ {
+	'Grundform'
+	| 'Erstglied'
+	| 'Binnenglied'
+	| 'Letztglied'
+	| 'formal_verwandt'
+	| 'MWA-Konstituente'
+	| 'MWA-Zentralartikel'
+}
+
 morphologische_Verweise = element Verweise {
     # Klassifizierung des morphologischen Prozesses
 	Metadaten.allgemein ?
@@ -226,45 +237,18 @@ morphologische_Verweise = element Verweise {
 	} ? # TODO: obligatory
 	, ( 
 		element Verweis {
-			# (Klassifizierung der) morphologische(n) Konstituenten
-			attribute Typ {
-				'Grundform'
-				| 'Erstglied'
-				| 'Binnenglied'
-				| 'Letztglied'
-				| 'formal_verwandt'
-				| 'MWA-Konstituente'
-	    			| 'MWA-Zentralartikel'
-			}
+			Konstituententyp
 			, attribute class { 'invisible' } ?
 	    		, Verweisziel
     		} *
-		| element Eigenname {
-			attribute Typ {
-				'Grundform'
-				| 'Erstglied'
-				| 'Binnenglied'
-				| 'Letztglied'
-				| 'formal_verwandt'
-				| 'MWA-Konstituente'
-			}
-			, attribute class { 'invisible' } ?			
+		& element Eigenname {
+			Konstituententyp
+			, attribute class { 'invisible' } ?
 			, Lemmatoken
 		} *
 	)
 }
 
-#[
-#  sch:pattern [
-#    sch:rule [
-#      context = "//d:Lesart/d:Verweise/d:Verweis[not(matches(@Typ, '(Antonym)|(Synonym)|(Assoziation)'))]"
-#      sch:assert [
-#        test = "@class = 'invisible'"
-#        'Semantische Verweise (außer Antonym, Synonym, Assoziation) müssen unsichtbar sein'
-#      ]
-#    ]
-#  ]
-#]
 
 semantischer_Verweis = element Verweis {
 	attribute Typ {
