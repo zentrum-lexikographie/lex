@@ -33,8 +33,7 @@ Kollokationen, Konstruktionsmuster, Kommentar {
 
 /* Labels für die Hauptblöcke */
 
-Artikel > Formangabe[Typ]:before        { -oxy-append-content: attr(Typ)"angabe"; }
-Artikel > Formangabe:not([Typ]):before  { -oxy-append-content: "Hauptformangabe (implizit)"; }
+Artikel > Formangabe[Typ]:before { -oxy-append-content: attr(Typ)"angabe"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); }
 Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
