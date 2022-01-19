@@ -94,69 +94,75 @@ Definition, Frequenzangabe, Kommentar, Verweise, Ueberschrift {
 
 /* Labels für Einzelfelder */
 
-Diasystematik > Fachgebiet:before              { content: "Fachgebiet: "; }
-Diasystematik > Stilebene:before               { content: "Stilebene: "; }
-Diasystematik > Stilfaerbung:before            { content: "Stilfärbung: "; }
-Diasystematik > Bedeutungsebene:before         { content: "Bedeutungsebene: "; }
-Diasystematik > Gruppensprache:before          { content: "Gruppensprache: "; }
-Diasystematik > Gebrauchszeitraum:before       { content: "Gebrauchszeitraum: "; }
-Diasystematik > Sprachraum:before              { content: "Sprachraum: "; }
-Diasystematik > Sprachareal:before             { content: "Sprachareal: "; }
-Aussprache:before                              { content: "Aussprache 🔈: "; }
-Auxiliar:before                                { content: "Auxiliar: "; }
-Wortklasse:before                              { content: "Wortklasse: "; }
-Wortklasse[Typ]:after                          { content: " (" attr(Typ) ")"; }
-Wortbildung:before                             { content: "Wortbildung: "; }
-FlexionsklasseSingular:before                  { content: "Flexionsklasse Sg.: "; }
-FlexionsklassePlural:before                    { content: "Flexionsklasse Pl.: "; }
-Genus:before                                   { content: "Genus: "; }
-Genitiv:before                                 { content: "Gen. Sg.: "; }
-Plural:before                                  { content: "Nom. Pl.: "; }
-Artikelpraeferenz:before                       { content: "Artikelpräferenz: "; }
-Praesens:before                                { content: "3. Pers. Präs.: "; }
-Praeteritum:before                             { content: "3. Pers. Prät.: "; }
-Partizip_II:before                             { content: "Partizip II: "; }
-Numerus:before                                 { content: "Numerus: "; }
-Numeruspraeferenz:before                       { content: "Numeruspräferenz: "; }
-Kasuspraeferenz:before                         { content: "Kasuspräferenz: "; }
-reflexiv:before                                { content: "reflexiv"; }
-Komparativ:before                              { content: "Komparativ: "; }
-Superlativ:before                              { content: "Superlativ: "; }
-Komparationspraeferenz:before                  { content: "Komparationspräferenz: "; }
-indeklinabel:before                            { content: "indeklinabel"; }
-Funktionspraeferenz:before                     { content: "Funktionspräferenz: "; }
-Einschraenkung:before                          { content: "sonstige Einschränkung: "; }
-Belegtext:before                               { content: "Belegtext: "; }
-Korpusabfrage:before                           { content: "DDC: "; }
-Fundstelle:before                              { content: "Fundstelle: "; }
-Kurztitel:before                               { content: "Kurztitel: "; }
-Datierung:before                               { content: "Datierung: "; }
-Etymologie:before                              { content: "Etymologie: "; }
-Formgeschichte:before                          { content: "Formgeschichte: "; }
-Bedeutungsgeschichte:before                    { content: "Bedeutungsgeschichte: "; }
-Diachronie>Verweise:before                     { content: "Querverweise: "; }
-Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
-Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
-Verweise>Verweis[Typ="MWA"]:before             { content: "auch in MWA ↗"; }
-Verweise>Verweis[Typ="MWA-Zentralartikel"]:before { content: "MWA-Zentralartikel ↗"; }
-Verweise>Verweis[Typ="Synonym"]:before         { content: "Synonym ist ↗"; }
-Verweise>Verweis[Typ="Synonym_MWA_Variante"]:before { content: "Synonym (MWA-Variante) ist ↗"; }
-Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
-Verweise>Verweis[Typ="Hyponym"]:before         { content: "Hyponym ist ↗"; }
-Verweise>Verweis[Typ="Hyperonym"]:before       { content: "Hyperonym ist ↗"; }
-Verweise>Verweis[Typ="Entsprechung"]:before    { content: "entspr. der Bed. von ↗"; }
-Verweise>Verweis[Typ="zu"]:before              { content: "zu ↗"; }
-Verweise>Verweis[Typ="vgl"]:before             { content: "vgl. ↗"; }
-Verweise>Verweis[Typ="mehr_sv"]:before         { content: "mehr unter ↗"; }
-Verweise>Verweis[Typ="Erstglied"]:before       { content: "mit Erstglied ↗"; }
-Verweise>Verweis[Typ="Binnenglied"]:before     { content: "mit Binnenglied ↗"; }
-Verweise>Verweis[Typ="Letztglied"]:before      { content: "mit Letztglied ↗"; }
-Verweise>Verweis[Typ="formal_verwandt"]:before { content: "formal verwandt mit ↗"; }
-Verweise>Verweis[Typ="Grundform"]:before       { content: "Grundform ist ↗"; }
-Verweise>Verweis[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente ist ↗"; }
+Diasystematik > Fachgebiet:before                   { content: "Fachgebiet: "; }
+Diasystematik > Stilebene:before                    { content: "Stilebene: "; }
+Diasystematik > Stilfaerbung:before                 { content: "Stilfärbung: "; }
+Diasystematik > Bedeutungsebene:before              { content: "Bedeutungsebene: "; }
+Diasystematik > Gruppensprache:before               { content: "Gruppensprache: "; }
+Diasystematik > Gebrauchszeitraum:before            { content: "Gebrauchszeitraum: "; }
+Diasystematik > Sprachraum:before                   { content: "Sprachraum: "; }
+Diasystematik > Sprachareal:before                  { content: "Sprachareal: "; }
+Aussprache:before                                   { content: "Aussprache 🔈: "; }
+Auxiliar:before                                     { content: "Auxiliar: "; }
+Wortklasse:before                                   { content: "Wortklasse: "; }
+Wortklasse[Typ]:after                               { content: " (" attr(Typ) ")"; }
+Wortbildung:before                                  { content: "Wortbildung: "; }
+FlexionsklasseSingular:before                       { content: "Flexionsklasse Sg.: "; }
+FlexionsklassePlural:before                         { content: "Flexionsklasse Pl.: "; }
+Genus:before                                        { content: "Genus: "; }
+Genitiv:before                                      { content: "Gen. Sg.: "; }
+Plural:before                                       { content: "Nom. Pl.: "; }
+Artikelpraeferenz:before                            { content: "Artikelpräferenz: "; }
+Praesens:before                                     { content: "3. Pers. Präs.: "; }
+Praeteritum:before                                  { content: "3. Pers. Prät.: "; }
+Partizip_II:before                                  { content: "Partizip II: "; }
+Numerus:before                                      { content: "Numerus: "; }
+Numeruspraeferenz:before                            { content: "Numeruspräferenz: "; }
+Kasuspraeferenz:before                              { content: "Kasuspräferenz: "; }
+reflexiv:before                                     { content: "reflexiv"; }
+Komparativ:before                                   { content: "Komparativ: "; }
+Superlativ:before                                   { content: "Superlativ: "; }
+Komparationspraeferenz:before                       { content: "Komparationspräferenz: "; }
+indeklinabel:before                                 { content: "indeklinabel"; }
+Funktionspraeferenz:before                          { content: "Funktionspräferenz: "; }
+Einschraenkung:before                               { content: "sonstige Einschränkung: "; }
+Belegtext:before                                    { content: "Belegtext: "; }
+Korpusabfrage:before                                { content: "DDC: "; }
+Fundstelle:before                                   { content: "Fundstelle: "; }
+Kurztitel:before                                    { content: "Kurztitel: "; }
+Datierung:before                                    { content: "Datierung: "; }
+Etymologie:before                                   { content: "Etymologie: "; }
+Formgeschichte:before                               { content: "Formgeschichte: "; }
+Bedeutungsgeschichte:before                         { content: "Bedeutungsgeschichte: "; }
+Diachronie>Verweise:before                          { content: "Querverweise: "; }
+Verweise>Verweis[Typ="EtymWB"]:before               { content: "im EtymWB als ↗"; }
+Verweise>Verweis[Typ="Assoziation"]:before          { content: "assoziativ verbunden mit ↗"; }
+Verweise>Verweis[Typ="MWA"]:before                  { content: "auch in MWA ↗"; }
+Verweise>Verweis[Typ="MWA-Zentralartikel"]:before   { content: "MWA-Zentralartikel ↗"; }
+Verweise>Verweis[Typ="Synonym"]:before              { content: "Synonym ist ↗"; }
+Verweise>Verweis[Typ="Synonym_MWA_Variante"]:before { content: "Synonym (MWA-zu-MWA-Variante) ist ↗"; }
+Verweise>Verweis[Typ="Antonym"]:before              { content: "Antonym ist ↗"; }
+Verweise>Verweis[Typ="Hyponym"]:before              { content: "Hyponym ist ↗"; }
+Verweise>Verweis[Typ="Hyperonym"]:before            { content: "Hyperonym ist ↗"; }
+Verweise>Verweis[Typ="Entsprechung"]:before         { content: "entspr. der Bed. von ↗"; }
+Verweise>Verweis[Typ="zu"]:before                   { content: "zu ↗"; }
+Verweise>Verweis[Typ="vgl"]:before                  { content: "vgl. ↗"; }
+Verweise>Verweis[Typ="mehr_sv"]:before              { content: "mehr unter ↗"; }
+Verweise>Verweis[Typ="Erstglied"]:before            { content: "Erstglied ist ↗"; }
+Verweise>Eigenname[Typ="Erstglied"]:before          { content: "Erstglied ist (Eigenname) "; }
+Verweise>Verweis[Typ="Binnenglied"]:before          { content: "Binnenglied ist ↗"; }
+Verweise>Eigenname[Typ="Binnenglied"]:before        { content: "Binnenglied ist (Eigenname) "; }
+Verweise>Verweis[Typ="Letztglied"]:before           { content: "Letztglied ist ↗"; }
+Verweise>Eigenname[Typ="Letztglied"]:before         { content: "Letztglied ist (Eigenname) "; }
+Verweise>Verweis[Typ="formal_verwandt"]:before      { content: "formal verwandt mit ↗"; }
+Verweise>Eigenname[Typ="formal_verwandt"]:before    { content: "formal verwandt mit (Eigenname) "; }
+Verweise>Verweis[Typ="Grundform"]:before            { content: "Grundform ist ↗"; }
+Verweise>Eigenname[Typ="Grundform"]:before          { content: "Grundform ist (Eigenname) "; }
+Verweise>Verweis[Typ="MWA-Konstituente"]:before     { content: "MWA-Konstituente ist ↗"; }
+Verweise>Eigenname[Typ="MWA-Konstituente"]:before   { content: "MWA-Konstituente ist (Eigenname) ↗"; }
 
-Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
-Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "ext. Etym.artikel ↗"; }
+Verweise>Verweis_extern[Typ="Enzyklopädie"]:before  { content: "Enzyklopädieartikel ↗"; }
+Verweise>Verweis_extern[Typ="Etymologie"]:before    { content: "externer Etymologieartikel ↗"; }
 
 /********************************************************************
  * Ab hier folgen alle Sonderfälle der Darstellung.
