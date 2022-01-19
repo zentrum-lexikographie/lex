@@ -203,8 +203,6 @@ Definition { font-weight: bold; }
 
 /* Markierung von Lemmazeichen */
 Schreibung { font-size: xx-large; }
-Schreibung[Praeferenz="1"] { font-weight: bold; }
-Schreibung[Praeferenz="3"], Schreibung[Praeferenz="4"] { font-size: 1.6em; }
 Schreibung[Typ="AR_G"] { color: brown; }
 *[Typ="U"], *[Typ="U_U"], *[Typ="U_CH"], *[Typ="U_AT"] {
 	text-decoration: line-through;
