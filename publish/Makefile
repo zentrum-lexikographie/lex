@@ -1,11 +1,11 @@
-src_user = root
+src_user = ${USER}
 src_host = zwei.dwds.de
 
 mysql = /usr/bin/mysql -sN
 mysqldump = /usr/bin/mysqldump
 
 all:
-	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|wortgeschichten|wortgeschichten_preprint)-update"
+	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|varwb|wortgeschichten|wortgeschichten_preprint)-update"
 
 environment:
 	/bin/mkdir -p backup/
@@ -32,6 +32,9 @@ dwb1-backup: environment
 
 dwb2-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwb2 > ./backup/backup-dwb2-`date -Iseconds`.sql
+
+varwb-backup: environment
+	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) varwb > ./backup/backup-varwb-`date -Iseconds`.sql
 
 wdg-backup: environment
 	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wdg > ./backup/backup-wdg-`date -Iseconds`.sql
@@ -147,6 +150,17 @@ etymwb-update: etymwb-backup
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE etymwb_beta.article TO etymwb.article;"
 	$(mysql) -e "RENAME TABLE etymwb_beta.lemma TO etymwb.lemma;"
+
+varwb-update: varwb-backup
+	# check whether the source database exists
+	$(mysql) -e "SELECT COUNT(*) FROM varwb_beta.article;"
+	$(mysql) -e "SELECT COUNT(*) FROM varwb_beta.lemma;"
+	# empty the target database
+	$(mysql) -e "DROP TABLE IF EXISTS varwb.article;"
+	$(mysql) -e "DROP TABLE IF EXISTS varwb.lemma;"
+	# move beta database tables to the target database
+	$(mysql) -e "RENAME TABLE varwb_beta.article TO varwb.article;"
+	$(mysql) -e "RENAME TABLE varwb_beta.lemma TO varwb.lemma;"
 
 wdg-update: wdg-backup
 	# check whether the source database exists
