@@ -458,8 +458,9 @@ if __name__ == '__main__':
                             ):
                         
                         # normalization hooks for DWB2:
-                        headword = headword.replace(u'‐', '-')
-                        headword = headword.rstrip('.') # no abbrevs. in dwb2
+                        if arguments.dictionary_type == 'dwb2':
+                            headword = headword.replace(u'‐', '-')
+                            headword = headword.rstrip('.') # no abbrevs. in dwb2
 
                         lemma_count += 1
                         #if not headword.isalpha():
