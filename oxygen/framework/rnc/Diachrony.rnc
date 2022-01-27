@@ -48,7 +48,8 @@ freie_Beschreibung = mixed {
     & erwaehntes_Zeichen *
 	& Stilebene *
 	& Stilfaerbung *
-	& Sprachraum *
+	& Sprachraum * # deprecated
+	& Sprachareal *
 	& Gebrauchszeitraum *
 	& Gruppensprache *
 	& Fachgebiet *
