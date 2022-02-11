@@ -89,7 +89,7 @@
    :links   "zdl-lex-links-view"})
 
 (def preview-url
-  (uri/uri "http://zwei.dwds.de/wb/existdb/"))
+  (uri/uri "https://zwei.dwds.de/wb/existdb/"))
 
 (extend-protocol Workspace
   StandalonePluginWorkspace

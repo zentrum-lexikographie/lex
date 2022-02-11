@@ -362,7 +362,7 @@ Schreibung[Trennung]:after { -oxy-append-content:" Trennung: "attr(Trennung)" ";
 .schreibung_ungültig { border-right: 2em solid blue; }
 
 Illustration {
-	content: url("http://zwei.dwds.de/thumbnails/" attr(Datei));
+	content: url("https://zwei.dwds.de/thumbnails/" attr(Datei));
 	margin-left: 1em;
 	max-width: 100%;
 }
