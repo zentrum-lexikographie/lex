@@ -117,6 +117,7 @@ Stilfaerbung = element Stilfaerbung {
 		| 'Schimpfwort'
 		| 'spöttisch'
 		| 'übertrieben'
+		| 'untertrieben'
 		| 'verhüllend'
 		| 'verstärkend'
 		| 'vertraulich' # D99 == fam.?
