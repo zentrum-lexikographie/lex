@@ -174,8 +174,6 @@ Metadaten.Artikel = (
 	    | 'Mix'
 	    | 'Movierung'
 	    | 'MWA'
-	    | 'MWA-NP'
-	    | 'MWA-N-PP'
 	    | 'MWA-Zentral-Satellit'
 	    | 'Philosophie'
 	    | 'Politik-001'
