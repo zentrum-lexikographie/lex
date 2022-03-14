@@ -14,9 +14,10 @@
 
 (defn update!
   [article-files]
-  (let [articles (vec (article/extract-articles-from-files dir article-files))]
-    (log/debugf "Updating %d article(s)" (count articles))
-    (solr.client/add! (map solr.fields/article->doc articles))))
+  (doseq [article-batch (partition-all 10000 article-files)]
+    (let [articles (vec (article/extract-articles-from-files dir article-batch))]
+      (log/debugf "Updating %d article(s)" (count articles))
+      (solr.client/add! (map solr.fields/article->doc articles)))))
 
 (defn remove!
   [article-files]
@@ -29,9 +30,8 @@
   []
   (let [article-files (article/files dir)
         threshold     (Date.)]
-    (log/debugf "Refreshing %d article(s)" (count article-files))
-    (doseq [article-batch (partition-all 10000 article-files)]
-      (update! article-batch))
+    (log/debugf "Refreshing %d article file(s)" (count article-files))
+    (update! article-files)
     (log/debugf "Purging article(s) before %s" threshold)
     (solr.client/purge! "article" threshold)))
 
