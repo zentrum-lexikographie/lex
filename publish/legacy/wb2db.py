@@ -78,7 +78,7 @@ class Dictionary(object):
                     source CHAR(32) DEFAULT "DWDS",
                     recommendation TINYINT(1) default 0,
                     date DATE NOT NULL,
-                    xml MEDIUMTEXT COLLATE utf8mb4_unicode_ci NOT NULL,
+                    xml MEDIUMTEXT COLLATE utf8mb4_bin NOT NULL,
                     PRIMARY KEY (id),
                     KEY status (status)
                     ) ENGINE=MyISAM
@@ -86,9 +86,9 @@ class Dictionary(object):
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS lemma (
                     id INT(11) NOT NULL,
-                    lemma VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                    lemma VARCHAR(50) COLLATE utf8mb4_bin NOT NULL,
                     hidx TINYINT(2) DEFAULT NULL,
-                    type VARCHAR(10),
+                    type VARCHAR(10) COLLATE utf8mb4_bin,
                     article_id INT(11) NOT NULL,
                     PRIMARY KEY (id),
                     KEY lemma (lemma),
@@ -97,7 +97,7 @@ class Dictionary(object):
                     DEFAULT CHARSET=utf8mb4;
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS token (
-                    token VARCHAR(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+                    token VARCHAR(50) COLLATE utf8mb4_bin NOT NULL,
                     lemma_id INT(11) NOT NULL,
                     KEY token (token)
                     ) ENGINE=MyISAM
