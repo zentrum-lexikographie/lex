@@ -32,7 +32,7 @@ _ddl_statements = [
          id INT(11) NOT NULL,
          lemma VARCHAR(200) COLLATE utf8mb4_bin NOT NULL,
          hidx TINYINT(2) DEFAULT NULL,
-         type VARCHAR(10),
+         type VARCHAR(32),
          article_id INT(11) NOT NULL,
          PRIMARY KEY (id),
          KEY lemma (lemma),
