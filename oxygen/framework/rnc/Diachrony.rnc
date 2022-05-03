@@ -89,6 +89,7 @@ Sprachen = (
 	| 'ahd'          # goh: Old High German (ca. 750-1050) [a-s]
 	| 'aimara'
 	| 'aind'
+	| 'ainu'
 	| 'air'          # sga: Old Irish (to 900)
 	| 'aital' 
 	| 'akatalan'
