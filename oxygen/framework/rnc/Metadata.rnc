@@ -74,6 +74,7 @@ Mitarbeiterinnen = (
 	| 'schroeder'
 	| 'siebel'
 	| 'solf'
+  | 'steinhauer'
 	| 'unger'
 	| 'wahrig'
 	| 'wulfert'
