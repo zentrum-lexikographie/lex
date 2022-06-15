@@ -1,20 +1,20 @@
 (ns zdl.lex.fixture.article
   (:require [clojure.test :refer [deftest is]]
             [clojure.test.check.generators :as gen]
-            [zdl.lex.article.validate :as article.validate]
-            [zdl.xml.rngom :as rngom]))
+            [gremid.data.xml.rngom :as dx.rngom]
+            [zdl.lex.article.validate :as article.validate]))
 
 (def model
   (delay
     (->> article.validate/rng-schema-source
-         (rngom/parse-schema) (rngom/traverse))))
+         (dx.rngom/parse-schema) (dx.rngom/traverse))))
 
 (def article-qn
   "{http://www.dwds.de/ns/1.0}Artikel")
 
 (defn article-attr-vals
   [k]
-  (into #{} (rngom/attribute-values article-qn k @model)))
+  (into #{} (dx.rngom/attribute-values article-qn k @model)))
 
 (def gen-article-attr-val
   (comp gen/elements article-attr-vals))

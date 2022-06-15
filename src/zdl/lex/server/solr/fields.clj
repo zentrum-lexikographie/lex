@@ -53,7 +53,7 @@
 
 (def issue-basic-fields
   [:form :last-updated :summary :category :status :severity
-   :reporter :handler :resolution :attachments :notes])
+   :reporter :handler :resolution])
 
 (defn issue->fields
   [issue]

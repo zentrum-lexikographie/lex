@@ -1,9 +1,9 @@
 (ns zdl.lex.client-test
-  (:require [clojure.data.xml :as dx]
-            [clojure.data.zip.xml :as zx]
-            [clojure.test.check.generators :as gen]
+  (:require [clojure.test.check.generators :as gen]
             [clojure.test :refer :all]
             [clojure.zip :as zip]
+            [gremid.data.xml :as dx]
+            [gremid.data.xml.zip :as dxz]
             [manifold.deferred :as d]
             [zdl.lex.client :as client]
             [zdl.lex.server.gen.schema :as schema-gen]
@@ -41,7 +41,7 @@
     (log/infof "E %s [%s @ %s]" id author timestamp)
     (zip/root
      (zip/edit
-      (zx/xml1-> (zip/xml-zip xml) ::dwds/Artikel)
+      (dxz/xml1-> (zip/xml-zip xml) ::dwds/Artikel)
       (fn [a]
         (-> a
             (assoc-in [:attrs :Zeitstempel] timestamp)

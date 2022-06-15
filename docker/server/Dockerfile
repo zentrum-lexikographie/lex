@@ -35,10 +35,10 @@ USER $ZDL_LEX_USER
 WORKDIR /app
 
 COPY --chown=lex:lex deps.edn /app
-RUN clojure -A:server -P
+RUN clojure -A:log:server -P
 
 COPY --chown=lex:lex src /app/src
 COPY --chown=lex:lex oxygen /app/oxygen
 
-ENTRYPOINT ["clojure", "-X:server", "zdl.lex.server/start!"]
+ENTRYPOINT ["clojure", "-X:log:server", "zdl.lex.server/start!"]
 

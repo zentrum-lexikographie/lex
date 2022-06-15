@@ -1,12 +1,29 @@
 (ns zdl.lex.client.validation
   (:require [gremid.data.xml :as dx]
             [clojure.string :as str]
+            [integrant.core :as ig]
+            [seesaw.bind :as uib]
             [seesaw.core :as ui]
+            [zdl.lex.bus :as bus]
+            [zdl.lex.client.icon :as client.icon]
+            [zdl.lex.client.editors :as client.editors]
             [zdl.lex.article.chars :as chars]
             [zdl.lex.article.token :as tokens]
             [zdl.lex.article.validate :as av])
   (:import ro.sync.document.DocumentPositionedInfo
+           (ro.sync.exml.workspace.api.standalone StandalonePluginWorkspace)
            [ro.sync.exml.workspace.api.results ResultsManager$ResultType]))
+
+(def active?
+  (atom false))
+
+(def action
+  (ui/action :name "Typographieprüfung"
+             :tip "Typographieprüfung (deaktiviert)"
+             :icon client.icon/gmd-error-outline
+             :handler (fn [_]
+                        (let [validate? (swap! active? not)]
+                          (bus/publish! #{:validate?} {:validate? validate?})))))
 
 (def tab-key
   "ZDL - Typographie")
@@ -71,3 +88,39 @@
 (defn clear-results!
   [manager url]
   (reset-results! manager url nil))
+
+(defn validate!
+  [^StandalonePluginWorkspace workspace topic {:keys [validate? url doc]}]
+  (let [results-manager (.getResultsManager workspace)]
+    (when (= :validate? topic)
+      (reset-results! results-manager)
+      (when validate?
+        (doseq [[url doc] (client.editors/read-editor-contents workspace)]
+          (add-results! results-manager url doc))))
+    (when (= :editor-closed topic)
+      (clear-results! results-manager url))
+    (when (and @active?
+               (#{:editor-opened :editor-activated :editor-saved} topic))
+      (add-results! results-manager url doc))))
+
+(def validation-events
+  #{:validate? :editor-opened :editor-closed :editor-activated :editor-saved})
+
+(defn bind-validation-events!
+  [workspace]
+  (bus/listen validation-events (partial validate! workspace)))
+
+(defmethod ig/init-key ::events
+  [_ _]
+  [(uib/bind
+    active?
+    (uib/transform #(if % client.icon/gmd-error client.icon/gmd-error-outline))
+    (uib/property action :icon))
+   (uib/bind
+    active?
+    (uib/transform #(str "Typographieprüfung (" (when-not % "de") "aktiviert)"))
+    (uib/property action :tip))])
+
+(defmethod ig/halt-key! ::events
+  [_ callbacks]
+  (doseq [callback callbacks] (callback)))

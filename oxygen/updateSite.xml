@@ -5,7 +5,7 @@
     <xt:extension id="zdl-lex-plugin">
         <xt:location href="zdl-lex-plugin.zip"/>
         <xt:version></xt:version>
-        <xt:oxy_version>15.1+</xt:oxy_version>
+        <xt:oxy_version>24.1+</xt:oxy_version>
         <xt:type>plugin</xt:type>
         <xt:author>Zentrum für Digitale Lexikographie der deutschen Sprache</xt:author>
         <xt:name>ZDL-Lex Plugin</xt:name>
@@ -32,7 +32,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <xt:extension id="zdl-lex-framework">
         <xt:location href="zdl-lex-framework.zip"/>
         <xt:version></xt:version>
-        <xt:oxy_version>15.1+</xt:oxy_version>
+        <xt:oxy_version>24.1+</xt:oxy_version>
         <xt:type>framework</xt:type>
         <xt:author>Zentrum für Digitale Lexikographie der deutschen Sprache</xt:author>
         <xt:name>ZDL-Lex Framework</xt:name>

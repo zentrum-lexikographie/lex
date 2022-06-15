@@ -1,12 +1,12 @@
 (ns zdl.lex.server.oxygen
   (:require
-   [clojure.data.zip.xml :as zx]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [clojure.tools.logging :as log]
    [clojure.zip :as zip]
    [gremid.data.xml :as dx]
-   [gremid.data.xml.io :as dx.io])
+   [gremid.data.xml.io :as dx.io]
+   [gremid.data.xml.zip :as dx.zip])
   (:import
    (io.github.classgraph ClassGraph ScanResult)
    (java.nio.charset Charset)
@@ -28,10 +28,10 @@
 (def update-descriptor
   (with-open [is (io/input-stream (io/resource "updateSite.xml"))]
     (loop [doc (dx/pull-all (dx/parse is))]
-      (if-let [version-el (zx/xml1-> (zip/xml-zip doc)
+      (if-let [version-el (dx.zip/xml1-> (zip/xml-zip doc)
                                   ::xt/extensions ::xt/extension
                                   ::xt/version
-                                  [(complement (zx/text= version))])]
+                                  [(complement (dx.zip/text= version))])]
         (recur (zip/root (zip/edit version-el
                                    #(assoc % :content (list version)))))
         doc))))
@@ -43,7 +43,7 @@
 (def plugin-descriptor
   (with-open [is (io/input-stream (io/resource "plugin/plugin.xml"))]
     (let [doc (zip/xml-zip (dx/parse plugin-descriptor-input-factory is))
-          plugin-el (zx/xml1-> doc :plugin)
+          plugin-el (dx.zip/xml1-> doc :plugin)
           plugin-el (zip/edit plugin-el #(assoc-in % [:attrs :version] version))]
       (dx/emit-str (zip/root plugin-el)))))
 

@@ -1,0 +1,91 @@
+{:paths ["src" "build"]
+ :tasks
+ {:requires     ([babashka.fs :as fs]
+                 [clojure.string :as str]
+                 [build-util :refer :all])
+  clj-kondo     {:doc "Configures clj-kondo linter"
+                 :task
+                 (run-proc!
+                  ["clj-kondo"
+                   "--lint"
+                   (run->str!
+                    ["clojure" "-A:test:log:client:server:oxygen" "-Spath"])
+                   "--dependencies"
+                   "--parallel"
+                   "--copy-configs"])}
+  pyenv         {:doc  "Initializes local python environment"
+                 :task (try
+                         (shell "pyenv local")
+                         (catch Throwable _
+                           (shell "pyenv virtualenv zdl-lex")
+                           (shell "pyenv local zdl-lex")
+                           (shell "pip install -U pip")))}
+  python-deps   {:doc  "Installs Python dependencies"
+                 :task (shell "pip install -r requirements.txt -r requirements-dev.txt")}
+  write-version {:doc "Writes new version"
+                 :task
+                 (spit (fs/file "src" "version.edn")
+                       (pr-str {:version (current-version)}))}
+  build-schema  {:doc "Transpile RELAXNG/Schematron sources"
+                 :task (clojure! "-T:build" "transpile-schema")}
+  build-client  {:doc "Builds Oxygen XML Editor plugin/framework"
+                 :task
+                 (clojure! "-T:build" "plugin-jar")}
+  build         {:doc     "Builds docker images"
+                 :depends [write-version
+                           build-schema
+                           build-client]
+                 :task
+                 (docker-compose! "build" "solr" "server")}
+  release       {:doc     "Releases docker images"
+                 :depends [build]
+                 :task
+                 (letfn [(image-tag
+                           ([image-name]
+                            (image-tag image-name (current-version)))
+                           ([image-name image-version]
+                            (str "gremid/propylaen-" image-name ":" image-version)))]
+                   (doseq [service ["solr" "server"]]
+                     (let [version-tag (image-tag service)
+                           latest-tag  (image-tag service "latest")]
+                       (docker! "tag" latest-tag version-tag)
+                       (docker! "push" version-tag))))}
+  start-oxygen {:doc "Start Oxygen XML Editor with plugin/framework"
+                 :task
+                 (do
+                   (when-not oxygen-home
+                     (throw (ex-info "$OXYGEN_HOME not found" {})))
+                   (run-proc!
+                    [(str (fs/file oxygen-home "jre" "bin" "java"))
+                     "--add-opens=java.base/java.lang=ALL-UNNAMED"
+                     "--add-opens=java.base/java.net=ALL-UNNAMED"
+                     "--add-opens=java.base/java.util=ALL-UNNAMED"
+                     "--add-opens=java.base/java.util.regex=ALL-UNNAMED"
+                     "--add-opens=java.base/sun.net.util=ALL-UNNAMED"
+                     "--add-opens=java.base/sun.net.www.protocol.http=ALL-UNNAMED"
+                     "--add-opens=java.base/sun.net.www.protocol.https=ALL-UNNAMED"
+                     "--add-opens=java.desktop/java.awt=ALL-UNNAMED"
+                     "--add-opens=java.desktop/java.awt.dnd=ALL-UNNAMED"
+                     "--add-opens=java.desktop/javax.swing=ALL-UNNAMED"
+                     "--add-opens=java.desktop/javax.swing.text=ALL-UNNAMED"
+                     "--add-opens=java.desktop/javax.swing.plaf.basic=ALL-UNNAMED"
+                     "--add-opens=java.xml/com.sun.org.apache.xerces.internal.xni=ALL-UNNAMED"
+                     "--add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED"
+                     "--add-opens=javafx.web/javafx.scene.web=ALL-UNNAMED"
+                     "-Xmx1g"
+                     "-XX:-OmitStackTraceInFastThrow"
+                     "-XX:SoftRefLRUPolicyMSPerMB=10"
+                     "-Dcom.oxygenxml.editor.plugins.dir=."
+                     "-Dcom.oxygenxml.app.descriptor=ro.sync.exml.EditorFrameDescriptor"
+                     "-Djava.net.preferIPv4Stack=true"
+                     "-Dsun.io.useCanonCaches=true"
+                     "-Dsun.io.useCanonPrefixCache=true"
+                     "-cp" (->>
+                            [(fs/file oxygen-home "classes")
+                             (fs/file oxygen-home "lib" "oxygen-basic-utilities.jar")
+                             (fs/file oxygen-home "lib" "oxygen.jar")
+                             (fs/file oxygen-home)]
+                            (str/join \:))
+                     "ro.sync.exml.Oxygen"
+                     "project.xpr"]
+                    {:dir oxygen-dir}))}}}

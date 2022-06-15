@@ -68,15 +68,32 @@
    (->request)
    (http/request)))
 
+(defn log-update
+  [action docs]
+  (log/debugf "%s %d doc(s)" action (count docs))
+  docs)
+
+(def add-xf
+  (comp
+   (partition-all 10000)
+   (map (partial log-update "Updating"))
+   (map (fn [docs] [:add (seq docs)]))
+   (map update!)))
+
 (defn add!
   [docs]
-  (update!
-   [:add (seq docs)]))
+  (into [] add-xf docs))
+
+(def removal-xf
+  (comp
+   (partition-all 10000)
+   (map (partial log-update "Removing"))
+   (map (fn [ids] [:delete (for [id ids] [:id id])]))
+   (map update!)))
 
 (defn remove!
   [ids]
-  (update!
-   [:delete (for [id ids] [:id id])]))
+  (into [] removal-xf ids))
 
 (defn optimize!
   []
@@ -85,6 +102,7 @@
 
 (defn purge!
   [doc-type threshold]
+  (log/debugf "Purging %s(s) before %s" doc-type threshold)
   (update!
    [:delete
     [:query (format "doc_type:%s && time_l:[* TO %s}"

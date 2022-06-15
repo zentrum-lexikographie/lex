@@ -10,8 +10,8 @@
   (as-file [^Path p] (.toFile p))
   (as-url [^Path p] (.. p (toFile) (toURI) (toURL))))
 
-(defn ^File file
-  [& args]
+(defn file
+  ^File [& args]
   (let [^File f (apply io/file args)]
     (.getCanonicalFile f)))
 
@@ -19,20 +19,24 @@
   [& args]
   (.isFile ^File (apply file args)))
 
-(defn ^String path
+(defn directory?
   [& args]
+  (.isDirectory ^File (apply file args)))
+
+(defn path
+  ^String [& args]
   (.getPath (apply file args)))
 
-(defn ^Path path-obj
-  [& args]
+(defn path-obj
+  ^Path [& args]
   (.toPath (apply file args)))
 
-(defn ^Path relativize
-  [base f]
+(defn relativize
+  ^Path [base f]
   (.relativize (path-obj base) (path-obj f)))
 
-(defn ^Path resolve-path
-  [base ^Path p]
+(defn resolve-path
+  ^Path [base ^Path p]
   (.resolve (path-obj base) p))
 
 (def ^:private copy-options
@@ -51,7 +55,11 @@
     (doseq [^File c (.listFiles f)] (delete! c)))
   (io/delete-file f silently))
 
+(defn ensure-dirs
+  [& d]
+  (doto (apply file d) (.mkdirs)))
+
 (defn clear-dir!
   [^File d]
-  (when (.isDirectory d) (delete! d))
-  (.mkdirs d))
+  (when (directory? d) (delete! d))
+  (ensure-dirs d))

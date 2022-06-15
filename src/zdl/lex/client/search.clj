@@ -1,19 +1,21 @@
 (ns zdl.lex.client.search
-  (:require [clojure.string :as str]
-            [mount.core :refer [defstate]]
-            [seesaw.behave :refer [when-focused-select-all]]
-            [seesaw.bind :as uib]
-            [seesaw.border :refer [line-border]]
-            [seesaw.core :as ui]
-            [zdl.lex.article :as article]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.client.bind :refer [bind->bus]]
-            [zdl.lex.client.font :as client.font]
-            [zdl.lex.client.icon :as client.icon]
-            [zdl.lex.lucene :as lucene]
-            [clojure.tools.logging :as log]
-            [zdl.lex.client.http :as client.http])
-  (:import com.jidesoft.hints.AbstractListIntelliHints))
+  (:require
+   [clojure.string :as str]
+   [clojure.tools.logging :as log]
+   [integrant.core :as ig]
+   [seesaw.behave :refer [when-focused-select-all]]
+   [seesaw.bind :as uib]
+   [seesaw.border :refer [line-border]]
+   [seesaw.core :as ui]
+   [zdl.lex.article :as article]
+   [zdl.lex.bus :as bus]
+   [zdl.lex.client.bind :refer [bind->bus]]
+   [zdl.lex.client.font :as client.font]
+   [zdl.lex.client.http :as client.http]
+   [zdl.lex.client.icon :as client.icon]
+   [zdl.lex.lucene :as lucene])
+  (:import
+   (com.jidesoft.hints AbstractListIntelliHints)))
 
 (defn- suggestion->html
   [{:keys [suggestion pos type definitions status id last-modified]}]
@@ -96,18 +98,18 @@
                           :action action
                           :font (client.font/derived :style :plain))))
 
-(defstate input->
-  :start (uib/bind
-          input
-          (uib/tee
-           query
-           (uib/bind (uib/transform #(if (lucene/valid? %) :black :red))
-                     (uib/property input :foreground))))
-  :stop (input->))
+(defmethod ig/init-key ::events
+  [_ _]
+  [(uib/bind input query)
+   (uib/bind
+    input
+    (uib/bind (uib/transform #(if (lucene/valid? %) :black :red))
+              (uib/property input :foreground)))
+   (uib/bind
+    (bind->bus #{:search-request :search-result-selected})
+    (uib/transform (comp :query second))
+    input)])
 
-(defstate ->input
-  :start (uib/bind
-          (bind->bus #{:search-request :search-result-selected})
-          (uib/transform (comp :query second))
-          input)
-  :stop (->input))
+(defmethod ig/halt-key! ::events
+  [_ callbacks]
+  (doseq [callback callbacks] (callback)))

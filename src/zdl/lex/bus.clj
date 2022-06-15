@@ -1,10 +1,11 @@
 (ns zdl.lex.bus
-  (:require [clojure.core.async :as a]))
+  (:require [clojure.core.async :as a]
+            [clojure.tools.logging :as log]))
 
-(defonce ^:private chan
+(def ^:private chan
   (a/chan))
 
-(defonce ^:private pubs
+(def ^:private pubs
   (a/pub chan first))
 
 (defn publish!
@@ -19,7 +20,10 @@
       (a/sub pubs topic c))
     (a/go-loop []
       (when-let [msg (a/<! c)]
-        (a/thread (apply listener msg))
+        (try
+          (apply listener msg)
+          (catch Throwable t
+            (log/warnf t "Error while processing %s" msg)))
         (recur)))
     (fn []
       (doseq [topic topics]

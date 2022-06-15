@@ -1,15 +1,14 @@
-(ns zdl.lex.dev
-  (:require [mount.core :as mount]
-            [seesaw.core :as ui]
+(ns zdl.lex.client.dev
+  (:require [seesaw.core :as ui]
             [zdl.lex.client.io :refer [lexurl-handler]]
             [zdl.lex.client.issue :as client.issue]
             [zdl.lex.client.links :as client.links]
-            [zdl.lex.client.oxygen :as client.oxygen]
             [zdl.lex.client.results :as client.results]
             [zdl.lex.client.toolbar :as client.toolbar]
             [zdl.lex.client.util :as client.util]
             [zdl.lex.url :as lexurl]
-            [zdl.lex.util :refer [install-uncaught-exception-handler!]]))
+            [zdl.lex.util :refer [install-uncaught-exception-handler!]]
+            [integrant.core :as ig]))
 
 (install-uncaught-exception-handler!)
 
@@ -17,12 +16,9 @@
   (lexurl/install-stream-handler! lexurl-handler)
   (catch Throwable _))
 
-(comment
-  ;; start/stop client-side state management
-  (mount/start (mount/only client.oxygen/states))
-  (mount/stop (mount/only client.oxygen/states))
-  ;; display dev testbed
-  (ui/invoke-later
+(defmethod ig/init-key ::testbed
+  [_ _]
+  (ui/invoke-now
    (ui/show!
     (ui/pack!
      (let [sidebar    (ui/splitter :top-bottom
@@ -40,3 +36,7 @@
         :size (client.util/clip-to-screen-size)
         :content (ui/border-panel :north client.toolbar/widget
                                   :center main-panel)))))))
+
+(defmethod ig/halt-key! ::testbed
+  [_ testbed]
+  (ui/dispose! testbed))

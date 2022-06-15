@@ -2,7 +2,6 @@
   (:require [clojure.java.io :as io]
             [clojure.tools.logging :as log]
             [hiccup.page :refer [include-css]]
-            [mount.core :as mount :refer [defstate]]
             [reitit.coercion.malli :as rcm]
             [reitit.http :as http]
             [reitit.http.coercion :as coercion]
@@ -16,8 +15,6 @@
             [ring.adapter.jetty :as jetty]
             [ring.util.io :as ring.io]
             [zdl.lex.cron :as cron]
-            [zdl.lex.env :refer [getenv]]
-            [zdl.lex.server.article :as server.article]
             [zdl.lex.server.article.handler :as article.handler]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.format :as format]
@@ -28,7 +25,8 @@
             [zdl.lex.server.solr.export :as solr.export]
             [zdl.lex.server.solr.query :as solr.query]
             [zdl.lex.server.solr.links :as solr.links]
-            [zdl.lex.server.solr.suggest :as solr.suggest])
+            [zdl.lex.server.solr.suggest :as solr.suggest]
+            [integrant.core :as ig])
   (:import org.eclipse.jetty.server.Server))
 
 (def homepage
@@ -48,7 +46,8 @@
           :title "Oxygen XML Editor - Update Site"}
          "Oxygen XML Editor - Update Site"]]]]]]])
 
-(defn wrap-log-exception [handler ^Throwable e req]
+(defn wrap-log-exception
+  [handler ^Throwable e req]
   (log/warn e (select-keys req [:uri :request-method]))
   (handler e req))
 
@@ -83,11 +82,13 @@
        :body   (ring.io/piped-input-stream oxygen/download-plugin)})]])
 
 (defn trigger-cron-handler
-  [ch-var]
+  [schedule]
   (fn [_]
-    {:status 200 :body {:triggered (some? (cron/trigger! (var-get ch-var)))}}))
+    {:status 200
+     :body   {:triggered (cron/trigger! schedule)}}))
 
-(def handler
+(defn handler
+  [{:keys [schedule lock-db git-repo] {git-dir :dir} :git-repo}]
   (http/ring-handler
    (http/router
     [""
@@ -97,19 +98,18 @@
         :headers {"Location" "/home"}})]
      ["/article" {::auth/roles #{:user}}
       ["/"
-       {:put    {:handler    article.handler/handle-create
+       {:put    {:handler    (partial article.handler/handle-create git-dir)
                  :parameters {:query [:map
                                       [:form :string]
                                       [:pos :string]]}}
         :delete {:summary     "Refreshes all article data"
                  :tags        ["Index", "Admin"]
-                 :handler     (trigger-cron-handler
-                               #'server.article/scheduled-refresh)
+                 :handler     (trigger-cron-handler (:git-refresh schedule))
                  ::auth/roles #{:admin}}}]
       ["/*resource"
-       {:get  {:handler    article.handler/handle-read
+       {:get  {:handler    (partial article.handler/handle-read git-dir)
                :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    article.handler/handle-write
+        :post {:handler    (partial article.handler/handle-write lock-db git-dir)
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
      ["/docs/api/*"
@@ -118,20 +118,13 @@
      ["/git"
       {:patch {:summary     "Commit pending changes on the server's branch"
                :tags        ["Article" "Git" "Admin"]
-               :handler     (trigger-cron-handler
-                             #'server.git/scheduled-commit)
+               :handler     (trigger-cron-handler (:git-commit schedule))
                ::auth/roles #{:admin}}}]
      ["/git/ff/:ref"
       {:post {:summary     "Fast-forwards the server's branch to the given refs"
               :tags        ["Article" "Git" "Admin"]
               :parameters  {:path [:map [:ref :string]]}
-              :handler     (fn [req]
-                             (let [ref (get-in req [:parameters :path :ref])]
-                               (try
-                                 {:status 200 :body (server.git/fast-forward! ref)}
-                                 (catch Throwable t
-                                   (log/warn t)
-                                   {:status 400 :body ref}))))
+              :handler     (partial server.git/handle-fast-forward git-repo)
               ::auth/roles #{:admin}}}]
      ["/home"
       (constantly
@@ -175,25 +168,25 @@
       [""
        {:summary "Retrieve list of active locks"
         :tags    ["Lock" "Query"]
-        :handler article.lock/read-locks}]
+        :handler (partial article.lock/read-locks lock-db)}]
       ["/*resource"
        {:get    {:summary    "Read a resource lock"
                  :tags       ["Lock" "Query" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    article.lock/read-lock}
+                 :handler    (partial article.lock/read-lock lock-db)}
         :post   {:summary    "Set a resource lock"
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map
                                       [:token :string]
                                       [:ttl [:int {:min 1}]]]}
-                 :handler    article.lock/create-lock}
+                 :handler    (partial article.lock/create-lock lock-db)}
         :delete {:summary    "Remove a resource lock."
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    article.lock/remove-lock}}]]
+                 :handler    (partial article.lock/remove-lock lock-db)}}]]
      ["/mantis"
       {:get
        {:summary    "Retrieve Mantis issues for a given set of surface forms"
@@ -203,8 +196,7 @@
        :delete
        {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
         :tags        ["Mantis" "Admin"]
-        :handler     (trigger-cron-handler
-                      #'server.issue/scheduled-sync)
+        :handler     (trigger-cron-handler (:issue-sync schedule))
         ::auth/roles #{:admin}}}]
      (client-resources "/oxygen")
      (client-resources "/zdl-lex-client")
@@ -234,14 +226,11 @@
                    (coercion/coerce-request-interceptor)
                    auth/interceptor]}))
 
-(defstate server
-  :start (jetty/run-jetty
-          handler
-          {:port (Integer/parseInt (getenv "HTTP_PORT" "3000"))
-           :join? false})
-  :stop (do
-          (.stop ^Server server)
-          (.join ^Server server)))
+(defmethod ig/init-key ::server
+  [_ {:keys [port] :as config}]
+  (jetty/run-jetty (handler config) {:port port :join? false}))
 
-(comment
-  (mount/start #'server))
+(defmethod ig/halt-key! ::server
+  [_ ^Server server]
+  (.stop ^Server server)
+  (.join ^Server server))

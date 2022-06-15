@@ -1,12 +1,10 @@
 (ns zdl.lex.server.article.lock
   (:require
-   [clojure.core.async :as a]
-   [mount.core :as mount :refer [defstate]]
    [next.jdbc :as jdbc]
    [slingshot.slingshot :refer [throw+]]
-   [zdl.lex.cron :as cron]
    [zdl.lex.server.auth :as auth]
-   [zdl.lex.server.h2 :as h2]))
+   [zdl.lex.server.h2 :as h2]
+   [integrant.core :as ig]))
 
 (defn- now
   []
@@ -17,10 +15,6 @@
   (+ (now) (* 1000 ttl)))
 
 ;; # DB layer
-
-(defstate db
-  :start (h2/open! "locks")
-  :stop  (h2/close! db))
 
 (defn select-locks
   [c]
@@ -94,12 +88,12 @@
        (select-keys lock)))
 
 (defn read-locks
-  [_]
+  [db _]
   (jdbc/with-transaction [c db {:read-only? true}]
     {:status 200 :body (map lock->response (select-locks c))}))
 
 (defn read-lock
-  [req]
+  [db req]
   (let [lock (request->lock req)]
     (jdbc/with-transaction [c db {:read-only? true}]
       (if-let [active (select-active-lock c lock)]
@@ -107,7 +101,7 @@
         {:status 404 :body (lock->response lock)}))))
 
 (defn create-lock
-  [req]
+  [db req]
   (let [lock (request->lock req)]
     (jdbc/with-transaction [c db {:isolation :serializable}]
       (if-let [other-lock (first (select-other-locks c lock))]
@@ -116,7 +110,7 @@
             {:status 200 :body (lock->response lock :token? true)})))))
 
 (defn remove-lock
-  [req]
+  [db req]
   (let [lock (request->lock req)]
     (jdbc/with-transaction [c db]
       (if-let [lock (select-active-lock c lock)]
@@ -128,19 +122,15 @@
 ;; # Periodic Lock Cleanup
 
 (defn cleanup!
-  []
+  [db]
   (jdbc/with-transaction [c db]
     (h2/execute! c {:delete-from :lock
                     :where       [:<= :expires (now)]})))
 
-(defstate cleanup
-  :start (cron/schedule "0 */5 * * * ?" "Lock cleanup" cleanup!)
-  :stop (a/close! cleanup))
-
 ;; # Locked Editing support
 
 (defn editor
-  [lock editor']
+  [db lock editor']
   (fn [f]
     (jdbc/with-transaction [c db {:isolation :serializable}]
       (assert-unlocked c lock)
@@ -150,3 +140,11 @@
           (editor' f)
           (finally
             (when-not active-lock (delete-lock c lock))))))))
+
+(defmethod ig/init-key ::db
+  [_ _]
+  (h2/open! "locks"))
+
+(defmethod ig/halt-key! ::db
+  [_ db]
+  (h2/close! db))

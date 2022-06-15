@@ -2,19 +2,19 @@
   (:require [clojure.test.check.generators :as gen]
             [clojure.test :refer [deftest is]]
             [zdl.lex.fs :refer [file]]
-            [zdl.xml.rngom :as rngom]))
+            [gremid.data.xml.rngom :as dx.rngom]))
 
 (def model
   (delay
     (->> (file "oxygen/framework/rng/DWDSWB.rng")
-         (rngom/parse-schema) (rngom/traverse))))
+         (dx.rngom/parse-schema) (dx.rngom/traverse))))
 
 (def article-qn
   "{http://www.dwds.de/ns/1.0}Artikel")
 
 (defn article-attr-vals
   [k]
-  (into #{} (rngom/attribute-values article-qn k @model)))
+  (into #{} (dx.rngom/attribute-values article-qn k @model)))
 
 (def gen-article-attr-val
   (comp gen/elements article-attr-vals))

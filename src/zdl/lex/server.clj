@@ -1,40 +1,27 @@
 (ns zdl.lex.server
-  (:require [clojure.tools.logging :as log]
-            [mount.core :as mount]
-            [zdl.lex.data :as data]
-            [zdl.lex.fs :refer [path]]
-            [zdl.lex.server.article :as server.article]
-            [zdl.lex.server.git :as server.git]
-            [zdl.lex.server.http :as server.http]
-            [zdl.lex.server.issue :as server.issue]
-            [zdl.lex.server.article.lock :as article.lock]
-            [zdl.lex.server.metrics :as server.metrics]
-            [zdl.lex.server.solr.suggest :as server.solr.suggest]
-            [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
+  (:require
+   [clojure.tools.logging :as log]
+   [integrant.core :as ig]
+   [zdl.lex.env :as env]
+   [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
 
 (install-uncaught-exception-handler!)
 
-(def states
-  #{#'server.article/scheduled-refresh
-    #'server.git/repo
-    #'server.git/scheduled-commit
-    #'server.git/scheduled-gc
-    #'server.http/server
-    #'server.issue/scheduled-sync
-    #'article.lock/db
-    #'article.lock/cleanup
-    #'server.metrics/reporter
-    #'server.solr.suggest/form-suggestions-update})
+(def system
+  (atom nil))
 
 (defn start
   []
-  (mount/start (mount/only states))
-  (log/infof "Started ZDL/Lex Server @[%s]" (path (data/dir))))
+  (ig/load-namespaces env/config env/server-config-keys)
+  (reset! system (ig/init env/config env/server-config-keys))
+  (log/info "Started ZDL/Lex Server"))
 
 (defn stop
   []
   (log/info "Stopping ZDL/Lex Server")
-  (mount/stop (mount/only states)))
+  (when-let [system' @system]
+    (ig/halt! system')
+    (reset! system nil)))
 
 (defn stop-on-shutdown
   []
@@ -45,7 +32,7 @@
   (exec! (fn [& _]
            (stop-on-shutdown)
            (start)
-           (.join (Thread/currentThread)))))
+           @(promise))))
 
 (def -main
   start!)

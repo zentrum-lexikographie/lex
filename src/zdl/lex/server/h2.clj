@@ -5,20 +5,25 @@
             [next.jdbc.result-set :as result-set]
             [zdl.lex.data :as data]
             [zdl.lex.fs :as fs]
-            [clojure.string :as str])
+            [clojure.string :as str]
+            [lambdaisland.uri :as uri]
+            [clojure.tools.logging :as log])
   (:import com.zaxxer.hikari.HikariDataSource
+           com.zaxxer.hikari.pool.HikariProxyConnection
+           java.sql.Connection
            org.flywaydb.core.api.configuration.FluentConfiguration
            org.flywaydb.core.Flyway))
 
-(def h2-spec
-  {:dbtype   "h2"
-   :username "sa"
-   :password ""})
+(defn h2-uri
+  [path]
+  (str (uri/map->URI {:scheme "jdbc:h2"
+                      :path (str path ";TRACE_LEVEL_FILE=4")})))
 
-(defn ^HikariDataSource open!
-  [id]
-  (let [db (assoc h2-spec :dbname (fs/path (data/file id)))
-        ds (con/->pool HikariDataSource db)]
+(defn open!
+  ^HikariDataSource [id]
+  (let [uri (h2-uri (fs/path (data/file id)))
+        db  {:jdbcUrl uri :username "sa" :password ""}
+        ds  (con/->pool HikariDataSource db)]
     (-> (doto (FluentConfiguration.)
           (.baselineOnMigrate true)
           (.dataSource ds)
@@ -70,10 +75,19 @@
 
 (sql/register-clause! :merge-into format-merge :insert-into)
 
+(defmethod print-method HikariDataSource
+  [^HikariDataSource ds ^java.io.Writer writer]
+  (.write writer (.getJdbcUrl ds)))
+
+(defmethod print-method HikariProxyConnection
+  [^HikariProxyConnection pc ^java.io.Writer writer]
+  (print-method (.unwrap pc Connection) writer))
+
 (defn execute!
   ([connectable sql]
    (execute! connectable sql {}))
   ([connectable sql opts]
+   (log/debugf "%s: %s" (pr-str connectable) sql)
    (jdbc/execute! connectable (sql/format sql) opts)))
 
 (def query-opts

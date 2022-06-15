@@ -1,8 +1,8 @@
 (ns zdl.lex.client.issue
   (:require
    [clojure.tools.logging :as log]
+   [integrant.core :as ig]
    [lambdaisland.uri :as uri]
-   [mount.core :refer [defstate]]
    [seesaw.bind :as uib]
    [seesaw.border :refer [empty-border line-border]]
    [seesaw.core :as ui]
@@ -21,70 +21,68 @@
 (def current-issues
   (atom []))
 
+(def visited-issues
+  (atom #{}))
+
 (defn get-issues
   [url doc]
-  (when-let [articles (article/extract-articles doc :errors? false)]
-    (when-let [forms (seq (mapcat :forms articles))]
-      (try
-        (let [req {:url          "mantis"
-                   :query-params {:q forms}}
-              resp (client.http/request req)
-              issues (get-in resp [:body :result])]
-          (swap! issue-cache assoc url issues)
-          (reset! current-issues issues))
-        (catch Throwable t
-          (log/warnf t "Error while retrieving issues for %s" forms))))))
+  (when-let [forms (:forms (article/extract-article doc))]
+    (try
+      (let [req    {:url          "mantis"
+                    :query-params {:q forms}}
+            resp   (client.http/request req)
+            issues (get-in resp [:body :result])]
+        (swap! issue-cache assoc url issues)
+        (reset! current-issues issues))
+      (catch Throwable t
+        (log/warnf t "Error while retrieving issues for %s" forms)))))
 
 (defn update-issues
   [topic {:keys [url doc]}]
   (condp = topic
-    :editor-content-changed (get-issues url doc)
+    :editor-opened          (get-issues url doc)
+    :editor-saved           (get-issues url doc)
     :editor-activated       (reset! current-issues (get @issue-cache url []))
     :editor-closed          (swap! issue-cache dissoc url)))
-
-(defstate issue-update
-  :start (bus/listen #{:editor-content-changed :editor-closed :editor-activated}
-                     update-issues)
-  :stop (issue-update))
-
-(def visited-issues
-  (atom #{}))
 
 (defn open-issue
   [{:keys [id last-updated url]}]
   (swap! visited-issues conj [id last-updated])
   (bus/publish! #{:open-url} {:url url}))
 
-(defn- issue->border
+(defn- issue->border-color
   [{:keys [active? severity]}]
-  (let [color (if-not active?
-                :lightgreen
-                (condp = severity
-                  "feature" :grey
-                  "trivial" :grey
-                  "text"    :grey
-                  "tweak"   :grey
-                  "minor"   :yellow
-                  "major"   :orange
-                  "crash"   :red
-                  "block"   :red
-                  :orange))]
-    [5
-     (line-border :color color :left 10)
-     (line-border :thickness 5 :color :white)]))
+  (if-not active?
+    :lightgreen
+    (condp = severity
+      "feature" :grey
+      "trivial" :grey
+      "text"    :grey
+      "tweak"   :grey
+      "minor"   :yellow
+      "major"   :orange
+      "crash"   :red
+      "block"   :red
+      :orange)))
+
+(defn- issue->border
+  [issue]
+  [5
+   (line-border :color (issue->border-color issue) :left 10)
+   (line-border :thickness 5 :color :white)])
 
 (def ^:private date-time-formatter
   (java.time.format.DateTimeFormatter/ofPattern "dd.MM.yyyy, HH:mm"))
 
 (defn render-issue
   [{:keys [active? last-updated resolution severity status summary visited?]
-    :as issue}]
-  (let [fg-color (if active? :black :lightgray)
-        bg-color (if active? :snow :white)
+    :as   issue}]
+  (let [fg-color      (if active? :black :lightgray)
+        bg-color      (if active? :snow :white)
         visited-color (if visited? :grey fg-color)
-        label (partial ui/label :foreground fg-color)
-        text (partial label :font (client.font/derived :style :plain))
-        last-updated (.. date-time-formatter (format last-updated))]
+        label         (partial ui/label :foreground fg-color)
+        text          (partial label :font (client.font/derived :style :plain))
+        last-updated  (.. date-time-formatter (format last-updated))]
     (mig/mig-panel
      :cursor :hand
      :background bg-color
@@ -135,12 +133,17 @@
                    [component value index selected? focus?]
                    (render-issue value)))))
 
-(defstate issue-renderer
-  :start (uib/bind (uib/funnel current-issues visited-issues)
-                   (uib/transform prepare-issues)
-                   (uib/property issue-list :model))
-  :stop (issue-renderer))
-
-
 (def panel
   (ui/scrollable issue-list))
+
+(defmethod ig/init-key ::events
+  [_ _]
+  [(bus/listen #{:editor-opened :editor-closed :editor-saved :editor-activated}
+               update-issues)
+   (uib/bind (uib/funnel current-issues visited-issues)
+             (uib/transform prepare-issues)
+             (uib/property issue-list :model))])
+
+(defmethod ig/halt-key! ::events
+  [_ callbacks]
+  (doseq [callback callbacks] (callback)))

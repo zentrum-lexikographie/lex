@@ -2,8 +2,6 @@
   (:require [clojure.core.async :as a]
             [lambdaisland.uri :as uri :refer [uri]]
             [metrics.timers :as timers]
-            [mount.core :refer [defstate]]
-            [zdl.lex.cron :as cron]
             [zdl.lex.http :as http]
             [zdl.lex.server.solr.client :as solr.client]))
 
@@ -45,8 +43,3 @@
    (http/request)
    (http/update-timer! forms-suggestions-build-timer)
    (http/read-json)))
-
-(defstate form-suggestions-update
-  :start (cron/schedule "0 */10 * * * ?" "Form Suggestions FSA update"
-                        build-forms-suggestions!)
-  :stop (a/close! form-suggestions-update))

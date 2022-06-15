@@ -1,22 +1,24 @@
 (ns zdl.lex.client.results
-  (:require [mount.core :refer [defstate]]
-            [seesaw.core :as ui]
-            [seesaw.swingx :as uix]
-            [seesaw.util :refer [to-dimension]]
-            [zdl.lex.bus :as bus]
-            [zdl.lex.client.font :as client.font]
-            [zdl.lex.client.icon :as client.icon]
-            [zdl.lex.client.http :as client.http]
-            [zdl.lex.client.export :as client.export]
-            [zdl.lex.client.filter :as client.filter]
-            [zdl.lex.article :as article]
-            [clojure.string :as str])
-  (:import com.jidesoft.swing.JideTabbedPane
-           [java.awt.event ComponentEvent MouseEvent]
-           java.awt.Point
-           [javax.swing Box JTabbedPane JTable]
-           [org.jdesktop.swingx JXTable JXTable$TableAdapter]
-           [org.jdesktop.swingx.decorator AbstractHighlighter Highlighter]))
+  (:require
+   [clojure.string :as str]
+   [integrant.core :as ig]
+   [seesaw.core :as ui]
+   [seesaw.swingx :as uix]
+   [seesaw.util :refer [to-dimension]]
+   [zdl.lex.article :as article]
+   [zdl.lex.bus :as bus]
+   [zdl.lex.client.export :as client.export]
+   [zdl.lex.client.filter :as client.filter]
+   [zdl.lex.client.font :as client.font]
+   [zdl.lex.client.http :as client.http]
+   [zdl.lex.client.icon :as client.icon])
+  (:import
+   (com.jidesoft.swing JideTabbedPane)
+   (java.awt Point)
+   (java.awt.event ComponentEvent MouseEvent)
+   (javax.swing Box JTabbedPane JTable)
+   (org.jdesktop.swingx JXTable JXTable$TableAdapter)
+   (org.jdesktop.swingx.decorator AbstractHighlighter Highlighter)))
 
 (def ^:private result-table-columns
   [{:key :status :text "Status"}
@@ -42,7 +44,8 @@
       (let [{:keys [id]} (nth result row)]
         (bus/publish! #{:open-article} {:id id})))))
 
-(defn- resize-columns [^ComponentEvent e]
+(defn- resize-columns
+  [^ComponentEvent e]
   (let [^JTable table (.getSource e)
         table-width (ui/width table)]
     (doseq [c (range (count result-table-columns))
@@ -59,13 +62,15 @@
         model))
     (ui/repaint! table)))
 
-(defn- result->table-model [result]
+(defn- result->table-model
+  [result]
   (merge result {:form (some-> result :forms first)
                  :definition (some-> result :definitions first)
                  :color (some-> result :status article/status->color)
                  :errors (some->> result :errors sort (str/join ", "))}))
 
-(defn create-highlighter [model]
+(defn create-highlighter
+  [model]
   (proxy [AbstractHighlighter] []
     (doHighlight [component ^JXTable$TableAdapter adapter]
       (let [column (.column adapter)
@@ -96,7 +101,8 @@
 (comment
   (.. (java.time.LocalDateTime/now) (format time-formatter)))
 
-(defn- render-result-summary [{:keys [query total result] :as data}]
+(defn- render-result-summary
+  [{:keys [query total result] :as data}]
   (let [filter-action (ui/action
                        :icon client.icon/gmd-filter
                        :handler (partial client.filter/open-dialog data))
@@ -156,16 +162,20 @@
                    (bus/publish! #{:search-result-selected} result))))
     pane))
 
-(defn select-result-tabs []
+(defn select-result-tabs
+  []
   (ui/select pane [:.result]))
 
-(defn count-result-tabs []
+(defn count-result-tabs
+  []
   (count (select-result-tabs)))
 
-(defn get-result-tab-index [tab]
+(defn get-result-tab-index
+  [tab]
   (.indexOfComponent pane tab))
 
-(defn result= [a b]
+(defn result=
+  [a b]
   (= (:query a) (:query b)))
 
 (defn merge-results
@@ -198,9 +208,13 @@
         response (client.http/request request)]
     (merge-results query (response :body))))
 
-(defstate search-requests->results
-  :start (bus/listen #{:search-request} search)
-  :stop (search-requests->results))
+(defmethod ig/init-key ::events
+  [_ _]
+  (bus/listen #{:search-request} search))
+
+(defmethod ig/halt-key! ::events
+  [_ callback]
+  (callback))
 
 (comment
   (search :search-request {:query "*"}))

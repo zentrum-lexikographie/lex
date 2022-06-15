@@ -1,6 +1,5 @@
 (ns zdl.lex.fixture.server
-  (:require [zdl.lex.server :as server]
-            [zdl.lex.server.article :as article]))
+  (:require [zdl.lex.server :as server]))
 
 (defn instance
   [f]
