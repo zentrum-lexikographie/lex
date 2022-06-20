@@ -1,7 +1,7 @@
 clojure
 clojure-install.sh
 
-.clj-kondo/.cache
+.clj-kondo/
 
 target
 classes
