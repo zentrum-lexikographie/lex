@@ -4,7 +4,7 @@
              org.clojure/core.memoize            {:mvn/version "1.0.236"}
              org.clojure/data.csv                {:mvn/version "0.1.4"}
              org.clojure/tools.logging           {:mvn/version "1.1.0"}
-             io.github.gremid/data.xml           {:git/sha    "b513b8d390b6f44a86d69b393abe7d18c2c5fc0d"
+             io.github.gremid/data.xml           {:git/sha    "1ce78184eb23ee0eadd1a93ae6178845437b624b"
                                                   :exclusions [org.relaxng/jing
                                                                org.relaxng/trang
                                                                org.kohsuke.rngom/rngom]}
@@ -56,7 +56,7 @@
              :build         {:paths      ["build"]
                              :deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
                                                                          :git/sha "34727f7"}
-                                          io.github.gremid/data.xml     {:git/sha "b513b8d390b6f44a86d69b393abe7d18c2c5fc0d"}}
+                                          io.github.gremid/data.xml     {:git/sha "1ce78184eb23ee0eadd1a93ae6178845437b624b"}}
                              :ns-default zdl-lex}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://clojars.org/repo"}
