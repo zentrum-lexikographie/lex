@@ -41,11 +41,12 @@
 
 (defn current-version
   []
-  (let [now (java.time.OffsetDateTime/now)
-        year (.getYear now)
-        month (.getMonthValue now)
+  (let [now       (java.time.OffsetDateTime/now)
+        year      (.getYear now)
+        month     (.getMonthValue now)
+        day       (.getDayOfMonth now)
         rev-count (git-rev-count)]
-    (format "%04d.%02d.%s" year month rev-count)))
+    (format "%04d%02d.%02d.%s" year month day rev-count)))
 
 (def oxygen-dir
   (fs/file (fs/absolutize "oxygen")))
