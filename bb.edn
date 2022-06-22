@@ -44,7 +44,8 @@
                            ([image-name]
                             (image-tag image-name (current-version)))
                            ([image-name image-version]
-                            (str "gremid/propylaen-" image-name ":" image-version)))]
+                            (str "docker-registry.zdl.org/zdl-lex/"
+                                 image-name ":" image-version)))]
                    (doseq [service ["solr" "server"]]
                      (let [version-tag (image-tag service)
                            latest-tag  (image-tag service "latest")]
