@@ -165,7 +165,7 @@
   (comp
    (mapcat :paths)
    (map #(fs/file dir %))
-   (mapcat #(concat (update! dir %) (remove! dir %)))))
+   (mapcat #(concat (update! dir [%]) (remove! dir [%])))))
 
 (defn publish-changes!
   [dir changes]
