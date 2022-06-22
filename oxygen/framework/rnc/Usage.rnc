@@ -376,6 +376,7 @@ Fachgebiet = element Fachgebiet {
 	| 'Bergsteigen' # D99 
 	| 'Berufssport' # D99
 	| 'Bowling' # D99
+	| 'Kampfsport' # neu: 2022-06-22
 	| 'Boxen'
 	| 'Budo' # D99
 	| 'Kendo' # -D99
