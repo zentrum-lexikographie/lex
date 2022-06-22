@@ -4,8 +4,7 @@
              org.clojure/core.memoize            {:mvn/version "1.0.236"}
              org.clojure/data.csv                {:mvn/version "0.1.4"}
              org.clojure/tools.logging           {:mvn/version "1.1.0"}
-             io.github.gremid/data.xml           {;:git/sha    "a25f4ae908f7272b019e29884fc6f625b4d0729c"
-                                                  :local/root "../data.xml"
+             io.github.gremid/data.xml           {:git/sha    "b513b8d390b6f44a86d69b393abe7d18c2c5fc0d"
                                                   :exclusions [org.relaxng/jing
                                                                org.relaxng/trang
                                                                org.kohsuke.rngom/rngom]}
@@ -18,49 +17,46 @@
              metosin/jsonista                    {:mvn/version "0.3.3"}
              lambdaisland/uri                    {:mvn/version "1.4.70"}
              clj-http/clj-http                   {:mvn/version "3.12.3"
-                                                  :exclusions [commons-logging/commons-logging]}
+                                                  :exclusions  [commons-logging/commons-logging]}
              jarohen/chime                       {:mvn/version "0.3.3"}
              io.github.cdimascio/dotenv-java     {:mvn/version "2.2.0"}
              org.slf4j/slf4j-api                 {:mvn/version "1.7.32"}}
  :aliases   {:test          {:extra-paths ["test"]
-                             :extra-deps
-                             {integrant/repl          {:mvn/version "0.3.2"}
-                              org.clojure/test.check  {:mvn/version "0.9.0"}
-                              org.kohsuke.rngom/rngom {:mvn/version "20100718"}}}
-             :log           {:extra-deps
-                             {ch.qos.logback/logback-classic {:mvn/version "1.2.5"
-                                                              :exclusions
-                                                              [org.slf4j/slf4j-api]}
-                              org.slf4j/jcl-over-slf4j       {:mvn/version "1.7.32"}
-                              org.slf4j/jul-to-slf4j         {:mvn/version "1.7.32"}
-                              org.slf4j/log4j-over-slf4j     {:mvn/version "1.7.32"}}}
+                             :extra-deps  {lambdaisland/kaocha     {:mvn/version "1.66.1034"}
+                                           integrant/repl          {:mvn/version "0.3.2"}
+                                           org.clojure/test.check  {:mvn/version "0.9.0"}
+                                           org.kohsuke.rngom/rngom {:mvn/version "20100718"}}
+                             :exec-fn     kaocha.runner/exec-fn}
+             :log           {:extra-deps {ch.qos.logback/logback-classic {:mvn/version "1.2.5"
+                                                                          :exclusions
+                                                                          [org.slf4j/slf4j-api]}
+                                          org.slf4j/jcl-over-slf4j       {:mvn/version "1.7.32"}
+                                          org.slf4j/jul-to-slf4j         {:mvn/version "1.7.32"}
+                                          org.slf4j/log4j-over-slf4j     {:mvn/version "1.7.32"}}}
              :client        {:extra-paths ["oxygen"]
-                             :extra-deps
-                             {seesaw/seesaw                                               {:mvn/version "1.5.0"}
-                              com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
-                              com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
-                              cider/cider-nrepl                                           {:mvn/version "0.28.4"}}}
+                             :extra-deps  {seesaw/seesaw                                               {:mvn/version "1.5.0"}
+                                           com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
+                                           com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+                                           cider/cider-nrepl                                           {:mvn/version "0.28.4"}}}
              :server        {:extra-paths ["oxygen"]
-                             :extra-deps
-                             {metosin/reitit                    {:mvn/version "0.5.15"}
-                              metosin/muuntaja                  {:mvn/version "0.6.8"}
-                              ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
-                              com.h2database/h2                 {:mvn/version "1.4.199"}
-                              mysql/mysql-connector-java        {:mvn/version "8.0.29"}
-                              com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
-                              com.github.seancorfield/honeysql  {:mvn/version "2.1.818"}
-                              org.flywaydb/flyway-core          {:mvn/version "7.2.0"}
-                              com.zaxxer/HikariCP               {:mvn/version "3.4.5"}
-                              io.github.classgraph/classgraph   {:mvn/version "4.8.50"}
-                              audiogum/metrics-clojure          {:mvn/version "3.0.0"}
-                              org.relaxng/jing                  {:mvn/version "20181222"}}}
+                             :extra-deps  {metosin/reitit                    {:mvn/version "0.5.15"}
+                                           metosin/muuntaja                  {:mvn/version "0.6.8"}
+                                           ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
+                                           com.h2database/h2                 {:mvn/version "1.4.199"}
+                                           mysql/mysql-connector-java        {:mvn/version "8.0.29"}
+                                           com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
+                                           com.github.seancorfield/honeysql  {:mvn/version "2.1.818"}
+                                           org.flywaydb/flyway-core          {:mvn/version "7.2.0"}
+                                           com.zaxxer/HikariCP               {:mvn/version "3.4.5"}
+                                           io.github.classgraph/classgraph   {:mvn/version "4.8.50"}
+                                           audiogum/metrics-clojure          {:mvn/version "3.0.0"}
+                                           org.relaxng/jing                  {:mvn/version "20181222"}}}
              :oxygen        {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "24.1.0.0"}}}
              :oxygen-plugin {:extra-paths ["classes/client"]}
              :build         {:paths      ["build"]
                              :deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
                                                                          :git/sha "34727f7"}
-                                          io.github.gremid/data.xml     {;:git/sha "a25f4ae908f7272b019e29884fc6f625b4d0729c"
-                                                                         :local/root "../data.xml"}}
+                                          io.github.gremid/data.xml     {:git/sha "b513b8d390b6f44a86d69b393abe7d18c2c5fc0d"}}
                              :ns-default zdl-lex}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://clojars.org/repo"}

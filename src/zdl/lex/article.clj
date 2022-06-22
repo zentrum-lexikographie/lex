@@ -6,15 +6,29 @@
             [gremid.data.xml :as dx]
             [gremid.data.xml.zip :as dx.zip]
             [zdl.lex.timestamp :as ts])
-  (:import java.text.Collator
+  (:import java.io.StringWriter
+           java.text.Collator
            java.util.Locale))
 
 (dx/alias-uri :dwds "http://www.dwds.de/ns/1.0")
 
 (defn read-xml
-  [& args]
-  (with-open [is (apply io/input-stream args)]
+  [in]
+  (with-open [is (io/input-stream in)]
     (dx/pull-all (dx/parse is))))
+
+(defn write-xml
+  [node out]
+  (let [xml-str (dx/emit-str node)
+        xml-str (str/replace xml-str #"^<\?xml.+?\?>\n?" "")]
+    (with-open [ow (io/writer out :encoding "UTF-8")]
+      (.write ow xml-str))))
+
+(defn write-str
+  [node]
+  (let [sw (StringWriter.)]
+    (write-xml node sw)
+    (.toString sw)))
 
 (declare node->text)
 
@@ -187,6 +201,10 @@
       :colouring     (texts-of-elements element-idx ::dwds/Stilfaerbung)
       :area          (texts-of-elements element-idx ::dwds/Sprachraum)
       :links         (links element-idx)})))
+
+(defn desc
+  [{:keys [form type status source]}]
+  (format "[%s]{%s/%s/%s}" form type source status))
 
 (defn status->color
   [status]

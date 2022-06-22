@@ -12,3 +12,7 @@
 **/.env
 
 data
+publish
+scripts
+test
+test-data

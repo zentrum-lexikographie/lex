@@ -11,8 +11,7 @@
         "^\\.env$"
         "^plugin/.*"
         "^plugin\\.dtd"
-        "^project\\.xpr"
-        "^updateSite\\.xml"))
+        "^project\\.xpr"))
 
 (defn plugin-jar
   [_]
@@ -30,7 +29,6 @@
     (b/compile-clj {:basis        compile-basis
                     :src-dirs     ["src"]
                     :ns-compile   ['zdl.lex.client.io
-                                   'zdl.lex.client.extension
                                    'zdl.lex.client.oxygen
                                    'zdl.lex.client.plugin]
                     :compile-opts {:disable-locals-clearing true

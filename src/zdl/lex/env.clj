@@ -1,11 +1,12 @@
 (ns zdl.lex.env
-  (:require [aero.core :as aero]
-            [camel-snake-kebab.core :as csk]
-            [clojure.string :as str]
-            [integrant.core :as ig]
-            [clojure.tools.logging :as log]
-            [clojure.java.io :as io])
-  (:import io.github.cdimascio.dotenv.Dotenv))
+  (:require
+   [aero.core :as aero]
+   [camel-snake-kebab.core :as csk]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [integrant.core :as ig])
+  (:import
+   (io.github.cdimascio.dotenv Dotenv)))
 
 (def ^Dotenv dot-env
   "Load `.env` (also into system properties)"
@@ -23,7 +24,8 @@
 (defmethod aero/reader 'dotenv
   [_ _ value]
   (let [k (csk/->SCREAMING_SNAKE_CASE_STRING value)]
-    (or (System/getenv k) (.get dot-env k))))
+    (or (some->> k System/getenv str/trim not-empty)
+        (some->> k (.get dot-env) str/trim not-empty))))
 
 (defmethod aero/reader 'ig/ref
   [_ _ value]
@@ -36,6 +38,10 @@
   [k & nss]
   (some #(str/starts-with? (namespace k) %) nss))
 
+(defn in-dev-namespace?
+  [k]
+  (in-namespaces? k "zdl.lex.client.dev"))
+
 (defn in-server-namespace?
   [k]
   (in-namespaces? k "zdl.lex.server"))
@@ -46,9 +52,20 @@
         (keys config)))
 
 (def server-config-keys
-  (into (sorted-set) (filter in-server-namespace?) config-keys))
+  (into (sorted-set)
+        (comp
+         (filter in-server-namespace?)
+         (remove in-dev-namespace?))
+        config-keys))
 
 (def client-config-keys
-  (into (sorted-set) (remove in-server-namespace?) config-keys))
+  (into (sorted-set)
+        (comp
+         (remove in-server-namespace?)
+         (remove in-dev-namespace?))
+        config-keys))
 
-
+(def dev-config-keys
+  (into (sorted-set)
+        (remove #(in-namespaces? % "zdl.lex.client.repl"))
+        config-keys))

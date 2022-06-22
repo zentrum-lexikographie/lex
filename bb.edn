@@ -50,6 +50,8 @@
                            latest-tag  (image-tag service "latest")]
                        (docker! "tag" latest-tag version-tag)
                        (docker! "push" version-tag))))}
+  test         {:doc "Runs test suite"
+                :task (clojure! "-A:log:client:server:oxygen" "-X:test")}
   start-oxygen {:doc "Start Oxygen XML Editor with plugin/framework"
                  :task
                  (do

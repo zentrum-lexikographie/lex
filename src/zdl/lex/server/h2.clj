@@ -3,7 +3,6 @@
             [next.jdbc :as jdbc]
             [next.jdbc.connection :as con]
             [next.jdbc.result-set :as result-set]
-            [zdl.lex.data :as data]
             [zdl.lex.fs :as fs]
             [clojure.string :as str]
             [lambdaisland.uri :as uri]
@@ -20,8 +19,9 @@
                       :path (str path ";TRACE_LEVEL_FILE=4")})))
 
 (defn open!
-  ^HikariDataSource [id]
-  (let [uri (h2-uri (fs/path (data/file id)))
+  ^HikariDataSource [id path]
+  (log/infof "Opening H2 database '%s' @ %s" id path)
+  (let [uri (h2-uri (fs/path path))
         db  {:jdbcUrl uri :username "sa" :password ""}
         ds  (con/->pool HikariDataSource db)]
     (-> (doto (FluentConfiguration.)
@@ -40,9 +40,9 @@
   (.close ^HikariDataSource ds))
 
 (defn delete!
-  [id]
+  [path]
   (doseq [suffix [".mv.db" ".trace.db"]]
-    (fs/delete! (data/file (str id suffix)) true)))
+    (fs/delete! (fs/file (str path suffix)) true)))
 
 (defn format-merge
   [k table]

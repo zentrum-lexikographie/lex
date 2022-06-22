@@ -1,13 +1,12 @@
 (ns zdl.lex.git
   (:require [clojure.java.shell :as sh]
-            [clojure.string :as str]))
-
-(require 'zdl.lex.sh)
+            [clojure.string :as str]
+            [zdl.lex.util]))
 
 (defn sh!
   [dir & args]
   (sh/with-sh-dir dir
-    (apply zdl.lex.sh/sh! (concat ["git"] args))))
+    (apply zdl.lex.util/sh! (concat ["git"] args))))
 
 (defn refs
   [dir]

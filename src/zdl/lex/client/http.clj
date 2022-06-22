@@ -3,16 +3,16 @@
             [clojure.edn :as edn]
             [clojure.java.io :as io]
             [lambdaisland.uri :as uri]
-            [zdl.lex.env :refer [getenv]]
-            [zdl.lex.url :as lexurl])
+            [zdl.lex.env :as env]
+            [zdl.lex.url :as lexurl]
+            [integrant.core :as ig])
   (:import java.io.PushbackReader))
 
 (def login-url
   (uri/join lexurl/server-base "status"))
 
 (def ^:dynamic *auth*
-  (atom (let [user     (getenv "SERVER_USER")
-              password (getenv "SERVER_PASSWORD")]
+  (atom (let [{:keys [user password]} (get env/config ::server)]
           (when (and user password) [user password]))))
 
 (defn authenticate
@@ -29,7 +29,7 @@
            (reset! *auth* [user password])))))))
 
 (def ^:dynamic *insecure?*
-  (getenv "HTTPS_INSECURE"))
+  (get-in env/config [::server :insecure?]))
 
 (defn request
   [{::keys [authenticated?] :as req :or {authenticated? true}}]
@@ -44,3 +44,7 @@
       (cond->
           auth        (assoc :basic-auth auth)
           *insecure?* (assoc :insecure? true))))))
+
+(defmethod ig/init-key ::server
+  [_ config]
+  config)

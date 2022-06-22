@@ -4,11 +4,11 @@
    [integrant.core :as ig]
    [integrant.repl :refer [go halt reset reset-all]]
    [zdl.lex.client.io :refer [lexurl-handler]]
-   [zdl.lex.env]
+   [zdl.lex.env :as env]
    [zdl.lex.url :as lexurl]
    [zdl.lex.util :refer [install-uncaught-exception-handler!]]))
 
-(set-refresh-dirs "src" #_"test")
+(set-refresh-dirs "src" "test")
 
 (install-uncaught-exception-handler!)
 
@@ -16,20 +16,14 @@
   (lexurl/install-stream-handler! lexurl-handler)
   (catch Throwable _))
 
-(require 'zdl.lex.client.dev)
+(def prep
+  (constantly (select-keys env/config env/dev-config-keys)))
 
-(defn prep
-  []
-  (->
-   zdl.lex.env/config
-   (assoc :zdl.lex.client.dev/testbed {})
-   (dissoc :zdl.lex.client.repl/server)))
-
-(ig/load-namespaces zdl.lex.env/config)
+(ig/load-namespaces env/config)
 (integrant.repl/set-prep! prep)
 
 (comment
-  (keys (prep))
+  (sort (keys (prep)))
   (go)
   (halt)
   (reset)

@@ -6,8 +6,8 @@
             [clojure.tools.logging :as log]
             [lambdaisland.uri :as uri]
             [zdl.lex.client.http :as client.http]
-            [zdl.lex.url :as lexurl]
-            [zdl.lex.util :refer [uuid]])
+            [zdl.lex.article.lock :as article.lock]
+            [zdl.lex.url :as lexurl])
   (:import [java.io ByteArrayInputStream ByteArrayOutputStream IOException]
            [java.net URLConnection URLStreamHandler]
            [java.time Instant ZoneId]
@@ -39,14 +39,11 @@
     (doto (LockException. message true message)
       (.setOwnerName owner))))
 
-(def lock-token
-  (uuid))
-
 (defn http-request
   [request]
   (->
    request
-   (assoc-in [:query-params :token] (str lock-token))
+   (assoc-in [:query-params :token] (str article.lock/*token*))
    (assoc :unexceptional-status #{200 404 423})
    (client.http/request)))
 

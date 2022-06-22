@@ -19,6 +19,11 @@
   [& args]
   (.isFile ^File (apply file args)))
 
+(defn xml-file?
+  [& args]
+  (let [^File f (apply file args)]
+    (and (file? f) (.. f (getName) (endsWith ".xml")))))
+
 (defn directory?
   [& args]
   (.isDirectory ^File (apply file args)))

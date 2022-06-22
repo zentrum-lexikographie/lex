@@ -17,10 +17,10 @@
             [zdl.lex.cron :as cron]
             [zdl.lex.server.article.handler :as article.handler]
             [zdl.lex.server.auth :as auth]
-            [zdl.lex.server.format :as format]
             [zdl.lex.server.git :as server.git]
+            [zdl.lex.server.http.format]
             [zdl.lex.server.issue :as server.issue]
-            [zdl.lex.server.article.lock :as article.lock]
+            [zdl.lex.server.article.lock :as server.article.lock]
             [zdl.lex.server.oxygen :as oxygen]
             [zdl.lex.server.solr.export :as solr.export]
             [zdl.lex.server.solr.query :as solr.query]
@@ -98,18 +98,18 @@
         :headers {"Location" "/home"}})]
      ["/article" {::auth/roles #{:user}}
       ["/"
-       {:put    {:handler    (partial article.handler/handle-create git-dir)
-                 :parameters {:query [:map
-                                      [:form :string]
-                                      [:pos :string]]}}
-        :delete {:summary     "Refreshes all article data"
-                 :tags        ["Index", "Admin"]
-                 :handler     (trigger-cron-handler (:git-refresh schedule))
-                 ::auth/roles #{:admin}}}]
+       {:put {:handler    (partial article.handler/handle-create git-dir)
+              :parameters {:query [:map
+                                   [:form :string]
+                                   [:pos :string]]}}
+        :patch {:summary     "Edits article data"
+                :tags        ["Article", "Git", "Admin"]
+                :handler     (trigger-cron-handler (:article-edit schedule))
+                ::auth/roles #{:admin}}}]
       ["/*resource"
        {:get  {:handler    (partial article.handler/handle-read git-dir)
                :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    (partial article.handler/handle-write lock-db git-dir)
+        :post {:handler    (partial article.handler/handle-write git-dir lock-db)
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
      ["/docs/api/*"
@@ -121,11 +121,16 @@
                :handler     (trigger-cron-handler (:git-commit schedule))
                ::auth/roles #{:admin}}}]
      ["/git/ff/:ref"
-      {:post {:summary     "Fast-forwards the server's branch to the given refs"
-              :tags        ["Article" "Git" "Admin"]
-              :parameters  {:path [:map [:ref :string]]}
-              :handler     (partial server.git/handle-fast-forward git-repo)
-              ::auth/roles #{:admin}}}]
+      {:post  {:summary     "Fast-forwards the server's branch to the given ref"
+               :tags        ["Article" "Git" "Admin"]
+               :parameters  {:path [:map [:ref :string]]}
+               :handler     (partial server.git/handle-fast-forward git-repo)
+               ::auth/roles #{:admin}}
+       :patch {:summary     "Rebases the server's branch to the given ref"
+               :tags        ["Article" "Git" "Admin"]
+               :parameters  {:path [:map [:ref :string]]}
+               :handler     (partial server.git/handle-rebase git-repo)
+               ::auth/roles #{:admin}}}]
      ["/home"
       (constantly
        {:status                200
@@ -134,13 +139,17 @@
         :body                  homepage})]
      ["/index" {::auth/roles #{:user}}
       [""
-       {:summary    "Query the full-text index"
-        :tags       ["Index" "Query"]
-        :parameters {:query [:map
-                             [:q {:optional true} :string]
-                             [:offset {:optional true} [:int {:min 0}]]
-                             [:limit {:optional true} [:int {:min 0}]]]}
-        :handler solr.query/handle-query}]
+       {:get   {:summary    "Query the full-text index"
+                :tags       ["Index" "Query"]
+                :parameters {:query [:map
+                                     [:q {:optional true} :string]
+                                     [:offset {:optional true} [:int {:min 0}]]
+                                     [:limit {:optional true} [:int {:min 0}]]]}
+                :handler    solr.query/handle-query}
+        :patch {:summary     "Refreshes all article data in index"
+                :tags        ["Index", "Admin"]
+                :handler     (trigger-cron-handler (:git-refresh schedule))
+                ::auth/roles #{:admin}}}]
       ["/export"
        {:summary    "Export index metadata in CSV format"
         :tags       ["Index" "Query" "Export"]
@@ -168,25 +177,25 @@
       [""
        {:summary "Retrieve list of active locks"
         :tags    ["Lock" "Query"]
-        :handler (partial article.lock/read-locks lock-db)}]
+        :handler (partial server.article.lock/read-locks lock-db)}]
       ["/*resource"
        {:get    {:summary    "Read a resource lock"
                  :tags       ["Lock" "Query" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    (partial article.lock/read-lock lock-db)}
+                 :handler    (partial server.article.lock/read-lock lock-db)}
         :post   {:summary    "Set a resource lock"
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map
                                       [:token :string]
                                       [:ttl [:int {:min 1}]]]}
-                 :handler    (partial article.lock/create-lock lock-db)}
+                 :handler    (partial server.article.lock/create-lock lock-db)}
         :delete {:summary    "Remove a resource lock."
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    (partial article.lock/remove-lock lock-db)}}]]
+                 :handler    (partial server.article.lock/remove-lock lock-db)}}]]
      ["/mantis"
       {:get
        {:summary    "Retrieve Mantis issues for a given set of surface forms"
@@ -211,7 +220,7 @@
     {;;:reitit.interceptor/transform dev/print-context-diffs
      ;;:exception pretty/exception
      :data {:coercion rcm/coercion
-            :muuntaja format/customized-muuntaja}})
+            :muuntaja zdl.lex.server.http.format/customized-muuntaja}})
    (ring/routes
     (ring/create-resource-handler {:path "/assets"})
     (ring/create-default-handler))
@@ -228,6 +237,7 @@
 
 (defmethod ig/init-key ::server
   [_ {:keys [port] :as config}]
+  (log/infof "Starting HTTP server @ %d/tcp" port)
   (jetty/run-jetty (handler config) {:port port :join? false}))
 
 (defmethod ig/halt-key! ::server

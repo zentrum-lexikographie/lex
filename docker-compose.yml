@@ -16,6 +16,8 @@ services:
       dockerfile: docker/server/Dockerfile
     environment:
       - "ZDL_LEX_SOLR_URL=http://solr:8983/solr/"
+      - "ZDL_LEX_GIT_DIR=/data/git"
+      - "ZDL_LEX_LOCK_DB_PATH=/data/locks"
     volumes:
       - server:/data
     ports:

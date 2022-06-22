@@ -9,7 +9,8 @@
    [slingshot.slingshot :refer [try+]]
    [zdl.lex.article :as article]
    [zdl.lex.lucene :as lucene]
-   [zdl.lex.server.article.lock :as article.lock]
+   [zdl.lex.server.article.editor :as server.article.editor]
+   [zdl.lex.server.article.lock :as server.article.lock]
    [zdl.lex.server.auth :as auth]
    [zdl.lex.server.git :as server.git]
    [zdl.lex.server.solr.client :as solr.client]
@@ -76,39 +77,36 @@
                                             "generations exceeded"))
             :else           (recur (inc n))))))))
 
+(defn handle-create
+  [git-dir {{:keys [user]} ::auth/identity {{:keys [form pos]} :query} :parameters}]
+  (when-let [xml-id (a/<!! (generate-id))]
+    (let [filename (form->filename form)
+          resource (str new-article-collection "/" filename "-" xml-id ".xml")
+          xml      (new-article-xml xml-id form pos user)]
+      {:status  200
+       :headers {"X-Lex-ID" resource}
+       :body    (->>
+                 (fn [f] (spit f xml :encoding "UTF-8"))
+                 (server.git/edit! git-dir resource))})))
+
 (defn handle-read
   [git-dir {{{:keys [resource]} :path} :parameters}]
   (if-let [^File f (server.git/get-file git-dir resource)]
     {:status 200 :body f}
     {:status 404 :body resource}))
 
-(defn create-xml!
-  [xml]
-  (fn [f] (spit f xml :encoding "UTF-8")))
-
-(defn handle-create
-  [git-dir {{:keys [user]} ::auth/identity {{:keys [form pos]} :query} :parameters}]
-  (when-let [xml-id (a/<!! (generate-id))]
-    (let [filename (form->filename form)
-          path     (str new-article-collection "/" filename "-" xml-id ".xml")
-          xml      (new-article-xml xml-id form pos user)]
-      {:status  200
-       :headers {"X-Lex-ID" path}
-       :body    (server.git/edit! git-dir path (create-xml! xml))})))
-
-(defn write-xml!
-  [lock-db lock body]
-  (article.lock/editor lock-db lock (fn [f] (io/copy body f))))
-
 (defn handle-write
-  [lock-db git-dir {:keys [body] :as req}]
-  (let [{:keys [resource] :as lock} (article.lock/request->lock req)]
+  [git-dir lock-db {:keys [body] :as req}]
+  (let [{:keys [resource] :as lock} (server.article.lock/request->lock req)]
     (if-not (server.git/get-file git-dir resource)
       {:status 404
        :body   resource}
       (try+
        {:status 200
-        :body   (server.git/edit! git-dir resource (write-xml! lock-db lock body))}
-       (catch [:type ::article.lock/locked] {:keys [lock]}
+        :body   (server.article.editor/edit-resource!
+                 git-dir lock-db
+                 (fn [f] (io/copy body f))
+                 resource lock)}
+       (catch [:type ::server.article.lock/locked] {:keys [lock]}
          {:status 423
           :body   lock})))))

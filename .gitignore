@@ -56,3 +56,5 @@ wikimedia/wikimedia-dumps/
 wikimedia/reports/
 
 /.env
+
+test-data/

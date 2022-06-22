@@ -57,7 +57,7 @@
     (let [xml     (article/read-xml file)
           article (article/extract-article xml)
           errors  (article.validate/check-for-errors xml file)]
-      (merge desc article errors))
+      (assoc (merge desc article errors) :xml xml))
     (catch Throwable t
       (log/warnf t "Error parsing %s" file)
       desc)))
@@ -68,6 +68,12 @@
    (files-xf dir)
    (filter (comp fs/file? :file))
    (map desc->article)))
+
+(defn articles
+  [dir]
+  (let [dir (fs/file dir)]
+    (sequence (articles-xf dir) (file-seq dir))))
+
 
 (defn index-xf
   [dir]
@@ -176,36 +182,59 @@
         (publish-changes! dir changes)
         (push! repo)))))
 
+(defn sync!
+  [repo]
+  (fetch! repo)
+  (commit! repo))
+
 (def diff-xf
   (comp
    (map not-empty) (remove nil?)
    (map #(str/split % #"\t"))
    (map #(nth % 2))))
 
-(defn fast-forward!
-  [[{:keys [dir] :as repo}] ref]
-  (fetch! repo)
-  (with-lock
-    (fn []
-      (let [head (git/head-rev dir)]
-        (git/assert-clean dir)
-        (git/sh! dir "merge" "--ff-only" "-q" ref)
-        (let [diff (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))
-              diff-out (str/split-lines (get diff :out))
-              changes (sequence diff-xf diff-out)]
-          (publish-changes! dir changes)))))
-  (push! repo))
-
 (defn handle-fast-forward
-  [repo req]
+  [{:keys [dir] :as repo} req]
   (let [ref (get-in req [:parameters :path :ref])]
     (try
+      (fetch! repo)
+      (with-lock
+        (fn []
+          (let [head (git/head-rev dir)]
+            (git/assert-clean dir)
+            (git/sh! dir "merge" "--ff-only" "-q" ref)
+            (let [diff     (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))
+                  diff-out (str/split-lines (get diff :out))
+                  changes  (sequence diff-xf diff-out)]
+              (publish-changes! dir changes)))))
+      (push! repo)
       {:status 200
-       :body   (fast-forward! repo ref)}
+       :body   {:ff ref}}
       (catch Throwable t
         (log/warn t)
         {:status 400
          :body   ref}))))
+
+(defn handle-rebase
+  [{:keys [dir] :as repo} req]
+  (let [ref (get-in req [:parameters :path :ref])]
+    (log/debugf "Rebasing Git repo @ %s to %s" dir ref)
+    (with-lock
+      (fn []
+        (sync! repo)
+        (let [head (git/head-rev dir)]
+          (try
+            (git/sh! dir "rebase" ref)
+            (let [diff     (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))
+                  diff-out (str/split-lines (get diff :out))
+                  changes  (sequence diff-xf diff-out)]
+              (publish-changes! dir changes))
+            (push! repo)
+            {:status 200 :body {:ff ref}}
+            (catch Throwable t
+              (log/warn t "Rebase failed")
+              (git/sh! dir "rebase" "--abort")
+              {:status 400 :body {:ff ref}})))))))
 
 (defn get-file
   [dir path]
@@ -234,7 +263,8 @@
     (fn []
       (let [f    (fs/file dir)
             path (fs/path dir)]
-        (log/info {:git {:repo path :branch branch :origin origin}})
+        (log/infof "Opening Git Repo @ '%s' from %s@%s"
+                   path (or origin "<local>") branch)
         (when-not (fs/directory? f ".git")
           (if origin
             (do

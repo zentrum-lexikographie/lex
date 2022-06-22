@@ -1,11 +1,11 @@
 (ns zdl.lex.url
   (:require [lambdaisland.uri :as uri]
-            [zdl.lex.env :refer [getenv]]
+            [zdl.lex.env :as env]
             [clojure.string :as str])
   (:import [java.net URL URLStreamHandler URLStreamHandlerFactory]))
 
 (def server-base
-  (uri/uri (getenv "SERVER_URL" "https://lex.dwds.de/")))
+  (uri/uri (get-in env/config [:zdl.lex.client.http/server :url])))
 
 (def url-base
   (assoc server-base :scheme "lex"))
@@ -16,7 +16,7 @@
 
 (defn id->url
   [id]
-  (str (uri/join url-base id)))
+  (uri/join url-base id))
 
 (defn url->id
   [uri]

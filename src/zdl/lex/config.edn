@@ -1,12 +1,17 @@
-{:zdl.lex.client.issue/events      {}
+{:zdl.lex.client.dev/testbed       {}
+ :zdl.lex.client.http/server       {:url                #or [#dotenv "ZDL_LEX_SERVER_URL" "https://lex.dwds.de/"]
+                                    :user                    #dotenv "ZDL_LEX_SERVER_USER"
+                                    :password                #dotenv "ZDL_LEX_SERVER_PASSWORD"
+                                    :insecure? #boolean #or [#dotenv "ZDL_LEX_SERVER_HTTPS_INSECURE" "false"] }
+ :zdl.lex.client.issue/events      {}
  :zdl.lex.client.links/events      {}
  :zdl.lex.client.repl/server       {:port 3001}
  :zdl.lex.client.search/events     {}
  :zdl.lex.client.results/events    {}
  :zdl.lex.client.toolbar/events    {}
  :zdl.lex.client.validation/events {}
- :zdl.lex.server.article.lock/db   {}
- :zdl.lex.server.git/repo          {:origin #dotenv "ZDL_LEX_GIT_ORIGIN"
+ :zdl.lex.server.article.lock/db   {:path   #or [#dotenv "ZDL_LEX_LOCK_DB_PATH" "data/locks"]}
+ :zdl.lex.server.git/repo          {:origin      #dotenv "ZDL_LEX_GIT_ORIGIN"
                                     :branch #or [#dotenv "ZDL_LEX_GIT_BRANCH" "zdl-lex-server/development"]
                                     :dir    #or [#dotenv "ZDL_LEX_GIT_DIR" "data/git"]}
  :zdl.lex.server.http/server       {:git-repo #ig/ref :zdl.lex.server.git/repo
@@ -14,11 +19,11 @@
                                     :schedule #ig/ref :zdl.lex.server.task/schedule
                                     :port     #long #or [#dotenv "ZDL_LEX_HTTP_PORT" "3000"]}
  :zdl.lex.server.issue/db          {:dbtype   "mysql"
-                                    :host     #or [#dotenv "ZDL_LEX_MANTIS_DB_HOST" "mantis.dwds.de"]
+                                    :host     #or       [#dotenv "ZDL_LEX_MANTIS_DB_HOST" "mantis.dwds.de"]
                                     :port     #long #or [#dotenv "ZDL_LEX_MANTIS_DB_PORT" "3306"]
-                                    :dbname   #or [#dotenv "ZDL_LEX_MANTIS_DB_NAME" "mantis_bugtracker"]
-                                    :username #or [#dotenv "ZDL_LEX_MANTIS_DB_USER" "mantis"]
-                                    :password #or [#dotenv "ZDL_LEX_MANTIS_DB_PASSWORD" "mantis"]}
+                                    :dbname   #or       [#dotenv "ZDL_LEX_MANTIS_DB_NAME" "mantis_bugtracker"]
+                                    :username #or       [#dotenv "ZDL_LEX_MANTIS_DB_USER" "mantis"]
+                                    :password #or       [#dotenv "ZDL_LEX_MANTIS_DB_PASSWORD" "mantis"]}
  :zdl.lex.server.metrics/reporter  {:interval #long #or [#dotenv "ZDL_LEX_METRICS_REPORT_INTERVAL" "5"]}
  :zdl.lex.server.task/schedule     {:git-repo #ig/ref :zdl.lex.server.git/repo
                                     :issue-db #ig/ref :zdl.lex.server.issue/db

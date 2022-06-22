@@ -1,18 +1,12 @@
 (ns zdl.lex.server.article.lock
   (:require
+   [integrant.core :as ig]
    [next.jdbc :as jdbc]
    [slingshot.slingshot :refer [throw+]]
+   [zdl.lex.article.lock :as article.lock]
    [zdl.lex.server.auth :as auth]
    [zdl.lex.server.h2 :as h2]
-   [integrant.core :as ig]))
-
-(defn- now
-  []
-  (System/currentTimeMillis))
-
-(defn ttl->expires
-  [ttl]
-  (+ (now) (* 1000 ttl)))
+   [clojure.tools.logging :as log]))
 
 ;; # DB layer
 
@@ -20,7 +14,7 @@
   [c]
   (h2/query c {:select   :*
                :from     :lock
-               :where    [:> :expires (now)]
+               :where    [:> :expires (System/currentTimeMillis)]
                :order-by [:resource :owner :token]}))
 
 (defn select-active-lock
@@ -29,7 +23,7 @@
    (h2/query c {:select   :*
                 :from     :lock
                 :where    [:and
-                           [:> :expires (now)]
+                           [:> :expires (System/currentTimeMillis)]
                            [:= :resource resource]
                            [:= :owner owner]
                            [:= :token token]]
@@ -55,16 +49,18 @@
              :other-lock other-lock})))
 
 (defn merge-lock
-  [c {:keys [resource owner token expires]}]
+  [c {:keys [resource owner token expires] :as lock}]
+  (log/debugf "+ %s" (article.lock/->str lock))
   (h2/execute! c {:merge-into :lock
                   :columns    [:resource :owner :token :expires]
                   :values     [[resource owner token expires]]}))
 
 (defn delete-lock
   [c lock]
+  (log/debugf "- %s" (article.lock/->str lock))
   (h2/execute! c {:delete-from :lock
                   :where       [:and
-                                [:> :expires (now)]
+                                [:> :expires (System/currentTimeMillis)]
                                 [:= :resource (:resource lock)]
                                 [:= :owner (:owner lock)]
                                 [:= :token (:token lock)]]}))
@@ -76,10 +72,7 @@
   (let [parameters                       (:parameters req)
         {:keys [resource]}               (:path parameters)
         {:keys [ttl token] :or {ttl 60}} (:query parameters)]
-    {:resource resource
-     :token    token
-     :owner    owner
-     :expires  (ttl->expires ttl)}))
+    (article.lock/create-lock token owner resource ttl)))
 
 (defn- lock->response
   [lock & {:keys [token?] :or {token? false}}]
@@ -125,25 +118,25 @@
   [db]
   (jdbc/with-transaction [c db]
     (h2/execute! c {:delete-from :lock
-                    :where       [:<= :expires (now)]})))
+                    :where       [:<= :expires (System/currentTimeMillis)]})))
 
 ;; # Locked Editing support
 
-(defn editor
-  [db lock editor']
-  (fn [f]
+(defn locking-edit-fn
+  [db lock edit-fn]
+  (fn [& args]
     (jdbc/with-transaction [c db {:isolation :serializable}]
       (assert-unlocked c lock)
       (let [active-lock (select-active-lock c lock)]
         (try
           (when-not active-lock (merge-lock c lock))
-          (editor' f)
+          (apply edit-fn args)
           (finally
             (when-not active-lock (delete-lock c lock))))))))
 
 (defmethod ig/init-key ::db
-  [_ _]
-  (h2/open! "locks"))
+  [_ {:keys [path]}]
+  (h2/open! "locks" path))
 
 (defmethod ig/halt-key! ::db
   [_ db]

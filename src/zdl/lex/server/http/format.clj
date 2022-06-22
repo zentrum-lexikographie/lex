@@ -1,4 +1,4 @@
-(ns zdl.lex.server.format
+(ns zdl.lex.server.http.format
   (:require [clojure.data.csv :as csv]
             [gremid.data.xml :as dx]
             [clojure.java.io :as io]
