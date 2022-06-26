@@ -52,7 +52,6 @@
                                            audiogum/metrics-clojure          {:mvn/version "3.0.0"}
                                            org.relaxng/jing                  {:mvn/version "20181222"}}}
              :oxygen        {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "24.1.0.0"}}}
-             :oxygen-plugin {:extra-paths ["classes/client"]}
              :build         {:paths      ["build"]
                              :deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
                                                                          :git/sha "34727f7"}

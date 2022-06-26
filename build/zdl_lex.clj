@@ -1,10 +1,10 @@
 (ns zdl-lex
   (:require
-   [gremid.data.xml.rnc :as dx.rnc]
-   [gremid.data.xml.schematron :as dx.schematron]
+   [clojure.java.io :as io]
    [clojure.tools.build.api :as b]
    [clojure.tools.build.tasks.copy :as copy]
-   [clojure.java.io :as io]))
+   [gremid.data.xml.rnc :as dx.rnc]
+   [gremid.data.xml.schematron :as dx.schematron]))
 
 (def ignores
   (conj copy/default-ignores
