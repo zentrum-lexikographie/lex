@@ -49,6 +49,14 @@
                      (content->text node))
     :else          ""))
 
+
+(defn node->orig-text
+  [node]
+  (cond
+    (string? node) node
+    (map? node)    (str/join (map node->orig-text (:content node)))
+    :else          ""))
+
 (defn normalize-text
   [s]
   (some-> s (str/replace #"\s+" " ") (str/trim) (not-empty)))
@@ -56,6 +64,10 @@
 (defn text
   [node]
   (normalize-text (node->text node)))
+
+(defn orig-text
+  [node]
+  (normalize-text (node->orig-text node)))
 
 (defn zip-text
   [loc]
@@ -67,7 +79,7 @@
 
 (defn hid
   [{{:keys [hidx]} :attrs :as node}]
-  (str/join (cond-> [(text node)] hidx (conj "#" hidx))))
+  (str/join (cond-> [(orig-text node)] hidx (conj "#" hidx))))
 
 (defn zip-hid
   [loc]
@@ -219,8 +231,7 @@
 
 (comment
   (require '[zdl.lex.fs :as fs])
-  (require '[zdl.lex.article.validate :as av])
   (let [dir      (fs/file ".." "zdl-wb")
         articles (filter fs/file? (file-seq dir))
         articles (filter #(str/ends-with? (.getName %) ".xml") articles)]
-    (mapcat (comp av/check-typography read-xml) (take 10 articles))))
+    (mapcat (comp :links extract-article read-xml) (take 1000 articles))))
