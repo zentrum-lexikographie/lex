@@ -84,7 +84,8 @@
                      "-Dsun.io.useCanonCaches=true"
                      "-Dsun.io.useCanonPrefixCache=true"
                      "-cp" (->>
-                            [(fs/file oxygen-home "classes")
+                            [(fs/file "lib")
+                             (fs/file oxygen-home "classes")
                              (fs/file oxygen-home "lib" "oxygen-basic-utilities.jar")
                              (fs/file oxygen-home "lib" "oxygen.jar")
                              (fs/file oxygen-home)]
