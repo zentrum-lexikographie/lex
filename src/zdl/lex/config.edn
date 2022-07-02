@@ -5,7 +5,7 @@
                                     :insecure? #boolean #or [#dotenv "ZDL_LEX_SERVER_HTTPS_INSECURE" "false"] }
  :zdl.lex.client.issue/events      {}
  :zdl.lex.client.links/events      {}
- :zdl.lex.client.repl/server       {:port 3001}
+ :zdl.lex.client.repl/server       {:port #long #or [#dotenv "ZDL_LEX_REPL_PORT" "3001"]}
  :zdl.lex.client.search/events     {}
  :zdl.lex.client.results/events    {}
  :zdl.lex.client.toolbar/events    {}

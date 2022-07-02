@@ -7,40 +7,22 @@ lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
 ## Prerequisites
 
-* [GNU/Linux](https://www.debian.org/) (tested on Debian-based distros)
-* [Docker](https://www.docker.com/)
-* [Java 8](https://packages.debian.org/search?keywords=openjdk-8-jdk)
-
-The application client is implemented as a plugin for [Oxygen XML
-Editor](https://www.oxygenxml.com/). We strive for compatibility with the
-editor's v20 which incorporates JDK v8. Thus, the client plugin has to be
-compiled with the apropriate JDK v8 API bindings. In the likely case that your
-default JDK is of a later version, you can install v8 in parallel and point the
-build scripts to its location. See below for configuration details.
-
-While the client and server component compile to Java bytecode and run natively
-on the Java Virtual Machine, for building the application a Clojure installation
-is required. [Clojure](https://clojure.org/) is installed locally in the project
-as part of the build.
-
-### Optional Requirements for Tooling/Scripts
-
-* [Python 3](https://www.python.org/)
-
-For Python-based tooling and scripts in `publish/`, it is recommended to use a
-project-specific virtual environment, e.g. via
-[pyenv](https://github.com/pyenv/pyenv):
-
-```plaintext
-$ pyenv virtualenv zdl-lex
-$ pyenv local zdl-lex
-```
-
-Then, install Python dependencies and local modules via
-
-```plaintext
-$ pip install -r requirements.txt
-```
+* [GNU/Linux](https://www.debian.org/): Development, builds and tests of the
+  platform are performed on [Debian GNU/Linux](https://debian.org/) (currently
+  v10 “Buster”). While other UNIX-like operating systems (i. e. MacOS) might
+  work, they are not supported. The same goes for MS Windows.
+* [Clojure](https://clojure.org/): The server component, mediating between the
+  [Oxygen-XML-Editor](https://www.oxygenxml.com/)-based client, a Git-based data
+  store and a search service, is written Clojure, a LISP dialect. The same goes
+  for Oxygen-XML's project-specific extensions.
+* [Java (JDK)](https://openjdk.java.net/): Clojure, being a hosted language,
+  requires a current Java runtime.
+* [Babashka](https://babashka.org/): The build process is orchestrated via `bb`,
+  a “fast native Clojure scripting runtime”.
+* [Docker](https://docs.docker.com/get-docker/): The server and the search
+  service require a Java runtime and [Apache Solr](https://solr.apache.org/). To
+  ease the setup and deployment of these services, both are containerized and
+  assume a Docker environment for testing and in production.
 
 ## Configuration
 
@@ -54,49 +36,49 @@ in the project directory and adjust the settings to your needs. See the comments
 in the sample file for a documentation of the available options. Example:
 
 ```plaintext
-ZDL_LEX_JAVA8_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-
-ZDL_LEX_DATA_DIR=../data
-
-ZDL_LEX_METRICS_REPORT_INTERVAL=0
-
 # disconnect test setup from production origin
 ZDL_LEX_GIT_ORIGIN=
+ZDL_LEX_GIT_DIR=test-data/git
+ZDL_LEX_LOCK_DB_PATH=test-data/locks
 
-ZDL_LEX_MANTIS_USER=lexuser
-ZDL_LEX_MANTIS_PASSWORD=secret123!
+ZDL_LEX_MANTIS_DB_HOST=localhost
+ZDL_LEX_MANTIS_DB_USER=testuser
+ZDL_LEX_MANTIS_DB_PASSWORD=testpass
+
+ZDL_LEX_METRICS_REPORT_INTERVAL=1440
+
+ZDL_LEX_SERVER_URL=http://localhost:3000/
+ZDL_LEX_SERVER_USER=admin
+ZDL_LEX_SERVER_PASSWORD=admin
 ```
 
 ## Build
 
-Build tasks can be executed via `make`:
+Build tasks can be executed via `bb`:
 
 ```plaintext
-$ make help
-Targets:
+$ bb tasks
+The following tasks are available:
 
- all      - Builds client, server and packages both in a Docker
-            container
- release  - Runs a test build, creates a release tag for the current
-            git revision and reruns the build, pushing resulting
-            images in the end
- client   - Builds client and starts an OxygenXML Editor instance
-            with the built development version of the client
+clj-kondo     Configures clj-kondo linter
+pyenv         Initializes local python environment
+python-deps   Installs Python dependencies
+write-version Writes new version
+build-schema  Transpile RELAXNG/Schematron sources
+build-client  Builds Oxygen XML Editor plugin/framework
+build         Builds docker images
+release       Releases docker images
+test          Runs test suite
+start-oxygen  Start Oxygen XML Editor with plugin/framework
 ```
 
 Accordingly, to build the application's client and server components:
 
 ```plaintext
-$ make all
-[main            | INFO  | zdl.lex.build       ] Transpiling Artikel-XML schema (RNC -> RNG)
-[main            | INFO  | zdl.lex.build       ] Compiling Oxygen XML Editor plugin (client)
-[main            | INFO  | zdl.lex.build       ] Packaging Oxygen XML Editor plugin (client)
-[main            | INFO  | zdl.lex.build       ] Compiling server
-[main            | INFO  | zdl.lex.build       ] Packaging server
+$ bb build
 […]
-Successfully built a57682690b6e
-Successfully tagged docker-registry.zdl.org/zdl-lex/server:35695b8
-make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
+Successfully built […]
+Successfully tagged docker-registry.zdl.org/zdl-lex/server:latest
 ```
 
 ## Test
@@ -104,10 +86,19 @@ make[1]: Leaving directory '/home/gregor/repositories/zdl-lex/docker/server'
 Before releasing new versions of the application, its client and server
 components can be tested locally.
 
+Make sure settings in `.env` point to the local server instance and provide test
+credentials, i.e.:
+
+```plaintext
+ZDL_LEX_SERVER_URL=http://localhost:3000/
+ZDL_LEX_SERVER_USER=admin
+ZDL_LEX_SERVER_PASSWORD=admin
+```
+
 To run a local server instance as a Docker container:
 
 ```plaintext
-$ make all
+$ bb build
 $ docker-compose up
 ```
 
@@ -120,35 +111,24 @@ The server container is reachable at
 
 http://localhost:3000/
 
-Before starting Oxygen XML Editor with the client plugin installed from the
-current project sources, make sure settings in `.env` point to the local server
-instance and provide test credentials:
+Then, start the Oxygen XML Editor with the client plugin installed from the
+current project sources via
 
 ```plaintext
-ZDL_LEX_SERVER_URL=http://localhost:3000/
-ZDL_LEX_SERVER_USER=admin
-ZDL_LEX_SERVER_PASSWORD=admin
-```
-
-Then, start the client via
-
-```plaintext
-$ make client
+$ bb start-oxygen
 ```
 
 ## Release
 
 Releasing a new version of ZDL/Lex entails a complete build of all components,
-packaging everything as a Docker container and pushing the container images with
-updated tags to the ZDL's private Docker registry:
+packaging everything in Docker containers and pushing the containers' images
+with updated tags to ZDL's private Docker registry:
 
 ```plaintext
-$ make release
+$ bb release
 ```
 
 ## License
-
-Copyright © 2019-2021 Berlin-Brandenburgische Akademie der Wissenschaften.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser Public License as published by
