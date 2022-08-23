@@ -361,6 +361,7 @@ Illustration = element Illustration {
 		| 'CC BY-SA 1.0'
 		| 'CC BY-SA 2.0'
 		| 'CC BY-SA 2.0 DE'
+		| 'CC BY-SA 2.0 FR'
 		| 'CC BY-SA 2.1 JP'
 		| 'CC BY-SA 2.5'
 		| 'CC BY-SA 2.5 DE'
@@ -468,7 +469,7 @@ Formangabe = element Formangabe {
 	} ?
 	, attribute Regel { 
 		list { xsd:token {
-			pattern = '\d+(_\(\*?E?\d?(\.\d)*\))?'
+			pattern = '\d+(_\(E?\d?(\.\d)*\))?'
 		} + } 
 	} ?
 	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }

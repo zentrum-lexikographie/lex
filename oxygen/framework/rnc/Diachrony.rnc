@@ -37,6 +37,7 @@ Diachronie = element Diachronie {
 	}
 	, element Verweise {
 		element Verweis {
+	        attribute class { 'invisible' } ?
 			attribute Typ { 'EtymWB' }
 			, Verweisziel
 		} *
