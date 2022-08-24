@@ -10,37 +10,38 @@ all:
 environment:
 	/bin/mkdir -p backup/
 	@if [ -z "${src_pass}" ] ; then echo '\nPlease set $${src_pass}!\n' ; /bin/false ; fi
-	$(eval mysql += -h$(src_host) -u$(src_user) -p$(src_pass))
+	$(eval mysql += -h$(src_host) -u$(src_user) -p"$(src_pass)")
+	$(eval mysqldump += -h$(src_host) -u$(src_user) -p"$(src_pass)")
 
 neologismen-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) neologismen > ./backup/backup-neologismen-`date -Iseconds`.sql
+	$(mysqldump) neologismen > ./backup/backup-neologismen-`date -Iseconds`.sql
 
 wortgeschichten-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wortgeschichten > ./backup/backup-wortgeschichten-`date -Iseconds`.sql
+	$(mysqldump) wortgeschichten > ./backup/backup-wortgeschichten-`date -Iseconds`.sql
 
 wortgeschichten_preprint-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wortgeschichten_preprint > ./backup/backup-wortgeschichten_preprint-`date -Iseconds`.sql
+	$(mysqldump) wortgeschichten_preprint > ./backup/backup-wortgeschichten_preprint-`date -Iseconds`.sql
 
 dwdswb-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwdswb > ./backup/backup-dwdswb-`date -Iseconds`.sql
+	$(mysqldump) dwdswb > ./backup/backup-dwdswb-`date -Iseconds`.sql
 
 etymwb-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) etymwb > ./backup/backup-etymwb-`date -Iseconds`.sql
+	$(mysqldump) etymwb > ./backup/backup-etymwb-`date -Iseconds`.sql
 
 dwb1-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwb1 > ./backup/backup-dwb1-`date -Iseconds`.sql
+	$(mysqldump) dwb1 > ./backup/backup-dwb1-`date -Iseconds`.sql
 
 dwb2-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) dwb2 > ./backup/backup-dwb2-`date -Iseconds`.sql
+	$(mysqldump) dwb2 > ./backup/backup-dwb2-`date -Iseconds`.sql
 
 varwb-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) varwb > ./backup/backup-varwb-`date -Iseconds`.sql
+	$(mysqldump) varwb > ./backup/backup-varwb-`date -Iseconds`.sql
 
 wdg-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) wdg > ./backup/backup-wdg-`date -Iseconds`.sql
+	$(mysqldump) wdg > ./backup/backup-wdg-`date -Iseconds`.sql
 
 openthesaurus-backup: environment
-	$(mysqldump) -h$(src_host) -u$(src_user) -p$(src_pass) openthesaurus > ./backup/backup-openthesaurus-`date -Iseconds`.sql
+	$(mysqldump) openthesaurus > ./backup/backup-openthesaurus-`date -Iseconds`.sql
 
 openthesaurus-update: openthesaurus-backup
 	# check whether the source database exists
