@@ -54,6 +54,7 @@ Mitarbeiterinnen = (
 	| 'hollos'
 	| 'jzaun'
 	| 'kaufhold'
+	| 'kirchner'
 	| 'lang'
 	| 'lemnitzer'
 	| 'lmartin'
