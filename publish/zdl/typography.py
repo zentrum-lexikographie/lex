@@ -3,14 +3,14 @@ import unicodedata
 from .article import xpath, qname, text_content, text
 
 
-_expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.', 'o. ä.', 'o. Ä.', 'usw.', 'z. B.', 'bzw.')) # U+202F NARROW NO-BREAK SPACE
+_expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.', u'o.\u202fä.', u'o.\u2027Ä.', 'usw.', u'z.\202fB.', 'bzw.')) # U+202F NARROW NO-BREAK SPACE
 _definition_els = xpath('//d:Definition')
 
 
 def check_abbreviations_in_definitions(element):
     comments = []
     for definition in _definition_els(element):
-        for token in text_content(definition).split():
+        for token in text_content(definition).split(' \n\r'):
             if token.endswith('.') and token not in _expected_abbreviations:
                 comments.append((definition, 'nicht erlaubte Abkürzung'))
     return comments
