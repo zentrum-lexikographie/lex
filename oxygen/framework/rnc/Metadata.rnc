@@ -39,6 +39,7 @@ Mitarbeiterinnen = (
 	| 'ast'
 	| 'barkey'
 	| 'billes'
+        | 'bomber'
 	| 'brockmeier'
 	| 'brosch'
 	| 'doerre'
