@@ -106,8 +106,6 @@ Auxiliar:before                                { content: "Auxiliar: "; }
 Wortklasse:before                              { content: "Wortklasse: "; }
 Wortklasse[Typ]:after                          { content: " (" attr(Typ) ")"; }
 Wortbildung:before                             { content: "Wortbildung: "; }
-FlexionsklasseSingular:before                  { content: "Flexionsklasse Sg.: "; }
-FlexionsklassePlural:before                    { content: "Flexionsklasse Pl.: "; }
 Genus:before                                   { content: "Genus: "; }
 Genitiv:before                                 { content: "Gen. Sg.: "; }
 Plural:before                                  { content: "Nom. Pl.: "; }

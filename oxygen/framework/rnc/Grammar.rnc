@@ -280,12 +280,6 @@ grammatische_Beschreibung = element Grammatik {
 		Frequenzbeschraenkung ?
 		, formaler_Text
 	} *
-	, element FlexionsklasseSingular {
-		'none' | '1' | '1a' | '2' | '3' | '4' | '5' | '5a' | '6'
-	} *
-	, element FlexionsklassePlural {
-		'none' | '1' | '2' | '3' | '4' | '4a' | '4b' | '5' | '6' | '7' | '7a' | '8' | '9'
-	} *
 	, Kommentar ?
 }
 
