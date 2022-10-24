@@ -23,8 +23,10 @@ Frequenzbeschraenkung = attribute Frequenz { Frequenzangaben }
 Sprachareal = element Sprachareal {
 	Frequenzbeschraenkung ?
 	, (
+		# unspezifisch
+		'regional'
 		# Metaareale
-		'D'
+		| 'D'
 		| 'D-Nord'
 		| 'D-Mitte'
 		| 'D-Süd'
@@ -162,6 +164,7 @@ Gebrauchszeitraum = element Gebrauchszeitraum {
 }
 
 Sprachraum = element Sprachraum {
+	# deprecated
 	Frequenzbeschraenkung ?
 	, (
 		'landschaftlich'
