@@ -3,6 +3,7 @@ import datetime, pytz
 import lxml.etree as et
 import re
 import uuid
+import logging
 
 _namespaces = {'d': 'http://www.dwds.de/ns/1.0',
                'tei': 'http://www.tei-c.org/ns/1.0',
@@ -94,7 +95,12 @@ def fromstring(s, strip=False):
 
 def parse(p, strip=False):
     with p.open() as f:
-        return get_articles(et.parse(f, parser(strip)))
+        try:
+            return get_articles(et.parse(f, parser(strip)))
+        except et.XMLSyntaxError as err:
+            logging.critical('In file %s: %s', p, err)
+            exit(-1)
+            
 
 
 def tostring(document):
