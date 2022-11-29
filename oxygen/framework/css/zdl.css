@@ -200,7 +200,8 @@ Definition { font-weight: bold; }
 
 /* Markierung von Lemmazeichen */
 Schreibung { font-size: xx-large; }
-Schreibung[Typ="AR_G"] { color: brown; }
+Schreibung[Typ="AR_G"] { color: brown; } /* TODO: remove*/
+Schreibung[Typ="R"] { color: blue; }
 *[Typ="U"], *[Typ="U_Falschschreibung"], *[Typ="U_CH"], *[Typ="U_AT"] {
 	text-decoration: line-through;
 	color: red;
