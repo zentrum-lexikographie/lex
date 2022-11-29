@@ -389,8 +389,6 @@ Rechtschreibstatus = attribute Typ {
 	| 'U_Falschschreibung' # was never valid
 	| 'U_CH' # TODO: keep or discard?
 	| 'U_AT' # TODO: keep or discard?
-	| 'U_U'  # deprecated, use U_Falschschreibung
-	| 'U_NR' # deprecated, use U
 }
 
 [

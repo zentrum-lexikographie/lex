@@ -201,7 +201,7 @@ Definition { font-weight: bold; }
 /* Markierung von Lemmazeichen */
 Schreibung { font-size: xx-large; }
 Schreibung[Typ="AR_G"] { color: brown; }
-*[Typ="U"], *[Typ="U_Falschschreibung"], *[Typ="U_U"], *[Typ="U_CH"], *[Typ="U_AT"] {
+*[Typ="U"], *[Typ="U_Falschschreibung"], *[Typ="U_CH"], *[Typ="U_AT"] {
 	text-decoration: line-through;
 	color: red;
 }
