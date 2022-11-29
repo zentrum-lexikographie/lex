@@ -131,6 +131,7 @@ Metadaten.Artikel = (
 		| 'Lex-kommentiert'
 		| 'Lex-Wiedervorlage'
 		| 'Lex-zurückgestellt'
+		| 'Lex-Regioprüfung'
 		| 'Red-1'
 		| 'Red-2'
 		| 'Red-2-zurückgewiesen'
