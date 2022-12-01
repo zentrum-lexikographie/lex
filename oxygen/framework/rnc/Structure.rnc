@@ -314,6 +314,16 @@ Fundstelle = element Fundstelle {
 }
 
 
+sch:pattern [
+    sch:rule [
+        context = "//d:Artikel//d:Fundstelle"
+        sch:assert [
+            test = "normalize-space(string-join(.//text(), '')) != '' "
+            'Fundstellenangabe ergänzen (darf nicht leer sein)!'
+        ]
+    ]
+]
+	
 ########################################
 # Bedeutungsangaben und Anmerkungen ####
 ########################################
