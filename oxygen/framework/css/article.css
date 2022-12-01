@@ -117,6 +117,7 @@ Numerus:before                                 { content: "Numerus: "; }
 Numeruspraeferenz:before                       { content: "Numeruspräferenz: "; }
 Kasuspraeferenz:before                         { content: "Kasuspräferenz: "; }
 reflexiv:before                                { content: "reflexiv"; }
+Positivvariante:before                         { content: "Positivvariante: "; }
 Komparativ:before                              { content: "Komparativ: "; }
 Superlativ:before                              { content: "Superlativ: "; }
 Komparationspraeferenz:before                  { content: "Komparationspräferenz: "; }
