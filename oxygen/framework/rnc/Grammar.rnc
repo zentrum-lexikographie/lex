@@ -194,6 +194,7 @@ grammatische_Beschreibung = element Grammatik {
 	# ##################
 	# -e- bzw. -s- sind optional für Komparativ bzw. Superlativ
 	# wegen Fällen wie /mehr/ und /am größten/
+        , element Positivvariante { Lemmatoken } ?
 	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(besser|freier|länger|leichter|näher|tiefer|schwerer|weiter) ?\p{Ll}+(t|nd)' } } *
 	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(besten|freiesten|längsten|leichtesten|nächsten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))|nächst\p{Ll}+|(best|tiefst)\p{Ll}+nd' } } *
 	, element Komparationspraeferenz {
