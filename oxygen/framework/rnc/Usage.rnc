@@ -34,7 +34,7 @@ Sprachareal = element Sprachareal {
 		| 'D-Ost'
 		| 'D-Mittelwest+'
 		| 'CH+'
-		| 'A*'
+		| 'A+'
 		# Deutschland
 		| 'D-Nordwest'
 		| 'D-Nordwest (Schleswig-Holstein)'
