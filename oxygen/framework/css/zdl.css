@@ -134,6 +134,7 @@ Formgeschichte:before                               { content: "Formgeschichte: 
 Bedeutungsgeschichte:before                         { content: "Bedeutungsgeschichte: "; }
 Diachronie>Verweise:before                          { content: "Querverweise: "; }
 Verweise>Verweis[Typ="EtymWB"]:before               { content: "im EtymWB als ↗"; }
+Verweise>Verweis[Typ="WGd"]:before                  { content: "bei Wortgeschichte digital als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before          { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="MWA"]:before                  { content: "auch in MWA ↗"; }
 Verweise>Verweis[Typ="MWA-Zentralartikel"]:before   { content: "MWA-Zentralartikel ↗"; }
