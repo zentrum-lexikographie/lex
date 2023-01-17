@@ -123,6 +123,7 @@ Mitarbeiterinnen = (
 	| 'unger'
 	| 'wahrig'
 	| 'wulfert'
+        | 'zepedama'
 )
 
 Metadaten.allgemein = (
