@@ -389,6 +389,7 @@ Ueberschrift = element Ueberschrift {
 
 Formangabe = element Formangabe {
 	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ? # übergangsweise, um Formangaben mit nur "R-Schreibungen" auszublenden
 	, attribute Klasse { # TODO: aus @Regel ableitbar?
 		list {
 			(
