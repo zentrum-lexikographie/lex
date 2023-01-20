@@ -483,8 +483,7 @@ Aussprache = element Aussprache {
 	, ( empty | xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' } )
 }
 
-Orthografie = element Orthografie {
-    element Orthografieregel {
+Orthografieregel = element Orthografieregel {
         '2'
         | '3 (E)'
         | '4 (E1)'
@@ -627,7 +626,10 @@ Orthografie = element Orthografie {
         | '66 (E1)'
         | '79 (2)'
         | '102 (E2)'
-    } *
+}
+
+Orthografie = element Orthografie {
+    Orthografieregel *
 }
 
 ########################################
