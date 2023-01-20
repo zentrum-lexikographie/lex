@@ -23,7 +23,7 @@ Artikel[Status="Red-f"]          { background-color: #aeecff; }
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
 Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
-Kollokationen, Konstruktionsmuster, Kommentar {
+Kollokationen, Konstruktionsmuster, Kommentar, Orthografie {
 	border: 1px dotted black;
 	margin-bottom: 0.4em;
 	margin-top: 0.4em;
@@ -40,6 +40,7 @@ Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
 Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
+Artikel>Orthografie:before       { content: "Orthografie"; }
 Verweise[Typ]:before          { -oxy-append-content: " – " attr(Typ); }
 Lesart Verweise:before        { content: "semantische und enzyklopädische Verweise"; }
 Diachronie:before             { content: "Diachronie"; }
@@ -124,6 +125,7 @@ Komparationspraeferenz:before                  { content: "Komparationspräferen
 indeklinabel:before                            { content: "indeklinabel"; }
 Funktionspraeferenz:before                     { content: "Funktionspräferenz: "; }
 Einschraenkung:before                          { content: "sonstige Einschränkung: "; }
+Orthografieregel:before                        { content: "Regel: "; }
 Belegtext:before                               { content: "Belegtext: "; }
 Korpusabfrage:before                           { content: "DDC: "; }
 Fundstelle:before                              { content: "Fundstelle: "; }
