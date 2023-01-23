@@ -124,7 +124,8 @@ Komparationspraeferenz:before                       { content: "Komparationsprä
 indeklinabel:before                                 { content: "indeklinabel"; }
 Funktionspraeferenz:before                          { content: "Funktionspräferenz: "; }
 Einschraenkung:before                               { content: "sonstige Einschränkung: "; }
-Orthografieregel:before                             { content: "Orthografieregel: "; }
+Orthografieregel:before                             { content: "§ "; }
+Orthografie > Orthografieregel:before               { content: "Orthografieregel: § "; }
 Belegtext:before                                    { content: "Belegtext: "; }
 Korpusabfrage:before                                { content: "DDC: "; }
 Fundstelle:before                                   { content: "Fundstelle: "; }
@@ -227,6 +228,11 @@ Verweis > *, Verweis_extern > * {
 	color: blue;
 	display: inline;
 	padding-left: 0.5em;
+}
+Kommentar > Orthografieregel {
+    color: blue;
+    display: inline;
+    padding-right: 0.5em;
 }
 Ziellemma:before {
 	content: attr(hidx); /* Homographenziffer */
