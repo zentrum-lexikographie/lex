@@ -82,7 +82,8 @@ Diachronie:before, Verweise:before, Diasystematik:before,
 Syntagmatik:before, Syntagmatik > *:before, Ueberschrift:before,
 Verwendungsbeispiele:before, Verwendungsbeispiele > *:before,
 Kollokationen:before, Kollokationen > *:before, Rohdaten:before,
-Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before {
+Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before,
+Orthografie:before {
 	color: black;
 	background-color: #ddd;
 	font-weight: normal;
