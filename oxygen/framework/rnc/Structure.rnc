@@ -390,59 +390,6 @@ Ueberschrift = element Ueberschrift {
 Formangabe = element Formangabe {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ? # übergangsweise, um Formangaben mit nur "R-Schreibungen" auszublenden
-	, attribute Klasse { # deprecated da aus @Regel ableitbar
-		list {
-			(
-				# Vokale/Diphtonge
-				'a/aa' | 'ai/ä' | 'à/a' | 'au/o' | 'aw/au'
-				| 'e/ä' | 'ée/ee' | 'é/ee' | 'eu/äu' | 'eu/ö'
-				| 'i/j'
-				| 'o/oo' | 'ou/u'
-				| 'u/ü'
-				# Konsonanten
-				| 'b/p'
-				| 'c/k' | 'c/s' | 'c/tz' | 'cc/kk' | 'c/ck' | 'c/z' | 'c/ss'
-				| 'ch/kh' | 'ch/sch'
-				| 'd/t'
-				| 'ff/f'
-				| 'gh/g' | 'gn/n'
-				| 'j/y'
-				| 'kk/ck' | 'kh/k'
-				| 'l/ll'
-				| 'm/mm'
-				| 'n/nn'
-				| 'p/pp' | 'ph/f'
-				| 'qu/k'
-				| 'rh/r'
-				| 's/ss' | 'ß/ss' | 's/z'
-				| 'sch/tsch' | 'sh/sch'
-				| 'th/t' | 't/tt' | 't/z'
-				| 'z/tz' | 'z/s' | 'zz/s'
-				| 'v/w'
-				| 'y/i' | 'y/j'
-				# Sonderfälle
-				| 'oxyd/oxid'
-				| 'tia/zia'
-				| 'tie/zie'
-				| 'tiö/ziö'
-				| 'Sinfonie/Symphonie'
-				# abstrakte Regeln
-				| 'G/Z'
-				| 'G/K'
-				| 'FM' # fremdsprachliches Material
-				| 'Bindestrich'
-				| 'Stammprinzip'
-				| 'Wortangleichung'
-				| 'Schwa-Tilgung'
-				| 'Fuge'
-			) + 
-		} 
-	} ?
-	, attribute Regel { # deprecated, wird //Orthografieregel
-		list { xsd:token {
-			pattern = '\d+(_\(E?\d?(\.\d)*\))?'
-		} + } 
-	} ?
 	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }
 	, Schreibung +
 	, Aussprache * # TODO oblig.?
@@ -629,7 +576,8 @@ Orthografieregel = element Orthografieregel {
 }
 
 Orthografie = element Orthografie {
-    Orthografieregel *
+    Metadaten.allgemein ?
+    , Orthografieregel *
 }
 
 ########################################

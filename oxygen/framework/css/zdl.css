@@ -36,8 +36,6 @@ Kollokationen, Konstruktionsmuster, Kommentar, Orthografie {
 Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Artikel > Formangabe:before   { -oxy-append-content: attr(Typ)"angabe"; }
-Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); }
-Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
 Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
@@ -126,7 +124,7 @@ Komparationspraeferenz:before                       { content: "Komparationsprä
 indeklinabel:before                                 { content: "indeklinabel"; }
 Funktionspraeferenz:before                          { content: "Funktionspräferenz: "; }
 Einschraenkung:before                               { content: "sonstige Einschränkung: "; }
-Orthografieregel:before                             { content: "Regel: "; }
+Orthografieregel:before                             { content: "Orthografieregel: "; }
 Belegtext:before                                    { content: "Belegtext: "; }
 Korpusabfrage:before                                { content: "DDC: "; }
 Fundstelle:before                                   { content: "Fundstelle: "; }
