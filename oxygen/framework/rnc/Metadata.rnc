@@ -86,6 +86,7 @@ Mitarbeiterinnen = (
         | 'bulak'
 	| 'doerre'
 	| 'ermakova'
+	| 'folz'
 	| 'fuhrmann'
 	| 'geyken'
 	| 'goettel'
@@ -122,6 +123,7 @@ Mitarbeiterinnen = (
 	| 'stypa'
 	| 'unger'
 	| 'wahrig'
+	| 'wiegand'
 	| 'wulfert'
         | 'zepeda'
 )
