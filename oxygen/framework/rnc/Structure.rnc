@@ -484,6 +484,7 @@ Orthografieregel = element Orthografieregel {
         | '36 (2.3)'
         | '36 (E2)'
         | '36 (E3)'
+        | '37'
         | '37 (1.1)'
         | '37 (1.2)'
         | '37 (1.3)'
