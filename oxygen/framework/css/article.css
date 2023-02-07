@@ -146,9 +146,6 @@ Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
 Verweise>Verweis[Typ="Hyponym"]:before         { content: "Hyponym ist ↗"; }
 Verweise>Verweis[Typ="Hyperonym"]:before       { content: "Hyperonym ist ↗"; }
 Verweise>Verweis[Typ="Entsprechung"]:before    { content: "entspr. der Bed. von ↗"; }
-Verweise>Verweis[Typ="zu"]:before              { content: "zu ↗"; }
-Verweise>Verweis[Typ="vgl"]:before             { content: "vgl. ↗"; }
-Verweise>Verweis[Typ="mehr_sv"]:before         { content: "mehr unter ↗"; }
 Verweise>Verweis[Typ="Erstglied"]:before       { content: "Erstglied ist ↗"; }
 Verweise>Eigenname[Typ="Erstglied"]:before     { content: "Erstglied ist (Eigenname) "; }
 Verweise>Verweis[Typ="Binnenglied"]:before     { content: "Binnenglied ist ↗"; }
@@ -164,6 +161,8 @@ Verweise>Eigenname[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente i
 
 Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
 Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "externer Etymologieartikel ↗"; }
+Verweis[Typ="zu"]:before                       { content: "zu ↗"; } # Etym.
+Verweis[Typ="mehr_sv"]:before                  { content: "↗"; }    # Etym.
 
 /********************************************************************
  * Ab hier folgen alle Sonderfälle der Darstellung.
