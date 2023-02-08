@@ -421,9 +421,9 @@ Schreibung = element Schreibung {
 [
     sch:pattern [
         sch:rule [
-            context = "//d:Schreibung[@Typ]"
+            context = "//d:Schreibung[@Typ][@Trennung]"
             sch:assert [
-                test = "starts-with(@Typ, 'U') and not(@Trennung)"
+                test = "not(@Typ = ('U', 'U_Falschschreibung'))"
                 'Keine Trennstellen für ungültige Schreibungen angeben!'
             ]
         ]
