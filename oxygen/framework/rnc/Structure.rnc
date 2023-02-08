@@ -418,6 +418,18 @@ Schreibung = element Schreibung {
 	, Lemmatoken
 }
 
+[
+    sch:pattern [
+        sch:rule [
+            context = "//d:Schreibung[@Typ]"
+            sch:assert [
+                test = "starts-with(@Typ, 'U') and not(@Trennung)"
+                'Keine Trennstellen für ungültige Schreibungen angeben!'
+            ]
+        ]
+    ]
+]
+
 Korpusabfrage = element Korpusabfrage { text }
 
 Aussprache = element Aussprache {
