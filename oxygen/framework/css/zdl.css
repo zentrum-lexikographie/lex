@@ -127,7 +127,6 @@ Einschraenkung:before                               { content: "sonstige Einschr
 Orthografieregel:before                             { content: "§ "; }
 Orthografie > Orthografieregel:before               { content: "Orthografieregel: § "; }
 Belegtext:before                                    { content: "Belegtext: "; }
-Korpusabfrage:before                                { content: "DDC: "; }
 Fundstelle:before                                   { content: "Fundstelle: "; }
 Kurztitel:before                                    { content: "Kurztitel: "; }
 Datierung:before                                    { content: "Datierung: "; }

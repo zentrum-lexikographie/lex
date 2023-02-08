@@ -148,7 +148,6 @@ Kollokation = element Kollokation {
 	, Belegtext
 	, semantische_Verweise ?
 	, Diasystematik ?
-	, Korpusabfrage *
 }
 
 # TODO: hier stecken sicherlich auch Kollokationen drin
@@ -159,7 +158,6 @@ Konstruktionsmuster = element Konstruktionsmuster {
 	, Frequenzangabe ?
 	, semantische_Verweise ?
 	, Diasystematik ?
-	, Korpusabfrage *
 }
 
 Phrasem = element Phrasem {
@@ -169,7 +167,6 @@ Phrasem = element Phrasem {
 	, Frequenzangabe ?
 	, semantische_Verweise ?
 	, Diasystematik ?
-	, Korpusabfrage *
 }
 
 Syntagmatik = element Syntagmatik {
@@ -393,7 +390,6 @@ Formangabe = element Formangabe {
 	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' }
 	, Schreibung +
 	, Aussprache * # TODO oblig.?
-	, Korpusabfrage *
 	, grammatische_Beschreibung
 	, Frequenzangabe ?
 	, Diasystematik
@@ -429,8 +425,6 @@ Schreibung = element Schreibung {
         ]
     ]
 ]
-
-Korpusabfrage = element Korpusabfrage { text }
 
 Aussprache = element Aussprache {
 	# relativer Pfad zur Aussprachedatei (ohne Dateinamenerweiterung)
