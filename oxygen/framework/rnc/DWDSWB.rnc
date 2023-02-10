@@ -31,6 +31,7 @@ start = element DWDS {
 		, Ueberschrift ?
 		, Kommentar ? # wird praktisch nicht genutzt
 		, Formangabe +
+                , Orthografie
 		, morphologische_Verweise + # getrennte morph. Analysen
 		, Diachronie
 		, Lesartangabe +

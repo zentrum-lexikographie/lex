@@ -86,6 +86,7 @@ Mitarbeiterinnen = (
         | 'bulak'
 	| 'doerre'
 	| 'ermakova'
+	| 'folz'
 	| 'fuhrmann'
 	| 'geyken'
 	| 'goettel'
@@ -122,8 +123,9 @@ Mitarbeiterinnen = (
 	| 'stypa'
 	| 'unger'
 	| 'wahrig'
+	| 'wiegand'
 	| 'wulfert'
-        | 'zepedama'
+        | 'zepeda'
 )
 
 Metadaten.allgemein = (
@@ -186,6 +188,9 @@ Metadaten.Artikel = (
 	, attribute Erstellungsdatum { xsd:date }
 	, attribute Empfehlung { 'ja' } ?
 	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
+	, attribute Blog-ID {
+		list { xsd:token { pattern = '\d+' } + }
+	} ?
 	, attribute Tranche {
 	    '45k-001'
 	    | '45k-002'

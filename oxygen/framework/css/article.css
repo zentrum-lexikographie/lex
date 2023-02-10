@@ -23,7 +23,7 @@ Artikel[Status="Red-f"]          { background-color: #aeecff; }
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
 Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
-Kollokationen, Konstruktionsmuster, Kommentar {
+Kollokationen, Konstruktionsmuster, Kommentar, Orthografie {
 	border: 1px dotted black;
 	margin-bottom: 0.4em;
 	margin-top: 0.4em;
@@ -35,11 +35,10 @@ Kollokationen, Konstruktionsmuster, Kommentar {
 
 Artikel > Formangabe[Typ]:before { -oxy-append-content: attr(Typ)"angabe"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
-Formangabe[Regel]:before      { -oxy-append-content: " mit Regel " attr(Regel); }
-Formangabe[Klasse]:before     { -oxy-append-content: " – " attr(Klasse); }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
 Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
+Artikel>Orthografie:before       { content: "Orthografie"; }
 Verweise[Typ]:before          { -oxy-append-content: " – " attr(Typ); }
 Lesart Verweise:before        { content: "semantische und enzyklopädische Verweise"; }
 Diachronie:before             { content: "Diachronie"; }
@@ -81,7 +80,8 @@ Diachronie:before, Verweise:before, Diasystematik:before,
 Syntagmatik:before, Syntagmatik > *:before, Ueberschrift:before,
 Verwendungsbeispiele:before, Verwendungsbeispiele > *:before,
 Kollokationen:before, Kollokationen > *:before, Rohdaten:before,
-Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before {
+Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before,
+Orthografie:before {
 	color: white;
 	background-color: gray;
 	font-weight: normal;
@@ -124,8 +124,9 @@ Komparationspraeferenz:before                  { content: "Komparationspräferen
 indeklinabel:before                            { content: "indeklinabel"; }
 Funktionspraeferenz:before                     { content: "Funktionspräferenz: "; }
 Einschraenkung:before                          { content: "sonstige Einschränkung: "; }
+Orthografieregel:before                        { content: "§ "; }
+Orthografie > Orthografieregel:before          { content: "Orthografieregel: § "; }
 Belegtext:before                               { content: "Belegtext: "; }
-Korpusabfrage:before                           { content: "DDC: "; }
 Fundstelle:before                              { content: "Fundstelle: "; }
 Kurztitel:before                               { content: "Kurztitel: "; }
 Datierung:before                               { content: "Datierung: "; }
@@ -134,6 +135,7 @@ Formgeschichte:before                          { content: "Formgeschichte: "; }
 Bedeutungsgeschichte:before                    { content: "Bedeutungsgeschichte: "; }
 Diachronie>Verweise:before                     { content: "Querverweise: "; }
 Verweise>Verweis[Typ="EtymWB"]:before          { content: "im EtymWB als ↗"; }
+Verweise>Verweis[Typ="WGd"]:before             { content: "bei Wortgeschichte digital als ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before     { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="MWA"]:before             { content: "auch in MWA ↗"; }
 Verweise>Verweis[Typ="MWA-Zentralartikel"]:before { content: "MWA-Zentralartikel ↗"; }
@@ -143,9 +145,6 @@ Verweise>Verweis[Typ="Antonym"]:before         { content: "Antonym ist ↗"; }
 Verweise>Verweis[Typ="Hyponym"]:before         { content: "Hyponym ist ↗"; }
 Verweise>Verweis[Typ="Hyperonym"]:before       { content: "Hyperonym ist ↗"; }
 Verweise>Verweis[Typ="Entsprechung"]:before    { content: "entspr. der Bed. von ↗"; }
-Verweise>Verweis[Typ="zu"]:before              { content: "zu ↗"; }
-Verweise>Verweis[Typ="vgl"]:before             { content: "vgl. ↗"; }
-Verweise>Verweis[Typ="mehr_sv"]:before         { content: "mehr unter ↗"; }
 Verweise>Verweis[Typ="Erstglied"]:before       { content: "Erstglied ist ↗"; }
 Verweise>Eigenname[Typ="Erstglied"]:before     { content: "Erstglied ist (Eigenname) "; }
 Verweise>Verweis[Typ="Binnenglied"]:before     { content: "Binnenglied ist ↗"; }
@@ -161,6 +160,8 @@ Verweise>Eigenname[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente i
 
 Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
 Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "externer Etymologieartikel ↗"; }
+Verweis[Typ="zu"]:before                       { content: "zu ↗"; } # Etym.
+Verweis[Typ="mehr_sv"]:before                  { content: "↗"; }    # Etym.
 
 /********************************************************************
  * Ab hier folgen alle Sonderfälle der Darstellung.
@@ -225,6 +226,11 @@ Verweis > *, Verweis_extern > * {
 	color: blue;
 	display: inline;
 	padding-left: 0.5em;
+}
+Kommentar > Orthografieregel {
+    color: blue;
+    display: inline;
+    padding-right: 0.5em;
 }
 Ziellemma:before {
 	content: attr(hidx); /* Homographenziffer */

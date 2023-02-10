@@ -37,7 +37,7 @@ Diachronie = element Diachronie {
 	}
 	, element Verweise {
 		element Verweis {
-			attribute Typ { 'EtymWB' }
+			attribute Typ { 'EtymWB' | 'WGd' }
 			, attribute class { 'invisible' } ?
 			, Verweisziel
 		} *
@@ -47,17 +47,18 @@ Diachronie = element Diachronie {
 freie_Beschreibung = mixed {
     Paraphrase *
     & erwaehntes_Zeichen *
-	& Stilebene *
-	& Stilfaerbung *
-	& Sprachraum * # deprecated
-	& Sprachareal *
-	& Gebrauchszeitraum *
-	& Gruppensprache *
-	& Fachgebiet *
-	& semantischer_Verweis *
-	& externer_Verweis *
-	& Fundstelle *
-	& element Stichwort { Lemmatoken }*
+    & Stilebene *
+    & Stilfaerbung *
+    & Sprachraum * # deprecated
+    & Sprachareal *
+    & Gebrauchszeitraum *
+    & Gruppensprache *
+    & Fachgebiet *
+    & semantischer_Verweis *
+    & externer_Verweis *
+    & Fundstelle *
+    & Orthografieregel *
+    & element Stichwort { Lemmatoken }*
 }
 
 Kommentar = element Kommentar {
