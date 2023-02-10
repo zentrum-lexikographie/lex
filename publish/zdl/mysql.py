@@ -30,7 +30,7 @@ _ddl_statements = [
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4''',
     '''CREATE TABLE IF NOT EXISTS lemma (
          id INT(11) NOT NULL,
-         lemma VARCHAR(200) COLLATE utf8mb4_bin NOT NULL,
+         lemma VARCHAR(256) COLLATE utf8mb4_bin NOT NULL,
          hidx TINYINT(2) DEFAULT NULL,
          type VARCHAR(32),
          article_id INT(11) NOT NULL,
@@ -39,7 +39,7 @@ _ddl_statements = [
          KEY article_id(article_id, lemma)
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4''',
     '''CREATE TABLE IF NOT EXISTS token (
-         token VARCHAR(50) COLLATE utf8mb4_bin NOT NULL,
+         token VARCHAR(128) COLLATE utf8mb4_bin NOT NULL,
          lemma_id INT(11) NOT NULL,
          KEY token (token)
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4''',
