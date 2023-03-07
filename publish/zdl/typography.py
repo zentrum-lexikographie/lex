@@ -332,14 +332,12 @@ _parentesis_exceptions = (
 
 _comp_sample_qn = qname('d', 'Kompetenzbeispiel')
 _collocation_qn = qname('d', 'Kollokation')
-_collocation1_qn = qname('d', 'Kollokation1')
-_collocation2_qn = qname('d', 'Kollokation2')
 
 
 def check_balanced_characters(article):
     comments = []
     targets = (_definition_qn, _sample_qn, _comp_sample_qn,
-               _collocation_qn, _collocation1_qn, _collocation2_qn)
+               _collocation_qn)
     for target in targets:
         for e in article.iter(str(target)):
             txt = text_content(e)
