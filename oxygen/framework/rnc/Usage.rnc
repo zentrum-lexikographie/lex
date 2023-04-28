@@ -51,7 +51,7 @@ Sprachareal = element Sprachareal {
 		| 'D-Nordost (Berlin)'
 		| 'D-Nordost (Altmark)'
 		| 'D-Mittelwest'
-		| 'D-Mittelwest (Niederrhein)'
+		| 'D-Mittelwest (Nordrhein)'
 		| 'D-Mittelwest (Mittelrhein/Mosel)'
 		| 'D-Mittelwest (Mittelrhein/Mainz)'
 		| 'D-Mittelwest (Saarland)'
