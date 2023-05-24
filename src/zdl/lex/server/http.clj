@@ -1,7 +1,6 @@
 (ns zdl.lex.server.http
   (:require [clojure.java.io :as io]
             [clojure.tools.logging :as log]
-            [hiccup.page :refer [include-css]]
             [reitit.coercion.malli :as rcm]
             [reitit.http :as http]
             [reitit.http.coercion :as coercion]
@@ -18,6 +17,7 @@
             [zdl.lex.server.article.handler :as article.handler]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.git :as server.git]
+            [zdl.lex.server.html :as html]
             [zdl.lex.server.http.format]
             [zdl.lex.server.issue :as server.issue]
             [zdl.lex.server.article.lock :as server.article.lock]
@@ -28,23 +28,6 @@
             [zdl.lex.server.solr.suggest :as solr.suggest]
             [integrant.core :as ig])
   (:import org.eclipse.jetty.server.Server))
-
-(def homepage
-  [:html
-   [:head
-    [:meta {:charset "utf-8"}]
-    (include-css "/assets/bulma-0.7.4.min.css")
-    [:title "ZDL Lex-Server"]]
-   [:body
-    [:div.hero.is-primary.is-bold.is-fullheight
-     [:div.hero-body
-      [:div.container
-       [:h1.title "ZDL Lex-Server"]
-       [:h2.subtitle
-        [:a
-         {:href  "/oxygen/updateSite.xml"
-          :title "Oxygen XML Editor - Update Site"}
-         "Oxygen XML Editor - Update Site"]]]]]]])
 
 (defn wrap-log-exception
   [handler ^Throwable e req]
@@ -95,7 +78,7 @@
      ["/"
       (constantly
        {:status  307
-        :headers {"Location" "/home"}})]
+        :headers {"Location" "/install"}})]
      ["/article" {::auth/roles #{:user}}
       ["/"
        {:put {:handler    (partial article.handler/handle-create git-dir)
@@ -131,12 +114,11 @@
                :parameters  {:path [:map [:ref :string]]}
                :handler     (partial server.git/handle-rebase git-repo)
                ::auth/roles #{:admin}}}]
-     ["/home"
+     ["/install"
       (constantly
        {:status                200
-        :muuntaja/encode       true
-        :muuntaja/content-type "text/html"
-        :body                  homepage})]
+        :muuntaja/encode       false
+        :body                  (html/install "/")})]
      ["/index" {::auth/roles #{:user}}
       [""
        {:get   {:summary    "Query the full-text index"
@@ -216,7 +198,12 @@
        ::auth/roles #{:user}}]
      ["/swagger.json"
       {:no-doc  true
-       :handler (swagger/create-swagger-handler)}]]
+       :handler (swagger/create-swagger-handler)}]
+     ["/styles.css"
+      (constantly
+       {:status          200
+        :muuntaja/encode false
+        :body            html/css})]]
     {;;:reitit.interceptor/transform dev/print-context-diffs
      ;;:exception pretty/exception
      :data {:coercion rcm/coercion
