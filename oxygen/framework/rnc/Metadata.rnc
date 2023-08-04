@@ -68,6 +68,7 @@ Lizenzangabe = attribute Lizenz {
     | 'GNU FDL'
     | 'Vereinfachte Pixabay Lizenz'
     | 'Pexels'
+    | 'banknotes.com'
 }
 
 
