@@ -233,6 +233,7 @@ Metadaten.Artikel = (
 	    | 'Movierung'
 	    | 'MWA'
 	    | 'MWA-Zentral-Satellit'
+            | 'NS'
 	    | 'Philosophie'
 	    | 'Politik-001'
 	    | 'Politik-002'
