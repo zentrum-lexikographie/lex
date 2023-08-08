@@ -68,6 +68,7 @@ Lizenzangabe = attribute Lizenz {
     | 'GNU FDL'
     | 'Vereinfachte Pixabay Lizenz'
     | 'Pexels'
+    | 'banknotes.com'
 }
 
 
@@ -77,6 +78,7 @@ Lizenzangabe = attribute Lizenz {
 
 Mitarbeiterinnen = (
 	'DWDS'
+	| 'alzeer'
 	| 'ast'
 	| 'barkey'
 	| 'billes'
@@ -96,6 +98,7 @@ Mitarbeiterinnen = (
 	| 'hartz'
 	| 'herold'
 	| 'hollos'
+	| 'hovhannisyan'
 	| 'jzaun'
 	| 'kaufhold'
 	| 'kirchner'
@@ -110,6 +113,7 @@ Mitarbeiterinnen = (
 	| 'nau'
 	| 'osterwinter'
 	| 'palmes'
+	| 'pandey'
 	| 'pfeiffer'
 	| 'radev'
 	| 'reckenthaeler'
