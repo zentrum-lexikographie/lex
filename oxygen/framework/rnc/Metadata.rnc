@@ -184,7 +184,7 @@ Metadaten.Artikel = (
 		| 'Red-f'
 		| 'Red-f-zurückgewiesen'
 	}
-	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ?
+	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ? # TODO: obligatory
 	, attribute Erstellungsdatum { xsd:date }
 	, attribute Empfehlung { 'ja' } ?
 	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
