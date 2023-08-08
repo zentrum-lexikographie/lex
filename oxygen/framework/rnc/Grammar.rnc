@@ -65,7 +65,7 @@ grammatische_Beschreibung = element Grammatik {
 		, (
 			''
 			| string 'Substantiv'
-			| string 'Eigenname'
+			| string 'Eigenname' # deprecated, use Funktionspraeferenz instead
 	    		| string 'Verb'
 			| string 'Imperativ'
 			| string 'Adjektiv'
@@ -261,6 +261,7 @@ grammatische_Beschreibung = element Grammatik {
 			| 'als unbestimmter Artikel'
 			| 'als Relativpronomen'
 			| 'als Genitivattribut'
+                        | 'als Eigenname'
 			| 'im Übergang zum Indefinitpronomen'
 			| 'im Übergang zur Konjunktion'
 			| 'im Übergang zur Präposition'

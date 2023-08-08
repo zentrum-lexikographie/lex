@@ -257,7 +257,7 @@ semantischer_Verweis = element Verweis {
 		| 'Hyponym'
 		| 'Hyperonym'
 		| 'Assoziation'
-		| 'zu'
+		| 'zu' # deprecated
 		| 'vgl'
 		| 'mehr_sv' # Weiterverweis, nur in Etymologie sinnvoll
 	}

@@ -1583,7 +1583,7 @@
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;Lesart xmlns="http://www.dwds.de/ns/1.0">${caret}&lt;Syntagmatik>&lt;/Syntagmatik>&lt;Diasystematik>&lt;/Diasystematik>&lt;Verweise>&lt;/Verweise>&lt;Definition Typ="Basis" xmlns="http://www.dwds.de/ns/1.0">&lt;/Definition>&lt;Kollokationen>&lt;/Kollokationen>&lt;Verwendungsbeispiele>&lt;/Verwendungsbeispiele>&lt;/Lesart></String>
+																<String>&lt;Lesart xmlns="http://www.dwds.de/ns/1.0">${caret}&lt;Syntagmatik>&lt;/Syntagmatik>&lt;Diasystematik>&lt;/Diasystematik>&lt;Verweise>&lt;/Verweise>&lt;Definition Typ="Basis">&lt;/Definition>&lt;Kollokationen>&lt;/Kollokationen>&lt;Verwendungsbeispiele>&lt;/Verwendungsbeispiele>&lt;/Lesart></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -1632,98 +1632,6 @@
 																<String>&lt;Konstruktionsmuster xmlns="http://www.dwds.de/ns/1.0">&lt;Belegtext>&lt;/Belegtext>&lt;/Konstruktionsmuster>
 
 </String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Kollokation1</String>
-										</field>
-										<field name="name">
-											<String>Kollokation Typ1</String>
-										</field>
-										<field name="description">
-											<String>Kollokation Typ1</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Kollokation1 xmlns="http://www.dwds.de/ns/1.0">&lt;Belegtext>&lt;/Belegtext>&lt;/Kollokation1></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Kollokation2</String>
-										</field>
-										<field name="name">
-											<String>Kollokation Typ2</String>
-										</field>
-										<field name="description">
-											<String>Kollokation Typ2</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String></String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Kollokation2 xmlns="http://www.dwds.de/ns/1.0">&lt;Belegtext>&lt;/Belegtext>&lt;/Kollokation2></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -4236,16 +4144,6 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>Kollokation1</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Kollokation2</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
 																<String>Phrasem</String>
 															</field>
 														</menuItem>
@@ -4701,16 +4599,6 @@ Autor [nocontextvalidation]</String>
 														<toolbarItem>
 															<field name="actionID">
 																<String>Definition</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Kollokation1</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Kollokation2</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>

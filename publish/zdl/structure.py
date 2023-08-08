@@ -13,8 +13,6 @@ _canonical_pi_locations = (
     qname('d', 'Beleg'),
     qname('d', 'Kompetenzbeispiel'),
     qname('d', 'Kollokation'),
-    qname('d', 'Kollokation1'),
-    qname('d', 'Kollokation2'))
 
 _oxy_comment_pi_targets = set(["oxy_comment_start", "oxy_comment_end"])
 

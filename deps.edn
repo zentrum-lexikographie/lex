@@ -13,7 +13,6 @@
              aero/aero                           {:mvn/version "1.1.6"}
              instaparse/instaparse               {:mvn/version "1.4.10"}
              integrant/integrant                 {:mvn/version "0.8.0"}
-             hiccup/hiccup                       {:mvn/version "2.0.0-alpha2"}
              metosin/jsonista                    {:mvn/version "0.3.3"}
              lambdaisland/uri                    {:mvn/version "1.4.70"}
              clj-http/clj-http                   {:mvn/version "3.12.3"
@@ -50,7 +49,10 @@
                                            com.zaxxer/HikariCP               {:mvn/version "3.4.5"}
                                            io.github.classgraph/classgraph   {:mvn/version "4.8.50"}
                                            audiogum/metrics-clojure          {:mvn/version "3.0.0"}
-                                           org.relaxng/jing                  {:mvn/version "20181222"}}}
+                                           org.relaxng/jing                  {:mvn/version "20181222"}
+                                           com.lambdaisland/ornament         {:mvn/version "0.8.84"}
+                                           com.lambdaisland/hiccup           {:mvn/version "0.0.4"}
+                                           com.vladsch.flexmark/flexmark     {:mvn/version "0.64.0"}}}
              :oxygen        {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "24.1.0.0"}}}
              :build         {:paths      ["build"]
                              :deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"

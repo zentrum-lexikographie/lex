@@ -30,7 +30,7 @@ _ddl_statements = [
        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4''',
     '''CREATE TABLE IF NOT EXISTS lemma (
          id INT(11) NOT NULL,
-         lemma VARCHAR(256) COLLATE utf8mb4_bin NOT NULL,
+         lemma VARCHAR(249) COLLATE utf8mb4_bin NOT NULL,
          hidx TINYINT(2) DEFAULT NULL,
          type VARCHAR(32),
          article_id INT(11) NOT NULL,
@@ -91,7 +91,7 @@ def read_articles(articles):
                         ].append(
                             (headword, hidx)
                         )
-                lemma = md['name'].replace('’', '\'')
+                lemma = md['name'].replace('’', '\'').replace('…', '...')
                 hidx = int(md['hidx']) if md['hidx'] else None
 
                 headword_sig = (lemma, hidx)

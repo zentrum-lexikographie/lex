@@ -3,8 +3,6 @@
             [gremid.data.xml :as dx]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [hiccup.core :refer [html]]
-            [hiccup.page :refer [doctype]]
             [muuntaja.core :as m]
             [muuntaja.format.core :as m-format]))
 
@@ -31,16 +29,6 @@
   (m-format/map->Format
    {:name    "text/csv"
     :encoder [(create-encoder csv->stream)]}))
-
-(defn html->stream
-  [doc charset os]
-  (with-open [w (io/writer os :encoding charset)]
-    (.write w ^String (html {:mode :html} (doctype :html5) doc))))
-
-(def html-format
-  (m-format/map->Format
-   {:name    "text/html"
-    :encoder [(create-encoder html->stream)]}))
 
 (defn xml->stream
   [{:keys [tag] :as doc} charset os]
@@ -74,7 +62,6 @@
    (-> m/default-options
        (assoc-in [:http :encode-response-body?]
                  (fn [_ {:keys [body]}]
-                   (or (coll? body) (string? body))))
+                   (or (coll? body) #_(string? body))))
        (assoc-in [:formats "text/csv"] csv-format)
-       (assoc-in [:formats "text/html"] html-format)
        (assoc-in [:formats "application/xml"] xml-format))))
