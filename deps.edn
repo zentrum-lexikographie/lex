@@ -54,11 +54,11 @@
                                            com.lambdaisland/hiccup           {:mvn/version "0.0.4"}
                                            com.vladsch.flexmark/flexmark     {:mvn/version "0.64.0"}}}
              :oxygen        {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "24.1.0.0"}}}
-             :build         {:paths      ["build"]
-                             :deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
+             :build         {:deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
                                                                          :git/sha "34727f7"}
-                                          io.github.gremid/data.xml     {:git/sha "1ce78184eb23ee0eadd1a93ae6178845437b624b"}}
-                             :ns-default zdl-lex}}
+                                          io.github.gremid/data.xml     {:git/sha "1ce78184eb23ee0eadd1a93ae6178845437b624b"}
+                                          com.taoensso/timbre           {:mvn/version "6.0.2"}}
+                             :ns-default build}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://clojars.org/repo"}
              "oxygen"  {:url "https://www.oxygenxml.com/maven"}}}

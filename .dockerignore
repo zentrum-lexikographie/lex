@@ -1,18 +1,9 @@
-**/.git
-**/.gitignore
-**/.gitmodules
+*
 
-.github
-.python-version
-
-**/.cpcache
-**/.clj-kondo
-**/.nrepl-port
-
-**/.env
-
-data
-publish
-scripts
-test
-test-data
+!build.clj
+!deps.edn
+!docker/
+!.git/
+!oxygen/
+oxygen/plugin/lib/org.zdl.lex.client.jar
+!src/

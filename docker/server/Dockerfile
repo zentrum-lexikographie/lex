@@ -1,44 +1,33 @@
-FROM clojure:openjdk-16-tools-deps
+FROM clojure:openjdk-19-bullseye AS builder
 
-ENV ZDL_LEX_USER "lex"
-ENV ZDL_LEX_UID "1010"
-ENV ZDL_LEX_GROUP "lex"
-ENV ZDL_LEX_GID "1010"
+ENV DISPLAY :99
 
-ENV ZDL_LEX_DATA_DIR "/data"
+RUN apt-get -qq update && \
+    apt-get -qq -y install xvfb libgtk3.0-cil\
+    && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log
 
-ENV GIT_AUTHOR_NAME "ZDL-Lex"
-ENV GIT_AUTHOR_EMAIL "noreply@lex.dwds.de"
+RUN mkdir -p /build
 
-ENV GIT_COMMITTER_NAME "ZDL-Lex"
-ENV GIT_COMMITTER_EMAIL "noreply@lex.dwds.de"
+WORKDIR /build
 
-ENV GIT_SSH_COMMAND "ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
+COPY deps.edn /build/
 
-RUN apt-get update && apt-get install -y \
-    git \
-    openssh-client \
-    && rm -rf /var/lib/apt/lists/*
+RUN clojure -A:log:client:oxygen -P &&\
+    clojure -A:log:server -P &&\
+    clojure -A:build -P
 
-WORKDIR "/data"
+COPY ./ /build
 
-RUN set -ex; \
-  groupadd -r --gid "$ZDL_LEX_GID" "$ZDL_LEX_GROUP"; \
-  useradd -r --uid "$ZDL_LEX_UID" --gid "$ZDL_LEX_GID" \
-  --home-dir /data "$ZDL_LEX_USER"
+RUN Xvfb :99 -screen 0 800x600x8 -nolisten tcp &\
+    clojure -T:build build-server
 
-RUN set -ex; chown -R $ZDL_LEX_USER:$ZDL_LEX_GROUP /data
+FROM openjdk:19-jdk-bullseye
 
-RUN mkdir -p /app; chown lex:lex /app
+RUN mkdir -p /service
+WORKDIR /service
 
-USER $ZDL_LEX_USER
-WORKDIR /app
+ENV JDK_JAVA_OPTIONS "-XshowSettings:system -XX:+UseContainerSupport -XX:MaxRAMPercentage=90"
 
-COPY --chown=lex:lex deps.edn /app
-RUN clojure -A:log:server -P
+COPY --from=builder /build/org.zdl.lex.server.jar /service
 
-COPY --chown=lex:lex src /app/src
-COPY --chown=lex:lex oxygen /app/oxygen
-
-ENTRYPOINT ["clojure", "-X:log:server", "zdl.lex.server/start!"]
-
+ENTRYPOINT ["java", "-jar", "/service/org.zdl.lex.server.jar"]

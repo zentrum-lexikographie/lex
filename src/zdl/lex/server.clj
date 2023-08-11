@@ -1,4 +1,5 @@
 (ns zdl.lex.server
+  (:gen-class)
   (:require
    [clojure.tools.logging :as log]
    [integrant.core :as ig]
