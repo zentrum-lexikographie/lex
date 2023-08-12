@@ -47,19 +47,12 @@
           plugin-el (zip/edit plugin-el #(assoc-in % [:attrs :version] version))]
       (dx/emit-str (zip/root plugin-el)))))
 
-(defn classpath-resources
+(defn scan-classpath!
   [path]
-  (with-open [scan (.. (ClassGraph.)
-                       (whitelistPaths (into-array String [path]))
-                       (scan))]
-    (let [path-pattern (re-pattern (str "^" path "/?"))]
-      (vec
-       (for [resource (.. ^ScanResult scan (getAllResources) (asMap))]
-         {:path     (-> resource .getKey (str/replace path-pattern ""))
-          :resource (-> resource .getValue first)})))))
-
-(comment
-  (classpath-resources "framework"))
+  (.. (ClassGraph.)
+      (disableNestedJarScanning)
+      (whitelistPaths (into-array String [path]))
+      (scan)))
 
 (defn write-to-zip [zip path-prefix path stream]
   (.. zip (putNextEntry (ZipEntry. (str path-prefix path))))
@@ -71,9 +64,11 @@
   (try
     (with-open [zip (ZipOutputStream. stream zip-charset)]
       (let [write-to-zip (partial write-to-zip zip "zdl-lex-client/")]
-        (doseq [{:keys [resource path]} (classpath-resources "framework")]
-          (with-open [stream (.open resource)]
-            (write-to-zip path stream)))))
+        (with-open [scan (scan-classpath! "framework")]
+          (doseq [r (.. ^ScanResult scan (getAllResources) (asMap))]
+            (let [path (-> r .getKey (str/replace #"^framework/?" ""))]
+              (with-open [stream (-> r .getValue first .open)]
+                (write-to-zip path stream)))))))
     (catch Exception e
       (log/warn e))))
 
@@ -85,9 +80,10 @@
             descriptor   (.. plugin-descriptor (getBytes "UTF-8"))]
         (with-open [stream (io/input-stream descriptor)]
           (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
-        (doseq [{:keys [resource path]} (classpath-resources "plugin/lib")]
-          (with-open [stream (.open resource)]
-            (write-to-zip "zdl-lex-client/lib/" path stream)))))
+        (with-open [scan (scan-classpath! "plugin/lib")]
+          (doseq [r (.. ^ScanResult scan (getAllResources) (asMap))]
+            (let [path (-> r .getKey (str/replace #"^plugin/lib/?" ""))]
+              (with-open [stream (-> r .getValue first .open)]
+                (write-to-zip "zdl-lex-client/lib/" path stream)))))))
     (catch Exception e
       (log/warn e))))
-
