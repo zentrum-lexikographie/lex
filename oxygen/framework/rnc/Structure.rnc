@@ -228,6 +228,7 @@ morphologische_Verweise = element Verweise {
 	    | 'Konversion'
 	    | 'Kurzwortbildung'
 	    | 'Rückbildung'
+	    | 'Wortkreuzung'
 	    | 'Zusammenrückung'
 	    | 'lexikalisierte_Flexionsform'
 	    | 'neoklassische_Bildung'
