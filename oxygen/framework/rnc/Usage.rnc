@@ -157,7 +157,6 @@ Gebrauchszeitraum = element Gebrauchszeitraum {
 		'historisch' #
 		| 'früher' # D99
 			| 'DDR'
-			| 'nazistisch' # deprecated
                         | 'nationalsozialistisch'
 		| 'veraltet'
 		| 'veraltend'
