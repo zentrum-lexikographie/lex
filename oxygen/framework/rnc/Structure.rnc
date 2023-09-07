@@ -90,8 +90,10 @@ Belegtext = element Belegtext {
 	& element Streichung { token } *
 	& element Loeschung { token } *
 	& element Autorenzusatz { token } *
-	& element Hervorhebung { token } * # nur für rein typografische Markierungen
+	& Hervorhebung * # nur für rein typografische Markierungen
 }
+
+Hervorhebung = element Hervorhebung { Lemmatoken }
 
 Beleg = element Beleg {
 	Metadaten.allgemein ?

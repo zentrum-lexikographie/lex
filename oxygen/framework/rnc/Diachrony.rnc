@@ -58,6 +58,7 @@ freie_Beschreibung = mixed {
     & externer_Verweis *
     & Fundstelle *
     & Orthografieregel *
+    & Hervorhebung *
     & element Stichwort { Lemmatoken }*
 }
 
