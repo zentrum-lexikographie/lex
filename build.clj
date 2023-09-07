@@ -169,7 +169,7 @@
 (defn package
   [& _]
   (log/info "Packaging server")
-  (check-proc! ["docker-compose" "build" "solr" "server"]))
+  (check-proc! ["docker" "compose" "build" "solr" "server"]))
 
 (defn image-tag
   ([image-name]
