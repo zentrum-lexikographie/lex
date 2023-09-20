@@ -90,8 +90,10 @@ Belegtext = element Belegtext {
 	& element Streichung { token } *
 	& element Loeschung { token } *
 	& element Autorenzusatz { token } *
-	& element Hervorhebung { token } * # nur für rein typografische Markierungen
+	& Hervorhebung * # nur für rein typografische Markierungen
 }
+
+Hervorhebung = element Hervorhebung { Lemmatoken }
 
 Beleg = element Beleg {
 	Metadaten.allgemein ?
@@ -443,6 +445,8 @@ Aussprache = element Aussprache {
 }
 
 Orthografieregel = element Orthografieregel {
+    attribute class { 'invisible' } ?
+    , (
         '2'
         | '3 (E)'
         | '4 (E1)'
@@ -521,7 +525,7 @@ Orthografieregel = element Orthografieregel {
         | '40 (1)'
         | '40 (2)'
         | '40 (3)'
-	| '40 (E)'
+        | '40 (E)'
         | '41 (E)'
         | '42'
         | '42 (E)'
@@ -584,6 +588,7 @@ Orthografieregel = element Orthografieregel {
         | '66 (E)'
         | '79 (2)'
         | '102 (E2)'
+      )
 }
 
 Orthografie = element Orthografie {
