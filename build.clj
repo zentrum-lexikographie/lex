@@ -193,7 +193,7 @@
     (throw (ex-info "$OXYGEN_HOME not found" {})))
   (log/info "Starting client")
   (check-proc!
-   [(str (io/file oxygen-home "jre" "bin" "java"))
+   ["java"
     "--add-opens=java.base/java.lang=ALL-UNNAMED"
     "--add-opens=java.base/java.net=ALL-UNNAMED"
     "--add-opens=java.base/java.util=ALL-UNNAMED"
