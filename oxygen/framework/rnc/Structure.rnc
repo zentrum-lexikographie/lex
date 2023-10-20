@@ -93,7 +93,7 @@ Belegtext = element Belegtext {
 	& Hervorhebung * # nur für rein typografische Markierungen
 }
 
-Hervorhebung = element Hervorhebung { Lemmatoken }
+Hervorhebung = element Hervorhebung { Token }
 
 Beleg = element Beleg {
 	Metadaten.allgemein ?
