@@ -171,7 +171,6 @@ Metadaten.Artikel = (
 		| 'Verweisartikel'
 		| 'Minimalartikel'
 	}
-	, attribute Redakteur { Mitarbeiterinnen } ?
 	, attribute Status {
 		'Artikelrumpf'
 		| 'wird_gestrichen'
@@ -188,8 +187,9 @@ Metadaten.Artikel = (
 		| 'Red-f'
 		| 'Red-f-zurückgewiesen'
 	}
-	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' } ? # TODO: obligatory
+	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' }
 	, attribute Erstellungsdatum { xsd:date }
+	, attribute Redakteur { Mitarbeiterinnen } ?
 	, attribute Empfehlung { 'ja' } ?
 	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
 	, attribute Blog-ID {
