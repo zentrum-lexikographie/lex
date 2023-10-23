@@ -459,6 +459,7 @@ Sprachen = (
 	| 'spätmnd'
 	| 'spätmnl'
 	| 'span'         # spa: Spanish
+        | 'steir'        # steirisch
 	| 'südchines'
 	| 'südd'
 	| 'südhess'

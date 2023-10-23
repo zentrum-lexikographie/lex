@@ -95,6 +95,7 @@ Mitarbeiterinnen = (
 	| 'greiser'
 	| 'grimm'
 	| 'gruetzner'
+        | 'gschroeder'
 	| 'hartz'
 	| 'herold'
 	| 'hollos'
