@@ -160,7 +160,6 @@ Verweise>Eigenname[Typ="MWA-Konstituente"]:before { content: "MWA-Konstituente i
 
 Verweise>Verweis_extern[Typ="Enzyklopädie"]:before { content: "Enzyklopädieartikel ↗"; }
 Verweise>Verweis_extern[Typ="Etymologie"]:before   { content: "externer Etymologieartikel ↗"; }
-Verweis[Typ="zu"]:before                       { content: "zu ↗"; } # Etym.
 Verweis[Typ="mehr_sv"]:before                  { content: "↗"; }    # Etym.
 
 /********************************************************************
