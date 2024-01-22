@@ -26,6 +26,7 @@ zdl-lex-config.edn
 *.egg-info
 
 .*.swp
+*.temp
 
 data/
 config.local.edn

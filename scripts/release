@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+from datetime import datetime
+from subprocess import check_call, check_output
+
+timestamp = datetime.now().strftime("%Y%m.%d")
+
+rev_count = check_output(['git', 'rev-list', 'HEAD', '--count'], text=True)
+rev_count = rev_count.strip().lstrip('v')
+
+version = f'{timestamp}.{rev_count}'
+
+image_prefix = 'docker-registry.zdl.org/zdl-lex/'
+
+check_call(['docker', 'compose', 'build', 'solr', 'server'])
+
+for service in ['solr', 'server']:
+    version_tag = f'{image_prefix}{service}:{version}'
+    latest_tag = f'{image_prefix}{service}:latest'
+    check_call(['docker', 'tag', latest_tag, version_tag])
+    check_call(['docker', 'push', version_tag])

@@ -7,24 +7,46 @@ lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
 ## Prerequisites
 
-* [GNU/Linux](https://www.debian.org/): Development, builds and tests of the
-  platform are performed on [Debian GNU/Linux](https://debian.org/) (currently
-  v10 “Buster”). While other UNIX-like operating systems (i. e. MacOS) might
-  work, they are not supported. The same goes for MS Windows.
+For building versions of the authoring environment, the following
+software is required:
+
+* [GNU/Linux](https://www.debian.org/): Development, builds and tests
+  of the platform are performed on Linux. While other UNIX-like
+  operating systems (i. e. MacOS) might work, they are not
+  supported. The same goes for MS Windows.
+* [Docker](https://docs.docker.com/get-docker/): The server and the search
+  service require a Java runtime and [Apache Solr](https://solr.apache.org/). To
+  ease the setup and deployment of these services, both are containerized and
+  assume a Docker environment for testing and in production.
+
+For developing the authoring environment, the following software is
+required:
+
 * [Clojure](https://clojure.org/): The server component, mediating between the
   [Oxygen-XML-Editor](https://www.oxygenxml.com/)-based client, a Git-based data
   store and a search service, is written Clojure, a LISP dialect. The same goes
   for Oxygen-XML's project-specific extensions.
 * [Java (JDK)](https://openjdk.java.net/): Clojure, being a hosted language,
   requires a current Java runtime.
-* [Babashka](https://babashka.org/): The build process is orchestrated via `bb`,
-  a “fast native Clojure scripting runtime”.
-* [Docker](https://docs.docker.com/get-docker/): The server and the search
-  service require a Java runtime and [Apache Solr](https://solr.apache.org/). To
-  ease the setup and deployment of these services, both are containerized and
-  assume a Docker environment for testing and in production.
 
-## Configuration
+## Build and Release
+
+Building a (new) version of the authoring environment:
+
+```plaintext
+$ scripts/release
+```
+
+This will trigger a build of 2 Docker container images, one for the
+customized Solr Search Server, one for the HTTP-based middleware, which
+also contains the plugin and a framework extending Oxygen-XML-Editor.
+
+After the build finishes, the images are pushed to the ZDL-internal
+Docker Registry for subsequent deployment.
+
+## Development and Testing
+
+### Configuration
 
 ZDL/Lex is configured via environment variables, in line with the [Twelve-Factor
 App guidelines](https://12factor.net/). Variable settings are read from `.env`
@@ -52,36 +74,7 @@ ZDL_LEX_SERVER_USER=admin
 ZDL_LEX_SERVER_PASSWORD=admin
 ```
 
-## Build
-
-Build tasks can be executed via `bb`:
-
-```plaintext
-$ bb tasks
-The following tasks are available:
-
-clj-kondo     Configures clj-kondo linter
-pyenv         Initializes local python environment
-python-deps   Installs Python dependencies
-write-version Writes new version
-build-schema  Transpile RELAXNG/Schematron sources
-build-client  Builds Oxygen XML Editor plugin/framework
-build         Builds docker images
-release       Releases docker images
-test          Runs test suite
-start-oxygen  Start Oxygen XML Editor with plugin/framework
-```
-
-Accordingly, to build the application's client and server components:
-
-```plaintext
-$ bb build
-[…]
-Successfully built […]
-Successfully tagged docker-registry.zdl.org/zdl-lex/server:latest
-```
-
-## Test
+### Test
 
 Before releasing new versions of the application, its client and server
 components can be tested locally.
@@ -95,11 +88,10 @@ ZDL_LEX_SERVER_USER=admin
 ZDL_LEX_SERVER_PASSWORD=admin
 ```
 
-To run a local server instance as a Docker container:
+To build and run a local server instance as a Docker container:
 
 ```plaintext
-$ bb build
-$ docker-compose up
+$ docker compose up --build
 ```
 
 The server component relies on [Apache Solr](https://lucene.apache.org/solr/)
@@ -115,17 +107,7 @@ Then, start the Oxygen XML Editor with the client plugin installed from the
 current project sources via
 
 ```plaintext
-$ bb start-oxygen
-```
-
-## Release
-
-Releasing a new version of ZDL/Lex entails a complete build of all components,
-packaging everything in Docker containers and pushing the containers' images
-with updated tags to ZDL's private Docker registry:
-
-```plaintext
-$ bb release
+$ clojure -T:build start-editor
 ```
 
 ## License
