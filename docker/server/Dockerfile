@@ -26,7 +26,7 @@ FROM openjdk:19-jdk-bullseye
 RUN mkdir -p /service
 WORKDIR /service
 
-ENV JDK_JAVA_OPTIONS "-XshowSettings:system -XX:+UseContainerSupport -XX:MaxRAMPercentage=90"
+ENV JDK_JAVA_OPTIONS "-XshowSettings:system -XX:+UseContainerSupport -XX:MaxRAMPercentage=75"
 
 COPY --from=builder /build/org.zdl.lex.server.jar /service
 
