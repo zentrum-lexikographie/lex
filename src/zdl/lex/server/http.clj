@@ -17,6 +17,7 @@
             [zdl.lex.server.article.handler :as article.handler]
             [zdl.lex.server.auth :as auth]
             [zdl.lex.server.git :as server.git]
+            [zdl.lex.server.gpt :as server.gpt]
             [zdl.lex.server.html :as html]
             [zdl.lex.server.http.format]
             [zdl.lex.server.issue :as server.issue]
@@ -103,6 +104,12 @@
                :tags        ["Article" "Git" "Admin"]
                :handler     (trigger-cron-handler (:git-commit schedule))
                ::auth/roles #{:admin}}}]
+     ["/gpt" {::auth/roles #{:user}}
+      ["/definitions"
+       {:get {:summary    "Query GPT model for definitions"
+              :tags       ["GPT" "Query" "Definitions"]
+              :parameters {:query [:map [:q :string]]}
+              :handler    server.gpt/handle-definitions}}]]
      ["/git/ff/:ref"
       {:post  {:summary     "Fast-forwards the server's branch to the given ref"
                :tags        ["Article" "Git" "Admin"]
