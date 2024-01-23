@@ -4,4 +4,7 @@
 ((python-mode
   (python-test-runner pytest))
  (clojure-mode
-  . ((cider-clojure-cli-global-options . "-A:test:log:client:server:oxygen"))))
+  (cider-preferred-build-tool . "clojure-cli")
+  (cider-clojure-cli-aliases . ":test:log:client:server:oxygen")
+  (cider-ns-refresh-before-fn . "integrant.repl/halt")
+  (cider-ns-refresh-after-fn . "integrant.repl/go")))

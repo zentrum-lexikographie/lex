@@ -32,12 +32,12 @@
                                           org.slf4j/jcl-over-slf4j       {:mvn/version "1.7.32"}
                                           org.slf4j/jul-to-slf4j         {:mvn/version "1.7.32"}
                                           org.slf4j/log4j-over-slf4j     {:mvn/version "1.7.32"}}}
-             :client        {:extra-paths ["oxygen"]
+             :client        {:extra-paths ["classes/client" "oxygen"]
                              :extra-deps  {seesaw/seesaw                                               {:mvn/version "1.5.0"}
                                            com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
                                            com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
                                            cider/cider-nrepl                                           {:mvn/version "0.28.4"}}}
-             :server        {:extra-paths ["oxygen"]
+             :server        {:extra-paths ["classes/server" "oxygen"]
                              :extra-deps  {metosin/reitit                    {:mvn/version "0.5.15"}
                                            metosin/muuntaja                  {:mvn/version "0.6.8"}
                                            ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
