@@ -232,3 +232,15 @@
   [& _]
   (build-client)
   (start-editor))
+
+(def gpt-model-dir
+  (io/file "models"))
+
+(def gpt-model-url
+  (str "https://huggingface.co/"
+       "TheBloke/DiscoLM_German_7b_v1-GGUF/resolve/main/"
+       "discolm_german_7b_v1.Q4_K_M.gguf"))
+
+(defn download-gpt-model
+  [& _]
+  (check-proc! ["curl" "-LO" gpt-model-url] gpt-model-dir))

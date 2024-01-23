@@ -9,6 +9,20 @@ services:
       - index:/var/solr
     ports:
       - "8983:8983"
+  gpt:
+    image: docker-registry.zdl.org/zdl-lex/gpt
+    build:
+      context: ./docker/gpt
+      dockerfile: Dockerfile
+    command:
+      - "--chat_format"
+      - "chatml"
+      - "--model"
+      - "/models/discolm_german_7b_v1.Q4_K_M.gguf"
+    volumes:
+      - ./models:/models
+    ports:
+      - "8000:8000"
   server:
     image: docker-registry.zdl.org/zdl-lex/server
     build:
