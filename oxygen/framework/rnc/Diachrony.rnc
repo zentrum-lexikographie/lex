@@ -536,5 +536,6 @@ Sprachen = (
 	| 'westsächs'
 	| 'westslaw'
 	| 'zigeuner'
+        | 'zaza'
 	| 'zoolog-lat'
 )
