@@ -298,7 +298,8 @@ Sprachen = (
 	| 'luxemburg'
 	| 'maghrebin-arab'
 	| 'mal'          # msa: Malay (macrolanguage)
-	| 'malajalam'
+	| 'malag'        # mlg: Malagasy
+    | 'malajalam'
 	| 'maldiv'       # div: Maldivian
 	| 'maori'
 	| 'marathi'
