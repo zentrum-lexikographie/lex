@@ -102,6 +102,7 @@
         rnc           (io/file framework-dir "rnc" "DWDSWB.rnc")
         rng           (io/file framework-dir "rng" "DWDSWB.rng")
         sch           (io/file framework-dir "rng" "DWDSWB.sch.xsl")]
+    (doseq [f [rnc rng sch]] (io/make-parents f))
     (dx.rnc/->rng rnc rng)
     (dx.schematron/extract-xslt rng sch)))
 
