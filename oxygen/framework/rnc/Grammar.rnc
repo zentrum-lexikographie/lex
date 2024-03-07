@@ -100,7 +100,11 @@ grammatische_Beschreibung = element Grammatik {
 	} ?
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
-	, element Genus { 'mask.' | 'fem.' | 'neutr.' } *
+	, element Genus {
+            string 'mask.'
+            | string 'fem.'
+            | string 'neutr.'
+        } * # TODO: 'ohne erkennbares Genus' ?
 	# #################
 	# Substantive #####
 	# #################
@@ -108,19 +112,19 @@ grammatische_Beschreibung = element Grammatik {
 		Frequenzbeschraenkung ?
 		, (
 			# Flexionsendungen
-			'-'
-			| '-en'
-			| '-ens'
-			| '-es'
-			| '-n'
-			| '-ns'
-			| '-s'
-			| '-ses'
+			string '-'
+			| string '-en'
+			| string '-ens'
+			| string '-es'
+			| string '-n'
+			| string '-ns'
+			| string '-s'
+			| string '-ses'
 			# Kombinationsformen (mit fakultativen Elementen)
-			| '-(e)n'
-			| '-(e)s'
-			| '-(n)'
-			| '-(s)'
+			| string '-(e)n'
+			| string '-(e)s'
+			| string '-(n)'
+			| string '-(s)'
 			# Vollformen
 			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’₀₂]+\p{Ll}' }
 			# »Voll«-Formen von Affix(oid)en
@@ -131,34 +135,34 @@ grammatische_Beschreibung = element Grammatik {
 		Frequenzbeschraenkung ?
 		, (
 			# Flexionsendungen
-			'-'
-			| '-a'
-			| '-e'
-			| '-een'
-			| '-en'
-			| '-er'
-			| '-es'
-			| '-i'
-			| '-ien'
-			| '-nen'
-			| '-n'
-			| '-ns'
-			| '-s'
-			| '-se'
-			| '-sen'
-			| '-ta'
-			| '-ten'
+			'-string '
+			| string '-a'
+			| string '-e'
+			| string '-een'
+			| string '-en'
+			| string '-er'
+			| string '-es'
+			| string '-i'
+			| string '-ien'
+			| string '-nen'
+			| string '-n'
+			| string '-ns'
+			| string '-s'
+			| string '-se'
+			| string '-sen'
+			| string '-ta'
+			| string '-ten'
 			# Kombinationsformen (mit fakultativen Elementen)
-			| '-e(n)'
-			| '-(e)s'
-			| '-(n)'
-			| '-(s)'
+			| string '-e(n)'
+			| string '-(e)s'
+			| string '-(n)'
+			| string '-(s)'
 			# Vollformen
 			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
 			# »Voll«-Formen von Affix(oid)en
 			| xsd:token { pattern = '\-(anden|ane|chen|eien|el|eleien|ereien|erl|fabriken|fritzen|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|linge|lysen|meter|nauten|nisse|onkels|osen|schweine|silos|tümer|ungen|verschnitte|werke|wesens)' }
                         # Ausnahmen
-                        | 'i-Dötze'
+                        | xsd:token { pattern = 'i\-Dötze' }
         	)
 	} *
 	# ###############
@@ -171,15 +175,14 @@ grammatische_Beschreibung = element Grammatik {
 		element Praesens {
                     (
                         xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|blau|breit|da(heim|her|hin|neben|rauf|rüber|von|zu|zwischen)|dar(nieder)?|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|falsch|fehl|feil|fern|fest|flach|fort|frei|fremd|frisch|fürlieb|gegen(einander|über)?|ge?rade|gern|gesund|glatt|gleich|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hintan|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|lang|laut|leer|leid|lieb|los|maß|matt|mies|mobil|mit( ein)?|nach|nahe|neben(einander|her)|neu|nieder|not|ob|offen|parallel|platt|pleite|quer|ran|rauf|raus|rein|richtig|rüber|rück|rum|rund|runter|satt|sauber|scharf|schlau|schlecht|schön|schwarz|stark|steif|tief(er)?|tot|trocken|über|überein|überhand|um(hin|her)?|unter|verloren|verrückt|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weh|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?' }
-                        | 'e-mailt'
+                        | xsd:token { pattern = '(e\-mailt)' }
                     )
                     , Rechtschreibstatus ?
 		} +
 		, element Praeteritum {
                     (
                         xsd:token { pattern = '\p{Ll}+( sich)?( (ab|abhanden|acht|an|aneinander|anheim|auf|aufeinander|aus|auseinander|bankrott|bei(einander|sammen|seite)?|bekannt|bereit|besser|blank|blau|breit|da(heim|her|hin|neben|rauf|rüber|von|zu|zwischen)|dar(nieder)?|dicht|down|dran|drauf|drin|durch(einander)?|ein|einher|empor|ent(gegen|lang)|ernst|fahren|falsch|fehl|feil|fern|fest|flach|fort|frei|fremd|frisch|fürlieb|gegen(einander|über)?|ge?rade|gern|gesund|glatt|gleich|groß|gut|halt|her(ab|an|auf|aus|bei|ein|nieder|über|um|unter|vor)?|hin(ab|auf|aus|durch|ein|unter|über|unter|weg|zu)?|hintan|hinter(her|drein)?|hoch|instand|in Stand|kahl|kalt|klein|krank|lang|laut|leer|leid|lieb|los|maß|matt|mies|mobil|mit( ein)?|nach|nahe|neben(einander|her)|neu|nieder|not|ob|offen|parallel|platt|pleite|quer|ran|rauf|raus|rein|richtig|rüber|rück|rum|rund|runter|satt|sauber|scharf|schlau|schlecht|schön|schwarz|stark|steif|tief(er)?|trocken|tot|über|überein|überhand|um(hin|her)?|unter|verloren|verrückt|verschütt|voll|vor(an|auf|aus|bei|her|lieb|über|wärts|weg)?|wach|wahr|warm|weg|weh|weich|weiter|wert|wichtig|wieder|wieder (ab|an|auf|ein|gut|her)|weiter|wider|wohl|wund|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zusammen|zustatten|zwischen|\p{Lu}\p{Ll}+))?' }
-                        | 'e-mailte'
-                        | 'lachte Hohn'
+                        | xsd:token { pattern = '(e\-mailte|lachte Hohn)' }
                     )
                     , Rechtschreibstatus ?
 		} +
@@ -207,36 +210,40 @@ grammatische_Beschreibung = element Grammatik {
 	, element Komparativ { xsd:token { pattern = '(\p{Ll}+\-)?\p{Ll}+e?r|(besser|freier|länger|leichter|näher|tiefer|schwerer|weiter) ?\p{Ll}+(t|nd)' } } *
 	, element Superlativ { xsd:token { pattern = 'am ((\p{Ll}+\-)?\p{Ll}+s?ten|(besten|freiesten|längsten|leichtesten|nächsten|tiefsten|schwersten|weitesten) \p{Ll}+(t|nd))|nächst\p{Ll}+|(best|tiefst)\p{Ll}+nd' } } *
 	, element Komparationspraeferenz {
-		'ohne Steigerung'
-		| 'Steigerung selten'
-		| 'ohne Komparativ'
-		| 'meist im Superlativ'
-		| 'nur im Superlativ'
-		| 'Komparativ selten'
-		| 'Komparativ ungebräuchlich'
-		| 'Superlativ selten'
-		| 'Superlativ ungebräuchlich'
+		string 'ohne Steigerung'
+		| string 'Steigerung selten'
+		| string 'ohne Komparativ'
+		| string 'meist im Superlativ'
+		| string 'nur im Superlativ'
+		| string 'Komparativ selten'
+		| string 'Komparativ ungebräuchlich'
+		| string 'Superlativ selten'
+		| string 'Superlativ ungebräuchlich'
 	} *
 	, element Kasuspraeferenz {
 		Frequenzbeschraenkung ?
 		, (
-			'mit Genitiv' | 'im Genitiv'
-			| 'mit Dativ' | 'im Dativ' | 'mit Dativ Plural'
-			| 'mit Akkusativ' | 'im Akkusativ'
-			| 'im Nominativ'
+			string 'mit Genitiv'
+                        | string 'im Genitiv'
+                        | string 'im Dativ'
+			| string 'mit Dativ'
+                        | string 'mit Dativ Plural'
+                        | string 'im Akkusativ'
+			| string 'mit Akkusativ'
+			| string 'im Nominativ'
 		)
 	} *
 	, element Numeruspraeferenz {
 		attribute class { 'invisible' } ? # Why do we even need this?
 		, (
-			'nur im Plural'
-			| 'meist im Plural'
-			| 'Singular selten'
-			| 'Singular ungebräuchlich'
-			| 'Plural ungebräuchlich'
-			| 'Plural selten'
-			| 'meist im Singular'
-			| 'nur im Singular'
+			string 'nur im Plural'
+			| string 'meist im Plural'
+			| string 'Singular selten'
+			| string 'Singular ungebräuchlich'
+			| string 'Plural ungebräuchlich'
+			| string 'Plural selten'
+			| string 'meist im Singular'
+			| string 'nur im Singular'
 		)
 	} ?
 	, element Funktionspraeferenz {
