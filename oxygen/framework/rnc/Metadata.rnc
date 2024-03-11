@@ -104,6 +104,7 @@ Mitarbeiterinnen = (
 	| 'jzaun'
 	| 'kaufhold'
 	| 'kirchner'
+        | 'kraska'
 	| 'lang'
 	| 'lemnitzer'
 	| 'lmartin'
