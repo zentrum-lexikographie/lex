@@ -67,6 +67,19 @@ Verbalflexion_1 = (
     | xsd:token { pattern = '\p{Ll}+( sich)? \p{Lu}\p{Ll}+' }
 )
 
+Verbalflexion_2 = (
+    # nicht trennbare Verben
+    xsd:token { pattern = '\p{Ll}+' }
+    # trennbar, NN+V
+    | xsd:token { pattern = '(Acht|Auto|Brust|Dank|Delfin|Delphin|Fahrrad|Gewähr|Halt|Hohn|Maß|Motorrad|Rad|Rücken|Staub) \p{Ll}+' }
+    # trennbar, AD*+V
+    | xsd:token { pattern = '(bekannt|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|frei|ge?rade|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|mobil|offen|parallel|platt|rein|richtig|ruhig|sauber|scharf|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übrig|wach|warm|weh|weich|weiß|wieder|wohl|wund|zueinander) \p{Ll}+' }
+    # Sonderfall Komp. mit /sein/
+    | xsd:token { pattern = '(ab|auf|aus|durch|hinterher|um|zu) gewesen' }
+    # Sonderfall /*lassen/
+    | xsd:token { pattern = '\p{Ll}+ (lassen|gelassen)' }
+)
+
 grammatische_Beschreibung = element Grammatik {
 	Metadaten.allgemein ?
 	, attribute Originaltext { token } ? # for Duden99 compatibility, deprecated
@@ -214,8 +227,12 @@ grammatische_Beschreibung = element Grammatik {
 	# note: die Gruppe am Anfang des ersten Ausdrucks steht wg. neuer Rechtschreibvarianten
 	# note: der zweite Ausdruck steht wg. neuer Rechtschreibung für »ab sein« usw.
 	, element Partizip_II {
-		xsd:token { pattern = '(((Acht|Auto|bekannt|blank|blau|bloß|breit|Brust|Dank|Delfin|Delphin|dicht|dick|dünn|ernst|Fahrrad|fein|fertig|fest|frei|ge?rade|Gewähr|glatt|groß|gut|Halt|hart|heiß|Hohn|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|Maß|mobil|Motorrad|offen|parallel|platt|Rad|rein|richtig|Rücken|ruhig|sauber|scharf|schief|schlank|schön|stark|Staub|steif|straff|stramm|schwarz|tief|tot|trocken|übrig|wach|warm|weh|weich|weiß|wieder|wohl|wund|zueinander) )?\p{Ll}+)|((ab|auf|aus|durch|hinterher|um|zu) gewesen)|\p{Ll}+ (lassen|gelassen)|ge-e-mailt' }
-		, Rechtschreibstatus ?
+		Rechtschreibstatus ?
+                , (
+                    Verbalflexion_2
+                    # Ausnahmen
+                    | xsd:token { pattern = 'ge-email-t' }
+                )
 	} *
 	# ##################
 	# Adjektive #######
