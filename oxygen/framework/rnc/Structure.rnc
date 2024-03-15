@@ -3,12 +3,19 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 
 # spezielle Datentypen
 
-Lemmatoken = xsd:token {
-	# this pattern triggers an infinite loop in jing
-	# when there are "(" or ")" somewhere after whitespace
-	#pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
-	pattern = "\d+%ig|50\+1\-Regel|Rh\+|08/15|3×3(-Basketball)?|inter\*|trans\*|&|m³|cm³|m²|cm²|km²|[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?( …)]?"
-}
+Lemmatoken = (
+    
+    # this pattern triggers an infinite loop in jing
+    # when there are "(" or ")" somewhere after whitespace
+    # pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
+    
+    # default
+    xsd:token {	pattern = "[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?( …)]?" }
+    # signs and symbols
+    | xsd:token { pattern = '&|m³|cm³|m²|cm²|km²' }
+    # exceptions
+    | xsd:token { pattern = '\d+%ig|50\+1\-Regel|Rh\+|08/15|5%-Hürde|3×3|3×3-Basketball|inter\*|trans\*' }
+)
 
 formaler_Text = (
 	# we cannot have mixed content with typed data :(
