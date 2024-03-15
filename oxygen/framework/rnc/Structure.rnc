@@ -12,9 +12,9 @@ Lemmatoken = (
     # default
     xsd:token {	pattern = "[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?( …)]?" }
     # signs and symbols
-    | xsd:token { pattern = '&|m³|cm³|m²|cm²|km²' }
+    | xsd:token { pattern = '∀|∃|&|m³|cm³|m²|cm²|km²' }
     # exceptions
-    | xsd:token { pattern = '\d+%ig|50\+1\-Regel|Rh\+|08/15|5%-Hürde|3×3|3×3-Basketball|inter\*|trans\*' }
+    | xsd:token { pattern = '\d+%ig|50\+1\-Regel|Rh\+|Rh−|08/15|5%-(Hürde|Klausel)|3×3|3×3-Basketball|inter\*|trans\*' }
 )
 
 formaler_Text = (
@@ -592,6 +592,7 @@ Orthografieregel = element Orthografieregel {
         | '63 (E3)'
         | '63 (E4)'
         | '65'
+        | '66'
         | '66 (E)'
         | '79 (2)'
         | '102 (E2)'

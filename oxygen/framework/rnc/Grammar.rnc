@@ -73,11 +73,14 @@ Verbalflexion_2 = (
     # trennbar, NN+V
     | xsd:token { pattern = '(Acht|Auto|Brust|Dank|Delfin|Delphin|Fahrrad|Gewähr|Halt|Hohn|Maß|Motorrad|Rad|Rücken|Staub) \p{Ll}+' }
     # trennbar, AD*+V
-    | xsd:token { pattern = '(bekannt|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|frei|ge?rade|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klein|krank|krumm|kurz|lang|leer|locker|mobil|offen|parallel|platt|rein|richtig|ruhig|sauber|scharf|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übrig|wach|warm|weh|weich|weiß|wieder|wohl|wund|zueinander) \p{Ll}+' }
+    | xsd:token { pattern = '(bekannt|bereit|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|flach|frei|ge?rade|gering|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klar|klein|krank|krumm|kurz|lang|laut|leer|lieb|locker|matt|mobil|offen|parallel|platt|rein|richtig|ruhig|sauber|scharf|scheu|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übel|übrig|wach|warm|weh|weich|weiß|weiter|wieder|wohl|wund|zueinander) \p{Ll}+' }
+    # trennbar, V+V
+    | xsd:token { pattern = '\p{Ll}+ (lassen|gelassen)' }
+    | xsd:token { pattern = '\p{Ll}+ geblieben' }
     # Sonderfall Komp. mit /sein/
     | xsd:token { pattern = '(ab|auf|aus|durch|hinterher|um|zu) gewesen' }
-    # Sonderfall /*lassen/
-    | xsd:token { pattern = '\p{Ll}+ (lassen|gelassen)' }
+    # Ausnahmen
+    | xsd:token { pattern = 'ge-e-mailt' }
 )
 
 grammatische_Beschreibung = element Grammatik {
@@ -154,7 +157,9 @@ grammatische_Beschreibung = element Grammatik {
 			# Vollformen
 			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’₀₂]+\p{Ll}' }
 			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(anden|ans|chens|derls|dls|ei|els|elei|erei|erls|ers|fabrik|fritzen|hai\(e\)s|in|heinis|hubers|ik|iers|ins|isten|itis|keit|kunde|leins|lers|les|lings|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schwein\(e\)s|silos|tums|tumes|ung|verschnitt\(e\)s|werke?s|wesens)' }
+			| xsd:token { pattern = '\-(anden|ans|chens|derls|dls|ei|els|elei|erei|erls|ers|fabrik|fritzen|h?ämie|hai\(e\)s|in|heinis|hubers|ik|iers|ins|isten|itis|keit|kunde|leins|lers|les|lings|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schrecke|schwein\(e\)s|silos|skopie|tums|tumes|ung|verschnitt\(e\)s|werke?s|wesens)' }
+                        # Ausnahmen
+                        | xsd:token { pattern = 'Hohen Priesters|Hohen Priesterin|Knecht\(e\)s Rupp?recht'}
 		)
 	} *
 	, element Plural {
@@ -186,9 +191,9 @@ grammatische_Beschreibung = element Grammatik {
 			# Vollformen
 			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
 			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(anden|ane|chen|derl\(n\)|dl\(n\)|eien|el|eleien|ereien|erl|erl\(n\)|fabriken|fritzen|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|l\(n\)|linge|lysen|meter|nauten|nisse|onkels|osen|schweine|silos|tümer|ungen|verschnitte|werke|wesens)' }
+			| xsd:token { pattern = '\-(anden|ane|chen|derl\(n\)|dl\(n\)|eien|el|eleien|ereien|erl|erl\(n\)|fabriken|fritzen|h?ämien|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|kunde|l|le|lein|ler|l\(n\)|linge|lysen|meter|nauten|nisse|onkels|osen|schrecken|schweine|silos|skopien|tümer|ungen|verschnitte|werke|wesens)' }
                         # Ausnahmen
-                        | xsd:token { pattern = '(i\-Dötze|K\.\-o\.\-(Abbrüche|Schläge))' }
+                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|100-(m|Meter)-Läufe)|dass-Sätze' }
         	)
 	} *
 
