@@ -19,12 +19,13 @@ Glossar = attribute Glossar {
 	list {
 		(
 			'Atomkraft'
-			| 'Bundestagswahl-2021'
 			| 'Corona'
+			| 'D-Wahl'
+                        | 'EU-Wahl'
 			| 'Fußball'
 			| 'Jahreskalender'
 			| 'Klimawandel'
-			| 'US-Wahl-2020'
+			| 'US-Wahl'
 			| 'Weihnachten'
 		) +
 	}
