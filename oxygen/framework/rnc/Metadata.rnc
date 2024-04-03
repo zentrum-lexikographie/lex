@@ -247,6 +247,7 @@ Metadaten.Artikel = (
 	    | 'Recht-002'
 	    | 'Recht-003'
 	    | 'Recht-004'
+	    | 'Rechtschreibung-2024'
 	    | 'Regio'
 	    | 'Religion'
 	    | 'Spiel'
