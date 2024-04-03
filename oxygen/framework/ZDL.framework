@@ -623,289 +623,13 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>Movierung Verweis</String>
-										</field>
-										<field name="name">
-											<String>Movierung</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer movierten Form [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Movierung" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Konversion Verweis</String>
-										</field>
-										<field name="name">
-											<String>Konversion</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer Konverse [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Konversion" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Derivation Verweis</String>
-										</field>
-										<field name="name">
-											<String>Derivation</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer derivierten Form [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Derivation" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Diminutiv Verweis</String>
-										</field>
-										<field name="name">
-											<String>Diminutiv</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer Diminutivform [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Diminutiv" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Kurzform Verweis</String>
-										</field>
-										<field name="name">
-											<String>Kurzform</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer Kurzform [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Kurzform" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
-											<String>Abkuerzung Verweis</String>
-										</field>
-										<field name="name">
-											<String>Abkürzung</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf Grundform einer abgekürzten Form [Verweis]</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="Abkürzung" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>Mehrwortausdruck Verweis</String>
 										</field>
 										<field name="name">
-											<String>Mehrwortausdruck</String>
+											<String>MWA-Konstituente</String>
 										</field>
 										<field name="description">
-											<String>Verweis auf einen Bestandteil eines mehrwortigen Ausdrucks [Verweis]</String>
+											<String>Verweis auf einen Bestandteil eines mehrwortigen Ausdrucks</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -929,7 +653,7 @@
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;Verweis Typ="Komposition" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
+																<String>&lt;Verweis Typ="MWA-Konstituente" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -2308,7 +2032,7 @@
 											<String>Grundform_zu</String>
 										</field>
 										<field name="description">
-											<String>Verweis auf Kurzformen, Abkürzungen etc.</String>
+											<String>morphologische Grundform</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2332,7 +2056,7 @@
 														<serializableOrderedMap>
 															<entry>
 																<String>fragment</String>
-																<String>&lt;Verweis type="Grundform_zu" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
+																<String>&lt;Verweis type="Grundform" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -3378,52 +3102,6 @@ Autor [nocontextvalidation]</String>
 									</action>
 									<action>
 										<field name="id">
-											<String>zu-Verweis [nocontextvalidation]</String>
-										</field>
-										<field name="name">
-											<String>zu-Verweis</String>
-										</field>
-										<field name="description">
-											<String>Verweis auf in der Definition verwendeten Wortteil</String>
-										</field>
-										<field name="largeIconPath">
-											<String></String>
-										</field>
-										<field name="smallIconPath">
-											<String></String>
-										</field>
-										<field name="accessKey">
-											<String></String>
-										</field>
-										<field name="accelerator">
-											<null/>
-										</field>
-										<field name="actionModes">
-											<actionMode-array>
-												<actionMode>
-													<field name="xpathCondition">
-														<String>self::Verweise</String>
-													</field>
-													<field name="argValues">
-														<serializableOrderedMap>
-															<entry>
-																<String>fragment</String>
-																<String>&lt;Verweis Typ="zu" class="invisible" xmlns="http://www.dwds.de/ns/1.0">&lt;Ziellemma>&lt;/Ziellemma>&lt;Ziellesart>&lt;/Ziellesart>&lt;/Verweis></String>
-															</entry>
-														</serializableOrderedMap>
-													</field>
-													<field name="operationID">
-														<String>ro.sync.ecss.extensions.commons.operations.InsertFragmentOperation</String>
-													</field>
-												</actionMode>
-											</actionMode-array>
-										</field>
-										<field name="enabledInReadOnlyContext">
-											<Boolean>false</Boolean>
-										</field>
-									</action>
-									<action>
-										<field name="id">
 											<String>OnlineBeleg Beleg</String>
 										</field>
 										<field name="name">
@@ -4217,11 +3895,6 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>zu-Verweis [nocontextvalidation]</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
 																<String>vgl Verweis</String>
 															</field>
 														</menuItem>
@@ -4258,43 +3931,12 @@ Autor [nocontextvalidation]</String>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
-																<String>Derivation Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Movierung Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Konversion Verweis</String>
+																<String>Grundform_zu Verweis</String>
 															</field>
 														</menuItem>
 														<menuItem>
 															<field name="actionID">
 																<String>formal_verwandt Verweis</String>
-															</field>
-														</menuItem>
-														<menuSeparator/>
-														<menuItem>
-															<field name="actionID">
-																<String>Diminutiv Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Kurzform Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Abkuerzung Verweis</String>
-															</field>
-														</menuItem>
-														<menuItem>
-															<field name="actionID">
-																<String>Grundform_zu Verweis</String>
 															</field>
 														</menuItem>
 														<menuSeparator/>
@@ -4676,11 +4318,6 @@ Autor [nocontextvalidation]</String>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>zu-Verweis [nocontextvalidation]</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
 																<String>vgl Verweis</String>
 															</field>
 														</toolbarItem>
@@ -4717,43 +4354,12 @@ Autor [nocontextvalidation]</String>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
-																<String>Derivation Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Movierung Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Konversion Verweis</String>
+																<String>Grundform_zu Verweis</String>
 															</field>
 														</toolbarItem>
 														<toolbarItem>
 															<field name="actionID">
 																<String>formal_verwandt Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarSeparator/>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Diminutiv Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Kurzform Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Abkuerzung Verweis</String>
-															</field>
-														</toolbarItem>
-														<toolbarItem>
-															<field name="actionID">
-																<String>Grundform_zu Verweis</String>
 															</field>
 														</toolbarItem>
 														<toolbarSeparator/>
