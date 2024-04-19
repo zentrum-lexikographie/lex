@@ -153,7 +153,7 @@ Kollokation = element Kollokation {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
 	, attribute syntaktische_Relation { syntaktische_Relationen }
-	, attribute semantische_Relation { token } ?
+	, attribute semantische_Relation { token } ? # TODO: remove (bleibt nach Beschluss der Lex-Runde erst einmal (2024-04-18))
 	, Belegtext
 	, semantische_Verweise ?
 	, Diasystematik ?
