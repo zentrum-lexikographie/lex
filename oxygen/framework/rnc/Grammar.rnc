@@ -56,15 +56,15 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 
 Verbalflexion_1 = (
     # nicht trennbare Verben
-    xsd:token { pattern = '\p{Ll}+( sich)?' }
+    xsd:token { pattern = '\p{Ll}+' }
     # trennbare Verben (AFF+V, ADV+V)
-    | xsd:token { pattern = '\p{Ll}+( sich)? (ab|abhanden|abwärts|an|aneinander|anheim|auf|aufeinander|aufwärts|aus|auseinander|bei|beieinander|beisammen|beiseite|da|dagegen|daheim|daher|dahin|dahinter|daneben|darauf|darüber|darunter|darum|davon|dazu|dazwischen|dar|darnieder|dort|dran|drauf|drauflos|draus|drein|drin|drüber|durch|durcheinander|ein|einher|einwärts|empor|entgegen|entlang|entzwei|fort|fürlieb|gegen|gegeneinander|gegenüber|heim|her|herab|heran|herauf|heraus|herbei|herein|hernieder|herüber|herum|herunter|hervor|hier|hin|hinab|hinauf|hinaus|hindurch|hinein|hinunter|hinüber|hinunter|hinweg|hinzu|hintan|hinter|hinterher|hinterdrein|hintüber|ineinander|instand|in Stand|los|mal|mit|mit ein|nach|nebeneinander|nebenher|nieder|ob|quer|ran|rauf|raus|rein|rüber|rück|rum|runter|statt|über|überein|übereinander|überhand|um|umher|umhin|unter|voneinander|vonstatten|vor|vorab|voran|vorauf|voraus|vorbei|vorher|vorlieb|vornüber|vorüber|vorwärts|vorweg|weg|wieder|wieder ab|wieder an|wieder auf|wieder ein|wieder her|wider|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zugute|zusammen|zustatten|zuteil|zuvor|zuwider|zwischen)' }
+    | xsd:token { pattern = '\p{Ll}+ (ab|abhanden|abwärts|an|aneinander|anheim|auf|aufeinander|aufwärts|aus|auseinander|bei|beieinander|beisammen|beiseite|da|dagegen|daheim|daher|dahin|dahinter|daneben|darauf|darüber|darunter|darum|davon|dazu|dazwischen|dar|darnieder|dort|dran|drauf|drauflos|draus|drein|drin|drüber|durch|durcheinander|ein|einher|einwärts|empor|entgegen|entlang|entzwei|fort|fürlieb|gegen|gegeneinander|gegenüber|heim|her|herab|heran|herauf|heraus|herbei|herein|hernieder|herüber|herum|herunter|hervor|hier|hin|hinab|hinauf|hinaus|hindurch|hinein|hinunter|hinüber|hinunter|hinweg|hinzu|hintan|hinter|hinterher|hinterdrein|hintüber|ineinander|instand|in Stand|los|mal|mit|mit ein|nach|nebeneinander|nebenher|nieder|ob|quer|ran|rauf|raus|rein|rüber|rück|rum|runter|statt|über|überein|übereinander|überhand|um|umher|umhin|unter|voneinander|vonstatten|vor|vorab|voran|vorauf|voraus|vorbei|vorher|vorlieb|vornüber|vorüber|vorwärts|vorweg|weg|wieder|wieder ab|wieder an|wieder auf|wieder ein|wieder her|wider|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zugute|zusammen|zustatten|zuteil|zuvor|zuwider|zwischen)' }
     # trennbare Verben (ADJ+V)
-    | xsd:token { pattern = '\p{Ll}+( sich)? (allein|bankrott|bekannt|bereit|besser|blank|blau|blind|brach|breit|dicht|down|ernst|falsch|fehl|feil|fern|fertig|fest|flach|frei|fremd|frisch|gering|ge?rade|gern|gesund|glatt|gleich|groß|gut|hoch|höher|kahl|kalt|kaputt|klar|klein|krank|krumm|kund|kurz|lahm|lang|laut|leer|leicht|leid|lieb|matt|mies|mobil|nahe|neu|offen|parallel|platt|pleite|richtig|rund|satt|sauber|selig|scharf|scheu|schlau|schlecht|schön|schwarz|stark|steif|stille?|tief(er)?|tot|trocken|übel|verloren|verrückt|verschütt|voll|wach|wahr|warm|weh|weich|weiter|wert|wett|wichtig|wieder gut|wohl|wund|zufrieden)' }
+    | xsd:token { pattern = '\p{Ll}+ (allein|bankrott|bekannt|bereit|besser|blank|blau|blind|brach|breit|dicht|down|ernst|falsch|fehl|feil|fern|fertig|fest|flach|frei|fremd|frisch|gering|ge?rade|gern|gesund|glatt|gleich|groß|gut|hoch|höher|kahl|kalt|kaputt|klar|klein|krank|krumm|kund|kurz|lahm|lang|laut|leer|leicht|leid|lieb|matt|mies|mobil|nahe|neu|offen|parallel|platt|pleite|richtig|rund|satt|sauber|selig|scharf|scheu|schlau|schlecht|schön|schwarz|stark|steif|stille?|tief(er)?|tot|trocken|übel|verloren|verrückt|verschütt|voll|wach|wahr|warm|weh|weich|weiter|wert|wett|wichtig|wieder gut|wohl|wund|zufrieden)' }
     # trennbare Verben (V+V)
-    | xsd:token { pattern = '\p{Ll}+( sich)? (bleiben|fahren|laufen|liegen|platzen|schmoren|sitzen)' }
-    # trennbare Verben (N+V) TODO: ggf. aufzählen, ggf. nicht reflexiv?
-    | xsd:token { pattern = '\p{Ll}+( sich)? \p{Lu}\p{Ll}+' }
+    | xsd:token { pattern = '\p{Ll}+ (bleiben|fahren|laufen|liegen|platzen|schmoren|sitzen)' }
+    # trennbare Verben (N+V) TODO: ggf. aufzählen
+    | xsd:token { pattern = '\p{Ll}+ \p{Lu}\p{Ll}+' }
 )
 
 Verbalflexion_2 = (
