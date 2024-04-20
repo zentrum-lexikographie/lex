@@ -140,7 +140,6 @@ Metadaten.allgemein = (
 	attribute Zeitstempel { xsd:date }
 	, attribute Quelle {
 		'DWDS'
-		| 'DWDS_auto'
 		| 'Duden_1999'
 		| 'Duden_1999/DWDS'
 		| 'Wahrig'
