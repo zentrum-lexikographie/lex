@@ -43,6 +43,7 @@ Sprachareal = element Sprachareal {
 		| 'D-Nordwest (Niedersachsen-Nord)'
 		| 'D-Nordwest (Westfalen-Nord)'
 		| 'D-Nordwest (Westfalen-Süd)'
+		| 'D-Nordwest (Ruhr)'
 		| 'D-Nordwest (Ostfalen)'
 		| 'D-Nordwest (Magdeburg)'
 		| 'D-Nordost'
