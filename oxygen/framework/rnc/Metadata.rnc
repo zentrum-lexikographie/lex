@@ -248,6 +248,7 @@ Metadaten.Artikel = (
 	    | 'Recht-004'
 	    | 'Rechtschreibung-2024'
 	    | 'Regio'
+	    | 'Regio_selten'
 	    | 'Religion'
 	    | 'Spiel'
 	    | 'Trendwörter'
