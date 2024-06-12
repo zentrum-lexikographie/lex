@@ -169,6 +169,15 @@ Konstruktionsmuster = element Konstruktionsmuster {
 	, Diasystematik ?
 }
 
+Rektionsmuster = element Rektionsmuster {
+	Metadaten.allgemein ?
+	, attribute class { 'invisible' } ?
+	, Belegtext
+	, Frequenzangabe ?
+	, semantische_Verweise ?
+	, Diasystematik ?
+}
+
 Phrasem = element Phrasem {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
@@ -180,6 +189,7 @@ Phrasem = element Phrasem {
 
 Syntagmatik = element Syntagmatik {
 	Metadaten.allgemein ?
+	& Rektionsmuster *
 	& Konstruktionsmuster *
 	& Phrasem *
 }
