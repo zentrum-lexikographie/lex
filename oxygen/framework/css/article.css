@@ -23,7 +23,7 @@ Artikel[Status="Red-f"]          { background-color: #aeecff; }
 Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
 Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
 Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
-Kollokationen, Konstruktionsmuster, Kommentar, Orthografie {
+Kollokationen, Rektionsmuster, Konstruktionsmuster, Kommentar, Orthografie {
 	border: 1px dotted black;
 	margin-bottom: 0.4em;
 	margin-top: 0.4em;
@@ -51,6 +51,7 @@ Lesart > Kommentar:before     { content: "Lesartenkommentar:";}
 Frequenzangabe:before         { content: "Frequenz"; }
 Syntagmatik:before            { content: "Syntagmatik"; }
 Phrasem:before                { content: "Phrasem"; }
+Rektionsmuster:before         { content: "Rektionsmuster"; }
 Konstruktionsmuster:before    { content: "Konstruktionsmuster"; }
 Kollokationen:before          { content: "Kollokationen"; }
 Kollokation:before            { content: "Kollokation"; }
@@ -66,7 +67,8 @@ Formangabe >*:before,
 Grammatik > *:before, Diachronie > *:before, Diasystematik > *:before,
 Fundstelle:before, Belegtext:before,
 Verweise > *:before, Verweis > *:before, Kollokation > *:before,
-Konstruktionsmuster > *:before, Phrasem > *:before {
+Rektionsmuster > *:before, Konstruktionsmuster > *:before,
+Phrasem > *:before {
 	color: gray;
 }
 Diasystematik > *, Grammatik > * {
