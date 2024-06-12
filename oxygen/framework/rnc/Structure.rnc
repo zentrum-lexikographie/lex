@@ -199,15 +199,17 @@ Syntagmatik = element Syntagmatik {
 # Verweise #############################
 ########################################
 
-[ sch:pattern [
-	sch:rule [
-      		context = "//d:URL"
-		sch:assert [
-			test = "not(contains(string-join(.//text(), ''), 'archive.org/save/'))"
-			'Archive.org-Link korrigieren!'
-		]
-	]
-] ]
+[
+  sch:pattern [
+    sch:rule [
+      context = "//d:URL"
+      sch:assert [
+        test = "not(contains(string-join(.//text(), ''), 'archive.org/save/'))"
+	'Archive.org-Link korrigieren!'
+      ]
+    ]
+  ]
+]
 
 semantische_Verweise = element Verweise {
 	Metadaten.allgemein ?
@@ -220,7 +222,14 @@ semantische_Verweise = element Verweise {
       context = "//d:Artikel/d:Verweise/d:Verweis/d:Ziellesart"
       sch:assert [
         test = "normalize-space(.) = ''"
-        'Keine Lesartendesambiguierung in morphologischen Zerlegungen vornehmen'
+        "Keine Lesartendesambiguierung in morphologischen Zerlegungen vornehmen"
+      ]
+    ]
+    sch:rule [
+      context = "//d:Verweis[@Typ='MWA']/d:Ziellesart"
+      sch:assert [
+        test = "normalize-space(.) = ''"
+	"Keine Lesartendesambiguierung in MWA-Verweisen vornehmen"
       ]
     ]
   ]
