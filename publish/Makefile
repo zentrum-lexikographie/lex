@@ -127,9 +127,9 @@ dwdswb-update: dwdswb-backup
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.relation;"
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.token;"
 	# determine lemma difference
-	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb > dwdswb.current
-	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb_beta.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb_beta > dwdswb.new
-	diff --color=always dwdswb.current dwdswb.new | less -r
+	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb > backup/dwdswb.current
+	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb_beta.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb_beta > backup/dwdswb.new
+	diff --color=always backup/dwdswb.current backup/dwdswb.new | less -r
 	# empty the target database
 	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.article;"
 	$(mysql) -e "DROP TABLE IF EXISTS dwdswb.lemma;"
