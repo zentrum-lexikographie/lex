@@ -14,7 +14,7 @@ Lemmatoken = (
     # signs and symbols
     | xsd:token { pattern = '∀|∃|&|m³|cm³|m²|cm²|km²' }
     # exceptions
-    | xsd:token { pattern = '\d+%ig|50\+1|50\+1\-Re\-?gel|Rh\+|Rh−|08/15|5%\-(Hür\-?de|Klau\-?sel)|3×3|3×3-Bas\-ket\-ball|inter\*|trans\*|Kick & Rush' }
+    | xsd:token { pattern = '\d+%ig|50\+1|50\+1\-Re\-?gel|Rh\+|Rh−|08/15|5%\-(Hür\-?de|Klau\-?sel)|3×3|3×3-Bas-?ket-?ball|inter\*|trans\*|Kick & Rush' }
 )
 
 formaler_Text = (

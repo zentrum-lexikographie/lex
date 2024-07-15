@@ -55,25 +55,29 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 ]
 
 Verbalflexion_1 = (
+    # Präsens/Präteritum
     # nicht trennbare Verben
     xsd:token { pattern = '\p{Ll}+' }
     # trennbare Verben (AFF+V, ADV+V)
-    | xsd:token { pattern = '\p{Ll}+ (ab|abhanden|abwärts|an|aneinander|anheim|auf|aufeinander|aufwärts|aus|auseinander|auswärts|bei|beieinander|beisammen|beiseite|da|dabei|dafür|dagegen|daheim|daher|dahin|dahinter|daneben|daran|darauf|darauf hin|darein|darüber|darunter|darum|davon|davor|dazu|dazwischen|dar|dar?nieder|dort|dran|drauf|drauflos|draus|drein|drin|drüber|drumrum|drunter|durch|durcheinander|ein|einher|einwärts|empor|entgegen|entlang|entzwei|fort|fürlieb|gegen|gegeneinander|gegenüber|heim|her|herab|heran|herauf|heraus|herbei|herein|herfür|hernieder|herüber|herum|herunter|hervor|herzu|hier|hierher|hin|hinab|hinan|hinauf|hinaus|hindurch|hinein|hintan|hintenüber|hinter|hinterdrein|hintereinander|hinterher|hintüber|hinüber|hin und her|hinunter|hinweg|hinzu|ineinander|instand|in Stand|los|mal|mit|mit ein|nach|nebeneinander|nebenher|nieder|ob|quer|ran|rauf|raus|rein|rüber|rück|rum|runter|statt|über|überein|übereinander|überhand|um|umher|umhin|unter|voneinander|vonstatten|vor|vorab|voran|vorauf|voraus|vorbei|vorher|vorlieb|vornüber|vorüber|vorwärts|vorweg|weg|wieder|wieder ab|wieder an|wieder auf|wieder ein|wieder her|wider|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zugute|zusammen|zustatten|zuteil|zuvor|zuwider|zwischen)' }
+    | xsd:token { pattern = '\p{Ll}+ (ab|abhanden|abseits|abwärts|an|aneinander|anheim|auf|aufeinander|aufwärts|aus|auseinander|auswärts|bei|beieinander|beisammen|beiseite|da|dabei|dafür|dagegen|daheim|daher|dahin|dahinter|daneben|daran|darauf|darauf hin|darein|darüber|darunter|darum|davon|davor|dazu|dazwischen|dar|dar?nieder|dort|dran|drauf|drauflos|draus|drein|drin|drüber|drumrum|drunter|durch|durcheinander|ein|einher|einwärts|empor|entgegen|entlang|entzwei|fort|fürlieb|gegen|gegeneinander|gegenüber|heim|her|herab|heran|herauf|heraus|herbei|herein|herfür|hernieder|herüber|herum|herunter|hervor|herzu|hier|hierher|hin|hinab|hinan|hinauf|hinaus|hindurch|hinein|hintan|hintenüber|hinter|hinterdrein|hintereinander|hinterher|hintüber|hinüber|hin und her|hinunter|hinweg|hinzu|ineinander|instand|in Stand|los|mal|mit|mit ein|nach|nebeneinander|nebenher|nieder|ob|quer|ran|rauf|raus|rein|rüber|rück|rum|runter|statt|über|überein|übereinander|überhand|um|umher|umhin|unter|voneinander|vonstatten|vor|vorab|voran|vorauf|voraus|vorbei|vorher|vorlieb|vornüber|vorüber|vorwärts|vorweg|weg|wieder|wieder ab|wieder an|wieder auf|wieder ein|wieder her|wider|zu|zueinander|zunichte|zupasse?|zurecht|zurück|zugute|zusammen|zustatten|zuteil|zuvor|zuwider|zwischen)' }
     # trennbare Verben (ADJ/ADV/KON+V)
-    | xsd:token { pattern = '\p{Ll}+ (ähnlich|allein|aufrecht|bankrott|bekannt|bereit|besser|bevor|bewusst|blank|blau|blind|bloß|brach|breit|dicht|dick|dicke|down|dünn|dünne|einig|ernst|falsch|fehl|feil|fern|fertig|fest|fett|flach|flott|flüssig|frei|fremd|frisch|gar|gefangen|geheim|genug|gering|ge?rade|gern|gesund|glatt|gleich|groß|gut|heil|heilig|heimlich|heiß|hoch|höher|inne|irre|kahl|kalt|kaputt|kehrt|klar|klein|knapp|krank|krumm|kund|kurz|lahm|lang|laut|leck|leer|leicht|leid|lieb|locker|matt|mies|mobil|mündig|nahe|näher|nass|neu|offen|parallel|platt|pleite|preis|richtig|rot|ruhig|rund|satt|sauber|selig|scharf|scheu|schief|schlank|schlapp|schlau|schlecht|schön|schwarz|schwer|sicher|spitz|stark|steif|stille?|straff|stramm|tief(er)?|tot|trocken|übel|übrig|verloren|verrückt|verschütt|voll|wach|wahr|warm|weh|weich|weiter|wert|wett|wichtig|wieder gut|wohl|wund|wunder|zufrieden)' }
+    | xsd:token { pattern = '\p{Ll}+ (ähnlich|allein|aufrecht|bankrott|bekannt|bereit|besser|bevor|bewusst|blank|blau|blind|bloß|brach|breit|dicht|dick|dicke|down|dünn|dünne|einig|ernst|falsch|fehl|feil|fern|fertig|fest|fett|flach|flott|flüssig|frei|fremd|frisch|gar|gefangen|geheim|genug|gering|ge?rade|gern|gesund|glatt|gleich|groß|gut|heil|heilig|heimlich|heiß|hoch|höher|inne|irre|kahl|kalt|kaputt|kehrt|klar|klein|knapp|krank|krumm|kund|kurz|lahm|lang|laut|leck|leer|leicht|leid|lieb|locker|matt|mies|mobil|mündig|nahe|näher|nass|neu|offen|parallel|platt|pleite|preis|richtig|rot|ruhig|rund|satt|sauber|selig|scharf|scheu|schief|schlank|schlapp|schlau|schlecht|schön|schwarz|schwer|sicher|spitz|stark|steif|steil|stille?|straff|stramm|tief(er)?|tot|trocken|übel|übrig|verloren|verrückt|verschütt|voll|wach|wahr|warm|weh|weich|weiter|wert|wett|wichtig|wieder gut|wohl|wund|wunder|zufrieden)' }
     # trennbare Verben (V+V)
     | xsd:token { pattern = '\p{Ll}+ (bestehen|bleiben|fahren|fallen|flöten|hocken|laufen|liegen|platzen|schmoren|sitzen|wohnen)' }
     # trennbare Verben (N+V) TODO: ggf. aufzählen
     | xsd:token { pattern = '\p{Ll}+ \p{Lu}\p{Ll}+' }
+    # »Voll«-Formen von Affix(oid)en
+    | xsd:token { pattern = '\-(ierte?|ifizierte?)' }
 )
 
 Verbalflexion_2 = (
+    # Partizipien Präteritum
     # nicht trennbare Verben
     xsd:token { pattern = '\p{Ll}+' }
     # trennbar, NN+V
     | xsd:token { pattern = '(Acht|Auto|Brust|Dank|Delfin|Delphin|Fahrrad|Gewähr|Halt|Hohn|Maß|Motorrad|Rad|Rücken|Staub) \p{Ll}+' }
     # trennbar, AD*+V
-    | xsd:token { pattern = '(bekannt|bereit|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|flach|frei|ge?rade|gering|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klar|klein|krank|krumm|kurz|lang|laut|leer|lieb|locker|matt|mobil|offen|parallel|platt|rein|richtig|ruhig|sauber|scharf|scheu|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übel|übrig|wach|warm|weh|weich|weiß|weiter|wieder|wohl|wund|zueinander) \p{Ll}+' }
+    | xsd:token { pattern = '(bekannt|bereit|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|flach|frei|ge?rade|gering|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klar|klein|krank|krumm|kurz|lang|laut|leer|lieb|locker|matt|mobil|offen|parallel|platt|rein|richtig|rot|ruhig|sauber|scharf|scheu|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übel|übrig|wach|warm|weh|weich|weiß|weiter|wieder|wohl|wund|zueinander) \p{Ll}+' }
     # trennbar, V+V
     | xsd:token { pattern = '\p{Ll}+ (lassen|gelassen)' }
     | xsd:token { pattern = '\p{Ll}+ geblieben' }
@@ -81,6 +85,8 @@ Verbalflexion_2 = (
     | xsd:token { pattern = '(ab|auf|aus|durch|hinterher|um|zu) gewesen' }
     # Ausnahmen
     | xsd:token { pattern = 'ge-e-mailt' }
+    # »Voll«-Formen von Affix(oid)en
+    | xsd:token { pattern = '\-(iert|ifiziert)' }
 )
 
 grammatische_Beschreibung = element Grammatik {
@@ -193,7 +199,7 @@ grammatische_Beschreibung = element Grammatik {
 			# »Voll«-Formen von Affix(oid)en
 			| xsd:token { pattern = '\-(anden|ane|bolzen|chen|derl\(n\)|dl\(n\)|eien|el|eleien|enden|ereien|erl|erl\(n\)|fabriken|fritzen|h?ämien|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|killer|kunde|l|le|lein|ler|li\(s\)|lithe\(n\)|l\(n\)|linge|lysen|meter|nauten|nisse|onkels|osen|schrecken|schweine|silos|skopien|tümer|ungen|verschnitte|werke|wesens)' }
                         # Ausnahmen
-                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|100-(m|Meter)-Läufe)|dass-Sätze' }
+                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|\d+-(m|Meter)-Läufe)|\d+-Meter-Räume|dass-Sätze' }
         	)
 	} *
 
