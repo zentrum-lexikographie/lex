@@ -63,7 +63,7 @@ Verbalflexion_1 = (
     # trennbare Verben (ADJ/ADV/KON+V)
     | xsd:token { pattern = '\p{Ll}+ (ähnlich|allein|aufrecht|bankrott|bekannt|bereit|besser|bevor|bewusst|blank|blau|blind|bloß|brach|breit|dicht|dick|dicke|down|dünn|dünne|einig|ernst|falsch|fehl|feil|fern|fertig|fest|fett|flach|flott|flüssig|frei|fremd|frisch|gar|gefangen|geheim|genug|gering|ge?rade|gern|gesund|glatt|gleich|groß|gut|heil|heilig|heimlich|heiß|hoch|höher|inne|irre|kahl|kalt|kaputt|kehrt|klar|klein|knapp|krank|krumm|kund|kurz|lahm|lang|laut|leck|leer|leicht|leid|lieb|locker|matt|mies|mobil|mündig|nahe|näher|nass|neu|offen|parallel|platt|pleite|preis|richtig|rot|ruhig|rund|satt|sauber|selig|scharf|scheu|schief|schlank|schlapp|schlau|schlecht|schön|schwarz|schwer|sicher|spitz|stark|steif|steil|stille?|straff|stramm|tief(er)?|tot|trocken|übel|übrig|verloren|verrückt|verschütt|voll|wach|wahr|warm|weh|weich|weiter|wert|wett|wichtig|wieder gut|wohl|wund|wunder|zufrieden)' }
     # trennbare Verben (V+V)
-    | xsd:token { pattern = '\p{Ll}+ (bestehen|bleiben|fahren|fallen|flöten|hocken|laufen|liegen|platzen|schmoren|sitzen|wohnen)' }
+    | xsd:token { pattern = '\p{Ll}+ (bestehen|bleiben|fahren|fallen|flöten|hocken|kleben|laufen|liegen|platzen|schmoren|sitzen|wohnen)' }
     # trennbare Verben (N+V) TODO: ggf. aufzählen
     | xsd:token { pattern = '\p{Ll}+ \p{Lu}\p{Ll}+' }
     # »Voll«-Formen von Affix(oid)en
@@ -74,15 +74,10 @@ Verbalflexion_2 = (
     # Partizipien Präteritum
     # nicht trennbare Verben
     xsd:token { pattern = '\p{Ll}+' }
-    # trennbar, NN+V
-    | xsd:token { pattern = '(Acht|Auto|Brust|Dank|Delfin|Delphin|Fahrrad|Gewähr|Halt|Hohn|Maß|Motorrad|Rad|Rücken|Staub) \p{Ll}+' }
-    # trennbar, AD*+V
-    | xsd:token { pattern = '(bekannt|bereit|blank|blau|bloß|breit|dicht|dick|dünn|ernst|fein|fertig|fest|flach|frei|ge?rade|gering|glatt|groß|gut|hart|heiß|instand|in Stand|kahl|kalt|kaputt|klar|klein|krank|krumm|kurz|lang|laut|leer|lieb|locker|matt|mobil|offen|parallel|platt|rein|richtig|rot|ruhig|sauber|scharf|scheu|schief|schlank|schön|stark|steif|straff|stramm|schwarz|tief|tot|trocken|übel|übrig|wach|warm|weh|weich|weiß|weiter|wieder|wohl|wund|zueinander) \p{Ll}+' }
-    # trennbar, V+V
-    | xsd:token { pattern = '\p{Ll}+ (lassen|gelassen)' }
-    | xsd:token { pattern = '\p{Ll}+ geblieben' }
-    # Sonderfall Komp. mit /sein/
-    | xsd:token { pattern = '(ab|auf|aus|durch|hinterher|um|zu) gewesen' }
+    # trennbar, allgemeiner Fall
+    | xsd:token { pattern = '\p{Ll}+ \p{Ll}+' }
+    # trennbar, NN/NP+V
+    | xsd:token { pattern = '(Acht|Auto|Brust|Dank|Delfin|Delphin|Fahrrad|Gewähr|Halt|Hohn|in Stand|Maß|Motorrad|Rad|Rücken|Staub) \p{Ll}+' }
     # Ausnahmen
     | xsd:token { pattern = 'ge-e-mailt' }
     # »Voll«-Formen von Affix(oid)en
@@ -199,7 +194,7 @@ grammatische_Beschreibung = element Grammatik {
 			# »Voll«-Formen von Affix(oid)en
 			| xsd:token { pattern = '\-(anden|ane|bolzen|chen|derl\(n\)|dl\(n\)|eien|el|eleien|enden|ereien|erl|erl\(n\)|fabriken|fritzen|h?ämien|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|killer|kunde|l|le|lein|ler|li\(s\)|lithe\(n\)|l\(n\)|linge|lysen|meter|nauten|nisse|onkels|osen|schrecken|schweine|silos|skopien|tümer|ungen|verschnitte|werke|wesens)' }
                         # Ausnahmen
-                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|\d+-(m|Meter)-Läufe)|\d+-Meter-Räume|dass-Sätze' }
+                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|\d+-(m|Meter)-Läufe)|\d+-Meter-Räume|\d+-Jahr-Plan|\d+-Jahres-Pläne|dass-Sätze' }
         	)
 	} *
 
