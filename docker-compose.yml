@@ -1,7 +1,7 @@
 version: "3"
 services:
   solr:
-    image: docker-registry.zdl.org/zdl-lex/solr
+    image: docker.zdl.org/zdl-lex/solr
     build:
       context: ./docker/solr
       dockerfile: Dockerfile
@@ -10,7 +10,7 @@ services:
     ports:
       - "8983:8983"
   gpt:
-    image: docker-registry.zdl.org/zdl-lex/gpt
+    image: docker.zdl.org/zdl-lex/gpt
     build:
       context: ./docker/gpt
       dockerfile: Dockerfile
@@ -26,7 +26,7 @@ services:
     ports:
       - "8000:8000"
   server:
-    image: docker-registry.zdl.org/zdl-lex/server
+    image: docker.zdl.org/zdl-lex/server
     build:
       context: .
       dockerfile: docker/server/Dockerfile

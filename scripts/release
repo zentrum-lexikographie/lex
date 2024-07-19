@@ -10,7 +10,7 @@ rev_count = rev_count.strip().lstrip('v')
 
 version = f'{timestamp}.{rev_count}'
 
-image_prefix = 'docker-registry.zdl.org/zdl-lex/'
+image_prefix = 'docker.zdl.org/zdl-lex/'
 
 check_call(['docker', 'compose', 'build', 'solr', 'server'])
 

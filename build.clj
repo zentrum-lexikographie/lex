@@ -176,7 +176,7 @@
   ([image-name]
    (image-tag image-name (current-version)))
   ([image-name image-version]
-   (str "docker-registry.zdl.org/zdl-lex/" image-name ":" image-version)))
+   (str "docker.zdl.org/zdl-lex/" image-name ":" image-version)))
 
 (defn release
   [& _]
