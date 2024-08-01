@@ -127,7 +127,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Mehrwortausdruck'
 			| string 'Partikel'
 		)
-	} ?
+	}
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus {
