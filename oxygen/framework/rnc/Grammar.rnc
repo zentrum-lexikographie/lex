@@ -88,7 +88,7 @@ grammatische_Beschreibung = element Grammatik {
 	Metadaten.allgemein ?
 	, attribute Originaltext { token } ? # for Duden99 compatibility, deprecated
     	, element Wortklasse {
-	    	attribute class { 'invisible' }
+	    	attribute class { 'invisible' } ?
 		, attribute Typ {  # TODO: this belongs to word formation, actually
 			'deadjektivisch' | 'deverbal'
 		} ?
@@ -127,7 +127,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string 'Mehrwortausdruck'
 			| string 'Partikel'
 		)
-	} ?
+	}
 	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus {
