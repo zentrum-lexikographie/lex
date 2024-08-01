@@ -88,7 +88,7 @@ grammatische_Beschreibung = element Grammatik {
 	Metadaten.allgemein ?
 	, attribute Originaltext { token } ? # for Duden99 compatibility, deprecated
     	, element Wortklasse {
-	    	attribute class { 'invisible' } ?
+	    	attribute class { 'invisible' }
 		, attribute Typ {  # TODO: this belongs to word formation, actually
 			'deadjektivisch' | 'deverbal'
 		} ?
