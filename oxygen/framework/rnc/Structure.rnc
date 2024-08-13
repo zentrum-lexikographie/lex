@@ -10,12 +10,17 @@ Lemmatoken = (
     # pattern = '([\p{L}\p{Nd}\-\.’]+(,? |\?|!)?)+|&|m³|cm³|m²|cm²|km²'
     
     # default
-    xsd:token {	pattern = "[(… )?\p{L}\p{Nd}\-’][\p{L}\p{Nd}\-\.,’₀₂ ]*[!\?( …)]?" }
-    # signs and symbols
-    | xsd:token { pattern = '∀|∃|&|m³|cm³|m²|cm²|km²' }
+    #   \p{L}  = letter
+    #   \p{Nd} = decimal digit number
+    #   \p{No} = other number (e.g. sub- and superscripts)
+    #   \p{Sc} = currency symbols (e.g. €)
+    #   \p{Sm} = mathematical symbols (e.g. +, ×)
+    xsd:token {	pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-’&%\.…,\s]+[!\?]?" }
     # exceptions
-    | xsd:token { pattern = '\d+%ig|50\+1|50\+1\-Re\-?gel|Rh\+|Rh−|08/15|5%\-(Hür\-?de|Klau\-?sel)|3×3|3×3-Bas-?ket-?ball|inter\*|trans\*|Kick & Rush' }
+    | xsd:token { pattern = '08/15|inter\*|trans\*' }
 )
+
+Flexionstoken = xsd:token { pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-’&%\s]+" }
 
 formaler_Text = (
 	# we cannot have mixed content with typed data :(
@@ -424,7 +429,12 @@ Formangabe = element Formangabe {
 	, attribute Typ { 'Hauptform' | 'Nebenform' | 'Abkürzung' | 'Symbol' }
 	, Schreibung +
 	, Aussprache * # TODO oblig.?
-	, grammatische_Beschreibung
+	, element Grammatik {
+            Metadaten.allgemein ? # TODO: remove
+            , attribute Originaltext { token } ? # for Duden99 compatibility, deprecated
+            , Wortklasse
+            , grammatische_Angaben
+        }
 	, Frequenzangabe ?
 	, Diasystematik
 	, Kommentar ?
@@ -434,7 +444,10 @@ Formbeschränkung = element Formangabe {
 	Metadaten.allgemein ?
 	, Schreibung *
 	, Aussprache *
-	, freie_grammatische_Beschreibung ?
+	, element Grammatik {
+            Metadaten.allgemein ? # TODO: remove
+            , grammatische_Angaben
+        } ?
 	, Frequenzangabe ?
 	, Diasystematik
 }

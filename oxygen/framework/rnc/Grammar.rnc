@@ -84,51 +84,50 @@ Verbalflexion_2 = (
     | xsd:token { pattern = '\-(iert|ifiziert)' }
 )
 
-grammatische_Beschreibung = element Grammatik {
-	Metadaten.allgemein ?
-	, attribute Originaltext { token } ? # for Duden99 compatibility, deprecated
-    	, element Wortklasse {
-	    	attribute class { 'invisible' } ?
-		, attribute Typ {  # TODO: this belongs to word formation, actually
-			'deadjektivisch' | 'deverbal'
-		} ?
-		, (
-			string ''
-			| string 'Substantiv'
-			| string 'Eigenname' # deprecated, use Funktionspraeferenz instead
-	    		| string 'Verb'
-			| string 'Imperativ'
-			| string 'Adjektiv'
-			| string 'Adverb'
-			| string 'partizipiales Adjektiv'
-			| string 'partizipiales Adverb'
-			| string 'Komparativ'
-			| string 'Superlativ'
-			| string 'Pronominaladverb'
-			| string 'Präposition'
-			| string 'Präposition + Artikel'
-			| string 'bestimmter Artikel'
-			| string 'unbestimmter Artikel'
-			| string 'Konjunktion'
-			| string 'Kardinalzahl'
-			| string 'Ordinalzahl'
-			| string 'Bruchzahl'
-			| string 'Pronomen'
-			| string 'Demonstrativpronomen'
-			| string 'Indefinitpronomen'
-			| string 'Interrogativpronomen'
-			| string 'Personalpronomen'
-			| string 'Possessivpronomen'
-			| string 'Reflexivpronomen'
-			| string 'Relativpronomen'
-			| string 'reziprokes Pronomen'
-			| string 'Interjektion'
-			| string 'Affix'
-			| string 'Mehrwortausdruck'
-			| string 'Partikel'
-		)
-	}
-	, element indeklinabel { empty } ? # TODO: Wortklasse/@Typ?
+Wortklasse = element Wortklasse {
+    attribute class { 'invisible' } ?
+    , attribute Typ {  # TODO: this belongs to word formation, actually
+        'deadjektivisch' | 'deverbal'
+    } ?
+    , (
+        string ''
+        | string 'Substantiv'
+        | string 'Eigenname' # deprecated, use Funktionspraeferenz instead
+        | string 'Verb'
+        | string 'Imperativ'
+        | string 'Adjektiv'
+        | string 'Adverb'
+        | string 'partizipiales Adjektiv'
+        | string 'partizipiales Adverb'
+        | string 'Komparativ'
+        | string 'Superlativ'
+        | string 'Pronominaladverb'
+        | string 'Präposition'
+        | string 'Präposition + Artikel'
+        | string 'bestimmter Artikel'
+        | string 'unbestimmter Artikel'
+        | string 'Konjunktion'
+        | string 'Kardinalzahl'
+        | string 'Ordinalzahl'
+        | string 'Bruchzahl'
+        | string 'Pronomen'
+        | string 'Demonstrativpronomen'
+        | string 'Indefinitpronomen'
+        | string 'Interrogativpronomen'
+        | string 'Personalpronomen'
+        | string 'Possessivpronomen'
+        | string 'Reflexivpronomen'
+        | string 'Relativpronomen'
+        | string 'reziprokes Pronomen'
+        | string 'Interjektion'
+        | string 'Affix'
+        | string 'Mehrwortausdruck'
+        | string 'Partikel'
+    )
+}
+
+grammatische_Angaben = (
+	element indeklinabel { empty } ?
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus {
             string 'mask.'
@@ -156,11 +155,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string '-(n)'
 			| string '-(s)'
 			# Vollformen
-			| xsd:token { pattern = '\p{Lu}[\p{Ll}\p{Nd} \-’₀₂]+\p{Ll}' }
-			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(anden|ans|bolzens|chens|derls|dls|ei|els|elei|enden|erei|erls|ers|fabrik|fritzen|h?ämie|hai\(e\)s|in|heinis|hubers|ik|iers|ins|isten|itis|jungen|keit|killers|kunde|leins|lers|les|lings|lis|lithen|lith\(e\)s|ls|lyse|meters|nauten|nis|nisses|onkels|ose|schrecke|schwein\(e\)s|silos|skopie|tums|tumes|ung|verschnitt\(e\)s|werke?s|wesens)' }
-                        # Ausnahmen
-                        | xsd:token { pattern = 'Hohen Priesters|Hohen Priesterin|Knecht\(e\)s Rupp?recht'}
+                        | Flexionstoken
 		)
 	} *
 	, element Plural {
@@ -190,11 +185,7 @@ grammatische_Beschreibung = element Grammatik {
 			| string '-(n)'
 			| string '-(s)'
 			# Vollformen
-			| xsd:token { pattern = '(\p{Lu}[\p{L}\p{Nd} \-’₀₂]+\p{Ll}|-itiden)' }
-			# »Voll«-Formen von Affix(oid)en
-			| xsd:token { pattern = '\-(anden|ane|bolzen|chen|derl\(n\)|dl\(n\)|eien|el|eleien|enden|ereien|erl|erl\(n\)|fabriken|fritzen|h?ämien|haie|innen|heinis|huber|ier|iere|iers|iken|ine|isten|itiden|keiten|killer|kunde|l|le|lein|ler|li\(s\)|lithe\(n\)|l\(n\)|linge|lysen|meter|nauten|nisse|onkels|osen|schrecken|schweine|silos|skopien|tümer|ungen|verschnitte|werke|wesens)' }
-                        # Ausnahmen
-                        | xsd:token { pattern = '(i-Dötze|K\.\-o\.-(Abbrüche|Schläge)|1-Euro-Läden|\d+-(m|Meter)-Läufe)|\d+-Meter-Räume|\d+-Jahr-Plan|\d+-Jahres-Pläne|dass-Sätze' }
+                        | Flexionstoken
         	)
 	} *
 
@@ -338,20 +329,7 @@ grammatische_Beschreibung = element Grammatik {
 		, formaler_Text
 	} *
 	, Kommentar ?
-}
-
-
-
-
-
-
-#####################################################################
-# Spezifizierung und/oder Auswahl
-# grammatischer Eigenschaften innerhalb von Lesarten
-# – hier ist (fast) alles möglich, außer Wortklassenangaben
-#####################################################################
-
-freie_grammatische_Beschreibung = grammatische_Beschreibung  # TODO: constraints via Schematron
+)
 
 #####################################################################
 # syntaktische Annotationen für Kollokationen
