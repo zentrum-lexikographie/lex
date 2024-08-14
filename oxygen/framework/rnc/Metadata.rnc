@@ -198,20 +198,7 @@ Metadaten.Artikel = (
 	, attribute Empfehlung { 'ja' } ?
 	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
 	, attribute Tranche {
-	    '45k-001'
-	    | '45k-002'
-	    | '45k-003'
-	    | '45k-004'
-	    | '45k-005'
-	    | '45k-006'
-	    | '45k-007'
-	    | '45k-008'
-	    | '45k-009'
-	    | '45k-010'
-	    | '45k-011'
-	    | '45k-012'
-	    | '45k-013'
-	    | '45k-014'
+	    '45k-Minimalartikel'
 	    | 'Adjektive'
 	    | 'Adverben'
 	    | 'Architektur'
