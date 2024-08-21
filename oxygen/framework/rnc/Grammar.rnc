@@ -8,7 +8,7 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 [
   sch:pattern [
     sch:rule [
-      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][not(d:Numeruspraeferenz[text() = 'nur im Singular'])][not(d:Numeruspraeferenz[text() = 'nur im Plural'])]"
+      context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][not(d:Numeruspraeferenz[text() = 'nur im Singular'])][not(d:Numeruspraeferenz[text() = 'nur im Plural'])][not(d:Genus[text() = 'ohne erkennbares Genus'])]"
       sch:assert [
         test = "d:Genus"
         'Fehlende Genusangabe ergänzen!'
@@ -103,7 +103,8 @@ grammatische_Angaben = (
             string 'mask.'
             | string 'fem.'
             | string 'neutr.'
-        } * # TODO: 'ohne erkennbares Genus' ?
+            | string 'ohne erkennbares Genus'
+        } *
 	# #################
 	# Substantive #####
 	# #################

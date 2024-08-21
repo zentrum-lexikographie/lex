@@ -158,7 +158,7 @@ Kollokation = element Kollokation {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
 	, attribute syntaktische_Relation { syntaktische_Relationen }
-	, attribute semantische_Relation { token } ? # TODO: remove (bleibt nach Beschluss der Lex-Runde erst einmal (2024-04-18))
+	, attribute semantische_Relation { token } ? # bleibt nach Beschluss der Lex-Runde erst einmal (2024-04-18)
 	, Belegtext
 	, semantische_Verweise ?
 	, Diasystematik ?
@@ -299,7 +299,7 @@ semantischer_Verweis = element Verweis {
 }
 
 externer_Verweis = element Verweis_extern {
-	attribute Typ { 'Enzyklopädie' | 'Etymologie' } # TODO: "Etymologie" bisher nicht verwendet …
+	attribute Typ { 'Enzyklopädie' | 'Etymologie' }
 	, attribute class { 'invisible' } ?
 	, element Ziellemma { token }
 	, element Ziellesart { token } # remove?
