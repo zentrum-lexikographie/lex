@@ -20,7 +20,7 @@ Lemmatoken = (
     | xsd:token { pattern = '08/15|inter\*|trans\*' }
 )
 
-Flexionstoken = xsd:token { pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-’&%\s]+" }
+Flexionstoken = xsd:token { pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-\.’&%\s]+" }
 
 formaler_Text = (
 	# we cannot have mixed content with typed data :(
