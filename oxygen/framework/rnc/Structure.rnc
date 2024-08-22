@@ -624,6 +624,7 @@ Orthografieregel = element Orthografieregel {
         | '63 (2.2)'
         | '63 (3.1)'
         | '63 (3.2)'
+        | '63 (E2)'
         | '63 (E3)'
         | '63 (E4)'
         | '65'
