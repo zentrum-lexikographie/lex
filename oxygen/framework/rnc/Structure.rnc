@@ -498,7 +498,6 @@ Orthografieregel = element Orthografieregel {
         | '20 (2)'
         | '21'
         | '21 (E1)'
-        | '21 (E2)' # deprecated
 	| '21 (E2.1)'
 	| '21 (E2.2)'
         | '22'
