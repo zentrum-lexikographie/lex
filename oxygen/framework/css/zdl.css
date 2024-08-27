@@ -27,15 +27,15 @@ Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
 Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
 Kollokationen, Rektionsmuster, Konstruktionsmuster, Kommentar, Orthografie {
 	border: 1px dotted #999;
-	padding: 0.5em;
-	margin: 0.5em 1em;
+	padding: 0.3em;
+	margin: 0.5em 0.2em 0.5em 1.5em;
 }
 
 /* Labels für die Hauptblöcke */
 
 Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
-Artikel > Formangabe:before   { -oxy-append-content: attr(Typ)"angabe"; }
+Artikel > Formangabe:before   { -oxy-append-content: attr(Typ)"angabe "; }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
 Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
@@ -88,6 +88,8 @@ Orthografie:before {
 	background-color: #ddd;
 	font-weight: normal;
 	vertical-align: top;
+ 	-oxy-prepend-content: " ";
+	-oxy-append-content: " ";
 }
 Definition, Frequenzangabe, Kommentar, Verweise, Ueberschrift {
 	-oxy-prepend-content: " "; /* ein bisschen vom Label abrücken */
