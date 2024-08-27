@@ -12,7 +12,7 @@
 /* Farbmarkierungen für Artikelstatus */
 
 DWDS { font-family: "Arial", sans-serif; }
-Artikel                          { border-left: 10px; }
+Artikel                          { border-left: 10px solid #fff; }
 Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
 Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
 Artikel[Status="Red-0"]          { border-left: 10px solid #ffec8b; }
