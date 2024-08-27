@@ -203,11 +203,17 @@ Definition { font-weight: bold; }
 
 /* Markierung von Lemmazeichen */
 Schreibung { font-size: xx-large; }
-Schreibung[Typ="AR_G"] { color: brown; } /* TODO: remove*/
 Schreibung[Typ="R"] { color: blue; }
 *[Typ="U"], *[Typ="U_Falschschreibung"], *[Typ="U_CH"], *[Typ="U_AT"] {
-	text-decoration: line-through;
 	color: red;
+}
+*[Typ="U"], *[Typ="U_Falschschreibung"] {
+	text-decoration: line-through;
+}
+Schreibung[Typ]:after {
+	color: black;
+	text-decoration:none;
+	-oxy-append-content:attr(Typ)" ";
 }
 
 /* farbliche Markierung für grammatische und syntagmatische Angaben */
@@ -336,11 +342,12 @@ Paraphrase:after { content: "’"; text-decoration: none; }
 
 Artikel[Typ]:before { -oxy-append-content:" ["attr(Typ)"] "; }
 Artikel[Status]:before { -oxy-append-content:" ["attr(Status)"] "; }
+
 *:not(Schreibung)[Zeitstempel]:before { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 *:not(Schreibung)[Quelle]:before { -oxy-append-content:" ["attr(Quelle)"] "; }
 *:not(Schreibung)[Autor]:before { -oxy-append-content:" ["attr(Autor)"] "; }
 
-Lesart[Glossar] { -oxy-append-content: " [Glossar: "attr(Glossar)"] "; }
+Lesart[Glossar] { -oxy-append-content: " Glossar: "attr(Glossar)" "; }
 
 /* //Schreibung ist ein Spezialfall, wo's dahinter steht */
 Schreibung:before {
@@ -354,7 +361,7 @@ Schreibung[Quelle]:after { -oxy-append-content:" ["attr(Quelle)"] "; }
 Schreibung:after { font-size: 50%; font-weight: normal; }
 
 Aussprache[IPA]:after { -oxy-append-content:" ["attr(IPA)"] "; }
-Schreibung[Trennung]:after { -oxy-append-content:" Trennung: "attr(Trennung)" "; }
+Schreibung[Trennung]:after { -oxy-append-content:" <"attr(Trennung)"> "; }
 
 /* allgemeine Sondermarkierungen via @class */
 

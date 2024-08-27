@@ -391,10 +391,9 @@ Illustration = element Illustration {
 Rechtschreibstatus = attribute Typ {
 	'R'                    # regional use and no norm applies
 	| 'U'                  # once was valid but no longer is
-	| 'U_auslaufend'       # deprecated spelling (will become invalid soon)
 	| 'U_Falschschreibung' # never was valid
-	| 'U_CH'               # TODO: keep or discard?
-	| 'U_AT'               # TODO: keep or discard?
+	| 'U_CH'
+	| 'U_AT'
 }
 
 [
