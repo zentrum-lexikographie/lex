@@ -215,6 +215,7 @@ grammatische_Angaben = (
                         | string 'im Akkusativ'
 			| string 'mit Akkusativ'
 			| string 'im Nominativ'
+			| string 'mit Nominativ'
 		)
 	} *
 	, element Numeruspraeferenz {
