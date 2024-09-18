@@ -17,7 +17,7 @@ Lemmatoken = (
     #   \p{Sm} = mathematical symbols (e.g. +, ×)
     xsd:token {	pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-’&%\.…,\s]+[!\?]?" }
     # exceptions
-    | xsd:token { pattern = '08/15|inter\*|trans\*' }
+    | xsd:token { pattern = '08/15|c/o|inter\*|trans\*|Wort-/Bildmarke' }
 )
 
 Flexionstoken = xsd:token { pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-\.’&%\s]+" }
