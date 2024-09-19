@@ -1,4 +1,4 @@
-version: "3"
+name: lex
 services:
   solr:
     image: docker.zdl.org/zdl-lex/solr
