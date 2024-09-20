@@ -11,7 +11,10 @@
 
 /* Farbmarkierungen für Artikelstatus */
 
-DWDS { font-family: "Arial", sans-serif; }
+DWDS {
+	font-family: Unifont, Arial, sans-serif;
+	font-weight: normal;
+}
 Artikel                          { border-left: 10px solid #fff; }
 Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
 Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
