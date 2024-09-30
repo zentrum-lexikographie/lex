@@ -209,6 +209,7 @@ grammatische_Angaben = (
 		, (
 			string 'mit Genitiv'
                         | string 'im Genitiv'
+			| string 'Genitiv ungebräuchlich'
                         | string 'im Dativ'
 			| string 'mit Dativ'
                         | string 'mit Dativ Plural'
