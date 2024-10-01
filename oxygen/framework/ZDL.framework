@@ -42,7 +42,7 @@
 											<Boolean>false</Boolean>
 										</field>
 									</cssFile>
-									<cssFile>
+									<!--cssFile>
 										<field name="href">
 											<String>${framework}/css/article.css</String>
 										</field>
@@ -52,7 +52,7 @@
 										<field name="alternate">
 											<Boolean>true</Boolean>
 										</field>
-									</cssFile>
+									</cssFile-->
 								</cssFile-array>
 							</field>
 							<field name="mergeCSSsFromDocument">
