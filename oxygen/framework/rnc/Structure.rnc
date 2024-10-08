@@ -494,6 +494,7 @@ Orthografieregel = element Orthografieregel {
         | '13 (E2)'
         | '16'
         | '19'
+        | '20 (1)'
         | '20 (2)'
         | '21'
         | '21 (E1)'
