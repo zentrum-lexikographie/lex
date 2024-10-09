@@ -190,6 +190,8 @@ Metadaten.Artikel = (
 		| 'Red-2-zurückgewiesen'
 		| 'Red-ex' # Expertenreview
 		| 'Red-f'
+		| 'Red-f-Sammelbecken'
+		| 'Red-f-blockiert'
 		| 'Red-f-zurückgewiesen'
 	}
 	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' }
