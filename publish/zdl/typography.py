@@ -3,7 +3,7 @@ import unicodedata
 from .article import xpath, qname, text_content, text
 
 
-_expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.', u'o.\u202fä.', u'o.\u2027Ä.', 'usw.', u'z.\202fB.', 'bzw.')) # U+202F NARROW NO-BREAK SPACE
+_expected_abbreviations = set(('etw.', 'jmd.', 'jmds.', 'jmdn.', 'jmdm.', u'o.\u202fä.', u'o.\u202fÄ.', 'usw.', u'z.\u202fB.', 'bzw.')) # U+202F NARROW NO-BREAK SPACE
 _definition_els = xpath('//d:Definition')
 
 
