@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]))
 
 (def abbreviation-whitelist
-  #{"etw.", "jmd.", "jmds.", "jmdn.", "jmdm."})
+  #{"etw.", "jmd.", "jmds.", "jmdn.", "jmdm.", "bzw.", "usw.", "o.\u202fä.", "o.\u202fÄ.", "z.\u202fB."})
 
 (def camel-case-whitelist
   #{"SonntagsBlick", "McCarthy-Ära", "(WoW)", "AfD.", "CyberProfit", "LfV",
