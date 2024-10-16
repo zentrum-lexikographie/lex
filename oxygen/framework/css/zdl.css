@@ -265,7 +265,7 @@ Definition Verweis:before { content: "↗"; }
 Artikel>Verweise>Verweis>Ziellesart { display: none; }
 
 /* etymologische Verweise im Diachronieteil */
-
+Diachronie>Verweise>Verweis { display: block; }
 
 /* Markierung von Fundstellenangaben */
 Fundstelle { color:blue; }
