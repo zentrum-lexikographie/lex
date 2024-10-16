@@ -223,7 +223,6 @@
   (condp = (str/trim status)
     "Artikelrumpf"    "#ffcccc"
     "Lex-zur_Abgabe"  "#ffff00"
-    "Red-0"           "#ffec8b"
     "Red-1"           "#ffec8b"
     "Red-f"           "#aeecff"
     "wird_gestrichen" "#cccccc"
