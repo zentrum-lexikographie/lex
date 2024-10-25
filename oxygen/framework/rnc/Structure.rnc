@@ -616,6 +616,7 @@ Orthografieregel = element Orthografieregel {
         | '60 (1)'
         | '60 (2.4)'
         | '60 (3.2)'
+	| '60 (4.1)'
         | '60 (5)'
         | '60 (6)'
         | '61'
