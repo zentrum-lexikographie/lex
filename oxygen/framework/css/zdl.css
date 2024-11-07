@@ -18,7 +18,6 @@ DWDS {
 Artikel                          { border-left: 10px solid #fff; }
 Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
 Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
-Artikel[Status="Red-0"]          { border-left: 10px solid #ffec8b; }
 Artikel[Status="Red-1"]          { border-left: 10px solid #ffec8b; }
 Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
 Artikel[Status="wird_gestrichen"]{ border-left: 10px solid #333; }
@@ -266,7 +265,7 @@ Definition Verweis:before { content: "↗"; }
 Artikel>Verweise>Verweis>Ziellesart { display: none; }
 
 /* etymologische Verweise im Diachronieteil */
-
+Diachronie>Verweise>Verweis { display: block; }
 
 /* Markierung von Fundstellenangaben */
 Fundstelle { color:blue; }

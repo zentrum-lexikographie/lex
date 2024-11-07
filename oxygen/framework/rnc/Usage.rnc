@@ -106,6 +106,7 @@ Bedeutungsebene = element Bedeutungsebene {
 		| 'metonymisch'
 		| 'spezieller'
 		| 'allgemeiner'
+		| 'eigentlich' # vor allem für die Etymologie wichtig
 	)
 }
 

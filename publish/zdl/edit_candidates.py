@@ -15,12 +15,10 @@ status = [
     'Lex-zur_Abgabe',
     'Lex-kommentiert',
     'Lex-zurückgestellt',
-    'Red-0',
     'Red-1',
     'Red-2-zurückgewiesen',
     'Red-ex',
     'Red-f-zurückgewiesen',
-    'wird_Vollartikel',
     'wird_gestrichen'
 ]
 status = dict([(s, i) for i, s in enumerate(status)])
