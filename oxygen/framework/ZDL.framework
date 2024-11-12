@@ -42,12 +42,12 @@
 											<Boolean>false</Boolean>
 										</field>
 									</cssFile>
-									<!--cssFile>
+									<cssFile>
 										<field name="href">
-											<String>${framework}/css/article.css</String>
+											<String>${framework}/css/qa-layer.css</String>
 										</field>
 										<field name="title">
-											<String>DWDS CSS</String>
+											<String>QA-Layer</String>
 										</field>
 										<field name="alternate">
 											<Boolean>true</Boolean>
@@ -59,7 +59,7 @@
 								<Boolean>true</Boolean>
 							</field>
 							<field name="multipleAlternateSelectionEnabled">
-								<Boolean>false</Boolean>
+								<Boolean>true</Boolean>
 							</field>
 							<field name="actionDescriptors">
 								<action-array>

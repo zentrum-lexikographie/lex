@@ -1,0 +1,34 @@
+/* highlighs (some) lexicographic editing of citations */
+
+Streichung {
+	border: 1px dotted black;
+	margin: 0px;
+	padding: 0px;
+	-oxy-display-tags: none;
+}
+
+Loeschung {
+	border: 1px dotted black;
+	text-decoration: line-through;
+	text-decoration-style: double;
+	background-color: #000;
+	-oxy-display-tags: none;
+}
+
+Paraphrase {
+	border: 1px dotted black;
+	background-color: #aeecff;
+	font-weight: bold;
+	-oxy-display-tags: none;
+}
+
+Autorenzusatz {
+	border: 1px dotted black;
+	background-color: #aeecff;
+	-oxy-display-tags: none;
+}
+
+Stichwort {
+	border: 1px dotted red;
+	-oxy-display-tags: none;
+}
