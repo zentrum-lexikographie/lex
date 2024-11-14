@@ -52,7 +52,7 @@
 										<field name="alternate">
 											<Boolean>true</Boolean>
 										</field>
-									</cssFile-->
+									</cssFile>
 								</cssFile-array>
 							</field>
 							<field name="mergeCSSsFromDocument">
