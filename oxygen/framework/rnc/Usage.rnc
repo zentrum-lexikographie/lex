@@ -32,9 +32,9 @@ Sprachareal = element Sprachareal {
 		| 'D-Süd'
 		| 'D-West'
 		| 'D-Ost'
-		| 'D-Mittelwest+'
-		| 'CH+'
-		| 'A+'
+		| 'D-Mittelwest+LUX+BELG'
+		| 'CH+LIE'
+		| 'A+STIR'
 		# Deutschland
 		| 'D-Nordwest'
 		| 'D-Nordwest (Schleswig-Holstein)'
