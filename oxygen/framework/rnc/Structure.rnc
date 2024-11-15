@@ -488,7 +488,7 @@ Aussprache_neu = element Aussprache {
 		xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' }
 	} ?
 	, element Wert {
-		( empty | xsd:token { pattern = "[aãɐeẽiɪoõøɔuyʏæœɑɒəɛʊ Ɂbçdfghjklmnprstvwxzðŋɜɡɰɹʀʁʃʌʒʔʙʟʤʦʧθχ ˈˌː̃̆\x{0303} \?,':]+" } )
+		( empty | xsd:token { pattern = "[aãɐeẽiɪoõøɔuyʏæœɑɒəɛʊ Ɂbçdfghjklmnprstvwxzðŋɜɹʀʁʃʌʒʔʙʟʤʦʧθχ ˈˌː̃̆\x{0303} \?,':]+" } )
 		# note: [?,':] are legal as input but are automatically
 		# transformed to [ʔˌˈː̃̆] periodically
 		# note: whitespace IS actually allowed
