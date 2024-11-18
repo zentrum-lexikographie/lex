@@ -24,10 +24,11 @@ Artikel[Status="wird_gestrichen"]{ border-left: 10px solid #333; }
 
 /* Hauptblöcke, die als »Kasten« dargestellt werden */
 
-Formangabe, Grammatik, Diachronie, Diasystematik, Verweise, Syntagmatik, 
-Verwendungsbeispiele, Lesart, Definition, Frequenzangabe, Illustration,
-Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift, Rohdaten,
-Kollokationen, Rektionsmuster, Konstruktionsmuster, Kommentar, Orthografie {
+Formangabe, Aussprache, Grammatik, Diachronie, Diasystematik, Verweise,
+Syntagmatik, Verwendungsbeispiele, Lesart, Definition, Frequenzangabe,
+Illustration, Beleg, Kollokation, Kompetenzbeispiel, Phrasem, Ueberschrift,
+Rohdaten, Kollokationen, Rektionsmuster, Konstruktionsmuster, Kommentar,
+Orthografie {
 	border: 1px dotted #999;
 	padding: 0.3em;
 	margin: 0.5em 0.2em 0.5em 1.5em;
@@ -38,6 +39,7 @@ Kollokationen, Rektionsmuster, Konstruktionsmuster, Kommentar, Orthografie {
 Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):"; }
 Lesart > Formangabe:before    { -oxy-append-content: "Formbeschränkung"; }
 Artikel > Formangabe:before   { -oxy-append-content: attr(Typ)"angabe "; }
+Aussprache:before             { content: "Aussprache"; }
 Grammatik:before              { content: "grammatische Angaben"; }
 Diasystematik:before          { content: "Diasystematik"; }
 Artikel>Verweise:before       { content: "synchrone Zerlegung"; }
@@ -65,7 +67,7 @@ Rohdaten:before               { content: "NLP-Rohdaten"; }
 
 /* Einzelfelder, die als vertikale Liste dargestellt werden */
 
-Formangabe >*:before,
+Formangabe >*:before, Aussprache > *:before,
 Grammatik > *:before, Diachronie > *:before, Diasystematik > *:before,
 Fundstelle:before, Belegtext:before,
 Verweise > *:before, Verweis > *:before, Kollokation > *:before,
@@ -85,7 +87,7 @@ Syntagmatik:before, Syntagmatik > *:before, Ueberschrift:before,
 Verwendungsbeispiele:before, Verwendungsbeispiele > *:before,
 Kollokationen:before, Kollokationen > *:before, Rohdaten:before,
 Lesart:before, Definition:before, Frequenzangabe:before, Kommentar:before,
-Orthografie:before {
+Orthografie:before, Aussprache:before {
 	color: black;
 	background-color: #ddd;
 	font-weight: normal;
@@ -107,7 +109,9 @@ Diasystematik > Gruppensprache:before               { content: "Gruppensprache: 
 Diasystematik > Gebrauchszeitraum:before            { content: "Gebrauchszeitraum: "; }
 Diasystematik > Sprachraum:before                   { content: "Sprachraum: "; }
 Diasystematik > Sprachareal:before                  { content: "Sprachareal: "; }
-Aussprache:before                                   { content: "Aussprache 🔈: "; }
+IPA:before                                          { content: "IPA-Transkr.: ["}
+IPA:after                                           { content: "] → (" attr(Audiodatei) ")"; }
+Audio:before                                        { content: "Audio-Datei: "}
 Auxiliar:before                                     { content: "Auxiliar: "; }
 Wortklasse:before                                   { content: "Wortklasse: "; }
 Wortklasse[Typ]:after                               { content: " (" attr(Typ) ")"; }
@@ -221,7 +225,7 @@ Schreibung[Typ]:after {
 }
 
 /* farbliche Markierung für grammatische und syntagmatische Angaben */
-Grammatik, Syntagmatik { color: maroon; }
+Grammatik, Syntagmatik, Aussprache { color: maroon; }
 
 /* Markierung von Kollokationsrelationen*/
 Kollokation:after {
@@ -364,7 +368,6 @@ Schreibung[Zeitstempel]:after { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 Schreibung[Quelle]:after { -oxy-append-content:" ["attr(Quelle)"] "; }
 Schreibung:after { font-size: 50%; font-weight: normal; }
 
-Aussprache[IPA]:after { -oxy-append-content:" ["attr(IPA)"] "; }
 Schreibung[Trennung]:after { -oxy-append-content:" <"attr(Trennung)"> "; }
 
 /* allgemeine Sondermarkierungen via @class */

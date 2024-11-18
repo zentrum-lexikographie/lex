@@ -484,15 +484,15 @@ Aussprache_alt = element Aussprache {
 Aussprache_neu = element Aussprache {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
-	, attribute Datei {
-		xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' }
-	} ?
-	, element Wert {
-		( empty | xsd:token { pattern = "[aãɐeẽiɪoõøɔuyʏæœɑɒəɛʊ Ɂbçdfghjklmnprstvwxzðŋɜɹʀʁʃʌʒʔʙʟʤʦʧθχ ˈˌː̃̆\x{0303} \?,':]+" } )
+	, element IPA {
+		( empty | xsd:token { pattern = "[aãɐeẽiɪoõøɔuyʏæœɑɒəɛʊ Ɂbçdfghjklmnprstvwxzðŋɜɹʀʁʃʌʒʔʙʟʤʦʧθχ ˈˌː\x{0303}\x{0306}\x{032f} \?,':]+" } )
 		# note: [?,':] are legal as input but are automatically
-		# transformed to [ʔˌˈː̃̆] periodically
+		# transformed to [ʔˌˈː] periodically
 		# note: whitespace IS actually allowed
 		# (AND helps structuring the regex)
+		, attribute Audiodatei {
+			xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' }
+		} ?
 	}
 	, Diasystematik ?
 	, Frequenzangabe ?
