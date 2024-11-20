@@ -471,17 +471,7 @@ Schreibung = element Schreibung {
     ]
 ]
 
-Aussprache_alt = element Aussprache {
-	# relativer Pfad zur Aussprachedatei (ohne Dateinamenerweiterung)
-	# Format: {Paketverzeichnis}/{Stimulus}
-	# Beispiel: 026/der_Snob
-	Metadaten.allgemein ?
-	, attribute class { 'invisible' } ?
-	, attribute IPA { list { xsd:token + } } ?
-	, ( empty | xsd:token { pattern = '[0-9]{3}/[A-Za-z\-_]*[1-9]?' } )
-}
-
-Aussprache_neu = element Aussprache {
+Aussprache = element Aussprache {
 	Metadaten.allgemein ?
 	, attribute class { 'invisible' } ?
 	, element IPA {
@@ -497,8 +487,6 @@ Aussprache_neu = element Aussprache {
 	, Diasystematik ?
 	, Frequenzangabe ?
 }
-
-Aussprache = ( Aussprache_neu | Aussprache_alt )
 
 Orthografie = element Orthografie {
     Metadaten.allgemein ?
