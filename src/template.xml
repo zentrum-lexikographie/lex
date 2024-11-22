@@ -4,6 +4,7 @@
     <Artikel Quelle="DWDS" Status="Artikelrumpf" Typ="Minimalartikel" xml:id="[ID]" Zeitstempel="[DATUM]" Erstfassung="DWDS">
         <Formangabe Typ="Hauptform">
             <Schreibung>[SCHREIBUNG]</Schreibung>
+            <Aussprache><IPA/></Aussprache>
             <Grammatik>
               <Wortklasse>[WORTKLASSE]</Wortklasse>
             </Grammatik>
