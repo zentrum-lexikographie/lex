@@ -476,8 +476,16 @@ Aussprache = element Aussprache {
 	, attribute class { 'invisible' } ?
 	, element IPA {
 		( empty | xsd:token { pattern = "[aãɐeẽiɪoõøɔuyʏæœɑɒəɛʊ ʔbçdfghjklmnprstvwxzðŋɜɹʀʁʃʌʒʙʟʤʦʧ θχ ˈˌː\x{0303}\x{0306}\x{0329}\x{032f}\x{0361} \?,':]+" } )
+		# note: allowed diacritics
+		#   \x{0303} U+0303 COMBINING TILDE
+		#   \x{0306} U+0306 COMBINING BREVE
+		#   \x{0329} U+0329 COMBINING VERTICAL LINE BELOW
+		#   \x{032f} U+032F COMBINING INVERTED BREVE BELOW
+		#   \x{0361} U+0361 COMBINING DOUBLE INVERTED BREVE -- check
+		#
 		# note: [?,':] are legal as input but are automatically
 		# transformed to [ʔˌˈː] periodically
+		#
 		# note: whitespace IS actually allowed
 		# (AND helps structuring the regex)
 		, attribute Audiodatei {
