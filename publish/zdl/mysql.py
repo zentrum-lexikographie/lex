@@ -33,6 +33,7 @@ _ddl_statements = [
          lemma VARCHAR(249) COLLATE utf8mb4_bin NOT NULL,
          hidx TINYINT(2) DEFAULT NULL,
          type VARCHAR(32),
+         form_type VARCHAR(32),
          article_id INT(11) NOT NULL,
          PRIMARY KEY (id),
          KEY lemma (lemma),
@@ -104,6 +105,7 @@ def read_articles(articles):
                         'lemma': lemma,
                         'hidx': hidx,
                         'type': md['htype'],
+                        'form_type': md['ftype'],
                         'article_id': article_id
                     })
                     for token in lemma.split():

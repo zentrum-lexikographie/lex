@@ -141,6 +141,7 @@ def metadata(article):
                    'name': name,
                    'hidx': hidx,
                    'htype': sf.get('Typ', 'AR_G'),
+                   'ftype': sf.getparent().get('Typ', 'Hauptform'),
                    'pos': ''.join(map(text_content, _pos_els(gr))),
                    'gen': ''.join(map(text_content, _genus_els(gr))),
                    'type': typ,
