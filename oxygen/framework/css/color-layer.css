@@ -1,0 +1,7 @@
+Artikel[Status="Artikelrumpf"]   { background-color: #ffd0d0; }
+Artikel[Status="Lex-zur_Abgabe"] { background-color: #fffecd; }
+Artikel[Status="Red-2"]          { background-color: #e0ffe0; }
+Artikel[Status="Red-f"]          { background-color: #d1f4ff; }
+Artikel[Status="wird_gestrichen"]{ background-color: #dddddd; }
+
+.invisible { background-color: #ffa0a0; }
