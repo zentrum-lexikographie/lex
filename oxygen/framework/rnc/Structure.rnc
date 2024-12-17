@@ -15,7 +15,8 @@ Lemmatoken = (
     #   \p{No} = other number (e.g. sub- and superscripts)
     #   \p{Sc} = currency symbols (e.g. €)
     #   \p{Sm} = mathematical symbols (e.g. +, ×)
-    xsd:token {	pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\-’&%\.…,\s]+[!\?]?" }
+    #   \p{So} = miscellaneous symbols (e.g. ⚭)
+    xsd:token {	pattern = "[\p{L}\p{Nd}\p{No}\p{Sc}\p{Sm}\p{So}\-’&%\.…,\s]+[!\?]?" }
     # exceptions
     | xsd:token { pattern = '08/15|c/o|inter\*|trans\*|Wort-/Bildmarke' }
 )
