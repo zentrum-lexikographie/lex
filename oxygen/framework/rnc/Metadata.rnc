@@ -270,6 +270,7 @@ Orthografieregel = element Orthografieregel {
         , (
             '2'
             | '3 (E)'
+	    | '4 (1)'
             | '4 (E1)'
             | '8 (1)'
             | '9'
