@@ -288,6 +288,7 @@ Sprachen = (
 	| 'kroat'        # hrv: Croatian
 	| 'kslaw'        # chu: Church Slavonic
 	| 'kuban-span'
+	| 'kurd'
 	| 'kymr'         # cym: Welsh
 	| 'kypr'
 	| 'langobard'    # lng: Langobardic
@@ -520,6 +521,7 @@ Sprachen = (
 	| 'vorroman'
 	| 'vulgärarab'
 	| 'vulgärgriech'
+	| 'vulgärlat'
 	| 'waldeck'
 	| 'wallon'       # wln: Walloon
 	| 'walis'
