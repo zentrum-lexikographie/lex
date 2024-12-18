@@ -521,7 +521,6 @@ Sprachen = (
 	| 'vorroman'
 	| 'vulgärarab'
 	| 'vulgärgriech'
-	| 'vulgärlat'
 	| 'waldeck'
 	| 'wallon'       # wln: Walloon
 	| 'walis'
