@@ -64,9 +64,6 @@ def read_articles(articles):
         for document, article in zdl.article.parse(article_file, strip=True):
             if not zdl.article.has_status('Red-f', article):
                 continue
-            # temporarily disable publication of entries with @tranche "RSR-*"
-            if article.get('Tranche', '').startswith('RSR-'):
-                continue
             zdl.article.prune(article)
             article_id = None
             for md in zdl.article.metadata(article):
