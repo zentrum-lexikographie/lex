@@ -147,11 +147,12 @@ Metadaten.allgemein = (
 		| 'Wahrig'
 		| 'Wahrig/DWDS'
 		| 'Wahrig/WDG'
-		| 'Wahrig/ZDL'
+		| 'Wahrig/ZDL' # deprecated
 		| 'WDG'
 		| 'WDG/DWDS'
-		| 'WDG/ZDL'
-		| 'ZDL'
+		| 'WDG/ZDL' # deprecated
+		| 'WDW_2011/DWDS'
+		| 'ZDL' # deprecated
 	}
 	, attribute Autor { Mitarbeiterinnen } ?
 )
