@@ -86,7 +86,7 @@ class Dictionary(object):
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS lemma (
                     id INT(11) NOT NULL,
-                    lemma VARCHAR(50) COLLATE utf8mb4_bin NOT NULL,
+                    lemma VARCHAR(128) COLLATE utf8mb4_bin NOT NULL,
                     hidx TINYINT(2) DEFAULT NULL,
                     type VARCHAR(10) COLLATE utf8mb4_bin,
                     article_id INT(11) NOT NULL,
