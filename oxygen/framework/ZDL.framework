@@ -9,7 +9,7 @@
 						<null/>
 					</field>
 					<field name="name">
-						<String>ZDL/DWDS</String>
+						<String>DWDS</String>
 					</field>
 					<field name="schemaDescriptor">
 						<docTypeSchema>
@@ -36,7 +36,7 @@
 											<String>${framework}/css/zdl.css</String>
 										</field>
 										<field name="title">
-											<String>ZDL</String>
+											<String>DWDS (Default)</String>
 										</field>
 										<field name="alternate">
 											<Boolean>false</Boolean>
@@ -2781,7 +2781,7 @@
 											<String>Quelle einfügen</String>
 										</field>
 										<field name="description">
-											<String>Fügt einen Quellverweis mit dem Wert "ZDL" in das Element ein.</String>
+											<String>Fügt einen Quellverweis mit dem Wert "DWDS" in das Element ein.</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -2813,7 +2813,7 @@
 															</entry>
 															<entry>
 																<String>value</String>
-																<String>ZDL</String>
+																<String>DWDS</String>
 															</entry>
 														</serializableOrderedMap>
 													</field>
@@ -2835,7 +2835,7 @@
 											<String>Zeitstempel/Quelle/Autor einfügen</String>
 										</field>
 										<field name="description">
-											<String>Fügt Zeitstempel, ZDL-Quellverweis und Autorin das Element ein.</String>
+											<String>Fügt Zeitstempel, Quellverweis und Autor in das Element ein.</String>
 										</field>
 										<field name="largeIconPath">
 											<String></String>
@@ -3636,7 +3636,7 @@ Autor [nocontextvalidation]</String>
 							<field name="menubarDescriptor">
 								<menu>
 									<field name="label">
-										<String>ZDL/DWDS</String>
+										<String>DWDS</String>
 									</field>
 									<field name="accessKey">
 										<String>D</String>
@@ -4073,7 +4073,7 @@ Autor [nocontextvalidation]</String>
 							<field name="toolbarDescriptor">
 								<toolbar>
 									<field name="id">
-										<String>ZDL/DWDS</String>
+										<String>DWDS</String>
 									</field>
 									<field name="type">
 										<Integer>2</Integer>
@@ -4553,7 +4553,7 @@ Autor [nocontextvalidation]</String>
 						<String-array/>
 					</field>
 					<field name="description">
-						<String>ZDL/DWDS Lexikographenumgebung</String>
+						<String>DWDS Lexikographenumgebung</String>
 					</field>
 					<field name="doctypeRules">
 						<documentTypeRule-array>

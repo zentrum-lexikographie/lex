@@ -147,12 +147,10 @@ Metadaten.allgemein = (
 		| 'Wahrig'
 		| 'Wahrig/DWDS'
 		| 'Wahrig/WDG'
-		| 'Wahrig/ZDL' # deprecated
 		| 'WDG'
 		| 'WDG/DWDS'
-		| 'WDG/ZDL' # deprecated
+                #| 'WDW_2011' # we don't show unedited WDW entries
 		| 'WDW_2011/DWDS'
-		| 'ZDL' # deprecated
 	}
 	, attribute Autor { Mitarbeiterinnen } ?
 )
@@ -196,7 +194,7 @@ Metadaten.Artikel = (
 		| 'Red-f-blockiert'
 		| 'Red-f-zurückgewiesen'
 	}
-	, attribute Erstfassung { 'WDG' | 'Duden_1999' | 'DWDS' | 'ZDL' | 'Wahrig' }
+	, attribute Erstfassung { 'DWDS' | 'WDG' | 'Duden_1999' | 'WDW_2011' }
 	, attribute Erstellungsdatum { xsd:date }
 	, attribute Redakteur { Mitarbeiterinnen } ?
 	, attribute Empfehlung { 'ja' } ?
