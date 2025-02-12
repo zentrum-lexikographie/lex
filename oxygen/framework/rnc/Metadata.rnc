@@ -379,6 +379,7 @@ Orthografieregel = element Orthografieregel {
             | '55 (4)'
             | '55 (5)'
             | '55 (E2)'
+            | '55 (E3)'
             | '55 (E4)'
             | '56 (1)'
             | '56 (2)'
