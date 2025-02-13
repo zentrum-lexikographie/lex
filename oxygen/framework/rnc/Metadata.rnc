@@ -361,6 +361,7 @@ Orthografieregel = element Orthografieregel {
             | '44'
             | '44 (1)'
             | '44 (2)'
+            | '44 (E)'
             | '45'
             | '45 (1)'
             | '45 (2)'
