@@ -15,12 +15,16 @@ DWDS {
 	font-family: Unifont, Arial, sans-serif;
 	font-weight: normal;
 }
-Artikel                          { border-left: 10px solid #fff; }
-Artikel[Status="Artikelrumpf"]   { border-left: 10px solid #fcc; }
-Artikel[Status="Lex-zur_Abgabe"] { border-left: 10px solid #ff0; }
-Artikel[Status="Red-1"]          { border-left: 10px solid #ffec8b; }
-Artikel[Status="Red-f"]          { border-left: 10px solid #aeecff; }
-Artikel[Status="wird_gestrichen"]{ border-left: 10px solid #333; }
+Artikel                                { border-left: 15px solid #fff; }
+Artikel[Status="Artikelrumpf"]         { border-left: 15px solid rgba(255, 0, 0, 0.5); }
+Artikel[Status="Lex-zurückgestellt"]   { border-left: 15px dashed rgba(255, 0, 0, 0.3); }
+Artikel[Status="Lex-zur_Abgabe"]       { border-left: 15px solid rgba(255, 128, 0, 0.5); }
+Artikel[Status="Lex-Regioprüfung"]     { border-left: 15px dashed rgba(255, 128, 0, 0.5); }
+Artikel[Status="Red-1"]                { border-left: 15px solid rgba(255, 255, 0, 0.5); }
+Artikel[Status="Red-2"]                { border-left: 15px solid rgba(0, 255, 0, 0.3); }
+Artikel[Status="Red-f"]                { border-left: 15px solid rgba(18, 90, 149, 0.5); }
+Artikel[Status="Red-f-blockiert"]      { border-left: 15px dotted rgba(18, 90, 149, 0.5); }
+Artikel[Status="wird_gestrichen"]      { border-left: 15px solid rgba(0, 0, 0, 0.3); }
 
 /* Hauptblöcke, die als »Kasten« dargestellt werden */
 
