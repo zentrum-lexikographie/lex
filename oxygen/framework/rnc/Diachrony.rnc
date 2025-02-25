@@ -481,6 +481,7 @@ Sprachen = (
 	| 'sumer-akkad'
 	| 'swahili'
 	| 'syr'
+	| 'tahit'
 	| 'taino'        # == aruak?
 	| 'tamil'        # tam: Tamil
 	| 'tarantschi'
