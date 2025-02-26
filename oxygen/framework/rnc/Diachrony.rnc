@@ -199,6 +199,7 @@ Sprachen = (
 	| 'eskim'
 	| 'esperanto'
 	| 'estn'         # est: Estonian
+	| 'fidschi'
 	| 'finn'         # fin: Finnish
 	| 'fläm'
 	| 'flandr'
