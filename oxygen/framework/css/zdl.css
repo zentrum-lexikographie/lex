@@ -38,6 +38,15 @@ Orthografie {
 	margin: 0.5em 0.2em 0.5em 1.5em;
 }
 
+/* untergeordnete Blöcke, die als schmalere »Kästen« dargestellt werden */
+
+Genitiv, Plural {
+	border-top: 1px dotted #999;
+	border-bottom: 1px dotted #999;
+	padding: 0em;
+	margin: 0em 0em 0.1em 0em;
+}
+
 /* Labels für die Hauptblöcke */
 
 Ueberschrift:before           { content: "Überschrift anstelle der Formangabe (!):"; }
@@ -393,3 +402,6 @@ Illustration {
 	max-width: 100%;
 }
 Illustration > Bildunterschrift:before { content: "Bildunterschrift: " }
+
+/* grammatische Wertangaben */
+Wert { display: inline; }
