@@ -543,4 +543,5 @@ Sprachen = (
 	| 'zigeuner'
         | 'zaza'
 	| 'zoolog-lat'
+	| 'zulu'
 )
