@@ -208,6 +208,77 @@ Plural_neu = element Plural {
 	, Diasystematik ?
 }
 
+Praesens_alt = element Praesens {
+	Rechtschreibstatus ?
+	, Flexionstoken
+}
+
+Praeteritum_alt = element Praeteritum {
+	Rechtschreibstatus ?
+	, Flexionstoken
+}
+
+Praesens_neu = element Praesens {
+	Rechtschreibstatus ?
+	, element Wert { Flexionstoken }
+	, Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Praeteritum_neu = element Praeteritum {
+	Rechtschreibstatus ?
+	, element Wert { Flexionstoken }
+	, Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Auxiliar_alt = element Auxiliar {
+	Frequenzbeschraenkung ?
+	, ( 'ist' | 'hat' )
+}
+
+Auxiliar_neu = element Auxiliar {
+	element Wert { 'ist' | 'hat' }
+	, Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Partizip_II_alt = element Partizip_II {
+	Rechtschreibstatus ?
+	, Flexionstoken
+}
+	
+Partizip_II_neu = element Partizip_II {
+	Rechtschreibstatus ?
+	, element Wert { Flexionstoken }
+	, Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Positivvariante_alt = element Positivvariante { Lemmatoken }
+
+Positivvariante_neu = element Positivvariante {
+	element Wert { Lemmatoken }
+	, Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Komparativ_alt = element Komparativ { Flexionstoken }
+
+Komparativ_neu = element Komparativ {
+	element Wert { Lemmatoken }
+	,Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Superlativ_alt = element Superlativ { Flexionstoken }
+
+Superlativ_neu = element Superlativ {
+	element Wert { Lemmatoken }
+	,Frequenzangabe ?
+        , Diasystematik ?
+}
+
 grammatische_Angaben = (
 	element indeklinabel { empty } ?
 	, element Genus {
@@ -227,31 +298,19 @@ grammatische_Angaben = (
 	# ###############
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ
 	, (
-		element Praesens {
-                    Rechtschreibstatus ?
-                    , Flexionstoken
-		} +
-		, element Praeteritum {
-                    Rechtschreibstatus ?
-                    , Flexionstoken
-		} +
+		( Praesens_alt + | Praesens_neu + )
+		, ( Praeteritum_alt + | Praeteritum_neu + )
 	) ?
-	, element Auxiliar {
-		Frequenzbeschraenkung ?
-		, ( 'ist' | 'hat' )
-	} *
-	, element Partizip_II {
-		Rechtschreibstatus ?
-                , Flexionstoken
-	} *
+	, ( Auxiliar_alt | Auxiliar_neu) *
+	, ( Partizip_II_alt | Partizip_II_neu ) *
 	
         # ##################
 	# Adjektive #######
 	# ##################
 	, (
-        	element Positivvariante { Lemmatoken } ?
-		, element Komparativ { Flexionstoken } *
-		, element Superlativ { Flexionstoken } *
+        	( Positivvariante_alt | Positivvariante_neu ) ?
+		, ( Komparativ_alt | Komparativ_neu ) *
+		, ( Superlativ_alt | Superlativ_neu ) *
 		, element Komparationspraeferenz {
 			string 'ohne Steigerung'
 			| string 'Steigerung selten'
