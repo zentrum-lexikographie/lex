@@ -210,7 +210,6 @@ Plural_neu = element Plural {
 
 grammatische_Angaben = (
 	element indeklinabel { empty } ?
-	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ?
 	, element Genus {
             string 'mask.'
             | string 'fem.'
@@ -241,8 +240,6 @@ grammatische_Angaben = (
 		Frequenzbeschraenkung ?
 		, ( 'ist' | 'hat' )
 	} *
-	
-	# TODO: sollte nur einmal auftreten, da sonst zwei Paradigmen vermischt sind?
 	, element Partizip_II {
 		Rechtschreibstatus ?
                 , Flexionstoken
@@ -251,22 +248,22 @@ grammatische_Angaben = (
         # ##################
 	# Adjektive #######
 	# ##################
-	# -e- bzw. -s- sind optional für Komparativ bzw. Superlativ
-	# wegen Fällen wie /mehr/ und /am größten/
-        , element Positivvariante { Lemmatoken } ?
-	, element Komparativ { Flexionstoken } *
-	, element Superlativ { Flexionstoken } *
-	, element Komparationspraeferenz {
-		string 'ohne Steigerung'
-		| string 'Steigerung selten'
-		| string 'ohne Komparativ'
-		| string 'meist im Superlativ'
-		| string 'nur im Superlativ'
-		| string 'Komparativ selten'
-		| string 'Komparativ ungebräuchlich'
-		| string 'Superlativ selten'
-		| string 'Superlativ ungebräuchlich'
-	} *
+	, (
+        	element Positivvariante { Lemmatoken } ?
+		, element Komparativ { Flexionstoken } *
+		, element Superlativ { Flexionstoken } *
+		, element Komparationspraeferenz {
+			string 'ohne Steigerung'
+			| string 'Steigerung selten'
+			| string 'ohne Komparativ'
+			| string 'meist im Superlativ'
+			| string 'nur im Superlativ'
+			| string 'Komparativ selten'
+			| string 'Komparativ ungebräuchlich'
+			| string 'Superlativ selten'
+			| string 'Superlativ ungebräuchlich'
+		} *
+	) ?
 	, element Kasuspraeferenz {
 		Frequenzbeschraenkung ?
 		, (
@@ -283,8 +280,7 @@ grammatische_Angaben = (
 		)
 	} *
 	, element Numeruspraeferenz {
-		attribute class { 'invisible' } ? # Why do we even need this?
-		, (
+		(
 			string 'nur im Plural'
 			| string 'meist im Plural'
 			| string 'Singular selten'
@@ -332,9 +328,8 @@ grammatische_Angaben = (
 			| 'im Übergang zur Präposition'
 		)
 	} *
-	, element Artikelpraeferenz { # TODO: rename: Artikelwortpraeferenz
-		attribute class { 'invisible' } ? # Why do we even need this?
-		, Frequenzbeschraenkung ?
+	, element Artikelpraeferenz {
+		Frequenzbeschraenkung ?
 		, (
 			'ohne Artikel'
 			| 'mit bestimmtem Artikel'
