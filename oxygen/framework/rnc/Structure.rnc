@@ -56,7 +56,6 @@ Lesartangabe = element Lesart {
 	
         # Semantik
 	, Diasystematik
-	, Bedeutungsebene *
 	, semantische_Verweise
 	, Definition +
 	, Kommentar ?
