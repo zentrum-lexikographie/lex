@@ -424,6 +424,7 @@ Orthografieregel = element Orthografieregel {
             | '66'
             | '66 (E)'
             | '79 (2)'
+	    | '80 (4)'
             | '102 (E2)'
         )
 }
