@@ -255,25 +255,19 @@ Partizip_II_neu = element Partizip_II {
         , Diasystematik ?
 }
 
-Positivvariante_alt = element Positivvariante { Lemmatoken }
-
-Positivvariante_neu = element Positivvariante {
+Positivvariante = element Positivvariante {
 	element Wert { Lemmatoken }
 	, Frequenzangabe ?
         , Diasystematik ?
 }
 
-Komparativ_alt = element Komparativ { Flexionstoken }
-
-Komparativ_neu = element Komparativ {
+Komparativ = element Komparativ {
 	element Wert { Lemmatoken }
 	,Frequenzangabe ?
         , Diasystematik ?
 }
 
-Superlativ_alt = element Superlativ { Flexionstoken }
-
-Superlativ_neu = element Superlativ {
+Superlativ = element Superlativ {
 	element Wert { Lemmatoken }
 	,Frequenzangabe ?
         , Diasystematik ?
@@ -308,9 +302,9 @@ grammatische_Angaben = (
 	# Adjektive #######
 	# ##################
 	, (
-        	( Positivvariante_alt | Positivvariante_neu ) ?
-		, ( Komparativ_alt | Komparativ_neu ) *
-		, ( Superlativ_alt | Superlativ_neu ) *
+        	Positivvariante ?
+		, Komparativ *
+		, Superlativ *
 		, element Komparationspraeferenz {
 			string 'ohne Steigerung'
 			| string 'Steigerung selten'
