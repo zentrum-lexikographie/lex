@@ -254,6 +254,7 @@ Metadaten.Artikel = (
 	    | 'RSR-2024-63_2_1'
 	    | 'RSR-2024-63_2_2'
 	    | 'RSR-2024-63_E4'
+	    | 'RSR-2024-Einzelfestlegungen'
 	    | 'Spiel'
 	    | 'Trendwörter'
 	    | 'TV'
