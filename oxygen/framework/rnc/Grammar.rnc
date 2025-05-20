@@ -208,47 +208,27 @@ Plural_neu = element Plural {
 	, Diasystematik ?
 }
 
-Praesens_alt = element Praesens {
-	Rechtschreibstatus ?
-	, Flexionstoken
-}
-
-Praeteritum_alt = element Praeteritum {
-	Rechtschreibstatus ?
-	, Flexionstoken
-}
-
-Praesens_neu = element Praesens {
+Praesens = element Praesens {
 	Rechtschreibstatus ?
 	, element Wert { Flexionstoken }
 	, Frequenzangabe ?
         , Diasystematik ?
 }
 
-Praeteritum_neu = element Praeteritum {
+Praeteritum = element Praeteritum {
 	Rechtschreibstatus ?
 	, element Wert { Flexionstoken }
 	, Frequenzangabe ?
         , Diasystematik ?
 }
 
-Auxiliar_alt = element Auxiliar {
-	Frequenzbeschraenkung ?
-	, ( 'ist' | 'hat' )
-}
-
-Auxiliar_neu = element Auxiliar {
+Auxiliar = element Auxiliar {
 	element Wert { 'ist' | 'hat' }
 	, Frequenzangabe ?
         , Diasystematik ?
 }
 
-Partizip_II_alt = element Partizip_II {
-	Rechtschreibstatus ?
-	, Flexionstoken
-}
-	
-Partizip_II_neu = element Partizip_II {
+Partizip_II = element Partizip_II {
 	Rechtschreibstatus ?
 	, element Wert { Flexionstoken }
 	, Frequenzangabe ?
@@ -291,12 +271,9 @@ grammatische_Angaben = (
 	# Verben #######
 	# ###############
 	, element reflexiv { empty } ? # TODO: Wortklasse/@Typ
-	, (
-		( Praesens_alt + | Praesens_neu + )
-		, ( Praeteritum_alt + | Praeteritum_neu + )
-	) ?
-	, ( Auxiliar_alt | Auxiliar_neu) *
-	, ( Partizip_II_alt | Partizip_II_neu ) *
+	, ( Praesens + , Praeteritum + ) ?
+	, Auxiliar *
+	, Partizip_II *
 	
         # ##################
 	# Adjektive #######
