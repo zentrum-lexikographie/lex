@@ -407,6 +407,7 @@ Orthografieregel = element Orthografieregel {
             | '58 (E5)'
             | '60 (1)'
             | '60 (2.4)'
+            | '60 (3)'
             | '60 (3.2)'
             | '60 (4.1)'
             | '60 (5)'
