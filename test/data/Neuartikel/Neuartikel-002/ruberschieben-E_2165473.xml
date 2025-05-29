@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_2165473" Autor="jgrimm" Typ="Minimalartikel" Zeitstempel="2016-07-26" Erstellungsdatum="2016-07-26" Status="Red-f">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>rüberschieben</Schreibung>
+            <Aussprache><IPA Audiodatei="122/rueberschieben"/></Aussprache><Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>schiebt rüber </Wert></Praesens>
+                <Praeteritum><Wert>schob rüber</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>rübergeschoben</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>rüber-</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>schieben</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Und was man alles hätte <Stichwort>rübergeschoben</Stichwort> gekriegt an Aufträgen, Preisen!</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">konkret, 1989</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das Spiel kann noch so ausverkauft sein, aber ihm <Stichwort>schieben</Stichwort> sie immer noch eine Karte <Stichwort>rüber</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 30.04.2004</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Und wenn ihr daneben steht, <Stichwort>schieben</Stichwort> wir einfach die Kulisse <Stichwort>rüber</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 15.03.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Vielleicht, lautet ihr Wunsch, könne der Bund ja was <Stichwort>rüberschieben</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 09.07.1999</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Drei Stationen weiter schreibt er einen Zettel und <Stichwort>schiebt</Stichwort> sie dem Mädchen <Stichwort>rüber</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 02.03.2002</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Aber eigentlich sollten auch wir der kleinen Fliege freiwillig ein wenig Obst <Stichwort>rüberschieben</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 14.08.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er ist auf eine kleine Bank geklettert, klammert sich am Zaun fest und kann so immerhin die Nase <Stichwort>rüberschieben</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.12.2009 (online)</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie tragen der Runde vor, wie sich Bandbreiten erhöhen und mehr Bits <Stichwort>rüberschieben</Stichwort> lassen.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 19.06.2000, Nr. 25</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Muss er mal wieder einem Zöllner ein paar Scheine <Stichwort>rüberschieben</Stichwort>?</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 24.08.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie kramte ihr Portemonnaie aus der Handtasche, zog einen Tausendmarkschein an die Luft und <Stichwort>schob</Stichwort> ihn zu mir <Stichwort>rüber</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Arjouni, Jakob: Happy birthday, Türke!, Zürich: Diogenes 1987 [1985], S. 11</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

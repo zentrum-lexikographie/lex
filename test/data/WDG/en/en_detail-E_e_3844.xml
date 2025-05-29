@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_e_3844" Autor="" Typ="Basisartikel-D" Zeitstempel="1967-01-01" Erstellungsdatum="1967-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="brosch" Quelle="DWDS" Zeitstempel="2024-09-17">
+            <Schreibung Trennung="en de-tail">en detail</Schreibung>
+            <Aussprache Zeitstempel="2024-09-17" Quelle="DWDS" Autor="brosch"><IPA Audiodatei="089/en_detail">ɑ̃deˈtaj</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Funktionspraeferenz>adverbiell</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2024-09-17" Quelle="DWDS" Autor="brosch" Typ="Simplex"/>
+        <Diachronie Zeitstempel="2024-09-17" Quelle="DWDS" Autor="brosch">
+            <Etymologie><erwaehntes_Zeichen Sprache="frz">en détail</erwaehntes_Zeichen>
+                <Paraphrase>in der Einzelheit</Paraphrase> &lt; <erwaehntes_Zeichen Sprache="frz">en</erwaehntes_Zeichen>
+                <Paraphrase>in</Paraphrase> und <erwaehntes_Zeichen Sprache="frz">détail</erwaehntes_Zeichen>
+                <Paraphrase>Einzelheit, Ausschnitt</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_e_3554">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>en gros</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">im Einzelhandel, einzeln</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>etw. <Stichwort>en detail</Stichwort> verkaufen, einkaufen</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

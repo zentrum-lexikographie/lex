@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_p_2945" Autor="jgrimm" Typ="Basisartikel-D" Tranche="RSR-2024-Einzelfestlegungen" Zeitstempel="2025-05-28" Erstellungsdatum="1974-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-03-03" Quelle="DWDS" Autor="herold">
+            <Schreibung>Fotopapier</Schreibung>
+            <Schreibung Typ="U">Photopapier</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv>
+                    <Wert>-s</Wert>
+                </Genitiv>
+                <Plural>
+                    <Wert>-e</Wert>
+                </Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Quelle="DWDS" Zeitstempel="2016-01-12" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Foto</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Papier</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_p_1929">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">lichtempfindliches Papier für das Fotografieren</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die meisten Hersteller bieten <Stichwort>Fotopapier</Stichwort> für
+                        den Drucker in den gängigen Formaten an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 2001, Nr. 19</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Grundsätzlich lohnt es nicht, ein Bild auf normalem Papier in der
+                        höchst möglichen Auflösung auszugeben; dazu benötigt man spezielles
+                            <Stichwort>Fotopapier</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 2000, Nr. 24</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das sieht nämlich, bannt man es auf
+                        <Stichwort>Fotopapier</Stichwort>, gerne schrecklich kitschig
+                        aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 06.05.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Durch ein Loch im Fenster des komplett verdunkelten Zimmers zeichnet
+                        das Licht direkt auf an der Wand befestigtes
+                            <Stichwort>Fotopapier</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        15.07.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Texte werden jetzt in den Computer geschrieben, auf
+                            <Stichwort>Fotopapier</Stichwort> belichtet, ausgeschnitten und auf das
+                        Layout geklebt.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 02.09.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wissenschaftliche Tests haben ergeben, dass es das
+                            <Stichwort>Fotopapier</Stichwort> der Abzüge vor 1950 nicht gegeben
+                        habe.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 17.08.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Stellt man im Treiber statt Folien <Stichwort>Fotopapier</Stichwort>
+                        ein, erzielt man etwas bessere Resultate.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 2000, Nr. 18</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Andersherum führt eine zu niedrige Einstellung auf
+                            <Stichwort>Fotopapier</Stichwort> zu unansehnlichen
+                        Resultaten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 2000, Nr. 24</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bei näherem Hinsehen entpuppen sich die schillernden Tropfen als
+                        gerolltes <Stichwort>Fotopapier</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.02.2007 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Hochfrequenzfeld veranlaßt das Objekt, eine Art von
+                        Biolumineszenz auf das <Stichwort>Fotopapier</Stichwort>
+                        auszustrahlen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Wölfl, Norbert: Die wiedergefundene
+                        Zärtlichkeit, Genf u. a.: Ariston 1995 [1983], S. 129</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="jgrimm" xml:id="E_s_12994_13" Autor="wgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2025-01-24" Erstellungsdatum="1976-01-01" Status="Red-f-zurückgewiesen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Sip-pen-haft">Sippenhaft</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="022/die_Sippenhaft">ˈzɪpn̩ˌhaft</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Sippe</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Haft</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilfaerbung Frequenz="meist">abwertend</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Sippenhaftung</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">(bis hin zu <Verweis Typ="vgl">
+                    <Ziellemma>Gewahrsam</Ziellemma>
+                    <Ziellesart>1 a</Ziellesart>
+                </Verweis> bzw. <Verweis Typ="vgl">
+                    <Ziellemma>Haft</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis> reichende) stellvertretende oder hinzutretende Inanspruchnahme von
+                Familienmitgliedern für die Straftat bzw. (allgemeiner) das Verhalten eines
+                Angehörigen</Definition>
+            <Definition Typ="Enzyklopädie"><?oxy_comment_start author="wgrimm" timestamp="20241125T124438+0100" comment="Aus &quot;Sippenhaftung&quot; übernommen." flag="done"?>Vor<?oxy_comment_end?>
+                allem in totalitären Staaten finden sich auch heute noch Formen der
+                rechtsstaatswidrigen Sippenhaft zur Erzwingung erwünschten und Bestrafung
+                abweichenden Verhaltens. In Deutschland, in der sie keine Tradition besaß, wurde sie
+                zuletzt unter der nationalsozialistischen Herrschaft praktiziert.</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Akkusativobjekt_von">
+                    <Belegtext><Stichwort>Sippenhaft</Stichwort> verhängen, anordnen, praktizieren,
+                        einführen, abschaffen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>jmdn. in <Stichwort>Sippenhaft</Stichwort> nehmen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Genitivattribut">
+                    <Belegtext>das Prinzip der <Stichwort>Sippenhaft</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ausweisungen aus der französisch besetzten Zone ins nicht besetzte
+                        Deutschland sind die hauptsächliche Strafe, die die Franzosen aussprechen.
+                        Sie trifft all jene, die sich widersetzen oder auch nur missliebig sind und
+                        sich nicht unterwerfen. <Streichung>Allein 1923 müssen 1.543 Mainzer ihre
+                            Heimat verlassen – darunter 48 Zoll- und Finanzbeamte, Forstleute,
+                            städtische Beamte, Eisenbahner und Postler, Gewerkschafter und
+                            Redakteure, aber auch Lehrer, denen unterstellt wird, den
+                            Französischunterricht zu verschleppen oder Schüler
+                            aufzuhetzen.</Streichung> Die Ausgewiesenen müssen umgehend Stadt und
+                        Besatzungsgebiet verlassen und im Stil einer
+                            <Stichwort>Sippenhaft</Stichwort> müssen die Familien binnen weniger
+                        Tage folgen.</Belegtext>
+                    <Fundstelle Fundort="dwds:maz_regional:2023/01/MAZ_313882050001673391600">
+                        Allgemeine Zeitung, 11.01.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20241125T144455+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Raif B<Streichung>adawi</Streichung> wurde »wegen
+                        Beleidigung des Islam« zu zehn Jahren Haft und 1.000 Peitschenhieben
+                        verurteilt. Sein Anwalt wurde wegen der Verteidigung
+                            B<Streichung>adawi</Streichung>s ebenfalls inhaftiert und zu 15 Jahren
+                        Haft und Geldstrafe verurteilt, schließlich wird im August 2018 auch seine
+                        Schwester Samar ins Gefängnis geworfen:
+                        <Stichwort>Sippenhaft</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2019/06/FR_fr_FRMT_600149383517C4193000-DEUTSCHLANDAUSGABE"> Frankfurter Rundschau, 15.06.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20241125T144638+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Stauffenberg und einige seiner Mitstreiter werden
+                        noch in der gleichen Nacht erschossen. Die Rache des Regimes ist
+                        fürchterlich. Hunderte Verschwörer werden verhaftet und in Schauprozessen
+                        abgeurteilt. Ihre Familien kommen ins KZ in
+                            <Stichwort>Sippenhaft</Stichwort>. Hinrichtungen, Selbstmorde und
+                        Folterungen stehen an der Tagesordnung.</Belegtext>
+                    <Fundstelle Fundort="dwds:apa:SN_regional/xml/2019/07/sn_20190722013041279670008">Salzburger Nachrichten, 22.07.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <?oxy_comment_start author="dsanders" timestamp="20201223T231013+0100" comment="gutes Bsp." flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Oft werden <Autorenzusatz>in einigen Gegenden
+                            Indiens</Autorenzusatz> Frauen in <Stichwort>Sippenhaft</Stichwort>
+                        genommen und müssen für vermeintliche Verfehlungen von Verwandten
+                        büßen.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Badische Zeitung, 02.09.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20241125T144501+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Auf einer Demonstration in Berlin verbrannte er
+                        die türkische Flagge und war dabei vom türkischen Fernsehsender TRT 1
+                        gefilmt worden, Fotos wurden in der Hürriyet und in Focus gedruckt.
+                            <Streichung>Die Behörden gehen davon aus, dass ihm in der Türkei eine
+                            »menschenrechtswidrige Behandlung« drohe.</Streichung> Einen Onkel, der
+                        in Mardin lebt, hat das Militär wegen der Tat des Neffen schon in
+                            <Stichwort>Sippenhaft</Stichwort> genommen und misshandelt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1999/zeit1999_47_21_10291:21">Die Zeit,
+                        18.11.1999</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20241125T144506+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Er war in sowjetischer Kriegsgefangenschaft, trat
+                        im Aug. <Paraphrase>August</Paraphrase> 1944 dem Bund deutscher Offiziere
+                        bei und schloß sich dem <Autorenzusatz>sowjetischen</Autorenzusatz> NKWD
+                            <Paraphrase>Volkskommissariat für innere Angelegenheiten</Paraphrase>
+                        an. Seine Ehefrau und sein Sohn wurden in Deutschland durch die Gestapo in
+                            <Stichwort>Sippenhaft</Stichwort> genommen. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1997/biogrhandbuch_p_1997:14937">Baumgartner, Gabriele / Hebig, Dieter (Hg.): Biographisches Handbuch der
+                        SBZ/DDR. Berlin: Directmedia 2000 [1997]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20241125T174609+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Um Regimekritiker aufzuspüren, bedienen sich die
+                        Behörden <Autorenzusatz>in Ghana</Autorenzusatz> sogar der
+                            <Stichwort>Sippenhaft</Stichwort>. Frauen, Kinder oder Eltern von
+                        Gesuchten werden so lange eingesperrt, bis der Angehörige freiwillig aus dem
+                        Versteck kommt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1986/sp19860901_188:108"> Der Spiegel,
+                        01.09.1986 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20241125T174602+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Senilität kann nicht alles entschuldigen, vor
+                        allem nicht, daß Mao sich kein Gewissen gemacht hat, gerade auch seine
+                        Getreuesten – allein mit Ausnahme von Tschu En Lai – dem totschlägerischen
+                        Pöbel zu überantworten. <Stichwort>Sippenhaft</Stichwort> führte in
+                        ungezählten Fällen zur Massakrierung auch der Angehörigen der Verfolgten.
+                        Schwiegertochter zu sein, das konnte genügen, um gefoltert und hingerichtet
+                        zu werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1946-1994/1986/05/ZEHI_0ACDADAA5C64E61B095CE1B511844941">
+                        Die Zeit, 09.05.1986 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20241125T174556+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Daß allen »Rechtsopportunisten« die Pässe entzogen
+                        worden sind und sie nicht einmal in »befreundete sozialistische Staaten«
+                        reisen dürfen, gehört fast schon zu den »kleineren« Schikanen. Die
+                        Ausdehnung dieser Maßnahmen auch auf die Familienmitglieder allerdings kann
+                        nur noch unter »<Stichwort>Sippenhaft</Stichwort>« eingeordnet
+                        werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1946-1994/1973/11/ZEHI_E0C8F7E30EA99C722FA76AD6773383C0">
+                        Die Zeit, 30.11.1973 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20241125T174550+0100" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Alle Bereitschaftspolizisten werden darüber
+                        aufgeklärt, daß bei Desertion über die Landesgrenze die volljährigen
+                        Familienangehörigen des Deserteurs strafrechtlich verfolgt
+                        werden<?oxy_comment_start author="dsanders" timestamp="20241125T145527+0100" comment="Punkt ergänzt." flag="done"?>.<?oxy_comment_end?>
+                        Diese <Stichwort>Sippenhaft</Stichwort> ist im Art. 58 des sowjetischen
+                        Militärstrafrechts festgelegt. </Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_print:src/1949/10/d_44438412">Der Spiegel,
+                        27.10.1949</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="*">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                    <Stilfaerbung>abwertend</Stilfaerbung>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Assoziation">
+                        <Ziellemma>Sippenhaftung</Ziellemma>
+                        <Ziellesart>*</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">(als unrechtmäßig empfundene) Beschuldigung,
+                    Inanspruchnahme, Bestrafung einer Gesamtheit, einer größeren Gruppe
+                    o. Ä.<?oxy_comment_start author="jgrimm" timestamp="20241213T130207+0100" comment="1) letzten Teil der Paraphrase einklammern oder erweitern? Der Vorwurf kann sich auch auf gesamte Kollektive, Teilkollektive innerhalb der beschuldigten Gruppe beziehen (s. Beispielbelege unten).
+
+2) Erweiterungsvorschlag: &quot;(undifferenzierte, pauschalisierende, ...) Beschuldigung, ...
+
+WebXL, 2021-06-17, abgerufen am 27.11.2024
+Die Demonstrationen sind nicht gegen Lärmschutz!
+Die Demonstrationen richten sich gegen Diskriminierung und Sippenhaft von Motorradfahrern, die sich gesetzeskonform verhalten und deren Motorräder die Zulassungsbestimmungen einhalten!
+
+Zeitungskorpus, Süddeutsche Zeitung, 13.05.2006
+Die Unternehmen kommentierten die Kursabschläge zurückhaltend.
+Bei BMW hieß es, die gesamte Autoindustrie werde durch die Dollarschwäche nach unten gezogen, das Unternehmen werde „in Sippenhaft“ genommen."?>
+                    für die Verfehlung eines Mitgliedes<?oxy_comment_end?></Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                        <Belegtext>geistige, moralische
+                            <Stichwort>Sippenhaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Akkusativobjekt_von">
+                        <Belegtext><Stichwort>Sippenhaft</Stichwort> verhängen, einführen,
+                            abschaffen</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                        <Belegtext>jmdn., etw. in <Stichwort>Sippenhaft</Stichwort>
+                            nehmen</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                        <Belegtext>in <Stichwort>Sippenhaft</Stichwort> geraten</Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <?oxy_comment_start author="wgrimm" timestamp="20241125T144904+0100" comment="neu" flag="done"?>
+                        <Belegtext><?oxy_comment_end?>»Es ist wichtig, diese <Autorenzusatz>die
+                                russische</Autorenzusatz> Musik auch weiterhin zu spielen«, sagt er.
+                            »Zum einen, weil diese Komponisten keineswegs regimetreue Sowjets waren,
+                            zum anderen, weil wir es vermeiden sollten, die russische Kultur,
+                            insbesondere die Musik, unter <Stichwort>Sippenhaft</Stichwort> für die
+                            verbrecherische Politik der jetzigen Regierung zu stellen.« Ein gutes
+                            Beispiel ist Dmitri Schostakowitsch.</Belegtext>
+                        <Fundstelle Fundort="dwds:baz_regional:2022/08/BAZ_5925986"> Basler Zeitung,
+                            24.08.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Wenn einer Schmarrn <Paraphrase>Unsinn</Paraphrase> erzählt, kann
+                            man nicht die Partei in <Stichwort>Sippenhaft</Stichwort> dafür nehmen. </Belegtext>
+                        <Fundstelle Fundort="dwds:mume_regional:2021/08/MUME_omp0000007307627">
+                            Münchner Merkur, 04.08.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Die gesamte ausgeh- und reisewillige Bevölkerung und eine ganze
+                            Branche mit drei Millionen Beschäftigten in
+                                <Stichwort>Sippenhaft</Stichwort> zu nehmen, weil einige
+                            Unvernünftige sich nicht an die Spielregeln halten, ist absolut
+                            unverhältnismäßig.</Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 29.10.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Innenminister nehmen den ganzen Stadtteil <Streichung>dann
+                                gern</Streichung> in extremistische
+                                <Stichwort>Sippenhaft</Stichwort>, Staatsanwaltschaften ermitteln im
+                            Quartier ohne konkreten Straftatverdacht, schrecken auch nicht vor
+                            flächendeckender Überwachung zurück.</Belegtext>
+                        <Fundstelle Fundort="dwds"> Leipziger Volkszeitung, 08.09.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <?oxy_comment_start author="kduden" timestamp="20201223T231129+0100" comment="gutes Bsp." flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Der Trainer hatte alle Spieler in
+                                <Stichwort>Sippenhaft</Stichwort> genommen und ihnen nach der Pleite
+                            beim Hamburger SV (1:3) vorgeworfen, sich gegenseitig im Stich gelassen
+                            zu haben.</Belegtext>
+                        <Fundstelle Fundort="dwds"> Welt am Sonntag, 02.12.2012 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20241213T130906+0100" comment="&lt;invisible&gt;: 3x sic"?>
+                    <Beleg class="invisible"><?oxy_comment_end?>
+                        <?oxy_comment_start author="jgrimm" timestamp="20241125T174631+0100" comment="neu" flag="done"?>
+                        <Belegtext><?oxy_comment_end?><Streichung>Aber</Streichung> während für die
+                            anderen Völker 1943/44 die Stunde der Befreiung schlug, begann für die
+                            Krimtartaren <Autorenzusatz>sic!, Krimtataren</Autorenzusatz> im Mai
+                            1945 <Autorenzusatz>sic!, 1944</Autorenzusatz> ein neues Unglück. Mit
+                            der Begründung, das »die« Krimtartaren
+                                <Autorenzusatz>sic!</Autorenzusatz> mit der Besatzungsmacht
+                            kollaboriert hätten, wurde das ganze Volk in
+                                <Stichwort>Sippenhaft</Stichwort> genommen und nach Mittelasien
+                            verbannt.</Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1987/taz_19870727_4_277.xml.cln">die
+                            tageszeitung, 27.07.1987 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26">
+                <Beleg>
+                    <Belegtext>Selbst vor der <Stichwort>Sippenhaft</Stichwort> schreckte das neue
+                        Regime nicht zurück.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Der Spiegel,
+                        21.12.1981</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Niemand will <Stichwort>Sippenhaft</Stichwort> einführen, alle, die
+                        ich fragte, fanden »eigentlich« nichts dabei.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 10.10.1980, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er wehrt sich dagegen, die Hunde in
+                            »<Stichwort>Sippenhaft</Stichwort>« zu nehmen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 28.04.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Was die <Stichwort>Sippenhaft</Stichwort> betrifft, so sind schwere
+                        Einbrüche in die individuelle Haftung auch heute zu verzeichnen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.:
+                        Einhunderteinundachtzigster Tag. Donnerstag, 18. Juli 1946. In: Der
+                        Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S.
+                        14059</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beide bedienten sich der
+                        <Stichwort>Sippenhaft</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Müller,Herta: Der König verneigt
+                        sich und tötet, München: Carl Hanser Verlag 2003, S. 22</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

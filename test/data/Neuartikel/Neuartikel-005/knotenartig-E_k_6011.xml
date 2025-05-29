@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_k_6011_13" Autor="wgrimm" Typ="Basisartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2019-02-26" Erstellungsdatum="1969-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <?oxy_comment_start author="dsanders" timestamp="20190226T083851+0000" comment="http://odo.dwds.de/mantis/view.php?id=0026510"?>
+            <Schreibung>knotenartig</Schreibung><?oxy_comment_end?>
+            <Aussprache><IPA Audiodatei="090/knotenartig"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-09-30" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Knoten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-artig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_k_3696">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine <Stichwort>knotenartige</Stichwort> Verdickung</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Der zweite deutsche Name der Zwiebelpflanze, nämlich Frühlingsknotenblume, bezieht sich auf den <Stichwort>knotenartigen</Stichwort> unterständigen Fruchtknoten.</Belegtext><Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 20.03.2004</Fundstelle></Beleg><Beleg><Belegtext>Rohe Eichenblöcke, die sich bis vor kurzem noch zu einem mächtigen Baum auftürmten, formt er mit Axt und Feilen zu <Stichwort>knotenartigen</Stichwort> Skulpturen.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.10.1995</Fundstelle></Beleg><Beleg><Belegtext>Es handelt sich um <Stichwort>knotenartig</Stichwort> vergrößerte Gefäßgeflechte im letzten Abschnitt des Enddarms, zwischen Mastdarm und After.</Belegtext><Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 15.01.2002</Fundstelle></Beleg><Beleg><Belegtext>Die Silikonbrust soll jedoch immer wieder in die Untersuchungen mit einbezogen werden, um den Unterschied zwischen normalen Verhärtungen und <Stichwort>knotenartigen</Stichwort> Verdickungen spüren zu können.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 12.09.1997, Nr. 38</Fundstelle></Beleg><Beleg><Belegtext>Verwachsungen und <Stichwort>knotenartige</Stichwort> Geschwulste an Bäumen zeigen dem Kundigen die negative Strahlung des Standorts.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.10.2001</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

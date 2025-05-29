@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_b_60137_34588" Autor="wgrimm" Typ="Basisartikel" Zeitstempel="2015-01-22" Erstellungsdatum="1967-01-01" Status="Red-ex">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Be-rufs-aus-übung">Berufsausübung</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+                </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Beruf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Ausübung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> In den Nachmittagsshows können Moderatoren junge Leute unausgesetzt der Lächerlichkeit preisgeben und diese Art der <Stichwort>Berufsausübung</Stichwort> gilt nicht als fragwürdig oder verächtlich, sondern wird hofiert, solange die Quote stimmt.</Belegtext>
+                    <Fundstelle>Die Zeit, 04.06.2009</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die deutschen Rechtsanwälte werden sich bald aller Voraussicht nach für ihre <Stichwort>Berufsausübung</Stichwort> auch auf gesetzlicher Grundlage der Gesellschaft mit beschränkter Haftung (GmbH) bedienen können.</Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 07.10.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nicht weniger problematisch ist die Frage, ob es mit der verfassungsmäßig gewährleisteten Freiheit der Berufswahl und der <Stichwort>Berufsausübung</Stichwort> vereinbar ist, wenn in der Handwerksordnung der große Befähigungsnachweis gefordert wird.</Belegtext>
+                    <Fundstelle>Giersch, Herbert, Allgemeine Wirtschaftspolitik, Wiesbaden: Gabler 1960, S. 333</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Frau müssen die gleichen Möglichkeiten für Erziehung und Ausbildung, für Berufswahl, <Stichwort>Berufsausübung</Stichwort> und Entlohnung geboten werden wie dem Mann.</Belegtext>
+                    <Fundstelle>Archiv der Gegenwart, 2001 [1959]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber für solchen Posten kann man sich nicht ausbilden, sondern man wächst dazu in der <Stichwort>Berufsausübung</Stichwort> durch Fähigkeiten und Bewährung heran.</Belegtext>
+                    <Fundstelle>Vossische Zeitung (Sonntags-Ausgabe), 02.03.1930</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Abgesehen davon werde die Freiheit der <Stichwort>Berufsausübung</Stichwort>, ein Grundrecht nach Artikel 12 der Verfassung, unzulässig eingeschränkt.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 17.07.1970, Nr. 29</Fundstelle></Beleg><Beleg><Belegtext>Denn das bayerische Gesetz greift in das Eigentumsrecht und das Grundrecht auf freie <Stichwort>Berufsausübung</Stichwort> niedergelassener Ärzte ein.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 19.07.1996, Nr. 30</Fundstelle></Beleg><Beleg><Belegtext>Ich habe nicht nur nicht die <Stichwort>Berufsausübung</Stichwort> davon abhängig gemacht, sondern nicht einmal die Mitgliedsbeiträge zwangsweise einheben lassen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Einhunderteinundfünfzigster Tag. Montag, 10. Juni 1946. In: Der Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S. 23633</Fundstelle></Beleg><Beleg><Belegtext>Davon unberührt ist die <Stichwort>Berufsausübung</Stichwort> durch Gesetz auf Ärzte und Heilpraktiker beschränkt.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Wetzel, Helmut u. Linster, Hans Wolfgang: Psychotherapie. In: Asanger, Roland u. Wenninger, Gerd (Hgg.) Handwörterbuch Psychologie, Berlin: Directmedia Publ. 2000 [1980], S. 24722</Fundstelle></Beleg><Beleg><Belegtext>Denn damit würde ich der für die <Stichwort>Berufsausübung</Stichwort> notwendigen und gesetzlich gewährleisteten Prärogative der Verteidigung etwas vergeben.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Friedländer, Hugo: Der Beleidigungsprozeß des Berliner Stadtkommandanten, Generalleutnant z.D. Graf Kuno von Moltke gegen den Herausgeber der »Zukunft« Maximilian Harden. In: ders., Interessante Kriminal-Prozesse, Berlin: Directmedia Publ. 2001 [1920], S. 4180</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

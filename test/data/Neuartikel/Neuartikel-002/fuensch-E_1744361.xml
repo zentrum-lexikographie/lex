@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="" xml:id="D99_054655" Autor="kduden" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2024-08-26" Erstellungsdatum="1999-01-01" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="wgrimm" timestamp="20240826T123931+0200" comment="keine Duden-Inhalte mehr"?>
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-12-02" Quelle="DWDS" Autor="herold"><?oxy_comment_end?>
+            <Schreibung>fünsch</Schreibung>
+            <Aussprache Zeitstempel="2024-08-26" Quelle="DWDS" Autor="brosch"><IPA Audiodatei="139/fuensch">fʏnʃ</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+                <?oxy_comment_start author="dsanders" timestamp="20240826T120421+0200" comment="Steigerung nicht belegt. " id="kkg_qqd_ncc"?>
+                <?oxy_comment_start author="wgrimm" timestamp="20240826T124135+0200" parentID="kkg_qqd_ncc" comment="ergänzt" mid="2"?>
+            </Grammatik><?oxy_comment_end?><?oxy_comment_end mid="2"?>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie Zeitstempel="2024-08-26" Quelle="DWDS" Autor="brosch">
+            <?oxy_comment_start author="wgrimm" timestamp="20240826T124713+0200" comment="Kann die von Wiktionary genannten Wörter nicht in den Handbüchern finden"?>
+            <Etymologie><?oxy_comment_end?>Herkunft unsicher</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>D-Nord</Sprachareal>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Stilebene Frequenz="häufig">mundartlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>empört</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>zornig</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="kduden" timestamp="20240826T115323+0200" comment="geändert von: aufgeregt, zornig"?>auf<?oxy_comment_end?>
+                etw. wütend, aufgebracht reagierend</Definition>
+            <Definition Typ="Basis">verärgert</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Sei kickt <Stichwort>fünsch</Stichwort> tau mi röwer un beklagt
+                        sick, dat ick kein Schneifru bugt hew. Worüm argern? </Belegtext>
+                    <Fundstelle Fundort="dwds:prig_regional:2021/02/PRIG_23-130872493"> Der
+                        Prignitzer, 16.02.2021 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Ein Dutzend Lämmer wurde gerissen. Amtlich ist mittlerweile
+                        bestätigt, dass ein Wolf sich in der Gegend regelmäßig Tiere holt.
+                        Schafzüchter auf der nordfriesischen Halbinsel sind aufgebracht, entrüstet
+                        und – wie es auf norddeutsch heißt – <Stichwort>fünsch</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:kn_regional:2018/08/KN_doc71fy7epdb2pm7n365su"> Kieler
+                        Nachrichten, 14.08.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In den Schränken hat alles seinen Platz, und wenn mal was woanders
+                        steht als es hingehört, werd<Autorenzusatz>'</Autorenzusatz> ich
+                            <Stichwort>fünsch</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:49865/hrxMQ9LCDDDraEZr">
+                        <Autor>Asuka</Autor>
+                        <Titel>Berufskrankheit</Titel>
+                        <Stelle/>
+                        <Datum>09.12.2015</Datum>
+                        <URL>https://web.archive.org/web/20240826094135/https://nadelspielereien.wordpress.com/2015/12/09/berufskrankheit/</URL>
+                        <Aufrufdatum>15.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Stichwort>Fünsch</Stichwort> bün ik up dei drei griesen Katten von dei
+                        Nahwers, dei mi öwerall in dei Beete schieten, dörch den`n Gorden ströpen un
+                        mi dei Vögel an mien Fauderflach von dat schöne Vagelhuus verdrieben. </Belegtext>
+                    <Fundstelle Fundort="dwds:svz_regional:2011/02/SVZ_23-37382140BU"> Schweriner
+                        Volkszeitung, 05.02.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ik harr mien Mudder <Streichung>ok</Streichung> son`n Zauberpott
+                            <Autorenzusatz>`n Schnellkaakpott</Autorenzusatz> tau Wiehnachten
+                        schenkt. Öwer Grotmudder K<Streichung>rohn</Streichung> wür ganz
+                            <Stichwort>fünsch</Stichwort> un meinte, son`n Düwelskram as dei
+                        Hexenpott kümmt nich up den`n Hierd. Vörher nömlich wier Mieken
+                            M<Streichung>öller</Streichung> all son`n »Ding« üm dei Uhren
+                        flagen <Streichung>, ahn dat ehr wat passiert wier</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:svz_regional:2010/12/SVZ_23-36526216BU"> Schweriner
+                        Volkszeitung, 11.12.2010 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-20"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

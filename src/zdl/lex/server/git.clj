@@ -1,289 +1,313 @@
 (ns zdl.lex.server.git
   (:require
+   [babashka.fs :as fs]
    [clojure.java.io :as io]
+   [clojure.java.shell :as sh :refer [sh]]
    [clojure.string :as str]
-   [clojure.tools.logging :as log]
-   [metrics.timers :as timers]
-   [slingshot.slingshot :refer [throw+ try+]]
+   [ring.util.response :as resp]
    [zdl.lex.article :as article]
-   [zdl.lex.article.validate :as article.validate]
-   [zdl.lex.fs :as fs]
-   [zdl.lex.git :as git]
-   [zdl.lex.server.solr.client :as solr.client]
-   [zdl.lex.server.solr.fields :as solr.fields]
-   [integrant.core :as ig])
+   [zdl.lex.article.qa :as article.qa]
+   [zdl.lex.env :as env :refer [git-dir]]
+   [zdl.lex.lucene :as lucene]
+   [zdl.lex.server.index :as index]
+   [zdl.lex.server.lock :as lock :refer [with-lock]]
+   [taoensso.telemere :as tm])
   (:import
-   (java.io File)
-   (java.util Date)
+   (java.util UUID)
    (java.util.concurrent TimeUnit)
    (java.util.concurrent.locks ReentrantLock)))
 
-(defn article?
-  [^File f]
-  (let [name (.getName f)
-        path (.getAbsolutePath f)]
-    (and
-     (.endsWith name ".xml")
-     (not (.startsWith name "."))
-     (not (#{"__contents__.xml" "indexedvalues.xml"} name))
-     (not (.contains path ".git")))))
+(defn article-file?
+  [f]
+  (let [name (fs/file-name f)]
+    (and (.endsWith name ".xml")
+         (not (.startsWith name "."))
+         (not (some #{".git"} (->> f fs/absolutize fs/components (map str)))))))
+
+(defn file->id
+  [f]
+  (str (fs/relativize git-dir f)))
+
+(defn id->file
+  [id]
+  (fs/file git-dir id))
 
 (defn file->desc
-  [dir f]
-  {:id   (str (fs/relativize dir f))
-   :file (fs/file f)})
+  [file]
+  {:file file
+   :id   (file->id file)})
 
-(defn files-xf
-  [dir]
-  (comp
-   (map fs/file)
-   (filter article?)
-   (map (partial file->desc dir))))
+(defn article-descs
+  []
+  (->> (file-seq (fs/file git-dir))
+       (filter article-file?)
+       (map file->desc)))
 
-(defn removal-xf
-  [dir]
-  (comp
-   (files-xf dir)
-   (remove (comp fs/file? :file))
-   (map :id)))
-
-(defn remove!
-  [dir vs]
-  (solr.client/remove! (sequence (removal-xf dir) vs)))
-
-(defn desc->article
-  [{:keys [file] :as desc}]
-  (try
-    (let [xml     (article/read-xml file)
-          article (article/extract-article xml)
-          errors  (article.validate/check-for-errors xml file)]
-      (assoc (merge desc article errors) :xml xml))
-    (catch Throwable t
-      (log/warnf t "Error parsing %s" file)
-      desc)))
-
-(defn articles-xf
-  [dir]
-  (comp
-   (files-xf dir)
-   (filter (comp fs/file? :file))
-   (map desc->article)))
-
-(defn articles
-  [dir]
-  (let [dir (fs/file dir)]
-    (sequence (articles-xf dir) (file-seq dir))))
-
-
-(defn index-xf
-  [dir]
-  (comp
-   (articles-xf dir)
-   (map solr.fields/article->doc)))
-
-(defn update!
-  [dir vs]
-  (solr.client/add! (sequence (index-xf dir) vs)))
-
-(defn refresh!
-  [dir]
-  (let [threshold (Date.)]
-    (update! dir (file-seq (io/file dir)))
-    (solr.client/purge! "article" threshold)))
+(defn sync-index!
+  []
+  (let [threshold (System/currentTimeMillis)]
+    (index/upsert-articles! (article-descs))
+    (index/purge! "article" threshold)))
 
 (def lock
   (ReentrantLock.))
 
-(def default-timeout
+(def lock-timeout
   30000)
 
-(defn lock!
-  ([]
-   (lock! default-timeout))
-  ([timeout]
-   (.tryLock lock timeout TimeUnit/MILLISECONDS)))
+(defmacro with-git
+  [& forms]
+  `(do
+     (when-not (.tryLock lock lock-timeout TimeUnit/MILLISECONDS)
+       (throw (ex-info "Timeout" {:type     ::lock-timeout
+                                  ::timeout lock-timeout})))
+     (try ~@forms (finally (.unlock lock)))))
 
-(defn unlock!
+(defn git!
+  [& args]
+  (sh/with-sh-dir git-dir
+    (let [result (apply sh (concat ["git"] (map str args)))]
+      (if (= 0 (:exit result))
+        (do (tm/event! ::git {:level :debug
+                              :msg         (format "git @ %s : %s" git-dir args)
+                              ::git-dir    git-dir
+                              ::git-args   args
+                              ::git-result result})
+            result)
+        (do (tm/event! ::git {:level       :error
+                              :msg         (format "git @ %s : %s" git-dir args)
+                              ::git-dir    git-dir
+                              ::git-args   args
+                              ::git-result result})
+            (throw (ex-info (str args) result)))))))
+
+(defn init!
   []
-  (.unlock lock))
-
-(defn with-lock
-  ([f]
-   (with-lock default-timeout f))
-  ([timeout f]
-   (when-not (lock! timeout)
-     (throw+ {:type ::lock-timeout ::timeout timeout ::f f}))
-   (try (f) (finally (unlock!)))))
+  (with-git
+    (let [f    (fs/file git-dir)
+          path (fs/path git-dir)]
+      (tm/log! :info (format "Init %s#%s -> '%s' "
+                            (or env/git-origin "git:local")
+                            env/git-branch path))
+      (when-not (fs/directory? f ".git")
+        (if env/git-origin
+          (git! "clone" "--quiet" env/git-origin ".")
+          (do (fs/create-dirs f) (git! "init" "--quiet"))))
+      (let [head-ref (->>
+                      (git! "symbolic-ref" "--short" "-q" "HEAD")
+                      :out str/trim)]
+        (when-not (= env/git-branch head-ref)
+          (if env/git-origin
+            (git! "checkout" "--track" (str "origin/" env/git-branch))
+            (git! "checkout" "-b" env/git-branch))))
+      git-dir)))
 
 (def gc-timer
-  (timers/timer ["git" "local" "gc-timer"]))
+  (env/timer "git.gc"))
 
 (defn gc!
-  [dir]
-  (->>
-   (git/sh! dir "gc" "--aggressive")
-   (timers/time! gc-timer)))
+  []
+  (with-open [_ (env/timed! gc-timer)]
+    (git! "gc" "--aggressive")))
 
 (def fetch-timer
-  (timers/timer ["git" "remote" "fetch-timer"]))
+  (env/timer "git.fetch"))
 
 (defn fetch!
-  [{:keys [origin dir]}]
-  (when origin
-    (->>
-     (git/sh! dir "fetch" "--quiet" "origin" "--tags")
-     (timers/time! fetch-timer))))
+  []
+  (when env/git-origin
+    (with-open [_ (env/timed! fetch-timer)]
+     (git! "fetch" "--quiet" "origin" "--tags"))))
 
 (def push-timer
-  (timers/timer ["git" "remote" "push-timer"]))
+  (env/timer "git.push"))
 
 (defn push!
-  [{:keys [origin branch dir]}]
-  (when origin
-    (->>
-     (git/sh! dir "push" "--quiet" "origin" branch)
-     (timers/time! push-timer))))
-
-(def status-timer
-  (timers/timer ["git" "local" "status-timer"]))
-
-(defn- status
-  [dir]
-  (->>
-   (git/status dir)
-   (timers/time! status-timer)))
+  []
+  (when env/git-origin
+    (with-open [_ (env/timed! push-timer)]
+     (git! "push" "--quiet" "origin" env/git-branch))))
 
 (defn add!
-  [dir f]
-  (with-lock (fn [] (git/sh! dir "add" (fs/path f)))))
+  [f]
+  (with-git (git! "add" (fs/path f))))
+
+(defn status->paths
+  [status-line]
+  (->> (str/split (subs status-line 3) #"->")
+       (map #(str/replace % #"\"" ""))
+       (map not-empty) (remove nil?)))
+
+(def status-timer
+  (env/timer "git.status"))
+
+(defn changed-ids
+  []
+  (with-open [_ (env/timed! status-timer)]
+    (->> (git! "status" "-s" "--porcelain") :out str/split-lines
+         (into [] (comp (map not-empty) (remove nil?) (mapcat status->paths))))))
+
+(defn dirty?
+  []
+  (seq (changed-ids)))
+
+(defn assert-clean
+  []
+  (when (dirty?) (throw (IllegalStateException. "Git dir is dirty."))))
+
+(defn ->index!
+  [ids]
+  (let [files    (map id->file ids)
+        existing (filter fs/regular-file? files)
+        removed  (remove fs/regular-file? files)]
+    (index/upsert-articles! (map file->desc existing))
+    (index/remove! (map file->id removed))))
 
 (def commit-timer
-  (timers/timer ["git" "local" "commit-timer"]))
-
-(defn changes-xf
-  [dir]
-  (comp
-   (mapcat :paths)
-   (map #(fs/file dir %))
-   (mapcat #(concat (update! dir [%]) (remove! dir [%])))))
-
-(defn publish-changes!
-  [dir changes]
-  (into [] (changes-xf dir) changes))
+  (env/timer "git.commit"))
 
 (defn commit!
-  [{:keys [dir] :as repo}]
-  (with-lock
-    (fn []
-      (when-let [changes (not-empty (status dir))]
-        (->>
-         (git/sh! dir "commit" "-a" "-m" "zdl-lex-server")
-         (timers/time! commit-timer))
-        (publish-changes! dir changes)
-        (push! repo)))))
+  []
+  (when-let [ids (with-git
+                   (let [ids (changed-ids)]
+                     (when (seq ids)
+                       (with-open [_ (env/timed! commit-timer)]
+                         (git! "commit" "-a" "-m" "zdl-lex-server"))
+                       ids)))]
+    (->index! ids)
+    (push!)))
 
 (defn sync!
-  [repo]
-  (fetch! repo)
-  (commit! repo))
+  []
+  (fetch!)
+  (commit!))
 
-(def diff-xf
-  (comp
-   (map not-empty) (remove nil?)
-   (map #(str/split % #"\t"))
-   (map #(nth % 2))))
+(defn get-article-file
+  [id]
+  (let [f (fs/file git-dir id)]
+    (when (fs/regular-file? f) f)))
+
+(defn write-article-file
+  [id write-fn]
+  (let [f (fs/file git-dir id)]
+    (with-git
+      (let [exists? (fs/regular-file? f)]
+        (when-not exists? (-> f fs/parent fs/create-dirs))
+        (with-open [output (io/output-stream f)] (write-fn output))
+        (when-not exists? (add! id))))
+    (index/upsert-articles! (list (file->desc f)))
+    f))
+
+;; Article Editors
+
+(def server-lock-token
+  (-> (UUID/randomUUID) str str/lower-case))
+
+(defn qa-article!
+  [{:keys [file id]}]
+  (try
+    (binding [lock/*context* {:owner    "zdl-lex-server"
+                              :resource id
+                              :token    server-lock-token}]
+      (with-lock
+        (when-let [edited (article.qa/edit file)]
+          (write-article-file id #(article/write-xml edited %)))))
+    (catch Throwable t
+      ;; Skip locked articles
+      (if (lock/locked? t) (tm/error! t) (throw t)))))
+
+(defn qa!
+  []
+  (run! qa-article! (article-descs)))
+
+;; Articles
+
+(defn generate-id
+  []
+  (loop [n 0]
+    (let [id        (str "E_" (rand-int 10000000))
+          id-query  [:query
+                    [:clause
+                     [:field [:term "id"]]
+                     [:value [:pattern (str "*" id "*")]]]]
+          request   {:q (lucene/->str id-query) :rows 0}
+          response  (index/query request)
+          num-found (get-in response [:body :response :numFound] 1)]
+      (cond
+        (= 0 num-found) id
+        (= 10 n)        (throw (ex-info (str "Maximum number of article id "
+                                             "generations exceeded") {}))
+        :else           (recur (inc n))))))
+
+(def new-article-collection
+  "Neuartikel/Neuartikel-007")
+
+(defn handle-create
+  [{{:keys [user]} :identity {{:keys [form pos]} :query} :parameters}]
+  (let [xml-id   (generate-id)
+        filename (article/form->filename form)
+        resource (str new-article-collection "/" filename "-" xml-id ".xml")
+        xml      (article/new-article-xml xml-id form pos user)]
+    (-> (write-article-file resource #(spit % xml :encoding "UTF-8"))
+        (resp/response)
+        (resp/header "X-Lex-ID" resource))))
+
+(defn handle-read
+  [{{{:keys [resource]} :path} :parameters}]
+  (if-let [f (get-article-file resource)]
+    (resp/response f)
+    (resp/not-found resource)))
+
+(defn handle-write
+  [{:keys [body] {{:keys [resource]} :path} :parameters}]
+  (try
+    (with-lock
+      (if-not (get-article-file resource)
+        (resp/not-found resource)
+        (-> (write-article-file resource #(io/copy body %)) (resp/response))))
+    (catch Throwable t
+      (if (lock/locked? t)
+        (-> t ex-data :lock (resp/response) (resp/status 423))
+        (throw t)))))
+
+(defn head-rev
+  []
+  (->> (git! "rev-parse" "HEAD") :out str/trim))
+
+(defn diff-changed-ids
+  [prev-head]
+  (->> (git! "diff" "--numstat" (str prev-head ".." "HEAD"))
+       :out (str/split-lines)
+       (into [] (comp (map not-empty) (remove nil?)
+                      (map #(str/split % #"\t"))
+                      (map #(nth % 2))))))
 
 (defn handle-fast-forward
-  [{:keys [dir] :as repo} req]
-  (let [ref (get-in req [:parameters :path :ref])]
-    (try
-      (fetch! repo)
-      (with-lock
-        (fn []
-          (let [head (git/head-rev dir)]
-            (git/assert-clean dir)
-            (git/sh! dir "merge" "--ff-only" "-q" ref)
-            (let [diff     (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))
-                  diff-out (str/split-lines (get diff :out))
-                  changes  (sequence diff-xf diff-out)]
-              (publish-changes! dir changes)))))
-      (push! repo)
-      {:status 200
-       :body   {:ff ref}}
-      (catch Throwable t
-        (log/warn t)
-        {:status 400
-         :body   ref}))))
+  [{{{:keys [ref]} :path} :parameters}]
+  (try
+    (fetch!)
+    (with-git
+      (let [prev-head (head-rev)]
+        (assert-clean)
+        (git! "merge" "--ff-only" "-q" ref)
+        (->index! (diff-changed-ids prev-head))))
+    (push!)
+    (resp/response {:ff ref})
+    (catch Throwable t
+      (tm/error! {:error t :level :warn})
+      (-> ref (resp/response) (resp/status 400)))))
 
 (defn handle-rebase
-  [{:keys [dir] :as repo} req]
-  (let [ref (get-in req [:parameters :path :ref])]
-    (log/debugf "Rebasing Git repo @ %s to %s" dir ref)
-    (with-lock
-      (fn []
-        (sync! repo)
-        (let [head (git/head-rev dir)]
-          (try
-            (git/sh! dir "rebase" ref)
-            (let [diff     (git/sh! dir "diff" "--numstat" (str head ".." "HEAD"))
-                  diff-out (str/split-lines (get diff :out))
-                  changes  (sequence diff-xf diff-out)]
-              (publish-changes! dir changes))
-            (push! repo)
-            {:status 200 :body {:ff ref}}
-            (catch Throwable t
-              (log/warn t "Rebase failed")
-              (git/sh! dir "rebase" "--abort")
-              {:status 400 :body {:ff ref}})))))))
-
-(defn get-file
-  [dir path]
-  (when-let [f (fs/file dir path)] f))
-
-(defn edit!
-  ([dir path editor]
-   (edit! dir default-timeout path editor))
-  ([dir lock-timeout path editor]
-   (with-lock
-     lock-timeout
-     (fn []
-       (let [f       (fs/file dir path)
-             exists? (fs/file? f)]
-         (when-not exists? (.. f (getParentFile) (mkdirs)))
-         (try+
-          (editor f)
-          (when-not exists? (add! dir f))
-          (update! dir [f])
-          (catch [:type ::unmodified] _))
-         f)))))
-
-(defmethod ig/init-key ::repo
-  [_ {:keys [branch origin dir] :as config}]
-  (with-lock
-    (fn []
-      (let [f    (fs/file dir)
-            path (fs/path dir)]
-        (log/infof "Opening Git Repo @ '%s' from %s@%s"
-                   path (or origin "<local>") branch)
-        (when-not (fs/directory? f ".git")
-          (if origin
-            (do
-              (log/info {:git {:clone origin}})
-              (git/sh! dir "clone" "--quiet" origin path))
-            (do
-              (log/info {:git {:init path}})
-              (fs/ensure-dirs f)
-              (git/sh! dir "init" "--quiet" path))))
-        (when-not (= branch (git/head-ref dir))
-          (if origin
-            (git/sh! dir "checkout" "--track" (str "origin/" branch))
-            (git/sh! dir "checkout" "-b" branch)))
-        (assoc config :dir dir :path path)))))
-
-(comment
-  (let [dir         (io/file "data" "git")
-        articles-xf (articles-xf dir)
-        removal-xf  (removal-xf dir)]
-    (count (sequence articles-xf (file-seq dir)))
-    (into [] (comp articles-xf (drop 1000) (take 10)) (file-seq dir))
-    (into [] (comp removal-xf (take 10)) (list (io/file dir "Duden/test.xml")))))
+  [{{{:keys [ref]} :path} :parameters}]
+  (with-git
+    (sync!)
+    (let [prev-head (head-rev)]
+      (try
+        (git! "rebase" ref)
+        (->index! (diff-changed-ids prev-head))
+        (push!)
+        (resp/response {:ff ref})
+        (catch Throwable t
+          (tm/error! {:error t :level :warn})
+          (git! "rebase" "--abort")
+          (-> {:ff ref} (resp/response) (resp/status 400)))))))

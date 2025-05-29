@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_k_2901_1" Autor="dsanders" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2020-11-23" Erstellungsdatum="1969-01-01" Status="wird_gestrichen">
+        <?oxy_comment_start author="jgrimm" timestamp="20200618T083755+0200" comment="Abbildung angefordert"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung hidx="1"><?oxy_comment_start author="kduden" timestamp="20201104T170035+0100" comment="ehemalige LA 2 (auf den Keks gehen) als ²Keks abgetrennt" flag="done"?>Keks<?oxy_comment_end?></Schreibung>
+            <Aussprache><IPA Audiodatei="021/der_Keks"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Genitiv><Wert>-es</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung hidx="1">Keks</Schreibung>
+            <Aussprache><IPA Audiodatei="021/das_Keks"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Genitiv><Wert>-es</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachareal>A</Sprachareal>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>zu <erwaehntes_Zeichen Sprache="engl">cakes</erwaehntes_Zeichen> (Plural) <Paraphrase>Kuchen(stücke), süße Gebäckstücke</Paraphrase></Etymologie>
+            <Formgeschichte>Zum als Singular aufgefassten <Stichwort>Keks</Stichwort> findet sich in den 20er Jahren gelegentlich ein künstlich gebildeter, sprachpflegerisch reduzierter Singular <erwaehntes_Zeichen Sprache="dt">Kek</erwaehntes_Zeichen> (Plural <erwaehntes_Zeichen Sprache="dt">Keks</erwaehntes_Zeichen>), der in den 30er Jahren wieder aus den Nachschlagewerken verschwindet. Vgl.: »Duden aber erkühnt sich, den zum Lehnwort gewordenen Keks als ›Kek‹ aufzuführen – ein Beweis für die Unfähigkeit des Herausgebers, Gesprochenes zu hören. (Reimann, Hans: Vergnügliches Handbuch der Deutschen Sprache, Düsseldorf: Econ-Verl. 1964 [1931], S. 107), Verwendung: »Kleine appetitliche Sandwiches ohne Rand mit Gurkenscheibe … und Schinken kontrastieren zu den Keks und Schokoladenplätzchen …« (Reznicek, Paula von: Auferstehung der Dame. In: Zillig, Werner (Hg.) Gutes Benehmen, Berlin: Directmedia Publ. 2004 [1928], S. 12370).</Formgeschichte>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma hidx="1"><?oxy_comment_start author="kduden" timestamp="20201110T080659+0100" comment="Richtigen hidx eingefügt (war Keks²)"?>Keks<?oxy_comment_end?></Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">trockenes, flaches Kleingebäckstück</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>selbstgebackene, leckere, nahrhafte, süße, salzige, weiche, runde, trockene <Stichwort>Kekse</Stichwort> </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Akkusativobjekt_von">
+                    <Belegtext> <Stichwort>Kekse</Stichwort> backen, anbieten, knabbern, stibitzen, <Autorenzusatz>in den Kaffee, den Tee</Autorenzusatz> tunken</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                    <Belegtext> <Stichwort>Kekse</Stichwort> und Kuchen, Schokolade</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                    <Belegtext>Kaffee, Tee und <Stichwort>Kekse</Stichwort> </Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Wir tranken Kaffee, aßen <Stichwort>Kekse</Stichwort> und rauchten ein paar Zigaretten. </Belegtext>
+                    <Fundstelle>Die Zeit, 15.06.2015</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> <Stichwort>Kekse</Stichwort> sollen knusprig sein, aber nicht zu sehr krümeln. </Belegtext>
+                    <Fundstelle>Die Zeit, 13.12.2012</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Neben ihm <Autorenzusatz>dem hinter der Theke stehenden Ladenbesitzer</Autorenzusatz> locken süße <Hervorhebung>alfajores</Hervorhebung>, zwei <Stichwort>Kekse</Stichwort> mit einer Füllung aus Milchcreme, von Schokolade umhüllt. </Belegtext>
+                    <Fundstelle>Der Spiegel, 31.05.2011 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Gefallen hat den Testerpersonen vor allem der gute Geschmack der Schokolade; das <Stichwort>Keks</Stichwort> selbst wurde einige Male als »zu trocken« und »mit wenig Eigengeschmack« bewertet. </Belegtext>
+                    <Fundstelle>Der Standard, 21.01.2006</Fundstelle>
+                    <Diasystematik>
+                        <Sprachareal>A</Sprachareal>
+                    </Diasystematik>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die lange Tafel <Streichung>im Kulturhaus der Kreisstadt in Nordvorpommern</Streichung> ist mit Christstollen und <Stichwort>Keksen</Stichwort> gedeckt, Kaffee dampft in den Tassen. </Belegtext>
+                    <Fundstelle>Der Spiegel, 01.01.1996</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Informations- und Telekommunikationstechnik</Fachgebiet>
+                <Gruppensprache>Jargon</Gruppensprache>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Cookie</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Schon ist mein Rechner wieder verstrickt ins Netz der <Stichwort>Kekse</Stichwort>. DoubleClick verfolgt mich wie zuvor über 40 Websites.</Belegtext>
+                    <Fundstelle>Der Spiegel, 26.03.2012</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20201110T081029+0100" comment="Fundstellenangaben korrigiert"?>
+                    <Belegtext><?oxy_comment_end?>Für uns paranoiahafte Datenschützer ein Alptraum, dass da <Stichwort>Kekse</Stichwort> auf unseren Rechnern rumkrümeln, von denen wir gar nichts wissen. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor>Jürgen</Autor>
+                        <Titel>Super-Cookies/Flash-Cookies</Titel>
+                        <Stelle/>
+                        <Datum>11.05.2009</Datum>
+                        <URL>https://bastardadmin.wordpress.com/2009/05/11/super-cookies-flash-cookies/</URL>
+                        <Aufrufdatum>31.08.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Im Jargon des Internets bezeichnet man als <Stichwort>Kekse</Stichwort> kleine Datenpakete, die auf dem Computer der Surfer abgelegt werden. </Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 12.10.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26"/></Rohdaten></Artikel>
+</DWDS>

@@ -60,8 +60,6 @@ in the sample file for a documentation of the available options. Example:
 ```plaintext
 # disconnect test setup from production origin
 ZDL_LEX_GIT_ORIGIN=
-ZDL_LEX_GIT_DIR=test-data/git
-ZDL_LEX_LOCK_DB_PATH=test-data/locks
 
 ZDL_LEX_MANTIS_DB_HOST=localhost
 ZDL_LEX_MANTIS_DB_USER=testuser
@@ -109,6 +107,10 @@ current project sources via
 ```plaintext
 $ clojure -T:build start-editor
 ```
+
+### Extracting random test data from DWDS sources
+
+    clojure -M:test:log -m zdl.lex.test-data $DWDS_WB_GIT_DIR
 
 ## License
 

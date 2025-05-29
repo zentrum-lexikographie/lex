@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_997652393" Autor="wgrimm" Typ="Verweisartikel" Zeitstempel="2015-12-21" Erstellungsdatum="2015-12-21" Status="wird_gestrichen">
+        <Formangabe Quelle="DWDS" Zeitstempel="2021-08-23" Typ="Hauptform" Autor="herold">
+            <Schreibung>Jenner</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-(s)</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+                <Numeruspraeferenz>meist im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Jänner</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Der Film billigt die Morde <Stichwort>Jenners</Stichwort> nicht, aber er verurteilt sie auch nicht.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 06.09.1991, Nr. 37</Fundstelle></Beleg><Beleg><Belegtext>In etwa zwei Jahren soll auch das »<Stichwort>Jenner</Stichwort>« umgebaut werden.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 07.11.2011, Nr. 45</Fundstelle></Beleg><Beleg><Belegtext>Denn für <Stichwort>Jenner</Stichwort> ist Kreuzberg seit der Wende schlichtweg zu kurz gekommen.</Belegtext><Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 01.10.1999</Fundstelle></Beleg><Beleg><Belegtext>Was aber ließ sich von einem William E. <Stichwort>Jenner</Stichwort> oder Joseph R. McCarthy sagen?</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Freymond, Jacques: Die Atlantische Welt. In: Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1961], S. 19659</Fundstelle></Beleg><Beleg><Belegtext>Unter den wenigen Schriften <Stichwort>Jenners</Stichwort> hat die Veröff. über Brahms große Anerkennung gefunden.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Schaal, Richard: Jenner. In: Die Musik in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2001 [1957], S. 34825</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

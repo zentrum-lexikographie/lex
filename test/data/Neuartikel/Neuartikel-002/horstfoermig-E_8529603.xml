@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_8529603" Autor="wgrimm" Typ="Minimalartikel" Zeitstempel="2021-02-16" Erstellungsdatum="2017-12-21" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>horstförmig</Schreibung>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="2">Horst</Ziellemma>
+                <?oxy_comment_start author="wgrimm" timestamp="20171221T082801+0100" comment="Oder zu ¹Horst?"?>
+                <Ziellesart><?oxy_comment_end?></Ziellesart>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Form</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/></Rohdaten></Artikel>
+</DWDS>

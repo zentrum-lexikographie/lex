@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="" xml:id="D99_104607" Autor="kduden" Typ="Vollartikel" Tranche="Duden_1999/DWDS" Zeitstempel="2019-08-23" Erstellungsdatum="1999-01-01" Status="Red-ex">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>mathematisieren</Schreibung>
+            <Aussprache><IPA Audiodatei="118/mathematisieren"/></Aussprache><Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>mathematisiert</Wert></Praesens>
+                <Praeteritum><Wert>mathematisierte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>mathematisiert</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>mathematisch</Ziellemma>
+                <?oxy_comment_start author="kduden" timestamp="20161005T142052+0200" comment="oder Mathematik"?>
+                <Ziellesart><?oxy_comment_end?></Ziellesart>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-isieren</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20190823T101213+0200" comment="ein Problem, einen Sachverhalt mit den Mitteln und Methoden der Mathematik beschreiben, lösen"?>nach<?oxy_comment_end?>
+                <?oxy_comment_start author="jgrimm" timestamp="20190830T085259+0200" comment="eben nicht &quot;ein Problem&quot; oder &quot;ein Sachverhalt&quot;, sondern &quot;alle Wissenschaften&quot;, &quot;die Nationalökonomie&quot; oder gar &quot;das Leben und auch nicht &quot;lösen&quot; sondern artfremd, außerhalb der Mathematik mathematisch behandeln, durchdringen - so jedenfalls sagen es die Belege"?>dem<?oxy_comment_end?> Vorbild, mit Mitteln und Methoden der <Verweis Typ="vgl">
+                    <Ziellemma>Mathematik</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> behandeln, <?oxy_comment_start author="dsanders" timestamp="20190823T101920+0200" comment="leuchtet mir nicht ganz ein, würde ich weglassen"?>mit mathematischen Angaben außerhalb der Mathematik operieren<?oxy_comment_end?>
+            </Definition>
+            <Definition Typ="Spezifizierung">etwas <Verweis Typ="vgl">
+                    <Ziellemma>strukturieren</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>, <Verweis Typ="vgl">
+                    <Ziellemma>quantifizieren</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>, über <?oxy_comment_start author="jgrimm" timestamp="20190823T102452+0200" comment="was sind mathematische Angaben? Zahlen? Daten? Formeln?
+
+
+-&gt; etwas strukturieren, quantifizieren, mit mathematischen Mitteln zugänglich, darstellbar machen
+
+(erfassen steckt ja schon in der Basisdefinition)
+"?>mathematische Angaben<?oxy_comment_end?> erfassen, zugänglich machen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Alle Wissenschaften sind heute
+                        <Stichwort>mathematisiert</Stichwort>, und auch der Alltag ist gespickt mit
+                        quantitativen Informationen, die wir deuten müssen – und zwar richtig. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 27.07.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Nationalökonomie und die Betriebswirtschaftslehre sind zwar
+                            <Stichwort>mathematisierte</Stichwort>, doch keine experimentell
+                        abgesicherten Wissenssysteme. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 08.12.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie <Autorenzusatz>die Phonologie</Autorenzusatz> analysiert die
+                        Sprache als eine Struktur von Gegensätzen, in der die einzelnen Teile nur
+                        durch das Verhältnis zu anderen Teilen ihre Bedeutung gewinnen. Diese
+                        Analyse lässt sich <Stichwort>mathematisieren</Stichwort>, und diese
+                        Exaktheit erklärt ihre Attraktivität für die Ethnologie. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 04.11.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Keine Wünsche, keine Hoffnungen, eine Faktenmaschine
+                            <Autorenzusatz>der PC</Autorenzusatz>, ein Datenfresser. Zudem ein
+                        Apparat, der das Leben <Stichwort>mathematisiert</Stichwort>. Als einer der
+                        ersten erkannte Herold, daß der Computer die Welt verändern kann. Er
+                        versteht bis heute nicht, daß er angefeindet wurde. Daß Datenfülle
+                        bedrohlich sein kann, daß eine <Stichwort>mathematisierte</Stichwort>
+                        Gesellschaft vielen als kalter Schrecken erscheint, geht ihm nicht in den
+                        Kopf. </Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 01.08.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese Spiele <Streichung>nämlich</Streichung> sind gewissermaßen das
+                        freundliche Abbild der rauhen Wirklichkeit in Politik, Kriegführung und in
+                        der Wirtschaft. Sie sind Konkurrenzkämpfe in vereinfachter und
+                        überschaubarer Form. Die Spieltheorie <Stichwort>mathematisiert</Stichwort>
+                        den Begriff der Strategie und deutet Methoden an, mit deren Hilfe man in
+                        einer gegebenen Kampfsituation am klügsten operiert. </Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 09.03.1962</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die durch Faraday entwickelte Kraftlinienvorstellung wurde durch J.
+                        C. Maxwell seit 1855 <Stichwort>mathematisiert</Stichwort>, zur Theorie des
+                        elektromagnetischen »Feldes« und zehn Jahre später zu einer
+                        elektromagnetischen Lichttheorie ausgestaltet. </Belegtext>
+                    <Fundstelle Fundort="dwds">Süßmann, G.: Naturwissenschaft. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia 2000 [1960]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Was <Autorenzusatz>der englische Mathematiker und Philosoph
+                            Thomas</Autorenzusatz> Hobbes <Streichung>damit</Streichung> will, steht
+                        in der Vorrede zu <Hervorhebung>De corpore</Hervorhebung>: Durch genaue
+                        Begriffsbestimmung sollen die Vorstellungen der allgemeinsten Dinge
+                        voneinander gesondert werden, um Zweifelhaftes und Dunkles zu beseitigen.
+                        Also wieder eine Kategorienlehre, die die Grundstrukturen des Wirklichen
+                        bloßlegt, und zwar in derselben wissenschaftlichen Sicherheit und
+                        systematischen Totalität wie bei Descartes. Auch Hobbes
+                            <Stichwort>mathematisiert</Stichwort> die Naturerkenntnis wie Galilei
+                        und Descartes. </Belegtext>
+                    <Fundstelle Fundort="dwds">Hirschberger, Johannes: Geschichte der Philosophie, Bd. 2: Neuzeit und Gegenwart. In: Bertram, Mathias (Hg.) Geschichte der Philosophie, Berlin: Directmedia 2000 [1952]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart>
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Stilfaerbung Frequenz="meist"><?oxy_comment_start author="dsanders" timestamp="20190823T120545+0200" comment="+ umgangssprachlich?"?><?oxy_comment_start author="kduden" timestamp="20190830T085439+0200" comment="&quot;umgangssprachlich&quot; - da bin ich unsicher + würde den Hinweis eher weglassen" mid="6"?>abwertend<?oxy_comment_end?><?oxy_comment_end mid="6"?></Stilfaerbung>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">etwas in übertriebenem Maße mathematisch, wissenschaftlich behandeln, <Verweis Typ="vgl">
+                        <Ziellemma>quantifizieren</Ziellemma>
+                        <Ziellesart/>
+                    </Verweis>
+                </Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>In Buchhandlungen liegen populärwissenschaftliche Lebensratgeber
+                            gleich tonnenweise aus, sie sind die Bibeln der Gegenwart, ihnen glauben
+                            wir aufs Wort, sogar bei der Kindererziehung. Pausenlos
+                                <Stichwort>mathematisieren</Stichwort> wir unsere Erfahrung, wir
+                            lassen sie statistisch erfassen, vermessen und bewerten, und selbst wer
+                            nur ein paar Meter durch den Wald hüpft, vertraut nicht mehr der
+                            Erfahrung seines Körpers, sondern nur noch seinem Pulsmessgerät. </Belegtext>
+                        <Fundstelle>Die Zeit, 03.05.2012</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>
+                            <Streichung>Doch</Streichung> je virtuoser der Tanz mit dem Ball
+                            aussehen soll, desto mathematischer müssen die Spieler und Trainer mit
+                            dem Ball umgehen. <Streichung>Klingt fürchterlich, aber Mannschaften wie
+                                der FC Barcelona, Manchester United oder der FC Arsenal sind
+                                erfolgreich, weil sie die Zahlen des Spiels lesen
+                                können</Streichung>. Fußball sei keine Mathematik, hat Karl-Heinz
+                            Rummenigge einem Bayern-Trainer in der Stunde des Misserfolgs einmal an
+                            den Kopf geworfen. Seither hat sich die Trainerarbeit bei Bayern immer
+                            weiter <Stichwort>mathematisiert</Stichwort>. Was die vier Männer der
+                            Firma Impire vor den Bildschirmen machen, heißt Tracking und wird die
+                            nächste Phase der Mathematisierung des Fußballs einleiten. Alle Spiele
+                            der ersten und zweiten Bundesliga werden von nun an in endlose
+                            Zahlenfolgen zerlegt, sie wachsen von Spieltag zu Spieltag zu einer
+                            Datenbank, wie es sie bisher in keiner Liga der Welt gibt. </Belegtext>
+                        <Fundstelle Fundort="dwds">Der Spiegel, 01.08.2011</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Vielleicht wäre es nicht nur für den Roman, sondern auch für
+                            seine Leser besser gewesen, wenn einige hundert Seiten an Ballast
+                            abgeworfen worden wären – zu denen auch manche von Stephensons
+                            Spielereien gehören, alltägliche Geschehnisse ausschweifend zu
+                                <Stichwort>mathematisieren</Stichwort>. Solche Spiele mit Wissen
+                            können die Neugier leicht ersticken, wenn sie zwar kryptisch sind, aber
+                            kaum Geheimnisse bergen, bis auf das der Spiellust selbst.</Belegtext>
+                        <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 21.09.2002 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Gottfried Benn hat den Tempel durch das Labor ersetzt, Max Bense
+                            unternahm den Versuch, Lyrik zu <Stichwort>mathematisieren</Stichwort>. </Belegtext>
+                        <Fundstelle>Die Zeit, 23.06.1972</Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"><Beleg><Belegtext>Von dieser Bewertung ausgehend <Stichwort>mathematisiert</Stichwort> die von Shannon konzipierte Theorie den Vorgang der Kommunikation.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 12.11.1965, Nr. 46</Fundstelle></Beleg><Beleg><Belegtext>Gottfried Benn hat den Tempel durch das Labor ersetzt, Max Bense unternahm den Versuch, Lyrik zu <Stichwort>mathematisieren</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 23.06.1972, Nr. 25</Fundstelle></Beleg><Beleg><Belegtext>Während also Musik in der Bedeutung Stimmung gänzlich in Vagheit logiert wird, wird Musik in der Bedeutung Proportion, auch Satzkunst, seit alters <Stichwort>mathematisiert</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Bloch, Ernst: Das Prinzip Hoffnung Bd. 3, Berlin: Aufbau-Verl. 1956, S. 155</Fundstelle></Beleg><Beleg><Belegtext>Aus den Daten lernt der Google-Gott, die »Schöpfung« geduldig zu verbessern; er berechnet die Verweildauer des Auges bei Konsumangeboten und <Stichwort>mathematisiert</Stichwort> seine Reaktion auf Werbereize.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 13.05.2013, Nr. 19</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

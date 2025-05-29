@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="wgrimm" xml:id="D99_074544_1" Autor="dsanders" Typ="Vollartikel" Tranche="Duden_1999/DWDS" Zeitstempel="2025-06-02" Erstellungsdatum="1999-01-01" Status="Red-1">
+        <?oxy_comment_start author="dsanders" timestamp="20240702T132203+0200" comment="keine Duden-Inhalte mehr" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>hochpreisig</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="093/hochpreisig">ˈhoːχˌpʀaɪ̯zɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <?oxy_comment_start author="wgrimm" timestamp="20240724T084116+0200" comment="an hochrangig orientiert ausgebaut" flag="done"?>
+                <Wortklasse><?oxy_comment_end?>Adjektiv</Wortklasse>
+                <Komparativ>
+                    <Wert>hochpreisiger</Wert>
+                </Komparativ>
+                <Komparativ>
+                    <Wert>höherpreisig</Wert>
+                </Komparativ>
+                <Superlativ>
+                    <Wert>am hochpreisigsten</Wert>
+                </Superlativ>
+                <Superlativ>
+                    <Wert>am höchstpreisigen</Wert>
+                </Superlativ>
+                <Kommentar>Bei den mit <erwaehntes_Zeichen Sprache="dt">hoch</erwaehntes_Zeichen>,
+                        <erwaehntes_Zeichen Sprache="dt">schwer</erwaehntes_Zeichen>,
+                        <erwaehntes_Zeichen Sprache="dt">nah</erwaehntes_Zeichen> und
+                        <erwaehntes_Zeichen Sprache="dt">weit</erwaehntes_Zeichen> gebildeten
+                    Adjektiven kann entweder das erste oder das zweite Glied der Zusammensetzung
+                    gesteigert werden. Die Komparativ- und Superlativformen sind meist gegeneinander
+                    austauschbar: <erwaehntes_Zeichen Sprache="dt">Die höherpreisigen,
+                        höchstpreisigen, hochpreisigeren, hochpreisigsten Wohnlagen der
+                        Stadt</erwaehntes_Zeichen>. Im aktuellen Sprachgebrauch wird bei
+                        <Stichwort>hochpreisig</Stichwort> die Steigerung des Erstgliedes gegenüber
+                    der Steigerung des Zweitgliedes bevorzugt.</Kommentar>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>hoch</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Preis</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>kostspielig</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20240621T132731+0200" comment="neu
+Duden alt: zu einer hohen Preisklasse gehörend" flag="done"?>teuer<?oxy_comment_end?>
+                (im Vergleich mit ähnlichen Produkten)</Definition>
+            <Definition Typ="Basis">einem gehobenen Preissegment angehörend</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>hochpreisige</Stichwort> Ware, Mode</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>hochpreisige</Stichwort> Immobilie,
+                        Eigentumswohnung</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>im <Stichwort>hochpreisigen</Stichwort> Segment</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <?oxy_comment_start author="kduden" timestamp="20240724T084319+0200" comment="Belege für alle vier Steigerungsformen ergänzt" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Durch die seelenlose «Arbeit» der Influencer wurden die
+                            <Stichwort>hochpreisigen</Stichwort> Luxuslabels komplett entwertet. Der
+                        Grund: Fashion braucht neben vielen anderen Dingen einen Vibe des
+                        Besonderen, des Elitären, um verheissungsvoll zu sein. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2024/06/NLZ_2024061500000328775827">
+                        Luzerner Zeitung, 15.06.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Die höchste geforderte Miete <Streichung>im ersten
+                            Quartal</Streichung> lag mit 14,67 Euro knapp vier Euro über der
+                            <Stichwort>hochpreisigsten</Stichwort> Offerte im Landkreis (11,84
+                        Euro). </Belegtext>
+                    <Fundstelle Fundort="dwds:noz:2024/06/NOZ_23-177167248"> Neue Osnabrücker
+                        Zeitung, 15.06.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Es gibt also nach wie vor freie Wohnungen, wenngleich eher im
+                            <Stichwort>hochpreisigeren</Stichwort> Bereich. </Belegtext>
+                    <Fundstelle Fundort="dwds:dnn_regional:2024/06/DNN_doc7vsox7hccr6gw6x94m5">
+                        Dresdner Neueste Nachrichten, 10.06.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vor allem in der Klassischen Moderne sind viele Fälschungen im Umlauf
+                        – auch deshalb, weil Originale hier besonders
+                            <Stichwort>hochpreisig</Stichwort> gehandelt werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:maz:2024/04/MAZ_330215030001712354400"> Allgemeine
+                        Zeitung, 06.04.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Deutschland ist das <Stichwort>hochpreisigste</Stichwort>
+                        Medikamentenland in Europa.« </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/06/MUME_mm_omp0000009476431">
+                        Münchner Merkur, 14.06.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Heute könnten sich die Unternehmen bei der riesigen Nachfrage auch
+                        nach <Stichwort>hochpreisigen</Stichwort> Fahrrädern oder E-Bikes eine
+                        goldene Nase verdienen. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2021/10/NEUW_534c92c5f56d4912714757ca13c0465a234df6d"> Neue Westfälische, 25.10.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In den <Stichwort>höchstpreisigen</Stichwort> Gebieten der Stadt
+                        stehen <Streichung>sogar</Streichung> immer mehr Wohnungen und Läden einfach
+                        leer. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp_regional:2018/10/TSP_13396983"> Der Tagesspiegel,
+                        11.10.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es gibt <Stichwort>hochpreisige</Stichwort> Seniorenresidenzen mit
+                        schickem Interieur genau wie spartanische Heime mit Mehrbettzimmern. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2013/06/BMP_98205269"> Berliner Morgenpost,
+                        16.06.2013 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Für eine 3-Megapixel-Kamera ist die CD300 jedoch ausgesprochen
+                            <Stichwort>hochpreisig</Stichwort> – da müssen schon sehr viele
+                        Speichermedien gefüllt werden, um den Mehrpreis zu vergleichbaren
+                        Konkurrenzmodellen zu amortisieren. </Belegtext>
+                    <Fundstelle Fundort="dwds:kern21:2001/ct_01_21_164_4126:164"> C’t, 2001, Nr. 21
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Kunde in den alten Bundesländern tendiere mehr zu
+                            <Stichwort>höherpreisiger</Stichwort> bis luxuriöser Ware. </Belegtext>
+                    <Fundstelle Fundort="dwds:nz:2612273X/2612273X_1991_11_30_01/tei/2612273X_1991_11_30_01_119"> Neue Zeit, 30.11.1991 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Von den <Stichwort>hochpreisigen</Stichwort> Künstlern damals kennt
+                        man heute viele überhaupt nicht mehr.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 11.02.2013, Nr. 06</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Denn als die Produktion stockte, verlegten sich die Hersteller auf
+                            <Stichwort>hochpreisige</Stichwort> Geräte – hier herrscht also kein
+                        Mangel.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 09.03.2012 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Allerdings wirke sich dies vor allem im
+                            <Stichwort>hochpreisigen</Stichwort> Segment aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.10.1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Man zielte weiter eindeutig auf die gediegene, stilvolle,
+                            <Stichwort>hochpreisige</Stichwort> Wohnungseinrichtung, hatte aber auch
+                        inzwischen schon mal vereinzelt einen Selbstbausessel ins Sortiment
+                        aufgenommen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hars, Wolfgang: Nichts ist
+                        unmöglich! Lexikon der Werbesprüche, München: Piper 2001 [1999], S.
+                        63</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Eckes und Eggert setzten hohes C von Anfang an auf die
+                            <Stichwort>hochpreisige</Stichwort> Gesundheitsschiene.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hars, Wolfgang: Nichts ist
+                        unmöglich! Lexikon der Werbesprüche, München: Piper 2001 [1999], S.
+                        363</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

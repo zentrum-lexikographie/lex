@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="" xml:id="D99_088189" Autor="kduden" Typ="Basisartikel-D" Tranche="Regio" Zeitstempel="2024-10-02" Erstellungsdatum="1999-01-01" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="dsanders" timestamp="20241008T164718+0200" comment="keine Duden-Inhalte mehr"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Kluntje</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-s</Wert></Plural>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders">D-Nord</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Kandiszucker</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20241008T134320+0200" comment="geändert von: ein Stück weißer Kandiszucker"?>aus<?oxy_comment_end?>
+                einer konzentrierten Zuckerlösung auskristallisierte Zuckerstückchen, die besonders
+                in Ostfriesland für den Tee verwendet werden</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Vor dem Eingießen <Autorenzusatz>des Tees</Autorenzusatz> legt man
+                        einen <Stichwort>Kluntje</Stichwort>, ein großes Stück braunen oder weißen
+                        Kandiszucker in die Tasse. Der Tee wird nun auf den
+                            <Stichwort>Kluntje</Stichwort> in die Teetassen gefüllt. Hierbei beginnt
+                        der <Stichwort>Kluntje</Stichwort> charakteristisch zu knistern.
+                        Anschließend gibt man mit einem Sahnelöffel (Rohmlepel) einen Tropfen Sahne
+                        (»’n Wulkje Rohm«) hinzu. </Belegtext>
+                    <Fundstelle Fundort="dwds:wikipedia:0023/00235007">
+                        <Autor/>
+                        <Herausgeber>Wikipedia</Herausgeber>
+                        <Titel>Ostfriesische Teekultur</Titel>
+                        <Stelle/>
+                        <Datum>22.05.2024</Datum>
+                        <URL>https://web.archive.org/web/20241008134540/https://de.wikipedia.org/w/index.php?oldid=245216155</URL>
+                        <Aufrufdatum>01.07.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das Romaneschreiben ist ihr kleines Geheimnis, das nur wenige
+                        Menschen kennen. Bei einer großen Kanne Ostfriesentee mit Sahne und
+                            <Stichwort>Kluntjes</Stichwort> kann sie halbe Nächte durchschreiben,
+                        tagsüber hält sie sich mit Joggen fit. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:629/vNSON9DX">
+                        <Autor>Die Rabenmutti</Autor>
+                        <Titel>Buchvorstellung »Friesenfisch« von Sina Jorritsma</Titel>
+                        <Stelle/>
+                        <Datum>17.03.2023</Datum>
+                        <URL>https://web.archive.org/web/20241008144221/https://dierabenmutti.de/2023/03/17/buchvorstellung-friesenfisch-von-sina-jorritsma/</URL>
+                        <Aufrufdatum>13.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Einige Supermärkte in der Region an der Nordseeküste meldeten
+                        zuletzt leere Regale bei einer bestimmten Sorte, dem sogenannten lüttje
+                            <Stichwort>Kluntje</Stichwort>, also bei den Packungen mit kleineren
+                        Kandiszuckerstücken. Allgemein ist die Nachfrage nach den kleinen
+                            <Stichwort>Kluntje</Stichwort> gar nicht mal so groß, doch bei den
+                        Ostfriesen mit ihrer Jahrhunderte alten Teetradition sind die äußerst
+                        begehrt. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg:2022/02/RZTG_CE16927D060FA2C7AA453F3B46E417BE-KOBLENZ">
+                        Rhein-Zeitung, 28.02.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zum Gespräch serviert der 46-Jährige Tee mit Sahne und Kandis, auch
+                        wenn er selbst mittlerweile auf die » <Stichwort>Kluntjes</Stichwort>«
+                        verzichtet – zu viel Zucker. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha_regional:2021/04/HA_50e3f312-96ab-11eb-9fc5-f9b8541b3277_2003755"> Hamburger Abendblatt, 12.04.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das <Streichung>dortige</Streichung> Ostfriesische Teemuseum
+                            <Autorenzusatz>in Norden</Autorenzusatz>
+                        <Streichung>im Alten Rathaus</Streichung> führt Besucher nicht nur zu den
+                        Anbaugebieten in Indien und China, sondern informiert auch über die
+                        Teerituale verschiedener Kulturen – einschließlich der heimischen. Für die
+                        braucht es die original ostfriesische Teemischung, ein Stövchen, eine
+                        Zuckerzange für das <Stichwort>Kluntje</Stichwort> (Kandiszuckerstück) und
+                        einen silbernen Sahnelöffel zum Auflegen des Wulkje (Sahnewölkchens). </Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2020/10/wasxml20201025_178"> Welt am Sonntag,
+                        25.10.2020 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Hier wird ostfriesischer Tee mit <Stichwort>Kluntjes</Stichwort>
+                        getrunken, und dazu gibt es »Leidenschaften«.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 17.08.1979, Nr. 34</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In die noch leere Tasse kommt zunächst ein Stück
+                            »<Stichwort>Kluntje</Stichwort>« (Kandis).</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 08.09.2004, Nr. 37</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im tiefsten Ostfriesland, in einem Vorstadtbungalow in Leer, serviert
+                        seine deutsche Frau Ute Ostfriesentee mit
+                        <Stichwort>Kluntjes</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 04.09.1995, Nr. 36</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Frau Jakobs lüftet noch mal schnell, stellt Tee, Sahne und
+                            <Stichwort>Kluntjes</Stichwort> bereit, dann erzählt Willy.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 30.11.1984, Nr. 49</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Entspannung findet er bei »Grüner Bünting« oder »Onno Behrens Gold«,
+                        schwarzem Tee aus Leer, gesüßt mit <Stichwort>Kluntjes</Stichwort>, weißem
+                        Kandis.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 20.09.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Frau Gisela brachte ihrem Mann Ostfriesen-Tee mit
+                            <Stichwort>Kluntje</Stichwort> und Room (Kandis und Sahne) ans Bett –
+                        normalerweise ist das umgekehrt im Hause Runde.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 13.02.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Ostfriesen zum Beispiel hätten viel mehr machen können aus ihrer
+                        Teetied, der Teezeit, und aus ihrem Lieblingsgetränk Schwarztee mit viel
+                        Sahne und <Stichwort>Kluntje</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 04.12.2012, Nr. 49</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

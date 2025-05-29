@@ -1,8 +1,10 @@
 (ns zdl.lex.lucene
   "Handling of Apache Lucene (Solr) Standard Query syntax"
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]
-            [instaparse.core :as insta :refer [defparser]]))
+  (:require
+   [clojure.string :as str]
+   [strojure.parsesso.char :as char]
+   [strojure.parsesso.parser :as p]
+   [gremid.xml :as gx]))
 
 ;; ## Escaping of special chars in regexps, terms etc.
 
@@ -15,14 +17,15 @@
   (let [re (re-pattern (str "\\\\" char-re))]
     (fn [s] (str/replace s re #(subs % 1 2)))))
 
-(def escape-quoted
+(def escape-phrase
   (partial escape #"\""))
 
-(def unescape-quoted
+(def unescape-phrase
   (unescape "\""))
 
 (def escape-regexp
   (partial escape #"/"))
+
 (def unescape-regexp
   (unescape "/"))
 
@@ -34,159 +37,326 @@
 
 (def escape-term
   (comp (partial escape #"[\*\?]") escape-pattern))
+
 (def unescape-term
   (comp unescape-pattern (unescape "[\\*\\?]")))
 
-;; ## App-specifics
+;; ## Parsesso-based parser
 
-(defn field-name->key
-  "Translates a Solr field name into a keyword.
+(defn node
+  [tag & content]
+  {:tag     tag
+   :content content})
 
-   Strips datatype-specific suffixes and replaces underscores."
-  [n]
-  (if (= n "_text_") :text
-      (-> n
-          (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
-          (str/replace "_" "-")
-          keyword)))
 
-(defn- field-name-suffix
-  "Suffix for a given field (keyword), expressing its datatype."
-  [k]
-  (condp = k
-    :id                  ""
-    :language            ""
-    :doc-type            ""
-    :xml-descendent-path ""
-    :weight              "_i"
-    :time                "_l"
-    :definitions         "_t"
-    :last-modified       "_dt"
-    :timestamp           "_dt"
-    :author              "_s"
-    :editor              "_s"
-    :form                "_s"
-    :source              "_s"
-    :type                "_s"
-    :provenance          "_s"
-    :last-updated        "_s"
-    :summary             "_s"
-    :category            "_s"
-    :status              "_s"
-    :severity            "_s"
-    :reporter            "_s"
-    :handler             "_s"
-    :resolution          "_s"
-    :attachments         "_i"
-    :notes               "_i"
-    "_ss"))
+(def whitespace-chars
+  " \t\n\r\u3000")
 
-(defn field-key->name
-  "Translates a keyword into a Solr field name."
-  [k]
-  (condp = k
-    :text "_text_"
-    (let [field-name   (str/replace (name k) "-" "_")
-          field-suffix (field-name-suffix k)]
-      (str field-name field-suffix))))
+(def modifier-chars
+  "+-!")
+
+(def field-chars
+  ":")
+
+(def range-chars
+  "[]{}")
+
+(def subquery-chars
+  "()")
+
+(def phrase-chars
+  "\"")
+
+(def pattern-chars
+  "*?")
+
+(def regex-chars
+  "/")
+
+(def escape-chars
+  "\\")
+
+(def boost-chars
+  "^")
+
+(def fuzzy-chars
+  "~")
+
+(def *ws
+  (p/*many (char/is whitespace-chars)))
+
+
+(def +ws
+  (p/+many (char/is whitespace-chars)))
+
+
+(def escaped
+  (-> (p/group (char/is escape-chars) (char/is-not whitespace-chars))
+      (p/value char/str*)))
+
+
+(def all
+  (p/word "*"))
+
+(def +number
+  (p/+many char/number?))
+
+
+(def number
+  (->
+   (p/group +number (p/option (p/group (char/is ".") +number)))
+   (p/value char/str*)))
+
+
+(def boost
+  (->
+   (p/group (p/word "^") number)
+   (p/value char/str*)))
+
+
+(def fuzzy
+  (->
+   (p/group (p/word "~") (p/option number))
+   (p/value char/str*)))
+
+
+(def not-term-rest-chars
+  (str whitespace-chars subquery-chars field-chars
+       range-chars phrase-chars fuzzy-chars boost-chars
+       pattern-chars phrase-chars escape-chars))
+
+(def not-term-start-chars
+  (str not-term-rest-chars modifier-chars regex-chars))
+
+
+(def term-start
+  (p/alt (char/is-not not-term-start-chars) escaped))
+
+
+(def term-rest
+  (p/alt (char/is-not not-term-rest-chars) escaped))
+
+
+(def term
+  (-> (p/group term-start (p/*many term-rest))
+      (p/value char/str*)))
+
+(def pattern-start
+  (p/alt term-start (char/is pattern-chars)))
+
+
+(def pattern-rest
+  (p/alt term-rest (char/is pattern-chars)))
+
+(def pattern
+  (-> (p/group pattern-start (p/*many pattern-rest))
+      (p/value char/str* (partial node :match))))
+
+(def phrase
+  (->
+   (p/*many (p/alt escaped (char/is-not phrase-chars)))
+   (p/between (char/is phrase-chars))
+   (p/value char/str* (partial node :phr))))
+
+
+(def regex
+  (->
+    (p/*many (p/alt escaped (char/is-not regex-chars)))
+    (p/between (char/is regex-chars))
+    (p/value char/str* (partial node :re))))
+
+(def value
+  (p/alt phrase regex number pattern all term))
+
+(def value-query
+  (-> (p/group value (p/*many (p/alt fuzzy boost)))
+      (p/value (fn [[v opts]]
+                 (cond-> (node :v v)
+                   (seq opts) (assoc-in [:attrs :opts] opts))))))
+
+(def range-bound
+  (p/alt phrase term number all))
+
+(def range-bound-ch->attr
+  {\{ "exclusive"
+   \} "exclusive"
+   \[ "inclusive"
+   \] "inclusive"})
+
+(def range-query
+  (->
+   (p/group
+    (char/is "[{")
+    *ws range-bound +ws
+    (p/word "TO")
+    +ws range-bound *ws
+    (char/is "}]")
+    (p/option boost))
+   (p/value
+    (fn [[start _ from _ _ _ to _ end boost]]
+      (cond-> {:tag     :range
+               :attrs   {:start (range-bound-ch->attr start)
+                         :end   (range-bound-ch->attr end)}
+               :content (list from {:tag :to} to)}
+        boost (assoc-in [:attrs :opts] (list boost)))))))
+
+(declare query)
+
+(def subquery
+  (p/do-parser
+   (->
+    (p/between query (char/is "(") (char/is ")"))
+    (p/group (p/option boost))
+    (p/value (fn [[sq boost]]
+               (cond-> (node :sub sq)
+                 boost (assoc-in [:attrs :opts] (list boost))))))))
+
+(def field
+  (->
+   (p/maybe (p/group (p/alt all term) (p/word ":")))
+   (p/value (fn [[k _]] (node :field k)))))
+
+(def modifier->tag
+  {\! :not
+   \+ :must
+   \- :must-not})
+
+(def modifier
+  (-> (char/is modifier-chars) (p/value modifier->tag)))
+
+(def clause
+  (->
+   (p/group (p/option modifier) *ws (p/option field)
+            (p/alt range-query subquery value-query))
+   (p/value (fn [[mod _ field query]]
+              (if (and (nil? mod) (nil? field))
+                query
+                {:tag     :c
+                 :content (cond->> (list query)
+                            field (cons field)
+                            mod   (cons (node mod)))})))))
+
+(def junction->tag
+  {"AND" :and
+   "&&"  :and
+   "OR"  :or
+   "||"  :or})
+
+(def junction
+  (-> (p/alt (p/word "AND") (p/word "&&") (p/word "OR") (p/word "||"))
+      (p/value junction->tag)))
+
+(def junction-clause
+  (-> (p/group *ws junction +ws clause)
+      (p/value (fn [[_ junction _ clause]] [junction clause]))))
+
+(def query
+  (->
+   (p/group clause (p/*many junction-clause))
+   (p/value (fn [[clause clauses]]
+              (if-not (seq clauses)
+                clause
+                {:tag     :q
+                 :content (reduce (fn [query [junction right]]
+                                    (concat query (list (node junction) right)))
+                                  (list clause)
+                                  clauses)})))))
 
 (def field-aliases
   "Aliasing of index field names, mostly translations."
-  {"autor" "author"
-   "red" "editor"
-   "def" "definitions"
-   "fehler" "errors"
-   "form" "forms"
-   "datum" "timestamp"
-   "klasse" "pos"
-   "bedeutung" "senses"
-   "quelle" "source"
-   "status" "status"
-   "tranche" "tranche"
-   "typ" "type"
-   "ersterfassung" "provenance"
-   "volltext" "text"})
+  {"autor"         "author_s"
+   "author"        "author_s"
+   "red"           "editor_s"
+   "editor"        "editor_s"
+   "def"           "definitions_txt"
+   "definitions"   "definitions_txt"
+   "fehler"        "errors_ss"
+   "errors"        "errors_ss"
+   "form"          "forms_ss"
+   "forms"         "forms_ss"
+   "datum"         "timestamp_dt"
+   "timestamp"     "timestamp_dt"
+   "klasse"        "pos_s"
+   "pos"           "pos_s"
+   "quelle"        "source_s"
+   "source"        "source_s"
+   "status"        "status_s"
+   "tranche"       "tranche_s"
+   "typ"           "type_s"
+   "type"          "type_s"
+   "ersterfassung" "provenance_s"
+   "provenance"    "provenance_s"})
 
-(defn translate-fields
-  "Applies field aliases and data type suffixes during AST transformation."
-  [[type v :as node]]
-  [:field (if (= type :term)
-            [:term (-> (get field-aliases v v) field-name->key field-key->name)]
-            node)])
+(defn translate-field-names
+  [{:keys [tag content] :as node}]
+  (if (= :field tag)
+    (let [k (gx/text node)]
+      (if-let [k* (field-aliases k)]
+        (assoc node :content (list k*))
+        node))
+    (if content
+      (update node :content (partial map translate-field-names))
+      node)))
 
-(defn expand-date-literals
+(defn expand-date-terms
   "Date literals can be specified as month or day prefixes, i.e. `2020-10` or
   `2020-11-01`."
-  [[_ v]]
-  [:term
-   (-> v
-       (str/replace #"^(\d{4}-\d{2})$" "$1-01")
-       (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\:00\\:00Z"))])
+  [{:keys [content] :as node}]
+  (if (string? node)
+    (let [s* (-> node
+                 (str/replace #"^(\d{4}-\d{2})$" "$1-01")
+                 (str/replace #"^(\d{4}-\d{2}-\d{2})$" "$1T00\\\\:00\\\\:00Z"))]
+      (if (not= node s*) s* node))
+    (if content
+      (update node :content (partial map expand-date-terms))
+      node)))
 
-;; ## Parsing queries into ASTs
-
-(defparser parse-str
-  (io/resource "zdl/lex/lucene-query.bnf"))
-
-(defn- str-node
-  ([type]
-   (str-node type identity))
-  ([type unescape-fn]
-   (fn [& args] [type (->> args (apply str) unescape-fn)])))
-
-(def ast->ast
-  (->>
-   {:field translate-fields
-    :term (comp expand-date-literals (str-node :term unescape-term))
-    :pattern (str-node :pattern unescape-pattern)
-    :regexp (str-node :regexp unescape-regexp)
-    :quoted (str-node :quoted unescape-quoted)
-    :fuzzy (str-node :fuzzy)
-    :boost (str-node :boost)}
-   (partial insta/transform)))
-
-(defn error->ex
-  [r]
-  (if (vector? r) r (throw (ex-info "Cannot parse Lucene/Solr query" r))))
-
-(def str->ast
-  (comp error->ex ast->ast parse-str))
-
-;; ## Serializing ASTs
-
-(defn ast->str
-  [[type & [arg :as args]]]
-  (condp = type
-    :sub-query (str "(" (apply str (map ast->str args)) ")")
-    :range (let [[lp lo up rp] args]
-             (str lp (ast->str lo) " TO " (ast->str up) rp))
-
-    :field (str (apply str (map ast->str args)) ":")
-    :boost (str "^" arg)
-    :fuzzy (str "~" arg)
-
-    :and " AND "
-    :or " OR "
-    :not "!"
-    :must "+"
-    :must-not "-"
-    :all "*"
-
-    :term (escape-term arg)
-    :pattern (escape-pattern arg)
-    :quoted (str "\"" (escape-quoted arg) "\"")
-    :regexp (str "/" (escape-regexp arg) "/")
-
-    (apply str (map ast->str args))))
-
-(def translate
-  "String-to-string conversion, applying AST transformations."
-  (comp ast->str str->ast))
-
-(comment
-  (str->ast "quelle:a/b"))
+(def parse
+  (comp expand-date-terms translate-field-names (partial p/parse query)))
 
 (defn valid?
   "A valid query can be parsed/transformed"
   [q]
-  (try (translate q) true (catch Throwable _ false)))
+  (try (parse q) true (catch Throwable _ false)))
+
+(defn node->str
+  [{:keys [tag content] {:keys [start end opts]} :attrs :as node}]
+  (if-not tag
+    (str node)
+    (let [content (apply str (map node->str content))]
+      (cond->
+          (condp = tag
+            :v        content
+            :match    content
+            :phr      (str "\"" content "\"")
+            :re       (str "/" content "/")
+            :not      "!"
+            :must     "+"
+            :must-not "-"
+            :to       " TO "
+            :and      " AND "
+            :or       " OR "
+            :range    (str (if (= start "exclusive") "{" "[")
+                           content
+                           (if (= end   "exclusive") "}" "]"))
+            :sub      (str "(" content ")")
+            :field    (str content ":")
+            content)
+        opts (str (str/join opts))))))
+
+(defn ->str
+  [v]
+  (let [v (cond-> v (vector? v) (gx/sexp->node))
+        v (cond-> v (map? v) (node->str))]
+    v))
+
+(def roundtrip
+  (comp ->str parse))
+
+(comment
+  (roundtrip "tp:(\"RA\" OR \"B\\\"UG\")")
+  (roundtrip "\"test \\\" 1\"~2")
+  (roundtrip "test^2")
+  (roundtrip "/ahd\\/jg\\kh/")
+  (roundtrip "a:a* AND b? OR /test[ab]/ AND \"t \\\"a*\"")
+  (roundtrip "[* TO b} AND test:\"a*\""))

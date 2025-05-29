@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7493048" Autor="kduden" Typ="Minimalartikel" Zeitstempel="2024-06-25" Erstellungsdatum="2024-06-25" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="wgrimm" timestamp="20240625T101830+0100" comment="Bitte um Regioprüfung der Formangaben"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>abseitsstehen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>steht abseits</Wert></Praesens>
+                <Praeteritum><Wert>stand abseits</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>abseitsgestanden</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders">D</Sprachareal>
+            </Diasystematik>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung>abseitsstehen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>steht abseits</Wert></Praesens>
+                <Praeteritum><Wert>stand abseits</Wert></Praeteritum>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>abseitsgestanden</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachareal>CH</Sprachareal>
+                <Sprachareal>A</Sprachareal>
+                <Sprachareal>D-Süd</Sprachareal>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>abseits</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>stehen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-06-25"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_997741082" Autor="dsanders" Typ="Verweisartikel" Zeitstempel="2022-12-15" Erstellungsdatum="1974-01-01" Status="Lex-zurückgestellt">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <?oxy_comment_start author="dsanders" timestamp="20221216T082922+0100" comment="in Artikel &quot;marode&quot; übernommen"?>
+            <Schreibung><?oxy_comment_end?>marod</Schreibung>
+            <Aussprache><IPA Audiodatei="130/marod"/></Aussprache><Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparativ><Wert>maroder</Wert></Komparativ>
+                <Superlativ><Wert>am marodesten</Wert></Superlativ>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>marode</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die Kunsteisbahn Dolder ist 1930 erbaut worden und befindet sich
+                        seit 1961 im Besitz der Stadt. Aus dieser Zeit stammt die Kälteanlage, die
+                        seither nie einer grösseren Instandsetzung unterzogen worden ist.
+                            <Streichung>Auch Ersatzteile sind laut Stadtrat kaum mehr zu
+                            beschaffen.</Streichung> Wie <Stichwort>marod</Stichwort> die Anlage
+                        ist, hat sich letztes Jahr bei einer Druckprobe gezeigt. Die Ergebnisse
+                        waren derart schlecht, dass gleich verschiedene Notmassnahmen eingeleitet
+                        werden mussten. Unter anderem wurden etwa hundert Zuleitungen
+                        ausgewechselt.</Belegtext>
+                    <Fundstelle Fundort="dwds:nzz_regional:2015/11/NZZ_NDF6J"> Neue Zürcher Zeitung,
+                        17.11.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>»Ich bin <Stichwort>marod</Stichwort> auf der Couch
+                            gelegen<Streichung>, nur wenn der Aksel in Kvitfjell gefahren ist, ist
+                            mein Puls jedes Mal auf 150 raufgegangen</Streichung>«<Streichung>,
+                            erzählte der Slalom-Weltmeister vom vergangenen Wochenende, als der
+                            norwegische Speed-Spezialist seine Heimrennen nutzte, um wieder die
+                            Führung im Gesamt-Weltcup zu übernehmen</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:at_nachrichten:rd/rDMQoHitJIoSDLIoxjAg8RAryeo">
+                        <Autor/>
+                        <Titel>Hirschers Kranjska-Gora-Mission lautet Weltcup-Führung – Tiroler
+                            Tageszeitung Online</Titel>
+                        <Kurztitel>Weltcup-Führung</Kurztitel>
+                        <Stelle/>
+                        <Datum>07.03.2014</Datum>
+                        <URL>https://www.tt.com/artikel/8048850/hirschers-kranjska-gora-mission-lautet-weltcup-fuehrung</URL>
+                        <Aufrufdatum>24.04.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vor allem junge Ärzte machen sich <Autorenzusatz>aus
+                            Bulgarien</Autorenzusatz> auf der Suche nach einem besseren Leben auf
+                        nach Mitteleuropa. Das Gesundheitssystem in ihrer Heimat ist
+                            <Stichwort>marod</Stichwort>, in Deutschland sind sie als Fachkräfte
+                        begehrt.</Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2014/02/27/ORF_Weltjournal_ueber_Mi"> Der
+                        Standard, 27.02.2014 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der gläserne Monsterbau aus den frühen Achtzigern war, nach nicht
+                        einmal 25 Jahren Betrieb, komplett <Stichwort>marod</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2013/09/20/Neue_Wiener_WU_Die_Welt_"> Der
+                        Standard, 20.09.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Staatliche Einrichtungen, Polizei und Armee gelten als grob
+                        unterfinanziert und <Stichwort>marod</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2012/12/27/Machtkampf_in_Zentralafr"> Der
+                        Standard, 27.12.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Über 50 Jahre alt ist der Schmutzwasserkanal <Streichung>von der
+                            Firma Hartchrom bis zur B27 in Zollhaus</Streichung> und entsprechend
+                            <Stichwort>marod</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2009/05/SK_200905130524"> Südkurier,
+                        13.05.2009 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-20"/></Rohdaten></Artikel>
+</DWDS>

@@ -1,0 +1,32 @@
+(ns zdl.lex.lexeme-query
+  (:require
+   [clojure.core.async :as a]
+   [clojure.test :refer [deftest is]]
+   [zdl.lex.server.ddc :as ddc]
+   [zdl.lex.server.korap :as korap]
+   [zdl.lex.server.util :refer [merge-chs]]
+   [taoensso.telemere :as t]))
+
+(def sample-lexeme
+  "zukunftsorientiert")
+
+(defn sample-ch
+  [ch]
+  (a/pipe ch (a/chan 1 (random-sample 0.1))))
+
+(defn query
+  [lexeme]
+  (->> (a/pipe (merge-chs
+                [(sample-ch (ddc/lexeme-stream lexeme))
+                 (sample-ch (korap/lexeme-stream lexeme))])
+               (a/chan 1 (take 100)))
+       (a/into [])
+       (a/<!!)))
+
+(deftest query-returns-results
+  (is (pos? (count (query sample-lexeme)))))
+
+(comment
+  (t/with-min-level :debug
+    (t/with-signals
+      (query sample-lexeme))))
