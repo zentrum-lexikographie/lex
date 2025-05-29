@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_d_30032" Autor="wgrimm" Typ="Minimalartikel" Zeitstempel="2010-03-31" Erstellungsdatum="2010-03-31" Status="Red-f">
+        <Formangabe Typ="Hauptform" Zeitstempel="2023-08-16" Quelle="DWDS" Autor="herold">
+            <?oxy_comment_start author="jgrimm" timestamp="20230816T082717+0200" comment="ergänzt, da urspr. Stichw. nur orthogr. Abk. war"?>
+            <Schreibung><?oxy_comment_end?>Doktor der Tiermedizin</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Abkürzung">
+            <Schreibung>Dr. med. vet.</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Zeitstempel="2023-08-16" Quelle="DWDS" Autor="herold">
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Doktor</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Tiermedizin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_d_30032">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

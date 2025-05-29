@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_1118788" Autor="wgrimm" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-05-30" Erstellungsdatum="2025-05-23" Status="Lex-kommentiert">
+        <?oxy_comment_start author="dsanders" timestamp="20250526T140451+0200" comment="@Red: in &quot;Amen&quot; aktiviere bitte den MWA Link"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <?oxy_comment_start author="jgrimm" timestamp="20250526T135204+0200" comment="Nebenform &quot;das Amen geben&quot; entfernt, fast keine Belege"?>
+            <Schreibung><?oxy_comment_end?>sein Amen geben</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar>Die Wendung wird je nach Kontext mit anderen Formen des Possessivpronomens
+                gebraucht: <Stichwort>ihr, mein Amen geben</Stichwort>.</Kommentar>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Amen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>geben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <?oxy_comment_start author="wgrimm" timestamp="20250530T155518+0200" comment="Etymologie ergänzen? hebr.: so sei es"?>
+            <Etymologie/><?oxy_comment_end?>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>gibt</Stichwort> (zu etw.) <Stichwort>sein
+                            Amen</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>jmdm., etw. grünes Licht geben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma><?oxy_comment_start author="wgrimm" timestamp="20221018T123606+0200" comment="Platzhalter und LA ergänzt  - bitte beide MWA zusammen freischalten"?>jmdm.,
+                        etw.<?oxy_comment_end?> seinen Segen geben</Ziellemma>
+                    <Ziellesart>1, 2</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Synonym" class="invisible">
+                    <Ziellemma>sein Einverständnis erklären</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="wgrimm" timestamp="20250530T155242+0200" comment="in Liste eingetragen als FVG"?>
+                </Verweis><?oxy_comment_end?>
+                <Verweis Typ="Assoziation" class="invisible">
+                    <Ziellemma>seine Zustimmung geben</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="kduden" timestamp="20250530T155242+0200" comment="in Liste eingetragen als FVG"?>
+                </Verweis><?oxy_comment_end?>
+            </Verweise>
+            <Definition Typ="Basis">einem Vorhaben o. Ä. zustimmen</Definition>
+            <Definition Typ="Basis">jmdm. die Erlaubnis erteilen, etw. zu tun</Definition>
+            <Definition Typ="Basis">sich mit etw. einverstanden erklären</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <?oxy_comment_start author="wgrimm" timestamp="20250530T155756+0200" comment="gibt es noch Belege aus A oder CH?"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext><Streichung>Viele Firmen beschäftigen heute einen eigenen Justiziar,
+                            der jeden Vertrag prüft, ehe er unterzeichnet wird. Nicht nur Verträge
+                            mit anderen Unternehmen gehen über seinen Tisch, auch ein angebotener
+                            Vertrag zu einer Bewerbung muss vorerst auf Herz und Nieren geprüft
+                            werden.</Streichung> Absolventen im Fach Wirtschaftsrecht sehen sich
+                        eher als Taktiker und agieren weniger an vorderster Front. Sie prüfen und
+                        klären verschiedene Dinge, sie studieren Verträge bis ins letzte Detail, ehe
+                        sie <Stichwort>ihr</Stichwort>
+                        <Stichwort>Amen</Stichwort> zu einer Unterschrift
+                            <Stichwort>geben</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:34812/M4FmZnr_sOuY5aFw">
+                        <Autor>Marius Beilhammer</Autor>
+                        <Titel>Business Law: Studium für den Karrierehöhenflug</Titel>
+                        <Stelle/>
+                        <Datum>04.12.2019</Datum>
+                        <URL>http://www.gerichte-und-urteile.de/business-law-studium/</URL>
+                        <Aufrufdatum>13.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In der parlamentarischen Sommerpause hat Grimmas Oberbürgermeister
+                        Matthias B<Streichung>erger</Streichung> die Leistung für den Bau von fünf
+                        Spielplätzen vergeben, um keine weitere Zeit zu verlieren. Der Technische
+                        Ausschuss wurde jetzt über diese Eilentscheidung in Kenntnis gesetzt und
+                            <Stichwort>gab</Stichwort>
+                        <Stichwort>sein</Stichwort>
+                        <Stichwort>Amen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2019/09/LVZ_doc770nqeq7jdw1dtn4k2sf">
+                        Leipziger Volkszeitung, 09.09.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Und</Streichung> bevor ich nicht restlos von etwas
+                        überzeugt bin, <Stichwort>gebe</Stichwort> ich <Stichwort>mein</Stichwort>
+                        <Stichwort>Amen</Stichwort> zu keinem Vorhaben, bloß weil die anderen in der
+                        Mehrzahl sind oder eine Instanz höher sitzen. </Belegtext>
+                    <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/1556/26120215_1983_09_10_01_085">
+                        Berliner Zeitung, 10.09.1983 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-23"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

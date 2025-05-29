@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_a_4084_13" Autor="jgrimm" Typ="Basisartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2025-05-21" Erstellungsdatum="1967-01-01" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform" Quelle="DWDS" Zeitstempel="2025-05-21" Autor="roll">
+            <Schreibung Trennung="an-ders-ar-tig">andersartig</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="037/andersartig">ˈandɐsˌʔaːɐ̯tɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparativ>
+                    <Wert>-er</Wert>
+                </Komparativ>
+                <Superlativ>
+                    <Wert>-sten</Wert>
+                </Superlativ>
+                <Komparationspraeferenz>Superlativ selten</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="wgrimm" timestamp="20250327T080321+0100" comment="Nur Bezugsregel ergänzt"?>36
+                (1.2)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>anders</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-artig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_a_4564">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine <Stichwort>andersartige</Stichwort> Denkweise</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>Die schöne Episode ging in ein wundervolles, aber ganz
+                            <Stichwort>andersartiges</Stichwort>, lautes Finale aus</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="HAUGERAPR">
+                        <Autor>G. Hauptm.</Autor>
+                        <Titel/>
+                        <Stelle>3,85</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="pandey" Quelle="DWDS" Zeitstempel="2023-08-04">
+                <Beleg>
+                    <Belegtext>Aber die <Stichwort>andersartige</Stichwort> religiöse Orientierung
+                        brach sich immer wieder Bahn.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Weber, Max: Die protestantische
+                        Ethik und der Geist des Kapitalismus. In: Weber, Marianne (Hg.) Gesammelte
+                        Aufsätze zur Religionssoziologie, Bd. I, Tübingen: Mohr 1920 [1920], S.
+                        117</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Einen <Stichwort>andersartigen</Stichwort> Gewinn ziehen die Mädchen,
+                        die sich den Witz erzählen, aus der Geschichte.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Lakaschus, Carmen u. Binder,
+                        Hans-Jörg: Der Unterschied von Mann und Frau, Frankfurt: Bärmeier und Nikel
+                        1968, S. 105</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Andersartige</Stichwort> Chancen leiden freilich unter dem
+                        Willen, nach oben zu kommen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.08.1980, Nr. 32</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber man wollte es auch kennen lernen, war fasziniert von einer
+                        völlig <Stichwort>andersartigen</Stichwort> Kultur.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 25.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In welcher Art und Weise können wir uns eine Entwicklung zu immer
+                            <Stichwort>andersartigen</Stichwort> Tiergestaltungen
+                        vorstellen?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Petersen, Jes: Erde und Mensch,
+                        Berlin: Columbus-Verl. [1935] [1925], S. 72</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

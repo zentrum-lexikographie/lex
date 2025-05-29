@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="kduden" xml:id="D99_063358" Autor="kduden" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-04-23" Erstellungsdatum="1999-01-01" Status="Lex-Wiedervorlage">
+        <?oxy_comment_start author="dsanders" timestamp="20250401T131448+0200" comment="bitte bei Freischaltung aktuellen Artikel streichen, danke" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20250423T125723+0200" comment="Quelle nun geändert" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="Gol-den De-li-cious">Golden Delicious</Schreibung>
+            <Aussprache>
+                <IPA>ˌgoʊ̯ldən dəˈlɪʃəs</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+                <Funktionspraeferenz>substantivisch</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <?oxy_comment_start author="dsanders" timestamp="20250401T131651+0200" comment="ist das nicht sogar ein Eigenname?" flag="done"?>
+        <Verweise Typ="Simplex"/><?oxy_comment_end?>
+        <Diachronie>
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">Golden
+                    Delicious</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="engl">golden</erwaehntes_Zeichen>
+                <Paraphrase>golden</Paraphrase> und <erwaehntes_Zeichen Sprache="engl">delicious</erwaehntes_Zeichen>
+                <Paraphrase>köstlich</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <?oxy_comment_start author="wgrimm" timestamp="20250423T122807+0200" comment="LA ergänzt u. ganze Struktur umgebaut, Mantis-Meldung v. 22.4.25"?>
+            <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">Apfelsorte mit mittelgroßen Äpfeln mit dünner, grüngoldgelber,
+                bräunlich punktierter Schale und gelblichem, süßem Fruchtfleisch bzw. Frucht dieser
+                Sorte</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>»Die neuen Sorten gehen alle auf Jonathan und
+                            <Stichwort>Golden</Stichwort>
+                        <Stichwort>Delicious</Stichwort> zurück«, erklärte der Fachmann. »In den
+                        1950er-Jahren hat man daraus neue Äpfel entwickelt.« </Belegtext>
+                    <Fundstelle Fundort="dwds:gea_regional:2024/10/GEA_srv101-17964928"> Reutlinger
+                        General-Anzeiger, 08.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Man erfährt <Streichung>unter anderem</Streichung>, dass die
+                        Hauptapfelsorten im Thurgau Gala und <Stichwort>Golden</Stichwort>
+                        <Stichwort>Delicious</Stichwort> sind. </Belegtext>
+                    <Fundstelle Fundort="dwds:tgz_regional:2022/05/TGZ_202205030301489290">
+                        Thurgauer Zeitung, 03.05.2022 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Als Baumpate trägt man zum Erhalt der 50 Apfelsorten im
+                        Apfelsortengarten <Streichung>am Schloss Rauenstein</Streichung> bei und schütz<?oxy_comment_start author="dsanders" timestamp="20250401T131809+0200" comment="-t ergänzt" flag="done"?>t<?oxy_comment_end?>
+                        <Streichung>somit</Streichung> alte und seltene Apfelsorten. Von der
+                        Apfelsorte Rheinischer Krummstiel bis zum <Stichwort>Golden
+                            Delicious</Stichwort> sind viele <Streichung>weitere</Streichung>
+                        Apfelsorten vertreten. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2017/04/SK_230699"> Südkurier, 29.04.2017
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Die Zeiten, da Pinova und <Stichwort>Golden</Stichwort>
+                        <Stichwort>Delicious</Stichwort> einzeln aus riesigen Schütten per Hand in
+                        die Tüte kamen, sind <Streichung>allerdings</Streichung> längst vorbei.
+                        Heute schwimmen die Äpfel über lange Bahnen im Wasserbad, bis sie
+                            <Streichung>dort ankommen, wo sie</Streichung> in einer Kiste, einer
+                        Tragetasche oder in der Obstschale landen. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2013/03/LVZ_47E362CC09E3321258E869A33F9F6B23">
+                        Leipziger Volkszeitung, 07.03.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Praktisch</Streichung> jede Stunde machen die Exoten
+                            <Autorenzusatz>Wasserbüffel</Autorenzusatz> eine Runde bei den
+                        Apfelbäumen und vergewissern sich, ob wieder eine Frucht vom Baum gefallen
+                        ist. Bäuerin Ruth W<Streichung>eber</Streichung> streckt den beiden
+                        einjährigen »Buben« <Streichung>Idefix und Travers</Streichung>
+                        aufgeschnittene <Stichwort>Golden Delicious</Stichwort> hin und betont, die
+                        Tiere seien wählerisch. So würdigten sie etwa die Klaräpfel keines Blickes
+                        mehr, sobald die Gravensteiner reif seien. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz_regional:2012/03/NZZ_JB2OS"> Neue Zürcher Zeitung,
+                        20.03.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ob Äpfel wie Kronprinz, Gala und <Stichwort>Golden
+                            Delicious</Stichwort> oder Birnen wie Gute Luise, Alexander und
+                        Conference – eines haben sie gemeinsam: Sie sind gesund zum Naschen,
+                        kalorienarm und haben wertvolle Inhaltsstoffe. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:KLEINE_regional/xml/2009/10/kleine_200910080847190338">Kleine Zeitung, 08.10.2009 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="*">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>metonymisch</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">Obstbaum, an dem die Frucht wächst</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>8000 Liter Kompost wurden bei der Pflanzung von Sorten mit
+                            klingenden Namen in den Boden eingearbeitet: Dithmarscher Paradiesapfel,
+                            Glücksburger Königsapfel, Schleswiger Erdbeerapfel, Schaalburger
+                            Renette, Holsteiner Cox und <Stichwort>Golden</Stichwort>
+                            <Stichwort>Delicious</Stichwort> stehen an der Landesstraße. </Belegtext>
+                        <Fundstelle Fundort="dwds:kn_regional:2019/11/KN_doc786hx6nr039bxwfo651">
+                            Kieler Nachrichten, 29.11.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Haben sie <Autorenzusatz>Hobbygärtner</Autorenzusatz> selbst Gala
+                            oder <Stichwort>Golden</Stichwort>
+                            <Stichwort>Delicious</Stichwort> gepflanzt, bleibt die Enttäuschung
+                            nicht aus: Mit den makellosen Früchten aus dem Supermarkt kann es die
+                            eigene Ernte nicht aufnehmen. </Belegtext>
+                        <Fundstelle Fundort="dwds:lvz_regional:2004/10/LVZ_200410230606284220822086"> Leipziger Volkszeitung, 23.10.2004 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

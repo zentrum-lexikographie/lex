@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_2103456" Autor="jgrimm" Typ="Verweisartikel" Tranche="IT-002" Zeitstempel="2025-05-27" Erstellungsdatum="2025-02-05" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>die Zügel fahrenlassen</Schreibung>
+            <Schreibung>die Zügel fahren lassen</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Zügel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>fahrenlassen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>lässt die Zügel fahren</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>die Zügel schießenlassen</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Synonym_MWA_Variante" class="invisible">
+                    <Ziellemma>die Zügel schleifenlassen</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="kduden" timestamp="20250527T130501+0200" comment="ist in der Mache" flag="done"?>
+                </Verweis><?oxy_comment_end?>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20250527T130854+0200" comment="Ersatzbeleg, derselbe Fall, nur genauer" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Wie sehr <Autorenzusatz>der scheidende
+                            US-Präsident</Autorenzusatz> Joe Biden derzeit
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>
+                        <Stichwort>lässt</Stichwort>, enttäuscht viele Amerikaner <Streichung>dann
+                            doch</Streichung>. Eindringlich hatte der Präsident davor gewarnt,
+                        welche Gefahr sein Vorgänger für die Demokratie darstelle, falls er noch
+                        einmal ins Weisse Haus gelange. Nun, da Donald Trump mit seinen
+                        Nominierungen für die Chefposten in der Justiz die schlimmsten Befürchtungen
+                        bekräftigt, scheint Biden kaum etwas zu unternehmen.</Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2024/12/BAZ_9735319"> Basler Zeitung, 27.12.2024
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aktivitäten im Freien <Autorenzusatz>während der
+                            Corona-Pandemie:</Autorenzusatz> Allerdings bedeuteten die
+                        Öffnungsschritte <Streichung>nun</Streichung> nicht, dass man die Zügel
+                        <?oxy_comment_start author="jgrimm" timestamp="20250527T105850+0200" comment="evtl. weiterer MWA: die Zügel schleifenlassen?" id="cw4_t5t_lfc" flag="done"?><?oxy_comment_start author="wgrimm" timestamp="20250527T113443+0200" parentID="cw4_t5t_lfc" comment="wie ich gerade sehe, habe ich den MWA bereits bestellt" flag="done" mid="3"?>schleifen<?oxy_comment_end mid="3"?><?oxy_comment_end?>
+                        lassen könne, so B<Streichung>erset</Streichung>. Wenn man die Situation
+                        deshalb <Streichung>aber</Streichung> als «halb so wild» interpretiere und
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>
+                        <Stichwort>lasse</Stichwort>, «wird es nicht gut gehen», warnte
+                        er.</Belegtext>
+                    <Fundstelle Fundort="dwds:sogr:2021/04/SOGR_4325686"> Südostschweiz Bündner
+                        Zeitung, 15.04.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich <Streichung>selbst</Streichung> musste
+                            <Streichung>ebenfalls</Streichung> wieder deutlichere Mühen unternehmen,
+                        um die Neurodermitis (und daraus resultierende Schlafstörungen) einzudämmen.
+                        Tja und deshalb freue ich mich einfach, wenn ich dahingehend etwas
+                        Erleichterung erfahre und in den nächsten Wochen wieder mehr
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>
+                        <Stichwort>lassen</Stichwort> und einfach mal lecker Essen gehen kann, auch
+                        das Meer wird wieder seine heilende Wirkung auf mich entfalten. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:27676/AOH8-J_E-9_zJz-P">
+                        <Autor>Doro</Autor>
+                        <Titel>Eine kleine Auszeit für mich mitten im Atlantik</Titel>
+                        <Stelle/>
+                        <Datum>10.06.2018</Datum>
+                        <URL>https://www.philosophie-des-gesundwerdens.de/2018/06/10/eine-kleine-auszeit-fuer-mich-mitten-im-atlantik/</URL>
+                        <Aufrufdatum>26.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="wgrimm" timestamp="20250527T113713+0200" comment="Ersatzbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?><Streichung>Um abschließend noch mal auf den
+                            body-Aspekt dieses Body&amp;Mind Postes zu kommen:</Streichung> Ja, ich
+                        habe <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>
+                        <Stichwort>gelassen</Stichwort>. Shame on me. Meine Werte, als ich anfang
+                        des Monates mal wieder gemessen habe, waren so schlecht wie lange nicht
+                        mehr. </Belegtext>
+                    <Fundstelle Fundort="dwds:modeblogs:651/7qwZZ7Wm3Jbyma2V">
+                        <Autor>Mara</Autor>
+                        <Titel>Rund – und? Klappe, die vierte</Titel>
+                        <Stelle/>
+                        <Datum>10.10.2015</Datum>
+                        <URL>http://all-that-plush.weebly.com/1/post/2015/10/rund-und-klappe-die-vierte.html</URL>
+                        <Aufrufdatum>26.09.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>lässt die Zügel fahren</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>die Zügel schießenlassen</Ziellemma>
+                    <Ziellesart>3</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Plötzlich spürt das Schlagzeug die Peitsche, der Bass die Sporen, und
+                        der Gitarrist <Stichwort>lässt</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>, jipiajeh! </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1994-2023/2020/07/ZEIT_93001049AF8B2F9720DA49E25619FA10">
+                        Die Zeit, 23.07.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit »Pettersson und Findus« ist Sven Nordqvist in jedem Kinderzimmer
+                        präsent. In seinem neuen Bilderbuch <Stichwort>lässt</Stichwort> er
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort> vollends <Stichwort>fahren</Stichwort> und
+                        schafft eine surreale Wunderwelt. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2008/10/FAZ_FD1200810151961113"> Frankfurter
+                        Allgemeine Zeitung, 15.10.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Leichtigkeit, mit der <Autorenzusatz>Pianistin
+                            Elisabeth</Autorenzusatz>
+                        <?oxy_comment_start author="dsanders" timestamp="20250527T105710+0200" comment="bitte noch AZ, wer das ist + Vorname" id="vv2_45t_lfc" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20250527T113308+0200" parentID="vv2_45t_lfc" comment="ergänzt" flag="done" mid="6"?>Leonskaja<?oxy_comment_end mid="6"?><?oxy_comment_end?>
+                        die eleganten Skalen und Intervall-Ketten von Chopin wie aus dem Ärmel
+                        schüttelt, könnte den Eindruck erwecken, sie <Stichwort>ließe</Stichwort>
+                        kühn <Stichwort>die</Stichwort>
+                        <Stichwort>Zügel</Stichwort>
+                        <Stichwort>fahren</Stichwort>, um der Musik Flügel zu verleihen. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:2004/11/sz_541308"> Nobles aus Mallorca.
+                        Süddeutsche Zeitung, 15.11.2004 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-02-05"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

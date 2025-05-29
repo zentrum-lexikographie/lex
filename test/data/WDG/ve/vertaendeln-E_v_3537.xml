@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_v_3537" Autor="" Typ="Basisartikel" Zeitstempel="1977-01-01" Erstellungsdatum="1977-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-03-19" Quelle="DWDS" Autor="herold">
+            <Schreibung>vertändeln</Schreibung>
+            <Aussprache><IPA Audiodatei="060/vertaendeln"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>vertändelt</Wert></Praesens>
+                <Praeteritum><Wert>vertändelte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>vertändelt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2021-03-19" Quelle="DWDS" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>ver-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>tändeln</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_v_2881">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>die Zeit <Stichwort>vertändeln</Stichwort> <Paraphrase>mit unnützen Dingen verbringen</Paraphrase> </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>Geld <Stichwort>vertändeln</Stichwort> <Paraphrase>für unnütze Dinge ausgeben</Paraphrase> </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Er <Stichwort>vertändelt</Stichwort> schon mal leichtfertig einen Ball, dafür ist er in entscheidenden Szenen da.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 23.10.2000</Fundstelle></Beleg><Beleg><Belegtext>Er hat den Ball <Stichwort>vertändelt</Stichwort> und es nicht geschafft, ihn zurückzuerobern.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 28.02.2001</Fundstelle></Beleg><Beleg><Belegtext>Doch er <Stichwort>vertändelte</Stichwort> und kam mit dem ausgestreckten Bein nicht mehr schnell genug an den Ball.</Belegtext><Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 10.05.2002</Fundstelle></Beleg><Beleg><Belegtext>Dann <Stichwort>vertändeln</Stichwort> die Hamburger mit einem Mann mehr die Scheibe.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 29.10.2005</Fundstelle></Beleg><Beleg><Belegtext>Jetzt beteiligte sich gelegentlich sogar Del Piero am Spiel, der bisher die meiste Zeit <Stichwort>vertändelt</Stichwort> hatte.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 30.06.2000</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

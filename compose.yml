@@ -1,0 +1,60 @@
+name: zdl_lex
+services:
+  index:
+    image: solr:9
+    volumes:
+      - index:/var/solr
+    ports:
+      - "8983:8983"
+    command: [ "solr-precreate", "articles" ]
+  db:
+    image: docker.zdl.org/zdl/pgvector:latest
+    build:
+      context: .
+      dockerfile_inline: |
+          FROM pgvector/pgvector:0.7.2-pg16
+          RUN localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
+          ENV LANG de_DE.utf8
+    environment:
+      - "POSTGRES_USER=nlp"
+      - "POSTGRES_PASSWORD=nlp"
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  server:
+    image: docker.zdl.org/zdl/lex:latest
+    build:
+      context: .
+    environment:
+      - "ZDL_LEX_SERVER_URL=http://localhost:3000"
+      - "ZDL_LEX_SERVER_USER=admin"
+      - "ZDL_LEX_SERVER_PASSWORD=admin"
+      - "ZDL_LEX_GIT_ORIGIN="
+      - "ZDL_LEX_GIT_BRANCH=dev"
+    volumes:
+      - server:/data
+    ports:
+      - "3000:3000"
+  http:
+    image: caddy
+    configs:
+      - source: caddy_config
+        target: /etc/caddy/Caddyfile
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    tty: true
+volumes:
+  index:
+  db:
+  server:
+configs:
+  caddy_config:
+    content: >-
+      localhost {
+          handle {
+              reverse_proxy server:3000
+          }
+      }

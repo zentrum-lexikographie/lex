@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_4229374" Autor="dsanders" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2022-02-23" Erstellungsdatum="2021-11-04" Status="Lex-kommentiert">
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_start author="dsanders" timestamp="20211110T093938+0100" comment="bitte zusammen freischalten mit &quot;den richtigen Riecher haben&quot;" flag="done"?>
+            <Schreibung><?oxy_comment_end?>einen guten Riecher haben</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar>Anstelle des Attributs <erwaehntes_Zeichen Sprache="dt">gut</erwaehntes_Zeichen> kommen auch andere Adjektive wie <erwaehntes_Zeichen Sprache="dt">besonders, untrüglich, ausgezeichnet</erwaehntes_Zeichen>
+                vor.<?oxy_comment_start author="jgrimm" timestamp="20211111T114819+0100" comment="Formkommentar ergänzt" flag="done"?></Kommentar><?oxy_comment_end?>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>gut</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Riecher</Ziellemma>
+                <?oxy_comment_start author="dsanders" timestamp="20211111T101353+0100" comment="was fehlt, ist der synonyme MWA &quot;eine gute Nase haben&quot;, dort würde ich dann wie hier andere Adjektivattribute unterbringen. Es gibt allerdings den MWA &quot;eine gute Nase/gutes Näschen&quot;, mit der Kollokation &quot;haben&quot; - wie gehen wir damit um? Ich habe bisher nichts beantragt in der MWAD, soll ich? (ca. 900 Belege allein für &quot;gut&quot;)" id="vdg_slv_fsb"?>
+                <?oxy_comment_start author="jgrimm" timestamp="20220113T172442+0100" parentID="vdg_slv_fsb" comment="verdammt guter Einwand. 
+Ich frage mich, ob wir mit der Nennform &quot;guter Riecher&quot; nicht besser dastehen (auch wenn die Definition damit schwieriger werden könnte)  
+Die Anfrage  guter Riecher &amp;&amp; !haben fördert 1500 Belege zutage: einen guten Riecher beweisen, Menschen haben nicht den besten Riecher, sie vertraute ihrem guten Riecher ...
+
+offenbar wird guter Riecher synonym zu gute Nase verwendet. Leider sind wir hier im Grenzbereich zum EWA Nase. " mid="3"?>
+                <Ziellesart><?oxy_comment_end?><?oxy_comment_end mid="3"?></Ziellesart>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>hat einen guten Riecher</Stichwort> (für
+                        etw.)</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <?oxy_comment_start author="kduden" timestamp="20211110T133216+0100" comment="das passt für mich eher als Synonym, die Definition passt besser" id="mc3_m2d_4rb" flag="done"?>
+                    <?oxy_comment_start author="dsanders" timestamp="20211111T101906+0100" comment="geändert zu &quot;Synoynm&quot;" parentID="mc3_m2d_4rb" flag="done" mid="5"?>
+                    <Ziellemma><?oxy_comment_end?><?oxy_comment_end mid="5"?>eine Nase für etw.
+                        haben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <?oxy_comment_start author="wgrimm" timestamp="20211110T094257+0100" comment="wenn ich &quot;den richtigen Riecher haben&quot; als MWA-Synonym angebe, könnte ich auf die Def. verzichten, müsste dann aber diesen zum Verweisartikel machen - hat aber 1.300 Belege, also die Def. hier (Vollartikel) wiederholen?" id="gvr_kww_nrb"?>
+                <?oxy_comment_start author="kduden" timestamp="20211110T132934+0100" comment="ich finde schon, dass sich die Bedeutungen unterscheiden: einen guten Riecher haben bezeichnet eher die Fähigkeit bzw. das entsprechende Geschick
+den richtigen Riecher ist eher eine Definition ex post: dass jmd. tatsächlich aufgrund seines guten Gespürs auf die richtige Lösung gekommen ist. " parentID="gvr_kww_nrb" mid="7"?>
+                <?oxy_comment_start author="wgrimm" timestamp="20211111T101837+0100" comment="das stimmt; Verweis zu &quot;den richtigen R. haben&quot; daher geändert zu &quot;Assoziation&quot; und 2 Def.zeilen ergänzt, orientiert an &quot;eine Nase haben für etw.&quot;" parentID="gvr_kww_nrb" mid="8"?>
+                <Verweis Typ="Assoziation"><?oxy_comment_end?><?oxy_comment_end mid="7"?><?oxy_comment_end mid="8"?>
+                    <Ziellemma>den richtigen Riecher haben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">über ein Gespür für sich bietende Möglichkeiten und Vorteile
+                verfügen</Definition>
+            <Definition Typ="Basis">die Fähigkeit, das Geschick besitzen, Entwicklungen, Trends o.
+                Ä. richtig einzuschätzen und passende Schlussfolgerungen zu ziehen</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adverbialbestimmung">
+                    <Belegtext>bisher, immer, stets <Stichwort>einen guten Riecher
+                        haben</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Dem Quellwasser wurde in den 1990ern Mineral- und Heilwasserqualität
+                        bescheinigt. <Streichung>Worauf sich die Mineralquellen Friedrichroda
+                            gründeten. Doch 2005 stellte Hassia den Abfüllbetrieb wieder
+                            ein.</Streichung> »Die Mönche <Stichwort>hatten</Stichwort> schon
+                            <Stichwort>einen guten Riecher</Stichwort> für gutes Wasser«, ist
+                            H<Loeschung>enniges</Loeschung> überzeugt.</Belegtext>
+                    <Fundstelle>Thüringer Allgemeine, 01.07.2021</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>»<Streichung>Deren Auslastung ist sehr gut.</Streichung> Wir haben
+                        die magische Grenze von 25000 Besuchern <Autorenzusatz>im
+                            Programmkino</Autorenzusatz> zum dritten Mal hintereinander
+                        überschritten.« Dennoch sei primäres Ziel, für Reutlingen ein attraktives
+                        Programm zu machen. »Wir <Stichwort>hatten</Stichwort> bislang diesbezüglich
+                            <Stichwort>einen guten Riecher</Stichwort>.«</Belegtext>
+                    <Fundstelle>Reutlinger General-Anzeiger, 01.02.2020</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20211111T090811+0100" comment="ausgezeichneten Riecher"?>
+                    <Belegtext><?oxy_comment_end?><Streichung>Und</Streichung> Wizzair, die grösste
+                        Billigfluggesellschaft Osteuropas, könnte ihrem Ruf, <Stichwort>einen
+                            ausgezeichneten Riecher</Stichwort> für Marktentwicklungen zu
+                            <Stichwort>haben</Stichwort>, wieder einmal gerecht werden: Ab Herbst
+                        wird die Airline die Zahl ihrer Flüge aus der Westukraine nach Berlin und
+                        Dortmund verdoppeln.</Belegtext>
+                    <Fundstelle>Neue Zürcher Zeitung, 03.07.2019</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20211110T133038+0100" comment="ebenfalls eher die Fähigkeit" flag="done"?>
+                    <Belegtext><?oxy_comment_end?><Streichung>Die Stadt, das Land Rheinland-Pfalz
+                            und der Förderverein sind für die Finanzierung zuständig, doch das
+                            Programm wird ausschließlich von der Projektgruppe
+                            entworfen.</Streichung> »Die Projektgruppe <Stichwort>hat einen guten
+                            Riecher</Stichwort> dafür, was in puncto Gegenkultur, Musik, Film,
+                        Literatur und Kabarett gerade so läuft«, erklärt der heute Achtzigjährige.
+                            <Streichung>Schroeder selbst war von 1975 bis 1988 Mitglied der
+                            Projektgruppe.</Streichung></Belegtext>
+                    <Fundstelle>Allgemeine Zeitung, 11.06.2019</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>"Viele Bands, die hier <Autorenzusatz>auf dem
+                            Festival</Autorenzusatz> auftraten, haben bald darauf einen renommierten
+                        Preis bekommen. Wir <Stichwort>hatten</Stichwort> bisher <Stichwort>einen
+                            guten Riecher</Stichwort> für die aktuelle Entwicklung in der Jazzszene"
+                        , meinte B<Loeschung>ack</Loeschung>. <Streichung>Die Kosten, das Festival
+                            zu realisieren, belaufen sich auf rund 10000 Euro, die die Veranstalter
+                            mit Spenden- und Sponsorengeldern decken.</Streichung></Belegtext>
+                    <Fundstelle> Kieler Nachrichten, 24.05.2019</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>H<Loeschung>inz</Loeschung>, der auch Regie führt, scheint mit diesem
+                        Stoff <Autorenzusatz>Streit an Heiligabend</Autorenzusatz>
+                        <Stichwort>einen guten Riecher gehabt</Stichwort> zu haben: Das Schauspiel
+                        ist so gut gefragt, dass H<Loeschung>inz</Loeschung> Zusatzvorstellungen
+                        anbietet.</Belegtext>
+                    <Fundstelle>Rhein-Zeitung, 16.12.2017</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20211111T085446+0100" comment="besonderen Riecher"?>
+                    <Belegtext><?oxy_comment_end?>Was macht für Sie einen guten Schlager aus?
+                            <Autorenzusatz>-</Autorenzusatz> Das kleine grüne Männchen, das einen
+                        Hit voraussagen kann, gibt's nicht. Aber natürlich muss ein Produzent
+                            <Stichwort>einen besonderen Riecher haben</Stichwort>. Ein Song muss
+                        aufgehen, irgendwann muss die Überraschung kommen, damit jeder mitmachen
+                        kann.</Belegtext>
+                    <Fundstelle>Leipziger Volkszeitung, 02.09.2015</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20211110T133016+0100" comment="eher die Fähigkeit" flag="done"?>
+                    <?oxy_comment_start author="kduden" timestamp="20211111T115520+0100" comment="oder zur ULA?" mid="13"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="13"?>Unsere Kinder
+                            <Stichwort>haben</Stichwort> ein feines Gespür und <Stichwort>einen
+                            guten Riecher</Stichwort> für Fairness, die Bemühungen,
+                        abwechslungsreich den Stoff zu vermitteln, sich der Kunst der
+                        Leistungsbewertung zu stellen und die so menschlichen Seiten ihres
+                        Pädagogen.</Belegtext>
+                    <Fundstelle>Neue Osnabrücker Zeitung, 15.08.2012</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20211110T133132+0100" comment="die Fähigkeit, ob sie damit immer richtig liegen, ist nicht zwangsläufig gesagt" id="x3y_2rd_4rb"?>
+                    <?oxy_comment_start author="jgrimm" timestamp="20211111T115557+0100" comment="besser invisible?" parentID="x3y_2rd_4rb" mid="15"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="15"?>Elsbeth
+                            L<Loeschung>auber</Loeschung> und ihre Mitarbeiterinnen
+                            <Autorenzusatz>in der Boutique</Autorenzusatz> sind bekannt dafür, dass
+                        sie <Stichwort>einen guten Riecher</Stichwort> für die kommenden Trends
+                            <Stichwort>haben</Stichwort>. Und während der Sommer eigentlich noch gar
+                        nicht richtig begonnen hat, sind sie in Gedanken schon im Herbst und
+                        Winter.</Belegtext>
+                    <Fundstelle>Badische Zeitung, 15.06.2011</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <?oxy_comment_start author="kduden" timestamp="20211111T115509+0100" comment="oder zur ULA?"?>
+                    <Belegtext><?oxy_comment_end?>Seit einem guten Jahrzehnt stellt er jährlich vier
+                        Auszubildende für seine beiden Salons ein. Sein erster Eindruck hat ihn
+                        selten getäuscht. »Ich habe bisher immer <Stichwort>einen guten Riecher
+                            gehabt</Stichwort>«, sagt der 38-Jährige, der seit 22 Jahren im
+                        Friseurberuf tätig ist.</Belegtext>
+                    <Fundstelle> Berliner Morgenpost, 16.02.2010 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>1959 eröffnete er in der Altstadt seine erste Gaststätte.
+                            <Streichung>"Zum Fußball« hieß das Lokal, seine Mannschaftskameraden vom
+                            SC Schwarz-Weiß waren dort Stammkunden.</Streichung> Später führte
+                            J<Loeschung>acob</Loeschung> zeitweise sieben bis acht Lokale
+                        gleichzeitig, wobei er immer <Stichwort>einen guten Riecher</Stichwort>
+                        dafür <Stichwort>hatte</Stichwort>, was gerade »in« war.</Belegtext>
+                    <Fundstelle>Allgemeine Zeitung, 08.05.2006 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20211111T085212+0100" comment="untrüglichen Riecher"?>
+                    <Belegtext><?oxy_comment_end?>"Sie <Autorenzusatz>die beiden preisgekrönten
+                            Fernsehjournalisten</Autorenzusatz>
+                        <Stichwort>haben einen untrüglichen Riecher</Stichwort> für kommende Themen.
+                        Niemand sonst kann so seismographisch genau erspüren, welches ein wirklich
+                        brennendes und lohnendes Thema für den nächsten Film sein
+                        könnte«.</Belegtext>
+                    <Fundstelle>Saarbrücker Zeitung, 04.05.2006</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>R<Loeschung>upert</Loeschung>, der stets <Stichwort>einen guten
+                            Riecher</Stichwort> für die Entwicklung des Marktes
+                            <Stichwort>hatte</Stichwort>, setzte früh auf Markenartikel und war die
+                        treibende Kraft bei der Schaffung des Luxusgüterkonzerns
+                            Richemont<Streichung>, der unter anderem die Marken Mont Blanc, Piaget,
+                            Cartier und Dunhill vertrieb</Streichung>.</Belegtext>
+                    <Fundstelle>Neue Zürcher Zeitung, 20.01.2006</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="jgrimm" timestamp="20211111T084359+0100" comment="einmalig"?>
+                    <Belegtext><?oxy_comment_end?>Die breite Bevölkerung, für die das »Hamburger
+                        Abendblatt«, die »Berliner Morgenpost« und »Bild« gemacht werden – für die
+                            <Stichwort>hatte</Stichwort> er <Autorenzusatz>Axel
+                            Springer</Autorenzusatz>
+                        <Stichwort>einen einmaligen Riecher</Stichwort>.</Belegtext>
+                    <Fundstelle>Hamburger Abendblatt, 27.01.2001</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart>
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">eine Situation korrekt
+                    <?oxy_comment_start author="wgrimm" timestamp="20211111T115253+0100" comment="teils ist es schwierig, diese neue ULA abzugrenzen - aber so weit stimmt es, oder? mit der Erweiterung &quot;einen Menschen&quot; könnten noch andere Belege hier unten landen"?>einschätzen<?oxy_comment_end?></Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg class="good_example">
+                        <Belegtext><Stichwort>Einen guten Riecher hatten</Stichwort> Beamte
+                                <Streichung>der Geretsrieder Polizeiinspektion</Streichung> am
+                            Sonntagmorgen. Sie kontrollierten <Streichung>um kurz vor 9 Uhr auf der
+                                Richard-Wagner-Straße</Streichung> einen 29-jährigen Mann
+                                <Streichung>aus Kochel am Steuer eines VW</Streichung>. Bei der
+                            Überprüfung der Fahrtüchtigkeit des Mannes »ergaben sich Anzeichen für
+                            den Konsum von Betäubungsmitteln«, heißt es im Polizeibericht.
+                                <Streichung>Ein Schnelltest bestätigte den Verdacht der
+                                Beamten.</Streichung></Belegtext>
+                        <Fundstelle>Münchner Merkur, 09.06.2020</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Zivilfahnder haben <Streichung>am Mittwochnachmittag kurz nach 16
+                                Uhr</Streichung> offenbar <Stichwort>einen guten Riecher
+                                gehabt</Stichwort>. Sie kontrollierten <Streichung>auf dem
+                                Karolienplatz</Streichung> zwei 31 und 34 Jahre alte Männer. Dabei
+                            stellte sich heraus, dass gegen den Älteren ein Vollstreckungshaftbefehl
+                                <Streichung>der Staatsanwaltschaft Offenbach</Streichung> wegen
+                            Leistungserschleichung in mehreren Fällen vorlag.</Belegtext>
+                        <Fundstelle>Frankfurter Rundschau, 15.11.2019</Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

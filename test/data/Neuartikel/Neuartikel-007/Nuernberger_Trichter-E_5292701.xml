@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_5292701" Autor="jgrimm" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2025-05-06" Erstellungsdatum="2025-04-30" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Nürnberger Trichter</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Eigenname Typ="MWA-Konstituente">Nürnberger</Eigenname>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Trichter</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte>Das Bild eines Trichters, der als Instrument zur Beförderung des
+                Wissens in den Kopf eines Menschen dient, war bereits vor der Entstehung der
+                aktuellen Redewendung bekannt. Jedoch wurde diese Metapher besonders populär als der
+                Nürnberger Dichter und
+                Mitg<?oxy_comment_start author="kduden" timestamp="20250505T164347+0200" comment="Mitgründer"?>ründer<?oxy_comment_end?>
+                der Nürnberger Sprachgesellschaft <Hervorhebung>Pegnesischen
+                    Blumenordens</Hervorhebung> Georg Philipp Harsdörffer (1607–1658) in den 40er
+                Jahren des 17. Jahrhunderts ein
+                <?oxy_comment_start author="kduden" timestamp="20250505T163541+0200" comment="Poetiklehrbuch"?>Poetiklehrbuch<?oxy_comment_end?>
+                mit dem Titel <Fundstelle><Autor>Georg Philipp Harsdörffer</Autor><Titel>Poetischer
+                        Trichter</Titel><URL>https://www.deutschestextarchiv.de/book/view/harsdoerffer_trichter01_1650?p=1</URL></Fundstelle>
+                <?oxy_comment_start author="kduden" timestamp="20250505T163604+0200" comment="Harsdörffer ist der alleinige Autor, nicht der Blumenorden"?>veröffentlicht<?oxy_comment_end?>e.
+                Das Lehrbuch versprach den Lesern, die Kunst des Dichtens in deutscher Sprache
+                innerhalb von sechs Stunden zu vermitteln. Harsdörffer selbst war kein Freund des
+                stumpfen Eintrichterns. Im Vorwort zu seinem Werk weist er den Leser darauf hin,
+                dass der Inhalt nicht an einem Tag durchgenommen und »das Gedächtnis überhäuft«
+                werden müssen. Ganz im Gegenteil empfiehlt er, sich für das Erlernen der Poeterei
+                Zeit zu nehmen.</Bedeutungsgeschichte>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilfaerbung>scherzhaft</Stilfaerbung>
+                <Stilfaerbung>abwertend</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>auf den richtigen Trichter kommen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Trichter</Ziellemma>
+                    <Ziellesart>3</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>eintrichtern</Ziellemma>
+                    <Ziellesart>*</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>einprügeln</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20250505T160437+0200" comment="vielleicht auch &quot;als ineffektiv geltende&quot;" flag="done"?>Lehr-<?oxy_comment_end?>
+                oder Lernmethode,
+                <?oxy_comment_start author="dsanders" timestamp="20250505T164006+0200" comment="mittels der jedem  Schüler" flag="done"?>mittels
+                der jedem<?oxy_comment_end?> Lernenden, ungeachtet seines Leistungsvermögens (durch
+                schematisches Auswendiglernen o. Ä.) uneingeschränkt viel Lehrstoff in kürzester
+                Zeit vermittelt werden kann</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ein Bildungssystem mit hohem Niveau soll
+                            <Streichung>dabei</Streichung> nicht mehr dem
+                            »<Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort>", sondern grundsätzlich der individuellen
+                        Talententdeckung verpflichtet sein. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/09/MUME_mm_omp0000009734475">
+                        Münchner Merkur, 05.09.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Oft war <Streichung>auch</Streichung> das Prinzip des
+                            <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichters</Stichwort>
+                        <Autorenzusatz>von Eltern</Autorenzusatz> gewünscht, das bedeutete die
+                        Vermittlung von möglichst viel Lernstoff in möglichst kurzer Zeit. Wie es
+                        den Kindern dabei erging, war irrelevant, die hatten dabei zu funktionieren
+                        und zu liefern. Und wehe Klein Karl-Mäxchen konnte mit seiner LRS
+                            <Paraphrase>Lese- und
+                            <?oxy_comment_start author="wgrimm" timestamp="20250505T165651+0200" comment="Rechtschreibschwäche (ist die häufigere Langform)" id="qqr_sww_ffc"?><?oxy_comment_start author="wgrimm" timestamp="20250506T105210+0200" parentID="qqr_sww_ffc" comment="danke, ersetzt" mid="6"?>Rechtschreibschwäche<?oxy_comment_end mid="6"?><?oxy_comment_end?></Paraphrase>
+                        nicht die kompletten unregelmäßigen Verben nach 2 Nachhilfestunden
+                        runterbeten und fehlerfrei anwenden. Dann war natürlich die Nachhilfe
+                        schuld. </Belegtext>
+                    <Fundstelle Fundort="dwds:reddit:dezwo/00300/13hc1jd_jk5c0c9">
+                        <Autor>kitty_silver</Autor>
+                        <Titel>br24user_lehrermangel_auch_wegen_schwieriger</Titel>
+                        <Stelle/>
+                        <Datum>14.05.2023</Datum>
+                        <URL>https://www.reddit.com/r/dezwo/comments/13hc1jd/comment/jk5c0c9/</URL>
+                        <Aufrufdatum>26.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext><?oxy_comment_start author="dsanders" timestamp="20250505T165839+0200" comment="hier kommt das Gegenargument zu deiner Definition: der Autor hier versteht den N.T. als letzlich illusorischen Ersatz für Wiederholung, Übung etc. 
+
+Insofern scheint die Bedeutung von N.T. eher etwas unscharf zu sein" flag="done"?>Allerdings
+                        funktioniert der berühmte <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort> als didaktische Methode nicht besonders gut.
+                        Für die Aneignung und Festigung von Kenntnissen und vor allem von
+                        Fähigkeiten sind Wiederholung und Übung unabdingbar, und zwar eben auch in
+                        Form von Hausaufgaben,<?oxy_comment_end?> die von Lehrkräften ja nicht
+                        einfach nur aus Jux und Tollerei erteilt werden, sondern Bestandteil eines
+                        (selbständigen) Wissens- und Kompetenzerwerbs sein sollten. </Belegtext>
+                    <Fundstelle Fundort="dwds:badz:2021/05/BADZ_51284761071"> Badische Zeitung,
+                        22.05.2021 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20250505T170112+0200" comment="Ich finden den Beleg trotz seiner Kürze nicht so erhellend, es wird nicht ganz klar, was der Autor wirklich meint. Ich vermute eher ein schematisch, formelhaft aufgebauter Lernstoff (whatever)" id="lpz_vww_ffc"?>
+                    <?oxy_comment_start author="kduden" timestamp="20250506T105309+0200" parentID="lpz_vww_ffc" comment="alles klar, ich stelle ihn auf inv.; vielleicht den darunter aktiveren?" mid="9"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="9"?>In der Schule wird
+                        immer noch viel auswendig gelernt, mit dem <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort> gearbeitet. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2021/01/FAZ_FD1202101286179141"> Frankfurter
+                        Allgemeine Zeitung, 28.01.2021 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Werden Schüler und Studenten zu eigenständigen Denkern
+                            erzogen<Streichung>, die dicke Bretter bohren können und einen mit
+                            harten Bandagen geführten Diskurs nicht scheuen</Streichung>? Da sind
+                        Zweifel erlaubt. Während im Vorschulalter, vielleicht noch in der
+                        Grundschule das Bemühen zu erkennen ist, die Kreativität der Kinder ernst zu
+                        nehmen, so schwindet dieses auf der Oberschule. An seine Stelle tritt der
+                            <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort>, eine weit über das Ziel hinausschießende
+                        Wissensvermittlung, die den Schülern natürlich auch Disziplin abverlangt.
+                            <Streichung>Aber diese Disziplin, bei der nachgekaut wird, was andere
+                            schon vorgekaut haben, ist gänzlich verschieden von der, die man
+                            braucht, um eigenen Visionen eine Form zu geben.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2016/07/FAZ_FD1201607024890084"> Frankfurter
+                        Allgemeine Zeitung, 02.07.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Statt nach dem Prinzip des <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichters</Stichwort> Unmengen von Wissen in die Schüler
+                        hineinzupressen, sollten die Lernpläne radikal reformiert und entschlackt
+                            werden<Streichung>, schlägt er vor</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2011/04/TSP_201104056185742"> Der Tagesspiegel,
+                        05.04.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der erste Faktor <Autorenzusatz>für die Wirksamkeit des
+                            Unterrichts</Autorenzusatz> betrifft die Unterstützung durch die Eltern,
+                        also die Lernbedingungen, die Schüler zu Hause haben. Konkret, ob es dort
+                        Bücher gibt, ob es einen ruhigen Arbeitsplatz hat, ob die Kinder betreut
+                        werden bei Hausaufgaben. Der zweite Faktor ist die Qualität der
+                        Lehrpersonen, da spielt die Ausbildung eine zentrale Rolle. Der dritte
+                        Faktor ist die Motivation der Schüler; man kann nicht einfach den
+                            <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort> ansetzen und Lernstoff einfüllen. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2011/01/NZZ_IENO5"> Neue Zürcher Zeitung,
+                        19.01.2011 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Top-moderne und altbewährte Lernstrategien<Streichung>, Teil 2: Wie
+                            Angst unser Immunsystem schwächt</Streichung>. Zusammen mit Otto
+                            F<Streichung>rühbauer vom Verein Gnostos</Streichung> zeigt die WOCHE zu
+                        Schulbeginn, wie Lernen auch anders funktionieren kann. Es gibt dabei
+                        Ansätze, die schon lange überholt sind – etwa die Idee des
+                            »<Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichters</Stichwort>“. „Der wird am Kopf angesetzt und alles,
+                        was man wissen soll, wird in den Kopf hineingeschüttet. Daher stammt auch
+                        die Redewendung, jemandem etwas eintrichtern‘“, so
+                            F<Streichung>rühbauer</Streichung>. Dass man allerdings Informationen am
+                        Fühlen vorbei in das Großhirn schieben kann, ist antiquiert. </Belegtext>
+                    <Fundstelle Fundort="dwds:at_nachrichten:608/gmhomoXmrSHyesE1">
+                        <Autor>Vanessa Pichler</Autor>
+                        <Titel>Nie mehr Nachhilfe – Beispiel 2: Die Geschichte der Tomate</Titel>
+                        <Stelle/>
+                        <Datum>21.09.2010</Datum>
+                        <URL>https://www.meinbezirk.at/feldkirchen/c-gesundheit/nie-mehr-nachhilfe-beispiel-2-die-geschichte-der-tomate_a307453</URL>
+                        <Aufrufdatum>25.09.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Am ärgsten sind <Streichung>schließlich</Streichung> die Auswirkungen
+                        der preußischen Militärschule<Streichung>, die wir gleichfalls 1869 kopiert
+                            haben</Streichung>. Von ihr stammen die problematischen
+                        Jahrgangsklassen, die 50-Minuten-Stunde, der
+                            <Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort> und die Fehlersuche bei jedem Schüler
+                        anstelle der Förderung seiner Talente und Stärken.</Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2009/03/30/Kommentar_der_anderen_Sc"> Der
+                        Standard, 30.03.2009 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart class="invisible">
+            <?oxy_comment_start author="kduden" timestamp="20250505T161049+0200" comment="laut dieser Quelle gab es diese Bedeutung: https://www.rhetos.de/html/lex/nuernberger_trichter.htm, ABER ich fand keine Belege bzw. nur einen Beleg"?>
+            <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+            <Diasystematik>
+                <Gebrauchszeitraum>veraltet</Gebrauchszeitraum>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">Hörgerät, <Verweis Typ="vgl">
+                    <Ziellemma>Hörrohr</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Willi Entenmann, der schwäbische Fleißarbeiter im Nürnberger
+                        Traineramt, wird für seine Männer wohl mal
+                        <?oxy_comment_start author="dsanders" timestamp="20250505T161806+0200" comment="J&gt;j"?>j<?oxy_comment_end?>enes
+                        Hörrohr, das man den »<Stichwort>Nürnberger</Stichwort>
+                        <Stichwort>Trichter</Stichwort>" nennt, aus dem Museum holen, um ihnen
+                        Regelbewußtsein einzutrichtern. </Belegtext>
+                    <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/455/26120215_1992_02_24_01_360">
+                        Berliner Zeitung, 24.02.1992 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-02"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

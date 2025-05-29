@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_e_1881" Autor="dsanders" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2020-10-08" Erstellungsdatum="1967-01-01" Status="Artikelrumpf">
+        <?oxy_comment_start author="dsanders" timestamp="20201008T113545+0200" comment="NZZ nicht gleich Regionalkorpus
+"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20211005T152419+0200" comment="verwaister Artikel, Anja zugewiesen" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung>einlässlich</Schreibung>
+            <Schreibung Typ="U">einläßlich</Schreibung>
+            <Aussprache><IPA Audiodatei="062/einlaesslich"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>2</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>einlassen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-lich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_e_1614">
+            <Formangabe>
+                <Schreibung><?oxy_comment_start author="wgrimm" timestamp="20211005T145200+0200" comment="als Helvetismus nur so"?>einlässlich<?oxy_comment_end?></Schreibung>
+                <Grammatik/>
+                <Diasystematik/>
+            </Formangabe>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>CH</Sprachareal>
+                <Stilfaerbung>papierdeutsch</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>eingehend</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="wgrimm" timestamp="20211005T143607+0200" comment="nach Belege auch: detailliert, detailgenau
+
+vielleicht sogar zwei Lesarten
+
+s. unten"?>
+                </Verweis><?oxy_comment_end?>
+                <?oxy_comment_start author="jgrimm" timestamp="20211005T152128+0200" comment="vielleicht noch Verweis auf ausführlich, um es von detailgenau abzugrenzen?"?>
+            </Verweise><?oxy_comment_end?>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine <Stichwort>einlässliche</Stichwort> Stilanalyse</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext> <Stichwort>einlässliche</Stichwort> Vorschriften</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>unter dankbarer Benützung der Besprechung der ersten Auflage, namentlich der <Stichwort>einläßlichen</Stichwort> von G. Cordes in der Dt. Literaturzeitung</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="HENWALSUM">
+                        <Autor>Henzen</Autor>
+                        <Titel>Schriftsprache</Titel>
+                        <Stelle>7</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Kompetenzbeispiel>
+                    <Belegtext>wir müssen darüber noch <Stichwort>einlässlicher</Stichwort> sprechen</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> In der Ausstellung wird diese späte und intensive Freundschaft <Stichwort>einlässlich</Stichwort> dargestellt. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 22.09.2010 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> <Stichwort>Einlässlich</Stichwort> und sektorübergreifend beschreiben und kommentieren die Autoren Entstehungsgeschichte, Theorie und Praxis der internationalen Gremien zur Finanzmarktregulierung. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 29.08.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Eine Juristin im Armeestab prüfte den Bericht <Stichwort>einlässlich</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> St. Galler Tagblatt, 12.02.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Obwohl der Arzt/Zahnarzt auf diese Mängel des Gutachtens hingewiesen und sich <Stichwort>einlässlich</Stichwort> auf 60 Seiten zu den rechtlichen wie fachlichen Aspekten des Gutachtens geäussert hat, erachtete das Verwaltungsgericht das Gutachten für vollständig und schlüssig. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Luzerner Zeitung, 25.09.2013 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="wgrimm" timestamp="20201011T162626+0200" comment="Zwei weitere Belege eingefügt." flag="done"?>
+            </Verwendungsbeispiele><?oxy_comment_end?>
+        </Lesart>
+        <Lesart>
+            <?oxy_comment_start author="jgrimm" timestamp="20211005T145133+0200" comment="NEUE Lesart"?>
+            <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">ins Detail gehend, detailgenau</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>etw. <Stichwort>einlässlich</Stichwort> beschreiben, behandeln</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> Hier wurde er 1819 (im noch erhaltenen Haus der Löwenapotheke) geboren, als Sohn eines Apothekers wie er dann selber einer wurde, bis er, zuerst als Journalist und in der Folge als unvergleichlich <Stichwort>einlässlicher</Stichwort> Chronist und Romancier zu bleibendem Ruhm kam. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Rundschau, 08.04.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der britische Germanist Stephen Parker erzählt Brechts Leben in angelsächsisch leichtem Stil sehr <Stichwort>einlässlich</Stichwort>, materialreich und in ideologischen oder gar moralischen Fragen um viel Objektivität bemüht. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Tagesspiegel, 11.12.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Er ist ein Musterbeispiel für jene Art von wissenschaftlichen Publikationen, die ihren Reiz (auch für den Laien) gerade aus ihrer <Stichwort>einläßlichen</Stichwort> Akribie beziehen und mit der Detailgenauigkeit zugleich weit über ihren begrenzten Gegenstand hinausweisen <Streichung>– im Falle des Bambuspapiers übrigens nicht nur auf Kulturgeschichte und Sozialgeschichte, sondern auch auf die Schwäche einer abendländischen Stärke</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 03.08.1994 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In der sehr <Stichwort>einläßlichen</Stichwort> Schilderung der innenpolitischen Wirren jener Jahre mußte Cicero schon auf Grund der Quellenlage stark in den Vordergrund treten. </Belegtext>
+                    <Fundstelle Fundort="dwds">Christ, Karl: Eduard Meyer. In: o. A. (Hg.), Geschichte des Altertums, Berlin: Directmedia 2001 [1972]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Ob auch alle dafür eingesetzten Mittel legitim und verantwortbar waren, wird unter anderem die Historikerkommission <Stichwort>einläßlich</Stichwort> prüfen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [1997]</Fundstelle></Beleg><Beleg><Belegtext>Über letztere wird den eidgenössischen Räten im Laufe des kommenden Jahres ein <Stichwort>einläßlicher</Stichwort> Bericht zugehen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [1972]</Fundstelle></Beleg><Beleg><Belegtext>Soll man aber diese Anonymität bewahren, wenn doch jede einigermaßen <Stichwort>einlässliche</Stichwort> philologische Klärung auf die Spur der Autorin führen muss?</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 27.09.2003</Fundstelle></Beleg><Beleg><Belegtext>Schließlich kommt der Verfasser auch noch <Stichwort>einläßlich</Stichwort> auf die Romanisierung der Schweiz zu sprechen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Jahresberichte für deutsche Geschichte, 1936, S. 976</Fundstelle></Beleg><Beleg><Belegtext>Das Konkordat ergänzt den Vertrag und bringt eine <Stichwort>einläßliche</Stichwort> Regelung der Kirche und Staat berührenden Angelegenheiten (45 Artikel).</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Die Weltkirche im 20. Jahrhundert. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1979], S. 14882</Fundstelle></Beleg><Beleg><Belegtext>Ob auch alle dafür eingesetzten Mittel legitim und verantwortbar waren, wird unter anderem die Historikerkommission <Stichwort>einläßlich</Stichwort> prüfen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [1997]</Fundstelle></Beleg><Beleg><Belegtext>Über letztere wird den eidgenössischen Räten im Laufe des kommenden Jahres ein <Stichwort>einläßlicher</Stichwort> Bericht zugehen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [1972]</Fundstelle></Beleg><Beleg><Belegtext>Soll man aber diese Anonymität bewahren, wenn doch jede einigermaßen <Stichwort>einlässliche</Stichwort> philologische Klärung auf die Spur der Autorin führen muss?</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 27.09.2003</Fundstelle></Beleg><Beleg><Belegtext>Schließlich kommt der Verfasser auch noch <Stichwort>einläßlich</Stichwort> auf die Romanisierung der Schweiz zu sprechen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Jahresberichte für deutsche Geschichte, 1936, S. 976</Fundstelle></Beleg><Beleg><Belegtext>Das Konkordat ergänzt den Vertrag und bringt eine <Stichwort>einläßliche</Stichwort> Regelung der Kirche und Staat berührenden Angelegenheiten (45 Artikel).</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Die Weltkirche im 20. Jahrhundert. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1979], S. 14882</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

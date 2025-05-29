@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_a_2072_13" Autor="wgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2020-03-04" Erstellungsdatum="1967-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>abteufen</Schreibung>
+            <Aussprache><IPA Audiodatei="075/abteufen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>teuft ab</Wert></Praesens>
+                <Praeteritum><Wert>teufte ab</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>abgeteuft</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>ab-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>teufen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise><Verweis Typ="EtymWB"><Ziellemma>abteufen</Ziellemma><Ziellesart/></Verweis></Verweise></Diachronie>
+        <Lesart xml:id="S_a_2651">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Gruppensprache>Bergmannssprache</Gruppensprache>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>einen Schacht <Stichwort>abteufen</Stichwort>
+                        <Paraphrase>in die Tiefe führen</Paraphrase>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-23"><Beleg><Belegtext>Insgesamt acht Förderschächte mußten <Stichwort>abgeteuft</Stichwort> werden, sie keilten die Siedlung ein.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 25.10.1991, Nr. 44</Fundstelle></Beleg><Beleg><Belegtext>Nachdem die ersten Kohle-Schächte <Stichwort>abgeteuft</Stichwort> waren, blieb keine Krume auf der anderen.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 26.07.2000</Fundstelle></Beleg><Beleg><Belegtext>Mit seinen namibischen Partnern berät Röttger, wo genau die ersten Probebohrungen <Stichwort>abzuteufen</Stichwort> sind.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 11.08.2005</Fundstelle></Beleg><Beleg><Belegtext>Man gründete eine Aktiengesellschaft, gab 1100 Aktien zu je 500 Talern aus und begann, den Schacht I <Stichwort>abzuteufen</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 10.02.1958, Nr. 06</Fundstelle></Beleg><Beleg><Belegtext>Bereits 1840 wurde die erste Schachtanlage im S der Stadt <Stichwort>abgeteuft</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Lexikon der Kunst – D. In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1989], S. 6781</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

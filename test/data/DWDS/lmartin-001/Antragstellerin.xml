@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_7228447_234" Autor="wgrimm" Typ="Verweisartikel" Tranche="Movierung" Zeitstempel="2020-09-16" Erstellungsdatum="2020-02-24" Status="Red-ex">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="An-trag-stel-le-rin"><?oxy_comment_start author="kduden" timestamp="20200321T111119+0100" comment="bitte zsm. mit Antragsteller freischalten
+"?>Antragstellerin<?oxy_comment_end?></Schreibung>
+            <Aussprache><IPA>ˈantʀaːkˌʃtɛləʀɪn</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="An-trags-stel-le-rin">Antragsstellerin</Schreibung>
+            <Aussprache><IPA>ˈantʀaːksˌʃtɛləʀɪn</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Antrag</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Stellerin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Antragsteller</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Antragsteller</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Ansucherin</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Gesuchstellerin</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">weibliche Person, Firma, Gruppe o. Ä., die eine Unterstützung, ein <Verweis Typ="vgl">
+                <Ziellemma>Verfahren</Ziellemma>
+                <Ziellesart>2</Ziellesart>
+                </Verweis> o. Ä. schriftlich oder mündlich <?oxy_comment_start author="jgrimm" timestamp="20200321T135424+0100" comment="orientiert an Lieferant - dort werden keine Unterlesarten für Personen und Betriebe gebildet" id="kx5_spm_dmb" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20200626T151455+0200" comment="Aber bei Lieferant stimmt die Kongruenz. Hier leider nicht.  jmd., Gruppe = Maskulinum; Gruppe Femininum" parentID="kx5_spm_dmb" flag="done" mid="2"?>beantragt<?oxy_comment_end mid="2"?><?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die stellvertretende Fraktionsvorsitzende, zuständig für Flüchtlings- und Schulpolitik, ist mit mehr als 200 schriftlichen <Hervorhebung>Kleinen Anfragen</Hervorhebung> in den vergangenen 13 Monaten die fleißigste <Stichwort>Antragsstellerin</Stichwort> ihrer Partei.</Belegtext>
+                    <Fundstelle Fundort="dwds">Welt am Sonntag, 27.03.2016</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Bei Androhung eines Ordnungsgeldes bis zu 250.000 Euro wird es den russischen Betreibern <Streichung>von »allofmp 3«</Streichung> verboten, »geschützte Aufnahmen aus Tonträgern der <Stichwort>Antragstellerinnen</Stichwort> innerhalb des Gebiets der Bundesrepublik Deutschland zugänglich zu machen«. <Stichwort>Antragstellerinnen</Stichwort> sind sechs führende Musikkonzerne, darunter Emi Music, Sony BMG und Warner Music, also die Unternehmen, deren Interessen von den Phonoverbänden <Streichung>unter anderem auf der Internetseite www.ifpi.de</Streichung> vertreten werden sollen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 13.07.2005 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Gemäß § 76 Abs. 1 Nr. 1 BVerfGG ist der Antrag der Landesregierungen von Baden-Württemberg, Bayern, Hessen, Sachsen, des Saarlandes und von Thüringen zulässig; die <Stichwort>Antragstellerinnen</Stichwort> halten das Zuwanderungsgesetz für mit dem Grundgesetz formell unvereinbar. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Spiegel, 18.12.2002 (online) </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Barbara Hall, Bürgermeisterin in Toronto, behauptete allerdings, dass die Stadt von einer Bewerbung <Autorenzusatz>für Olympia</Autorenzusatz> weit entfernt sei; ihrer Ansicht nach müsste die ganze Region als <Stichwort>Antragsstellerin</Stichwort> hervortreten, denn ohne eine breite Unterstützung durch die Bevölkerung sei das Projekt nicht realisierbar. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 30.12.1996 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Das Gesetz sei »undurchsichtig und unkontrollierbar«, schreibt die <Stichwort>Antragsstellerin</Stichwort> der Petition in ihrer Begründung.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.10.2009, Nr. 19</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Höhe basiere auf dem ehemaligen 30 % igen Eigentumsanteil der <Stichwort>Antragsstellerin</Stichwort> am Grundstück.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 23.07.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wahrscheinlich wollten Sie damit in die Presse », unterstellte er der <Stichwort>Antragstellerin</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 04.04.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zudem habe die <Stichwort>Antragstellerin</Stichwort> zwei 18 und 22 Jahre alte gesunde Söhne.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 04.12.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Von anderen Schulen wird berichtet, daß sich die <Stichwort>Antragstellerinnen</Stichwort> fast ein Jahr gedulden mußten.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.09.1962, Nr. 37</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Kinder der <Stichwort>Antragstellerin</Stichwort> seien ebenso entsetzt wie auswärtige Besucher.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.12.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Gegen diesen Beschluß legte nicht nur die von mir vertretene und inzwischen als Nebenklägerin zugelassene <Stichwort>Antragstellerin</Stichwort>, Frau Gabel-Thälmann, sondern auch die Staatsanwaltschaft Beschwerde ein.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hannover, Heinrich: Die Republik vor Gericht 1975 – 1995, Berlin: Aufbau-Taschenbuch-Verl. 2001 [1999], S. 251</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

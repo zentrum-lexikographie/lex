@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_4191588" Autor="wgrimm" Typ="Minimalartikel" Zeitstempel="2019-01-16" Erstellungsdatum="2019-01-16" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="kduden" timestamp="20190116T132335+0100" comment="Beleglage zu dünn"?>
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_end?>
+            <Schreibung>aversiv</Schreibung>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-iv</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/></Rohdaten></Artikel>
+</DWDS>

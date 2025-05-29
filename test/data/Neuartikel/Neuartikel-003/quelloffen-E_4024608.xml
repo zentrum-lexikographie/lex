@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_4840638" Autor="jgrimm" Typ="Basisartikel" Zeitstempel="2023-06-29" Erstellungsdatum="2016-01-07" Status="Lex-in_Arbeit">
+        <?oxy_comment_start author="dsanders" timestamp="20230629T105144+0200" comment="zusammen mit Open Source, open source u. Ä. bearbeiten"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>quelloffen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Quelle</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>offen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,160 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_h_52000_275" Autor="jgrimm" Typ="Vollartikel" Tranche="Recht-004" Zeitstempel="2025-05-12" Erstellungsdatum="2015-09-03" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="hilfs-wei-se">hilfsweise</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="120/hilfsweise">ˈhɪlfsvaɪ̯zə</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Hilfe</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-weise</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>ersatzweise</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">nur ersatzweise (an Stelle eines vorrangigen Argumentes, einer
+                wichtigeren Forderung, einer geplanten Ausführung, eines passenderen Ausdrucks
+                o. Ä.) </Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Wenn es um Frauen geht, werden sie im Polizeibericht oft als Dame
+                        bezeichnet, sogar wenn sie sich keineswegs ladylike verhalten haben.
+                            <Streichung>Öfter aber ist von Frauen als Geschädigten die
+                            Rede.</Streichung>
+                        <Stichwort>Hilfsweise</Stichwort> zieht die Polizei bei Männern wie Frauen
+                        das Alter der Betreffenden heran. Da heißt es dann »der 16-Jährige« oder die
+                        »70-Jährige«.</Belegtext>
+                    <Fundstelle Fundort="dwds:laz_regional:2023/11/LAZ_asr0000026534913-LANDSHUTERZEITUNG">
+                        Landshuter Zeitung, 10.11.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Neben der digitalen Bezahlmethode werden für den Shuttle
+                            <Stichwort>hilfsweise</Stichwort> auch Guthabenkarten zu 12, 20 oder 40
+                        Euro angeboten. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2023/04/NEUW_7e7c52bc2fe8188d6e45393eaa142b1e234df43"> Neue Westfälische, 11.04.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Kurz- bis mittelfristig will die neue Landesregierung 10.000
+                        zusätzliche Lehrkräfte an die Schulen bringen,
+                            <Stichwort>hilfsweise</Stichwort> anderes unterstützendes Personal, sie
+                        will Bürokratie abbauen und Seiteneinsteiger gewinnen. </Belegtext>
+                    <Fundstelle Fundort="dwds:aaz_regional:2022/06/AAZ_135019111-AACHEN"> Aachener
+                        Zeitung, 28.06.2022 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart>
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Fachgebiet>Recht</Fachgebiet>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">zur (wenigstens teilweisen) Absicherung der Ziele des
+                    Rechtsstreites ersatzweise für den Fall einer Ablehnung der Hauptforderung oder
+                    des Hauptargumentes (als nachrangige Forderung oder nachrangiges Argument
+                    vorgebracht)</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Wenn nun Zahlungen ganz oder zum Teil ausblieben, werde »von
+                            Vermieterseite regelmäßig sowohl eine fristlose als auch
+                                <Stichwort>hilfsweise</Stichwort> eine fristgerechte Kündigung
+                            ausgesprochen«. </Belegtext>
+                        <Fundstelle Fundort="dwds:welt:2022/09/wexml20220928_030"> Die Welt,
+                            28.09.2022 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Frequenzangabe>seltener</Frequenzangabe>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">behelfsmäßig</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>In einem von Vandalismus schwer gezeichneten Gebäude wohnen jetzt
+                        nach jahrzehntelangem Leerstand Menschen, <Stichwort>hilfsweise</Stichwort>
+                        hinter preisgünstigen Holzfaserplatten, die Reste eingeschlagener
+                        Fensterscheiben verdecken. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2022/08/TSP_doc7m9ho2yi9efzy9nz4ob"> Der
+                        Tagesspiegel, 13.08.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aktuell geht es um ein Brückenlager, das sich seitlich verschoben hat
+                        und deshalb seine Funktion nicht mehr erfüllen kann. <Streichung>Es muss
+                            ersetzt werden. Die Kosten dafür belaufen sich auf rund 79000
+                            Euro.</Streichung>
+                        <Stichwort>Hilfsweise</Stichwort> sichert derzeit eine
+                        Stahlträgerkonstruktion den betroffenen Bereich ab.</Belegtext>
+                    <Fundstelle Fundort="dwds:maz_regional:2022/01/MAZ_296742330001642460400">
+                        Allgemeine Zeitung, 18.01.2022 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">als Hilfe</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Krug berichtet ihm von einem Streit am Set, wo ein junger
+                        Schauspieler nicht erträgt, wie der Alte die Karten bezeichnet, auf denen
+                            <Stichwort>hilfsweise</Stichwort> Text steht. Althergebracht dafür war
+                        das N-Wort.</Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2022/01/FR_fr_FRD_1727083C500BE2173000-DEUTSCHLANDAUSGABE">
+                        Frankfurter Rundschau, 29.01.2022 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Vier Jahre zuvor war er schon einmal
+                            <Stichwort>hilfsweise</Stichwort> zum Landgerichtsschöffen berufen
+                        worden und hatte, ohne daß dies jemand beanstandet hätte, an vier Urteilen
+                        mitgewirkt. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:part1/1989/04/14/richter_ohne_ansehen_der">Die
+                        Zeit, 14.04.1989</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

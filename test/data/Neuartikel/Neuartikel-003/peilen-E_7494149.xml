@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_p_1398" Autor="dsanders" Typ="Basisartikel" Zeitstempel="2022-09-07" Erstellungsdatum="1974-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>peilen</Schreibung>
+            <Aussprache><IPA Audiodatei="023/peilen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>peilt</Wert></Praesens>
+                <Praeteritum><Wert>peilte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gepeilt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>peilen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1." xml:id="S_p_993">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">durch Funk, Kompass die Lage, Entfernung von etw.
+                bestimmen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>einen festen Punkt, eine Station <Stichwort>peilen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>das Schiff <Stichwort>peilt</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+            <Lesart xml:id="S_p_993_21">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis"/>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>die Lage <Stichwort>peilen</Stichwort>
+                            <Paraphrase>auskundschaften</Paraphrase>
+                        </Belegtext>
+                        <Diasystematik>
+                            <Stilebene>salopp</Stilebene>
+                        </Diasystematik>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+                <Lesart xml:id="S_p_993_11">
+                    <Syntagmatik>
+                        <Konstruktionsmuster>
+                            <Belegtext>etw. über den Daumen <Stichwort>peilen</Stichwort>
+                            </Belegtext>
+                        </Konstruktionsmuster>
+                    </Syntagmatik>
+                    <Diasystematik/>
+                    <Verweise/>
+                    <Definition Typ="Basis">etw. ganz grob schätzen, ungefähr bestimmen</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>er hat die Entfernung, Stückzahl, das Gewicht, den
+                                Kostenanschlag über den Daumen <Stichwort>gepeilt</Stichwort>
+                            </Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>bei dieser Arbeit hat er über den Daumen
+                                    <Stichwort>gepeilt</Stichwort>
+                                <Paraphrase>nicht sorgfältig gearbeitet</Paraphrase>
+                            </Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+            </Lesart>
+        </Lesart>
+        <Lesart n="2." xml:id="S_p_994">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">die Tiefe eines Gewässers bestimmen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine Bucht <Stichwort>peilen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="3." xml:id="S_p_995">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>nach jmdm., etw. <Stichwort>peilen</Stichwort>
+                    </Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>salopp</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">den Blick auf jmdn., etw. richten</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Er duckt sich und <Stichwort>peilt</Stichwort> nach dem
+                        Ausgang</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="SCHPAUWMA">
+                        <Autor>Schallück</Autor>
+                        <Titel>Wenn man aufhören könnte</Titel>
+                        <Stelle>46</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Kompetenzbeispiel>
+                    <Belegtext>er <Stichwort>peilte</Stichwort> immer in unsere Ecke</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Sie wirkt irgendwie fünf Jahre älter als die anderen und
+                            <Stichwort>peilt</Stichwort> die Lage besser als irgendeiner von
+                        uns.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 04.10.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Abgesehen vom Facility Management <Stichwort>peile</Stichwort> SBT
+                        für alle Divisionen Wachstum an, hieß es.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.12.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Kuna <Stichwort>peilt</Stichwort> in das Loch, zieht eine kleine
+                        Kamera hervor und fotografiert.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 12.08.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Damit <Stichwort>peilt</Stichwort> man eine neutrale, weiße Fläche
+                        an, also eine weißgestrichene Wand oder ein Blatt Papier.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 2001, Nr. 19</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dann aber schreitet er voran, denn seine männliche Aufgabe ist es,
+                        die dortige Lage zu <Stichwort>peilen</Stichwort> und den best-geeignetsten
+                        Tisch zu entdecken.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Meißner, Hans-Otto: Man benimmt sich
+                        wieder, Giessen: Brühl 1950, S. 218</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und da lag er nun in einer Schneemulde und
+                            <Stichwort>peilte</Stichwort> die Lage.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Plievier, Theodor: Stalingrad, München u.
+                        a.: Desch 1973 [1946], S. 272</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er hat ein Loch in die Zeitung gebohrt und
+                            <Stichwort>peilt</Stichwort> dadurch auf die Enten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">von Luckner, Felix: Seeteufel, Herford: Kohler 1966 [1921], S. 33</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Immerhin waren die Sechziger gerade deutsche Pokalsieger geworden und
+                            <Stichwort>peilten</Stichwort> auch die Deutsche Meisterschaft
+                        an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Beckenbauer, Franz: Einer wie ich, München:
+                        Wilhelm Heyne Verlag 1977, S. 43</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und ebenso sollte die Zuverlässigkeit des der Minderungskorrektur
+                        zugrundegelegten Gültigkeitskriteriums niemals gewissermaßen über den Daumen
+                            <Stichwort>gepeilt</Stichwort> werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Lienert, Gustav A.: Testaufbau und
+                        Testanalyse, Weinheim: Beltz 1961, S. 285</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das wird einfach übern Daumen <Stichwort>gepeilt</Stichwort>, für die
+                        Hibernia ist das die äußerste Zeche, also muß die aufgegeben
+                        werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Runge, Erika (Hg.), Bottroper Protokolle,
+                        Frankfurt a. M.: Suhrkamp 1968, S. 40</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

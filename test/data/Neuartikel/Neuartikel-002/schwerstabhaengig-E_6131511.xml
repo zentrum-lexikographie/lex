@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_6131511" Autor="kduden" Typ="Minimalartikel" Zeitstempel="2024-02-19" Erstellungsdatum="2024-02-19" Status="Red-f">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="schwerst-ab-hän-gig">schwerstabhängig</Schreibung>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.2)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>schwerst-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>abhängig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26">
+                <Beleg>
+                    <Belegtext>Für die <Stichwort>schwerstabhängigen</Stichwort> Obdachlosen ist so viel Papier jedoch meist nicht zu bewältigen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.12.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sissa definiert Abhängigkeit als die »Verfolgung eines negativen Vergnügens«, wobei sie sich unter anderen auf Burroughs beruft, der lebenslänglich <Stichwort>schwerstabhängig</Stichwort> gewesen sein soll.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 09.10.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Stadt Frankfurt will mit diesem Angebot etwa 150 <Stichwort>schwerstabhängige</Stichwort> Fixer aus dem Bahnhofsviertel erreichen, von denen viele schon mehrmals erfolglos therapiert worden sind.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.12.1994, Nr. 51</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Laut Justizministerium hatte der <Stichwort>schwerstabhängige</Stichwort> Mann von einem Anstaltssanitäter den Heroinersatzstoff bekommen.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 31.03.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beide Fraktionen beurteilen das Projekt als wichtigen Schritt zu einer wirksameren »Überlebenshilfe <Stichwort>schwerstabhängiger</Stichwort> Drogenkranker«.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.06.2001</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

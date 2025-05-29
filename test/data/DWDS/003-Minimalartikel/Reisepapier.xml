@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_r_989000003_1379" Autor="wgrimm" Typ="Minimalartikel" Tranche="45k-Minimalartikel" Zeitstempel="2023-07-27" Erstellungsdatum="1974-01-01" Status="Red-f-zurückgewiesen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Reisepapier</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+                <Numeruspraeferenz>meist im Plural</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Zeitstempel="2016-02-15" Quelle="DWDS" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Reise</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Papier</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ich reiste mit dem deutschen Paß, der 1931 ausgestellt war, noch
+                        nicht mit einem vorteilhafteren norwegischen
+                            <Stichwort>Reisepapier</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 13.09.1982</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

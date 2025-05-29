@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_1065622" Autor="dsanders" Typ="Verweisartikel" Tranche="Spiel" Zeitstempel="2025-05-21" Erstellungsdatum="1976-01-01" Status="Red-2">
+        <?oxy_comment_start author="dsanders" timestamp="20250520T100202+0200" comment="zwei Homographen (als Verb), bitte zusammen freischalten"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung hidx="2">überkommen</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="021/ueberkommen_2">ˈyːbɐˌkɔmən</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens>
+                    <Wert>kommt über</Wert>
+                </Praesens>
+                <Praeteritum>
+                    <Wert>kam über</Wert>
+                </Praeteritum>
+                <Auxiliar>
+                    <Wert>ist</Wert>
+                </Auxiliar>
+                <Partizip_II>
+                    <Wert>übergekommen</Wert>
+                </Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>über-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>kommen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>überkommen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="II." xml:id="S_u_486">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>etw. <Stichwort>kommt über</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Frequenzangabe>selten</Frequenzangabe>
+            <Diasystematik Quelle="WDG" Zeitstempel="1976-01-01">
+                <Gruppensprache>Seemannssprache</Gruppensprache>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>überfluten</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Gut lag die »Elbe 3« in der See, kaum Wasser
+                            <Stichwort>kam</Stichwort>
+                        <Stichwort>über</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha:2013/08/HA_108765507"> Hamburger Abendblatt,
+                        24.08.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Hin und wieder kommen mich doch Bedenken an, daß unser Auftrieb
+                        nicht ausreichen könnte, um das Boot in dieser tobenden See oben zu halten.
+                        Angst, daß trotz geschlossenem Luk zuviel Wasser
+                            <Stichwort>überkommen</Stichwort> könnte und die in der Zentrale nicht
+                        rechtzeitig lenzen würden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:i/1973/buchheim_boot_1973:286"> Buchheim,
+                        Lothar-Günter: Das Boot. München: Piper 1973, S. 286 </Fundstelle>
+                </Beleg>
+                <Kompetenzbeispiel Quelle="WDG" Zeitstempel="1976-01-01">
+                    <Belegtext>das Seewasser <Stichwort>kommt</Stichwort>
+                        <Stichwort>über</Stichwort>
+                        <Paraphrase>flutet, strömt über das Deck</Paraphrase>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg Quelle="WDG" Zeitstempel="1976-01-01">
+                    <Belegtext><Autorenzusatz>…</Autorenzusatz> Immer wieder
+                            <Stichwort>kam</Stichwort> die Flut in tosenden Stürmen
+                            <Stichwort>über</Stichwort>
+                        <Autorenzusatz>…</Autorenzusatz></Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="CRAHEIDKD">
+                        <Autor>Cramer</Autor>
+                        <Titel>Konzessionen</Titel>
+                        <Stelle>13</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg Quelle="WDG" Zeitstempel="1976-01-01">
+                    <Belegtext><Autorenzusatz>…</Autorenzusatz> das
+                            <Stichwort>überkommende</Stichwort> Wasser lief über den Setzbord ab
+                            <Autorenzusatz>…</Autorenzusatz></Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="WEIGUEDMV">
+                        <Autor>Weisenborn</Autor>
+                        <Titel>Mädchen</Titel>
+                        <Stelle>156</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Zeitstempel="2023-11-08" Quelle="DWDS" Autor="herold">
+                <Beleg>
+                    <Belegtext>Für kurze Zeit schien ein tiefes Ausruhen ihn zu
+                            <Stichwort>überkommen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Schaper, Edzard: Der Henker, Zürich:
+                        Artemis 1978 [1940], S. 917</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Also konnte ich mich nicht freuen, mich
+                            <Stichwort>überkam</Stichwort> eher so ein Grauen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 03.11.1986</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Den Minister, dachte er an die beiden Bilder,
+                            <Stichwort>überkam</Stichwort> ein fast körperlicher Ekel.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Feuchtwanger, Lion: Erfolg. In: ders.,
+                        Gesammelte Werke in Einzelbänden, Bd. 6, Berlin: Aufbau-Verl. 1993 [1930],
+                        S. 11</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

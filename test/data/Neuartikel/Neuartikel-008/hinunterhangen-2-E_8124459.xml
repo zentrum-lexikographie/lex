@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_h_1936" Autor="wgrimm" Typ="Basisartikel-D" Tranche="Regio" Zeitstempel="2020-04-26" Erstellungsdatum="1969-01-01" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="jgrimm" timestamp="20200415T230950+0200" comment="Nicht zu belegen, aber strukturell möglich; ggfls. streichen"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung hidx="2">hinunterhängen</Schreibung>
+            <Aussprache><IPA Audiodatei="132/hinunterhaengen">hɪˈnʊntɐˌhɛŋən</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>hängt hinunter</Wert></Praesens>
+                <Praeteritum><Wert>hing hinunter</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>hinuntergehangen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung hidx="2">hinunterhängen</Schreibung>
+            <Aussprache><IPA Audiodatei="132/hinunterhaengen">hɪˈnʊntɐˌhɛŋən</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>hängt hinunter</Wert></Praesens>
+                <Praeteritum><Wert>hing hinunter</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>hinuntergehangen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachraum>landschaftlich</Sprachraum>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>hinunter-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="2">hängen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_h_21078">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">etw. vom Beobachter weg von oben nach unten positionieren und so befestigen, dass ein Teil sichtbar der Schwerkraft ausgesetzt ist</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

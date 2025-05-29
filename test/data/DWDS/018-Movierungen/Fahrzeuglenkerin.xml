@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_5371157_1056" Autor="dsanders" Typ="Verweisartikel" Tranche="Movierung" Zeitstempel="2020-10-16" Erstellungsdatum="2020-09-24" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Fahrzeuglenkerin</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Fahrzeuglenker</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Fahrzeuglenker</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Eine Stunde später wurde eine andere
+                            <Stichwort>Fahrzeuglenkerin</Stichwort> nach dem Weg gefragt und gab
+                        bereitwillig Auskunft. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 07.09.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die meisten <Stichwort>Fahrzeuglenkerinnen</Stichwort> und -lenker
+                        hätten sich an die vorgeschriebenen Höchstgeschwindigkeiten gehalten, die
+                        mit sieben stationierten mobilen Radargeräten gemessen wurden. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 10.10.2007 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Durch das abrupte Ausweichmanöver der
+                            <Stichwort>Fahrzeuglenkerin</Stichwort> auf die Überholspur kam ihr Auto
+                        ins Schleudern. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 15.09.2007 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

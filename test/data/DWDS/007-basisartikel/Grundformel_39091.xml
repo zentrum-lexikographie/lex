@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_g_60000_39091" Autor="kduden" Typ="Basisartikel" Zeitstempel="2014-04-25" Erstellungsdatum="1967-01-01" Status="Lex-zurückgestellt">
+        <Formangabe Typ="Hauptform">
+            <Schreibung><?oxy_comment_start author="wgrimm" timestamp="20150619T113524+0200" comment="mehrdeutig"?>Grundformel<?oxy_comment_end?></Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-n</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Grund</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Formel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20140425T083248+0000" comment="Lemmakommentar: nur ein unzureichender (3u) Beleg für die mathemat"?>
+                    <Belegtext>Wir stehen freilich auf dem Standpunkt, wir sollten auf der Grundlage unserer Leistungen bewertet werden. Dies entspricht ja auch der <Stichwort>Grundformel</Stichwort> der Ost-Erweiterung, die in Brüssel immer wieder hervorgehoben wird. <Streichung>Wir sollten daher nicht auf 2007 oder irgendein anderes fernes Datum warten müssen, wenn wir unseren Zeitplan einhalten und bis Ende 2003 die Beitrittsverhandlungen abgeschlossen haben.</Streichung> </Belegtext><?oxy_comment_end?>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 06.05.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20140425T083248+0000" comment="Lemmakommentar: nur ein unzureichender (3u) Beleg für die mathemat"?>
+                    <Belegtext> <Streichung>Eben dieser objektive Prozeß war es, der die Grundlage für die Ideologie von »Arbeitsstaat« und »Arbeitsdemokratie« in ihren diversen Erscheinungsformen bildete.</Streichung> Je mehr Markt, desto mehr Staat: diese strukturgeschichtliche <Stichwort>Grundformel</Stichwort> der kapitalistischen Entwicklung bewahrheitete sich mehr denn je beim Übergang zum fordistischen Vollkapitalismus, der ohne den gleichzeitigen Übergang zum Staat als forciertem Metasubjekt der Ökonomie gar nicht möglich gewesen wäre. <Streichung>Was viele als zunehmenden Sozialismus oder Protosozialismus mißverstanden, war nichts anderes als eine Häutung des Kapitalismus selbst.</Streichung> </Belegtext><?oxy_comment_end?>
+                    <Fundstelle Fundort="dwds">Kurz, Robert, Schwarzbuch Kapitalismus, Frankfurt a.M.: Eichborn 1999, S. 497</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20140425T083248+0000" comment="Lemmakommentar: nur ein unzureichender (3u) Beleg für die mathemat"?>
+                    <?oxy_comment_start author="wgrimm" timestamp="20140425T083248+0000" comment="Relation: Adjektivattribut" mid="4"?>
+                    <Belegtext> <Streichung>Mit dieser expressiven Sicht auf den Schock ist geballt die Tragweite der multiplen Sklerose erfasst, eine Klimax nicht mehr möglich.</Streichung> Der Rest ist Wiederholung der einfachen <Stichwort>Grundformel</Stichwort>: Die Virtuosin tritt ab, ihre Musik lebt.</Belegtext><?oxy_comment_end?><?oxy_comment_end mid="4"?>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 10.08.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20140425T083248+0000" comment="Lemmakommentar: nur ein unzureichender (3u) Beleg für die mathemat"?>
+                    <Belegtext> <Streichung>Wenn man den Tod schon nicht abschaffen kann, dann will man in der Lebensspanne zumindest möglichst viel erleben.</Streichung> Leistung = Geschwindigkeit, das ist die europäische <Stichwort>Grundformel</Stichwort>, mit der der Weg ins Paradies gesucht wird. <Streichung>Doch der führt, siehe Ozonloch, direkt in den Abgrund.</Streichung> </Belegtext><?oxy_comment_end?>
+                    <Fundstelle Fundort="dwds">Müller, Heiner, Stirb schneller, Europa, in: Transatlantik (1989) Nr. 1, S. 40</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Eine solche <Stichwort>Grundformel</Stichwort> hat sich nun herausgeschält aus langen Diskussionen.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 04.04.1969, Nr. 14</Fundstelle></Beleg><Beleg><Belegtext>Da habe ich die <Stichwort>Grundformel</Stichwort>, mit der ich mir was herleiten kann.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 03.05.2003</Fundstelle></Beleg><Beleg><Belegtext>Die Tatsachen sprechen, wenn eine gemeinsame hypothetische <Stichwort>Grundformel</Stichwort> für das Verhältnis von Lust zu den Lebensvorgängen gefunden werden soll, eher für das Gegenteil.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Bühler, Karl: Die Krise der Psychologie, Jena: G. Fischer 1929 [1927], S. 189</Fundstelle></Beleg><Beleg><Belegtext>Ist Ihnen die <Stichwort>Grundformel</Stichwort> bekannt, die in der SA vorherrschte, nämlich »Gleiches Recht für alle«?</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Zweihundertzweiter Tag. Dienstag, 13. August 1946. In: Der Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S. 10561</Fundstelle></Beleg><Beleg><Belegtext>Die Unterscheidung von Gesetz und Evangelium ist darum die <Stichwort>Grundformel</Stichwort> theol. Verstehens.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Ebeling, G.: Luther. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1960], S. 24009</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

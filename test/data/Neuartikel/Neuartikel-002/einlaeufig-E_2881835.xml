@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_9758297" Autor="kduden" Typ="Minimalartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2025-05-21" Erstellungsdatum="2023-12-07" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="ein-läu-fig">einläufig</Schreibung>
+            <Schreibung Trennung="1-läu-fig"><?oxy_comment_start author="kduden" timestamp="20250402T122019+0200" comment="Ergänzte Variante"?>1-läufig</Schreibung><?oxy_comment_end?>
+            <Aussprache>
+                <IPA>ˈaɪ̯nlɔɪ̯fɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.2)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20250402T122103+0200" comment="(Für die SmB) ergänzte Bezugsregel"?>40
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>eins</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Lauf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26">
+                <Beleg>
+                    <Belegtext>Innen erhebt sich aus der unteren Passagenstraße heraus eine
+                            <Stichwort>einläufige</Stichwort> Stahltreppe ins Obergeschoß, wo sie
+                        jeweils von vier Klassenräumen flankiert wird.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 31.05.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Von den einzelnen über <Stichwort>einläufig</Stichwort> angelegte
+                        Treppen erreichbaren Sitzen unterschied sich die Kaiserloge
+                        (pulvinar).</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Lexikon der Kunst – C.
+                        In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001
+                        [1989], S. 20642</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Einläufige</Stichwort> Vorderlader darf übrigens jeder
+                        kaufen, für zweiläufige braucht man schon eine amtliche
+                        Erlaubnis.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        15.02.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Pistole (angeblich nach der Stadt Pistoja), kurze
+                            <Stichwort>einläufige</Stichwort> Feuerwaffe mit handgriffartigem
+                        Kolben, jetzt verdrängt durch Revolver und Selbstladepistole.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: P. In: Brockhaus'
+                        Kleines Konversations-Lexikon, Berlin: Directmedia Publ. 2001 [1906], S.
+                        43843</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

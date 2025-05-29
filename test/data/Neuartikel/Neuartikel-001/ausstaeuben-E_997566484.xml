@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+<Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_997566484" Autor="dsanders" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2015-12-21" Erstellungsdatum="1967-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-10-01" Quelle="DWDS" Autor="herold">
+            <Schreibung>ausstäuben</Schreibung>
+            <Aussprache><IPA Audiodatei="124/ausstaeuben"/></Aussprache><Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>stäubt aus</Wert></Praesens>
+                <Praeteritum><Wert>stäubte aus</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>ausgestäubt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2016-06-22" Quelle="DWDS" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>aus-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>stäuben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachraum>landschaftlich</Sprachraum>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>ausstauben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Doch just wenn Hollywood zu einem leidenschaftlichen Kuß ansetzen würde, <Stichwort>stäuben</Stichwort> Sie und Er in Bollywood auseinander und brechen in heftiges Singen und Tanzen <Stichwort>aus</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 08.04.2005</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

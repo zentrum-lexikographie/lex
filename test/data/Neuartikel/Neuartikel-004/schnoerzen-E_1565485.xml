@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_1565485" Autor="dsanders" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2024-11-18" Erstellungsdatum="2024-11-18" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="schnör-zen">schnörzen</Schreibung>
+            <Aussprache><IPA>ˈʃnœʁʦn̩</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>schnörzt</Wert></Praesens>
+                <Praeteritum><Wert>schnörzte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>geschnörzt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <?oxy_comment_start author="jgrimm" timestamp="20241118T090725+0100" comment="zu schnorren?"?>
+            <Etymologie/><?oxy_comment_end?>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>D-Mittelwest (Mittelrhein/Mosel)</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>dotzen</Ziellemma>
+                    <Ziellesart>4</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die Stadt lobte <Streichung>zudem</Streichung> das Engagement zahlreicher Bonner Unternehmen und privater Spender, die <Streichung>mit ihren Beiträgen unter anderem</Streichung> dafür sorgten, dass sich die Kinder an zahlreichen Weckmännern und Weckmanntüten erfreuen konnten. Nachdem die kleinen Männlein aus Teig verstaut oder auch verputzt waren, machten sich viele der Kinder und Jugendlichen auf, um wie jedes Jahr singend von Tür zu Tür zu gehen und zu »<Stichwort>schnörzen</Stichwort>«, um mit einer Tüte voller Süßigkeiten nach Hause zu gehen. </Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2023-11-06/5/8ya7G9hf">
+                        <Autor>Jonas Dirker</Autor>
+                        <Titel>Großes Feuer auf dem Marktplatz: Zahlreiche Bonner beim Martinsumzug in der Innenstadt</Titel>
+                        <Kurztitel>Martinsumzug</Kurztitel>
+                        <Stelle/>
+                        <Datum>06.11.2023</Datum>
+                        <URL>https://ga.de/bonn/stadt-bonn/martinsumzug-in-bonn-mit-grossem-feuer-am-marktplatz_aid-100974317</URL>
+                        <Aufrufdatum>14.03.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Kinder konnten mit ihren Laternen in diesem Jahr nicht von Haus
+                        zu Haus ziehen, ihre Lieder singen und Süßigkeiten
+                            <Stichwort>schnörzen</Stichwort>, kötten oder dotzen. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/931/LJGac51fWmJSylmD">
+                        <Autor>Autor Schriftführung</Autor>
+                        <Titel>St. Martin – Bürgergemeinschaft Geisbach e. V.</Titel>
+                        <Kurztitel>St. Martin </Kurztitel>
+                        <Stelle/>
+                        <Datum>15.11.2022</Datum>
+                        <URL>https://www.bvge-ev.de/category/veranstaltung/st-martin/</URL>
+                        <Aufrufdatum>30.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn Kinder zu Sankt Martin singend mit ihren Laternen durch die Straßen ziehen und dafür Spenden oder Süßigkeiten erhalten, dann » dotzen« oder » <Stichwort>schnörzen</Stichwort>« sie<Streichung>, erklärt der Elternrat</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2022/10/RZTG_0E21D24F146D80979786B05F16F51DFC-NEUWIEDLINZ"> Rhein-Zeitung, 25.10.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sankt Martin wäre für die meisten Kinder nicht Sankt Martin, wenn sie nicht nach dem Zug noch »<Stichwort>schnörzen</Stichwort>« könnten. Das Lied-Repertoire ist zwar klein, aber ungemein wirkungsvoll. <Streichung>"Hier wohnt ein reicher Mann« – wer will sich da das Gegenteil nachsagen lassen?</Streichung> Und so kehren die Kinder spätabends schwer beladen mit Süßigkeiten nach Hause zurück. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2003/10/RZTG_9AA47788DA2536D1380C145835DF8ECF"> Rhein-Zeitung, 24.10.2003 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-12"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_d_187" Autor="kduden" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2020-10-09" Erstellungsdatum="1967-01-01" Status="Lex-kommentiert">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>dahinfallen</Schreibung>
+            <Aussprache><IPA Audiodatei="067/dahinfallen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>fällt dahin</Wert></Praesens>
+                <Praeteritum><Wert>fiel dahin</Wert></Praeteritum>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>dahingefallen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>dahin-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>fallen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_d_244">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>CH</Sprachareal>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">entfallen, wegfallen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Der Grund, sie wieder fortzuschicken, <Stichwort>fiel</Stichwort>
+                        immer mehr <Stichwort>dahin</Stichwort>
+                    </Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="ZAHERNFSI">
+                        <Autor>Zahn</Autor>
+                        <Titel>Frau Sixta</Titel>
+                        <Stelle>169</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Er ging vor Thurgauer Obergericht und wollte festgestellt wissen,
+                        dass die Zahlungen für die Vergangenheit
+                            <Stichwort>dahingefallen</Stichwort> seien. </Belegtext>
+                    <Fundstelle Fundort="dwds"> St. Galler Tagblatt, 29.12.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Aufsichtskommission über die Rechtsanwälte hatte ihn Anfang Jahr
+                        im Anwaltsregister gelöscht, womit auch die Urkundenberechtigung
+                            <Stichwort>dahinfalle</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Luzerner Zeitung, 16.08.2013 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"><Beleg><Belegtext>Die Einschränkung der persönlichen Freiheiten müsse so bald als möglich und so bald ihre Voraussetzungen <Stichwort>dahingefallen</Stichwort> seien, wieder aufgehoben werden.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [1945]</Fundstelle></Beleg><Beleg><Belegtext>Mit dem Ende des nationalen Militarismus <Stichwort>fiel</Stichwort> alle derartige planmäßige »Wirtschaftspolitik« <Stichwort>dahin</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Weber, Max: Die Wirtschaftsethik der Weltreligionen. In: Weber, Marianne (Hg.), Gesammelte Aufsätze zur Religionssoziologie, Bd. I, Tübingen: Mohr 1920 [1916-1919], S. 424</Fundstelle></Beleg><Beleg><Belegtext>Unterschied <Stichwort>fiel</Stichwort> mit der Union der beiden Bekenntnisse (1821) <Stichwort>dahin</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Bornkamm, H.: Heidelberg. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1959], S. 17405</Fundstelle></Beleg><Beleg><Belegtext>Gelinge es nicht die französische Gruppe zu verkaufen, <Stichwort>falle</Stichwort> die Stillhaltevereinbarung <Stichwort>dahin</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.07.1996</Fundstelle></Beleg><Beleg><Belegtext>Nun <Stichwort>fiel</Stichwort> das <Stichwort>dahin</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Doderer, Heimito von: Die Strudlhofstiege oder Melzer und die Tiefe der Jahre, Gütersloh: Bertelsmann 1996 [1951], S. 336</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

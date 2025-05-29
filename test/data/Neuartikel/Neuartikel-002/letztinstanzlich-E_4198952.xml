@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="dsanders" xml:id="E_l_52000_63" Autor="dsanders" Typ="Vollartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2024-11-04" Erstellungsdatum="1999-01-01" Status="Red-2">
+        <?oxy_comment_start author="kduden" timestamp="20241104T110139+0100" comment="ehemals solf"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="letzt-in-s-tanz-lich"><?oxy_comment_start author="kduden" timestamp="20241107T202819+0100" comment="weitere Trennmöglichkeit: letzt-in-s-tanz-lich" flag="done"?>letztinstanzlich<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA>ˈlɛʦtʔɪnˌstanʦlɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20250401T095729+0200" comment="Nur Bezugsregel ergänzt (die sehr streng genommen nicht passt, da BEIDE Konstituenten so nicht frei vorkommen)"?>36
+                (1.2)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>letzt</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Instanz</Ziellemma>
+                <?oxy_comment_start author="dsanders" timestamp="20200703T192749+0200" comment="Geändert, sonst funzen die Verweise nicht" flag="done"?>
+                <Ziellesart><?oxy_comment_end?></Ziellesart>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-lich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Recht</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">in der letzten <Verweis Typ="vgl">
+                    <Ziellemma>Instanz</Ziellemma>
+                    <Ziellesart>1, 2</Ziellesart>
+                </Verweis> (<Verweis Typ="vgl">
+                    <Ziellemma Anzeigeform="gefällt">fällen</Ziellemma>
+                    <?oxy_comment_start author="kduden" timestamp="20201027T113229+0100" comment="Link ergänzt. Zumindest ich bin über das nachgesetzte »(gefällt)« gestolpert und musste die Def. mehrmals lesen, bis ich verstand, dass es nicht um /gefallen/ geht …" flag="done"?>
+                    <Ziellesart><?oxy_comment_end?>3 b</Ziellesart>
+                </Verweis>)</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>ein <Stichwort>letztinstanzliches</Stichwort> Urteil</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>letztinstanzliche</Stichwort> Entscheidung, Klärung,
+                        Verurteilung</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext>etw. <Stichwort>letztinstanzlich</Stichwort> entscheiden,
+                        zurückweisen, abweisen</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Erst vergangenes Jahr wurde <Stichwort>letztinstanzlich</Stichwort>
+                        am kantonalen Verwaltungsgericht entschieden, dass die Baubewilligung
+                        rechtskräftig ist. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Südkurier, 07.10.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Gefährder Sami A. war am 13. Juli nach Tunesien abgeschoben
+                        worden – zu Unrecht, wie das zuständige Oberverwaltungsgericht
+                            <Stichwort>letztinstanzlich</Stichwort> entschieden hat. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Fränkischer Tag, 18.08.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das <Autorenzusatz>italienische</Autorenzusatz> Kassationsgericht
+                        bestätigte jetzt <Stichwort>letztinstanzlich</Stichwort> den Freispruch. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Standard, 22.11.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich nehme an, dass der BGH <Paraphrase>Bundesgerichtshof</Paraphrase>
+                        die meisten Dinge <Stichwort>letztinstanzlich</Stichwort> entscheiden muss,
+                        und häufig ist es dann so, dass im Gesetzgebungsverfahren die von der
+                        Rechtsprechung erarbeiteten Ergebnisse Eingang in die Gesetzgebung finden. </Belegtext>
+                    <Fundstelle Fundort="dwds"> C’t, 2000, Nr. 19 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In offensichtlich unbegründeten Fällen entscheiden Einzelrichter
+                            <Stichwort>letztinstanzlich</Stichwort> über Einsprüche gegen einen
+                        ablehnenden Bescheid des Bundesamts. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Spiegel, 14.10.1991</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der <Autorenzusatz>iranische</Autorenzusatz> Rat der Weisen hat die
+                        Befugnis, den herrschenden Gottesgelehrten – der zugleich
+                        »Revolutionsführer« ist – zu ernennen und eventuell auch
+                            abzusetzen<Streichung>; dieser übt eine kontrollierende Funktion über
+                            den Staatspräsidenten aus, wodurch die Zusammensetzung des Gremiums
+                            entscheidenden Einfluß auf die Machtbalance im Land hat</Streichung>.
+                        Zudem entscheiden die 83 Geistlichen <Stichwort>letztinstanzlich</Stichwort>
+                        in Verfassungsangelegenheiten. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Archiv der Gegenwart, 2001 [1990]</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20200703T193009+0200" comment="Streichkandidat, die anderen sind gehaltvoller" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Ein <Stichwort>letztinstanzliches</Stichwort>
+                        Urteil des Münchner Bundesfinanzhofes (BFH) steht noch immer aus. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Spiegel, 14.04.1986 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Bedeutungsebene>übertragen</Bedeutungsebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">endgültig, letztgültig, letztendlich</Definition>
+            <Definition Typ="Basis">(auf der höchsten Ebene) für letztgültige Entscheidungen
+                zuständig</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext><Autorenzusatz>Bundespräsident</Autorenzusatz> Steinmeier mag sich
+                        danach kurzzeitig als <Stichwort>letztinstanzlicher</Stichwort> Versöhner in
+                        allen Lebenslagen gesehen haben, eine Rolle, in der er mit der Einmischung
+                        in den Fall des Fußballers und Erdoğan-Freundes Mesut Özil an seine Grenzen
+                        stieß. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 24.12.2018 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20200703T193116+0200" comment="Den finde ich sehr schwer verständlich" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Im Gegensatz zu anerkannten Behandlungsguidelines
+                        gebe es keine anerkannten Algorithmen, welche dem Apotheker <Streichung>im
+                            Sinn einer Triage</Streichung> helfen würden, die richtige Indikation
+                        für ein bestimmtes heute rezeptpflichtiges Medikament zu finden. Die heute
+                        verwendeten Algorithmen unterlägen <Stichwort>letztinstanzlich</Stichwort>
+                        der ärztlichen Verantwortung<Streichung>, schreibt der Ärzteverband FMH, der
+                            das Fehlen einer Liste der betroffenen Arzneimittel
+                            bemängelt</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 22.10.2017 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Weiter sagte er <Autorenzusatz>Gorbatschow</Autorenzusatz>, niemand
+                        habe das Recht auf <Stichwort>letztinstanzliche</Stichwort> Wahrheit. Die
+                        Presse müsse die Meinung des Volkes zum Ausdruck bringen, anders zu handeln
+                        wäre undemokratisch.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Archiv der Gegenwart, 2001 [1987]</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext><Streichung>Denn</Streichung> in dem idealen Verlag<Streichung>,
+                            dessen Norm sich beide Briefpartner unterstellen,</Streichung> regelt
+                            <Stichwort>letztinstanzlich</Stichwort> nicht eine ökonomische Kategorie
+                        die Beziehungen zwischen Autor und Verleger, sondern eine
+                        persönlich-moralische: die Treue. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 12.10.1999
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und wenn gesagt wird, daß gesellschaftliche Konflikte in staatlich
+                        geregelten Bahnen auszutragen sind, wie Otto das im »Spiegel«, getan hat,
+                        dann heißt das, ich akzeptiere <Stichwort>letztinstanzlich</Stichwort>
+                        <Streichung>– außer meinem Recht zu wählen, darauf beharre ich, merkt euch
+                            das –</Streichung>, daß der Staat das Monopol hat zu regeln, wann und
+                        wieviel und ob Raketen stationiert werden. </Belegtext>
+                    <Fundstelle Fundort="dwds"> konkret, 2000 [1985]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn die Unsicherheit dadurch vermehrt wird, daß Instanzen, die
+                        bisher über Jahrtausende hinweg immer ganz sicher waren in ihrem Urteil, sei
+                        es die Jurisprudenz, sei es die Religion, sei es die von Hippokrates in
+                        Pflicht genommene Heilkunst – wenn die auf einmal alle unsicher sind: Was
+                        bleibt dann? Offenbar nur diese arme
+                            <Stichwort>letztinstanzliche</Stichwort> Einrichtung namens Gewissen
+                        …</Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 05.12.1975</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Es ist die erste <Stichwort>letztinstanzliche</Stichwort>
+                        Verurteilung für ihn nach vielen Prozessen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.08.2013, Nr. 31</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er kennt nur <Stichwort>letztinstanzliche</Stichwort> Äußerungen, die
+                        allerdings in jedem Konzert anders ausfallen können.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 22.04.2007, Nr. 17</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und schließlich galt in diesem »System« – über allem und am Ende –
+                        das <Stichwort>letztinstanzliche</Stichwort> Wort.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 18.02.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich denke, dass man <Stichwort>letztinstanzliche</Stichwort>
+                        gerichtliche Entscheidungen auch akzeptieren muss.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 27.07.2009, Nr. 30</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wie die meisten Medikamente für den Menschen richtig angewandtes Gift
+                        sind, ist dieses Mittel für den Motor
+                            <Stichwort>letztinstanzlich</Stichwort> richtig angewandter
+                        Dreck.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Spoerl, Alexander: Mit dem Auto
+                        auf Du, Berlin u. a.: Dt. Buchgemeinschaft 1961 [1953], S. 293</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

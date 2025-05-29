@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_b_5146" Autor="jgrimm" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2023-10-31" Erstellungsdatum="1967-01-01" Status="Lex-kommentiert">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="be-kloppt">bekloppt</Schreibung>
+            <Aussprache><IPA Audiodatei="030/bekloppt">bəˈklɔpt</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse><?oxy_comment_start author="jgrimm" timestamp="20231031T104111+0100" comment="s. Kommentar bei der Zerlegung.
+Da es das Verb bekloppen nicht gibt, ist das auch kein partizipiales Adjektiv, sondern ein ganz normales, das auch steigerbar ist"?>Adjektiv<?oxy_comment_end?></Wortklasse>
+                <?oxy_comment_start author="jgrimm" timestamp="20231031T104140+0100" comment="ergänzt"?>
+                <Komparativ><Wert>bekloppter</Wert></Komparativ>
+                <Superlativ><Wert>am beklopptesten</Wert></Superlativ>
+                <?oxy_comment_end?>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="lexikalisierte_Flexionsform">
+            <?oxy_comment_start author="kduden" timestamp="20231011T105615+0200" comment="Hierfür habe ich mich an dem Artikel &quot;verrückt&quot; orientiert " id="yzf_jtf_hzb"?>
+            <?oxy_comment_start author="kduden" timestamp="20231031T103621+0100" parentID="yzf_jtf_hzb" comment="bekloppen gibt es leider als Verb nicht (zumindest nicht offiziell, in den Korpora findet man es trotzdem selten, aber was findet man dort nicht...). Der Fall ist hier eher mit bescheuert vergleichbar. Bescheuert ist aber noch nicht überarbeitet, sodass du dort auch nicht fündig geworden wärst.
+Das Adjektiv setzt sich aus dem Partizip II von kloppen und dem Präfix be- zusammen.
+Ich hab&apos;s schon mal ergänzt, bekloppen sollte dann raus." mid="3"?>
+            <Verweis Typ="Grundform" class="invisible"><?oxy_comment_end?><?oxy_comment_end mid="3"?>
+                <Ziellemma>bekloppen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>be-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>kloppen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>bekloppt</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart xml:id="S_b_2711">
+            <?oxy_comment_start author="kduden" timestamp="20231011T110956+0200" comment="Was passiert mit der Substantivierung von bekloppt --&gt; &quot;etwas Beklopptes&quot;? Soll das zweite Lesart markiert werden?" id="agf_swf_hzb"?>
+            <?oxy_comment_start author="kduden" timestamp="20231031T110149+0100" parentID="agf_swf_hzb" comment="Nein, generell bekommen Substantivierungen keine eigene Lesart. Du kannst ja alles substantivieren. lesen - das Lesen, beweglich - das Bewegliche, etc. 
+Unsere Konvention ist aber, dass man einen Beleg für die Substantivierung bringen kann. Der muss dann auch nicht speziell gekennzeichnet oder paraphrasiert werden, weil sich die Bedeutung ja erschließt.
+" mid="5"?>
+            <Syntagmatik><?oxy_comment_end?><?oxy_comment_end mid="5"?></Syntagmatik>
+            <Diasystematik>
+                <?oxy_comment_start author="dsanders" timestamp="20231011T110257+0200" comment="Es ist in allen Arealen gebräuchlich. (zwischen 2 und 24% Antiel PPM)" id="nwy_dvf_hzb"?>
+                <?oxy_comment_start author="kduden" timestamp="20231031T105002+0100" parentID="nwy_dvf_hzb" comment="D-Mittelwest 	1656 	0,49 	24,03 %
+D-Nordost 	299 	0,47 	23,19 %
+D-Nordwest 	609 	0,44 	21,89 %
+D-Mittelost 	367 	0,23 	11,34 %
+D-Südwest 	236 	0,22 	10,63 %
+D-Südost 	161 	0,10 	5,05 %
+CH 	31 	0,05 	2,23 %
+A 	42 	0,03 	1,65 %
+
+Gebräuchlich schon, aber in CH und A fast um den Faktor 10 seltener. 
+
+Auch im allgemeinen Zeitungskorpus noch:
+DE 	9821 	0,46 	69,74 %
+CH 	213 	0,11 	16,15 %
+AT 	35 	0,09 	14,11 %
+
+Ich würde hier vermutlich [besonders D] vergeben." mid="7"?>
+                <Stilebene><?oxy_comment_end?><?oxy_comment_end mid="7"?><?oxy_comment_start author="dsanders" timestamp="20231031T112552+0100" comment="salopp entstammt auch noch dem WDG-Artikel und müsste daher mit einer Binnenquellenangabe versehen werden. Da wir ja aber wahrscheinlich noch die Arealangabe ergänzen (die ja von uns stammt) und man, wenn man mehrere diasystematische Angaben hat, nicht nur eine mit einer Quelle versehen kann, lassen wir die Quelle hier ganz weg. &quot;Salopp&quot; ist jetzt auch nichts, worauf wir nicht selber gekommen wären. Wobei man vielleicht auch überlegen könnte, ob es einfach nur umgangssprachlich und nicht salopp ist."?>salopp<?oxy_comment_end?></Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis" Quelle="WDG" Zeitstempel="1967-01-01"><?oxy_comment_start author="wgrimm" timestamp="20231031T105132+0100" comment="da die Definition noch vom WDG-Artikel übernommen ist, müssen wir sie mit einer Binnenquellenangabe versehen. Ich hab das mal gemacht"?>nicht
+                ganz bei Verstand<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Vor allem beeindrucken die Gesangsstimmen der Darsteller und die so
+                        schönen und <Stichwort>bekloppten</Stichwort> Rollen und Kostüme, in welche
+                        sie fast minütlich wechseln. </Belegtext>
+                    <Fundstelle Fundort="dwds:svz_regional:2023/07/SVZ_23-164231349"> Schweriner
+                        Volkszeitung, 29.07.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Dass dieses Land und diese Stadt nun wieder wegen eines
+                            <Stichwort>bekloppten</Stichwort> Machthabers so leiden müssen, ist ein
+                        Zustand, der traurig und zornig macht. </Belegtext>
+                    <Fundstelle Fundort="dwds:frt_regional:2022/04/FRT_3167847874-ERLANGENHOECHSTADT">
+                        Fränkischer Tag, 14.04.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Sie, liebe Leser, entscheiden für sich, wen Sie für
+                            <Stichwort>bekloppt</Stichwort> oder klar denkend
+                        halt<?oxy_comment_start author="wgrimm" timestamp="20231031T110546+0100" comment="da ist leider ein Fehler im Beleg, es müsste &quot;halten&quot; heißen.
+In diesem Fall könnte man einfach per Autorenzusatz das [n] ergänzen (meine Präferenz), oder dahinter per Autorenzusatz ein [sic!] setzen.
+Generell sollten wir fehlerhafte Belege eher vermeiden, da ich den Beleg aber sonst sehr schön finde, würde ich mich für die minimalinvasive Lösung &quot;halte[n]&quot; entscheiden."?>e<?oxy_comment_end?>,
+                        beziehungsweise mit wem Sie eventuell ins Gespräch kommen wollen. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2021/12/LVZ_doc7inyr7eafp4ekr5e8bc">
+                        Leipziger Volkszeitung, 03.12.2021</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20231031T110635+0100" comment="Schön, dass du einen Beleg für den Superlativ gewählt hast!
+Man könnte  noch überlegen, ob man den Komparativ auch belegt."?>
+                    <Belegtext><?oxy_comment_end?> In
+                        <?oxy_comment_start author="dsanders" timestamp="20231031T111938+0100" comment="hier fehlt wieder der Bezug
+--&gt; in seinem [des Wissenschafts-Comedians] Programm"?>seinem<?oxy_comment_end?>
+                        Programm gibt es neben neuen, abgefahrenen Versuchen und den wohl
+                            <Stichwort>beklopptesten</Stichwort> Experimenten, die je auf einer
+                        Bühne stattfanden, wieder spannende Sachen zu erfahren. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2020/02/NEUW_37d31712b0c788634cafbc3feea31b5a234df2e"> Neue Westfälische, 07.02.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wieder einmal lieferten
+                        <?oxy_comment_start author="wgrimm" timestamp="20231031T111139+0100" comment="Man kann zwar vermuten, wer &quot;sie&quot; ist, aber ich würde wahrscheinlich einen Autorenzusatz setzen.
+
+Beleg mit mehr Kontext:
+Wollkommen durchgeknallt / Wie das Comedy-Duo Oropax aus Freiburg mit völlig beklopptem Quatsch 200 Gems-Besucher in Singen glücklich macht Wieder einmal waren die beiden Brüder Volker und Thomas Martins aus Freiburg in Singen, wieder einmal suchten sie das Kulturzentrum Gems heim.
+Wieder einmal lieferten sie völlig bekloppten Quatsch ab und wieder einmal war das Publikum komplett glücklich.
+Als Chaos-Theater Oropax sind die beiden Martins-Buben auf Kleinkunstbühnen im Land gut bekannt. Das wurde jetzt beim jüngsten Auftritt vor wenigen Tagen überdeutlich. Nicht nur einmal griffen eifrige Zuschauer selbst ins Programm ein, lieferten ungebeten Pointen und führten Szenen weiter, die längst zum Kult-Programm der beiden Breisgauer gehören. 
+
+--&gt; sie [das Comedy-Duo] oder sie [die Künstler]"?>sie<?oxy_comment_end?>
+                        völlig <Stichwort>bekloppten</Stichwort> Quatsch ab und wieder einmal war
+                        das Publikum komplett glücklich. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2016/03/SK_OE6LTE29"> Südkurier,
+                        24.03.<?oxy_comment_start author="dsanders" timestamp="20231031T112149+0100" comment="ich glaube wir haben mal über die unterschiedlichen Präferenzen bei der Belegauswahl gesprochen. Ich persönlich finde, dass gerne auch mal ältere Belege dabei sein können. Ist aber kein Muss. 
+Besonders wenn wir jetzt bei der Arealangabe &quot;besonders D&quot; angeben, fände ich auch ein, zwei Belege aus CH und/oder A ganz nett. Nur um zu zeigen, dass es dort eben auch gebraucht wird."?>2016<?oxy_comment_end?>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Er ist auch krankheitsmäßig auf der Höhe dieser
+                            <Stichwort>bekloppten</Stichwort> Zeit.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">konkret, 1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Da sei er allerdings lieber nicht hingegangen, denn sonst hätte er im
+                        Viertel »als <Stichwort>bekloppt</Stichwort>« gegolten.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 13.05.1994, Nr. 20</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der kann noch so <Stichwort>bekloppt</Stichwort> sein, aber gegen uns
+                        ist er immer erfolgreich.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.08.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Eigentlich wäre ich ja <Stichwort>bekloppt</Stichwort>, wenn ich das
+                        machen würde.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 15.04.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Selbst wenn wir zehn Stück gekriegt hätten, wäre das
+                            <Stichwort>bekloppt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 27.10.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das ist weniger als unsere Nummer 20, aber so
+                            <Stichwort>bekloppt</Stichwort> bin ich halt.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 09.06.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und wenn von außen nichts geschieht, dann werden in den nächsten 34
+                        Jahren seine mindestens ebenso <Stichwort>bekloppten</Stichwort> Söhne das
+                        Volk unterdrücken.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        17.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber zu sagen, wir wollen jetzt einfach nur spinnen und
+                            <Stichwort>bekloppt</Stichwort> sein, ist auch zu einfach.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        23.01.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er wollte aber unbedingt irgendeinen
+                            <Stichwort>bekloppten</Stichwort> Streit mit mir anfangen und drehte
+                        sich zu mir um.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Brussig, Thomas: Wasserfarben, Berlin:
+                        Aufbau-Taschenbuch-Verl. 2001 [1991], S. 83</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bist du etwa völlig <Stichwort>bekloppt</Stichwort>?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Hilsenrath, Edgar: Das Märchen vom letzten
+                        Gedanken, München: Piper 1989, S. 381</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

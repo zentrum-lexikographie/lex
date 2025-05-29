@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_9270629" Autor="jgrimm" Typ="Basisartikel" Zeitstempel="2023-10-20" Erstellungsdatum="2023-10-20" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung><?oxy_comment_start author="dsanders" timestamp="20190730T143343+0200" comment="#39426
+Bedeutung der maskulinen Form fehlt"?>Schulabbrecherin<?oxy_comment_end?></Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Schule</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Abbrecherin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Schulabbrecher</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Schulabbrecher</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Eine unkonventionelle Tante habe ihr, der <Stichwort>Schulabbrecherin</Stichwort>, die mit einem Bautrupp Straßengräben aushob, empfohlen, sich für einen Fotografen-Workshop zu bewerben.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 27.11.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ina K<Streichung>ent</Streichung> fehlte beim Lernen jede Disziplin, mit 16 Jahren »entließ« sie sich schließlich selbst und jobbte jahrelang als <Stichwort>Schulabbrecherin</Stichwort> quer durch die Stadt.</Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 03.07.2017</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Initiative »Girls Go Technics«, die im Auftrag des AMS von der Wiener Firma Weidinger &amp; Partner durchgeführt wird, ist zwar nicht mit einem TU-Studium vergleichbar, bietet den Mädchen im Alter von 15 bis 19 Jahren – meist Hauptschulabsolventinnen oder <Stichwort>Schulabbrecherinnen</Stichwort> – jedoch eine praxisorientierte Ausbildung, die ihnen berufliche Chancen bei EDV-Firmen, Internetprovidern, Onlinemedien und Agenturen, aber auch beispielsweise als selbstständige Webdesigner eröffnen soll.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Standard, 10.07.2001 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

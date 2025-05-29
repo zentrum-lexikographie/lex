@@ -1,0 +1,515 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_u_2749" Autor="jgrimm" Typ="Vollartikel" Zeitstempel="2024-01-22" Erstellungsdatum="1976-01-01" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform">
+            <Schreibung hidx="1">untermischen</Schreibung>
+            <Aussprache><IPA>ˌʊntɐˈmɪʃn̩</IPA></Aussprache>
+            <Aussprache class="invisible"><IPA Audiodatei="053/untermischen">ˈʊntɐˌmɪʃn̩</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>untermischt</Wert></Praesens>
+                <Praeteritum><Wert>untermischte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>untermischt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>unter-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>mischen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="II." xml:id="S_u_4112">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext><?oxy_comment_start author="kduden" timestamp="20240122T181132+0100" comment="1. passt nicht zu Wetterbelegen
+2. auch Geräte/Maschinen können etw. mit etw. untermischen"?>jmd<?oxy_comment_end?>.
+                            <Stichwort>untermischt</Stichwort> etw. mit etw.</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <?oxy_comment_start author="wgrimm" timestamp="20240122T104159+0100" comment="durchmischen"?>
+            <Verweise><?oxy_comment_end?></Verweise>
+            <Definition Typ="Basis">etw. mit etw. gut vermischen, dass es davon durchsetzt
+                ist</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>der Zucker wird mit den Gewürzen gut
+                            <Stichwort>untermischt</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>die Quarkspeise ist mit Schlagsahne
+                            <Stichwort>untermischt</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>es fiel Schnee, mit Regen <Stichwort>untermischt</Stichwort>
+                    </Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="WASJAKDGA">
+                        <Autor>Wasserm.</Autor>
+                        <Titel>Gänsemännchen</Titel>
+                        <Stelle>94</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> »Tablieren« nennt der Fachmann das, immer wieder wird die angewärmte
+                        Schokolade mit Pellets kühlerer Schokolade
+                            <Stichwort>untermischt</Stichwort> und ausgestrichen, bis die Masse eine
+                        optimale Temperatur erreicht, in diesem Fall 29 Grad Celsius. </Belegtext>
+                    <Fundstelle Fundort="dwds:maz_regional:2019/11/MAZ_251208560001575068400">
+                        Allgemeine Zeitung, 30.11.2019 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Grünerlen und Weidengehölze, <Stichwort>untermischt</Stichwort> mit
+                        Vogelbeere, bedecken heute riesige Flächen der Talflanken. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2018/09/NLZ_201809080234703033"> Luzerner
+                        Zeitung, 08.09.2018 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Der Sand, der mit vielen Steinen <Stichwort>untermischt</Stichwort>
+                        ist, stammt vom Strandwall am Dünenweg in Hohwacht. </Belegtext>
+                    <Fundstelle Fundort="dwds:kn_regional:2018/05/KN_doc6zyifzci1j8q9d2o60y"> Kieler
+                        Nachrichten, 02.05.2018 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Großformatige Fotos in klassischem Schwarz-Weiß zaubern
+                        Landschaftseindrücke an die Galeriewände – ein gutes Dutzend Bäume
+                        betagteren Alters <Stichwort>untermischt</Stichwort> mit nur zwei Reihen von
+                        schlankerem Habitus am Straßenrad. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2018/04/LVZ_doc6zqlql92wj9bajvc2zy">
+                        Leipziger Volkszeitung, 17.04.2018 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Was ihm <Autorenzusatz>Tom of Finland</Autorenzusatz>, allein mit
+                        dem Grafitstift, allenfalls durch ein wenig Kreide
+                            <Stichwort>untermischt</Stichwort>, mit seinen Lederjacken,
+                        Schaftstiefeln, Schnauzbärten, Mützen und Haarschöpfen gelingt, das ist eine
+                        Sinfonie in Schwarz und Grau, sich verselbstständigende stoffliche Essenz,
+                        glatt wie Lack, schwerelos, man sieht keinen einzigen Strich. </Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2017/02/wasxml20170219_206"> Welt am Sonntag,
+                        19.02.2017 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> In den zahlreichen, meist aus mehreren Blättern bestehenden Blöcken
+                        mit Wasserfarben auf Papier herrscht eine größere Dynamik und Farbigkeit:
+                        Ein sattes Orange, aber auch schwarze Schemen von Buhnen, Gittern und
+                        Strandbefestigungen, <Stichwort>untermischt</Stichwort> mit Strichelungen
+                        und Rastern erzählen vom Alltag der Künstlerin unter dem Eindruck der
+                        eigenen Sehnsucht nach Ferne, Weite und Meer. </Belegtext>
+                    <Fundstelle Fundort="dwds:dnn_regional:2015/04/DNN_AE7CE6B4FEFA5FF711F4E1E3DC333088">
+                        Dresdner Neueste Nachrichten, 17.04.2015 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Dass der Appetit bei exemplarischen, marktfrischen und realistisch
+                        geschätzten Objekten unvermindert anhält, signalisierte die erfolgreichere
+                        Sotheby's-Auktion am Mittwochabend. Ihr umfangreiches Angebot von 71
+                        Losen aus renommierten Privatsammlungen, <Stichwort>untermischt</Stichwort>
+                        mit einigen hochkarätigen Impressionisten summierte sich auf knapp 106
+                        Millionen Pfund <Streichung>und damit an den Rand der oberen
+                            Erwartung</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2013/01_13/we_01xml20130101_13676"> Die Welt,
+                        22.06.2013 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext>Zur Linken wechseln Kräne, Ufermauern, ein Kreuzfahrtschiff. Dahinter
+                        die Marmorkuben und Backsteinbuge der HafenCity,
+                            <Stichwort>untermischt</Stichwort> mit zarten Bäumchen. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha:2012/10/HA_89076939"> Hamburger Abendblatt,
+                        13.10.2012 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> In den Bühnenbildern von Johan Engels und den Kostümen Marie-Jeanne
+                        Leccas sind gerade in den Trojanerszenen oft starke Momente zu bestaunen.
+                        Ein herbes Dunkel herrscht da, <Stichwort>untermischt</Stichwort> mit viel
+                        Blutrot. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2010/12/SZ_A48499041"> Süddeutsche Zeitung,
+                        07.12.2010 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Gehackter Spinat, denkbar frisch, <Stichwort>untermischt</Stichwort>
+                        mit Lauch sowie ein kaum gebundenes Hackfleisch, das trotzdem den
+                        Zusammenhalt nicht verliert, fügen sich willig in einen Teig von
+                        <?oxy_comment_start author="kduden" timestamp="20240119T183025+0100" comment="?"?>Graden<?oxy_comment_end?>. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2010/09/TSP_201009105762738"> Der Tagesspiegel,
+                        10.09.2010 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Einerseits ist der Flugverkehr ihretwegen <Autorenzusatz>wegen der
+                            Aschewolke</Autorenzusatz> eingestellt, andererseits schauen die Leute
+                        zum Himmel und sehen nichts als Blau, da oder dort vielleicht einen
+                        Cumulushaufen, allenfalls weit draußen am Horizont etwas Trübes, Diesiges,
+                        das aus Asche bestehen oder mit Asche <Stichwort>untermischt</Stichwort>
+                        sein könnte. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2010/04/SZ_A47118369"> Süddeutsche Zeitung,
+                        20.04.2010 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Aber dann steht da im Gartencenter das Heer blühender Töpfe – und
+                        die wollen nicht in das Schema passen. Geblüht wird in allen Nuancen von
+                        Weiß und Gelb, <Stichwort>untermischt</Stichwort> mit Orange, Rot oder Rosa. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2010/04/BMP_69855568"> Berliner Morgenpost,
+                        03.04.2010 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Das <Streichung>von Goldhahn &amp; Sampson in der Dose
+                            vertriebene</Streichung> Produkt ist halb püriert, mit festen,
+                        unverkochten Kartoffelnwürfeln <Stichwort>untermischt</Stichwort> und so gut
+                        abgerundet, dass man sich in jeder Raststätte über sie herzlich freuen
+                        würde. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2009/11/TSP_200911135159053"> Der Tagesspiegel,
+                        13.11.2009 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Letzte Nacht schwenkte die Front von »Frauke« herein und
+                        lässt ein wenig Regen fallen, der auf den Eifeler Höhen auch mit Schnee
+                            <Stichwort>untermischt</Stichwort> ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:aaz_regional:2008/11/AAZ_0317781118"> Aachener
+                        Zeitung, 18.11.2008 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20240119T183415+0100" comment="zusätzliches K-Muster mit jmd.? --&gt; jmd. untermischt jmdn. [mehrere Personen] mit jmdm. [mehreren Personen]
+(vgl. auch Beleg drunter und den aus der NZZ von 1993)"?>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0"><?oxy_comment_end?>
+                    <Belegtext> Um Breitenwirkung zu erreichen, mussten die Chorprofis einst mit
+                        Verstärkung <Stichwort>untermischt</Stichwort> werden, etwa vom Berliner
+                            Motettenchor<Streichung>, einem ehrgeizigen Laienchor, der damals eine
+                            goldene Zeit erlebte: neben den illustren Sängerinnen und Sängern unter
+                            Dirigenten wie Hindemith und Fricsay mitzusingen</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2008/10/TSP_200810264374928"> Der Tagesspiegel,
+                        26.10.2008 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Dank dem Geldregen leisten sich Arsenal, Liverpool, Manchester
+                        United, Chelsea und andere teures Personal, vorwiegend aus dem Ausland.
+                            <Streichung>Das Wort« englisch »sei fast irreführend, schreibt Hughes.
+                            In der Startaufstellung Liverpools standen am Dienstag mit Carragher und
+                            Gerrard zwei Engländer, Arsenal spielt oft ohne einen einzigen
+                            Einheimischen. Keines der Teams hat einen englischen Manager, ManU und
+                            Liverpool werden von Besitzern aus den USA kontrolliert, Chelsea gehört
+                            dem russischen Oligarchen Abramowitsch.</Streichung> «Die Engländer
+                        kommen. Oder besser gesagt: die Franzosen, Spanier und Togolesen,
+                            <Stichwort>untermischt</Stichwort> mit ein paar einheimischen Talenten,
+                        die die Fahne der englischen Premier League fest in den europäischen Boden
+                        einpflanzen», schrieb der «Daily Telegraph». </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2008/03/NZZ_FZMIU"> Neue Zürcher Zeitung,
+                        13.03.2008 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Er trägt die Farbe mit breitem Pinsel pastos auf, großzügig,
+                        entspannt und locker, Schicht für Schicht, tektonisch. Mit kräftigem Weiß
+                            <Stichwort>untermischt</Stichwort><Streichung>,</Streichung> ergeben
+                        sich erdig-silbrige Landschaften, Porträts und Stilleben
+                            <Autorenzusatz>sic!</Autorenzusatz>. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz:2008/02/LVZ_B47E3451AD5496EE602494D814D8C420">
+                        Leipziger Volkszeitung, 22.02.2008 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Am unteren Ende der Sardinen-Skala, die Appel in den Handel bringt,
+                        firmiert die lieblich klingende »Rosalinde«. Geöffnet erweist sie
+                        sich als eine moderne Interpretation der Büchse der Pandora: Haut und
+                        Gräten, <Stichwort>untermischt</Stichwort> mit trockenen Filetteilen, die
+                        riechen wie ein feuchter Jutesack.</Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2006/09/TSP_200609082761960"> Der Tagesspiegel,
+                        08.09.2006 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Wuchtig und rustikal tritt <Streichung>dagegen
+                            Lafayettes</Streichung>
+                        <Autorenzusatz>das</Autorenzusatz> »Confit de Canard« auf, das mit
+                        Leberstückchen <Stichwort>untermischt</Stichwort> ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2006/05/TSP_200605122525384"> Der Tagesspiegel,
+                        12.05.2006 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Am besten schmecken sie <Autorenzusatz>Ölsardinen</Autorenzusatz>
+                        ihm auf einer Schnitte Bauernbrot oder <Stichwort>untermischt</Stichwort>
+                        mit Kartoffeln und Zwiebeln. </Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2005/08/BAZ_0805120097"> Basler Zeitung,
+                        12.08.2005 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Unaufhörlich zuckten die Blitze, fast ununterbrochen grollte der
+                        Donner. Dabei ging ein wolkenbruchartiger Regen, der mit Hagel
+                            <Stichwort>untermischt</Stichwort> war, nieder.</Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2003/07/LVZ_200307296404062660208282">
+                        Leipziger Volkszeitung, 29.07.2003 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                    <Belegtext> Da standen sie denn, die Herren. Leicht
+                            <Stichwort>untermischt</Stichwort> von ein paar Damen. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:1993/12/NZZ_A574CEA69CF82225851806B0CABD37B1">
+                        Neue Zürcher Zeitung, 24.12.1993 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Im Winter, wenn es regnet, so regnet es lauter Honig in süßen
+                        Tropfen, da kann einer lecken und schlecken, daß es eine Lust ist, und wenn
+                        es schneit, so schneit es klaren Zucker, und wenn es hagelt, so hagelt es
+                        Würfelzucker, <Stichwort>untermischt</Stichwort> mit Feigen, Rosinen und
+                        Mandeln. </Belegtext>
+                    <Fundstelle Fundort="dwds:dibilit:sagen_maerchen/bechstein_deutsches-maerchenbuch_1971.txt:224"> Ludwig Bechstein: Sämtliche Märchen. München 1971 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart xml:id="S_u_4112_10">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>bildlich</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis"/>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Er sprach ein mit spanischen Lauten
+                                <Stichwort>untermischtes</Stichwort> Französisch</Belegtext>
+                        <Fundstelle Fundort="WDG" Sigle="MANTHOBUD">
+                            <Autor>Th. Mann</Autor>
+                            <Titel>Buddenbrooks</Titel>
+                            <Stelle>1,239</Stelle>
+                            <Datum/>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>ein wenig Wahrheit mit viel Lüge
+                                <Stichwort>untermischt</Stichwort>
+                        </Belegtext>
+                        <Fundstelle Fundort="WDG" Sigle="FALHANJSF">
+                            <Autor>Fallada</Autor>
+                            <Titel>Jeder stirbt</Titel>
+                            <Stelle>228</Stelle>
+                            <Datum/>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> In dieser Woche hat der Wahlkampf begonnen. Die Ausrufung der
+                            Neuwahl war mit einem gehörigen
+                            <?oxy_comment_start author="jgrimm" timestamp="20240122T105639+0100" comment="Solche Konstruktionen findet man oft (mit einem Schuss, einer Prise, einer Portion usw.) --&gt; mit &quot;im Bild&quot; markieren oder ist das Bild nicht elaboriert genug?"?>Schuss<?oxy_comment_end?>
+                            Pathos <Stichwort>untermischt</Stichwort>.</Belegtext>
+                        <Fundstelle Fundort="dwds:bund:2022/10/BUND_202210066158218"> Der Bund,
+                            06.10.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Jetzt erklingt die Borussia-Hymne. »Die einzig wahre Borussia
+                            kommt vom Niederrhein.« Im Gang zum Spielfeld gibt es einen magischen
+                            Knopf. Wird der gedrückt, ertönt die Musik dort um ein Vielfaches
+                            lauter, <Stichwort>untermischt</Stichwort> noch mit starkem Jubel der
+                            Fans. </Belegtext>
+                        <Fundstelle Fundort="dwds:welt:2020/06/wexml20200629_042"> Die Welt,
+                            29.06.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Welchen bewundernswerten Kraftakt er eben mit Medtners
+                            zyklopischer Sonate absolviert hat, ist Vasily Gvozdetsky kaum
+                            anzumerken, als er den mit Bravi <Stichwort>untermischten</Stichwort>
+                            Beifall der Zuhörer im Salon von Schloss Höfling entgegennimmt und sich
+                            dafür mit zwei Zugaben bedankt<Streichung>: einer instrumentalen Version
+                                von Schumanns Lied »Du meine Seele, du mein Herz« und Chopins
+                                »Minutenwalzer«</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:mib:2019/10/MIB_E90771B5668054468F803CA118E0FB42-WOERTHERANZEIGER"> Mittelbayerische, 29.10.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Meisterlich das Duett zwischen Adam (Bass) und Eva (Sopran),
+                                <Stichwort>untermischt</Stichwort> vom Lobgesang des Chores, das
+                            unglaublich viel an Geheimnis und Größe ausstrahlte. </Belegtext>
+                        <Fundstelle Fundort="dwds:mume_regional:2018/12/MUME_omp0000004192559">
+                            Münchner Merkur, 04.12.2018 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Ein abwechslungsreiches Programm
+                                <Stichwort>untermischt</Stichwort> mit Tanzeinlagen<Streichung>,
+                                nicht zuletzt von der Deutschen Meisterin im Steptanz,</Streichung>
+                            wird im großen Saal dargeboten. </Belegtext>
+                        <Fundstelle Fundort="dwds:gea_regional:2018/02/GEA_srv101-5114741">
+                            Reutlinger General-Anzeiger, 20.02.2018 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Nur der Maestro selbst<Streichung>, vor allem, wenn er zur
+                                Klarinette greift,</Streichung> versprüht die urtypischen Anklänge,
+                            die allerdings sofort mit anderen Farben, Rhythmen und Tempi
+                                <Stichwort>untermischt</Stichwort> werden <Streichung>– und meistens
+                                überraschend, aber punktgenau enden</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:dnn_regional:2015/08/DNN_DD930077F0CD494C549D29DA29D4FADC"> Dresdner Neueste Nachrichten, 01.08.2015 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Grundlagen des Rumänischen zu lernen, um halbwegs mit den
+                            rumänischen und ungarischen Dorfbewohnern <Streichung>sowie mit den
+                                Zigeunern</Streichung> ins Gespräch zu kommen – darin lag ein Teil
+                            des Deals. Ich habe das Wenige, was ich lernte, mit Italienisch
+                                <Stichwort>untermischt</Stichwort> und bin mit diesem Cocktail ganz
+                            gut durchgekommen. </Belegtext>
+                        <Fundstelle Fundort="dwds:faz:2012/10/FAZ_FD1N201210133641563"> Frankfurter
+                            Allgemeine Zeitung, 13.10.2012 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                        <Belegtext> Da gab es jede Menge fast skurril anmutende, gespaltene Klänge,
+                            schwirrende Flötentöne, <Stichwort>untermischt</Stichwort> von
+                            schattenhaft dahinhuschenden Tonfetzen, und dann und wann doch fast
+                            harmonische Figuren. </Belegtext>
+                        <Fundstelle Fundort="dwds:lvz_regional:2011/10/LVZ_B2EB526C02BDBE4BBCE008B6C8B54062"> Leipziger Volkszeitung, 05.10.2011 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Es ist kein Zufall, dass man Ralph Lauren die Ausstattung für
+                            die Verfilmung des »Großen Gatsby« antrug. <Streichung>Die
+                                dreißiger Jahre, in denen die Stimmen der Männer weich und die
+                                Kleider der Frauen burschikos wurden, stimulierten wie keine andere
+                                Epoche seinen Sinn für die Inszenierung.</Streichung> Fred Astaire
+                            und der Herzog von Windsor waren ästhetisch seine Leitfiguren, doch er
+                                <Stichwort>untermischte</Stichwort> seine Anleihen uramerikanisch
+                            mit rustikalem Chic<Streichung>, für die Frauen mit Reitröcken und
+                                Indianer-Strick, mit Ponchos und
+                            Rüschenblusen</Streichung>.</Belegtext>
+                        <Fundstelle Fundort="dwds:faz:2009/10/FAZ_FD1N200910122457167"> Frankfurter
+                            Allgemeine Zeitung, 12.10.2009 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                        <Belegtext> Jost hat seine statischen, mehr und mehr gleichförmig tönenden
+                            Bilder immer wieder mit »inneren Stimmen«
+                                <Stichwort>untermischt</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:welt:2009/01_20/we_01xml20090101_20957"> Die Welt,
+                            23.06.2009 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Meinungsvielfalt, Kontroversen oder kritische Kommentare sind in
+                            den staatlich kontrollierten Medien verpönt, Nachrichten werden mit
+                            Propaganda und Agitation <Stichwort>untermischt</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz:2007/12/NZZ_FQL3A"> Neue Zürcher Zeitung,
+                            17.12.2007 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                        <Belegtext> Konrad Adam verdanken wir viele scharfsinnige Analysen und
+                            Kommentare. Nicht selten waren sie <Stichwort>untermischt</Stichwort>
+                            mit Anwürfen, die die Adressaten auch als Pöbeleien verstehen konnten
+                            (und wohl auch sollten). </Belegtext>
+                        <Fundstelle Fundort="dwds:faz:2007/09/FAZ_FD1200709251324607"> Frankfurter
+                            Allgemeine Zeitung, 25.09.2007 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Erstaunlicherweise ist noch kein Regisseur, selbst nicht die
+                            radikalsten unter ihnen, je auf die Idee gekommen, den »Bajazzo« mit
+                            »Cavalleria rusticana« zu
+                                <Stichwort>untermischen</Stichwort><Streichung>, obwohl sich auch
+                                dies zweifellos tun ließe (vielleicht kommt das noch)</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:bmp:2007/01/BMP_50265635"> Berliner Morgenpost,
+                            21.01.2007 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Eine der Frauen probiert mit winkenden Armen einige lockere
+                            Tanzschritte. Eine andere hält ihre Trompete direkt vors Mikrophon und
+                                <Stichwort>untermischt</Stichwort> harte Rhythmen von der Platte mit
+                            Blues. </Belegtext>
+                        <Fundstelle Fundort="dwds:welt:2005/01_84/we_asvx_2005_84917"> Die Welt,
+                            14.12.2005 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Tatsächlich ist die am weitesten verbreitete amerikanische
+                            Haltung gegenüber Europa eine leichte, wohlwollende Gleichgültigkeit,
+                                <Stichwort>untermischt</Stichwort> von beeindruckender Unwissenheit. </Belegtext>
+                        <Fundstelle Fundort="dwds:zeit:1994-2023/2003/01/ZEIT_0103300123"> Die Zeit,
+                            30.01.2003 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Ein edler, aristokratischer Duft von Zimt und Schokolade dringt
+                            in die Nase, <Stichwort>untermischt</Stichwort> von Kirsche und
+                            Brombeere und Pilzgeruch. </Belegtext>
+                        <Fundstelle Fundort="dwds:faz:2002/071000/faz_2002_071563_tei"> Erwin Seitz:
+                            Der Mensch lebt nicht vom Wein allein. Frankfurter Allgemeine Zeitung,
+                            05.09.2002 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                        <Belegtext> Elton Johns Hits werden <Autorenzusatz>im Musical »König der
+                                Löwen"</Autorenzusatz> mit Musik von Lebo M., Mark Mancina, Jay
+                            Rifkin und Hans Zimmer <Stichwort>untermischt</Stichwort>; eine
+                            erfreulich wohlklingende Melange, der fast vollständig die billigen
+                            Arrangements sonstiger Musicals abgehen. </Belegtext>
+                        <Fundstelle Fundort="dwds:sz_legacy:2001/10/sz_200130"> Unter Geiern.
+                            Süddeutsche Zeitung, 18.10.2001 </Fundstelle>
+                    </Beleg>
+                    <Beleg xmlns="http://www.dwds.de/ns/1.0" class="invisible">
+                        <Belegtext> Wen zerreißt es nicht beinahe vor Entsetzen, Zorn und Scham,
+                                <Stichwort>untermischt</Stichwort> von Angst und Hilflosigkeit, beim
+                            Anblick massakrierter Zivilisten, zerstörter Dörfer, traumatisierter
+                            Kinder? </Belegtext>
+                        <Fundstelle Fundort="dwds:faz:1999/036000/faz_1999_036207_tei"> Dieter S.
+                            Lutz: Die mächtigste Allianz der Welt – Ein Sündenfall. Frankfurter
+                            Allgemeine Zeitung, 18.05.1999 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Während sie das Eis abschabt, <Stichwort>mischt</Stichwort> sie viel
+                        Luft <Stichwort>unter</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 04.01.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nicht ein Brot wurde untersucht, da hätte ich jedes Mehl
+                            <Stichwort>untermischen</Stichwort> können.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 10.01.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Man kann nicht einfach sagen, hier hat mir jemand etwas
+                            <Stichwort>untergemischt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        19.09.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Alles was da jetzt zusätzlich hinein soll, muß extra gekocht werden
+                        und wird erst kurz vor dem Servieren
+                        <Stichwort>untergemischt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.09.2008, Nr. 38</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Praxis sei aufgeflogen, weil zu viel belastetes Fett
+                            <Stichwort>untergemischt</Stichwort> worden sei.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 19.01.2011 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Heute schätzen wir uns glücklich, den kräftigen Harntreiber diskret
+                            <Stichwort>untergemischt</Stichwort> zu finden.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 24.05.2010, Nr. 21</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er wird kleinwürfelig geschnitten, gebraten, über den Salat gegossen
+                        und <Stichwort>untergemischt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Wir kochen gut, Leipzig: Verl. für
+                        d. Frau 1968 [1963], S. 26</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Doch dieser stieß immer schneller nach den Seiten vor, und ich war
+                        gezwungen, die Flucht zu ergreifen, um nicht wieder
+                            <Stichwort>untergemischt</Stichwort> zu werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Strauß, Botho: Der junge Mann, München:
+                        Hanser 1984, S. 296</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die dunklen Kämme der Tannenwälder,
+                            <Stichwort>untermischt</Stichwort> von dem frischen Grün der Buchen,
+                        bildeten einen lieblichen Kontrast zu den üppigen, fetten Wiesen auf den
+                        Lichtungen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Knittel, John: Via Mala, Berlin: Deutsche
+                        Buch-Gemeinschaft 1957 [1934], S. 223</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese Töne, in denen auch vielfach Tango
+                            <Stichwort>untermischt</Stichwort>, scheinen sich im Augenblick
+                        besonderer Vorliebe zu erfreuen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Landfrau, 23.05.1925</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_q_438" Autor="jgrimm" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2023-11-15" Erstellungsdatum="1974-01-01" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>quick</Schreibung>
+            <Aussprache Quelle="DWDS" Zeitstempel="2021-02-10" Autor="brosch"><IPA Audiodatei="041/quick">kvɪk</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>quick</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart xml:id="S_q_330">
+            <Syntagmatik/>
+            <?oxy_comment_start author="wgrimm" timestamp="20231129T125905+0100" comment="D-Mittelwest	446	0,13	10,89 %
+A	297	0,24	19,65 %
+D-Nordwest	191	0,14	11,52 %
+D-Südost	189	0,12	9,92 %
+D-Südwest	147	0,13	11,13 %
+D-Mittelost	136	0,08	7,07 %
+D-Nordost	136	0,21	17,72 %
+CH	100	0,15	12,09 %
+"?>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik><?oxy_comment_end?>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <?oxy_comment_start author="dsanders" timestamp="20231129T130028+0100" comment="Ich habe sie verwiesen. Davor standen die Lemmata als Definition."?>
+                    <Ziellemma>munter</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>lebhaft</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>schnell</Ziellemma>
+                    <Ziellesart/><?oxy_comment_end?>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Und wer immer sich unter dem Klang der Posaunen den mächtigen Schall
+                        vorgestellt hat, dem sei gesagt, dass die Posaune in der Tat die
+                            <Stichwort>quicken</Stichwort> Melodien, den schnellen Rhythmus des Jazz
+                        erstaunlich gut hervorbringt. </Belegtext>
+                    <Fundstelle Fundort="dwds:svz_regional:2018/09/SVZ_23-101139964"> Schweriner
+                        Volkszeitung, 18.09.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> » Lady Bird« <Autorenzusatz>ein Kinofilm</Autorenzusatz>
+                        (Marienkäfer) erzählt das alles allerdings nicht als traniges
+                        Erwachsenwerden eines sozial beengten Teenies, sondern mit viel Tempo, Witz,
+                        Turbulenzen, ironisch gefärbten Erfahrungen und Enttäuschungen, die die
+                            <Stichwort>quicke</Stichwort> Christine, alles andere als ein Kind von
+                        Traurigkeit, durchaus wegzustecken versteht. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2018/07/LVZ_doc712h9tm3yy8100akqnem">
+                        Leipziger Volkszeitung, 19.07.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ruetz <Autorenzusatz>ein Photograph</Autorenzusatz>, der mit seiner
+                        Kamera die Verwandlungen der Stille sucht, beobachtet hier Abenteuerlust und
+                        Unternehmungsgeist der <Stichwort>quicken</Stichwort> Tiere. Am Strand gräbt
+                        sich ein Hund kopfüber in ein Loch, tief versunken in die Spur. Zwei
+                        Streuner schnüren selbstvergessen über das Watt. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp_regional:2011/11/TSP_201111296704157"> Der
+                        Tagesspiegel, 29.11.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wieder ist die Geigerin Margulis zu hören, eben noch mit heftigem
+                        Gefühlsausbruch, jetzt mit zartem Wohlklang. Yuri
+                            B.<Loeschung>ashmet</Loeschung> (Bratsche) betreut das
+                        Kammermusik-Ensemble, das ergänzt wird von Kaori
+                            Y.<Loeschung>amagami</Loeschung> (Cello) und Francesco
+                            P.<Loeschung>emontesi</Loeschung> (Klavier). Ein
+                            <Stichwort>quickes</Stichwort> und apartes Quartett, das sich schnell
+                        findet zu dem spielerisch leichten Schumann-Ton. </Belegtext>
+                    <Fundstelle Fundort="dwds:fr_regional:2006/05/FR_4862947"> Frankfurter
+                        Rundschau, 20.05.2006 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Sofort bot man dem <Stichwort>quicken</Stichwort> und
+                        kontaktfreudigen Architekten drei Stellen an.</Belegtext>
+                    <Fundstelle Fundort="dwds">Süddeutsche Zeitung, 11.09.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wäre eine so stilvolle, <Stichwort>quicke</Stichwort> politische
+                        Diskussion auch zwischen deutschen Politikern möglich?</Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 14.10.1960, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Allein nur der <Stichwort>quicke</Stichwort> Herr Brieger ging auf
+                        seinen fröhlichen, lärmenden Ton ein.</Belegtext>
+                    <Fundstelle Fundort="dwds">Feuchtwanger, Lion: Die Geschwister Oppermann,
+                        Berlin: Aufbau-Taschenbuch-Verl. 2001 [1933], S. 119</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber der <Stichwort>quicke</Stichwort> Poet ist als Weltreisender
+                        nicht von der schnellen Sorte.</Belegtext>
+                    <Fundstelle Fundort="dwds">Der Tagesspiegel, 07.03.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Später, im zweiten Teil ihres Konzerts, erscheint Noa im weißen Kleid
+                        und verwandelt sich prompt in die <Stichwort>quicke</Stichwort>, lebendige
+                        Musikerin, die sie auch ist.</Belegtext>
+                    <Fundstelle Fundort="dwds">Die Welt, 12.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Gesicht des kleinen, <Stichwort>quicken</Stichwort> Herrn
+                        fältelte sich diesmal besonders listig.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Feuchtwanger, Lion: Die Geschwister
+                        Oppermann, Berlin: Aufbau-Taschenbuch-Verl. 2001 [1933], S. 378</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Keiner bezweifelt seine <Stichwort>quicke</Stichwort>
+                        Auffassungsgabe, manche aber seine Bereitschaft, bei einem erkannten Thema
+                        zu bleiben.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.04.2005, Nr. 17</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ihre Faszination erhält sie nicht zuletzt aus dem gelassenen
+                        Verneinen aller abendländisch <Stichwort>quicken</Stichwort>
+                        Zeitbewältigung.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 26.06.1970, Nr. 26</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Warum ist der <Stichwort>quicke</Stichwort> Junglehrer zum Schluß nur
+                        so ein Weichei?</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.02.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beides geschieht über TXF-Dateien, trotzdem sind die aus Money und
+                            <Stichwort>Quicken</Stichwort> exportierten Dateien nicht
+                        kompatibel.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 1997, Nr. 3</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

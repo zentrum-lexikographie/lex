@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="jgrimm" xml:id="E_b_3882" Autor="kduden" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2025-05-23" Erstellungsdatum="1967-01-01" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="dsanders" timestamp="20250526T132926+0200" comment="S. LA2: Ich hätte das auch alleine umsetzen können, aber wollte es zur Diskussion stellen"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <?oxy_comment_start author="wgrimm" timestamp="20241209T115247+0100" comment="als &lt;ungültig&gt; markierte Formangabe für Getrenntschreibung entfernt" flag="done"?>
+            <Schreibung Trennung="hi-n-un-ter-be-ge-ben"><?oxy_comment_end?><?oxy_comment_start author="dsanders" timestamp="20241209T115303+0100" comment="WT erweitert: hin-... --&gt; hi-n-..." flag="done"?>hinunterbegeben<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA>hɪˈnʊntɐbəˌgeːbn̩</IPA>
+            </Aussprache>
+            <?oxy_comment_start author="dsanders" timestamp="20241209T133005+0100" comment="Verzicht auf &quot;sich&quot; ist korrekt: s. Lexrundenprotokoll v. 18.4.2024, TOP 1" flag="done"?>
+            <Grammatik><?oxy_comment_end?>
+                <Wortklasse>Verb</Wortklasse>
+                <reflexiv/>
+                <Praesens>
+                    <Wert>begibt hinunter</Wert>
+                </Praesens>
+                <Praeteritum>
+                    <Wert>begab hinunter</Wert>
+                </Praeteritum>
+                <Auxiliar>
+                    <Wert>hat</Wert>
+                </Auxiliar>
+                <Partizip_II>
+                    <Wert>hinunterbegeben</Wert>
+                </Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>34 (1.2)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>hinunter-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>begeben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_b_22203" n="1.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>begibt</Stichwort> sich (an einen Ort)
+                            <Stichwort>hinunter</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>gehoben</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>herunterbegeben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20241211T111413+0100" comment="entfernt: »beschreibt eine Handlung in Verbindung mit einer (ungefähren) Richtungsangabe« – solche Angaben geben wir gar nicht"?>von<?oxy_comment_end?>
+                einer
+                <?oxy_comment_start author="jgrimm" timestamp="20241209T133131+0100" comment="ergänzt" flag="done"?>höher
+                gelegenen <?oxy_comment_end?>Stelle (hier oben) nach (dort) unten gehen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die 82-jährige Dame <Stichwort>begibt</Stichwort> sich langsam die
+                        Treppen <Stichwort>hinunter</Stichwort> und öffnet die Tür, hinter der ihr
+                        ein charmanter Senior der Organisation »Senioren helfen Senioren« freundlich
+                        ins Gesicht lächelt. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2018/03/FAZ_FD1201803195357516"> Frankfurter
+                        Allgemeine Zeitung, 19.03.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als sie <Autorenzusatz>Jessica</Autorenzusatz> über den Gang lief,
+                        kam sie an Evelins Zimmertür vorbei und lauschte kurz nach drinnen, konnte
+                        aber keinen Laut vernehmen. Erleichtert <Stichwort>begab</Stichwort> sie
+                        sich die Treppe <Stichwort>hinunter</Stichwort> in den Gastraum.
+                            <Streichung>Sie war der erste Mensch dort, aber nach allem, was sie
+                            mitbekommen hatte, befand sich außer ihr und Evelin sowieso nur noch ein
+                            einziger Gast im Haus, ein älterer Herr, der immer in Wanderstiefeln und
+                            einem scheußlichen rotweiß karierten Hemd herumlief. Aber auch der
+                            schlief um diese Zeit wohl noch.</Streichung> Nach einer Weile kam
+                        Prudence müde herangeschlurft und brachte heißen Kaffee, der Jessicas
+                        Lebensgeister sofort weckte. </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:belletristik/9783641051938"> Link,
+                        Charlotte: Am Ende des Schweigens. München 2011</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Im Nationalpark können sich Besucher von der enormen Tiefe des
+                        Canyons begeistern, die Weite auf sich wirken lassen und sich auf den
+                        Wanderwegen bis zum Colorado River <Stichwort>hinunterbegeben</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:6483/nRqvRderF9DBAORW">
+                        <Autor/>
+                        <Titel>Im Wohnmobil durch den Wilden Westen in Arizona</Titel>
+                        <Stelle/>
+                        <Datum>17.02.2015</Datum>
+                        <URL>https://www.usa-reisetraum.de/info/wohnmobil-arizona/</URL>
+                        <Aufrufdatum>15.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wer jetzt genug hat von den vielen »Häusern« und Verwaltungsgebäuden,
+                        der kann sich über die Klosterstraße zur Spree
+                            <Stichwort>hinunterbegeben</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:5120/ZUsKS9b3pQeDZWzc">
+                        <Autor>Fahunterwegs</Autor>
+                        <Titel>Das Klosterviertel … Geschichten für Detailverliebte</Titel>
+                        <Stelle/>
+                        <Datum>21.09.2014</Datum>
+                        <URL>https://fahunterwegs.wordpress.com/2014/09/21/das-klosterviertel-geschichten-fur-detailverliebte/</URL>
+                        <Aufrufdatum>15.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wer sich die Stufen in den heimeligen Keller
+                            <Stichwort>hinunterbegibt</Stichwort>, wird mit Musik aus drei
+                        Jahrzehnten von DJ D. Happy umschmeichelt. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2010/12/SK_QN3ITGF6"> Südkurier,
+                        17.12.2010 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="dsanders" timestamp="20241209T133454+0100" comment="&quot;hinunter&quot; ist hier Adverb" flag="done"?>
+                <Beleg class="invisible"><?oxy_comment_end?>
+                    <Belegtext>Für Nicht- oder Neu-Frankfurter ist sie etwas schwerer zu finden,
+                        sollte aber keineswegs übersehen werden: die »Romanfabrik« in der
+                        Uhlandstraße. Wer sich die Stufen <Stichwort>hinunter</Stichwort> in den
+                        Keller <Stichwort>begeben</Stichwort> hat, den erwartet ein ambitioniertes
+                        Programm im Gewölbe.</Belegtext>
+                    <Fundstelle Fundort="dwds:fr:1998/03/FR_02030812"> Frankfurter Rundschau,
+                        06.03.1998 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>begibt</Stichwort> sich auf ein, jmds. <?oxy_comment_start author="wgrimm" timestamp="20250523T131842+0200" comment="Ich finde, das sollte als MWA gefasst werden, ist ja kein austauschbares oder weglassbares Element"?>Niveau<?oxy_comment_end?>
+                        <Stichwort>hinunter</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Bedeutungsebene>übertragen</Bedeutungsebene>
+            </Diasystematik>
+            <Verweise/>
+            <?oxy_comment_start author="dsanders" timestamp="20241209T134940+0100" comment="ersetzt: 
+(gegenüber einer anderen Person) sich nicht (mehr) auf eine angemessene, dem eigenen sozialen Status entsprechende (vor allem höfliche oder rücksichtsvolle) Art äußern oder verhalten (weil diese selbst keine Rücksicht nimmt)" flag="done"?>
+            <Definition Typ="Basis">(entgegen seinem üblichen Verhalten, seinem Selbstverständnis)
+                sich zu jmdm. herablassen, dem man sich (häufig in jeglicher Hinsicht) überlegen
+                wähnt</Definition>
+            <Definition Typ="Basis">(entgegen seinem üblichen Verhalten, seinem Selbstverständnis)
+                sich auf etw. (bislang abgelehnte Verhaltensweisen, ein niedrigeres Niveau o. Ä.)
+                einlassen</Definition><?oxy_comment_end?>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <?oxy_comment_start author="wgrimm" timestamp="20241209T135748+0100" comment="neu: Beleg für 1. Teildefinition" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Helmut geht als Maschinenarbeiter in eine große Fabrik. »Das ist nur
+                        eine Durchgangsstation für mich, ich mache es nur so lange, bis ich wieder
+                        ins Konstruktionsbüro
+                            kann«<?oxy_comment_start author="dsanders" timestamp="20241211T111334+0100" comment="ergänzt"?><Autorenzusatz>,</Autorenzusatz><?oxy_comment_end?>
+                        sagt er. Barbara, seine Braut ist skeptisch: »Wer sich einmal auf den Stand
+                        der Proleten <Stichwort>hinunterbegibt</Stichwort>, der bleibt ein Prolet.
+                        Und ich will nicht mein Lebtag Frau eines Arbeiters sein.«</Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/1377/aLOWaPPX3Y8Cctbx">
+                        <Autor/>
+                        <Titel>1956 – Am seidenen Faden</Titel>
+                        <Stelle/>
+                        <Datum><?oxy_comment_start author="jgrimm" timestamp="20241209T134913+0100" comment="Datierung unsicher, bitte anhand des Originals überprüfen" flag="done"?>2023<?oxy_comment_end?></Datum>
+                        <URL>https://valentin-senger.de/1956-am-seidenen-faden/</URL>
+                        <Aufrufdatum>29.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Andere Parteipräsidenten sollten sich nicht auf das Niveau von
+                        SP-Chef Christian Levrat <Stichwort>hinunterbegeben</Stichwort>, sagte
+                        Ignazio Cassis kürzlich. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2018/12/NLZ_201812290238321822"> Luzerner
+                        Zeitung, 29.12.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Mein ganz persönliches Gerechtigkeits-Empfinden besagt
+                            <Streichung>nun</Streichung>, dass jeder, der diesen Müll hinterlässt,
+                        verdient hat, anschließend in einen Hundehaufen reinzutreten. Der
+                        Versuchung, die Haufen meiner Hunde eigens für diese Menschen
+                        liegenzulassen, habe ich aber bisher frauenhaft widerstanden. Ich räume sie
+                        immer selbst weg. Dies vor allem, weil <Streichung>es mit großer
+                            Wahrscheinlichkeit die Falschen treffen würde und</Streichung> ich mich
+                        auf das Niveau dieser Menschen nicht <Stichwort>hinunterbegeben</Stichwort>
+                        will.</Belegtext>
+                    <Fundstelle Fundort="dwds:aaz_regional:2016/03/AAZ_dtistory20189664-AACHEN">
+                        Aachener Zeitung, 26.03.2016 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20241209T135601+0100" comment="neu: Ersatzbeleg" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Französisch. (Nein, ich <Stichwort>begebe</Stichwort> mich jetzt
+                        nicht <Stichwort>hinunter</Stichwort> in die Niederungen des bekannten
+                        humoristischen Flachwurzlers, der auf »… nur mit der Sprache hapert es«
+                        endet, obwohl es mich, das gebe ich zu, kurz in den Fingern gejuckt
+                            hat.<?oxy_comment_start author="jgrimm" timestamp="20241211T111608+0100" comment="ergänzt"?><Autorenzusatz>)</Autorenzusatz><?oxy_comment_end?></Belegtext>
+                    <Fundstelle Fundort="dwds:web:8268/-e85aG2yeJoKzU0x">
+                        <Autor>Stancerbn</Autor>
+                        <Titel>Je apprendre francaise</Titel>
+                        <Stelle/>
+                        <Datum>14.05.2010</Datum>
+                        <URL>https://alltaeglichesundausgedachtes.com/2010/05/14/je-apprendre-francaise-8587789/</URL>
+                        <Aufrufdatum>15.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Da muss sich</Streichung> Sachsen, das als einziges unter
+                        den neuen Ländern die Gelder konsequent für Investitionen und nicht zur
+                        Haushaltssanierung einsetzt, <Autorenzusatz>muss sich</Autorenzusatz> von
+                        den anderen sogar als knausriger Kassenwart beschimpfen lassen. Das ist so,
+                        als ob der Klassenbeste sich vor den Mitschülern für seine guten Zensuren
+                        rechtfertigen muss. Die anderen Länder wollen <Streichung>also</Streichung>
+                        keine besseren Noten, sondern verlangen vom Primus, sich auf ihr
+                        fragwürdiges Niveau <Stichwort>hinunterzubegeben</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:lvz:2006/06/LVZ_200606132644026800224202"> Leipziger
+                        Volkszeitung, 13.06.2006 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Aber</Streichung> auf das
+                        <?oxy_comment_start author="jgrimm" timestamp="20241209T135221+0100" comment="Stichwortmarkierung entfernt" flag="done"?>Niveau<?oxy_comment_end?>
+                        des Wiener Bürgermeisters, der auch vor persönlichen Beschimpfungen nicht
+                        zurückschreckt, werde ich mich nicht <Stichwort>hinunterbegeben</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:WZ_regional/xml/2009/08/wz_200908220112030019">Wiener Zeitung, 22.08.2009 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20241209T135301+0100" comment="schreibung_ungueltig --&gt; invisible"?>
+                <Beleg class="invisible"><?oxy_comment_end?>
+                    <Belegtext>Auch ich ärgere mich täglich über diese halbnackten Mädchen in
+                        aufreizenden Positionen. Eine halbwegs seriöse Zeitung dürfte sich nicht auf
+                        ein solches Niveau <Stichwort>hinunter begeben</Stichwort>. Ursula Breuer,
+                        Ricken – bacher Straße 23, Wolfurt Mein Vater Anton ist nun seit mehr als
+                        fünf Jahren Insasse im Pflegeheim Schwarzenberg und wird dort sehr
+                        liebevoll, fachkundig und mit viel Herz ausgezeichnet betreut. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:VN_regional/xml/2008/07/vn_200807070200040151">Vorarlberger Nachrichten, 07.07.2008 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Wer sich mit dem gläsernen Aufzug
+                            <Stichwort>hinunterbegibt</Stichwort>, schaut auf der gegenüberliegenden
+                        Seite ins Grün des Stadtparks.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 22.05.2000, Nr. 21</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

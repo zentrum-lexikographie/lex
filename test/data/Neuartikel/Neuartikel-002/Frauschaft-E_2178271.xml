@@ -1,0 +1,411 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_2178271" Autor="dsanders" Typ="Vollartikel" Zeitstempel="2024-01-04" Erstellungsdatum="2016-07-28" Status="Red-2-zurückgewiesen">
+        <?oxy_comment_start author="wgrimm" timestamp="20230103T143630+0100" comment="vorher jzaun" flag="done"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20240124T175810+0100" comment="Bitte Verhältnis bzw. Unterschied zu »Frauenschaft« klären und mindestens entsprechende Verweise einfügen." id="axz_hcc_f1c" mid="1"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20240124T175845+0100" parentID="axz_hcc_f1c" comment="Eventuell sogar gemeinsam ansetzen, da morphologisch identisch" mid="2"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?>
+            <Schreibung><?oxy_comment_start author="kduden" timestamp="20221213T122305+0100" comment="Verweise stezen von und zu  &quot;Mannschaftsführerin&quot; und &quot;Frauschaftsführerin&quot;" flag="done"?><?oxy_comment_start author="jgrimm" timestamp="20230131T110627+0100" comment="Lieber Lothar, der Artikel sieht möglicherweise einfach aus. Ich habe aber daran über fünf volle Tage gearbeitet (das Preis-Leistung-Verhältnis wackelt dabei sehr stark). Oder ist das am Anfang &quot;normal&quot;? Wie kann ich die Arbeitszeit bis zur ersten Abgabe abkürzen? Gibt es hierbei Kunstgriffe, die ich leicht beherrschen kann? Herzlichst, Agniecha" flag="done" mid="4"?>Frauschaft<?oxy_comment_end?><?oxy_comment_end mid="4"?></Schreibung>
+            <Aussprache><IPA>ˈfʀaʊ̯ʃaft</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Frau</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-schaft</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise><?oxy_comment_start author="wgrimm" timestamp="20230105T155623+0100" comment="Frage: von der Oberlesart verweisen oder von den einzelnen ULA?" flag="done"?></Verweise><?oxy_comment_end?>
+            <Definition Typ="Basis">Gruppe von weiblichen Personen, die einer ähnlichen Tätigkeit nachgehen, in einem ähnlichen Bereich arbeiten o. Ä. <?oxy_comment_start author="wgrimm" timestamp="20230105T132201+0100" comment="Definition übernommen: s.&quot;Mannschaft&quot;" flag="done"?><?oxy_comment_start author="jgrimm" timestamp="20230126T133247+0100" comment="im Vergleich mit, im Gegensatz zu bzw. in Kombination mit dem Ausdruck Mannschaft gebrauchte Bezeichnung für eine bestimmte Gruppe von Menschen " flag="done" mid="7"?></Definition><?oxy_comment_end?><?oxy_comment_end mid="7"?>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                    <Belegtext>Mann- und <Stichwort>Frauschaft</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele/>
+            <Lesart Glossar="Fußball" n="a)">
+                <?oxy_comment_start author="dsanders" timestamp="20230105T161127+0100" comment="auch Aufnahme in FB-Glossar?" flag="done"?>
+                <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+                <Diasystematik>
+                    <Fachgebiet>Mannschaftssport</Fachgebiet>
+                    <Fachgebiet Frequenz="häufig">Ballsport</Fachgebiet>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Entsprechung">
+                        <Ziellemma>Mannschaft</Ziellemma>
+                        <Ziellesart>a</Ziellesart>
+                        <?oxy_comment_start author="kduden" timestamp="20230105T155547+0100" comment="bitte auch bei Mannschaft den Verweis visible stellen"?>
+                    </Verweis><?oxy_comment_end?>
+                    <Verweis Typ="Synonym">
+                        <?oxy_comment_start author="jgrimm" timestamp="20230131T094136+0100" comment="Bitte bei Team (2)  &quot;Sportlerinnen&quot; und &quot;Frauschaft&quot; einfügen 
+
+Vielleicht in den Klammern abwechseln Maskulinum und Feminium benutzen?
+
+ZB. aus den Sportlern und Sportlerinnen  (z. B. Spielern, Rennfahrerinnen) und weiteren Mitgliedern (z. B. Trainerninnen, Technikern) einer Mannschaft bzw. Frauschaft  bestehende Gruppe
+
+Ein-zwei Belegbeispiele mit Frauschaft?" flag="done"?>
+                        <Ziellemma><?oxy_comment_end?>Team</Ziellemma>
+                        <Ziellesart>2</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">Sportlerinnen, die als Gruppe gemeinsam in einem Wettbewerb antreten</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                        <Belegtext>die deutsche <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Akkusativobjekt">
+                        <Belegtext>eine <Stichwort>Frauschaft</Stichwort> trainieren</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Genitivattribut_von">
+                        <Belegtext>der Erfolg, die Leistung, einer <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Genitivattribut_von">
+                        <Belegtext>die Trainerin, der Trainer, die Kapitänin, Fans einer <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <?oxy_comment_start author="dsanders" timestamp="20230131T100726+0100" comment="ES sind sehr viele Belegbeispiele, daher habe ich einige &quot;invisible&quot; markiert. Ich würde sie denoch behalten wollen, weil sie den Kollokationen entsprechen. 
+
+Ist es okay, wenn 10 Belege veröffentlciht werden? Oder ist es quantitativ  zu viel?" flag="done"?>
+                <Verwendungsbeispiele><?oxy_comment_end?>
+                    <Beleg class="good_example">
+                        <Belegtext>Tatsächlich ist ja etwas Großes geschehen. In Abwandlung eines alten Fußballspruchs: Elf Freunde müsst ihr sein – es sind 23 Freundinnen in einem Team, die einer Nation und der Welt vorführen, was sich auf ihre Weise gewinnen lässt. Vorbei die Zeit zotiger Herrenwitze, keine überheblichen Kommentare mehr, nur Begeisterung, Bewunderung für eine <Stichwort>Frauschaft</Stichwort>, die all das aufbietet, was man sich wünscht: Herz, Courage, Leidenschaft, Kraft, Taktik, Disziplin, technisches Geschick, einen Plan, der über ein Match hinausgeht. <Streichung>Und Freude am Ganzen, am Spiel, am Teamgeist, die ansteckt. Wie die Frauen feiern können! Es sind Profis, die da spielen, aber sie machen nicht den Eindruck, als gehe es um etwas anderes als die, sagen wir ruhig, Ehre.</Streichung> </Belegtext>
+                        <Fundstelle Fundort="dwds:tsp:2022/07/TSP_doc7m296bis4yp1cmxxwfc1"> Der Tagesspiegel, 29.07.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Ich freue mich aufrichtig über den Erfolg der deutschen <Stichwort>Frauschaft</Stichwort> <Autorenzusatz>…</Autorenzusatz></Belegtext>
+                        <Fundstelle Fundort="dwds:mume_regional:2019/06/MUME_omp0000004847220"> Münchner Merkur, 15.06.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Dann nämlich, wenn die Kapitänin einer <Stichwort>Frauschaft</Stichwort> die Bällin in die Maschen drischt. </Belegtext>
+                        <Fundstelle Fundort="dwds:baz:2015/06/BAZ_2015062045380519590"> Basler Zeitung, 20.06.2015 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> »Da haben wir uns prima geschlagen«, sagt der Trainer, dessen <Stichwort>Frauschaft</Stichwort> <Streichung>am vergangenen Wochenende</Streichung> ein Turnier in Bönen <Streichung>sogar</Streichung> gewann. </Belegtext>
+                        <Fundstelle Fundort="dwds:neuw_regional:2014/09/NEUW_119ED66A858AAEA6969F06B60F641E1A-PADERBORNERKREISZEITUNG"> Neue Westfälische, 10.09.2014 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Vor allem die Frauen sind vom Fußballfieber infiziert. Aber auch die Männer haben ihre Freude daran, Celia, Lira und Co. lautstark anzufeuern. Dafür langt ein kurzer Blick auf die Fanmeilen <Streichung>in Frankfurt oder Berlin</Streichung>, wo sich <Streichung>tatsächlich</Streichung> Zigtausende von Fans vor Großbildleinwänden versammeln, um die deutsche <Stichwort>Frauschaft</Stichwort> siegen zu sehen. </Belegtext>
+                        <Fundstelle Fundort="dwds:rztg_regional:2011/06/RZTG_159D9496ED7B955F58D80C290EF5DCF6"> Rhein-Zeitung, 28.06.2011 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Korrekt muss Frauen-Mannschaft also <Stichwort>Frauschaft</Stichwort> heißen, was zugegebenermaßen (noch?) ungewohnt bis seltsam klingt, <Loeschung>laut Duden</Loeschung><?oxy_comment_start author="wgrimm" timestamp="20230120T103302+0100" comment="Ist der Belegbeispiel okay? - ich habe &quot;laut Duden&quot; gelöscht " flag="done"?><?oxy_comment_end?>jedoch tatsächlich ein aus weiblichen Mitgliedern bestehendes Team beschreibt. </Belegtext>
+                        <Fundstelle Fundort="dwds:badz:2011/06/BADZ_5149506780"> Badische Zeitung, 30.06.2011 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> <Streichung>Für einen Tag mutierte der Verein also zum FTV, und Mannschaft wäre wirklich eine irrwitzige Bezeichnung gewesen.</Streichung> Die <Stichwort>Frauschaft</Stichwort> der Kreuznacher zeigte eine starke Leistung, wahrscheinlich auch, weil sie sich wie im Nationalteam fühlte. </Belegtext>
+                        <Fundstelle Fundort="dwds:maz_regional:2010/05/MAZ_12729650001275256800"> Allgemeine Zeitung, 31.05.2010 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Toller Erfolg für die erste <Stichwort>Frauschaft</Stichwort> der Volleyballabteilung des TV Jahn Bad Lippspringe. Die Damen machten jetzt nicht nur den Aufstieg von der Bezirksklasse in die Bezirksliga perfekt, sie schafften diesen Erfolg in der Staffel 29 auch in überaus souveräner Manier ohne eine einzige Niederlage. </Belegtext>
+                        <Fundstelle Fundort="dwds:neuw_regional:2008/03/NEUW_200803130663"> Neue Westfälische, 13.03.2008 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="wgrimm" timestamp="20230105T153103+0100" comment="Sport: Kampftrinken" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Zum Schmiedefelder Kampftrinken am Samstag im Kulturhaus hatten sich rund 300 Gäste eingefunden, das Spektakel zu beobachten. Zum 5. Male wurde dieser Wettbewerb vom SV Rennsteig organisiert, 12 Mannschaften, davon eine <Stichwort>Frauschaft</Stichwort> zu je vier Kampftrinkern nahmen an der Zeitenmessung teil. </Belegtext>
+                        <Fundstelle Fundort="dwds:ta_regional:2000/11/TA_1100214070"> Thüringer Allgemeine, 21.11.2000 </Fundstelle>
+                        <Diasystematik>
+                            <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                        </Diasystematik>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="wgrimm" timestamp="20230105T152250+0100" comment="Sport: Fechtsport - neutraler SG &quot;Mann- und Frauschaft&quot;" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Am liebsten sind uns unsere Fechterinnen und Fechter, wenn sie bei den Olympischen Spielen einzeln und als Mann- und <Stichwort>Frauschaft</Stichwort> so viele Goldmedaillen erkämpfen, dass Deutschland in der Nationenwertung ganz weit oben landet</Belegtext>
+                        <Fundstelle Fundort="dwds:tsp_legacy:2000/10/TSP_20001031_ak_sp_13260_html"> Der Tagesspiegel, 31.10.2000 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <?oxy_comment_start author="dsanders" timestamp="20230105T135159+0100" comment="Sport: Sportkegeln"?>
+                        <Belegtext><?oxy_comment_end?> »Es geht, wir sind zufrieden«, freute <Loeschung>sie</Loeschung> sich <Autorenzusatz>Anna Martiskova</Autorenzusatz> über den Aufstieg ihrer <Stichwort>Frauschaft</Stichwort> in die Gruppe A bei der <Streichung>nächsten</Streichung> WM 1996 in Prag. Das Sportkegeln wird auch dort bei Pilsner Urquell und Prager Schinken seine Parteigänger begeistern, <Streichung>die aber endlich Abschied nehmen sollten von traditionsreichen, aber antiquierten Bezeichnungen wie dem abgedankten »Holz«. Längst sind die Kegel aus Kunststoff, leuchten gelb, verächtlich beim kapitalen Fehlwurf zurück und werden wie die poppig bunten Kugeln von umweltverpestenden Chemiefirmen auf die Bahn gebracht</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1994/taz_19940525_15_1157.xml.cln"> die tageszeitung, 25.05.1994 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> »Meiner Meinung nach«, behauptete wieder ein Stückchen daneben trotzig Silvia Neid, Kapitänin der deutschen <Stichwort>Frauschaft</Stichwort> nach dem Halbfinalausscheiden, »sind wir klar die beste Mannschaft bei diesem Turnier.« </Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1993/taz_19930702_19_4621.xml.cln"> die tageszeitung, 02.07.1993 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Endlich könnte das deutsche Team zu einer Großmacht werden, hofften viele. Die hoffnungsvolle Schwarz-Rot-Gold-Formation vereinigt mit dem Hammer-und-Zirkel-Team, das mußte doch eine schlagkräftige <Stichwort>Frauschaft</Stichwort> geben. <Streichung>Ist es aber nicht. Im Volleyballsport hängt viel von ausreichenden Trainingseinheiten ab, und die hatten Köhlers ProbandInnen noch nicht. Von den 15 Spielerinnen im Aufgebot dürfen jeweils nur 12 pro Spiel nominiert werden, drei müssen also zuschauen.</Streichung> </Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1991/taz_19910105_26_4390.xml.cln"> die tageszeitung, 05.01.1991 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Fachgebiet>Politik</Fachgebiet>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Assoziation">
+                        <Ziellemma>Team</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20230126T111642+0100" comment="vielleicht besser wäre: &quot; Gruppe von politischtätigen weiblichen Personen" flag="done"?>Gruppe von<?oxy_comment_end?> politisch tätigen Frauen bzw. weiblichen Beschäftigten, Angestellten (als Teil eines größeren Teams)</Definition>
+                <Definition Typ="Basis"> überwiegend oder ausschließlich aus weiblichen Mitgliedern bestehendes Gremium o. Ä.</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                        <Belegtext>eine starke, gute, erfolgreiche <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                        <Belegtext>mit einer <Stichwort>Frauschaft</Stichwort> antreten</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Genitivattribut_von">
+                        <Belegtext>die Mitglieder, das Team einer <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                        <Belegtext>vor versammelter <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg class="good_example">
+                        <Belegtext>Die Fraktionschefin der Grünen, Maria V<Streichung>iethen</Streichung>, kündigte an, ihre Partei wolle <Hervorhebung>Gleichstellungsstelle</Hervorhebung>, <Hervorhebung>Gender</Hervorhebung><Autorenzusatz>-</Autorenzusatz><Hervorhebung>Mainstreaming</Hervorhebung> und Kontaktstelle <Hervorhebung>Frau und Beruf</Hervorhebung> wieder zusammenfassen – »für eine einsatzkräftige <Stichwort>Frauschaft</Stichwort>«. </Belegtext>
+                        <Fundstelle Fundort="dwds:badz_regional:2013/12/BADZ_5181767692"> Badische Zeitung, 28.12.2013 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Zur nächsten Wahl, <Streichung>so Horn,</Streichung> müssten die Grünen mit einer teilweise veränderten Mann- und <Stichwort>Frauschaft</Stichwort> antreten. </Belegtext>
+                        <Fundstelle Fundort="dwds:bams:2001/01_6/bas-asvx-2001_6882"> Bild am Sonntag, 18.11.2001 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Streichung>Wenn ich mich dazu entschließe, würde ich den Wahlkampf führen mit allem, was mir zur Verfügung steht. Es würde ein hartes Jahr für die SPD. »Gleichzeitig betonte sie den Stellenwert des OB-Wahlkampfes für die SPD in Homburg.</Streichung> Man müsse sich geschlossen als »Mann- und <Stichwort>Frauschaft</Stichwort>« präsentieren. Der Eindruck, den man dabei hinterlasse, schlage sich in der nächsten Kommunalwahl nieder<Streichung>, ganz gleich, mit welchem Ergebnis die OB-Wahl ausfalle. »Deshalb müssen wir konsequent und entschieden bei den Veranstaltungen auftreten«, appellierte sie. Das endgültige SPD-Leitbild soll am 11. Mai verabschiedet werden</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:saar_regional:2000/02/SAAR_0200250178"> Saarbrücker Zeitung, 25.02.2000 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <?oxy_comment_start author="wgrimm" timestamp="20230131T103917+0100" comment="Ich hätte gerne diesen Beleg als zweiten &quot;good exemple&quot;, möchte aber dabei nicht Biedenkopf eins auswischen. Soll ich seinen Namen löschen? oder doch stehen lassen?" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Vor versammelter <Stichwort>Frauschaft</Stichwort> – beim 2. Landestreffen sächsischer Frauenverbände – verkündete K<Streichung>urt Biedenkopf (CDU)</Streichung>: »Frauenpolitik kann nur mit Erfolg gemacht werden, wenn sie von Männern gemacht wird.«</Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1994/taz_19940919_2_1954.xml.cln"> die tageszeitung, 19.09.1994 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Es handelte sich <Streichung>dabei</Streichung> um die Mann- und <Stichwort>Frauschaft</Stichwort>, die sich vorgenommen hat, nach der Landtagswahl <Streichung>am 25. September</Streichung> das CSU-Kabinett abzulösen.</Belegtext>
+                        <Fundstelle Fundort="dwds:sz_legacy:1994/07/sz_084449"> Süddeutsche Zeitung, 27.07.1994 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Um <Streichung>aber schon</Streichung> einen SPD-Sieg im Herbst bei der Bundestagswahl zu signalisieren, hätte der Zugewinn von Schröders Mann- und <Stichwort>Frauschaft</Stichwort> deutlich höher ausfallen müssen. </Belegtext>
+                        <Fundstelle Fundort="dwds:saar:1994/03/SAAR_0394190398"> Saarbrücker Zeitung, 19.03.1994 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="c)">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Spezifizierung">im <?oxy_comment_start author="kduden" timestamp="20230125T095402+0100" comment="&quot;Kultur&quot;, &quot;Kulturszene&quot; bzw. &quot;Kulturbetrieb&quot;  als Fachgebiet? - wäre hier kurz und prägnant" id="p15_5px_hwb" flag="done"?><?oxy_comment_start author="jgrimm" timestamp="20230128T002310+0100" parentID="p15_5px_hwb" comment="Nein, kann aber gern eine Spez.def. sein" flag="done" mid="19"?>Kulturbetrieb, besonders in der Literatur, Musik, bildenden und darstellenden Kunst<?oxy_comment_end mid="19"?><?oxy_comment_end?></Definition>
+                <Definition Typ="Basis">Gruppe von (zusammenarbeitenden) Künstlerinnen (als Teil eines größeren Teams)</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Während es in Salzburg beim Jedermann <Autorenzusatz>Theaterinszenierung nach Hugo Hofmannsthal</Autorenzusatz> recht konventionell zugeht, rockt in Gilching »die Jedermann« alias Ulrike Dostal die Bühne mitsamt ihrer »<Stichwort>Frauschaft</Stichwort>«: Da gibt es das It-Girl  <Streichung>aus der Münchner Maximilianstraße, eine Osteuropäerin, die sich einen Millionär geangelt hat</Streichung>, eine entzückend männliche wie musikalische Buhlschaft, wie auch einen Schuldknecht<Streichung>, ein insolventer Steinmetz aus Gilching</Streichung>.</Belegtext>
+                        <Fundstelle Fundort="dwds:mume_regional:2018/08/MUME_omp0000003796073"> Münchner Merkur, 17.08.2018 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Das Homburger Frauenkabarett hat keine Zeit für Sentimentalitäten. Es entwickelte sich und damit die Stellung der Frau im Kabarett selbstbewusst weiter, wobei für das Quintett als Ganzes gilt: Der Star ist die <Stichwort>Frauschaft</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:saar_regional:2004/03/SAAR_0304010266"> Saarbrücker Zeitung, 01.03.2004 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>Alle treten zusammen <Streichung>und nicht länger pärchenweise</Streichung> an, um ein Riesen-Graffiti an den Wänden im Studio zu erarbeiten. Kollektive‍(r) Autor‍(in) ist dabei die versammelte Mann- und <Stichwort>Frauschaft</Stichwort> der 170 <Streichung>angeschriebenen,</Streichung> aktiven Mitglieder des Saarländischen Künstlerhauses e. V., von denen sich 59 bereit erklärten, mitzutun. </Belegtext>
+                        <Fundstelle Fundort="dwds:saar_regional:2000/08/SAAR_0800180071"> Saarbrücker Zeitung, 18.08.2000 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <Belegtext> Mit einigen der vorgestellten neuen Tracks, <Streichung>die in Sachen Rhythmik und Programmierarbeit für die Drum-'n'-Basswelt neckisch-revolutionäre Ansätze offenbaren,</Streichung> schürt die Mann- und <Stichwort>Frauschaft</Stichwort> aus dem hippen London die Vorfreude auf ihr <Streichung>im Oktober erscheinendes</Streichung> Album <Streichung>und setzt Festival-Qualitätsmassstäbe, an denen die nachfolgenden Bands zunächst einmal zu kauen haben.</Streichung> </Belegtext>
+                        <Fundstelle Fundort="dwds:bund_regional:2000/07/BUND_RA2000071801041"> Der Bund, 17.07.2000 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Ein spezielles Erlebnis wurde diese Theatersaison <Streichung>auch</Streichung> für alle Mitwirkenden, die als verschworene und kollegial agierende »Mann- und <Stichwort>Frauschaft</Stichwort>« diese grossartige Leistung erbrachten. </Belegtext>
+                        <Fundstelle Fundort="dwds:nlz_regional:2000/04/NLZ_RA2000041100412"> Luzerner Zeitung, 10.04.2000 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Eine fernsehreife Leistung lieferte auch die <Stichwort>Frauschaft</Stichwort> um Irmgard Kronauer mit dem Rammelkistenherzblatt ab. Jeck und Doof, alias Inge Kloeckner und Meta Baulig, packten mit so manchen tolpatschigen Geschichten von dorfbekannten Groessen aus. </Belegtext>
+                        <Fundstelle Fundort="dwds:rztg_regional:1997/02/RZTG_361FFAE068CA3368E5136F40FB41A240"> Rhein-Zeitung, 08.02.1997 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <Belegtext><Autorenzusatz>Im Film »Eine Klasse für sich« tritt</Autorenzusatz> Tom Hanks als versoffener Trainer der <Autorenzusatz>Baseball-</Autorenzusatz>Mannschaft <Autorenzusatz>auf</Autorenzusatz>. Zu Beginn schläft er seinen Kater <Streichung>noch regelmäßig</Streichung> während der Spiele auf der Bank aus, nach der Läuterung schlägt er sogar bessere Angebote aus und will weiter eine <Stichwort>Frauschaft</Stichwort> trainieren. Hanks, bekanntermaßen ein eher unterdurchschnittlicher Mime, hat seine besten Momente als unsympathischer, stinkender, spuckender Trottel.. </Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1992/taz_19921126_15_217.xml.cln"> die tageszeitung, 26.11.1992 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="d)">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Assoziation">
+                        <Ziellemma>Team</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">Gruppe von (zusammenarbeitenden) weiblichen Beschäftigten, Angestellten o. Ä. (als Teil eines größeren Teams)</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                        <Belegtext>mit einer <Stichwort>Frauschaft</Stichwort> arbeiten</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Genitivobjekt_von">
+                        <Belegtext>die Leistung, die Mitglieder einer <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Ergänzt wird die <Stichwort>Frauschaft</Stichwort> mit Nora T<Loeschung>ruttmann</Loeschung> <Streichung>(80- beziehungsweise 90-Prozent-Pensum)</Streichung> aus Arth, welche das Team der Gemeindeverwaltung <Streichung>ab 1. September</Streichung> als Verwaltungsangestellte komplettieren und so die mit den personellen Veränderungen entstandene Lücke in der Kanzlei wieder schliessen wird. </Belegtext>
+                        <Fundstelle Fundort="dwds:buhp_regional:2021/07/BUHP_202107240286174043"> Bote der Urschweiz, 24.07.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Mit einem <Autorenzusatz>Karneval-</Autorenzusatz>Tänzchen auf dem Kellerplatz stimmten sich die Beverunger Weiber auf den Rathaussturm vor. <Streichung>Die schmucken »Schneeflöckchen« tanzten bei frühlingshaften Temperaturen einen flotten Schneewalzer, ehe dann Till Eulenspiegel die Frauenschar zum Rathaussturm in den Rathaussaal führte.</Streichung> Dort <Autorenzusatz>im Rathaussaal</Autorenzusatz> hatten Bürgermeister <Streichung><?oxy_comment_start author="wgrimm" timestamp="20230126T095137+0100" comment="Soll ich die beiden Namen löschen? Nur die Amtbezeichnungen lassen?" flag="done"?>Hubertus Grimm<?oxy_comment_end?></Streichung> und <Streichung>der</Streichung> Bauamtsleiter <Streichung>Ludger Ernst</Streichung> als Häuptlinge Winnetou und Winnetouch, wie beim Schuh des Manitou gewandet in plüschigem Rosa, mit der Garde der Beverunger Bunten Brückenbauer eine wehrhafte Linie aufgebaut, die aber angesichts der charmanten Angriffsvariante schnell die Herrschaft an die <Stichwort>Frauschaft</Stichwort> übergab.</Belegtext>
+                        <Fundstelle Fundort="dwds:neuw_regional:2020/02/NEUW_5f5570ce3df8c5861f94a20ac81ceabf234df20"> Neue Westfälische, 21.02.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>»Wir arbeiten von vornherein vertrauensvoll und sehr gut zusammen«, sagt der Chef, der seine Mann- und <Stichwort>Frauschaft</Stichwort> insgesamt lobt: »Das sind sehr motivierte Leute!« </Belegtext>
+                        <Fundstelle Fundort="dwds:gea_regional:2014/02/GEA_srv0000002274659"> Reutlinger General-Anzeiger, 18.02.2014 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Gleichwohl ist die Mann- und <Stichwort>Frauschaft</Stichwort> ziemlich stolz auf das Unternehmen und seine Leistung, die ja auch die ihre ist. Vergleiche mit anderen Bekleidungsunternehmen braucht man da erst gar nicht ziehen. </Belegtext>
+                        <Fundstelle Fundort="dwds:gea:2012/12/GEA_srv0000001906384"> Reutlinger General-Anzeiger, 08.12.2012 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Mit Spaten, Heckenschere und Motorsäge bewaffnet, hat sich <Streichung>Mittwochvormittag</Streichung> eine kleine, ehrenamtlich tätige Mann- und <Stichwort>Frauschaft</Stichwort> auf dem Meßkircher Friedhof um die Familiengräber im so genannten »Millionenviertel« gekümmert. Diese Gräber stellen wertvolle Denkmale der Meßkircher Vergangenheit dar. </Belegtext>
+                        <Fundstelle Fundort="dwds:sk_regional:2002/10/SK_200210051655"> Südkurier, 05.10.2002 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <Belegtext> Stellvertretend für die <Stichwort>Frauschaft</Stichwort> nahmen drei von uns <Autorenzusatz>einer Zeitungsredaktion</Autorenzusatz> den Preis <Autorenzusatz>»Die Spitze Feder«</Autorenzusatz> entgegen </Belegtext>
+                        <Fundstelle Fundort="dwds:standard:2001/03/04/Vorschusslorbeeren_oder_"> Der Standard, 04.03.2001 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Streichung>Derzeit zähle der Ortsverband 70 Mitglieder, so der neue Vorsitzende und</Streichung> man wolle nun mit einer neuen verjüngten Mann- und <Stichwort>Frauschaft</Stichwort> die Vereinsarbeit aktivieren und neue Mitglieder werben. </Belegtext>
+                        <Fundstelle Fundort="dwds:saar_regional:1997/06/SAAR_0697120401"> Saarbrücker Zeitung, 12.06.1997 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="e)">
+                <?oxy_comment_start author="kduden" timestamp="20210610T153130+0200" comment="+ Raumstation?" flag="done"?>
+                <?oxy_comment_start author="jgrimm" timestamp="20230126T110455+0100" comment="Lesart 1 d) und 1 e) als allgemein also 1f)  zusammen legen? Nur diese wenige Beispiele gefunden" flag="done" mid="22"?>
+                <Syntagmatik><?oxy_comment_end?><?oxy_comment_end mid="22"?></Syntagmatik>
+                <Frequenzangabe>selten</Frequenzangabe>
+                <Diasystematik/>
+                <?oxy_comment_start author="dsanders" timestamp="20210610T143126+0200" comment="Verweis auf Schiffs- oder Bootsmannschaft aktuell sinnlos; beides nur Minimalartikel" flag="done"?>
+                <?oxy_comment_start author="jgrimm" timestamp="20210615T071821+0200" comment="m.E. nicht notwendig, würde nzur umgekehrt Sinn machen" flag="done" mid="24"?>
+                <Verweise/><?oxy_comment_end?><?oxy_comment_end mid="24"?>
+                <Definition Typ="Basis">Gruppe weibliche Mitglieder einer <Verweis Typ="vgl">
+                    <Ziellemma>Besatzung</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                    </Verweis> auf einem Boot, Schiff, einer Raumstation o. Ä.</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                        <Belegtext>die gesamte <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                        <Belegtext>Kapitänin einer <Stichwort>Frauschaft</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Das allerdings will Günther, Sohn der Kapitänin Haken Hanne van de Deibel, nicht einsehen und schleicht sich verkleidet als Piratin zwischen Hannes <Stichwort>Frauschaft</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:noz_regional:2016/08/NOZ_2982015"> Neue Osnabrücker Zeitung, 13.08.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> So lange war noch nie eine Frau im Weltraum geblieben. <Streichung>Der bisherige Rekord hatte gerade bei etwas mehr als einer Woche gelegen. Bei der Planung des Unternehmens war sogar an einen Rekord ganz anderer Dimension gedacht worden:</Streichung> Die gesamte Mannschaft (oder sollte man <Stichwort>Frauschaft</Stichwort> sagen?) hätte aus Kosmonautinnen bestehen sollen, um den Vorsprung der amerikanischen Frauen aufzuholen. <Streichung>Zwar war die erste Frau im Weltraum, die resolute Walentina Tereschkowa, Sowjetbürgerin. Doch dann startete nur noch eine ihrer Geschlechtsgenossinnen vom Weltraumbahnhof Baikonur, während mittlerweile mehr als ein Dutzend Amerikanerinnen die Schwerelosigkeit im All am eigenen Leib spüren konnten. Die Idee der Frauenweltraummission wurde indes bald verworfen.</Streichung> </Belegtext>
+                        <Fundstelle Fundort="dwds:sz_legacy:1994/10/sz_116018"> Süddeutsche Zeitung, 10.10.1994 </Fundstelle>
+                        <Diasystematik>
+                            <Stilfaerbung>anerkennend</Stilfaerbung>
+                        </Diasystematik>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="f)" class="invisible">
+                <?oxy_comment_start author="dsanders" timestamp="20230126T141950+0100" comment="Nur einen einzigen Beleg gefunden, deswegen diese Lesart 1f)  invisible gestellt"?>
+                <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+                <Diasystematik>
+                    <Fachgebiet>Polizei</Fachgebiet>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">Teil einer Gruppe oder eines Zugs der Bereitschaftspolizei</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> In ihrem Bericht <Streichung>- in diesem Jahr war kein Polizeibeamter persönlich erschienen -</Streichung> bewertet das Polizeipräsidium Reutlingen »den Einsatz des gemeindlichen Vollzugsbeamten sehr positiv«. Vielleicht liegt es <Streichung>also an dem von nicht allen Engstinger geliebten Sheriffs, dass der Kriminalitätslagebericht so unspektakulär ausfiel, dass auf eine persönliche Vorstellung durch die Polizei verzichtet wurde. Mehr optische Präsenz Vielleicht liegt es auch</Streichung> daran, dass nach dem der Außenposten in Trochtelfingen geschlossen wurde, die gesamte Mann- und <Stichwort>Frauschaft</Stichwort> des Polizeiposten Alb jetzt von Engstingen aus ausschwärmt und so für mehr optische Präsenz sorgt. <Streichung>Vielleicht liegt 's aber auch an Corona, der Virus macht ja besonders den Einbrechern die Suche nach unbelebten Immobilien schwer. Was auch immer die Ursachen sein mögen, die in Engstingen von der Polizei aufgenommenen Straftaten haben sich seit 2012 mehr als halbiert, damals waren es noch 255 Fälle, 2021 gerade mal 118.</Streichung> </Belegtext>
+                        <Fundstelle Fundort="dwds:gea_regional:2022/09/GEA_srv101-14682654"> Reutlinger General-Anzeiger, 24.09.2022 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">von Frauen ausgeübte Regierungsgewalt, Befehlsgewalt o. Ä. </Definition>
+            <Definition Typ="Generalisierung">als <?oxy_comment_start author="kduden" timestamp="20230126T143042+0100" comment="&quot;sprachsymmetrische Entsprechung&quot;  anstatt &quot;sprachspielerische Abwandlung&quot;?" flag="done"?>sprachspielerische<?oxy_comment_end?> Abwandlung zur <Verweis Typ="vgl">
+                <Ziellemma>Herrschaft</Ziellemma>
+                <Ziellesart>1</Ziellesart>
+                </Verweis></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Patriarchat? Matriarchat? Am besten gar kein -archat. Dass beide Formen von <Stichwort>Herrschaft</Stichwort> (oder <Stichwort>Frauschaft</Stichwort>) nicht den Weg in eine rosige Zukunft weisen, sondern in eine Vergangenheit, in der der Mensch sich über sein Geschlecht definierte, offenbart nun ein kolumbianischer Film <Autorenzusatz>»Birds of Passage«</Autorenzusatz>. <Streichung>Allerdings eher unfreiwillig. In erster Linie widmet sich einem anderen Thema. Es geht um die Ursprünge des Drogenhandels in einem Land, das heute der größte Kokain-Produzent weltweit ist.</Streichung> </Belegtext>
+                    <Fundstelle Fundort="dwds:mume:2019/04/MUME_omp0000004603393"> Münchner Merkur, 04.04.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Autorinnen beschäftigen sich <Streichung>reflektiert und spielerisch</Streichung> mit der Wirkung von Sprache. <Streichung>Dabei ist ein illustrierter alphabetischer Bilderbogen entstanden.</Streichung> Wer ist eigentlich »Die Deutschen«? Kann <Stichwort>Frauschaft</Stichwort> herrschen, wenn Herrschaft frauscht? <Streichung>Und was hat es mit dem traurigen Toilettentabu auf sich? Wir reden mit zwei der Autorinnen, mit Claudia Johann und mit Elisabeth Weber.</Streichung> </Belegtext>
+                    <Fundstelle Fundort="dwds:web:pkc/pkcTm5Fs">
+                        <Autor>Radiaobskura</Autor>
+                        <Titel>machtWORTE! – Ein gesellschaftskritisches ABC-Buch</Titel>
+                        <Kurztitel>Ein gesellschaftskritisches ABC-Buch</Kurztitel>
+                        <Stelle/>
+                        <Datum>21.02.2015</Datum>
+                        <URL>https://radiaobskura.wordpress.com/2015/02/21/machtworte-ein-gesellschaftskritisches-abc-buch/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vier Jahre unter der <Stichwort>Frauschaft</Stichwort> von Angela Merkel, der Tante Deutschland, die mit ihrem vom Vorgänger übernommenen Groß- und Haupthausmeister Steinmeier <Autorenzusatz><?oxy_comment_start author="dsanders" timestamp="20240104T140816+0100" comment="ergänzt"?>als Außenminister und Vizekanzler<?oxy_comment_end?></Autorenzusatz> regiert hat. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2009/08/SZ_A45733594"> Süddeutsche Zeitung, 22.08.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nun nutzt die gelernte Diplom-Pädagogin Birgit F<Streichung><?oxy_comment_start author="kduden" timestamp="20230126T095645+0100" comment="Löschen?" flag="done"?>ischer<?oxy_comment_end?></Streichung> ihre derzeitige Herrschaft über das Düsseldorfer Frauen-Ministerium, um die Sprachlücke zu schließen und die <Stichwort>Frauschaft</Stichwort> in den amtlichen Sprachgebrauch einzuschleusen. Ist das nun herrlich oder fraulich? <Streichung>Wie wäre es denn mit einer weniger holprig klingenden Lösung, als es die Schirmfrauschaft ist? Der Schirmherr ist fast identisch mit dem Schutzpatron.</Streichung> </Belegtext>
+                    <Fundstelle Fundort="dwds:saar:2002/12/SAAR_1202100083"> Saarbrücker Zeitung, 10.12.2002 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Die Kandidatinnen wollten <Streichung>Messer weg – keineswegs »den kleinen Unterschied«, sondern lediglich »den großen Unterschied« beseitigen –</Streichung> die Benachteiligung von Frauen gegenüber Männern in allen gesellschaftlichen Bereichen <Autorenzusatz>beseitigen</Autorenzusatz>. Im übrigen könnten all die GAL-Männer <Autorenzusatz>Politiker der Grün-Alternativen Liste</Autorenzusatz>, »die nun nicht selbst kandidieren, dadurch viel Positives lernen: weniger Vorurteils- und mehr Haushaltspflege« – damit bald »das Wort HERRschaft vergessen werden kann«. Daß sich unter einer <Stichwort>FRAUschaft</Stichwort> vieles zum Besseren wenden würde, dessen sind sich die »Grüninnen« (Parteimund) ziemlich sicher. <Streichung>Aus ihrer Sicht sind, logo, die Männer schuld an Krieg und an Ausbeutung, an der Umweltzerstörung und an all den frauenfeindlichen Kücheneinrichtungen. Die »Phallusform von Raketen«, argumentieren jedenfalls Hamburger GAL-Frauen, sei kein Zufall. Viele sehen, wie Adrienne Goehler, zwischen sich und dem Paradies vor allem (ältere) Männer</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_print:src/1986/11/d_13519818"> Der Spiegel, 03.11.1986</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26">
+                <Beleg>
+                    <Belegtext>Unsere gesammelte Mann- und <Stichwort>Frauschaft</Stichwort> steht für eine kompetente Politik.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.10.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Steinbrück nennt sein Team an diesem Tag »Mann- und <Stichwort>Frauschaft</Stichwort>«.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.11.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es handelte sich dabei um die Mann- und <Stichwort>Frauschaft</Stichwort>, die sich vorgenommen hat, nach der Landtagswahl am 25. September das CSU-Kabinett abzulösen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 27.07.1994</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwei Lehrerinnen waren schon extrem. Da wurde »Mannschaft« zu »<Stichwort>Frauschaft</Stichwort>« umbenannt. Vielleicht hat das ja die Atmosphäre an unserer Schule beeinflußt.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 23.12.1996, Nr. 52</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Den künftigen Geschäftsführenden Landesvorstand wünscht sich Frau Fugmann als »dynamische Mannund <Stichwort>Frauschaft</Stichwort>«, ein führungs- und verantwortungsbewusstes Team.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 05.05.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

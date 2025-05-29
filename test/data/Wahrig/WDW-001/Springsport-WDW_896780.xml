@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="WDW_2011" Redakteur="dsanders" xml:id="WDW_896780" Autor="wgrimm" Typ="Verweisartikel" Zeitstempel="2025-05-19" Erstellungsdatum="2019-12-31" Status="Red-f-blockiert">
+        <?oxy_comment_start author="jgrimm" timestamp="20250513T093106+0200" comment="zusammen mit Springreiten überarbeitet freischalten" id="izp_qqm_jfc"?>
+        <?oxy_comment_start author="kduden" timestamp="20250519T082002+0200" parentID="izp_qqm_jfc" comment="OK, wartet darauf" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="Spring-sport">Springsport</Schreibung>
+            <Aussprache>
+                <IPA>ˈʃpʀɪŋʃpɔʁt</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-(e)s</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>springen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Sport</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <?oxy_comment_start author="dsanders" timestamp="20241212T140653+0100" comment="WDW: Reitsport" flag="done"?>
+                <Fachgebiet>Reiten</Fachgebiet><?oxy_comment_end?>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <?oxy_comment_start author="kduden" timestamp="20250409T150924+0200" comment="die Definition bei uns ist sehr unvollständig, da es auch (und vor allem eine sportliche Disziplin ist) 
+evtl. dort ändern zu Leistungsprüfung oder sportliche Disziplin für Springpferde, bei der Pferd und Reiter einen Parcours (verweis) passieren müssen" flag="done"?>
+                    <Ziellemma>Springreiten</Ziellemma>
+                    <Ziellesart/><?oxy_comment_end?>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>der internationale <Stichwort>Springsport</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>eine Serie im <Stichwort>Springsport</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Melanie Lott hat zahlreiche Pferde erfolgreich im Dressur- und <Stichwort>Springsport</Stichwort> auf Turnieren vorgestellt. </Belegtext>
+                    <Fundstelle Fundort="dwds:gea_regional:2024/12/GEA_srv101-18231438"> Reutlinger
+                        General-Anzeiger, 11.12.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Im <Stichwort>Springsport</Stichwort> – und leider in jeder anderen reiterlichen Disziplin – hat man die Bedürfnisse dieser wunderbaren, sanften Tiere mehr als einmal missbraucht.</Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:belletristik/9783641234805"> Schmidbauer, Lea: Ostwind. Der große Orkan. München: CBJ 2018</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Überraschungen wie im <Stichwort>Springsport</Stichwort> gibt es in
+                        der Dressur selten.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 02.12.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit dem Derby beginnt die Riders Tour, die höchstdotierte
+                        Turnierserie im internationalen
+                        <Stichwort>Springsport</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 05.04.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ein von Natur aus weiches Pferd wird die Anforderungen des
+                            <Stichwort>Springsportes</Stichwort> nicht lange aushalten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">[o. A.]: Richtlinien für Reiten und Fahren. Bd. 2. FN-Verlag der Dt. Reiterlichen Vereinigung 1990 [1964], S. 124</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-12-13">
+                <Beleg>
+                    <Belegtext>Wie würde er sich, gäbe es ihn noch, heute im
+                            <Stichwort>Springsport</Stichwort> behaupten?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 04.03.1983, Nr. 10</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ob der <Stichwort>Springsport</Stichwort> das auch will, muss er
+                        allerdings selbst entscheiden.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        14.10.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Überraschungen wie im <Stichwort>Springsport</Stichwort> gibt es in
+                        der Dressur selten.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 02.12.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Weg in die Elite des deutschen
+                            <Stichwort>Springsports</Stichwort> führt auch ihn über
+                        Warendorf.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 25.05.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der <Stichwort>Springsport</Stichwort> ist auf dem Wege, sich von
+                        diesem Grundkonsens zu verabschieden.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 20.03.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er ist im <Stichwort>Springsport</Stichwort> seit 45 Jahren dabei,
+                        vorne dabei, wenn auch ohne den ganz großen Einzeltitel.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 09.10.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>An Paul Schockemöhle führt auch heutzutage kein Weg im
+                            <Stichwort>Springsport</Stichwort> vorbei.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 06.11.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit dem Derby beginnt die Riders Tour, die höchstdotierte
+                        Turnierserie im internationalen
+                        <Stichwort>Springsport</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 05.04.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der heute oft benutzte Mehrzwecksattel genügt den besonderen
+                        Anforderungen des <Stichwort>Springsportes</Stichwort> nicht.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">o. A.: Richtlinien für Reiten und
+                        Fahren – Bd. 2: Ausbildung für Fortgeschrittene, Warendorf: FN-Verl. der Dt.
+                        Reiterlichen Vereinigung 1990 [1964], S. 90</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ein von Natur aus weiches Pferd wird die Anforderungen des
+                            <Stichwort>Springsportes</Stichwort> nicht lange aushalten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">o. A.: Richtlinien für Reiten und
+                        Fahren – Bd. 2: Ausbildung für Fortgeschrittene, Warendorf: FN-Verl. der Dt.
+                        Reiterlichen Vereinigung 1990 [1964], S. 124</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

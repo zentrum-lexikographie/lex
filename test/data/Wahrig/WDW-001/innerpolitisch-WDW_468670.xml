@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="WDW_2011" Redakteur="dsanders" xml:id="WDW_468670" Autor="dsanders" Typ="Verweisartikel" Zeitstempel="2025-02-18" Erstellungsdatum="2019-12-31" Status="Red-f-blockiert">
+        <?oxy_comment_start author="jgrimm" timestamp="20250212T101021+0100" comment="dazu noch innenpolitisch
+
+wahrig:  die Innenpolitik betreffend, auf ihr beruhend; oV innerpolitisch" id="stc_rt3_k2c"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20250218T091601+0100" parentID="stc_rt3_k2c" comment="wartet darauf" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="in-ner-po-li-tisch">innerpolitisch</Schreibung>
+            <Aussprache>
+                <IPA>ˈɪnɐpoˌliːtɪʃ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>inner-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>politisch</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Gebrauchszeitraum>veraltend</Gebrauchszeitraum>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>innenpolitisch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>innerpolitische</Stichwort> Angelegenheiten,
+                        Auseinandersetzungen, Spannungen, Verhältnisse, Wirren</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>innerpolitische</Stichwort> Konstellation</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                    <Belegtext><Stichwort>innerpolitisch</Stichwort> und außenpolitisch</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die Menschen seien durch Kriege, Inflation und
+                            <Stichwort>innerpolitische</Stichwort> Veränderungen verunsichert. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2023/12/RZTG_B3D557ED7DDEABCA836321A05815E1FD-ALTENKIRCHENBETZDORF"> Rhein-Zeitung, 20.12.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Amerika mit seinem immer noch nicht aufgearbeiteten Trauma von
+                        Vietnam und Watergate ist nach einer Serie außerpolitischer Fehlschläge und
+                            <Stichwort>innerpolitischen</Stichwort> Schwierigkeiten anfälliger
+                        geworden für einen Neoisolationismus. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:p/1979/adg19791018_105214:23000"> Archiv der
+                        Gegenwart, 2001 [1979]</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Diese strukturelle Lage wurde dadurch nicht besser, daß
+                            <Stichwort>innerpolitische</Stichwort> Konstellationen zumeist mit
+                        außenpolitischen verkoppelt waren.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heuß, Alfred: Herrschaft und
+                        Freiheit im griechisch-römischen Altertum. In: [o. A.]: Propyläen
+                        Weltgeschichte. Berlin: Directmedia 2000 [1965]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wir dürfen <Streichung>dabei auch</Streichung> die außerordentlich
+                        schwierige <Stichwort>innerpolitische</Stichwort> Situation in den Ländern,
+                        die uns umgeben, nicht verkennen. </Belegtext>
+                    <Fundstelle Fundort="dwds:bundestagprt:01/01054:2015">
+                        <Autor/>
+                        <Herausgeber>Deutscher Bundestag</Herausgeber>
+                        <Titel>Plenarprotokoll vom 29. 03. 1950</Titel>
+                        <Stelle/>
+                        <Datum>29.03.1950</Datum>
+                        <URL>https://dserver.bundestag.de/btp/01/01054.pdf</URL>
+                        <Aufrufdatum>29.08.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nachdem die Außenpolitik bis zu einem gewissen Grade vorläufig zum
+                        Abschluß gekommen ist, muß der Versuch gemacht werden, energischer als
+                        bisher dafür zu sorgen, daß unser <Stichwort>innerpolitisches</Stichwort>
+                        Leben, unser Verwaltungsleben, unsere öffentliche Ordnung nicht ein Faß ohne
+                        Boden ist, in dem die Steuern des Volkes verschwinden. </Belegtext>
+                    <Fundstelle Fundort="dwds:reichstag:bsb00000130.txt:2179">[o. A.]: Verhandlungen
+                        des Reichstages. Berlin 1932</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-12-13">
+                <Beleg>
+                    <Belegtext>Sein <Stichwort>innerpolitisches</Stichwort> Wirken wird manche
+                        Jahre, bis Ende des Jahrhunderts, ausgefüllt haben, aber das läßt sich nur
+                        vermuten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heuß, Alfred: Hellas. In:
+                        Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1962], S.
+                        3565</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auf <Stichwort>innerpolitischem</Stichwort> Gebiet sichere die
+                        Regierung die Verwirklichung der demokratischen Rechte des Volkes
+                        zu.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001
+                        [1940]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wir haben sie vor sieben Jahren zusammengeschlagen als sie uns in
+                        unserm <Stichwort>innerpolitischen</Stichwort> Kampf von der Macht
+                        zurückstoßen wollten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001
+                        [1939]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich teile nicht die Haltung der ZEIT zu jeder
+                            <Stichwort>innerpolitischen</Stichwort> deutschen Frage.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 23.02.1956, Nr. 08</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nur dann wird die neue außenpolitische Mehrheit in Frankreich auch
+                            <Stichwort>innerpolitisch</Stichwort> aktionsfähig sein.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.10.1953, Nr. 40</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Neurath bemühte sich zu meiner Zeit nach Kräften, das Auswärtige Amt
+                        aus dem <Stichwort>innerpolitischen</Stichwort> Kampf in Österreich
+                        herauszuhalten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.:
+                        Einhundertvierundsechzigster Tag. Mittwoch, 26. Juni 1946. In: Der
+                        Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S.
+                        11764</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Selbstverständlich war es die Aufgabe der Regierung, die
+                            <Stichwort>innerpolitische</Stichwort> Spannung zu lösen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.:
+                        Einhundertvierundfünfzigster Tag. Donnerstag, 13. Juni 1946. In: Der
+                        Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S.
+                        23972</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vor allem jedoch mußten seine <Stichwort>innerpolitischen</Stichwort>
+                        Verhältnisse als keineswegs besonders stabil gelten.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heuß, Alfred: Hellas. In:
+                        Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1962], S.
+                        3641</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es gab zwischen Österreich und dem Reich nicht nur auf kulturellem
+                            <Stichwort>innerpolitischem</Stichwort> Gebiet, sondern auch auf
+                        außenpolitischem Gebiet unüberbrückbare Meinungsdifferenzen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.:
+                        Einhundertvierundfünfzigster Tag. Donnerstag, 13. Juni 1946. In: Der
+                        Nürnberger Prozeß, Berlin: Directmedia Publ. 1999 [1946], S.
+                        23975</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese strukturelle Lage wurde dadurch nicht besser, daß
+                            <Stichwort>innerpolitische</Stichwort> Konstellationen zumeist mit
+                        außenpolitischen verkoppelt waren.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heuß, Alfred: Herrschaft und
+                        Freiheit im griechisch-römischen Altertum. In: Propyläen Weltgeschichte,
+                        Berlin: Directmedia Publ. 2000 [1965], S. 25374</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

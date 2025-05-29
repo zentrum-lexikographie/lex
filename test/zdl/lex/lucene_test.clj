@@ -3,7 +3,7 @@
             [clojure.test :refer [deftest is]]))
 
 (deftest translate
-  (let [is= #(is (= %2 (lucene/translate %1)))]
+  (let [is= #(is (= %2 (lucene/roundtrip %1)))]
     (is= "quelle:a/b"
          "source_s:a/b")
     (is= "-*:test OR +test2"
@@ -17,7 +17,7 @@
     (is= "\"test \\\" 1\"~2"
          "\"test \\\" 1\"~2")
     (is= "autor:me^10 OR def:\"*gu\\*t*\""
-         "author_s:me^10 OR definitions_t:\"*gu\\*t*\"")
+         "author_s:me^10 OR definitions_txt:\"*gu\\*t*\"")
     (is= "autor:test AND form:*te"
          "author_s:test AND forms_ss:*te")
     (is= "status:(Red-f OR Red-2 OR Artikelrump*)"

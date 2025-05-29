@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_8034467" Autor="jgrimm" Typ="Verweisartikel" Zeitstempel="2024-12-09" Erstellungsdatum="2023-09-14" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="dsanders" timestamp="20230914T203603+0200" comment="erstmal weiterbefördert, ich wäre aber für eine Zusammenlegung mit luzide" id="whl_kx4_qdc"?>
+        <?oxy_comment_start author="kduden" timestamp="20241209T172045+0100" parentID="whl_kx4_qdc" comment="Der Artikel ist analog zu den ARtikeln solid u. solide gestaltet. Trotzdem stellt sich die Frage, ob eine solche Trennung der Formen, die nur im Positiv unterscheiden. Duden ist hier ebenfalls nicht einheitlich 
+liquid/liquide ein ARtikel 
+solid/solide zwei Artikel 
+
+Vielleicht lässt sich die Frage ja grundsätzlich klären" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <?oxy_comment_start author="kduden" timestamp="20230911T133833+0100" comment="bitte mit luzid freischalten"?>
+            <Schreibung Trennung="lu-zi-de"><?oxy_comment_end?>luzide</Schreibung>
+            <Aussprache Zeitstempel="2023-09-12" Quelle="DWDS" Autor="brosch">
+                <IPA>luˈʦiːdə</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparativ><Wert>luzider</Wert></Komparativ>
+                <Superlativ><Wert>am luzidesten</Wert></Superlativ>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Zeitstempel="2023-09-12" Quelle="DWDS" Autor="brosch">
+            <Verweis Typ="formal_verwandt">
+                <Ziellemma>luzid</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie Zeitstempel="2023-09-12" Quelle="DWDS" Autor="brosch">
+            <Etymologie>aus <erwaehntes_Zeichen Sprache="lat">lūcidus</erwaehntes_Zeichen>
+                <Paraphrase>lichtvoll, hell</Paraphrase>, zu <erwaehntes_Zeichen Sprache="lat">lux</erwaehntes_Zeichen>
+                <Paraphrase>Licht</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>bildungssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Generalisierung">Unbeschwertheit, Helligkeit, Klarheit
+                ausstrahlend</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>luzide</Stichwort> Beobachtung, Einsicht, Erkenntnis,
+                        Gedanken</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Hier <Autorenzusatz>in Debussys »Prélude à l’après-midi d’un
+                            faune«</Autorenzusatz> geht es um einen »Eindruck«, eine »Impression«:
+                        Die Schwüle des Nachmittags, das Verschwimmen von Realem und Irrealem,
+                        Begierden und Lüste, all das ist in dieser Musik greifbar. Das ist
+                            <Stichwort>luzide</Stichwort> Erotik, transparent wie ein
+                            Negligé<Streichung>, ohne jedes penetrante Hüftwackeln à la
+                            Aquagymnastik – vielmehr ein Sommerhit, der wirklich unter die Haut
+                            geht</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2021/07/FR_fr_FRD_6800443BAE8996033000-DEUTSCHLANDAUSGABE">
+                        Frankfurter Rundschau, 17.07.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In seiner Zelle unternimmt er, wie man in seinem Buch nachlesen
+                        kann, fantasievolle Zeitreisen, zurück in die Vergangenheit und in eine
+                            <Stichwort>luzide</Stichwort>
+                        <Paraphrase>verheißungsvoll</Paraphrase> Zukunft. </Belegtext>
+                    <Fundstelle Fundort="dwds:bund:2019/10/BUND_20191004928797"> Der Bund,
+                        04.10.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wenige Worte, in denen sich ein ganzes Meer an Gedanken zu einem
+                            <Stichwort>luzide</Stichwort> schillernden Tropfen verdichtet! </Belegtext>
+                    <Fundstelle Fundort="dwds:politische_reden:src/de12/DE12_0881_20141103">
+                        <Autor>Monika Grütters</Autor>
+                        <Titel>Über die Versöhnung des Ästhetischen mit dem Politischen</Titel>
+                        <Stelle/>
+                        <Datum>03.11.2014</Datum>
+                        <URL>https://www.bundesregierung.de/Content/DE/Rede/2014/11/2014-11-03-gruetters-schillerrede.html</URL>
+                        <Aufrufdatum>01.10.2020</Aufrufdatum>
+                    </Fundstelle>
+                    <Diasystematik>
+                        <Bedeutungsebene>im Bild</Bedeutungsebene>
+                    </Diasystematik>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="a)">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>luzid</Ziellemma>
+                        <Ziellesart>a</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis"/>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>ein <Stichwort>luzider</Stichwort> Augenblick, Moment,
+                            Traum</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext><Stichwort>luzide</Stichwort> Beobachtung, Einsicht,
+                            Erkenntnis</Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Manche Menschen können <Stichwort>luzide</Stichwort> träumen,
+                            wissen also im Schlaf, dass sie träumen, und können die Traumhandlung
+                            aktiv verändern.</Belegtext>
+                        <Fundstelle Fundort="dwds:tsp:2022/06/TSP_doc7lkaxuyc1phsi6uy4n6"> Der
+                            Tagesspiegel, 26.06.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Mehrere Studien weisen darauf hin, dass Cannabiskonsumenten
+                            tatsächlich weniger träumen<Streichung>, da Gras die REM Schlafphasen
+                                mindert</Streichung>. Wenn man sich allerdings dazu
+                                entscheidet<Autorenzusatz>,</Autorenzusatz> eine Zeit lang auf Gras
+                            zu verzichten, kommen die Träume mit voller Kraft zurück,
+                                <Stichwort>luzider</Stichwort> als jemals zuvor!</Belegtext>
+                        <Fundstelle Fundort="dwds:web:10447/qRSpt2Sugcahz6J5">
+                            <Autor/>
+                            <Titel>Wie wirkt sich Gras auf unsere Träume aus?</Titel>
+                            <Stelle/>
+                            <Datum>26.07.2017</Datum>
+                            <URL>https://www.royalqueenseeds.de/blog-wie-wirkt-sich-gras-auf-unsere-traume-aus-n578</URL>
+                            <Aufrufdatum>13.06.2023</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Sie <Autorenzusatz>die Fechterin</Autorenzusatz> scheiterte erst
+                            in den Viertelfinals <Streichung>an der Estin Irina Embrich –
+                                10:15</Streichung>. Sie sei im vierten Gefecht der
+                            Direktausscheidung nicht mehr genügend <Stichwort>luzide</Stichwort>
+                            gewesen, ärgerte sich die Walliserin über die Niederlage<Streichung>,
+                                sah die Dinge nach einem Telefongespräch mit ihrem Vater aber
+                                rosiger</Streichung>.</Belegtext>
+                        <Fundstelle Fundort="dwds:nzz:2007/07/NZZ_FBGOH"> Neue Zürcher Zeitung,
+                            04.07.2007 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Auch Demente haben ihre <Stichwort>luziden</Stichwort> Momente
+                            und meist einen Erinnerungsschatz an Streichen und lustigen Erlebnissen,
+                            den es nur zu heben gelte. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz_regional:1999/10/NZZ_5WCHM"> Neue Zürcher
+                            Zeitung, 09.10.1999 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>luzid</Ziellemma>
+                        <Ziellesart>b</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis"/>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext><Stichwort>luzide</Stichwort> Klarheit, Transparenz,
+                            Prosa</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>ein <Stichwort>luzider</Stichwort> Essay, Kommentar,
+                            Vortrag</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>eine <Stichwort>luzide</Stichwort> Darstellung, Sprache,
+                            Studie</Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Ab dem zweiten Akt darf sich <Autorenzusatz>die
+                                Sängerin</Autorenzusatz>
+                            <Streichung>Jacquelyn Wagner</Streichung>, deren Sopran anfänglich noch
+                            etwas klein anmutet, in gewohnteren Bahnen bewegen. Mit zunehmend
+                            feineren lyrischen Stimmgaben und <Stichwort>luzideren</Stichwort>
+                            Kopftönen singt sie die Partie immer besser.</Belegtext>
+                        <Fundstelle Fundort="dwds:tsp:2022/04/TSP_doc7ki7xqvdetf777fr7wd"> Der
+                            Tagesspiegel, 11.04.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Streichung>Selbst</Streichung> diese Musik klingt in der
+                            sparsamen Besetzung noch lichter und <Stichwort>luzider</Stichwort> als
+                            sonst, die Sängerinnen und Sänger danken es mit einer selten so fein
+                            gehörten, detaillierten, Ton und Text in perfekte, humorvolle
+                            Übereinstimmung bringenden Darbietung <Streichung>(wieso darf Richard
+                                Wagner das Alleinrecht für das »Gesamtkunstwerk«
+                                beanspruchen)</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2020/09/FR_fr_FRD_73270C3AEE7AF7013000-DEUTSCHLANDAUSGABE"> Frankfurter Rundschau, 08.09.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Die Texte waren so <Stichwort>luzide</Stichwort> und gut
+                            ausgearbeitet, dass wir keine Grundsatzdiskussionen mehr hatten. </Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2020/07/FR_fr_FRD_2D00D8399D767D003000-DEUTSCHLANDAUSGABE"> Frankfurter Rundschau, 18.07.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Das Geheimnis <Autorenzusatz>der Darbietung des Musikstücks
+                                durch ein Kammerorchester</Autorenzusatz> liegt auch in der
+                            gewählten Orchesterbesetzung. <Streichung>Das Kammerorchester Carl
+                                Philipp Emanuel Bach unter Leitung von Hartmut Haenchen begleitete
+                                mit vier ersten und vier zweiten Violinen, vier Bratschen, zwei
+                                Violoncelli, einem Kontrabass und einem Fagott (in der Partitur als
+                                Bassi-Instrument »ad libitum« angegeben), ferner zwei Oboen und zwei
+                                Hörnern – eine Besetzung, die sich an die verhältnismäßig geringe
+                                Stärke der Esterházy-Kapelle des Entstehungsjahres 1783 anlehnt. Die
+                                Solostimme hat es so leichter, sich konturiert
+                                herauszuschälen.</Streichung> Der Klang ist insgesamt transparenter,
+                            die Rhetorik <Stichwort>luzider</Stichwort> als bei einem größer
+                            besetzten Orchester.</Belegtext>
+                        <Fundstelle Fundort="dwds:faz:1999/067000/faz_1999_067924_tei"> Frankfurter
+                            Allgemeine Zeitung, 21.09.1999 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>Sein <Autorenzusatz>des Musikers Darbietung von Kompositionen des
+                                Komponisten</Autorenzusatz> Rameau ist brillant, verspielt und doch
+                            ungemein <Stichwort>luzide</Stichwort>. Sein Debussy wiederum phänomenal
+                            ausgehört, schillernd und klanglich tief gedacht.</Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2019/08/FR_fr_FRMT_650184384F10C0173000-DEUTSCHLANDAUSGABE"> Frankfurter Rundschau, 13.08.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Das Reduzieren der Körper auf ein paar Grundformen, das Zerren
+                            und Zerpflücken ist für Picasso <Streichung>nur noch</Streichung> ein
+                            kleiner Schritt, das Ergebnis wirkt umso gewaltiger und wird in jedem
+                            Avantgarde-Band bejubelt. Diesen Weg so <Stichwort>luzide</Stichwort>
+                            vor Augen zu führen, ist das Sensationelle dieser
+                            Ausstellung.</Belegtext>
+                        <Fundstelle Fundort="dwds:laz:2019/02/LAZ_asr0000018225520-LANDSHUTERZEITUNG">
+                            Landshuter Zeitung, 21.02.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Schmidt kontert <Autorenzusatz>auf Honeckers ablehnende Haltung
+                                zur Möglichkeit der Wiedervereinigung beider deutscher
+                                Staaten</Autorenzusatz> kühl: »Er wolle sich zu dieser Frage nicht
+                            äußern, denn niemand wisse, wie das 20. Jahrhundert enden werde.« Erst
+                            heute können wir wirklich ermessen, wie <Stichwort>luzide</Stichwort>
+                            diese Bemerkung war.</Belegtext>
+                        <Fundstelle Fundort="dwds:politische_reden:src/de1/DE1_1146_20060207">
+                            <Autor>Frank-Walter Steinmeier</Autor>
+                            <Titel>Grußwort von Bundesaußenminister Dr. Frank-Walter Steinmeier
+                                anlässlich der Präsentation der »Akten zur Auswärtigen Politik der
+                                Bundesrepublik Deutschland«</Titel>
+                            <Kurztitel>Grußwort von Bundesaußenminister Dr. Frank-Walter
+                                Steinmeier</Kurztitel>
+                            <Stelle/>
+                            <Datum>07.02.2006</Datum>
+                            <URL>http://www.auswaertiges-amt.de/DE/Infoservice/Presse/Reden/2006/060207-AktenAuswaertigePolitik.html</URL>
+                            <Aufrufdatum>01.10.2020</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext><Streichung>Dabei zeigt</Streichung> Bourdieu
+                                <Autorenzusatz>zeigt</Autorenzusatz>, wie in unzähligen Ritualen,
+                            Bildern, Interaktionen und Wertmustern in Familie, Schule, Hochschule
+                            und Beruf Frauen tendenziell immer noch herabgesetzt, unsichtbar und
+                            letztlich zu Objekten der männlichen Ordnung gemacht werden. Am
+                                <Stichwort>luzidesten</Stichwort> wird seine Analyse dort, wo er
+                            sein Habituskonzept zum Verständnis der unbewusst verlaufenden
+                            Partizipation der Frauen am Kosmos männlicher Herrschaft
+                            heranzieht.</Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2005/03/FR_3560010"> Frankfurter Rundschau,
+                            16.03.2005 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-09-12"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

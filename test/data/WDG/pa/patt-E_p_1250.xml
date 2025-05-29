@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_p_1250" Autor="" Typ="Basisartikel-D" Zeitstempel="1974-01-01" Erstellungsdatum="1974-01-01" Status="wird_gestrichen">
+    <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+      <Schreibung>patt</Schreibung>
+      <Aussprache Quelle="DWDS" Zeitstempel="2021-03-27" Autor="brosch"><IPA Audiodatei="031/patt">pat</IPA></Aussprache>
+      <Grammatik>
+        <Wortklasse>Adjektiv</Wortklasse>
+      </Grammatik>
+      <Diasystematik/>
+    </Formangabe>
+    <Orthografie/>
+    <Verweise/>
+    <Diachronie>
+      <Etymologie/>
+      <Formgeschichte/>
+      <Bedeutungsgeschichte/>
+      <Verweise>
+        <Verweis Typ="EtymWB">
+          <Ziellemma>patt</Ziellemma>
+          <Ziellesart/>
+        </Verweis>
+      </Verweise>
+    </Diachronie>
+    <Lesart xml:id="S_p_891">
+      <Syntagmatik>
+        <Konstruktionsmuster>
+          <Belegtext>
+            <Stichwort>patt</Stichwort> sein</Belegtext>
+        </Konstruktionsmuster>
+      </Syntagmatik>
+      <Diasystematik>
+        <Fachgebiet>Schach</Fachgebiet>
+      </Diasystematik>
+      <Verweise/>
+      <Definition Typ="Basis">ohne im Schach zu stehen, nicht mehr ziehen können</Definition>
+      <Kollokationen/>
+      <Verwendungsbeispiele/>
+    </Lesart>
+    <Rohdaten>
+      <Verwendungsbeispiele>
+        <Beleg>
+          <Belegtext>Denn das atomare <Stichwort>Patt</Stichwort>, die gegenseitige Abschreckung durch Fernbomber und Interkontinentalraketen, blieb zwischen den beiden Supermächten ja noch bestehen.</Belegtext>
+          <Fundstelle Fundort="dwds">konkret, 1983</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Augenblicklich gibt es also ein <Stichwort>Patt</Stichwort> im Kampf um das neue Image.</Belegtext>
+          <Fundstelle Fundort="dwds">Süddeutsche Zeitung, 09.06.1998</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Dann sprach man beim Abbröckeln der sozial-liberalen Mehrheit in Bonn nach 1972 von parlamentarischem <Stichwort>Patt</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds">o. A. [es]: Patt. In: Aktuelles Lexikon 1974-2000, München: DIZ 2000 [1975]</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Bei den Kommunalwahlen in Essen kommt es zu einem politischen <Stichwort>Patt</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds">o. A.: 1948. In: Overresch, Manfred u. Saal, Friedrich Wilhelm (Hgg.) Deutsche Geschichte von Tag zu Tag 1918-1949, Berlin: Directmedia Publ. 2000 [1986], S. 29806</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Nach der Auswertung aller Ergebnisse aus allen Bundesstaaten steht es <Stichwort>patt</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 08.11.2000</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Neu in den Vorstand kommt PAUL-JOSEF <Stichwort>PATT</Stichwort> für das Ressort Verkauf.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.12.1998</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Sie hatte ihren Wahlkampf prononziert auf das Sonderinteresse der Angestellten gegenüber den Arbeiterinteressen abgestellt und den DGB damit weitgehend <Stichwort>patt</Stichwort> gesetzt.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.07.1968, Nr. 28</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Der Leistungsverglich zwischen selektivem Lasersintern und Lasergenerieren fällt <Stichwort>patt</Stichwort> aus: SLS erlaubt die Herstellung von Bauteilen mit Brückenstrukturen.</Belegtext>
+          <Fundstelle Fundort="dwds:kernbasis">C’t, 1995, Nr. 8</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Einen Moment lang stand es <Stichwort>patt</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.12.2001</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Was heißt »<Stichwort>patt</Stichwort>"?</Belegtext>
+          <Fundstelle Fundort="dwds:welt">Die Welt, 21.09.2005</Fundstelle>
+        </Beleg>
+      </Verwendungsbeispiele>
+    </Rohdaten>
+  </Artikel>
+</DWDS>

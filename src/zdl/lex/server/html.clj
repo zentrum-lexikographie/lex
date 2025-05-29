@@ -13,6 +13,18 @@
                              :serif "PT Serif,serif"}
                 :colors     {:zdl "002bff"}})
 
+#_(o/set-tokens! {:tw-version 3
+                  :fonts      {:dwds-sans  "Source Sans Pro"
+                               :dwds-serif "Crimson Text"}
+                  :colors     {:dwds-white    "f6f6f6"
+                               :dwds-grey-1   "666666"
+                               :dwds-grey-2   "777777"
+                               :dwds-grey-3   "e7e7e7"
+                               :dwds-blue     "0087C2"
+                               :dwds-darkblue "004A6B"
+                               :dwds-green    "559955"
+                               :dwds-red      "c9302c"
+                               :dwds-lightred "F7D1BC"}})
 (defstyled header :header
   :relative
   [:nav

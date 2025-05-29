@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+<Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_997841072" Autor="" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="1967-01-01" Erstellungsdatum="1967-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Zeitstempel="2022-02-25" Quelle="DWDS" Autor="herold">
+            <Schreibung>blinzen</Schreibung>
+            <Aussprache><IPA Audiodatei="131/blinzen"/></Aussprache><Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>blinzt</Wert></Praesens>
+                <Praeteritum><Wert>blinzte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>geblinzt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>blinzeln</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachraum>landschaftlich</Sprachraum>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>blinzeln</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

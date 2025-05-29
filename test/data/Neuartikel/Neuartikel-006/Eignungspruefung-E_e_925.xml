@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_e_925_13" Autor="jgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2025-04-30" Erstellungsdatum="1967-01-01" Status="Red-2">
+        <?oxy_comment_start author="wgrimm" timestamp="20250425T114431+0200" comment="zu Eignungstest"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Eignungsprüfung</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="033/die_Eignungspruefung">ˈaɪ̯gnʊŋsˌpʀyːfʊŋ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Eignung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Prüfung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_e_649">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Eignungstest</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">Untersuchung, Prüfung auf Eignung zu einem bestimmten Beruf oder
+                für eine Tätigkeit</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>eine anspruchsvolle, spezielle, strenge
+                            <Stichwort>Eignungsprüfung</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>eine künstlerische, psychologische
+                            <Stichwort>Eignungsprüfung</Stichwort>
+                        <Paraphrase> Prüfung auf künstlerische Fähigkeiten, psychische
+                            Voraussetzungen</Paraphrase></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Akkusativobjekt_von">
+                    <Belegtext>eine <Stichwort>Eignungsprüfung</Stichwort> ablegen, absolvieren,
+                        bestehen, durchführen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Dativobjekt_von">
+                    <Belegtext>sich einer <Stichwort>Eignungsprüfung</Stichwort>
+                        unterziehen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>sich auf eine <Stichwort>Eignungsprüfung</Stichwort>
+                        vorbereiten</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>bei einer <Stichwort>Eignungsprüfung</Stichwort>
+                        durchfallen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Präpositionalgruppe/-objekt_mit">
+                    <Belegtext>eine <Stichwort>Eignungsprüfung</Stichwort> für Rennpferde, für das
+                        Medizinstudium, an einer Kunsthochschule</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Genitivattribut_von">
+                    <Belegtext>das Bestehen der <Stichwort>Eignungsprüfung</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Für einige Studienfächer müssen Sprachtests,
+                            <Stichwort>Eignungsprüfungen</Stichwort> oder Praktika absolviert
+                        werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha:2025/04/HA_2F9DA9B28C004FF90FF16975B5E38463_6840948">
+                        Hamburger Abendblatt, 12.04.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Du wolltest Polizist werden.« Silvan sah seinen ungebetenen Gast
+                        teilnahmslos an. »Du übst gern Macht und Kontrolle aus, aber es fehlt dir
+                        für so einen Beruf an den charakterlichen Erfordernissen. Deswegen hast du
+                        vermutlich die <Stichwort>Eignungsprüfung</Stichwort> nicht bestanden.« </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:belletristik/9783426461709"> Kliesch,
+                        Vincent: Der Klang des Bösen. E-Book. München: Droemer, 2022. </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Weitere Gründe, die eine Überprüfung der Augen veranlassen, ist die
+                            <Stichwort>Eignungsprüfung</Stichwort> zur Fahrerlaubnis und die
+                        arbeitsmedizinische Verordnung, in der festgelegt ist, dass Mitarbeiter in
+                        einigen Berufen vom Betriebsarzt untersucht werden, damit die korrekte
+                        Ausübung ihrer Tätigkeit gewährleistet ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:medizin:2f/2f94175d-99f6-4c26-9167-dfded224436d">
+                        <Autor/>
+                        <Titel>Sehtest: Gründe, Ablauf, Kosten im Überblick – praktischArzt</Titel>
+                        <Stelle/>
+                        <Datum>14.08.2020</Datum>
+                        <URL>https://www.praktischarzt.de/untersuchungen/sehtest/</URL>
+                        <Aufrufdatum>04.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ich weiß noch, wie so viele kurz vor unserem Abschluss in Princeton
+                        an Zulassungstests zum Medizinstudium oder
+                            <Stichwort>Eignungsprüfungen</Stichwort> für das Jurastudium teilnahmen,
+                        sich für Bewerbungsgespräche für Ausbildungsprogramme in großen Unternehmen
+                        in Anzug und Kostüm warfen<Streichung>, ohne (wie ich zumindest) je darüber
+                            nachzudenken, dass es so viele andere öffentliche Ämter gab, die die
+                            Arbeit am Bürger in den Vordergrund stellten</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:sachbuch/9783641227326"> Obama, Michelle:
+                        BECOMING. E-Book. München: Goldmann, 2018. </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Zur Rechtsanwaltschaft kann nur zugelassen werden, wer die
+                        Befähigung zum Richteramt nach dem Deutschen Richtergesetz<Streichung>2
+                            3</Streichung> erlangt oder die <Stichwort>Eignungsprüfung</Stichwort>
+                        nach dem Gesetz über die Eignungsprüfung für die Zulassung zur
+                        Rechtsanwaltschaft <Streichung>vom 6. Juli 1990 (BGBl. I S.
+                            1349)</Streichung> bestanden hat. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:w/1997/rechts:594"> o. A.:
+                        Bundesrechtsanwaltsordnung (BRAO). In: Schönfelder: Deutsche Gesetze :
+                        Sammlung des Zivil-, Straf- und Verfahrensrechts (Ergänzungslieferung),
+                        München: Beck 1997 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26">
+                <Beleg>
+                    <Belegtext>Die Kaufholds bestehen die <Stichwort>Eignungsprüfung</Stichwort> und
+                        werden auf die Liste der Bewerber gesetzt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 16.12.1999, Nr.
+                        51</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dazu müssen die Bewerber eine schriftliche und mündliche
+                            <Stichwort>Eignungsprüfung</Stichwort> überstehen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 18.03.1999, Nr.
+                        12</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Aufnahme in diese Sonderformen erfolgt aufgrund einer speziellen
+                            <Stichwort>Eignungsprüfung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Kursbuch, 1971, Bd.
+                        24</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der vom Führer mit der Bekämpfung von Omnibusunfällen beauftragte
+                        Korpsführer Hühnlein gibt Richtlinien zur
+                            <Stichwort>Eignungsprüfung</Stichwort> der Omnibusfahrer
+                        heraus.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: 1938. In: Overresch,
+                        Manfred u. Saal, Friedrich Wilhelm (Hgg.) Deutsche Geschichte von Tag zu Tag
+                        1918-1949, Berlin: Directmedia Publ. 2000 [1982], S. 1095</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Unter Berücksichtigung dieser Umstände führten sehr umfangreiche
+                            <Stichwort>Eignungsprüfungen</Stichwort> zu dem Entschluß, mit einer
+                        Ausfallkörnung zu arbeiten ohne nennenswerte Anteile von 1 bis 7
+                        mm.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Ramm, Hans: Be- und
+                        Entwässerungsprojekt Al Hassa in Saudi Arabien. In: Vorträge auf dem
+                        Betontag 1971, [Wiesbaden]: [Deutscher Beton-Verein e. V.] 1971, S.
+                        204</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

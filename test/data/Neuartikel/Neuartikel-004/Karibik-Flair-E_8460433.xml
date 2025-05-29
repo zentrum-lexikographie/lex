@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_1342953" Autor="jgrimm" Typ="Basisartikel-D" Tranche="RSR-2024-45_E1" Zeitstempel="2024-09-10" Erstellungsdatum="2024-08-19" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_start author="dsanders" timestamp="20240910T104932+0200" comment="so belassen, Belege recht ausgewogen"?>
+            <Schreibung Trennung="Ka-ri-bik-Flair">Karibik-Flair</Schreibung>
+            <Schreibung Trennung="Ka-ri-bik-flair">Karibikflair<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <?oxy_comment_start author="dsanders" timestamp="20250509T091442+0200" comment="IPA neu"?>
+                <IPA>kaˈʀiːbɪkˌflɛːɐ̯</IPA>
+                <?oxy_comment_end?>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="wgrimm" timestamp="20250220T083937+0100" comment="Ersetzt (da wg. des geogr. Namens hier unpassend): 45 (E1)"?>51<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Karibik</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Flair</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-19">
+                <Beleg>
+                    <Belegtext>Ein Aquarium mit bunten Fischen ist in die felsige Wand eingelassen
+                        und läßt <Stichwort>Karibik-Flair</Stichwort> aufkommen.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 29.03.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wer allerdings eine Insel mit typischem
+                            <Stichwort>Karibik-Flair</Stichwort> erwartet, wird auf Aruba nicht
+                        happy.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 24.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Ostseetherme in Scharbeutz bei Lübeck garantiert
+                            <Stichwort>Karibik-Flair</Stichwort> auch mitten im
+                        November.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 23.11.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Karibik-Flair</Stichwort> können Berliner und Besucher der
+                        Stadt von morgen bis Sonnabend am Potsdamer Platz genießen.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 21.07.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Tsp <Stichwort>Karibik-Flair</Stichwort> in Brand Tropical Island
+                        bringt Karibik-Flair nach Brandenburg.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        05.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Angeboten werden zum Beispiel Brotdüfte für die Bäckerei,
+                            <Stichwort>Karibikflair</Stichwort> fürs Reisebüro.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        04.10.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch Model Lars Burmeister, Sängerin Jasmin Wagner und Moderatorin
+                        Nandini Mitra erfreuten sich trotz des nordfriesisch-kühlen Wetters an
+                        Cocktails und <Stichwort>Karibikflair</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 01.08.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ambergris Caye bietet – gefolgt von Placencia am gleichnamigen Strand
+                        – einen Hauch konventionellen
+                        <Stichwort>Karibikflairs</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 26.03.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Am Baldeneysee in Essen vermittelt der Seaside Beach Club
+                            <Stichwort>Karibikflair</Stichwort> mit Cocktailbars.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 20.08.2005</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

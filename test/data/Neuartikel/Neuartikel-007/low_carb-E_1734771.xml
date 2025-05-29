@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_1734771" Autor="wgrimm" Typ="Minimalartikel" Tranche="RSR-2024-55_E2_alt" Zeitstempel="2025-05-02" Erstellungsdatum="2025-05-02" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="dsanders" timestamp="20250506T143959+0200" comment="Potentielle Lemmalücke - Ausarbeitung ist nicht im Zuge der orthogr. Anpassung leistbar"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>low carb</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="wgrimm" timestamp="20250506T135126+0200" comment="Ergänzt"?>55 (E3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-02"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_1413042" Autor="wgrimm" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-03-31" Erstellungsdatum="2025-03-31" Status="Lex-Regioprüfung">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Wiener Schmäh</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma hidx="2">Wiener</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <?oxy_comment_start author="dsanders" timestamp="20250331T102401+0100" comment="s. LA 6"?>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Schmäh</Ziellemma>
+                <Ziellesart/>
+            </Verweis><?oxy_comment_end?>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders">A</Sprachareal>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">gemütliche, entspannte, humorvolle, aber auch oft brummige
+                <?oxy_comment_start author="dsanders" timestamp="20250429T145405+0200" comment="evtl. &quot;sowie Ausdrucksweise&quot; (wie bei &quot;Berliner Schnauze&quot;)?"?>Lebenseinstellung<?oxy_comment_end?>,
+                die für Wiener als typisch angesehen wird</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Er <Autorenzusatz>der Comedian</Autorenzusatz> freut sich auf jedes
+                        einzelne Jubiläumskonzert und auf die Zeit mit seinem Publikum. Niko
+                        Formanek erzählt mit einer großen Portion <Stichwort>Wiener</Stichwort>
+                        <Stichwort>Schmäh</Stichwort> von seinem Leben als Ehemann. Seit über 30
+                        Jahren ist er mit seiner Frau zusammen. Er plaudert schonungslos und mit
+                        großer Freude über die Peinlichkeiten des Ehealltags <Streichung>und
+                            darüber, wie glücklich er ist, dass seine Frau ihn vor Jahrzehnten zu
+                            ihrem Sozialprojekt gemacht hat. Nach über 30 Jahren Beziehung ist es
+                            nicht einfach, alles perfekt, frisch und aufregend zu
+                            gestalten</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:laz_regional:2025/03/LAZ_asr0000028598537-MOOSBURGERZEITUNG">
+                        Landshuter Zeitung, 08.03.2025 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>
+                        <Stichwort>Wiener</Stichwort>
+                        <Stichwort>Schmäh</Stichwort> - eine Lebenshaltung, eine Sprache, ein
+                        bissiger Humor <Streichung>- die Mitglieder des Ensembles haben all das
+                            längst im Griff</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:aaz_regional:2025/03/AAZ_gmk3s5816.1-AACHEN"> Aachener
+                        Zeitung, 07.03.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250401T125227+0200" comment="aus dem EWA &quot;Schmäh&quot;"?>
+                    <Belegtext><?oxy_comment_end?>Mit viel Charme und <Stichwort>Wiener</Stichwort>
+                        <Stichwort>Schmäh</Stichwort> begeisterte Rainhard Fendrich sein Publikum in
+                        der S-Arena. </Belegtext>
+                    <Fundstelle Fundort="dwds:laz_regional:2022/10/LAZ_asr0000024792145-LANDSHUTERZEITUNG">
+                        Landshuter Zeitung, 25.10.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250401T125235+0200" comment="aus dem EWA &quot;Schmäh&quot;"?>
+                    <Belegtext><?oxy_comment_end?>Da dürfen eine Prise Ironie,
+                            <Stichwort>Wiener</Stichwort>
+                        <Stichwort>Schmäh</Stichwort> und viel Gefühl ebenso wenig fehlen wie
+                        eingängige Melodien, die darauf warten, vom Publikum gefeiert zu werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:NOEN_regional/xml/2022/08/noen_2022081709411212104720046">Niederösterreichische Nachrichten, 17.08.2022</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart>
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">Wiener Dialekt</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Die beiden sind gebürtige Wiener, leben aber seit fast vier
+                            Jahrzehnten in der Diaspora in Osnabrück. Der Dialekt, der
+                                <Stichwort>Wiener</Stichwort>
+                            <Stichwort>Schmäh</Stichwort>, ist bei dem Paar unüberhörbar. </Belegtext>
+                        <Fundstelle Fundort="dwds:noz_regional:2024/04/NOZ_23-174492302"> Neue
+                            Osnabrücker Zeitung, 26.04.2024 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>Beck schafft es, einen in die Zaubererwelt mit hineinzuziehen,
+                            das Ganze gleichzeitig aber auch mit einer Spur Humor zu garnieren, wenn
+                            er etwa Dolores Umbridge mit leichtem <Stichwort>Wiener</Stichwort>
+                            <Stichwort>Schmäh</Stichwort> spricht oder Ludo Bagman in schönstem
+                            rheinischen Dialekt reden lässt. </Belegtext>
+                        <Fundstelle Fundort="dwds:aaz_regional:2020/07/AAZ_87599573-AACHEN">
+                            Aachener Zeitung, 29.07.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Für die Rolle lernte Philip Hahn Italienisch und den
+                                <Stichwort>Wiener</Stichwort>
+                            <Stichwort>Schmäh</Stichwort>. Er spielte nicht nur selbst Klavier,
+                            sondern komponierte für den Film ein Stück.</Belegtext>
+                        <Fundstelle Fundort="dwds:ta_regional:2020/12/TA_403d12d6-3a09-11eb-ab35-b63b3d17e294_1594655"> Thüringer Allgemeine, 10.12.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>Groß von Statur, prinzipienfest in seinen Ansichten, konziliant,
+                            verstand er sich auch auf <Stichwort>Wiener</Stichwort>
+                            <Stichwort>Schmäh</Stichwort> - sogar wenn es um so eine bierernste
+                            Angelegenheit wie den Sport ging. </Belegtext>
+                        <Fundstelle Fundort="dwds:faz:2019/03/FAZ_FD2201903045652036"> Frankfurter
+                            Allgemeine Zeitung, 04.03.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Sie sprechen Wiener Dialekt oder besser gesagt
+                                <Stichwort>Wiener</Stichwort>
+                            <Stichwort>Schmäh</Stichwort> ? </Belegtext>
+                        <Fundstelle Fundort="dwds:laz:2018/08/LAZ_asr0000017245153-LANDSHUTERZEITUNG">
+                            Landshuter Zeitung, 25.08.2018 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-03-31"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

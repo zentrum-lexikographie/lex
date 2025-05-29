@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="dsanders" xml:id="E_m_4735" Autor="jgrimm" Typ="Minimalartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2024-11-01" Erstellungsdatum="1974-01-01" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="drei-mi-nü-tig">dreiminütig</Schreibung>
+            <Schreibung Trennung="3-mi-nü-tig"><?oxy_comment_start author="jgrimm" timestamp="20250325T101325+0100" comment="Ergänzt"?>3-minütig</Schreibung><?oxy_comment_end?>
+            <Aussprache>
+                <IPA Audiodatei="104/dreiminuetig"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.2)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="dsanders" timestamp="20250325T102951+0100" comment="Dto."?>40
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>drei</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Minute</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_m_22666">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

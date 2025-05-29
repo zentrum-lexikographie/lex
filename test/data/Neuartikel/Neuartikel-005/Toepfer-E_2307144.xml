@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_t_3719" Autor="kduden" Typ="Basisartikel" Tranche="Regio" Zeitstempel="2025-01-22" Erstellungsdatum="1976-01-01" Status="Lex-Regioprüfung">
+        <Formangabe Typ="Hauptform" Zeitstempel="2022-04-28" Quelle="DWDS" Autor="herold">
+            <Schreibung Trennung="Töp-fer">Töpfer</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="003/der_Toepfer">ˈtœpfɐ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Zeitstempel="2022-04-28" Quelle="DWDS" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Topf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-er</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>Töpfer</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1." xml:id="S_t_2136">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">Person, die <Verweis Typ="vgl">
+                    <Ziellemma>Keramik</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis> aus <Verweis Typ="vgl">
+                    <Ziellemma hidx="2">Ton</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> fertigt</Definition>
+            <Kommentar>Als Berufsbezeichnung ist
+                    <?oxy_comment_start author="kduden" timestamp="20241129T121631+0100" comment="+Stw." flag="done"?><Stichwort>Töpfer</Stichwort><?oxy_comment_end?>
+                <Gebrauchszeitraum><?oxy_comment_start author="kduden" timestamp="20241129T121648+0100" comment="+Gebrauchszeiteraum" flag="done"?>veraltet<?oxy_comment_end?></Gebrauchszeitraum>,
+                der entsprechende Ausbildungsberuf heißt heute <Verweis Typ="Synonym">
+                    <Ziellemma>Keramiker</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>.</Kommentar>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Vom <Stichwort>Töpfer</Stichwort> bis zum Bäcker sind etliche
+                        Gewerbeleute auf Holz angewiesen, Bergbau, Metallverarbeitung,
+                        Glasherstellung oder Salzgewinnung würden nicht funktionieren ohne Hitze und
+                        Feuer, und nicht zuletzt braucht jeder Haushalt Holz zum Heizen und Kochen. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2022/11/NZZ_2022111200000308178252"> Neue Zürcher
+                        Zeitung, 12.11.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Einen kleinen Eindruck vom Tunesischen Lebensgefühl bekommen
+                        Messebesucher bereits in Wien bei diversen folkloristischen Veranstaltungen
+                        wie dem Bauchtanz, sehen Kupferschmiede und <Stichwort>Töpfer</Stichwort>
+                        bei der Arbeit und können lokale Spezialitäten probieren. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2009/12/22/Start_in_die_Reisesaison"> Der
+                        Standard, 22.12.2009 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Für die frühislamische Kunst ungewöhnliche Darstellungen von
+                        arbeitenden Menschen finden sich unter den Deckenmalereien in der von drei
+                        gewaltigen Tonnengewölben überdachten Halle: Tischler schneiden Holz, ein
+                            <Stichwort>Töpfer</Stichwort> dreht die Töpferscheibe, und Maurer bauen
+                        an einem Haus.</Belegtext>
+                    <Fundstelle Fundort="dwds:nd:2532889X_1985-08-06_01/tei/2532889X_1985-08-06_01_204">
+                        Neues Deutschland, 06.08.1985 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Zwei Jahre dauert die Ausbildung, an deren Ende die Jungen und
+                        Mädchen den Facharbeiterbrief eines <Stichwort>Töpfers</Stichwort> erhalten. </Belegtext>
+                    <Fundstelle Fundort="dwds:nd:2532889X_1980-10-25_01/tei/2532889X_1980-10-25_01_098">
+                        Neues Deutschland, 25.10.1980 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wie ein Gutsherr besitzt Gott einen großen Garten; wie ein Gärtner
+                        bestellt Gott diesen Garten, indem er den Menschen hineinpflanzt; wie ein
+                            <Stichwort>Töpfer</Stichwort> formt Gott den Menschen aus
+                            Lehm<Streichung><?oxy_comment_start author="wgrimm" timestamp="20250122T085230+0100" comment="gekürzt, so ein altbackenes Geseire )-:"?>;
+                            wie ein Medizinmann läßt Gott den Menschen in einen Tiefschlaf fallen,
+                            entnimmt ihm eine Rippe, bildet ein neues Wesen und haucht ihm Leben
+                            ein; wie ein Brautvater führt Gott dem Menschen die Frau als Gefährtin
+                            zu<?oxy_comment_end?></Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1946-1994/1975/02/ZEHI_C1EE7AC8307245B02E3332F7046F96C8">
+                        Die Zeit, 28.02.1975 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Erst ist es nur ein unförmiger Kegel, der da auf der Scheibe rotiert,
+                        aber bald gewinnt die weiche Masse durch die formenden Finger des
+                            <Stichwort>Töpfers</Stichwort> Gestalt, ein Rand wächst hoch, wird dünn
+                        und legt sich dann flach nach außen, bis man in dem sogenannten Blatt
+                        plötzlich die rohe Form eines Tellers erkennt. </Belegtext>
+                    <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/878/26120215_1945_08_19_01_024">
+                        Berliner Zeitung, 19.08.1945 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2." xml:id="S_t_2137">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachraum><?oxy_comment_start author="kduden" timestamp="20250122T084836+0100" comment="--&gt; regional? veraltet? Dürft sich in aus den Korpora nicht ermitteln lassen"?>landschaftlich<?oxy_comment_end?></Sprachraum>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Ofensetzer</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> In Torgau arbeiteten <Stichwort>Töpfer</Stichwort>, die gute Öfen
+                        für den Hof herzustellen vermochten. Neben anderen Quellen der 1510er bis
+                        1530erJahre bezeugt nicht zuletzt eine Rechnung von 1523, dass der
+                            <Stichwort>Töpfer</Stichwort> Hans Schüler in drei Stuben des
+                        Kanzleihauses jeweils einen Ofen setzte.</Belegtext>
+                    <Fundstelle Fundort="dwds:dnn_regional:2021/05/DNN_doc7ft6nny8tpe5tzc1kr">
+                        Dresdner Neueste Nachrichten, 17.05.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Um 1750 baute der Mann drei Öfen zum veranschlagten Preis von je 30
+                        Talern für den damaligen Neubau der Greifswalder Universität. Dort wollte
+                        man ursprünglich Öfen aus Meißner Porzellan haben. Doch zum einen war deren
+                        Anschaffung zu teuer und zum anderen waren die Gefahren auf dem langen
+                        Transportweg nicht abwägbar. So entschied sich der Senat der Universität für
+                        die Öfen des <Stichwort>Töpfers</Stichwort> aus dem ostmecklenburgischen
+                        Dargun.</Belegtext>
+                    <Fundstelle Fundort="dwds:nnn:2013/10/NNN_EC4DC6E4CC4AF365101E026E0277FD20">
+                        Norddeutsche Neueste Nachrichten, 28.10.2013 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Die <Stichwort>Töpfer</Stichwort> fertigten die Keramikkacheln und
+                        setzten bis Ende 19. Jahrhundert die Öfen selbst, bevor der Beruf des
+                        Ofensetzers entstand. </Belegtext>
+                    <Fundstelle Fundort="dwds:svz:2008/05/SVZ_23-21991480NN"> Schweriner
+                        Volkszeitung, 09.05.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Ofen wurde zum Gegenstand der Meisterprüfung, die
+                        Kachelfertigung und das Ofensetzen zur Hauptarbeit der Leipziger
+                            <Stichwort>Töpfer</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:1997/06/LVZ_199706240864244068064604">
+                        Leipziger Volkszeitung, 24.06.1997 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Maurer, Zimmerleute und <Stichwort>Töpfer</Stichwort> zogen in das
+                        Gebäude ein, brachten die gerissenen Wände in Ordnung, wechselten angefaulte
+                        Balken aus, legten neue Dielen und setzten die Öfen instand. </Belegtext>
+                    <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/93/26120215_1954_01_30_01_211">
+                        Berliner Zeitung, 30.01.1954 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Fachgruppe der <Stichwort>Töpfer</Stichwort>: Versammlung sämtlicher
+                        im Ofensetzergewerbe beschäftigten Arbeitskräfte.</Belegtext>
+                    <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/1329/26120215_1946_10_12_01_220">
+                        Berliner Zeitung, 12.10.1946 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Um 8 Uhr briefe ich <Stichwort>Töpfer</Stichwort>, der gerade
+                        angekommen ist.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.05.2001, Nr. 21</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das ist aber nur der harmlosere Teil von
+                            <Stichwort>Töpfers</Stichwort> Vorhaben.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 10.01.1994, Nr. 02</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In den Augen <Stichwort>Töpfers</Stichwort> haben sie viel zu langsam
+                        gerudert.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 29.01.1990, Nr. 05</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Töpfer</Stichwort> weist das, wie es seine Art ist, von
+                        sich.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 20.10.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er war früher <Stichwort>Töpfer</Stichwort> und habe sich zuletzt als
+                        Arbeiter ernährt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Friedländer, Hugo: Der Zaubermord am
+                        Teufelssee vor dem Schwurgericht zu Potsdam. In: ders., Interessante
+                        Kriminal-Prozesse, Berlin: Directmedia Publ. 2001 [1913], S.
+                        27459</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das ist von <Stichwort>Töpfer</Stichwort> jetzt auch für die Zeit
+                        nach 2000 beantragt worden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 15.02.1993</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Reinhardt ist der große <Stichwort>Töpfer</Stichwort> und alle sind
+                        Ton in seinen Händen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Alexander Granach, Da geht ein Mensch:
+                        Leck: btb Verlag 2007, S. 229</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn der Fischer Ihnen zu pittoresk ist, machen Sie einen
+                            <Stichwort>Töpfer</Stichwort> daraus, völlig egal.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Krausser, Helmut: Eros, Köln: DuMont 2006,
+                        S. 81</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Anderseits ist die Drehscheibe des <Stichwort>Töpfers</Stichwort>
+                        offenbar erst in der historischen Zeit in Ägypten eingezogen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Wilson, John A.: Ägypten. In: Propyläen
+                        Weltgeschichte, Berlin: Directmedia Publ. 2000 [1961], S. 754</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>B. wurde als Sohn eines <Stichwort>Töpfers</Stichwort> geboren,
+                        besuchte die Volksschule und dann die Handelsschule und arbeitete als
+                        Verkäufer.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Baumgartner, Gabriele u. Hebig, Dieter
+                        (Hg.): Biographisches Handbuch der SBZ/DDR – B. In: Enzyklopädie der DDR,
+                        Berlin: Directmedia Publ. 2000 [1997], S. 2233</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

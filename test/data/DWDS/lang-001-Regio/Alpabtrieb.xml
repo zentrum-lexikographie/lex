@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_20200600820_387" Autor="jgrimm" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2022-10-14" Erstellungsdatum="2022-01-27" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="kduden" timestamp="20221013T084358+0200" comment="Arealangaben okay" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20221014T171454+0200" comment="vorerst zurückgestellt (Diskussionsbedarf hinsichtlich der Arealangaben)
+
+war schon Red-1" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="Alp-ab-trieb">Alpabtrieb</Schreibung>
+            <Aussprache><IPA>ˈalpˌʔaptʀiːp</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-(e)s</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="2">Alp</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Abtrieb</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <?oxy_comment_start author="jgrimm" timestamp="20221014T161649+0200" comment="Merkwürdig finde ich, dass &quot;Alpabtrieb&quot; im AMC-Print-Korpus 1,146 Belege hat, &quot;Alpauftrieb&quot; dagegen grade mal 148 Belege. Hat der Abtrieb einen höheren Nachrichtenwert? Wird der eher gefeiert als der Auftrieb? Außerdem ist die Diskrepanz zwischen Gesamtprintkorpus und Regionalkorpus hier sehr groß: Im AMC-Regionalkorpus gibt es nur 106 Belege für &quot;Alpabtrieb&quot;. "?>
+            <Diasystematik><?oxy_comment_end?>
+                <Sprachareal Frequenz="besonders">A-West (Vorarlberg)</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Almabfahrt</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Almabtrieb</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Alpabzug</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Viehscheid</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>Alpauftrieb</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">das <Verweis Typ="vgl">
+                    <Ziellemma Anzeigeform="Abtreiben">abtreiben</Ziellemma>
+                    <Ziellesart>1 d</Ziellesart>
+                </Verweis> des Viehs von der <Verweis Typ="vgl">
+                    <Ziellemma hidx="2">Alp</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> in die Winterställe im Herbst</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die <Stichwort>Alpabtriebe</Stichwort> sind an den Wochenenden in
+                        vollem Gang, die Sommerfrische für die Tiere ist zu Ende. </Belegtext>
+                    <Fundstelle Fundort="amc">Vorarlberger Nachrichten, 20.09.2021</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Traditionell geschmückt werden die Tiere im September
+                            <Streichung>dann</Streichung> zurück ins Tal gebracht. Allerdings wird
+                        der <Stichwort>Alpabtrieb</Stichwort> heuer ohne großes Fest
+                        stattfinden.</Belegtext>
+                    <Fundstelle Fundort="amc">Neue Vorarlberger Tageszeitung,
+                        26.08.2020</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die verschiedenen Käsesorten der Alpe Latons gab es am Tag des
+                            <Stichwort>Alpabtriebs</Stichwort> direkt beim Dorfladen zu kaufen. </Belegtext>
+                    <Fundstelle Fundort="dwds:at_nachrichten:46/46sXaccbh+AaEHwPq-RoTdGvNH0">
+                        <Autor>Scopoli Gerhard</Autor>
+                        <Titel>Alpabtrieb trotz Regens ein Publikumsmagnet</Titel>
+                        <Kurztitel>Publikumsmagnet</Kurztitel>
+                        <Stelle/>
+                        <Datum>02.09.2020</Datum>
+                        <URL>https://www.vol.at/alpabtrieb-trotz-regens-ein-publikumsmagnet/6725536</URL>
+                        <Aufrufdatum>24.04.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Während zum <Stichwort>Alpabtrieb</Stichwort> im Allgäu – dem
+                        Viehscheid – vielerorts große Volksfeste veranstaltet werden, wird in
+                        Oberbayern das Ende des Bergsommers eher im Stillen gefeiert. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2016/05/MUME_omp0000000976199"> Münchner
+                        Merkur, 19.05.2016 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Ist der Alpsommer für Mensch und Tier ohne tödliche Unfälle
+                        verlaufen, werden in vielen Gegenden die Herden für den Abtrieb kunstvoll
+                        geschmückt und der <Stichwort>Alpabtrieb</Stichwort> mit Musik- und
+                        Tanzveranstaltungen verbunden. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2006/10/NLZ_OI2006103101459"> Luzerner
+                        Zeitung, 31.10.2006 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"><Beleg><Belegtext>Zu den großen <Stichwort>Alpabtrieben</Stichwort> werden jeweils mehr als zehntausend Besucher erwartet.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.09.1994</Fundstelle></Beleg><Beleg><Belegtext>Per Pkw, Bus oder Bahn reisen Urlauber aus ganz Deutschland zu den <Stichwort>Alpabtrieben</Stichwort> an.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.09.1994</Fundstelle></Beleg><Beleg><Belegtext>In den nächsten zwei Wochen steht in 19 Gemeinden der Bergregion der traditionelle <Stichwort>Alpabtrieb</Stichwort> an.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 11.09.1999</Fundstelle></Beleg><Beleg><Belegtext>Während der nächsten zwei Wochen wird noch in 20 Gemeinden der Bergregion der traditionelle <Stichwort>Alpabtrieb</Stichwort> gefeiert.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 14.09.1998</Fundstelle></Beleg><Beleg><Belegtext>DAS BINDEN von Kränzen für den <Stichwort>Alpabtrieb</Stichwort> hat Tradition in der Familie Schöll.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.09.1998</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>
