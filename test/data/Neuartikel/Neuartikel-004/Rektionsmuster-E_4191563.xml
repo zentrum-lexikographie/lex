@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_4714556" Autor="jgrimm" Typ="Basisartikel-D" Zeitstempel="2024-09-16" Erstellungsdatum="2024-07-02" Status="Red-2">
+        <?oxy_comment_start author="jgrimm" timestamp="20240826T155709+0200" comment="keine Belege
+Ich mach dazu auch &quot;Konstruktionsmuster&quot;, das linguistisch genauso wenig Belege hat…" id="vgj_dwj_ncc" flag="done"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20240827T091139+0200" parentID="vgj_dwj_ncc" comment="~ ist anscheinend noch nicht in unseren Erklärtexten, übrigens" flag="done" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="Rek-ti-ons-mus-ter">Rektionsmuster</Schreibung>
+            <Aussprache><IPA>ʀɛkˈʦi̯oːnsmʊstɐ</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Rektion</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Muster</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Sprachwissenschaft</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">beispielhafte Darstellung der <Verweis Typ="vgl">
+                    <Ziellemma>Rektion</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> einer <Verweis Typ="vgl">
+                    <Ziellemma>Adposition</Ziellemma>
+                    <Ziellesart/>
+                </Verweis></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-07-02"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

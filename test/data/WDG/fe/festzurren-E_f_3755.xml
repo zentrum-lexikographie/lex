@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_f_3755" Autor="" Typ="Vollartikel" Zeitstempel="1967-01-01" Erstellungsdatum="1967-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="fest-zur-ren">festzurren</Schreibung>
+            <Aussprache><IPA>ˈfɛstˌʦʊʀən</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>zurrt fest</Wert></Praesens>
+                <Praeteritum><Wert>zurrte fest</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>festgezurrt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Quelle="DWDS" Zeitstempel="2016-07-05" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>fest</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>zurren</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_f_2245">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Gruppensprache>Seemannssprache</Gruppensprache>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">etw. festbinden</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>die Segelleine, das Beiboot <Stichwort>festzurren</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>schlingernde, noch <Stichwort>festgezurrte</Stichwort> Hängematten
+                        des Mannschaftslogis</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="GRAGUEKUM">
+                        <Autor>Grass</Autor>
+                        <Titel>Katz</Titel>
+                        <Stelle>15</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Warum aber fällt es so schwer, wenigstens die bestehende Wirklichkeit
+                        in einem Abkommen <Stichwort>festzuzurren</Stichwort>?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 14.10.1999, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwar sind noch Änderungen im Detail möglich, doch scheint der Deal
+                        insgesamt <Stichwort>festgezurrt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.09.1990, Nr. 38</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es kommt darauf an, den litauischen Knoten zu lockern, nicht, ihn
+                            <Stichwort>festzuzurren</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.04.1990, Nr. 17</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dort musste sie wie alle erst einmal fünf Jahre lang die Container
+                            <Stichwort>festzurren</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.09.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Denn erst nachdem er auf der Bank Platz genommen hat,
+                            <Stichwort>zurrt</Stichwort> er das Band unter dem Kinn
+                            <Stichwort>fest</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 05.01.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und die derzeit niedrigen Zinsen lassen sich für lange Jahre
+                            <Stichwort>festzurren</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 06.09.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Handwerker schlampen und <Stichwort>zurren</Stichwort> ihr Zeug
+                        nicht richtig <Stichwort>fest</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        02.03.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er wurde für weitere zwei Jahre gewählt – und damit die unsinnige
+                        Struktur erneut <Stichwort>festgezurrt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 09.12.2002, Nr. 49</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die See strudelte an Steuerbordseite an der Plicht entlang, brach
+                        sich am Beiboot, das da <Stichwort>festgezurrt</Stichwort> war, und
+                        schwankte über das ganze Achterdeck.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Hausmann, Manfred: Abel mit der
+                        Mundharmonika. In: ders., Gesammelte Werke, Berlin: Fischer 1983 [1932], S.
+                        49</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

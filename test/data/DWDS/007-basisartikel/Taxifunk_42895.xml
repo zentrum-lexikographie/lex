@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_t_60000_42895" Autor="jgrimm" Typ="Basisartikel" Zeitstempel="2014-04-25" Erstellungsdatum="1967-01-01" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Taxifunk</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Taxi</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">Funk</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Für kurze Zeit war der »Lange Lulatsch« noch einmal ein (richtiger) Funkturm.</Streichung> Anfang der fünfziger Jahre wurde der Funkturm neu ausgerüstet, er beherbergte nun getrennte Antennen für Fernsehen und Hörfunk sowie für Feuerwehr, Polizei und <Stichwort>Taxifunk</Stichwort>. <Streichung>Diese zweite Karriere währte allerdings nur kurz, denn bald darauf baute man an anderen Orten stärkere Sendemasten.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 03.09.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Ohnedies wehen viele Sonnenflecken Sender zu uns, die man sonst nicht hört.</Streichung> Der <Stichwort>Taxifunk</Stichwort> in und um Moskau innerhalb eines Amateurfunkbereiches zählt ebenso dazu wie nord- und mittelamerikanischer Feuerwehrfunk um 35 MHz oberhalb der Kurzwelle. <Streichung>Wie hoch die übertragbaren Frequenzen schließlich klettern, liegt fast ausschließlich an der Zahl der Sonnenflecken.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 25.07.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Weil sie es irgendwie nicht schaffen, die typische Berliner Sprachhaltung den Gästen zu vermitteln, vermute ich.</Streichung> Im <Stichwort>Taxifunk</Stichwort> melden sich die Fahrer ja immer mit bestimmten Standorten für die Aufträge. Gehört habe ich einmal »Primelschuppen« für die Blumenhalle.</Belegtext>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 06.11.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beim Datenverkehr über GSM kann nicht zugleich gesprochen werden, das macht ein Hineinlauschen ins Fahrzeug über denselben Kanal wohl unmöglich. Also muß das Abhören, wenn es sich überhaupt unbemerkt machen läßt, über den gewöhnlichen <Stichwort>Taxifunk</Stichwort> laufen, den heute 85 Prozent aller Droschken haben. <Streichung>Oder das heimliche Abhören fällt ganz aus, Datenschutz sei Dank.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds">Frankfurter Allgemeine Zeitung, 19.11.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Das Gespräch, die Erörterung einer makabren Theorie, hatte sich als überflüssig erwiesen.</Streichung> Suchtrupps, von einem röchelnden Hilferuf per <Stichwort>Taxifunk</Stichwort> alarmiert, fanden Lühmann, den Vater zweier Kinder, in der Nacht zum Sonnabend gegen 2,50 Uhr in einer einsamen Gegend von Hannover-Herrenhausen – verblutet. <Streichung>Ein Mord ist geschehen, und »die Skala der Empfindungen auf die furchtbare Nachricht von Hannover ist breit ».</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 04.09.1970</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Er hofft, dass das so bleibt, vertraut auf den <Stichwort>Taxifunk</Stichwort> zum Hilfeholen.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 25.07.2003</Fundstelle></Beleg><Beleg><Belegtext>Eine 30 Leitungen starke ISDN-Telephonanlage, <Stichwort>Taxifunk</Stichwort> und modernste rechnergestützte Datennetze ermöglichen eine rasche Versorgung.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 11.08.1995</Fundstelle></Beleg><Beleg><Belegtext>Durch den <Stichwort>Taxifunk</Stichwort> ist ein Ehemann aus Neapel seiner untreuen Gattin auf die Schliche gekommen.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.09.1998</Fundstelle></Beleg><Beleg><Belegtext>Während der Leverkusener Fahrer seinem Kunden noch die Tür aufhielt, lief über denKölner <Stichwort>Taxenfunk</Stichwort> bereits die Suchmeldung.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 13.06.1975, Nr. 25</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_8853122" Autor="jgrimm" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2024-10-02" Erstellungsdatum="2024-09-20" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="dsanders" timestamp="20241001T101124+0200" comment="Varianz-Analyse:der Ausdruck kommt eigentlich fast immer im Bild vor:
+(eine, die, Pl.) heiße Kartoffel - gesamt 3660 Belege im Zeitungskorpus
+(wie eine) eine h. K. fallenlassen - 1215 Suchabfrage: ``heiß Kartoffel &amp;&amp; ((fallen &amp;&amp; lassen) || fallenlassen )``
+wie eine h. K. behandeln - ca. 100 Belege
+(wie eine) eine h. K. anfassen - ca. 90 
+wie eine h. K. weiterreichen - ca. 80 Belege
+die h. K. weiterreichen - ca. 60 Belege
+wie eine h. K. herumreichen - ca. 55 Belege
+wie eine h. K. hin und her schieben / von einem zum anderen schieben - ca. 70 Belege
+wie eine h. K. hin und her werfen - ca. 45 Belege"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20241002T140732+0200" comment="@Red: bitte als Gruppe &quot;Zentral/Satellit&quot; freischalten:
+eine heiße Kartoffel
+etw. wie eine heiße Kartoffel anfassen
+etw. wie eine heiße Kartoffel hin und her schieben
+etw. wie eine heiße Kartoffel weiterreichen
+etw. wie eine heiße Kartoffel behandeln" mid="1"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20241004T154630+0200" comment="besonders CH + A?" id="vps_psp_c2c" mid="2"?>
+        <?oxy_comment_start author="kduden" timestamp="20250121T174523+0100" parentID="vps_psp_c2c" comment="Hmmm, die Zahlen sprechen schon dafür.
+
+
+{heiß,heiss} Kartoffel
+
+Areal	Treffer	PPM	Anteil PPM
+CH 	455 	0,64 	39,27 %
+A 	564 	0,43 	26,37 %
+D-Mittelost 	259 	0,16 	9,87 %
+D-Südwest 	118 	0,10 	6,42 %
+D-Nordost 	65 	0,10 	6,16 %
+D-Mittelwest 	304 	0,09 	5,41 %
+D-Südost 	101 	0,06 	3,76 %
+D-Nordwest 	64 	0,04 	2,73 % 
+
+(Darunter sind natürlich auch wörtlich gemeinte Belege, aber die allermeisten scheinen dem MWA zu entsprechen.)
+
+
+nur in vergleichender Konstruktion:
+
+&quot;wie #1 {heiß,heiss} Kartoffel&quot;
+
+Areal	Treffer	PPM	Anteil PPM
+CH 	159 	0,22 	36,58 %
+A 	179 	0,14 	22,30 %
+D-Nordost 	41 	0,06 	10,35 %
+D-Mittelost 	89 	0,05 	9,04 %
+D-Mittelwest 	157 	0,05 	7,45 %
+D-Südwest 	43 	0,04 	6,23 %
+D-Südost 	50 	0,03 	4,96 %
+D-Nordwest 	27 	0,02 	3,07 % 
+
+
+Eine Markierung [besonders CH, A] würde mich als &quot;bundesdeutsche&quot; Muttersprachlerin allerdings irritieren.
+
+Anja würde trotzdem Arealangaben setzen, weil sie das Ergebnis sehr deutlich findet. In anderen Fällen (z. B. bei &quot;aufs Tapet kommen/bringen&quot;), in denen die Unterschiede noch deutlicher waren, haben wir uns aber auch schon gegen Arealangaben entschieden, weil es nicht unserem Empfinden entsprach, vgl.: https://agora.bbaw.de/dstar-teambbaw/pl/1cf8fzewp7dpzrry6tea43j8ky
+
+
+@ER: Das sollte ein(e) Dritte(r) entscheiden. 
+" mid="3"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?><?oxy_comment_end mid="3"?>
+            <Schreibung>eine heiße Kartoffel</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar>Die Wendung wird abhängig vom Kontext gelegentlich mit bestimmtem Artikel
+                sowie im Plural gebraucht: <Stichwort>die heiße Kartoffel</Stichwort>,
+                    <Stichwort>heiße Kartoffeln</Stichwort>. </Kommentar>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>heiß</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Kartoffel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <?oxy_comment_start author="kduden" timestamp="20250121T175717+0100" comment="Duden 11 schreibt bei &quot;jmdn., etw. fallen lassen [wie eine heiße Kartoffel]&quot;:
+&quot;Die längere Form dieser Wendung ist aus engl. »drop somebody/something like a hot potato« entlehnt.&quot;
+
+
+Das muss dem, was hier steht nicht unbedingt widersprechen. Das OED gibt unter &quot;hot potato&quot; auch das Spiel an. Der älteste Beleg für das Spiel ist dort allerdings von 1915, wohingegen die Wendung &quot;to drop (a thing or person) like a hot potato&quot; schon 1821 belegt ist.
+(In der Bedeutung &apos;something difficult or painful to deal with; a controversial or awkward matter or situation&apos; tritt &quot;hot potato&quot; dann wohl erst Mitte des 20. Jh. auf.)"?>
+        <Diachronie><?oxy_comment_end?>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte class="invisible">Die Wendung geht vermutlich auf das Kinderspiel
+                    <Hervorhebung>Die heiße Kartoffel</Hervorhebung> zurück. Dabei wird bei
+                spielender Musik ein Ball, <Hervorhebung>eine heiße Kartoffel</Hervorhebung>, im
+                Kreis weitergereicht. Wird die Musik angehalten, ist das Kind, das in dem Moment den
+                Ball hat, raus aus dem Spiel. </Bedeutungsgeschichte>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>heißes Eisen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>dünnes Eis</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>die Kohlen aus dem Feuer holen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>die Kartoffeln aus dem Feuer holen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation" class="invisible">
+                    <Ziellemma>jmdn. fallenlassen wie eine heiße Kartoffel</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Spezifizierung"><?oxy_comment_start author="kduden" timestamp="20241004T120141+0200" comment="das ist keine Basisdefiniitin -&gt; Spezifizierung" flag="done"?>bezogen
+                auf ein Thema, eine Aufgabe, bestimmte Angelegenheiten o. Ä.
+                <?oxy_comment_end?></Definition>
+            <Definition Typ="Basis">etwas Heikles, Schwieriges, Problematisches</Definition>
+            <Definition Typ="Basis">etwas als unangenehm, unerwünscht Empfundenes</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <Belegtext>Die Kindergrundsicherung ist in der Ampelregierung mittlerweile
+                            <Stichwort>eine</Stichwort>
+                        <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>: Egal, wer sie gerade in der Hand hält, es
+                        besteht die Gefahr, sich gewaltig die Finger zu verbrennen. Die Konsequenz:
+                        Die heiße Kartoffel wird möglichst schnell von einem zum anderen Ministerium
+                        weiter gereicht.</Belegtext>
+                    <Fundstelle Fundort="dwds:nnn:2024/04/NNN_276-5250726_276-5254977"> Norddeutsche
+                        Neueste Nachrichten, 24.04.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Autorenzusatz>Deutscher Politiker</Autorenzusatz> Manfred Weber
+                        redet nicht lange drum herum. »Wir haben <Stichwort>eine</Stichwort>
+                        <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort> auf der Tagesordnung«, sagt der Chef der
+                        christdemokratischen Europäischen Volkspartei <Streichung>(EVP)</Streichung>
+                        zu Beginn der Fraktionssitzung. Der CSU-Politiker meint Punkt 3, dessen
+                        Brisanz im umgekehrten Verhältnis zur sperrigen Formulierung steht: »Debatte
+                        und Abstimmung über Änderungen der Geschäftsordnung der EVP-Fraktion«.
+                        Wochenlang war um die Modalitäten gerungen worden, um künftig ganze Gruppen
+                        aus der Fraktion suspendieren zu können. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2021/03/SZ_A111389708"> Süddeutsche Zeitung,
+                        04.03.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Auch</Streichung> Hohen Pritz stimmte nach erneuter
+                        Vorlage dem Abschluss einer freiwilligen vertraglichen Vereinbarung der
+                        Gemeinde mit dem Landkreis Ludwigslust-Parchim zur Sicherstellung des
+                        Regionalen Bildungsganges an der verbundenen Regionalen Schule und Gymnasium
+                        Sternberg zu. Bürgermeister Jan K<Streichung>assel</Streichung> nannte die
+                        Sache <Stichwort>eine</Stichwort> »<Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>'. Das Votum von Hohen Pritz mit einer
+                        Ja-Stimme bei gleich fünf Enthaltungen spricht Bände. Eine Zustimmung aus
+                        Überzeugung sieht in der Tat anders aus! </Belegtext>
+                    <Fundstelle Fundort="dwds:svz:2017/04/SVZ_5DE8DEC3913D38639E0220D74293D400">
+                        Schweriner Volkszeitung, 18.04.2017 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der umstrittene Genmais 1507 steht vor einer Zulassung in der
+                        Europäischen Union, obwohl die Mehrheit der Mitgliedsstaaten dagegen ist.
+                        Bei einer Sitzung der EU-Staaten gab es gestern bei deutscher Enthaltung
+                        keine ausreichende Mehrheit gegen eine Anbauerlaubnis<Streichung>, wie
+                            Griechenlands Außenminister Evangelos Venizelos als Vorsitzender des
+                            Treffens in Brüssel sagte</Streichung>. Die Entscheidung liegt nun bei
+                        der EU-Kommission. In der Sitzung zum Genmais ging es hoch her: »Das ist
+                            <Stichwort>eine</Stichwort>
+                        <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>«, sagte der zuständige Gesundheitskommissar
+                        Tonio B<Streichung>org</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:lvz:2014/02/LVZ_B2F45C82922108EFD285BA193A8F7F8E">
+                        Leipziger Volkszeitung, 12.02.2014 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im Umfeld des Männerteams wird das Thema der Selektionen
+                            <Autorenzusatz>der Teilnehmen für die WM</Autorenzusatz> behandelt, als
+                        sei es <Stichwort>eine</Stichwort>
+                        <Stichwort>heisse</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>. Bloss keine vorschnellen Versprechungen
+                        machen, bloss keine Möglichkeiten zum Tabu erklären. Die Funktionäre hoffen,
+                        die <Autorenzusatz>Ski-</Autorenzusatz>Fahrer nützten die letzten Chancen
+                        und die Kartoffel möge in letzter Minute etwas kühler werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2013/01/NZZ_K0XAW"> Neue Zürcher Zeitung,
+                        17.01.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Q :</Streichung> Sind die Fragen der Satzungsänderung und
+                        Versöhnung <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffeln</Stichwort> für die Regierung und wird es sich auf die
+                        Stabilität der Regierung auswirken? <Streichung>A: Es sollte kein forcieren
+                            der Themen geben. Es wird für die Opposition schwierig sein dagegen
+                            anzugehen.</Streichung></Belegtext>
+                    <Fundstelle Fundort="dwds:web:36865/nUxqV-h-RiQWGPIm">
+                        <Autor>Berndgrimm</Autor>
+                        <Titel>Coup Macher können nicht über dem Gesetz stehen</Titel>
+                        <Stelle/>
+                        <Datum>30.12.2012</Datum>
+                        <URL>http://www.schoenes-thailand.at/?p=5079</URL>
+                        <Aufrufdatum>14.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hätte Deutschland die österreichischen Steuersätze, hätte es kein
+                        Problem mit dem Budgetdefizit, sondern in den vergangenen Jahren sogar
+                        Überschüsse produziert. An <Stichwort>die</Stichwort>
+                        <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort> Vermögenssteuern hat sich aber auch die
+                        große Koalition in Deutschland – noch – nicht gewagt. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2006/01/13/Verlorener_Spielraum"> Der
+                        Standard, 13.01.2006 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Frequenzangabe>seltener</Frequenzangabe>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>jmdn. fallenlassen wie eine heiße Kartoffel</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">Person, die im Umgang als lästig oder problematisch empfunden
+                wird (und daher gemieden wird)</Definition>
+            <Definition Typ="Basis">jmd., den oder die man loszuwerden sucht</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Wer den Ball, sprich die »heiße Kartoffel«, in der Hand hält, wenn
+                        die Musik vom Spielleiter angehalten wird, ist raus, denn er »verbrennt sich
+                        die Finger«. So ungefähr muss man sich heute unser Gesundheitssystem
+                        vorstellen: Der Patient ist die » <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>«, die niemand haben möchte. Den Kreis
+                        bilden unsere Gesundheitseinrichtungen: Arztpraxen, Krankenhäuser und
+                        Rettungsdienste. <Streichung>So muss man beispielsweise heutzutage in einer
+                            Sonntagnacht mit Engelszungen auf die Fahrer eines Krankenwagens
+                            einreden, dass sie einen offensichtlich schwer kranken Menschen bitte
+                            mitnehmen und in ein Krankenhaus bringen. Ein paar Monate später jammert
+                            ein Hausarzt, dass er seinen Job als Erstversorger bei demselben
+                            Schwerkranken wahrnehmen muss.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2024/09/RZTG_5430F1A148647F73203EA393CA41330A-NEUWIEDLINZ"> Rhein-Zeitung, 06.09.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Eine vorausgegangene andauernde Belastung wie durch Arbeitsstress
+                        oder Leistungssport erhöht nach einer Infektion laut Spezialist Protazy
+                            R<Streichung>ejmer</Streichung> zudem die Wahrscheinlichkeit für ME/CFS
+                            <Paraphrase>Chronische Fatigue-Syndrom</Paraphrase>. Zwei Drittel sind
+                        Frauen, das Suizidrisiko ist hoch. R<Streichung>ejmer</Streichung> kennt die
+                        Psychologisierung der Krankheit. «Weil man ihnen nicht helfen kann, werden
+                        die Patienten zu <Stichwort>heissen</Stichwort>
+                        <Stichwort>Kartoffeln</Stichwort>», sagt er. In der Regel dauere es fast
+                        sieben Jahre und elf verschiedene Ärzte, bis die Diagnose ME/CFS stehe. </Belegtext>
+                    <Fundstelle Fundort="dwds:tgz:2023/07/TGZ_2023070400000320577796"> Thurgauer
+                        Zeitung, 04.07.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Dalai Lama muss sich in den vergangenen Tagen vorgekommen sein
+                        wie die sprichwörtliche <Stichwort>heisse</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort>, die niemand anfassen will. Mit
+                        Bundeskanzlerin Angela Merkel <Streichung>(CDU)</Streichung> und
+                        Aussenminister Frank-Walter Steinmeier <Streichung>(SPD)</Streichung> hatten
+                        die zentralen Figuren der deutschen Aussenpolitik schon frühzeitig
+                        klargemacht, dass sie nicht zusammen mit der Symbolfigur für die kulturellen
+                        Autonomiebestrebungen des Tibets gesehen werden wollten. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz:2008/05/NLZ_OI2008052000450"> Luzerner Zeitung,
+                        20.05.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bis vor kurzem war er noch der Quoten-Gott, heute ist er die
+                            <Stichwort>heiße</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort> des deutschen Fernsehens. Keiner mag mehr
+                        Thomas Gottschalk anfassen und sich an ihm die Finger verbrennen. Am
+                        Mittwoch gab die ARD bekannt, dass man aufgrund schlechter Quoten
+                        »Gottschalk Live« einstellen werde, nun erklärte ZDF-Intendant Thomas
+                        Bellut, dass er eine Rückkehr des einstigen »Wetten, dass..?« -Moderators
+                        ausschließe. </Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_online:src/2012/04/gottschalk_zdf_intendant">
+                        Spiegel, 21.04.2012 (online) </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Heute«, sagt der ehemalige Meistertrainer des FC Bayern München,
+                        Udo L<Streichung>attek</Streichung>, »haben die Manager mehr Macht. Wenn sie
+                        merken, dass der Trainer zur <Stichwort>heißen</Stichwort>
+                        <Stichwort>Kartoffel</Stichwort> wird, ziehen sie ihre Hand weg.« Und das
+                        bedeutet: Der Trainer muss gehen. </Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2001/01_2/was-asvx-2001_2095"> Welt am Sonntag,
+                        18.02.2001 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-09-20"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

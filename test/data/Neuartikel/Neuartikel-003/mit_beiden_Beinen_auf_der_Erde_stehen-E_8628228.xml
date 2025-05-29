@@ -1,0 +1,284 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_8628228" Autor="jgrimm" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2023-08-29" Erstellungsdatum="2023-08-04" Status="Lex-kommentiert">
+        <?oxy_comment_start author="jgrimm" timestamp="20230814T163600+0200" comment="In Verweisartikel geändert" id="gvk_ksq_pyb"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20230829T151236+0200" parentID="gvk_ksq_pyb" comment="jetzt: Verweisziel ist Vollartikel: &quot;mit beiden Beinen auf dem Boden stehen&quot;" mid="1"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20230829T172644+0200" parentID="gvk_ksq_pyb" comment="Bitte freischalten mit:
+- mit beiden Beinen auf dem Boden stehen
+- mit beiden Beinen auf der Erde bleiben" mid="2"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?>
+            <Schreibung>mit beiden
+                <?oxy_comment_start author="wgrimm" timestamp="20230829T160145+0200" comment="auch Variante mit &quot;Füßen&quot; möglich - bin dafür, es im Formkommentar zu nennen. Sonst wird es Artikelhuberei (Belege siehe unten, invisible)"?>Beinen<?oxy_comment_end?>
+                auf der Erde stehen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung>mit beiden Beinen fest auf der Erde stehen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>beide</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Bein</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Erde</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>stehen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>beide</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Bein</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>fest</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Erde</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>stehen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>steht mit beiden Beinen</Stichwort> (fest)
+                            <Stichwort>auf der Erde</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>mit beiden Beinen auf dem Boden stehen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>mit beiden Beinen auf der Erde bleiben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <?oxy_comment_start author="wgrimm" timestamp="20230829T143301+0200" comment="ich denke, Syn-Variante ist: &quot;mit beiden Beinen (fest) auf dem Boden stehen&quot; [im Leben stehen bedeutet m.E. etw. anderes]"?>
+                <Verweis Typ="Assoziation" class="invisible"><?oxy_comment_end?>
+                    <Ziellemma>mit beiden Beinen im Leben stehen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>»Was nützt ein Dichter auf einem hohen Podest, Hesse
+                            <Stichwort>stand</Stichwort>
+                        <Stichwort>mit beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort>« – was sich auch in seinen Gedichten
+                        widerspiegelte.</Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/04/MUME_mm_omp0000009321776">
+                        Münchner Merkur, 24.04.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Der ehemalige niedersächsische FDP-Landtags- und jetzige
+                            Europaabgeordnete Jan-Christoph Oetjen bringt es beim Parteitag in
+                            Hildesheim auf den Punkt:</Streichung> »Wir
+                            <Stichwort>stehen</Stichwort>
+                        <Stichwort>mit beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort> und sind keine Partei von Porsche fahrenden
+                        Zahnärzten.« </Belegtext>
+                    <Fundstelle Fundort="dwds:noz_regional:2023/03/NOZ_23-159201562"> Neue
+                        Osnabrücker Zeitung, 13.03.2023 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20230829T160105+0200" comment="&quot;Füßen&quot;, insg. ca 60 Belege"?>
+                    <Belegtext><?oxy_comment_end?> Eine echte gesunde Geisteshaltung zeigt sich
+                        meiner Meinung nach darin, wie erdverbunden man ist. Man kann große Ideen
+                        nur entwickeln, wenn man <Stichwort>mit</Stichwort>
+                        <Stichwort>beiden</Stichwort>
+                        <Stichwort>Füßen</Stichwort>
+                        <Stichwort>fest</Stichwort>
+                        <Stichwort>auf</Stichwort>
+                        <Stichwort>der</Stichwort>
+                        <Stichwort>Erde</Stichwort>
+                        <Stichwort>steht</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:KLEINE_regional/xml/2020/08/kleine_20200830020527106090210"> Kleine Zeitung, 30.08.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20230829T152437+0200" comment="neu, A"?>
+                    <Belegtext><?oxy_comment_end?><Autorenzusatz>"</Autorenzusatz>Was wir
+                            <Streichung>noch</Streichung> sehen, ist, dass Frauen eher nüchterner
+                        und pragmatischer sind als Männer.« Letztere neigten »zu Illusionen und
+                        fantasievollen Vorstellungen«. H<Loeschung>einzlmaier</Loeschung>: »Frauen
+                            <Stichwort>stehen</Stichwort> eher <Stichwort>mit</Stichwort>
+                        <Stichwort>beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf</Stichwort>
+                        <Stichwort>der</Stichwort>
+                        <Stichwort>Erde</Stichwort> und haben realistischere Berufswünsche.« </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:SN_regional/xml/2020/08/sn_20200806013309159270040">
+                        Salzburger Nachrichten, 06.08.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20230829T153154+0200" comment="neu, CH"?>
+                    <Belegtext><?oxy_comment_end?>
+                        <Streichung>Jetzt</Streichung>
+                        <Autorenzusatz>in dem Film</Autorenzusatz> steht die zwölfjährige Laura
+                        Röösli im Mittelpunkt. Sie ist «Das Mädchen vom Änziloch», daheim auf einem
+                        abgelegenen Bauernhof <Streichung>im Napfgebiet</Streichung>. Sie schreibt
+                        Tagebuch, träumt und <Stichwort>steht</Stichwort> doch
+                            <Stichwort>mit</Stichwort>
+                        <Stichwort>beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf</Stichwort>
+                        <Stichwort>der</Stichwort>
+                        <Stichwort>Erde</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:buhp_regional:2019/01/BUHP_201901220239039169"> Bote
+                        der Urschweiz, 22.01.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Darüber hinaus fühlt sich der Universitätsprofessor des 21.
+                        Jahrhunderts der Tradition seiner Vorgänger verpflichtet. Denn auch Martin
+                        Schlegel ist »kein weltferner Gelehrter, sondern
+                            <Stichwort>steht</Stichwort> als Mensch seiner Zeit, <Stichwort>mit
+                            beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>fest</Stichwort>
+                        <Stichwort>auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort>«: unter dem Motto »Miteinander-Füreinander«
+                        engagiert er sich als Vorsitzender des Vereins Nachbarschaftshilfe für
+                        hilfebedürftige Borsdorfer. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2015/01/LVZ_630B4611AD68E7ECFF616CBE8E1F584E">
+                        Leipziger Volkszeitung, 05.01.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20230829T151450+0200" comment="good ex?"?>
+                    <Belegtext><?oxy_comment_end?>Der Vater ist ein etwas weltfremder Architekt, die
+                        Mutter <Stichwort>steht</Stichwort>
+                        <Stichwort>mit beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2011/12/SK_7S42CPVF"> Südkurier,
+                        07.12.2011 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="wgrimm" timestamp="20230829T160530+0200" comment="&quot;Füßen&quot;"?>
+                    <Belegtext><?oxy_comment_end?> Welche Stärken haben Sie?
+                            <Autorenzusatz>–</Autorenzusatz> Ich bin ruhig, sachlich und gesellig,
+                            <Stichwort>stehe</Stichwort> »<Stichwort>mit</Stichwort>
+                        <Stichwort>beiden</Stichwort>
+                        <Stichwort>Füßen</Stichwort>
+                        <Stichwort>auf</Stichwort>
+                        <Stichwort>der</Stichwort>
+                        <Stichwort>Erde</Stichwort>«, mag den schlichten und ehrlichen Umgang
+                        mit meinen Mitmenschen. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:2003/08/SAAR_0803210033"> Saarbrücker
+                        Zeitung, 21.08.2003 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zur eigenen Partei <Autorenzusatz>SPD</Autorenzusatz>, die bei der
+                        Landtagswahl aus der Koalition mit der CDU auf den dritten Platz hinter der
+                        PDS abrutschte, sagte <Autorenzusatz>Christoph</Autorenzusatz> Matschie, sie
+                            <Stichwort>stehe</Stichwort>
+                        <Stichwort>mit beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>fest</Stichwort>
+                        <Stichwort>auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2000/104000/faz_2000_104511_tei"> Frankfurter
+                        Allgemeine Zeitung, 04.12.2000 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20230829T151909+0200" comment="neu"?>
+                    <Belegtext><?oxy_comment_end?>Hannelore St<Loeschung>ruklec</Loeschung>
+                        <Streichung>von der Stadtsparkasse Völklingen</Streichung> ist
+                        uninteressiert am ganzen Lottorummel. »Mich amüsiert das allenfalls.
+                        Für Menschen, die <Stichwort>mit</Stichwort>
+                        <Stichwort>beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf</Stichwort>
+                        <Stichwort>der</Stichwort>
+                        <Stichwort>Erde</Stichwort>
+                        <Stichwort>stehen</Stichwort>, ist so etwas einfach zu unwirklich«,
+                        meint die Chefin der Stadtsparkasse. Auch Glückszahlen <Autorenzusatz>beim
+                            Lotto</Autorenzusatz> ließen sie völlig kalt<Streichung>, sie habe dafür
+                            keine Zeit</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:1994/09/SAAR_0994023919"> Saarbrücker
+                        Zeitung, 02.09.1994 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Wir sind als Rechtspolitiker auch gar nicht so naiv, zu glauben,
+                        irgendwo im
+                        Wolkenku<?oxy_comment_start author="dsanders" timestamp="20230829T151402+0200" comment="-kk- korr., war wahrscheinlich alte Worttrennung" flag="done"?>c<?oxy_comment_end?>kucksheim
+                        zu sitzen und in einer theoretisch-rechtspolitischen Disputation zu
+                        debattieren, sondern wir <Stichwort>stehen</Stichwort> schon <Stichwort>mit
+                            beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>auf</Stichwort> dieser <Stichwort>Erde</Stichwort> und wissen,
+                        daß es Ereignisse gibt. </Belegtext>
+                    <Fundstelle Fundort="dwds:bundestag:09/09026:1262">
+                        <Autor>Deutscher Bundestag</Autor>
+                        <Titel>Plenarprotokoll Nr. 09/26</Titel>
+                        <Stelle/>
+                        <Datum>19.03.1981</Datum>
+                        <URL>https://dserver.bundestag.de/btp/09/09026.pdf</URL>
+                        <Aufrufdatum>10.01.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Wir sind keine Schwächlinge und Mondgucker, wir
+                            <Stichwort>stehen</Stichwort>
+                        <Stichwort>mit beiden</Stichwort>
+                        <Stichwort>Beinen</Stichwort>
+                        <Stichwort>fest</Stichwort><Stichwort> auf der</Stichwort>
+                        <Stichwort>Erde</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:nd:2532889X_1977-08-13_01/tei/2532889X_1977-08-13_01_156"><?oxy_comment_start author="dsanders" timestamp="20230814T165119+0200" comment="Ist etwas aus dem ND als Beleg eig. ok oder zu sehr Propaganda?"?>
+                        Neues Deutschland,<?oxy_comment_end?> 13.08.1977 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das also ist Sturzenegger, Freund von Stiller, ehedem junger
+                        Architekt, der von konsequenter Modernität schwärmte, heute ein Mann von
+                        Karriere, ein Mann der fidelen Resignation, ein Mann, der <Stichwort>mit
+                            beiden Beinen</Stichwort>
+                        <Stichwort>auf der Erde</Stichwort>
+                        <Stichwort>steht</Stichwort>, und als Arrivierter natürlich von betonter
+                        Kameradschaftlichkeit. </Belegtext>
+                    <Fundstelle Fundort="dwds:kern:1954/frisch_stiller_1954:237"> Frisch, Max:
+                        Stiller, Rheda-Wiedenbrück: Bertelsmann 1997 [1954], S. 237 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-08-04"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_s_6375" Autor="" Typ="Minimalartikel" Zeitstempel="1976-01-01" Erstellungsdatum="1976-01-01" Status="wird_gestrichen">
+        <?oxy_comment_start author="kduden" timestamp="20230714T102459+0200" comment="muss als Kollokation zu blau"?>
+        <?oxy_comment_start author="dsanders" timestamp="20140505T110959+0000" comment="lt. D24 K60(1): Trennung oblig." mid="1"?>
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17"><?oxy_comment_end?>
+            <Schreibung>schmutzig blau</Schreibung>
+            <Schreibung Typ="U">schmutzigblau</Schreibung>
+            <Aussprache><IPA Audiodatei="091/schmutzigblau"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe><?oxy_comment_end mid="1"?>
+        <Orthografie/>
+        <Verweise Quelle="DWDS" Zeitstempel="2017-02-07" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>schmutzig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>blau</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_s_6375_99">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26">
+                <Beleg>
+                    <Belegtext>Mit einem <Stichwort>schmutzigblauen</Stichwort> Tuch wischt Angel
+                        Román über das Objektiv seiner uralten Plattenkamera.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 10.09.1998, Nr.
+                        38</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

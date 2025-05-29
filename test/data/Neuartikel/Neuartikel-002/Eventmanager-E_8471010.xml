@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="Wahrig/DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_5913755" Autor="dsanders" Typ="Vollartikel" Tranche="RSR-2024-37_E3" Zeitstempel="2025-02-28" Erstellungsdatum="2019-10-02" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="dsanders" timestamp="20240826T101150+0200" comment="ehemals wahrig"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="Event-ma-na-ger">Eventmanager</Schreibung>
+            <Schreibung Trennung="Event-Ma-na-ger"><?oxy_comment_start author="jgrimm" timestamp="20240828T145631+0200" comment="neu wg Event-Managment" flag="done"?>Event-Manager<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA>iˈvɛntmɛnɪʤɐ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20250114T135035+0100" comment="Bezugsregeln ergänzt"?>37
+                (E3)</Orthografieregel>
+            <Orthografieregel>45 (E1<?oxy_comment_end?>)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Event</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Manager</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">jmd., der im Bereich des <Verweis Typ="vgl">
+                    <Ziellemma Anzeigeform="Eventmanagements">Eventmanagement</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> tätig ist</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20250114T135351+0100" comment="Ergänzungsbeleg für Alternativschreibung (u. Gen.)"?>
+                    <Belegtext><?oxy_comment_end?>Wenn du gerne kreativ arbeitest, ein
+                        Organisationstalent bist und gerne mit Menschen kommunizierst, könnte der
+                        Beruf des <Stichwort>Event-Managers</Stichwort> genau das Richtige für dich
+                        sein. Die Ausbildung zum Event-Manager ist eine duale Ausbildung, die in der
+                        Regel drei Jahre dauert. Während dieser Zeit wechseln sich theoretische
+                        Phasen an Berufsschulen mit praktischen Phasen in Unternehmen
+                        ab.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:27668/NCETK2dFbbxIBvaS">
+                        <Autor>Bergischerbote de</Autor>
+                        <Titel>Alles rund um den Beruf des Event-Managers: Ausbildung,
+                            Karrierechancen und Anforderungen</Titel>
+                        <Stelle/>
+                        <Datum>27.03.2023</Datum>
+                        <URL>https://www.bergischerbote.de/event-manager/</URL>
+                        <Aufrufdatum>26.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Weil er so gerne Shows macht, ist R<Streichung>einhard</Streichung>
+                        <Stichwort>Eventmanager</Stichwort> geworden. </Belegtext>
+                    <Fundstelle>Die Zeit, 13.06.2017 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Eigentlich hatte der ausgebildete <Stichwort>Eventmanager</Stichwort>
+                        davon geträumt, Großveranstaltungen zu organisieren, in Arenen und
+                        Fußballstadien <Streichung>und am liebsten – überzeugter Katholik, der er
+                            ist –, einen Papstbesuch.</Streichung>
+                    </Belegtext>
+                    <Fundstelle>Süddeutsche Zeitung, 16.03.2017</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zu den Aufgaben von <Stichwort>Eventmanagern</Stichwort> gehört es
+                        auch, die richtigen Veranstaltungsorte für exklusive Veranstaltungen zu
+                        finden. </Belegtext>
+                    <Fundstelle>Die Welt, 13.06.2015</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Von den Einladungen über den DJ <Paraphrase>Diskjockey</Paraphrase>
+                        bis hin zum Catering – Ein <Stichwort>Eventmanager</Stichwort> übernimmt die
+                        gesamte Konzeption, Organisation und Durchführung eines Events
+                            <Autorenzusatz>Überschrift</Autorenzusatz>
+                    </Belegtext>
+                    <Fundstelle>Der Standard, 04.03.2009</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Nach der Idee der <Stichwort>Eventmanager</Stichwort> sollten
+                            <Autorenzusatz>beim »Promi- und Fashion-Event«</Autorenzusatz>
+                        Atmosphäre, Musik, Unterhaltung und Menschen im Mittelpunkt stehen. </Belegtext>
+                    <Fundstelle>Süddeutsche Zeitung, 08.03.1999</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26">
+                <Beleg>
+                    <Belegtext>Ist er also doch auch für seinen Job als
+                            <Stichwort>Eventmanager</Stichwort> unterwegs?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.03.2010, Nr. 11</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Für den Betrieb ab 2005 soll allerdings ein
+                            <Stichwort>Eventmanager</Stichwort> verantwortlich sein.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 16.03.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Leicht war es für die israelischen
+                            <Stichwort>Eventmanager</Stichwort> nicht, den Ort und die Oper
+                        zusammenzubringen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 02.05.2011, Nr. 18</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nach langer Suche wird ein neuer Investor gefunden, der Kölner
+                            <Stichwort>Eventmanager</Stichwort> Hans Flock.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 31.12.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Unter freiberuflichen <Stichwort>Eventmanagern</Stichwort> sind
+                        Tagessätze von bis zu 3500 Mark üblich.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 17.07.1999</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

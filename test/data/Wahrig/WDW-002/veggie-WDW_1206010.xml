@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="WDW_2011" Redakteur="dsanders" xml:id="WDW_1206010" Autor="wgrimm" Typ="Verweisartikel" Zeitstempel="2025-03-31" Erstellungsdatum="2019-12-31" Status="Lex-zur_Abgabe">
+        <?oxy_comment_start author="kduden" timestamp="20250505T145432+0200" comment="damit Veggie freischalten"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="veg-gie">veggie</Schreibung>
+            <Aussprache Zeitstempel="2025-03-31" Quelle="DWDS" Autor="brosch">
+                <IPA>ˈvɛʤi</IPA>
+            </Aussprache>
+            <Aussprache>
+                <IPA>ˈvɛgi</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <indeklinabel/>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie Zeitstempel="2025-03-31" Quelle="DWDS" Autor="brosch">
+            <Etymologie>zu <erwaehntes_Zeichen Sprache="engl">vegetarian</erwaehntes_Zeichen>
+                <Paraphrase>vegetarisch</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>vegetarisch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Der Plan für die kommende Woche fährt ebenfalls eine große Vielfalt
+                        an Gerichten auf, jeden Tag ist von bodenständig über international bis hin
+                        zu <Stichwort>veggie</Stichwort> und vegan und kreativen Bowls für alle
+                        Geschmäcker was dabei. </Belegtext>
+                    <Fundstelle Fundort="dwds:dnn_regional:2025/01/DNN_doc7z2a8rbv2ep1cvutnduo">
+                        Dresdner Neueste Nachrichten, 25.01.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Neben Burgervariationen – auch <Stichwort>veggie</Stichwort> oder
+                            <Stichwort>vegan</Stichwort> - können Kunden Salate, Getränke,
+                        Milchshakes oder Fingerfood bestellen, abholen oder vor Ort essen. </Belegtext>
+                    <Fundstelle Fundort="dwds:svz_regional:2022/10/SVZ_23-153891379"> Schweriner
+                        Volkszeitung, 20.10.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Unter dem Slogan »Alles <Stichwort>veggie</Stichwort>" wirbt der
+                        Süßkram-Hersteller damit, dass seine Fruchtgummis keine tierische Gelatine
+                        enthalten, die in der Regel aus Schweinen gewonnen wird. </Belegtext>
+                    <Fundstelle Fundort="dwds:jetzt:2018/02/20180202_SZ_JETZT_A73511986"> jetzt
+                        (SZ), 2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> » Bevor nun zu Hause der Kühlschrank ausgeräumt, die nächste
+                        Grillparty abgesagt und nur noch <Stichwort>veggie</Stichwort> aufgetischt
+                        wird - das entscheidende Wort heißt <Hervorhebung>Übermaß</Hervorhebung>.
+                        Fast 60 Kilo Fleisch essen deutsche Männer pro Jahr.
+                            <Autorenzusatz>"</Autorenzusatz></Belegtext>
+                    <Fundstelle Fundort="dwds:noz:2015/10/NOZ_2569539"> Neue Osnabrücker Zeitung,
+                        28.10.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Erst wurde alles light, zero, <Stichwort>veggie</Stichwort> und dann
+                        auch noch nachhaltig, regional, wiederverwertbar. </Belegtext>
+                    <Fundstelle Fundort="dwds:at_nachrichten:1340/ENbtTCyWLh5rX9Uc">
+                        <Autor>Salzburger Nachrichten; Thomas Hofbauer</Autor>
+                        <Titel>Gesund essen, Müll vermeiden, Menschen in die Augen sehen</Titel>
+                        <Stelle/>
+                        <Datum>11.05.2014</Datum>
+                        <URL>https://www.sn.at/kolumne/bits-und-bites/gesund-essen-muell-vermeiden-menschen-in-die-augen-sehen-3585400</URL>
+                        <Aufrufdatum>25.09.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Bei »Vegó« an der Lychener Straße gibt es vegetarische und vegane
+                        Burger, Pizza, Wraps, Pommes und Salate – »alles bio und
+                            <Stichwort>veggie</Stichwort>", sagt Philipp. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp_regional:2012/01/BMP_83599845"> Berliner
+                        Morgenpost, 16.01.2012 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-02-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

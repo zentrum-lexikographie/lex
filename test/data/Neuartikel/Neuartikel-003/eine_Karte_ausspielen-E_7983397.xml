@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_7983397" Autor="dsanders" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2023-06-28" Erstellungsdatum="2023-05-26" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>eine Karte ausspielen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung>eine Karte spielen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Karte</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>ausspielen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Karte</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>spielen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>spielt eine Karte aus</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>die letzte Karte ausspielen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">ein Argument, eine Alternative in die Diskussion
+                einbringen</Definition>
+            <Definition Typ="Basis">auf eine bestimmte Möglichkeit zu handeln zurückgreifen </Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext><Stichwort>die</Stichwort> xy <Stichwort>Karte</Stichwort>
+                        <Stichwort>ausspielen</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Akkusativobjekt">
+                    <Belegtext><Stichwort>die Karte</Stichwort> xy
+                        <Stichwort>ausspielen</Stichwort></Belegtext>
+                    <?oxy_comment_start author="jgrimm" timestamp="20230628T152108+0200" comment="Wie wird dieses Attribut genannt?"?>
+                </Kollokation><?oxy_comment_end?>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext><Streichung>Der Westen muss zur Kenntnis nehmen, dass die türkische
+                            Gesellschaft noch immer religiös grundiert und anfällig für autoritäre
+                            Machtmuster ist.</Streichung> Zudem <Stichwort>spielt</Stichwort>
+                        Erdogan mit Erfolg die nationale <Stichwort>Karte</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2023/05/BMP_C4D033FBA3676F6661239C2C44002030_4766980">
+                        Berliner Morgenpost, 30.05.2023 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Mit einer schwachen Wirtschaft und einem hungernden Volk ist sein
+                        fortschreitendes Atomwaffenprogramm die einzige
+                        <Stichwort>Karte</Stichwort>, die er <Autorenzusatz>Nordkoreas Machthaber
+                            Kim Jong Un</Autorenzusatz> noch <Stichwort>ausspielen</Stichwort> kann. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz:2023/05/NLZ_2023050300000312776442"> Luzerner
+                        Zeitung, 03.05.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Politik ist auch aus anderen Gründen versucht, die
+                            <Stichwort>Karte</Stichwort> des Klimawandels
+                            <Stichwort>auszuspielen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2023/03/NZZ_2023031100000312029709"> Neue Zürcher
+                        Zeitung, 11.03.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im Poker um Oliver Batista-Meier mit Drittligagrößen wie 1860 München
+                        und Waldhof Mannheim hat der SC Verl mit der größten Aussicht auf
+                        regelmäßige Einsatzzeiten die entscheidende <Stichwort>Karte</Stichwort>
+                        <Stichwort>ausgespielt</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2023/01/NEUW_7b10aeb92fcfb1a13ba9823c2b5186ff234df91"> Neue Westfälische, 12.01.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwar haben die USA einen Militäreinsatz ausgeschlossen, doch jede
+                        andere <Stichwort>Karte</Stichwort> wurde
+                        <Stichwort>ausgespielt</Stichwort>, um der Ukraine zu helfen, von
+                        Waffenlieferungen bis zu spektakulären Wirtschaftssanktionen. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2022/03/wexml20220307_013"> Die Welt, 07.03.2022
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Sollte er <Autorenzusatz>Chinas Präsident Jiang Zemin</Autorenzusatz>
+                        jedoch von den Ultras vor allem in der Armee unter Druck gesetzt werden,
+                        könnte er versucht sein, die nationalistische <Stichwort>Karte</Stichwort>
+                        <Stichwort>auszuspielen</Stichwort>. <Streichung>Dann wird Taiwan zum
+                            Brandherd der Region.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:kern:1997/zeit1997_19_13_21590:13">Die Zeit, 02.05.1997</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Warum soll man jetzt mit Gewalt die europäische
+                            <Stichwort>Karte</Stichwort> gegen die nationalen, in diesem Fall
+                        österreichischen, Interessen gegeneinander
+                        <Stichwort>ausspielen</Stichwort>? </Belegtext>
+                    <Fundstelle Fundort="dwds:politische_reden:src/at1/AT1_0332_20041125">
+                        <Autor>Wolfgang Schüssel</Autor>
+                        <Titel>Rede in der 715. Sitzung des Bundesrates zur Erklärung des
+                            Bundeskanzlers betreffend Ernennung eines neuen Regierungsmitgliedes
+                            (2)</Titel>
+                        <Stelle/>
+                        <Datum>25.11.2004</Datum>
+                        <URL>https://www.parlament.gv.at/PAKT/VHG/BR/BRSITZ/BRSITZ_00715/SEITE_0068.html</URL>
+                        <Aufrufdatum>01.10.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie von der Opposition versuchen hier, die
+                            <Stichwort>Karte</Stichwort> Sozialneid
+                            <Stichwort>auszuspielen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:bundestag:13/13135:12058">
+                        <Autor>Deutscher Bundestag</Autor>
+                        <Titel>Plenarprotokoll Nr. 13/135</Titel>
+                        <Stelle/>
+                        <Datum>07.11.1996</Datum>
+                        <URL>https://dserver.bundestag.de/btp/13/13135.pdf</URL>
+                        <Aufrufdatum>10.01.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

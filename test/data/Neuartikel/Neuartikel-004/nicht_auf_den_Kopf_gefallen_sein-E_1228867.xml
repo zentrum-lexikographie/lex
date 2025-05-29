@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_1228867" Autor="jgrimm" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2024-03-04" Erstellungsdatum="2024-03-04" Status="Red-f">
+        <?oxy_comment_start author="wgrimm" timestamp="20240206T110924+0100" comment="@LL: bitte bei Freischaltung in EWA &quot;fallen&quot; den MWA Link aktivieren, ist bereits gesetzt" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <?oxy_comment_start author="wgrimm" timestamp="20240205T124303+0100" comment="bitte zusanmmen freischalten mit &quot;nicht aus Dummsdorf sein&quot; und &quot;Köpfchen haben&quot;" flag="done"?>
+            <Schreibung><?oxy_comment_end?>nicht auf den Kopf gefallen sein</Schreibung>
+            <Aussprache><IPA Audiodatei="137/nicht_auf_den_Kopf_gefallen_sein"/></Aussprache><Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Kopf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>fallen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>ist nicht auf den Kopf gefallen</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>nicht aus Dummsdorf sein</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Köpfchen haben</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20240205T125914+0100" comment="DUDEN 11: gewitzt, nicht dumm sein" flag="done"?>intelligent<?oxy_comment_end?>, clever sein </Definition>
+            <Definition Typ="Basis">einen scharfen Verstand haben</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Im Oktober ist der <Streichung>entsprechende</Streichung>
+                        <Autorenzusatz>Konsum-</Autorenzusatz>Index auf ein Jahrestief gesunken. Aber nicht nur. »Der Konsument <Stichwort>ist</Stichwort> ja <Stichwort>nicht auf den Kopf gefallen</Stichwort>«, gibt Wirtschaftspsychologe Christian F<Streichung>ichter</Streichung> zu bedenken. »Irgendwann merkt er: Ich habe schon einen Flatscreen, wozu brauche ich einen zweiten?« Für die Anbieter von Unterhaltungselektronik sei das eine ausgesprochen ungünstige Konstellation. </Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2022/11/BAZ_6392816"> Basler Zeitung, 19.11.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>»Womit ich ein Problem habe, ist der Kontrast: Nach dem Portugal-Spiel waren wir die Helden der Nation und nach Ungarn dann die Gurken der Nation«, sagte der Linksverteidiger <Streichung>am Sonntag</Streichung> und kündigte an: »<Streichung>Ich glaube schon, dass wir unser wahres Gesicht gegen Portugal gezeigt haben. Aber</Streichung> wir <Autorenzusatz>im DFB-Team</Autorenzusatz>
+                        <Stichwort>sind nicht auf den Kopf gefallen</Stichwort> und wissen, was wir noch besser machen können. Es bleibt dabei: Das Finale ist das Ziel, das muss unser Anspruch sein«.</Belegtext>
+                    <Fundstelle Fundort="dwds:daz:2021/06/DAZ_doc7geryaawt6c9vinm98b"> Döbelner Allgemeine Zeitung, 28.06.2021 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-02-12"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

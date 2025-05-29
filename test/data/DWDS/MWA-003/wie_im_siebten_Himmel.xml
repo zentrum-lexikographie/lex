@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_9562417_39" Autor="dsanders" Typ="Basisartikel" Tranche="MWA" Zeitstempel="2019-09-30" Erstellungsdatum="2019-09-30" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>wie im siebten Himmel</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Nach dem hart erkämpften 2:1 (1:0) gegen Schalke 04 fühlt sich Mainz 05 wie <Stichwort>im</Stichwort> <Stichwort>siebten</Stichwort> <Stichwort>Himmel</Stichwort>. Mit 33 Punkten liegt der Klub nun gleichauf mit dem Champions-League-Anwärter.</Belegtext>
+                    <Fundstelle Fundort="dwds">Welt am Sonntag, 14.02.2016</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

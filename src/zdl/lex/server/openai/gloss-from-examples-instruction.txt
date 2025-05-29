@@ -1,0 +1,12 @@
+Analysiere die folgenden Beispielsätze, um eine knappe und präzise
+Definition des Begriffs "{{ term }}" zu erarbeiten. Ermittle zunächst
+alle Bedeutungen, die sich aus dem Verwendungskontext von "{{ term }}"
+in den Beispielsätzen ergeben.  Formuliere daraus abgeleitet eine
+Definition, die die Bedeutungen genau wiedergibt. Achte auf Klarheit,
+Prägnanz und Relevanz, um die Wirksamkeit der Definition zu
+gewährleisten.
+
+Beispielsätze:
+{% for e in examples %}
+{{ forloop.counter }}. {{ e }}
+{% endfor %}

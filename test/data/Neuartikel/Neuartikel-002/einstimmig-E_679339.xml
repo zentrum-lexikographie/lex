@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="dsanders" xml:id="E_e_1096" Autor="jgrimm" Typ="Basisartikel-D" Tranche="RSR-2024-36_1_2" Zeitstempel="2025-05-21" Erstellungsdatum="1967-01-01" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="ein-stim-mig">einstimmig</Schreibung>
+            <Schreibung Trennung="1-stim-mig"><?oxy_comment_start author="kduden" timestamp="20250325T090631+0100" comment="Ergänzt"?>1-stimmig</Schreibung><?oxy_comment_end?>
+            <Aussprache>
+                <IPA Audiodatei="002/einstimmig">ˈaɪ̯nʃtɪmɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.2)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20250325T091126+0100" comment="Dto."?>40
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>eins</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Stimme</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>einstimmig</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1." xml:id="S_e_2429">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">aus nur einer Stimme bestehend</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>ein <Stichwort>einstimmiges</Stichwort> Lied, ein
+                            <Stichwort>einstimmiger</Stichwort> Satz</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>etw. ist <Stichwort>einstimmig</Stichwort> gesetzt</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>sie sangen <Stichwort>einstimmig</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2." xml:id="S_e_2430">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">einmütig, übereinstimmend</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>die <Stichwort>einstimmige</Stichwort> Annahme eines
+                        Beschlusses</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine <Stichwort>einstimmige</Stichwort> Billigung</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>etw. <Stichwort>einstimmig</Stichwort> billigen, beschließen,
+                        bestätigen, erklären</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>der Kandidat wurde <Stichwort>einstimmig</Stichwort>
+                        gewählt</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>alle Zeitungen stellten <Stichwort>einstimmig</Stichwort> fest, dass
+                        …</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Also ruft demnach baldigst ziemlich <Stichwort>einstimmig</Stichwort>
+                        das ganze große Menschengeschlecht.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Scheerbart, Paul: Immer mutig! In: Deutsche
+                        Literatur von Lessing bis Kafka, Berlin: Directmedia Publ. 2000 [1902], S.
+                        4514</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Selten wurde einem Gerät so <Stichwort>einstimmig</Stichwort> eine
+                        hohe Qualität bescheinigt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">C’t, 1993, Nr. 2</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Rat nimmt die zur Verwirklichung der Ziele der Union
+                        erforderlichen Beschlüsse <Stichwort>einstimmig</Stichwort> an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Archiv der Gegenwart, 2001
+                        [1964]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Rat nimmt die zur Verwirklichung der Ziele der Europäischen Union
+                        erforderlichen Beschlüsse <Stichwort>einstimmig</Stichwort> an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Archiv der Gegenwart, 2001
+                        [1964]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das äthiopische Parlament billigte am gleichen Tage ebenfalls
+                            <Stichwort>einstimmig</Stichwort> ein entsprechendes Gesetz.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Archiv der Gegenwart, 2001
+                        [1962]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn es wieder hell geworden ist, so wird dies
+                            <Stichwort>einstimmig</Stichwort> bestätigt werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Stettenheim, Julius: Der moderne Knigge.
+                        In: Zillig, Werner (Hg.) Gutes Benehmen, Berlin: Directmedia Publ. 2004
+                        [1902], S. 19568</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Rat hat festgelegt, dass seine Beschlüsse
+                            <Stichwort>einstimmig</Stichwort> gefasst werden müssen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A. [dah]: Deutscher Behindertenrat. In:
+                        Aktuelles Lexikon 1974-2000, München: DIZ 2000 [1999]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und vollkommen ließ diese Forderung sich nur in der
+                            <Stichwort>einstimmigen</Stichwort> Musik erfüllen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Mann, Michael u. Heartz, Daniel: Die
+                        europäische Musik von den Anfängen bis zu Beethoven. In: Propyläen
+                        Weltgeschichte, Berlin: Directmedia Publ. 2000 [1964], S. 16040</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dadurch trat dieser jetzt in den Vordergrund, und der ursprüngliche
+                            <Stichwort>einstimmige</Stichwort> Gesang war als zusammenhängende
+                        Melodie nicht mehr vernehmbar.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Mezger, M.: Musik. In: Die Religion in
+                        Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1960], S.
+                        18027</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese meist <Stichwort>einstimmigen</Stichwort> Chöre sind reizvoll
+                        durch die sizilianische Färbung der Melodie.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Schuhmann, Otto: Meyers Opernbuch, Leipzig:
+                        Bibliograph. Inst. 1938 [1935], S. 440</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

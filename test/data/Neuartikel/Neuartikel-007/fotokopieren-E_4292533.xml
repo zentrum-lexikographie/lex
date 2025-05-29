@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="jgrimm" xml:id="E_p_2936" Autor="kduden" Typ="Basisartikel-D" Tranche="RSR-2024-Einzelfestlegungen" Zeitstempel="2025-05-28" Erstellungsdatum="1974-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>fotokopieren</Schreibung>
+            <Schreibung Typ="U">photokopieren</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens>
+                    <Wert>fotokopiert</Wert>
+                </Praesens>
+                <Praeteritum>
+                    <Wert>fotokopierte</Wert>
+                </Praeteritum>
+                <Auxiliar>
+                    <Wert>hat</Wert>
+                </Auxiliar>
+                <Partizip_II>
+                    <Wert>fotokopiert</Wert>
+                </Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Quelle="DWDS" Zeitstempel="2016-01-12" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Foto</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>kopieren</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_p_1919">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">eine Fotokopie von etw. herstellen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine Zeichnung <Stichwort>fotokopieren</Stichwort> lassen</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Zu privaten, nicht kommerziellen Zwecken darf aus Büchern
+                            <Stichwort>fotokopiert</Stichwort> werden.</Belegtext>
+                    <Fundstelle Fundort="dwds">Die Welt, 14.01.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit Mini-Flachbett- oder Einzugscannern lassen sich Dokumente
+                        unterwegs digitalisieren und
+                        <Stichwort>fotokopieren</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds">C’t, 2001, Nr. 7</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Danach wird das gesamte, inzwischen
+                            <Stichwort>fotokopierte</Stichwort> und auf Folie abgepauste Bild
+                        originalgetreu wieder aufgetragen.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 15.03.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er habe die Unterlagen <Stichwort>fotokopiert</Stichwort>, damit
+                        niemand das Verschwinden der Originale bemerken könne.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 13.08.2012 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vor dem Kauf hatte er die Pässe der drei Anbieter
+                            <Stichwort>fotokopiert</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.08.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dann findet er eine schmale Akte, <Stichwort>fotokopiert</Stichwort>
+                        sie und gibt sie dem Besucher.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 24.07.1992, Nr. 31</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Jetzt wird der Paß nicht heimlich, nein, in aller Öffentlichkeit
+                            <Stichwort>fotokopiert</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">konkret, 1989</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als die Drehbücher zur zweiten Staffel an die Schauspieler verteilt
+                        wurden, waren sie durchnummeriert und in Rot gedruckt, damit man sie nicht
+                            <Stichwort>fotokopieren</Stichwort> konnte.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        09.03.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Unter der Flagge eines dänischen Geheimdienstmannes gewann er sie,
+                        geheime Nato-Akten zu <Stichwort>fotokopieren</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 27.11.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Krankenhaus bestreitet bis heute jedes Versäumnis; auch meine
+                        Krankenakte ist nicht mehr auffindbar, ist jedoch von mir zeitnah
+                            <Stichwort>fotokopiert</Stichwort> worden.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.12.1999</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

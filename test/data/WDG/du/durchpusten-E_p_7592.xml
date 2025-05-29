@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_p_7592" Autor="" Typ="Minimalartikel" Zeitstempel="1974-01-01" Erstellungsdatum="1974-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-11-15" Quelle="DWDS" Autor="herold">
+            <Schreibung>durchpusten</Schreibung>
+            <Aussprache><IPA Audiodatei="123/durchpusten"/></Aussprache><Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>pustet durch</Wert></Praesens>
+                <Praeteritum><Wert>pustete durch</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>durchgepustet</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-02-24" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>durch-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>pusten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_p_23935">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"><Beleg><Belegtext>Im Winter kann man sich dort am Strand <Stichwort>durchpusten</Stichwort> lassen.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 29.01.2000</Fundstelle></Beleg><Beleg><Belegtext>Zwei Stunden später schon hat er das Manuskript an die Redaktion <Stichwort>durchgepustet</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 29.10.2003, Nr. 44</Fundstelle></Beleg><Beleg><Belegtext>Bei Temperaturen bis sechs Grad soll ein frischer Wind etwaige Spaziergänger kräftig <Stichwort>durchpusten</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 11.12.1999</Fundstelle></Beleg><Beleg><Belegtext>Diesen Sieg hatten wir verdammt nötig », <Stichwort>pustete</Stichwort> Trainer Jack Bicknell <Stichwort>durch</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 18.04.2005</Fundstelle></Beleg><Beleg><Belegtext>Die anderen waren »<Stichwort>durchgepustet</Stichwort>«, Fenster und Türen herausgerissen, die Einrichtungen durcheinandergewirbelt.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 26.05.1955, Nr. 21</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

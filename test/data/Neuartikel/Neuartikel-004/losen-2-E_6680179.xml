@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_6680179" Autor="jgrimm" Typ="Minimalartikel" Tranche="RSR-2024-21_E2_1" Zeitstempel="2024-11-05" Erstellungsdatum="2024-08-14" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="jgrimm" timestamp="20250121T122106+0100" comment="muss ausgebaut werden, sonst im GGs. zu Homographen nicht verständlich zudem fehlt der Homograph losen = lauschen" id="wzq_pz2_s2c"?>
+        <?oxy_comment_start author="dsanders" timestamp="20250318T111758+0100" parentID="wzq_pz2_s2c" comment="... ist im Zuge der orthograph. Umstellung nicht leistbar" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung hidx="2" Trennung="lo-sen">losen</Schreibung>
+            <?oxy_comment_start author="dsanders" timestamp="20240814T123728+0200" comment="dt. Aussprache zu ¹losen" id="szj_wb4_c2c"?>
+            <?oxy_comment_start author="kduden" timestamp="20250121T121951+0100" parentID="szj_wb4_c2c" comment="korrigiert" mid="3"?>
+            <Aussprache>
+                <IPA>ˈluːzn̩</IPA>
+            </Aussprache><?oxy_comment_end?><?oxy_comment_end mid="3"?>
+            <Aussprache class="invisible">
+                <IPA Audiodatei="012/losen"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>lost</Wert></Praesens>
+                <Praeteritum><Wert>loste</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II>
+                    <Wert><?oxy_comment_start author="kduden" timestamp="20241105T115434+0100" comment="Entfernt (da ein unregelm. [engl.] Verb zugrunde liegt): &quot;gelosed&quot; als alternatives Part. II" flag="done"?>gelost<?oxy_comment_end?></Wert>
+                </Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>21 (E2.1)</Orthografieregel>
+        </Orthografie>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-14"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

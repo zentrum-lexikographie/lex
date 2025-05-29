@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_5632187" Autor="jgrimm" Typ="Vollartikel" Tranche="RSR-2024-37_E4" Zeitstempel="2025-04-29" Erstellungsdatum="2024-08-15" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="kduden" timestamp="20250205T112443+0100" comment="Neue AWL-Buchung = mögl. Lemmalücke im DWDS - die Ausarbeitung zum Vollart. ist nicht im Zuge der orthogr. Anpassung leistbar" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="Hu-man Re-sour-ces"><?oxy_comment_start author="kduden" timestamp="20240906T130508+0200" comment="IPA nicht korrekt: [huˈmaːn ʀeˈsʊʁsəs] (computergeneriert)" flag="done"?>Human<?oxy_comment_end?>
+                Resources</Schreibung>
+            <Aussprache Zeitstempel="2024-09-11" Quelle="DWDS" Autor="brosch">
+                <IPA>ˌhjuːmən ɹiˈsɔːsəs</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Numeruspraeferenz>nur im Plural</Numeruspraeferenz>
+                <Funktionspraeferenz>substantivisch</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>37 (E4)</Orthografieregel>
+            <Orthografieregel>55 (3)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie Zeitstempel="2024-09-11" Quelle="DWDS" Autor="brosch">
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">human
+                    resources</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="engl">human</erwaehntes_Zeichen>
+                <Paraphrase>menschlich</Paraphrase> + <erwaehntes_Zeichen Sprache="engl">resource</erwaehntes_Zeichen>
+                <Paraphrase>Mittel, Ressource</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma><?oxy_comment_start author="wgrimm" timestamp="20250325T133149+0100" comment="Hier ergänzt (vorher: 2. Basisdef.)" flag="done"?>Personalabteilung</Ziellemma>
+                    <Ziellesart/><?oxy_comment_end?>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="wgrimm" timestamp="20250325T144356+0100" comment="Ergänzt" flag="done"?>für
+                Personalangelegenheiten zuständiger<?oxy_comment_end?> Bereich eines
+                <?oxy_comment_start author="jgrimm" timestamp="20250325T144446+0100" comment="Entfernt (da Exhaustivität der Merkmale nicht erreichbar ist): ..., der sich mit den Beschäftigten, ihren Kompetenzen und ihrer Produktivität beschäftigt" flag="done"?>Unternehmens<?oxy_comment_end?></Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Genitivattribut_von" class="invisible">
+                    <?oxy_comment_start author="jgrimm" timestamp="20250429T165918+0200" comment="wir haben leider nur partitive Apposition, das wäre knapp daneben"?>
+                    <Belegtext><?oxy_comment_end?>Leiter, Leiterin
+                            <Stichwort><?oxy_comment_start author="kduden" timestamp="20240906T130508+0200" comment="IPA nicht korrekt: [huˈmaːn ʀeˈsʊʁsəs] (computergeneriert)" flag="done"?>Human<?oxy_comment_end?>
+                            Resources</Stichwort></Belegtext>
+                    <?oxy_comment_start author="wgrimm" timestamp="20250305T075034+0100" comment="Genitivattribut trifft es nicht ganz" id="dyx_t42_52c" flag="done"?>
+                    <?oxy_comment_start author="kduden" timestamp="20250325T133238+0100" parentID="dyx_t42_52c" comment="M. E. haben wir keine passende Kategorie (wäre lt. Duden 4 wohl explikative Apposition) - @BR: besser nicht zeigen?" flag="done" mid="8"?>
+                </Kollokation><?oxy_comment_end?><?oxy_comment_end mid="8"?>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Präpositionalattribut_von" class="invisible">
+                    <Belegtext>Bereich
+                            <Stichwort><?oxy_comment_start author="dsanders" timestamp="20240906T130508+0200" comment="IPA nicht korrekt: [huˈmaːn ʀeˈsʊʁsəs] (computergeneriert)" flag="done"?>Human<?oxy_comment_end?>
+                            Resources</Stichwort></Belegtext>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250305T075034+0100" comment="Genitivattribut trifft es nicht ganz" id="sfn_542_52c" flag="done"?>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250325T133249+0100" parentID="sfn_542_52c" comment="Dto." flag="done" mid="11"?>
+                </Kollokation><?oxy_comment_end?><?oxy_comment_end mid="11"?>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Wir sind daran, in Zusammenarbeit mit <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> Basel-Stadt die Arbeitsbedingungen zu
+                        verbessern. </Belegtext>
+                    <Fundstelle Fundort="dwds:baz_regional:2024/01/BAZ_8449047"> Basler Zeitung,
+                        11.01.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Wir nehmen vorübergehende Anpassungen an unseren
+                        Personaleinsatzplänen vor, um unseren Betrieb
+                        <?oxy_comment_start author="dsanders" timestamp="20250325T142707+0100" comment="Ausgeblendet (da eher irritierend)" flag="done"?>als
+                        Reaktion zu optimieren<?oxy_comment_end?>«, erklärt Oliver
+                            W<Streichung>immer</Streichung>, Manager <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:mib_regional:2024/10/MIB_29-120554175">
+                        Mittelbayerische, 17.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Managerin <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> war im
+                        vergangen<?oxy_comment_start author="dsanders" timestamp="20250305T074219+0100" comment="ergänzt" flag="done"?>en<?oxy_comment_end?>
+                        Jahr für die Rekrutierung von etwa 350 Hochschulabsolventen verantwortlich. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:7510/XjpVb8ll6lBxU_US">
+                        <Autor/>
+                        <Titel>Diese Woche im Karriere-Ratgeber: Einstieg in die
+                            Consulting-Branche</Titel>
+                        <Stelle/>
+                        <Datum>24.04.2024</Datum>
+                        <URL>https://www.computerwoche.de/a/einstieg-in-die-consulting-branche,1090562</URL>
+                        <Aufrufdatum>24.04.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Neben erfahrenen Yogalehrerinnen und -lehrern beschäftigt
+                            U<Streichung><?oxy_comment_start author="dsanders" timestamp="20250325T142139+0100" comment="Anonymisiert" flag="done"?>nyte<?oxy_comment_end?></Streichung>
+                        auch Experten in den Bereichen <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort>, Marketing und Architektur. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2015/10/TSP_201510229639938"> Der Tagesspiegel,
+                        22.10.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>»Gerade die junge Generation will Flexibilität«, sagt Petra
+                            R<Streichung>aspels</Streichung>, Leiterin des Bereichs
+                            <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> beim Beratungskonzern
+                        PricewaterhouseCoopers
+                            <Streichung><?oxy_comment_start author="jgrimm" timestamp="20250325T142208+0100" comment="Ausgeblendet (da hier nicht mehr relevant)" flag="done"?>(PwC)<?oxy_comment_end?></Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2014/01/was_01xml20140101_430"> Welt am Sonntag,
+                        12.01.2014 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250325T142539+0100" comment="Älterer (jargonkritischer) Ergänzungsbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Für all jene, die bei HR noch an den Hessischen
+                        Rundfunk denken: Das Kürzel steht für <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort>, zu deutsch Personalabteilung.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:1999/02/sz_615466"> Frischfleisch-Lieferant
+                        für die IT-Branche. Süddeutsche Zeitung, 27.02.1999 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Frequenzangabe>seltener</Frequenzangabe>
+            <Diasystematik>
+                <Fachgebiet><?oxy_comment_start author="kduden" timestamp="20250325T141425+0100" comment="Ergänzt" flag="done"?>Wirtschaft<?oxy_comment_end?></Fachgebiet>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma><?oxy_comment_start author="jgrimm" timestamp="20250325T141734+0100" comment="Ergänzte Verweisrelation" flag="done"?>Humankapital</Ziellemma>
+                    <Ziellesart/><?oxy_comment_end?>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">die Beschäftigten eines Unternehmens
+                <?oxy_comment_start author="jgrimm" timestamp="20250325T141545+0100" comment="Modifiziert: ..., ihre Kompetenzen und Produktivität als betriebswirtschaftlicher Faktor" flag="done"?>mit
+                ihren Qualifikationen und ihrem Leistungspotenzial (als betriebswirtschaftlicher
+                Faktor)<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20250325T143305+0100" comment="Ausgeblendet (zu untypisch)" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Die Frauenzentrale Zürich und die
+                        Hilfsorganisation Heartwings publizierten Fake-Jobinserat eines Bordells.
+                            <Streichung>Es tönt zuerst wie ein attraktives Stelleninserat: «Du
+                            suchst ein Praktikum mit flexiblen Arbeitszeiten und viel
+                            Kundenkontakt?», fragt eine junge Frau in die Kamera.</Streichung> »Bei
+                        uns dreht sich alles um <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> mit Expats aus der ganzen Welt.« </Belegtext>
+                    <Fundstelle Fundort="dwds:stg:2024/10/STG_2024100800000330483818"> St. Galler
+                        Tagblatt, 08.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ein Engpass im Bereich <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> berge
+                            <Streichung><?oxy_comment_start author="jgrimm" timestamp="20250325T143401+0100" comment="Ausgeblendet (sonst ohne Bezug)" flag="done"?>daher<?oxy_comment_end?></Streichung>
+                        ein hohes
+                        Gef<?oxy_comment_start author="kduden" timestamp="20250325T144212+0100" comment="Stillschw. umgelautet" flag="done"?>ä<?oxy_comment_end?>hrdungspotential
+                        fuer TK-<Autorenzusatz>Telekommunikation</Autorenzusatz>Projekte. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:5888/tkiA3P2Kk0ChwO_w">
+                        <Autor/>
+                        <Titel>Die Akquisition von Personal fuer TK-Projekte</Titel>
+                        <Stelle/>
+                        <Datum>17.04.2024</Datum>
+                        <URL>https://www.computerwoche.de/a/die-akquisition-von-personal-fuer-tk-projekte,1116861</URL>
+                        <Aufrufdatum>17.04.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>C<Streichung>hiesa</Streichung> hat an der Universität Freiburg
+                        Betriebswirtschaft studiert und danach einen Master in Gesundheitswesen und
+                        einen Master in <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> erworben. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz:2023/12/NLZ_2023122800000325640936"> Luzerner
+                        Zeitung, 28.12.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Derweil erhielt das ebenfalls zur FUNKE Mediengruppe gehörende
+                        Spezial-Jobportal Azubiyo auf der »Zukunft Personal Europe«, Europas größter
+                        Fachmesse für <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> in Köln, zum sechsten Mal in Folge den
+                        Preis als »Deutschlands bestes Jobportal für Auszubildende und
+                        Schüler*innen«. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2022/09/BMP_F9E1873F31E07F984EE1E79142CBDA98_3928541">
+                        Berliner Morgenpost, 24.09.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wohl nirgendwo ist die »Haben-wir-schon-immer-so-gemacht«-Mentalität
+                        so weit verbreitet wie in den deutschen Traditionsbetrieben. Dort, wo es
+                        keine Personalchefin gibt, die an einer Elite-Uni BWL mit Schwerpunkt
+                            <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> studiert hat. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2022/06/SZ_A114460789"> Süddeutsche Zeitung,
+                        04.06.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20250325T144052+0100" comment="Ergänzungsbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Die Bereitschaft großer Unternehmen, in den
+                        Abteilungen für <Stichwort>Human</Stichwort>
+                        <Stichwort>Resources</Stichwort> mit Künstlicher Intelligenz (KI) zu
+                        arbeiten, hält sich in Grenzen. Die Online-Bewerbung ist zwar Standard, aber
+                        sonst?</Belegtext>
+                    <Fundstelle Fundort="dwds:nn:2019/03/NN_680988CC567A16EDC12583BC0000F69A">
+                        Nürnberger Nachrichten, 13.03.2019 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-15"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_r_6432" Autor="" Typ="Basisartikel-D" Zeitstempel="1974-01-01" Erstellungsdatum="1974-01-01" Status="wird_gestrichen">
+    <Formangabe Typ="Hauptform" Zeitstempel="2022-01-24" Quelle="DWDS" Autor="herold">
+      <Schreibung>Rothirsch</Schreibung>
+      <Aussprache><IPA Audiodatei="050/der_Rothirsch"/></Aussprache>
+      <Grammatik>
+        <Wortklasse>Substantiv</Wortklasse>
+        <Genus>mask.</Genus>
+        <Genitiv><Wert>-(e)s</Wert></Genitiv>
+        <Plural><Wert>-e</Wert></Plural>
+      </Grammatik>
+      <Diasystematik/>
+    </Formangabe>
+    <Orthografie/>
+    <Verweise Quelle="DWDS" Zeitstempel="2022-01-24" Autor="herold" Typ="Komposition">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>rot</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>Hirsch</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+    <Diachronie>
+      <Etymologie/>
+      <Formgeschichte/>
+      <Bedeutungsgeschichte/>
+      <Verweise/>
+    </Diachronie>
+    <Lesart xml:id="S_r_4200">
+      <Syntagmatik/>
+      <Diasystematik/>
+      <Verweise/>
+      <Definition Typ="Basis">Hirsch mit rotbraunem Sommerfell und graubraunem Winterfell, der
+        größer als der Damhirsch wird, Edelhirsch</Definition>
+      <Kollokationen/>
+      <Verwendungsbeispiele/>
+    </Lesart>
+    <Rohdaten>
+      <Verwendungsbeispiele>
+        <Beleg>
+          <Belegtext>Es gäbe wohl in Deutschland kaum noch <Stichwort>Rothirsche</Stichwort> oder
+            Rehe, wenn Jäger nicht das Vergnügen behalten möchten, sie immer wieder
+            totzuschießen.</Belegtext>
+          <Fundstelle Fundort="dwds">Grzimek, Bernhard: Kein Platz für wilde Tiere, Köln: Lingen
+            [1973] [1954], S. 61</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Typische Landsäugetiere, die nun in der Region heimisch werden, sind der
+            Feldhase und der <Stichwort>Rothirsch</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds">Die Welt, 30.11.2002</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Seit Gletscher schmelzen wachsen aus den Tälern Wälder in einst kahle Höhen,
+            den Bäumen folgen <Stichwort>Rothirsch</Stichwort> und Reh.</Belegtext>
+          <Fundstelle Fundort="dwds">Bild, 23.04.1999</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>In der Brunft des <Stichwort>Rothirsches</Stichwort> liegt eine tiefe Poesie
+            des deutschen Waldes.</Belegtext>
+          <Fundstelle Fundort="dwds">von Lucanus, Friedrich: Im Zauber des Tierlebens, Berlin: Wegweiser-Verl. 1926 [1926], S. 69</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Das klassische Beispiel eines Herausforderungskampfes ist von jeher der
+            Brunftkampf unserer <Stichwort>Rothirsche</Stichwort> gewesen.</Belegtext>
+          <Fundstelle Fundort="dwds">von Buddenbrock, Wolfgang: Das Liebesleben der Tiere, Bonn: Athenäum 1953, S. 114</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Der Wolf löst den <Stichwort>Rothirsch</Stichwort> als Tier des Jahres
+            ab.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 19.11.2002</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Er warf ihnen Futter zu, dabei wurde einer der
+              <Stichwort>Rothirsche</Stichwort> rebellisch.</Belegtext>
+          <Fundstelle Fundort="dwds:bild">Bild, 17.10.2001</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Die Fahndung gilt der Todesursache des kapitalsten deutschen
+              <Stichwort>Rothirsches</Stichwort> seit rund 300 Jahren.</Belegtext>
+          <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 14.02.1983</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Spätestens seit dieser Zeit haftet dem <Stichwort>Rothirsch</Stichwort> das
+            Image eines Waldschädlings an.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 06.03.2003</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Der <Stichwort>Rothirsch</Stichwort> sei für die meisten Jäger die heilige Kuh
+            der deutschen Wälder.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 12.07.1995</Fundstelle>
+        </Beleg>
+      </Verwendungsbeispiele>
+    </Rohdaten>
+  </Artikel>
+</DWDS>

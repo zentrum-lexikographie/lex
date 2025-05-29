@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_1571244" Autor="jgrimm" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-05-23" Erstellungsdatum="2025-05-20" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>die Dosis macht das Gift</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Dosis</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>machen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma hidx="1">Gift</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte class="invisible">Die Wendung ist ein leicht abgewandeltes Zitat
+                aus den »Sieben Verteidigungsreden« von Paracelsus (Theophrastus Bombast von
+                Hohenheim): »Alle Dinge sind Gift, und nichts ist ohne Gift; allein die dosis
+                machts, daß ein Ding kein Gift sei.« </Bedeutungsgeschichte>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <?oxy_comment_start author="dsanders" timestamp="20250520T152009+0200" comment="ich nehme hier absichtlich nur die Belege, die keinen Bezug zum Verzehr von etw. oder Einnahme von irgendwelchen Medikamenten o. Ä. hat; die wörtliche Bedeutung schließe ich hier bewusst aus" flag="done"?>
+            <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+            <Diasystematik>
+                <Bedeutungsebene>sprichwörtlich</Bedeutungsebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>allzu viel ist ungesund</Ziellemma>
+                    <Ziellesart>*</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>die Mischung machts</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">die Häufigkeit oder die Intensität, mit der etw. betrieben wird,
+                die Menge von dem, was
+                <?oxy_comment_start author="kduden" timestamp="20250521T105254+0200" comment="man --&gt; jmd." flag="done"?>jmd<?oxy_comment_end?>.
+                konsumiert, ist entscheidend dafür, ob
+                <?oxy_comment_start author="dsanders" timestamp="20250521T105551+0200" comment="war: ... es schädlich, gefährlich wird" id="lc1_hsp_kfc" flag="done"?><?oxy_comment_start author="wgrimm" timestamp="20250523T081507+0200" parentID="lc1_hsp_kfc" comment="danke für die Änderungen" flag="done" mid="3"?>es
+                schädliche, gefährliche Auswirkungen
+                hat<?oxy_comment_end mid="3"?><?oxy_comment_end?></Definition>
+            <Definition Typ="Basis">alles, was in übertriebenem Maße getan wird, kann sich
+                nachteilig auf die Gesundheit, das Leben, die Umwelt o. Ä. auswirken</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20250523T081539+0200" comment="auf inv. gestellt, den letzten aktiviert" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Wenn wir Menschen ausschliesslich schonen, dann
+                        machen wir sie schwächer. Hier sollten wir ansetzen.
+                            <Autorenzusatz>–</Autorenzusatz> Aber Verständnis ist doch etwas Gutes?
+                            <Autorenzusatz>–</Autorenzusatz> Grundsätzlich ja. Aber wie Paracelsus
+                        sagte: <Stichwort>Die Dosis macht das Gift</Stichwort>. Zu viel Schonung,
+                        Entlastung und Verständnis macht krank. Ich bin immer wieder Patientinnen
+                        und Patienten begegnet, die traurigerweise die Überzeugung entwickelten, es
+                        sei attraktiver, krank zu sein. <Streichung>Sie fühlten sich dadurch
+                            geschützt, und gleichzeitig verlieh ihnen die Krankheit einen gewissen
+                            Status.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:bund:2025/03/BUND_9946138"> Der Bund, 01.03.2025
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es geht nicht darum, ob man mal ein Discount-Shirt kauft. Es geht um
+                        die Masse, darum, wie viel und wie oft man shoppt und wie lange man die
+                        Sachen trägt. <Stichwort>Die Dosis macht das Gift</Stichwort>. Die Zahlen
+                        sprechen für sich: Die Textilindustrie ist verantwortlich für bis zu acht
+                        Prozent der weltweiten CO2-Emissionen (mehr als der Flug- und Schiffsverkehr
+                        zusammen), außerdem für bis zu 16 Prozent der globalen Insektizidproduktion.
+                            <Streichung>Laut Greenpeace verursachen weggeworfene Klamotten 35
+                            Prozent des Mikroplastiks in Meeren, das sind jährlich eine halbe
+                            Million Tonnen Mikroplastikfasern.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:badz:2025/03/BADZ_51-352125267"> Badische Zeitung,
+                        27.03.2025 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <?oxy_comment_start author="jgrimm" timestamp="20250521T110114+0200" comment="good ex.?" id="ph4_jsp_kfc" flag="done"?>
+                    <?oxy_comment_start author="dsanders" timestamp="20250523T081551+0200" parentID="ph4_jsp_kfc" comment="umgestzt" flag="done" mid="6"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="6"?><Streichung>Oder anders
+                            ausgedrückt,</Streichung> auch für die Bewegung gilt: <Stichwort>Die
+                            Dosis macht das Gift</Stichwort>. Zu viel ist genauso schädlich wie zu
+                        wenig. Das Optimum stellt die sogenannte Gesundheitszone dar, die für
+                        Rehabilitationen, die Stabilisierung des Herz-Kreislauf-Systems und als
+                        Regenerationstraining geeignet ist.
+                            <Streichung><?oxy_comment_start author="wgrimm" timestamp="20250521T105656+0200" comment="Streichung erg." flag="done"?>Wenn
+                            Sie sich mehr bewegen wollen und bisher gar nichts oder nur sehr wenig
+                            sportlich aktiv waren, sollten Sie erst einmal klein
+                            anfangen.<?oxy_comment_end?></Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:sachbuch/9783898838481"> Rubin, Franziska:
+                        Meine sanfte Medizin für einen guten Schlaf. München: ZS 2018</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20250520T152143+0200" comment="Ersatzbeleg" id="qjr_xzb_kfc" flag="done"?>
+                    <?oxy_comment_start author="wgrimm" timestamp="20250521T110059+0200" parentID="qjr_xzb_kfc" comment="den finde ich besser als den obersten" flag="done" mid="9"?>
+                    <?oxy_comment_start author="wgrimm" timestamp="20250523T081638+0200" parentID="qjr_xzb_kfc" comment="dann stelle ich diesen auf visible" flag="done" mid="10"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="9"?><?oxy_comment_end mid="10"?>Nach
+                        einer <Streichung>anderen</Streichung> Studie dürften bereits 1,2 Prozent
+                        der Neuntklässler süchtig nach Computerspielen sein. <Streichung>Bemerkbar
+                            macht sich dies bei Leistungen und Gesundheit:</Streichung> Betroffene
+                        haben schlechtere Schulnoten, schwänzen häufiger und leiden unter
+                        Schlafproblemen. Trotz der vielen nützlichen Möglichkeiten der digitalen
+                        Welt dürften die Risiken nicht vernachlässigt werden, warnte
+                            M<Streichung>ortler</Streichung>. Wie bei anderen Dingen gelte:
+                            »<Stichwort>Die Dosis macht das Gift</Stichwort>.« </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2016/06/09/Ueber_500_000_Internet_S"> Der
+                        Standard, 09.06.2016 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-20"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

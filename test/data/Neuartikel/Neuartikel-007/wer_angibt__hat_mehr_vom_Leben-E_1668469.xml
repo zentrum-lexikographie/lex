@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_1668469" Autor="jgrimm" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-05-23" Erstellungsdatum="2025-05-23" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>wer angibt, hat mehr vom Leben</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>angeben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>mehr</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Leben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Bedeutungsebene>sprichwörtlich</Bedeutungsebene>
+                <?oxy_comment_start author="dsanders" timestamp="20250523T133737+0200" comment="oder &quot;scherzhaft&quot;/&quot;ironisch&quot;?"?>
+                <Stilfaerbung Frequenz="gelegentlich">abwertend<?oxy_comment_end?></Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>Eigenlob stinkt</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">wer eigene Leistungen, Fähigkeiten in Gegenwart anderer stetst
+                hervorhebt, erhält häufig mehr Anerkennung, Vorteile, Aufmerksamkeit o. Ä. </Definition>
+            <Definition Typ="Basis">Bescheidenheit führt nicht zum Erfolg </Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Der Volksmund sagt: <Stichwort>Wer</Stichwort>
+                        <Stichwort>angibt,</Stichwort>
+                        <Stichwort>hat</Stichwort>
+                        <Stichwort>mehr</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Leben</Stichwort>. Aber das Leben lehrt auch, dass das nicht viel
+                        bringt. Richtig aber ist, dass Selbstbewusstsein dem Alltag durchaus
+                        Motivation verleiht. </Belegtext>
+                    <Fundstelle Fundort="dwds:nnn:2024/02/NNN_23-171643837"> Norddeutsche Neueste
+                        Nachrichten, 21.02.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>aber</Streichung> in der Jugend fuhr ich gerne solche
+                        »riesen Schlitten«<Autorenzusatz>,</Autorenzusatz> um die Mädchen zu
+                        beeindrucken 🙂 Der Vater eines Freundes hatte einen Autohandel mit
+                        Ami-Autos. Da fuhren wir vom Buick 1957 bis zum Ford Fairlane 1957 alle
+                        gängigen Typen, jede Woche einen anderen 🙂 lg karl
+                            <Autorenzusatz>-</Autorenzusatz> Es heißt ja auch nicht
+                            umsonst:«<Stichwort>Wer</Stichwort>
+                        <Stichwort>angibt,</Stichwort>
+                        <Stichwort>hat</Stichwort>
+                        <Stichwort>mehr</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Leben</Stichwort>!“ 🙂 Für euch war es ja dann auch leicht – wenn
+                        man solche Relationen hat!  </Belegtext>
+                    <Fundstelle Fundort="dwds:web:36532/IK62S8Zs0nHX1I5t">
+                        <Autor/>
+                        <Titel>Nostalgie</Titel>
+                        <Stelle/>
+                        <Datum>16.07.2018</Datum>
+                        <URL>https://karlswortbilder.wordpress.com/2018/07/16/nostalgie-2/</URL>
+                        <Aufrufdatum>13.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-23"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

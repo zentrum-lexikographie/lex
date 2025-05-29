@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_h_5953" Autor="" Typ="Basisartikel" Zeitstempel="1969-01-01" Erstellungsdatum="1969-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="herold" Quelle="DWDS" Zeitstempel="2024-05-28">
+            <Schreibung>hinübernehmen</Schreibung>
+            <Aussprache><IPA Audiodatei="062/hinuebernehmen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>nimmt hinüber</Wert></Praesens>
+                <Praeteritum><Wert>nahm hinüber</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>hinübergenommen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-03-10" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>hinüber-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>nehmen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_h_5143">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>kann ich das Buch mit zu mir <Stichwort>hinübernehmen</Stichwort>?</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>er wollte nicht alle Möbel mit in das neue Haus <Stichwort>hinübernehmen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+            <Lesart xml:id="S_h_5143_1">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis"/>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Jetzt aber begannen wir einzusehen, daß doch viel altes Kapital in diese neue Welt <Stichwort>hinübergenommen</Stichwort> worden war</Belegtext>
+                        <Fundstelle Fundort="WDG" Sigle="HARHUGWWU">
+                            <Autor>Hartung</Autor>
+                            <Titel>Wunderkinder</Titel>
+                            <Stelle>201</Stelle>
+                            <Datum/>
+                        </Fundstelle>
+                        </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Von den Kompetenzen der Reichsgewalt ist später fast alles in die Verfassung von 1871 <Stichwort>hinübergenommen</Stichwort> worden.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Kupisch, K.: Frankfurter Parlament. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1958], S. 1142</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Zu groß ist der Restposten, der unerledigt in das neue Jahr <Stichwort>hinübergenommen</Stichwort> werden muß.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 05.01.1953, Nr. 01</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die Empfindlichkeit hatte sie aus ihren Backfischtagen ins Leben mit <Stichwort>hinübergenommen</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Ury, Else: Nesthäkchen fliegt aus dem Nest, Stuttgart: K. Thienemanns 1997 [1920], S. 149</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er hat sein Gefühl für Rhythmus aus den Versen des »Don Karlos« <Stichwort>hinübergenommen</Stichwort> in die Prosa.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Safranski, Rüdiger: Friedrich Schiller, München Wien: Carl Hanser 2004, S. 263</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er <Stichwort>übernahm</Stichwort> das Verfahren der Collage, aber er gab ihm eine neue ikonographische Wendung, <Stichwort>hin</Stichwort> zu den Alltagsdingen, den Staubsaugern, den Comics.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.02.2002</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Wer zügig studiert, kann in eine künftige Weiterbildung gebührenfreie Elemente <Stichwort>hinübernehmen</Stichwort> – wer ein Langzeitstudent ist, muss schon für sein Erststudium nach Überschreiten der Toleranzgrenze zahlen.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 25.03.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er verstand, wann immer er in eine neue Haut schlüpfte, die alten Musterungen und Markierungen mit <Stichwort>hinüberzunehmen</Stichwort> in die nächste Existenz.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 19.05.2006, Nr. 20</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Auf diese Art wurde der alte begrabene preußische Militärzwist in die Reichspolitik <Stichwort>hinübergenommen</Stichwort> und die Militärfrage mit parteipolitischen Interessen verknüpft.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Weber, Max: Parlament und Regierung im neugeordneten Deutschland. In: Weber, Marianne (Hg.) Gesammelte Politische Schriften, München: Drei Masken Verl. 1921 [1918], S. 128</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Den größten Einfluß gewann diese jüdische Schöpfungssage dadurch, daß sie in das christliche Glaubensbekenntnis <Stichwort>hinübergenommen</Stichwort> und als »Wort Gottes« geheiligt wurde.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Haeckel, Ernst: Die Welträtsel, Berlin: Directmedia Publ. 2000 [1899], S. 34367</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Einige hundert Jahre später stehen die Römer vor der Aufgabe, mit der ganzen griechischen Weltanschauung auch den Begriff Urbestandteil in ihre Sprache <Stichwort>hinüberzunehmen</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Mauthner, Fritz: Wörterbuch der Philosophie. In: Bertram, Mathias (Hg.) Geschichte der Philosophie, Berlin: Directmedia Publ. 2000 [1910], S. 26431</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

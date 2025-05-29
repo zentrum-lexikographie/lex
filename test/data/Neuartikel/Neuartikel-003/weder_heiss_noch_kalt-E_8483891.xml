@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_8483891" Autor="dsanders" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2024-03-07" Erstellungsdatum="2023-06-14" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="dsanders" timestamp="20240131T145505+0100" comment="die beiden Teildefinitionen sind zu heterogen und solllten auch bei schlechter Beleglage in zwei Lesarten aufgeteilt werden" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20240305T130806+0100" comment="ehem. Red. RO; wenn Basisartikel-tauglich, dann bitte als Basis-MWA markieren" flag="done" mid="1"?>
+        <?oxy_comment_start author="kduden" timestamp="20240307T073846+0100" comment="Def und Belege bei LA 1 passen nicht zusammen
+
+die Belege sagen (z.B. der letzte in der Reihe): so, dass sich keine klare Position erkennen lässt, oft abwertend" mid="2"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?>
+            <Schreibung>weder heiß noch kalt</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>heiß</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>kalt</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <?oxy_comment_start author="jgrimm" timestamp="20231120T115735+0100" comment="Ergänzte Verweisrelationen" flag="done"?>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>weder Fisch noch Fleisch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise><?oxy_comment_end?>
+            <Definition Typ="Basis">gleichgültig,
+                <?oxy_comment_start author="dsanders" timestamp="20231120T121909+0100" comment="Ergänzt (ersetzt: unzulänglich)" flag="done"?>(innerlich)
+                unbeteiligt, (emotional) <Verweis Typ="vgl">
+                    <Ziellemma>unberührt</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis><?oxy_comment_start author="kduden" timestamp="20231120T122520+0100" comment="@ER/LL: Die Substituierung funktioniert hier nur mäßig, da sich die Nennform nicht mit einem bestimmten Verb verbinden lässt" flag="done" mid="5"?><?oxy_comment_start author="kduden" timestamp="20240305T131030+0100" comment="noch &quot;emotionslos, leidenschaftslos&quot;?" flag="done" mid="6"?></Definition><?oxy_comment_end?><?oxy_comment_end mid="5"?><?oxy_comment_end mid="6"?>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext><Streichung>Und die gängige Meinung ist doch:</Streichung> Lau, das
+                        heißt schlaff, gleichgültig, nicht engagiert. <Stichwort>Weder heiß noch
+                            kalt</Stichwort>. Ist Lauheit <Autorenzusatz>in
+                            <?oxy_comment_start author="wgrimm" timestamp="20231218T125448+0100" comment="Modifiziert: christlicher" flag="done"?>biblischer<?oxy_comment_end?>
+                            Hinsicht</Autorenzusatz> Tugend oder Laster? Halb und halb, würde ich
+                        sagen. In Zeiten großer Erregungen wird die Lauheit zuweilen zu etwas sehr
+                        Heilsamen
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20231218T125632+0100" comment="Ergänzt" flag="done"?>sic!<?oxy_comment_end?></Autorenzusatz>. </Belegtext>
+                    <Fundstelle Fundort="dwds:nnn:2019/09/NNN_23-112625626"> Norddeutsche Neueste
+                        Nachrichten, 02.09.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="wgrimm" timestamp="20231218T130708+0100" comment="Ausgeblendet (da fraglich, ob im gegebenen Kontext zur Nennform passend)" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Die Zahlen, die der
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20231120T120355+0100" comment="Ergänzt" flag="done"?>russische<?oxy_comment_end?></Autorenzusatz>
+                        <?oxy_comment_start author="dsanders" timestamp="20231120T120435+0100" comment="Entfernt: AZ &quot;[Wladimir Putin]&quot;" flag="done"?>Präsident<?oxy_comment_end?>
+                        in seinen Ansprachen und Begegnungen mit dem Volk und mit Journalisten
+                        nennt, entfernen sich immer weiter von der Realität. Den Bürgern wird bei
+                        diesen Zahlen <Stichwort>weder heiß noch kalt</Stichwort>, drückt sich ihre
+                        wirtschaftliche Lage doch objektiv in sinkenden Einkünften
+                            <Autorenzusatz><?oxy_comment_start author="wgrimm" timestamp="20231218T125847+0100" comment="Ergänzt (sonst unvollst. Syntax)" flag="done"?>aus.<?oxy_comment_end?></Autorenzusatz>
+                        Laut offiziellen Zahlen sinkt das Realeinkommen in Russland kontinuierlich
+                        seit fünf Jahren. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:49201/3g-85gG5OngTXQS4">
+                        <Autor>Olga Schirnina / Klimbim</Autor>
+                        <Titel>Völlig losgelöst von der Wirtschaft</Titel>
+                        <Stelle/>
+                        <Datum>28.02.2019</Datum>
+                        <URL>https://www.dekoder.org/de/article/bip-2018-neuberechnung-rosstat-wachstum</URL>
+                        <Aufrufdatum>15.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Realität hinter den in der Öffentlichkeit heiß diskutierten
+                        Themen präsentiert sich oftmals <Stichwort>weder heiß noch kalt</Stichwort>,
+                        <?oxy_comment_start author="dsanders" timestamp="20231120T120842+0100" comment="Streichung aufgehoben" flag="done"?>sondern
+                        eher lauwarm<?oxy_comment_end?>.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/26532/KGpujuvq1Vl-dtZw">
+                        <Autor/>
+                        <Titel>Polarisierung</Titel>
+                        <Stelle/>
+                        <Datum>07.12.2018</Datum>
+                        <URL>https://vladimirvertlib.at/texte/polarisierung/</URL>
+                        <Aufrufdatum>29.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20231218T130351+0100" comment="Ersatzbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Die Lauen haben keine gute Lobby in der Bibel. »So
+                        aber, weil du lau bist und <Stichwort>weder heiß noch kalt</Stichwort>, will
+                        ich dich aus meinem Munde ausspeien«, heißt es.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 17.01.2015</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20231218T130615+0100" comment="Ausgeblendet (da fraglich, ob im gegebenen Kontext zur Nennform passend)" flag="done"?>
+                    <Belegtext><?oxy_comment_end?><Streichung>Doch</Streichung> die Deutschen
+                        berührte sein <Autorenzusatz>US-Präsident Obamas</Autorenzusatz> Besuch
+                        kaum, <Stichwort>weder heiß noch kalt</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2013/01_13/we_01xml20130101_13407"> Die Welt,
+                        20.06.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>»<Stichwort>Weder heiß noch kalt</Stichwort>« sei das Treffen
+                        zwischen der Bundeskanzlerin und
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20231218T130011+0100" comment="Ergänzt" flag="done"?>dem
+                            russischen Präsidenten<?oxy_comment_end?></Autorenzusatz> Putin gewesen,
+                        so die konservative <Autorenzusatz>polnische</Autorenzusatz> Zeitung
+                        »Rzeczpospolita«.</Belegtext>
+                    <Fundstelle Fundort="dwds:rztg:2006/01/RZTG_90E9DC78006959A0B068371365175335">
+                        Rhein-Zeitung, 18.01.2006 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Frequenzangabe>seltener</Frequenzangabe>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>nichts Halbes und nichts Ganzes</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="dsanders" timestamp="20240307T073456+0100" comment="umgehängt, war bei Lesart1 da passt es nicht hin"?>
+                </Verweis><?oxy_comment_end?>
+            </Verweise>
+            <Definition Typ="Spezifizierung">im Hinblick auf einen bestimmten Zweck</Definition>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20231218T131014+0100" comment="Ergänzt" flag="done"?>nur
+                mittelmäßig geeignet, nicht gut genug</Definition><?oxy_comment_end?>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20231218T131132+0100" comment="2. Ersatzbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Die Aufklärung des dreisten Überfalls auf das
+                        Pokerturnier im Luxushotel Grand Hyatt am Potsdamer Platz <Autorenzusatz>in
+                            Berlin</Autorenzusatz> braucht noch ein Weilchen. Man habe 40 Hinweise
+                        geprüft, 40 Vernehmungen gemacht, Ergebnis: bislang keine brauchbare Spur,
+                            <Stichwort>weder heiß noch kalt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds">Badische Zeitung, 12.03.2010</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Autorenzusatz>Der Actionfilm</Autorenzusatz> »Extreme Ops«
+                            <Streichung>Ups!</Streichung> Stupide Story, starke Stunts. Komischer
+                        Mix aus Action und Wintersportfilm. <Stichwort>Weder heiß noch
+                            kalt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild:2003/01_12/bi_asvx_2003_12293"> Bild, 13.03.2003
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>
