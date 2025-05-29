@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="WDW_17970" Autor="jgrimm" Typ="Vollartikel" Zeitstempel="2025-05-09" Erstellungsdatum="2015-09-03" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="af-fir-mie-ren">affirmieren</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="103/affirmieren">afɪʁˈmiːʀən</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>affirmiert</Wert></Praesens>
+                <Praeteritum><Wert>affirmierte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>affirmiert</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ieren</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie class="invisible">&lt; <erwaehntes_Zeichen Sprache="lat">affirmare</erwaehntes_Zeichen>
+                <Paraphrase>bekräftigen</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>affirmiert</Stichwort> etw.</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>bildungssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>negieren</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><Verweis Typ="vgl">
+                    <Ziellemma>bejahen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>,
+                <?oxy_comment_start author="wgrimm" timestamp="20250509T100501+0200" comment="ergänzen"?>rechtfertigen,
+                festigen<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Gegen Heines Lyrik konnte man aber sehr viel haben – sein Werk hat
+                        die Verhältnisse nicht <Stichwort>affirmiert</Stichwort>, sondern irritiert,
+                        verunsichert, im besten Sinne beschädigt. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2024/04/NZZ_2024040400000327381742"> Neue Zürcher
+                        Zeitung, 04.04.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Barbie wurde von Soziologen analysiert und von Feministinnen
+                        attackiert, von Modeschöpfern kostümiert und von kleinen Mädchen hemmungslos
+                            <Stichwort>affirmiert</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        01.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mode <Stichwort>affirmiert</Stichwort> nicht mehr die
+                        Geschlechterrollen, wie die Haute Couture es tat, sondern sie durchkreuzt
+                        sie, ist heute Transvestismus, Maskerade, Cross-Dressing.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.07.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Ursprung dieser Idee lag in den sechziger Jahren und
+                        radikalisierte die Pop Art, die den Konsum immer noch thematisierte, wenn
+                        nicht gar <Stichwort>affirmierte</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        14.06.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Gerechtigkeitsbild betonte die Verantwortung des Gerichtes und
+                            <Stichwort>affirmierte</Stichwort> sie zugleich.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Lexikon der Kunst – J. In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia 2001 [1991]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-04-24">
+                <Beleg>
+                    <Belegtext>Das <Stichwort>affirmieren</Stichwort> wir jetzt emphatisch,
+                        inständig und nachdrücklich, aber erst nach nachhaltiger Beratung,
+                        Begleitung und Evaluation.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.07.2007, Nr. 31</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Gerechtigkeitsbild betonte die Verantwortung des Gerichtes und
+                            <Stichwort>affirmierte</Stichwort> sie zugleich.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Lexikon der Kunst – J.
+                        In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001
+                        [1991], S. 28202</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Flut der Schreckensbilder <Stichwort>affirmiert</Stichwort> und
+                        nährt diese Sehnsucht immer weiter.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        19.09.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Barbie wurde von Soziologen analysiert und von Feministinnen
+                        attackiert, von Modeschöpfern kostümiert und von kleinen Mädchen hemmungslos
+                            <Stichwort>affirmiert</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        01.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Überhaupt ist der Enthusiasmus, mit dem Ezra Pound den faschistischen
+                        Totalitarismus <Stichwort>affirmierte</Stichwort>, seiner Poetik nicht
+                        fremd.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 09.11.2012, Nr. 45</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mode <Stichwort>affirmiert</Stichwort> nicht mehr die
+                        Geschlechterrollen, wie die Haute Couture es tat, sondern sie durchkreuzt
+                        sie, ist heute Transvestismus, Maskerade, Cross-Dressing.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.07.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Jeder Ausbruchsversuch <Stichwort>affirmiert</Stichwort> nur das
+                        System, gegen das er unternommen wurde.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Schuh, Franz: Schreibkräfte,
+                        Köln: DuMont 2000, S. 157</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Ursprung dieser Idee lag in den sechziger Jahren und
+                        radikalisierte die Pop Art, die den Konsum immer noch thematisierte, wenn
+                        nicht gar <Stichwort>affirmierte</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        14.06.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Indem sie einzelne Objekte zu zeigen verboten,
+                            <Stichwort>affirmierten</Stichwort> sie von Hagens ’ Selbststilisierung
+                        zum Volksaufklärer.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 06.03.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Denn natürlich <Stichwort>affirmieren</Stichwort> auch die
+                        Marvelhelden, wofür sie als Mythen eingesetzt sind, die Freie
+                        Marktwirtschaft und ihre eingeborene Brutalität.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">konkret, 1990</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

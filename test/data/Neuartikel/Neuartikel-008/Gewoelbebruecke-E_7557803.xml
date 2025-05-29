@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7557803" Autor="dsanders" Typ="Basisartikel-D" Zeitstempel="2022-12-08" Erstellungsdatum="2022-12-08" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Gewölbebrücke</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-n</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Gewölbe</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Brücke</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">Bauwerk aus Steinen oder Mauerziegeln; der Oberbegriff (Sammelbezeichnung) ist die <?oxy_comment_start author="jgrimm" timestamp="20190807T092300+0200" comment="Das ist keine Paraphrase für »Gewölbebrücke« (es gibt noch viele andere Bauwerke aus Steinen usw.)"?>Bogenbrücke<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-31"/></Rohdaten></Artikel>
+</DWDS>

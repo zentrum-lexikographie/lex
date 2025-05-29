@@ -1,71 +1,87 @@
 (ns zdl.lex.env
   (:require
-   [aero.core :as aero]
+   [babashka.fs :as fs]
    [camel-snake-kebab.core :as csk]
-   [clojure.java.io :as io]
    [clojure.string :as str]
-   [integrant.core :as ig])
+   [lambdaisland.uri :as uri]
+   [taoensso.telemere :as t])
   (:import
    (io.github.cdimascio.dotenv Dotenv)))
 
+(t/uncaught->error!)
+(t/set-min-level! nil 
+                  [["com.zaxxer(.*)" :warn]
+                   ["*" :info]])
+
+(defn read-dot-env
+  [filename]
+  (.. Dotenv (configure) (filename filename) (ignoreIfMissing) (load)))
+
 (def ^Dotenv dot-env
-  "Load `.env` (also into system properties)"
-  (.. Dotenv (configure) (ignoreIfMissing) (systemProperties) (load)))
+  (read-dot-env ".env"))
+
+(def ^Dotenv dot-env-dev
+  (read-dot-env ".env.dev"))
 
 (defn getenv
   ([k]
    (getenv k nil))
   ([k df]
    (let [k (str "ZDL_LEX_" (csk/->SCREAMING_SNAKE_CASE_STRING k))]
-     (or (some->> k System/getProperty str/trim not-empty)
-         (some->> k System/getenv str/trim not-empty)
-         df))))
+     (some-> (or (System/getenv k)
+                 (.get dot-env k)
+                 (.get dot-env-dev k)
+                 df)
+             str/trim not-empty))))
 
-(defmethod aero/reader 'dotenv
-  [_ _ value]
-  (let [k (csk/->SCREAMING_SNAKE_CASE_STRING value)]
-    (or (some->> k System/getenv str/trim not-empty)
-        (some->> k (.get dot-env) str/trim not-empty))))
+(def server-url
+  (getenv "SERVER_URL" "https://lex.dwds.de"))
 
-(defmethod aero/reader 'ig/ref
-  [_ _ value]
-  (ig/ref value))
+(def server-user
+  (getenv "SERVER_USER"))
 
-(def config
-  (aero/read-config (io/resource "zdl/lex/config.edn")))
+(def server-password
+  (getenv "SERVER_PASSWORD"))
 
-(defn in-namespaces?
-  [k & nss]
-  (some #(str/starts-with? (namespace k) %) nss))
+(def server-auth
+  (when (and server-user server-password) [server-user server-password]))
 
-(defn in-dev-namespace?
-  [k]
-  (in-namespaces? k "zdl.lex.client.dev"))
+(def repl-port
+  (Long/parseLong (getenv "REPL_PORT" "3001")))
 
-(defn in-server-namespace?
-  [k]
-  (in-namespaces? k "zdl.lex.server"))
+(def git-origin
+  (getenv "GIT_ORIGIN" "git@git.zdl.org:zdl/wb.git"))
 
-(def config-keys
-  (into (sorted-set)
-        (filter qualified-keyword?)
-        (keys config)))
+(def git-branch
+  (getenv "GIT_BRANCH" "zdl-lex-server/production"))
 
-(def server-config-keys
-  (into (sorted-set)
-        (comp
-         (filter in-server-namespace?)
-         (remove in-dev-namespace?))
-        config-keys))
+(def git-dir
+  (getenv "GIT_DIR" "/data/git"))
 
-(def client-config-keys
-  (into (sorted-set)
-        (comp
-         (remove in-server-namespace?)
-         (remove in-dev-namespace?))
-        config-keys))
+(def http-port
+  (Long/parseLong (getenv "HTTP_PORT" "3000")))
 
-(def dev-config-keys
-  (into (sorted-set)
-        (remove #(in-namespaces? % "zdl.lex.client.repl"))
-        config-keys))
+(def solr-url
+  (uri/join (getenv "SOLR_URL" "http://index:8983/solr/")
+            (str (getenv "SOLR_CORE" "articles") "/")))
+
+(def lock-db
+  (let [lock-db-path (fs/absolutize (getenv "LOCK_DB_PATH" "/data/locks"))]
+    {:jdbcUrl       (-> {:scheme "jdbc:h2" :path lock-db-path} (uri/map->URI) (str))
+     :username      "sa"
+     :password      ""
+     ::lock-db-path lock-db-path}))
+
+(def mantis-db
+  {:dbtype   "mysql"
+   :host     (getenv "MANTIS_DB_HOST" "mantis.dwds.de")
+   :port     (Long/parseLong (getenv "MANTIS_DB_PORT" "3306"))
+   :dbname   (getenv "MANTIS_DB_NAME" "mantis_bugtracker")
+   :username (getenv "MANTIS_DB_USER" "mantis")
+   :password (getenv "MANTIS_DB_PASSWORD" "mantis")})
+
+(def schedule-tasks?
+  (Boolean/parseBoolean (getenv "SCHEDULE_TASKS" "true")))
+
+(def metrics-report-interval
+  (Long/parseLong (getenv "METRICS_REPORTER_INTERVAL" "5")))

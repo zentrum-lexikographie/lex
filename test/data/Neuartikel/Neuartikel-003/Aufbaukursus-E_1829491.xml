@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_1829491" Autor="dsanders" Typ="Verweisartikel" Zeitstempel="2023-04-25" Erstellungsdatum="2023-04-25" Status="Lex-Regioprüfung">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Auf-bau-kur-sus">Aufbaukursus</Schreibung>
+            <Aussprache><IPA>ˈaʊ̯fˌbaʊ̯ˌkʊʁzʊs</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>Aufbaukurse</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Aufbau</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Kursus</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>D</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Aufbaukurs</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die Handwerkskammer des Saarlandes bietet Interessierten einen neuen
+                            <Stichwort>Aufbaukursus</Stichwort> für die Arbeit mit Microsoft Excel
+                        an. </Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2023-04-14/4/NnWZnt7Y">
+                        <Autor>Sarah Materna</Autor>
+                        <Titel>Seminar zur Befestigungstechnik</Titel>
+                        <Stelle/>
+                        <Datum>14.04.2023</Datum>
+                        <URL>https://www.handwerksblatt.de/die-handwerkskammern-in-deutschland/hwk-saarland/seminar-zur-befestigungstechnik</URL>
+                        <Aufrufdatum>18.04.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Am Ende des Lebens zählt der Mensch und braucht der Mensch den
+                        Menschen. Das erleben die ehrenamtlichen Mitarbeiter beim Hospiz-Verein
+                        Rhein-Ahr immer wieder als Hospizbegleiter. Auf ihre erfüllende und
+                        verantwortungsvolle Aufgabe werden die Männer und Frauen, die für Themen wie
+                        Sterben, Tod und Trauer offen sind, in Qualifizierungskursen des
+                        Hospiz-Vereins Rhein-Ahr vorbereitet. Diese gliedern sich in einen Grund-
+                        und <Stichwort>Aufbaukursus</Stichwort> und ein begleitetes Praktikum im
+                        Kreis Ahrweiler.</Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2022/12/RZTG_3E3F42B8AC5ECB701989A68065190EDD-BADNEUENAHR"> Rhein-Zeitung, 14.12.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Volkshochschule <Streichung>(VHS)</Streichung> bietet
+                            <Streichung>dazu</Streichung> einen <Stichwort>Aufbaukursus</Stichwort>
+                        Kindertagespflege für bereits tätige Tageseltern an, die bis jetzt erst
+                        einen Stundenumfang von 92 Unterrichtseinheiten in der Qualifizierung
+                        gemacht haben und sich nachqualifizieren müssen. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2013/10/NEUW_30a47528a1efeeb6d1ee94dd9abf6524fbc6d8cda498b0b"> Neue Westfälische, 28.10.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Außer dem pflichtmaßigen Unterricht (wöchentlich zwölf Stunden), der
+                        von 16 Lehrkräften erteilt wird, gibt die Betriebsberufsschule Espenhain
+                        begabten Lehrlingen die Möglichkeit, freiwillig an einem
+                            <Stichwort>Aufbaukursus</Stichwort> von sechs Semestern teilzunehmen.
+                        Zugelassen zu diesem Sonderlehrgang, der sich über alle drei Lehrjahre
+                        erstreckt, wird jeder mit guter Allgemeinbildung aus der Grundschule
+                        hervorgegangene Lehrling vom ersten Jahre an. Gelehrt werden Algebra.
+                        Physik. </Belegtext>
+                    <Fundstelle Fundort="dwds:nz:2612273X/2612273X_1949_08_06_01/tei/2612273X_1949_08_06_01_066"> Neue Zeit, 06.08.1949 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Dabei würde der 47-Jährige so gern auch mal einen <Stichwort>Aufbaukursus</Stichwort> anbieten, doch dafür ist die Nachfrage gleich null.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 04.03.2002, Nr. 09</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

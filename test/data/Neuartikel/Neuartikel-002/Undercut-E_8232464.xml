@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_8232464" Autor="wgrimm" Typ="Vollartikel" Tranche="RSR-2024-37_E3" Zeitstempel="2025-06-02" Erstellungsdatum="2024-08-27" Status="Red-1">
+        <?oxy_comment_start author="kduden" timestamp="20250123T143213+0100" comment="Neu-Stichwort in amtl. Wortliste - zurückgestellt, da Ausbau zum Vollart. nicht im Zug der orthogr. Anpassung leistbar ist" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Undercut</Schreibung>
+            <Aussprache Zeitstempel="2025-05-16" Quelle="DWDS" Autor="brosch">
+                <IPA>ˈandɐkat</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse><?oxy_comment_start author="wgrimm" timestamp="20250516T095934+0200" comment="bitte grammatische Angaben ergänzen" id="pnb_4jr_3fc" flag="done"?><?oxy_comment_start author="kduden" timestamp="20250516T100729+0200" parentID="pnb_4jr_3fc" comment="gemacht" flag="done" mid="2"?>Substantiv<?oxy_comment_end mid="2"?><?oxy_comment_end?></Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv>
+                    <Wert>-s</Wert>
+                </Genitiv>
+                <Plural>
+                    <Wert>-s</Wert>
+                </Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>37 (E3)</Orthografieregel>
+        </Orthografie>
+        <Verweise Zeitstempel="2025-05-16" Quelle="DWDS" Autor="brosch" Typ="Simplex"/>
+        <Diachronie Zeitstempel="2025-05-16" Quelle="DWDS" Autor="brosch">
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">undercut</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="engl">under</erwaehntes_Zeichen>
+                <Paraphrase>unter</Paraphrase> + <erwaehntes_Zeichen Sprache="engl">cut</erwaehntes_Zeichen>
+                <Paraphrase>Schnitt</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Sidecut</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">Frisur, bei der das Haar (nur) der unteren Kopfhälfte sehr kurz
+                rasiert oder geschnitten wird</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20250526T125117+0200" comment="auf invisible wg. neuen Plural-Belegs" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Ärzte warnen bereits seit längerer Zeit, dass
+                        besonders in Barber-Shops, die sich auf Trendfrisuren wie unter anderem dem
+                            »<Stichwort>Undercut</Stichwort>« spezialisiert haben, das Risiko einer
+                        Ansteckung <Autorenzusatz>mit einer Pilzerkrankung</Autorenzusatz> erhöht
+                        ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2025/01/NEUW_1be93c36ef6d48934d66c0946433fe49234df66"> Neue Westfälische, 24.01.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Kurze, lockige Haare können aber auch gut mit einem richtigen
+                            <Stichwort>Undercut</Stichwort> kombiniert werden. Durch die kurz
+                        rasierten Seiten- und Nackenpartien kommen die Locken
+                            <Streichung><?oxy_comment_start author="jgrimm" timestamp="20250516T100138+0200" comment="ergänzt" flag="done"?>laut
+                            »Haut. de«<?oxy_comment_end?></Streichung> noch mehr zur Geltung. </Belegtext>
+                    <Fundstelle Fundort="dwds:aaz:2024/10/AAZ_gbh3o8isc.1-AACHEN"> Aachener Zeitung,
+                        21.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="wgrimm" timestamp="20250526T124713+0200" comment="auf invisible wg neues Genitiv-Belegs" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Mit klackernden Fußfesseln nehmen die beiden
+                        Angeklagten im Sitzungssaal 11 Platz. Sheqir K., breite Schultern, akkurater
+                            <Stichwort>Undercut</Stichwort>. Typ Türsteher. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1994-2023/2024/10/ZEIT_A74EC96E202789FD3955614D1CC11319">
+                        Die Zeit, 02.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20250526T124649+0200" comment="neu wg. Genitiv" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Extremversionen des sogenannten
+                            <Stichwort>Undercuts</Stichwort> gab es schon vor Jahrhunderten. Der
+                        Haarschmuck ist ja eigentlich eine militärische Frisur.</Belegtext>
+                    <Fundstelle Fundort="dwds:nlz:2024/06/NLZ_2024062500000328910447"> Luzerner
+                        Zeitung, 25.06.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Lange, zu einem Zopf gebundene Haare mit
+                            <Stichwort>Undercut</Stichwort> rahmten mein Gesicht. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:7232/1B3yWkzpAYFtl1Ti">
+                        <Autor>Martin Gommel</Autor>
+                        <Titel>Wie ich der Freikirche entkam</Titel>
+                        <Stelle/>
+                        <Datum>25.10.2023</Datum>
+                        <URL>https://krautreporter.de/sinn-und-konsum/5097-wie-ich-der-freikirche-entkam</URL>
+                        <Aufrufdatum>21.03.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Besonders frech wirkt ein Short Pixie, bei dem das Haar am Hinterkopf
+                        und an den Seiten meist sehr kurz
+                        <?oxy_comment_start author="dsanders" timestamp="20250314T101123+0100" comment="Leerzeichen eingefügt" flag="done"?><?oxy_comment_end?>gehalten
+                        und oft nur einige Millimeter lang ist – fast wie bei einem
+                            <Stichwort>Undercut</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:24473/cziw85iAIs4gp6qP">
+                        <Autor/>
+                        <Titel>Warum der Pixie Cut bei Frauen so beliebt ist</Titel>
+                        <Stelle/>
+                        <Datum>13.07.2023</Datum>
+                        <URL>https://www.syoss.de/insights/inspiration/haarstyling/kurze-haare/pixie-cut.html</URL>
+                        <Aufrufdatum>26.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20250526T124953+0200" comment="neu wg. Pluiral" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Angesagte Herren-Haarschnitte
+                            <Autorenzusatz>–</Autorenzusatz> Weiche fließende Cuts, moderne Looks
+                        mit unterschiedlichen Haarlängen, <Stichwort>Undercuts</Stichwort> mit
+                        kurzgeschorenen Seiten und anrasiertem Scheitel. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:6312/XcdVnJqRi7RzyVG2">
+                        <Autor/>
+                        <Titel>Mein Friseur Gmunden – Kreativität ist unsere Leidenschaft</Titel>
+                        <Stelle/>
+                        <Datum>18.05.2023</Datum>
+                        <URL>https://meinfriseur-gmunden.at/</URL>
+                        <Aufrufdatum>27.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Motorsport</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">frühzeitiger, vorgezogener Boxenstopp, um mit frischen Reifen
+                schneller am direkten Konkurrenten vorbeizukommen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext><Autorenzusatz>Max</Autorenzusatz> Verstappen war weiter in die
+                        Defensive gedrängt, ein <Stichwort>Undercut</Stichwort> von
+                            <Autorenzusatz>Carlos</Autorenzusatz> Sainz
+                            <Autorenzusatz>junior</Autorenzusatz> verschärfte die Lage für den
+                        Weltmeister. Nach dem überfälligen Reifenwechsel war der Niederländer seine
+                        Position los. </Belegtext>
+                    <Fundstelle Fundort="dwds:ta:2024/10/TA_8E6E84CCB3FDE84FEC9547D9506DC244_6360879">
+                        Thüringer Allgemeine, 21.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit einem höheren Reifenverschleiß läufst du immer Gefahr, mit einem
+                            <Stichwort>Undercut</Stichwort> attackiert zu werden, und du selbst
+                        kannst praktisch keinen Overcut probieren. </Belegtext>
+                    <Fundstelle Fundort="dwds:ballsport:2541/6gKC-X6tlUZbjXF0">
+                        <Autor>Motorsport-Total</Autor>
+                        <Titel>Carlos Sainz verteidigt Ferrari: Strategien waren gar nicht so
+                            schlecht!</Titel>
+                        <Stelle/>
+                        <Datum>27.12.2023</Datum>
+                        <URL>https://www.ran.de/sports/motorsport/formel1/news/carlos-sainz-verteidigt-ferrari-strategien-waren-gar-nicht-so-schlecht-343650</URL>
+                        <Aufrufdatum>22.02.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext><Autorenzusatz>Oscar</Autorenzusatz> Piastri lag vor dem Boxenstopp
+                        vor seinem Teamkollegen, der aber durch den <Stichwort>Undercut</Stichwort>
+                        an Piastri vorbeikam. </Belegtext>
+                    <Fundstelle Fundort="dwds:ballsport:2540/sh7sHlej6MlEWO74">
+                        <Autor>Motorsport-Total</Autor>
+                        <Titel>Berührung bringt Teamchef zum Kochen: »Dann haben wir ein Problem
+                            …"</Titel>
+                        <Stelle/>
+                        <Datum>04.09.2023</Datum>
+                        <URL>https://www.ran.de/sports/motorsport/formel1/news/beruehrung-bringt-teamchef-zum-kochen-dann-haben-wir-ein-problem-319833</URL>
+                        <Aufrufdatum>22.02.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>HRT-Mercedes-Pilot Luca Stolz mischte durch seinen
+                            <Stichwort>Undercut</Stichwort> fast das Duell um den Sieg auf und
+                        überholte Thomas Preining <Streichung>- warum nutzte der DTM-Leader diese
+                            Taktik nicht?</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:ballsport:1558/d9TmWVHQdyNzGRZs">
+                        <Autor>Motorsport Total</Autor>
+                        <Titel>Undercut am Lausitzring: Warum verzichtete Thomas Preining auf
+                            taktischen Kniff?</Titel>
+                        <Stelle/>
+                        <Datum>22.08.2023</Datum>
+                        <URL>https://www.ran.de/sports/motorsport/dtm/news/dtm-lausitzring-thomas-preining-luca-stolz-undercut-taktik-porsche-316567</URL>
+                        <Aufrufdatum>22.02.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Plan entpuppte sich als sogenannter
+                            »<Stichwort>Undercut</Stichwort>« in Runde 22 für Leclerc. Eine Art
+                        feindlicher Übernahme der Führung. Der Monegasse erhielt beim Boxenstopp
+                        frische Reifen, während Ferrari Vettel auf den abgenutzten weitere vier
+                        Runden lang kreisen ließ. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2019/09/FAZ_FD2201909305821393"> Frankfurter
+                        Allgemeine Zeitung, 30.09.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nach den strategischen Fehlentscheidungen von Mercedes in Melbourne
+                        und Bahrain gab es endlich mal wieder eine strategische Entscheidung von
+                        Mercedes, die funktionierte. Vor den Stopps, vor
+                            <Autorenzusatz>Valtteri</Autorenzusatz> Bottas’
+                            <Stichwort>Undercut</Stichwort>, hatte der Finne drei Sekunden hinter
+                            <Autorenzusatz>Sebastian</Autorenzusatz> Vettel gelegen.
+                            <Streichung>»Wir hatten das Rennen im Griff«, sagte Vettel, »wir haben
+                            uns da vertan.«</Streichung> Vettel hing nun fest hinter Bottas, die
+                        Hälfte des Rennens stand noch aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2018/04/SZ_A74196442"> Süddeutsche Zeitung,
+                        16.04.2018 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-27"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

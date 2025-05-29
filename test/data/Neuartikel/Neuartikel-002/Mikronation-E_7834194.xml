@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7834194" Autor="wgrimm" Typ="Minimalartikel" Zeitstempel="2022-04-01" Erstellungsdatum="2016-04-12" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Mikronation</Schreibung>
+            <Aussprache><IPA>ˈmikʀonaˌʦi̯oːn</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="neoklassische_Bildung">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">mikro-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Nation</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">staatenähnliches Gebilde mit oft territorialem Anspruch, das </Definition>
+            <Definition Typ="Basis">meist kleines Gebiet, mir wenigen Einwohnern, das Souveränität
+                beansprucht souveräner Staat ohne Merkmale eines echten Staates</Definition>
+            <Definition Typ="Basis">staatenähnliches Gebilde, welches wie ein eigenständiger Staat
+                auftritt, aber nach dem Völkerrecht keiner ist</Definition>
+            <Definition Typ="Basis">An area or territory, typically small and with relatively few
+                inhabitants (and often having some of the political and social apparatus of a
+                nation-state), that claims national sovereignty despite not being recognized by most
+                or all other nation-states.</Definition>
+            <Definition Typ="Basis">A small area or political entity that claims national
+                sovereignty but is not recognized by other sovereign states.</Definition>
+            <Definition Typ="Basis">an entity, typically existing only on the internet or within the
+                private property of its members, that lays claim to sovereign status as an
+                independent nation, but which is unrecognized by real nations</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext> Das Phänomen der <Stichwort>Mikronationen</Stichwort> existiert
+                        weltweit und ist nicht zu verwechseln mit tatsächlich anerkannten
+                        Zwergstaaten. Es handelt sich dabei um Fantasiestaaten, die meist von einem
+                        Exzentriker ausgerufen werden, etwa die Freistadt Christiania bei Kopenhagen
+                        oder das Atoll EnenKio. </Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2020/08/BMP_doc7bwz09zm0d31dma9l86w"> Berliner
+                        Morgenpost, 17.08.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ende für »Staat« Hutt River
+                            <Autorenzusatz>Überschrift</Autorenzusatz>
+                        <Streichung>Sydney</Streichung> Ein eigenes Königreich mit eigener Währung
+                        und Pass-Stempel. Was klingt wie eine Utopie, gibt es auf der Welt in Form
+                        mehrerer <Stichwort>Mikronationen</Stichwort>. Eine davon gibt nun in
+                        Australien auf. Wegen der Corona-Pandemie bleiben Besucher und damit Geld
+                        aus. </Belegtext>
+                    <Fundstelle Fundort="dwds:noz:2020/08/NOZ_23-124112763"> Neue Osnabrücker
+                        Zeitung, 06.08.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Bezeichnung »Zwergstaat« verbittet sich, warum nicht
+                        gleich »Pygmäenstaat"? Auch eine
+                            »<Stichwort>Mikronation</Stichwort>« ist Liechtenstein nicht,
+                        denn dann stünde es in einer Reihe mit Fantasienationen wie der Freien
+                        Republik Saugeais im französischen Jura oder der Seefestungs-Grafschaft
+                        Sealand vor England. Liechtenstein ist ein »Mikrostaat«, einer von
+                        sechs in Europa: souverän, weitherum anerkannt, aber handlich in Format und
+                        Einwohnerzahl.</Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2019/02/BAZ_201902272719620243"> Basler Zeitung,
+                        27.02.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Ursprünglich ging es darum, auf der Plattform ungestört von der
+                        britischen Justiz einen Piratensender zu betreiben. Eigene Pässe,
+                        Briefmarken und eine eigene Währung, der Sealand-Dollar, folgten einige
+                        Jahre später. Fürstentum Sealand (Aufnahme von 1999) Die sogenannte
+                            <Stichwort>Mikronation</Stichwort> wurde jedoch nie anerkannt, obwohl
+                        sie anfangs noch in internationalen Gewässern lag. Spätestens 1987 aber war
+                        es vorbei damit. Damals erweiterte Großbritannien seine nationalen Gewässer
+                        von drei auf zwölf Seemeilen von der Küste. Die einst militärisch genutzte
+                        Plattform ist nur 7,5 Seemeilen vom Festland entfernt und gehört damit
+                        formal zu Großbritannien. </Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_online:src/2017/02/schwimmende_staedte_zuha">
+                        Spiegel, 16.02.2017 (online) </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Länder sind Kuriositäten, echte Randerscheinungen. Auch wenn
+                        sich die Gründer selbst oft sehr ernst nehmen und sich selbstbewusst mit
+                        Monaco oder Vatikanstadt vergleichen. Mit dem großen Unterschied, dass diese
+                        Zwergstaaten völkerrechtlich anerkannt sind. Was den
+                            <Stichwort>Mikronationen</Stichwort> niemand nehmen kann, sind die oft
+                        skurrilen Geschichten ihrer Gründung. Etwa die Besetzung einer verlassenen
+                        Plattform in der Nordsee, um einen illegalen Radiosender zu führen
+                        (Sealand), oder der Ärger über Warteschlangen vor einem Grenzposten (Conch
+                        Republic).</Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2015/04/SZ_A59988075"> Süddeutsche Zeitung,
+                        23.04.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Wir sind eine diktatorische Bananenrepublik«, sagt Baugh
+                        über seinen Staat, dessen Bevölkerung eigentlich nur aus ihm, seiner
+                        Familie, fünf Hunden und einem Hamster besteht. <Streichung>Jeder kann in
+                            seinem Vorgarten eine neue Nation ausrufen Tatsächlich braucht es nicht
+                            viel mehr, um sein eigener Regierungschef zu werden.</Streichung>
+                        »Jeder der möchte, kann im Prinzip morgens aufwachen und seinen
+                        Vorgarten zur <Stichwort>Mikronation</Stichwort> erklären«, sagt Hélène
+                            L<Streichung>andemore</Streichung>, Politikwissenschaftlerin an der
+                        Elite-Uni Yale. Alles was man dazu bräuchte, sei eigenes Territorium, eine
+                        Bevölkerung und einen, der das Land führt. Wie viele dieser Miniländer
+                        existieren, darüber gehen die Schätzungen der Experten auseinander – auch
+                        weil nicht ganz klar ist, was alles als <Stichwort>Mikronation</Stichwort>
+                        gezählt werden kann. Manche der Spaßstaaten treiben nur virtuell ihr
+                        Unwesen, andere sind als Kunstprojekte entstanden, so kommt man – je nach
+                        Definition und Zählart – mal auf ein paar Dutzend, mal gar auf einige
+                        hundert <Stichwort>Mikronationen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_online:src/2013/07/mikronation_molossia_100">
+                        Spiegel, 10.07.2013 (online) </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Einen anderen Ansatzpunkt haben die Mitglieder der virtuellen Nation
+                        Tomanien gewählt. Auf dem Webportal www.tomanien.de setzen sie sich in Form
+                        der Satire mit der NS-Vergangenheit Deutschlands auseinander. Sie
+                        orientieren sich dabei an dem berühmten Kinoklassiker »Der große
+                        Diktator« mit Charlie Chaplin. Dieses Beispiel zeigt, dass es sich bei
+                        den virtuellen Staaten eigentlich um Spiele handelt, »man simuliert
+                        aber in erster Linie Politik, und auch gesellschaftliche Ausgestaltung kommt
+                        in einer <Stichwort>Mikronation</Stichwort> nicht zu kurz«, erläutert
+                        Sven Kasubek.</Belegtext>
+                    <Fundstelle Fundort="dwds:saar:2009/05/SAAR_0509110287"> Saarbrücker Zeitung,
+                        11.05.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Vereinten Nationen (Uno) registrieren derzeit 193 vollständig von
+                        ihr anerkannte souveräne Staaten – 192 sind Mitglieder des Staatenforums,
+                        dazu kommt die Vatikanstadt. Außerdem gibt es ein paar nur von wenigen
+                        Staaten anerkannte Länder wie Somaliland, die Cookinseln oder Niue. Und
+                        schließlich existieren noch kaum bekannte
+                            <Stichwort>Mikronationen</Stichwort> wie Sealand.</Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2008/12/LVZ_C7C987C25C98ACFE4055902DCD9BB693">
+                        Leipziger Volkszeitung, 09.12.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> «Etats (faites-le vous-même)» <Paraphrase>Staaten (do it
+                            yourself)</Paraphrase> nennt der Künstler Peter Coffin ein Projekt, das
+                        er derzeit im Pariser Palais de Tokyo präsentiert: Da hängen die Flaggen
+                        erfundener <Stichwort>Mikronationen</Stichwort> in Reih und Glied an der
+                        Wand, in Vitrinen liegen Geldscheine, Pässe und Briefmarken aus – es gibt
+                        königliche Uniformen zu bestaunen, Verfassungen und Dekrete zu analysieren,
+                        Landkarten und Modelle zu studieren<Streichung>, und ab und zu wird einem
+                            auch mit viel falsch gestimmtem Blech eine Nationalhymne ins Ohr
+                            geblasen. Utopische Phantasien</Streichung> Die meisten dieser
+                            <Stichwort>Mikronationen</Stichwort> wurden von Künstlern geschaffen –
+                        aus unterschiedlichen Motiven heraus: Enttäuschung über die reale Politik,
+                        Steuerflucht, Alltagsüberdruss, Lust am Umgang mit monarchischen Symbolen
+                        usw. Erstaunlicherweise bilden sozialkritische Projekte, die reale
+                        Verhältnisse verzerren oder spiegeln, eher die Ausnahme. Was viele dieser
+                        Arbeiten eint, ist die Lust, sich eine eigen Nation als Spielstätte mehr
+                        oder weniger utopischer Phantasien zu schaffen. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2007/04/NZZ_F2ID9"> Neue Zürcher Zeitung,
+                        12.04.2007 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">A very small group of people having a single ethnic, religious,
+                or cultural affiliation</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Während in Europa ein Staat üblicherweise eine Nationalsprache
+                        besitzt, die von der Mehrheit der Bevölkerung als Muttersprache gesprochen
+                        wird, sind in manchen afrikanischen Staaten mehr als hundert verschiedene
+                        Sprachen verbreitet, in Nigeria über 500, in Kamerun etwa 300 und in
+                        etlichen weiteren Staaten jeweils über 100. Die Staatsgrenzen wurden – meist
+                        von den ehemaligen Kolonialherren – ohne Rücksicht auf ethnische und
+                        linguistische Gruppierungen festgelegt. So konnten sich bis auf wenige
+                        Ausnahmen keine Nationen herausbilden, da es keine Verbindung von Sprache,
+                        Volk und Staat gibt. Ein afrikanischer Staat besteht in der Regel aus
+                        zahlreichen <Stichwort>Mikronationen</Stichwort> oder Stämmen. Ein vor allem
+                        in Schwarzafrika verbreitetes Phänomen ist die Dreisprachigkeit. Neben ihrer
+                        angestammten indigenen Muttersprache ("Stammessprache«, oft
+                        fälschlich als »Dialekt« abqualifiziert) verwenden viele Afrikaner
+                        im Alltagsleben eine der bedeutenden afrikanischen Verkehrssprachen, die
+                        eine überregionale Kommunikation zwischen verschiedenen Volksgruppen
+                        erlauben. Als dritte Sprache spielen die Kolonialsprachen Französisch,
+                        Englisch oder Portugiesisch nach wie vor eine wichtige Rolle. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2019/02/wexml20190222_056"> Die Welt, 22.02.2019
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Sie unterscheidet vielmehr »Mikro-« und
+                        »Makronationen«. Natürlich müssen sich die afrikanischen Staaten
+                        zu modernen Nationen entwickeln. Aber sie sollten dies im Bewusstsein tun,
+                        aus einer Vielfalt von »Mikronationen« zu bestehen. Und diese
+                            <Stichwort>Mikronationen</Stichwort> müssen keine Stolpersteine auf dem
+                        Weg zur »richtigen« Nation sein. Im Gegenteil: Sie können die
+                        Nationenbildung im modernen Sinne befördern. Ein Beispiel. In den
+                        afrikanischen Gesellschaften ist heute das Bewusstsein von der Legitimität
+                        und Wünschbarkeit des Wechsels politischer Herrschaft nur schwach
+                        ausgeprägt. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2009/07_17/we_02xml20090701_17478"> Die Welt,
+                        25.11.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Nicht der Schmelztiegel – die über viele Jahrzehnte gelebte
+                        Föderation der Kulturen hat dazu geführt, dass heute von den USA als vom
+                        ersten transnationalen Land des 21. Jahrhunderts die Rede sein kann.
+                        Transnationale Länder aber sind es, die sich im weltweiten – politischen,
+                        ökonomischen und kulturellen – Konkurrenzkampf innerhalb der globalisierten
+                        Welt besonders gut behaupten werden. Die Multiethnisierung ist ein
+                        weltweites Problem. Die afrikanische Friedensnobelpreisträgerin Wangari
+                        Maathai spricht von »<Stichwort>Mikronationen</Stichwort>«. Ein
+                        Land wie Tansania hat über 120 Mikronationen – genauso viele wie Kreuzberg.
+                        Die Zukunft unseres Gemeinwesens hängt davon ab, ob es uns gelingt, eine
+                        Nation zu werden, in der die vielen »Mikronationen« sich heimisch
+                        fühlen, ob wir es schaffen, eine kosmopolitische Föderation der Kulturen zu
+                        bilden. Dies ist kein Plädoyer für Multikulti, für die Beliebigkeit eines
+                        kulturellen Neben- oder Durcheinanders, das bestenfalls beim »Karneval
+                        der Kulturen« Sinn hat. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2009/07_13/we_02xml20090701_13744"> Die Welt,
+                        24.10.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> 1985 wurden die Spiele ins Leben gerufen, seitdem treten alle zwei
+                        Jahre Andorra, Liechtenstein, Luxemburg, Island, Malta, Monaco, San Marino
+                        und Zypern gegeneinander an, um die Medaillen zu gewinnen, die ihnen sonst
+                        versagt bleiben. Dabei werden keine Phantasiesportarten wie
+                        Teebeutelweitwurf oder Wettsaunen praktiziert, sondern ganz normale wie
+                        100-Meter-Lauf, Schwimmen und Judo. Mit Dopingkontrollen, Olympischem Feuer
+                        und allem, was dazugehört. Die 700 Athleten aus den acht
+                            <Stichwort>Mikronationen</Stichwort> prägen derzeit das Straßenbild von
+                        San Marino (4500 Einwohner).</Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:2001/06/sz_156188"> Süddeutsche Zeitung,
+                        02.06.2001 </Fundstelle>
+                    <Diasystematik>
+                        <Stilebene>umgangssprachlich</Stilebene>
+                    </Diasystematik>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"><Beleg><Belegtext>Die 700 Athleten aus den acht <Stichwort>Mikronationen</Stichwort> prägen derzeit das Straßenbild von San Marino (4500 Einwohner).</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 02.06.2001</Fundstelle></Beleg><Beleg><Belegtext>Im Jahr 1967 wurde die Plattform vom englischen Fischer Paddy Roy Bates besetzt und als erste <Stichwort>Mikronation</Stichwort> nach internationalem Recht anerkannt.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 16.01.2012, Nr. 03</Fundstelle></Beleg><Beleg><Belegtext>Einige hundert »<Stichwort>Mikronationen</Stichwort>« im Internet basteln zurzeit an ähnlichen Unternehmen, berufen sich auf liberale Philosophen, sagen das Ende der Nationalstaaterei voraus, planen Steueroasen im Laptop.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 23.04.2001, Nr. 17</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

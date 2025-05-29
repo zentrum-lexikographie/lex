@@ -46,7 +46,7 @@
   [n]
   (if (= n "_text_") :text
       (-> n
-          (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(i)|(l))$" "")
+          (str/replace #"_((dts)|(dt)|(s)|(ss)|(t)|(txt)|(i)|(l))$" "")
           (str/replace "_" "-")
           keyword)))
 
@@ -56,11 +56,11 @@
   (condp = k
     :id                  ""
     :language            ""
-    :doc-type            ""
+    :doc-type            "_s"
     :xml-descendent-path ""
     :weight              "_i"
     :time                "_l"
-    :definitions         "_t"
+    :definitions         "_txt"
     :last-modified       "_dt"
     :timestamp           "_dt"
     :author              "_s"
@@ -69,7 +69,7 @@
     :source              "_s"
     :type                "_s"
     :provenance          "_s"
-    :last-updated        "_s"
+    :updated             "_s"
     :summary             "_s"
     :category            "_s"
     :status              "_s"

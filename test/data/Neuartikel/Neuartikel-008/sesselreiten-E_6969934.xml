@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_6969934" Autor="dsanders" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2021-01-18" Erstellungsdatum="2021-01-18" Status="Lex-zurückgestellt">
+        <Formangabe Typ="Hauptform">
+            <Schreibung><?oxy_comment_start author="kduden" timestamp="20210121T072329+0100" comment="bitte noch hutschen prüfen ((als fehlend gemeldet))" id="wls_fgx_5xb"?><?oxy_comment_start author="kduden" timestamp="20230616T104842+0200" parentID="wls_fgx_5xb" comment="in AMC 2 Belege, sonst nur Substantiv &gt; Substantiv ausbauen" mid="1"?>sesselreiten<?oxy_comment_end mid="1"?><?oxy_comment_end?></Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>sesselreitet </Wert></Praesens>
+                <Praeteritum><Wert>sesselritt</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>sesselgeritten</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="wgrimm" timestamp="20230905T084038+0100" comment="vollständige Angabe &quot;33 (1)&quot; wird vom Skript als Fehler moniert"?>33<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Sessel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>reiten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>A</Sprachareal>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">auf einem Sessel wippen, <Verweis Typ="vgl">
+                    <Ziellemma>kippeln</Ziellemma>
+                    <Ziellesart>b</Ziellesart>
+                </Verweis></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Der in der letzten Tischreihe, Tisch fensterseitig, rechter Sitzplatz
+                        (Blickrichtung Tafel), sitzende Schüler NN störte durch Unterhaltung mit
+                        seinem rechten<Streichung>, durch Gangbreite zwischen den Tischen
+                            getrennten</Streichung> Tischnachbarn <Streichung>in der am N durch den
+                            Disziplinarbeschuldigten zu supplierenden Deutschstunde von NN in der
+                            N-Klasse der Neuen Mittelschule N den Unterricht</Streichung> erheblich.
+                        NN wurde vom Disziplinarbeschuldigten mehrfach aufgefordert, das störende
+                        Verhalten einzustellen, was jedoch ohne Erfolg blieb. <Streichung>Der
+                            Disziplinarbeschuldigte nahm daraufhin im Durchgang zwischen den
+                            Tischen, letzte Reihe, Blickrichtung Tafel, Aufstellung, um die
+                            Sichtverbindung zwischen den störenden Schülern zu verstellen und die
+                            Unterhaltung so einzustellen.</Streichung> NN setzte sein störendes
+                        Verhalten <Streichung>jedoch</Streichung> weiter fort, indem er
+                            <Stichwort>sesselreitend</Stichwort> nach hinten rückte und mit seinem
+                        Nachbarn redete.</Belegtext>
+                    <Fundstelle Fundort="online">
+                        <Autor/>
+                        <Titel>Disziplinarerkenntnis</Titel>
+                        <Stelle/>
+                        <Datum>2014</Datum>
+                        <URL>https://web.archive.org/web/20230905064225/https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwi3xtHH7ZKBAxVv7rsIHbcWCWoQFnoECA0QAQ&amp;url=https%3A%2F%2Fwww.ris.bka.gv.at%2FDokumente%2FDok%2FDKT_TI_20140918_DIS_82_2014_00%2FDKT_TI_20140918_DIS_82_2014_00.pdf</URL>
+                        <Aufrufdatum>05.09.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

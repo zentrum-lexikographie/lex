@@ -1,0 +1,515 @@
+<?xml version='1.0' encoding='UTF-8'?><?oxy_comment_start author="kduden" timestamp="20200919T112924+0200" comment="Das muss auch mit den A-Subkorpora geprüft werden"?><DWDS xmlns="http://www.dwds.de/ns/1.0"><?oxy_comment_end?>
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" Goethe-Zertifikat="A1" xml:id="E_k_4381" Autor="dsanders" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2021-03-18" Erstellungsdatum="1969-01-01" Status="Lex-zurückgestellt">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>klar</Schreibung>
+            <Aussprache><IPA Audiodatei="004/klar"/></Aussprache>
+            <Grammatik>
+                <Wortklasse><?oxy_comment_start author="dsanders" timestamp="20220817T161615+0200" comment="bitte Eckformen aus dem WDG-Artikel übernehmen" flag="done"?>Adjektiv<?oxy_comment_end?></Wortklasse>
+                <Komparativ><Wert>klarer</Wert></Komparativ>
+                <Superlativ><Wert>am klarsten</Wert></Superlativ>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>klar</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1." xml:id="S_k_2686">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>trüb</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <Lesart n="a)" xml:id="S_k_2687">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">durchsichtig, rein</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>
+                            <Stichwort>klares</Stichwort> Wasser</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ein <Stichwort>klarer</Stichwort> Bach</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>eine <Stichwort>klare</Stichwort>
+                            <Paraphrase>ungebundene</Paraphrase> Brühe, Suppe</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>wenn die Flüssigkeit eine Zeitlang steht, wird sie wieder
+                                <Stichwort>klar</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>jetzt sind die Fensterscheiben
+                            <Stichwort>klar</Stichwort>!</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>die Wäsche so lange spülen, bis das Wasser
+                                <Stichwort>klar</Stichwort> bleibt</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>der Bergsee ist <Stichwort>klar</Stichwort> wie
+                            Kristall</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>etw. ist <Stichwort>klar</Stichwort> wie Kloßbrühe
+                                <Paraphrase>etw. ist völlig klar</Paraphrase>
+                        </Belegtext>
+                        <Diasystematik>
+                            <Stilebene>salopp</Stilebene>
+                            <Stilfaerbung>scherzhaft</Stilfaerbung>
+                        </Diasystematik>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>etw. ist <Stichwort>klar</Stichwort> wie dicke Tinte
+                                <Paraphrase>etw. ist völlig klar</Paraphrase>
+                        </Belegtext>
+                        <Diasystematik>
+                            <Stilebene>salopp</Stilebene>
+                            <Stilfaerbung>scherzhaft</Stilfaerbung>
+                            <Sprachraum>landschaftlich</Sprachraum>
+                        </Diasystematik>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ein <Stichwort>Klarer</Stichwort>
+                            <Paraphrase>ein wasserheller Trinkbranntwein ohne Zusatz von
+                                Geschmacksstoffen</Paraphrase>
+                        </Belegtext>
+                        <Diasystematik>
+                            <Stilebene>salopp</Stilebene>
+                            <Stilfaerbung>scherzhaft</Stilfaerbung>
+                        </Diasystematik>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+                <Lesart xml:id="S_k_2687_23">
+                    <Syntagmatik/>
+                    <Diasystematik>
+                        <Bedeutungsebene>übertragen</Bedeutungsebene>
+                    </Diasystematik>
+                    <Verweise/>
+                    <Definition Typ="Basis"/>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>jmdm. <Stichwort>klaren</Stichwort> Wein einschenken
+                                    <Paraphrase>den wahren Sachverhalt mitteilen</Paraphrase>
+                            </Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+                <Lesart xml:id="S_k_2687_12">
+                    <Syntagmatik/>
+                    <Diasystematik/>
+                    <Verweise/>
+                    <Definition Typ="Basis">nicht dunstig, neblig</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>
+                                <Stichwort>klare</Stichwort> Luft, Wetter</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>die Nacht, der Tag war <Stichwort>klar</Stichwort> und
+                                kalt</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>ein <Stichwort>klarer</Stichwort>
+                                <Paraphrase>wolkenloser</Paraphrase> Himmel</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>
+                                <Stichwort>klare</Stichwort>
+                                <Paraphrase>ungehinderte</Paraphrase> Sicht haben</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Beleg>
+                            <Belegtext>Die Sonne war ganz <Stichwort>klar</Stichwort>
+                                aufgegangen</Belegtext>
+                            <Fundstelle Fundort="WDG" Sigle="HERGEOGWO">
+                                <Autor>G. Hermann</Autor>
+                                <Titel>Wordelmann</Titel>
+                                <Stelle>113</Stelle>
+                                <Datum/>
+                            </Fundstelle>
+                        </Beleg>
+                    </Verwendungsbeispiele>
+                </Lesart>
+                <Lesart xml:id="S_k_2687_13">
+                    <Syntagmatik/>
+                    <Diasystematik/>
+                    <Verweise/>
+                    <Definition Typ="Basis">unvermischt, rein</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>
+                                <Stichwort>klare</Stichwort>, leuchtende Farben</Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+                <Lesart xml:id="S_k_2687_14">
+                    <Syntagmatik/>
+                    <Diasystematik>
+                        <Bedeutungsebene>bildlich</Bedeutungsebene>
+                    </Diasystematik>
+                    <Verweise/>
+                    <Definition Typ="Basis">leuchtend, strahlend, offen</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>sie hat <Stichwort>klare</Stichwort> Augen, einen
+                                    <Stichwort>klaren</Stichwort> Blick, ein
+                                    <Stichwort>klares</Stichwort> Gesicht</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Beleg>
+                            <Belegtext>Sie ist … ein schöner Mensch, so hell und
+                                    <Stichwort>klar</Stichwort>
+                            </Belegtext>
+                            <Fundstelle Fundort="WDG" Sigle="JOHWOLDWE">
+                                <Autor>Joho</Autor>
+                                <Titel>Wendemarke</Titel>
+                                <Stelle>108</Stelle>
+                                <Datum/>
+                            </Fundstelle>
+                        </Beleg>
+                    </Verwendungsbeispiele>
+                </Lesart>
+                <Lesart xml:id="S_k_2687_15">
+                    <Syntagmatik/>
+                    <Diasystematik/>
+                    <Verweise/>
+                    <Definition Typ="Basis">hell tönend, rein</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Beleg>
+                            <Belegtext>da hörten sie eine <Stichwort>klare</Stichwort> Knabenstimme
+                                singen</Belegtext>
+                            <Fundstelle Fundort="WDG" Sigle="STOTEHSWE">
+                                <Autor>Storm</Autor>
+                                <Titel>Immensee</Titel>
+                                <Stelle>1, 130</Stelle>
+                                <Datum/>
+                            </Fundstelle>
+                        </Beleg>
+                    </Verwendungsbeispiele>
+                </Lesart>
+            </Lesart>
+            <Lesart n="b)" xml:id="S_k_2688">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">vernünftig und nüchtern denkend, klug</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>er ist ein <Stichwort>klarer</Stichwort> Kopf, bewahrt, behält in
+                            jeder Situation seinen <Stichwort>klaren</Stichwort> Kopf, hat einen
+                                <Stichwort>klaren</Stichwort> Verstand</Belegtext>
+                        <Verweise Zeitstempel="2023-03-06" Quelle="DWDS" Autor="kaufhold">
+                            <Verweis Typ="MWA">
+                                <Ziellemma><?oxy_comment_start author="dsanders" timestamp="20230306T171751+0100" comment="ticketnr 0053472"?>einen<?oxy_comment_end?>
+                                    klaren Kopf bewahren</Ziellemma>
+                                <Ziellesart/>
+                            </Verweis>
+                        </Verweise>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ich kann heute keinen <Stichwort>klaren</Stichwort> Gedanken
+                            fassen</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>
+                            <Stichwort>klar</Stichwort> denken können</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>es gab Augenblicke, in denen der Kranke ganz
+                                <Stichwort>klar</Stichwort>
+                            <Paraphrase>bei vollem Bewusstsein</Paraphrase> war</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>nach einigen Schnäpsen war er (im Kopf) nicht mehr
+                                <Stichwort>klar</Stichwort>
+                            <Paraphrase>war er betrunken</Paraphrase>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart n="2." xml:id="S_k_2689">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">deutlich</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <Lesart n="a)" xml:id="S_k_2690">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">übersichtlich und verständlich</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>eine <Stichwort>klare</Stichwort> Darstellung,
+                            Gliederung</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>einen <Stichwort>klaren</Stichwort> Stil schreiben</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>er hat eine <Stichwort>klare</Stichwort>
+                            <Paraphrase>gut lesbare</Paraphrase> Schrift</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>sie kann sich nicht <Stichwort>klar</Stichwort>
+                            ausdrücken</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>
+                            <Stichwort>klar</Stichwort> und deutlich sprechen</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>mir ist noch nicht recht <Stichwort>klar</Stichwort>
+                            <Paraphrase>ich habe noch nicht ganz begriffen, verstanden</Paraphrase>,
+                            wie man zu diesem Ergebnis kommt</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ich bin mir darüber <Stichwort>klar</Stichwort>, bin mir im
+                                <Stichwort>Klaren</Stichwort>, bin darüber ins
+                                <Stichwort>Klare</Stichwort> gekommen <Paraphrase>mir ist klar
+                                geworden</Paraphrase>, dass er ein großer Taugenichts
+                            ist</Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)" xml:id="S_k_2691">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">eindeutig</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>das ist ein <Stichwort>klarer</Stichwort> Fall von
+                            Betrug</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>seine Antwort war ein <Stichwort>klares</Stichwort>
+                            Nein</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>eine <Stichwort>klare</Stichwort> Stellungnahme</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ein <Stichwort>klares</Stichwort> Bekenntnis zur
+                            Demokratie</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>man erwartete von ihm eine <Stichwort>klare</Stichwort> Antwort,
+                            Entscheidung</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>eine <Stichwort>klare</Stichwort> Vorstellung von etw.
+                            haben</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>sich <Autorenzusatz>Dativ</Autorenzusatz> ein
+                                <Stichwort>klares</Stichwort> Bild von etw. machen</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>ein Ziel <Stichwort>klar</Stichwort> vor Augen haben</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>sie hat in allem, was sie tut, eine <Stichwort>klare</Stichwort>
+                            Linie</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>der Boxer errang einen <Stichwort>klaren</Stichwort>
+                            Punktsieg</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>der Sieger ging mit <Stichwort>klarem</Stichwort> Vorsprung
+                            durchs Ziel</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>etw. <Stichwort>klar</Stichwort>, <Stichwort>klar</Stichwort> und
+                            deutlich heraussagen</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>etw. klipp und <Stichwort>klar</Stichwort>
+                            heraussagen</Belegtext>
+                        <Verweise>
+                            <Verweis Typ="MWA">
+                                <Ziellemma>klipp und klar</Ziellemma>
+                                <Ziellesart/>
+                                <?oxy_comment_start author="jgrimm" timestamp="20210318T123111+0100" comment="bitte MWA &quot;klipp und klar&quot; berücksichtigen, MWA-Link gesetzt laut Ticket 0049627"?>
+                            </Verweis><?oxy_comment_end?>
+                        </Verweise>
+                        <Diasystematik>
+                            <Stilfaerbung>verstärkend</Stilfaerbung>
+                        </Diasystematik>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>die Fronten <Stichwort>klar</Stichwort> abstecken</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>die Entwicklung zeichnet sich bereits <Stichwort>klar</Stichwort>
+                            ab</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>etw. ist <Stichwort>klar</Stichwort> erkennbar,
+                            sichtbar</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>der Läufer H liegt <Stichwort>klar</Stichwort> in
+                            Führung</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>es ist <Stichwort>klar</Stichwort>, liegt
+                                <Stichwort>klar</Stichwort> auf der Hand, dass er gelogen
+                            hat</Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+                <Lesart xml:id="S_k_2691_10">
+                    <Syntagmatik/>
+                    <Diasystematik>
+                        <Stilebene>umgangssprachlich</Stilebene>
+                    </Diasystematik>
+                    <Verweise/>
+                    <Definition Typ="Basis">selbstverständlich, natürlich</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>»willst du mitkommen?« »<Stichwort>Klare</Stichwort> Sache,
+                                das ist doch (ganz) <Stichwort>klar</Stichwort>, (na)
+                                    <Stichwort>klar</Stichwort>!«</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>»da hast du dich aber beeilt!« »Na
+                                    <Stichwort>klar</Stichwort>, ich wollte ja möglichst schnell
+                                damit fertig werden«</Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+                <Lesart xml:id="S_k_2691_11">
+                    <Syntagmatik/>
+                    <Diasystematik/>
+                    <Verweise/>
+                    <Definition Typ="Basis">richtig, genau</Definition>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>in <Stichwort>klarer</Stichwort> Erkenntnis der
+                                Lage</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>einen <Stichwort>klaren</Stichwort> Blick
+                                    <Paraphrase>Beurteilung, Einsicht</Paraphrase> für etw.
+                                haben</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>etw. <Stichwort>klar</Stichwort> voraussehen,
+                                durchschauen</Belegtext>
+                        </Kompetenzbeispiel>
+                        <Kompetenzbeispiel>
+                            <Belegtext>etw. <Stichwort>klar</Stichwort> voneinander trennen,
+                                unterscheiden</Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+            </Lesart>
+            <Lesart n="c)" xml:id="S_k_2692">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">geordnet, überschaubar</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>
+                            <Stichwort>klare</Stichwort> Verhältnisse schaffen</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>in <Stichwort>klaren</Stichwort> Verhältnissen leben</Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart n="3." xml:id="S_k_2693">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Gruppensprache>Seemannssprache</Gruppensprache>
+                <Gruppensprache>Fliegersprache</Gruppensprache>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">für etw. vorbereitet, zu etw. fertig, bereit</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>das Schiff ist <Stichwort>klar</Stichwort> zum Einsatz, Gefecht, zur
+                        Abfahrt</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>alle Rettungsboote sind <Stichwort>klar</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>das Flugzeug, die Maschine ist <Stichwort>klar</Stichwort>
+                        <Paraphrase>zum Einsatz bereit</Paraphrase>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>Herr Rockezoll … rief »<Stichwort>Klar</Stichwort> zur
+                        Landung!«</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="HARHUGWWU">
+                        <Autor>Hartung</Autor>
+                        <Titel>Wunderkinder</Titel>
+                        <Stelle>27</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+                <Kompetenzbeispiel>
+                    <Belegtext>
+                        <Stichwort>klar</Stichwort> Schiff, Deck machen <Paraphrase>das Schiff, Deck
+                            säubern</Paraphrase>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="4." xml:id="S_k_2694">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachraum>landschaftlich</Sprachraum>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>
+                        <Stichwort>klarer</Stichwort>
+                        <Paraphrase>fein gemahlener</Paraphrase> Zucker</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"><Beleg><Belegtext>Ein paar Tage nach dem Prozeß konnten wir uns noch nicht über die künftige Strategie <Stichwort>klar</Stichwort> sein.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Hannover, Heinrich: Die Republik vor Gericht 1975 – 1995, Berlin: Aufbau-Taschenbuch-Verl. 2001 [1999], S. 393</Fundstelle></Beleg><Beleg><Belegtext>Sonst wird das Land ein kleinbäuerliches Land bleiben, und das müssen wir <Stichwort>klar</Stichwort> erkennen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Schlögel, Karl: Petersburg, München Wien: Carl Hanser Verlag 2002, S. 347</Fundstelle></Beleg><Beleg><Belegtext>Das ist doch das brennende Problem, daß die da hinmüssen, ist doch <Stichwort>klar</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Runge, Erika (Hg.), Bottroper Protokolle, Frankfurt a. M.: Suhrkamp 1968, S. 40</Fundstelle></Beleg><Beleg><Belegtext>Es muss sich darüber <Stichwort>klar</Stichwort> werden, wie es dieses Ziel erreichen kann.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Archiv der Gegenwart, 2001 [2000]</Fundstelle></Beleg><Beleg><Belegtext>Das Interesse der sowjetischen Führung ist <Stichwort>klar</Stichwort>, die Theorie falsch.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Brandt, Willy: Erinnerungen, Berlin: Ullstein 1997 [1989], S. 55</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

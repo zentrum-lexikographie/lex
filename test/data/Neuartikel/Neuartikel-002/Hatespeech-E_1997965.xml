@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_7212177" Autor="jgrimm" Typ="Verweisartikel" Tranche="RSR-2024-37_E3" Zeitstempel="2025-03-03" Erstellungsdatum="2018-03-26" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Hate-speech"><?oxy_comment_start author="wgrimm" timestamp="20240829T102305+0200" comment="Hate-Speech getilgt, nicht  im AWZ (und nicht in Duden), Belege dreimal so viele für ZS" id="bjw_3tk_ndc"?><?oxy_comment_start author="wgrimm" timestamp="20241128T101156+0100" parentID="bjw_3tk_ndc" comment="SmB reaktiviert, da signifikant belegt" mid="1"?>Hatespeech<?oxy_comment_end mid="1"?><?oxy_comment_end?></Schreibung>
+            <Schreibung>Hate-Speech</Schreibung>
+            <Aussprache>
+                <IPA>ˈhɛɪ̯tspiːʧ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-es</Wert></Plural>
+                <Numeruspraeferenz>Plural selten</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <?oxy_comment_start author="wgrimm" timestamp="20240829T102320+0200" comment="45 (E1) gestilgt" flag="done"?>
+            <Orthografieregel><?oxy_comment_end?>37 (E3)</Orthografieregel>
+            <Orthografieregel>45 (1)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>Englisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Hassrede</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

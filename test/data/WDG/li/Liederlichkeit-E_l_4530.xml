@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_l_4530" Autor="" Typ="Verweisartikel" Zeitstempel="1969-01-01" Erstellungsdatum="1969-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>Liederlichkeit</Schreibung>
+            <Aussprache><IPA Audiodatei="042/die_Liederlichkeit"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2016-08-01" Quelle="DWDS" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>liederlich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-keit</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise><Verweis Typ="EtymWB"><Ziellemma>Liederlichkeit</Ziellemma><Ziellesart/></Verweis></Verweise></Diachronie>
+        <Lesart xml:id="S_l_2515_11" n="a)">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>liederlich</Ziellemma>
+                    <Ziellesart>a</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>wegen ihrer <Stichwort>Liederlichkeit</Stichwort> wurde ihr gekündigt</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart xml:id="S_l_2515_10" n="b)">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>liederlich</Ziellemma>
+                    <Ziellesart>b</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>die gewerbsmäßige <Stichwort>Liederlichkeit</Stichwort> nahm aufdringliche und ausschweifende Formen an</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="MANTHOGWE">
+                        <Autor>Th. Mann</Autor>
+                        <Titel>Tod in Venedig</Titel>
+                        <Stelle>9,526</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Der Satz, die Zeit sei die vierte Dimension der Wirklichkeit (außer den drei Dimensionen des Raums), leidet an einer sprachlichen <Stichwort>Liederlichkeit</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Mauthner, Fritz: Wörterbuch der Philosophie. In: Bertram, Mathias (Hg.) Geschichte der Philosophie, Berlin: Directmedia Publ. 2000 [1910], S. 34199</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Schuld daran ist diese russische <Stichwort>Liederlichkeit</Stichwort>, die es bei uns schon immer gegeben hat.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 28.10.2000</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die Freude an der Übersetzung wird getrübt durch eine gewisse philologische <Stichwort>Liederlichkeit</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 26.07.1963, Nr. 30</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Gegen außereheliche <Stichwort>Liederlichkeiten</Stichwort> gibt es wenigstens Gerichte, an die der männliche Volksteil sich wenden kann.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">konkret, 1989</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In den letzten drei Jahren ihrer Amtszeit als Premierministerin konnte sie einen Sieg über dieses Zeichen der »<Stichwort>Liederlichkeit</Stichwort>« erringen.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.11.1992, Nr. 48</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie verlieren sich in einem Wust von Freizeit, Weichheit, <Stichwort>Liederlichkeit</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 01.12.2000</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Der <Stichwort>Liederlichkeit</Stichwort> beim Umgang mit Grundrechten wird offenbar diesmal die Krone aufgesetzt.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.12.1997</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das Paradoxon ist die Giftblüte des Quietismus, das Schillern des faulig gewordenen Geistes, die größte <Stichwort>Liederlichkeit</Stichwort> von allen!</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Mann, Thomas: Der Zauberberg, Gütersloh: Bertelsmann 1998 [1924], S. 274</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie habe die führende Rolle in der Ehe und bestimme den Lebensstil der Familie durch ihre Nachlässigkeit und <Stichwort>Liederlichkeit</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Werner, Reiner: Das verhaltensgestörte Kind, Berlin: Dt. Verl. d. Wiss. 1973 [1967], S. 88</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Ein Gutachter von der Denkungsart Lodovico Settembrini’s hätte angesichts eines
+                        solchen Mangels an gutem Willen geradezu von
+                            <Stichwort>Liederlichkeit</Stichwort>, von »einer Form der
+                        Liederlichkeit« sprechen mögen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Mann, Thomas: Der Zauberberg, Gütersloh: Bertelsmann 1998 [1924], S. 281</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

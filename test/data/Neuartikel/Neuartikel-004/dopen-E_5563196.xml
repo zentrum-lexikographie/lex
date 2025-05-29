@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="dsanders" xml:id="E_d_3500" Autor="" Typ="Basisartikel-D" Tranche="RSR-2024-21_E2_1" Zeitstempel="2025-01-20" Erstellungsdatum="1967-01-01" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="wgrimm" timestamp="20241105T104107+0100" comment="Bitte Metadaten korrigieren: Das ist immer noch ein WDG-Artikel, weil keine DWDS- oder ZDL-Anteile im Lesartenteil stehen" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="do-pen">dopen</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="034/dopen">ˈdoːpn̩</IPA>
+            </Aussprache>
+            <Aussprache>
+                <?oxy_comment_start author="dsanders" timestamp="20250121T083844+0100" comment="Vorschlag für ergänzung" flag="done"?>                
+                <IPA>ˈdɔʊ̯pn̩</IPA>
+                <?oxy_comment_end?>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>dopt</Wert></Praesens>
+                <Praeteritum><Wert>dopte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gedopt</Wert></Partizip_II>
+                <Partizip_II><Wert>gedoped</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar><?oxy_comment_start author="dsanders" timestamp="20250116T092331+0100" comment="Ergänzt"?>Neben
+                der an die Konjugation deutscher Verben angepassten Partizipform <erwaehntes_Zeichen Sprache="dt">gedopt</erwaehntes_Zeichen> ist bei prädikativem Gebrauch auch die
+                an das Englische angelehnte Partizipbildung <erwaehntes_Zeichen Sprache="dt">gedoped</erwaehntes_Zeichen> regulär.<?oxy_comment_end?></Kommentar>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>21 (E2.1)</Orthografieregel>
+        </Orthografie>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie>aus <erwaehntes_Zeichen Sprache="engl">to dope</erwaehntes_Zeichen>
+                <Paraphrase>ein stimulierendes narkotisches Getränk verabreichen</Paraphrase> &lt;
+                    <erwaehntes_Zeichen Sprache="engl">dope</erwaehntes_Zeichen>
+                <Paraphrase>zähe Flüssigkeit, Narkotikum, Opium</Paraphrase> &lt;
+                    <erwaehntes_Zeichen Sprache="nl">doop</erwaehntes_Zeichen>
+                <Paraphrase>Flüssigkeit, in die etw. eingetaucht wird,
+                Soße</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>dopen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart xml:id="S_d_2754">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Sport</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">jmdn. (unerlaubt) durch Anregungsmittel zu einer vorübergehenden
+                Leistungssteigerung aufputschen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>einen Läufer <Stichwort>dopen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250116T092243+0100" comment="Beispiel-Pendant zum (neuen) FK"?>
+                    <Belegtext><?oxy_comment_end?>ein <Stichwort>gedoptes</Stichwort>
+                        Rennpferd</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Allerdings musste er 2012 einräumen, in seiner aktiven Zeit selbst
+                            <Stichwort>gedopt</Stichwort> zu haben.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.10.2013 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er <Stichwort>dopte</Stichwort>, weil er nicht einsah, es nicht zu
+                        tun.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 27.08.2013, Nr. 34</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als er aber merkte, dass dieses Ziel nicht zu erreichen sei, habe er
+                        aufgehört, zu <Stichwort>dopen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 29.01.2013 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Man könnte sagen, du hast <Stichwort>gedopt</Stichwort>, also bist du
+                        draußen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 10.05.2012 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Haben Sie selbst schon mal <Stichwort>gedopt</Stichwort>, um besser
+                        zu sein?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.10.2007, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Da ich nicht so saudumm bin, habe ich mich nicht
+                            <Stichwort>gedopt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.10.2000, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ohne ärztliche Hilfe könnte er auf diese Art nicht
+                            <Stichwort>gedopt</Stichwort> haben.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 26.03.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn er so gut in Form ist, braucht er doch nicht zu
+                            <Stichwort>dopen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 25.02.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In solch entschleunigten Momenten duftet es in der Halle nach gutem
+                            <Stichwort>Dope</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 02.12.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nahezu die gesamten Spitzensportler der ehemaligen DDR seien
+                        jahrelang systematisch mit dem Präparat Oral-Turinabol (OT) aus der
+                        Produktion der VEB Jenapharm <Stichwort>gedopt</Stichwort>
+                        worden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A. [math]: Oral-Turinabol. In: Aktuelles
+                        Lexikon 1974-2000, München: DIZ 2000 [1990]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

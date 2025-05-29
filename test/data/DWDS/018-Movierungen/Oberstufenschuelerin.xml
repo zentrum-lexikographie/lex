@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_5371157_764" Autor="wgrimm" Typ="Basisartikel-D" Tranche="Movierung" Zeitstempel="2023-08-25" Erstellungsdatum="2020-09-24" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Ober-stu-fen-schü-le-rin"><?oxy_comment_start author="wgrimm" timestamp="20230826T112832+0200" comment="maskuline Form muss ausgebaut werden"?>Oberstufenschülerin<?oxy_comment_end?></Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Oberstufenschüler</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Oberstufenschüler</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Rund 260 <Stichwort>Oberstufenschülerinnen</Stichwort> und -schüler
+                        der beiden Merziger Gymnasien nahmen am Aktionstag teil. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:2023/08/SAAR_172233493"> Saarbrücker
+                        Zeitung, 04.08.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Mit Autorität allein käme die
+                            <Stichwort>Oberstufenschülerin</Stichwort> allerdings auch nicht weit. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2023/08/RZTG_A79DA286F43D3E7C0A3F2DD623C10BC7-KOBLENZ"> Rhein-Zeitung, 03.08.2023 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Für <Stichwort>Oberstufenschülerinnen</Stichwort> werden an der
+                        Hochschule Koblenz von September bis November 2023 »
+                        Mint-Samstage« zur Studienorientierung angeboten. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2023/07/RZTG_5086D8B5B0F9EA78E165C8518659A2BA-NEUWIEDLINZ"> Rhein-Zeitung, 20.07.2023 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> »Unser Ziel ist es, alle drei Monate eine Zeitung zu
+                        veröffentlichen«, sagt die <Stichwort>Oberstufenschülerin</Stichwort>.
+                        Erst einmal elektronisch, vielleicht auch mal gedruckt. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2023/06/NEUW_13b2afe0d41ef1fb3573901d585c326b234df66"> Neue Westfälische, 20.06.2023 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Eine <Stichwort>Oberstufenschülerin</Stichwort> kam zu dem Schluss,
+                        dass lediglich das «Provisorium Primarschule Mitte» infrage komme. </Belegtext>
+                    <Fundstelle Fundort="dwds:tgz_regional:2023/06/TGZ_2023060500000318151035">
+                        Thurgauer Zeitung, 05.06.2023 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Ein halbes Jahr waren die <Stichwort>Oberstufenschülerin</Stichwort>
+                        und Maurice ein Paar.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        21.05.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit dem grauen weiten Pullover, den engen Jeans und dem dezenten
+                        Make-up sieht das leichte Mädchen wie eine
+                            <Stichwort>Oberstufenschülerin</Stichwort> aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 02.07.2008, Nr. 21</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch heute noch belegen <Stichwort>Oberstufenschülerinnen</Stichwort>
+                        als Leistungsfächer lieber Fremdsprachen denn Physik und Chemie.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.11.1986, Nr. 49</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In den holzgetäfelten Fluren voller Heiligenstatuen herrscht
+                        ehrfurchtsvolle Stille, in den Klassenräumen geben die Lehrerinnen
+                        Frontalunterricht vor sehr braven, sehr gelangweilten
+                            <Stichwort>Oberstufenschülerinnen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        13.05.2004</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

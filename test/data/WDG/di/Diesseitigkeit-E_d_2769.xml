@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_d_2769" Autor="" Typ="Vollartikel" Zeitstempel="1967-01-01" Erstellungsdatum="1967-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="herold" Quelle="DWDS" Zeitstempel="2024-04-04">
+            <Schreibung>Diesseitigkeit</Schreibung>
+            <Aussprache><IPA Audiodatei="034/die_Diesseitigkeit"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-08-01" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>diesseitig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-keit</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_d_2162">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>gehoben</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">dem Diesseits zugewandte Einstellung, Haltung</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine optimistische <Stichwort>Diesseitigkeit</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>daß sie die Bücher führte und Pastor und Oberin auf diesem Gebiet vollkommen bevormundete, erschien den meisten als Beweis ihrer <Stichwort>Diesseitigkeit</Stichwort>
+                    </Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="SEIINALEN">
+                        <Autor>I. Seidel</Autor>
+                        <Titel>Lennacker</Titel>
+                        <Stelle>628</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                    </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Doch scheint sich diese trotz eigentlich selbstbewußt vertretener <Stichwort>Diesseitigkeit</Stichwort> in ihrer Stellung unwohl zu fühlen.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 04.12.1995, Nr. 49</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Nur in dieser absoluten Feuerbachschen <Stichwort>Diesseitigkeit</Stichwort> wird eine Lösung zu finden sein.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.01.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Dieses Zurückschlagen von Jenseitigkeit in <Stichwort>Diesseitigkeit</Stichwort> geschieht nicht wie im Kitsch der populären Kunst des 19.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 24.12.2001, Nr. 52</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die neue <Stichwort>Diesseitigkeit</Stichwort> ist jedoch nur die eine Perspektive dieser Übergangszeit.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 10.04.1992, Nr. 16</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die Welt, in der man dopt, ist eine Hölle der <Stichwort>Diesseitigkeit</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 26.04.2003</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die <Stichwort>Diesseitigkeit</Stichwort> und die Jenseitigkeit lassen sich nicht zu einer kosmischen Einheit zusammenbringen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Løgstrup, K. E.: Existenztheologie. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1958], S. 2883</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das Mönchtum kann als lebendiger Protest gegen die <Stichwort>Diesseitigkeit</Stichwort> verstanden werden.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Sucker, W.: Katholizismus. In: Die Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1959], S. 25104</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Mit dem Bildnis wurde langfristig eine Entwicklung profaner Kunst und unmittelbarer <Stichwort>Diesseitigkeit</Stichwort> eingeleitet.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – F. In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1989], S. 2716</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Zugleich ist die <Stichwort>Diesseitigkeit</Stichwort> der homerischen Welt eine Wurzel der heroischen Tragik.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Curtius, Ernst Robert: Europäische Literatur und lateinisches Mittelalter, Tübingen: Francke 1993 [1948], S. 171</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die von Vernünfteleien und Geistreichtun kahlgefressenen Ödeneien bloßer <Stichwort>Diesseitigkeit</Stichwort> sind nicht die Bereiche von Pfitzners Erleben und Schaffen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Schuhmann, Otto: Meyers Opernbuch, Leipzig: Bibliograph. Inst. 1938 [1935], S. 627</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

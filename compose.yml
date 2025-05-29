@@ -1,0 +1,26 @@
+name: zdl_lex
+services:
+  index:
+    image: solr:9
+    volumes:
+      - index:/var/solr
+    ports:
+      - "8983:8983"
+    command: [ "solr-precreate", "articles" ]
+  server:
+    image: docker.zdl.org/zdl-lex/server:latest
+    build:
+      context: .
+    environment:
+      - "ZDL_LEX_SERVER_URL=http://localhost:3000"
+      - "ZDL_LEX_SERVER_USER=admin"
+      - "ZDL_LEX_SERVER_PASSWORD=admin"
+      - "ZDL_LEX_GIT_ORIGIN="
+      - "ZDL_LEX_GIT_BRANCH=zdl-lex-server/development"
+    volumes:
+      - server:/data
+    ports:
+      - "3000:3000"
+volumes:
+  index:
+  server:

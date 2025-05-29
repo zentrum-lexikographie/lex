@@ -5,6 +5,6 @@
   (python-test-runner pytest))
  (clojure-mode
   (cider-preferred-build-tool . "clojure-cli")
-  (cider-clojure-cli-aliases . ":test:log:client:server:oxygen")
-  (cider-ns-refresh-before-fn . "integrant.repl/halt")
-  (cider-ns-refresh-after-fn . "integrant.repl/go")))
+  (cider-clojure-cli-aliases . ":build:dev:test:client:server:oxygen")
+  (cider-ns-refresh-before-fn . "user/halt")
+  (cider-ns-refresh-after-fn . "user/go")))

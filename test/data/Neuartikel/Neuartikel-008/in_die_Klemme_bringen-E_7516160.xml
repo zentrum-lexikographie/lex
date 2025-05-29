@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7516160" Autor="kduden" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2022-05-21" Erstellungsdatum="2020-06-17" Status="Red-f">
+        <?oxy_comment_start author="kduden" timestamp="20201104T162411+0100" comment="zurückgestellt wegen einer Überfülle an &quot;Klemme&quot; - Artikeln; besprochen mit Maria, 4.11.20" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20220521T215526+0200" comment="Mantis-Fehlermeldung behoben, 21.5.22" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung><?oxy_comment_start author="wgrimm" timestamp="20220406T113614+0200" comment="Platzhalter ergänzt" flag="done"?>jmdn<?oxy_comment_end?>. in die Klemme <?oxy_comment_start author="jgrimm" timestamp="20220406T103408+0200" comment="NEU - Satellit zu &quot;in der Klemme / in die Klemme&quot;" flag="done"?>bringen<?oxy_comment_end?></Schreibung>
+            <Aussprache class="invisible"><IPA Audiodatei="126/jemanden_in_die_Klemme_bringen"/></Aussprache>
+            <Aussprache><IPA Audiodatei="129/jemanden_in_die_Klemme_bringen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Artikelpraeferenz Frequenz="seltener">mit unbestimmtem Artikel</Artikelpraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Klemme</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>bringen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise>
+            <Verweis Typ="MWA-Zentralartikel">
+                <Ziellemma Anzeigeform="in der Klemme / in die Klemme">in die <?oxy_comment_start author="kduden" timestamp="20220518T144124+0200" comment="Verweis korr."?>Klemme<?oxy_comment_end?></Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd., etw. <Stichwort>bringt jmdn. in die Klemme</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Klemme</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">dafür sorgen, dass jmd. in eine missliche, unangenehme oder ausweglose Lage, eine Zwangslage gerät</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Sein <Autorenzusatz>des Geldwäschers</Autorenzusatz> Geständnis könnte <Streichung>nun</Streichung> etliche Deutsche, darunter auch zwei Großunternehmen, ordentlich <Stichwort>in die Klemme bringen</Stichwort>. B<Streichung>rauer</Streichung> hat den Fahndern Passwörter für seine Laptops, seine Handys und USB-Sticks gegeben. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 06.12.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ihre <Autorenzusatz>Merkels</Autorenzusatz> Ankündigung im vergangenen Sommer, Deutschland könne 800.000 Migranten aufnehmen, hatte für die anderen Europäer den Klang eines Machtworts. Und sie <Stichwort>brachte</Stichwort> die süd- und osteuropäischen Nationen <Stichwort>in eine</Stichwort> fürchterliche <Stichwort>Klemme</Stichwort>. Jeder, der seine nationalen Grenzen verteidigte (und vertragsgemäß die EU-Außengrenzen verteidigte), blockierte damit plötzlich deutsche nationale Interessen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 28.01.2016</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wer <Streichung>allerdings</Streichung> Russland wirtschaftlich <Stichwort>in die Klemme bringen</Stichwort> will, der braucht die Europäer. Denn sie sind Russlands Haupthandelspartner.</Belegtext>
+                    <Fundstelle Fundort="dwds">Der Spiegel, 03.03.2014 (online) </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Das ist die Crux dieser Sache:</Streichung> Aus komplexen und komplizierten menschlichen Figuren, die Arno Geiger <Autorenzusatz>in seinem Roman</Autorenzusatz>
+                        <Stichwort>in</Stichwort> psychische <Stichwort>Klemmen bringt</Stichwort> und in ideologische Widersprüche verstrickt, denen er Wandlungen aufzwingt und Entwicklungen erlaubt, macht W<Streichung>alburg</Streichung>
+                        <Autorenzusatz>in seiner Bühnenadaption</Autorenzusatz> charakterlich simplifizierte Strichmännchen und -weibchen.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 06.05.2008 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die FDP hat sich mit ihrer Kandidatin Hamm-Brücher für das Amt des Bundespräsidenten <Stichwort>in die Klemme gebracht</Stichwort>
+                        <Paraphrase>sich selbst in eine verzwickte Lage manövriert</Paraphrase>. <?oxy_comment_start author="kduden" timestamp="20220406T130448+0200" comment="wenig reflexive Verwendung, deswegen hier Paraphrase statt &quot;sich&quot; in der Nennform" flag="done"?>Gespräche<?oxy_comment_end?> über einen gemeinsamen Koalitionskandidaten <Autorenzusatz>mit der CDU</Autorenzusatz> bedeuten, daß Frau Hamm-Brücher fallengelassen werden müßte. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 08.12.1993 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der permanente Zwang, die <Autorenzusatz>landwirtschaftliche</Autorenzusatz> Produktion auszuweiten, um einen Ausgleich für die sinkenden Gewinne pro Produkteinheit zu finden, <Stichwort>bringt</Stichwort>
+                        <Streichung>auch im Kreis Vechta</Streichung> viele spezialisierte Agrarbetriebe <Stichwort>in die</Stichwort> wirtschaftliche <Stichwort>Klemme</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 18.01.1985</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="*">
+                <Formangabe>
+                    <Grammatik>
+                        <Artikelpraeferenz Frequenz="nur">mit bestimmtem Artikel</Artikelpraeferenz>
+                    </Grammatik>
+                    <Diasystematik/>
+                </Formangabe>
+                <Syntagmatik>
+                    <Konstruktionsmuster>
+                        <Belegtext>etw. <Stichwort>bringt jmdn. <?oxy_comment_start author="kduden" timestamp="20220521T215504+0200" comment="ergänzt"?>in<?oxy_comment_end?> die Klemme</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Frequenzangabe>seltener</Frequenzangabe>
+                <Diasystematik>
+                    <Bedeutungsebene>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis"><?oxy_comment_start author="wgrimm" timestamp="20220521T215439+0200" comment="ergänzt"?>jmdn<?oxy_comment_end?>. in Geldnot bringen</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Ein Flop wie »Lone Ranger«, mit dem Disney 2013 offenbar 150 Millionen Dollar verlor, reicht, um ein <Autorenzusatz>Film-</Autorenzusatz>Studio <Stichwort>in die Klemme</Stichwort> zu <Stichwort>bringen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds">Der Spiegel, 28.02.2014 (online) </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Steigende Energiekosten <Stichwort>bringen</Stichwort> immer mehr Verbraucher <Stichwort>in die Klemme</Stichwort>. »Früher war Energiearmut ein Randphänomen, doch mittlerweile ist es für viele ein Alltagsproblem geworden«, sagte der Vorstand der Verbraucherzentrale Nordrhein-Westfalen<Streichung>, Klaus Müller, der »Welt am Sonntag«</Streichung>. Nach seinen Worten kämpfen inzwischen zehn bis 15 Prozent der Bevölkerung damit, die Energiekosten zu finanzieren. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Die Zeit, 29.04.2012 (online) </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

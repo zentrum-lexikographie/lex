@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_3696892" Autor="wgrimm" Typ="Minimalartikel" Tranche="RSR-2024-45_E2" Zeitstempel="2024-09-11" Erstellungsdatum="2019-02-14" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Warm-up"><?oxy_comment_start author="wgrimm" timestamp="20240911T160812+0200" comment="Warmup gestrichen wie in AWZ und Duden"?>Warm-up<?oxy_comment_end?></Schreibung>
+            <Schreibung Typ="U_Falschschreibung"><?oxy_comment_start author="kduden" timestamp="20250305T144635+0100" comment="Ergänzt"?>Warm-Up</Schreibung><?oxy_comment_end?>
+            <Aussprache>
+                <IPA Audiodatei="134/das_Warm-up">ˈwoːɐ̯mʔap</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-s</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>45 (E2)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="kduden" timestamp="20240911T160841+0200" comment="ergänzt"?>55
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie> aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">warm-up</erwaehntes_Zeichen>, zu <erwaehntes_Zeichen Sprache="engl">to warm
+                    up</erwaehntes_Zeichen>
+                <Paraphrase>warm werden, sich warm laufen</Paraphrase>
+            </Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Selbst ein Sturz im <Stichwort>Warmup</Stichwort> machte den
+                        20-Jährigen nicht nervös.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.05.2011 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dennoch zog er ein positives Fazit nach Startplatz zwei und der
+                        schnellsten Zeit im <Stichwort>Warmup</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.10.2013 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Noch aber ist das lange, schwierige <Stichwort>Warmup</Stichwort> für
+                        das Jahresfinale im Dezember nicht beendet.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        18.11.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das <Stichwort>Warmup</Stichwort> im bitterkalten Breisgau sorgte bei
+                        Bayer Leverkusen für gemischte Gefühle.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 27.01.2013 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Allerdings hatte Los Angeles zuletzt Spekulationen über ein
+                        neuerliches »<Stichwort>Warmup</Stichwort>« des früheren Stars von
+                        Manchester United und Real Madrid in Europa eine Absage erteilt.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.01.2011 (online)</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

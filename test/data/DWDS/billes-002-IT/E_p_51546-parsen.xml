@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_p_51546" Autor="kduden" Typ="Vollartikel" Tranche="RSR-2024-21_E2_1" Zeitstempel="2025-01-21" Erstellungsdatum="2015-09-03" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="wgrimm" timestamp="20240814T115827+0200" comment="Bearbeitungsstand billes (war Red-2)"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="par-sen">parsen</Schreibung>
+            <Aussprache Zeitstempel="2024-11-07" Quelle="DWDS" Autor="brosch">
+                <IPA Audiodatei="099/parsen_1">ˈpaːsn̩</IPA>
+            </Aussprache>
+            <Aussprache Zeitstempel="2024-11-07" Quelle="DWDS" Autor="brosch">
+                <IPA Audiodatei="103/parsen_2">ˈpaʁsn̩</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>parst</Wert></Praesens>
+                <Praeteritum><Wert>parste</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>geparst</Wert></Partizip_II>
+                <Partizip_II><Wert>geparsed</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar><?oxy_comment_start author="jgrimm" timestamp="20250116T092331+0100" comment="Ergänzt"?>Neben
+                der an die Konjugation deutscher Verben angepassten Partizipform <erwaehntes_Zeichen Sprache="dt">geparst</erwaehntes_Zeichen> ist bei prädikativem Gebrauch auch die
+                an das Englische angelehnte Partizipbildung <erwaehntes_Zeichen Sprache="dt">geparsed</erwaehntes_Zeichen> regulär.<?oxy_comment_end?></Kommentar>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>21 (E2.1)</Orthografieregel>
+        </Orthografie>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie class="invisible">Englisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>etw. <Stichwort>parst</Stichwort> etw.</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Fachgebiet><?oxy_comment_start author="wgrimm" timestamp="20241107T121057+0100" comment="Ergänzt"?>Informatik<?oxy_comment_end?></Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20241107T121031+0100" comment="Klammern ergänzt (da nicht Teil des Begriffsinhalts)"?>(einen
+                Satz in einer natürlichen Sprache oder eine vergleichbare
+                Konstruktion)<?oxy_comment_end?> in einer formalen Sprache zergliedern</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ich kenne ähnliche Probleme mit OGNL
+                            <Paraphrase><?oxy_comment_start author="kduden" timestamp="20241107T121445+0100" comment="Ergänzt"?>Object-Graph
+                            Navigation Language<?oxy_comment_end?></Paraphrase>
+                        <Streichung><?oxy_comment_start author="jgrimm" timestamp="20241107T121527+0100" comment="Ausgeblendet (sonst erklärungsbedürftig)"?>aus
+                            der Struts-Welt<?oxy_comment_end?></Streichung>: Das sind Systeme, die
+                        irgendwelche Ausdrücke, die man hinschickt, interpretieren,
+                            <Stichwort>parsen</Stichwort>, und dann kann man irgendwas damit machen.
+                        Im Allgemeinen ist das eine sehr nette Idee, aber insgesamt ist es immer
+                        eine wandelnde Sicherheitslücke.</Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2021/12/FAZ_FD12021121650001100797836">
+                        Frankfurter Allgemeine Zeitung, 16.12.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der nahtlose Zugriff auf Cloud-Paketdate bietet die Möglichkeit,
+                        Informationen in beliebige Sicherheits-, Überwachungs- und Testwerkzeuge zu
+                        leiten, wo sie <Stichwort>geparst</Stichwort> und analysiert werden können. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:88/88c7d347-21bb-46b5-9748-d60f33f387e8">
+                        <Autor/>
+                        <Titel>Vier Schritte zu mehr Sicherheit in Multicloud-Umgebungen</Titel>
+                        <Stelle/>
+                        <Datum>30.08.2019</Datum>
+                        <URL>https://www.it-daily.net/it-sicherheit/cloud-security/18708-vier-schritte-zu-mehr-sicherheit-in-multicloud-umgebungen</URL>
+                        <Aufrufdatum>18.07.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Text aus einem Microsoft-Word-Dokument kann in eine Datenbank
+                            <Stichwort>geparst</Stichwort>, in Photoshop visuell verformt, in Flash
+                        animiert, in Online-Textwölfe gefüttert, per Spam an tausend E-Mail-Adressen
+                        geschossen, in ein Audioprogramm geladen und als Musik wieder ausgegeben
+                        werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2017/07/SZ_A71345555"> Süddeutsche Zeitung,
+                        21.07.2017 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In einem aktuellen Blog-Eintrag geht Google
+                            <?oxy_comment_start author="wgrimm" timestamp="20241107T121815+0100" comment="Ausgeblendet (sonst ohne Bezug)"?><Streichung>nun</Streichung><?oxy_comment_end?>
+                        auf zwei signifikante Verbesserungen beim eigenen Chrome-Browser ein.
+                            <Streichung>Script Streaming</Streichung> So kann Chrome nun ein Skript
+                        schon während dessen Download <Stichwort>parsen</Stichwort>, anstatt wie
+                        bisher abzuwarten. Diese Methode nennt sich »Script Streaming« und soll bis
+                        zu 10 Prozent schnellere Ladzeiten bringen.</Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2015/03/19/Chrome_Flotter_dank_neue"> Der
+                        Standard, 19.03.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das Objekt muss noch als
+                            JSON<Autorenzusatz><?oxy_comment_start author="dsanders" timestamp="20241107T121315+0100" comment="Ergänzt (sonst rechtschreibl. problematisch)"?>-<?oxy_comment_end?></Autorenzusatz>String
+                            <Stichwort>geparsed</Stichwort> (d. h. zergliedert) werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/16645/5hg6ewXNXQuOykZ2">
+                        <Autor>Chris Krzikalla</Autor>
+                        <Titel>Wetterbericht und Astrodaten als JSON auslesen und
+                            verarbeiten</Titel>
+                        <Stelle/>
+                        <Datum>05.01.2015</Datum>
+                        <URL>https://www.rustimation.eu/index.php/wetterbericht-und-astrodaten-auslesen-und-mit-json-verarbeiten/</URL>
+                        <Aufrufdatum>29.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250116T065702+0100" comment="Ergänzungsbeleg für attributiven Gebrauch (als Pendant zum FK)"?>
+                    <Belegtext><?oxy_comment_end?>Der Zugriff auf eine
+                            <Stichwort>geparste</Stichwort> Datei erfolgt ähnlich dem Verarbeiten
+                        eines XML-Dokumentes: man kann entweder auf den Element-Baum zugreifen, oder
+                        man definiert einen Listener, der immer alarmiert wird, wenn ein bestimmtes
+                        Ereignis eintritt.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:34050/uJEB0JQ-cB7Mryel">
+                        <Autor>Mibutec</Autor>
+                        <Titel>Define your own language</Titel>
+                        <Stelle/>
+                        <Datum>04.12.2013</Datum>
+                        <URL>https://mibutec.wordpress.com/2013/12/04/define-your-own-language/</URL>
+                        <Aufrufdatum>13.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung><?oxy_comment_start author="jgrimm" timestamp="20241107T121906+0100" comment="Ausgeblendet (sonst ohne Bezug)"?>Aber<?oxy_comment_end?></Streichung>
+                        da ich die Ironie von Danny nicht <Stichwort>parste</Stichwort>, hab ich die
+                        Sache wohl eh ein bisserl überbewertet. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:10065/VqMysMgsaUBm0OlC">
+                        <Autor>Tim Pritlove</Autor>
+                        <Titel>LNP068 Marsch der Millionen</Titel>
+                        <Stelle/>
+                        <Datum>18.06.2013</Datum>
+                        <URL>http://logbuch-netzpolitik.de/lnp068</URL>
+                        <Aufrufdatum>13.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                    <Diasystematik>
+                        <Bedeutungsebene><?oxy_comment_start author="jgrimm" timestamp="20250121T110840+0100" comment="neu"?>übertragen<?oxy_comment_end?></Bedeutungsebene>
+                    </Diasystematik>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wir <Stichwort>parsen</Stichwort>
+                        <Streichung><?oxy_comment_start author="dsanders" timestamp="20241107T121951+0100" comment="Dto."?>beispielsweise<?oxy_comment_end?></Streichung>
+                        den gesamten Berliner Kommunikationsverkehr <Streichung>innerhalb der
+                            Intel-Map</Streichung>. </Belegtext>
+                    <Fundstelle>Die Zeit, 22.03.2013 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Unsere Absicht ist es, zu zeigen, wie ein XML-Dokument aussieht, so
+                        dass wir es <Stichwort>parsen</Stichwort> können. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:55/557a824c-08f0-4f7a-9012-bcb200183563">
+                        <Autor/>
+                        <Titel>Das Traumpaar Java und XML</Titel>
+                        <Stelle/>
+                        <Datum>05.05.2004</Datum>
+                        <URL>https://jaxenter.de/das-traumpaar-java-und-xml-9628</URL>
+                        <Aufrufdatum>18.07.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Projekt-Manager nahm sich
+                            <Streichung><?oxy_comment_start author="kduden" timestamp="20241107T122008+0100" comment="Dto."?>nun<?oxy_comment_end?></Streichung>
+                        bei nahezu allen Arbeitsschritten viel Zeit, als würde er jeweils im
+                        Hintergrund alle Sources <Stichwort>parsen</Stichwort>. </Belegtext>
+                    <Fundstelle>C’t, 1999, Nr. 8</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Wenn
+                            <Autorenzusatz><?oxy_comment_start author="jgrimm" timestamp="20241107T122205+0100" comment="(Zum besseren Belegverständnis) ergänzt"?>die
+                            maschinenlesbare Wissensdatenbank<?oxy_comment_end?></Autorenzusatz> Cyc
+                            <Streichung><?oxy_comment_start author="kduden" timestamp="20241107T122243+0100" comment="Ausgeblendet (sonst ohne Bezug)"?>etwa<?oxy_comment_end?></Streichung>
+                        den Satz »John saw the light with the telescope«
+                            <Stichwort>parst</Stichwort>, weist es in einem ersten Durchlauf jedem
+                        Wort seine möglichen Kategorien <Autorenzusatz>zu</Autorenzusatz>. In einem
+                        zweiten Schritt erzeugt der syntaktische Prozessor <Streichung>(der auf GB
+                            beruht)</Streichung> hieraus eine syntaktische Struktur <Streichung>–
+                            genauer gesagt zwei (wobei er eine Klammernotation als Alternative zur
+                            Baumdarstellung verwendet)</Streichung>. </Belegtext>
+                    <Fundstelle>C’t, 1997, Nr. 4</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Hier muß der SQL-Server erst einmal das SQL-Statement
+                            <Stichwort>parsen</Stichwort> und optimieren.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1994, Nr. 4</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn es allerdings darum geht, formatierte Bedienereingaben zu
+                            <Stichwort>parsen</Stichwort>, ist wieder Handarbeit
+                        gefragt.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 2001, Nr. 2</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Tatsächlich bezahlen die Palästinenser einen Teil der Zeche, für die
+                        Frau Strobls Eltern, <Stichwort>pars</Stichwort> pro totogesprochen,
+                        verantwortlich sind.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 27.02.1981, Nr. 10</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese Bilder aber sind nur fragmentarische Schlaglichter der
+                        Geschichte, <Stichwort>pars</Stichwort> pro toto.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        07.04.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ohne der Verteilung alles Recht abzustreiten, beginne man bei der
+                        Wechselseitigkeit, <Stichwort>pars</Stichwort> pro toto, beim
+                        Tausch.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 04.11.2003</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_s_989000009_2005" Autor="dsanders" Typ="Vollartikel" Tranche="Diverse-004" Zeitstempel="2016-01-29" Erstellungsdatum="2016-01-29" Status="Red-ex">
+        <?oxy_comment_start author="dsanders" timestamp="20160614T162610+0200" comment="soweit OK, Details v.a. der Definition 2 möchte ich noch von einem Experten prüfen lassen, setzen Sie den Artikel deshalb bitte nach Überarbeitung auf Red-ex (und lassen Sie diesen Kommentar stehen)"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Sonderposten</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>sonder-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Posten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Handel</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">Ware, die wegen Mängeln, Retouren, Lagerüberschüssen, Geschäftsauflösungen oder bei Restmengen zu reduziertem Preis verkauft wird</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>"<Stichwort>Sonderposten</Stichwort>, also Waren, die aus bestimmten Gründen zu Sonderkonditionen verkauft werden, sind unsere Stärke«, sagt <Streichung>Torsten Fischer,</Streichung> <Autorenzusatz>der</Autorenzusatz> Marktleiter <Streichung>bei Thomas Philipps</Streichung>.</Belegtext>
+                    <Fundstelle>https://harzpix.wordpress.com/2015/05/18/neueroffnung-thomas-philipps-nordhausen/ 18.05.2015</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Restposten24 ist eine große B2B Handelsplattform für Restposten, <Stichwort>Sonderposten</Stichwort>, Konkursware und Neuware. Unsere Kunden sind ausschließlich Gewerbetreibende, Freiberufler, Selbstständige und ähnliche Nutzer.</Belegtext>
+                    <Fundstelle>http://www.helge.at/2007/08/restposten24at-wills/ 01.08.2007</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Aus dem Supermarkt kennt man diese Körbe mit <Stichwort>Sonderposten</Stichwort>, deren Verfallsdatum abgelaufen ist. In eine neue Lage Frischhaltefolie eingeschweißt<Streichung>, mit einem signalfarbenen Sonderpreis!-Etikett versehen,</Streichung> scheint es ein Schnäppchen zu sein.</Belegtext>
+                    <Fundstelle>Die Zeit, 11.10.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hersteller und private Anbieter präsentieren hier <Streichung>am Sonnabend, 17.9., und Sonntag, 18.9., nicht nur neue Produkte und Dienstleistungen aus den Bereichen Unterhaltungselektronik und Computertechnik, sondern auch</Streichung> Secondhand-Geräte und <Stichwort>Sonderposten</Stichwort> zu sehr günstigen Preisen.</Belegtext>
+                    <Fundstelle>Berliner Zeitung, 16.09.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Fähren seien außerdem insbesondere für namhafte Textilmarken ideale Vertriebsstellen, um Überkapazitäten zu verramschen. Die Hersteller könnten<Streichung>, so Grosshans,</Streichung> auf den Schiffen <Stichwort>Sonderposten</Stichwort> verkaufen, ohne ihr höheres Preisniveau an Land zu unterminieren. </Belegtext>
+                    <Fundstelle>Die Zeit, 24.06.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die günstigen Angebote sind möglich, weil der Verein vom Großhandel <Stichwort>Sonderposten</Stichwort> einkauft, die, gäbe es die Nachfrage des Ladens nicht, auf die Müllhalde gekarrt werden würden.</Belegtext>
+                    <Fundstelle>die tageszeitung, 24.02.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nyltest-Hemden erster Qualität verkauft Oberstleutnant Boritzki für 17,50 Mark. Einen <Stichwort>Sonderposten</Stichwort> anderer Oberhemden hat er im Preis von zwölf Mark auf sieben Mark herabgesetzt<Streichung>, um damit zu räumen</Streichung>.</Belegtext>
+                    <Fundstelle>Der Spiegel, 10.03.1965</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Finanzwesen</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">Eintrag auf der Passivseite der Bilanz eines Unternehmens oder einer Gemeinde, der weder eindeutig dem Eigen- noch Fremdkapital zugewiesen werden kann, z. B. aufzulösende Zuwendungen mit festem Verwendungszweck, Beiträge, Gebührenausgleich oder Treuhandvermögen</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>einmalige <Stichwort>Sonderposten</Stichwort> </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>die Auflösung von, die Berücksichtigung von, das (Betriebs-)Ergebnis vor, der (Betriebs-, Netto-Rein-)Gewinn vor <Stichwort>Sonderposten</Stichwort> </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Koordination_mit">
+                    <Belegtext>Firmenabschreibungen, Goodwill-Abschreibungen, <Autorenzusatz>vor</Autorenzusatz> Steuern und <Stichwort>Sonderposten</Stichwort> </Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Für 2016 rechnet SAP beim Verkauf von Software und Wartungsverträgen – Währungseffekte und <Stichwort>Sonderposten</Stichwort> herausgerechnet – nur noch mit einem Umsatzplus von sechs bis acht Prozent.</Belegtext>
+                    <Fundstelle>Der Standard, 12.01.2016</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dass der Reingewinn unter dem Strich gegenüber dem Vorjahr dennoch um 36% sank, erklärt sich daraus, dass er 2013 durch einen <Stichwort>Sonderposten</Stichwort> – die Neubewertung der einstigen Beteiligung an der 2013 voll übernommenen Corona-Brauerei Modelo in Mexiko – in die Höhe getrieben worden war. </Belegtext>
+                    <Fundstelle>Neue Zürcher Zeitung, 26.02.2015</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Das Ergebnis enthält allerdings zwei grössere <Stichwort>Sonderposten</Stichwort>. Insgesamt wurden nämlich netto Rückstellungen von 1,84 Mrd CHF für Rechtsfälle sowie eine Steuergutschrift von 1,32 Mrd CHF verbucht, letztere im Zusammenhang mit der jährlichen Neubewertung latenter Steueransprüche.</Belegtext>
+                    <Fundstelle>Neue Zürcher Zeitung, 28.10.2014</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das operative Ergebnis vor <Stichwort>Sonderposten</Stichwort> wie Restrukturierungsaufwendungen legte im Berichtszeitraum um 35,9 Prozent auf 2,402 Mrd. Euro zu.</Belegtext>
+                    <Fundstelle>Der Standard, 31.07.2008</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Vor <Stichwort>Sonderposten</Stichwort> und Goodwill-Abschreibungen lag der Gewinn mit 334 Millionen Euro lediglich um ein Prozent über dem Vorjahresergebnis.</Belegtext>
+                    <Fundstelle Fundort="dwds">Der Tagesspiegel, 11.09.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In den Bilanzen vieler Unternehmen tauchen so genannte <Stichwort>Sonderposten</Stichwort> auf <Streichung>(siehe Bericht auf Seite 20)</Streichung>. Darunter können sowohl Gewinne als auch Verluste verbucht werden. Unternehmen verkaufen zum Beispiel Gebäude oder Maschinen und leasen sie gleich darauf wieder zurück. Sie erzielen dadurch einen einmaligen Gewinn, indem sie so genannte »stille Reserven« aktivieren. Auch steuerfreie Rücklagen eines Unternehmens sind <Stichwort>Sonderposten</Stichwort>: Damit kann eine Firma ihre Steuerlast in spätere Jahre verschieben, was Zins- und Finanzierungsvorteile bringt. <Stichwort>Sonderposten</Stichwort> auf der Verlustseite sind zum Beispiel Restrukturierungskosten oder Abschreibungen und häufig in Geschäftsberichten nicht erfasst: »Gewinn vor <Stichwort>Sonderposten</Stichwort>« heißt es dann.</Belegtext>
+                    <Fundstelle>Der Tagesspiegel, 13.11.2002</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart>
+                <Syntagmatik>
+                    <Konstruktionsmuster>
+                        <Belegtext> <Stichwort>Sonderposten</Stichwort> mit Rücklage<?oxy_comment_start author="jgrimm" timestamp="20161011T121642+0200" comment="&gt; Rücklageanteil"?>n<?oxy_comment_end?>anteil <Paraphrase><?oxy_comment_start author="kduden" timestamp="20160614T155943+0200" comment="der Text, der jetzt im Definitionsfeld steht, sollte bei Phrasemen als &quot;Paraphrase&quot;-Element direkt beim Phrasem angegeben werden. Das Definitionsfeld bleibt in diesem Fall leer"?>bis<?oxy_comment_end?> 2009 steuerrechtlich mögliche, auf der Passivseite der Bilanz gesondert ausgewiesene Art der Rücklage, z. B. Sonderabschreibungen</Paraphrase> </Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis"/>
+                <?oxy_comment_start author="wgrimm" timestamp="20161011T122142+0200" comment="Web-Darstellung unbefriedigend"?>
+                <Definition Typ="Spezifizierung"><?oxy_comment_end?><?oxy_comment_start author="kduden" timestamp="20160623T114542+0200" comment="geht das jetzt so? Die Spezifizierung gilt nur für diese Paraphrase, nicht generell. In der Bilanz ausgewiesen werden Sonderposten immer noch"?>Rechtsgrundlage<?oxy_comment_end?> war § 247 Abs.3 HGB, der Sachverhalt wurde mit Wirkung vom 1.1.2010 abgeschafft</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg class="good_example">
+                        <Belegtext>So wurde ein außerordentlicher Ertrag von 356 Millionen DM aus der vorzeitigen Auflösung von <Stichwort>Sonderposten mit Rücklageanteil</Stichwort> verbucht, um die außerordentlichen Belastungen von 706 Millionen DM, die aus dem massiven Personalabbauprogramm resultieren, wenigstens zur Hälfte abzufedern.</Belegtext>
+                        <Fundstelle>Frankfurter Allgemeine Zeitung, 29.09.2000</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Allein die Auflösung des <Stichwort>Sonderpostens mit Rücklageanteil</Stichwort> aufgrund der künftig wegfallenden Sonderabschreibungen und die Auflösung von Pensionsrückstellungen <Streichung>wegen des Wegfalls des bisher günstigeren Rechnungszinsfußes</Streichung> führt bei Schering zu 340 Millionen DM an zusätzlichem Steueraufwand.</Belegtext>
+                        <Fundstelle>die tageszeitung, 22.03.1991</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Dazu <Autorenzusatz>um die Dividende zahlen zu können</Autorenzusatz> wurden noch 18,9 Millionen aus dem »<Stichwort>Sonderposten mit Rücklageanteil</Stichwort>« steuerwirksam aufgelöst, ein ungewöhnlicher Schritt, von der Not diktiert.</Belegtext>
+                        <Fundstelle>Die Zeit, 10.04.1981</Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">zusätzlicher Betrag in einer Rechnung oder einem Budget, außerordentliche Ausgabe</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext> <Streichung>Denn in den Jahren</Streichung> 2012 bis 2014 zahlte Deutschland <Streichung>noch</Streichung> 630 Millionen Euro an in die syrischen Nachbarstaaten. Hinzu kommt noch im laufenden Jahr ein <Stichwort>Sonderposten</Stichwort> über 140 Millionen Euro aus dem Etat des Entwicklungshilfeministeriums für die akute Winterhilfe.</Belegtext>
+                    <Fundstelle>Spiegel, 28.10.2014 (online)</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Im Land mit der höchsten Beschäftigungsrate für Bodyguards, die aus einem <Stichwort>Sonderposten</Stichwort> des <Autorenzusatz>spanischen</Autorenzusatz> Staatshaushalts bezahlt werden müssen, erzeugt die für 13. Mai angesetzte Wahl einer neuen Autonomieregierung berechtigte Sorgen.</Belegtext>
+                    <Fundstelle>Der Standard, 22.04.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> <Autorenzusatz>US-Außenministerin Madeleine</Autorenzusatz> Albright versprach den Familien der afrikanischen Opfer <Autorenzusatz>der Bombenanschläge auf die US-Botschaften in Tansania und Kenia</Autorenzusatz> finanzielle Unterstützung. Sie kündigte an, die US-Regierung werde den Kongreß um die Bewilligung eines <Stichwort>Sonderpostens</Stichwort> im Haushalt für die Opfer bitten. </Belegtext>
+                    <Fundstelle>Frankfurter Rundschau, 19.08.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Daneben wurde ein <Stichwort>Sonderposten</Stichwort> zum Wiederaufbau der durch den Ausbruch des Vulkans Pinatubo <Streichung>(35738 A)</Streichung> betroffenen Gebiete bewilligt.</Belegtext>
+                    <Fundstelle>Archiv der Gegenwart, 2001 [1991]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und 1982 sparten die Touristen an allen Ecken und Enden – in Meran speziell beim <Stichwort>Sonderposten</Stichwort> »Seilbahn-Ausflüge«.</Belegtext>
+                    <Fundstelle>Die Zeit, 17.02.1984</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In dem Flottenhaushalt selbst sind die Kosten für die Bestückung der Stützpunkte nicht enthalten; sie sind in einem <Stichwort>Sonderposten</Stichwort> aufgeführt, der zu diesem Zweck 36 Millionen Mark vorsieht.</Belegtext>
+                    <Fundstelle>Völkischer Beobachter (Berliner Ausgabe), 02.03.1939</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">zusätzlicher Punkt in einer Liste, der sich den vorgesehenen, üblichen Kategorien nicht zuordnen lässt</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Erklärungsbedürftig ist aber, weshalb auch der Aussenhandelsüberschuss der Schweiz 2015 – auch ohne <Stichwort>Sonderposten</Stichwort> wie Erdöl, Transithandel, Gold- und Diamantenhandel – trotz Franken-Schock noch um etwa 10% auf 53 Mrd. Fr. zugelegt hat.</Belegtext>
+                    <Fundstelle>Neue Zürcher Zeitung, 26.03.2016</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ist das noch Wissenschaft – oder eher Kunst? H<Streichung>auschild</Streichung>: Die Ethnologie ist irgendwo dazwischen, und man kann sie nur im Kanon mit anderen Wissenschaften verstehen. Die Ethnologie ist ein ganz spezieller <Stichwort>Sonderposten</Stichwort> im Rahmen der Wissenschaft und<Streichung>, wie die Psychoanalyse,</Streichung> dazu da, das System der Wissenschaften zu verunsichern. </Belegtext>
+                    <Fundstelle>Die Zeit, 30.09.1999</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">besondere oder zusätzliche Funktion, berufliche Position oder Aufgabe</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Der Text beruht vor allem auf den Forschungsergebnissen von Wilhelm Reich <Streichung>(siehe« Die Massenpsychologie des Faschismus«)</Streichung>. Dass er aktuell bleibt, dafür sorgen die «Mütter der Nation”, die keineswegs emanzipierte Berufsfrauen sind, sondern Mütter auf einem «<Stichwort>Sonderposten</Stichwort> außerhalb der autoritären Kleinfamilie”. </Belegtext>
+                    <Fundstelle>http://rette-sich-wer-kann.com/patriarchat/zum-muttertag-mutterkult-und-der-kampf-gegen-die-sexualitaet/ 01.05.2008</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Manche Leute drehen jeden Stein um für eine Dienstreise ins Ausland, übernehmen fiktive <Stichwort>Sonderposten</Stichwort> als Berater oder Experten und manipulieren Überstunden und Extraprämien.</Belegtext>
+                    <Fundstelle>Der Spiegel, 30.11.1970</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Man besprach <Streichung>die bevorstehenden Monmouth-Verhöre, dann</Streichung> die Zukunft David Schines, der inzwischen seinen Gestellungsbefehl erhalten hatte. Cohn bedeutete Stevens, dem Schine in New York einen <Stichwort>Sonderposten</Stichwort> zu verschaffen und ihm die Grundausbildung zu ersparen.</Belegtext>
+                    <Fundstelle>Der Spiegel, 12.05.1954</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Warum nicht meinen <Stichwort>Sonderposten</Stichwort> »zwischen den Stühlen« einnehmen ?</Belegtext>
+                    <Fundstelle Fundort="dwds">Klemperer, Victor: [Tagebuch] 1949. In: ders., So sitze ich denn zwischen allen Stühlen, Berlin: Aufbau-Verl. 1999 [1949], S. 1030</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">zusätzlicher Wach- oder Polizeiposten für besondere Aufgaben</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Schließlich stellte die DDR <Stichwort>Sonderposten</Stichwort> vor der Ständigen Vertretung auf und ließ die Ausweise der Besucher kontrollieren <Autorenzusatz>um die Zahl der Botschaftsasylanten einzudämmen</Autorenzusatz> – es half nichts. Denn als die Wachen Mitte Mai nach Bonner Protesten zurückgezogen wurden, füllte sich das Gebäude erneut.</Belegtext>
+                    <Fundstelle>Der Spiegel, 31.12.1984</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Die Anordnung hängt in einem Raum des ehemaligen Amtsgerichts, das seit gut einem Jahr neben der lokalen Polizeistation einen <Stichwort>Sonderposten</Stichwort> beherbergt, einen Trupp von rund 40 Mann, die von den Einheimischen »Atomis« genannt werden. »Wir sind eine aufgabenorientierte Schutzpolizei«, beschreibt Polizeidirektor <Streichung>Will</Streichung> <Autorenzusatz>W.</Autorenzusatz> die Aufgabe seiner Mannschaft, »nicht für Feld-, Wald- und Wiesenwidrigkeiten, sondern um politische Aufklärungsarbeit zu leisten« – das alles für die »Dauer notwendiger Schutzmaßnahmen im Zusammenhang mit dem Zwischenlager«.</Belegtext>
+                    <Fundstelle>Der Spiegel, 11.01.1982</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Vor der »Grossen Halle des Volkes« in Peking waren <Stichwort>Sonderposten</Stichwort> der Volksbefreiungsarmee aufgezogen, chinesische Fernseh-, Photo- und Zeitungsreporter standen bereit. </Belegtext>
+                    <Fundstelle>Der Spiegel, 31.03.1980</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Staudamm-Bauleitung habe schon Tage vor dem Unglück <Stichwort>Sonderposten</Stichwort> zum Gletscher beordert; den Ingenieuren, hieß es, seien sehr wohl warnende Vorzeichen bekannt gewesen, nur habe man sich nicht entschließen mögen, die Arbeiten einzustellen.</Belegtext>
+                    <Fundstelle>Der Spiegel, 08.09.1965</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Achtzig <Stichwort>Sonderposten</Stichwort>, die von der Garnison im benachbarten Shoeburyness abkommandiert sind, kontrollieren Straßen und Brücken <Autorenzusatz>auf der britischen Insel Foulness</Autorenzusatz>.</Belegtext>
+                    <Fundstelle>Der Spiegel, 09.07.1958</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Der Verlust vor <Stichwort>Sonderposten</Stichwort> ohne einmalige Zahlungen habe 28 Millionen Euro betragen, teilte das Unternehmen mit.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 24.07.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ohne <Stichwort>Sonderposten</Stichwort> sei das operative Ergebnis auf 47 (48) Cents gesunken.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 19.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch vor <Stichwort>Sonderposten</Stichwort> sank der Gewinn um mehr als ein Fünftel.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 01.02.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im März hatte das Unternehmen noch mitgeteilt, 2002 werde inklusive aller <Stichwort>Sonderposten</Stichwort> ein Verlust geschrieben.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 17.04.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bis die <Stichwort>Sonderposten</Stichwort> auffallen, geht vermutlich viel Zeit ins Land.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1998, Nr. 3</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_5966313" Autor="dsanders" Typ="Verweisartikel" Zeitstempel="2025-04-29" Erstellungsdatum="2016-04-15" Status="Red-2">
+        <Formangabe Typ="Hauptform" Zeitstempel="2022-11-07" Quelle="DWDS" Autor="herold">
+            <Schreibung>Sexobjekt</Schreibung>
+            <Aussprache Zeitstempel="2025-03-19" Quelle="DWDS" Autor="brosch">
+                <IPA Audiodatei="097/das_Sexobjekt">ˈzɛksʔɔpˌjɛkt</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-(e)s</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Sex</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Objekt</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Sexualobjekt</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adjektivattribut">
+                    <Belegtext>ein männliches, reines <Stichwort>Sexobjekt</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_in_Präpositionalgruppe/-objekt_zu">
+                    <Belegtext>jmdn. zu einem <Stichwort>Sexobjekt</Stichwort> degradieren,
+                        herabwürdigen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Prädikativ_von">
+                    <Belegtext>jmdn. als <Stichwort>Sexobjekt</Stichwort> betrachten, darstellen,
+                        wahrnehmen</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Kurz darauf schrieb Andrea einen Brief an die Mutter und gestand ihr
+                        detaillierter, was F<Streichung>remlin</Streichung> ihr angetan hatte und
+                        wie er sie während Jahren als <Stichwort>Sexobjekt</Stichwort> behandelt
+                        habe. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz:2025/01/NLZ_2025012400000332291619"> Luzerner
+                        Zeitung, 24.01.2025 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Bereits im Alter von sechs Jahren haben die meisten
+                        US-amerikanischen Mädchen ein Bild von ihrem Körper, das dem eines
+                            <Stichwort>Sexobjekts</Stichwort> gleicht, und äußern den Wunsch, sich
+                        freizügig und sexy zu kleiden, um gemocht zu werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:ebookvaria:sachbuch/9783518765074"> Chemaly, Soraya:
+                        Speak out! E-Book. Berlin: Suhrkamp, 2020. </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Eine wissenschaftlichen Ansprüchen genügende repräsentative
+                        Untersuchung gibt es noch nicht, aber nach der Literatur ist der typische
+                        Käufer weiß, alleinstehend, heterosexuell und zwischen 40 und 65 Jahren alt.
+                        Die Puppen werden auf den Internetseiten der Hersteller meist als
+                        Masturbations- und <Stichwort>Sexobjekte</Stichwort> beworben, aber die
+                        Besitzer haben zu diesen Puppen oft Beziehungen, die weit über das Sexuelle
+                        hinausgehen. Für manche Menschen werden sie zu Lebenspartnern.</Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:belletristik/9783641203412"> Schirach,
+                        Ferdinand von: Strafe. E-Book. München: Luchterhand, 2018. </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich bin Autorin, kein <Stichwort>Sexobjekt</Stichwort>, also reißen
+                        Sie sich am Riemen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 08.07.2006</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zur Freude ihrer weiblichen Fans sind in den Songs der vier Donnas
+                        die Jungs die <Stichwort>Sexobjekte</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.05.2003</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Was sollte ich unternehmen, um nicht als
+                            <Stichwort>Sexobjekt</Stichwort> angesehen zu werden?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 18.01.1993, Nr. 03</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Gelernt haben zwar alle, daß keine Frau wie ein jederzeit verfügbares
+                            »<Stichwort>Sexobjekt</Stichwort>« behandelt werden dürfe.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 19.11.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Feministen werfen ihr vor, sie reduziere das Frausein zum
+                            <Stichwort>Sexobjekt</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 02.07.2007 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Frauen zum <Stichwort>Sexobjekt</Stichwort> machen, hätte meine
+                        Französischlehrerin dazu, glaube ich, gesagt.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.04.2006, Nr. 17</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zur Freude ihrer weiblichen Fans sind in den Songs der vier Donnas
+                        die Jungs die <Stichwort>Sexobjekte</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.05.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Frau als <Stichwort>Sexobjekt</Stichwort> hat unsere tägliche
+                        Bilderwelt längst vereinnahmt, ebenso die etablierte Kunst.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        29.05.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch die Frauen, die immer noch Angst davor haben, dass sie
+                            <Stichwort>Sexobjekte</Stichwort> sein könnten, meldeten sich wieder zu
+                        Wort.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 16.11.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als <Stichwort>Sexobjekt</Stichwort> abgeschoben zu werden, seelisch
+                        damit fertig zu werden, vielleicht ein Leben lang mit dieser Rolle
+                        konfrontiert zu sein.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        18.05.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich bin Autorin, kein <Stichwort>Sexobjekt</Stichwort>, also reißen
+                        Sie sich am Riemen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 08.07.2006, Nr. 27</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der brach endgültig mit dem jahrtausendealten Diktat der
+                        Männergesellschaft, die Frau als <Stichwort>Sexobjekt</Stichwort> unter
+                        Kontrolle zu halten.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.11.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

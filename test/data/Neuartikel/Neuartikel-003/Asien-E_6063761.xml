@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_a_7491" Autor="dsanders" Typ="Basisartikel-D" Zeitstempel="2023-06-02" Erstellungsdatum="1967-01-01" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="kduden" timestamp="20230608T085844+0200" comment="wenn keine Belege etc., dann Basisartikel-D"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="Asi-en"><?oxy_comment_start author="wgrimm" timestamp="20230608T085514+0200" comment="dazu; Vorderasien, Kleinasien, Zentralasien..."?>Asien<?oxy_comment_end?></Schreibung>
+            <Aussprache><IPA Audiodatei="002/Asien">ˈaːzi̯ən</IPA></Aussprache>
+            <?oxy_comment_start author="wgrimm" timestamp="20230710T104015+0200" comment="Einschränkung: nur mit Attribut wird der Artikel gebraucht, sonst ohne. Hatten wir schon irgendwo"?>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik><?oxy_comment_end?>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <?oxy_comment_start author="wgrimm" timestamp="20230608T085802+0200" comment="lt. Wikipedia. Ich würde hier etwas in diesem Stil angeben"?>
+            <Etymologie class="invisible"><?oxy_comment_end?>Das Wort <Stichwort>Asien</Stichwort>
+                geht über <erwaehntes_Zeichen Sprache="lat">Asia</erwaehntes_Zeichen> auf
+                    <erwaehntes_Zeichen Sprache="griech">Asía</erwaehntes_Zeichen>
+                    (<erwaehntes_Zeichen Sprache="griech">Ἀσία</erwaehntes_Zeichen>) zurück. Die
+                weitere Herkunft ist unklar.</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_a_7486">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis_extern Typ="Enzyklopädie">
+                    <Ziellemma>Asien</Ziellemma>
+                    <Ziellesart/>
+                    <Fundstelle>
+                        <Titel>Wikipedia</Titel>
+                        <URL>https://de.wikipedia.org/w/index.php?title=Asien&amp;oldid=234382408</URL>
+                        <Aufrufdatum>08.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Verweis_extern>
+            </Verweise>
+            <?oxy_comment_start author="jgrimm" timestamp="20230710T104149+0200" comment="würde hier auch Eigenname oder geographischer Name schreiben und in der enzyk. def von Kontinent sprechen und nicht von Erdteil. Das ist international und präziser."?>
+            <Definition Typ="Generalisierung">Ortsname</Definition><?oxy_comment_end?>
+            <Definition Typ="Enzyklopädie">bezeichnet einen
+                <?oxy_comment_start author="kduden" timestamp="20230608T085444+0200" comment="alles andere würde ich gern einem enzyklopädischen Eintrag überlassen" id="xw2_rmb_kyb"?><?oxy_comment_start author="kduden" timestamp="20230809T155533+0200" parentID="xw2_rmb_kyb" comment="»bezeichnet einen Erdteil« ist ziemlich dünn, welcher das ist, bleibt vollkommen unklar" mid="6"?>Erdteil<?oxy_comment_end mid="6"?><?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <?oxy_comment_start author="wgrimm" timestamp="20230608T085636+0200" comment="auf Belege würde ich hier verzichten" id="dxj_mtp_byb"?>
+            <?oxy_comment_start author="kduden" timestamp="20230710T104225+0200" parentID="dxj_mtp_byb" comment="wegen der Verwendung des Artikels würde ich ein, zwei Belege ohne und ein, zwei mit Attribut und Artikel bringen" mid="8"?>
+            <Verwendungsbeispiele/><?oxy_comment_end?><?oxy_comment_end mid="8"?>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Die Austrian Airlines Group baut ihre Verbindungen nach
+                            <Stichwort>Asien</Stichwort> aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 28.11.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>SGL Carbon rechne zudem mit einer wachsenden Nachfrage in
+                            <Stichwort>Asien</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 11.06.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nicht alle Politiker in <Stichwort>Asien</Stichwort> halten die
+                        Probleme für hausgemacht.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 20.02.1998, Nr. 9</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ihn ziehe eben »der Sinn für junge Mädchen« nach
+                            <Stichwort>Asien</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 20.09.1996, Nr. 39</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der zweite große Block ist der Handel in <Stichwort>Asien</Stichwort>
+                        mit rund 60 Millionen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 22.07.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Indessen auf diese Dinge kam wenig mehr an; die Entscheidung lag in
+                            <Stichwort>Asien</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Meyer, Eduard: Geschichte des Altertums,
+                        Bd. IV,2. In: Geschichte des Altertums, Berlin: Directmedia Publ. 2001
+                        [1901], S. 11589</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Galten die Götter Ägyptens noch genug in
+                        <Stichwort>Asien</Stichwort>, um ihrem Boten den Weg zu ebnen?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Wilson, John A.: Ägypten. In: Propyläen
+                        Weltgeschichte, Berlin: Directmedia Publ. 2000 [1961], S. 6359</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er ordnete die Rückführung nach <Stichwort>Asien</Stichwort> zu
+                        Lasten des Absenders an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Morgner, Irmtraud: Leben und Abenteuer der
+                        Trobadora Beatriz nach Zeugnissen ihrer Spielfrau Laura, Berlin:
+                        Aufbau-Verl. 1974, S. 612</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In <Stichwort>Asien</Stichwort> liegt eine der großen Aufgaben für
+                        die neunziger Jahre.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Brandt, Willy: Erinnerungen, Berlin:
+                        Ullstein 1997 [1989], S. 385</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das schafft eine hoch explosive Situation, die zum Atomkrieg in
+                            <Stichwort>Asien</Stichwort> führen könnte.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 05.06.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

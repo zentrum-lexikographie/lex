@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_997599560" Autor="wgrimm" Typ="Verweisartikel" Zeitstempel="2015-12-21" Erstellungsdatum="1969-01-01" Status="wird_gestrichen">
+        <?oxy_comment_start author="dsanders" timestamp="20220224T151316+0100" comment="unnötige Bearbeitung"?>
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17"><?oxy_comment_end?>
+            <Schreibung>landesflüchtig</Schreibung>
+            <Aussprache><IPA Audiodatei="105/landesfluechtig"/></Aussprache>
+            <?oxy_comment_start author="wgrimm" timestamp="20211217T073920+0100" comment="Duplikat"?>
+            <Aussprache class="invisible"><IPA Audiodatei="118/landesfluechtig"/></Aussprache><?oxy_comment_end?>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2017-03-06" Quelle="DWDS" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Land</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>flüchtig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="vgl">
+                    <Ziellemma>landflüchtig</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext> <Stichwort>landesflüchtig</Stichwort> werden <Paraphrase>aus dem Land fliehen</Paraphrase> </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Er hätte den <Stichwort>landesflüchtigen</Stichwort> Sohn des Neckartals vor dem ehrwürdigen Mayer, diesem unerbittlichen Anwalt des Fortschritts, womöglich mit ironisch-tremolierenden Argumenten in Schutz zu nehmen versucht.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 15.03.1996, Nr. 12</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

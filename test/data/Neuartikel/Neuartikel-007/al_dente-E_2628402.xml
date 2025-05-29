@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="dsanders" xml:id="D99_004154" Autor="jgrimm" Typ="Basisartikel-MWA" Tranche="RSR-2024-55_E2_alt" Zeitstempel="2025-05-23" Erstellungsdatum="1999-01-01" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="wgrimm" timestamp="20250224T134339+0100" comment="bei Freischaltung bitte &quot;al dente&quot; red-f streichen" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20250502T092150+0200" comment="ehemals siebel" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="al den-te">al dente</Schreibung>
+            <Aussprache>
+                <IPA>al ˈdɛntə</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Funktionspraeferenz>adverbiell</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20250506T092643+0200" comment="Nur Bezugsregel ergänzt" flag="done"?>55
+                (E3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>gleichbedeutend <erwaehntes_Zeichen Sprache="ital">al
+                    dente</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="ital">a</erwaehntes_Zeichen>
+                <Paraphrase>zu</Paraphrase> + <erwaehntes_Zeichen Sprache="ital">il</erwaehntes_Zeichen>
+                <?oxy_comment_start author="kduden" timestamp="20250224T134453+0100" comment="ergänzt &quot;der&quot; sowie vorweg &quot;gleichbedeutend&quot;" flag="done"?><Paraphrase>der</Paraphrase><?oxy_comment_end?>
+                + <erwaehntes_Zeichen Sprache="ital">dente</erwaehntes_Zeichen>
+                <Paraphrase>Zahn</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Gastronomie</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Spezifizierung"><?oxy_comment_start author="dsanders" timestamp="20250224T134501+0100" comment="ergänzt" flag="done"?>vor
+                allem<?oxy_comment_end?> von Nudeln, Reis</Definition>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20250224T134509+0100" comment="ergänzt" flag="done"?>bissfest<?oxy_comment_end?>,
+                nicht ganz weichgekocht</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Zubereitung<Autorenzusatz>:</Autorenzusatz> Farfalle fünf Minuten
+                        lang in Salzwasser <Stichwort>al dente</Stichwort> kochen. Wasser abgiessen,
+                        Pasta in eine eingefettete Gratinform geben. Rahm, Milch, Tomatenpüree,
+                        Parmesan und Petersilie mischen, mit Salz und Pfeffer abschmecken und über
+                        die Pasta giessen. <Streichung>30 Minuten im auf 180 Grad vorgeheizten Ofen
+                            backen.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2025/01/NLZ_2025011100000332124666">
+                        Luzerner Zeitung, 11.01.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sobald der Reis <Stichwort>al dente</Stichwort> ist, den Topf vom
+                        Feuer nehmen und die Butter und den Parmesan unter den Reis rühren – mit
+                        Salz und reichlich Pfeffer abschmecken und auf tiefe Teller verteilen. </Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2023/08/wasxml20230827_118"> Welt am Sonntag,
+                        27.08.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>So hat</Streichung> der mit dem Nobelpreis ausgezeichnete
+                        Physiker Giorgio Parisi <Autorenzusatz>hat</Autorenzusatz> in Italien eine
+                        Debatte ausgelöst, weil er vorschlägt, Nudeln bei ausgeschalteter Gasflamme
+                        weiterkochen zu lassen, um Energie zu sparen. Doch viele italienische
+                        Starköche sind empört: Ohne bis zuletzt kochendes Wasser könne man keine
+                        Spaghetti <Stichwort>al dente</Stichwort> – also bissfest – garantieren. Die
+                        Pasta bei ausgeschalteter Flamme kochen zu lassen, sei ein »Anschlag auf
+                        Italiens Tradition«<Streichung>, wettert Antonello Colonna, Sternekoch und
+                            Inhaber eines Nobelrestaurants in Rom</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:bmp:2022/10/BMP_B7006423320678D9A331CCF3247CD82C_3998499">
+                        Berliner Morgenpost, 12.10.2022 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

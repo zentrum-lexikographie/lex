@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="WDG" Redakteur="dsanders" xml:id="WDW_345000" Autor="kduden" Typ="Vollartikel" Zeitstempel="2025-05-05" Erstellungsdatum="1967-01-01" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="geis-tes-ge-schicht-lich">geistesgeschichtlich</Schreibung>
+            <Aussprache Zeitstempel="2025-05-05" Quelle="DWDS" Autor="brosch">
+                <IPA>ˈgaɪ̯stəsgəˌʃɪçtlɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Geistesgeschichte</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-lich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">die <Verweis Typ="vgl">
+                    <Ziellemma>Geistesgeschichte</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> betreffend, zu ihr gehörig</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>geistesgeschichtliche</Stichwort> Betrachtungsweise,
+                        Einordnung</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>geistesgeschichtliche</Stichwort> Epoche, Strömung,
+                        Tradition</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>geistesgeschichtliche</Stichwort> Wurzeln</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>ein <Stichwort>geistesgeschichtliches</Stichwort>
+                        Panorama</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>ein <Stichwort>geistesgeschichtlicher</Stichwort> Kontext</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext><Stichwort>geistesgeschichtlich</Stichwort> bedeutsam</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext><Stichwort>geistesgeschichtlich</Stichwort> orientiert</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext>etw. <Stichwort>geistesgeschichtlich</Stichwort>einordnen</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die großen <Stichwort>geistesgeschichtlichen</Stichwort> Ereignisse
+                        Europas erreichten Russland nie oder kaum: weder Renaissance noch
+                        Reformation, weder Aufklärung noch die Herausbildung einer
+                        Bürgergesellschaft. </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:sachbuch/9783841231031"> von Fritsch,
+                        Rüdiger: Zeitenwende. E-Book. Berlin: Aufbau, 2022. </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Er beschäftigt sich in seinem Vortrag mit der Frage, aus welchen
+                        Gründen damals Bücher gesammelt wurden, und wie diese Sammlungen in den
+                        politischen und <Stichwort>geistesgeschichtlichen</Stichwort> Kontext der
+                        Reichsstadt Frankfurt eingeordnet werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2025/03/FR_fr_GK8DT73E.1"> Frankfurter Rundschau,
+                        15.03.2025 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Szenisch und <Stichwort>geistesgeschichtlich</Stichwort>
+                        verlebendigt die mit großer Akkuratesse und an Originalschauplätzen gedrehte
+                        historische Kriminalfilmreihe "Vienna Blood" die Zeit um 1900 in
+                        vielerlei Hinsicht. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2020/11/FAZ_FD1202011206129716"> Frankfurter
+                        Allgemeine Zeitung, 20.11.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Wie Hutchinson nun, in Zusammenarbeit mit Claudia Jeschke, der
+                        zweiten grossen Spezialistin fuer Tanzschriften, Wege fand, diese Schrift zu
+                        lesen, ist <Stichwort>geistesgeschichtlich</Stichwort> ebenso spannend wie
+                        die Entzifferung der aegyptischen Hieroglyphen. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:1993/01/NZZ_97CC0758BEA475B81EADB946ECC65076">
+                        Neue Zürcher Zeitung, 26.01.1993 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In so engem Rahmen konnte naturgemäß keine
+                            <Stichwort>geistesgeschichtlich</Stichwort> fundierte Entwicklung der
+                        Bibliothek gegeben werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Jahresberichte für deutsche
+                        Geschichte, 1937, S. 138</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-04-24">
+                <Beleg>
+                    <Belegtext>Dieser ungeheure <Stichwort>geistesgeschichtliche</Stichwort> Bruch
+                        stellt auch die Kunst vor eine völlig neue Situation.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hofmann, Werner: Das irdische
+                        Paradies, München: Prestel 1991 [1960], S. 246</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>So hinkt die kirchliche A. dem Gang der
+                            <Stichwort>geistesgeschichtlichen</Stichwort> Entwicklung
+                        nach.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Maurer, W.: Aufklärung. In: Die
+                        Religion in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2000 [1957],
+                        S. 28806</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Von den <Stichwort>geistesgeschichtlichen</Stichwort> Kenntnissen der
+                        Führer in Bussen und Städten sollte man sich nicht völlig abhängig
+                        machen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.02.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hier möchte ich vor allem auf die eindringenden und feinsinnigen
+                            <Stichwort>geistesgeschichtlichen</Stichwort> Untersuchungen von Erik
+                        Wolf hinweisen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Forschungen und Fortschritte.
+                        Nachrichtenblatt der deutschen Wissenschaft und Technik, 1947, Nr. 4/5/6,
+                        Bd. 21/23</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Daß sie entartet sind, ist ein
+                            <Stichwort>geistesgeschichtlicher</Stichwort>, naturgeschichtlicher,
+                        aber auch schuldhafter Prozeß zum Teil, nur zum Teil.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Einhundertsiebenter Tag.
+                        Samstag, 13. April 1946. In: Der Nürnberger Prozeß, Berlin: Directmedia
+                        Publ. 1999 [1946], S. 10362</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber auch diese wissenschaftliche und
+                            <Stichwort>geistesgeschichtliche</Stichwort> Revolution vollzog sich
+                        nicht so plötzlich und unvorbereitet, wie heute oft behauptet
+                        wird.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 15.02.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Historisch, wirtschaftlich, politisch, kulturell,
+                            <Stichwort>geistesgeschichtlich</Stichwort> und auch emotional gehören
+                        wir dazu.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 22.03.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In so engem Rahmen konnte naturgemäß keine
+                            <Stichwort>geistesgeschichtlich</Stichwort> fundierte Entwicklung der
+                        Bibliothek gegeben werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Jahresberichte für deutsche
+                        Geschichte, 1937, S. 138</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber die alten Meister waren,
+                            <Stichwort>geistesgeschichtlich</Stichwort> sehr amüsant, unter anderen
+                        Vorzeichen kaum weniger widersprüchlich.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.03.1981, Nr. 13</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er schenkt uns damit wohl den ersten Beitrag zu einer
+                        strukturpsychologischen und <Stichwort>geistesgeschichtlichen</Stichwort>
+                        Betrachtung Pestalozzis.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Eberhard, D. Otto: Pestalozzi ein
+                        Klassiker der Seelenführung. In: Bausteine zur Arbeit im Kindergottesdienst,
+                        Sonderhefte der Monatsschrift »Der Kindergottesdienst«, Nr. 4, 1926, S.
+                        8</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

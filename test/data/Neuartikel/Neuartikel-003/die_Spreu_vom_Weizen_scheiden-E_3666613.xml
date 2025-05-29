@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_3666613" Autor="wgrimm" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2022-11-16" Erstellungsdatum="2022-11-08" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="jgrimm" timestamp="20221108T201523+0100" comment="bitte freischalten mit &quot;die Spreu v. Weizen trennen&quot; / &quot;sondern&quot;"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20221116T123242+0100" comment="Regioprüfung &quot;die / der Spreu&quot; abwarten!" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung>die Spreu vom Weizen
+                <?oxy_comment_start author="kduden" timestamp="20221108T223134+0100" comment="Regioprüfung auf &quot;den Spreu ... scheiden&quot; folgt"?>scheiden<?oxy_comment_end?></Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>Spreu vom Weizen scheiden</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung><?oxy_comment_start author="jgrimm" timestamp="20221110T153359+0100" comment="ich schlage vor, einen Verweisartikel &quot;den Spreu vom Weizen trennen&quot;, Diaysys.:  (bes.) CH anzulegen. Dort in den Formkommentar, dass auch die Verben &quot;scheiden&quot;, &quot;sondern&quot; vorkommen können.  " flag="done"?>den<?oxy_comment_end?>
+                Spreu vom Weizen scheiden</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachareal Frequenz="nur"><?oxy_comment_start author="dsanders" timestamp="20221110T152301+0100" comment="wenn nicht CH, dann falsche Verwendung (?)"?>CH<?oxy_comment_end?></Sprachareal>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie/><Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Spreu</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma hidx="1">Weizen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>trennen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd., etw. <Stichwort>scheidet die Spreu vom
+                        Weizen</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Bedeutungsebene>im
+                    <?oxy_comment_start author="wgrimm" timestamp="20221108T212934+0100" comment="oder biblisch - s. Vollartikel?" flag="done"?>Bild<?oxy_comment_end?></Bedeutungsebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>die Spreu vom Weizen trennen</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Manche Schulen <Streichung>sparen sich diese kriminalistische Mühe
+                            und</Streichung> verzichten ganz auf schriftliche Hausarbeiten. Die
+                        Lehrer testen das Wissen, indem sie die Schüler in ein Gespräch über das zu
+                        recherchierende Thema verwickeln. So lässt sich zuverlässig
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>
+                        <Stichwort>scheiden</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2019/04/wexml20190430_008"> Die Welt, 30.04.2019
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>
+                        <Streichung>Chengdu ist die Stadt, in der</Streichung> der Taxifahrer
+                            <Autorenzusatz>möchte</Autorenzusatz> erst einmal von seinem Fahrgast
+                        wissen <Streichung>möchte</Streichung>, ob der schon mal
+                        »Fischduft-Schweinefleisch« gekocht hat, bevor er ausführt, dass unter den
+                        Köchen Sichuans die Zubereitung der Fischduft-Gerichte
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>
+                        <Stichwort>scheide</Stichwort>. <Streichung>Die Fischduft-Gerichte heißen
+                            nicht deshalb so, weil da Fisch drin wäre, sondern weil man mit
+                            denselben Zutaten früher Fisch zubereitet hat.</Streichung> »Das ist die
+                        hohe Kunst«, sagt der Fahrer. <Streichung>»Das Salzige, das Süße, das Saure
+                            und das Scharfe in ein Gleichgewicht zu bringen.«</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2018/05/SZ_A74448668"> Süddeutsche Zeitung,
+                        12.05.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> 4800 Fachartikel seien allein 2012 in
+                        kommunikationswissenschaftlichen Fachzeitschriften publiziert
+                            worden<Streichung>, 1999 seien es noch 980 gewesen. Niemand wird
+                            behaupten wollen, seither habe sich der Erkenntnisgewinn nahezu
+                            verfünffacht</Streichung>. Dramatisch vervielfacht hat sich
+                            <Streichung>indes</Streichung> der Aufwand, um <Streichung>im »Peer
+                            review«, also</Streichung> mit Hilfe der ehrenamtlichen
+                        Begutachtung <Streichung>der eingereichten Arbeiten durch Fachkolleginnen
+                            und -kollegen,</Streichung> diese Publikationsflut zu kanalisieren und
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort> zu <Stichwort>scheiden</Stichwort>. Denn bei
+                        weitem nicht alle Aufsätze, die zur Veröffentlichung eingereicht werden,
+                        werden ja tatsächlich publiziert. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2014/12/29/Der_alltaegliche_Irrsinn"> Der
+                        Standard, 29.12.2014 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Auf der Radstrecke <Stichwort>schied</Stichwort> der Heartbreak Hill
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>: Der Kilchberg forderte den Athleten mit einem
+                        steilen Anstieg über 78 Höhenmeter alles ab<Streichung>, zumal
+                            Windschattenfahren verboten war</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:ta_regional:2005/07/TA_20050720-TAWES20-WES-1A">
+                        Thüringer Allgemeine, 20.07.2005 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Drei Schnuppertanzabende <Stichwort>schieden</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>. Die Meisten der anfangs nur
+                        »Schnuppernden« blieben dabei. </Belegtext>
+                    <Fundstelle Fundort="dwds:lvz_regional:2001/09/LVZ_200109048486620622686668">
+                        Leipziger Volkszeitung, 04.09.2001 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Denn</Streichung> von 100 neuen Pharmawirkstoffen, die
+                        aussichtsreich genug für die klinische Erprobung erscheinen, kommen nur
+                        sechs schließlich als Medikamente auf den Markt. Und es kann zehn Jahre
+                        dauern, bis <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>
+                        <Stichwort>geschieden</Stichwort> ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:part1/2000/11/16/200047_cm_analysten_xml_">Die Zeit, 16.11.2000</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Rezessionen und wirtschaftliche Krisen haben schon immer
+                            <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>
+                        <Stichwort>geschieden</Stichwort>. Unternehmen mit einer dünnen
+                        Kapitaldecke, den falschen Produkten oder einer kundenfernen und
+                        aufgeblähten Verwaltung gehen in schlechten Zeiten unter. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar:1994/06/SAAR_0694172576"> Saarbrücker Zeitung,
+                        17.06.1994 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Viele Firmen bieten »Einbruchmeldeanlagen« an – so lautet der
+                        korrekte Ausdruck für ein Alarmsystem. Doch nur wenige Apparate taugen
+                        etwas. In den Kölner Labors des Bundes der Sachversicherer
+                            <Stichwort>scheiden</Stichwort> Tester <Stichwort>die</Stichwort>
+                        <Stichwort>Spreu</Stichwort>
+                        <Stichwort>vom</Stichwort>
+                        <Stichwort>Weizen</Stichwort>. <Streichung>Listen der empfohlenen Geräte
+                            liegen an den 150 kriminalpolizeilichen Beratungsstellen
+                            aus.</Streichung> Billiganlagen, die bei den Prüfungen durchfallen
+                        würden, sind <Streichung>dennoch</Streichung> weit verbreitet. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:part1/1994/02/25/was_die_boesen_buben_sto">Die Zeit, 25.02.1994</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="*" class="invisible">
+                <?oxy_comment_start author="kduden" timestamp="20221117T132953+0100" comment="doch kein Phrasem!! --&gt; im Kommentar zu :die Spreu trennt sich vom Weizen&quot;"?>
+                <Syntagmatik><?oxy_comment_end?>
+                    <Phrasem>
+                        <Belegtext><Stichwort>die Spreu scheidet sich vom Weizen</Stichwort>
+                            <Paraphrase>es stellt sich heraus, wer oder was aus einer vorhandenen
+                                Menge gut, brauchbar, von Wert und wer oder was schlecht,
+                                unbrauchbar, wertlos ist</Paraphrase></Belegtext>
+                    </Phrasem>
+                </Syntagmatik>
+                <Diasystematik/>
+                <Verweise>
+                    <Verweis Typ="Synonym_MWA_Variante">
+                        <Ziellemma Anzeigeform="die Spreu trennt sich vom Weizen">die Spreu vom
+                            Weizen trennen</Ziellemma>
+                        <Ziellesart>2 *</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis"/>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Wann merkt man, wer wirklich für einen da ist und hilft?
+                            Richtig, in der Not. Da <Stichwort>scheidet</Stichwort>
+                            <Stichwort>sich</Stichwort> menschlich <Stichwort>die</Stichwort>
+                            <Stichwort>Spreu</Stichwort>
+                            <Stichwort>vom</Stichwort>
+                            <Stichwort>Weizen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:frt:2021/07/FRT_3164806802-BAMBERG"> Fränkischer
+                            Tag, 14.07.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Ein entscheidender Schritt für viele Jungunternehmer und solche,
+                            die es gerne werden möchten, ist die kostenlose Erstberatung. Hier
+                                <Stichwort>scheidet</Stichwort>
+                            <Stichwort>sich</Stichwort> oft schon <Stichwort>die</Stichwort>
+                            <Stichwort>Spreu</Stichwort>
+                            <Stichwort>vom</Stichwort>
+                            <Stichwort>Weizen</Stichwort>. In dieser Phase stellen sich Fragen wie:
+                            Bin ich ein Unternehmer, ist ein Businessplan vorhanden? </Belegtext>
+                        <Fundstelle Fundort="dwds:nlz:2013/11/NLZ_JM20131105000119074"> Luzerner
+                            Zeitung, 05.11.2013 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Viele machen sich <Streichung>allerdings</Streichung>
+                            Illusionen: »Sie träumen von schnellem Reichtum und wissen nicht,
+                            dass <Autorenzusatz>bei der Schneckenzucht</Autorenzusatz> schwere
+                            Arbeit auf sie wartet«. Die Schwestern bieten neben kostenlosen
+                            Seminaren deshalb auch Schnupperpraktika. Da
+                                <Stichwort>scheidet</Stichwort>
+                            <Stichwort>sich</Stichwort>
+                            <Stichwort>die</Stichwort>
+                            <Stichwort>Spreu</Stichwort>
+                            <Stichwort>vom</Stichwort>
+                            <Stichwort>Weizen</Stichwort>: »Von 100 Interessenten springen 99
+                            wieder ab«, sagt M<Loeschung>aria</Loeschung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:badz:2012/11/BADZ_5166756860"> Badische Zeitung,
+                            26.11.2012 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Die Streckenführung hatte es <Streichung>durchaus</Streichung>
+                            in sich. Insbesondere am Übergang von der steilen Startrampe in
+                                <Streichung>das sogenannte »Haseneck«,</Streichung> eine
+                            langgezogene Linkskurve<Streichung>,</Streichung>
+                            <Stichwort>schied</Stichwort>
+                            <Stichwort>sich</Stichwort> fahrtechnisch <Stichwort>die</Stichwort>
+                            <Stichwort>Spreu</Stichwort>
+                            <Stichwort>vom</Stichwort>
+                            <Stichwort>Weizen</Stichwort>. Es kam zu spektakulär anzusehenden
+                                Stürzen<Streichung>, die aber allesamt glimpflich verliefen und
+                                lediglich vereinzelt zu kleineren Blessuren führten, wie Andreas
+                                Reiner, einer der Organisatoren bestätigte</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:sk_regional:2011/05/SK_C93PTSA9"> Südkurier,
+                            31.05.2011 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="wgrimm" timestamp="20221110T151546+0100" comment="das ist der einzige brauchbare Beleg für das Mask. Aber der ist ausgerechnet nicht CH "?>
+                        <Belegtext><?oxy_comment_end?><Streichung>Nein, diese</Streichung>
+                            <Autorenzusatz>die</Autorenzusatz> Minuten des Kino-Abspanns dienen
+                            allein dem Zweck, unseren jähen Sturz aus dem Jenseits der Kunst ins
+                            schnöde Diesseits des Lebens hinauszuzögern. Weswegen
+                                <Stichwort>sich</Stichwort> beim Kino-Abspann bis heute
+                                <Stichwort>der</Stichwort>
+                            <Stichwort>Spreu</Stichwort>
+                            <Stichwort>vom</Stichwort>
+                            <Stichwort>Weizen</Stichwort>
+                            <Stichwort>scheidet</Stichwort>, der noch während des letzten Bilds
+                            hastig nach Hut und Mantel greifende Banause vom ruhig im Sitz
+                            verharrenden Genießer. </Belegtext>
+                        <Fundstelle Fundort="dwds:sz:2007/03/SZ_A40713211"> Süddeutsche Zeitung,
+                            10.03.2007 </Fundstelle>
+                        <Diasystematik>
+                            <Stilfaerbung>scherzhaft</Stilfaerbung>
+                        </Diasystematik>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

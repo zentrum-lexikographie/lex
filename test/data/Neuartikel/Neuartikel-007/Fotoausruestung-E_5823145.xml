@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_2116343" Autor="dsanders" Typ="Minimalartikel" Tranche="RSR-2024-Einzelfestlegungen" Zeitstempel="2025-05-28" Erstellungsdatum="2025-01-02" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Fotoausrüstung</Schreibung>
+            <Schreibung Typ="U">Photoausrüstung</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv>
+                    <Wert>-</Wert>
+                </Genitiv>
+                <Plural>
+                    <Wert>-en</Wert>
+                </Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Foto</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Ausrüstung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-01-02">
+                <Beleg>
+                    <Belegtext>Den größten Teil seiner Honorare habe er in die
+                            <Stichwort>Fotoausrüstung</Stichwort> gesteckt.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        20.06.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die ersten Passanten blieben schon neugierig stehen, und hinten bei
+                        der Anlage lief auch ein vollbärtiger Mann mit
+                            <Stichwort>Fotoausrüstung</Stichwort> herum.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        03.03.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Unglaubliche 85 Jahre soll er alt sein, sieht aber aus wie 65 bis 70,
+                        ein großer grauhaariger Italiener, elegant gekleidet, mit neuester
+                            <Stichwort>Fotoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 23.04.2001, Nr. 17</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie schützen nicht nur Sportler, sondern auch wertvolle Güter wie
+                            <Stichwort>Fotoausrüstungen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 01.12.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nun, nach achtzehn Jahren des internationalen Lebens und Reisens, ist
+                        Juergen Teller nach Hause zurückgekehrt, samt
+                            <Stichwort>Fotoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        14.06.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hoffentlich reicht der Erlös nicht nur für neue Zähne und die fällige
+                        Operation, sondern auch noch für eine neue
+                            <Stichwort>Fotoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.09.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Einmal, im Südsudan, versackte der Wagen mit der
+                            <Stichwort>Fotoausrüstung</Stichwort> im Morast.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heller, Gisela: Märkischer
+                        Bilderbogen, Berlin: Berlin Verlag der Nation 1978, S. 12</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ihre Rolleiflex hat sie immer dabei, notfalls versteckt sie die vier
+                        Kilo <Stichwort>Fotoausrüstung</Stichwort> im Tüll ihres
+                        Abendkleids.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 29.05.2013, Nr. 21</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Eine Übersetzerin hilft einem Flüchtling über die Grenze, und er
+                        stiehlt ihr zum Dank ihre <Stichwort>Fotoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 12.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Für eine <Stichwort>Fotoausrüstung</Stichwort>, die in einem
+                        unbeaufsichtigten Kraftfahrzeug zurückgelassen wird, gibt es keinen
+                        Versicherungsschutz.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 31.03.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Gestohlen wurden sein Auto, etwa 800 Mark sowie die
+                            <Stichwort>Photoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 03.06.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die <Stichwort>Photoausrüstung</Stichwort> ist versunken, die Möbel
+                        der Großeltern liegen zerlegt im Hof zum Trocknen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.10.1988, Nr. 43</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Eine <Stichwort>Photoausrüstung</Stichwort> für den anspruchsvollen
+                        Amateur kostet heute so viel wie ein Mittelklassewagen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.10.1966, Nr. 43</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er erbeutete dabei Bargeld und eine
+                            <Stichwort>Photoausrüstung</Stichwort> im Wert von 5500
+                        Mark.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 02.02.1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Posso Universal 34 wurde konzipiert, eine kleine bis mittlere
+                            <Stichwort>Photoausrüstung</Stichwort> und ein Notebook
+                        aufzunehmen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.01.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wir drücken den Rucksack mit der leidlich getarnten
+                            <Stichwort>Photoausrüstung</Stichwort> an uns.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 22.05.1987, Nr. 22</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die meisten sind mit Taschenlampen ausgerüstet, manch einer schleppt
+                        eine <Stichwort>Photoausrüstung</Stichwort> mit allen Finessen mit sich
+                        herum.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 19.08.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Rußland betritt man lieber nicht mit einer auffälligen
+                            <Stichwort>Photoausrüstung</Stichwort>, eine kleine Kamera in der
+                        Hosentasche genügt für die meisten Ansprüche.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.02.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Überdies besaß Guillaume ehe wertvolle und speziell für
+                        Dokumentenphotographie geeignete
+                        <Stichwort>Photoausrüstung</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.11.1975, Nr. 49</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Spector ist bereits mit Photolabors in mehreren Ländern in der
+                        europäischen Spitzengruppe, während <Stichwort>Photoausrüstung</Stichwort>
+                        erst in geringerem Umfang verkauft wird.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 19.07.1996</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

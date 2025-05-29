@@ -1,9 +1,6 @@
 *
-
 !build.clj
 !deps.edn
-!docker/
-!.git/
 !oxygen/
 oxygen/plugin/lib/org.zdl.lex.client.jar
 !src/

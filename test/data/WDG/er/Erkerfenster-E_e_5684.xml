@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_e_5684" Autor="" Typ="Basisartikel" Zeitstempel="1967-01-01" Erstellungsdatum="1967-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Zeitstempel="2020-12-08" Quelle="DWDS" Autor="herold">
+            <Schreibung>Erkerfenster</Schreibung>
+            <Aussprache><IPA Audiodatei="060/das_Erkerfenster"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+                </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2020-12-08" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Erker</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Fenster</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_e_5295">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>am <Stichwort>Erkerfenster</Stichwort> stehen</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Die, die gemeint sind, stehen derweil ungerührt hinter ihren <Stichwort>Erkerfenstern</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.06.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Hier befindet sich unsere Küche, hinter diesem <Stichwort>Erkerfenster</Stichwort> steht unser Tisch, da wird gewohnt, dort wird gearbeitet.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 07.05.2004</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie waren durch das kleine <Stichwort>Erkerfenster</Stichwort> hereingekommen und fanden nicht mehr hinaus.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.02.2004</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Da aber fiel mein Blick auf das <Stichwort>Erkerfenster</Stichwort> des Hauses.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Trakl, Georg: Traumland. In: Deutsche Literatur von Lessing bis Kafka, Berlin: Directmedia Publ. 2000 [1906], S. 10967</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die Gefangene hing am oberen Teil des inneren Gitters am offenstehenden <Stichwort>Erkerfenster</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.01.1978, Nr. 03</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Im neuen Haus kann sie vom <Stichwort>Erkerfenster</Stichwort> in der Küche direkt aufs Erdbeerbeet schauen.</Belegtext>
+      <Fundstelle Fundort="dwds:bild">Bild, 10.07.2002</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Vom <Stichwort>Erkerfenster</Stichwort> im ersten Stock blickt man weit über Stadt und Bucht.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.01.1983, Nr. 05</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In einem der <Stichwort>Erkerfenster</Stichwort> steht Willy Brandt – lebensgroß auf einem Plakat.</Belegtext>
+      <Fundstelle Fundort="dwds:welt">Die Welt, 17.08.2002</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Und von den großzügigen und komfortablen Zimmern mit ihren <Stichwort>Erkerfenstern</Stichwort> hat man den freien Meerblick auf die Bucht von Newcastle.</Belegtext>
+      <Fundstelle Fundort="dwds:welt">Die Welt, 07.06.2000</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Ein zimmerhohes <Stichwort>Erkerfenster</Stichwort> ist hier einmal ganz anders dekoriert worden.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Das Buch vom Wohnen, Hamburg: Orbis GmbH 1977, S. 175</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

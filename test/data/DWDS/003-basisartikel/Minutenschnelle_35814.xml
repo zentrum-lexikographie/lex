@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_m_60000_35814" Autor="wgrimm" Typ="Basisartikel" Zeitstempel="2013-04-17" Erstellungsdatum="1976-01-01" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Minutenschnelle</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+                </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Minute</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Schnelle</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Es ist die Tatsache, daß heute jedermann mit einer Digitalkamera ausgerüstet ist, deren Bilder in <Stichwort>Minutenschnelle</Stichwort> verbreitet sein können.</Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 15.11.2006</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Informationen verbreiten sich heute in <Stichwort>Minutenschnelle</Stichwort> rund um den Globus.</Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 21.06.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Innovation dieser Tage besteht darin, daß bewegliche Ziele, die sich in großer Entfernung befinden, in <Stichwort>Minutenschnelle</Stichwort> erkannt und bekämpft werden.</Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 20.10.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Gigantische tintenschwarze Regenwolken türmen sich in <Stichwort>Minutenschnelle</Stichwort> kilometerhoch über dem Gebirge auf und regnen sich in Tropfen ab, die so groß und schwer wie Kachelöfen sind.</Belegtext>
+                    <Fundstelle>Moers, Walter: Die 13 1/2 Leben des Käpt’n Blaubär. Frankfurt a. M.: Eichborn 1999, S. 198</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In <Stichwort>Minutenschnelle</Stichwort>, wie ein Virus, befiel die Euphorie ganz Südafrika.</Belegtext>
+                    <Fundstelle>Die Zeit, 06.05.1994</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Das Feuer, dessen Ursache noch unklar war, brach auf der dritten Etage aus und griff in <Stichwort>Minutenschnelle</Stichwort> auf die höher gelegenen Stockwerke über.</Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 10.12.1993</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er warnt davor, weittragende Entscheidungen Computern zu überlassen, sei es in Expertensystemen der Medizin, sei es in militärischen Computersystemen, die in <Stichwort>Minutenschnelle</Stichwort> über einen Atomkrieg entscheiden sollen.</Belegtext>
+                    <Fundstelle>Rechenberg, Peter: Was ist Informatik? München: Hanser 1991, S. 264</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>1985, als ich mit viel Mühe und einiger Hartnäckigkeit einen Abstecher nach Weimar durchgesetzt hatte, wurden die vielen Menschen, die sich zu meiner Begrüßung eingefunden hatten, ziemlich rabiat und in <Stichwort>Minutenschnelle</Stichwort> verjagt.</Belegtext>
+                    <Fundstelle>Brandt, Willy: Erinnerungen. Frankfurt a. M.: Propyläen 1989, S. 434</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Daß sie aber das Schiff so beschädigen, daß es in <Stichwort>Minutenschnelle</Stichwort> sinkt, ist eher unwahrscheinlich.</Belegtext>
+                    <Fundstelle>Die Zeit, 22.12.1978</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In <Stichwort>Minutenschnelle</Stichwort> sind wir in die Zwickmühle hineingeraten.</Belegtext>
+                    <Fundstelle>Buchheim, Lothar-Günter: Das Boot. München: Piper 1973, S. 335</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>In <Stichwort>Minutenschnelle</Stichwort> warfen die von uns gebetenen Künstler ihre Ideen aufs Papier.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.01.1996</Fundstelle></Beleg><Beleg><Belegtext>Dabei stellte ich fest, daß viele Artikel in <Stichwort>Minutenschnelle</Stichwort> zerlegt waren.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 22.11.2004</Fundstelle></Beleg><Beleg><Belegtext>Dafür gibt es dann in <Stichwort>Minutenschnelle</Stichwort> das ersehnte Geld in bar, Personalausweis genügt.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Die Zeit, 15.11.1996, Nr. 47</Fundstelle></Beleg><Beleg><Belegtext>In <Stichwort>Minutenschnelle</Stichwort> detektiert das hochempfindliche Gerät sogar noch Schadstoffe, die bisher nur in einer zweihundertfach höheren Konzentration nachzuweisen waren.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Chemie. In: Bild der Wissenschaft auf CD-ROM, Stuttgart: Dt. Verl.-Anst. 1997 [1996]</Fundstelle></Beleg><Beleg><Belegtext>In <Stichwort>Minutenschnelle</Stichwort> frißt sich die Kälte durch falsch gewählte Kleidung.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 05.12.1995</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="dsanders" xml:id="D99_082763" Autor="wgrimm" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2022-02-25" Erstellungsdatum="1999-01-01" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="dsanders" timestamp="20220207T085159+0100" comment="Arealangaben okay" flag="done"?>
+        <?oxy_comment_start author="dsanders" timestamp="20220225T153310+0100" comment="Ableitungsvarianten mit Umlaut müssen nach den Ansetzungsregeln in 1 Artikel, also bitte mit &quot;kalken&quot; zusammenlegen" id="h2z_kbr_ssb" mid="1"?>
+        <?oxy_comment_start author="kduden" timestamp="20220228T142604+0100" parentID="h2z_kbr_ssb" comment="das geht semantisch nicht, weil kälken 2 nicht zu kalken geht, und kalken 2 nicht zu kälken; ich würde LA 1 zu kalken fahren, dann aber diesen Kandidat mit den Greifvögeln zurückstellen" mid="2"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?>
+            <Schreibung hidx="2">kälken</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>kälkt</Wert></Praesens>
+                <Praeteritum><Wert>kälkte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gekälkt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation"><?oxy_delete author="andreas" timestamp="20220228T170143+0100" content="&lt;Verweis Typ=&quot;Grundform&quot;&gt;&lt;Ziellemma&gt;Kalk&lt;/Ziellemma&gt;&lt;Ziellesart/&gt;&lt;/Verweis&gt;"?></Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <?oxy_delete author="andreas" timestamp="20220228T170152+0100" content="&lt;Lesart&gt;&lt;Syntagmatik&gt;&lt;Konstruktionsmuster&gt;&lt;Belegtext&gt;jmd. &lt;Stichwort&gt;kälkt&lt;/Stichwort&gt; etw.&lt;/Belegtext&gt;&lt;/Konstruktionsmuster&gt;&lt;/Syntagmatik&gt;&lt;Diasystematik&gt;&lt;Sprachareal&gt;D-Mittelwest&lt;/Sprachareal&gt;&lt;Sprachareal&gt;D-Nordwest&lt;/Sprachareal&gt;&lt;/Diasystematik&gt;&lt;Verweise&gt;&lt;Verweis Typ=&quot;Synonym&quot;&gt;&lt;Ziellemma&gt;kalken&lt;/Ziellemma&gt;&lt;Ziellesart&gt;1&lt;/Ziellesart&gt;&lt;/Verweis&gt;&lt;/Verweise&gt;&lt;Definition Typ=&quot;Basis&quot;/&gt;&lt;Kollokationen/&gt;&lt;Verwendungsbeispiele&gt;&lt;Beleg&gt;&lt;Belegtext&gt;Bestandspflege und Schutz vor Wildverbiss, indem die Spitzen der Jungfichten in den Schonungen &lt;Stichwort&gt;gekälkt&lt;/Stichwort&gt; wurden, um sie vor Wildverbiss zu schützen, waren weitere regelmäßig anstehende Aufgaben. &lt;Streichung&gt;Begegnungen mit Kriegsmunition&lt;/Streichung&gt; Bei Flächen die er einst aufforstete, setzte er Jahrzehnte später die Motorsäge an.&lt;/Belegtext&gt;&lt;Fundstelle Fundort=&quot;dwds&quot;&gt; Aachener Zeitung, 29.01.2020 &lt;/Fundstelle&gt;&lt;/Beleg&gt;&lt;Beleg&gt;&lt;Belegtext&gt; Kalk ist von Natur aus alkalisch, durch den hohen Ph-Wert antibak&lt;Autorenzusatz&gt;t&lt;/Autorenzusatz&gt;etriell und bietet daher Schimmelsporen keinen geeigneten Untergrund. Das wussten schon die Landwirte vor vielen hundert Jahren, daher wurden die Kuhställe immer &lt;Stichwort&gt;gekälkt&lt;/Stichwort&gt;. &lt;/Belegtext&gt;&lt;Fundstelle Fundort=&quot;dwds:web:91h/91hsqDS7&quot;&gt;&lt;Autor&gt;Ursula Kohlmann&lt;/Autor&gt;&lt;Titel&gt;Mineralische Kalkputze – gesunde und kreative Wandgestaltungen für den Innenraum&lt;/Titel&gt;&lt;Kurztitel&gt;Mineralische Kalkputze&lt;/Kurztitel&gt;&lt;Stelle/&gt;&lt;Datum&gt;01.07.2017&lt;/Datum&gt;&lt;URL&gt;https://www.farbefreudeleben.de/wohntrends-wandgestaltungnaturfarben/kalkputz/&lt;/URL&gt;&lt;Aufrufdatum&gt;31.08.2020&lt;/Aufrufdatum&gt;&lt;/Fundstelle&gt;&lt;/Beleg&gt;&lt;Beleg class=&quot;invisible&quot;&gt;&lt;Belegtext&gt; In den 50er- und 60er-Jahren konnte die eifrige Hausfrau mit dem Sauger Haare trocknen, die Obstbäume mit Insektenvernichter bespritzen oder die Stallwände &lt;Stichwort&gt;kälken&lt;/Stichwort&gt;&lt;Streichung&gt;, das Vieh vom Schmutz befreien&lt;/Streichung&gt; oder das Bohnerwachs mit dem Blocker auf dem Linoleum verteilen. &lt;/Belegtext&gt;&lt;Fundstelle Fundort=&quot;dwds&quot;&gt; Neue Osnabrücker Zeitung, 28.12.2016 &lt;/Fundstelle&gt;&lt;/Beleg&gt;&lt;Beleg&gt;&lt;Belegtext&gt; Angesichts der steigenden Nachfrage der Verbraucher nach natürlichen Holzoberflächen lassen die deutschen Hersteller keinen Versuch aus, bei ihren Produkten die Ursprünglichkeit des Naturmaterials so gut wie möglich zu erhalten&lt;Streichung&gt;, erklärt der Verband der Deutschen Parkettindustrie e.&amp;#8239;V&lt;/Streichung&gt;. Da wird gebürstet, geschroppt, geräuchert und &lt;Stichwort&gt;gekälkt&lt;/Stichwort&gt;, es werden Äste und Wurmlöcher herausgearbeitet, natürliche Risse per Hand gekittet und anschließend wird mit Naturölen ein High-End-Finish hingelegt.&lt;/Belegtext&gt;&lt;Fundstelle Fundort=&quot;dwds:neuw_regional:2015/04/NEUW_BBEC406300BC68DC719537DC27B6DD19-BIELEFELDERTAGEBLATTHAUPTAUSGABEBIWEST&quot;&gt; Neue Westfälische, 18.04.2015 &lt;/Fundstelle&gt;&lt;/Beleg&gt;&lt;Beleg&gt;&lt;Belegtext&gt; Nicht zu heiß soll es werden in dem Gemäuer, das die Gruppe zuvor in liebevoller Arbeit restauriert hatte. Allerdings muss die Hitze ausreichend sein, um neben einem runden Dutzend Backesbroten auch noch zwei Platten Zuckerkuchen zum Garen zu bringen, wovon eine den Weg nach Rott noch erreichen wird. Die andere hat schon auf dem Weg von der Backstube ihre Verkoster gefunden. Derweil sind andere Mitglieder der Gruppe damit beschäftigt, die Wände des Stalls zu &lt;Stichwort&gt;kälken&lt;/Stichwort&gt; und die Bäume vor dem Haus zu beschneiden.&lt;/Belegtext&gt;&lt;Fundstelle Fundort=&quot;dwds:rztg_regional:2001/10/RZTG_C92B77B14D66EA16621E2CA7FEB70116&quot;&gt; Rhein-Zeitung, 30.10.2001 &lt;/Fundstelle&gt;&lt;/Beleg&gt;&lt;/Verwendungsbeispiele&gt;&lt;/Lesart&gt;"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20220124T162445+0100" comment="nicht belegbar"?>
+        <Lesart><?oxy_comment_end?>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Gruppensprache>Jargon</Gruppensprache>
+                <Gruppensprache>Jägersprache</Gruppensprache>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Spezifizierung">von Greifvögeln</Definition>
+            <Definition Typ="Basis">Exkremente ausscheiden</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

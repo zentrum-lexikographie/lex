@@ -110,6 +110,10 @@ current project sources via
 $ clojure -T:build start-editor
 ```
 
+### Extracting random test data from DWDS sources
+
+    clojure -M:test:log -m zdl.lex.test-data $DWDS_WB_GIT_DIR
+
 ## License
 
 This program is free software: you can redistribute it and/or modify

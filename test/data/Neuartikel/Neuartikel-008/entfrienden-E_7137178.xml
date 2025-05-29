@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7137178" Autor="wgrimm" Typ="Minimalartikel" Zeitstempel="2019-01-16" Erstellungsdatum="2019-01-16" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="dsanders" timestamp="20190117T153701+0100" comment="nicht relevant, das Wort der Wahl ist entfreunden, sollte aber weiter beobachtet werden"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>entfrienden</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>entfriendet</Wert></Praesens>
+                <Praeteritum><Wert>entfriendete</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>entfriendet</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>ent-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied" class="invisible">
+                <Ziellemma>frienden</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

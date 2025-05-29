@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_4759460" Autor="wgrimm" Typ="Minimalartikel" Tranche="Spiel" Zeitstempel="2025-01-06" Erstellungsdatum="2019-04-10" Status="Red-2">
+        <?oxy_comment_start author="dsanders" timestamp="20190410T093852+0200" comment="Achtung, EtymWB-Artikel, bitte nicht ändern, nur ergänzen!" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20241206T085204+0100" comment="bei Freischaltung bitte Tranche=Spiel entfernen" flag="done" mid="1"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20241209T081134+0100" comment="in den historischen Korpora finde ich nur Belege für &quot;Blase&quot;, was passender wäre. Vermutlich und nach DWB urspr. Behältnis in Form einer Blase, daraus dann Blase. Wenn das geht, sollte der Pfeifer-Artikel unterdrückt werden" id="j14_c4k_ydc" mid="2"?>
+        <?oxy_comment_start author="dsanders" timestamp="20250106T172634+0100" parentID="j14_c4k_ydc" comment="DWB² hat aber einige Belege. Wenn wir eben keine eigenen haben, würde ich den Artikel einfach als Minimalat. beibehalten und nicht weiter machen" mid="3"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?><?oxy_comment_end mid="3"?>
+            <Schreibung hidx="1">Bulge</Schreibung>
+            <Aussprache Autor="brosch" Quelle="DWDS" Zeitstempel="2021-03-19">
+                <IPA>ˈbʊlgə</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-n</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>Bulge</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Zeitstempel="2024-02-15" Quelle="DWDS" Autor="lemnitzer"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

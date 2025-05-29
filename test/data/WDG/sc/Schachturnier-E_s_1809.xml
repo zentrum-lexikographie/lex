@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_s_1809" Autor="" Typ="Basisartikel" Zeitstempel="1974-01-01" Erstellungsdatum="1974-01-01" Status="wird_gestrichen">
+    <Formangabe Typ="Hauptform" Zeitstempel="2020-10-12" Quelle="DWDS" Autor="herold">
+      <Schreibung>Schachturnier</Schreibung>
+      <Aussprache><IPA Audiodatei="033/das_Schachturnier"/></Aussprache>
+      <Grammatik>
+        <Wortklasse>Substantiv</Wortklasse>
+        <Genus>neutr.</Genus>
+        <Genitiv><Wert>-s</Wert></Genitiv>
+        <Plural><Wert>-e</Wert></Plural>
+      </Grammatik>
+      <Diasystematik/>
+    </Formangabe>
+    <Orthografie/>
+    <Verweise Quelle="DWDS" Zeitstempel="2020-10-12" Autor="herold" Typ="Komposition">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>Schach</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>Turnier</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+    <Diachronie>
+      <Etymologie/>
+      <Formgeschichte/>
+      <Bedeutungsgeschichte/>
+      <Verweise/>
+    </Diachronie>
+    <Lesart xml:id="S_s_1192">
+      <Syntagmatik/>
+      <Diasystematik/>
+      <Verweise/>
+      <Definition Typ="Basis"/>
+      <Kollokationen/>
+      <Verwendungsbeispiele>
+        <Kompetenzbeispiel>
+          <Belegtext>ein <Stichwort>Schachturnier</Stichwort> austragen</Belegtext>
+        </Kompetenzbeispiel>
+      </Verwendungsbeispiele>
+    </Lesart>
+    <Rohdaten>
+      <Verwendungsbeispiele>
+        <Beleg>
+          <Belegtext>Wie lange wird es <Stichwort>Schachturniere</Stichwort> in der herkömmlichen Form überhaupt noch geben?</Belegtext>
+          <Fundstelle Fundort="dwds:welt">Die Welt, 29.12.1999</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Nominell handelt es sich sogar um das bedeutendste <Stichwort>Schachturnier</Stichwort> des Jahres.</Belegtext>
+          <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 16.07.2001</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Aber bei <Stichwort>Schachturnieren</Stichwort> gibt es zuweilen auch wesentlich persönlichere Preise und Präsente.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.02.2011, Nr. 08</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Er beginnt um 11 Uhr mit Jazz und einem <Stichwort>Schachturnier</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds:bild">Bild, 27.06.2003</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Die Energie und Ideen, die ein <Stichwort>Schachturnier</Stichwort> fordert, habe sie momentan nicht.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.12.2012, Nr. 50</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Motiviert meldeten sich die beiden für das erste <Stichwort>Schachturnier</Stichwort> an, einen speziellen Computerwettkampf.</Belegtext>
+          <Fundstelle Fundort="dwds:kernbasis">C’t, 1992, Nr. 3</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Die Kinder waren mit ihrem Betreuer auf dem Weg zu einem <Stichwort>Schachturnier</Stichwort>.</Belegtext>
+          <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 02.03.2004</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Bei einem <Stichwort>Schachturnier</Stichwort> in London erreichte er nach sechs Stunden und 56 Zügen ein Unentschieden gegen einen elf Jahre älteren Deutschen.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 23.08.1994</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext><Stichwort>Schachturniere</Stichwort> mit meiner Teilnahme wurden nicht erwähnt oder erschienen ohne meinen Namen.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 07.02.2011, Nr. 06</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Normalerweise zählt bei einem <Stichwort>Schachturnier</Stichwort> die einzelne gewonnene Partie einen Punkt, das Remis je einen halben Punkt, die Niederlage null Punkte.</Belegtext>
+          <Fundstelle Fundort="dwds:kernbasis">o. A. [M.-M.jr.]: Remis. In: Aktuelles Lexikon 1974-2000, München: DIZ 2000 [1978]</Fundstelle>
+        </Beleg>
+      </Verwendungsbeispiele>
+    </Rohdaten>
+  </Artikel>
+</DWDS>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="Wahrig/DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_1204282" Autor="dsanders" Typ="Verweisartikel" Zeitstempel="2021-08-13" Erstellungsdatum="2020-11-04" Status="Red-f">
+        <Formangabe Typ="Hauptform">
+            <Schreibung><?oxy_comment_start author="kduden" timestamp="20201104T094154+0100" comment="Hierzu auch spülmaschinengeeignet" flag="done"?>spülmaschinentauglich<?oxy_comment_end?></Schreibung>
+            <Aussprache><IPA Audiodatei="141/spuelmaschinentauglich">ˈʃpyːlmaʃiːnənˌtaʊ̯klɪç</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Spülmaschine</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>tauglich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>spülmaschinengeeignet</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Laut einer Meissen-Sprecherin geht es darum, die Vielfalt von Farben
+                        und Dekoren zu erweitern und mehr
+                            <Stichwort>spülmaschinentaugliches</Stichwort> Porzellan auszuliefern. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 21.06.2016 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Um das <Autorenzusatz>Schäden an Gläsern</Autorenzusatz> künftig zu
+                        vermeiden, sollte man Spülmittel mit Glasschutz nutzen sowie darauf achten,
+                        dass neue Gläser <Stichwort>spülmaschinentauglich</Stichwort> sind und diese
+                        außerdem bei nicht mehr als 55 Grad reinigen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Rhein-Zeitung, 10.11.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Trinkflaschen sind aus recyclingfähigem Kunststoff hergestellt
+                        und <Stichwort>spülmaschinentauglich</Stichwort><Streichung>, verspricht der
+                            Initiator, die Wiener Wasserwerke</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Standard, 03.04.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das Elektromesser <Streichung>Easy Control Duo von
+                            Moulinex</Streichung> hat einen neuartigen, voll in der Hand liegenden
+                        Griff und zweierlei Sätze <Stichwort>spülmaschinentauglicher</Stichwort>
+                            Klingen<Streichung>, der eine selbstschärfend, der andere eigens für
+                            Tiefgefrorenes</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 01.06.1999
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

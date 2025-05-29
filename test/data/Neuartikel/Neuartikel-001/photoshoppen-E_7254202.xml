@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7254202" Autor="jgrimm" Typ="Minimalartikel" Zeitstempel="2021-10-13" Erstellungsdatum="2016-02-29" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>photoshoppen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert><?oxy_comment_start author="dsanders" timestamp="20211013T122134+0200" comment="oder shoppt/e photo?
+so lassen?"?>photoshoppt<?oxy_comment_end?></Wert></Praesens>
+                <Praeteritum><Wert>photoshoppte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>photogeshoppt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>photoshoppen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>photoshoppt</Wert></Praesens>
+                <Praeteritum><Wert>photoshoppte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gephotoshoppt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Konversion">
+            <Eigenname Typ="Grundform">Photoshop</Eigenname>
+        </Verweise>
+        <Diachronie>
+            <Etymologie class="invisible">gebildet nach dem Namen des Grafikbearbeitungsprogramms
+                    <erwaehntes_Zeichen Sprache="engl">Photoshop</erwaehntes_Zeichen>
+            </Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/></Rohdaten></Artikel>
+</DWDS>

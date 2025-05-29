@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_z_3636" Autor="" Typ="Basisartikel-D" Zeitstempel="1977-01-01" Erstellungsdatum="1977-01-01" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform" Zeitstempel="2021-09-02" Quelle="DWDS" Autor="herold">
+            <Schreibung>zusammenballen</Schreibung>
+            <Aussprache><IPA Audiodatei="045/zusammenballen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>ballt zusammen</Wert></Praesens>
+                <Praeteritum><Wert>ballte zusammen</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>zusammengeballt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-03-16" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>zusammen-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>ballen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_z_2671">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">etw. ballen, zusammenknüllen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>Papier (zu einem Knäuel) <Stichwort>zusammenballen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>die Hände <Stichwort>zusammenballen</Stichwort>
+                        <Paraphrase>zur Faust ballen</Paraphrase>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+            <Lesart xml:id="S_z_2671_10" n="*">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">sich bedrohlich zusammenziehen</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>am Himmel <Stichwort>ballen</Stichwort> sich dunkle, drohende Gewitterwolken <Stichwort>zusammen</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+                <Lesart xml:id="S_z_2671_11">
+                    <Syntagmatik/>
+                    <Diasystematik>
+                        <Bedeutungsebene>bildlich</Bedeutungsebene>
+                    </Diasystematik>
+                    <Verweise/>
+                    <Definition Typ="Basis"/>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Kompetenzbeispiel>
+                            <Belegtext>über ihm <Stichwort>ballten</Stichwort> sich drohende Wolken <Stichwort>zusammen</Stichwort>
+                                <Paraphrase>er befand sich in einer gefährlichen, unangenehmen Lage</Paraphrase>
+                            </Belegtext>
+                        </Kompetenzbeispiel>
+                    </Verwendungsbeispiele>
+                </Lesart>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Wir rannten ohne Verluste, in einen Klumpen
+                            <Stichwort>zusammengeballt</Stichwort>, zum Ziel.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Jünger, Ernst: In Stahlgewittern,
+                        Stuttgart: Klett-Cotta 1994 [1920], S. 203</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber offenbar <Stichwort>ballen</Stichwort> wir den Sinn lieber in
+                        einem Wort <Stichwort>zusammen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 20.11.1964, Nr. 47</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>So <Stichwort>ballt</Stichwort> sich das Geld heute’ schon nur in
+                        einigen Händen <Stichwort>zusammen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.08.1947, Nr. 33</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Am nächsten Morgen <Stichwort>ballte</Stichwort> sich eine schwere
+                        atmosphärische Störung <Stichwort>zusammen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.12.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Da <Stichwort>ballt</Stichwort> sich dann mit der Zeit schon mal
+                        etwas <Stichwort>zusammen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.05.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wenn ich mich einmal <Stichwort>zusammenballe</Stichwort>, wird das
+                        einzelne Ding in mir still.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Tucholsky, Kurt: »Masse Mensch«. In: ders.,
+                        Kurt Tucholsky, Werke – Briefe – Materialien, Berlin: Directmedia Publ. 2000
+                        [1928], S. 21075</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Erwartungen und Hoffnungen <Stichwort>ballten</Stichwort> sich in der
+                        zusammengepferchten Masse des Lagers
+                        <Stichwort>zusammen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Apitz, Bruno: Nackt unter Wölfen, Reinbek
+                        bei Hamburg: Rowohlt 1961 [1958], S. 298</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich <Stichwort>ballte</Stichwort> das Blatt Papier heftig
+                            <Stichwort>zusammen</Stichwort> und schleuderte es zu Boden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Braun, Lily: Memoiren einer Sozialistin.
+                        In: Lehmstedt, Mark (Hg.) Deutsche Literatur von Frauen, Berlin: Directmedia
+                        Publ. 2001 [1911], S. 1994</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es war, als hätte sich die Nacht in ihrem Haar zu einem schwarzen
+                        Knäuel <Stichwort>zusammengeballt</Stichwort> und entrückte sie
+                        uns.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Trakl, Georg: Aus goldenem Kelch. Maria
+                        Magdalena. In: Deutsche Literatur von Lessing bis Kafka, Berlin: Directmedia
+                        Publ. 1998 [1906], S. 10966</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Was sich da <Stichwort>zusammenballte</Stichwort>, sollte in der
+                        großen kommenden Reformperiode seine Entladung finden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Die mittelalterliche Kirche. In:
+                        Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia
+                        Publ. 2000 [1966], S. 4384</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

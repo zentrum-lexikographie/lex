@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_w_3089" Autor="" Typ="Basisartikel-D" Zeitstempel="1977-01-01" Erstellungsdatum="1977-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>weitsichtig</Schreibung>
+            <Aussprache><IPA Audiodatei="023/weitsichtig"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2020-08-28" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>weit</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Sicht</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise><Verweis Typ="EtymWB"><Ziellemma>weitsichtig</Ziellemma><Ziellesart/></Verweis></Verweise></Diachronie>
+        <Lesart xml:id="S_w_1990">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>sehen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <Lesart n="1." xml:id="S_w_1991">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">in der Nähe befindliche Dinge nicht deutlich sehend</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>er war <Stichwort>weitsichtig</Stichwort> und brauchte zum Lesen eine Brille</Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="2." xml:id="S_w_1992">
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise/>
+                <Definition Typ="Basis">vorausschauend, weitblickend</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel>
+                        <Belegtext>
+                            <Stichwort>weitsichtig</Stichwort> denken</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel>
+                        <Belegtext>eine <Stichwort>weitsichtige</Stichwort> Politik treiben</Belegtext>
+                    </Kompetenzbeispiel>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext><Stichwort>Weitsichtige</Stichwort> Lösungen gibt es längst; sie müssen nur auch umgesetzt werden.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 02.10.1997, Nr. 41</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das Trio, das lieber über die warmherzigen Bindungen referiert als über gemeinsame geschäftliche Interessen spricht, plante stets <Stichwort>weitsichtig</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 09.10.1989</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Ich halte es nicht für <Stichwort>weitsichtig</Stichwort>, Geld nach China zu schicken, um dort Emissionen zu senken.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 11.11.2013, Nr. 46</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Plötzlich merkt man, wie festgefahren selbst die <Stichwort>weitsichtigsten</Stichwort> Politiker dieses Landes sind.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.12.2008, Nr. 48</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er äußerte nicht nur Verständnis dafür, dass es den Deutschen schwer fiel, unter bedrückenden wirtschaftlichen Bedingungen politisch klug und <Stichwort>weitsichtig</Stichwort> zu handeln.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Lepenies, Wolf: Kultur und Politik, München, Wien: Carl Hanser Verlag 2006, S. 77</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Mit der Marshall-Hilfe führten sie ein großherziges und <Stichwort>weitsichtiges</Stichwort> Wiederaufbauprogramm ein, das für Partner und Gegner bestimmt war.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">von Weizsäcker, Richard: Dreimal Stunde Null? 1949 1969 1989, Berlin: Siedler Verlag 2001, S. 174</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In den TV-Spots wird dieses Problem <Stichwort>weitsichtiger</Stichwort> Vorratshaltung skurril und unterhaltsam dargestellt und die Lösung gleich mitgeliefert.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Hars, Wolfgang: Nichts ist unmöglich! Lexikon der Werbesprüche, München: Piper 2001 [1999], S. 26</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Im Westen galt Maos Nachfolger Deng Xiaoping lange als <Stichwort>weitsichtiger</Stichwort> Staatsmann.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 18.06.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie haben deshalb auch nicht das Vermögen, großzügig und <Stichwort>weitsichtig</Stichwort> zu organisieren und zu koordinieren.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Klemz, Willy: Praktische Menschenkunde, Düsseldorf: Greif 1963, S. 60</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die scharfen grauen Augen waren <Stichwort>weitsichtig</Stichwort> geworden, wie das seinen Jahren entsprach.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Bergengruen, Werner: Der letzte Rittmeister, Berlin: Deutsche Buch-Gemeinschaft 1956 [1952], S. 17</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

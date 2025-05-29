@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_5033772" Autor="jgrimm" Typ="Vollartikel" Zeitstempel="2023-11-23" Erstellungsdatum="2023-08-28" Status="Lex-Regioprüfung">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Lan-des-ener-gie-ver-sor-ger"><?oxy_comment_start author="kduden" timestamp="20231119T083719+0100" comment="der ausdruck ist bestimmt regional. muss es unbedingt für regioprüfung geschickt werden?"?>Landesenergieversorger<?oxy_comment_end?></Schreibung>
+            <Aussprache Zeitstempel="2023-11-23" Quelle="DWDS" Autor="brosch"><IPA>ˌlandəsʔenɛʁˈgiːfɛɐ̯zɔʀgɐ</IPA></Aussprache>
+            <Aussprache Zeitstempel="2023-11-23" Quelle="DWDS" Autor="brosch"><IPA>ˈlandəsʔenɛʁˌgiːfɛɐ̯zɔʀgɐ</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Land</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Energieversorger</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal><?oxy_comment_start author="dsanders" timestamp="20231123T064459+0100" comment="im Regiokorpus 100 %"?>A<?oxy_comment_end?></Sprachareal>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Spezifizierung">in
+                <?oxy_comment_start author="dsanders" timestamp="20231123T064600+0100" comment="oder lieber so?"?>Österreich<?oxy_comment_end?></Definition>
+            <Definition Typ="Basis">(öffentliches) Unternehmen das
+                Strom,<?oxy_comment_start author="wgrimm" timestamp="20231119T083243+0100" comment="auf linguee findet man übersetzungen, wie regional or provinvial engergy supplier. jedoch konnte ich das nicht bestätigen, ob sie wirklich nur für ein bestimmtes bundesland gemeint sind" flag="done"?>
+                <?oxy_comment_end?>Gas o. Ä. produziert und liefert</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Der Strompreis wird vom
+                            <Stichwort>Landesenergieversorger</Stichwort> angehoben, um zusätzlich
+                        von der Strompreisbremse zu profitieren. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:820/y8aTbHUB">
+                        <Autor>Redaktion</Autor>
+                        <Titel>Tiwag kündigt Stromtarif von 18,9 Cent/kWh an –
+                            dolomitenstadt</Titel>
+                        <Stelle/>
+                        <Datum>14.04.2023</Datum>
+                        <URL>https://www.dolomitenstadt.at/2023/04/14/tiwag-kuendigt-stromtarif-von-189-cent-kwh-an/</URL>
+                        <Aufrufdatum>13.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Die Salzburg AG ist hier als öffentlicher
+                            <Stichwort>Landesenergieversorger</Stichwort> in der Verantwortung,
+                        Lösungen anzubieten und Härtefälle, etwa mittels Freistromtagen, auch für
+                        Menschen, die mit Strom heizen – abzufedern. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/17536/V1X8YieoAj6fG55T">
+                        <Autor/>
+                        <Titel>Salzburger Armutskonferenz</Titel>
+                        <Stelle/>
+                        <Datum>01.01.<?oxy_comment_start author="jgrimm" timestamp="20231119T074932+0100" comment="Datierung unsicher, bitte anhand des Originals überprüfen" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20231123T064911+0100" comment="&quot;2019&quot; steht im Copyrightvermerk" mid="5"?>2019<?oxy_comment_end?><?oxy_comment_end mid="5"?></Datum>
+                        <URL>https://www.salzburger-armutskonferenz.at</URL>
+                        <Aufrufdatum>29.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wien Energie, größter <Stichwort>Landesenergieversorger</Stichwort>
+                        Österreichs, hat im ersten Quartal 2016 um sieben Prozent mehr Strom
+                        erzeugt, den Umsatz gesteigert und mehr Gewinn erzielt. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2016/06/30/Wien_Energie_erzeugt_wie"> Der
+                        Standard, 30.06.2016 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Es gebe nach einer Studie aus 2011 ein Potenzial von 25 Mrd. Euro
+                        durch Teilprivatisierungen (bis maximal 25 Prozent plus 1 Aktie) von
+                            <Stichwort>Landesenergieversorgern</Stichwort>, Flughäfen und anderen
+                        oder durch den Abbau von Beteiligungen an bereits teilweise privatisierten
+                        Firmen wie OMV, Telekom Austria oder Post. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2013/10/14/Wiener_Boerse_hofft_auf_"> Der
+                        Standard, 14.10.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In Österreich sind öffentliche Mehrheiten an Verbund und
+                            <Stichwort>Landesenergieversorgern</Stichwort> im zweiten
+                        Verstaatlichungsgesetz im Verfassungsrang festgeschrieben. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2010/01/21/Bis_zu_30_Millionen_EVN_"> Der
+                        Standard, 21.01.2010 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Strompreiserhöhungen im Laufe des heurigen Jahren haben bereits
+                        einige <Stichwort>Landesenergieversorger</Stichwort> angekündigt und dies
+                        mit den hochgeschnellten Großhandelspreisen argumentiert. </Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2004/01/28/Strom_wird_teurer_Gas_eh"> Der
+                        Standard, 28.01.2004 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Uta, Telekom-Tochter der neun österreichischen
+                            <Stichwort>Landesenergieversorger</Stichwort>, an der auch die Schweizer
+                        Swisscom beteiligt ist, bedient seit November des Vorjahres auch
+                        Privatkunden. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:1999/001000/faz_1999_001157_tei"> Der Wettbewerb
+                        für die österreichischen Telefondienste wird härter. Frankfurter Allgemeine
+                        Zeitung, 27.01.1999 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-08-29"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

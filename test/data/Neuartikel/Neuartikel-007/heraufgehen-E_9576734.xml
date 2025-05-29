@@ -1,0 +1,481 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_g_2823" Autor="dsanders" Typ="Vollartikel" Zeitstempel="2025-05-14" Erstellungsdatum="1967-01-01" Status="Red-2">
+        <?oxy_comment_start author="wgrimm" timestamp="20210817T132912+0200" comment="zusammen mit raufgehen, runtergehen und hinaufgehen freischalten" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20250430T102104+0100" comment="s. ULA 1 b)" flag="done" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="he-r-auf-ge-hen"><?oxy_comment_start author="dsanders" timestamp="20210818T114622+0200" comment="habe nach deinen Kommentaren noch fehlende LA nachgetragen (18.08.2021)" flag="done"?>heraufgehen<?oxy_comment_end?></Schreibung>
+            <Aussprache Zeitstempel="2023-09-15" Quelle="DWDS" Autor="brosch">
+                <IPA Audiodatei="132/heraufgehen">hɛˈʀaʊ̯fgeːən</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>geht herauf</Wert></Praesens>
+                <Praeteritum><Wert>ging herauf</Wert></Praeteritum>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>heraufgegangen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>34 (1.2)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>herauf-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>gehen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <Lesart n="a)">
+                <Syntagmatik>
+                    <Konstruktionsmuster>
+                        <Belegtext>jmd. <Stichwort>geht</Stichwort> (etw.) (irgendwohin)
+                                <Stichwort>herauf</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Diasystematik/>
+                <?oxy_comment_start author="jgrimm" timestamp="20230913T105203+0200" comment="hier und in den folgenden Lesarten - Problemfeld Antonym: invisible
+- Basiswort a) gleich oder b) nicht?
+- a) 1 Sachverhalt, 2 personenverschiedene Perspektiven, 2 Standorte oder  b) 2 Sachverhalte, 1 personenidentische Perspektive, 1 Standort?" flag="done"?>
+                <Verweise><?oxy_comment_end?>
+                    <Verweis Typ="Hyperonym">
+                        <Ziellemma>raufgehen</Ziellemma>
+                        <Ziellesart><?oxy_comment_start author="jgrimm" timestamp="20210818T114729+0200" comment="LA-Nr nachgetragen" flag="done"?>1
+                            a<?oxy_comment_end?></Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Antonym" class="invisible">
+                        <Ziellemma>herabgehen</Ziellemma>
+                        <Ziellesart>1 a</Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Antonym">
+                        <Ziellemma>heruntergehen</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">(zu Fuß) von unten, von einer niedriger gelegenen Stelle
+                    nach oben, hoch <Verweis Typ="vgl">
+                        <Ziellemma>gehen</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                </Definition>
+                <Definition Typ="Basis">sich (zu Fuß) aufwärts
+                    <?oxy_comment_start author="dsanders" timestamp="20230913T105700+0200" comment="war: ... von einer von einer ..." flag="done"?>von
+                    einer <?oxy_comment_end?>niedriger gelegenen Stelle zu einer höher gelegenen
+                    Stelle <Verweis Typ="vgl">
+                        <Ziellemma hidx="1">bewegen</Ziellemma>
+                        <Ziellesart><?oxy_comment_start author="kduden" timestamp="20230914T074033+0200" comment="1 --&gt; 2" flag="done"?>2<?oxy_comment_end?></Ziellesart>
+                    </Verweis></Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext><Autorenzusatz>Unser altes Bauernhaus hat sich sehr
+                                verändert.</Autorenzusatz> Gut, dass mein Vater nicht die Kraft hat,
+                            das kleine Stück auf den Berg <Stichwort>heraufzugehen</Stichwort>. So
+                            muss er das Haus nicht sehen.</Belegtext>
+                        <Fundstelle Fundort="online">
+                            <Autor>Fröhlich, Stefan</Autor>
+                            <Titel>Der Mandelbaum singt ein Abschiedslied</Titel>
+                            <Stelle/>
+                            <Datum>13.04.2021</Datum>
+                            <URL>https://web.archive.org/web/20210804125607/https://www.story.one/u/stefan-frohlich-20890/der-mandelbaum-singt-ein-abschiedslied</URL>
+                            <Aufrufdatum>04.08.2021</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Immer wieder sind wir <Autorenzusatz>zu unserem
+                                Lieblingsplatz</Autorenzusatz>
+                            <Stichwort>heraufgegangen</Stichwort>, haben uns unter die Bäume
+                            gesetzt. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Der Standard, 04.05.2015 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Wir sind <Autorenzusatz>während der Klassenfahrt</Autorenzusatz>
+                            die 533 Stufen <Autorenzusatz>des Kölner Doms</Autorenzusatz>
+                            <Stichwort>heraufgegangen</Stichwort>. Das war sehr
+                            anstrengend.</Belegtext>
+                        <Fundstelle Fundort="online">
+                            <Autor/>
+                            <Titel> Klassenausflug – Ausflug der Klasse 1 zum Kölner Dom</Titel>
+                            <Kurztitel>Ausflug der Klasse 1 zum Kölner Dom</Kurztitel>
+                            <Stelle/>
+                            <Datum>25.06.2010</Datum>
+                            <URL>https://web.archive.org/web/20210804131855/https://www.joseph-beuys-schule.de/alte_seite/alte_seite/7._News/Eintrage/2010/6/25_Klassenausflug.html</URL>
+                            <Aufrufdatum>04.08.2021</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Autorenzusatz>Der britische
+                                <?oxy_comment_start author="kduden" timestamp="20230913T110010+0200" comment="Tippfehler korrigiert" flag="done"?>Premierminister<?oxy_comment_end?>
+                                winkt in die Menschenmenge.</Autorenzusatz> Dann
+                                <Stichwort>geht</Stichwort> er steif und etwas linkisch die Rampe
+                                <Stichwort>herauf</Stichwort> zum Rednerpult. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Berliner Zeitung, 16.04.1997 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Ein Bub mit Baseballmütze fragt, ob wir da etwa zu Fuß
+                                <Stichwort>heraufgegangen</Stichwort> seien. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 18.08.1995 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Jeder kann in das Hotel hineingehen und die imposante Treppe zum
+                            Restaurant »Coelln« <Stichwort>heraufgehen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 02.10.1996 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Man <Stichwort>geht</Stichwort> eine Stufe
+                                <Stichwort>herauf</Stichwort>, aber man geht auch mal ein paar
+                            Stufen herunter.</Belegtext>
+                        <Fundstelle Fundort="dwds"> Welt am Sonntag, 05.03.2017 </Fundstelle>
+                        <Diasystematik>
+                            <?oxy_comment_start author="dsanders" timestamp="20230913T105928+0200" comment="übertragen --&gt; im Bild" flag="done"?>
+                            <Bedeutungsebene>im Bild</Bedeutungsebene><?oxy_comment_end?>
+                        </Diasystematik>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)">
+                <Syntagmatik>
+                    <?oxy_comment_start author="dsanders" timestamp="20250430T101959+0100" comment="geändert: &quot;... geht (etw.) (irgendwohin) herauf&quot;" flag="done"?>
+                    <Konstruktionsmuster>
+                        <Belegtext>etw. <Stichwort>geht</Stichwort> (irgendwo, irgendwohin)
+                                <Stichwort>herauf</Stichwort></Belegtext>
+                    </Konstruktionsmuster><?oxy_comment_end?>
+                </Syntagmatik>
+                <Diasystematik/>
+                <Verweise>
+                    <Verweis Typ="Hyperonym">
+                        <Ziellemma>raufgehen</Ziellemma>
+                        <Ziellesart><?oxy_comment_start author="kduden" timestamp="20210818T114801+0200" comment="LA-Nr nachgetragen" flag="done"?>1
+                            b<?oxy_comment_end?></Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Synonym" class="invisible">
+                        <Ziellemma>heraufführen</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Antonym" class="invisible">
+                        <Ziellemma>herabgehen</Ziellemma>
+                        <Ziellesart>1 b</Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Antonym">
+                        <Ziellemma>heruntergehen</Ziellemma>
+                        <Ziellesart>2</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <?oxy_comment_start author="kduden" timestamp="20230913T111135+0200" comment="Teildefinitionen zusammengefasst" flag="done"?>
+                <Definition Typ="Basis">von unten, von einer niedriger gelegenen Stelle nach oben,
+                    zu einer höher gelegenen Stelle <Verweis Typ="vgl">
+                        <Ziellemma>führen</Ziellemma>
+                        <Ziellesart>4 a</Ziellesart>
+                    </Verweis>, <Verweis Typ="vgl">
+                        <Ziellemma>verlaufen</Ziellemma>
+                        <Ziellesart>5</Ziellesart>
+                    </Verweis></Definition><?oxy_comment_end?>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Steil <Stichwort>geht</Stichwort> es <Streichung>nun</Streichung>
+                            den Lavarand <Autorenzusatz>von Eldhraun in Island</Autorenzusatz>
+                            <Stichwort>herauf</Stichwort>, doch ein paar Stufen und Ketten helfen
+                            und schon stehen wir oben.</Belegtext>
+                        <Fundstelle Fundort="online">
+                            <Autor/>
+                            <Titel>Reise zum Mittelpunkt der Erde</Titel>
+                            <Stelle/>
+                            <Datum>17.08.2017</Datum>
+                            <URL>https://web.archive.org/web/20210804152711/https://www.geotrip.de/reise-zum-mittelpunkt-der-erde/</URL>
+                            <Aufrufdatum>04.08.2021</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Teilweise <Stichwort>geht</Stichwort> es mit extremen Steigungen
+                            den Berg <Stichwort>herauf</Stichwort> und die Kondition der Teilnehmer
+                            wird von Anfang an gefordert.</Belegtext>
+                        <Fundstelle Fundort="online">
+                            <Autor/>
+                            <Titel>Rangerwanderung – Auf der Suche nach Frau Holles Berg</Titel>
+                            <Kurztitel>Auf der Suche nach Frau Holles Berg</Kurztitel>
+                            <Stelle/>
+                            <Datum>30.04.2018</Datum>
+                            <URL>https://web.archive.org/web/20210804133421/https://schulen-borchen.de/sebo/2018/04/30/rangerwanderung-auf-der-suche-nach-frau-holles-berg/</URL>
+                            <Aufrufdatum>04.08.2021</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Der Weg <Stichwort>geht</Stichwort> in Windungen bei der
+                            Drahtseilbahn <Stichwort>herauf</Stichwort>, mäßig steil und
+                            gepflastert.</Belegtext>
+                        <Fundstelle Fundort="gbooks">Benjamin, Walter: Selbstzeugnisse. Curriculum
+                            Vitae, Reisetagebücher, Aufzeichnungen, Protokolle zu Drogenversuchen.
+                            [o. O.]: e-artnow 2013</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Im Winter <Stichwort>geht</Stichwort> es im Schnee
+                                <Stichwort>herauf</Stichwort> und herunter beim Eisklettern,
+                            Heliskiing, Tiefschneefahren oder bei den Skitouren<Streichung>, zu der
+                                natürlich auch die legendäre Haute Route gehört, die
+                                Westalpendurchquerung von Chamonix nach Saas Fee</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 12.12.2002
+                        </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart xml:id="S_g_21615" n="2.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>etw. <Stichwort>geht</Stichwort>
+                        <Stichwort>herauf</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+                <?oxy_comment_start author="kduden" timestamp="20230914T083133+0200" comment="ergänzt" flag="done"?>
+                <Konstruktionsmuster><?oxy_comment_end?>
+                    <Belegtext>es <Stichwort>geht</Stichwort> (mit etw.)
+                            <Stichwort>herauf</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>raufgehen</Ziellemma>
+                    <Ziellesart><?oxy_comment_start author="wgrimm" timestamp="20210818T115335+0200" comment="LA-Nr nachgetragen" flag="done"?>2<?oxy_comment_end?></Ziellesart>
+                </Verweis>
+                <Verweis Typ="Antonym">
+                    <Ziellemma><?oxy_comment_start author="jgrimm" timestamp="20210818T115325+0200" comment="Antonym nachgetragen" flag="done"?>runtergehen<?oxy_comment_end?></Ziellemma>
+                    <Ziellesart>e</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20230913T111832+0200" comment="zwei Teildefs zusammengefasst" flag="done"?>(im
+                Wert, Niveau, in der Anzahl o. Ä.)<?oxy_comment_end?>
+                <Verweis Typ="vgl">
+                    <Ziellemma>steigen</Ziellemma>
+                    <Ziellesart><?oxy_comment_start author="kduden" timestamp="20230913T111839+0200" comment="2 --&gt; 3" flag="done"?>3<?oxy_comment_end?></Ziellesart>
+                </Verweis>, nach oben gehen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <?oxy_comment_start author="jgrimm" timestamp="20230913T113724+0200" comment="neu" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Der prominente britische Verkoster Jim Murray hat
+                            <Streichung>darin</Streichung> einen Yamazaki aus Sherry-Fässern zum
+                        besten Produkt seiner Klasse gekürt. Japans Schnapsexporte
+                            <Stichwort>gingen</Stichwort> daraufhin um ein Drittel
+                            <Stichwort>herauf</Stichwort> – und wachsen seitdem stetig
+                        weiter.</Belegtext>
+                    <Fundstelle Fundort="dwds:badz:2017/01/BADZ_51129123233"> Badische Zeitung,
+                        13.01.2017 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Und:</Streichung> Außerhalb der Wettkampfsaison als
+                        Sprinter sei sein Gewicht stets <Stichwort>heraufgegangen</Stichwort> auf 85
+                        Kilo.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Welt am Sonntag, 20.03.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Lebensmittellage ist trotz der günstigen Jahreszeit nicht allzu
+                        rosig; es fehlt an Obst und Gemüse, die Preise sind weiter
+                            <Stichwort>heraufgegangen</Stichwort><Streichung>, das Volk macht sich
+                            Sorge um den Feldzug im Osten, bei dem es im Augenblick noch keine Ende
+                            absehen kann.</Streichung></Belegtext>
+                    <Fundstelle Fundort="gbooks">Fröhlich, Elke: Juli–September 1941. [o. O.]:
+                        Walter de Gruyter 2013, S. 320</Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20230913T113550+0200" comment="entspricht nicht dem Konstruktionsmuster" flag="done"?>
+                <Beleg class="invisible"><?oxy_comment_end?>
+                    <Belegtext> Die Verständigung über den Zimmerpreis braucht eine Weile, weil
+                            <Autorenzusatz>meine Begleitung</Autorenzusatz>
+                            C<Streichung>elestinus</Streichung> beim Feilschen mit dem Preis
+                            <Stichwort>heraufgeht</Stichwort> statt herunter.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 29.03.2012</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> An den Aktienmärkten <Stichwort>geht</Stichwort> es bereits seit
+                        Tagen einmal deutlich <Stichwort>herauf</Stichwort> und einmal deutlich
+                            herunter<Streichung>; früher oder später werde die Volatilität an den
+                            Anleihemarkt wieder steigen, trösten sich Händler</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Allgemeine Zeitung, 21.10.2005
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In dem Moment, wo <Streichung>dort</Streichung> die Zinsen
+                            <Stichwort>heraufgehen</Stichwort>, kann ein Land mit
+                            <Streichung>so</Streichung> einer hohen, vor allem kurzfristig
+                        finanzierten Verschuldung in Bedrängnis kommen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 28.02.1998 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="dsanders" timestamp="20230913T113352+0200" comment="entspricht nicht dem Konstruktionsmuster" flag="done"?>
+                <Beleg class="invisible"><?oxy_comment_end?>
+                    <Belegtext> Wenn es das Umfeld erlaube, werde die Bank natürlich mit der
+                        Ausschüttung <Autorenzusatz>der Dividende</Autorenzusatz>
+                        <Stichwort>heraufgehen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 15.01.1993 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="jgrimm" timestamp="20210827T205213+0200" comment="offenbar hist. Zitat – sollte kontextualisiert werden" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Ein Maximalarbeitstag <Paraphrase>gesetzlich
+                            vorgeschriebene Arbeitszeit</Paraphrase> hat
+                            <Paraphrase>birgt</Paraphrase> die Gefahr, daß nun ein jeder Arbeitgeber
+                        sich berechtigt hält, bis auf das Maximum
+                            <Stichwort>heraufzugehen</Stichwort><Streichung>, auch der, welcher es
+                            früher nicht gethan</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 12.10.1984</Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20230913T115623+0200" comment="neu" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Ich glaube, daß der höchste Punkt der Auswanderung fürs Erste
+                        erreicht ist, und daß im nächsten Jahre die Zahl der Auswanderer noch weiter
+                        heruntergehen wird. In dem einen Jahrzehnt <Stichwort>geht</Stichwort> die
+                        Auswanderungszahl <Stichwort>herauf</Stichwort>, im anderen
+                            herunter<Streichung>, je nach der wirthschaftlichen Lage der
+                            Auswanderer- und Einwandererländer, freilich mit dem Unterschiede, daß
+                            in dem nächsten Jahrzehent die Zahl wieder höher steigt, als sie im
+                            vorausgegangenen je gewesen war</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:reichstag:bsb00018439:498">Verhandlungen des
+                        Reichstages. Berlin 1883</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="3.">
+            <?oxy_comment_start author="wgrimm" timestamp="20230913T113938+0200" comment="ULA 2 * --&gt; LA 3" flag="done"?>
+            <Syntagmatik><?oxy_comment_end?>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>geht</Stichwort> mit etw.
+                            <Stichwort>herauf</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <?oxy_comment_start author="jgrimm" timestamp="20230913T114327+0200" comment="ergänzt" flag="done"?>
+                <Stilebene><?oxy_comment_end?>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>raufgehen</Ziellemma>
+                    <Ziellesart><?oxy_comment_start author="kduden" timestamp="20230913T115110+0200" comment="Verweis angepasst" flag="done"?>3<?oxy_comment_end?></Ziellesart>
+                </Verweis>
+                <Verweis Typ="Antonym">
+                    <Ziellemma><?oxy_comment_start author="jgrimm" timestamp="20210818T120100+0200" comment="Antonym nachgetragen" flag="done"?>runtergehen<?oxy_comment_end?></Ziellemma>
+                    <Ziellesart>f</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <?oxy_comment_start author="kduden" timestamp="20230913T114819+0200" comment="in Teildefs. Klammern gesetzt + ersetzt: &quot;im Wert&quot; / &quot;den Wert&quot;" flag="done"?>
+            <Definition Typ="Basis"><?oxy_comment_end?>(den Preis, die Menge o. Ä.) <Verweis Typ="vgl">
+                    <Ziellemma>erhöhen</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>, <Verweis Typ="vgl">
+                    <Ziellemma hidx="1">anheben</Ziellemma>
+                    <?oxy_comment_start author="jgrimm" timestamp="20230913T114802+0200" comment="präzisiert" flag="done"?>
+                    <Ziellesart>*</Ziellesart><?oxy_comment_end?>
+                </Verweis></Definition>
+            <Definition Typ="Basis">(den Preis, die Menge o. Ä.) <Verweis Typ="vgl">
+                    <Ziellemma>steigen</Ziellemma>
+                    <Ziellesart>3 a</Ziellesart>
+                </Verweis> lassen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Wenn ihr uns weiterhin solch große Mengen abnehmt, sehe ich keinen
+                        Grund, mit dem Preis <Stichwort>heraufzugehen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="gbooks">Wolf, Daniel: Im Zeichen des Löwen. [o. O.]:
+                        Goldmann 2020</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Tipp an den Wirt: mit den Preisen ruhig
+                            <Stichwort>heraufgehen</Stichwort>, dafür besseres Material einkaufen,
+                        die Gäste werden es sicher honorieren.</Belegtext>
+                    <Fundstelle Fundort="online">
+                        <Autor/>
+                        <Titel>Sehr günstige Preise, Essen nicht besonders</Titel>
+                        <Stelle/>
+                        <Datum>31.12.2015</Datum>
+                        <URL>https://web.archive.org/web/20210804143145/https://www.tripadvisor.at/ShowUserReviews-g187309-d5506452-r336184896-Allee_Stuberl_Dalmacija-Munich_Upper_Bavaria_Bavaria.html</URL>
+                        <Aufrufdatum>04.08.2021</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="wgrimm" timestamp="20230913T120422+0200" comment="neu" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext> Zum Glück bin ich mit meinen Arbeitsstunden
+                            <Stichwort>heraufgegangen</Stichwort><Streichung>:)</Streichung><Autorenzusatz>.</Autorenzusatz></Belegtext>
+                    <Fundstelle Fundort="dwds:web:19752/WNtuYlTV3txx_Ez3">
+                        <Autor>Wortakzente / Kinderohren</Autor>
+                        <Titel>Hanno Beck, Juliane Schwoch: ALLES, WAS RECHT IST/A SHORT STORY ABOUT
+                            LAW</Titel>
+                        <Kurztitel>A SHORT STORY ABOUT LAW</Kurztitel>
+                        <Stelle/>
+                        <Datum>23.06.2013</Datum>
+                        <URL>https://kinderohren.wordpress.com/2013/06/23/beck-schwoch-was-recht-ist/</URL>
+                        <Aufrufdatum>14.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Mit dem Kurs <Stichwort>ging</Stichwort> es um 3,1 Prozent auf 47,10
+                        Euro <Stichwort>herauf</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 06.10.1999 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> So <Stichwort>geht</Stichwort> Hoechst <Streichung>zum
+                            Beispiel</Streichung> bei Ausschreibungsgeschäften im Dollarraum mit
+                        seinen Preisen für Chemiefasern <Stichwort>herauf</Stichwort> – und bleibt
+                        dennoch billiger als amerikanische Konkurrenten. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 12.10.1984</Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20230913T120418+0200" comment="neu" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext> Bei den Bundesobligationen ist der Bund in dieser Woche mit den
+                        Zinsen <Stichwort>heraufgegangen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:part1/1980/12/26/die_anleger_sind_von_hoh"> Die
+                        Zeit, 26.12.1980</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Die Leistung je Mann unter Tage <Stichwort>ging</Stichwort> von 1708
+                        auf 1734 kg <Stichwort>herauf</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 17.05.1956, Nr. 20</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wir allein auf der ganzen Welt können heute hier herunterfahren, weil
+                        wir allein hier <Stichwort>heraufgegangen</Stichwort> sind.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        25.01.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nach einer halben Stunde <Stichwort>ging</Stichwort> er mir schon bis
+                        an die Knie <Stichwort>herauf</Stichwort>, und das mühsame Waten machte mir
+                        heiß.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Ganghofer, Ludwig: Lebenslauf
+                        eines Optimisten. In: Simons, Oliver (Hg.) Deutsche Autobiographien
+                        1690-1930, Berlin: Directmedia Publ. 2004 [1911], S. 18243</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er war über den Hinteraufgang <Stichwort>heraufgegangen</Stichwort>
+                        und hatte sich noch schnell umgezogen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hermann, Georg [d.i. Borchardt,
+                        Georg Hermann]: Jettchen Gebert, Berlin: Fleischel 1919 [1906], S.
+                        43</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie kündigt die kranke Mimi an, die zu schwach ist, die Treppen
+                            <Stichwort>heraufzugehen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Fath, Rolf: Rollen – M. In:
+                        Reclams Opernlexikon, Berlin: Directmedia Publ. 2001 [1998], S.
+                        16399</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

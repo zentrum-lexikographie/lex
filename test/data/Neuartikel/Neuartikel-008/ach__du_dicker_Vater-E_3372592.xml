@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_9154988" Autor="wgrimm" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2020-12-03" Erstellungsdatum="2020-08-04" Status="wird_gestrichen">
+        <?oxy_comment_start author="kduden" timestamp="20200805T092404+0200" comment="ich habe nicht mehr als 2 Belege gefunden + 1 aus Röhrich" flag="done"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20201202T143037+0100" comment="Kopie von Red-f; Nennformänderung" mid="1"?>
+        <?oxy_comment_start author="dsanders" timestamp="20201027T142429+0100" comment="@ER: Bitte zusammen mit dem Verweisziel freischalten." flag="done" mid="2"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?>
+            <Schreibung>ach, du dicker Vater<?oxy_comment_start author="kduden" timestamp="20200805T093218+0200" comment="Soll &quot;Ach&quot; in die Nennform. Keine Belege ohne &quot;Ach&quot;." id="dnt_lsw_lnb" flag="done"?><?oxy_comment_start author="kduden" timestamp="20201027T130812+0100" comment="Ja." parentID="dnt_lsw_lnb" flag="done" mid="4"?></Schreibung><?oxy_comment_end?><?oxy_comment_end mid="4"?>
+            <Aussprache><IPA Audiodatei="115/ach__du_dicker_Vater"/></Aussprache><Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Funktionspraeferenz>als Ausruf</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar><?oxy_comment_start author="dsanders" timestamp="20210810T144050+0200" comment="Neuer, mit LL u. BR am 9.8.21 abgestimmter FK"?>Wenn
+                die Interjektion <erwaehntes_Zeichen Sprache="dt">ach</erwaehntes_Zeichen> in die
+                Wendung einbezogen wird, entfällt das Komma.<?oxy_comment_end?></Kommentar>
+        </Formangabe>
+        <Orthografie/><Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>dick</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Vater</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Stilfaerbung><?oxy_comment_start author="dsanders" timestamp="20201027T130625+0100" comment="Ergänzt" flag="done"?>emotional<?oxy_comment_end?></Stilfaerbung>
+                <Gebrauchszeitraum>veraltet</Gebrauchszeitraum>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>ach, du meine Güte</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <?oxy_comment_start author="dsanders" timestamp="20201027T131603+0100" comment="Grenzwertiger Beleg, aber mangels Masse hinnehmbar" id="tsh_zls_mnb" flag="done"?>
+                    <?oxy_comment_start author="wgrimm" timestamp="20201030T125522+0100" comment="Wollen wir vielleicht ausnahmsweise ein Kompetenzbeispiel verwenden? Ich habe unten einen Vorschlag." parentID="tsh_zls_mnb" flag="done" mid="8"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="8"?> Schauspieler und Kabarettist Thomas Nicolai<?oxy_comment_start author="jgrimm" timestamp="20201027T131042+0100" comment="Gekürzt" flag="done"?><Streichung>,40, besser bekannt als »Der blonde Emil«,</Streichung><?oxy_comment_end?> sorgt mit dem Titel seiner neuen Comedy-Show »Ei verbibbsch – Das Comedy Kombinat« <Streichung>(immer freitags um 21.15 Uhr, Sat 1)</Streichung> für Verwirrung. »Nee, Sächsisch ist das nicht, auch wenn das jeder denkt«, sagt der gebürtige Leipziger <Streichung><?oxy_comment_start author="wgrimm" timestamp="20201027T131421+0100" comment="Dto." flag="done"?>und inzwischen begeisterte Wahl-Berliner. Thomas Nicolai hat sich sogar einen sächsischen Sprachführer besorgt, den Begriff darin aber nicht gefunden<?oxy_comment_end?></Streichung>. Am ehesten sei »Ei verbibbsch« mit »Na, so was«<Autorenzusatz><?oxy_comment_start author="jgrimm" timestamp="20201027T131152+0100" comment="Ergänzt" flag="done"?>,<?oxy_comment_end?></Autorenzusatz> »Huch!« oder »<Stichwort>Ach, du dicker Vater</Stichwort>« zu übersetzen<Streichung>, erklärt Thomas Nicolai, der in der neuen Sat 1-Comedy-Reihe als Anchorman den Spagat zwischen Ostalgie und West-Moderne vollführt</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 17.01.2004 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Ach du dicker Vater</Stichwort>, immer diese Aufregungen, zum Kotzen. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor/>
+                        <Titel/>
+                        <Stelle/>
+                        <Datum>1975</Datum>
+                        <URL>http://www.opensubtitles.org/en/subtitles/5504774/la-pupa-del-gangster-de</URL>
+                        <Aufrufdatum>31.10.2014</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> <Stichwort>Ach du dicker Vater</Stichwort>! (auch <Stichwort>Ach du dicker Vater</Stichwort>, hast du dünne Kinder!): Ausruf der Überraschung und des Erstaunens; berlinerisch seit etwa 1900.</Belegtext>
+                    <Fundstelle Fundort="dwds">Röhrich, Lutz: Vater. In: Lexikon der sprichwörtlichen Redensarten [Elektronische Ressource], Berlin: Directmedia 2000, S. 6754. Zitiert nach: Röhrich, Lutz: Vater. In: Lexikon der sprichwörtlichen Redensarten, Freiburg u. a.: Herder 1994 [1973].</Fundstelle>
+                </Beleg>
+                <Kompetenzbeispiel class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20201030T130148+0100" comment="Vorschlag - Kompetenzbeispiel statt Beleg 1" id="fhf_5xm_nnb" flag="done"?>
+                    <?oxy_comment_start author="dsanders" timestamp="20201102T082544+0100" comment="M. E. wirkt das im Kontext der Korpusbelege irritierend." parentID="fhf_5xm_nnb" flag="done" mid="13"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="13"?>Kurz vor Heiligabend. Ich bin fertig mit den Vorbereitungen: die Weihnachtsgans ist im Ofen, der Tisch ist festlich gedeckt, die Geschenke verpackt. <Stichwort>Ach, du dicker Vater!</Stichwort> Der Weihnachtsbaum liegt immer noch auf dem Balkon! </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

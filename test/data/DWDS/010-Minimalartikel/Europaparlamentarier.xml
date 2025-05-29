@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_e_989000010_1744" Autor="dsanders" Typ="Minimalartikel" Tranche="45k-Minimalartikel" Zeitstempel="2015-08-07" Erstellungsdatum="2015-08-07" Status="wird_gestrichen">
+    <Formangabe Typ="Hauptform">
+      <Schreibung>Europaparlamentarier</Schreibung>
+      <Grammatik>
+        <Wortklasse>Substantiv</Wortklasse>
+        <Genus>mask.</Genus>
+        <Genitiv><Wert>-s</Wert></Genitiv>
+        <Plural><Wert>-</Wert></Plural>
+      </Grammatik>
+      <Diasystematik/>
+    </Formangabe>
+    <Orthografie/>
+    <Verweise Typ="Komposition" Zeitstempel="2022-05-12" Quelle="DWDS" Autor="herold">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>Europa</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>Parlamentarier</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+    <Diachronie>
+      <Etymologie/>
+      <Formgeschichte/>
+      <Bedeutungsgeschichte/>
+      <Verweise/>
+    </Diachronie>
+    <Lesart>
+      <Syntagmatik/>
+      <Diasystematik/>
+      <Verweise/>
+      <Definition Typ="Basis"/>
+      <Kollokationen/>
+      <Verwendungsbeispiele/>
+    </Lesart>
+    <Rohdaten>
+      <Verwendungsbeispiele>
+        <Beleg>
+          <Belegtext>Demnach erhalten die deutschen <Stichwort>Europaparlamentarier</Stichwort>
+            derzeit rund 7000 Euro im Monat.</Belegtext>
+          <Fundstelle Fundort="dwds:welt">Die Welt, 09.06.2004</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Zwar hatte die große Mehrheit der <Stichwort>Europaparlamentarier</Stichwort>
+            erwartet, dass die deutschen Richter so entscheiden würden.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.09.2012, Nr. 37</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Dieser hatte vor <Stichwort>Europaparlamentariern</Stichwort> in Brüssel davor
+            gewarnt, dass sich «in den nächsten Stunden weitere katastrophale Entwicklungen» ergeben
+            können.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.03.2011 (online)</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Als ehemaliger <Stichwort>Europaparlamentarier</Stichwort> mit Pendelerfahrung
+            dürfte er frühes Aufstehen gewohnt sein.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.12.2009, Nr. 53</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Bei den <Stichwort>Europaparlamentariern</Stichwort> stießen die beiden
+            Vegetarier-Apostel freilich nicht nur auf Wohlwollen.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 21.12.2009, Nr. 51</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Davon sind zwar die <Stichwort>Europaparlamentarier</Stichwort> der CSU alles
+            andere als begeistert.</Belegtext>
+          <Fundstelle Fundort="dwds:zeit">Die Zeit, 13.07.2009, Nr. 28</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Die deutschen <Stichwort>Europaparlamentarier</Stichwort> liegen mit 7000 Euro
+            im oberen Drittel der Bezüge.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.12.2003</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>In Straßburg stimmen die <Stichwort>Europaparlamentarier</Stichwort> über die
+            Erweiterung der Union ab.</Belegtext>
+          <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 09.04.2003</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Schließlich würde sich für deutsche <Stichwort>Europaparlamentarier</Stichwort>
+            mit dem neuen Statut kaum etwas ändern.</Belegtext>
+          <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 24.01.2004</Fundstelle>
+        </Beleg>
+        <Beleg>
+          <Belegtext>Diesmal waren zwei <Stichwort>Europaparlamentarier</Stichwort> das Ziel,
+            wahrscheinlich werden weitere Anschläge folgen.</Belegtext>
+          <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 06.01.2004</Fundstelle>
+        </Beleg>
+      </Verwendungsbeispiele>
+    </Rohdaten>
+  </Artikel>
+</DWDS>

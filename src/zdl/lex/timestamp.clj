@@ -30,4 +30,3 @@
   "The number of days since the UNIX epoch for a given date."
   [^java.time.LocalDate date]
   (.between java.time.temporal.ChronoUnit/DAYS unix-epoch date))
-

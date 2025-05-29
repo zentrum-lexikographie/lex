@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_n_2787" Autor="" Typ="Basisartikel-D" Zeitstempel="1974-01-01" Erstellungsdatum="1974-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Zeitstempel="2019-11-04" Quelle="DWDS" Autor="herold">
+            <Schreibung>nomadisieren</Schreibung>
+            <Aussprache><IPA Audiodatei="064/nomadisieren"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>nomadisiert</Wert></Praesens>
+                <Praeteritum><Wert>nomadisierte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>nomadisiert</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2024-04-26" Quelle="DWDS" Autor="herold" Typ="Derivation">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>Nomade</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>-isieren</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+        <Diachronie>
+            <Etymologie>Griechisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_n_2478">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">(mit Herden) wandern, umherziehen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>die Samen haben das Recht, zwischen Finnland, Norwegen und Schweden zu <Stichwort>nomadisieren</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>
+                        <Stichwort>nomadisierende</Stichwort> Viehzüchter, Jäger</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Diese Völker <Stichwort>nomadisierten</Stichwort> in den weiten Räumen nördlich des Reiches.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 25.01.1982, Nr. 04</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Manche betätigten sich als Farmer, andere <Stichwort>nomadisierten</Stichwort> zeitweise, wieder andere jagten und sammelten wilde Pflanzen.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 19.05.1999</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Seither <Stichwort>nomadisiert</Stichwort> Bandleader Alec Empire, mittlerweile 25 Jahre alt, als Solo-Elektroniker durch die Welt.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 30.06.1997, Nr. 26</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie <Stichwort>nomadisieren</Stichwort> von Bar zu Bar, von Party zu Party, von Vernissage zu Vernissage.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 02.10.1992, Nr. 41</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Aber nur 500000 Mauren leben oder vielmehr <Stichwort>nomadisieren</Stichwort> in diesem riesigen Wüstengebiet.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.12.1960, Nr. 51</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>John Zorn ist der spektakulärste Repräsentant einer Musik, die zwischen Rock, Jazz und zeitgenössischer Moderne <Stichwort>nomadisiert</Stichwort>, ohne sich je dauerhaft niederzulassen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 25.07.1997, Nr. 31</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Zuerst landete er in Spanien, dann <Stichwort>nomadisierte</Stichwort> er über Frankreich und Italien nach Tirol.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.02.2011, Nr. 09</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Dann rufe ich beim Hochkommissariat für Menschenrechte an und sage zum Beispiel, ich möchte in die Mongolei, weil die Verzweifelten dort wieder anfangen zu <Stichwort>nomadisieren</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 03.01.2011, Nr. 01</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In den Stunden des Umzugs <Stichwort>nomadisiert</Stichwort> der Umziehende, bricht er seine Zelte ab, und kämpft um das Sinkgut seiner Sesshaftigkeit.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 12.08.1999</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das faschistische Bild ist nicht eigentlich in den gesellschaftlichen Besitz übergegangen; so <Stichwort>nomadisiert</Stichwort> es in den Zwischenzonen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">konkret, 1996</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

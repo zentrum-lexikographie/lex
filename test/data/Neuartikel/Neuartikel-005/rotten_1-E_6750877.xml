@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_l_20150504_552" Autor="wgrimm" Typ="Vollartikel" Zeitstempel="2025-01-02" Erstellungsdatum="2015-05-04" Status="Red-f-blockiert">
+        <?oxy_comment_start author="kduden" timestamp="20241206T111836+0100" comment="bei Freischaltung bitte Tranche=Spiel entfernen" id="cvm_bsj_w2c"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20250402T110501+0200" parentID="cvm_bsj_w2c" comment="OK, wartet auf rotten²" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung hidx="1" Trennung="rot-ten">rotten</Schreibung>
+            <Aussprache>
+                <IPA>ˈʀɔtn̩</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>rottet</Wert></Praesens>
+                <Praeteritum><Wert>rottete</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>gerottet</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma hidx="2">rotten</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart xml:id="S_l_20150504_552" n="1.">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>etw. <Stichwort>rottet</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">faulend, modernd, verwesend o. ä. sich zersetzen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> In der <Streichung>Kaditzer</Streichung> Anlage
+                            <Stichwort>rottet</Stichwort> aktuell geschreddertes Laub, das unter
+                        zerkleinerten Bioabfall gemischt wurde. </Belegtext>
+                    <Fundstelle Fundort="dwds:dnn_regional:2020/11/DNN_doc7d9trptk0x1uspl4olz">
+                        Dresdner Neueste Nachrichten, 20.11.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20241220T134141+0100" comment="hat gerottet" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>»Katastrophe«, sagt ein Arbeiter im Vorbeigehen
+                        über das Hausboot. Teilweise ist es offenbar schlecht saniert worden. In
+                        Hohlräumen soll es vor sich hin <Stichwort>gerottet</Stichwort>
+                        haben.</Belegtext>
+                    <Fundstelle Fundort="dwds:ha_regional:2019/06/HA_doc75zt0x7d6u81fm179yp">
+                        Hamburger Abendblatt, 29.06.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Ein guter Kompost <Stichwort>rottet</Stichwort>, er riecht nach
+                        Walderde oder holzig. </Belegtext>
+                    <Fundstelle Fundort="dwds:tgz_regional:2019/03/TGZ_201903160240654935">
+                        Thurgauer Zeitung, 16.03.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20241220T134214+0100" comment="ist gerottet" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Nach der Wende war das in den 70er Jahren
+                        geschaffene Denkmal unbeachtet vor sich hin <Stichwort>gerottet</Stichwort>,
+                        ehe es der Landkreis <Streichung>auf Anregung der PDS 2003 für 20.000 Euro
+                            aufwendig</Streichung> renovieren ließ. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2005/09/SZ_A26170662"> Süddeutsche Zeitung,
+                        02.09.2005 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die »autonome« Komi-Republik im Hohen Norden, wo neben der Kohle von
+                        Workuta die Leichen von Hunderttausenden Gulag-Opfern
+                            <Stichwort>rotten</Stichwort>, hat sich ebenso verselbständigt wie
+                        Karelien, wie Abchasien in Georgien und sogar die russische Minderheit im
+                        rumänisch besiedelten Moldau, die eine eigene »Dnjestr-Republik« ausgerufen
+                        hat.</Belegtext>
+                    <Fundstelle Fundort="dwds:spiegel_print:src/1990/09/d_13502126">Der Spiegel,
+                        17.09.1990</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Formangabe>
+                <Grammatik>
+                    <Auxiliar><Wert>hat</Wert></Auxiliar>
+                </Grammatik>
+                <Diasystematik/>
+            </Formangabe>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>rottet</Stichwort> (etw.)</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Fachgebiet>Landwirtschaft</Fachgebiet>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma hidx="2">rösten</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>»Der Flachs wird zuerst drei bis fünf Wochen
+                            <Stichwort>gerottet</Stichwort>, das heisst, in Wasser eingeweicht,
+                        damit sich die Faser vom Holz löst«, erklärt M<Streichung>üller</Streichung>
+                        den Vorgang <Autorenzusatz>der
+                        Papierherstellung</Autorenzusatz>.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:13475/PI7oSdilMHX7dxYn">
+                        <Autor>Vanessa Simili</Autor>
+                        <Titel>Wo selbst angebauter Flachs zu Papier verarbeitet wird</Titel>
+                        <Stelle/>
+                        <Datum>13.10.2018</Datum>
+                        <URL>https://www.solothurnerzeitung.ch/solothurn/lebern-bucheggberg-wasseramt/wo-selbst-angebauter-flachs-zu-papier-verarbeitet-wird-133575742</URL>
+                        <Aufrufdatum>13.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dort liegt der andere Teil des biologischen Materials, das
+                            »<Stichwort>gerottet</Stichwort>« wird und am Ende als Qualitätskompost
+                        herauskommt. <Streichung>Ein »Wiederverwertungsspektrum von 100 Prozent«,
+                            sagt Eichhorn. Er hat noch mehr Zahlen:</Streichung> Pro Jahr landen
+                        rund 7.500 Tonnen Biomüll aus der Stadt und 12.000 aus dem Landkreis in
+                        seinem <Autorenzusatz>eines Landwirts</Autorenzusatz> Betrieb, exklusive
+                        Gartenabfall- und Christbaumabfuhr.</Belegtext>
+                    <Fundstelle Fundort="dwds:frt_regional:2016/07/FRT_3140912585-BAMBERG">
+                        Fränkischer Tag, 09.07.2016 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20241220T134522+0100" comment="intransitiver Gebrauch" flag="done"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>Leinen ist ein Gewebe, das aus dem Stengel oder Stiel des Flachses
+                        gewonnen wird. Es gilt als eines der ältesten Materialien für die
+                        Herstellung von Bekleidung. Sehr aufwendige Arbeitsvorgänge – da wird
+                        gebrochen, <Stichwort>gerottet</Stichwort> und gehechelt, um ein paar
+                        Beispiele zu nennen – machen die Faser gefügig und die störrische
+                        Flachspflanze zu dem angenehm kühlen Material, daß wir in heißen Tagen so
+                        gern auf dem Körper tragen.</Belegtext>
+                    <Fundstelle Fundort="dwds:bz:1994/1994_07_02/BZ_1994_153_26697_tei"> Berliner
+                        Zeitung, 02.07.1994 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="dsanders" timestamp="20250102T093335+0100" comment="die Langofrm der Abkürzung &quot;K.&quot; ist unklar" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Die reifen Bohnen werden zuerst
+                            <Stichwort>gerottet</Stichwort> und dann an der Sonne getrocknet
+                        (gerotteter K. oder Erd-K.), oder gleich getrocknet und nachher geschält
+                        (ungerotteter oder Sounen-K.). </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:i/1906/brocki_k_1906:36061">Brockhaus’
+                        Kleines Konversations-Lexikon. Berlin: Directmedia 2001 [1906]</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Die getrockneten Pflanzen werden durch das Riffeln
+                            <?oxy_comment_start author="kduden" timestamp="20250102T121707+0100" comment="gestrichen" flag="done"?><Streichung>(s.
+                            Riffel)</Streichung><?oxy_comment_end?> von den Samenkörnern befreit,
+                        geröstet oder <Stichwort>gerottet</Stichwort>, auf Flachsdarren getrocknet,
+                        auf Handbrechen oder Brechmaschinen gebrochen, mit Handhechel oder
+                        Hechelmaschinen weiter aufgelöst und von den kurzen Fasern (Hede, Werg),
+                        befreit. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:w/1906/brocki_f_1906:23483">Brockhaus’
+                        Kleines Konversations-Lexikon. Berlin: Directmedia 2001 [1906]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Zeitstempel="2023-05-25" Quelle="DWDS" Autor="herold">
+                <Beleg>
+                    <Belegtext>Das Holz ist feucht und <Stichwort>rottet</Stichwort> langsam vor
+                        sich hin, aber es trägt das Dach.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.11.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dort <Stichwort>rottet</Stichwort> es vor sich hin, das Prachtstück
+                        im Wert von 15.000 Mark.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.03.2008, Nr. 14</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In der DDR nutzte man das Anwesen noch, seit der Wende
+                            <Stichwort>rottet</Stichwort> es vor sich hin.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.05.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>An eine Rückkehr ist nicht zu denken, und ihr Lager, in dem sie nun
+                        seit einem Monat festsitzen, <Stichwort>rottet</Stichwort> vor sich
+                        hin.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 15.05.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auf den Bergen wird gewöhnlich tiefer als in der Ebene
+                            <Stichwort>gerottet</Stichwort>, auf gutem oder lockerem Boden weniger
+                        tief, als auf festem und steinigem Boden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Schlipf, Johann Adam: Schlipfs populäres
+                        Handbuch der Landwirtschaft, Berlin: Parey 1918, S. 291</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

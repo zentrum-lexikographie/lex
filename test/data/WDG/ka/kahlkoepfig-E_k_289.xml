@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_k_289" Autor="" Typ="Basisartikel" Zeitstempel="1969-01-01" Erstellungsdatum="1969-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>kahlköpfig</Schreibung>
+            <Aussprache><IPA Audiodatei="044/kahlkoepfig"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-02-11" Autor="herold" Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Kahlkopf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_k_157">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>mit dem Ortsgeistlichen … einem kleinen, <Stichwort>kahlköpfigen</Stichwort> Herrn</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="HAUCAREDL">
+                        <Autor>C. Hauptm.</Autor>
+                        <Titel>Einhart</Titel>
+                        <Stelle>1,205</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                    </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Der <Stichwort>kahlköpfige</Stichwort> Mann floh vor 20 Jahren aus dem Iran.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 13.11.1998, Nr. 47</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Fast <Stichwort>kahlköpfig</Stichwort> ist er, professoral, manchmal scheint er fast abwesend.</Belegtext>
+      <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel, 21.11.2000</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Auf der Straße gehen ein <Stichwort>kahlköpfiger</Stichwort> Mann, eine Frau und vier schwarzgekleidete Herren nach Hause.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 11.10.1999</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Der Mann ist <Stichwort>kahlköpfig</Stichwort>, quatscht in ein Handy und wirkt dennoch enorm sympathisch.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 16.11.1996</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Der <Stichwort>kahlköpfige</Stichwort>, fettleibige Herr sieht ihn an, zieht ihn zu sich hinein.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Döblin, Alfred: Berlin Alexanderplatz, Olten: Walter 1961 [1929], S. 111</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In der Ferne begleitete den Zug eine lange Kette von <Stichwort>kahlköpfigen</Stichwort> Bergen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Nadolny, Sten: Selim oder Die Gabe der Rede, München: Piper 1997 [1990], S. 36</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Bis auf den gepflegt gewellten Haarkranz, der silbergrau schimmernd über den Kragen fällt, ist er <Stichwort>kahlköpfig</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Grass, Günter: Die Rättin, Darmstadt: Luchterhand 1986, S. 55</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er drängte sich hinter Frau Behrend und die dicken <Stichwort>kahlköpfigen</Stichwort> Geschäftsleute.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Koeppen, Wolfgang: Tauben im Gras. In: ders., Drei Romane, Frankfurt a. M.: Suhrkamp 1972 [1951], S. 182</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er ist <Stichwort>kahlköpfig</Stichwort>, dickbauchig, hat eine nackte Brust und ein lachendes Gesicht.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – P. In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1993], S. 532</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sonst wird der »Meergreis« N. zumeist als alter, bärtiger und <Stichwort>kahlköpfiger</Stichwort> Mann mit Zepter und Fisch, oft auf einem Hippokamp (Seepferd) reitend, dargestellt.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – N. In: Olbrich, Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1993], S. 13033</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

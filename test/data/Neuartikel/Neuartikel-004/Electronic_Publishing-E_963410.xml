@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_963410" Autor="kduden" Typ="Vollartikel" Tranche="RSR-2024-37_E4" Zeitstempel="2025-05-26" Erstellungsdatum="2024-08-15" Status="Red-1">
+        <?oxy_comment_start author="dsanders" timestamp="20250204T122048+0100" comment="Neue AWL-Buchung = mögl. Lemmalücke im DWDS - die Ausarbeitung zum Vollart. ist nicht im Zuge der orthogr. Anpassung leistbar" flag="done"?>
+        <Formangabe Typ="Hauptform" Quelle="DWDS" Zeitstempel="2024-09-24" Autor="brosch"><?oxy_comment_end?>
+            <?oxy_comment_start author="wgrimm" timestamp="20240905T104017+0200" comment="IPA nicht korrekt: [eˈlɛkˈtʀoːnɪk puˈbliːʃɪŋ] (computergeneriert)" flag="done"?>
+            <Schreibung Trennung="Elec-t-ro-nic Pu-b-li-shing">Electronic
+                Publishing<?oxy_comment_end?></Schreibung>
+            <Aussprache Zeitstempel="2024-09-24" Quelle="DWDS" Autor="brosch">
+                <IPA>ɪlɛkˌtɹɔnɪk ˈpablɪʃɪŋ</IPA>
+            </Aussprache>
+            <Aussprache Zeitstempel="2025-05-15" Quelle="DWDS" Autor="brosch">
+                <IPA>elɛkˌtʀɔnɪk ˈpablɪʃɪŋ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Genus>neutr.</Genus>
+                <?oxy_comment_start author="wgrimm" timestamp="20250515T143417+0200" comment="optionales &quot;s&quot; als Endung ergänzt, s. unten Belege" flag="done"?>
+                <Genitiv>
+                    <Wert>-(s)</Wert>
+                </Genitiv><?oxy_comment_end?>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+                <Funktionspraeferenz>substantivisch</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>37 (E4)</Orthografieregel>
+            <Orthografieregel>55 (3)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie Zeitstempel="2025-06-02" Quelle="DWDS" Autor="brosch">
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">electronic
+                    publishing</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="engl">electronic</erwaehntes_Zeichen>
+                <Paraphrase>elektronisch</Paraphrase> + <erwaehntes_Zeichen Sprache="engl">publishing</erwaehntes_Zeichen>
+                <Paraphrase>Publizieren</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">elektronisches Publizieren von Verlagserzeugnissen etwa als
+                E-Books, digitale Zeitschriften oder Zeitschriftenartikel</Definition>
+            <Definition Typ="Basis">Veröffentlichen von (digitalen) Inhalten im Internet oder auf
+                elektronischen Medien </Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <Belegtext>Mit der ab sofort erhaeltlichen Studie »Dokumente erstellen mit
+                            <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort>« will das Institut fuer technische
+                        Literatur (itl) GmbH, Muenchen, Anwendern eine fundierte und differenzierte
+                        Entscheidungshilfe in Sachen <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort> (EP) bieten. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:4071/TwXH8M4srhPtW5MO">
+                        <Autor/>
+                        <Titel>Marktstudie EP-Systeme im Vergleich</Titel>
+                        <Stelle/>
+                        <Datum>25.05.2024</Datum>
+                        <URL>https://www.computerwoche.de/a/marktstudie-ep-systeme-im-vergleich,1125650</URL>
+                        <Aufrufdatum>25.05.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>An Applikationen sind <Streichung>dabei</Streichung> Dienstleistungen
+                        wie Videokonferenzen, <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort> und Electronic Commerce vorstellbar. </Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:7275/0cYSAEnTvYVoZRFk">
+                        <Autor/>
+                        <Titel>Lotus kooperiert mit fuehrenden Carriern Elf Telecoms planen Aufbau
+                            eines weltweiten Notes-Netzes</Titel>
+                        <Stelle/>
+                        <Datum>24.05.2024</Datum>
+                        <URL>https://www.computerwoche.de/a/lotus-kooperiert-mit-fuehrenden-carriern-elf-telecoms-planen-aufbau-eines-weltweiten-notes-netzes,1117470</URL>
+                        <Aufrufdatum>24.05.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Welchen Mehrwert erbringt die elektronische Publikation gegenüber
+                        einem Printwerk<Streichung>, warum will man dem Anwender das Lesen von
+                            Fachinhalten ueber einen Computerbildschirm zumuten</Streichung>?
+                        Grundsätzlich gilt: Je mehr Nachschlagecharakter Informationen besitzen und
+                        je stärker sich ihre
+                        <?oxy_comment_start author="kduden" timestamp="20250515T143744+0200" comment="alles im Beleg verumlautet" flag="done"?>Inhalte<?oxy_comment_end?>
+                        in kleine, überschaubare Wissenseinheiten gliedern lassen, desto besser sind
+                        sie für <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort> geeignet.</Belegtext>
+                    <Fundstelle Fundort="dwds:it_blogs:556/VAeyTPaptJ1Drmd5">
+                        <Autor/>
+                        <Titel>Kritische Erfolgsfaktoren fuer Anbieter elektronischer Medien</Titel>
+                        <Stelle/>
+                        <Datum>21.05.2024</Datum>
+                        <URL>https://www.computerwoche.de/a/kritische-erfolgsfaktoren-fuer-anbieter-elektronischer-medien,1122590</URL>
+                        <Aufrufdatum>21.05.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Autorenzusatz>Frankfurter Buchmesse</Autorenzusatz> 1993: Eine neue
+                        Halle für »<Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort>« steht bereit. Hier werden erstmals
+                        Disketten und Mini-CDs vorgestellt.</Belegtext>
+                    <Fundstelle Fundort="dwds:aaz:2023/09/AAZ_178338301-AACHEN"> Aachener Zeitung,
+                        15.09.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In Form von Block-Seminaren wird erläutert, was <Stichwort>Electronic
+                            Publishing</Stichwort> bedeutet. <Streichung>Verlage der Zukunft heißt
+                            das Thema – und auch das Projekt.</Streichung> Die Studierenden
+                        konzipieren ein Fallbeispiel zur Konzeption eines solchen
+                            <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishings</Stichwort> oder
+                        Social<?oxy_comment_start author="jgrimm" timestamp="20250401T130642+0200" comment="Bindestrich stillschweigend ergänzt" flag="done"?>-<?oxy_comment_end?>Media-Produktes. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:11337/XaiDzX4J3iZBLNyM">
+                        <Autor/>
+                        <Titel>Buch- und Medienwirtschaft</Titel>
+                        <Stelle/>
+                        <Datum>20.06.2023</Datum>
+                        <URL>https://www.htwk-leipzig.de/studieren/studiengaenge/bachelorstudiengaenge/buch-und-medienwirtschaft</URL>
+                        <Aufrufdatum>26.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort> bedeutet vor allem für kleine und
+                        mittelständische Verlage eine existenzielle Herausforderung. Speziell für
+                        diese Zielgruppe entsteht im Verbundprojekt »Lernforum Verlagswesen (Lever)«
+                        eine E-Learning-gestützte Qualifizierungsumgebung zur raschen und intensiven
+                        Weiterbildung von Verlagsmitarbeitern. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:2002/03/sz_245936"> Kurze Halbwertszeit.
+                        Süddeutsche Zeitung, 06.03.2002 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>In vielen Fällen ist das elektronische Produkt dem Buch
+                            durchaus überlegen.</Streichung> Überall wo die Informationsvermittlung
+                        im Vordergrund steht, wo Wissen schnell veraltet, wo Informationen in kurzer
+                        Zeit aktualisiert und große Datenmengen verarbeitet werden müssen, wo
+                        umfangreiche Recherchen erforderlich sind, macht
+                            <Stichwort>Electronic</Stichwort>
+                        <Stichwort>Publishing</Stichwort> dem gedruckten Wort heftig
+                        Konkurrenz.</Belegtext>
+                    <Fundstelle Fundort="dwds:faz:1995/10/FAZ_F19951009BUMESS-100"> Frankfurter
+                        Allgemeine Zeitung, 09.10.1995 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-08-15"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

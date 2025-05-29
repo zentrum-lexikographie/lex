@@ -1,39 +1,53 @@
 (ns zdl.lex.server
-  (:gen-class)
   (:require
-   [clojure.tools.logging :as log]
-   [integrant.core :as ig]
+   [metrics.core :refer [default-registry]]
    [zdl.lex.env :as env]
-   [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
+   [zdl.lex.server.lock :as lock]
+   [zdl.lex.server.git :as git]
+   [zdl.lex.server.http :as http]
+   [zdl.lex.server.issue :as issue]
+   [zdl.lex.server.schedule :as schedule])
+  (:import
+   (java.util.concurrent TimeUnit)
+   (com.codahale.metrics Slf4jReporter)))
 
-(install-uncaught-exception-handler!)
+(def ^:dynamic metrics-reporter
+  nil)
 
-(def system
-  (atom nil))
+(defn stop-metrics-reporter
+  []
+  (when metrics-reporter
+    (.close metrics-reporter)
+    (alter-var-root #'metrics-reporter (constantly nil))))
+
+(defn start-metrics-reporter
+  []
+  (stop-metrics-reporter)
+  (->>
+   (doto (.build (Slf4jReporter/forRegistry default-registry))
+     (.start env/metrics-report-interval TimeUnit/MINUTES))
+   (constantly)
+   (alter-var-root #'metrics-reporter)))
 
 (defn start
   []
-  (ig/load-namespaces env/config env/server-config-keys)
-  (reset! system (ig/init env/config env/server-config-keys))
-  (log/info "Started ZDL/Lex Server"))
+  (lock/open-db)
+  (issue/open-db)
+  (git/init!)
+  (http/start-server)
+  (when env/schedule-tasks? (schedule/start)))
 
 (defn stop
   []
-  (log/info "Stopping ZDL/Lex Server")
-  (when-let [system' @system]
-    (ig/halt! system')
-    (reset! system nil)))
+  (when env/schedule-tasks? (schedule/stop))
+  (http/stop-server)
+  (issue/close-db)
+  (lock/close-db)
+  (stop-metrics-reporter))
 
-(defn stop-on-shutdown
-  []
-  (.addShutdownHook (Runtime/getRuntime) (Thread. ^Runnable stop)))
-
-(defn start!
+(defn -main
   [& _]
-  (exec! (fn [& _]
-           (stop-on-shutdown)
-           (start)
-           @(promise))))
-
-(def -main
-  start!)
+  (. (Runtime/getRuntime) (addShutdownHook (Thread. stop)))
+  (start-metrics-reporter)
+  (start)
+  @(promise))

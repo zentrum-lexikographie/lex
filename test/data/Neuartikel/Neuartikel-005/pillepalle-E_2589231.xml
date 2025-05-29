@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_2589231" Autor="wgrimm" Typ="Verweisartikel" Zeitstempel="2024-12-04" Erstellungsdatum="2024-12-03" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>pillepalle</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="130/pillepalle">ˈpɪləˌpalə</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <indeklinabel/>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Konversion">
+            <?oxy_comment_start author="jgrimm" timestamp="20241204T120707+0100" comment="Ja, so rum" flag="done"?>
+            <Verweis Typ="Grundform"><?oxy_comment_end?>
+                <Ziellemma>Pillepalle</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>banal</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>belanglos</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>unwesentlich</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Schon werden mildere Formen des
+                        <?oxy_comment_start author="dsanders" timestamp="20241204T120817+0100" comment="Welche Sau wird denn jetzt schon wieder durchs Dorf getrieben?"?>Rawdoggings<?oxy_comment_end?>
+                        bekannt: Joggen ohne Musik, Kochen ohne Rezept. Alles
+                            <Stichwort>pillepalle</Stichwort>. Aber vielleicht liest man demnächst
+                        von echten Männern, die am Wochenende eine ganze Netflix-Serie gerawdogged
+                        haben – ohne Ton und mit geschlossenen Lidern, versteht sich. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar:2024/10/SAAR_214461215"> Saarbrücker Zeitung,
+                        22.10.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Alles wirkt zusammengeklaut und krude gemischt, Hauptsache die
+                        Teenies sehen sexy aus. Regisseur Renny Harlin hat schon viel bessere Filme
+                        gedreht – doch das ist lange her. Belangloses Pop-Märchen im MTV-Look, das
+                        weder seiner Geschichte noch seinen Figuren auch nur ansatzweise Interesse
+                        entgegenbringt. Eine blöde Story, <Stichwort>pillepalle</Stichwort>
+                        umgesetzt.</Belegtext>
+                    <Fundstelle Fundort="dwds:wikipedia:0202/02029371">
+                        <Autor/>
+                        <Herausgeber>Wikipedia</Herausgeber>
+                        <Titel>Der Pakt (2006)</Titel>
+                        <Stelle/>
+                        <Datum>28.09.2024</Datum>
+                        <URL>https://de.wikipedia.org/w/index.php?oldid=248974052</URL>
+                        <Aufrufdatum>01.10.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Im Zweikampf mit Erling Haaland zog sich Bayerns Kapitän eine
+                        Kapselverletzung am rechten Sprunggelenk zu und wird daher für das Duell
+                        gegen Köln ausfallen. »Stand jetzt gehe ich davon aus, dass er nicht
+                        spielt«, so Nagelsmann auf der Pressekonferenz. »Im Grunde ist es eine
+                            <Stichwort>pillepalle</Stichwort> Verletzung. Wenn man damit jetzt aber
+                            <Stichwort>pillepalle</Stichwort> umgeht, wird aus einer
+                            <Stichwort>pillepalle</Stichwort> Verletzung sehr schnell eine
+                        dramatische.« </Belegtext>
+                    <Fundstelle Fundort="dwds:ballsport:1856/kTUGKGhZDiCV_IyT">
+                        <Autor>Victor Catalina</Autor>
+                        <Titel>FC Bayern vs. Köln: Stellt Baumgart auch den Bayern ein Bein? –
+                            90PLUS</Titel>
+                        <Kurztitel>FC Bayern vs. Köln</Kurztitel>
+                        <Stelle/>
+                        <Datum>22.08.2021</Datum>
+                        <URL>https://neunzigplus.de/bundesliga/fc-bayern-vs-koeln/</URL>
+                        <Aufrufdatum>09.02.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Zwar schaut sie noch nach, was sich hinter Brigitte Nielsen
+                        verbirgt, doch als sie die 30 Skorpione erblickt, bricht sie auch hier ab:
+                        »Die sind überall! Jetzt ist auch egal. Ich wollte alle Sterne holen. Wie
+                        viele ich jetzt hole, ist komplett <Stichwort>pillepalle</Stichwort>!« Und
+                        so ist es kein Wunder, dass sie auch bei den 8.000 Kakerlaken, die sich
+                        hinter Joey Heindle verbergen, und den grünen Ameisen, die bei Melanie
+                        Müller auf sie warten, gar nicht erst versucht, die Sterne zu bekommen.
+                        Rebecca hat so am Ende nur einen einzigen Stern erbeutet.</Belegtext>
+                    <Fundstelle Fundort="dwds:at_nachrichten:ml/mlaJEycoVAmRaeOYD5QKK3QNVRE">
+                        <Autor/>
+                        <Titel>Heulkrampf bei Rebecca nach verpfuschter Prüfung</Titel>
+                        <Stelle/>
+                        <Datum>25.01.2015</Datum>
+                        <URL>https://www.krone.at/436262</URL>
+                        <Aufrufdatum>24.04.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Frau Schavan, ich meine mit »mehr Geld für Bildung« nicht Ihre
+                        ohnehin schon in den Haushaltsplan eingestellten
+                            <?oxy_comment_start author="wgrimm" timestamp="20241204T153553+0100" comment="Naja, eine Miliarde hier, eine Milliarde dort … mit der Zeit kommt so auch richtig Geld zusammen"?><Stichwort>pillepalle</Stichwort>
+                        6 Milliarden Euro<?oxy_comment_end?>. </Belegtext>
+                    <Fundstelle Fundort="dwds:bundestagprt:16/16183:19478">
+                        <Autor/>
+                        <Herausgeber>Deutscher Bundestag</Herausgeber>
+                        <Titel>Plenarprotokoll vom 16. 10. 2008</Titel>
+                        <Stelle/>
+                        <Datum>16.10.2008</Datum>
+                        <URL>https://dserver.bundestag.de/btp/16/16183.pdf</URL>
+                        <Aufrufdatum>12.12.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Was auf dem Bild so <Stichwort>pillepalle</Stichwort> aussieht, war
+                        für einen nicht höhentauglichen und auch nicht sonderlich sportlichen
+                        Menschen wie mich durchaus eine Herausforderung. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:1638/s1RN6gtJcpoLalXm">
+                        <Autor/>
+                        <Titel>Ostseeurlaub – 4. Tag (Nr. 57–61)</Titel>
+                        <Stelle/>
+                        <Datum>12.02.2008</Datum>
+                        <URL>https://aichlinn2.wordpress.com/2008/02/12/ostseeurlaub-4-tag-nr-57-61/</URL>
+                        <Aufrufdatum>14.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-12-04"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

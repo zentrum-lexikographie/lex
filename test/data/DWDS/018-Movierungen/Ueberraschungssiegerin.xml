@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_5371157_388" Autor="jgrimm" Typ="Verweisartikel" Tranche="Movierung" Zeitstempel="2024-12-23" Erstellungsdatum="2024-12-23" Status="Red-f-zurückgewiesen">
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_start author="kduden" timestamp="20230907T141134+0200" comment="das geht so noch nicht. in Vergleichbaren Fällen, in denen juristische Personen mit fem. Genus gemeint waren, wurde dies auch angegegen: 
+weibliche Person (oder Firma, Institution o. Ä. mit femininem Genus),
+eine Mannschaft mit fem. Genus ist mir dagegen noch nicht begegnet. 
+Belege, die sich nicht auf natürliche Personen beziehen, sind äußerst rar. Zwei Belege unten"?>
+            <Schreibung Trennung="Über-ra-schungs-sie-ge-rin"><?oxy_comment_end?><?oxy_comment_start author="jgrimm" timestamp="20230823T112630+0200" comment="maskuline Form muss ausgebaut werden"?>Überraschungssiegerin<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA>yːbɐˈʀaʃʊŋsˌziːgəʀɪn</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Überraschung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Siegerin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Überraschungssieger</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Überraschungssieger</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">weibliche Person oder
+                <?oxy_comment_start author="wgrimm" timestamp="20230907T144936+0200" comment="Mannschaft mit femininem Genus? - keinen entsprechenden Beleg gefunden"?>Mannschaft<?oxy_comment_end?>
+                bzw.
+                <?oxy_comment_start author="kduden" timestamp="20230907T145030+0200" comment="vielleicht doch auch Partei nennen?
+
+(oder Gruppierung mit weiblichem Genus, z. B. Partei)"?>Gruppierung<?oxy_comment_end?>,
+                die entgegen der Erwartung einen Wettbewerb o. Ä. gewinnt</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Und nun ist die <Autorenzusatz>politische</Autorenzusatz> Mitte zur
+                            <Stichwort>Überraschungssiegerin</Stichwort> geworden. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz_regional:2023/02/NZZ_2023021300000311513117"> Neue
+                        Zürcher Zeitung, 13.02.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die beiden <Stichwort>Überraschungssiegerinnen</Stichwort> von den
+                        Paralympics bestätigten ihre Spitzenform bei der nordischen Para-Ski-WM in
+                            Östersund<Streichung>, die ohne Beteiligung aus China
+                            stattfand</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2023/01/TSP_doc7oot3noj0mg1lir89enn"> Der
+                        Tagesspiegel, 29.01.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Rest lief für die <Stichwort>Überraschungssiegerin</Stichwort>
+                        aus Markt Schwaben wie im Film ab. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/01/MUME_mm_omp0000009035786">
+                        Münchner Merkur, 24.01.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Sie ist die <Stichwort>Überraschungssiegerin</Stichwort> der Wahl
+                        von Anfang Mai. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha_regional:2022/11/HA_7A2605583C49F7E9A07E99504A2EB2FD_4079646"> Hamburger Abendblatt, 02.11.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20230907T141345+0200" comment="neu Beleg für Partei, muss noch gekürzt annotiert werden"?>
+                    <Belegtext><?oxy_comment_end?> Drei Parteien schnitten etwa gleich stark ab,
+                        aber eigentlich will keine mit den anderen koalieren. Eine Einigung kann
+                        also dauern. Ein Thema schwingt aber in allen Verhandlungen mit: die irische
+                        Wiedervereinigung. Sinn Féin, <Stichwort>Überraschungssiegerin</Stichwort>
+                        der Wahl, war mit einem Versprechen ins Rennen gegangen: »Unser Hauptziel
+                        ist, die irische Einheit umzusetzen und dafür ein Referendum zu initiieren.«
+                        Der Preis einer Regierungsbeteiligung oder auch nur der Duldung einer
+                        Minderheitsregierung durch die gesamtirische, republikanische Partei wäre
+                        die Vorbereitung dieser Volksabstimmung. Und die Zeichen mehren sich, dass
+                        diese positiv ausgehen könnte. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2020/03/SZ_A107846290"> Süddeutsche Zeitung,
+                        16.03.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20230907T144026+0200" comment="neu Beleg für Partei bitte noch kürzen "?>
+                    <Belegtext><?oxy_comment_end?> Der konservative Aargau ist für Linke ein hartes
+                        Pflaster. Doch am Sonntag bricht die kantonale SP in der Aarauer Szenebar
+                        Gossip in Jubel aus. «Das ist ein richtiger Linksrutsch», ruft
+                        Co-SP-Präsident Cédric Wermuth seinen Genossen zu – und verspricht ihnen
+                        mehr Gratisbier, da die SP dank mehr Parlamentssitzen nun mehr
+                        Mandatsabgaben einnehme. Die SP ist die
+                            <Stichwort>Überraschungssiegerin</Stichwort> der Aargauer Wahlen. Sie
+                        legt um 3,7 Prozentpunkte und fünf Parlamentssitze zu – ein Erfolg mit
+                        Bedeutung über den viertgrössten Kanton hinaus. Denn der Aargau ist jener
+                        Kanton, der die nationalen Parteistärken am präzisesten abbildet. Dass die
+                        Linke ein Jahr nach dem Rechtsrutsch auf nationaler Ebene im Aargau so stark
+                        zulegen würde, hatte sie selbst nicht erwartet. </Belegtext>
+                    <Fundstelle Fundort="dwds:bund:2016/10/BUND_20161024436293"> Der Bund,
+                        24.10.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Stichwort>Überraschungssiegerinnen</Stichwort>
+                        <Autorenzusatz>bei einem Schießwettbewerb</Autorenzusatz> wurden
+                            <Streichung>nun</Streichung> die Damen aus Halen. </Belegtext>
+                    <Fundstelle Fundort="dwds:noz_regional:2016/03/NOZ_2768676"> Neue Osnabrücker
+                        Zeitung, 11.03.2016 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Anders als bei den Männern gibt es bei den Frauen kaum Chancen auf
+                        eine <Stichwort>Überraschungssiegerin</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.01.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bester Beweis ist die letztjährige
+                            <Stichwort>Überraschungssiegerin</Stichwort>, die Moderatorin Sonja
+                        Zietlow.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.09.2002, Nr. 37</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nach einer 5:1-Führung im entscheidenden Durchgang musste die
+                            <Stichwort>Überraschungssiegerin</Stichwort> von 2010 noch einmal
+                        kräftig zittern.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.05.2011 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Für sie alle ist <Stichwort>Überraschungssiegerin</Stichwort>
+                        Beinroth ein Vorbild – auch wegen ihrer lockeren Einstellung.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        18.05.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Henin gilt als <Stichwort>Überraschungssiegerin</Stichwort>, bei
+                        Ferrero hatte sich der Triumph nach zwei Halbfinalauftritten und einem
+                        verlorenen Finale in den vergangenen drei Jahren angedeutet.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 10.06.2003</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

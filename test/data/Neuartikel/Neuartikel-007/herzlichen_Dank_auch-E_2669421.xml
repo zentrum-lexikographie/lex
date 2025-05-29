@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="kduden" xml:id="E_2669421" Autor="dsanders" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2025-05-28" Erstellungsdatum="2025-05-28" Status="Lex-zur_Abgabe">
+        <?oxy_comment_start author="wgrimm" timestamp="20250528T161030+0200" comment="bitte bearbeiten mit
+- schönen Dank auch
+- vielen Dank auch"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>herzlichen Dank
+                <?oxy_comment_start author="jgrimm" timestamp="20250528T161100+0200" comment="s. Kommentar zu &quot;schönen Dank auch&quot;: evtl. zu Basis-MWA machen (dann Defi einfügen)?"?>auch<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>na herzlichen Dank auch</Schreibung>
+            <Schreibung>na, herzlichen Dank auch</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>ja herzlichen Dank auch</Schreibung>
+            <Schreibung>ja, herzlichen Dank auch</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>herzlich</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Dank</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Stilfaerbung>ironisch</Stilfaerbung>
+                <Stilfaerbung Frequenz="häufig">scherzhaft</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>schönen Dank auch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>vielen Dank auch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Man steigt aus dem Auto aus, holt sich einen
+                            <Autorenzusatz>Einkaufs-</Autorenzusatz>Wagen, betritt den Markt – und
+                        stellt fest, dass der Einkaufszettel daheim auf dem Küchentisch liegt.
+                            <Stichwort>Na</Stichwort>
+                        <Stichwort>herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>! <Streichung>Leider sind es aber nicht nur vier
+                            oder fünf Posten, die auf dem Zettel stehen. Nein, er war lang. Sehr
+                            lang.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:ta_regional:2023/08/TA_B9DA21C8356FD0C04862F8E58ED06ED1_4999449"> Thüringer Allgemeine, 08.08.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> 120 Schmerztabletten und eine weitere OP
+                            später<Streichung>,</Streichung> sind wir <Autorenzusatz>die Zahnärzte
+                            und ich</Autorenzusatz> uns ziemlich sicher, dass ich in der Tat keinen
+                        Zahnzement vertrage. Ist aber ganz, ganz selten. <Stichwort>Ja</Stichwort>
+                        <Stichwort>herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>.  </Belegtext>
+                    <Fundstelle Fundort="dwds:web:29881/OG5YU25fEYkl_wE5">
+                        <Autor>Katja Narkprasert</Autor>
+                        <Titel>Von unverträglichem Zahn-Zement und dem Ende meines Leidens</Titel>
+                        <Stelle/>
+                        <Datum>17.08.2021</Datum>
+                        <URL>https://www.katjaskinderkram.de/allergie-unvertr%C3%A4glichkeit-zahnzement-mutter-leiden-keramik-stillen/</URL>
+                        <Aufrufdatum>27.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Du schaust beschissen aus«, sag ich
+                            <Streichung>stattdessen</Streichung>. »<Stichwort>Ja,</Stichwort>
+                        <Stichwort>herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>. Aber ist das ein Wunder?«, entgegnet er, zuckt
+                        ein bisschen hilflos mit den hängenden Schultern und nimmt dann einen großen
+                        Schluck Bier.</Belegtext>
+                    <Fundstelle Fundort="dwds:regiolit:9783423437530"> Falk, Rita:
+                        Rehragout-Rendezvous. E-Book. München: DTV, 2021. </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dann <Autorenzusatz>bei der Hochzeit</Autorenzusatz>
+                        <Streichung>nämlich</Streichung> treten die bereits Verheirateten auf den
+                        Plan und strotzen nur so vor 100fach durchgekauten und wieder hochgewürgten
+                        Zukunfts-Weisheiten: »Jetzt wird sich alles für euch ändern – und nicht
+                        gerade zum besten <Autorenzusatz>sic!</Autorenzusatz>!«, »Eine Ehe ist kein
+                        Zuckerschlecken!«, »Jede dritte Ehe wird geschieden!«, »Der betrügt dich
+                        irgendwann. Machen sie doch alle!«
+                            <Stichwort>Na</Stichwort><Stichwort>,</Stichwort>
+                        <Stichwort>herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>! Da kann man die Vorfreude auf die Hochzeit doch
+                        gleich doppelt genießen! </Belegtext>
+                    <Fundstelle Fundort="dwds:web:983/GKpjnOJILp0J61gj">
+                        <Autor>Anke</Autor>
+                        <Titel>Rabenmutter 2.0: Tod den doofen Sprüchen</Titel>
+                        <Stelle/>
+                        <Datum>11.05.2015</Datum>
+                        <URL>https://www.laecheln-und-winken.com/2015/05/11/rabenmutter-2-0-tod-den-doofen-spruechen/</URL>
+                        <Aufrufdatum>27.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Der is weg, raunzte ein schlecht gelaunter Schaffner auf Nachfrage
+                            <Autorenzusatz>nach dem Anschlusszug</Autorenzusatz>. Der nächste kommt
+                        in ner Stunde. <Stichwort>Herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>.  </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg:2010/09/RZTG_248218AF753E07556C89C2CBA307F2E9">
+                        Rhein-Zeitung, 09.09.2010 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Schokolade und Schokoladeprodukte werden nächstes Jahr in der
+                        Schweiz um satte 20 Prozent teurer. <Stichwort>Na,</Stichwort>
+                        <Stichwort>herzlichen</Stichwort>
+                        <Stichwort>Dank</Stichwort>
+                        <Stichwort>auch</Stichwort>. Das hat meinem Portemonnaie gerade noch
+                        gefehlt!  </Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2009/09/BAZ_2009092823185720368"> Basler Zeitung,
+                        28.09.2009 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-28"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

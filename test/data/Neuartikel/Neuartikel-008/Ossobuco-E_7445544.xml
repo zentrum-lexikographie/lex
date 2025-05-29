@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7445544" Autor="kduden" Typ="Vollartikel" Tranche="Ernährung" Zeitstempel="2019-02-11" Erstellungsdatum="2019-02-11" Status="Lex-kommentiert">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Os-so-bu-co">Ossobuco</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-(s)</Wert></Genitiv>
+                <Plural><Wert>Ossobuchi</Wert></Plural>
+                <Numeruspraeferenz>Plural selten</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <?oxy_comment_start author="jgrimm" timestamp="20190205T104150+0100" comment="Etymologie ergänzen."?>
+            <Etymologie/><?oxy_comment_end?>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">aus der norditalienischen Küche stammendes Fleischgericht, für das dicke Kalbshachsenscheiben samt dem Markknochen angebraten und dann oft auch unter Zugabe von Tomaten oder anderem Gemüse in Brühe und Weißwein geschmort und typischerweise mit einer Gewürzmischung bestreut serviert werden </Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> <Stichwort>Ossobuco</Stichwort> ist ein Klassiker der italienischen Küche. </Belegtext>
+                    <Fundstelle Fundort="dwds">Welt am Sonntag, 03.09.2017</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Was <Streichung>dabei</Streichung> herauskommt, kennen wir alle: eine Art von <Stichwort>Ossobuco</Stichwort>, bei dem etwa eine Kalbshaxe in vier Zentimeter dicke Scheiben geschnitten, in Mehl gewendet und langsam geschmort wird. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 12.06.2017 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>Ein gutes Beispiel <Autorenzusatz>für ein Schmorgericht</Autorenzusatz> ist <Stichwort>Ossobuco</Stichwort> (»Knochen mit Loch«); die langsam in Wein, Fond und Gemüse gegarte Kalbsbeinscheibe ist Norditaliens heimliche Königin des Schmortopfes<Streichung>, erfunden angeblich im 19. Jahrhundert in einer Mailänder Osteria</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 30.01.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dazu <Autorenzusatz>zu Risotto</Autorenzusatz> wird gerne <Stichwort>Ossobuco</Stichwort> bestellt, eine dicke Scheibe aus der Kalbshaxe, die würzig paniert und langsam im Ofen geschmort wird. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 21.02.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wesentlich rustikaler, dabei zart wie Butter ist der langsam geschmorte »<Stichwort>Ossobuco</Stichwort>«, die Leibspeise vieler Italiener. Die Beinscheibe vom Kalb mit Markknochen kommt klassisch mit Gemüse, Tomaten und Kräutern auf den Tisch. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Berliner Zeitung, 08.04.1995 </Fundstelle>
+                </Beleg>
+                <Beleg class="plural_ungewöhnlich">
+                    <Belegtext>"Heute <Autorenzusatz>gab es in einer Trattoria in Turin</Autorenzusatz> z. B. die delikatesten <Stichwort>Ossobuchi</Stichwort>, Gott weiß, wie man deutsch sagt, das Fleisch an den Knochen, wo das herrliche Mark ist! Dazu Broccoli auf eine unglaubliche Weise zubereitet, zuerst die allerzartesten Maccaroni«. <Autorenzusatz>Zitat aus dem Briefwechsel von Friedrich Nietzsche an Franz Overbeck, Weihnachten 1888</Autorenzusatz> </Belegtext>
+                    <Fundstelle Fundort="IDS-Archiv">Salzburger Nachrichten, 13.03.1999</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>In den römischen Metzgereien sind kaum Kunden zu sehen, das in Italien so beliebte »<Stichwort>Ossobuco</Stichwort>«, eine Scheibe Beinfleisch, kommt fast nicht mehr auf den Tisch.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.01.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ihre Freunde und Bekannten fordern Sie dazu auf, endlich mal wieder Ihr berühmtes <Stichwort>Ossobuco</Stichwort> oder Ihren köstlichen Zucchinisalat zu machen?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 07.03.2013, Nr. 11</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Genießer haben die Wahl zwischen Saltimbocca, <Stichwort>Ossobuco</Stichwort>, Ochsenschwanzgulasch und Bauerngröstl.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 22.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im selbigen Jahr beschloss Don <Stichwort>Ossobuco</Stichwort> Ristorante, Alfredos Vater, zur Buße im protestantischen Hamburg eine Schenke zu eröffnen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.01.2004, Nr. 04</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

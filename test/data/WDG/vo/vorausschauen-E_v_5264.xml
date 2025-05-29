@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_v_5264" Autor="" Typ="Vollartikel" Zeitstempel="1977-01-01" Erstellungsdatum="1977-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="herold" Quelle="DWDS" Zeitstempel="2024-03-15">
+            <Schreibung>vorausschauen</Schreibung>
+            <Aussprache><IPA Audiodatei="053/vorausschauen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>schaut voraus</Wert></Praesens>
+                <Praeteritum><Wert>schaute voraus</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>vorausgeschaut</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2016-03-16" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>voraus-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>schauen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_v_4298">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>gehoben</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">die für die Zukunft zu erwartenden Entwicklungen erkennen und berücksichtigen, den Blick auf Künftiges richten</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>er hat diese Fortschritte der ärztlichen Kunst bereits <Stichwort>vorausgeschaut</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+          <?oxy_comment_start author="dsanders" timestamp="20140505T111038+0000" comment="DDR-Duktus oder DDR-typisch"?>
+                    <Belegtext>Der marxistische Philosoph … soll <Stichwort>vorausschauen</Stichwort>, soll künftige Entwicklungslinien in ihren Ansätzen schon jetzt ahnen</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="KLAGEOKIP">
+                        <Autor>Klaus</Autor>
+                        <Titel>Kybernetik</Titel>
+                        <Stelle>395</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                    <?oxy_comment_end?>
+                </Beleg>
+                <Kompetenzbeispiel>
+                    <Belegtext>eine weit <Stichwort>vorausschauende</Stichwort> Planung, Politik</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Während ein »dummer« Computer also zwanghaft dem nächstbesten Weg folgt, <Stichwort>schaut</Stichwort> das bessere Programm <Stichwort>voraus</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Chip – Schach – matt. In: Bild der Wissenschaft auf CD-ROM, Stuttgart: Dt. Verl.-Anst. 1997 [1996]</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Das kann man <Stichwort>vorausschauend</Stichwort> schon mitten im »Kampf« tun, aber auch rückblickend.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: DER BETTELSTUDENT – EINE DEMOKRATISCHE OPERETTE. In: Marxistische Zeit- und Streitschrift 1980-1991, München: Gegenstandpunkt Verl. 1998 [1989]</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Was nehmen Sie sich für 2012 vor, wie weit <Stichwort>schauen</Stichwort> Sie <Stichwort>voraus</Stichwort>?</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 08.02.2012 (online)</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Wo alles nichts half, haben Helfer die Bulletins des Volkes <Stichwort>vorausschauend</Stichwort> selbst ausgefüllt.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.10.2003, Nr. 42</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Er hat sich <Stichwort>vorausschauend</Stichwort> überlegt, wo kann ich mein Geld am sichersten anlegen?</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.12.1978, Nr. 51</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Ein Minister, der mich zum Essen eingeladen hatte, war so <Stichwort>vorausschauend</Stichwort>, den Tisch schon am Tag davor zu bestellen.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 27.02.1978, Nr. 09</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Auch die Wissenschaft hat ihren größten Wert darin, daß wir die Wirkungen <Stichwort>vorausschauen</Stichwort>, berechnen, zu unserem Vorteil und zur Förderung des Lebens benutzen können.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Hirschberger, Johannes: Geschichte der Philosophie, Bd. 2: Neuzeit und Gegenwart. In: Bertram, Mathias (Hg.) Geschichte der Philosophie, Berlin: Directmedia Publ. 2000 [1952], S. 1452</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Wo die Fahrenden <Stichwort>vorausschauen</Stichwort>, windet sich die Kolonne um Hügelhänge und verliert sich mit dem Anfang irgendwo.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Bauer, Josef Martin: So weit die Füße tragen, Frankfurt a.M: Fischer 1960 [1955], S. 19</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Später lernt man, <Stichwort>vorauszuschauen</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Frisch, Karl von: Erinnerungen eines Biologen, Berlin: Springer 1957, S. 153</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Ich kann in Ruhe <Stichwort>vorausschauen</Stichwort>, bei ihr ist niemand älter als 66 geworden.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Späth, Gerold: Commedia, Frankfurt a. M.: S. Fischer 1980 [1980], S. 121</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

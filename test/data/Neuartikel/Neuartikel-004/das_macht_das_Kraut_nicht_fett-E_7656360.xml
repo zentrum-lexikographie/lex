@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_7656360" Autor="kduden" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2024-01-30" Erstellungsdatum="2024-01-30" Status="wird_gestrichen">
+        <?oxy_comment_start author="kduden" timestamp="20240123T085939+0100" comment="bitte bearbeiten / freischalten mit 
+- den Kohl nicht fett machen " flag="done"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20240604T171718+0200" comment="wird gestrichen bei Freischaltung von &quot;das Kraut nicht fett machen / fettmachen&quot;" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung>das Kraut nicht fett <?oxy_comment_start author="kduden" timestamp="20240123T111208+0100" comment="Nennform geändert " flag="done"?>machen<?oxy_comment_end?>
+            </Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="137/das_Kraut_nicht_fettmachen"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>das Kraut auch nicht fett machen </Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma hidx="1">Kraut</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>fett</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>machen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <?oxy_comment_start author="kduden" timestamp="20240123T100646+0100" comment="ugs." flag="done"?>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik><?oxy_comment_end?>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>den Kohl nicht fett machen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym_MWA_Variante" class="invisible">
+                    <Ziellemma>den Bock nicht fett machen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>nicht der Rede wert sein</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Antonym">
+                    <Ziellemma>ins Gewicht fallen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">(auch schon) egal sein, keinen Unterschied (mehr) machen</Definition>
+            <Definition Typ="Basis">(auch) nichts mehr an einer Sache ändern</Definition>
+            <Definition Typ="Basis">unerheblich sein, zu gering sein, um etw. zu bewirken </Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <?oxy_comment_start author="kduden" timestamp="20240123T100714+0100" comment="ein guter Beleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Gestern hat es in Murnau zwar geregnet. Doch angesichts der Dürre der vergangenen Wochen <Stichwort>macht</Stichwort> dies <Stichwort>das</Stichwort>
+                        <Stichwort>Kraut</Stichwort>
+                        <Stichwort>nicht</Stichwort>
+                        <Stichwort>fett</Stichwort>. Der Boden lechzt nach Wasser. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/07/MUME_mm_omp0000009532795"> Münchner Merkur, 01.07.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Während wichtige Zukunftsthemen finanziell kleingehalten werden, nimmt die Regierung die Bankenrettungen auf die leichte Schulter. Ein paar Hundert Millionen Euro oder gar die eine oder andere Milliarde <Stichwort>machen</Stichwort>
+                        <Stichwort>das</Stichwort>
+                        <Stichwort>Kraut</Stichwort> offenbar <Stichwort>auch</Stichwort>
+                        <Stichwort>nicht</Stichwort>
+                        <Stichwort>fett</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:standard:2013/05/17/Staatsbanken_Fekters_Goo"> Der Standard, 17.05.2013 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-01-23"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

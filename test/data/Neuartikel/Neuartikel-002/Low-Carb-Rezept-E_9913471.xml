@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_9913471" Autor="dsanders" Typ="Minimalartikel" Tranche="RSR-2024-55_E3" Zeitstempel="2024-11-06" Erstellungsdatum="2024-11-06" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="dsanders" timestamp="20250422T132850+0200" comment="Potentielle Lemmalücke - Ausarbeitung ist nicht im Zuge der orthogr. Anpassung leistbar"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <?oxy_comment_start author="dsanders" timestamp="20250422T132824+0200" comment="Ergänzte (u. wg. Fallgruppen-Einheitlichkeit vorangestellte) Schreibvariante"?>
+            <Schreibung>Low-carb-Rezept</Schreibung><?oxy_comment_end?>
+            <Schreibung>Low-Carb-Rezept</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-(e)s</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <?oxy_comment_start author="kduden" timestamp="20250422T103741+0200" comment="Bezugsregeln ergänzt (u. anders als im AR angeordnet)"?>
+            <Orthografieregel><?oxy_comment_end?>44 (1)</Orthografieregel>
+            <Orthografieregel>55 (1)</Orthografieregel>
+            <Orthografieregel>55 (E3)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied" class="invisible">
+                <Ziellemma>low carb</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Rezept</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-11-06"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>
