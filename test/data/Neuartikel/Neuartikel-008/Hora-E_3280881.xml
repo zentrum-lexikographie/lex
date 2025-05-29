@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_3280881" Autor="jgrimm" Typ="Minimalartikel" Zeitstempel="2020-05-22" Erstellungsdatum="2020-05-22" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Hora</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>Horen</Wert></Plural>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Hora</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>Horas</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"><Beleg><Belegtext>Als Meister <Stichwort>Hora</Stichwort> die Zeit für eine Stunde anhält, ist es soweit.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.06.1998</Fundstelle></Beleg><Beleg><Belegtext>Sein Vater war zurückgekehrt, als er selber in die »<Stichwort>Hora</Stichwort>«, die Stadt unten am Meer, ziehen mußte, um die höhere Schule zu besuchen.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 15.12.1972, Nr. 50</Fundstelle></Beleg><Beleg><Belegtext>Natürlich ist Uhr ein Lehnwort, direkt oder indirekt das lateinische <Stichwort>hora</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Mauthner, Fritz: Wörterbuch der Philosophie. In: Bertram, Mathias (Hg.) Geschichte der Philosophie, Berlin: Directmedia Publ. 2000 [1910], S. 31814</Fundstelle></Beleg><Beleg><Belegtext>Seit 1598 war er Verwalter an der St. Heinrich-Schule in Prag und seit 1600 Oberschulverwalter in Kuttenberg (Kutná <Stichwort>Hora</Stichwort>).</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Snízková, Jitka: Campanus. In: Die Musik in Geschichte und Gegenwart, Berlin: Directmedia Publ. 2001 [1973], S. 9778</Fundstelle></Beleg><Beleg><Belegtext>Hernad, Fluß in Oberungarn, entspringt nördl. vom Königsberg (Králova <Stichwort>Hora</Stichwort>), mündet nach 190 km in den Sajó (Nebenfluß der Theiß).</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: H. In: Brockhaus' Kleines Konversations-Lexikon, Berlin: Directmedia Publ. 2001 [1906], S. 32754</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

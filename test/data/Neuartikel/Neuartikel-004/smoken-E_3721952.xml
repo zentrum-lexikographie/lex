@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_s_13392" Autor="wgrimm" Typ="Basisartikel-D" Tranche="RSR-2024-21_E2_1" Zeitstempel="2025-01-20" Erstellungsdatum="1976-01-01" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="wgrimm" timestamp="20250121T085338+0100" comment="hier fehlt noch die Lesart: durch Rauch (langsam) garen " id="pkz_4z2_s2c"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20250318T111746+0100" parentID="pkz_4z2_s2c" comment="... ist im Zuge der orthograph. Umstellung nicht leistbar" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="smo-ken">smoken</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="091/smoken">ˈsmoːkn̩</IPA>
+            </Aussprache>
+            <Aussprache>
+                <?oxy_comment_start author="dsanders" timestamp="20250121T083754+0100" comment="Vorschlag für ERgänzung" flag="done"?>
+                <IPA>ˈsmɔʊ̯kn̩</IPA><?oxy_comment_end?>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>smokt</Wert></Praesens>
+                <Praeteritum><Wert>smokte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gesmokt</Wert></Partizip_II>
+                <Partizip_II><Wert>gesmoked</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+            <Kommentar><?oxy_comment_start author="kduden" timestamp="20250116T092331+0100" comment="Ergänzt"?>Neben
+                der an die Konjugation deutscher Verben angepassten Partizipform <erwaehntes_Zeichen Sprache="dt">gesmokt</erwaehntes_Zeichen> ist bei prädikativem Gebrauch auch die
+                an das Englische angelehnte Partizipbildung <erwaehntes_Zeichen Sprache="dt">gesmoked</erwaehntes_Zeichen> regulär.<?oxy_comment_end?></Kommentar>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>21 (E2.1)</Orthografieregel>
+        </Orthografie>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie>Englisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_s_9009">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Handarbeit</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">ein Kleidungsstück mit regelmäßigen Fältchen verzieren, die
+                durch Zierstiche festgehalten werden</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <?oxy_comment_start author="dsanders" timestamp="20250116T071110+0100" comment="Bsp. für attributiven Gebrauch (als Pendant zum FK)"?>
+                    <Belegtext><?oxy_comment_end?>ein Kleid mit <Stichwort>gesmokter</Stichwort>
+                        Passe</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>das Kleid wird durch <Stichwort>Smoken</Stichwort> in der Taille
+                        zusammengefaßt</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Zeitstempel="2023-12-05" Quelle="DWDS" Autor="lemnitzer">
+                <Beleg>
+                    <Belegtext>Den deklinierte er in den verschiedensten Chiffonformungen durch,
+                            <Stichwort>gesmokt</Stichwort>, gebauscht, gerafft, kniekurz oder
+                        bodenlang.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.07.2006, Nr. 15</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_6512410" Autor="jgrimm" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2021-03-09" Erstellungsdatum="2019-12-18" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_start author="jgrimm" timestamp="20210305T173338+0100" comment="MWA-Probeartikel: Satellit zu Dachartikel (Option 2)"?>
+            <Schreibung><?oxy_comment_end?>auf dem Laufenden bleiben</Schreibung>
+            <Schreibung Typ="U">auf dem laufenden bleiben</Schreibung>
+            <Aussprache><IPA Audiodatei="109/auf_dem_Laufenden_bleiben"/></Aussprache>
+            <?oxy_comment_start author="jgrimm" timestamp="20211101T081839+0100" comment="Duplikat"?>
+            <Aussprache class="invisible"><IPA Audiodatei="115/auf_dem_Laufenden_bleiben"/></Aussprache><?oxy_comment_end?>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>am Laufenden bleiben</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachraum>österreichisch</Sprachraum>
+                <Sprachraum>bayrisch</Sprachraum>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie><Orthografieregel>57 (1)</Orthografieregel></Orthografie><Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>laufend</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>bleiben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>bleibt</Stichwort> (über etw.) <Stichwort>auf dem
+                            Laufenden, am Laufenden</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>auf dem Laufenden halten</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>auf dem Laufenden sein</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20200529T090145+0200" comment="habe ich ergänzt" flag="done"?>stets<?oxy_comment_end?>
+                über den aktuellen Stand einer Situation informiert sein</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adverbialbestimmung">
+                    <Belegtext>immer, ständig <Stichwort>auf dem Laufenden bleiben</Stichwort>
+                    </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Präpositionalgruppe/-objekt_mit">
+                    <Belegtext>durch etw. <Stichwort>auf dem Laufenden bleiben</Stichwort>
+                    </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Präpositionalgruppe/-objekt_mit">
+                    <Belegtext>über etw. <Stichwort>auf dem Laufenden bleiben</Stichwort>
+                    </Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>Viel aufzuholen an Informationsfluss hatte er nicht, da er die
+                        vergangene Woche im Homeoffice verbracht hatte und per Computer, Telefon und
+                        E-Mail in allen Dingen <Stichwort>auf dem Laufenden geblieben</Stichwort>
+                        war.</Belegtext>
+                    <Fundstelle>Badische Zeitung, 10.11.2020</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Man muss ständig <Stichwort>auf dem Laufenden bleiben</Stichwort>,
+                        weil sich gerade im Energiebereich viel verändert und die Produkte und ihre
+                        Handhabung immer aufwendiger werden.</Belegtext>
+                    <Fundstelle>Welt am Sonntag, 10.03.2019</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wer Geschichtsunterricht mit Gegenwartsbezug unterrichten will, muss
+                        sich privat einen Pool an Materialien zusammensammeln und immer
+                            <Stichwort>auf dem Laufenden bleiben</Stichwort>.</Belegtext>
+                    <Fundstelle>jetzt-Magazin (SZ), 07.07.2018</Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>»Als Wissenschaftlerin in Elternzeit benötigt man manchmal Ruhe,
+                        damit man in seinem Thema <Stichwort>auf dem Laufenden bleibt</Stichwort>
+                        und den Kontakt zur Arbeitsgruppe halten kann«, erzählt Kerstin
+                            L<Streichung>udwig</Streichung>, »trotzdem wollte ich nah bei meinem
+                        Kind sein.«</Belegtext>
+                    <Fundstelle Fundort="dwds">Welt am Sonntag, 11.12.2016</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie kümmerte sich rechtzeitig <Autorenzusatz>vor der
+                            Elternzeit</Autorenzusatz> um einen Krippenplatz und schaute regelmäßig
+                        im Büro vorbei. So <Stichwort>blieb</Stichwort> sie <Stichwort>auf dem
+                            Laufenden</Stichwort>, welche Aufträge gerade anstanden. Als sie
+                        zurückkehrte, durfte sie ihre 20 Stunden Arbeit pro Woche flexibel
+                        gestalten. </Belegtext>
+                    <Fundstelle> Frankfurter Rundschau, 02.10.2013 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Mehr als jeder Zehnte fühlt sich sehr häufig bis häufig überfordert,
+                        weil er <Stichwort>am Laufenden bleiben</Stichwort> muss. </Belegtext>
+                    <Fundstelle>Der Standard, 24.09.2012</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Isabel konnte sich <Autorenzusatz>als Austauschschülerin in den
+                            USA</Autorenzusatz> über ein eigenes Zimmer mit eigenem Computer und
+                        Internet freuen. So <Stichwort>blieben</Stichwort> ihre Familie und Freunde
+                        in Deutschland immer <Stichwort>auf dem Laufenden</Stichwort>.</Belegtext>
+                    <Fundstelle>Rhein-Zeitung, 09.10.2008 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Wer über die gröbsten Bild-Fehler <Stichwort>auf dem Laufenden
+                            bleiben</Stichwort> möchte, sollte bildblog.de lesen.</Belegtext>
+                    <Fundstelle>Süddeutsche Zeitung, 10.06.2008</Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext>"Über die Mitarbeiterzeitung <Stichwort>bleiben</Stichwort> sie
+                            <Autorenzusatz>Mitarbeiter in der Elternzeit oder Karenz</Autorenzusatz>
+                        <Stichwort>am Laufenden</Stichwort> und Einladungen zu allen Veranstaltungen
+                        sind selbstverständlich«, erklärt
+                        W<Loeschung>inkler</Loeschung>.</Belegtext>
+                    <Fundstelle>Der Standard, 10.12.2006 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>»Aber was sich bei uns <Autorenzusatz>im Verband</Autorenzusatz> tut,
+                        wollen auch die Schwerkranken wissen. Sie <Stichwort>bleiben</Stichwort>
+                        durch unsere schriftlichen Informationen <Stichwort>auf dem
+                            Laufenden</Stichwort>«, erzählt sie.</Belegtext>
+                    <Fundstelle>Berliner Zeitung, 02.12.1995</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

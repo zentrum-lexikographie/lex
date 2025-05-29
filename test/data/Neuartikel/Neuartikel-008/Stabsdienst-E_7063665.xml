@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_7063665" Autor="kduden" Typ="Minimalartikel" Zeitstempel="2023-04-18" Erstellungsdatum="2020-05-27" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="kduden" timestamp="20230418T080311+0200" comment="Bei Freischaltung Link in der Def. von &quot;Bataillonsschreiber&quot; ergänzen"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="Stabs-dienst">Stabsdienst</Schreibung>
+            <Aussprache><IPA>ˈʃtaːpsdiːnst</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-(e)s</Wert></Genitiv>
+                <Plural><Wert>-e</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="2">Stab</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Dienst</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Formangabe>
+                <Grammatik>
+                    <Numeruspraeferenz>Plural selten</Numeruspraeferenz>
+                </Grammatik>
+                <Diasystematik/>
+            </Formangabe>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet Frequenz="meist">Militär</Fachgebiet>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">Verwaltung(sarbeit)
+                i<?oxy_comment_start author="wgrimm" timestamp="20230418T080813+0200" comment="Nicht einfach &quot;in einem Stab&quot;, denn Stäbe sind höher angesiedelt, aber jede popelige Mannschaftsdienstgard im Kompanie-Geschäftszimmer (genau das war ich) ist auch Stabsdienstsoldat"?>n
+                einer Dienststelle oder <Verweis Typ="vgl">
+                    <Ziellemma>Einheit</Ziellemma>
+                    <Ziellesart>3</Ziellesart>
+                </Verweis><?oxy_comment_end?>
+                <?oxy_comment_start author="jgrimm" timestamp="20230418T080656+0200" comment="Wichtig, um es von der Zivilverwaltung abzugrenzen"?>durch
+                speziell ausgebildete Soldaten<?oxy_comment_end?> (oder Polizisten)</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Vor allem in drei Bereichen sucht die Bundeswehr Nachwuchs: In der
+                            IT<Streichung>, die ein Soldat gerade mit gelber Soße verglichen hat,
+                            »für Feinschmecker interessant«</Streichung>. Im
+                            <Stichwort>Stabsdienst</Stichwort>, das sind quasi die, die sich um Post
+                        kümmern, um Anträge, solche Sachen. Und in der Logistik<Streichung>, darum
+                            steht draußen ein großer Transporter rum, mit »extra viel Komfort«, wie
+                            ein Soldat sagt, hohe Sitze, neuester Standard, und hinten drin Platz
+                            für Munition und Werkzeug</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz:2022/05/SZ_A114299808"> Süddeutsche Zeitung,
+                        06.05.2022 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Der 33-jährige Unterfranke ist Hauptfeldwebel bei der Bundeswehr,
+                        arbeitet im <Stichwort>Stabsdienst</Stichwort> an der Infanterieschule in
+                        Hammelburg. </Belegtext>
+                    <Fundstelle Fundort="dwds:frt_regional:2021/06/FRT_3164629928-BAMBERG">
+                        Fränkischer Tag, 28.06.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Denn</Streichung> der »Neue« hätte durch seine
+                        vielfältigen Stationen als Streifenpolizist, Revierleiter oder im
+                            <Stichwort>Stabsdienst</Stichwort> bereits in der Vergangenheit auf
+                        ganzer Linie überzeugt. Seit 2015 war er Dezernatsleiter des
+                        Polizeipräsidiums Rostock.</Belegtext>
+                    <Fundstelle Fundort="dwds:nnn:2019/08/NNN_23-112174975"> Norddeutsche Neueste
+                        Nachrichten,
+                        21.08.<?oxy_comment_start author="kduden" timestamp="20230418T082118+0200" comment="Polizei"?>2019<?oxy_comment_end?>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="plural_ungewöhnlich">
+                    <Belegtext>Jeder Tag war mit einem Schwerpunktthema geplant worden, um möglichst
+                        alle Bereiche des Bataillons vorstellen zu können. Die Thementage in den
+                        Bereichen Nachschub, Transport, Instandsetzung, Versorgungsdienste und die
+                            <Stichwort>Stabsdienste</Stichwort> bildeten den roten Faden am
+                        jeweiligen Ausbildungstag.</Belegtext>
+                    <Fundstelle Fundort="dwds:mib_regional:2015/07/MIB_C01C165F6C08B2D5FD6AB247002F0C5B-VILSTAL"> Mittelbayerische, 18.07.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der 61-jährige Unfallverursacher erlitt dabei so schwerwiegende
+                        Verletzungen, dass er mit einem Helikopter der Rega ins Spital geflogen
+                        werden musste, wie der <Stichwort>Stabsdienst</Stichwort> Kommunikation der
+                        Baselbieter Polizei mitteilte. </Belegtext>
+                    <Fundstelle Fundort="dwds:baz_regional:2014/04/BAZ_2014041417148920887"> Basler
+                        Zeitung,
+                        14.04.<?oxy_comment_start author="kduden" timestamp="20230418T082203+0200" comment="Polizei + CH"?>2014<?oxy_comment_end?>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Für Österreich leisten zwei Offiziere und ein Unteroffizier in Kabul
+                            <Stichwort>Stabsdienst</Stichwort>.
+                        <?oxy_comment_start author="wgrimm" timestamp="20230418T082207+0200" comment="A"?></Belegtext><?oxy_comment_end?>
+                    <Fundstelle Fundort="dwds:standard:2009/07/10/Afghanistan_Einsatz_Stei"> Der
+                        Standard, 10.07.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Cardinal von Widdern, Georg, Militärschriftsteller, geb. 12. April
+                        1841 zu Wollstein in Posen, seit 1859 im preuß. Militärdienst, 1882-87
+                        Direktor der Kriegsschule in Neisse, lebt als Oberst a.D. in Berlin;
+                        schrieb: »Handbuch für Truppenführung und
+                        <Stichwort>Stabsdienst</Stichwort>« (1881-84; 4. Aufl. als »Heeresbewegungen
+                        und Märsche«, 1892), »Die Infanterie im Gefecht« (3. Aufl. 1892) u.a. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1906/brocki_c_1906:12307">o. A.: C. In: Brockhaus' Kleines Konversations-Lexikon, Berlin: Directmedia 2001 [1906]</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <Lesart>
+                <Formangabe>
+                    <Grammatik>
+                        <Numeruspraeferenz>meist im Plural</Numeruspraeferenz>
+                    </Grammatik>
+                    <Diasystematik/>
+                </Formangabe>
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Sprachareal>CH</Sprachareal>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">Verwaltung(sarbeit) oder Abteilung im Sekretariat einer
+                        <Verweis Typ="vgl">
+                        <Ziellemma>Gemeinde</Ziellemma>
+                        <Ziellesart>1 a</Ziellesart>
+                    </Verweis> (oder seltener einer höheren Verwaltungsgliederung)</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext><?oxy_comment_start author="kduden" timestamp="20230418T081417+0200" comment="Beleg aus D, aber auf CH bezogen"?>Seit<?oxy_comment_end?>
+                            Mitte Oktober ist Nicolás Schmid aus Fricktal neuer Leiter
+                                <Stichwort>Stabsdienste</Stichwort> und Stadtmarketing bei der Stadt
+                            Rheinfelden (Schweiz). </Belegtext>
+                        <Fundstelle Fundort="dwds:sk_regional:2020/11/SK_914624"> Südkurier,
+                            10.11.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Die Rede ist auch von einer -Stellenreduktion im
+                                <Stichwort>Stabsdienst</Stichwort> um 190 Prozent, der Entlassung
+                            einer Person und der Auslagerung von Personal- und Buchhaltungsarbeiten
+                            an den Kanton Nidwalden. </Belegtext>
+                        <Fundstelle Fundort="dwds:nlz_regional:2016/03/NLZ_JM20160330000253575">
+                            Luzerner Zeitung, 30.03.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Denn sie ist auf Personalsuche und hat auf der Homepage der
+                            Stadt Zürich ein Stelleninserat schalten lassen, in dem für die
+                                <Stichwort>Stabsdienste</Stichwort> des Präsidialdepartements eine
+                            Mitarbeiterin oder ein Mitarbeiter gesucht wird. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz_regional:2014/01/NZZ_KY5W4"> Neue Zürcher
+                            Zeitung, 28.01.2014 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <Belegtext> Die <Stichwort>Stabsdienste</Stichwort> koordinieren die interne
+                            Zusammenarbeit, nehmen übergeordnete Aufgaben zum Kommando wahr und sind
+                            für das Beschwerdewesen und die Erledigung von kantonalen und
+                            eidgenössischen Vernehmlassungen zuständig. </Belegtext>
+                        <Fundstelle Fundort="dwds:nlz_regional:2013/12/NLZ_JM20131216000348274">
+                            Luzerner Zeitung, 16.12.2013 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Zwischen die beiden Konzernbereiche und die Konzernleitung wird
+                            neu ein zentraler <Stichwort>Stabsdienst</Stichwort> eingeschoben, der
+                            als geschäftsstrategisches Instrument zu verstehen ist. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz:1993/11/NZZ_1176CDABD147A275F14A300F75BDE7C1">
+                            Neue Zürcher Zeitung, 04.11.1993 </Fundstelle>
+                        <Diasystematik>
+                            <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                        </Diasystematik>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart>
+                <Formangabe>
+                    <Grammatik>
+                        <Numeruspraeferenz>meist im Singular</Numeruspraeferenz>
+                    </Grammatik>
+                    <Diasystematik/>
+                </Formangabe>
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Sprachareal>A</Sprachareal>
+                    <Sprachareal Frequenz="selten"><?oxy_comment_start author="dsanders" timestamp="20230418T082758+0200" comment="Das kann auch Instanz der allgemeineren Bedeutung 2a sein
+Laut Wikipedia nur A"?>CH<?oxy_comment_end?></Sprachareal>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">Verwaltung(sarbeit) in einer Dienststelle der
+                    Feuerwehr</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Im vergangenen Jahr sind neun Personen neu zur Feuerwehr
+                            Weinfelden dazu gestossen, zwölf traten aus. Somit hat sich der
+                            Unterbestand weiter verschärft, anstatt der idealen Besetzung mit 137
+                            Männern und Frauen, stehen aktuell nur 113 im Dienst. <Streichung>Im
+                                Verkehrszug fehlen somit vier Personen und in den Zügen eins und
+                                zwei je elf.</Streichung> Nur das Kommando, die
+                                <Stichwort>Stabsdienste</Stichwort> und der Stabszug sind komplett
+                            oder überbesetzt.</Belegtext>
+                        <Fundstelle Fundort="dwds:tgz_regional:2021/01/TGZ_202101140279876184">
+                            Thurgauer Zeitung, 14.01.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Um während der Corona-Krise koordiniert und situationsgerecht
+                            reagieren zu können, ist seit zwei Wochen an der Bezirksstelle Gmunden
+                            des Roten Kreuzes der <Stichwort>Stabsdienst</Stichwort> des
+                            Bezirksrettungskommandos eingerichtet. </Belegtext>
+                        <Fundstelle Fundort="dwds:apa:OOEN_regional/xml/2020/03/ooen_20200331014503227630079"> Oberösterreichische Nachrichten, 31.03.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Der Feuerwehroffizier und Leiter der
+                                <Stichwort>Stabsdienste</Stichwort> war am Wochenende
+                                <Streichung>OK-</Streichung>Chef des Eröffnungsfestes und
+                            verantwortlich für den reibungslosen Ablauf der
+                                Veranstaltung<Streichung>, an der sich nebst der Feuerwehr auch der
+                                Sanitätsnotdienst, der mit der Feuerwehr an die Gaswerkstrasse
+                                umgezogen ist, sowie die Kantonspolizei und das Technorama
+                                präsentierten und von ihrer besten Seite zeigten</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds:tgz_regional:2017/06/TGZ_201706260223114088">
+                            Thurgauer Zeitung, 26.06.2017 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="good_example">
+                        <Belegtext>Die Hartberger Florianijünger
+                                <Paraphrase>Feuerwehrleute</Paraphrase> waren auf unbekanntem
+                            Terrain unterwegs, zu Gast im Bezirk Graz-Umgebung. »Eine neue
+                            Situation, weil eben nicht einmal die Einsatzleitung vorher die
+                            gestellten Aufgaben kannte, alles erst vor Ort erarbeitet musste«,
+                            erklärt H<Streichung>öller</Streichung>. Deshalb sei die Übung gerade
+                            für den <Stichwort>Stabsdienst</Stichwort> wichtig gewesen.</Belegtext>
+                        <Fundstelle Fundort="dwds:apa:KLEINE_regional/xml/2005/10/kleine_200510050400140140"> Kleine Zeitung, 05.10.2005 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"><Beleg><Belegtext>Er hat eine ganze Reihe von Jahren im <Stichwort>Stabsdienst</Stichwort> gearbeitet und sich um die Einführung und den Betrieb computergestützter Systeme Verdienste erworben.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 22.05.1997</Fundstelle></Beleg><Beleg><Belegtext>Während des Zweiten Weltkriegs wurde sie bei der Nachrichtenübermittlung, im <Stichwort>Stabsdienst</Stichwort> oder der Flugabwehr eingesetzt.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 30.05.1998</Fundstelle></Beleg><Beleg><Belegtext>Paul Breuer von der CDU sieht Möglichkeiten für Frauen bei der Luftwaffe, im <Stichwort>Stabsdienst</Stichwort> oder in der Logistik – mehr nicht.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 12.01.2000</Fundstelle></Beleg><Beleg><Belegtext>Als denkbare Einsatzfelder nannten sie <Stichwort>Stabsdienst</Stichwort>, Personalplanung, Ausbildung, Logistik, Technischen Dienst und Kraftfahrwesen.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 22.01.1996</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

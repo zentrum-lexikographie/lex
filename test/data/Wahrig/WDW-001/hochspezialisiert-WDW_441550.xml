@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0"><Artikel Quelle="WDW_2011/DWDS" Erstfassung="WDW_2011" Redakteur="jgrimm" xml:id="WDW_441550" Autor="dsanders" Typ="Vollartikel" Zeitstempel="2025-03-06" Erstellungsdatum="2019-12-31" Status="Red-f-blockiert">
+        <?oxy_comment_start author="kduden" timestamp="20250304T104409+0100" comment="@ER: zusammen mit Verweisziel freischalten"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="hoch-spe-zi-a-li-siert">hochspezialisiert</Schreibung>
+            <Schreibung Trennung="hoch spe-zi-a-li-siert">hoch spezialisiert</Schreibung>
+            <Aussprache>
+                <IPA>ˈhoːχʃpeʦi̯aliˌziːɐ̯t</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <?oxy_comment_start author="wgrimm" timestamp="20250306T122604+0100" comment="S. zu dieser noch zu entscheidenden Problematik den Kommentar bei &quot;hochstehend&quot;"?>
+                <Komparativ><Wert>höher spezialisiert</Wert></Komparativ>
+                <?oxy_comment_end?>
+                <Komparationspraeferenz>Komparativ selten</Komparationspraeferenz>
+                <Komparationspraeferenz>Superlativ ungebräuchlich</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>hoch</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>spezialisiert</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">in besonderem Maße <Verweis Typ="vgl">
+                    <Ziellemma>spezialisiert</Ziellemma>
+                    <Ziellesart/>
+                </Verweis><?oxy_comment_start author="wgrimm" timestamp="20250129T120649+0100" comment="Verweisziel muss noch erstellt bzw. aus WDW genommen werden" id="whd_j2l_32c" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20250211T133619+0100" parentID="whd_j2l_32c" comment="gibt es im WDW so wie ich das sehe nicht" flag="done" mid="3"?></Definition><?oxy_comment_end?><?oxy_comment_end mid="3"?>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>hochspezialisierte</Stichwort> Medizin</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>hochspezialisierte</Stichwort> Fachkraft,
+                        Nervenzelle</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>ein <Stichwort>hochspezialisierter</Stichwort> Facharbeiter,
+                        Facharzt</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adverbialbestimmung">
+                    <Belegtext>teils, teilweise <Stichwort>hochspezialisiert</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Den Stadtparlamentariern steht <Streichung>aber</Streichung> ein Heer <Stichwort>hochspezialisierter</Stichwort> Mitarbeiterinnen und Mitarbeiter in der Stadtverwaltung zur Verfügung. </Belegtext>
+                    <Fundstelle Fundort="dwds:nzz:2025/01/NZZ_2025011600000332175043"> Neue Zürcher
+                        Zeitung, 16.01.2025 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Aus einem Huhn, das alles konnte, auf einem Hof, der alles brauchte, sind im Verlauf der modernen Zivilisation hoch optimierte Hühner in <Stichwort>hoch spezialisierten</Stichwort> Geflügelfabriken geworden. </Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:sachbuch/9783843723114"> Göpel, Maja: Unsere Welt neu denken. Berlin: Ullstein 2020</Fundstelle>
+                </Beleg>
+                <Beleg class="ungewöhnlich">
+                    <Belegtext> Das Kohlendioxid hatte die Lebensbedingungen im Boden so verändert, dass Bodentiere ausgeschlossen wurden und sich die Gemeinschaft der Mikroorganismen hin zu weniger vielfältigen, <Stichwort>höher spezialisierten</Stichwort> Arten verschoben hatte. </Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2016/03/FR_fr_FRD_2627AC332F820C263000-DEUTSCHLANDAUSGABE">
+                        Frankfurter Rundschau, 21.03.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die <Stichwort>hochspezialisierten</Stichwort> Chips sind in vielen
+                        alltäglichen Anwendungen zu Hause.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.03.1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwittrigkeit kommt vielfach bei
+                            <Stichwort>hochspezialisierten</Stichwort> Formen mit besonderer
+                        Lebensweise vor.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hesse, Richard: Der Tierkörper als selbständiger Organismus. Leipzig [u. a.]: B. G. Teubner 1910, S. 623</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-12-13">
+                <Beleg>
+                    <Belegtext>Diese funktionell <Stichwort>hochspezialisierten</Stichwort> Gebäude
+                        aber sind fast immun gegen erforderliche Veränderungen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.08.1973, Nr. 36</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Allerdings gelang es den Männern nicht, das
+                            <Stichwort>hochspezialisierte</Stichwort> Gerät an den Mann zu
+                        bringen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 11.10.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die <Stichwort>hochspezialisierten</Stichwort> Chips sind in vielen
+                        alltäglichen Anwendungen zu Hause.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.03.1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die vorübergehend schwierige Situation für Architekten hierzulande
+                        nutzte Herr Duster zum Aufbau eines
+                            <Stichwort>hochspezialisierten</Stichwort> Büros.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 05.03.1994</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Watt ist ein nährstoffreicher Lebensraum mit
+                            <Stichwort>hochspezialisierten</Stichwort> Pflanzen und
+                        Tieren.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A. [wor]: Wattenmeer. In:
+                        Aktuelles Lexikon 1974-2000, München: DIZ 2000 [1998]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Unter Menschenaffen verstehen wir aber die heutige Gruppe oben
+                        genannter <Stichwort>hochspezialisierter</Stichwort>
+                        Baumsäugetiere.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Gehlen, Arnold: Der Mensch,
+                        Berlin: Junker und Dünnhaupt 1940, S. 121</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wie aber kann die selbständig gewordene,
+                            <Stichwort>hochspezialisierte</Stichwort> Vernunft mit der verlassenen,
+                        verlorenen Sinnlichkeit geeint – und in eine einfache Menschheit
+                        zurückgeholt werden?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Blättner, Fritz: Geschichte der
+                        Pädagogik, Heidelberg: Quelle &amp; Meyer 1961 [1951], S. 141</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die meist <Stichwort>hochspezialisierten</Stichwort> Insekten, zu
+                        denen die Schmetterlinge gehören, brauchen bestimmte Umweltbedingungen und
+                        besondere Nahrungspflanzen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A. [cs]: Lepidopterologie.
+                        In: Aktuelles Lexikon 1974-2000, München: DIZ 2000 [1980]</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwittrigkeit kommt vielfach bei
+                            <Stichwort>hochspezialisierten</Stichwort> Formen mit besonderer
+                        Lebensweise vor.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hesse, Richard: Der Tierkörper
+                        als selbständiger Organismus, Leipzig u. a.: B. G. Teubner 1910, S.
+                        623</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch heute noch sind die vielen
+                            <Stichwort>hochspezialisierten</Stichwort> Gewerkschaften der American
+                        Federation of Labor in dieser Art organisiert.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Friedrich, Carl Joachim:
+                        Totalitäre Diktatur, Stuttgart: Kohlhammer 1957, S. 184</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

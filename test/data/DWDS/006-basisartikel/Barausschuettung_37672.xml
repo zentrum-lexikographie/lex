@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_b_60000_37672" Autor="wgrimm" Typ="Basisartikel" Zeitstempel="2023-07-17" Erstellungsdatum="1967-01-01" Status="Lex-in_Arbeit">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Barausschüttung</Schreibung>
+            <?oxy_comment_start author="wgrimm" timestamp="20140306T071254+0000" comment="IF: +DWDS"?>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-en</Wert></Plural>
+            </Grammatik><?oxy_comment_end?>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">bar</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Ausschüttung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">Zahlung, meist in Form von Dividenden oder Zinsen, die eine
+                Organisation wie eine Aktiengesellschaft oder eine Investmentfonds an ihre
+                Anteilseigner ausgibt</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Aus dem Bilanzgewinn in Höhe von 1,1 Millionen Euro schlage die Bank
+                        fünf Prozent Dividende als <Stichwort>Barausschüttung</Stichwort>
+                        vor.</Belegtext>
+                    <Fundstelle>Südkurier, 28.06.2018</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Die getrennte Aufführung von Diyidendenerträgnissen und
+                            realisierten Kursgewinnen ist aus zwei Gründen wichtig:.</Streichung> 1.
+                        Auf Wunsch kann an Stelle einer <Stichwort>Barausschüttung</Stichwort> der
+                        Kapitalgewinne deren Wiederanlage in einer entsprechenden Anzahl von
+                        Television-Shares erfolgen. <Streichung>Die Abrechnung solcher aus
+                            Erträgnissen bezogenen Shares wird unter Einräumung eines Rabattes von
+                            8V4 v. H. auf den jeweiligen Ausgabepreis vorgenommen.</Streichung>
+                    </Belegtext>
+                    <Fundstelle>Die Zeit, 24.07.2008</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch Markus Strau, Vorstandsmitglied der Schutzgemeinschaft der
+                        Kleinaktionäre hält <Stichwort>Barausschüttungen</Stichwort> in vielen
+                        Fällen für richtig:</Belegtext>
+                    <Fundstelle>Süddeutsche Zeitung, 28.01.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Anstatt einer Bardividende wie bisher üblich wird der Vorstand
+                            des Baustoffkonzerns dem Aufsichtsrat eine Stockdividende
+                            vorschlagen.</Streichung> Das heißt, die Aktionäre erhalten an Stelle
+                        einer <Stichwort>Barausschüttung</Stichwort> zusätzliche Aktien.
+                            <Streichung>Für 22 alte Aktien gibt es eine neue Aktie.</Streichung>
+                    </Belegtext>
+                    <Fundstelle>Frankfurter Allgemeine Zeitung, 22.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Angeboten wurde dieses Objekt im gesamten Bundesgebiet von der Kölner
+                        Firma Consulta. Diese versprach den Käufern neben der neunprozentigen
+                            <Stichwort>Barausschüttung</Stichwort> auf das volle Eigenkapital
+                        zusätzlich ein zinsloses Darlehen. <Streichung>Dafür lag dem Prospekt gleich
+                            ein Kreditund Kontoeröffnungsantrag der Landesbank Rheinland-Pfalz
+                            bei.</Streichung>
+                    </Belegtext>
+                    <Fundstelle>Die Zeit, 08.12.1989</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Natürlich herrscht Enttäuschung darüber, daß sich die für 1964
+                            zu erwartenden besseren Jahresergebnisse kaum in höheren Dividenden
+                            niederschlagen werden.</Streichung> Aber ist die
+                            <Stichwort>Barausschüttung</Stichwort> wirklich der wichtigste Maßstab
+                        für die Bewertung der Aktienkurse? Ist es nicht richtiger, den Gesamtgewinn
+                        einer Gesellschaft zu berücksichtigen?</Belegtext>
+                    <Fundstelle>Die Zeit, 06.11.1964</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Außerdem könnten sie die Liquidation beschleunigen und eine weitere
+                            <Stichwort>Barausschüttung</Stichwort> vornehmen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 10.09.1976, Nr. 38</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auch kann man ihm nicht die Wahl lassen zwischen
+                            <Stichwort>Barausschüttung</Stichwort> oder vermögenswirksamer
+                        Anlage.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 04.12.1964, Nr. 49</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese versprach den Käufern neben der neunprozentigen
+                            <Stichwort>Barausschüttung</Stichwort> auf das volle Eigenkapital
+                        zusätzlich ein zinsloses Darlehen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 08.12.1989, Nr. 50</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Diese Größe wird berechnet, indem man die
+                            <Stichwort>Barausschüttung</Stichwort> pro Aktie mit 100 mal nimmt und
+                        durch den aktuellen Börsenkurs teilt.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 13.10.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>So erklären sich auch die vergleichsweise hohen
+                            <Stichwort>Barausschüttungen</Stichwort> der US-Fonds: häufig liegen sie
+                        bereits in den ersten Jahren der Fondslaufzeit zwischen sieben und acht
+                        Prozent.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 25.07.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

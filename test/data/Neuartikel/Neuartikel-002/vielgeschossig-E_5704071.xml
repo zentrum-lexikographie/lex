@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_v_4424" Autor="kduden" Typ="Basisartikel-D" Tranche="RSR-2024-36_1_2" Zeitstempel="2024-10-11" Erstellungsdatum="1977-01-01" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="viel-ge-schos-sig"><?oxy_comment_start author="dsanders" timestamp="20241011T112316+0200" comment="österreichisch und süddeutsch: vielgeschoßig"?>vielgeschossig<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="091/vielgeschossig"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="dsanders" timestamp="20250320T134117+0100" comment="Nur Bezugsregel ergänzt"?>36
+                (1.2)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>viel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Geschoss</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_v_3461">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">mit vielen Geschossen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>im Zentrum der Stadt entstanden
+                            <Stichwort>vielgeschossige</Stichwort> Hochhäuser, Hotels</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Dort bestimmen die Reste der DDR in Form
+                            <Stichwort>vielgeschossiger</Stichwort> Plattenbauten immer noch das
+                        Bild der Stadt.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 25.09.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es ist ein weinbewachsener Innenhof, umgeben von
+                            <Stichwort>vielgeschossigen</Stichwort> Häusern aus der
+                        Jahrhundertwende.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 05.08.1988, Nr. 32</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beim Breitfußsystem wird ein <Stichwort>vielgeschossiges</Stichwort>
+                        Bettenhaus vertikal mit einem flach ausgebildeten, breit entwickelten
+                        Behandlungstrakt verbunden, der direkt unter dem Bettenhaus oder neben ihm
+                        angeordnet ist.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – K. In: Olbrich,
+                        Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1992], S.
+                        25120</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Vielgeschossige</Stichwort> Plattenbauten mit
+                        Parabolantennen und Balkons, auf denen Wäsche trocknet, das ist Pristina vor
+                        allem.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 06.07.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Stadtverordnete und Landtag, Bürger und Verbände wünschen sich die
+                        Unterbringung der Landesbibliothek in dem dafür ideal geeigneten
+                            <Stichwort>vielgeschossigen</Stichwort> Lagerhaus.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 11.02.1994</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Tendenz zur Erhöhung der Wohndichte führt aber auch hier zur
+                            <Stichwort>vielgeschossigen</Stichwort> G. als einem wesentl. Element
+                        des künftigen Städtebaus.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – G. In: Olbrich,
+                        Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1991], S.
+                        16044</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In den 30er Jahren wurden stärker kompakte Kompositionsprinzipien in
+                            <Stichwort>vielgeschossiger</Stichwort> Bauweise angewendet, in denen
+                        horizontal die Bettenstation der Behandlungsabteilung zugeordnet
+                        ist.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – K. In: Olbrich,
+                        Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1992], S.
+                        25120</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In neuen Wohnkomplexen bilden sie als meist zweigeschossige
+                        Flachbauten einen charakterist. Kontrast zu den
+                            <Stichwort>vielgeschossigen</Stichwort> Wohnblocks.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Lexikon der Kunst – K. In: Olbrich,
+                        Harald (Hg.), Lexikon der Kunst, Berlin: Directmedia Publ. 2001 [1991], S.
+                        19636</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Tuk-Tuk hält vor einem <Stichwort>vielgeschossigen</Stichwort>
+                        Appartementhaus, Petras Heimat auf Zeit.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 31.08.2012, Nr. 23</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Freie Grundschule Bröbberow ist nicht in einem
+                            <Stichwort>vielgeschossigen</Stichwort> Theoriegebäude zu Hause, sondern
+                        in einem alten Gutshaus.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 06.02.2012, Nr. 06</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

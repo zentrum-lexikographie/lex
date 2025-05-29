@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_1546294" Autor="dsanders" Typ="Minimalartikel" Tranche="RSR-2024-21_E2_1" Zeitstempel="2025-01-21" Erstellungsdatum="2024-02-16" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="rou-ten">routen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>routet</Wert></Praesens>
+                <Praeteritum><Wert>routete</Wert></Praeteritum>
+                <Auxiliar>
+                    <Wert><?oxy_comment_start author="kduden" timestamp="20211019T193741+0200" comment="ein Beleg für ist; mit aufnehmen?" flag="done"?>hat<?oxy_comment_end?></Wert>
+                </Auxiliar>
+                <Partizip_II><Wert>geroutet</Wert></Partizip_II>
+                <Partizip_II><Wert>gerouted</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>21 (E2.1)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Konversion">
+            <Verweis Typ="Grundform">
+                <Ziellemma>Route</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie class="invisible">Englisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26">
+                <Beleg>
+                    <Belegtext>Wenn die Batterien schwach werden, zeigt das Gerät zwar im Display
+                        ein Warnsignal, versucht aber weiterhin zu
+                        <Stichwort>routen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1999, Nr. 12</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie <Stichwort>routen</Stichwort> die aus dem Internet angeforderten
+                        Datenpakete über Satellit auf den Rechner des Kunden.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 2000, Nr. 4</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>So hätten zum Beispiel alle Provider die technische Möglichkeit, bei
+                        einem Ausfall ihrer eigenen USA-Leitung den Datenverkehr dorthin über einen
+                        anderen Anbieter zu <Stichwort>routen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1996, Nr. 1</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dem Systembetreiber ist es in der neuen Version möglich, die privaten
+                        Nachrichten domainabhängig individuell für jeden User zu
+                            <Stichwort>routen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1993, Nr. 12</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die 010050 erkannte der Delta Dial S0 nicht als Netzbetreiberkennzahl
+                        und versuchte auch diese Verbindung über einen anderen Call-by-Call-Anbieter
+                        zu <Stichwort>routen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1999, Nr. 12</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

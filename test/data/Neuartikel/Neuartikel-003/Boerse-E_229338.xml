@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_b_11848" Autor="wgrimm" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2023-07-24" Erstellungsdatum="1967-01-01" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung hidx="1">Börse</Schreibung>
+            <Aussprache><IPA Audiodatei="001/die_Boerse">ˈbœʁzə</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-n</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="nl">beurs</erwaehntes_Zeichen>, <erwaehntes_Zeichen Sprache="nl">geldbeurs</erwaehntes_Zeichen> &lt; <erwaehntes_Zeichen Sprache="mnl">borse</erwaehntes_Zeichen>
+                <Paraphrase>Beutel, Geldtäschchen</Paraphrase> &lt; <erwaehntes_Zeichen Sprache="mlat">bursa</erwaehntes_Zeichen>
+                <Paraphrase>(Leder-)Beutel, -tasche, Geldsäckchen</Paraphrase> &lt;
+                    <erwaehntes_Zeichen Sprache="griech">býrsa</erwaehntes_Zeichen>
+                    (<erwaehntes_Zeichen Sprache="griech">βύρσα</erwaehntes_Zeichen>)
+                    <Paraphrase>abgezogene Haut, Fell</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>Börse</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart xml:id="S_b_6739">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal>D</Sprachareal>
+                <Sprachareal>A</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Geldbeutel</Ziellemma>
+                    <Ziellesart>1 a</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Geldbörse</Ziellemma>
+                    <Ziellesart>1 a</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <?oxy_comment_start author="dsanders" timestamp="20230724T081915+0200" comment="WP nur für HOM-2 relevant"?>
+            <Kollokationen><?oxy_comment_end?></Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die <Stichwort>Börse</Stichwort> enthielt nur zwei
+                            <Stichwort>Bankkarten</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/04/MUME_mm_omp0000009282460">
+                        Münchner Merkur, 12.04.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Verdächtige soll die <Stichwort>Börse</Stichwort> samt Bargeld
+                        und <Stichwort>Bankomatkarte</Stichwort> aus der Innentasche einer im
+                        Einkaufswagen abgestellten Handtasche endwendet haben. </Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2023-04-11/4/0r29kS6I">
+                        <Autor/>
+                        <Titel>Polizei in NÖ sucht mit Fotos nach Supermarkt-Dieb</Titel>
+                        <Stelle/>
+                        <Datum>11.04.2023</Datum>
+                        <URL>https://kurier.at/chronik/niederoesterreich/polizei-in-noe-sucht-mit-fotos-nach-supermarkt-dieb/402396494</URL>
+                        <Aufrufdatum>07.06.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Eine schwarze Geldbörse hat am Dienstagabend ein 16-jähriger
+                        Jugendlicher bei der Polizeiinspektion in Linz abgegeben. Nach eigenen
+                        Angaben hatte er sie in seinem Schulbus gefunden. Geld, Fahrkarten und
+                        Papiere befanden sich noch darin. Der 12-jährige Verlierer und dessen Vater
+                        wurden verständigt und <Stichwort>olten</Stichwort> die
+                            <Stichwort>Börse</Stichwort> erfreut ab. Laut Polizeibericht fehlte
+                        nichts. red </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2022/09/RZTG_06DCCA2C04A3C6C1846D5C4366D0CB65-NEUWIEDLINZ"> Rhein-Zeitung, 22.09.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die laut Beschreibung etwa 20 bis 25 Jahre alte Unbekannte hatte den
+                        Pensionisten am Mittwoch gegen 10 Uhr Vormittag in Vöcklamarkt auf offener
+                        Straße angesprochen und ihn um eine Spende für eine wohltätige Organisation
+                        gebeten. In Wirklichkeit war die Frau allerdings nicht bloß auf das
+                        Spendengeld des Seniors aus. Der 78-Jährige ließ sich erweichen und
+                        überreichte der Unbekannten einen vermeintlichen Spendenbetrag, doch ehe er
+                        noch seine Geldbörse wieder einstecken konnte, bedankte sich die Frau auf
+                        überschwängliche Art und Weise und umarmte den Mann in vorgetäuschter
+                        Freude. Erst später bemerkte der Pensionist das Fehlen von
+                            <Stichwort>Bargeld</Stichwort> aus seiner <Stichwort>Börse</Stichwort>.
+                        Die dem Anschein nach nicht aus Österreich stammende Diebin war schlank und
+                        mit einem dunklen Anorak bekleidet. Sie hatte gute Deutschkenntnisse.
+                        Hinweise erbeten an die Polizei Vöcklamarkt, Tel. 059133 / 4178. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:OOEN_regional/xml/2020/02/ooen_20200221014504245790116">
+                        Oberösterreichische Nachrichten, 21.02.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Leder-Werkstatt von Robert S<Loeschung>chröder</Loeschung> ist
+                        sehr gut besucht. Es werden neben Taschen auch Handyhüllen, Armbänder und
+                        kleine <Stichwort>Börsen</Stichwort> gebastelt.</Belegtext>
+                    <Fundstelle Fundort="dwds:maz_regional:2015/08/MAZ_125789580001440712800">
+                        Allgemeine Zeitung, 28.08.2015 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Sie suchte noch mal ein paar Münzen aus einer kleinen
+                            <Stichwort>Börse</Stichwort> heraus.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Schulze, Ingo: Simple Storys, Berlin:
+                        Berlin-Verl. 1998, S. 238</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich war jeden Tag an der <Stichwort>Börse</Stichwort> mit 4000 Juden
+                        zusammen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">o. A.: Einhundertzwanzigster Tag. Freitag,
+                        3. Mai 1946. In: Der Nürnberger Prozeß, Berlin: Directmedia Publ. 1999
+                        [1946], S. 19569</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Selbst die hypernervösen <Stichwort>Börsen</Stichwort> scheinen sich
+                        an die Situation in Japan zu gewöhnen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 19.03.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Genau diese Idee aber lässt sich an der <Stichwort>Börse</Stichwort>
+                        bisher nicht verkaufen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 13.04.2000, Nr. 16</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Im Jahr 2004 will die Bahn an die <Stichwort>Börse</Stichwort>
+                        gehen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 06.04.2000, Nr. 15</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Aber ich habe da nun an der <Stichwort>Börse</Stichwort> Pech gehabt
+                        – könnten Sie mir nicht das Bild wieder abnehmen?</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Tucholsky, Kurt: An Hedwig Müller,
+                        16.05.1934. In: ders., Kurt Tucholsky, Werke – Briefe – Materialien, Berlin:
+                        Directmedia Publ. 2000 [1934], S. 16219</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als er endlich zu etwas Geld gekommen war, legte er es auf der
+                            <Stichwort>Börse</Stichwort> an.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 05.01.2000, Nr. 2</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das entlastet die <Stichwort>Börse</Stichwort>, es erspart außerdem
+                        Kosten und macht es dadurch der Bank möglich, sich bei gleichem Gewinn mit
+                        geringeren Provisionen zu begnügen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Eltzbacher, Paul: Deutsches Handelsrecht,
+                        Berlin: Simon 1925 [1924], S. 347</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Alle versammeln sich an einem gewaltigen Amboß vor der
+                            <Stichwort>Börse</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Schlögel, Karl: Petersburg, München Wien:
+                        Carl Hanser Verlag 2002, S. 468</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Da der Bund seinen Anteil nicht erhöhen will, werden wir an die
+                            <Stichwort>Börse</Stichwort> gehen müssen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Der Spiegel, 07.09.1992</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

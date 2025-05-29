@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_7525219" Autor="kduden" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2023-10-23" Erstellungsdatum="2023-10-19" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="wgrimm" timestamp="20231023T151600+0200" comment="@Regio-Gruppe: siehe &quot;in die Kiste springen&quot;"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>mit
+                jmdm.<?oxy_comment_start author="kduden" timestamp="20240201T093128+0100" comment="das &quot;mit jmdm.&quot; sollte wegen der zweiten LA weg, oder? (wie bei &quot;in die Kiste springen&quot;)" id="xbz_k1c_fdc"?><?oxy_comment_start author="jgrimm" timestamp="20241029T152558+0100" parentID="xbz_k1c_fdc" comment="das würde ich nicht tun (in die Kiste springen müsste auch erweitert werden), weil a) am häufigsten doch mit &quot;mit&quot;, b) die Nennform kann missverstanden werden, wenn die PP fehlt. Ich kläre das und finde eine Lösung. Evtl. müssen es zwei Artikel werden." mid="2"?>
+                <?oxy_comment_end mid="2"?><?oxy_comment_end?>in die Kiste hüpfen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Kiste</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>hüpfen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>hüpft</Stichwort> mit jmdm. <Stichwort>in die
+                            Kiste</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders">D</Sprachareal>
+                <Stilfaerbung Frequenz="meist">abwertend</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>in die Kiste springen</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Nach Gottesdienst und Mittagessen seien die Kinder sonntags ins Kino
+                        geschickt worden, »weil die Eltern ungestört <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>
+                        <Stichwort>hüpfen</Stichwort> wollten«. </Belegtext>
+                    <Fundstelle Fundort="dwds:maz_regional:2016/09/MAZ_168651960001474927200">
+                        Allgemeine Zeitung, 27.09.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das Sex eine so große Rolle beim Kinderkriegen spielt, ist ungünstig.
+                        Statt <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort> zu <Stichwort>hüpfen</Stichwort>, schaffen sich
+                        unzählige Deutsche lieber einen Hund oder eine Katze oder ein Auto an, weil
+                        das ganz ohne Sex geht<Streichung>, auch wenn Männern wie Frauen
+                            grundsätzlich klar ist, dass einem die schönsten, aufregendsten Sachen
+                            im Leben nun mal dann passieren, wenn man nackt
+                        ist</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:dnn:2015/07/DNN_273F643B62D3BCE87F179EFEB90F7C67">
+                        Dresdner Neueste Nachrichten, 15.07.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Und mit der drastischen Sprache ausgehfreudiger junger
+                            Mädchen, wie zum Beispiel: »Warum pimpst du denn deine Mu so auf?
+                            Steht was ins Haus?« oder einem:</Streichung> »Du, aber beim
+                        ersten Date ist doch immer die goldene Regel: vorher nicht rasieren und
+                        nicht die Wohnung aufräumen, damit man nicht gleich
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>
+                        <Stichwort>hüpft</Stichwort>.« </Belegtext>
+                    <Fundstelle Fundort="dwds:wams:2009/01_3/was_01xml20090101_3547"> Welt am
+                        Sonntag, 29.03.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es gibt Paare, die <Stichwort>hüpfen</Stichwort> jeden Tag fünfmal
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>. Dann gibt es solche, die haben nur einmal im
+                        Jahr Sex und sind trotzdem happy. </Belegtext>
+                    <Fundstelle Fundort="dwds:modeblogs:51/51bdb5d1-56e9-482e-9109-baec60a50602">
+                        <Autor>S.A</Autor>
+                        <Titel>beziehungssache – Die Paartherapeutin Katja Sundermeier gibt Coaching
+                            für ein besseres Sexleben</Titel>
+                        <Kurztitel>Coaching für ein besseres Sexleben</Kurztitel>
+                        <Stelle/>
+                        <Datum>16.04.2008</Datum>
+                        <URL>https://www.freundin.de/psycho-liebe-sex-beziehungssache-die-paartherapeutin-katja-sundermeier-gibt-coaching-fuer-ein-besseres-sexleben-12771.html</URL>
+                        <Aufrufdatum>09.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>hüpft in die Kiste</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <?oxy_comment_start author="wgrimm" timestamp="20240201T094109+0100" comment="im Artikel &quot;Kiste&quot; hat die übertragene LA &apos;Sarg&apos; keine Markierung (laut VWB zwar [D] aber viele Belege gibt es halt nicht)
+
+&quot;@in @die @Kiste&quot; &amp;&amp; hüpfen
+
+Areal	Treffer	PPM	Anteil PPM	davon für &apos;sterben&apos;
+D-Mittelost 	6 	0,00 	25,27 %	2 echte
+D-Nordost 	2 	0,00 	21,06 %	0 echte
+D-Südwest 	3 	0,00 	18,35 %	2 echte, ein Zitat von Mundstuhl (aus D-MW)
+A 	3 	0,00 	16,12 %	2 echte
+D-Südost 	2 	0,00 	8,41 %	0 echte
+D-Mittelwest 	3 	0,00 	5,93 %	0 echte
+D-Nordwest 	1 	0,00 	4,86 %	0 echte"?>
+            <Diasystematik><?oxy_comment_end?>
+                <Sprachareal Frequenz="besonders">D</Sprachareal>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Stilfaerbung>verhüllend</Stilfaerbung>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>in die Kiste springen</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Ich war am Ende meiner Kräfte und eine Stimme in mir fragte: Was
+                        tust du hier? Wozu machst du das? Willst du wirklich so weitermachen, bis du
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>
+                        <Stichwort>hüpfst</Stichwort>? Das wollte ich auf gar keinen Fall!s </Belegtext>
+                    <Fundstelle Fundort="dwds:web:ccrawl_s1-0/18151/9qnZcnTw8GrVbEwB">
+                        <Autor/>
+                        <Titel>Aloha, ich bin Bettina.</Titel>
+                        <Stelle/>
+                        <Datum><?oxy_comment_start author="dsanders" timestamp="20231023T150559+0200" comment="Datierung unsicher, bitte anhand des Originals überprüfen" flag="done"?>2023<?oxy_comment_end?></Datum>
+                        <URL>https://www.bettinaramm.com/bettina-ramm</URL>
+                        <Aufrufdatum>29.08.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Es tut mir leid, dass Menschen am Ende ihres Lebens
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>
+                        <Stichwort>hüpfen</Stichwort>, ohne ein geiles Leben gehabt zu haben. </Belegtext>
+                    <Fundstelle Fundort="dwds:welt:2021/07/wexml20210702_017"> Die Welt, 02.07.2021
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Ein Ende ist jedenfalls nicht in Sicht.
+                            Gottmann:</Streichung> »Im Gegensatz zum Sport kann man Musik machen,
+                        bis man <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Kiste</Stichwort>
+                        <Stichwort>hüpft</Stichwort>.« </Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2004/10/FR_3234840"> Frankfurter Rundschau,
+                        29.10.2004 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-10-19"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

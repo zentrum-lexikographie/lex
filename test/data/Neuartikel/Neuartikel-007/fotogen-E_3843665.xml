@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_p_2933" Autor="kduden" Typ="Basisartikel-D" Tranche="RSR-2024-Einzelfestlegungen" Zeitstempel="2025-05-28" Erstellungsdatum="1974-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>fotogen</Schreibung>
+            <Schreibung Typ="U">photogen</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="139/fotogen"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Quelle="DWDS" Zeitstempel="2016-01-12" Autor="herold" Typ="neoklassische_Bildung">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Foto</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-gen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie>Griechisch</Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_p_1916">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">zum Fotografieren geeignet, vorteilhaft</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>ein <Stichwort>fotogenes</Stichwort> Motiv</Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel>
+                    <Belegtext>sie ist ausgesprochen <Stichwort>fotogen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ich bin nicht zu dick, ich bin nicht zu dünn, ich bin
+                            <Stichwort>fotogen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 17.10.2011, Nr. 42</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Weil sie so <Stichwort>fotogen</Stichwort> sei, das sei sie ja, könne
+                        man nicht übersehen.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 27.08.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ich hätte nicht auf ihre Sensibilität gewettet, aber attraktiv waren
+                        sie – auf eine <Stichwort>fotogene</Stichwort> Weise – schon.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Die Zeit, 08.07.1999, Nr. 28</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Für ihr zartes Alter von fünf Tagen sind diese Kalmar-Embryos schon
+                        sehr <Stichwort>fotogen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 24.11.2008, Nr. 47</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Doch richtig <Stichwort>fotogen</Stichwort> ist der Dom längst nicht
+                        überall – in Köln wird derzeit heftig über seine Sauberkeit
+                        diskutiert.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 23.05.2007 (online)</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dafür musste er 100 auftreiben, denn die Hälfte war dann doch nicht
+                        so <Stichwort>fotogen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        02.11.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Seine Häuser waren sehr <Stichwort>fotogen</Stichwort>, egal von
+                        welcher Seite ich sie aufgenommen habe.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        31.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er ist weder gut integriert, noch hat er eine
+                            <Stichwort>fotogene</Stichwort> Familie.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 28.02.2011, Nr. 09</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Doch noch ist es nicht soweit, noch hat die
+                            <Stichwort>fotogene</Stichwort> Fichte lange und Meier bange Monate vor
+                        sich.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.06.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wir sehen sie sportlich gekleidet und nicht nur zu zweit
+                            <Stichwort>fotogen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Grass, Günter: Die Rättin, Darmstadt:
+                        Luchterhand 1986, S. 116</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

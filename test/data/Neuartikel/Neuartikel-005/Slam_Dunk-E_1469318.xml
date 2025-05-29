@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_8381076" Autor="wgrimm" Typ="Vollartikel" Zeitstempel="2025-03-03" Erstellungsdatum="2025-01-23" Status="Red-2">
+        <?oxy_comment_start author="jgrimm" timestamp="20250123T081340+0100" comment="zu Dunk"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Slam Dunk</Schreibung>
+            <Aussprache Zeitstempel="2025-03-04" Quelle="DWDS" Autor="brosch">
+                <?oxy_comment_start author="wgrimm" timestamp="20250304T150922+0100" comment="oder daŋk? vgl. Dunk" flag="done"?>
+                <IPA>ˈslæmdaŋk</IPA>
+                <?oxy_comment_end?>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-s</Wert></Plural>
+                <Funktionspraeferenz>substantivisch</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Slam</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Dunk</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Dunk</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Lässig wurden Bälle aus unfassbaren Distanzen im Korb versenkt,
+                        präzise Passstafetten endeten mit krachenden <Stichwort>Slam
+                            Dunks</Stichwort>, unfassbare Trick-Shots hauten selbst ausgemachte
+                        Basketballfans vom Hocker, und furiose Dribblings sorgten regelmäßig für
+                        Schwindelanfälle beim Gegner. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg:2024/04/RZTG_90149393BCBCDC41C963ED1A1683DE44-KOBLENZ">
+                        Rhein-Zeitung, 17.04.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Gießener begann stark, machte schöne Punkte (auch ein schöner
+                            <Stichwort>Slam Dunk</Stichwort>!, auch wenn Ricks noch schöner war),
+                        und dann war er irgendwann weg, naja, zumindest abgemeldet. </Belegtext>
+                    <Fundstelle Fundort="dwds:ballsport:2877/EQ-9iFktT9I1YSoy">
+                        <Autor>P Offline Pippo wrote</Autor>
+                        <Titel>Würzburg – Bamberg</Titel>
+                        <Stelle/>
+                        <Datum>05.02.2024</Datum>
+                        <URL>https://www.schoenen-dunk.de/topic/1375/w%C3%BCrzburg-bamberg</URL>
+                        <Aufrufdatum>11.02.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Zweimal wurde die Crew Weltmeister im Acrobatic Dunking und hat im
+                        Guinness Buch der Rekorde zwei Einträge: einen für den weltweit höchsten
+                        »Flip Dunk« und einen für den weitesten »<Stichwort>Slam Dunk</Stichwort>«
+                        von einem Trampolin aus. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2024/01/NEUW_350995803b5a11a62a27f9230956239e234df35"> Neue Westfälische, 19.01.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Dr. J« (unten rechts) ist der Spitzname des Basketballstars Julius
+                        Erving, der gemeinhin als einer der besten Spieler in der Geschichte der
+                        National Basketball Association und der American Basketball Association
+                        gilt. Berühmt ist er vor allem dafür, den »<Stichwort>Slam Dunk</Stichwort>«
+                        populär gemacht zu haben.</Belegtext>
+                    <Fundstelle Fundort="dwds:bestseller:sachbuch/9783641289843:217"> Obama, Barack
+                        und Springsteen, Bruce: Renegades. München: Penguin 2021, S.
+                        217</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Michael Johnson scherzte mit Michael Jordan, und der tat das Übrige,
+                        als er bei einem Alleingang völlig unbedrängt den Ball nicht in den Korb
+                        befördern konnte. Sein gründlich misslungener <Stichwort>Slam
+                            Dunk</Stichwort> wird wohl noch in Jahren in den Highlight-Filmen
+                        gezeigt werden.</Belegtext>
+                    <Fundstelle Fundort="dwds:bz:2002/2002_02_12/BZ_2002_36_7792_tei"> Berliner
+                        Zeitung, 12.02.2002 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-01-23"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_5371157_489" Autor="kduden" Typ="Verweisartikel" Tranche="Movierung" Zeitstempel="2020-10-08" Erstellungsdatum="2020-09-24" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Berufspolitikerin</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Berufspolitiker</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Beruf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Politikerin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Berufspolitiker</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Ich hatte Angst, <Stichwort>Berufspolitikerin</Stichwort> zu werden und die Hoheit über meine Zeit und meine Prioritäten zu verlieren. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor/>
+                        <Titel>Sahra Wagenknecht über das »Mutti«-Image der Kanzlerin: »Merkel hat eine große Fähigkeit zu verbergen, wie sie wirklich ist«</Titel>
+                        <Kurztitel>Sahra Wagenknecht über das »Mutti«-Image der Kanzlerin</Kurztitel>
+                        <Stelle/>
+                        <Datum>29.08.2017</Datum>
+                        <URL>https://meedia.de/2017/08/29/sahra-wagenknecht-ueber-das-mutti-image-der-kanzlerin-merkel-hat-eine-grosse-faehigkeit-zu-verbergen-wie-sie-wirklich-ist/</URL>
+                        <Aufrufdatum>19.08.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Von einer gut bezahlten <Stichwort>Berufspolitikerin</Stichwort> <Streichung>wie Frau Herold</Streichung> muss man erwarten, dass sie auch ihren Pflichten nachkommt. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor>Junge Union Erfurt</Autor>
+                        <Titel>JU fordert Mandatsrückgabe der Erfurter Stadträte Corinna Herold (AfD) und Enrico Biczysko (NPD)</Titel>
+                        <Kurztitel>JU fordert Mandatsrückgabe</Kurztitel>
+                        <Stelle/>
+                        <Datum>05.08.2016</Datum>
+                        <URL>http://eastsidenews.de/2016/08/05/ju-fordert-mandatsrueckgabe-der-erfurter-stadtraete-corinna-herold-afd-und-enrico-biczysko-npd/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Es wäre naiv <Streichung>(und sexistisch obendrein)</Streichung> zu erwarten, dass <Stichwort>Berufspolitikerinnen</Stichwort> ihres Kalibers sanftmütig sind. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 01.08.2015 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Wichtig war für mich, glasklar die Entscheidung getroffen zu haben, keine <Stichwort>Berufspolitikerin</Stichwort> mehr sein zu wollen.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.06.2003</Fundstelle></Beleg><Beleg><Belegtext>Mein Wissen aus den Zeiten als <Stichwort>Berufspolitikerin</Stichwort> hilft dabei, weil ich weiß, wie es läuft in der Politik.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 21.06.2003</Fundstelle></Beleg><Beleg><Belegtext>Die 34-jährige Dresdnerin wurde bereits im Alter von 21 Jahren <Stichwort>Berufspolitikerin</Stichwort>.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 04.06.2012, Nr. 23</Fundstelle></Beleg><Beleg><Belegtext>Sie selbst wäre nie auf die Idee gekommen, <Stichwort>Berufspolitikerin</Stichwort> zu werden, wenn Geisler sie nicht gebeten hätte.</Belegtext><Fundstelle Fundort="dwds:welt">Die Welt, 29.06.2000</Fundstelle></Beleg><Beleg><Belegtext>Die Vorwürfe der Opposition seien zwar polemisch und ungerechtfertigt, als <Stichwort>Berufspolitikerin</Stichwort> könne sie aber damit umgehen.</Belegtext><Fundstelle Fundort="dwds:bild">Bild, 03.11.2005</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

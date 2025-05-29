@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_2877473" Autor="dsanders" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2021-03-04" Erstellungsdatum="2021-03-04" Status="Lex-in_Arbeit">
+        <?oxy_comment_start author="jgrimm" timestamp="20201222T085552+0100" comment="der Artikel wurde in mehrere gesplittet" id="tbr_jls_v4b"?>
+        <?oxy_comment_start author="kduden" timestamp="20210304T161139+0100" comment="Reaktiviert für Neubearbeitung" parentID="tbr_jls_v4b" mid="2"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20210310T105647+0100" comment="TESTARTIKEL - NICHT VERÖFFENTLICHEN
+OPTION 1: gelumpter Artikel" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="2"?><?oxy_comment_end mid="1"?>
+            <Schreibung>wie geschnitten Brot</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>schneiden</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Brot</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Spezifizierung">zumeist vom Verkauf von sehr begehrten
+                Waren</Definition>
+            <Definition Typ="Basis">besonders gut, schnell, reibungslos</Definition>
+            <Definition Typ="Basis">mit großem (finanziellem) Erfolg</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext>
+                        <Stichwort>wie geschnitten Brot</Stichwort> laufen, gehen,
+                        weggehen</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext>sich <Stichwort>wie geschnitten Brot</Stichwort> verkaufen
+                    </Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Skianzüge, Snowboards, Langlaufausrüstungen sollten jetzt gefragt
+                        sein <Stichwort>wie</Stichwort>
+                        <Stichwort>geschnitten</Stichwort>
+                        <Stichwort>Brot</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Basler Zeitung, 30.01.2021 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Als geschäftstüchtig erwies sich <Streichung>auch</Streichung> der
+                        Verkauf von Schutzmasken. »Die sind gelaufen <Stichwort>wie geschnitten
+                            Brot</Stichwort>«<Streichung>, freut sich
+                        Nordhorn</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Westfälische, 14.07.2020 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext>Büroflächen kosten jetzt schon bis zu 14 Euro
+                            kalt<Autorenzusatz>.</Autorenzusatz> Weil die Wirtschaft in Leipzig
+                        brummt, gehen Büroflächen weg <Stichwort>wie geschnitten
+                        Brot</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Leipziger Volkszeitung, 19.01.2019 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Zu Hunderten entstehen in Berlin derzeit Baublocks mit schematischen
+                        Wohnungen wie billige Konfektionsware, die sich dennoch <Stichwort>wie
+                            geschnitten Brot</Stichwort> verkauft.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Tagesspiegel, 25.08.2018 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext>Fakt ist, die Kirmes läuft <Stichwort>wie geschnitten
+                            Brot</Stichwort>, Jahr für Jahr rennen die Besucher den Junggesellen vor
+                        allem zum Höhenfeuerwerk mit Musik regelrecht die Bude ein.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Rhein-Zeitung, 21.08.2017 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext><Streichung>Aber auch</Streichung> Parfüm, Schmuck, Bücher,
+                        Elektronikwaren und Spielzeug gingen über die Ladentheke <Stichwort>wie
+                            geschnitten Brot</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Aachener Zeitung, 29.12.2014 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Drei Tage nach der AKW-Katastrophe in Fukushima werden
+                            <Streichung>sie</Streichung>
+                        <Autorenzusatz>die Anteilsscheine der Solar- und
+                            Windindustrie</Autorenzusatz> gekauft <Stichwort>wie</Stichwort>
+                        <Stichwort>geschnitten</Stichwort>
+                        <Stichwort>Brot</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 17.03.2011</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/></Rohdaten></Artikel>
+</DWDS>

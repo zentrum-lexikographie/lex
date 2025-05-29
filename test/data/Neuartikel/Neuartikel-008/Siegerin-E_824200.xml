@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" Goethe-Zertifikat="B1" xml:id="E_s_12435" Autor="jgrimm" Typ="Verweisartikel" Tranche="Movierung" Zeitstempel="2020-09-23" Erstellungsdatum="1976-01-01" Status="Lex-zurückgestellt">
+        <?oxy_comment_start author="kduden" timestamp="20201008T115251+0200" comment="erst Sieger neu bearbeiteb"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>Siegerin</Schreibung>
+            <Aussprache><IPA Audiodatei="031/die_Siegerin"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Sieger</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_s_16331">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Sieger</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Dass die Deutschen gegen Spanien trotzdem als
+                            <Stichwort>Siegerinnen</Stichwort> vom Platz gingen, lag an der
+                        mannschaftlichen Geschlossenheit und am Kampfgeist. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 14.06.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Und bei der Bundestagswahl 2017 ging Bundeskanzlerin Angela Merkel
+                        dann auch als klare <Stichwort>Siegerin</Stichwort> vom Platz. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Welt, 08.03.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Aber ich fühlte mich auch nicht als <Stichwort>Siegerin</Stichwort>
+                        in diesem Zweikampf. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Kerner, Charlotte: Blueprint Blaupause, Weinheim:
+                        Beltz &amp; Gelberg 1999, S. 132 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Danach ließ sie sich am Rücken behandeln, ging aber wenig später als <Stichwort>Siegerin</Stichwort> vom Court.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 24.01.2013 (online)</Fundstelle></Beleg><Beleg><Belegtext>Bei den Frauen hat es dagegen schon zwei Rennen mit je drei <Stichwort>Siegerinnen</Stichwort> gegeben.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 29.12.2012 (online)</Fundstelle></Beleg><Beleg><Belegtext>Aber ich fühlte mich auch nicht als <Stichwort>Siegerin</Stichwort> in diesem Zweikampf.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Kerner, Charlotte: Blueprint Blaupause, Weinheim: Beltz &amp; Gelberg 1999, S. 124</Fundstelle></Beleg><Beleg><Belegtext>Hier aber ging sie strahlend als <Stichwort>Siegerin</Stichwort> aus dem Konkurrenzkampf hervor.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Schleich, Carl Ludwig: Besonnte Vergangenheit, Lebenserinnerungen (1859-1919). In: Simons, Oliver (Hg.) Deutsche Autobiographien 1690-1930, Berlin: Directmedia Publ. 2004 [1921], S. 31483</Fundstelle></Beleg><Beleg><Belegtext>Aus dem zähen Kampf – er fand erst 932 mit der Unterwerfung Toledos sein Ende – ging die Regierung von Córdoba als <Stichwort>Siegerin</Stichwort> hervor.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Die mittelalterliche Kirche. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1966], S. 4021</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

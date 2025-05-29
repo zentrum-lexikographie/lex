@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_892647" Autor="dsanders" Typ="Vollartikel" Tranche="RSR-2024-45_E2" Zeitstempel="2025-05-16" Erstellungsdatum="2025-03-05" Status="Lex-Wiedervorlage">
+        <?oxy_comment_start author="dsanders" timestamp="20250520T095832+0200" comment="zusammen mit Wartebetrieb"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>stand-by</Schreibung>
+            <Schreibung>standby</Schreibung>
+            <Aussprache Zeitstempel="2025-03-05" Quelle="DWDS" Autor="brosch">
+                <IPA>ˈstɛntbaɪ̯</IPA>
+            </Aussprache>
+            <Aussprache Zeitstempel="2025-03-05" Quelle="DWDS" Autor="brosch">
+                <IPA>stɛntˈbaɪ̯</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <?oxy_comment_start author="jgrimm" timestamp="20250306T142510+0100" comment="Ergänzt" flag="done"?>
+                <indeklinabel/><?oxy_comment_end?>
+                <Funktionspraeferenz><?oxy_comment_start author="kduden" timestamp="20250306T133207+0100" comment="Korrigiert: attributiv (das gerade nicht)" flag="done"?>prädikativ<?oxy_comment_end?></Funktionspraeferenz>
+                <Funktionspraeferenz>adverbiell</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <?oxy_comment_start author="kduden" timestamp="20250306T133415+0100" comment="keine Bezugsregel angebbar, analog zu Nomen (u. OED)" flag="done"?>
+        <Orthografie/><?oxy_comment_end?>
+        <Verweise Typ="Konversion">
+            <Verweis Typ="Grundform">
+                <Ziellemma>Stand-by</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart n="1.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Spezifizierung">von technischen Geräten</Definition>
+            <Definition Typ="Basis">im
+                <?oxy_comment_start author="kduden" timestamp="20250516T131943+0100" comment="fehlt im DWDS-Bestand"?>Wartebetrieb<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="invisible">
+                    <Belegtext> Strom sparen. Kippschalter zum
+                        <?oxy_comment_start author="jgrimm" timestamp="20250306T140622+0100" comment="Abwegiges Komma stillschw. entfernt" flag="done"?>Ausschalten<?oxy_comment_end?>
+                        statt
+                            <?oxy_comment_start author="wgrimm" timestamp="20250516T132104+0100" comment="hier: sic!, Nomen"?><Stichwort>stand-by</Stichwort><?oxy_comment_end?>
+                        etc.</Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2024-01-10/4/k1ZOBCMn">
+                        <Autor>Fiona Rohde</Autor>
+                        <Titel>Nachhaltig leben: Warum du dein Leben jetzt umkrempeln
+                            solltest</Titel>
+                        <Kurztitel>Nachhaltig leben</Kurztitel>
+                        <Stelle/>
+                        <Datum>10.01.2024</Datum>
+                        <URL>https://www.gofeminin.de/mein-leben/nachhaltig-leben-s4025485.html</URL>
+                        <Aufrufdatum>11.12.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Täter
+                            <Autorenzusatz><?oxy_comment_start author="dsanders" timestamp="20250306T141426+0100" comment="(Zum besseren Belegverständnis) ergänzt" flag="done"?>Hacker<?oxy_comment_end?></Autorenzusatz>
+                        profitieren von der Manie, möglichst alle heimischen Geräte vom Fernseher
+                        bis zum Drucker mit dem Internet zu verbinden und dann stets
+                            »<Stichwort>standby</Stichwort>« zu halten, egal ob sie genutzt werden
+                        oder nicht. </Belegtext>
+                    <Fundstelle Fundort="dwds:maz:2021/01/MAZ_275655000001611961200"> Allgemeine
+                        Zeitung, 30.01.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das Bügeleisen braucht achtzig Watt, der Lötkolben sechzehn und die
+                        Haustürklingel vielleicht ein Watt, ziemlich egal, ob sie gerade klingelt
+                        oder nur »<Stichwort>stand-by</Stichwort>« steht. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:1993/05/FAZ_F19930525JOEBY--100"> Frankfurter
+                        Allgemeine Zeitung, 25.05.1993 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Lesart n="2.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">in einer
+                <?oxy_comment_start author="kduden" timestamp="20250306T143216+0100" comment="Modifiziert: Warteposition" flag="done"?>abwartenden,
+                einsatzbereiten Position<?oxy_comment_end?></Definition>
+            <Definition Typ="Basis">in einem Zustand geringerer Aktivität</Definition>
+            <Kollokationen/>
+            <?oxy_comment_start author="kduden" timestamp="20250516T133011+0100" comment="im Folgenden mehrere Belege für &quot;auf Standby sein&quot;" flag="done"?>
+            <Verwendungsbeispiele><?oxy_comment_end?>
+                <?oxy_comment_start author="dsanders" timestamp="20250520T095646+0200" comment="zwei hoffentlich passende Belege ergänzt"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext>An der Spitze des Deutsch-Niederländischen Korps steht ein
+                            Generalleutnant<Streichung>, also ein Drei-Sterner</Streichung>. Es ist
+                        als schnell verlegbares Hauptquartier der Allianz schon jetzt in der Lage,
+                        40.000 bis 100.000 Soldaten in einem Einsatz zu führen und hat in diesem
+                        Jahr das Kommando über die Nato-Response-Force. Die ist mit ihren rund
+                        50.000 <Stichwort>stand-by</Stichwort> stehenden Soldaten Abschreckung und
+                        Schnelle Eingreiftruppe zugleich.</Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2023-02-02/3/lXJUtBOm">
+                        <Autor>Elmar Ries; Redaktion; Westfälische Nachrichten</Autor>
+                        <Titel>Zoff ums neue Hauptquartier: Münster oder Stettin?</Titel>
+                        <Stelle/>
+                        <Datum>01.02.2023</Datum>
+                        <URL>https://www.wn.de/muenster/nato-neues-armee-hauptquartier-muenster-stettin-usa-2700261</URL>
+                        <Aufrufdatum>10.12.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><?oxy_comment_start author="dsanders" timestamp="20250306T143559+0100" comment="Irritierenden Vor-Satz &quot;Termin ist im September&quot; gestrichen" flag="done"?><Streichung><?oxy_comment_end?><?oxy_comment_start author="dsanders" timestamp="20250306T143539+0100" comment="Ausgeblendet (sonst ohne Bezug)" flag="done"?>Aber<?oxy_comment_end?></Streichung>
+                        ich bin mittlerweile, wie sicher alle, vorsichtig geworden mit Planungen.
+                        Der Wolf ist jedenfalls »<Stichwort>standby</Stichwort>« und bleibt am Ball
+                        und so langsam streunt er auch bald wieder durch die Wälder.</Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2021/03/RZTG_833617CD768060ABA6AEFA9F0470D3C9-NEUWIEDLINZ"> Rhein-Zeitung, 22.03.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Als
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20250306T143829+0100" comment="Ergänzt" flag="done"?>der
+                            Autovermieter<?oxy_comment_end?></Autorenzusatz> Sixt jetzt seine neuen
+                        Preisknüller vorstellte, war Interrent zwei Wochen später mit einem neuen
+                        »Super-Tip« und exakt identischen Offerten zur Stelle<Streichung>,
+                            <?oxy_comment_start author="wgrimm" timestamp="20250306T143957+0100" comment="Ausgeblendet (da sonst rechtschreibl. problematisch)" flag="done"?>inklusive
+                            Golf Tubo Diesel<?oxy_comment_end?></Streichung>. »Deren
+                        Preislistendrucker müssen <Stichwort>standby</Stichwort> gewesen sein«,
+                        kommentierte vergnatzt ein Sixt-Sprecher.</Belegtext>
+                    <Fundstelle>Die Zeit, 04.04.1986</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="*">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">in Bereitschaft (für einen Notfall), auf Abruf</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Die Veranstalterinnen Michèle
+                                M<Streichung><?oxy_comment_start author="jgrimm" timestamp="20250306T144042+0100" comment="Anonymisiert" flag="done"?>üller<?oxy_comment_end?></Streichung>
+                            und Kim Dana
+                                B<Streichung><?oxy_comment_start author="kduden" timestamp="20250306T144052+0100" comment="Dto." flag="done"?>oppart<?oxy_comment_end?></Streichung>
+                            wurden von der Stadt angewiesen, ihre Mitarbeitenden
+                                <Stichwort>standby</Stichwort> zu halten, um das Festivalgelände im
+                            Notfall rasch räumen zu können. </Belegtext>
+                        <Fundstelle Fundort="dwds:stg_regional:2024/06/STG_2024061100000328714157">
+                            St. Galler Tagblatt, 11.06.2024 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="wgrimm" timestamp="20250306T150458+0100" comment="(Eindeutiger) Ergänzungsbeleg (s. u.)" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> In allen <Streichung>drei</Streichung>
+                            Bereichen wechseln sich die
+                                <Autorenzusatz>Bereitschafts-</Autorenzusatz>Ärzte ab. Mittwoch und
+                            Freitag von 13 bis 8 Uhr des Folgetags, an den anderen Werktagen von 18
+                            bis 8 Uhr des Folgetags sowie an Wochenenden und Feiertagen durchgehend:
+                            Das sind die Zeiten, zu denen die Mediziner
+                                <Stichwort>standby</Stichwort> stehen und bei akuten Fällen Hilfe
+                            leisten.</Belegtext>
+                        <Fundstelle Fundort="dwds:mume_regional:2017/12/MUME_omp0000002995470">
+                            Münchner Merkur, 21.12.2017 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Viele Schwiegermütter der neuen Generation stehen
+                                <Streichung>ja</Streichung> nicht mehr permanent
+                                <Stichwort>stand-by</Stichwort>
+                            <Autorenzusatz>zur Betreuung ihrer Enkelkinder</Autorenzusatz>, weil sie
+                            im Ruhestand selber noch mal richtig Gas geben. </Belegtext>
+                        <Fundstelle Fundort="dwds:bmp:2014/12/BMP_130874613"> Berliner Morgenpost,
+                            13.12.2014 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="jgrimm" timestamp="20250305T125013+0100" comment="oer Lesart 2?" id="om2_npw_42c" flag="done"?>
+                        <?oxy_comment_start author="jgrimm" timestamp="20250306T141107+0100" parentID="om2_npw_42c" comment="Scheint mir hierhin zu passen" flag="done" mid="19"?>
+                        <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="19"?> Drei Stunden
+                            später, so war es geplant, sollten sie
+                                <Autorenzusatz><?oxy_comment_start author="jgrimm" timestamp="20250306T144355+0100" comment="(Zum besseren Belegverständnis) ergänzt" flag="done"?>Flüchtlinge
+                                aus Sarajevo<?oxy_comment_end?></Autorenzusatz> in Split eintreffen,
+                            wo ein gechartertes Flugzeug für den sofortigen Weiterflug in die
+                            Bundesrepublik bereitgestellt war, das mit Hilfe und auf Kosten von
+                            Sponsoren aus der Wirtschaft <Stichwort>stand-by</Stichwort> gebucht
+                            worden war, so
+                                A<Streichung><?oxy_comment_start author="kduden" timestamp="20250306T144142+0100" comment="Anonymisiert (sonst ohne Bezug)" flag="done"?>ngelbeck<?oxy_comment_end?></Streichung>
+                            weiter. </Belegtext>
+                        <Fundstelle Fundort="dwds:nz:2612273X/2612273X_1993_01_19_01/tei/2612273X_1993_01_19_01_044"> Neue Zeit, 19.01.1993 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Auf den drei Flughäfen darf
+                                <Streichung><?oxy_comment_start author="wgrimm" timestamp="20250306T144229+0100" comment="Ausgeblendet (sonst ohne Bezug)" flag="done"?>nun
+                                auch<?oxy_comment_end?></Streichung> nicht mehr gefilmt und
+                            fotografiert werden. Außerdem wurde das Wachpersonal bei den
+                            Zugangskontrollen zum Flughafengelände aufgestockt. »Die Leute sollen
+                            wissen, dass wir auf den Flughäfen in jedem Fall
+                                <Stichwort>stand-by</Stichwort> sind«, sagte ein
+                            Flughafensprecher.</Belegtext>
+                        <Fundstelle Fundort="dwds:bz:2003/2003_03_21/BZ_2003_68_10224_tei"> Berliner
+                            Zeitung, 21.03.2003 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <?oxy_comment_start author="kduden" timestamp="20250306T150005+0100" comment="Ist ohne weiteren Kontext m. E. dieser LA nicht eindeutig zuzuordnen." flag="done"?>
+                        <Belegtext><?oxy_comment_end?>Ich hatte 47 Tage am Stück gearbeitet. Immer
+                                <Stichwort>stand-by</Stichwort>, immer auf dem Sprung – das kann ein
+                            Mörderjob sein.</Belegtext>
+                        <Fundstelle>Berliner Zeitung, 01.11.1997</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><?oxy_comment_start author="jgrimm" timestamp="20250306T145249+0100" comment="(Zum besseren Belegverständnis) ergänzter Kontext" flag="done"?>Nach
+                            Informationen von Greenpeace haben im
+                                <Autorenzusatz>Chemie-</Autorenzusatz>Werk
+                                <Streichung>auch</Streichung> PVC-Verkleidungen gebrannt und Dioxine
+                            emittiert. <Streichung>Die Greenpeacler wollen neben dem Haupttor in
+                                Höchst, durch das am Nachmittag wieder der Werksverkehr rollte,
+                                ausharren, »bis sich etwas getan hat«
+                            (Krautter).</Streichung><?oxy_comment_end?> Das renommierte
+                                <Streichung><?oxy_comment_start author="kduden" timestamp="20250306T144853+0100" comment="Anonymisiert (sonst rechtschreibl. problematisch)" flag="done"?>Fresenius<?oxy_comment_end?></Streichung>
+                            Institut, so Greenpeace, würde <Stichwort>stand-by</Stichwort> darauf
+                            warten, die entnommenen Proben umgehend auszuwerten. </Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1993/taz_19930317_1_2408.xml.cln">die
+                            tageszeitung, 17.03.1993 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="dsanders" timestamp="20250305T125039+0100" comment="mglw. auch zur Unterlesart " flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Wie geht es auf See weiter?
+                                <Autorenzusatz>–</Autorenzusatz> Die Fischer und auch wir bleiben
+                            erstmal <Stichwort>standby</Stichwort> und warten auf den Schlepper. Es
+                            wäre unmöglich, so ein Schiff, das in sich schon eine Gefahr birgt, hier
+                            schwimmen zu lassen. Das Ding muß weg.</Belegtext>
+                        <Fundstelle Fundort="dwds:taz:1987/taz_19871020_3_628.xml.cln">die
+                            tageszeitung, 20.10.1987 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart n="3.">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"><?oxy_comment_start author="dsanders" timestamp="20250306T151025+0100" comment="Alternativvorschlag" flag="done"?>mit
+                der unverbindlichen Option auf ein preisgünstiges
+                <?oxy_comment_start author="dsanders" timestamp="20250306T152249+0100" comment="Ist zwar (noch) nicht lemmatisiert, aber selbsterklärend" flag="done"?>Restplatzticket<?oxy_comment_end?>
+                für eine nicht ausgebuchte Flug- oder Schiffsreise<?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250306T152110+0100" comment="Ersatz-/Ergänzungsbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Sabines bester Freund ist Stewart. Ein Anruf
+                        genügt, und schon eine Stunde später fliegt Sabine
+                            <Stichwort>standby</Stichwort> nach Venedig.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:25995/pS4m4XgLeHmlMeQY">
+                        <Autor>Mariebastide</Autor>
+                        <Titel>Adventskalender-Minikrimi am 6. Dezember</Titel>
+                        <Stelle/>
+                        <Datum>06.12.2017</Datum>
+                        <URL>https://mariebastide.blog/2017/12/06/adventskalender-minikrimi-am-6-dezember/</URL>
+                        <Aufrufdatum>26.11.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ja, ich muss <Stichwort>standby</Stichwort> fliegen, zu ’ner
+                        Besprechung in Cincinnati. </Belegtext>
+                    <Fundstelle Fundort="dwds:untertitel:2/1193138_50741">
+                        <Autor/>
+                        <Titel>Up in the Air</Titel>
+                        <Stelle/>
+                        <Datum>2009</Datum>
+                        <URL>http://www.opensubtitles.org/en/subtitles/4233856/up-in-the-air-de</URL>
+                        <Aufrufdatum>31.10.2014</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20250306T151414+0100" comment="Möglicher (nicht idealer) Ersatz-/Ergänzungsbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?><Streichung>Denn</Streichung> ein unangemeldetes
+                        Rad reist allenfalls »<Stichwort>stand-by</Stichwort>«, wird also nur
+                        mitgenommen, wenn im Frachtraum noch Platz geblieben ist.</Belegtext>
+                    <Fundstelle Fundort="dwds:ha:1999/06/HA_1999061213848560105484864"> Hamburger
+                        Abendblatt, 12.06.1999 </Fundstelle>
+                    <Diasystematik>
+                        <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                    </Diasystematik>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250306T151540+0100" comment="Ersatz-/Ergänzungsbeleg" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Übernachtet wird »in der billigsten Absteige«,
+                        gereist nach Möglichkeit <Stichwort>stand-by</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:1995/07/sz_229575">Süddeutsche Zeitung,
+                        01.07.1995 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Studenten bis zu 26 Jahren haben die Möglichkeit, für 910 Mark
+                            »<Stichwort>standby</Stichwort>« (Warteliste) auf
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20250306T145555+0100" comment="Ergänzt" flag="done"?>dem
+                            Oceanliner<?oxy_comment_end?></Autorenzusatz> QE 2 den Atlantik zu
+                        kreuzen.<?oxy_comment_start author="kduden" timestamp="20250306T145749+0100" comment="Ausgeblendet, da syntaktisch leider verunglückt: auf der QE 2 + man kreuzt nicht den Atlantik, sondern überquert ihn" flag="done"?></Belegtext><?oxy_comment_end?>
+                    <Fundstelle>Die Zeit, 06.08.1982</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="lemnitzer" Quelle="DWDS" Zeitstempel="2025-03-05"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

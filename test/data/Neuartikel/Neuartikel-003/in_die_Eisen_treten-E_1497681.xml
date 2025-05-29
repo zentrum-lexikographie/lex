@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_1497681" Autor="wgrimm" Typ="Verweisartikel" Tranche="MWA" Zeitstempel="2023-06-12" Erstellungsdatum="2023-05-03" Status="Red-f">
+        <?oxy_comment_start author="wgrimm" timestamp="20230515T113540+0200" comment="@ER: Bitte zeitgleich mit Verweisziel freischalten" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung>in die Eisen treten</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Eisen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>treten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>tritt in die Eisen</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym_MWA_Variante">
+                    <Ziellemma>in die Eisen steigen</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Für das abrupte Bremsen fehlt einem oft der Mut. Das ging allen so.
+                        Unsere Instruktoren haben uns ermutigt, ohne Rücksicht auf Verluste
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort> zu <Stichwort>treten</Stichwort>. Was hindert
+                        einen, voll in die Bremse zu treten? </Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2013/08/FR_fr_FRSB_3001EB2FA02AF92E3000-BORDAUSGABE">
+                        Frankfurter Rundschau, 05.08.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dabei <Autorenzusatz>bei der Verkehrssicherheitsaktion »Achtung
+                            Auto«</Autorenzusatz> lud Rudolf A<Streichung>pel</Streichung> vom ADAC
+                        die Kinder zu einer Bremsprobe in seinen Opel Corsa ein. Mit 30 km/h
+                            <Stichwort>trat</Stichwort> er auf der abgesperrten
+                        Albert-Schweitzer-Straße nahe dem Schulgelände voll
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort> und rüttelte seinen jungen Passagieren ins
+                        Bewusstsein,
+                        <?oxy_comment_start author="jgrimm" timestamp="20230503T152231+0200" comment="Leerzeichen ergänzt" flag="done"?>wie
+                        viel<?oxy_comment_end?> Energie in einem fahrenden Auto steckt.</Belegtext>
+                    <Fundstelle Fundort="dwds:ta_regional:2011/09/TA_31411321"> Thüringer
+                        Allgemeine, 30.09.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ex-Formel-1-Pilot Heinz-Harald Frenzen hatte im Fahrsimulator der
+                        Polizei eine Reaktionszeit von 0,48 Sekunden erreicht. Marc Soltau
+                            <Stichwort>trat</Stichwort> beim Test immerhin mit gerade einmal 0,74
+                        Sekunden Verzögerung <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort>, als auf dem Monitor ein Hindernis auftauchte. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:2007/05/RZTG_5EDBC6787DF692CB662829D3A66ACBCD">
+                        Rhein-Zeitung, 10.05.2007 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ein weiterer Wagen hinter dem Laster scherte plötzlich
+                            <Streichung>ebenfalls</Streichung> aus und kam dem Mazda-Fahrer in die
+                        Quere. Der <Stichwort>trat</Stichwort> sofort <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort>, um einen Unfall zu verhindern. Doch der Mazda
+                        geriet ins Schleudern, überschlug sich gleich mehrmals und blieb auf der
+                        rechten Fahrspur liegen.</Belegtext>
+                    <Fundstelle Fundort="dwds:saar:2005/08/SAAR_0805220417"> Saarbrücker Zeitung,
+                        22.08.2005 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext>Das Heckruder kennt drei verschiedene Stellungen: zehn Grad ab
+                        95km/h, 30 Grad auf Knopfdruck und 65 Grad automatisch bei Vollbremsung. Wir
+                            <Stichwort>treten</Stichwort> bei
+                        <?oxy_comment_start author="jgrimm" timestamp="20230503T153014+0200" comment="Leerzechen ergänzt" flag="done"?>300
+                        Kilometer<?oxy_comment_end?> pro Stunde mit aller Macht
+                            <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort> – eine Übung, die nicht nur den Anstellwinkel
+                        der Ohren korrigiert, sondern auch das physikalische
+                        Grundverständnis.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:2003/06/sz_395367"> Süddeutsche Zeitung,
+                        14.06.2003 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Weil er eine Radarkontrolle vor sich befürchtete und nicht geblitzt
+                        werden wollte, <Stichwort>trat</Stichwort> ein Autofahrer an der Steige
+                            <Autorenzusatz><?oxy_comment_start author="kduden" timestamp="20230515T113331+0200" comment="Ergänzt" flag="done"?>bei
+                            der baden-württembergischen Stadt<?oxy_comment_end?></Autorenzusatz>
+                        Schramberg voll <Stichwort>in</Stichwort>
+                        <Stichwort>die</Stichwort>
+                        <Stichwort>Eisen</Stichwort>. Dafür krachte es allerdings von hinten: Ein
+                        nachfolgender Fahrer fuhr auf den unvermutet bremsenden Vordermann
+                        auf.</Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2002/08/SK_200208212100"> Südkurier,
+                        21.08.2002 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/></Rohdaten></Artikel>
+</DWDS>

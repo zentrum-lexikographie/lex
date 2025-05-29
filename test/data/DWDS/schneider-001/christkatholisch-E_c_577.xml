@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_c_577" Autor="wgrimm" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2021-11-02" Erstellungsdatum="1967-01-01" Status="Lex-kommentiert">
+        <?oxy_comment_start author="jgrimm" timestamp="20201009T122018+0200" comment="NZZ" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20211005T140420+0200" comment="verwaister Artikel, Anja zugewiesen" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung>christkatholisch</Schreibung>
+            <Aussprache><IPA Audiodatei="107/christkatholisch"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">Christ</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>katholisch</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_c_430">
+            <?oxy_comment_start author="dsanders" timestamp="20211005T140338+0200" comment="Belege ergänzt"?>
+            <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+            <Diasystematik>
+                <Sprachareal>CH</Sprachareal>
+            </Diasystematik>
+            <Verweise>
+                <?oxy_comment_start author="wgrimm" timestamp="20211005T135850+0200" comment="war Definition, jetzt Verweis"?>
+                <Verweis Typ="Synonym"><?oxy_comment_end?>
+                    <Ziellemma>altkatholisch</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>die <Stichwort>christkatholische</Stichwort> Kirche</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> Gemeinsam mit der <Stichwort>christkatholischen</Stichwort>
+                        Kirchgemeinde Luzern wurde Ostern gefeiert – «ein starkes ökumenisches
+                        Zeichen», findet Asal-Steger. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Luzerner Zeitung, 08.08.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bereits vor einem Jahr hatte sich die
+                            <Stichwort>christkatholische</Stichwort> Kirchgemeinde mit dem Gesuch um
+                        einen Beitrag an die dringend nötige Renovation <Autorenzusatz>ihres
+                            Kirchenhauses</Autorenzusatz> an die Politische Gemeinde
+                        gewandt.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Basler Zeitung, 05.12.2019 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Die kleine <Stichwort>christkatholische</Stichwort> Gemeinde, deren
+                        Predigerkirche sich am «Totentanz» befindet, einst Basels bildhaftester
+                        Friedhof, ist mit ihren Plänen bereits weit fortgeschritten. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 18.12.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die <Stichwort>christkatholische</Stichwort> Kirche engagiert sich
+                        zudem mit der Finanzierung von Forschungsprojekten und Stipendien an der
+                        Universität. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 20.02.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Bisher haben sich für die Teilnahme an der Aktion 182 evangelische,
+                        römisch-katholische und <Stichwort>christkatholische</Stichwort>
+                        Kirchgemeinden mit 254 Kirchen angemeldet. </Belegtext>
+                    <Fundstelle Fundort="dwds"> St. Galler Tagblatt, 27.09.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der <Stichwort>christkatholische</Stichwort> Theologe Kurt Stalder
+                        aus Bern ist im Alter von 84 Jahren verstorben. Mit Professor Kurt Stalder
+                        ist eine Person, die als Mensch und als Theologe über die
+                            <Stichwort>christkatholische</Stichwort> Kirche hinaus hohe Achtung
+                        genoss, von uns gegangen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Bund, 16.01.1997 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20201011T152713+0200" comment="zwei weitere Belege eingefügt" flag="done"?>
+            </Verwendungsbeispiele><?oxy_comment_end?>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"><Beleg><Belegtext>Er ist alt und speist sich aus dem <Stichwort>christkatholischen</Stichwort> Antijudaismus.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 26.09.2007, Nr. 40</Fundstelle></Beleg><Beleg><Belegtext>Unsere Gesellschaft ist nicht mehr so christlich oder gar <Stichwort>christkatholisch</Stichwort>!</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 02.09.1995</Fundstelle></Beleg><Beleg><Belegtext>Das Wesentliche seiner Grundsätze ist in seinem Werk »Philosophische Einleitung in die <Stichwort>Christkatholische</Stichwort> Theologie« (1819) und deren Ergänzung »Positive Einleitung« (1829) dargelegt.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Die Kirche in der Gegenwart. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1971], S. 15691</Fundstelle></Beleg><Beleg><Belegtext>Es war hauptsächlich sein Verdienst, daß sie die radikalen Elemente ausschied und sich als »<Stichwort>Christkatholische</Stichwort> Kirche« in die Tradition der Reformanliegen Wessenbergs gestellt hatte 37.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Die Kirche in der Gegenwart. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1971], S. 16436</Fundstelle></Beleg><Beleg><Belegtext>Nach langer Belagerung wurde Palma am 31. Dezember von dem <Stichwort>christkatholischen</Stichwort> König den Mohrenhunden entrissen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_primarily">Thelen, Albert Vigoleis: Die Insel des zweiten Gesichts, Düsseldorf: Claassen 1981 [1953], S. 300</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

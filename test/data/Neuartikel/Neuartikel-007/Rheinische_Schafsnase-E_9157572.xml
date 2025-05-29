@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_9157572" Autor="kduden" Typ="Basisartikel-MWA" Tranche="MWA" Zeitstempel="2025-04-28" Erstellungsdatum="2025-04-28" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Rheinische Schafsnase</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>rheinisch</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <?oxy_comment_start author="jgrimm" timestamp="20250428T095011+0100" comment="LA 2"?>
+                <Ziellemma>Schafsnase</Ziellemma><?oxy_comment_end?>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-04-28"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="dsanders" xml:id="E_g_10189_13" Autor="kduden" Typ="Vollartikel" Tranche="RSR-2024-36_1_4" Zeitstempel="2025-01-08" Erstellungsdatum="1969-01-01" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="wgrimm" timestamp="20240801T130820+0200" comment="ehemals lemnitzer"?>
+        <?oxy_comment_start author="kduden" timestamp="20240815T112007+0200" comment="vorher Quelle ZDL, Autor lemnitzer, Redakteur brosch" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="grün-gelb">grüngelb</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="139/gruengelb">ˈgʀyːngɛlp</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.4)</Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Zusammenrückung">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>grün</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>gelb</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_g_25121">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>grün-gelb</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="kduden" timestamp="20240904T101636+0200" comment="neu" flag="done"?>
+                </Verweis><?oxy_comment_end?>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>gelbgrün</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="jgrimm" timestamp="20240820T125843+0200" comment="neu" flag="done"?>
+                </Verweis><?oxy_comment_end?>
+            </Verweise>
+            <Definition Typ="Basis">von einem Farbton, der sowohl grüne als auch gelbe Anteile
+                enthält</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20240821T094547+0200" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Das weiche Fruchtfleisch <Autorenzusatz>der
+                            Avocado</Autorenzusatz> ist <Stichwort>grüngelb</Stichwort> bis goldgelb
+                        und oxidiert zu einer dunklen Farbe, sobald es der Luft ausgesetzt ist;
+                            <Streichung>dies kann durch schnelle Zugabe von Antioxidantien wie der
+                            in Zitronensaft enthaltenen Ascorbinsäure verhindert
+                        werden</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:wikipedia:0007/00076603">
+                        <Autor/>
+                        <Herausgeber>Wikipedia</Herausgeber>
+                        <Titel>Avocado</Titel>
+                        <Stelle/>
+                        <Datum>01.07.2024</Datum>
+                        <URL>https://de.wikipedia.org/w/index.php?oldid=246354586</URL>
+                        <Aufrufdatum>01.07.2024</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20240821T095043+0200" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>Wenn Teile einer Wolke eine ausreichende Dicke
+                        haben, <Streichung>was bei einem heftigen Sturm oder Gewitter oft der Fall
+                            ist,</Streichung> dann gehen dem Sonnenlicht bestimmte Farbkomponenten
+                        »verloren« (vor allem blau und rot). Der Himmel erscheint dann grün oder
+                            <Stichwort>grüngelb</Stichwort>
+                        <Streichung>– also in den einzigen noch verbliebenen Farben im Spektrum des
+                            Sonnenlichts</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:baz:2023/06/BAZ_7493890"> Basler Zeitung, 22.06.2023
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="jgrimm" timestamp="20240821T093534+0200" comment="neu auf invisible" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Von Grautönen bis hin zu filigranen rosa, roten
+                        oder <Stichwort>grün-gelben</Stichwort> Nuancen sind diese Herbstpflanzen
+                        eine ideale Ergänzung zu Bordüren und eignen Sie
+                            <Autorenzusatz><?oxy_comment_start author="wgrimm" timestamp="20230306T085149+0100" comment="Ergänzt (!)" flag="done"?>sic!<?oxy_comment_end?></Autorenzusatz>
+                        perfekt für
+                            <Autorenzusatz><?oxy_comment_start author="wgrimm" timestamp="20230306T085208+0100" comment="Ergänzt" flag="done"?>die<?oxy_comment_end?></Autorenzusatz>
+                        Unterpflanzung von Bäumen und in Blumenarrangements für Töpfe. </Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2022-09-12/1/ogclNjI5">
+                        <Autor>Sabina Karlev</Autor>
+                        <Titel>Herbstbepflanzung für Balkon und Garten: Diese atemberaubenden
+                            Ensembles aus Ziergräsern, Herbstblumen und -pflanzen brauchen Sie
+                            unbedingt!</Titel>
+                        <Kurztitel>Herbstbepflanzung für Balkon und Garten</Kurztitel>
+                        <Stelle/>
+                        <Datum>12.09.2022</Datum>
+                        <URL>https://archzine.net/gartengestaltung/garten-pflanzen/herbstbepflanzung-fuer-balkon-und-garten-atemberaubende-ensembles-aus-ziergraesern-herbstblumen-und-pflanzen/</URL>
+                        <Aufrufdatum>12.09.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="kduden" timestamp="20240821T093552+0200" comment="neu auf invisible" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Korn, Rüben, Raps und Kartoffeln geben den
+                        Feldern der Wetterau einen <Stichwort>grün-gelben</Stichwort> Farbanstrich. </Belegtext>
+                    <Fundstelle Fundort="dwds:fr_regional:2021/06/FR_fr_FRMZ_16272E3B82338C113000-MAINZ">
+                        Frankfurter Rundschau, 25.06.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20240821T094540+0200" comment="neu" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Ehe ihm die Heimleitung dezente Kleidung
+                        nahegelegt hatte, war er zu den Mahlzeiten in einem
+                            <Stichwort>grüngelb</Stichwort> schillernden Sportanzug erschienen. </Belegtext>
+                    <Fundstelle Fundort="dwds:kern21:2003/Hahn_Bilder_2003:14"> Hahn, Ulla:
+                        Unscharfe Bilder, München: Deutsche Verlags-Anstalt 2003, S. 14
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Mumin lag auf seinem gewohnten Platz (oder auf einem seiner Plätze),
+                        zusammengerollt im <Stichwort>grüngelben</Stichwort> Moos, <Streichung>mit
+                            vorsichtig eingezogenem Schwänzchen</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds:childlex:497"> Jansson, Tove: Das grosse Muminbuch.
+                        Zürich / Köln 1978</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung><?oxy_comment_start author="jgrimm" timestamp="20240912T121114+0200" comment="Ausgeblendet (sonst ohne Bezug)"?>Aber<?oxy_comment_end?></Streichung>
+                        aus welchem Grunde vermied diese Malerei
+                            <Autorenzusatz><?oxy_comment_start author="jgrimm" timestamp="20240912T121329+0200" comment="(Zur besseren Belegeinordnung) ergänzt"?>der
+                            griechischen Antike<?oxy_comment_end?></Autorenzusatz> in ihrer großen
+                        Zeit das Blau und sogar noch das Blaugrün und ließ erst bei den
+                            <Stichwort>grüngelben</Stichwort> und bläulichroten Tönen die Skala der
+                        erlaubten Farben beginnen? </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1918/spengler_abendland_1918:316"> Spengler,
+                        Oswald: Der Untergang des Abendlandes. München: Beck 1929 [1918], S. 316
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <?oxy_comment_start author="wgrimm" timestamp="20240821T095012+0200" comment="neu auf invisible" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Hermann Hagenström, in einem fußlangen, dicken
+                        und schweren Pelze, der vorne offenstand und einen
+                            <Stichwort>grüngelben</Stichwort>, faserigen und durablen englischen
+                        Winteranzug sehen ließ, war eine großstädtische Figur, ein imposanter
+                        Börsentypus. </Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:1901/mann_buddenbrooks_1901:601"> Mann,
+                        Thomas: Buddenbrooks. Frankfurt a. M.: Fischer 1989 [1901], S. 601
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-23">
+                <Beleg>
+                    <Belegtext>Kilometerlange Autokolonnen fuhren hupend durch die überall
+                            <Stichwort>grüngelb</Stichwort> geschmückte Stadt.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        07.07.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Wer etwa einen Lachs sucht, bekommt von der einen App rotes und von
+                        der anderen <Stichwort>grüngelbes</Stichwort> Licht.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.11.2011, Nr. 46</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Musbach beugte sich schnuppernd über das
+                            <Stichwort>grüngelbe</Stichwort> Papier mit dem goldenen
+                        Aufdruck.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hahn, Ulla: Unscharfe Bilder,
+                        München: Deutsche Verlags-Anstalt 2003, S. 197</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ehe ihm die Heimleitung dezente Kleidung nahegelegt hatte, war er zu
+                        den Mahlzeiten in einem <Stichwort>grüngelb</Stichwort> schillernden
+                        Sportanzug erschienen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Hahn, Ulla: Unscharfe Bilder,
+                        München: Deutsche Verlags-Anstalt 2003, S. 11</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Farben des Neids sind vorwiegend Grün und Gelb; vielleicht haben
+                        die <Stichwort>grüngelben</Stichwort> Augen eines Hammels den Ausschlag für
+                        diese Wortbildung gegeben.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Röhrich, Lutz: Neid. In:
+                        Lexikon der sprichwörtlichen Redensarten [Elektronische Ressource], Berlin:
+                        Directmedia Publ. 2000 [1994], S. 4271</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nun muß ich mich, in meinen <Stichwort>grün-gelben</Stichwort>
+                        Tupfen, doppelt schämen und grämen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Venske, Regula: Marthes Vision,
+                        Frankfurt am Main: Eichborn Verlag 2006, S. 193</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Vorlagenbeleuchtung erhellt das einzulesende Material mit einem
+                            <Stichwort>grün-gelben</Stichwort> Licht.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1992, Nr. 1</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ein kleiner Hauch <Stichwort>grün-gelber</Stichwort> Übereinstimmung
+                        wehte am Ende aber doch durch den Raum.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.09.2013, Nr. 37</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sein Gesicht sehen wir auf diese Entfernung aus der roten Mütze jetzt
+                        empor strahlen, <Stichwort>grün-gelb</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Reportage vom Großen
+                        Preis von Deutschland auf dem Nürburgring, 17.07.1932</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Schon zieht er jetzt die weiße Rennmütze wieder über das
+                            <Stichwort>grün-gelbe</Stichwort>, von Falten zersägte
+                        Gladiatorengesicht.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Reportage vom Großen
+                        Preis von Deutschland auf dem Nürburgring, 17.07.1932</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

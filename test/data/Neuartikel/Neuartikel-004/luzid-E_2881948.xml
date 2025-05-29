@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_l_6297" Autor="kduden" Typ="Vollartikel" Zeitstempel="2024-12-09" Erstellungsdatum="1969-01-01" Status="Red-f-zurückgewiesen">
+        <?oxy_comment_start author="jgrimm" timestamp="20230911T133839+0100" comment="bitte mit luzide freischalten"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20241209T172211+0100" comment="bitte klären, ob nicht doch ein ARtikel " mid="1"?>
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="lu-zid">luzid</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="051/luzid">luˈʦiːt</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparativ><Wert>luzider</Wert></Komparativ>
+                <Superlativ><Wert>am luzidesten</Wert></Superlativ>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Zeitstempel="2023-09-12" Quelle="DWDS" Autor="brosch">
+            <Verweis Typ="formal_verwandt">
+                <Ziellemma>luzide</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie>aus <erwaehntes_Zeichen Sprache="lat">lūcidus</erwaehntes_Zeichen>
+                <Paraphrase>lichtvoll, hell</Paraphrase>, zu <erwaehntes_Zeichen Sprache="lat">lux</erwaehntes_Zeichen>
+                <Paraphrase>Licht</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_l_3649">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>bildungssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Generalisierung">Unbeschwertheit, Helligkeit, Klarheit
+                ausstrahlend</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext><Stichwort>luzide</Stichwort> Beobachtung, Einsicht, Erkenntnis,
+                        Gedanken</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Gemäss einer Online-Umfrage <Streichung>von Tamedia</Streichung> zum
+                        freiwilligen Tragen eines Gesichtsschutzes gaben lediglich 3 Prozent der
+                        Teilnehmenden an, erst mal schauen zu wollen, was die anderen machen.
+                            <Streichung>Dennoch scheinen sich ja viele nach den anderen zu
+                            richten?</Streichung> Diese 3 Prozent sind sehr
+                            <Stichwort>luzid</Stichwort>
+                        <Paraphrase>aufrichtig, unverstellt</Paraphrase> und ehrlich.</Belegtext>
+                    <Fundstelle Fundort="dwds:baz_regional:2022/04/BAZ_5277111"> Basler Zeitung,
+                        16.04.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hier <Autorenzusatz>in Debussys »Prélude à l’après-midi d’un
+                            faune«</Autorenzusatz> geht es um einen »Eindruck«, eine »Impression«:
+                        Die Schwüle des Nachmittags, das Verschwimmen von Realem und Irrealem,
+                        Begierden und Lüste, all das ist in dieser Musik greifbar. Das ist
+                            <Stichwort>luzide</Stichwort> Erotik, transparent wie ein
+                            Negligé<Streichung>, ohne jedes penetrante Hüftwackeln à la
+                            Aquagymnastik – vielmehr ein Sommerhit, der wirklich unter die Haut
+                            geht</Streichung>.</Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2021/07/FR_fr_FRD_6800443BAE8996033000-DEUTSCHLANDAUSGABE">
+                        Frankfurter Rundschau, 17.07.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In seiner Zelle unternimmt er, wie man in seinem Buch nachlesen
+                        kann, fantasievolle Zeitreisen, zurück in die Vergangenheit und in eine
+                            <Stichwort>luzide</Stichwort>
+                        <Paraphrase>verheißungsvoll</Paraphrase> Zukunft. </Belegtext>
+                    <Fundstelle Fundort="dwds:bund:2019/10/BUND_20191004928797"> Der Bund,
+                        04.10.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Streichung>Denn</Streichung> Wahlen im Iran sind nicht gerade von
+                        besonders <Stichwort>luzidem</Stichwort>
+                        <Paraphrase>transparent, demokratisch o.
+                        Ä.</Paraphrase>Charakter.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 06.06.2001</Fundstelle>
+                    <Diasystematik>
+                        <Stilfaerbung>ironisch</Stilfaerbung>
+                    </Diasystematik>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="a)" xml:id="S_l_3650">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>luzide</Ziellemma>
+                        <Ziellesart>a</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">(im Hinblick auf jmds. Wahrnehmung, Bewusstsein) <Verweis Typ="vgl">
+                        <Ziellemma>licht</Ziellemma>
+                        <Ziellesart>1 a γ</Ziellesart>
+                    </Verweis>, ungetrübt</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>ein <Stichwort>luzider</Stichwort> Augenblick, Moment,
+                            Traum</Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel Zeitstempel="1969-01-01" Quelle="WDG">
+                        <Belegtext>eine <Stichwort>luzide</Stichwort> Eingebung</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Beleg>
+                        <Belegtext> Klarträume oder auch <Stichwort>luzide</Stichwort> Träume nennt
+                            man Zustände, in denen sich der Mensch bewusst ist, dass er träumt. </Belegtext>
+                        <Fundstelle Fundort="dwds:laz:2021/11/LAZ_asr0000023097799-LANDSHUTERZEITUNG">
+                            Landshuter Zeitung, 06.11.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Auch Demente haben ihre <Stichwort>luziden</Stichwort> Momente
+                            und meist einen Erinnerungsschatz an Streichen und lustigen Erlebnissen,
+                            den es nur zu heben gelte. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz_regional:1999/10/NZZ_5WCHM"> Neue Zürcher
+                            Zeitung, 09.10.1999 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Früher, als er jung war, hatte er noch Humor. Den hat er
+                            inzwischen verloren. Dazu ist er nicht mehr <Stichwort>luzid</Stichwort>
+                            genug.</Belegtext>
+                        <Fundstelle Fundort="dwds:kernbasis:1996/zeit1996_09_57_27411:57">Die Zeit,
+                            23.02.1996</Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)" xml:id="S_l_3651">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>luzide</Ziellemma>
+                        <Ziellesart>b</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis">von geistiger Beweglichkeit, wachem Geist bzw. davon
+                    zeugend</Definition>
+                <Definition Typ="Basis"><Verweis Typ="vgl">
+                        <Ziellemma Anzeigeform="erhellend">erhellen</Ziellemma>
+                        <Ziellesart>2</Ziellesart>
+                    </Verweis>, präzise und treffend, sich gut erschließend</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext><Stichwort>luzide</Stichwort> Klarheit, Transparenz,
+                            Prosa</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>ein <Stichwort>luzider</Stichwort> Essay, Gedanke, Kommentar,
+                            Vortrag</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                        <Belegtext>eine <Stichwort>luzide</Stichwort> Darstellung, Sprache,
+                            Studie</Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel Zeitstempel="1969-01-01" Quelle="WDG">
+                        <Belegtext>er hat Freude an einer <Stichwort>luziden</Stichwort> und
+                            eleganten sprachlichen Formulierung</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel Zeitstempel="1969-01-01" Quelle="WDG">
+                        <Belegtext>eine <Stichwort>luzide</Stichwort> Erläuterung,
+                            Partitur</Belegtext>
+                    </Kompetenzbeispiel>
+                    <Beleg>
+                        <Belegtext> Beim Schreiben seiner Romane <Streichung>griff er darauf zurück
+                                und</Streichung> formte <Autorenzusatz>er</Autorenzusatz> aus den
+                            Wahrnehmungen so lakonische wie <Stichwort>luzide</Stichwort>
+                            Reflexionen und Passagen von beiläufiger Poesie.</Belegtext>
+                        <Fundstelle Fundort="dwds:dnn:2023/03/DNN_doc7p8dm5re67k17nez7hnv"> Dresdner
+                            Neueste Nachrichten, 08.03.2023 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Seine Sätze sind lang, aber <Stichwort>luzid</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:nzz:2022/09/NZZ_202209220306635712"> Neue Zürcher
+                            Zeitung, 22.09.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Wer Korsgaards Buch liest, begegnet der wohl
+                                <Stichwort>luzidesten</Stichwort> und subtilsten Analyse aller
+                            tierethischen Probleme und denkbaren Fragestellungen, die die in dieser
+                            Hinsicht ohnehin ziemlich anspruchsvolle philosophische Literatur zu
+                            bieten hat. </Belegtext>
+                        <Fundstelle Fundort="dwds:web:434/UcRgREvB">
+                            <Autor>Hubert Wenzl</Autor>
+                            <Titel>Der einzige Wertmaßstab für die Qualität seines Lebens stammt vom
+                                jeweiligen Lebewesen selbst</Titel>
+                            <Stelle/>
+                            <Datum>22.07.2021</Datum>
+                            <URL>https://hubwen.wordpress.com/2021/07/22/der-einzige-wertmassstab-fuer-die-qualitaet-seines-lebens-stammt-vom-jeweiligen-lebewesen-selbst/</URL>
+                            <Aufrufdatum>13.06.2023</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Hubacher war in seinen Kolumnen Welterklärer und Weltverdammer.
+                            Nie überheblich, immer <Stichwort>luzid</Stichwort>, oft sehr lustig und
+                            bissig. Gesegnet, wer bis ins höchste Alter so schreiben
+                            kann.</Belegtext>
+                        <Fundstelle Fundort="dwds:baz:2020/08/BAZ_2057102"> Basler Zeitung,
+                            21.08.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Ich wohne in einer kleinen Universitätsstadt 50 Kilometer
+                            ausserhalb von Algier. Auch hier wird viel demonstriert. Die Studenten
+                            sind ungeheuer aufgeheizt. Es ist berührend, zu sehen, wie naiv und
+                            zugleich <Stichwort>luzid</Stichwort> sie sind.</Belegtext>
+                        <Fundstelle Fundort="dwds:nlz:2019/03/NLZ_201903210240957380"> Luzerner
+                            Zeitung, 21.03.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>In seinem <Stichwort>luziden</Stichwort> Vortrag machte er
+                                <Autorenzusatz>der Philosoph Martin Seel</Autorenzusatz> deutlich,
+                            dass ein totales Wissen weder möglich noch wünschbar ist.
+                                <Streichung>Unmöglich ist totales Wissen, weil jedes Wissen selektiv
+                                ist und nicht alles umfasst, also prinzipiell unvollständig bleibt.
+                                Nicht wünschbar ist totales Wissen, weil es die Menschen der Chance
+                                berauben würde, aus Freiheit zu handeln.</Streichung> Statt der
+                            Illusion eines vollständigen Überblicks nachzutrauern, plädierte Seel
+                            dafür, sich mit der <Hervorhebung>Condition humaine</Hervorhebung>
+                            abzufinden, sich von der Illusion des Überblicks zu verabschieden und
+                            sich auf Umsicht, Bescheidenheit und Selbstreflexion
+                            einzustellen.</Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2009/11/FR_2CE9BA91-A015-418B-967E-19E4F0ADF854">
+                            Frankfurter Rundschau, 23.11.2009 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Geradezu raffiniert ist es <Streichung>schließlich</Streichung>,
+                                <Streichung>derart</Streichung>
+                            <Stichwort>luzide</Stichwort> Passagen mit einem dazwischengeschobenen
+                            dunklen Sätzchen zu konterkarieren.</Belegtext>
+                        <Fundstelle Fundort="dwds:kernbasis:1998/zeit1998_17_60_13656:60">Die Zeit,
+                            16.04.1998</Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Man hat Carl Andres Skulpturen mit dem strengen Versmaß
+                            klassischer Dichtung oder der <Stichwort>luziden</Stichwort> Logik
+                            Bachscher Fugen verglichen. </Belegtext>
+                        <Fundstelle Fundort="dwds:sz_legacy:1996/03/sz_337281"> Süddeutsche Zeitung,
+                            07.03.1996 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Sie spielen so exquisit, daß sie es sich leisten können, die Musik
+                        mozartisch <Stichwort>luzid</Stichwort> zu machen.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 16.07.1971, Nr. 29</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es tagte, und das <Stichwort>luzide</Stichwort> Musizieren zog in
+                        seinen Bann.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 18.09.1997</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das gesprochene Wort ist ihm wichtig, und sein Buch enthält
+                            <Stichwort>luzide</Stichwort> Passagen über die inspirierende Kraft der
+                        freien Rede.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 18.12.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auf <Stichwort>luzide</Stichwort> Weise ist dieser Abend analytisch
+                        und sinnlich zugleich, er verweist ständig über den eigentlichen Text
+                        hinaus.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 14.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ungläubig folgt man seinen <Stichwort>luziden</Stichwort>
+                        Überlegungen, die zwischen 1990 und 2000 bereits verstreut als Aufsätze
+                        publiziert wurden.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 06.10.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Je länger das anhält, desto <Stichwort>luzider</Stichwort> und
+                        spannender wird die Interaktion zwischen den Vieren.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        26.09.1998</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Schriften Simmels etwa kranken allesamt an der Unvereinbarkeit
+                        ihrer aparten Gegenstände mit der peinlich <Stichwort>luziden</Stichwort>
+                        Behandlung.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Adorno, Theodor W.: Minima Moralia,
+                        Frankfurt a. M.: Suhrkamp 1971 [1951], S. 93</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Beim nochmaligen <Stichwort>luziden</Stichwort> Auffädeln der
+                        Vorfälle lag einem der Schädel wuselnd um Haaresbreite neben dem
+                        Wahn.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis">Müller,Herta: Der König verneigt sich und
+                        tötet, München: Carl Hanser Verlag 2003, S. 126</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

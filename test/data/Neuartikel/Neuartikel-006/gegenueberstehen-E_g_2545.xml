@@ -1,0 +1,520 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_g_2545_13" Autor="jgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2024-07-09" Erstellungsdatum="1967-01-01" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="dsanders" timestamp="20230927T142224+0200" comment="bei Freischaltung bitte im Artikel &quot;gegenübersehen&quot;, in beiden ULA Verweise ergänzen"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20240709T143841+0100" comment="bitte 2. regiospezifische Formangabe prüfen" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung Trennung="ge-gen-über-ste-hen">gegenüberstehen</Schreibung>
+            <Aussprache><IPA Audiodatei="007/gegenueberstehen">geːgn̩ʔyːbɐˌʃteːən</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>steht gegenüber</Wert></Praesens>
+                <Praeteritum><Wert>stand gegenüber</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gegenübergestanden</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <?oxy_comment_start author="kduden" timestamp="20240709T112048+0100" comment="neu, regiospezifisches Auxiliar"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="ge-gen-über-ste-hen">gegenüberstehen</Schreibung>
+            <Aussprache><IPA Audiodatei="007/gegenueberstehen">geːgn̩ʔyːbɐˌʃteːən</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>steht gegenüber</Wert></Praesens>
+                <Praeteritum><Wert>stand gegenüber</Wert></Praeteritum>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>gegenübergestanden</Wert></Partizip_II>
+            </Grammatik>
+            <Frequenzangabe>selten</Frequenzangabe>
+            <Diasystematik>
+                <Sprachareal>A</Sprachareal>
+                <Sprachareal>CH</Sprachareal>
+                <Sprachareal>D-Süd</Sprachareal>
+            </Diasystematik>
+        </Formangabe>
+        <Orthografie>
+            <?oxy_comment_start author="kduden" timestamp="20240618T100843+0100" comment="ergänzt"?>
+            <Orthografieregel>34 (1.2)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="2">gegenüber</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>stehen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_g_1409">
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd., etw. <Stichwort>steht</Stichwort>
+                        (<?oxy_comment_start author="wgrimm" timestamp="20240709T132115+0100" comment="eingeklammert + um 3. Komponente erweitert"?>jmdm.,
+                        etw., einander<?oxy_comment_end?>)
+                        <Stichwort>gegenüber</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">(einer Person oder Sache zugewandt) auf der gegenüberliegenden,
+                anderen Seite stehen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel Quelle="WDG" Zeitstempel="1967-01-01">
+                    <Belegtext>jmdm. plötzlich <Stichwort>gegenüberstehen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> Als sie den Stall verlassen wollte, habe sie plötzlich Auge in Auge
+                        einem Wolf <Stichwort>gegenübergestanden</Stichwort>, der eines ihrer Schafe
+                        reißen wollte<Streichung>, erzählte Anna-Lisa Boman</Streichung>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Westfälische, 03.11.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Als er gegen 22.25 Uhr die Gaststätte kurz vor seinem Bekannten
+                        verließ, <Stichwort>stand</Stichwort> der Bad Oeynhausener einer Gruppe von
+                        drei ca. 20 – 21 Jahre alten Männern <Stichwort>gegenüber</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Westfälische, 06.01.2015 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20220530T100425+0200" comment="passt nicht zur Definition, besonders zum Verweisziel von stehen. Entweder diesen als &quot;allgemeiner&quot; markieren oder den Link auf stehen (1) entfernen (was ich als vertretbar und die bessere Lösung ansehe)" id="xx2_4rs_rzb" flag="done"?>
+                    <?oxy_comment_start author="dsanders" timestamp="20231207T232249+0100" parentID="xx2_4rs_rzb" comment="geändert" flag="done" mid="6"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="6"?> Je dichter die beiden
+                        Sofas einander <Stichwort>gegenüberstehen</Stichwort>, desto besser die
+                        Schalldämpfung. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Tagesspiegel, 25.04.2008 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="kduden" timestamp="20240709T130522+0100" comment="neu:Aux=sein"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext> Nachdem er sich 1989 <Streichung>dann</Streichung> das Seemannsbuch
+                        geholt hatte und taumelnd und staunend vor Glück und Aufregung einen Abend
+                        über die schier unbegreifliche Reeperbahn gelaufen und am Hafen von weitem
+                        einem gigantischen Kreuzfahrtschiff
+                            <Stichwort>gegenübergestanden</Stichwort> war, hatte er beschlossen,
+                        nach Paris zu fahren.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis:2002/Kopetzky_GrandTour_2002:225"> Kopetzky,
+                        Steffen: Grand Tour, Frankfurt am Main: Eichborn 2002, S. 225 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Sein Nachbar <Stichwort>stand</Stichwort> ihm
+                            <Stichwort>gegenüber</Stichwort> und schrie. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Rhein-Zeitung, 09.02.1999 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Durch <Streichung>das</Streichung>
+                        <Autorenzusatz>ein</Autorenzusatz> Geräusch aufgeweckt, ging die Frau des
+                        Nachbarn zum Balkon – und <Stichwort>stand</Stichwort>
+                            plötzlich<Streichung>, nur durch eine Fensterscheibe
+                            getrennt,</Streichung> einem Mann <Stichwort>gegenüber</Stichwort>, der
+                        nicht auf den Balkon gehörte. </Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 30.11.1990</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart xml:id="S_g_1409_10" n="a)">
+                <?oxy_comment_start author="wgrimm" timestamp="20220511T093818+0200" comment="neue LA ----&gt; konfrontiert sein mit
+
+Problem, Herausforderung, Anspruch, Schwierigkeit
+
+ohnmächtig, hilflos ...." flag="done"?>
+                <Syntagmatik><?oxy_comment_end?>
+                    <Konstruktionsmuster>
+                        <Belegtext>jmd.<?oxy_comment_start author="wgrimm" timestamp="20240709T140732+0100" comment="ergänzt"?>, etw.<?oxy_comment_end?>
+                            <Stichwort>steht</Stichwort>
+                            <?oxy_comment_start author="kduden" timestamp="20240709T140519+0100" comment="erweitert"?>jmdm.,
+                            etw., einander<?oxy_comment_end?>
+                            <Stichwort>gegenüber</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">mit jmdm.,
+                    <?oxy_comment_start author="jgrimm" timestamp="20220530T100601+0200" comment="mMn auch &quot;jemand&quot;, vgl. das erste Kompetenzbeispiel" id="m1b_wrs_rzb" flag="done"?><?oxy_comment_start author="kduden" timestamp="20231207T232507+0100" parentID="m1b_wrs_rzb" comment="ergänzt" flag="done" mid="12"?>etw<?oxy_comment_end mid="12"?><?oxy_comment_end?>.
+                        <Verweis Typ="vgl">
+                        <Ziellemma Anzeigeform="konfrontiert"><?oxy_comment_start author="jgrimm" timestamp="20220621T114629+0200" comment="flektierte Form bitte als Anzeigeform" id="g5m_xrs_rzb" flag="done"?><?oxy_comment_start author="wgrimm" timestamp="20231207T232533+0100" parentID="g5m_xrs_rzb" comment="wie stellt man das ein?" flag="done" mid="14"?>konfrontier<?oxy_comment_end mid="14"?><?oxy_comment_end?>en</Ziellemma>
+                        <Ziellesart/>
+                    </Verweis> sein</Definition>
+                <Definition Typ="Basis">mit jmdm., etw., miteinander im Widerstreit stehen, sich
+                    auseinandersetzen (müssen)</Definition>
+                <?oxy_comment_start author="wgrimm" timestamp="20240709T125617+0100" comment=" &lt;spezieller&gt; MAnnschaft gegen jmdn. spielen"?>
+                <?oxy_comment_start author="dsanders" timestamp="20240709T140654+0100" comment="hier und in folgenden ULA Kollokationen ergänzt" mid="16"?>
+                <Kollokationen><?oxy_comment_end?><?oxy_comment_end mid="16"?>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Dativobjekt">
+                        <Belegtext>einer <Stichwort>Übermacht</Stichwort>
+                            gegenüberstehen</Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Aktivsubjekt">
+                        <Belegtext>die Kontrahenten, die Lager, die Machtblöcke
+                                <Stichwort>stehen</Stichwort> einander
+                                <Stichwort>gegenüber</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext> Nicht immer können bestehende Entwicklungsansätze den
+                            vielfältigen Herausforderungen Rechnung tragen, denen die
+                            Automobilbranche derzeit <Stichwort>gegenübersteht</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Landshuter Zeitung, 12.03.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Auch die letzte Stadtratssitzung vor der Weihnachtspause gab ein
+                            beredtes Beispiel für die Hilflosigkeit, mit der die Politik diesem im
+                            wahrsten Sinne des Wortes unberechenbaren Problem
+                                <Stichwort>gegenübersteht</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Allgemeine Zeitung, 30.12.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Er fühlte sich an seine Studienzeit erinnert, als er als
+                            Nicht-Aachener ratlos den Fragen von Freunden und Familienmitgliedern
+                            zur Geschichte Aachens <Stichwort>gegenüberstand</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Aachener Zeitung, 03.09.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <?oxy_comment_start author="jgrimm" timestamp="20220530T100516+0200" comment="zur ULA 1, hier sind die beiden symbolischen, nicht wirklichen Parteien miteindander konfrontiert" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Eine Warenterminbörse ist ein hochgradig
+                            organisierter Markt, in dem sich Käufer und Verkäufer niemals direkt
+                                <Stichwort>gegenüberstehen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds">Die Zeit, 13.05.1994</Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20240709T131150+0100" comment="neu:Aux=sein"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Er dachte an die Vorsicht, zu der er sich stets gedrungen gefühlt
+                            hatte, wenn er den Augen dieses Mannes
+                                <Stichwort>gegenübergestanden</Stichwort> war, diesen entkleidenden,
+                            diesen durchsetzenden Augen.</Belegtext>
+                        <Fundstelle Fundort="dwds:kernbasis:1925/kolbenheyer_paracelsusreich_1925:654">
+                            Kolbenheyer, Erwin Guido: Das dritte Reich des Paracelsus, München: J.
+                            F. Lehmanns 1964 [1925], S. 654 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20240709T111251+0100" comment="neu: Auxiliar=sein"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>«Wahnsinnig, – oder was ist es sonst, daß mich Dinge befremden,
+                            die den anderen alltäglich erscheinen? Daß mich dieses Befremden quält?
+                            Daß mir dieses Befremden unzüchtige Gefühle» – er wählte absichtlich
+                            dieses Wort voll biblischer Salbung, weil es ihn dunkler und voller
+                            dünkte – «erregt? Ich bin dem früher
+                                <Stichwort>gegenübergestanden</Stichwort> wie jeder junge Mann, wie
+                            alle meine Kameraden …»</Belegtext>
+                        <Fundstelle Fundort="dwds:kernbasis:1906/musil_toerless_1906:89"> Musil,
+                            Robert: Die Verwirrungen des Zöglings Törleß, Reinbek bei Hamburg:
+                            Rowohlt 1983 [1906], S. 89 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="wgrimm" timestamp="20240709T141124+0100" comment="neu"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Letztmals <Autorenzusatz>im Rahmen des Schweizer
+                                Cups</Autorenzusatz>
+                            <Stichwort>gegenübergestanden</Stichwort>
+                            <Paraphrase>gegeneinander antreten, spielen</Paraphrase> sind sich die
+                            beiden Teams vor genau zwanzig Jahren<Streichung>, ebenfalls in diesem
+                                Wettbewerb</Streichung>.</Belegtext>
+                        <Fundstelle Fundort="dwds:baz_regional:2021/10/BAZ_4374029"> Basler Zeitung,
+                            27.10.2021 </Fundstelle>
+                        <Diasystematik>
+                            <Bedeutungsebene>spezieller</Bedeutungsebene>
+                        </Diasystematik>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <?oxy_comment_start author="jgrimm" timestamp="20240709T143453+0100" comment="neu"?>
+            <Lesart n="b)"><?oxy_comment_end?>
+                <Syntagmatik>
+                    <Konstruktionsmuster>
+                        <Belegtext>etw. <Stichwort>steht</Stichwort> etw., einander
+                                <Stichwort>gegenüber</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Diasystematik>
+                    <Bedeutungsebene>übertragen</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">ein Pendant, einen Gegensatz (zu etw.) bilden,
+                    darstellen</Definition>
+                <Definition Typ="Basis">(mit, im Verhältnis zu etw.) kontrastieren</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Bedenken Sie, dass der Aussicht auf einen hohen Gewinn ein hohes
+                            Risiko <Stichwort>gegenübersteht</Stichwort>.</Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2024/05/FR_fr_F40C563F80CD5C323000">
+                            Frankfurter Rundschau, 24.05.2024 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext>Die Sorgenfalten bei den Verantwortlichen des SSC Palmberg
+                            Schwerin sind tief. Und das, obwohl der deutsche Rekordmeister abgesehen
+                            von der Supercup-Niederlage gegen Allianz MTV Stuttgart (1:3) bisher
+                            alle seine Spiele gewonnen hat und die Bundesliga-Tabelle anführt. Den
+                            sportlichen Erfolgen <Stichwort>steht</Stichwort> aber eine angespannte
+                            Personalsituation <Stichwort>gegenüber</Stichwort>.</Belegtext>
+                        <Fundstelle Fundort="dwds:svz_regional:2023/11/SVZ_23-168114555"> Schweriner
+                            Volkszeitung, 15.11.2023 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Streichung>Darin heisst es,</Streichung> das Ziel der
+                            Initianten, die «Steuerungsfunktion des Stadtrates zu erweitern und zu
+                            beschleunigen», sei erreicht worden. Gleichzeitig sei aber das
+                            politische Leben in der Stadt «erlahmt». So denn lautete ihre
+                            Schlussfolgerung: «Dem Gewinn an Effizienz <Stichwort>steht</Stichwort>
+                            ein Verlust an Partizipation
+                            <Stichwort>gegenüber</Stichwort>.»</Belegtext>
+                        <Fundstelle Fundort="dwds:tgz_regional:2022/10/TGZ_2022102600000307725024">
+                            Thurgauer Zeitung, 26.10.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Wie der Konflikt, bei dem sich zwei diametral entgegengesetzte
+                            Rechtsauffassungen <Stichwort>gegenüberstehen</Stichwort>, gelöst werden
+                            könnte, ist völlig unklar. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 20.10.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Dem <Autorenzusatz>Vorschlag zur
+                                <?oxy_comment_start author="wgrimm" timestamp="20220530T101049+0200" comment="AZ ändern: Vorschlag zur Impfung dieser Gruppe" id="y2j_gss_rzb" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20231207T232809+0100" parentID="y2j_gss_rzb" comment="geändert" flag="done" mid="23"?>Impf<?oxy_comment_end mid="23"?><?oxy_comment_end?>ung
+                                dieser Gruppe</Autorenzusatz>
+                            <Stichwort>steht</Stichwort>
+                            <Stichwort>gegenüber</Stichwort>, dass Covid-19 bei Kindern sehr wenig
+                            Schaden anrichtet. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 10.06.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="kduden" timestamp="20220530T100853+0200" comment="Bedeutung hier; mit etwas kontrastieren. Entweder Def. erwetitern und weiterer Beleg oder diesen hier paraphrassieren und als &quot;allgemiener&quot; markieren" id="q4f_css_rzb" flag="done"?>
+                        <?oxy_comment_start author="wgrimm" timestamp="20231207T232656+0100" parentID="q4f_css_rzb" comment="Def. ergänzt" flag="done" mid="25"?>
+                        <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="25"?> Den
+                            Schwierigkeiten <Stichwort>standen</Stichwort> handfeste Erfolge
+                                <Stichwort>gegenüber</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Frankfurter Rundschau, 21.03.2019 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>
+                            <Streichung>Denn</Streichung> den Kosten für die Förderung der
+                            Erneuerbaren <Stichwort>steht</Stichwort>
+                            <Stichwort>gegenüber</Stichwort>, dass durch den Ausbau des Ökostroms
+                            die Preise an den Energiebörsen massiv sinken. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Frankfurter Rundschau, 15.01.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext><Streichung>So liegen</Streichung> die Betriebskosten des
+                            Trolleybusses <Autorenzusatz>liegen</Autorenzusatz> unter
+                            Berücksichtigung von Infrastruktur und Fahrzeugen – je nach
+                            Berechnungsart – zwischen 15 und 30 Prozent höher als jene des
+                            Dieselbusses, der grundsätzlich dieselbe Kapazität hat. Der
+                            Umweltbelastung, die er <Autorenzusatz>der mit Diesel betriebene
+                                Bus</Autorenzusatz> vor Ort verursacht, <Stichwort>steht</Stichwort>
+                            seine grössere Flexibilität <Stichwort>gegenüber</Stichwort>, weil er
+                            nicht an eine Fahrleitung gebunden ist.</Belegtext>
+                        <Fundstelle Fundort="dwds:nzz_regional:2003/09/NZZ_9353L"> Neue Zürcher
+                            Zeitung, 11.09.2003 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="c)">
+                <?oxy_comment_start author="dsanders" timestamp="20220511T113509+0200" comment="neue LA ---&gt; im Widerspruch zu etw. stehen" flag="done"?>
+                <?oxy_comment_start author="dsanders" timestamp="20240709T113605+0100" comment="Konstruktionsmuster erweitert" mid="27"?>
+                <Syntagmatik><?oxy_comment_end?><?oxy_comment_end mid="27"?>
+                    <Konstruktionsmuster>
+                        <Belegtext>etw., jmd. <Stichwort>steht</Stichwort> etw., jmdm.
+                                <Autorenzusatz>irgendwie</Autorenzusatz>
+                            <Stichwort>gegenüber</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                    <Konstruktionsmuster>
+                        <Belegtext>etw., jmd. <Stichwort>steht</Stichwort> sich, einander
+                                <Autorenzusatz>irgendwie</Autorenzusatz>
+                            <Stichwort>gegenüber</Stichwort></Belegtext>
+                    </Konstruktionsmuster>
+                </Syntagmatik>
+                <Diasystematik>
+                    <Bedeutungsebene><?oxy_comment_start author="dsanders" timestamp="20220530T095931+0200" comment="ergänzt" flag="done"?>übertragen<?oxy_comment_end?></Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">(etw., jmdm.) mit einer bestimmten Einstellung und
+                    entsprechendem Verhalten begegnen</Definition>
+                <?oxy_comment_start author="kduden" timestamp="20240709T115119+0100" comment="ersetzt: im Gegensatz, Widerspruch (zu etw., zueinander) sein"?>
+                <Definition Typ="Basis"><?oxy_comment_end?>(zueinander, wechselseitig) in einem
+                    bestimmten (häufig gegensätzlichen) Verhältnis stehen, sein</Definition>
+                <Kollokationen>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Dativobjekt">
+                        <Belegtext>dem Ansinnen, dem Vorhaben, den Neuerungen, dem Reformkurs
+                                <Autorenzusatz>kritisch, aufgeschlossen</Autorenzusatz>
+                            <Stichwort>gegenüberstehen</Stichwort></Belegtext>
+                    </Kollokation>
+                    <Kollokation syntaktische_Relation="Stichwort_hat_Präpositionalgruppe/-objekt_mit">
+                        <Belegtext>jmdm., etw. mit Skepsis, Misstrauen, Vorbehalten
+                                <Stichwort>gegenüberstehen</Stichwort></Belegtext>
+                    </Kollokation>
+                </Kollokationen>
+                <?oxy_comment_start author="kduden" timestamp="20240709T125137+0100" comment="zahlreiche Belege aus ULA a hierher verschoben"?>
+                <Verwendungsbeispiele><?oxy_comment_end?>
+                    <Kompetenzbeispiel Quelle="WDG" Zeitstempel="1967-01-01">
+                        <Belegtext>einem Plan, Vorhaben kritisch, mit äußerstem Misstrauen
+                                <Stichwort>gegenüberstehen</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                    <Kompetenzbeispiel Quelle="WDG" Zeitstempel="1967-01-01">
+                        <Belegtext>beide Auffassungen <Stichwort>stehen</Stichwort> sich diametral
+                                <Stichwort>gegenüber</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                    <?oxy_comment_start author="jgrimm" timestamp="20240709T142909+0100" comment="neu: positiv"?>
+                    <Beleg class="invisible"><?oxy_comment_end?>
+                        <Belegtext> »Über 80 Prozent der Menschen <Stichwort>stehen</Stichwort>
+                            Umfragen zufolge der Organspende positiv
+                                <Stichwort>gegenüber</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2024/06/FR_fr_6D00623F85C12E083000">
+                            Frankfurter Rundschau, 05.06.2024 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20240709T132346+0100" comment="neu: Aux=sein + A"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Ein Jahr<Autorenzusatz>,</Autorenzusatz> nachdem der Gemeinderat
+                            eine Bürgerfragestunde in den Gemeinderatssitzungen einführt hatte,
+                            wurde diese Möglichkeit eingestellt. Das Instrument <Autorenzusatz>der
+                                Bürgerfragestunde</Autorenzusatz> habe sich als nicht geeignet für
+                            einen Bürgerdialog herausgestellt, so das Argument der Volkspartei, die
+                            schon der Einführung skeptisch <Stichwort>gegenübergestanden</Stichwort>
+                            war.</Belegtext>
+                        <Fundstelle Fundort="dwds:apa:OOEN_regional/xml/2023/01/ooen_202301300145059676720124"> Stadt Perg trennt sich von Bürgerfragestunde. Oberösterreichische
+                            Nachrichten, 30.01.2023 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20240709T132616+0100" comment="neu:Aux=sein + CH"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Auch wenn die Eltern von Arbeiterkindern ihren Sprösslingen nur
+                            wenig Unterstützung etwa durch Nachhilfeunterricht oder durch Hilfe bei
+                            Hausaufgaben bieten können, sind sie kein Hindernis für den Aufstieg.
+                            «Es hat mich überrascht und gefreut, wie wenige Eltern den Plänen ihrer
+                            Kinder negativ <Stichwort>gegenübergestanden</Stichwort> sind», betont
+                                S<Streichung>tamm</Streichung>, die selber aus einer Arbeiterfamilie
+                            kommt.</Belegtext>
+                        <Fundstelle Fundort="dwds:nzz_regional:2022/05/NZZ_202205060301626276"> Neue
+                            Zürcher Zeitung, 06.05.2022 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20220511T100753+0200" comment="Belege" flag="done"?>
+                    <Beleg class="invisible"><?oxy_comment_end?>
+                        <Belegtext> Den Nordkreis-Offerten hatten Landrätin und Gutachter eher
+                            ablehnend <Stichwort>gegenübergestanden</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Neue Westfälische, 14.04.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Auch wenn ich dieser Haltung kritisch
+                                <Stichwort>gegenüberstehe</Stichwort>, ist klar, dass jedem
+                            souveränen Staat grundsätzlich das Recht zusteht, sich dem Bündnis
+                            anzuschließen oder fernzubleiben<Streichung>, dem es sich anschließen
+                                oder fernbleiben möchte</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 30.03.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Prag – Anzahl der tschechischen Abgeordneten, die offen
+                            homosexuell leben: 0. Zahl der Tschechen, die der Ehe für alle
+                            aufgeschlossen <Stichwort>gegenüberstehen</Stichwort> in Prozent:
+                            61.</Belegtext>
+                        <Fundstelle Fundort="dwds:sz:2021/08/SZ_A112553451"> Süddeutsche Zeitung,
+                            11.08.2021 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Dem Vorschlag, den Pflegeanteil auf monatlich 700 Euro zu
+                                begrenzen <Streichung>und nach drei Jahren wegfallen zu
+                                lassen,</Streichung>
+                            <Stichwort>stehe</Stichwort>
+                            <Stichwort>gegenüber</Stichwort>, dass in der Hälfte der Bundesländer
+                            dieser Höchstbetrag nicht erreicht werde. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Allgemeine Zeitung, 05.10.2020 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Die Meinungen über die Wahl dieses
+                                <Autorenzusatz>Karneval-</Autorenzusatz>Sessions-Mottos haben sich
+                            wochenlang quer durch Alsdorf völlig gegensätzlich
+                                <Stichwort>gegenübergestanden</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Aachener Zeitung, 05.02.2018 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Vollkommen gegensätzlich <Stichwort>standen</Stichwort> sich die
+                            Aussagen des Mannes und seiner ehemaligen Frau
+                                <Stichwort>gegenüber</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Saarbrücker Zeitung, 10.02.2010 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Die Interessen des Forstes, der Jagd, der Landwirtschaft und der
+                            Freizeitgestaltung scheinen sich diametral
+                                <Stichwort>gegenüberzustehen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Rhein-Zeitung, 05.06.1999 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Um der Masse der Studienbewerber nicht mehr ohnmächtig
+                                <Stichwort>gegenüberzustehen</Stichwort>, möchte die Universität
+                            sich ihre Studenten aussuchen<Streichung>, als wäre die Masse an sich
+                                das Problem</Streichung>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Frankfurter Rundschau, 22.01.1998 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext> Die Ostdeutschen <Stichwort>stehen</Stichwort> <Streichung>auch</Streichung> einer Bindung an militärische Organisationen
+                            skeptischer <Stichwort>gegenüber</Stichwort>: </Belegtext>
+                        <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 30.12.1993 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>
+                            <Streichung>Sie</Streichung><Autorenzusatz>Die Volksrepublik
+                                Angola</Autorenzusatz> hat einem aufrichtigen und konstruktiven
+                            Dialog über eine friedliche und gerechte Lösung der bestehenden Probleme
+                            stets sehr offen <Stichwort>gegenübergestanden</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Berliner Zeitung, 04.12.1985 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20240709T130648+0100" comment="neu:Aux=sein"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Von seiten der beiden großen Staatsmänner
+                                <Autorenzusatz>Staatspräsident Georges Pompidou und Bundeskanzler
+                                Willy Brandt</Autorenzusatz>, die diesen Vertrag <Autorenzusatz>den
+                                Élysée-Vertrag</Autorenzusatz> geschaffen haben, war das ein Akt der
+                            Klarsicht und des Mutes, mit dem die Spuren einer Vergangenheit getilgt
+                            wurden, in deren Verlauf wir einander häufig und gewalttätig
+                                <Stichwort>gegenübergestanden</Stichwort> sind.</Belegtext>
+                        <Fundstelle Fundort="dwds:kernbasis:1970/adg19700131_90788:15249"> Archiv
+                            der Gegenwart, Bd. 40, 31.01.1970 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-23">
+                <Beleg>
+                    <Belegtext>Dem Recht des Schweigens <Stichwort>steht</Stichwort> hier die
+                        Pflicht, nicht zu fragen, <Stichwort>gegenüber</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_primarily">Eschenburg, Theodor: Staat und
+                        Gesellschaft in Deutschland, Stuttgart: Schwab 1957 [1956], S.
+                        409</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der sehr schmalen metallurgischen Basis <Stichwort>stand</Stichwort>
+                        eine stark spezialisierte arbeitsintensive metallverarbeitende I.
+                            <Stichwort>gegenüber</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Zimmermann, Hartmut (Hg.):
+                        DDR-Handbuch – I. In: Enzyklopädie der DDR, Berlin: Directmedia Publ. 2000
+                        [1985], S. 28970</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Zwei Blöcke <Stichwort>stehen</Stichwort> einander
+                            <Stichwort>gegenüber</Stichwort>, ideologisch weitgehend abgerüstet,
+                        aber militärisch so hochgerüstet wie noch nie.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Der Spiegel,
+                        30.01.1989</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der schier unbegrenzten Freiheit der Initiative
+                            <Stichwort>stand</Stichwort> ein System regressiver Kontrollen
+                            <Stichwort>gegenüber</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">Heuß, Alfred: Hellas. In:
+                        Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1962], S.
+                        3782</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Dem neuen Kanzler hätten die Objektive dann auf gleicher Höhe
+                            <Stichwort>gegenübergestanden</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">konkret, 1986</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

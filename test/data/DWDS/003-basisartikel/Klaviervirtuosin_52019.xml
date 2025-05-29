@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_k_60000_52019" Autor="dsanders" Typ="Vollartikel" Tranche="Movierung" Zeitstempel="2025-05-19" Erstellungsdatum="2015-08-07" Status="Red-f-blockiert">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Kla-vier-vir-tu-o-sin"><?oxy_comment_start author="wgrimm" timestamp="20231109T195325+0100" comment="maskuline Form muss ausgebaut werden" id="axf_x5m_jfc"?><?oxy_comment_start author="wgrimm" timestamp="20250519T085226+0200" parentID="axf_x5m_jfc" comment="OK; wartet darauf" mid="1"?>Klaviervirtuosin<?oxy_comment_end mid="1"?><?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA>klaˈviːɐ̯vɪʀtuˌoːziːn</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-nen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Klavier</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Virtuosin</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Klaviervirtuose</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-in</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>Klaviervirtuose</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">weibliche Person, der das Klavier(spiel) <Verweis Typ="vgl">
+                    <Ziellemma>virtuos</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> beherrscht</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Das Konzert beginnt mit einem Trio für Geige, Cello und Klavier von
+                        Clara Schumann, die als legendäre <Stichwort>Klaviervirtuosin</Stichwort>
+                        bekannt ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:2023/03/SAAR_158472613"> Saarbrücker
+                        Zeitung, 09.03.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Sie gilt als eine der talentiertesten
+                            <Stichwort>Klaviervirtuosinnen</Stichwort> ihrer Generation und
+                        engagiert sich seit Ausbruch des Krieges unter anderem durch Benefizkonzerte
+                        für Künstler*innen <Autorenzusatz>sic!</Autorenzusatz> aus ihrer Heimat. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp_regional:2023/03/TSP_doc7p58cldq38h12ey37a0z"> Der
+                        Tagesspiegel, 02.03.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ein musikalisches Live-Erlebnis bietet <Streichung>zu diesem
+                            Anlass</Streichung> eine junge <Stichwort>Klaviervirtuosin</Stichwort>
+                        aus der Ukraine, die momentan an der Musikschule Vaterstetten Unterricht
+                        erhält. </Belegtext>
+                    <Fundstelle Fundort="dwds:mume_regional:2023/02/MUME_mm_omp0000009095788">
+                        Münchner Merkur, 11.02.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die in Rumänien geborene <Stichwort>Klaviervirtuosin</Stichwort>
+                        unterrichtet seit 2009 an der Jugendmusikschule in Singen und hat seit 2014
+                        einen Lehrauftrag an der Musikhochschule in Augsburg. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2022/11/SK_1187962"> Südkurier, 29.11.2022
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Die bulgarischstämmige <Stichwort>Klaviervirtuosin</Stichwort> war
+                        gerade mal fünf Jahre alt, als sie mit dem Unterricht begann. </Belegtext>
+                    <Fundstelle Fundort="dwds:nlz_regional:2022/08/NLZ_202208120304316347"> Luzerner
+                        Zeitung, 12.08.2022 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

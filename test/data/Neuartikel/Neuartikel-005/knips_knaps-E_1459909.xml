@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="dsanders" xml:id="D99_088511" Autor="dsanders" Typ="Basisartikel" Tranche="MWA" Zeitstempel="2025-05-19" Erstellungsdatum="1999-01-01" Status="Red-f">
+        <?oxy_comment_start author="dsanders" timestamp="20250326T182842+0100" comment="was ist mit
+- klick klack
+- tripp trapp
+- schnipp schnapp? Als MWA aufnehmen?" id="ahb_vjn_52c" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20250326T183706+0100" parentID="ahb_vjn_52c" comment="... beantragt" flag="done" mid="1"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20250514T150927+0200" parentID="ahb_vjn_52c" comment="klick, klack hat über 100 Belege, sehr gut; schnipp, schnapp über 200 Belege im DWDS; aber tripp trapp wird schwierig mit 30 Belegen" flag="done" mid="2"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20250514T172110+0200" parentID="ahb_vjn_52c" comment="ich beantrage sie als Reserve, wenn wir diese seltenen haben, sollten wir die häufigen auch nehmen" flag="done" mid="3"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20250514T172410+0200" comment="Umwandeln in einen defilosen Basis-MWA?" id="m15_jvj_3fc" flag="done" mid="4"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20250515T091326+0200" parentID="m15_jvj_3fc" comment="@LL: bitte entscheide du, vielen Dank" flag="done" mid="5"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?><?oxy_comment_end mid="2"?><?oxy_comment_end mid="3"?><?oxy_comment_end mid="4"?><?oxy_comment_end mid="5"?>
+            <Schreibung>knips, knaps</Schreibung>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>knips</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>knaps</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20250326T183412+0100" comment="nur 1 Beleg gefunden" id="swg_xg2_3fc" flag="done"?>
+                    <?oxy_comment_start author="dsanders" timestamp="20250514T145302+0200" parentID="swg_xg2_3fc" comment="und der macht dann bald einen &quot;MWA-Vollartikel&quot; !" flag="done" mid="7"?>
+                    <?oxy_comment_start author="kduden" timestamp="20250514T172311+0200" parentID="swg_xg2_3fc" comment="oder wir nehmen hier ausnahmsweise die Defi mal raus" flag="done" mid="8"?>
+                    <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="7"?><?oxy_comment_end mid="8"?>
+                        <Streichung>Der Drache schnupperte kurz, warf Mumin einen verächtlichen
+                            Blick zu und flitzte dann unglaublich flink zum Fensterbrett, wo er eine
+                            große, dicke Augustfliege angriff.</Streichung> Die Fliege hörte auf zu
+                        summen <Streichung>und fing an zu knirschen</Streichung>. Der Drache hatte
+                        sie mit seinen grünen kleinen Tatzen am Genick gepackt <Streichung>und ihr
+                            Rauch in die Augen gepustet</Streichung>. Dann machten die weißen
+                        kleinen Zähnchen kurz <Stichwort>knips, knaps</Stichwort>, der Rachen wurde
+                        aufgesperrt und nichts wie rein mit der dicken Fliege. <Streichung>Der
+                            Drache schluckte und schluckte, leckte sich die Schnauze, kratzte sich
+                            hinterm Ohr und guckte Mumin mit einem Auge spöttisch an.</Streichung>
+                    </Belegtext>
+                    <Fundstelle Fundort="dwds:zeit:1994-2023/2008/10/ZEIT_1008010125"> Die Zeit,
+                        01.10.2008 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="jgrimm" xml:id="E_9576525" Autor="wgrimm" Typ="Vollartikel" Tranche="MWA" Zeitstempel="2021-01-28" Erstellungsdatum="2020-12-16" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>in den Bankrott treiben</Schreibung>
+            <Aussprache><IPA Audiodatei="126/in_den_Bankrott_treiben"/></Aussprache><Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>Bankrott</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="MWA-Konstituente">
+                <Ziellemma>treiben</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext><?oxy_comment_start author="kduden" timestamp="20210112T142700+0100" comment="ich nenne hier beides, obwohl es meistens etw. ist, das etw. (ein Unternehmen, Land) in den B. treibt. Ok so?" id="kkz_jz3_j4b" flag="done"?><?oxy_comment_start author="kduden" timestamp="20210119T111459+0100" comment="ich finde ja" parentID="kkz_jz3_j4b" flag="done" mid="1"?>etw.,
+                        jmd. <Stichwort>treibt</Stichwort> etw., jmdn.<?oxy_comment_end mid="1"?><?oxy_comment_end?>
+                        <Stichwort>in den Bankrott</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <?oxy_comment_start author="kduden" timestamp="20210119T111623+0100" comment="erg. z.B. Assoziation Pleite machen, Bankrott machen" flag="done"?>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Bankrott machen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Pleite machen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>in den Bankrott gehen</Ziellemma>
+                    <Ziellesart/>
+                    <?oxy_comment_start author="dsanders" timestamp="20210128T075652+0100" comment="Verweis ergänzt"?>
+                </Verweis><?oxy_comment_end?>
+            </Verweise><?oxy_comment_end?>
+            <Definition Typ="Basis">verursachen, dass
+                <?oxy_comment_start author="wgrimm" timestamp="20210112T142056+0100" comment="was (wer) genau, steht in den Kollokationen " flag="done"?>etw.,
+                jmd. <?oxy_comment_end?> zahlungsunfähig wird, in die Insolvenz gerät</Definition>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Akkusativobjekt">
+                    <Belegtext>Firmen, Betriebe, Unternehmen, Banken <Stichwort>in den Bankrott
+                            treiben</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Akkusativobjekt">
+                    <Belegtext>ein Land, einen Staat <Stichwort>in den Bankrott
+                        treiben</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Die Coronakrise <Stichwort>treibt</Stichwort> Berlin <Stichwort>in
+                            den Bankrott</Stichwort>
+                        <Autorenzusatz>Überschrift</Autorenzusatz>
+                        <Streichung>Rot-Rot-Grün will trotzdem nicht sparen</Streichung> Berlins
+                        Finanzsenator <Streichung>Matthias Kollatz (SPD)</Streichung> rechnet damit,
+                        dass wegen der wirtschaftlichen Folgen der Coronakrise im Doppelhaushalt
+                        2020/21 »im günstigsten Fall« rund sechs Milliarden Euro fehlen
+                        werden.</Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Tagesspiegel, 02.05.2020</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Rückzug in die eigenen vier Wände soll der
+                            <Autorenzusatz>Corona-</Autorenzusatz>Pandemie den Garaus machen. Was
+                        die Menschheit schützt, <Stichwort>treibt</Stichwort> Kunstschaffende
+                            <Stichwort>in den Bankrott</Stichwort>. Ohne Gäste werden Theater
+                        geschlossen und Konzerte abgesagt. Vielen Künstlern sind alle
+                        Einnahmequellen weggebrochen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Fränkischer Tag, 30.03.2020 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Und</Streichung> sie <Autorenzusatz>die FDP</Autorenzusatz> will
+                        die Europäische Zentralbank (EZB) dazu bringen, die Zinsen wieder anzuheben,
+                        was viele Staaten Südeuropas <Stichwort>in den Bankrott treiben</Stichwort>
+                        könnte. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Die Zeit, 26.07.2017</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Während bei uns Hühnerbrüste penibel auf Knochenreste untersucht
+                            werden, erhalten</Streichung> die Afrikaner
+                            <Autorenzusatz>erhalten</Autorenzusatz> die hierzulande unverkäuflichen
+                        Abfallprodukte oder auch ausgezehrte Suppenhühner, die in Deutschland
+                        niemand mehr abnehmen würde. <Streichung>Die Ware gelangt in gefrorenem
+                            Zustand in die Tropen, wo sie mangels Kühlmöglichkeiten teilweise in
+                            ungenießbarem Zustand auf den Markt kommt.</Streichung> Die dortigen
+                        Hühnerzüchter, die lebende Tiere und damit frische Ware anboten, wurden mit
+                        Dumpingpreisen <Stichwort>in den Bankrott getrieben</Stichwort>,
+                        Arbeitsplätze vernichtet. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Frankfurter Rundschau, 07.04.2009 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Um ihr Geschäft mit Leasing- und Finanzierungsvermittlungen zu
+                        betreiben, sollen die Geschäftsleute mit ungedeckten Schecks und falschen
+                        Angaben gegenüber ihren Banken gearbeitet haben. Ihrem Unternehmen sollen
+                        sie systematisch Kapital entzogen und den Betrieb so <Stichwort>in den
+                            Bankrott getrieben</Stichwort> haben. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Fränkischer Tag, 16.09.2006 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Das</Streichung> Geld wurde unter anderem dadurch verpulvert,
+                        dass <Autorenzusatz>die türkischen</Autorenzusatz> Staatsbanken billige
+                        Kredite an Freunde von Regierungspolitikern vergaben. Zudem sah die
+                        staatliche Bankenaufsicht untätig dabei zu, wie sich einige Privatbankiers
+                        das Geld aus ihren Instituten in die Taschen stopften und damit reihenweise
+                        Banken <Stichwort>in den Bankrott trieben</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Der Tagesspiegel, 25.07.2003 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Dutzende <Streichung>andere</Streichung> geschädigte Kunden führen
+                        derzeit Prozesse gegen <Autorenzusatz>das Kreditunternehmen</Autorenzusatz>
+                            C<Streichung>apital City und ähnliche Geschäftemacher. Die Vorwürfe
+                            gegen das Unternehmen waren zwar moralisch eindeutig aber rechtlich
+                            alles andere als leicht zu formulieren, da Finanzinstitute in der
+                            amerikanischen Hauptstadt weniger Regeln unterworfen sind als diedie
+                            Hot-Dog-Stände auf der Straße</Streichung>. Anders als jeder ehrbare
+                        Geldhändler, der darauf hofft, daß der Schuldner seinen Kredit zurückzahlt,
+                        setzt C<Streichung>apital City</Streichung> alles daran, dem Kunden die
+                        Rückzahlung nahezu unmöglich zu machen. Mit unrealistischen Zinssätzen und
+                        Gebühren legte es das Unternehmen darauf an, ihre <Autorenzusatz>sic!,
+                            seine</Autorenzusatz> Schuldner <Stichwort>in den Bankrott</Stichwort>
+                        zu <Stichwort>treiben</Stichwort> und dann die Immobilie zwangsversteigern
+                        zu lassen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Süddeutsche Zeitung, 06.07.1996 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/></Rohdaten></Artikel>
+</DWDS>

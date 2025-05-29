@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_u_1589" Autor="" Typ="Vollartikel" Zeitstempel="1976-01-01" Erstellungsdatum="1976-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="DWDS" Quelle="DWDS" Zeitstempel="2012-03-17">
+            <Schreibung>unbeweibt</Schreibung>
+            <Aussprache Zeitstempel="2023-04-14" Quelle="DWDS" Autor="brosch"><IPA Audiodatei="061/unbeweibt">ˈʊnbəˌvaɪ̯pt</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+        <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Zeitstempel="2023-04-14" Quelle="DWDS" Autor="brosch" Typ="Derivation">
+      <Verweis Typ="Erstglied">
+        <Ziellemma>un-</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+      <Verweis Typ="Letztglied">
+        <Ziellemma>beweibt</Ziellemma>
+        <Ziellesart/>
+      </Verweis>
+    </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_u_2414">
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>salopp</Stilebene>
+                <Stilfaerbung>scherzhaft</Stilfaerbung>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis">keine Ehefrau habend, ohne Ehefrau</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>er ist noch <Stichwort>unbeweibt</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext>da es einem Mann in seinen Jahren doch noch nicht so leicht fällt, <Stichwort>unbeweibt</Stichwort> zu leben</Belegtext>
+                    <Fundstelle Fundort="WDG" Sigle="BAHHERHIM">
+                        <Autor>Bahr</Autor>
+                        <Titel>Himmelfahrt</Titel>
+                        <Stelle>279</Stelle>
+                        <Datum/>
+                    </Fundstelle>
+                    </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Im Jahr 2020 werden voraussichtlich 24 Millionen Männer <Stichwort>unbeweibt</Stichwort> sein.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 18.02.2013, Nr. 07</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>So habe er ihn einmal, Luther war noch <Stichwort>unbeweibt</Stichwort>, beim Arbeiten gestört.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.11.2003</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>In der Tat blieb Immanuel Kant Zeit seines Lebens <Stichwort>unbeweibt</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.11.2003</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Und ferner ist er, was einem Männerklub einige Sorgen erspart, <Stichwort>unbeweibt</Stichwort>.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 14.08.1970, Nr. 33</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Da trafen sich am Nikolaustag einige <Stichwort>unbeweibte</Stichwort> Ingenieure um die 40, die zum Ende des Jahres gekündigt waren.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 15.12.1998</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Aber da ist auch Erleichterung: bei Sohn Ofer, der für den Vater so besorgniserregend <Stichwort>unbeweibt</Stichwort> durchs Dasein geht, ist offenbar alles in Ordnung.</Belegtext>
+      <Fundstelle Fundort="dwds:welt">Die Welt, 01.12.2001</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Der Erzähler ist <Stichwort>unbeweibt</Stichwort>, obwohl er ein Priester ist und Ehelosigkeit inzwischen bei katholischen Geistlichen die ungern gesehene Ausnahme wurde.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 15.11.1974, Nr. 47</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die einzelnen <Stichwort>unbeweibten</Stichwort> Herren bilden den Abschluß.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Graudenz, Karlheinz u. Pappritz, Erica: Etikette neu, Berlin: Deutsche Buch-Gemeinschaft 1967 [1956], S. 355</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Wie du siehst, bin ich <Stichwort>unbeweibt</Stichwort> geblieben.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Kreuder, Ernst: Die Gesellschaft vom Dachboden, Frankfurt a. M.: Suhrkamp 1978 [1946], S. 107</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Der bleibt wohl besser <Stichwort>unbeweibt</Stichwort>!</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 24.12.1982, Nr. 52</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

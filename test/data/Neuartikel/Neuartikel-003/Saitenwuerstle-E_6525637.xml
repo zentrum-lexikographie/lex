@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_6525637" Autor="kduden" Typ="Minimalartikel" Tranche="Regio" Zeitstempel="2022-08-22" Erstellungsdatum="2022-08-22" Status="Lex-zur_Abgabe">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Saitenwürstle</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Saiten</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Würstle</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <?oxy_comment_start author="dsanders" timestamp="20220822T131123+0200" comment="Siehe Frage in Regio: auf Württemberg beschränkt
+
+"?>
+            <Diasystematik>
+                <Sprachareal>D-Südwest</Sprachareal>
+                <Sprachareal Frequenz="besonders">D-Südwest (Württemberg)</Sprachareal>
+            </Diasystematik><?oxy_comment_end?>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma hidx="3">Frankfurter</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Synonym">
+                    <Ziellemma hidx="3">Wiener</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext> Bei ihm kommen an Heiligabend Kartoffelsalat und
+                            <Stichwort>Saitenwürstle</Stichwort> auf den Tisch. </Belegtext>
+                    <Fundstelle Fundort="dwds:gea_regional:2021/11/GEA_srv101-13107891"> Reutlinger
+                        General-Anzeiger, 24.11.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der Verein »Jung und Alt – Attraktives Dorfleben« bietet
+                        zum mobilen Mittagstisch am Dienstag, 2. Februar, folgendes Menü an:
+                        Endiviensalat, Linsen mit <Stichwort>Saitenwürstle</Stichwort> und Spätzle
+                        sowie als Nachtisch Apfelkuchen vom Blech. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2021/01/SK_940836"> Südkurier, 27.01.2021
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der Oberschwabe reimt im schwäbischen Dialekt oder in akkuratem
+                        Schriftdeutsch über alles, was landläufig als typisch schwäbisch bezeichnet
+                        wird. Also Maultaschen, Spätzle mit <Stichwort>Saitenwürstle</Stichwort>
+                        oder Kehrwoche. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2020/02/SK_823337"> Südkurier, 28.02.2020
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Beim familiären Kochduell wird ein altes und immer noch aktuelles
+                        schwäbisches Gericht umgesetzt, das aber durch die Knöpfle zum badischen
+                        Schmaus wird: Saure Linsen und <Stichwort>Saitenwürstle</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:sk_regional:2019/11/SK_769058"> Südkurier, 13.11.2019
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Vesperangebot anschließend: <Stichwort>Saitenwürstle</Stichwort> mit
+                        Kartoffelsalat. </Belegtext>
+                    <Fundstelle Fundort="dwds:gea_regional:2015/11/GEA_srv0000002807190"> Reutlinger
+                        General-Anzeiger, 04.11.2015 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-05-26"/></Rohdaten></Artikel>
+</DWDS>
