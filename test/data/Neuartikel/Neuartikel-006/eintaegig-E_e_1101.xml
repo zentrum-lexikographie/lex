@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_e_1101_13" Autor="dsanders" Typ="Verweisartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2025-05-21" Erstellungsdatum="1967-01-01" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="ein-tä-gig">eintägig</Schreibung>
+            <Schreibung Trennung="1-tä-gig"><?oxy_comment_start author="wgrimm" timestamp="20250325T111626+0100" comment="Ergänzt"?>1-tägig</Schreibung><?oxy_comment_end?>
+            <Aussprache>
+                <IPA Audiodatei="089/eintaegig"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>36 (1.2)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="dsanders" timestamp="20250325T112010+0100" comment="Dto."?>40
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>eins</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma hidx="1">Tag</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_e_1101_99">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>einjährig</Ziellemma>
+                    <Ziellesart>1, 2</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

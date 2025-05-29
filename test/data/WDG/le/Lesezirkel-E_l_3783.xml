@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG" Erstfassung="WDG" Redakteur="" xml:id="E_l_3783" Autor="" Typ="Basisartikel-D" Zeitstempel="1969-01-01" Erstellungsdatum="1969-01-01" Status="Red-f">
+        <Formangabe Typ="Hauptform" Autor="herold" Quelle="DWDS" Zeitstempel="2022-10-21">
+      <Schreibung>Lesezirkel</Schreibung>
+      <Aussprache><IPA Audiodatei="041/der_Lesezirkel"/></Aussprache>
+      <Grammatik>
+        <Wortklasse>Substantiv</Wortklasse>
+        <Genus>mask.</Genus>
+        <Genitiv><Wert>-s</Wert></Genitiv>
+        <Plural><Wert>-</Wert></Plural>
+      </Grammatik>
+      <Diasystematik/>
+    </Formangabe>
+        <Orthografie/><Verweise Quelle="DWDS" Zeitstempel="2018-04-24" Autor="herold" Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">lesen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Zirkel</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_l_2048">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis">Zirkel, dessen Abonnenten gegen Zahlung einer Gebühr eine Auswahl von Zeitschriften, die regelmäßig ausgewechselt werden, erhalten</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten>
+  <Verwendungsbeispiele>
+    <Beleg>
+      <Belegtext>Inhaber von <Stichwort>Lesezirkeln</Stichwort> werden sicher nicht zögern, dies zu bestätigen.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 01.03.1965, Nr. 09</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Sie wurde in vielen <Stichwort>Lesezirkeln</Stichwort> gelesen, aber deshalb weniger abonniert.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 16.03.1996</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Dabei sagte man diesen <Stichwort>Lesezirkeln</Stichwort> nach, bei der Verteilung der Rollen werde in erster Linie die soziale Stellung berücksichtigt.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Wundt, Wilhelm: Erlebtes und Erkanntes. In: Simons, Oliver (Hg.) Deutsche Autobiographien 1690-1930, Berlin: Directmedia Publ. 2004 [1921], S. 1829</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Einen <Stichwort>Lesezirkel</Stichwort> kann jeder gründen, der einen Kundenstamm nachweisen kann.</Belegtext>
+      <Fundstelle Fundort="dwds:zeit">Die Zeit, 12.08.2002, Nr. 32</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Im Mai sollen nun auch die New Yorker einen kollektiven <Stichwort>Lesezirkel</Stichwort> bilden.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 04.03.2002</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Weil Fastenzeit ist, mästet der <Stichwort>Lesezirkel</Stichwort> sich heute nicht an fremden Fehlern.</Belegtext>
+      <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 20.03.1999</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Durch Leihbibliotheken und <Stichwort>Lesezirkel</Stichwort> sorgte der Klerus für Verbreitung religiösen Schrifttums.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">o. A.: Die Kirche in der Gegenwart. In: Jedin, Hubert (Hg.) Handbuch der Kirchengeschichte, Berlin: Directmedia Publ. 2000 [1971], S. 9123</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Es wird von den Parteimitgliedern erwartet, daß sie sich ständig an Studiengruppen beteiligen, an <Stichwort>Lesezirkeln</Stichwort> und Seminaren und Diskussionen.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Friedrich, Carl Joachim: Totalitäre Diktatur, Stuttgart: Kohlhammer 1957, S. 61</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Die Diskussion über die amerikanischen Verfassungen, die nun in Zeitungen, Kaffeehäusern, Salons und allenthalben gegründeten <Stichwort>Lesezirkeln</Stichwort> begann, schärfte zweifellos das politische Selbstbewußtsein.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Palmer, Robert R.: Der Einfluß der amerikanischen Revolution auf Europa. In: Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1960], S. 9818</Fundstelle>
+    </Beleg>
+    <Beleg>
+      <Belegtext>Konsul Buddenbrook kehrte aus der »Harmonie«, dem <Stichwort>Lesezirkel</Stichwort> für Herren, in dem er nach dem zweiten Frühstück eine Stunde verbracht hatte, in die Mengstraße zurück.</Belegtext>
+      <Fundstelle Fundort="dwds:kernbasis">Mann, Thomas: Buddenbrooks, Frankfurt a. M.: Fischer 1989 [1901], S. 306</Fundstelle>
+    </Beleg>
+  </Verwendungsbeispiele>
+</Rohdaten></Artikel>
+</DWDS>

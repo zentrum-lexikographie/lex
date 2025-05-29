@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_113957" Autor="wgrimm" Typ="Verweisartikel" Tranche="RSR-2024-37_E4" Zeitstempel="2025-04-30" Erstellungsdatum="1974-01-01" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <?oxy_comment_start author="kduden" timestamp="20240906T165812+0200" comment="IPA nicht korrekt: [ˈnɛf lʊk] (computergeneriert)" flag="done"?>
+            <Schreibung Trennung="New Look"><?oxy_comment_end?>New Look</Schreibung>
+            <Aussprache Zeitstempel="2024-09-09" Quelle="DWDS" Autor="brosch">
+                <IPA Audiodatei="082/der_New_Look">ni̯uː ˈlʊk</IPA>
+            </Aussprache>
+            <Aussprache class="invisible">
+                <IPA Audiodatei="117/das_New_Look"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse><?oxy_comment_start author="jgrimm" timestamp="20240909T094133+0200" comment="Klasse nach Neubveschluss geändert"?>Mehrwortausdruck<?oxy_comment_end?></Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+                <Funktionspraeferenz>substantivisch</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="wgrimm" timestamp="20250205T151618+0100" comment="Ergänzte Bezugsregeln"?>37
+                (E4)</Orthografieregel>
+            <Orthografieregel>55 (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">new
+                    look</erwaehntes_Zeichen>, eigentlich <Paraphrase>neues
+                Aussehen</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Stilebene>bildungssprachlich</Stilebene>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Look</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

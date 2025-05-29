@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="wgrimm" xml:id="E_4903895" Autor="kduden" Typ="Minimalartikel" Tranche="RSR-2024-55_E2_alt" Zeitstempel="2025-05-23" Erstellungsdatum="2025-05-02" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>in absentia</Schreibung>
+            <Aussprache>
+                <IPA/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="kduden" timestamp="20250506T092643+0200" comment="Nur Bezugsregel ergänzt"?>55
+                (E3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2025-05-02"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="dsanders" xml:id="D99_052687_1" Autor="dsanders" Typ="Basisartikel" Tranche="RSR-2024-37_E4" Zeitstempel="2025-04-29" Erstellungsdatum="1999-01-01" Status="Red-f-Sammelbecken">
+        <?oxy_comment_start author="jgrimm" timestamp="20220819T172833+0100" comment="ursprünglich autor=pfeiffer" flag="done"?>
+        <?oxy_comment_start author="dsanders" timestamp="20240815T141247+0200" comment="ehemals doerre" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <?oxy_comment_start author="kduden" timestamp="20220822T101149+0100" comment="freischalten mit Freiklettern" flag="done"?>
+            <Schreibung Trennung="Free-clim-bing"><?oxy_comment_end?>Freeclimbing</Schreibung>
+            <Schreibung Trennung="Free Clim-bing"><?oxy_comment_start author="dsanders" timestamp="20250204T125215+0100" comment="Alternativschreibung u. WT ergänzt (s. u.)" flag="done"?>Free
+                Climbing<?oxy_comment_end?></Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="101/das_Freeclimbing">ˈfɹiːklaɪ̯mɪŋ</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>neutr.</Genus>
+                <?oxy_comment_start author="jgrimm" timestamp="20250204T125134+0100" comment="NF-Ansatz aufgegeben, da die Gen.-Endung nicht der GZS abhängt (s. Ergänzungsbeleg)" flag="done"?>
+                <Genitiv><Wert>-(s)</Wert></Genitiv>
+                <?oxy_comment_end?>
+                <Numeruspraeferenz>nur im Singular</Numeruspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel>37 (E4)</Orthografieregel>
+            <Orthografieregel><?oxy_comment_start author="jgrimm" timestamp="20240905T105047+0200" comment="neu"?>55
+                (3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">free
+                    climbing</erwaehntes_Zeichen> &lt;  <erwaehntes_Zeichen Sprache="engl">free</erwaehntes_Zeichen>
+                <Paraphrase>frei</Paraphrase> + <erwaehntes_Zeichen Sprache="engl">climbing</erwaehntes_Zeichen>
+                <Paraphrase>Klettern</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Fachgebiet>Sport</Fachgebiet>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>Freiklettern</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Illustration Datei="Klettern.jpg" Lizenz="CC BY 2.0">
+                <Bildunterschrift>Freeclimbing (Kletterwand)</Bildunterschrift>
+                <Fundstelle Fundort="online">
+                    <Autor>Marco Verch Professional Photographer</Autor>
+                    <Titel>Person with Safety Harness and Climbing Shoes is attached to a Rope and
+                        Climbing up a Wall in an Indoor Climbing Hall</Titel>
+                    <Stelle/>
+                    <Datum>28.11.2020</Datum>
+                    <URL>https://www.flickr.com/photos/30478819@N08/50709801208</URL>
+                    <Aufrufdatum>22.08.2022</Aufrufdatum>
+                </Fundstelle>
+            </Illustration>
+            <Illustration Datei="Klettern-2.jpg" Lizenz="GNU FDL">
+                <Bildunterschrift>Freeclimbing (Fels)</Bildunterschrift>
+                <Fundstelle Fundort="online">
+                    <Autor>Rsriprac</Autor>
+                    <Titel>Rock-Climbing-in-Clarks-Canyon-California-US</Titel>
+                    <Stelle/>
+                    <Datum>02.09.2007</Datum>
+                    <URL>https://en.wikipedia.org/wiki/File:Rock-Climbing-in-Clarks-Canyon-California-US.jpg</URL>
+                    <Aufrufdatum>22.08.2022</Aufrufdatum>
+                </Fundstelle>
+            </Illustration>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Ab Ende der 1970er Jahre entstand <Streichung>an den Flanken des
+                            Berges</Streichung> eine Art Gegenbewegung <Autorenzusatz>zum
+                            technischen Klettern</Autorenzusatz>: das <Stichwort>Free
+                            Climbing</Stichwort>, eine neue Philosophie des Kletterns. Seil und
+                        Haken dürfen nur noch der Sicherung dienen – und nicht mehr als
+                        Fortbewegungshilfe im Fels.</Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2021-02-11/2/S9UWY0Um">
+                        <Autor>Till Bartels</Autor>
+                        <Titel>El Capitan: Klettern und klicken Sie sich durch die 1.000 Meter hohe
+                            Granitwand</Titel>
+                        <Kurztitel>1.000 Meter hohe Granitwand</Kurztitel>
+                        <Stelle/>
+                        <Datum>11.02.2021</Datum>
+                        <URL>https://www.stern.de/reise/die-welt-der-gipfelstuermer/el-capitan---klettern-sie-durch-die-1000-meter-granitwand-7648572.html</URL>
+                        <Aufrufdatum>30.04.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Yosemite Valley wurde <Autorenzusatz>etwa Mitte der 1960er
+                            Jahre</Autorenzusatz> zum Mekka des <Stichwort>Free
+                            Climbings</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="online">
+                        <Autor>Kathrina Kestler</Autor>
+                        <Titel>Als das Klettern noch frei war</Titel>
+                        <Stelle/>
+                        <Datum>25.03.2019</Datum>
+                        <URL>https://web.archive.org/web/20220822071945/https://www.alpenverein.de/geschichte/blog/geschichte-klettern-freiklettern/</URL>
+                        <Aufrufdatum>22.08.2022</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er bezwang die steilsten Felswände, war ein Pionier des
+                            <Stichwort>Freeclimbings</Stichwort> (Freiklettern). </Belegtext>
+                    <Fundstelle Fundort="dwds:bild:2012/07_10/bibu_02xml20120701_10789"> Bild,
+                        19.11.2012 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Das Elbsandsteinklettern wurde zum Vorreiter einer weltweiten
+                        Entwicklung, die der Auswanderer Fritz Wiessner in den dreissiger Jahren in
+                        die USA trug, wo der Begriff des »<Stichwort>Freeclimbing</Stichwort>«
+                        geprägt
+                        wurde.<?oxy_comment_start author="dsanders" timestamp="20250204T131127+0100" comment="Ergänzungsbeleg mit endungsloser ZS im Gen. (s. o.)" flag="done"?></Belegtext><?oxy_comment_end?>
+                    <Fundstelle Fundort="dwds:nzz:2011/10/NZZ_J08YF"> Neue Zürcher Zeitung,
+                        28.10.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Das Elbsandsteingebirge liegt zwischen dem Erzgebirge und der
+                        Lausitz beiderseits der Elbe im deutsch-tschechischen Grenzraum. Bekannt ist
+                        das Mittelgebirge auch als Wander- und Kletterparadies und gilt als Wiege
+                        des »<Stichwort>Freeclimbings</Stichwort>«. Fritz Wiessner, Oskar Schuster,
+                        Bernd Arnold und viele andere berühmte Kletterer begannen von Sachsen aus
+                        die Eroberung der Berge der Welt. Von der Elbe gelangte das
+                            <Stichwort>Freeclimbing</Stichwort> in die USA und von dort wieder
+                        zurück nach Europa.</Belegtext>
+                    <Fundstelle Fundort="dwds:web:h9o/H9ONpwBn">
+                        <Autor>Testroom</Autor>
+                        <Titel>Elbsandsteingebirge – der deutsche Grand Canyon –
+                            Germanblogs.de</Titel>
+                        <Kurztitel>Elbsandsteingebirge – der deutsche Grand Canyon</Kurztitel>
+                        <Stelle/>
+                        <Datum>28.06.2006</Datum>
+                        <URL>http://germanblogs.de/1rtdjsai3a9mz/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Knapp 20 Ferienkarten-Kinder schnupperten gestern auf Einladung des
+                        Sport-Treffs Bretzenheim in die hohe Kunst des <Stichwort>Free
+                            Climbing</Stichwort> hinein. </Belegtext>
+                    <Fundstelle Fundort="dwds:rztg_regional:1999/08/RZTG_B649006F09D228CFF061386E9E12FE0C">
+                        Rhein-Zeitung, 05.08.1999 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Während bis vor kurzen die Beachvolleyballer den Schloßplatz fest in
+                        ihrer Hand hatten, dominiert seit Samstag die Kletterwand, die extra für die
+                        saarländischen Meisterschaften im »<Stichwort>Freeclimbing</Stichwort>«
+                        aufgestellt wurde, die Szenerie rund um den Brunnen. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:1994/05/SAAR_0594306035"> Saarbrücker
+                        Zeitung, 30.05.1994 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Und genau wie beim <Stichwort>Freeclimbing</Stichwort> oder
+                        Bungeejumping gibt es zwei Typen.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 11.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Freeclimbing</Stichwort> heißt nicht, dass man an
+                        senkrechten Wänden hochklettern muss, und dass gleich tief fällt, wer einen
+                        Fehltritt tut oder mal daneben greift.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        24.11.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Zuwachsrate beim sogenannten <Stichwort>Freeclimbing</Stichwort>,
+                        dem freien, ungesicherten Klettern, liege bei jährlich 30
+                        Prozent.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 27.02.1995</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bunte Kunststofftritte in unterschiedlicher Größe und Form laden zum
+                            <Stichwort>Freeclimbing</Stichwort> an.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        04.06.2001</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Jeder kann hier jede Menge Sportarten ausprobieren, von
+                            <Stichwort>Freeclimbing</Stichwort> bis Inlineskaten ist alles
+                        drin.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 10.08.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

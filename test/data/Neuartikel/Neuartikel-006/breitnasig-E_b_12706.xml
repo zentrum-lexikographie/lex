@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="wgrimm" xml:id="E_b_12706_13" Autor="jgrimm" Typ="Basisartikel" Tranche="RSR-2024-36_1_2" Zeitstempel="2024-11-01" Erstellungsdatum="1967-01-01" Status="Red-2">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="breit-na-sig">breitnasig</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="104/breitnasig"/>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="dsanders" timestamp="20250327T101941+0100" comment="Nur Bezugsregel ergänzt"?>36
+                (1.2)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>breit</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Nase</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_b_7158">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>ein <Stichwort>breitnasiges</Stichwort> Gesicht</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-26"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

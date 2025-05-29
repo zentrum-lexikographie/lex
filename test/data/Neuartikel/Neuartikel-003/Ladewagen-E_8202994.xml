@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_8202994" Autor="dsanders" Typ="Vollartikel" Tranche="Regio" Zeitstempel="2025-01-24" Erstellungsdatum="2025-01-24" Status="Lex-Wiedervorlage">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Ladewagen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>-</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>Ladewagen</Schreibung>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv><Wert>-s</Wert></Genitiv>
+                <Plural><Wert>Ladewägen</Wert></Plural>
+            </Grammatik>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders">A</Sprachareal>
+                <Sprachareal Frequenz="besonders">D-Süd</Sprachareal>
+            </Diasystematik>
+            <Kommentar> Das Lemma <erwaehntes_Zeichen Sprache="dt">Wagen</erwaehntes_Zeichen> lässt
+                zwei verschiedene Pluralbildungen zu. Neben der im gesamten deutschsprachigen Raum
+                verbreiteten Pluralform <erwaehntes_Zeichen Sprache="dt">Wagen</erwaehntes_Zeichen>
+                ist vor allem in Österreich und Süddeutschland auch die Pluralform
+                    <erwaehntes_Zeichen Sprache="dt">Wägen</erwaehntes_Zeichen> belegt. Diese
+                regionale Verteilung überträgt sich größtenteils auch auf die Pluralformen der mit
+                    <erwaehntes_Zeichen Sprache="dt">-wagen</erwaehntes_Zeichen> gebildeten
+                Komposita, kann jedoch im Einzelfall aus verschiedenen Gründen abweichen. So kann es
+                z. B. sein, dass die umgelauteten Pluralformen zwar theoretisch bildbar, aber
+                aufgrund der Seltenheit des Kompositums nicht in unseren Quellen belegt sind. Auch
+                in den Regionen, in denen der umgelautete Plural gehäuft auftritt, ist in der Regel,
+                zumindest im schriftlichen Gebrauch, die Pluralform <erwaehntes_Zeichen Sprache="dt">Wagen</erwaehntes_Zeichen>/<erwaehntes_Zeichen Sprache="dt">-wagen</erwaehntes_Zeichen> die häufigere Variante. </Kommentar>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma hidx="1">laden</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>Wagen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> Dabei werden zahlreiche landwirtschaftliche Maschinen zu sehen sein,
+                        etwa ein nagelneuer Fendt 942, ein neuer Mähdrescher von Claas, ein neuer
+                        Gülletrac von Holmer, ein neuer Big M von Krone, neue
+                            <Stichwort>Ladewägen</Stichwort>, Sämaschinen und viele mehr. </Belegtext>
+                    <Fundstelle Fundort="dwds:mib_regional:2022/08/MIB_29-99111459">
+                        Mittelbayerische, 31.08.2022 </Fundstelle>
+                </Beleg>
+                <Beleg xmlns="http://www.dwds.de/ns/1.0">
+                    <Belegtext> Pöttinger zeigt natürlich solche <Stichwort>Ladewägen</Stichwort>,
+                        die unsere zwar immer weniger, dafür aber immer größer werdenden Landwirte
+                        brauchen. </Belegtext>
+                    <Fundstelle Fundort="dwds:apa:OOEN_regional/xml/2009/09/ooen_200909240400130193"> Oberösterreichische Nachrichten, 24.09.2009 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22">
+                <Beleg>
+                    <Belegtext>Flirrende Staubsäulen über Mähdreschern und
+                            <Stichwort>Ladewagen</Stichwort> wecken in den meisten Menschen wohl nur
+                        den Wunsch nach Biergarten und Badestrand.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 08.06.1998</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

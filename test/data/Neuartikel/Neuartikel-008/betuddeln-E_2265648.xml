@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_2265648" Autor="dsanders" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2024-05-30" Erstellungsdatum="2019-11-18" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="kduden" timestamp="20231122T093435+0100" comment="Regioprüfung durchgeführt (s. u.)" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20240530T092436+0200" comment="Artikel ist für sich genommen o.k. bitte aber das Verhältnis zu betutteln, betütteln klären, derzeit auch Minimalartikel, lex zur Abgabe (mendoza). " mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <?oxy_comment_start author="wgrimm" timestamp="20231122T092513+0100" comment="Auch in der Form &quot;betüdeln&quot;:
+
+https://zwei.dwds.de/r/?q=bet%C3%BCdel*&amp;corpus=regional_dach&amp;date-start=1993&amp;date-end=2023&amp;area=A&amp;area=D-Nordwest&amp;area=D-Mittelwest&amp;area=D-S%C3%BCdwest&amp;area=D-Nordost&amp;area=D-Mittelost&amp;area=D-S%C3%BCdost&amp;area=CH&amp;format=full&amp;sort=date_desc&amp;limit=50
+
+Ist das eine reine Schreibvariante oder spricht man den Vokal da auch länger?
+
+
+Daneben gibt&apos;s außerdem noch &quot;betüt(t)eln&quot;, was aber separat angesetzt werden müsste, oder? Da besteht zudem eher eine Tendenz zu D-Nordost:
+
+https://zwei.dwds.de/r/?q=bet%C3%BCttel*+%7C%7C+bet%C3%BCtel*+%7C%7C+%40Bet%C3%BCtteln+%7C%7C+%40Bet%C3%BCteln&amp;corpus=regional_dach&amp;date-start=1993&amp;date-end=2023&amp;area=A&amp;area=D-Nordwest&amp;area=D-Mittelwest&amp;area=D-S%C3%BCdwest&amp;area=D-Nordost&amp;area=D-Mittelost&amp;area=D-S%C3%BCdost&amp;area=CH&amp;format=full&amp;sort=date_desc&amp;limit=50
+
+
+Und was machen wir mit den ebenfalls wohl eher in D-Nordost und D-Mittelost verbreiteten Varianten &quot;betuddeln&quot; und &quot;betutteln&quot;? Auch aufnehmen? Die müssten wir dann auch separat ansetzen, richtig? Und dafür sind sie zumindest in Zeitungen eigentlich zu selten belegt:
+
+https://zwei.dwds.de/r/?corpus=regional_dach&amp;q=betuddel%2A%20%7C%7C%20betuttel%2A%20%7C%7C%20%40Betuddeln%20%7C%7C%20%40Betutteln
+
+Es gibt übrigens noch einen Minimalartikel betutteln/betuddeln/betütteln/betüddeln auf Wiedervorlage." flag="done"?>
+            <Schreibung><?oxy_comment_end?>betüddeln</Schreibung>
+            <Aussprache><IPA>bəˈtʏdl̩n</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>betüddelt</Wert></Praesens>
+                <Praeteritum><Wert>betüddelte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>betüddelt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Formangabe Typ="Hauptform">
+            <Schreibung>betüdeln</Schreibung>
+            <Aussprache><IPA>bəˈtʏːdl̩n</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>betüdelt</Wert></Praesens>
+                <Praeteritum><Wert>betüdelte</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>betüdelt</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise/>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>betüddelt</Stichwort> jmdn., etw. <Autorenzusatz>ein
+                            Tier</Autorenzusatz></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <?oxy_comment_start author="kduden" timestamp="20231122T093408+0100" comment="Abfrage noch erweitert, da das nicht richtig lemmatisiert ist:
+
+betüddel* || @Betüddeln
+Areal	Treffer	PPM	Anteil PPM
+D-Nordwest 	52 	0,04 	42,47 %
+D-Nordost 	10 	0,02 	17,62 %
+D-Südwest 	14 	0,01 	14,33 %
+D-Mittelwest 	37 	0,01 	12,20 %
+D-Südost 	11 	0,01 	7,84 %
+D-Mittelost 	3 	0,00 	2,11 %
+A 	2 	0,00 	1,78 %
+CH 	1 	0,00 	1,64 % 
+
+Die zusätzliche Eingrenzung auf D würde ich vorsichtshalber mal weglassen. Die beiden Belege aus A sind von &quot;echten&quot; Österreichern. Im AMC findet man noch ein paar mehr. Bei der geringen Gesamtbelegzahl würde ich die nicht ignorieren. (Zeitungskorpora geben hier halt leider nicht so viel her.)
+
+Das Wort scheint es jedenfalls schon über die Landesgrenzen geschafft zu haben. Mir persönlich war auch gar nicht bewusst, dass es sich dabei um ein aus dem Plattdeutschen stammendes Wort handelt. 
+
+--&gt; [besonders D-Nordwest] würde mir reichen
+" flag="done"?>
+            <?oxy_comment_start author="jgrimm" timestamp="20191118T085426+0100" comment="+ dialektale Einordnung" flag="done" mid="4"?>
+            <Diasystematik><?oxy_comment_end?>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Sprachareal Frequenz="besonders">D-Nordwest</Sprachareal>
+            </Diasystematik><?oxy_comment_end mid="4"?>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>betütern</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>»Es gibt natürlich viele Aspekte, da entscheiden die Erwachsenen –
+                        dennoch geht es darum, Kinder zur Selbstständigkeit zu erziehen und nicht
+                        von oben herab zu bestimmen«. Auch das übertriebene
+                            »<Stichwort>Betüddeln</Stichwort>« der Eltern kann ein Thema sein. Denn
+                        die Kinder sollen lernen, ihre eigene Meinung zu bilden.</Belegtext>
+                    <Fundstelle Fundort="dwds:webmonitor:2023-09-26/8/yFz35FRz">
+                        <Autor>Judith Tausendfreund</Autor>
+                        <Titel>Vahlder und Stuckenborsteler Kita-Kinder üben das
+                            Mitspracherecht</Titel>
+                        <Stelle/>
+                        <Datum>26.09.2023</Datum>
+                        <URL>https://www.kreiszeitung.de/lokales/rotenburg/fintel-ort50583/vahlder-und-stuckenborsteler-kinder-ueben-mitsprache-92543616.html</URL>
+                        <Aufrufdatum>27.09.2023</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Weltweit gebe es nur noch einige 10.000 Giraffen. So freut sich
+                        Köchling auf eine fruchtbare Zusammenarbeit mit dem Tier-Erlebnispark im
+                        Hunsrück. Dort bleibt Ranger Sascha, den die Jung-Giraffen gewohnt sind,
+                        noch ein paar Tage, um sie zu <Stichwort>betüddeln</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2023/10/NEUW_2e677ef559af2dba5129fdb61dd34609234df74"> Neue Westfälische, 05.10.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Geschenke besorgen, Feiern planen, die Schwiegermutter
+                            <Stichwort>betüdeln</Stichwort> und dann auch noch im Job den
+                        Jahresabschluss erstellen oder Schrauben zählen für die Inventur – das kann
+                        einem schon mal zu viel werden. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha_regional:2022/12/HA_64D02E72DAF0737BB93A009499CF1846_4226848"> Hamburger Abendblatt, 24.12.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Was die Betreuung von Flüchtlingen angeht, so folgt Paszehr dem
+                        Leitspruch »weniger ist oft mehr«. »Man darf sie nicht von morgens bis
+                        abends <Stichwort>betüddeln</Stichwort>. Sonst lernen sie nicht, ihre
+                        Angelegenheiten selbstständig zu regeln.« Aber wenn die Flüchtlinge gar
+                        nicht mehr weiter wissen, dann hilft die 52-Jährige gerne.</Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2016/07/NEUW_EA9E30272E2C6C2A9DFBCA5B3AD717A2-TAGEBLATTFUERENGERUNDSPENGE"> Neue Westfälische, 01.07.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Mit drei weiteren Kolleginnen berät sie ehrenamtliche Betreuer, ist
+                        aber auch selbst Betreuerin. So zum Beispiel von K<Streichung>unigunde
+                            Maßmann</Streichung>. »Ich soll ihr nicht alles abnehmen und sie
+                            <Stichwort>betüddeln</Stichwort> oder pflegen, sondern nur schützend
+                        eingreifen«, beschreibt E<Streichung>lke Wunder</Streichung> ihre Aufgabe. </Belegtext>
+                    <Fundstelle Fundort="dwds:frt_regional:2012/10/FRT_3128085568A"> Fränkischer
+                        Tag, 17.10.2012 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Über seine »Biggi« sagt S<Streichung>pier</Streichung>: »Sie hat mich
+                            <Stichwort>betüddelt</Stichwort>, gehegt und gepflegt«.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild:2005/01_44/bi_asvx_2005_44934"> Bild, 28.09.2005
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Der 'typische Kreuzfahrer', so Browatzki, sei in der Regel um die
+                        60, habe eine recht konservative Lebenseinstellung und lasse sich gern von
+                        'hinten bis vorn <Stichwort>betüddeln</Stichwort>'. </Belegtext>
+                    <Fundstelle Fundort="dwds:sz_legacy:1995/04/sz_194618"> Süddeutsche Zeitung,
+                        06.04.1995 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Autorenzusatz>"</Autorenzusatz>A<Streichung>rmin Malter</Streichung> hat
+                        mich auch ganz lieb <Stichwort>betüdelt</Stichwort>, festgehalten und mir
+                        über die Zeit geholfen, bis unser Etienne endlich da war«, schildert Janina
+                        Günther die aufregenden Stunden davor <Autorenzusatz>vor der
+                            Geburt</Autorenzusatz>. </Belegtext>
+                    <Fundstelle Fundort="dwds:saar_regional:2000/07/SAAR_0700270419"> Saarbrücker
+                        Zeitung, 27.07.2000 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

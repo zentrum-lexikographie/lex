@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_e_1056_13" Autor="jgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2020-03-04" Erstellungsdatum="1967-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>einhufig</Schreibung>
+            <Aussprache><IPA Audiodatei="104/einhufig"/></Aussprache>
+            <?oxy_comment_start author="jgrimm" timestamp="20211217T073920+0100" comment="Duplikat"?>
+            <Aussprache class="invisible"><IPA Audiodatei="118/einhufig"/></Aussprache><?oxy_comment_end?>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>eins</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Binnenglied">
+                <Ziellemma>Huf</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_e_1056_99">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>Einhufer</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-23"/></Rohdaten></Artikel>
+</DWDS>

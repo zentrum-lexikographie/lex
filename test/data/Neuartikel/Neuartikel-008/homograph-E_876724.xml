@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_876724" Autor="jgrimm" Typ="Vollartikel" Zeitstempel="2021-10-12" Erstellungsdatum="2021-08-30" Status="wird_gestrichen">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>homograph</Schreibung>
+            <?oxy_comment_start author="wgrimm" timestamp="20210928T133029+0200" comment="endbetont, oder?" flag="done"?>
+            <Aussprache>
+                <IPA Audiodatei="140/homograph">homoˈgʀaːf</IPA>
+            </Aussprache><?oxy_comment_end?>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparationspraeferenz>ohne Steigerung</Komparationspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Konversion" Zeitstempel="2021-11-24" Quelle="DWDS" Autor="brosch">
+            <Verweis Typ="Grundform">
+                <Ziellemma>Homograph</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Spezifizierung">von zwei oder mehr sprachlichen Zeichen, besonders von
+                Wörtern</Definition>
+            <Definition Typ="Basis">von gleicher Schreibung bei verschiedener Bedeutung, Aussprache
+                oder Herkunft</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> So klingen die Wörter <Hervorhebung>wachsen</Hervorhebung>
+                        (größer/länger werden) und <Hervorhebung>wachsen</Hervorhebung> (mithilfe
+                        von Wachs entfernen) gleich, gehen aber nicht auf einen gleichen Ursprung
+                        zurück. Gleiches gilt für Homophone wie <Hervorhebung>Wal</Hervorhebung> und
+                            <Hervorhebung>Wahl</Hervorhebung>, <Hervorhebung>Wende</Hervorhebung>
+                        und <Hervorhebung>Wände</Hervorhebung>, <Hervorhebung>Kiefer</Hervorhebung>
+                        und <Hervorhebung>Kiefer</Hervorhebung> (nicht nur gleichklingend
+                        (homophon), sondern auch mit gleicher Schreibweise
+                            (<Stichwort>homograph</Stichwort>)).</Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor>Name (Erforderlich</Autor>
+                        <Titel>Täschchen–Tässchen, wachsen–wachsen – Verwirrungen und
+                            Äquivation</Titel>
+                        <Stelle/>
+                        <Datum>20.04.2011</Datum>
+                        <URL>https://kfeekunstundkoennen.wordpress.com/2011/04/20/taschchen-tasschen-wachsen-wachsen-verwirrungen-und-aquivation/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Zwar unterscheiden bereits Schriftstücke aus der zweiten Hälfte des
+                        7. Jahrhunderts <Stichwort>homographe</Stichwort> Konsonanten durch
+                        diakritische Punkte, doch fanden diese zunächst nur sporadische Verwendung;
+                        Vokalzeichen entstanden erst um 700 und werden selbst heutzutage nur bei
+                        religiösen Texten durchgängig eingesetzt. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 18.03.2006 </Fundstelle>
+                </Beleg>
+                <Beleg class="good_example">
+                    <Belegtext> Mein Bruder Arne sammelt Wörter, die
+                            <Stichwort>homograph</Stichwort>, aber nicht homophon sind. Das sind
+                        Wörter, die gleich geschrieben, aber unterschiedlich ausgesprochen werden.
+                        Ein bekanntes Beispiel ist »Montage«. Das kann die Montage auf der Baustelle
+                        sein, oder es sind die Montage, die jede Woche verlässlich auf den Sonntag
+                        folgen. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor/>
+                        <Titel>Zugreifen</Titel>
+                        <Stelle/>
+                        <Datum>12.06.2004</Datum>
+                        <URL>https://stefanroock.wordpress.com/2004/06/12/zugreifen/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-22"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

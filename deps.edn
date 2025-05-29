@@ -1,64 +1,68 @@
 {:paths     ["src"]
- :deps      {org.clojure/clojure                 {:mvn/version "1.10.3"}
-             org.clojure/core.async              {:mvn/version "1.3.618"}
-             org.clojure/core.memoize            {:mvn/version "1.0.236"}
-             org.clojure/data.csv                {:mvn/version "0.1.4"}
-             org.clojure/tools.logging           {:mvn/version "1.1.0"}
-             io.github.gremid/data.xml           {:git/sha    "1ce78184eb23ee0eadd1a93ae6178845437b624b"
-                                                  :exclusions [org.relaxng/jing
-                                                               org.relaxng/trang
-                                                               org.kohsuke.rngom/rngom]}
-             slingshot/slingshot                 {:mvn/version "0.12.2"}
-             camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
-             aero/aero                           {:mvn/version "1.1.6"}
-             instaparse/instaparse               {:mvn/version "1.4.10"}
-             integrant/integrant                 {:mvn/version "0.8.0"}
-             metosin/jsonista                    {:mvn/version "0.3.3"}
-             lambdaisland/uri                    {:mvn/version "1.4.70"}
-             clj-http/clj-http                   {:mvn/version "3.12.3"
-                                                  :exclusions  [commons-logging/commons-logging]}
-             jarohen/chime                       {:mvn/version "0.3.3"}
-             io.github.cdimascio/dotenv-java     {:mvn/version "2.2.0"}
-             org.slf4j/slf4j-api                 {:mvn/version "1.7.32"}}
- :aliases   {:test          {:extra-paths ["test"]
-                             :extra-deps  {lambdaisland/kaocha     {:mvn/version "1.66.1034"}
-                                           integrant/repl          {:mvn/version "0.3.2"}
-                                           org.clojure/test.check  {:mvn/version "0.9.0"}
-                                           org.kohsuke.rngom/rngom {:mvn/version "20100718"}}
-                             :exec-fn     kaocha.runner/exec-fn}
-             :log           {:extra-deps {ch.qos.logback/logback-classic {:mvn/version "1.2.5"
-                                                                          :exclusions
-                                                                          [org.slf4j/slf4j-api]}
-                                          org.slf4j/jcl-over-slf4j       {:mvn/version "1.7.32"}
-                                          org.slf4j/jul-to-slf4j         {:mvn/version "1.7.32"}
-                                          org.slf4j/log4j-over-slf4j     {:mvn/version "1.7.32"}}}
-             :client        {:extra-paths ["classes/client" "oxygen"]
-                             :extra-deps  {seesaw/seesaw                                               {:mvn/version "1.5.0"}
-                                           com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
-                                           com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
-                                           cider/cider-nrepl                                           {:mvn/version "0.28.4"}}}
-             :server        {:extra-paths ["classes/server" "oxygen"]
-                             :extra-deps  {metosin/reitit                    {:mvn/version "0.5.15"}
-                                           metosin/muuntaja                  {:mvn/version "0.6.8"}
-                                           ring/ring-jetty-adapter           {:mvn/version "1.9.4"}
-                                           com.h2database/h2                 {:mvn/version "1.4.199"}
-                                           mysql/mysql-connector-java        {:mvn/version "8.0.29"}
-                                           com.github.seancorfield/next.jdbc {:mvn/version "1.2.780"}
-                                           com.github.seancorfield/honeysql  {:mvn/version "2.1.818"}
-                                           org.flywaydb/flyway-core          {:mvn/version "7.2.0"}
-                                           com.zaxxer/HikariCP               {:mvn/version "3.4.5"}
-                                           io.github.classgraph/classgraph   {:mvn/version "4.8.50"}
-                                           audiogum/metrics-clojure          {:mvn/version "3.0.0"}
-                                           org.relaxng/jing                  {:mvn/version "20181222"}
-                                           com.lambdaisland/ornament         {:mvn/version "0.8.84"}
-                                           com.lambdaisland/hiccup           {:mvn/version "0.0.4"}
-                                           com.vladsch.flexmark/flexmark     {:mvn/version "0.64.0"}}}
-             :oxygen        {:extra-deps {com.oxygenxml/oxygen-sdk {:mvn/version "24.1.0.0"}}}
-             :build         {:deps       {io.github.clojure/tools.build {:git/tag "v0.7.5"
-                                                                         :git/sha "34727f7"}
-                                          io.github.gremid/data.xml     {:git/sha "1ce78184eb23ee0eadd1a93ae6178845437b624b"}
-                                          com.taoensso/timbre           {:mvn/version "6.0.2"}}
-                             :ns-default build}}
+ :deps      {org.clojure/clojure                 {:mvn/version "1.12.1"}
+             org.clojure/data.csv                {:mvn/version "1.1.0"}
+             babashka/fs                         {:mvn/version "0.5.26"}
+             camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"}
+             clj-http/clj-http                   {:mvn/version "3.13.0" :exclusions [commons-logging/commons-logging]}
+             com.github.strojure/parsesso        {:mvn/version "1.2.2+295"}
+             com.potetm/fusebox                  {:mvn/version "1.0.11"}
+             com.taoensso/telemere               {:mvn/version "1.0.1"}
+             io.dropwizard.metrics/metrics-core  {:mvn/version "4.2.0"}
+             io.github.cdimascio/dotenv-java     {:mvn/version "3.2.0"}
+             io.github.gremid/clj-xml            {:git/sha "ffcf1d87cf9eca8a6055edb0cd61ae88e8763589"}
+             lambdaisland/uri                    {:mvn/version "1.19.155"}
+             metosin/jsonista                    {:mvn/version "0.3.13"}
+             org.slf4j/jcl-over-slf4j            {:mvn/version "2.0.17"}
+             tick/tick                           {:mvn/version "1.0"}}
+ :aliases   {:dev     {:extra-paths ["dev"]
+                       :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.0"}
+                                     clj-commons/clj-yaml        {:mvn/version "1.0.29"}}}
+             :test    {:extra-paths ["test"]
+                       :extra-deps  {lambdaisland/kaocha    {:mvn/version "1.91.1392"}
+                                     dev.weavejester/medley {:mvn/version "1.8.1"}}
+                       :exec-fn     kaocha.runner/exec-fn}
+             :client  {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.56.0"}
+                                    com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
+                                    com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+                                    seesaw/seesaw                                               {:mvn/version "1.5.0"}}}
+             :server  {:extra-deps {org.clojure/core.async                          {:mvn/version "1.8.741"}                                    
+                                    buddy/buddy-auth                                {:mvn/version "3.0.323"}
+                                    com.github.seancorfield/next.jdbc               {:mvn/version "1.3.1048"}
+                                    com.github.seancorfield/honeysql                {:mvn/version "2.7.1310"}
+                                    com.lambdaisland/ornament                       {:mvn/version "1.12.107"}
+                                    com.lambdaisland/hiccup                         {:mvn/version "0.0.33"}
+                                    com.mysql/mysql-connector-j                     {:mvn/version "9.1.0"}
+                                    com.pgvector/pgvector                           {:mvn/version "0.1.5"}
+                                    com.taoensso/telemere-slf4j                     {:mvn/version "1.0.1"}
+                                    com.vladsch.flexmark/flexmark                   {:mvn/version "0.64.8"}
+                                    com.zaxxer/HikariCP                             {:mvn/version "6.3.0"}
+                                    dali/dali                                       {:git/url "https://github.com/gremid/dali.git"
+                                                                                     :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
+                                    de.ids-mannheim.korap.tokenizer/KorAP-Tokenizer {:mvn/version "2.2.5"}
+                                    dev.weavejester/ragtime.next-jdbc               {:mvn/version "0.11.0"}
+                                    garden/garden                                   {:git/url    "https://github.com/noprompt/garden.git"
+                                                                                     :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
+                                                                                     :exclusions [org.clojure/clojurescript]}
+                                    hickory/hickory                                 {:mvn/version "0.7.1"
+                                                                                     :exclusions  [org.clojure/clojurescript]}
+                                    io.github.gremid/clj-xml-schema                 {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
+                                    jarohen/chime                                   {:mvn/version "0.3.3"}
+                                    metosin/muuntaja                                {:mvn/version "0.6.11"}
+                                    metosin/reitit                                  {:mvn/version "0.9.1"}
+                                    ring/ring-defaults                              {:mvn/version "0.5.0"}
+                                    ring/ring-jetty-adapter                         {:mvn/version "1.14.1"}
+                                    selmer/selmer                                   {:mvn/version "1.12.62"}}}
+             :oxygen  {:extra-deps {com.oxygenxml/oxygen-sdk       {:mvn/version "26.0.0.2"}
+                                    ch.qos.logback/logback-classic {:mvn/version "1.2.12"}}}
+             :build   {:extra-deps {babashka/fs                     {:mvn/version "0.5.26"}
+                                    com.taoensso/telemere           {:mvn/version "1.0.1"}
+                                    com.taoensso/telemere-slf4j     {:mvn/version "1.0.1"}
+                                    io.github.gremid/clj-xml-schema {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
+                                    io.github.clojure/tools.build   {:mvn/version "0.10.9"}
+                                    org.slf4j/slf4j-api             {:mvn/version "2.0.17"}
+                                    tick/tick                       {:mvn/version "1.0"}}
+                       :ns-default build}
+             :classes {:extra-paths ["classes"]}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://clojars.org/repo"}
              "oxygen"  {:url "https://www.oxygenxml.com/maven"}}}

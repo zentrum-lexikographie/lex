@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="WDG" Redakteur="" xml:id="E_v_1585_13" Autor="jgrimm" Typ="Vollartikel" Tranche="WDG-Überarbeitung" Zeitstempel="2020-03-04" Erstellungsdatum="1977-01-01" Status="Artikelrumpf">
+        <Formangabe Typ="Hauptform">
+            <Schreibung>Verhaftungswelle</Schreibung>
+            <Aussprache><IPA Audiodatei="026/die_Verhaftungswelle"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>fem.</Genus>
+                <Genitiv><Wert>-</Wert></Genitiv>
+                <Plural><Wert>-n</Wert></Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/><Verweise Typ="Komposition">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>Verhaftung</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">Welle</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+        <Verweise/></Diachronie>
+        <Lesart xml:id="S_v_1168">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>von der <Stichwort>Verhaftungswelle</Stichwort> wurden Menschen aller Schichten betroffen</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+    <Rohdaten><Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-23"><Beleg><Belegtext>Als ich antrat, war die <Stichwort>Verhaftungswelle</Stichwort> der letzten Tage fast schon verschmerzt.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Klemperer, Victor: [Tagebuch] 1943. In: ders., Ich will Zeugnis ablegen bis zum letzten, Berlin: Aufbau-Taschenbuch-Verl. 1999 [1943], S. 53</Fundstelle></Beleg><Beleg><Belegtext>China übt schon seit Monaten mehr Druck auf seine Dissidenten aus, eine <Stichwort>Verhaftungswelle</Stichwort> setzte ein.</Belegtext><Fundstelle Fundort="dwds:zeit">Die Zeit, 19.04.2011 (online)</Fundstelle></Beleg><Beleg><Belegtext>Eine kurze Phase der Entspannung sei spätestens Ende des Jahres mit einer neuen <Stichwort>Verhaftungswelle</Stichwort> beendet worden.</Belegtext><Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 17.04.1996</Fundstelle></Beleg><Beleg><Belegtext>Nach mehreren <Stichwort>Verhaftungswellen</Stichwort> waren die reichsweiten Organisationsstrukturen der E. 1938 zerschlagen.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">o. A.: Enzyklopädie des Nationalsozialismus – E. In: Enzyklopädie des Nationalsozialismus, Berlin: Directmedia Publ. 2000 [1997], S. 6441</Fundstelle></Beleg><Beleg><Belegtext>Schon am selben Tage, an dem man die Waffen fand, begann eine <Stichwort>Verhaftungswelle</Stichwort>, wie sie die Stadt noch nie gesehen hatte.</Belegtext><Fundstelle Fundort="dwds:kernbasis_secondarily">Hilsenrath, Edgar: Das Märchen vom letzten Gedanken, München: Piper 1989, S. 410</Fundstelle></Beleg></Verwendungsbeispiele></Rohdaten></Artikel>
+</DWDS>

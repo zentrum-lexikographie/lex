@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="" xml:id="E_2177545" Autor="kduden" Typ="Verweisartikel" Zeitstempel="2024-11-25" Erstellungsdatum="2024-11-25" Status="Lex-Regioprüfung">
+        <?oxy_comment_start author="wgrimm" timestamp="20241126T120957+0100" comment="bitte zusammen mit tüdelig freischalten"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="tüd-de-lig">tüddelig</Schreibung>
+            <Aussprache Zeitstempel="2024-11-26" Quelle="DWDS" Autor="brosch">
+                <IPA>ˈtʏdəlɪç</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Adjektiv</Wortklasse>
+                <Komparativ><Wert>tüddeliger</Wert></Komparativ>
+                <Superlativ><Wert>am tüddeligsten</Wert></Superlativ>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise>
+            <Verweis Typ="Erstglied">
+                <?oxy_comment_start author="kduden" timestamp="20241126T120630+0100" comment="bin mir nicht sicher, weil tüddeln als Nebenform nicht aufgeführt ist"?>
+                <Ziellemma>tüdeln</Ziellemma><?oxy_comment_end?>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>-ig</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <Diasystematik>
+                <Sprachareal Frequenz="besonders"><?oxy_comment_start author="dsanders" timestamp="20241126T121049+0100" comment="oder wäre direkt D-Nord angebrachter?
+|        Areal | Treffer |    PPM | Anteil PPM |
+|--------------|--------:|-------:|-----------:|
+ |   D-Nordwest |      60 |   0,04 |    56,12 % |
+ | D-Mittelwest |      30 |   0,01 |    11,67 % |
+ |    D-Nordost |      10 |   0,02 |    20,68 % |
+ |    D-Südwest |       6 |   0,01 |     7,14 % |
+ |  D-Mittelost |       3 |   0,00 |     2,50 % |
+ |           CH |       1 |   0,00 |     1,89 % |"?>D-Nordwest</Sprachareal>
+                <Sprachareal Frequenz="häufig">D-Nordost</Sprachareal><?oxy_comment_end?>
+            </Diasystematik>
+            <Verweise>
+                <Verweis Typ="Synonym">
+                    <Ziellemma>tüdelig</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis"/>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adverbialbestimmung">
+                    <Belegtext>etwas, ein bisschen, leicht
+                        <Stichwort>tüddelig</Stichwort></Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adverbialbestimmung_von">
+                    <Belegtext><Stichwort>tüddelig</Stichwort> sein, werden</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>eine <Stichwort>tüddelige</Stichwort> Oma, Tante,
+                            <Autorenzusatz>ältere</Autorenzusatz> Dame</Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_ist_Adjektivattribut_von">
+                    <Belegtext>ein <Stichwort>tüddeliger</Stichwort> Opa, Onkel,
+                            <Autorenzusatz>älterer</Autorenzusatz> Herr</Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext> »<Stichwort>Tüddelig</Stichwort>"
+                            <Streichung>wiederum</Streichung> meint einen zerstreuten oder auch
+                        verwirrten Geisteszustand einer Person. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2022/12/NEUW_5531fd5fdcc37ddc40b50ea3f0fb98d9234df43"> Neue Westfälische, 12.12.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> » Nur <Stichwort>tüddelig</Stichwort> – oder schon
+                        dement?« <Autorenzusatz>Überschrift</Autorenzusatz>
+                        <Streichung>Bad Bramstedt</Streichung> Ist es Ihnen auch schon passiert,
+                        dass Sie auf einem großen Parkplatz Ihr Auto nicht sofort wiedergefunden
+                        haben oder dass Sie an der Kellertreppe stehen und sich fragen: Was wollte
+                        ich da noch mal? Eine gewisse »Tüddeligkeit«, wie man in
+                        Norddeutschland so schön sagt, ist gewiss mehr oder weniger normal. </Belegtext>
+                    <Fundstelle Fundort="dwds:ha_regional:2019/11/HA_doc784w99aaqrpcyjsvoot">
+                        Hamburger Abendblatt, 26.11.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Bemerkung »Hach, bist du aber groß geworden« müssen
+                        sich J<Streichung>an</Streichung> und J<Streichung>osefine</Streichung> als
+                        16-Jährige nicht mehr allzu häufig anhören. Ausgewachsen sind sie zwar
+                        vermutlich noch nicht ganz, aber der Kommentar kommt selbst der
+                            <Stichwort>tüddeligsten</Stichwort> Tante komisch vor, wenn ein
+                        selbstbewusster Teenager vor ihr steht. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp_regional:2018/03/TSP_2018030911333730"> Der
+                        Tagesspiegel, 09.03.2018 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hedwig Bensmann ist die Rolle der <Stichwort>tüddeligen</Stichwort>
+                        Oma wie auf den Leib geschrieben, ihre Szenen mit dem armen
+                        Versicherungsvertreter F<Streichung>riedhelm (Timo Hehmann)</Streichung>,
+                        den sie an den Rand der Verzweiflung <Streichung>und sogar noch ein wenig
+                            weiter</Streichung> bringt, sind Höhepunkte der Aufführung. </Belegtext>
+                    <Fundstelle Fundort="dwds:noz_regional:2013/01/NOZ_1179492"> Neue Osnabrücker
+                        Zeitung, 14.01.2013 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> In'n häogen Oller Joahr wett man jümmer meiher
+                        vogierdenhaftiger un <Stichwort>tüddeliger</Stichwort>. Seo volöpp niu moal
+                        dat Liarben und dat es iaben seo. De Doktor segg äok woll »verkalkt"
+                        doateo. </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2011/01/NEUW_201101290445"> Neue
+                        Westfälische, 29.01.2011 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> »Niemand soll denken, wir wären irgendwelche
+                            <Stichwort>tüddeligen</Stichwort> Alten.« </Belegtext>
+                    <Fundstelle Fundort="dwds:neuw_regional:2004/02/NEUW_200402120063"> Neue
+                        Westfälische, 12.02.2004 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2024-11-25">
+                <Beleg>
+                    <Belegtext>Und nun sehen wir Sie, fragil, einem trotzigen Kind gleich,
+                            »<Stichwort>tüddelig</Stichwort>«, sagen die Nachbarn, liebevoll,
+                        sorgenvoll, aber nicht auch verharmlosend?</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 22.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er war schon ein <Stichwort>tüddeliger</Stichwort> Greis von 87, als
+                        ihm 1966 der Preis für Medizin zugesprochen wurde.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 12.10.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Immer häufiger wirkte er fahrig und <Stichwort>tüddelig</Stichwort>,
+                        immer seltener zeigte er echte Begeisterung für die Gäste.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 07.06.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Hodler, früher Chef des Schweizer Bridge-Verbandes, galt bislang
+                        nicht als <Stichwort>tüddelig</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:welt">Die Welt, 01.03.2000</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Der <Stichwort>tüddelige</Stichwort> Witwer stellte ihm eine
+                        Generalvollmacht zur Verwaltung seines Vermögens aus.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 29.10.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Opa Gerhard S. (72) ist ziemlich <Stichwort>tüddelig</Stichwort>,
+                        darum hat er jetzt einen Betreuer.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 30.09.1999</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Ist es <Stichwort>tüddelige</Stichwort> Nostalgie, an Karl Schillers
+                        »runden Tisch der Vernunft« zu erinnern?</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 29.07.1994, Nr. 31</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Schrubbt die Fußböden, findet ihre Zellengenossin, eine angebliche
+                        Giftmörderin, »<Stichwort>tüddelig</Stichwort>« – und schreibt lange Briefe
+                        an ihre Mutter (61).</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 09.03.1998</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

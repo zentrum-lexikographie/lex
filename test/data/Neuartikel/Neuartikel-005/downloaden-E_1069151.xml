@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="DWDS" Redakteur="dsanders" xml:id="E_d_51601" Autor="kduden" Typ="Verweisartikel" Tranche="RSR-2024-21_E2_1" Zeitstempel="2025-01-23" Erstellungsdatum="2015-09-03" Status="Artikelrumpf">
+        <?oxy_comment_start author="jgrimm" timestamp="20201120T163713+0100" comment="Artikel seit 2014 zur Abgabe, aktualisiert; bitte zusammen mit herunterladen freischalten" flag="done"?>
+        <?oxy_comment_start author="kduden" timestamp="20250123T110706+0100" comment="war:aotur=billes" mid="1"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+            <Schreibung>downloaden</Schreibung>
+            <?oxy_comment_start author="wgrimm" timestamp="20201123T132213+0100" comment="Eher so, denke ich." flag="done"?>
+            <Aussprache Zeitstempel="2020-11-23" Quelle="DWDS" Autor="solf">
+                <IPA Audiodatei="102/downloaden">ˈdaʊ̯nloʊ̯dən</IPA>
+            </Aussprache><?oxy_comment_end?>
+            <Aussprache>
+                <IPA>ˈdaʊ̯nloːdən</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>downloadet</Wert></Praesens>
+                <Praeteritum><Wert>downloadete</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>gedownloadet</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <?oxy_comment_start author="wgrimm" timestamp="20201120T163216+0100" comment="Ich habe jetzt mal eine Nebenform angesetzt, die getrennten Formen sind seltener aber nicht unüblich. Erzeugen natürlich Fehlermeldungen. Ich bin mir unschlüssig, ob man die als regelwidrig bezeichnen kann. Natürlich ist &quot;down&quot; kein deutsches Präfix, aber wenn das komplette Verb eingebürgert werden kann, warum dann nicht ein englisches Adverb?
+
+Beim PP zeigt sich ein uneinheitliches Bild:
+downgeloadet 993 WebXL, 115 Zeitungen
+gedownloadet 2074 WebXL, 9 Zeitungen" flag="done"?>
+        <?oxy_comment_start author="wgrimm" timestamp="20201123T131938+0100" comment="Das kann ich nachvollziehen: Ich würde die Frage gern an Red_2 und Red_f weiterreichen." id="lry_hs4_xnb" flag="done" mid="4"?>
+        <?oxy_comment_start author="jgrimm" timestamp="20201208T082604+0100" comment="Ich nehme down als abtrennbare Verbpartikel mit auf, kein Problem. Dauert aber ein bisschen, bis der Fehler hier verschwindet." parentID="lry_hs4_xnb" flag="done" mid="5"?>
+        <Formangabe Typ="Nebenform">
+            <Schreibung>downloaden</Schreibung>
+            <Aussprache Zeitstempel="2020-11-23" Quelle="DWDS" Autor="solf">
+                <IPA Audiodatei="102/downloaden">ˈdaʊ̯nloʊ̯dən</IPA>
+            </Aussprache>
+            <Aussprache>
+                <IPA>ˈdaʊ̯nloːdən</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>loadet down</Wert></Praesens>
+                <Praeteritum><Wert>loadete down</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Partizip_II><Wert>downgeloadet</Wert></Partizip_II>
+            </Grammatik>
+            <Frequenzangabe>selten</Frequenzangabe>
+            <?oxy_comment_start author="wgrimm" timestamp="20201123T131951+0100" comment="Als selten kennzeichnen?" flag="done"?>
+            <Diasystematik><?oxy_comment_end?></Diasystematik>
+        </Formangabe><?oxy_comment_end?><?oxy_comment_end mid="4"?><?oxy_comment_end mid="5"?>
+        <Orthografie/>
+        <Verweise Typ="Konversion" Zeitstempel="2025-01-14" Quelle="DWDS" Autor="herold">
+            <Verweis Typ="Grundform">
+                <Ziellemma>Download</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie>aus gleichbedeutend <erwaehntes_Zeichen Sprache="engl">to
+                    download</erwaehntes_Zeichen></Etymologie>
+            <Formgeschichte>Das in der
+                <?oxy_comment_start author="kduden" timestamp="20201208T082829+0100" comment="Besser konkrete Zeiträume nennen: Die »Frühzeit des Internets« sind eigentlich die 1970er Jahre, die hier sicher nicht gemeint sind." flag="done"?>Frühzeit
+                des
+                <?oxy_comment_end?><?oxy_comment_start author="kduden" timestamp="20211012T092928+0200" comment="geändert, statt &quot;Internet&quot;" id="nvc_nj5_frb"?><?oxy_comment_start author="kduden" timestamp="20211012T154627+0200" comment="Internet ist aber richtiger, damals gab&apos;s auch noch FTP und so Sachen, die gerade nicht WWW sind" parentID="nvc_nj5_frb" mid="9"?>World
+                Wide Web<?oxy_comment_end mid="9"?><?oxy_comment_end?> sehr häufige Verb ist
+                mittlerweile weitgehend vom deutschen <Verweis Typ="vgl">
+                    <Ziellemma>herunterladen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis> verdrängt.</Formgeschichte>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>downloadet</Stichwort> (etw.)</Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik>
+                <Stilebene>umgangssprachlich</Stilebene>
+            </Diasystematik>
+            <?oxy_comment_start author="dsanders" timestamp="20201120T164551+0100" comment="Antonyme hochladen und uploaden noch ohne Artikel"?>
+            <Verweise>
+                <Verweis Typ="Entsprechung">
+                    <Ziellemma>herunterladen</Ziellemma>
+                    <Ziellesart>1</Ziellesart>
+                </Verweis>
+                <Verweis Typ="Antonym" class="invisible">
+                    <Ziellemma>uploaden</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+                <Verweis Typ="Antonym" class="invisible">
+                    <Ziellemma>hochladen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise><?oxy_comment_end?>
+            <Definition Typ="Basis"/>
+            <Kollokationen>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Adverbialbestimmung">
+                    <Belegtext>etw. gratis, illegal, kostenlos <Stichwort>downloaden</Stichwort>
+                    </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Akkusativobjekt">
+                    <Belegtext>eine Datei, Filme, Musik, eine Software
+                            <Stichwort>downloaden</Stichwort>
+                    </Belegtext>
+                </Kollokation>
+                <Kollokation syntaktische_Relation="Stichwort_hat_Präpositionalgruppe/-objekt_mit">
+                    <Belegtext>etw. aus dem Internet <Stichwort>downloaden</Stichwort></Belegtext>
+                </Kollokation>
+            </Kollokationen>
+            <Verwendungsbeispiele>
+                <Beleg class="good_example">
+                    <Belegtext>
+                        <Stichwort>Downloade</Stichwort> einfach die kostenlosen Testversionen und
+                        prüfe, ob die Software deinen Vorstellungen entspricht. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor/>
+                        <Titel>ESET Gutschein</Titel>
+                        <Stelle/>
+                        <Datum>20.08.2020</Datum>
+                        <URL>https://www.coupons.de/gutscheine/eset</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Zu den einzelnen Veranstaltungen verfügbares Lehr- und Lernmaterial
+                        kann <Stichwort>downgeloadet</Stichwort> werden, in dem Sie auf die
+                        unterstrichenen Texte im Reiter des jeweiligen Studiengangs klicken. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor/>
+                        <Titel>Lehre</Titel>
+                        <Stelle/>
+                        <Datum>16.06.2020</Datum>
+                        <URL>http://wiwi.hs-duesseldorf.de:80/personen/christoph.voos/lehre</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Die Lerninhalte können in Form von Texten, Videos und PDF-Dateien
+                            <Stichwort>gedownloadet</Stichwort> werden und sind sowohl kompatibel
+                        mit dem Desktop als auch mit mobilen Geräten wie Smartphones oder Tablets. </Belegtext>
+                    <Fundstelle Fundort="dwds">
+                        <Autor>Maximilian Lindner</Autor>
+                        <Titel>comdirect bank AG (2020) – Erfahrung, Test und Vorstellung</Titel>
+                        <Kurztitel>Erfahrung, Test und Vorstellung</Kurztitel>
+                        <Stelle/>
+                        <Datum>18.10.2019</Datum>
+                        <URL>https://www.kagels-trading.de/comdirect-bank/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Kaum jemand kauft noch Tonträger wie CDs. Wir erleben gerade die
+                        zweite Revolution. Die erste war: Musik <Stichwort>downloaden</Stichwort>.
+                        Die zweite ist: Musik nicht mehr selbst auf einem Gerät haben, sondern über
+                        das Internet streamen. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Bild am Sonntag, 04.12.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In der Schule tauschen sie Tag für Tag gebrannte Spiele, sie chatten
+                        und <Stichwort>downloaden</Stichwort>.</Belegtext>
+                    <Fundstelle>Süddeutsche Zeitung, 28.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Oder man nehme »<Stichwort>downloaden</Stichwort>«: Heißt es nun »ich
+                            <Stichwort>loade down</Stichwort>« oder ich
+                            »<Stichwort>downloade</Stichwort>«,
+                        »<Stichwort>gedownloadet</Stichwort>« oder
+                            »<Stichwort>downgeloadet</Stichwort>«? Keiner weiß es; einschränkende
+                        und umständliche Vermeidungstaktiken sind die Folge, es schlägt die Stunde
+                        der Hilfszeitwörter, und man bekommt zu hören: »Ich tu das jetzt mal
+                            <Stichwort>downloaden</Stichwort>.«</Belegtext>
+                    <Fundstelle Fundort="dwds"> Berliner Zeitung, 14.02.2001 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21">
+                <Beleg>
+                    <Belegtext>Hier können Sie von jedem beliebigen FTP-Server Files
+                            <Stichwort>downloaden</Stichwort> und sich zumailen lassen.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1993, Nr. 2</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>In der Schule tauschen sie Tag für Tag gebrannte Spiele, sie chatten
+                        und <Stichwort>downloaden</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:sz">Süddeutsche Zeitung, 28.09.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Selbst wenn ich mir einen herstellerunabhängigen Patch für ein
+                        netzwerkfähiges Spiel <Stichwort>downloade</Stichwort>, gehe ich ein Risiko
+                        ein.</Belegtext>
+                    <Fundstelle Fundort="dwds:kernbasis_secondarily">C’t, 1998, Nr. 8</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Mit der Nummer des Bibliotheksausweises kann man die Medien
+                            <Stichwort>downloaden</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:zeit">Die Zeit, 17.04.2008, Nr. 16</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Diplomaten sollen weniger Daten berichten, die man daheim aus dem
+                        Internet »<Stichwort>downloaden</Stichwort>« kann.</Belegtext>
+                    <Fundstelle Fundort="dwds:tagesspiegel">Der Tagesspiegel,
+                        24.08.2000</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="DWDS" Erstfassung="Duden_1999" Redakteur="wgrimm" xml:id="D99_122788" Autor="jgrimm" Typ="Verweisartikel" Tranche="Regio" Zeitstempel="2024-11-17" Erstellungsdatum="1999-01-01" Status="Lex-kommentiert">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="Pie-pel">Piepel</Schreibung>
+            <Aussprache><IPA>ˈpiːpl̩</IPA></Aussprache>
+            <Grammatik>
+                <Wortklasse>Substantiv</Wortklasse>
+                <Genus>mask.</Genus>
+                <Genitiv>
+                    <Wert>-s</Wert>
+                </Genitiv>
+                <?oxy_comment_start author="kduden" timestamp="20241030T165011+0100" comment="komischer Plural eigentlich, aber wenn er belegt ist ..
+
+Daneben ist auch noch der endungslose Plural belegt (und ein paar Belege mit Dat. Pl. &quot;Piepeln&quot;, die bei Nom. Pl. -s nicht möglich wären)" id="sx3_sn4_fdc"?>
+                <?oxy_comment_start author="dsanders" timestamp="20241031T081220+0100" parentID="sx3_sn4_fdc" comment="-s ist der reguläre Plural im Niederdeutschen" mid="1"?>
+                <Plural><?oxy_comment_end?><?oxy_comment_end mid="1"?>
+                    <Wert>-s</Wert>
+                </Plural>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation" Zeitstempel="2024-10-31" Quelle="DWDS" Autor="brosch">
+            <Verweis Typ="Letztglied">
+                <Ziellemma hidx="1">-el</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie Zeitstempel="2024-10-31" Quelle="DWDS" Autor="brosch">
+            <Etymologie>zu <erwaehntes_Zeichen Sprache="nd">piepelig</erwaehntes_Zeichen>
+                <Paraphrase>fein, schwächlich</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart>
+            <Syntagmatik/>
+            <?oxy_comment_start author="dsanders" timestamp="20241030T160404+0100" comment="Ein paar Belege finde man auch außerhalb Berlins, vor allem in D-MO, was auch zur Herkunftsangabe bei Duden passen würde:
+
+zu landschaftlich (besonders ostmitteldeutsch) piep(e)lig = klein, mickrig
+
+--------------------------------------------------
+
+Beispiele aus D-MO:
+
+ Leipziger Volkszeitung, 13.11.2017
+Überliefert ist dagegen eine Episode von einem Auftritt Renfts im Bornaer Kulturhaus, als Schoppe noch ein &quot;kleiner Piepel&quot; war und vor &quot;zwei, drei Leuten&quot; spielte.
+
+ Thüringer Allgemeine, 28.01.2017
+Christian Kuno Kunert hat sich aufs Romanschreiben verlegt. Warum? Vielleicht gerade deshalb. Über die sechs kleenen, versoffenen Piepels, die unter dem Namen Renft im Wolga durch die 70-er Jahre tourten, gibt es inzwischen drei Autobiografien, zwei dicke Bücher, etliche Magisterarbeiten und unzählige Beiträge in anderen Publikationen ich glaube, es reicht , sagt der Autor.
+
+ Thüringer Allgemeine, 09.12.2016
+Sie schlossen ihre Streitkräfte zu einem übermächtigen Heer zusammen, wenn man bedenkt, dass sich auf der Burg Falkenstein nur ein paar Piepel zu ihrer Verteidigung befanden. 
+
+ Leipziger Volkszeitung, 29.04.2006
+Um ihre Beziehung zu den frischgeborenen herzig-stressigen Piepels, zu sich selbst, zur Hebamme, zur Physiotherapeutin, zu sogenannter Fachliteratur über Kinderaufzucht (hanebüchenster Art auch) und um die Besonderheiten zwischenmütterlicher Beziehungen. 
+
+Die Zeit, 12.09.1997, Nr. 38
+Uwe Dern wird das verhindern und den Mammon besiegen durch die Macht der Liebe. [...] Wir sind für Jena der zwölfte Mann in heavy rotation erschallen. Vierzig kleine Piepel gingen hier mit Jenawimpel wieder raus, sagt Uwe.
+[Anm.: Die Zeit ist natürlich keine D-MO-Zeitung, aber der zitierte Typ wohl aus D-MO]
+
+
+--------------------------------------------------
+
+
+Beispiele aus D-NW:
+
+ Die Zeit, 08.03.2018
+Kommt ein Wärter zum Kassieren? Nö, das lohnt noch nicht bei den paar Piepeln weit und breit.
+[Anm.: Autor unbekannt, aber es geht zumindest um St. Peter-Ording]
+	
+ 11bar Hamburg 2011 - KreativCamp auf der MS Stubnitz Thema Kultur- und Kreativwirtschaft. Sommer in Hamburg - Die Liebe zur schönsten Stadt der Welt, ~2011-02-16, abgerufen am 14.06.2023
+Die Gästeschaar auf der Stubnitz im Hamburger Baakenhafen hinter dem Hamburger Großmarkt war mit ca. 200 Piepeln durchaus überschaubar. 
+
+ Hamburger Abendblatt, 04.02.2006
+Er war mehrfacher Hamburger Boxmeister und brachte es sogar zum deutschen Meister im Fliegengewicht. &quot;Boxen war alles für mich&quot;, sagt er und erinnert sich an seine verpaßten Chancen, an den Traum von Olympia und vom Weltmeistertitel. Weil er im Kampf um ein Mädchen einen Matrosen mit zwei harten Schlägen ausgeknockt hatte, wurde daraus nichts. Der hatte seine Renate umarmt und auch noch zu ihm &quot;Was willst du kleiner Piepel denn?&quot; gesagt. Der Seemann fiel rücklings auf den Kopf und starb am nächsten Tag, und Fascher mußte wegen Körperverletzung mit Todesfolge in den Bau.
+[Anm.: Da hier wohl ein Seemann zitiert wird, s. dazu aber auch einen meiner Kommentare weiter unten =/]
+
+
+--------------------------------------------------
+
+--&gt; Vermutlich [D-Nord, D-Mittelost], aber streng genommen sind es insgesamt zu wenige Belege für eine konkrete Arealangabe. Lieber [regional]? (Die Mehrheit der Regio-Gruppe hat sich mal gegen Angaben der Art [regional, besonders XY] ausgesprochen, was sonst auch noch denkbar gewesen wäre.)"?>
+            <Diasystematik><?oxy_comment_end?>
+                <Stilebene>umgangssprachlich</Stilebene>
+                <Sprachareal>D-Nordost (Berlin)</Sprachareal>
+            </Diasystematik>
+            <Verweise/>
+            <Definition Typ="Basis"/>
+            <Kollokationen/>
+            <Verwendungsbeispiele/>
+            <?oxy_comment_start author="kduden" timestamp="20241030T170312+0100" comment="Manchmal auch etwas abwertend? z. B. in:
+ 	
+Die Zeit, 07.12.2023
+Der 17-jährige »Piepel« habe ihm die Hand weggeschlagen. 
+
+ Berliner Morgenpost, 10.08.2008
+&quot;Wer ist dieser Piepel überhaupt?&quot;, rief Wolfgang laut und schaute mich wütend an. "?>
+            <Lesart n="1."><?oxy_comment_end?>
+                <Syntagmatik/>
+                <Diasystematik/>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <?oxy_comment_start author="kduden" timestamp="20241030T174153+0100" comment="Hom.-Ziffer ergänzt"?>
+                        <Ziellemma hidx="1"><?oxy_comment_end?>Junge</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>Mann</Ziellemma>
+                        <Ziellesart>1</Ziellesart>
+                    </Verweis>
+                </Verweise>
+                <?oxy_comment_start author="wgrimm" timestamp="20241001T122035+0200" comment="kann Junge als auch schlicht Mann bedeuten, würden das nicht in zwei LA trennen. Definition oder Syn-Verweise?" id="bhq_kgj_fdc"?>
+                <?oxy_comment_start author="wgrimm" timestamp="20241030T170351+0100" parentID="bhq_kgj_fdc" comment="Dann würde ich tatsächlich eher die Def. wählen. Mit den semantischen Verweisen sieht&apos;s ein bisschen so aus, als wären &quot;Junge&quot; und &quot;Mann&quot; auch synonym zueinander" mid="6"?>
+                <?oxy_comment_start author="jgrimm" timestamp="20241030T171400+0100" comment="Und kann es (im Plural) evtl. auch allgemein &apos;Leute&apos; bedeuten? Insbesondere wenn es nicht viele und/oder unwichtige sind; in etwa so wie &quot;Hansel&quot;
+
+
+Beispiele:
+
+ Klikken-Kalle: Ick sach Euch, ick bin ja sowatt von pappesatt!. CLIQUE . Wir im Süden Berlins, ~2012-01-11, abgerufen am 14.06.2023
+Die Erna hat jeplant und jeplant, jeda Tisch brochte nen Blumnjesteck, ditt Büffet wurde jeordert, der Dijäi hat noch ne Box mehr mitjebracht und dann stehn wa mit 10 Piepeln da.
+
+ Frankfurter Allgemeine Zeitung, 29.06.1999
+Endlich einmal wird man von den Security-Leuten durchgewunken und nicht wie alle anderen Piepel gescheucht.
+[Anm.: Autor stammt wohl ursprünglich aus Magdeburg]
+
+ Der Spiegel, 04.12.1989, Nr. 49
+So verlor die DKP in den vergangenen zwei Jahren nach Kenntnis des Verfassungsschutzes rund die Hälfte ihrer einst 58000 Gefolgsleute: &quot;Das sind nur noch 25000 bis 30000 Piepels.&quot;
+
+ Deutscher Bundestag: Plenarprotokoll Nr. 10/201 vom 27.02.1986, S. 15493.
+Mann (GRÜNE): Frau Präsidentin! Liebe Kolleginnen und Kollegen! Ich begrüße insbesondere die hier hereinrotierten Kolleginnen und Kollegen sehr herzlich. (Kittelmann [CDU/CSU]: Sie mit Ihren drei „Piepeln&quot; sollten die Klappe halten!) 
+
+
++ ein paar weitere im Kommentar oben" mid="7"?>
+                <Definition Typ="Basis"><?oxy_comment_end?><?oxy_comment_end mid="6"?><?oxy_comment_end mid="7"?></Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Beleg>
+                        <Belegtext>Wohl jeder kann sich an solche Momente erinnern: Wenn man früh
+                            als »kleena <Stichwort>Piepel</Stichwort>« am 1. April in die Schule
+                            kam, hörte man gleich den Ruf: »Ey, du hast’n Riss in der Hose!« Und
+                            wenn man erschrocken an sich runterblickte, folgte ein Kichern und ein
+                            lautes »April, April!«</Belegtext>
+                        <Fundstelle Fundort="dwds:webmonitor:2022-04-01/1/K3s47neg">
+                            <Autor>Torsten Harmsen</Autor>
+                            <Titel>April, April: Warum Aprilscherze und andere Überraschungen
+                                nerven</Titel>
+                            <Stelle/>
+                            <Datum>01.04.2022</Datum>
+                            <URL>https://www.berliner-zeitung.de/mensch-metropole/april-april-warum-aprilscherze-und-andere-ueberraschungen-nerven-li.218397</URL>
+                            <Aufrufdatum>14.03.2024</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>"In meiner Kindheit fuhren wir mit Eltern und Großeltern zum
+                            Dauercampen. Dafür wurde ein Gütertaxi gerufen<Streichung>, das war dann
+                                ein Barkas</Streichung>.« Wenn alle Koffer verladen waren, »durfte
+                            ich als kleener <Stichwort>Piepel</Stichwort> vorn auf dem Motorblock
+                            sitzen, zwischen Fahrer und Beifahrer«, erinnert er sich. </Belegtext>
+                        <Fundstelle Fundort="dwds:bmp_regional:2022/07/BMP_F810CE8CC82AC46BEBD5298965E82F00_3725809"> Berliner Morgenpost, 31.07.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <?oxy_comment_start author="dsanders" timestamp="20241001T115641+0200" comment="eig. schöner Beleg, aber was heiti sein soll? Von Heititeiti? Umsorgung der Eltern? " id="zjx_xck_fdc" flag="done"?>
+                        <?oxy_comment_start author="wgrimm" timestamp="20241030T173806+0100" parentID="zjx_xck_fdc" comment="Würde ich hier auch vermuten.
+
+Das wird&apos;s vermutlich nicht sein:
+[Literaturwissenschaft] in der altnordischen Dichtung: bildliche Umschreibung eines Begriffes durch eine einfache eingliedrige Benennung" flag="done" mid="9"?>
+                        <Belegtext><?oxy_comment_end?><?oxy_comment_end mid="9"?><Streichung>Und</Streichung>
+                            was die für ein Getue mit ihren Kindern machen. Heiti hier, heiti da.
+                            Wie sollen die <Stichwort>Piepels</Stichwort> denn mal klarkommen, wenn
+                            's irgendwann kein Heiti mehr gibt? </Belegtext>
+                        <Fundstelle Fundort="dwds:tsp_regional:2018/07/TSP_13235158"> Der
+                            Tagesspiegel, 14.07.2018 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>
+                            <Streichung>Blödsinn,</Streichung> überall auf der Welt saufen die
+                                <Stichwort>Piepel</Stichwort> sich ins Koma. Sogar da, wo es
+                            gesetzlich verboten ist.</Belegtext>
+                        <Fundstelle Fundort="dwds:reddit:de/03459/5jpuz4_dbibea3">
+                            <Autor>Hirnsuppe</Autor>
+                            <Titel>5jpuz4</Titel>
+                            <Stelle/>
+                            <Datum>22.12.2016</Datum>
+                            <URL>https://www.reddit.com/r/de/comments/5jpuz4/comment/dbibea3/</URL>
+                            <Aufrufdatum>09.01.2017</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Ursprünglich wollte er Schiffskoch werden: »Seit ich ein kleiner
+                                <Stichwort>Piepel</Stichwort> war, hab ich bei meiner Mama
+                            mitgekocht«.</Belegtext>
+                        <Fundstelle Fundort="dwds:tsp_regional:2015/03/TSP_201503089179785"> Der
+                            Tagesspiegel, 08.03.2015 </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext><Streichung>Was einer geschickt für sich zu nutzen
+                                weiß:</Streichung> Ernst, der acht Monate alte und bislang nur wenig
+                            beachtete Malaienbär, läuft nebenan zu Hochform auf, turnt auf der
+                            Spitze seines Baumes und zieht dem launischen Knut <Autorenzusatz>dem
+                                Eisbären</Autorenzusatz> die Fans scharenweise ab. »Guck mal, der
+                                <Stichwort>Piepel</Stichwort> da oben ist viel besser«, sagt ein
+                            Junge.</Belegtext>
+                        <Fundstelle Fundort="dwds:tsp_regional:2007/07/TSP_200707103386856"> Der
+                            Tagesspiegel, 10.07.2007 </Fundstelle>
+                        <Diasystematik>
+                            <Bedeutungsebene>allgemeiner</Bedeutungsebene>
+                        </Diasystematik>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext>Unterwegs seien ihnen zwei »komische
+                                <Stichwort>Piepels</Stichwort>« mit dicken Plastiktüten voller CDs
+                            aufgefallen, erinnert sich
+                            <?oxy_comment_start author="wgrimm" timestamp="20241030T171442+0100" comment="der hier zitierte kommt wohl aus Frankfurt (Oder), vgl. Kontext:
+&quot;An einem Samstagmorgen im März 1996 saßen vier Freunde in der Berliner S-Bahn. Malte B., ein breitschultriger Rundkopf, hatte Besuch von seinen Kumpels aus Frankfurt /Oder.&quot;"?>Christian
+                                W.<?oxy_comment_end?><Streichung>, einer der vier
+                                Freunde</Streichung>.</Belegtext>
+                        <Fundstelle Fundort="dwds:kern:1996/zeit1996_27_58_30066:58">Die Zeit,
+                            28.06.1996</Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+                <Lesart>
+                    <?oxy_comment_start author="kduden" timestamp="20241031T125815+0100" comment="semantisch sehr nah beinander, müssen wir noch überlegen, ob ULA oder gleicberechtigt etc."?>
+                    <Syntagmatik><?oxy_comment_end?></Syntagmatik>
+                    <Diasystematik>
+                        <Gruppensprache>Seemannssprache</Gruppensprache>
+                    </Diasystematik>
+                    <Verweise/>
+                    <Definition Typ="Basis"/>
+                    <Kollokationen/>
+                    <Verwendungsbeispiele>
+                        <Beleg>
+                            <Belegtext>
+                                <?oxy_comment_start author="kduden" timestamp="20241031T125959+0100" comment="vermutlich Kapitän, nochmal prüfen"?>Herr<?oxy_comment_end?>
+                                über fünfzigtausend Tonnen und mal gerade achtzehn
+                                    <Stichwort>Piepel</Stichwort> an Bord.</Belegtext>
+                            <Fundstelle Fundort="dwds:sz_legacy:1997/07/sz_458765"> Der Kapitän.
+                                Süddeutsche Zeitung, 05.07.1997 </Fundstelle>
+                        </Beleg>
+                        <Beleg>
+                            <Belegtext>Mit viel
+                                »Hauruck!<?oxy_comment_start author="jgrimm" timestamp="20241030T171458+0100" comment="stillschweigend ergänzt (ist im Original bestimmt vorhanden)"?>«<?oxy_comment_end?>
+                                wird schließlich der Aal <Paraphrase>Torpedo</Paraphrase> wieder ins
+                                Rohr geschoben. Dann beginnt dieselbe Prozedur für den zweiten
+                                Torpedo. Die <Stichwort>Piepels</Stichwort> scheinen in Fahrt
+                                gekommen zu sein.</Belegtext>
+                            <Fundstelle Fundort="dwds:kern:1973/buchheim_boot_1973:112">
+                                <?oxy_comment_start author="dsanders" timestamp="20241030T171610+0100" comment="Autor stammte aus D-MO
+
+Im Glossar am Ende des Buches steht übrigens: &quot;Piepel - von people = Leute&quot;
+
+Ist das in dem Fall vielleicht Seemannssprache?
+Ah, wohl wirklich. Guck mal: https://de.wikipedia.org/wiki/Liste_seem%C3%A4nnischer_Fachw%C3%B6rter_(N_bis_Z)#P
+
+
+Uff, das müsste man dann eigentlich separat ansetzen, oder? Bei Duden steht zur Etym. von ~ iSv &apos;kleiner Junge; Penis&apos; ja was anderes
+"?>Buchheim, Lothar-Günter<?oxy_comment_end?>: Das Boot, München:
+                                Piper 1973, S. 112 </Fundstelle>
+                        </Beleg>
+                    </Verwendungsbeispiele>
+                </Lesart>
+            </Lesart>
+            <Lesart n="2.">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Gebrauchszeitraum>veraltet</Gebrauchszeitraum>
+                    <Stilebene>salopp</Stilebene>
+                </Diasystematik>
+                <Verweise>
+                    <Verweis Typ="Synonym">
+                        <Ziellemma>Penis</Ziellemma>
+                        <Ziellesart/>
+                    </Verweis>
+                </Verweise>
+                <Definition Typ="Basis"/>
+                <Kollokationen/>
+                <?oxy_comment_start author="wgrimm" timestamp="20241030T171636+0100" comment="grade noch auf den gestoßen:
+
+ Dunnerkeil, das Unterteil: Warum es eine Scheu gibt, übers „Untenrum“ zu reden. Berliner Zeitung, 2022-11-17
+Sogar in der Nazizeit riefen Berliner Kinder auf der Straße provozierende Verse wie: „Sack und Piepel sind Geschwister/ und der Arsch ist Kriegsminister“. " flag="done"?>
+                <Verwendungsbeispiele><?oxy_comment_end?>
+                    <Beleg>
+                        <Belegtext><Streichung>Sogar</Streichung> in der Nazizeit riefen Berliner
+                            Kinder auf der Straße provozierende Verse wie: »Sack und
+                                <Stichwort>Piepel</Stichwort> sind Geschwister/ und der Arsch ist
+                            Kriegsminister«.</Belegtext>
+                        <Fundstelle Fundort="dwds:webmonitor:2022-11-17/2/TRogYqKX">
+                            <Autor>Torsten Harmsen</Autor>
+                            <Titel>Dunnerkeil, das Unterteil: Warum es eine Scheu gibt, übers
+                                »Untenrum« zu reden</Titel>
+                            <Stelle/>
+                            <Datum>17.11.2022</Datum>
+                            <URL>https://www.berliner-zeitung.de/mensch-metropole/dunnerkeil-das-unterteil-warum-es-eine-scheu-gibt-uebers-untenrum-zu-reden-li.279559</URL>
+                            <Aufrufdatum>14.03.2024</Aufrufdatum>
+                        </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Im Mai noch desselben Jahres lernte Rolf an einer Imbißbude
+                            Tamara kennen, welcher er großzügig »Bols Grüne Banane«
+                                <Autorenzusatz>Likör</Autorenzusatz> spendierte, damit er ihr seinen
+                                <Stichwort>Piepel</Stichwort> reinstecken konnte. </Belegtext>
+                        <Fundstelle Fundort="dwds:kern:1985/konkret8514_042_kapielski:15"> konkret,
+                            2000 [1985] </Fundstelle>
+                    </Beleg>
+                    <Beleg class="invisible">
+                        <Belegtext><Streichung>Deutlich wird die Kastrationsangst der Jungen auch in
+                                der selbst-»gedichteten« Liedzeile (zu: »Von den blauen Bergen
+                                kommen wir«):</Streichung> »Wir zieh'n den Lehrer nackend aus und
+                            reißen ihm den <Stichwort>Piepel</Stichwort> raus«.</Belegtext>
+                        <Fundstelle Fundort="dwds:kern:1971/broschuere_schuelerladen_1971:96"> o.
+                            A.[Autorenkollektiv am Psychologischen Institut der Freien Universität
+                            Berlin]: Sozialistische Projektarbeit im Berliner Schülerladen Rote
+                            Freiheit. Frankfurt: Fischer Bücherei 1971, S. 96 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele>
+                <Beleg>
+                    <Belegtext>Dabei wollte »<Stichwort>Piepel</Stichwort>« doch ein Zeichen setzen
+                        für die Jahreshauptversammlung.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 21.10.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Und ausgerechnet vor dem Spiel hat »<Stichwort>Piepel</Stichwort>«
+                        gar keinen Bammel.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 08.11.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Für das Wuppertal-Spiel hat »<Stichwort>Piepel</Stichwort>« wieder
+                        fast alle Mann an Bord.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 26.11.2004</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Papa »<Stichwort>Piepel</Stichwort>« erfuhr vom schönen Erfolg seiner
+                        hübschen Tochter im Pauli-Trainingslager.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 30.07.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bei <Stichwort>Piepel</Stichwort> war ich die letzten vier Mal dabei
+                        », sagt der Mittelfeld-Mann.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 20.09.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext><Stichwort>Piepel</Stichwort> hat es abgelehnt, die Amateure von
+                        Coach Ewald Reil wieder zu übernehmen.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 27.02.2003</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bei Pauli gegen Oberhausen (3:1) war »<Stichwort>Piepel</Stichwort>«
+                        selbst vor Ort.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 16.09.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Das ist die Garantie, das es besser wird », erklärt
+                            <Stichwort>Piepel</Stichwort> seine Fußball-Philosophie.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 19.09.2002</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bis die kommt, kann »<Stichwort>Piepel</Stichwort>« ja ehrenamtlich
+                        für seinen alten Klub Pauli arbeiten.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 30.11.2005</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Trotzdem wird »<Stichwort>Piepel</Stichwort>« in den verbleibenden
+                        Partien schon für die nächste Spielzeit testen.</Belegtext>
+                    <Fundstelle Fundort="dwds:bild">Bild, 15.04.2005</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

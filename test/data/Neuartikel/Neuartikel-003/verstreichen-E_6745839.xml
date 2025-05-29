@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_v_3459" Autor="wgrimm" Typ="Vollartikel" Zeitstempel="2024-08-14" Erstellungsdatum="1977-01-01" Status="Lex-Wiedervorlage">
+        <?oxy_comment_start author="kduden" timestamp="20220330T092555+0200" comment="bitte danach auf Wiedervorlage, ich muss noch Metadaten ändern" flag="done"?>
+        <Formangabe Typ="Hauptform"><?oxy_comment_end?>
+            <Schreibung Trennung="ver-strei-chen">verstreichen</Schreibung>
+            <Aussprache><IPA Audiodatei="010/verstreichen"/></Aussprache>
+            <Grammatik>
+                <Wortklasse>Verb</Wortklasse>
+                <Praesens><Wert>verstreicht</Wert></Praesens>
+                <Praeteritum><Wert>verstrich</Wert></Praeteritum>
+                <Auxiliar><Wert>hat</Wert></Auxiliar>
+                <Auxiliar><Wert>ist</Wert></Auxiliar>
+                <Partizip_II><Wert>verstrichen</Wert></Partizip_II>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie/>
+        <Verweise Typ="Derivation">
+            <Verweis Typ="Erstglied">
+                <Ziellemma>ver-</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+            <Verweis Typ="Letztglied">
+                <Ziellemma>streichen</Ziellemma>
+                <Ziellesart/>
+            </Verweis>
+        </Verweise>
+        <Diachronie>
+            <Etymologie/>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise>
+                <Verweis Typ="EtymWB">
+                    <Ziellemma>verstreichen</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+        </Diachronie>
+        <Lesart n="1." xml:id="S_v_2819">
+            <Formangabe>
+                <Grammatik>
+                    <Auxiliar><Wert>hat</Wert></Auxiliar>
+                </Grammatik>
+                <Diasystematik/>
+            </Formangabe>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <Belegtext>jmd. <Stichwort>verstreicht</Stichwort> etw.
+                        <?oxy_comment_start author="jgrimm" timestamp="20220330T081847+0200" comment="Konstruktionsmuster geändert, vermutlich im WDG so gewesen" id="svm_xjs_rzb" flag="done"?><?oxy_comment_start author="wgrimm" timestamp="20231207T222437+0100" parentID="svm_xjs_rzb" comment="ok" flag="done" mid="2"?></Belegtext><?oxy_comment_end?><?oxy_comment_end mid="2"?>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <?oxy_comment_start author="wgrimm" timestamp="20240814T141907+0200" comment="Dach-LA aus ULA b + (aufgelöster) ULA c: Definitionen zusammengefasst, Belege aufgeteilt"?>
+            <Definition Typ="Basis"><?oxy_comment_end?>durch
+                <?oxy_comment_start author="kduden" timestamp="20220330T092014+0200" comment="etw. durch streichende Bewegungen gleichmäßig verteilen" id="prb_bls_rzb" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20231207T223317+0100" parentID="prb_bls_rzb" comment="übernommen" flag="done" mid="5"?>streichen<?oxy_comment_end mid="5"?><?oxy_comment_end?>de
+                Bewegungen auf einer Oberfläche
+                <?oxy_comment_start author="jgrimm" timestamp="20220330T091544+0200" comment="Vorschlag: auf einer Oberfläche auftragen (so dass Unebenheiten geglättet werden oder die Substanz tiefer eindringen kann)" id="j55_4ks_rzb" flag="done"?>auftragen<?oxy_comment_end?>,
+                gleichmäßig verteilen</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                    <Belegtext>Ölfarbe muss gut <Stichwort>verstrichen</Stichwort>
+                        werden</Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> Der fertige Polentabrei wird <Streichung>nun</Streichung> auf ein
+                        mit Backpapier ausgelegtes Backblech geschüttet und gleichmäßig
+                            <Stichwort>verstrichen</Stichwort>, etwa einen Zentimeter
+                        dick.</Belegtext>
+                    <Fundstelle Fundort="dwds:badz:2024/06/BADZ_51337124954"> Badische Zeitung,
+                        29.06.2024 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Ich trage den Leim auf und <Stichwort>verstreiche</Stichwort> ihn
+                        mit dem Zeigefinger, der im Plastikhandschuh steckt. </Belegtext>
+                    <Fundstelle Fundort="dwds:tgz_regional:2023/05/TGZ_2023050400000312808341">
+                        Thurgauer Zeitung, 04.05.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Die Kleistertechnik hat in Herrnhut Tradition, im 18. Jahrhundert
+                        wurden damit Bucheinbände, Dosen und Schachteln verziert. Für die Muster
+                        wird eine Farbmasse auf Papier aufgebracht und kunstvoll
+                            <Stichwort>verstrichen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds:frt:2022/11/FRT_3170409704-BAMBERG"> Fränkischer Tag,
+                        25.11.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20220330T092117+0200" comment="NEU" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Drei große Esslöffel der Sonnenblumenkerne in der
+                        Mitte einer mittelgroßen Schüssel <Stichwort>verstreichen</Stichwort>, den
+                        Spitzkohl und den schwarzen Rettich auf der Creme zum kleinen Berg
+                        anrichten. </Belegtext>
+                    <Fundstelle Fundort="dwds:tsp:2022/02/TSP_doc7joc21ru7swakp2yhve"> Der
+                        Tagesspiegel, 13.02.2022 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>
+                        <Streichung>Anschließend</Streichung> die Creme auf den
+                            <?oxy_comment_start author="wgrimm" timestamp="20240814T142828+0200" comment="ergänzt"?><Autorenzusatz>Teig-</Autorenzusatz><?oxy_comment_end?>Boden
+                            <Stichwort>verstreichen</Stichwort>, ca. 5 Std. kaltstellen und vor dem
+                        Servieren nach Belieben verzieren. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Mittelbayerische, 30.06.2021 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20220330T091122+0200" comment="der gehört zu 1 b, AkkO ist hier die verriebene Substanz" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Bohrlöcher lassen sich gut schließen, indem man
+                        Fertigspachtel oder Maleracryl in die Löcher einspritzt oder einarbeitet und
+                        anschließend die Masse mit einem Spachtel
+                        <Stichwort>verstreicht</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Schweriner Volkszeitung, 16.01.2021 </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Glasur portionsweise auf die Kringel geben und sofort mit einem
+                        Messer oder kleinem Backpinsel <Stichwort>verstreichen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Mittelbayerische, 23.11.2019 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20220330T091837+0200" comment="NEU" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Nachdem Sie die Spachtelmasse
+                            <Stichwort>verstrichen</Stichwort> haben, können Sie, nach einer
+                        Trockenzeit von einer halben bis ganzen Stunde, die verspachtelte Stelle mit
+                        Schleifpapier glätten. </Belegtext>
+                    <Fundstelle Fundort="dwds:web:pvc/PVCUp5v7">
+                        <Autor>Feli</Autor>
+                        <Titel>Gipskartondübel – Infos zur Anwendung, Tragkraft und Größen –
+                            Talu.de</Titel>
+                        <Kurztitel>Gipskartondübel</Kurztitel>
+                        <Stelle/>
+                        <Datum>09.11.2017</Datum>
+                        <URL>https://www.talu.de/gipskartonduebel/</URL>
+                        <Aufrufdatum>01.09.2020</Aufrufdatum>
+                    </Fundstelle>
+                </Beleg>
+                <Beleg class="invisible">
+                    <Belegtext> Den Blätterteig auf dem Backblech ausrollen, die
+                        Gemüse-Bacon-Mischung mit einem Teigschaber auf dem Blätterteig
+                            <Stichwort>verstreichen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Neue Westfälische, 06.10.2016 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <?oxy_comment_start author="jgrimm" timestamp="20220330T091139+0200" comment="ebenso 1 b" flag="done"?>
+                    <Belegtext><?oxy_comment_end?> Ursprünglich wurden mit dem Sumpfkalk Fugen
+                        gefüllt und dabei der zu viel aufgetragene Mörtel einfach über die Fugen
+                        hinaus <Stichwort>verstrichen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds"> Luzerner Zeitung, 26.07.2002 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+            <Lesart n="a)" xml:id="S_v_2820">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <?oxy_comment_start author="dsanders" timestamp="20240814T141944+0200" comment="ergänzt"?>
+                    <Bedeutungsebene>spezieller<?oxy_comment_end?></Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis"><?oxy_comment_start author="kduden" timestamp="20240814T142029+0200" comment="ergänzt"?>etw.
+                    (eine Fläche, einen Hohlraum o. Ä.) <?oxy_comment_end?>ausfüllen,
+                    <?oxy_comment_start author="kduden" timestamp="20220330T090822+0200" comment="ich würde hier &quot;verfüllen&quot; wählen
+
+AkkO dieser Lesart ist die affizierte Fläche bzw. Hohlraum" id="mmn_2ks_rzb" flag="done"?><?oxy_comment_start author="jgrimm" timestamp="20231207T222641+0100" parentID="mmn_2ks_rzb" comment="geändert" flag="done" mid="15"?>ver<?oxy_comment_end mid="15"?><?oxy_comment_end?>füllen,
+                    verputzen</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                        <Belegtext>Fugen mit Mörtel, Risse an den Bäumen mit Wachs
+                                <Stichwort>verstreichen</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                    <Beleg>
+                        <?oxy_comment_start author="dsanders" timestamp="20220330T091218+0200" comment="Ersatzbeleg" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Wenn ihr mit eurer Arbeit fertig seid, werden
+                            wir die feinen Löcher mit einer Spachtel
+                                <Stichwort>verstreichen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:fr:2006/08/FR_5123468"> Frankfurter Rundschau,
+                            14.08.2006 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="dsanders" timestamp="20240814T142114+0200" comment="stillschweigend geändert: ae u. ue --&gt; ä u. ü"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>
+                            <Streichung>Das Problem ist rein wirtschaftlicher Art:</Streichung> wenn
+                            die Wände der Lehmhütten mit Gips <Stichwort>verstrichen</Stichwort>
+                            werden, verlieren die Wanzen ihren Lebensraum und die Krankheit
+                            verschwindet. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Neue Zürcher Zeitung, 15.09.1993 </Fundstelle>
+                    </Beleg>
+                    <?oxy_comment_start author="kduden" timestamp="20240814T143932+0200" comment="neu"?>
+                    <Beleg><?oxy_comment_end?>
+                        <Belegtext>Auf der Innenseite der Lehmbrocken sind noch Abdrücke einer
+                            hölzernen Wandkonstruktion zu erkennen. Die Außenseite ist glatt
+                                <Stichwort>verstrichen</Stichwort>, und mehrere hundert der
+                            Bruchstücke sind mit einer dick aufgetragenen, weißen Farbe
+                            bemalt.</Belegtext>
+                        <Fundstelle Fundort="dwds:faz:1993/06/FAZ_F19930611KBRAND-100"> Frankfurter
+                            Allgemeine Zeitung, 11.06.1993 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="kduden" timestamp="20220330T091338+0200" comment="Ersatzbeleg" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Es erschien ein kleiner schneeweißer Kopf,
+                            der eines Königs des Mittleren Reiches, um 1870 v. u. Z. Es folgt nun
+                            die Retusche, die Bearbeitung mit dem hölzernen Spatel. Grate werden
+                            geglättet, kleine Löcher im Guß <Stichwort>verstrichen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds:bz_pp:bz_pp/src/672/26120215_1962_08_29_01_286">
+                            Berliner Zeitung, 29.08.1962 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart n="b)" xml:id="S_v_2821">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <?oxy_comment_start author="wgrimm" timestamp="20240814T144007+0200" comment="ergänzt"?>
+                    <Bedeutungsebene><?oxy_comment_end?>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <?oxy_comment_start author="wgrimm" timestamp="20240814T142256+0200" comment="&quot;etw. ...&quot; entfernt
+
+zweite Teildef. entfernt, s. LA 1 o. ULA 1 a: &quot;auf einer Oberfläche auftragen (so dass Unebenheiten geglättet werden oder die Substanz tiefer eindringen kann)&quot;"?>
+                <Definition Typ="Basis"><?oxy_comment_end?>verreiben, einreiben, streichend und
+                    einreibend verteilen</Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                        <Belegtext>man soll den Puder, diese Creme auf der Haut gut
+                                <Stichwort>verstreichen</Stichwort>
+                        </Belegtext>
+                    </Kompetenzbeispiel>
+                    <Beleg>
+                        <Belegtext> »Mit einem abgeflachten Pinsel unterhalb der Wangenknochen sowie
+                            an der seitlichen Stirn und den Nasenflügeln den Puder
+                                <Stichwort>verstreichen</Stichwort> und verblenden.« </Belegtext>
+                        <Fundstelle Fundort="dwds"> Saarbrücker Zeitung, 30.09.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <?oxy_comment_start author="jgrimm" timestamp="20220330T091657+0200" comment="NEU" flag="done"?>
+                        <Belegtext><?oxy_comment_end?> Zunächst die Sonnencreme
+                                <Stichwort>verstreichen</Stichwort> und einziehen lassen. </Belegtext>
+                        <Fundstelle Fundort="dwds:rztg:2016/07/RZTG_38C26673A6F5EBCD069A4690FBB5EA01-KOBLENZ"> Rhein-Zeitung, 15.07.2016 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Einfach nur Lotion <Stichwort>verstreichen</Stichwort> und die
+                            Kunden mit Aromaöl einlullen ist nicht meine Sache. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Der Bund, 23.09.2006 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Auf der eingecremten Haut werden eingeweichte Gipsbinden
+                                <Stichwort>verstrichen</Stichwort>, nach fünfzehn Minuten kann der
+                            entstandene Panzer abgenommen und mit Gips ausgegossen werden. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Bild am Sonntag, 15.02.1998 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+            <Lesart Autor="brockmeier" Quelle="DWDS" Zeitstempel="2022-03-30" n="c)">
+                <Syntagmatik/>
+                <Diasystematik>
+                    <Bedeutungsebene>spezieller</Bedeutungsebene>
+                </Diasystematik>
+                <Verweise/>
+                <Definition Typ="Basis">streichend
+                    <?oxy_comment_start author="dsanders" timestamp="20220330T081957+0200" comment="&quot;etwas&quot; entfernt" flag="done"?>verbrauchen<?oxy_comment_end?></Definition>
+                <Kollokationen/>
+                <Verwendungsbeispiele>
+                    <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                        <?oxy_comment_start author="wgrimm" timestamp="20220330T092329+0200" comment="von idr oder aus dem WDG übernommen" flag="done"?>
+                        <Belegtext><?oxy_comment_end?>du hast zu viel Butter
+                                <Stichwort>verstrichen</Stichwort></Belegtext>
+                    </Kompetenzbeispiel>
+                    <Beleg>
+                        <Belegtext> In 90 Stunden wurden insgesamt 21 Liter hellgraue und
+                            dunkelgraue Farbe von 25 fleißigen Helfern im alten und neuen
+                            Trainingsraum <Stichwort>verstrichen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Thüringer Allgemeine, 08.01.2022 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Einen großen Anteil der Farben und Lacke haben Heimwerker
+                                <Stichwort>verstrichen</Stichwort>. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Rhein-Zeitung, 03.03.2017 </Fundstelle>
+                    </Beleg>
+                    <Beleg>
+                        <Belegtext> Rund zwei Wochen haben die Malerarbeiten in dem Gotteshaus
+                            gedauert, rund 15 Eimer Farbe à 12,5 Liter sind in dieser Zeit
+                                <Stichwort>verstrichen</Stichwort> worden. </Belegtext>
+                        <Fundstelle Fundort="dwds"> Neue Westfälische, 29.07.2006 </Fundstelle>
+                    </Beleg>
+                </Verwendungsbeispiele>
+            </Lesart>
+        </Lesart>
+        <Lesart n="2." xml:id="S_v_2823">
+            <Formangabe>
+                <Grammatik>
+                    <Auxiliar><Wert>ist</Wert></Auxiliar>
+                </Grammatik>
+                <Diasystematik/>
+            </Formangabe>
+            <Syntagmatik>
+                <Konstruktionsmuster>
+                    <?oxy_comment_start author="wgrimm" timestamp="20220327T115657+0200" comment="Vorschlag B. Roll" flag="done"?>
+                    <Belegtext><?oxy_comment_end?>etw. [die Zeit, eine Zeitspanne]
+                            <Stichwort>verstreicht</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+                <Konstruktionsmuster>
+                    <Belegtext>etw. [eine Frist, ein Zeitpunkt o. Ä.]
+                            <Stichwort>verstreicht</Stichwort></Belegtext>
+                </Konstruktionsmuster>
+            </Syntagmatik>
+            <Diasystematik/>
+            <Verweise/>
+            <Definition Typ="Basis"><?oxy_comment_start author="jgrimm" timestamp="20220327T115756+0200" comment="Def. B. Roll" flag="done"?>vergehe<?oxy_comment_start author="jgrimm" timestamp="20240814T145419+0200" comment="ergänzt" mid="27"?>n<?oxy_comment_end?>,
+                    <Verweis Typ="vgl">
+                    <Ziellemma>verrinnen</Ziellemma>
+                    <Ziellesart>*</Ziellesart>
+                </Verweis>, <Verweis Typ="vgl">
+                    <Ziellemma>vorübergehen</Ziellemma>
+                    <Ziellesart>2</Ziellesart>
+                </Verweis><?oxy_comment_end mid="27"?></Definition>
+            <Definition Typ="Basis">ablaufen, zu Ende
+                gehen<?oxy_comment_start author="jgrimm" timestamp="20240814T145244+0200" comment="ergänzt"?>,
+                sich <Verweis Typ="vgl">
+                    <Ziellemma>neigen</Ziellemma>
+                    <Ziellesart>3</Ziellesart>
+                </Verweis><?oxy_comment_end?></Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                    <Belegtext>das Jahr, der Urlaub, die Frist ist schnell
+                            <Stichwort>verstrichen</Stichwort>
+                    </Belegtext>
+                </Kompetenzbeispiel>
+                <Kompetenzbeispiel Zeitstempel="1977-01-01" Quelle="WDG">
+                    <Belegtext>ich wollte keinen Augenblick ungenutzt
+                            <Stichwort>verstreichen</Stichwort>
+                        <?oxy_comment_start author="dsanders" timestamp="20220330T092501+0200" comment="bitte hierzu noch mindestens drei Belege aus dem Korpus" id="vm4_vls_rzb" flag="done"?><?oxy_comment_start author="dsanders" timestamp="20231207T223917+0100" parentID="vm4_vls_rzb" comment="ergänzt" flag="done" mid="30"?>lassen<?oxy_comment_end mid="30"?><?oxy_comment_end?></Belegtext>
+                </Kompetenzbeispiel>
+                <Beleg>
+                    <Belegtext> Die Frist zur Räumung des Schlachthofs bis zum 15. Oktober hatte der
+                        Betreiber <Stichwort>verstreichen</Stichwort> lassen. </Belegtext>
+                    <Fundstelle Fundort="dwds:frt_regional:2023/10/FRT_3173525306-BAMBERG">
+                        Fränkischer Tag, 26.10.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Im ARD-Sommerinterview sagt er <Autorenzusatz>Markus
+                            Söder</Autorenzusatz>, das Zeitfenster, in dem er Kanzlerkandidat hätte
+                        werden können, sei <Stichwort>verstrichen</Stichwort>. </Belegtext>
+                    <Fundstelle Fundort="dwds:fr:2023/08/FR_fr_6800343E51F2C4083000"> Frankfurter
+                        Rundschau, 08.08.2023 </Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext> Nachdem die gesetzte Frist ungenutzt
+                            <Stichwort>verstrich</Stichwort>, stellte der Eigentümer einen
+                        Strafantrag bei der Polizei. </Belegtext>
+                    <Fundstelle Fundort="dwds:baz_regional:2017/04/BAZ_2017041120124321006"> Basler
+                        Zeitung, 11.04.2017 </Fundstelle>
+                </Beleg>
+                <?oxy_comment_start author="dsanders" timestamp="20240814T145456+0200" comment="neu"?>
+                <Beleg><?oxy_comment_end?>
+                    <Belegtext> Drei Monate sind seit der Wahl <Stichwort>verstrichen</Stichwort>,
+                        aus der die von Kanzler Schüssel geführte ÖVP mit einem sensationellen Sieg
+                        hervorgegangen ist. </Belegtext>
+                    <Fundstelle Fundort="dwds:faz:2003/02/FAZ_FD1200302221769305"> Frankfurter
+                        Allgemeine Zeitung, 22.02.2003 </Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Zeitstempel="2023-08-14" Quelle="DWDS" Autor="pandey">
+                <Beleg>
+                    <Belegtext>Nach unbemerkt <Stichwort>verstrichenen</Stichwort> 45 Minuten gingen
+                        wir zur zweiten Phase der Meditation über.</Belegtext>
+                    <Fundstelle Fundort="dwds">Süddeutsche Zeitung, 18.05.1996</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Nachdem sie schon acht Tage hier war, wollte er nicht mehr Zeit
+                            <Stichwort>verstreichen</Stichwort> lassen.</Belegtext>
+                    <Fundstelle Fundort="dwds">Feuchtwanger, Lion: Erfolg. In: ders., Gesammelte
+                        Werke in Einzelbänden, Bd. 6, Berlin: Aufbau-Verl. 1993 [1930], S.
+                        171</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Bis diese abgeschlossen ist, wird wohl auch noch einige Zeit
+                            <Stichwort>verstreichen</Stichwort>.</Belegtext>
+                    <Fundstelle Fundort="dwds">C’t, 2000, Nr. 11</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Auf alle Fälle werde etliche Zeit
+                        <Stichwort>verstreichen</Stichwort>, bis das Material herbeigeschafft sei,
+                        um den Antrag juristisch genügend zu fundieren.</Belegtext>
+                    <Fundstelle Fundort="dwds">Feuchtwanger, Lion: Erfolg. In: ders., Gesammelte
+                        Werke in Einzelbänden, Bd. 6, Berlin: Aufbau-Verl. 1993 [1930], S.
+                        249</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Warum nur hatten wir fast ein halbes Jahr
+                            <Stichwort>verstreichen</Stichwort> lassen?</Belegtext>
+                    <Fundstelle Fundort="dwds">C’t, 1993, Nr. 6</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sonst hätten sie die große Chance von 1987 nicht ungenutzt
+                            <Stichwort>verstreichen</Stichwort> lassen.</Belegtext>
+                    <Fundstelle Fundort="dwds">Die Zeit, 27.09.1996, Nr. 40</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Er ließ die zehn Jahre <Stichwort>verstreichen</Stichwort> und gab
+                        noch eins dazu.</Belegtext>
+                    <Fundstelle Fundort="dwds">von Salomon, Ernst: Der Fragebogen, Reinbek bei Hamburg: Rowohlt 1961 [1951], S. 89</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Sie ließen aber kostbare Zeit <Stichwort>verstreichen</Stichwort>,
+                        und der schlaue Georgier kam ihnen zuvor.</Belegtext>
+                    <Fundstelle Fundort="dwds">Gitermann, Valentin: Die Russische Revolution. In:
+                        Propyläen Weltgeschichte, Berlin: Directmedia Publ. 2000 [1960], S.
+                        6672</Fundstelle>
+                </Beleg>
+                <Beleg>
+                    <Belegtext>Es kam darauf an, wie weit dieser vom Meßplatz entfernt war; eine
+                        verhältnismäßig lange Frist <Stichwort>verstrich</Stichwort> dabei
+                        jedenfalls.</Belegtext>
+                    <Fundstelle Fundort="dwds">Goldfriedrich, Johann: Geschichte des Deutschen
+                        Buchhandels vom Westfälischen Frieden bis zum Beginn der klassischen
+                        Litteraturperiode. In: Lehmstedt, Mark (Hg.) Geschichte des deutschen
+                        Buchwesens, Berlin: Directmedia Publ. 2000 [1908], S. 24482</Fundstelle>
+                </Beleg>
+            </Verwendungsbeispiele>
+        </Rohdaten>
+    </Artikel>
+</DWDS>

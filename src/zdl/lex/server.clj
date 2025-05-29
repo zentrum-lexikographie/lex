@@ -1,39 +1,31 @@
 (ns zdl.lex.server
-  (:gen-class)
   (:require
-   [clojure.tools.logging :as log]
-   [integrant.core :as ig]
    [zdl.lex.env :as env]
-   [zdl.lex.util :refer [exec! install-uncaught-exception-handler!]]))
-
-(install-uncaught-exception-handler!)
-
-(def system
-  (atom nil))
+   [zdl.lex.server.db :as db]
+   [zdl.lex.server.git :as git]
+   [zdl.lex.server.http :as http]
+   [zdl.lex.server.issue :as issue]
+   [zdl.lex.server.schedule :as schedule]))
 
 (defn start
   []
-  (ig/load-namespaces env/config env/server-config-keys)
-  (reset! system (ig/init env/config env/server-config-keys))
-  (log/info "Started ZDL/Lex Server"))
+  (db/open-db)
+  (issue/open-db)
+  (git/init!)
+  (http/start-server)
+  (when env/schedule-tasks? (schedule/start)))
 
 (defn stop
   []
-  (log/info "Stopping ZDL/Lex Server")
-  (when-let [system' @system]
-    (ig/halt! system')
-    (reset! system nil)))
+  (when env/schedule-tasks? (schedule/stop))
+  (http/stop-server)
+  (issue/close-db)
+  (db/close-db)
+  (env/stop-metrics-reporter))
 
-(defn stop-on-shutdown
-  []
-  (.addShutdownHook (Runtime/getRuntime) (Thread. ^Runnable stop)))
-
-(defn start!
+(defn -main
   [& _]
-  (exec! (fn [& _]
-           (stop-on-shutdown)
-           (start)
-           @(promise))))
-
-(def -main
-  start!)
+  (. (Runtime/getRuntime) (addShutdownHook (Thread. stop)))
+  (env/start-metrics-reporter)
+  (start)
+  @(promise))

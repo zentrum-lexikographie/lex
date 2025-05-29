@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8'?><DWDS xmlns="http://www.dwds.de/ns/1.0">
+    <Artikel Quelle="WDG/DWDS" Erstfassung="WDG" Redakteur="kduden" xml:id="E_a_2569" Autor="jgrimm" Typ="Basisartikel-D" Tranche="RSR-2024-55_E2_alt" Zeitstempel="2025-05-21" Erstellungsdatum="1967-01-01" Status="Red-f-Sammelbecken">
+        <Formangabe Typ="Hauptform">
+            <Schreibung Trennung="ad ab-sur-dum">ad absurdum</Schreibung>
+            <Aussprache>
+                <IPA Audiodatei="107/ad_absurdum">at apˈsʊʁdʊm</IPA>
+            </Aussprache>
+            <Grammatik>
+                <Wortklasse>Mehrwortausdruck</Wortklasse>
+                <Funktionspraeferenz>adverbiell</Funktionspraeferenz>
+            </Grammatik>
+            <Diasystematik/>
+        </Formangabe>
+        <Orthografie>
+            <Orthografieregel><?oxy_comment_start author="kduden" timestamp="20250506T085254+0200" comment="Nur Bezugsregel ergänzt" flag="done"?>55
+                (E3)<?oxy_comment_end?></Orthografieregel>
+        </Orthografie>
+        <Verweise Typ="Simplex"/>
+        <Diachronie>
+            <Etymologie><erwaehntes_Zeichen Sprache="lat">ad absurdum</erwaehntes_Zeichen>
+                <Paraphrase>zum Unpassenden</Paraphrase> &lt; <erwaehntes_Zeichen Sprache="lat">ad</erwaehntes_Zeichen>
+                <Paraphrase>bis zu, an</Paraphrase> + <erwaehntes_Zeichen Sprache="lat">absurdus</erwaehntes_Zeichen>
+                <Paraphrase>misstönend, ungereimt, unpassend</Paraphrase></Etymologie>
+            <Formgeschichte/>
+            <Bedeutungsgeschichte/>
+            <Verweise/>
+        </Diachronie>
+        <Lesart xml:id="S_a_3202">
+            <Syntagmatik/>
+            <Diasystematik/>
+            <Verweise>
+                <Verweis Typ="Assoziation">
+                    <Ziellemma>absurd</Ziellemma>
+                    <Ziellesart/>
+                </Verweis>
+            </Verweise>
+            <Definition Typ="Basis">bis zur Sinnlosigkeit</Definition>
+            <Kollokationen/>
+            <Verwendungsbeispiele>
+                <Kompetenzbeispiel>
+                    <Belegtext>einen Gedanken <Stichwort>ad absurdum</Stichwort> führen</Belegtext>
+                </Kompetenzbeispiel>
+            </Verwendungsbeispiele>
+        </Lesart>
+        <Rohdaten>
+            <Verwendungsbeispiele Autor="DWDS" Quelle="DWDS" Zeitstempel="2023-06-21"/>
+        </Rohdaten>
+    </Artikel>
+</DWDS>
