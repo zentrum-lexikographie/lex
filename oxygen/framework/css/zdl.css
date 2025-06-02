@@ -40,9 +40,9 @@ Orthografie {
 
 /* untergeordnete Blöcke, die als schmalere »Kästen« dargestellt werden */
 
-Genitiv, Plural {
+Genitiv, Plural, Praesens, Praeteritum, Auxiliar, Partizip_II, Positivvariante, Komparativ, Superlativ {
 	border-top: 1px dotted #999;
-	border-bottom: 1px dotted #999;
+	/*border-bottom: 1px dotted #999;*/
 	padding: 0em;
 	margin: 0em 0em 0.1em 0em;
 }
