@@ -98,7 +98,8 @@ Wortklasse = element Wortklasse {
 
 Genitiv = element Genitiv {
 	element Wert {
-		(
+		Rechtschreibstatus ?
+		, (
 			# Flexionsendungen
 			string '-'
 			| string '-en'
@@ -123,7 +124,8 @@ Genitiv = element Genitiv {
 
 Plural = element Plural {
 	element Wert {
-		(
+		Rechtschreibstatus ?
+		, (
 			# Flexionsendungen
 			string '-'
 			| string '-a'
@@ -156,15 +158,19 @@ Plural = element Plural {
 }
 
 Praesens = element Praesens {
-	Rechtschreibstatus ?
-	, element Wert { Flexionstoken }
+	element Wert {
+		Rechtschreibstatus ?
+		, Flexionstoken
+	}
 	, Frequenzangabe ?
         , Diasystematik ?
 }
 
 Praeteritum = element Praeteritum {
-	Rechtschreibstatus ?
-	, element Wert { Flexionstoken }
+	element Wert {
+		Rechtschreibstatus ?
+		, Flexionstoken
+	}
 	, Frequenzangabe ?
         , Diasystematik ?
 }
@@ -176,8 +182,10 @@ Auxiliar = element Auxiliar {
 }
 
 Partizip_II = element Partizip_II {
-	Rechtschreibstatus ?
-	, element Wert { Flexionstoken }
+	element Wert { 
+		Rechtschreibstatus ?
+		, Flexionstoken
+	}
 	, Frequenzangabe ?
         , Diasystematik ?
 }
@@ -189,13 +197,19 @@ Positivvariante = element Positivvariante {
 }
 
 Komparativ = element Komparativ {
-	element Wert { Lemmatoken }
+	element Wert {
+		Rechtschreibstatus ?
+		, Lemmatoken
+	}
 	,Frequenzangabe ?
         , Diasystematik ?
 }
 
 Superlativ = element Superlativ {
-	element Wert { Lemmatoken }
+	element Wert {
+		Rechtschreibstatus ?
+		, Lemmatoken
+	}
 	,Frequenzangabe ?
         , Diasystematik ?
 }
