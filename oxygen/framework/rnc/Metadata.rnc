@@ -172,7 +172,7 @@ Metadaten.Artikel = (
 		'Vollartikel'
 		| 'Basisartikel'
 		| 'Basisartikel-D'
-		| 'Basisartikel-MWA'
+		| 'Basisartikel-MWA' # deprecated
 		| 'Verweisartikel'
 		| 'Minimalartikel'
 	}
@@ -223,6 +223,7 @@ Metadaten.Artikel = (
 	    | 'Mix'
 	    | 'Movierung'
 	    | 'MWA'
+	    | 'MWA-Basis'
 	    | 'MWA-Zentral-Satellit'
             | 'NS'
 	    | 'Philosophie'
