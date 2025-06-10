@@ -283,6 +283,7 @@ Orthografieregel = element Orthografieregel {
             | '19'
             | '20 (1)'
             | '20 (2)'
+	    | '20 (E)'
             | '21'
             | '21 (1)'
             | '21 (2)'
