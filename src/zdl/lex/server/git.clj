@@ -227,12 +227,12 @@
   (loop [n 0]
     (let [id        (str "E_" (rand-int 10000000))
           id-query  [:query
-                    [:clause
-                     [:field [:term "id"]]
-                     [:value [:pattern (str "*" id "*")]]]]
+                     [:clause
+                      [:field [:term "id"]]
+                      [:value [:pattern (str "*" id "*")]]]]
           request   {:q (lucene/->str id-query) :rows 0}
           response  (index/query request)
-          num-found (get-in response [:body :response :numFound] 1)]
+          num-found (get-in response [:body "response" "numFound"] 1)]
       (cond
         (= 0 num-found) id
         (= 10 n)        (throw (ex-info (str "Maximum number of article id "
