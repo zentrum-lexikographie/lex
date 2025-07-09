@@ -1,7 +1,7 @@
 name: test
 on:
   push:
-      branches:
+    branches:
       - 'main'
 jobs:
   test:
@@ -22,10 +22,11 @@ jobs:
           cli: 1.12.1.1550
 
       - name: Execute tests
-        run: |
-          export GIT_AUTHOR_NAME="ZDL-Lex"
-          export GIT_AUTHOR_EMAIL="noreply@dwds.de"
-          export GIT_COMMITTER_NAME="ZDL-Lex"
-          export GIT_COMMITTER_EMAIL="noreply@dwds.de"
-          clojure -T:build server && clojure -X:oxygen:client:server:test
         shell: bash
+        env:
+          GIT_AUTHOR_NAME: "ZDL-Lex"
+          GIT_AUTHOR_EMAIL: "noreply@dwds.de"
+          GIT_COMMITTER_NAME: "ZDL-Lex"
+          GIT_COMMITTER_EMAIL: "noreply@dwds.de"
+        run: |
+          clojure -T:build server && clojure -X:oxygen:client:server:test
