@@ -34,14 +34,14 @@ def article_progress(ctx, label):
 @click.group()
 @click.option('--server-base',
               envvar='ZDL_LEX_SERVER_BASE',
-              default='https://lex.dwds.de/')
+              default='https://labor.dwds.de/')
 @click.option('--server-user',
               envvar='ZDL_LEX_SERVER_USER')
 @click.option('--server-password',
               envvar='ZDL_LEX_SERVER_PASSWORD')
 @click.option('--git-origin',
               envvar='ZDL_LEX_GIT_ORIGIN',
-              default='git@lex.dwds.de:lex.git')
+              default='git@git.zdl.org:lex.git')
 @click.option('--git-branch',
               envvar='ZDL_LEX_GIT_BRANCH',
               default='zdl-lex-server')
