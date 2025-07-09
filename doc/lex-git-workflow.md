@@ -112,7 +112,7 @@ comitted and pushed to the main branch by triggering a server-side commit/push
 manually:
 
 ```plaintext
-$ curl -u… -X PATCH https://lex.dwds.de/git
+$ curl -u… -X PATCH https://labor.dwds.de/git
 ```
 
 After the server-side state is synchronized with the origin repository, a final
@@ -132,7 +132,7 @@ $ git push --force-with-lease --set-upstream origin xlhrld/audio-update-2020-04-
 In the final step we instruct the server to fast-forward its branch to the head of the feature branch:
 
 ```plaintext
-$ curl -u… -X POST https://lex.dwds.de/git/ff/$(git rev-parse HEAD)
+$ curl -u… -X POST https://labor.dwds.de/git/ff/$(git rev-parse HEAD)
 ```
 
 Now the feature branch is integrated into the server's branch
@@ -157,7 +157,7 @@ of other users during the required time slot. This can be established by looking
 at the set of pending locks on server resources:
 
 ```plaintext
-$ curl -u… https://lex.dwds.de/lock
+$ curl -u… https://labor.dwds.de/lock
 ```
 
 If this request returns an empty list, no lexicon articles are currently edited
@@ -170,11 +170,11 @@ _ … TODO: Document lock/unlock of data store …_
 
 ```plaintext
 $ export TOKEN=$(uuid)
-$ curl -u… -X POST https://lex.dwds.de/lock/?token=$TOKEN
+$ curl -u… -X POST https://labor.dwds.de/lock/?token=$TOKEN
 ```
 
 ```plaintext
-$ curl -u… -X DELETE https://lex.dwds.de/lock/?token=$TOKEN
+$ curl -u… -X DELETE https://labor.dwds.de/lock/?token=$TOKEN
 ```
 
 
