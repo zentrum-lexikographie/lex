@@ -138,7 +138,7 @@ class REPL(NodeVisitor):
 @click.command()
 @click.option('--server-base',
               envvar='ZDL_LEX_SERVER_BASE',
-              default='https://lex.dwds.de/')
+              default='https://labor.dwds.de/')
 @click.option('--server-user',
               envvar='ZDL_LEX_SERVER_USER')
 @click.option('--server-password',
