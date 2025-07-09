@@ -1,4 +1,4 @@
-# ZDL/Lex – Lexikographic Workbench
+# ZDL/Lex – Dictionary Writing System
 
 _A client/server application implementing an authoring environment for
 lexicographic articles at the [ZDL](https://www.zdl.org/)_
