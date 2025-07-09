@@ -17,7 +17,7 @@ def json(r):
 
 
 class Server:
-    def __init__(self, base_url='https://lex.dwds.de/', http_auth=None):
+    def __init__(self, base_url='https://labor.dwds.de/', http_auth=None):
         self.base_url = base_url
         self.session = requests.Session()
         self.session.auth = http_auth

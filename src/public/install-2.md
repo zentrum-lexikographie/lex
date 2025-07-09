@@ -7,7 +7,7 @@ eingerichtete *Update-Site* bereitgestellt.
 
 Kopieren Sie den folgenden URL (markieren und *Strg+c*)
 
-[https://lex.dwds.de/oxygen/updateSite.xml](https://lex.dwds.de/oxygen/updateSite.xml)
+[https://labor.dwds.de/oxygen/updateSite.xml](https://labor.dwds.de/oxygen/updateSite.xml)
 
 und fügen Sie ihn in das Eingabefeld mit der Bezeichnung ***Add-Ons zeigen
 von*** ein (*Strg+v*). Sobald der vollständige URL im Eingabefeld zu stehen
