@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/zentrum-lexikographie/lex/compare/v0.1.0...v0.1.1) (2025-07-10)
+
+
+### Bug Fixes
+
+* Keys in index query result maps are not keywordized anymore ([9891be5](https://github.com/zentrum-lexikographie/lex/commit/9891be5a84e95c00489dbac06b82795f176df4ba))
+* switch default deployment host to labor.dwds.de ([598e75f](https://github.com/zentrum-lexikographie/lex/commit/598e75f7f78d585d3f0a6788a918a428292a424b))
+
 ## 0.1.0 (2025-07-09)
 
 
