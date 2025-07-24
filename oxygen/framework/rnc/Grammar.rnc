@@ -114,6 +114,8 @@ Genitiv = element Genitiv {
 			| string '-(e)s'
 			| string '-(n)'
 			| string '-(s)'
+			# artikellose Eigennamen auf s, ss, ß, x, z, ce
+			| string '-(’)'
 			# Vollformen
 			| Flexionstoken
 		)
