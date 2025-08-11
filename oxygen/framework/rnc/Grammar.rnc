@@ -125,7 +125,8 @@ Genitiv = element Genitiv {
 }
 
 Plural = element Plural {
-	element Wert {
+	attribute Typ {	'Mengenangabe' } ?
+	, element Wert {
 		Rechtschreibstatus ?
 		, (
 			# Flexionsendungen
