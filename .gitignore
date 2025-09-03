@@ -56,7 +56,7 @@ publish/backup
 wikimedia/wikimedia-dumps/
 wikimedia/reports/
 
-/.env
+.env
 
 test-data/
 
