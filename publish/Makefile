@@ -4,8 +4,13 @@ src_host = zwei.dwds.de
 mysql = /usr/bin/mysql -sN
 mysqldump = /usr/bin/mysqldump
 
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+bin_dir := $(dir $(mkfile_path))/bin
+
 all:
-	@echo "Usage: make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|varwb|wortgeschichten|wortgeschichten_preprint)-update"
+	@echo "Usage:"
+	@echo "make [-j] check"
+	@echo "make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|varwb|wortgeschichten|wortgeschichten_preprint)-update"
 
 environment:
 	/bin/mkdir -p backup/
@@ -195,3 +200,32 @@ dwb2-update: dwb2-backup
 	# move beta database tables to the target database
 	$(mysql) -e "RENAME TABLE dwb2_beta.article TO dwb2.article;"
 	$(mysql) -e "RENAME TABLE dwb2_beta.lemma TO dwb2.lemma;"
+
+check-audio:
+	python3 $(bin_dir)/check-audio.py
+
+check-bibl:
+	python3 $(bin_dir)/check-bibl.py -f
+	@echo "Bibliographic checks restricted to Artikel[@Status=\"Red-f\"]"
+
+check-constraints:
+	python3 $(bin_dir)/check-constraints.py
+
+check-duplicates:
+	python3 $(bin_dir)/check-duplicates.py
+
+check-links:
+	python3 $(bin_dir)/check-links.py
+
+check-metadata:
+	python3 $(bin_dir)/check-metadata.py
+
+check-morphology:
+	python3 $(bin_dir)/check-morphology.py
+
+check-typography:
+	python3 $(bin_dir)/check-typography.py -f
+	@echo "Typographic checks restricted to Artikel[@Status=\"Red-f\"]"
+
+check: check-typography check-bibl check-links check-audio check-constraints check-duplicates check-metadata check-morphology
+	@echo "Note: checks can be run in parallel using \`make -j\`"
