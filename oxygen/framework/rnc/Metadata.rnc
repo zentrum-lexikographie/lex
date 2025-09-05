@@ -175,7 +175,6 @@ Metadaten.Artikel = (
 		'Vollartikel'
 		| 'Basisartikel'
 		| 'Basisartikel-D'
-		| 'Basisartikel-MWA' # deprecated
 		| 'Verweisartikel'
 		| 'Minimalartikel'
 	}
