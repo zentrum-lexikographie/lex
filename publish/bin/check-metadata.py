@@ -28,13 +28,6 @@ def get_cits(e):
     cits = [_c for _c in et.ETXPath('.//%(Lesart)s/%(Verwendungsbeispiele)s/%(Beleg)s' % wb.TAGS)(e) if wb.is_visible(_c) ]
     return cits
 
-def get_max_cits(e):
-    # for crazy MWA-Basisartikel
-    n_cits = [0,]
-    for _l in e.findall('.//%(Lesart)s' % wb.TAGS):
-        _n = [ 1 if wb.is_visible(_c) else 0 for _c in et.ETXPath('./%(Verwendungsbeispiele)s/%(Beleg)s' % wb.TAGS)(_l) ]
-        n_cits.append(sum(_n))
-    return max(n_cits)
 
 for entry, path in wb:
 
@@ -120,10 +113,6 @@ for entry, path in wb:
                 wb.report(entry, path, 'no def but Vollartikel', not(arguments.path))
             if len(get_cits(entry)) == 0:
                 wb.report(entry, path, 'no cit but Vollartikel', not(arguments.path))
-            #if wb.get_wordclass(entry) == 'Mehrwortausdruck':
-            #    if get_max_cits(entry) < 4:
-            #        wb.report(entry, path, f'max. {get_max_cits(entry)} cits in //Lesart but Vollartikel (should be Basisartikel-MWA)', not(arguments.path))
-
         elif entry.get('Typ') == 'Basisartikel':
             if d_text != '':
                 wb.report(entry, path, 'def but Basisartikel', not(arguments.path))
@@ -135,10 +124,6 @@ for entry, path in wb:
                 wb.report(entry, path, 'no def but Basisartikel-D', not(arguments.path))
             if len(get_cits(entry)) != 0:
                 wb.report(entry, path, 'cit(s) but Basisartikel-D', not(arguments.path))
-
-        elif entry.get('Typ') == 'Basisartikel-MWA':
-            if get_max_cits(entry) > 3:
-                wb.report(entry, path, f'{get_max_cits(entry)} cits in //Lesart but MWA-Basisartikel (max. 3, should be Vollartikel)', not(arguments.path))
 
         elif entry.get('Typ') == 'Verweisartikel':
             if d_text != '':
