@@ -353,7 +353,7 @@ class Wb(object):
     
     def __iter__(self):
         
-        for root, _, files in sorted(os.walk(self.start)):
+        for root, _, files in sorted(os.walk(self.start, followlinks=True)):
             
             if root in ('./.git', './sandbox', './scripts', './share', './stuff'):
                 continue
