@@ -61,3 +61,5 @@ wikimedia/reports/
 test-data/
 
 /models/
+
+*.backup
