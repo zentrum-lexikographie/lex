@@ -70,7 +70,7 @@ The skript will trigger a commit/push cycle on the server so that the changes ca
 To publish the dictionary internally to `zwei.dwds.de`, run
 
 ```plaintext
-$ zdl-mysql ${PATH_TO_DICTIONARY} src_pass=${MYSQL_PASSWORD}
+$ zdl-mysql ${PATH_TO_DICTIONARY} --mysql-host zwei.dwds.de --mysql-user ${USERNAME} --mysql-password ${PASSWORD}
 ```
 
 This will create a dictionary database from scratch without altering any existing dictionary database. To switch to the newly created dictionary database, run
