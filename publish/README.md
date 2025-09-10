@@ -91,4 +91,9 @@ The dictionary is published on `www.dwds.de` by copying the database from `zwei`
 $ make -f /home/herold/Makefile src_pass=${MYSQL_PASSWORD_ON_ZWEI} dst_pass=${MYSQL_PASSWORD_ON_WWW} dwdswb-update
 ```
 
-After external publication, the published version should be tagged.
+After external publication, the published version should be tagged (in the local clone of the dictionary):
+
+```plaintext
+$ git tag `date -I`
+$ git push --tags
+```
