@@ -9,8 +9,10 @@ bin_dir := $(dir $(mkfile_path))/bin
 
 all:
 	@echo "Usage:"
-	@echo "make [-j] check"
-	@echo "make src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|varwb|wortgeschichten|wortgeschichten_preprint)-update"
+	@echo "\tmake [-j] check"
+	@echo "\tmake src_pass=... dst_pass=... (dwdswb|etymwb|wdg|dwb1|dwb2|neologismen|varwb|wortgeschichten|wortgeschichten_preprint)-update"
+	@echo
+	@echo "Note: checks can be run in parallel using \`make -j [n]\`"
 
 environment:
 	/bin/mkdir -p backup/
@@ -205,8 +207,8 @@ check-audio:
 	python3 $(bin_dir)/check-audio.py
 
 check-bibl:
-	python3 $(bin_dir)/check-bibl.py -f
 	@echo "Bibliographic checks restricted to Artikel[@Status=\"Red-f\"]"
+	python3 $(bin_dir)/check-bibl.py -f
 
 check-constraints:
 	python3 $(bin_dir)/check-constraints.py
@@ -224,8 +226,7 @@ check-morphology:
 	python3 $(bin_dir)/check-morphology.py
 
 check-typography:
-	python3 $(bin_dir)/check-typography.py -f
 	@echo "Typographic checks restricted to Artikel[@Status=\"Red-f\"]"
+	python3 $(bin_dir)/check-typography.py -f
 
 check: check-typography check-bibl check-links check-audio check-constraints check-duplicates check-metadata check-morphology
-	@echo "Note: checks can be run in parallel using \`make -j\`"
