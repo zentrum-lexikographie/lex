@@ -22,6 +22,15 @@ services:
       - db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  queue:
+    image: rabbitmq:4.1
+    environment:
+      - "RABBITMQ_DEFAULT_USER=nlp"
+      - "RABBITMQ_DEFAULT_PASS=nlp"
+    volumes:
+      - queue:/var/lib/rabbitmq
+    ports:
+      - "5672:5672"
   server:
     image: docker.zdl.org/zdl/lex:latest
     build:
@@ -49,6 +58,7 @@ services:
 volumes:
   index:
   db:
+  queue:
   server:
 configs:
   caddy_config:
