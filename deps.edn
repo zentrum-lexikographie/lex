@@ -32,6 +32,7 @@
                                     com.lambdaisland/ornament                       {:mvn/version "1.12.107"}
                                     com.lambdaisland/hiccup                         {:mvn/version "0.0.33"}
                                     com.mysql/mysql-connector-j                     {:mvn/version "9.1.0"}
+                                    com.novemberain/langohr                         {:mvn/version "5.5.0"}
                                     com.pgvector/pgvector                           {:mvn/version "0.1.5"}
                                     com.taoensso/telemere-slf4j                     {:mvn/version "1.0.1"}
                                     com.vladsch.flexmark/flexmark                   {:mvn/version "0.64.8"}
