@@ -79,8 +79,8 @@
         (resp/status 401))))
 
 (def auth-backend
-  (buddy.auth.backends/basic {:realm  "ZDL-Lex-Server"
-                              :authfn authenticate
+  (buddy.auth.backends/basic {:realm                "ZDL-Lex-Server"
+                              :authfn               authenticate
                               :unauthorized-handler handle-unauthorized}))
 
 (def access-rules
