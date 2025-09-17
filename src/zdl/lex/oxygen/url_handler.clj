@@ -20,7 +20,7 @@
             (comment "No-Op"))
           (getInputStream
             []
-            (tm/event! {:id ::read ::id id })
+            (tm/log! {:level :debug :id ::read :data id})
             (try
               (client/http-get-article id)
               (catch LockException e
@@ -28,7 +28,7 @@
                 (throw (IOException. e)))))
           (getOutputStream
             []
-            (tm/event! {:id ::write ::id id})
+            (tm/log! {:level :debug :id ::write :data id})
             (proxy [ByteArrayOutputStream] []
               (close []
                 (try
@@ -59,12 +59,17 @@
     (updateLock
       [url timeout]
       (try
-        (client/http-lock (client/url->id url) timeout)
+        (let [id (client/url->id url)]
+          (tm/log! {:level :debug :id ::lock :data {:id      id
+                                                    :timeout timeout}})
+          (client/http-lock id timeout))
         (catch IOException e (tm/error! e) nil)))
     (unlock
       [url]
       (try
-        (client/http-unlock (client/url->id url))
+        (let [id (client/url->id url)]
+          (tm/log! {:level :debug :id ::unlock :data id})
+          (client/http-unlock id))
         (catch IOException e (tm/error! e) nil)))))
 
 (defn -getURLStreamHandler

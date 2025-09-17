@@ -4,7 +4,7 @@
    [clojure.string :as str]
    [lambdaisland.uri :as uri]
    [taoensso.telemere :as tm]
-   [taoensso.telemere.tools-logging]
+   [taoensso.telemere.tools-logging :as tm.tools-logging]
    [babashka.fs :as fs]
    [clojure.java.io :as io]
    [clojure.data.csv :as csv])
@@ -13,10 +13,10 @@
    (io.github.cdimascio.dotenv Dotenv)
    (java.util.concurrent TimeUnit)))
 
+(tm.tools-logging/tools-logging->telemere!)
 (tm/uncaught->error!)
-(tm/set-min-level! nil
-                   [["com.zaxxer(.*)" :warn]
-                    ["*" :info]])
+(tm/set-min-level! :info)
+(tm/set-min-level! nil "com.zaxxer(.*)" :warn)
 
 (defn read-dot-env
   [filename]
@@ -103,7 +103,7 @@
                                           :description desc}]))
                  users))))
      (do
-       (tm/log! :warn "Using fallback userbase; this instance is INSECURE!")
+       (tm/log! {:level :warn :id ::userbase :data fallback-userbase})
        fallback-userbase))))
 
 (def ddc-dstar-request
@@ -174,4 +174,3 @@
   [^Timer timer]
   (.time timer))
 
-(taoensso.telemere.tools-logging/tools-logging->telemere!)

@@ -33,16 +33,18 @@
 
 (defn timestamp
   [& _]
-  (tm/log! :info (format "Timestamp: %s" current-timestamp))
+  (tm/log! {:level :info :id ::timestamp :data current-timestamp})
   (spit (fs/file "oxygen" "VERSION") current-timestamp))
 
 (defn schema
   [& _]
-  (tm/log! :info "Transpiling DWDSwb schema")
   (let [framework-dir (fs/file "oxygen" "framework")
         rnc           (fs/file framework-dir "rnc" "DWDSWB.rnc")
         rng           (fs/file framework-dir "rng" "DWDSWB.rng")
         sch           (fs/file framework-dir "rng" "DWDSWB.sch.xsl")]
+    (tm/log! {:level :info :id ::schema :data {:rnc (str rnc)
+                                               :rng (str rng)
+                                               :sch (str sch)}})
     (doseq [f [rnc rng sch]] (-> f fs/parent fs/create-dirs))
     (gxs/rnc->rng (str rnc) (str rng))
     (gxs/rng->sch-xsl rng sch)))
@@ -57,13 +59,13 @@
 (defn client
   [& _]
   (schema)
-  (tm/log! :info "Compiling Oxygen XML Editor plugin")
   (let [compile-basis (b/create-basis {:project "deps.edn"
                                        :aliases #{:client :oxygen :classes}})
         package-basis (b/create-basis {:project "deps.edn"
                                        :aliases #{:client :classes}})
         classes-dir   "classes"
         jar-file      "oxygen/plugin/lib/org.zdl.lex.client.jar"]
+    (tm/log! {:level :info :id ::client :data jar-file})
     (b/delete {:path jar-file})
     (b/delete {:path classes-dir})
     (b/copy-dir {:src-dirs   ["src"]
@@ -86,7 +88,8 @@
 (defn editor
   [& _]
   (assert oxygen-home "$OXYGEN_HOME not found")
-  (tm/log! :info "Starting client")
+  (tm/log! {:level :info :id ::editor :data {:home (str oxygen-home)
+                                             :dir (str oxygen-dir)}})
   (p/exec
    {:dir    (fs/file oxygen-dir)
     :stdout :inherit
