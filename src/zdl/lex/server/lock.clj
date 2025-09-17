@@ -2,7 +2,8 @@
   (:require
    [next.jdbc :as jdbc]
    [ring.util.response :as resp]
-   [zdl.lex.server.db :as db :refer [db]]))
+   [zdl.lex.server.db :as db :refer [db]]
+   [taoensso.telemere :as tm]))
 
 (def ^:dynamic *context*
   nil)
@@ -84,7 +85,7 @@
 (def context-middleware
   {:name ::middleware
    :wrap (fn [handler]
-           (fn [{owner                        :zdl.lex.server.http/user
+           (fn [{{owner :user}                :identity
                  {{:keys [resource]} :path}   :parameters
                  {{:keys [token ttl]} :query} :parameters
                  :as                          req}]
@@ -92,7 +93,8 @@
                                           :resource resource
                                           :token    token}
                                    ttl (assoc :ttl (* ttl 1000)))]
-               (handler req))))})
+               (tm/with-ctx+ {::context *context*}
+                 (handler req)))))})
 
 (defn response-not-found
   []
