@@ -30,10 +30,10 @@
   (unescape "/"))
 
 (def escape-pattern
-  (partial escape #"[\!\(\)\:\^\[\]\"\{\}\~\\]"))
+  (partial escape #"[ \!\(\)\:\^\[\]\"\{\}\~\\]"))
 
 (def unescape-pattern
-  (unescape "[\\!\\(\\)\\:\\^\\[\\]\\\"\\{\\}\\~\\\\]"))
+  (unescape "[\\ \\!\\(\\)\\:\\^\\[\\]\\\"\\{\\}\\~\\\\]"))
 
 (def escape-term
   (comp (partial escape #"[\*\?]") escape-pattern))
