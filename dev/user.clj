@@ -30,10 +30,10 @@
   (halt)
   (repl/refresh-all :after 'user/go))
 
-(comment
-  (do (fixtures/start-backends!) (fixtures/wait-for-backends!))
-  (fixtures/init-with-test-data!)
-  (go)
-  (halt)
-  (reset)
-  (reset-all))
+(defn backends!
+  []
+  (fixtures/start-backends!)
+  (fixtures/wait-for-backends!))
+
+(def init-with-test-data!
+  fixtures/init-with-test-data!)
