@@ -70,7 +70,7 @@
                         (fs/create-dirs))]
     (doseq [{::keys [xml path]} (sample (io/file dir))]
       (let [test-data-path (fs/path test-data-dir path)]
-        (tm/log! :info (str test-data-path))
+        (tm/log! {:level :info :id ::create :data (str test-data-path)})
         (-> test-data-path fs/parent fs/create-dirs)
         (with-open [os (io/output-stream (fs/file test-data-path))]
           (gx/write-events os (gx/node->events xml)))))))
