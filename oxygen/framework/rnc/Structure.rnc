@@ -357,6 +357,17 @@ sch:pattern [
         ]
     ]
 ]
+
+# Titel im Reddit-Korpus sind alle falsch dargestellt und müssen manuell korrigiert werden
+sch:pattern [
+    sch:rule [
+        context = "//d:Fundstelle[starts-with(@Fundort, 'dwds:reddit:')]/d:Titel"
+        sch:assert [
+            test = "not(contains(string-join(text()), '_'))"
+            'Bitte Reddit-URL im Browser öffnen und Titel korrigieren!'
+        ]
+    ]
+]
 	
 ########################################
 # Bedeutungsangaben und Anmerkungen ####
