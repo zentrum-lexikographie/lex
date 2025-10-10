@@ -392,10 +392,10 @@ class Wb(object):
             raise ValueError(self.get_headwords(entry)[0], wc)
 
 
-    def get_headwords(self, entry, only_main_lemmas=False):
-        _xpath = './%(Formangabe)s/%(Schreibung)s' % self.TAGS
-        if only_main_lemmas:
-            _xpath = './%(Formangabe)s[@Typ="Hauptform" or @Typ="Nebenform"]/%(Schreibung)s[not(@Typ)]' % self.TAGS
+    def get_headwords(self, entry, only_approved_headwords=False):
+        _xpath = './%(Formangabe)s[not(@class)]/%(Schreibung)s' % self.TAGS
+        if only_approved_headwords:
+            _xpath = './%(Formangabe)s[not(@class)][@Typ="Hauptform" or @Typ="Nebenform"]/%(Schreibung)s[not(@Typ)]' % self.TAGS
 
         return list(dict.fromkeys( [
                 (' '.join(self.text(h).split())+'#'+h.get('hidx', '')).rstrip('#')
