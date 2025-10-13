@@ -52,7 +52,7 @@ def hook_supply_good_examples(e, modify=False):
                 c = 0
                 
                 try:
-                    for hw in set(wb.get_headwords(e, only_main_lemmas=True)):
+                    for hw in set(wb.get_headwords(e, only_approved_headwords=True)):
                         _c = 0
                         for _c, (ex, bibl, src) in enumerate(ge.get_examples(hw, 10), start=1):
                             # mixing is nice, especially with multiple forms
