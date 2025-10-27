@@ -272,8 +272,7 @@ Metadaten.Artikel = (
 Orthografieregel = element Orthografieregel {
         attribute class { 'invisible' } ?
         , (
-            '2'
-            | '3 (E)'
+            '3 (E)'
 	    | '4 (1)'
             | '4 (E1)'
             | '8 (1)'
