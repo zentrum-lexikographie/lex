@@ -132,6 +132,7 @@ Wortbildung:before                                  { content: "Wortbildung: "; 
 Genus:before                                        { content: "Genus: "; }
 Genitiv:before                                      { content: "Gen. Sg.: "; }
 Plural:before                                       { content: "Nom. Pl.: "; }
+Plural[Typ="Mengenangabe"]:before                  { content: "Nom. Pl. bei Wert-/Mengenangabe: "; }
 Artikelpraeferenz:before                            { content: "Artikelpräferenz: "; }
 Praesens:before                                     { content: "3. Pers. Präs.: "; }
 Praeteritum:before                                  { content: "3. Pers. Prät.: "; }
