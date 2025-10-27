@@ -67,6 +67,8 @@ for entry, path in wb:
         wb.report(entry, path, '@Erstfassung vs. @Erstellungsdatum (WDG)', not(arguments.path))
     if not entry.get('Erstfassung') == 'WDG' and entry.get('Erstellungsdatum') in ('1967-01-01', '1969-01-01', '1974-01-01', '1976-01-01', '1977-01-01'):
         wb.report(entry, path, '@Erstfassung vs. @Erstellungsdatum (WDG)', not(arguments.path))
+    if entry.get('Quelle') == 'WDG' and not entry.get('Zeitstempel') in ('1967-01-01', '1969-01-01', '1974-01-01', '1976-01-01', '1977-01-01'):
+        wb.report(entry, path, '@Quelle vs. @Zeitstempel (WDG)', not(arguments.path))
     #if entry.get('Erstfassung') == 'WDG' and not True in [ True if l in wdg else False for l in headwords ]:
     #    wb.report(entry, path, '@Erstfassung=WDG but not in WDG', not(arguments.path))
     if True in [ True if l in wdg else False for l in headwords ] and not entry.get('Erstfassung') in ('WDG', 'Duden_1999'):
@@ -138,6 +140,10 @@ for entry, path in wb:
                 wb.report(entry, path, 'ref but Minimalartikelartikel', not(arguments.path))
             if len(get_cits(entry)) + k_count + a_count != 0:
                 wb.report(entry, path, 'cit but Minimalartikel', not(arguments.path))
+
+    for element in entry.iter('*'):
+        if '/' in element.get('Quelle', '') and element.tag != wb.TAGS['Artikel']:
+            wb.report(entry, path, f'Hybrid @Quelle on sub-element {element.tag}')
 
 if arguments.path:
     print()

@@ -265,6 +265,7 @@ class Wb(object):
         'Rhein- und Ruhrzeitung',
         'Rhein-Zeitung',
         'Rheinische Post',
+        'Rheinisch-westfälische Wirte-Zeitung',
         'Rote Fahne',
         'Rote Fahne (Morgen-Ausgabe)',
         'Reutlinger General-Anzeiger',
