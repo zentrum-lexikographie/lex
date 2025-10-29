@@ -69,6 +69,7 @@ ILLEGAL_SEQUENCES = (
         'Gegenstandpunkt[\s\-]+Verl' # → Gegenstandpunkt
         'Hanser[\s\-]+Verl',     # → Hanser
         'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
+        'Hippokrates[\s\-]+Verl',# → Hippokrates
         'Insel[\s\-]+Verl',      # → Insel
         'Kinderbuchverl\.',      # → Kinderbuchverlag
         'König[\s\-]+Verl',      # → König
