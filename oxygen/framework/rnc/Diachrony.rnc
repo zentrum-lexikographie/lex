@@ -22,21 +22,25 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 ]
 
 Diachronie = element Diachronie {
-	Metadaten.allgemein ?
+	Metadaten.allgemein ? # deprecated
 	, element Etymologie {
-	    attribute class { 'invisible' } ?
-	    , freie_Beschreibung
+		Metadaten.allgemein ?
+		, attribute class { 'invisible' } ?
+		, freie_Beschreibung
 	}
 	, element Formgeschichte {
-	    attribute class { 'invisible' } ?
-	    , freie_Beschreibung
+		Metadaten.allgemein ?
+		, attribute class { 'invisible' } ?
+		, freie_Beschreibung
 	}
 	, element Bedeutungsgeschichte {
-	    attribute class { 'invisible' } ?
-	    , freie_Beschreibung
+		Metadaten.allgemein ?
+		, attribute class { 'invisible' } ?
+		, freie_Beschreibung
 	}
 	, element Verweise {
-		element Verweis {
+		Metadaten.allgemein ?
+		, element Verweis {
 			attribute Typ { 'EtymWB' | 'Sprachlehre' | 'Wahrig' | 'WGd' | 'eWDG' }
 			, attribute class { 'invisible' } ?
 			, Verweisziel
