@@ -59,6 +59,7 @@ ILLEGAL_SEQUENCES = (
         'Bermann\s.*Fischer'     # → Bermann-Fischer
         'Buntbuch[\s\-]+Verl',   # → Buntbuch
         'Columbus[\s\-]+Verl',   # → Columbus
+        'Dietz[\s\-]+Verl',      # → Dietz
         'Drei\s+Masken\s+Verl',  # → Drei Masken
         'Dressler[\s\-]+Verl',   # → Cecilie Dressler
         'Econ[\s\-]+Verl',       # → Econ
