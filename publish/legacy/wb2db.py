@@ -80,7 +80,7 @@ class Dictionary(object):
                     date DATE NOT NULL,
                     xml MEDIUMTEXT COLLATE utf8mb4_bin NOT NULL,
                     PRIMARY KEY (id),
-                    KEY status (status)
+                    INDEX status (status)
                     ) ENGINE=MyISAM
                     DEFAULT CHARSET=utf8mb4;
             ''')
@@ -91,15 +91,15 @@ class Dictionary(object):
                     type VARCHAR(10) COLLATE utf8mb4_bin,
                     article_id INT(11) NOT NULL,
                     PRIMARY KEY (id),
-                    KEY lemma (lemma),
-                    KEY article_id(article_id, lemma)
+                    INDEX lemma (lemma),
+                    INDEX article_id(article_id, lemma)
                     ) ENGINE=MyISAM
                     DEFAULT CHARSET=utf8mb4;
             ''')
             cursor.execute('''CREATE TABLE IF NOT EXISTS token (
                     token VARCHAR(50) COLLATE utf8mb4_bin NOT NULL,
                     lemma_id INT(11) NOT NULL,
-                    KEY token (token)
+                    INDEX token (token)
                     ) ENGINE=MyISAM
                     DEFAULT CHARSET=utf8mb4;
             ''')
@@ -108,8 +108,8 @@ class Dictionary(object):
                         article1 INT(11) NOT NULL,
                         article2 INT(11) NOT NULL,
                         type VARCHAR(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-                        KEY article1 (article1, article2, type),
-                        KEY article2 (article2, article1, type)
+                        INDEX article1 (article1, article2, type),
+                        INDEX article2 (article2, article1, type)
                         ) ENGINE=MyISAM;
                 ''')
 
@@ -450,12 +450,12 @@ if __name__ == '__main__':
                     
                     if headword and (
                             not (lemma_count, headword, hidx, htype, index, ) in bucket_lemma.data
-                            # maybe the following test suffices?
-                            and not (headword, hidx) in lemma_index
                             ) or (
-                                    # hook for neologismen which come without @hidx and for dwb2 where not *all* homographs are marked
+                                    # (unnecessary?) hook for neologismen which come without @hidx and for dwb2 where not *all* homographs are marked
                                     (headword, hidx) in lemma_index and arguments.dictionary_type in ('neologismen', 'dwb2')
                             ):
+                        if headword == u'unerhört':
+                            print headword
                         
                         # normalization hooks for DWB2:
                         if arguments.dictionary_type == 'dwb2':
