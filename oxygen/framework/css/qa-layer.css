@@ -28,6 +28,12 @@ Autorenzusatz {
 	-oxy-display-tags: none;
 }
 
+Hervorhebung {
+	border: 1px dotted black;
+	background-color: #5eff00;
+	-oxy-display-tags: none;
+}
+
 Stichwort {
 	border: 1px dotted red;
 	-oxy-display-tags: none;
