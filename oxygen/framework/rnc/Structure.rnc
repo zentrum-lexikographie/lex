@@ -337,10 +337,10 @@ Fundstelle = element Fundstelle {
 			, element Stelle { token } ?
 			, element Datum { xsd:token { pattern = '((\d\d\.)?\d\d.)?\d{4}' } | empty } ?
 			, element URL {
-				xsd:anyURI {
+	                        attribute class { 'invisible' } ?
+                                , xsd:anyURI {
 					pattern = 'https?://[^\s]+'
 				}
-				| empty
 			} ?
 			, element Aufrufdatum {	xsd:token { pattern = '(\d\d\.\d\d.)?\d{4}' } | empty } ? # kann man vlt. in Oxygen automatisch machen
 		)		
