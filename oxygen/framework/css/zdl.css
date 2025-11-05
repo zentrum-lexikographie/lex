@@ -75,7 +75,7 @@ Kollokation:before            { content: "Kollokation"; }
 Verwendungsbeispiele:before   { content: "Verwendungsbeispiele"; }
 Beleg:before                  { content: "Beleg"; }
 Kompetenzbeispiel:before      { content: "Kompetenzbeispiel"; }
-Illustration:before           { content: "Illustration"; }
+Illustration:before           { content: "Illustration (" attr(Lizenz) ")"; }
 Rohdaten:before               { content: "NLP-Rohdaten"; }
 
 /* Einzelfelder, die als vertikale Liste dargestellt werden */
