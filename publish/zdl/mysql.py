@@ -84,15 +84,13 @@ def read_articles(articles):
                     })
                     relations = zdl.article.relations(article)
                     for rel_type, headword, hidx in relations:
-                        headword = headword.replace('’', '\'')
-                        headword = headword.replace('…', '...')
                         hidx = int(hidx) if hidx else None
                         relation_index[
                             (article_id, rel_type)
                         ].append(
                             (headword, hidx)
                         )
-                lemma = md['name'].replace('’', '\'').replace('…', '...')
+                lemma = md['name']
                 hidx = int(md['hidx']) if md['hidx'] else None
 
                 headword_sig = (lemma, hidx)
