@@ -79,6 +79,7 @@ ILLEGAL_SEQUENCES = (
         'P\.\s?M\.',             # → Peter Moosleitners …
         'Propyläen[\s\-]+Verl',  # → Propyläen
         'Roland[\s\-]+Verl',     # → Roland
+        'Silberburg[\s\-]+Verl', # → Silberburg
         'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
         'Südwest[\s\-]+Verl',    # → Südwest
         'Trotzdem[\s\-]+Verl',   # → Trotzdem
