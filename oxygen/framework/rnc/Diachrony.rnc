@@ -51,6 +51,7 @@ Diachronie = element Diachronie {
 freie_Beschreibung = mixed {
     Paraphrase *
     & erwaehntes_Zeichen *
+    & Bedeutungsebene *
     & Stilebene *
     & Stilfaerbung *
     & Sprachraum * # deprecated
