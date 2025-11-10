@@ -339,6 +339,33 @@ for entry, path in wb:
             if m is not None:
                 wb.report(entry, path, m.group(1), not(arguments.path))
         
+            if d.tag == wb.TAGS['Paraphrase']:
+                p = d.getprevious()
+                t = ''
+                if p is not None:
+                    t = p.tail or ''
+                else:
+                    t = d.getparent().text or ''
+                if len(t) > 0 and not t[-1].isspace():
+                    wb.report(entry, path, 'Found "glued" //Paraphrase', not(arguments.path))
+    
+            if d.tag in (wb.TAGS['Paraphrase'], wb.TAGS['Autorenzusatz']):
+                t = wb.text(d, normalize=False)
+                
+                if len(t) == 0:
+                    wb.report(entry, path, f'Empty element //{wb.tagname(d.tag)}', not(arguments.path))
+                elif t[0].isspace() or t[-1].isspace():
+                    wb.report(entry, path, f'Leading/trailing space in //{wb.tagname(d.tag)}', not(arguments.path))
+                elif len(t) > 1 and ',' in t[0]+t[-1]:
+                    wb.report(entry, path, f'Leading/trailing punctuation in //{wb.tagname(d.tag)}', not(arguments.path))
+            
+                p = d.getprevious()
+                t2 = d.getparent().text or '' if p is None else p.tail or ''
+            
+                if t2 and not t2[-1].isspace() and not t[0] in '.,-':
+                    #wb.report(entry, path, 'Missing space before Paraphrase or Autorenzusatz', not(arguments.path))
+                    pass
+
         for w in entry.findall('.//%(Belegtext)s' % wb.TAGS):
             
             # explicitly split certain whitespace so we can use &#160;
@@ -356,33 +383,6 @@ for entry, path in wb:
         for w in entry.findall('.//%(Titel)s' % wb.TAGS):
             if wb.text(w).endswith(':'):
                 wb.report(entry, path, '//Titel ends with ":"', not(arguments.path))
-
-        if d.tag == wb.TAGS['Paraphrase']:
-            p = d.getprevious()
-            t = ''
-            if p is not None:
-                t = p.tail or ''
-            else:
-                t = d.getparent().text or ''
-            if len(t) > 0 and not t[-1].isspace():
-                wb.report(entry, path, 'Found "glued" //Paraphrase', not(arguments.path))
-    
-        if d.tag in (wb.TAGS['Paraphrase'], wb.TAGS['Autorenzusatz']):
-            t = wb.text(d, normalize=False)
-            
-            if len(t) == 0:
-                wb.report(entry, path, f'Empty element //{wb.tagname(d.tag)}', not(arguments.path))
-            elif t[0].isspace() or t[-1].isspace():
-                wb.report(entry, path, f'Leading/trailing space in //{wb.tagname(d.tag)}', not(arguments.path))
-            elif len(t) > 1 and ',' in t[0]+t[-1]:
-                wb.report(entry, path, f'Leading/trailing punctuation in //{wb.tagname(d.tag)}', not(arguments.path))
-            
-            p = d.getprevious()
-            t2 = d.getparent().text or '' if p is None else p.tail or ''
-            
-            if t2 and not t2[-1].isspace() and not t[0] in '.,-':
-                #wb.report(entry, path, 'Missing space before Paraphrase or Autorenzusatz', not(arguments.path))
-                pass
 
         for e in entry.findall('.//%(Loeschung)s' % wb.TAGS) + entry.findall('.//%(Streichung)s' % wb.TAGS):
             t = wb.text(e, normalize=False)
