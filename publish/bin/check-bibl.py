@@ -33,7 +33,7 @@ _OPT_ONLINE =         '( \(online\))?'
 _OPT_PAGE =           '(, S\. \d+)?'
 
 ILLEGAL_SEQUENCES = (
-        # common illegal character sequence
+        # common illegal character sequences
         '&(amp|quot|apos|lt|gt|#)',
         '[<>]',
         #'\d(-|--|—)\d', # URLS!
@@ -48,9 +48,10 @@ ILLEGAL_SEQUENCES = (
         'o\.J\.',
         'a\.M\.',
         'u\.a\.',
-        'et al\.',
-        ' von:',                 # → DIN 1505 (Teil 2): von Nachname, Vorname
-        ' de:',                  # → DIN 1505 (Teil 2): von Nachname, Vorname
+        'et\s+al\.',
+        '\svon:',                 # → DIN 1505 (Teil 2): von Nachname, Vorname
+        '\svom:',                 # → DIN 1505 (Teil 2): von Nachname, Vorname
+        '\sde:',                  # → DIN 1505 (Teil 2): von Nachname, Vorname
         'Hrsg',
         'Hg[^\.][^\)][^:]',
         '[zZ]itiert nach',       # → ∅
