@@ -83,8 +83,9 @@ ILLEGAL_SEQUENCES = (
         'Silberburg[\s\-]+Verl', # → Silberburg
         'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
         'Südwest[\s\-]+Verl',    # → Südwest
-        'Trotzdem[\s\-]+Verl',   # → Trotzdem
+        'Tcetum[\s\-]+Verl',     # → Tectum
         'Tourist[\s\-]+Verl',    # → Tourist
+        'Trotzdem[\s\-]+Verl',   # → Trotzdem
         'Wegweiser[\s\-]+Verl',  # → Wegweiser
         'Würfel[\s\-]+Verl',     # → Würfel
         'Union[\s\-]+Verl',      # → Union
