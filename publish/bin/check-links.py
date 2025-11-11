@@ -35,6 +35,14 @@ VALID_CLASSES = (
     'sg',               # * α
 )
 
+def get_n_location(element, _location=''):
+    _location = element.get('n', '') + ' ' + _location
+    p = element.getparent()
+    if p.tag != wb.TAGS['Lesart']:
+        return _location
+    else:
+        return get_n_location(p, _location)
+
 def get_entry_source(element):
     if element.tag == wb.TAGS['Artikel']:
         return element.get('Quelle')
@@ -81,8 +89,8 @@ def check_ziellesart(root):
 def check_structuring(root):
     
     allowed_ranges = (
-        '#', # default for senses with no siblings and no headmark
-        '*****************', # TODO: enumerate
+        '#',
+        '*',
         '1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.26',
         'a)b)c)d)e)f)g)h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)',
         'α)β)γ)δ)ε)ζ)η)θ)ι)κ)λ)μ)ν)ξ)ο)π)ρ)σ)τ)υ)φ)χ)ψ)ω)',
@@ -94,13 +102,18 @@ def check_structuring(root):
             for l in et.ETXPath('./%(Lesart)s[not(@class="invisible")]' % wb.TAGS)(root)
     ])
 
-    if n == '#' and root.getparent().tag == wb.TAGS['Lesart']: # and entry.get('Quelle') != 'WDG': # TODO: -WDG
-       wb.report(entry, path, 'Unmarked anonymous subsense', verbose=not(args.path))
+    if n.startswith('#') and root.getparent().tag == wb.TAGS['Lesart']:
+       wb.report(entry, path, f'Unmarked anonymous subsense under {get_n_location(root)}', verbose=not(args.path))
        return False
     
     for allowed in allowed_ranges:
         if allowed.startswith(n):
-            break
+            if n == '#' or n == '':
+                break # no sub-senses
+            elif n == '*':
+                break # one anonymous sub-sense
+            elif len(n) > 2:
+                break # several sub-senses (each with a two-char headmark)
     else:
         if get_entry_source(root) not in ('WDG'): # TODO
             wb.report(entry, path, f'Illegal @n sequence: {n}', verbose=not(args.path))
