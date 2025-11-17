@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0 (2025-11-17)
+
+
+### Features
+
+* Refactoring ([2654581](https://github.com/zentrum-lexikographie/lex/commit/26545810d19ed2e9a1e04fdd6e0fe49b14f70073))
+
+
+### Bug Fixes
+
+* 24 for legacy database updater ([bc0dbd3](https://github.com/zentrum-lexikographie/lex/commit/bc0dbd35fb73c7ea288198416043b2bcda9721c1))
+* 64 ([43a5154](https://github.com/zentrum-lexikographie/lex/commit/43a51541ea3b69e786db6e46c79baf691f98b481))
+* add space to escaped characters in Lucene pattern queries ([6267d18](https://github.com/zentrum-lexikographie/lex/commit/6267d18d3423ac54fbe24d957ede8f68aa63ad0a))
+* Keys in index query result maps are not keywordized anymore ([7ef70e0](https://github.com/zentrum-lexikographie/lex/commit/7ef70e01526c1057d22555c7e20f305dd2d31fb7))
+* switch default deployment host to labor.dwds.de ([a174fb4](https://github.com/zentrum-lexikographie/lex/commit/a174fb46232153f2461a2b3161603c4d718ed099))
+
 ## [0.1.1](https://github.com/zentrum-lexikographie/lex/compare/v0.1.0...v0.1.1) (2025-07-10)
 
 
