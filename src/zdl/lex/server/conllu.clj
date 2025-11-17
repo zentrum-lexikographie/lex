@@ -3,7 +3,8 @@
   (:require
    [camel-snake-kebab.core :as csk]
    [clojure.string :as str]
-   [jsonista.core :as json])
+   [jsonista.core :as json]
+   [clojure.java.io :as io])
   (:import
    (de.ids_mannheim.korap.tokenizer DerekoDfaTokenizer_de)
    (opennlp.tools.util Span)))
@@ -95,6 +96,11 @@
   "Parses sentences read from a given reader and separated by empty lines."
   [lines]
   (sequence (comp lines->sentences-xf (map parse-sentence)) lines))
+
+(defn parse-str
+  [s]
+  (with-open [r (io/reader (java.io.StringReader. s))]
+    (parse (doall (line-seq r)))))
 
 (defn serialize-metadata
   [[k v]]

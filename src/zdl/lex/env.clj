@@ -17,6 +17,7 @@
 (tm/uncaught->error!)
 (tm/set-min-level! :info)
 (tm/set-min-level! nil "com.zaxxer(.*)" :warn)
+(tm/set-min-level! nil "com.rabbitmq.client.TrustEverythingTrustManager" :error)
 
 (defn read-dot-env
   [filename]
@@ -78,6 +79,12 @@
      :user     user
      :username user
      :password (getenv "DB_PASSWORD" "nlp")}))
+
+(def queue
+  {:host     (getenv "MQ_HOST" "localhost")
+   :username (getenv "MQ_HOST" "nlp")
+   :password (getenv "MQ_PASSWORD" "nlp")
+   :ssl      true})
 
 (def mantis-db
   {:dbtype   "mysql"
