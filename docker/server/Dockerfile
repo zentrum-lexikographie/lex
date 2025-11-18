@@ -1,4 +1,4 @@
-FROM clojure:openjdk-19-bullseye AS builder
+FROM clojure:temurin-19-tools-deps AS builder
 
 ENV DISPLAY :99
 
@@ -21,7 +21,7 @@ COPY ./ /build
 RUN Xvfb :99 -screen 0 800x600x8 -nolisten tcp &\
     clojure -T:build build-server
 
-FROM openjdk:19-jdk-bullseye
+FROM clojure:temurin-19-tools-deps
 
 RUN mkdir -p /service
 WORKDIR /service
