@@ -464,14 +464,9 @@ for entry, path in wb:
                 print('Pushing changes, please `git pull`')
                 lex.commit_changes()
                 exit(-2)
-            if counter >= 100:
-                print('100 modifications committed, pushing changes')
-                counter = 0
-                lex.commit_changes()
-                time.sleep(5)
 
 if counter != 0:
-    print('Pushing changes, please `git pull`')
+    print(f'{counter} modification{"" if counter==1 else "s"}, pushing changes, please `git pull`')
     lex.commit_changes()
 else:
     print('No changes')

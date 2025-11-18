@@ -14,6 +14,7 @@ class LexSrv(object):
 
     DEFAULT_TTL = 10
     QUERY_LIMIT = 100 # server side default (or maximum?): 1000
+    MAX_CHANGES = 100
     
     def __init__(self,
             baseurl='https://localhost/',
@@ -22,6 +23,7 @@ class LexSrv(object):
         
         self.BASE_URL = baseurl
         self.AUTH = auth
+        self.changes = self.MAX_CHANGES
 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(loglevel)
@@ -113,6 +115,13 @@ class LexSrv(object):
             r.raise_for_status()
         
         self._release_lock(resource, token)
+
+        # see whether there were more than MAX_CHANGES changes over time
+        self.changes -= 1
+        if self.changes <= 0:
+            self.logger.info('Flushing accumulated changes')
+            self.commit_changes()
+            self.changes = self.MAX_CHANGES
 
 
     def create_new_entry(self, headword, pos, author='DWDS'):
