@@ -49,15 +49,16 @@ ILLEGAL_SEQUENCES = (
         'a\.M\.',
         'u\.a\.',
         'et\s+al\.',
-        '\svon:',                 # → DIN 1505 (Teil 2): von Nachname, Vorname
-        '\svom:',                 # → DIN 1505 (Teil 2): von Nachname, Vorname
-        '\sde:',                  # → DIN 1505 (Teil 2): von Nachname, Vorname
+        '\svon:',                # → DIN 1505 (Teil 2): von Nachname, Vorname
+        '\svom:',                # → DIN 1505 (Teil 2): vom Nachname, Vorname
+        '\sde:',                 # → DIN 1505 (Teil 2): de Nachname, Vorname
+        '\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
         'Hrsg',
         'Hg[^\.][^\)][^:]',
         '[zZ]itiert nach',       # → ∅
         'IDS-Archiv',            # → ∅
         'Aufbau[\s\-]+Verl',     # → Aufbau
-        'Bermann\s.*Fischer'     # → Bermann-Fischer
+        'Bermann\s.*Fischer',    # → Bermann-Fischer
         'Buntbuch[\s\-]+Verl',   # → Buntbuch
         'Columbus[\s\-]+Verl',   # → Columbus
         'Dietz[\s\-]+Verl',      # → Dietz
@@ -68,7 +69,7 @@ ILLEGAL_SEQUENCES = (
         'Elektronische\s+Ressource', # → ∅
         'Fachbuchverl[^a\.]',    # → Fachbuchverlag
         'Falken[\s\-]+Verl',     # → Falken
-        'Gegenstandpunkt[\s\-]+Verl' # → Gegenstandpunkt
+        'Gegenstandpunkt[\s\-]+Verl', # → Gegenstandpunkt
         'Hanser[\s\-]+Verl',     # → Hanser
         'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
         'Hippokrates[\s\-]+Verl',# → Hippokrates
@@ -91,11 +92,12 @@ ILLEGAL_SEQUENCES = (
         'Union[\s\-]+Verl',      # → Union
         'Urania[\s\-]+Verl',     # → Urania
         'Verlag\sTribüne',       # → Tribüne
-        'Verlag Volk u',         # → Volk und Gesundheit
+        'Verlag\s+Volk\s+u',     # → Volk und Gesundheit
+        'Verl\.\s+Volk\s+u',     # → Volk und Welt
         'Verl.+Das Neue Berlin', # → Das Neue Berlin
         'Verl.+Neues Leben',     # → Neues Leben
         'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
-        'Zsolnay[\s\-]*[vV]erl'  # → Paul Zsolnay
+        'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
         'Frankfurt am Main',     # → Frankfurt a. M.
         ';\s',                   # exception: URLs, therefore \s
         '[…!?\.,:][…\.,]',
