@@ -54,10 +54,12 @@ ILLEGAL_SEQUENCES = (
         '\sde:',                 # → DIN 1505 (Teil 2): de Nachname, Vorname
         '\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
         'Hrsg',
+        #'Verl\.',
         'Hg[^\.][^\)][^:]',
         '[zZ]itiert nach',       # → ∅
         'IDS-Archiv',            # → ∅
         'Aufbau[\s\-]+Verl',     # → Aufbau
+        'Berlin[\s\-]+Verl\.',   # → Bermann-Fischer
         'Bermann\s.*Fischer',    # → Bermann-Fischer
         'Buntbuch[\s\-]+Verl',   # → Buntbuch
         'Columbus[\s\-]+Verl',   # → Columbus
@@ -69,6 +71,7 @@ ILLEGAL_SEQUENCES = (
         'Elektronische\s+Ressource', # → ∅
         'Fachbuchverl[^a\.]',    # → Fachbuchverlag
         'Falken[\s\-]+Verl',     # → Falken
+        'Fischer[\s\-]+Taschenbuch[\s\-]+Verl',     # → Fischer Taschenbuch
         'Gegenstandpunkt[\s\-]+Verl', # → Gegenstandpunkt
         'Hanser[\s\-]+Verl',     # → Hanser
         'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
@@ -81,6 +84,7 @@ ILLEGAL_SEQUENCES = (
         'P\.\s?M\.',             # → Peter Moosleitners …
         'Propyläen[\s\-]+Verl',  # → Propyläen
         'Roland[\s\-]+Verl',     # → Roland
+        'Rotbuch[\s\-]+Verl',    # → Rotbuch
         'Silberburg[\s\-]+Verl', # → Silberburg
         'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
         'Südwest[\s\-]+Verl',    # → Südwest
