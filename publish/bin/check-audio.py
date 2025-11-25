@@ -31,13 +31,17 @@ lemmas_todo = set([ line.strip() for line in open ('share/lemmas-todo')
 
 for entry, path in wb:
     
-    # only entry-level forms!
+    # only entry-level forms
+    # ignore invisible forms/pronounciations
     for form in et.ETXPath('./%(Formangabe)s' % wb.TAGS)(entry):
         audios = []
-        for audio in form.findall('.//%(IPA)s' % wb.TAGS):
-            a = audio.get('Audiodatei', '')
-            if a != '':
+        visible_audios = []
+        for audio in et.ETXPath('.//%(IPA)s' % wb.TAGS)(form):
+            a = audio.get('Audiodatei')
+            if a is not None:
                 audios.append(a)
+            if audio.getparent().get('class') is None and form.get('class') is None:
+                visible_audios.append(a)
 
         if arguments.generate == 'none':
             # check for broken audio links
@@ -64,13 +68,12 @@ for entry, path in wb:
                 for st, _ in wb.generate_stimuli(candidate, form):
                     if st in audiofiles_basenames:
                         wb.report(entry, path,
-                                'possibly missing audio link: ' + candidate,
+                                f'Possibly missing audio link: {candidate}',
                                 not(arguments.path))
-            
                 
         else:
             # candidates for Maren (only existing or soon to be published)
-            if audios == [] and entry.get('Status', '') in ('Red-f', 'Red-f-blockiert', 'Red-f-Sammelbecken', 'Red-2', 'Red-1'):
+            if visible_audios == [] and entry.get('Status', '') in ('Red-f', 'Red-f-blockiert', 'Red-f-Sammelbecken', 'Red-2', 'Red-1'):
                 candidates = [ wb.text(s)
                         for s in form.findall('%(Schreibung)s' % wb.TAGS)
                         if not s.get('Typ', '').startswith('U')
@@ -87,5 +90,6 @@ for entry, path in wb:
             break
 
 # 2nd pass: check for files that are not referenced anywhere
-for audiofile, _ in filter(lambda x: x[1] == False, audiofiles.items()):
-    wb.report(None, None, 'Missing audio reference for '+audiofile, not(arguments.path))
+if arguments.generate == 'none':
+    for audiofile, _ in filter(lambda x: x[1] == False, audiofiles.items()):
+        wb.report(None, None, f'Missing audio reference for {audiofile}', not(arguments.path))
