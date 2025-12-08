@@ -25,101 +25,114 @@ arguments = argument_parser.parse_args()
 
 status = ('Red-f',) if arguments.Red_f else ('Red-f', 'Red-f-blockiert', 'Red-f-Sammelbecken', 'Red-2')
 
-_FULL_DATE =          ', [0123]\d\.[01]\d\.[12]\d{3}'          # , 12.03.1967
-_YEAR =               ', [12]\d{3}( \[[12]\d{3}\])?'           # , 1975 [1901]
-_YEAR_NUMBER =        ', [12]\d\d\d, Nr. [1-9]\d*(–[1-9]\d*)?' # , 1993, Nr. 7
-_VOLUME_NUMBER_YEAR = ', \d+(–\d+)?/\d+(–\d+)? \([1]\d{3}\)'   # , 23/18 (1978)
-_OPT_ONLINE =         '( \(online\))?'
-_OPT_PAGE =           '(, S\. \d+)?'
+_FULL_DATE =          r', [0123]\d\.[01]\d\.[12]\d{3}'          # , 12.03.1967
+_YEAR =               r', [12]\d{3}( \[[12]\d{3}\])?'           # , 1975 [1901]
+_YEAR_NUMBER =        r', [12]\d\d\d, Nr. [1-9]\d*(–[1-9]\d*)?' # , 1993, Nr. 7
+_VOLUME_NUMBER_YEAR = r', \d+(–\d+)?/\d+(–\d+)? \([1]\d{3}\)'   # , 23/18 (1978)
+_OPT_ONLINE =         r'( \(online\))?'
+_OPT_PAGE =           r'(, S\. \d+)?'
 
 ILLEGAL_SEQUENCES = (
         # common illegal character sequences
-        '&(amp|quot|apos|lt|gt|#)',
-        '[<>]',
-        #'\d(-|--|—)\d', # URLS!
-        '["\']',
-        '[^\s]\[',
-        #'http',
-        'Ztg',
-        'VEB',
-        'd\.i\.',
-        'o\.A\.',
-        'o\.O\.',
-        'o\.J\.',
-        'a\.M\.',
-        'u\.a\.',
-        'et\s+al\.',
-        '\svon:',                # → DIN 1505 (Teil 2): von Nachname, Vorname
-        '\svom:',                # → DIN 1505 (Teil 2): vom Nachname, Vorname
-        '\sde:',                 # → DIN 1505 (Teil 2): de Nachname, Vorname
-        '\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
-        'Hrsg',
-        #'Verl\.',
-        'Hg[^\.][^\)][^:]',
-        '[zZ]itiert nach',       # → ∅
-        'IDS-Archiv',            # → ∅
-        'Aufbau[\s\-]+Verl',     # → Aufbau
-        'Berlin[\s\-]+Verl\.',   # → Bermann-Fischer
-        'Bermann\s.*Fischer',    # → Bermann-Fischer
-        'Buntbuch[\s\-]+Verl',   # → Buntbuch
-        'Columbus[\s\-]+Verl',   # → Columbus
-        'Dietz[\s\-]+Verl',      # → Dietz
-        'Drei\s+Masken\s+Verl',  # → Drei Masken
-        'Dressler[\s\-]+Verl',   # → Cecilie Dressler
-        'Econ[\s\-]+Verl',       # → Econ
-        'Eichborn[\s\-]+Verl',   # → Eichborn
-        'Elektronische\s+Ressource', # → ∅
-        'Fachbuchverl[^a\.]',    # → Fachbuchverlag
-        'Falken[\s\-]+Verl',     # → Falken
-        'Fischer[\s\-]+Taschenbuch[\s\-]+Verl',     # → Fischer Taschenbuch
-        'Gegenstandpunkt[\s\-]+Verl', # → Gegenstandpunkt
-        'Hanser[\s\-]+Verl',     # → Hanser
-        'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
-        'Hippokrates[\s\-]+Verl',# → Hippokrates
-        'Insel[\s\-]+Verl',      # → Insel
-        'Kinderbuchverl\.',      # → Kinderbuchverlag
-        'König[\s\-]+Verl',      # → König
-        'Landwirtschaftsverl[^a]', # → Landwirtschaftsverlag
-        'Lebensweiser[\s\-]+Verl', # → Lebensweiser
-        'P\.\s?M\.',             # → Peter Moosleitners …
-        'Propyläen[\s\-]+Verl',  # → Propyläen
-        'Roland[\s\-]+Verl',     # → Roland
-        'Rotbuch[\s\-]+Verl',    # → Rotbuch
-        'Silberburg[\s\-]+Verl', # → Silberburg
-        'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
-        'Südwest[\s\-]+Verl',    # → Südwest
-        'Tcetum[\s\-]+Verl',     # → Tectum
-        'Tourist[\s\-]+Verl',    # → Tourist
-        'Trotzdem[\s\-]+Verl',   # → Trotzdem
-        'Wegweiser[\s\-]+Verl',  # → Wegweiser
-        'Würfel[\s\-]+Verl',     # → Würfel
-        'Union[\s\-]+Verl',      # → Union
-        'Urania[\s\-]+Verl',     # → Urania
-        'Verlag\sTribüne',       # → Tribüne
-        'Verlag\s+Volk\s+u',     # → Volk und Gesundheit
-        'Verl\.\s+Volk\s+u',     # → Volk und Welt
-        'Verl.+Das Neue Berlin', # → Das Neue Berlin
-        'Verl.+Neues Leben',     # → Neues Leben
-        'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
-        'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
-        'Frankfurt am Main',     # → Frankfurt a. M.
-        ';\s',                   # exception: URLs, therefore \s
-        '[…!?\.,:][…\.,]',
-        '\s[:]',
-        '[^\p{L}]ders\.[^\]]',   # → [ders.]
-        '[^\p{L}]dies\.[^\]]',   # → [dies.]
-        'u\.\s*a\.[^\]]',        # → [u. a.]
-        '[^\[]u\.\s*a\.',        # → [u. a.]
-        'o\.\s*A\.[^\]][^:]',    # → [o. A.]:
-        'o\.\s*O\.[^\]]',        # → [o. O.]
-        'o\.\s*J\.[^\]]',        # → [o. J.]
-        'o\.\s*S\.',             # o. S. → ∅
-        'N\.\s*N\.',             # N. N. → [o. A.]
-        'S\.\s*\d+.*S\.',
-        'S\.\d',
-        'Seite\s*\d+\s*$',
-        'S\.\s+\d\d\d\d\d',
-        '\.$',
+        r'&(amp|quot|apos|lt|gt|#)',
+        r'[<>]',
+        #r'\d(-|--|—)\d', # URLS!
+        r'["\']',
+        r'[^\s]\[',
+        #r'http',
+        r'Ztg',
+        r'VEB',
+        r'd\.i\.',
+        r'o\.A\.',
+        r'o\.O\.',
+        r'o\.J\.',
+        r'a\.M\.',
+        r'u\.a\.',
+        r'et\s+al\.',
+        r'\svon:',                # → DIN 1505 (Teil 2): von Nachname, Vorname
+        r'\svom:',                # → DIN 1505 (Teil 2): vom Nachname, Vorname
+        r'\sde:',                 # → DIN 1505 (Teil 2): de Nachname, Vorname
+        r'\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
+        r'Hrsg',
+        #r'Verl\.',
+        r'Hg[^\.][^\)][^:]',
+        r'[zZ]itiert nach',       # → ∅
+        r'IDS-Archiv',            # → ∅
+        r'Aufbau[\s\-]+Verl',     # → Aufbau
+        r'Aufbau[\s\-]+Taschenb.+[vV]erl', # → Aufbau Taschenbuch
+        r'Berlin\s+Verl.+d.+Nation', # → Verlag der Nation
+        r'Bergstadtverl\.'        # → Bergstadtverlag
+        r'Bermann\s.*Fischer',    # → Bermann-Fischer
+        r'Buchverl\.',            # → UFA-Buchverlag
+        r'Buntbuch[\s\-]+Verl',   # → Buntbuch
+        r'Columbus[\s\-]+Verl',   # → Columbus
+        r'Dietz[\s\-]+Verl',      # → Dietz
+        r'Drei\s+Masken\s+Verl',  # → Drei Masken
+        r'Dressler[\s\-]+Verl',   # → Cecilie Dressler
+        r'Econ[\s\-]+Verl',       # → Econ
+        r'Eichborn[\s\-]+Verl',   # → Eichborn
+        r'Elektronische\s+Ressource', # → ∅
+        r'Fachbuchverl[^a\.]',    # → Fachbuchverlag
+        r'Falken[\s\-]+Verl',     # → Falken
+        r'Fischer[\s\-]+Taschenb.+[vV]erl', # → Fischer Taschenbuch
+        r'FN[\s\-]+Verl',         # → FN (FN-Verlag der dt. Reiterl. Vereinigung)
+        r'Frauenbuchverl\.',      # → Frauenbuchverlag
+        r'Gegenstandpunkt[\s\-]+Verl', # → Gegenstandpunkt
+        r'Greifenverl\.',         # → Greifenverlag
+        r'Hanser[\s\-]+Verl',     # → Hanser
+        r'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
+        r'Hippokrates[\s\-]+Verl',# → Hippokrates
+        r'Insel[\s\-]+Verl',      # → Insel
+        r'Kinderbuchverl\.',      # → Kinderbuchverlag
+        r'König[\s\-]+Verl',      # → König
+        r'Landwirtschaftsverl[^a]', # → Landwirtschaftsverlag
+        r'Lebensweiser[\s\-]+Verl', # → Lebensweiser
+        r'Militärverl\.',         # → Militärverlag
+        r'Orania[\s\-]+Verl',     # → Orania
+        r'P\.\s?M\.',             # → Peter Moosleitners …
+        r'Propyläen[\s\-]+Verl',  # → Propyläen
+        r'Ratgeberverl\.',        # → Bertelsmann Ratgeber
+        r'Roland[\s\-]+Verl',     # → Roland
+        r'Rotbuch[\s\-]+Verl',    # → Rotbuch
+        r'Silberburg[\s\-]+Verl', # → Silberburg
+        r'Sportverl\.',           # → Sortverlag
+        r'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
+        r'Südwest[\s\-]+Verl',    # → Südwest
+        r'-Taschenbuch',          # → Taschenbuch
+        r'Tcetum[\s\-]+Verl',     # → Tectum
+        r'Tourist[\s\-]+Verl',    # → Tourist
+        r'Trotzdem[\s\-]+Verl',   # → Trotzdem
+        r'Wegweiser[\s\-]+Verl',  # → Wegweiser
+        r'Würfel[\s\-]+Verl',     # → Würfel
+        r'Ullstein[\s\-]+Taschenb.+[vV]erl', # → Ullstein Taschenbuch
+        r'Union[\s\-]+Verl',      # → Union
+        r'Urania[\s\-]+Verl',     # → Urania
+        r'Verlag\sTribüne',       # → Tribüne
+        r'Verlag\s+Volk\s+u',     # → Volk und Gesundheit
+        r'Verl\.\s+Volk\s+u',     # → Volk und Welt
+        r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
+        r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
+        r'Verl.+Neues Leben',     # → Neues Leben
+        r'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
+        r'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
+        r'Frankfurt am Main',     # → Frankfurt a. M.
+        r';\s',                   # exception: URLs, therefore \s
+        r'[…!?\.,:][…\.,]',
+        r'\s[:]',
+        r'[^\p{L}]ders\.[^\]]',   # → [ders.]
+        r'[^\p{L}]dies\.[^\]]',   # → [dies.]
+        r'u\.\s*a\.[^\]]',        # → [u. a.]
+        r'[^\[]u\.\s*a\.',        # → [u. a.]
+        r'o\.\s*A\.[^\]][^:]',    # → [o. A.]:
+        r'o\.\s*O\.[^\]]',        # → [o. O.]
+        r'o\.\s*J\.[^\]]',        # → [o. J.]
+        r'o\.\s*S\.',             # o. S. → ∅
+        r'N\.\s*N\.',             # N. N. → [o. A.]
+        r'S\.\s*\d+.*S\.',
+        r'S\.\d',
+        r'Seite\s*\d+\s*$',
+        r'S\.\s+\d\d\d\d\d',
+        r'\.$',
 )
 
 for entry, path in wb:
