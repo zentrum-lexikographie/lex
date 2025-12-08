@@ -195,6 +195,7 @@ legal = (
         'Ukrainer:innen',
         'Unterstützer:innen',
         'User:innen',
+        'Züchter:innen',
         'Zuschauer:innen',
         # stuff
         'verni’sa:z(e)',

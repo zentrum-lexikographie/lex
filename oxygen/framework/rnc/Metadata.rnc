@@ -300,6 +300,7 @@ Orthografieregel = element Orthografieregel {
             | '32 (1.2)'
             | '32 (2)'
             | '33'
+            | '33 (1)'
             | '33 (3)'
             | '33 (E)'
             | '34'
