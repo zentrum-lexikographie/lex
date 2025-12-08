@@ -66,6 +66,15 @@ class Wb(object):
             'Red-f',
     )
 
+    CORPORA = {
+            'dwds:bz_pp': r'dwds:bz_pp:(?P<year>\d{4})/(?P<month>\d{2})/26120215_\1-\2-(?P<day>\d{2})_\d+_\d+',
+            'dwds:dradio': r'dwds:dradio:(?P<id>\d{2})/id_\1\d+',
+            'dwds:nd': r'dwds:nd:{(?P<year>\d{4})/(?P<month>\d{2})/2532889X_\1-\2-(?P<day>\d{2})_\d+_\d+',
+            'dwds:nz': r'dwds:nz:{(?P<year>\d{4})/(?P<month>\d{2})/2612273X_\1-\2-(?P<day>\d{2})_\d+_\d+',
+            'dwds:pnn': r'dwds:pnn:(?P<year>\d{4})/(?P<month>\d{2})/\1\2(?P<day>\d{2})_.+',
+            'dwds:standard': r'dwds:standard:(?P<year>\d{4})/(?P<month>\d{2})/\1\2(?P<day>\d{2}_.+)',
+    }
+
     PERIODICALS = (
         'Aachener Zeitung',
         'Academia',

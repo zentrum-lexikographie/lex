@@ -66,6 +66,7 @@ ILLEGAL_SEQUENCES = (
         'Dietz[\s\-]+Verl',      # → Dietz
         'Drei\s+Masken\s+Verl',  # → Drei Masken
         'Dressler[\s\-]+Verl',   # → Cecilie Dressler
+        'Druck\.-',              # → Schweizer Druck- und Verlagshaus
         'Econ[\s\-]+Verl',       # → Econ
         'Eichborn[\s\-]+Verl',   # → Eichborn
         'Elektronische\s+Ressource', # → ∅
