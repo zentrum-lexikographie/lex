@@ -345,23 +345,23 @@ if __name__ == '__main__':
 
     # set up dictionary type
     if arguments.dictionary_type == 'dwdswb':
-        dictionary = DWDSWB(arguments.input_files)
+        dictionary = DWDSWB(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'etymwb':
-        dictionary = EtymWB(arguments.input_files)
+        dictionary = EtymWB(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'wdg':
-        dictionary = WDG(arguments.input_files)
+        dictionary = WDG(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'dwb1':
-        dictionary = DWB1(arguments.input_files)
+        dictionary = DWB1(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'dwb2':
-        dictionary = DWB2(arguments.input_files)
+        dictionary = DWB2(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'neologismen':
-        dictionary = Neologismen(arguments.input_files)
+        dictionary = Neologismen(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'varwb':
-        dictionary = VarWB(arguments.input_files)
+        dictionary = VarWB(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'wortgeschichten':
-        dictionary = Wortgeschichten(arguments.input_files)
+        dictionary = Wortgeschichten(sorted(arguments.input_files))
     elif arguments.dictionary_type == 'wortgeschichten_preprint':
-        dictionary = Wortgeschichten_preprint(arguments.input_files)
+        dictionary = Wortgeschichten_preprint(sorted(arguments.input_files))
 
     # set up DB connection
     cursor = None
