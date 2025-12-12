@@ -66,6 +66,7 @@ ILLEGAL_SEQUENCES = (
         r'Buchverl\.',            # → UFA-Buchverlag
         r'Buntbuch[\s\-]+Verl',   # → Buntbuch
         r'Columbus[\s\-]+Verl',   # → Columbus
+        r'Desotron[\s\-]+Verl',   # → Desotron
         r'Dietz[\s\-]+Verl',      # → Dietz
         r'Drei\s+Masken\s+Verl',  # → Drei Masken
         r'Dressler[\s\-]+Verl',   # → Cecilie Dressler
@@ -89,12 +90,14 @@ ILLEGAL_SEQUENCES = (
         r'Landwirtschaftsverl[^a]', # → Landwirtschaftsverlag
         r'Lebensweiser[\s\-]+Verl', # → Lebensweiser
         r'Militärverl\.',         # → Militärverlag
+        r'Mitteld.+Verl\.',       # → Mitteldeutscher Verlag
         r'Orania[\s\-]+Verl',     # → Orania
         r'P\.\s?M\.',             # → Peter Moosleitners …
         r'Propyläen[\s\-]+Verl',  # → Propyläen
         r'Ratgeberverl\.',        # → Bertelsmann Ratgeber
         r'Roland[\s\-]+Verl',     # → Roland
         r'Rotbuch[\s\-]+Verl',    # → Rotbuch
+        r'Siedler\s+Verl',        # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
         r'Sportverl\.',           # → Sortverlag
         r'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
@@ -108,12 +111,13 @@ ILLEGAL_SEQUENCES = (
         r'Ullstein[\s\-]+Taschenb.+[vV]erl', # → Ullstein Taschenbuch
         r'Union[\s\-]+Verl',      # → Union
         r'Urania[\s\-]+Verl',     # → Urania
-        r'Verlag\sTribüne',       # → Tribüne
+        r'Verl.+\sTribüne',       # → Tribüne
         r'Verlag\s+Volk\s+u',     # → Volk und Gesundheit
         r'Verl\.\s+Volk\s+u',     # → Volk und Welt
         r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
         r'Verl.+Neues Leben',     # → Neues Leben
+        r'Weltbild[\s\-]+Verl',   # → Weltbild
         r'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
         r'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
         r'Frankfurt am Main',     # → Frankfurt a. M.

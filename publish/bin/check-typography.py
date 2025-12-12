@@ -152,6 +152,7 @@ legal = (
         'Makler:innen',
         'Maler:in',
         'Mathematiker:innen',
+        'Migrant:innen',
         'Migrant:innenpartei',
         'Mitarbeiter:in',
         'Mitarbeiter:innen',
