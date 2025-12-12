@@ -42,6 +42,7 @@ class Wb(object):
                 'Orthografie', 'Orthografieregel', 'Frequenzangabe',
                 'Bedeutungsebene', 'Syntagmatik', 'Verweis_extern',
                 'Auxiliar', 'Stilfaerbung', 'Gruppensprache',
+                'Funktionspraeferenz',
                 'Komparativ', 'Superlativ', 'Wert', 'Positivvariante',
                 'Streichung', 'Loeschung', 'Praesens', 'Praeteritum',
                 'Partizip_II', 'Komparationspraeferenz', 'Gebrauchszeitraum',)
