@@ -97,7 +97,8 @@ ILLEGAL_SEQUENCES = (
         r'Ratgeberverl\.',        # → Bertelsmann Ratgeber
         r'Roland[\s\-]+Verl',     # → Roland
         r'Rotbuch[\s\-]+Verl',    # → Rotbuch
-        r'Siedler\s+Verl',        # → Siedler
+        r'Savari[\s\-]+Verl',     # → Safari
+        r'Siedler[\s\-]+Verl'     # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
         r'Sportverl\.',           # → Sortverlag
         r'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
@@ -117,7 +118,8 @@ ILLEGAL_SEQUENCES = (
         r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
         r'Verl.+Neues Leben',     # → Neues Leben
-        r'Weltbild[\s\-]+Verl',   # → Weltbild
+        r'Weltbild[\s\-]+Verl.+\d{4}', # → Weltbild
+        r'Wunderlich[\s\-]+Verl', # → Wunderlich
         r'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
         r'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
         r'Frankfurt am Main',     # → Frankfurt a. M.
