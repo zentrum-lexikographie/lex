@@ -232,7 +232,7 @@
          :attrs {:context (get contexts context context)}})))))
 
 (comment
-  (p/parse token "{test|www, testen,testet, 'testete'}")
+  (p/parse token "{test|www,testen,testet,'testete'}")
   (p/parse token "'tes.'*")
   (p/parse token "@\\@test")
   (p/parse token "/^te.*st/")
