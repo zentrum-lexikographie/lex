@@ -8,31 +8,33 @@ services:
       - "8983:8983"
     command: [ "solr-precreate", "articles" ]
   db:
-    image: docker.zdl.org/zdl/pgvector:latest
+    image: ${CI_REGISTRY_IMAGE:-zdl}/db:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
       dockerfile_inline: |
-          FROM pgvector/pgvector:0.7.2-pg16
+          FROM pgvector/pgvector:pg18-trixie
           RUN localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
           ENV LANG de_DE.utf8
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
+    configs:
+      - source: db_config
+        target: /etc/postgresql/postgresql.conf
+      - source: db_server_cert
+        target: /etc/postgresql/server.crt
+      - source: db_server_key
+        target: /etc/postgresql/server.key
+        uid: "999"
+        gid: "999"
+        mode: 0o400
     environment:
       - "POSTGRES_USER=nlp"
       - "POSTGRES_PASSWORD=nlp"
     volumes:
-      - db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql
     ports:
       - "5432:5432"
-  queue:
-    image: rabbitmq:4.1
-    environment:
-      - "RABBITMQ_DEFAULT_USER=nlp"
-      - "RABBITMQ_DEFAULT_PASS=nlp"
-    volumes:
-      - queue:/var/lib/rabbitmq
-    ports:
-      - "5672:5672"
   server:
-    image: docker.zdl.org/zdl/lex:latest
+    image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
     environment:
@@ -58,11 +60,107 @@ services:
 volumes:
   index:
   db:
-  queue:
   server:
 configs:
+  db_config:
+    content: |
+      listen_addresses = '*'
+      ssl = on
+      ssl_cert_file = '/etc/postgresql/server.crt'
+      ssl_key_file = '/etc/postgresql/server.key'
+  db_server_cert:
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIGNzCCBB+gAwIBAgIUEK7k1UDFYH4AI9QtHlQJ+SOG+TAwDQYJKoZIhvcNAQEN
+      BQAwfTELMAkGA1UEBhMCREUxDzANBgNVBAgTBkJlcmxpbjEPMA0GA1UEBxMGQmVy
+      bGluMT4wPAYDVQQKEzVCZXJsaW4tQnJhbmRlbmJ1cmcgQWNhZGVteSBvZiBTY2ll
+      bmNlcyBhbmQgSHVtYW5pdGllczEMMAoGA1UECxMDWkRMMB4XDTI1MTIyMjIwNTYw
+      MFoXDTMwMTIyMTIwNTYwMFowgYoxCzAJBgNVBAYTAkRFMQ8wDQYDVQQIEwZCZXJs
+      aW4xDzANBgNVBAcTBkJlcmxpbjE+MDwGA1UEChM1QmVybGluLUJyYW5kZW5idXJn
+      IEFjYWRlbXkgb2YgU2NpZW5jZXMgYW5kIEh1bWFuaXRpZXMxDDAKBgNVBAsTA1pE
+      TDELMAkGA1UEAxMCZGIwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDG
+      CjXJKJ7Nu5zicJM9KKUHf7zd5Ryk04F41HO96bI9duNbqGFK7M0pZvqDRuJo9EnB
+      KI6hoKPAD67dYEHfzv+Dcw71ndmxTW5RL0USVUe8zCt0qauYK3lTIvVdOw9iXxyh
+      43JWCLlCW0dt4fLin+Pj0qkFdOQ6Oj+KcTaE8jO+6ax3dC6m3Xin9jzkc2k77sBL
+      pVuKUGg1PQja9f5hZTGzQ/PZvCHVLJjyDq2hWMNli8djeDSW12Q1V65FNA7ojx/G
+      b7gF+orgxTqRhG9VSNwqLRWr1HKhOYCBW+vzAZkoUZ8NmEona2EctvKl+mN2G5Gs
+      YZrKKLpu0FtxYT6544qOwg0NAJ7VvX5UNivdyrlpZ0/s2D05dnJqh8fXQpKxmEIN
+      pmcwnp47smuWMP7NjEqAwILM0ejDgWnF7RAE72mLDsNjMGE2CXsDD8Pzx73afdY6
+      SJVzlQOvkIodtbLyJtftxjA17f9TJbE3i5DlX+5W5QuNPjfAVjsmGnnLAjYRQm5x
+      X1xqTMhZalnElZGGbK2FvnYKQECyW1DhtJJHw64mPnYUrqNiylEq/Fts9zNgMJMI
+      AVpLMgLkocpHU3g7sIgTN1XLGnqP2L0FYTIiuYNWJLjqds52LnpEYK0vYX9WDAZn
+      50fUY5aWGHWyQcl/3egdbBEY3Rq1gFLeHHlyQFaApQIDAQABo4GgMIGdMA4GA1Ud
+      DwEB/wQEAwIFoDAdBgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwDAYDVR0T
+      AQH/BAIwADAdBgNVHQ4EFgQU3JWifKugJQObdTT3pVBbyb74DD0wHwYDVR0jBBgw
+      FoAUaYHqEmFNvLlDpw8b2vhBFrjHDcIwHgYDVR0RBBcwFYICZGKCCWxvY2FsaG9z
+      dIcEfwAAATANBgkqhkiG9w0BAQ0FAAOCAgEAWfuXRGI/I2b6xviwXH30lMGUR9wR
+      GNUk3xd6cHgiqqmV+C41l6vfH68ihpNWX9Zlqq1OJfKr1r6X1IqE/CqHPAFxFeuQ
+      YFt5F98BzP58MQX+kX77HEuCG6YQSEOnAZHTz5eR/ikXyKvjanHvDhP7FYxUOivY
+      7FwyN1V8/Wp/b5BJsVS25qDW6FxrA8Sk/X4gr3H/RBAakACEFRquQJ2V9BZXGDxP
+      JaQKVBxF7+Q41KCH2PxuVTn3OIKrLOuDVIgqMn7OkIcMJwaV6pmmoNRy1PIzjy2z
+      jbr7PTNxP/DJBSC+HLfvHpUe0rFlhjpqPeRYQh+GqoQnhXZ4X9EN3O21g/JIBWxB
+      IC8FiR6S0hCia5ojua745TqcS9Vw8TWkazjwD70Wt3h3q7FuLeBQpLVa9yQ44Mhf
+      TeIQPKlJ9Mm1D2Zt3vQUryBcICJiZX3LHxZRgoCEPCzngLI55hGn7EEPOS2FJaFL
+      A6SDhvSSfBi/I15QRMElpinLhZcf/ox5HVoFiTBwvOTHjzTq69a3Xg8OOltUllNk
+      zYZw38o3vZhxRdNJUwNlatm00+NEhDBQSQ9RKjss4qmwh/FbZo+fcSGSAo+wixlz
+      k9Sh6+ezgmfnZeW58tnXX1y25XRD/oRt0uR9UjoQ/+Fnfb0Ap14eTTNjpwpXd7zl
+      RrBiPX+glZ70C/0=
+      -----END CERTIFICATE-----
+  db_server_key:
+    content: |
+      -----BEGIN RSA PRIVATE KEY-----
+      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
+      -----END RSA PRIVATE KEY-----
   caddy_config:
-    content: >-
+    content: |
       localhost {
           handle {
               reverse_proxy server:3000
