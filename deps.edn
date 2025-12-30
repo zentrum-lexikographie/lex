@@ -22,6 +22,7 @@
                                      dev.weavejester/medley {:mvn/version "1.8.1"}}
                        :exec-fn     kaocha.runner/exec-fn}
              :client  {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.58.0"}
+                                    nrepl/nrepl                                                 {:mvn/version "1.5.2"}
                                     com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
                                     com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
                                     seesaw/seesaw                                               {:mvn/version "1.5.0"}}}

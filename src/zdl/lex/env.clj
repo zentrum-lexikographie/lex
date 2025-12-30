@@ -71,13 +71,13 @@
             (str (getenv "SOLR_CORE" "articles") "/")))
 
 (def db
-  (let [user (getenv "DB_USER" "nlp")]
+  (let [user (getenv "DB_USER" "lex")]
     {:dbtype     "postgresql"
      :host       (getenv "DB_HOST" "db")
-     :dbname     (getenv "DB_NAME" "nlp")
+     :dbname     (getenv "DB_NAME" "lex")
      :user       user
      :username   user
-     :password   (getenv "DB_PASSWORD" "nlp")
+     :password   (getenv "DB_PASSWORD" "lex")
      :sslmode    "require"}))
 
 (def mantis-db

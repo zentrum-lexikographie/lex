@@ -27,8 +27,9 @@ services:
         gid: "999"
         mode: 0o400
     environment:
-      - "POSTGRES_USER=nlp"
-      - "POSTGRES_PASSWORD=nlp"
+      - "POSTGRES_USER=lex"
+      - "POSTGRES_PASSWORD=lex"
+      - "POSTGRES_INITDB_ARGS=--locale-provider=icu --icu-locale=de-DE"
     volumes:
       - db:/var/lib/postgresql
     ports:
@@ -68,6 +69,8 @@ configs:
       ssl = on
       ssl_cert_file = '/etc/postgresql/server.crt'
       ssl_key_file = '/etc/postgresql/server.key'
+      shared_buffers = 512MB
+      synchronous_commit = off
   db_server_cert:
     content: |
       -----BEGIN CERTIFICATE-----
