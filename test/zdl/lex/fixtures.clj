@@ -22,11 +22,11 @@
 
 (defn start-backends!
   []
-  (p/exec "docker" "compose" "--progress" "quiet" "up" "db" "index" "queue" "-d"))
+  (p/exec "docker" "compose" "--progress" "quiet" "up" "db" "index" "-d"))
 
 (defn stop-backends!
   []
-  (p/exec "docker" "compose"  "--progress" "quiet" "down" "db" "index" "queue"))
+  (p/exec "docker" "compose"  "--progress" "quiet" "down" "db" "index"))
 
 (defn backends
   [f]

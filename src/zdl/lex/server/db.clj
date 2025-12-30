@@ -72,8 +72,9 @@
 
 (comment
   (tm/with-min-level :debug (tm/with-signals (init-db! db)))
-  (execute! ["SELECT * FROM lexeme"])
-  (execute! ["CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))"])
+  (execute! {:select :* :from :query})
+  (->> ["CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3))"]
+       (jdbc/execute! db))
   (jdbc/with-transaction [tx db]
     (PGvector/registerTypes tx)
     (jdbc/execute! tx ["INSERT INTO items (embedding) VALUES (?)"
