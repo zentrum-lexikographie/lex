@@ -1,0 +1,88 @@
+name: zdl-lex
+services:
+  index:
+    image: solr:9
+    volumes:
+      - index:/var/solr
+    restart: unless-stopped
+    command: [ "solr-precreate", "articles" ]
+  db:
+    image: ${CI_REGISTRY_IMAGE:-zdl}/db:${CI_COMMIT_SHORT_SHA:-latest}
+    restart: unless-stopped
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
+    configs:
+      - source: db_config
+        target: /etc/postgresql/postgresql.conf
+      - source: db_server_cert
+        target: /etc/postgresql/server.crt
+      - source: db_server_key
+        target: /etc/postgresql/server.key
+        uid: "999"
+        gid: "999"
+        mode: 0o400
+    environment:
+      - "POSTGRES_USER=lex"
+      - "POSTGRES_PASSWORD=${ZDL_LEX_DB_PASSWORD}"
+      - "POSTGRES_INITDB_ARGS=--locale-provider=icu --icu-locale=de-DE"
+    volumes:
+      - db:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+  server:
+    image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
+    environment:
+      - "GIT_AUTHOR_NAME=ZDL-Lex"
+      - "GIT_AUTHOR_EMAIL=noreply@dwds.de"
+      - "GIT_COMMITTER_NAME=ZDL-Lex"
+      - "GIT_COMMITTER_EMAIL=noreply@dwds.de"
+      # - "GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
+      - "ZDL_LEX_DB_PASSWORD=${ZDL_LEX_DB_PASSWORD}"
+      - "ZDL_LEX_GIT_ORIGIN="
+      - "ZDL_LEX_USERBASE_FILE=/run/secrets/userbase"
+      - "ZDL_LEX_MANTIS_DB_PASSWORD=${ZDL_LEX_MANTIS_DB_PASSWORD}"
+    volumes:
+      - server:/data
+    restart: unless-stopped
+    secrets:
+      - userbase
+  http:
+    image: caddy
+    configs:
+      - source: caddy_config
+        target: /etc/caddy/Caddyfile
+    volumes:
+      - http:/data
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    restart: unless-stopped
+    tty: true
+volumes:
+  index:
+  db:
+  server:
+  http:
+configs:
+  db_config:
+    content: |
+      listen_addresses = '*'
+      ssl = on
+      ssl_cert_file = '/etc/postgresql/server.crt'
+      ssl_key_file = '/etc/postgresql/server.key'
+      shared_buffers = 1GB
+      synchronous_commit = off
+  db_server_cert:
+    environment: "ZDL_LEX_DB_SERVER_CERT"
+  db_server_key:
+    environment: "ZDL_LEX_DB_SERVER_KEY"
+  caddy_config:
+    content: >-
+      labor.dwds.de {
+          handle {
+              reverse_proxy server:3000
+          }
+      }
+secrets:
+  userbase:
+    environment: "ZDL_LEX_USERBASE"
