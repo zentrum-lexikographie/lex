@@ -79,6 +79,7 @@ class Wb(object):
     PERIODICALS = (
         'Aachener Zeitung',
         'Academia',
+        'Allgemeine Auswanderungs-Zeitung',
         'Allgemeine Zeitung',
         'APA-Meldungen digital',
         'Apotheken Umschau', # sic!
