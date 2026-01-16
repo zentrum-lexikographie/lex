@@ -316,7 +316,7 @@ def hook_trim_streichung(e, modify=False):
 
 def hook_directmedia1(e, modify=False):
     found = False
-    for f in e.findall('.//%(Lesart)s//%(Fundstelle)s' % wb.TAGS):
+    for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
         t = wb.text(f)
         if re.search('Directmedia\s+Publ\.', t) is not None:
             if len(f) == 0:
@@ -332,7 +332,7 @@ def hook_directmedia1(e, modify=False):
 
 def hook_directmedia2(e, modify=False):
     found = False
-    for f in e.findall('.//%(Lesart)s//%(Fundstelle)s' % wb.TAGS):
+    for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
         t = wb.text(f)
         m = re.match('^(.*Berlin:\s+Directmedia.*)(,\s+S\.\s+\d+\s*)$', t)
         if m is not None:
@@ -361,7 +361,7 @@ def hook_minimalartikel_tranche(e, modify=False):
 def hook_nr(e, modify=False):
     found = False
     
-    for f in e.findall('.//%(Lesart)s//%(Fundstelle)s' % wb.TAGS):
+    for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
         if len(f) == 0:
             t = wb.text(f)
             m = re.match('(?P<head>.*),\s+(?P<date>[0123]\d\.[01]\d\.[12]\d\d\d)\s*(?P<tail>.*)', t)
