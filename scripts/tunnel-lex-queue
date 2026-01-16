@@ -4,7 +4,7 @@ from os import execlp
 
 execlp(
     "ssh", "ssh", "-v",
-    "-N", "-L", "5433:labor.dwds.de:5432",
+    "-N", "-L", "5670:labor.dwds.de:5671",
     "-o", "ServerAliveInterval 60",
     "lex.dwds.de"
 )

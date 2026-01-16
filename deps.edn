@@ -36,6 +36,7 @@
                                     com.github.igrishaev/pg2-core                   {:mvn/version "0.1.41"}
                                     com.github.igrishaev/pg2-honey                  {:mvn/version "0.1.41"}
                                     com.github.igrishaev/pg2-migration              {:mvn/version "0.1.41"}
+                                    com.novemberain/langohr                         {:mvn/version "5.5.0"}
                                     com.taoensso/telemere-slf4j                     {:mvn/version "1.0.1"}
                                     com.vladsch.flexmark/flexmark                   {:mvn/version "0.64.8"}
                                     com.zaxxer/HikariCP                             {:mvn/version "6.3.0"}

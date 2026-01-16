@@ -4,11 +4,11 @@
    [clojure.java.process :as p]
    [clojure.test :refer [join-fixtures]]
    [com.potetm.fusebox.retry :as retry :refer [with-retry delay-exp]]
+   [pg.core :as pg]
    [zdl.lex.env :as env]
    [zdl.lex.server :as server]
    [zdl.lex.server.index :as index]
-   [zdl.lex.server.git :as git]
-   [next.jdbc :as jdbc]))
+   [zdl.lex.server.git :as git]))
 
 (def backend-retry
   (retry/init {::retry/retry? (fn [n _ms _ex] (< n 20))
@@ -18,15 +18,20 @@
   []
   (with-retry backend-retry
     (index/query {"q" "id:*" "rows" "0" "wt" "json"})
-    (jdbc/execute! env/db ["SELECT 1+1 AS n"])))
+    (pg/execute env/db "SELECT 1+1 AS n")))
+
+(def backend-services
+  (cond-> ["index"] (not env/tunnel-backends?) (conj "db" "queue")))
 
 (defn start-backends!
   []
-  (p/exec "docker" "compose" "--progress" "quiet" "up" "db" "index" "-d"))
+  (apply p/exec (concat ["docker" "compose" "--progress" "quiet" "up" "-d"]
+                        backend-services)))
 
 (defn stop-backends!
   []
-  (p/exec "docker" "compose"  "--progress" "quiet" "down" "db" "index"))
+  (apply p/exec (concat ["docker" "compose"  "--progress" "quiet" "down"]
+                        backend-services)))
 
 (defn backends
   [f]

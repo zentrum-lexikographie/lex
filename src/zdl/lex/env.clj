@@ -16,7 +16,7 @@
 (tm.tools-logging/tools-logging->telemere!)
 (tm/uncaught->error!)
 (tm/set-min-level! :info)
-(tm/set-min-level! nil "com.zaxxer(.*)" :warn)
+(tm/set-min-level! nil "com.rabbitmq.client.TrustEverythingTrustManager" :error)
 
 (defn read-dot-env
   [filename]
@@ -52,7 +52,7 @@
   (when (and server-user server-password) [server-user server-password]))
 
 (def repl-port
-  (Long/parseLong (getenv "REPL_PORT" "3001")))
+  (parse-long (getenv "REPL_PORT" "3001")))
 
 (def git-origin
   (getenv "GIT_ORIGIN" "git@git.zdl.org:zdl/dict.git"))
@@ -64,14 +64,18 @@
   (getenv "GIT_DIR" "/data/git"))
 
 (def http-port
-  (Long/parseLong (getenv "HTTP_PORT" "3000")))
+  (parse-long (getenv "HTTP_PORT" "3000")))
 
 (def solr-url
   (uri/join (getenv "SOLR_URL" "http://index:8983/solr/")
             (str (getenv "SOLR_CORE" "articles") "/")))
 
+(def tunnel-backends?
+  (some? (getenv "TUNNEL_BACKENDS")))
+
 (def db
   {:host          (getenv "DB_HOST" "db")
+   :port          (parse-long (getenv "DB_PORT" (if tunnel-backends? "5433" "5432")))
    :database      (getenv "DB_NAME" "lex")
    :user          (getenv "DB_USER" "lex")
    :password      (getenv "DB_PASSWORD" "lex")
@@ -79,10 +83,17 @@
    :migrations-path "zdl/lex/server/db"
    :pool-max-size 8})
 
+(def queue
+  {:host     (getenv "QUEUE_HOST" "localhost")
+   :port     (parse-long (getenv "QUEUE_PORT" (if tunnel-backends? "5670" "5671")))
+   :username (getenv "QUEUE_HOST" "lex")
+   :password (getenv "QUEUE_PASSWORD" "lex")
+   :ssl      true})
+
 (def mantis-db
   {:dbtype   "mysql"
    :host     (getenv "MANTIS_DB_HOST" "mantis.dwds.de")
-   :port     (Long/parseLong (getenv "MANTIS_DB_PORT" "3306"))
+   :port     (parse-long (getenv "MANTIS_DB_PORT" "3306"))
    :dbname   (getenv "MANTIS_DB_NAME" "mantis_bugtracker")
    :username (getenv "MANTIS_DB_USER" "mantis")
    :password (getenv "MANTIS_DB_PASSWORD" "mantis")})
@@ -135,7 +146,7 @@
   (Boolean/parseBoolean (getenv "SCHEDULE_TASKS" "true")))
 
 (def metrics-report-interval
-  (Long/parseLong (getenv "METRICS_REPORTER_INTERVAL" "5")))
+  (parse-long (getenv "METRICS_REPORTER_INTERVAL" "5")))
 
 (def ^MetricRegistry metrics-registry
   (MetricRegistry.))
