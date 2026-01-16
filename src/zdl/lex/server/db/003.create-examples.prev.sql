@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS example_collocs;
+DROP TABLE IF EXISTS example;
+DROP TABLE IF EXISTS example_request;
+-- DROP INDEX IF EXISTS text_class_query;
+-- DROP TABLE IF EXISTS text_class;
+-- DROP INDEX IF EXISTS topic_query;
+-- DROP TABLE IF EXISTS topic;
+-- DROP TABLE IF EXISTS hit;
+-- DROP INDEX IF EXISTS query_lexeme;
+-- DROP TABLE IF EXISTS query;
+-- DROP INDEX IF EXISTS lexeme_ts;
+-- DROP INDEX IF EXISTS lexeme_ppm;
+-- DROP TABLE IF EXISTS lexeme;
