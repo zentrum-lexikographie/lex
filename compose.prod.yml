@@ -13,9 +13,9 @@ services:
     configs:
       - source: db_config
         target: /etc/postgresql/postgresql.conf
-      - source: db_server_cert
+      - source: tls_server_cert
         target: /etc/postgresql/server.crt
-      - source: db_server_key
+      - source: tls_server_key
         target: /etc/postgresql/server.key
         uid: "999"
         gid: "999"
@@ -28,6 +28,24 @@ services:
       - db:/var/lib/postgresql
     ports:
       - "5432:5432"
+  queue:
+    image: rabbitmq:4.1
+    environment:
+      - "RABBITMQ_DEFAULT_USER=lex"
+      - "RABBITMQ_DEFAULT_PASS=${ZDL_LEX_QUEUE_PASSWORD}"
+    volumes:
+      - queue:/var/lib/rabbitmq
+    configs:
+      - source: rabbitmq_config
+        target: /etc/rabbitmq/rabbitmq.conf
+      - source: tls_server_ca
+        target: /etc/rabbitmq/ca.pem
+      - source: tls_server_cert
+        target: /etc/rabbitmq/cert.pem
+      - source: tls_server_key
+        target: /etc/rabbitmq/key.pem
+    ports:
+      - "5671:5671"
   server:
     image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
     environment:
@@ -37,6 +55,7 @@ services:
       - "GIT_COMMITTER_EMAIL=noreply@dwds.de"
       # - "GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
       - "ZDL_LEX_DB_PASSWORD=${ZDL_LEX_DB_PASSWORD}"
+      - "ZDL_LEX_QUEUE_PASSWORD=${ZDL_LEX_QUEUE_PASSWORD}"
       - "ZDL_LEX_GIT_ORIGIN="
       - "ZDL_LEX_USERBASE_FILE=/run/secrets/userbase"
       - "ZDL_LEX_MANTIS_DB_PASSWORD=${ZDL_LEX_MANTIS_DB_PASSWORD}"
@@ -61,6 +80,7 @@ services:
 volumes:
   index:
   db:
+  queue:
   server:
   http:
 configs:
@@ -72,10 +92,18 @@ configs:
       ssl_key_file = '/etc/postgresql/server.key'
       shared_buffers = 1GB
       synchronous_commit = off
-  db_server_cert:
-    environment: "ZDL_LEX_DB_SERVER_CERT"
-  db_server_key:
-    environment: "ZDL_LEX_DB_SERVER_KEY"
+  rabbitmq_config:
+    content: |
+      listeners.ssl.default  = 5671
+      ssl_options.cacertfile = /etc/rabbitmq/ca.pem
+      ssl_options.certfile   = /etc/rabbitmq/cert.pem
+      ssl_options.keyfile    = /etc/rabbitmq/key.pem
+  tls_server_ca:
+    environment: "ZDL_LEX_SERVER_CA"
+  tls_server_cert:
+    environment: "ZDL_LEX_SERVER_CERT"
+  tls_server_key:
+    environment: "ZDL_LEX_SERVER_KEY"
   caddy_config:
     content: >-
       labor.dwds.de {
