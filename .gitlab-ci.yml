@@ -11,6 +11,8 @@ build:
   script:
     - docker compose build
     - docker compose push
+  only:
+    - main
   tags:
     - zdl
     - build
@@ -21,6 +23,8 @@ deploy:
     - docker compose -f compose.prod.yml pull
     - docker compose -f compose.prod.yml down --remove-orphans
     - docker compose -f compose.prod.yml up -d
+  only:
+    - main
   tags:
     - labor.dwds.de
     - shell
