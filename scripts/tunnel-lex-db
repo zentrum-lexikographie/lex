@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+
+from os import execlp
+
+execlp(
+    "ssh", "ssh", "-v",
+    "-N", "-L", "5432:labor.dwds.de:5432",
+    "-o", "ServerAliveInterval 60",
+    "lex.dwds.de"
+)

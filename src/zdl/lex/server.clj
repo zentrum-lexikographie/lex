@@ -9,7 +9,7 @@
 
 (defn start
   []
-  (db/open-db)
+  (db/open!)
   (issue/open-db)
   (git/init!)
   (http/start-server)
@@ -20,7 +20,7 @@
   (when env/schedule-tasks? (schedule/stop))
   (http/stop-server)
   (issue/close-db)
-  (db/close-db)
+  (db/close!)
   (env/stop-metrics-reporter))
 
 (defn -main

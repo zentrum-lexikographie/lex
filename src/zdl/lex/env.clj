@@ -71,14 +71,13 @@
             (str (getenv "SOLR_CORE" "articles") "/")))
 
 (def db
-  (let [user (getenv "DB_USER" "lex")]
-    {:dbtype     "postgresql"
-     :host       (getenv "DB_HOST" "db")
-     :dbname     (getenv "DB_NAME" "lex")
-     :user       user
-     :username   user
-     :password   (getenv "DB_PASSWORD" "lex")
-     :sslmode    "require"}))
+  {:host          (getenv "DB_HOST" "db")
+   :database      (getenv "DB_NAME" "lex")
+   :user          (getenv "DB_USER" "lex")
+   :password      (getenv "DB_PASSWORD" "lex")
+   :ssl?          true
+   :migrations-path "zdl/lex/server/db"
+   :pool-max-size 8})
 
 (def mantis-db
   {:dbtype   "mysql"

@@ -1,8 +1,9 @@
 (ns zdl.lex.server.lock
   (:require
-   [next.jdbc :as jdbc]
+   [pg.core :as pg]
+   [pg.honey :as pgh]
    [ring.util.response :as resp]
-   [zdl.lex.server.db :as db :refer [db]]
+   [zdl.lex.server.db :refer [db q]]
    [taoensso.telemere :as tm]))
 
 (def ^:dynamic *context*
@@ -12,25 +13,25 @@
   [c]
   (when-let [{:keys [resource owner token]} *context*]
     (first
-     (db/query c {:select   :*
-                  :from     :lock
-                  :where    [:and
-                             [:> :expires (System/currentTimeMillis)]
-                             [:= :resource resource]
-                             [:= :owner owner]
-                             [:= :token token]]
-                  :order-by [:resource :owner :token]}))))
+     (q c {:select   :*
+           :from     :lock
+           :where    [:and
+                      [:> :expires (System/currentTimeMillis)]
+                      [:= :resource resource]
+                      [:= :owner owner]
+                      [:= :token token]]
+           :order-by [:resource :owner :token]}))))
 
 (defn select-other-locks
   [c]
   (when-let [{:keys [resource owner token]} *context*]
-    (db/query c {:select   :*
-                 :from     :lock
-                 :where    [:and
-                            [:> :expires (System/currentTimeMillis)]
-                            [:= :resource resource]
-                            [:or [:<> :owner owner] [:<> :token token]]]
-                 :order-by [:resource :owner :token]})))
+    (q c {:select   :*
+          :from     :lock
+          :where    [:and
+                     [:> :expires (System/currentTimeMillis)]
+                     [:= :resource resource]
+                     [:or [:<> :owner owner] [:<> :token token]]]
+          :order-by [:resource :owner :token]})))
 
 (defn assert-unlocked
   [c]
@@ -47,7 +48,7 @@
 
 (def merge-sql-stmt
   (str "INSERT INTO lock (resource, owner, token, expires) "
-       "VALUES (?, ?, ?, ?) "
+       "VALUES ($1, $2, $3, $4) "
        "ON CONFLICT (resource, owner, token) "
        "DO UPDATE SET expires = EXCLUDED.expires"))
 
@@ -55,13 +56,13 @@
   [c]
   (when-let [{:keys [resource owner token ttl] :or {ttl default-ttl}} *context*]
     (let [expires (+ (System/currentTimeMillis) ttl)]
-      (jdbc/execute! c [merge-sql-stmt resource  owner token expires])
+      (pg/execute c merge-sql-stmt {:params [resource owner token expires]})
       {:resource resource :owner owner :token token :expires expires})))
 
 (defn delete-lock
   [c]
   (when-let [{:keys [resource owner token]} *context*]
-    (db/execute! c {:delete-from :lock
+    (pgh/execute c {:delete-from :lock
                     :where       [:and
                                   [:> :expires (System/currentTimeMillis)]
                                   [:= :resource resource]
@@ -71,14 +72,14 @@
 
 (defmacro with-lock
   [& forms]
-  `(jdbc/with-transaction [c# db {:isolation :serializable}]
-     (assert-unlocked c#)
-     (let [active-lock# (select-active-lock c#)]
+  `(pg/with-transaction [tx# db {:isolation :serializable}]
+     (assert-unlocked tx#)
+     (let [active-lock# (select-active-lock tx#)]
        (try
-         (when-not active-lock# (merge-lock c#))
+         (when-not active-lock# (merge-lock tx#))
          ~@forms
          (finally
-           (when-not active-lock# (delete-lock c#)))))))
+           (when-not active-lock# (delete-lock tx#)))))))
 
 ;; # HTTP API
 
@@ -102,38 +103,38 @@
 
 (defn handle-read-locks
   [_]
-  (jdbc/with-transaction [c db {:read-only? true}]
+  (pg/with-transaction [tx db {:read-only? true}]
     (resp/response
-     (db/query c {:select   [:resource :owner :expires]
-                  :from     :lock
-                  :where    [:> :expires (System/currentTimeMillis)]
-                  :order-by [:resource :owner :expires]}))))
+     (q tx {:select   [:resource :owner :expires]
+            :from     :lock
+            :where    [:> :expires (System/currentTimeMillis)]
+            :order-by [:resource :owner :expires]}))))
 
 (defn handle-read-lock
   [_req]
-  (jdbc/with-transaction [c db {:read-only? true}]
-    (if-let [active (select-active-lock c)]
+  (pg/with-transaction [tx db {:read-only? true}]
+    (if-let [active (select-active-lock tx)]
       (resp/response active)
       (response-not-found))))
 
 (defn handle-create-lock
   [_req]
-  (jdbc/with-transaction [c db {:isolation :serializable}]
-    (if-let [other-lock (first (select-other-locks c))]
+  (pg/with-transaction [tx db {:isolation :serializable}]
+    (if-let [other-lock (first (select-other-locks tx))]
       (-> other-lock (resp/response) (resp/status 423))
-      (-> (merge-lock c) (resp/response)))))
+      (-> (merge-lock tx) (resp/response)))))
 
 (defn handle-remove-lock
   [_req]
-  (jdbc/with-transaction [c db]
-    (if (select-active-lock c)
-      (resp/response (delete-lock c))
+  (pg/with-transaction [tx db]
+    (if (select-active-lock tx)
+      (resp/response (delete-lock tx))
       (response-not-found))))
 
 ;; # Periodic Lock Cleanup
 
 (defn cleanup!
   []
-  (jdbc/with-transaction [c db]
-    (db/execute! c {:delete-from :lock
-                    :where       [:<= :expires (System/currentTimeMillis)]})))
+  (pg/with-transaction [tx db]
+    (pgh/execute tx {:delete-from :lock
+                     :where       [:<= :expires (System/currentTimeMillis)]})))
