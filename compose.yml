@@ -19,9 +19,9 @@ services:
     configs:
       - source: db_config
         target: /etc/postgresql/postgresql.conf
-      - source: db_server_cert
+      - source: tls_server_cert
         target: /etc/postgresql/server.crt
-      - source: db_server_key
+      - source: tls_server_key
         target: /etc/postgresql/server.key
         uid: "999"
         gid: "999"
@@ -34,6 +34,24 @@ services:
       - db:/var/lib/postgresql
     ports:
       - "5432:5432"
+  queue:
+    image: rabbitmq:4.1
+    environment:
+      - "RABBITMQ_DEFAULT_USER=lex"
+      - "RABBITMQ_DEFAULT_PASS=lex"
+    volumes:
+      - queue:/var/lib/rabbitmq
+    configs:
+      - source: rabbitmq_config
+        target: /etc/rabbitmq/rabbitmq.conf
+      - source: tls_server_ca
+        target: /etc/rabbitmq/ca.pem
+      - source: tls_server_cert
+        target: /etc/rabbitmq/cert.pem
+      - source: tls_server_key
+        target: /etc/rabbitmq/key.pem
+    ports:
+      - "5671:5671"
   server:
     image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
     build:
@@ -61,6 +79,7 @@ services:
 volumes:
   index:
   db:
+  queue:
   server:
 configs:
   db_config:
@@ -71,7 +90,48 @@ configs:
       ssl_key_file = '/etc/postgresql/server.key'
       shared_buffers = 512MB
       synchronous_commit = off
-  db_server_cert:
+  rabbitmq_config:
+    content: |
+      listeners.ssl.default  = 5671
+      ssl_options.cacertfile = /etc/rabbitmq/ca.pem
+      ssl_options.certfile   = /etc/rabbitmq/cert.pem
+      ssl_options.keyfile    = /etc/rabbitmq/key.pem
+  tls_server_ca:
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIFyjCCA7KgAwIBAgIUQ50uo/GRbbRiBFfXawgVyNt6OywwDQYJKoZIhvcNAQEN
+      BQAwfTELMAkGA1UEBhMCREUxDzANBgNVBAgTBkJlcmxpbjEPMA0GA1UEBxMGQmVy
+      bGluMT4wPAYDVQQKEzVCZXJsaW4tQnJhbmRlbmJ1cmcgQWNhZGVteSBvZiBTY2ll
+      bmNlcyBhbmQgSHVtYW5pdGllczEMMAoGA1UECxMDWkRMMB4XDTI1MTIyMjE5NDgw
+      MFoXDTMwMTIyMTE5NDgwMFowfTELMAkGA1UEBhMCREUxDzANBgNVBAgTBkJlcmxp
+      bjEPMA0GA1UEBxMGQmVybGluMT4wPAYDVQQKEzVCZXJsaW4tQnJhbmRlbmJ1cmcg
+      QWNhZGVteSBvZiBTY2llbmNlcyBhbmQgSHVtYW5pdGllczEMMAoGA1UECxMDWkRM
+      MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2q67gtIqpSS9+ZeaIXZY
+      LR92om8Tt5VwxLsB6JQQmcwDQMmyJTRFA4oOPaitvJSjKsVIQ2o6/YNf/iq7GvW2
+      cZ8srurPDOpFnuxCgtuawtMmuh/1h0WFdnSDILW30A3W711fBDEs3h7NrEZbIVHq
+      2Km8ZxLNQ+w4bVtHTvlAlV63Q503zCcjafDnYETa2XKqmmmNLaWTc8BdiY6H6j8X
+      SMCJgsuq4PsrJQn4Uk02TytxUxd/h0Jtq0dMkdHIyf+0++R0NtgP3FRpp0neADPK
+      /vQq02rwVPdo7ts2ujzWLVp0LuMIvD5B+s3m496WSGOqrJehmx5GTWjS8L0DIg7F
+      n2FTg98sY9CK3jGrHiT2BmiThQMc+cGzOObBDXMgPA7gvaasyiRYKnDMerimZX0R
+      BpAs8d78WYWmSZ7VayAvWDRBq+AoVKJz3zgFuRlkcJMdMl9feiYekgL7sqFT5r4h
+      C7LGO4MzdXH6UfkRHi+Tx7FIm8QixRBLEKoKCn0DwDIB+KFlVEl7BtY4S1XhUrbL
+      KGRNRwgBCa3pROVZzy7XKUtJnwit3k+2ZLpuIph4YfU8apP2IPF+Z65QykMF+An5
+      dblCxB0uvSZAmJ67NLOjZnfMu7ZeAIY0CVaJ9a9wBbAfErPsyAhVoqX94lp6nMoQ
+      MCAbsICJ5l1RgEzk/edPmfkCAwEAAaNCMEAwDgYDVR0PAQH/BAQDAgEGMA8GA1Ud
+      EwEB/wQFMAMBAf8wHQYDVR0OBBYEFGmB6hJhTby5Q6cPG9r4QRa4xw3CMA0GCSqG
+      SIb3DQEBDQUAA4ICAQAz0MT+xAkFa/ijKdWS2dvav4wEnkNnJfdeFElyW86laXD8
+      KWioA6oxdlYOKoKUYtmZLkNt/PMnNtm40zApkwhQEBiYbVhi2jbpbQBwXol0wy4J
+      vy2E0+vV3K/PLtnIR0EQG5vZWLmABki1nxgEPglXbNEJegIkypMHyQKo+OwPQ6oM
+      MoaPExVTlPZgFgnlA89HHeoWFV9MfLG2K80nS75IzEw+zq5ePM28cVfGiB9uAnq0
+      v8utn1VImeYRlt6gggamADQFrBB7Y9U2BgCHG6V9sXUIjo01zQJUPoFyQ/TB7in2
+      WObBtImuQDwZldKWcIFM+EXPW68jvhru5P30lVg72D7U5EULvPAz+7zLe4h/R4r6
+      R2DOXX7+M97WubgDX2Qt0A7hdVkxObK5J27KQwQo+sFEWz9DTe4lEf0/RfdGPAWM
+      FfoHBZ35frsnwwCyyDLI/19EEdEyoT9/CqIh8zAIYXiIyykjhvECOIpUj3AWkxQ6
+      Y6aBFRup7z06KRmzwuyCkI0HG6eGgnIoNswaOLhUrNHQvbllTB6rmNNnALB67ixG
+      Ky9BJpCKVMWzJolP+9Pufsc5iS1VhnqvuELftKWzlru1OfcS7tb34hhjuv+0O7Dg
+      XeEgFJi70j9uK5HGELCtesiEvltWD9jLD0HoEStzNcFq/4QmeMUXZZIM/PK1fA==
+      -----END CERTIFICATE-----
+  tls_server_cert:
     content: |
       -----BEGIN CERTIFICATE-----
       MIIGNzCCBB+gAwIBAgIUEK7k1UDFYH4AI9QtHlQJ+SOG+TAwDQYJKoZIhvcNAQEN
@@ -109,7 +169,7 @@ configs:
       k9Sh6+ezgmfnZeW58tnXX1y25XRD/oRt0uR9UjoQ/+Fnfb0Ap14eTTNjpwpXd7zl
       RrBiPX+glZ70C/0=
       -----END CERTIFICATE-----
-  db_server_key:
+  tls_server_key:
     content: |
       -----BEGIN RSA PRIVATE KEY-----
       MIIJKQIBAAKCAgEAxgo1ySiezbuc4nCTPSilB3+83eUcpNOBeNRzvemyPXbjW6hh
