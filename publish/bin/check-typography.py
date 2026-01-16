@@ -138,6 +138,7 @@ legal = (
         'Ingenieur:innen',
         'Innenminister:innen',
         'jede:r',
+        'Jede:r',
         'Journalist:innen',
         'Klimaaktivist:innen',
         'Kolleg:innen',
