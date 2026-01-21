@@ -1,30 +1,29 @@
 (ns zdl.lex.client
   (:require
-   [clojure.edn :as edn]
    [clojure.java.io :as io]
    [clojure.string :as str]
+   [hato.client :as hc]
    [lambdaisland.uri :as uri]
-   [org.httpkit.client :as hc]
    [taoensso.telemere :as tm]
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.article.qa :as qa]
    [zdl.lex.env :as env])
   (:import
-   (java.io ByteArrayInputStream PushbackReader)
-   (java.net URL)
+   (java.io ByteArrayInputStream)
+   (java.net Authenticator PasswordAuthentication)
    (java.util UUID)
    (ro.sync.exml.plugin.lock LockException)))
 
-(def auth
-  (atom env/server-auth))
+(def active-user
+  (atom nil))
+
+(def active-article
+  (atom nil))
 
 (defn agent*
   [state]
   (agent state :error-handler (fn [_ t] (tm/error! t) nil)))
-
-(def active-article
-  (atom nil))
 
 (def articles
   (agent* {}))
@@ -61,34 +60,15 @@
   (-> "WDG/ve/Verfasserkollektiv-E_k_6565.xml" id->url url->id)
   (id->url "test.xml"))
 
-(def login-url
-  (str (uri/join env/server-url "status")))
+(defn handle-auth-context
+  [{{user "x-lex-user"} :headers :as response}]
+  (when-not @active-user (reset! active-user user))
+  response)
 
-(defn http-authenticate
-  []
-  (or
-   @auth
-   (let [status-con (.. (URL. login-url) (openConnection))]
-     (.. status-con (setRequestProperty "Accept" "application/edn"))
-     (with-open [status-stream (.. status-con (getInputStream))
-                 status-reader (io/reader status-stream :encoding "UTF-8")
-                 status-reader (PushbackReader. status-reader)]
-       (let [{:keys [user password]} (edn/read status-reader)]
-         (when (and user password)
-           (reset! auth [user password])))))))
-
-(defn read-edn-stream
-  [stream]
-  (with-open [r (java.io.PushbackReader. (io/reader stream :encoding "UTF-8"))]
-    (edn/read r)))
-
-(defn handle-http-response
-  [{:keys [status error] :as resp} {:keys [as] :as _req :or {as :edn}}]
-  (when error
-    (throw error))
-  (when-not (#{200 423} status)
-    (throw (ex-info "HTTP error" resp)))
-  (cond-> resp (= :edn as) (update :body read-edn-stream)))
+(defn handle-http-errors
+  [{:keys [status] :as response}]
+  (when-not (#{200 423} status) (throw (ex-info "HTTP error" response)))
+  response)
 
 (defn handle-http-locked-response
   [{:keys [status body] :as response}]
@@ -114,20 +94,33 @@
 (def lock-token
   (-> (UUID/randomUUID) str str/lower-case))
 
+(def http-client
+  (delay
+    (hc/build-http-client
+     {:authenticator (or (when env/server-auth
+                           (proxy [Authenticator] []
+                             (getPasswordAuthentication []
+                               (let [[user password] env/server-auth]
+                                 (PasswordAuthentication.
+                                  user (char-array password))))))
+                         (Authenticator/getDefault))
+      :version       :http-1.1})))
+
 (defn http-request
   [req & {:keys [lock?]}]
-  (let [auth (http-authenticate)]
-    (->
-     req
-     (update :method #(or % :get))
-     (update :url #(str (uri/join env/server-url %)))
-     (update-in [:headers "Accept"] #(or % "application/edn"))
-     (cond-> auth (assoc :basic-auth auth))
-     (cond-> lock? (assoc-in [:query-params :token] lock-token))
-     (hc/request)
-     (deref)
-     (handle-http-response req)
-     (handle-http-locked-response))))
+  (->
+   req
+   (assoc :http-client @http-client :throw-exceptions? false)
+   (update :method #(or % :get))
+   (update :url #(str (uri/join env/server-url %)))
+   (update-in [:headers "Accept"] #(or % "application/edn"))
+   (update :as #(or % :clojure))
+   (cond-> lock? (assoc-in [:query-params :token] lock-token))
+   (hc/request)
+   (handle-auth-context)
+   (handle-http-errors)
+   (handle-http-locked-response)))
+
 
 (defn http-lock
   [id timeout]
@@ -145,7 +138,8 @@
       :url    (uri/join "lock/" id)}
      (http-request :lock? true))
     (catch Throwable t
-      (tm/error! {:id ::unlock :data {:id id}} t))))
+      (when (not= 404 (-> t ex-data :status))
+        (tm/error! {:id ::unlock :data {:id id}} t)))))
 
 (defn http-response->input-stream
   [{:keys [body]}]
@@ -180,7 +174,7 @@
                    :pos  pos}
     :as           :byte-array}
    (http-request)
-   (get-in [:headers :x-lex-id])))
+   (get-in [:headers "x-lex-id"])))
 
 (defn http-suggest
   [q]
