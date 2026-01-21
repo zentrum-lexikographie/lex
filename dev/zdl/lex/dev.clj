@@ -10,13 +10,6 @@
    [zdl.lex.client :as client]
    [zdl.lex.article :as article]))
 
-(def sidebar
-  (ui/splitter :top-bottom
-               links/pane
-               issue/panel
-               :divider-location 0.6
-               :resize-weight 0.6))
-
 (def editor
   (ui/text :border 5
            :font {:from :monospaced :style :bold :size (util/large-font-size)}
@@ -34,23 +27,28 @@
  (uib/value editor))
 
 (def article-panel
-  (ui/splitter :top-bottom
-               search/panel
-               (ui/scrollable editor)
-               :divider-location 0.75
-               :resize-weight 0.75))
+  (ui/border-panel
+   :north toolbar/widget
+   :center (ui/splitter :left-right
+                        (ui/splitter :top-bottom
+                                     search/panel
+                                     (ui/scrollable editor)
+                                     :divider-location 0.75
+                                     :resize-weight 0.75)
+                        (ui/splitter :top-bottom
+                                     links/pane
+                                     issue/panel
+                                     :divider-location 0.6
+                                     :resize-weight 0.6)
+                        :divider-location 0.75
+                        :resize-weight 0.75)))
+
 
 (def frame
   (ui/frame
-   :title "ZDL Lex – Dev"
-   :size (util/clip-to-screen-size)
-   :content (ui/border-panel
-             :north toolbar/widget
-             :center (ui/splitter :left-right
-                                  article-panel
-                                  sidebar
-                                  :divider-location 0.75
-                                  :resize-weight 0.75))))
+   :title   "ZDL Lex – Dev"
+   :size    (util/clip-to-screen-size)
+   :content article-panel #_(ui/scrollable examples/table)))
 
 (defn show!
   []
