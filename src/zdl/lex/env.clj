@@ -10,7 +10,6 @@
    [clojure.data.csv :as csv])
   (:import
    (com.codahale.metrics Meter MetricRegistry Slf4jReporter Timer)
-   (com.rabbitmq.client ConnectionFactory)
    (io.github.cdimascio.dotenv Dotenv)
    (java.util.concurrent TimeUnit)))
 
@@ -81,16 +80,11 @@
    :migrations-path "zdl/lex/server/db"
    :pool-max-size 8})
 
-(def queue-connection-factory
-  (doto (ConnectionFactory.)
-    (.setHost (getenv "QUEUE_HOST" "labor.dwds.de"))
-    (.setPort (Integer/parseInt (getenv "QUEUE_PORT" "5671")))
-    (.setUsername (getenv "QUEUE_USER" "lex"))
-    (.setPassword (getenv "QUEUE_PASSWORD" "lex"))
-    (.useSslProtocol)
-    (.setConnectionTimeout 10000)
-    (.setHandshakeTimeout 10000)
-    (.setShutdownTimeout 10000)))
+(def queue
+  {:host     (getenv "QUEUE_HOST" "labor.dwds.de")
+   :port     (Integer/parseInt (getenv "QUEUE_PORT" "5671"))
+   :user     (getenv "QUEUE_USER" "lex")
+   :password (getenv "QUEUE_PASSWORD" "lex")})
 
 (def gpt-queue-name
   (getenv "QUEUE_GPT_QUEUE" "gpt"))
@@ -121,31 +115,6 @@
      (do
        (tm/log! {:level :warn :id ::userbase :data fallback-userbase})
        fallback-userbase))))
-
-(def ddc-dstar-request
-  {:request-method :get
-   :url            "https://ddc.dwds.de/dstar/"
-   :basic-auth     [(getenv "DDC_DSTAR_USER" "ddc")
-                    (getenv "DDC_DSTAR_PASSWORD" "ddc")]})
-
-(def korap-dereko-request
-  {:request-method :get
-   :url            "https://korap.ids-mannheim.de/api/v1.0/search"
-   :oauth-token    (getenv "DEREKO_ACCESS_TOKEN" "")})
-
-(def korap-dnb-request
-  {:request-method :get
-   :url            "https://korap.dnb.de/api/v1.0/search"})
-
-(def openai-api-request
-  {:request-method :post
-   :url            "https://api.openai.com/v1/chat/completions"
-   :headers        {"Content-Type" "application/json"
-                    "Accept"       "application/json"}
-   :oauth-token    (getenv "OPENAI_API_TOKEN")
-   :body           {"model"       "gpt-4.1-2025-04-14"
-                    "temperature" 0.0
-                    "top_p"       0.75}})
 
 (def schedule-tasks?
   (Boolean/parseBoolean (getenv "SCHEDULE_TASKS" "true")))
@@ -189,4 +158,3 @@
 (defn timed!
   [^Timer timer]
   (.time timer))
-

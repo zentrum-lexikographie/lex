@@ -5,7 +5,7 @@
    [taoensso.telemere :as tm]
    [clojure.core.async :as a])
   (:import
-   (com.rabbitmq.client AMQP$BasicProperties$Builder CancelCallback DeliverCallback)))
+   (com.rabbitmq.client AMQP$BasicProperties$Builder CancelCallback ConnectionFactory DeliverCallback)))
 
 (defrecord Exchange [id messages])
 
@@ -62,9 +62,18 @@
   (try
     (tm/log! {:id    ::start
               :level :info
-              :data  {:connection-factory env/queue-connection-factory
-                      :queue-name         env/gpt-queue-name}})
-    (let [mq-connection*  (.newConnection env/queue-connection-factory)
+              :data  {:connection env/queue
+                      :queue-name env/gpt-queue-name}})
+    (let [mq-conn-factory (doto (ConnectionFactory.)
+                           (.setHost (env/queue :host))
+                           (.setPort (env/queue :port))
+                           (.setUsername (env/queue :user))
+                           (.setPassword (env/queue :password))
+                           (.useSslProtocol)
+                           (.setConnectionTimeout 10000)
+                           (.setHandshakeTimeout 10000)
+                           (.setShutdownTimeout 10000))
+          mq-connection*  (.newConnection mq-conn-factory)
           mq-channel*     (.createChannel mq-connection*)
           mq-reply-queue* (.. mq-channel* (queueDeclare) (getQueue))]
       (alter-var-root #'mq-connection (constantly mq-connection*))

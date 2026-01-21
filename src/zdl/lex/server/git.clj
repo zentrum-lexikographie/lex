@@ -250,7 +250,7 @@
         xml      (article/new-article-xml xml-id form pos user)]
     (-> (write-article-file resource #(spit % xml :encoding "UTF-8"))
         (resp/response)
-        (resp/header "X-Lex-ID" resource))))
+        (resp/header "X-Lex-Id" resource))))
 
 (defn handle-read
   [{{{:keys [resource]} :path} :parameters}]

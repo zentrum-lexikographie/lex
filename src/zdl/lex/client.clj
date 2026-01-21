@@ -1,15 +1,15 @@
 (ns zdl.lex.client
   (:require
-   [clj-http.client :as http]
    [clojure.edn :as edn]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [lambdaisland.uri :as uri]
+   [org.httpkit.client :as hc]
    [taoensso.telemere :as tm]
    [tick.core :as t]
    [zdl.lex.article :as article]
-   [zdl.lex.env :as env]
-   [zdl.lex.article.qa :as qa])
+   [zdl.lex.article.qa :as qa]
+   [zdl.lex.env :as env])
   (:import
    (java.io ByteArrayInputStream PushbackReader)
    (java.net URL)
@@ -77,6 +77,19 @@
          (when (and user password)
            (reset! auth [user password])))))))
 
+(defn read-edn-stream
+  [stream]
+  (with-open [r (java.io.PushbackReader. (io/reader stream :encoding "UTF-8"))]
+    (edn/read r)))
+
+(defn handle-http-response
+  [{:keys [status error] :as resp} {:keys [as] :as _req :or {as :edn}}]
+  (when error
+    (throw error))
+  (when-not (#{200 423} status)
+    (throw (ex-info "HTTP error" resp)))
+  (cond-> resp (= :edn as) (update :body read-edn-stream)))
+
 (defn handle-http-locked-response
   [{:keys [status body] :as response}]
   (when (= 423 status)
@@ -108,12 +121,12 @@
      req
      (update :method #(or % :get))
      (update :url #(str (uri/join env/server-url %)))
-     (update :as #(or % :clojure))
      (update-in [:headers "Accept"] #(or % "application/edn"))
-     (update :unexceptional-status #(conj (or % #{200}) 423))
      (cond-> auth (assoc :basic-auth auth))
      (cond-> lock? (assoc-in [:query-params :token] lock-token))
-     (http/request)
+     (hc/request)
+     (deref)
+     (handle-http-response req)
      (handle-http-locked-response))))
 
 (defn http-lock
@@ -126,22 +139,24 @@
 
 (defn http-unlock
   [id]
-  (->
-   {:method               :delete
-    :url                  (uri/join "lock/" id)
-    :unexceptional-status #{200 404}}
-   (http-request :lock? true)))
+  (try
+    (->
+     {:method :delete
+      :url    (uri/join "lock/" id)}
+     (http-request :lock? true))
+    (catch Throwable t
+      (tm/error! {:id ::unlock :data {:id id}} t))))
 
 (defn http-response->input-stream
   [{:keys [body]}]
-  (ByteArrayInputStream. (.getBytes ^String body "UTF-8")))
+  (ByteArrayInputStream. body))
 
 (defn http-get-article
   [id]
   (-> {:method  :get
        :url     (uri/join "article/" id)
        :headers {"Accept" "text/xml, application/edn"}
-       :as      "UTF-8"}
+       :as      :byte-array}
       (http-request :lock? true)
       (http-response->input-stream)))
 
@@ -151,7 +166,7 @@
        :url     (uri/join "article/" id)
        :headers {"Content-Type" "text/xml"
                  "Accept"       "text/xml, application/edn"}
-       :as      "UTF-8"
+       :as      :byte-array
        :body    xml-bytes}
       (http-request :lock? true)
       (http-response->input-stream)))
@@ -162,9 +177,10 @@
    {:method       :put
     :url          "article/"
     :query-params {:form form
-                   :pos  pos}}
+                   :pos  pos}
+    :as           :byte-array}
    (http-request)
-   (get-in [:headers "X-Lex-ID"])))
+   (get-in [:headers :x-lex-id])))
 
 (defn http-suggest
   [q]
@@ -189,7 +205,7 @@
   (->
    {:method       :get
     :url          "index/export"
-    :as           :input-stream
+    :as           :stream
     :query-params {:q     query
                    :limit 50000}}
    (http-request)

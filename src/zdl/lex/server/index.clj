@@ -1,12 +1,12 @@
 (ns zdl.lex.server.index
   (:require
-   [clj-http.client :as http]
    [clojure.data.csv :as csv]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [gremid.xml :as gx]
    [jsonista.core :as json]
    [lambdaisland.uri :as uri]
+   [org.httpkit.client :as hc]
    [ring.util.io :as rio]
    [ring.util.response :as resp]
    [taoensso.telemere :as tm]
@@ -15,6 +15,13 @@
    [zdl.lex.env :as env]
    [zdl.lex.lucene :as lucene]
    [zdl.lex.server.qa :as qa]))
+
+(defn http-request
+  [req]
+  (let [{:keys [status error] :as resp} @(hc/request req)]
+    (when error (throw error))
+    (when (not= status 200) (throw (ex-info "HTTP error" resp)))
+    (update resp :body json/read-value)))
 
 (def query-request
   {:method :post
@@ -26,10 +33,7 @@
 (defn query
   [query-params]
   (with-open [_ (env/timed! query-timer)]
-   (-> query-request
-       (assoc :form-params query-params)
-       (http/request)
-       (update :body json/read-value))))
+    (http-request (assoc query-request :form-params query-params))))
 
 (def update-request
   {:request-method :post
@@ -46,7 +50,7 @@
    (->
     update-request
     (assoc :body (with-out-str (gx/write-node *out* (gx/sexp->node xml-node))))
-    (http/request))))
+    (http-request))))
 
 (defn add!
   [docs]
