@@ -3,11 +3,7 @@
   (:require
    [camel-snake-kebab.core :as csk]
    [clojure.string :as str]
-   [jsonista.core :as json]
-   [clojure.java.io :as io])
-  (:import
-   (de.ids_mannheim.korap.tokenizer DerekoDfaTokenizer_de)
-   (opennlp.tools.util Span)))
+   [clojure.java.io :as io]))
 
 (def ->kebab-case
   (memoize csk/->kebab-case-keyword))
@@ -119,53 +115,3 @@
   (str/join \newline (concat (map serialize-metadata metadata)
                              (map serialize-token tokens)
                              (list "" ""))))
-
-(def ^DerekoDfaTokenizer_de tokenizer
-  (DerekoDfaTokenizer_de.))
-
-(defn token->conllu
-  [s space-after? i [token next-token]]
-  (let [n            (inc i)
-        start        (.getStart token)
-        end          (.getEnd token)
-        text         (subs s start end)
-        space-after? (if next-token (< end (.getStart next-token)) space-after?)]
-    (cond-> {:n (str n) :form text :features {:n n :i i}}
-      (not space-after?) (-> (assoc :misc "SpaceAfter=No")
-                             (assoc-in [:features :space-after] "No")))))
-
-(defn tokenize
-  [s hit? [^Span sentence ^Span next-sentence]]
-  (let [start         (.getStart sentence)
-        end           (.getEnd sentence)
-        text          (subs s start end)
-        space-after?  (and next-sentence (< end (.getStart next-sentence)))
-        tokens        (.tokenizePos tokenizer text)
-        hits          (into []
-                            (comp (map-indexed
-                                   (fn [i ^Span token]
-                                     (when (some hit?
-                                                 (range (+ start (.getStart token))
-                                                        (+ start (.getEnd token))))
-                                       (list (inc i)))))
-                                  (mapcat identity))
-                            tokens)
-        token->conllu (partial token->conllu (subs s start) space-after?)]
-    {:tokens   (into [] (map-indexed token->conllu) (partition-all 2 1 tokens))
-     :metadata (cond-> []
-                 (seq hits) (conj ["hits" (json/write-value-as-string hits)]))}))
-
-(defn segment
-  [s]
-  (let [segments (map-indexed vector (str/split s #"</?t>"))
-        [s hit?] (reduce
-                  (fn [[s hit?] [n segment]]
-                    [(str s segment)
-                     (cond-> hit?
-                       (odd? n) (into (range (count s)
-                                             (+ (count s) (count segment)))))])
-                  ["" #{}] segments)]
-    (locking tokenizer
-      (->> (.sentPosDetect tokenizer s)
-           (partition-all 2 1)
-           (into [] (map (partial tokenize s hit?)))))))

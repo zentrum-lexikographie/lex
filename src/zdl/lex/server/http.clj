@@ -5,6 +5,7 @@
    [buddy.auth.middleware]
    [clojure.string :as str]
    [muuntaja.core :as m]
+   [org.httpkit.server :as http-kit]
    [reitit.coercion.malli]
    [reitit.ring]
    [reitit.ring.coercion]
@@ -12,7 +13,6 @@
    [reitit.ring.middleware.muuntaja]
    [reitit.swagger :as swagger]
    [reitit.swagger-ui :as swagger-ui]
-   [ring.adapter.jetty :as jetty]
    [ring.middleware.defaults]
    [ring.util.io :as ring.io]
    [ring.util.response :as resp]
@@ -259,14 +259,13 @@
 (defn stop-server
   []
   (when server
-    (.stop server)
-    (.join server)
+    (server)
     (alter-var-root #'server (constantly nil))))
 
 (defn start-server
   []
   (stop-server)
   (->>
-   (jetty/run-jetty handler {:port env/http-port :join? false})
+   (http-kit/run-server handler {:port env/http-port})
    (constantly)
    (alter-var-root #'server)))
