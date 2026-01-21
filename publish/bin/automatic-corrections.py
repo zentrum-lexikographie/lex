@@ -371,7 +371,23 @@ def hook_nr(e, modify=False):
 
                     if modify:
                         f.text = m.group('head') + ', ' + m.group('date')
-                        wb.report(e, None, f'Trimming metadata for periodical:  → {m.group("head")}, {m.group("date")}')
+                        wb.report(e, None, f'Trimming metadata for periodical:  {f.text}')
+    return found
+
+def hook_aktuelles_lexikon(e, modify=False):
+    found = False
+
+    for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
+        if len(f) == 0:
+            t = wb.text(f)
+            m = re.match('.*(?P<title>Aktuelles Lexikon 1974[-–]2000)[.,] (?P<bibl>München: DIZ 2000 \[\d\d\d\d\]).*', t)
+            if m is not None:
+                found = True
+
+                if modify:
+                    f.text = f'{m.group("title").replace("-", "–")}. {m.group("bibl")}'
+                    wb.report(e, None, f'Trimming metadata for lexikon: {f.text}')
+
     return found
 
 
@@ -446,6 +462,7 @@ HOOKS = (
         hook_nr,
         hook_directmedia1,
         hook_directmedia2,
+        hook_aktuelles_lexikon,
 )
 
 counter = 0
