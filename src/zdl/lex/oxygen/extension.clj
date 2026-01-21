@@ -74,7 +74,7 @@
         (resolveEditorVariables
           [s editor-url]
           (when s
-            (let [user (some-> client/auth deref first)
+            (let [user (some-> client/active-user deref)
                   user (or user (System/getProperty "user.name") "")]
               (str/replace s #"\$\{zdl\.user\}" user)))))))
     (workspace/bind-editor-change-listener)

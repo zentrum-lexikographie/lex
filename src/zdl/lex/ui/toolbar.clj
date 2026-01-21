@@ -15,16 +15,16 @@
    (com.jidesoft.hints ListDataIntelliHints)
    (ro.sync.exml.workspace.api.standalone.ui ToolbarButton)))
 
-(defn auth->status-label
-  [[user _]]
+(defn active-user->status-label
+  [user]
   (or user "<nicht angemeldet>"))
 
 (def status-label
-  (ui/label :text (auth->status-label @client/auth) :border 5))
+  (ui/label :text (active-user->status-label @client/active-user) :border 5))
 
 (uib/bind
- client/auth
- (uib/transform auth->status-label)
+ client/active-user
+ (uib/transform active-user->status-label)
  (uib/property status-label :text))
 
 (def search-all-action

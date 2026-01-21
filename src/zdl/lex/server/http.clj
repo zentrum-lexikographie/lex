@@ -3,7 +3,6 @@
    [buddy.auth.accessrules]
    [buddy.auth.backends]
    [buddy.auth.middleware]
-   [clojure.string :as str]
    [muuntaja.core :as m]
    [org.httpkit.server :as http-kit]
    [reitit.coercion.malli]
@@ -23,7 +22,8 @@
    [zdl.lex.server.index :as index]
    [zdl.lex.server.issue :as issue]
    [zdl.lex.server.lock :as lock]
-   [zdl.lex.server.oxygen :as oxygen]))
+   [zdl.lex.server.oxygen :as oxygen]
+   [zdl.lex.server.socket :as server.socket]))
 
 (def handler-defaults
   (-> ring.middleware.defaults/site-defaults
@@ -33,27 +33,6 @@
 (def defaults-middleware
   {:name ::defaults
    :wrap #(ring.middleware.defaults/wrap-defaults % handler-defaults)})
-
-(defn proxy-headers->request
-  [{:keys [headers] :as request}]
-  (let [scheme      (some->
-                     (or (headers "x-forwarded-proto") (headers "x-scheme"))
-                     (str/lower-case) (keyword) #{:http :https})
-        remote-addr (some->>
-                     (headers "x-forwarded-for") (re-find #"^[^,]*")
-                     (str/trim) (not-empty))]
-    (cond-> request
-      scheme      (assoc :scheme scheme)
-      remote-addr (assoc :remote-addr remote-addr))))
-
-(def proxy-headers-middleware
-  {:name ::proxy-headers
-   :wrap (fn [handler]
-           (fn
-             ([request]
-              (handler (proxy-headers->request request)))
-             ([request respond raise]
-              (handler (proxy-headers->request request) respond raise))))})
 
 (defn log-exceptions
   [handler ^Throwable e request]
@@ -88,6 +67,7 @@
           (admin? [{{:keys [user]} :identity :as _req}] (= "admin" user))
           (public? [_req] true)]
     {:rules [{:pattern #"^/article.*" :handler authenticated?}
+             {:pattern #"^/client.*" :handler authenticated?}
              {:pattern #"^/git.*" :handler admin?}
              {:pattern #"^/index.*" :request-method :get :handler authenticated?}
              {:pattern #"^/index.*" :handler admin?}
@@ -97,19 +77,25 @@
              {:pattern #"^/status.*" :handler authenticated?}
              {:pattern #"^/.*" :handler public?}]}))
 
+(def auth-context-middleware
+  {:name ::auth-context-middleware
+   :wrap (fn [handler]
+           (fn [{{:keys [user]} :identity :as req}]
+             (cond-> (handler req) user (resp/header "X-Lex-User" user))))})
+
 (def handler-options
   {:muuntaja   m/instance
    :coercion   reitit.coercion.malli/coercion
    :middleware [#(buddy.auth.middleware/wrap-authentication % auth-backend)
                 #(buddy.auth.middleware/wrap-authorization % auth-backend)
                 #(buddy.auth.accessrules/wrap-access-rules % access-rules)
-                proxy-headers-middleware
                 defaults-middleware
                 reitit.ring.middleware.muuntaja/format-middleware
                 exception-middleware
                 reitit.ring.coercion/coerce-exceptions-middleware
                 reitit.ring.coercion/coerce-request-middleware
                 reitit.ring.coercion/coerce-response-middleware
+                auth-context-middleware
                 lock/context-middleware]})
 
 (defn trigger-task
@@ -139,6 +125,7 @@
         :post {:handler    git/handle-write
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]]
+     ["/client" server.socket/handle-client]
      ["/docs/api/*"
       {:no-doc  true
        :handler (swagger-ui/create-swagger-ui-handler)}]
@@ -258,9 +245,10 @@
 
 (defn stop-server
   []
-  (when server
-    (server)
-    (alter-var-root #'server (constantly nil))))
+  (try
+    (when server (server))
+    (finally
+      (alter-var-root #'server (constantly nil)))))
 
 (defn start-server
   []
