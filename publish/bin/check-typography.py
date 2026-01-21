@@ -159,6 +159,7 @@ legal = (
         'Mitarbeiter:innen',
         'Mountainbiker:innen',
         'Musiker:innen',
+        'Nachbar:innen',
         'Nachwuchsforscher:innen',
         'Nutzer:innen',
         'Oberstufenschüler:innen',
