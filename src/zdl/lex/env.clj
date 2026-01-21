@@ -10,6 +10,7 @@
    [clojure.data.csv :as csv])
   (:import
    (com.codahale.metrics Meter MetricRegistry Slf4jReporter Timer)
+   (com.rabbitmq.client ConnectionFactory)
    (io.github.cdimascio.dotenv Dotenv)
    (java.util.concurrent TimeUnit)))
 
@@ -70,12 +71,9 @@
   (uri/join (getenv "SOLR_URL" "http://index:8983/solr/")
             (str (getenv "SOLR_CORE" "articles") "/")))
 
-(def tunnel-backends?
-  (some? (getenv "TUNNEL_BACKENDS")))
-
 (def db
   {:host          (getenv "DB_HOST" "db")
-   :port          (parse-long (getenv "DB_PORT" (if tunnel-backends? "5433" "5432")))
+   :port          (parse-long (getenv "DB_PORT" "5432"))
    :database      (getenv "DB_NAME" "lex")
    :user          (getenv "DB_USER" "lex")
    :password      (getenv "DB_PASSWORD" "lex")
@@ -83,12 +81,19 @@
    :migrations-path "zdl/lex/server/db"
    :pool-max-size 8})
 
-(def queue
-  {:host     (getenv "QUEUE_HOST" "localhost")
-   :port     (parse-long (getenv "QUEUE_PORT" (if tunnel-backends? "5670" "5671")))
-   :username (getenv "QUEUE_HOST" "lex")
-   :password (getenv "QUEUE_PASSWORD" "lex")
-   :ssl      true})
+(def queue-connection-factory
+  (doto (ConnectionFactory.)
+    (.setHost (getenv "QUEUE_HOST" "labor.dwds.de"))
+    (.setPort (Integer/parseInt (getenv "QUEUE_PORT" "5671")))
+    (.setUsername (getenv "QUEUE_USER" "lex"))
+    (.setPassword (getenv "QUEUE_PASSWORD" "lex"))
+    (.useSslProtocol)
+    (.setConnectionTimeout 10000)
+    (.setHandshakeTimeout 10000)
+    (.setShutdownTimeout 10000)))
+
+(def gpt-queue-name
+  (getenv "QUEUE_GPT_QUEUE" "gpt"))
 
 (def mantis-db
   {:dbtype   "mysql"

@@ -20,18 +20,13 @@
     (index/query {"q" "id:*" "rows" "0" "wt" "json"})
     (pg/execute env/db "SELECT 1+1 AS n")))
 
-(def backend-services
-  (cond-> ["index"] (not env/tunnel-backends?) (conj "db" "queue")))
-
 (defn start-backends!
   []
-  (apply p/exec (concat ["docker" "compose" "--progress" "quiet" "up" "-d"]
-                        backend-services)))
+  (p/exec "docker" "compose" "--progress" "quiet" "up" "-d" "db" "index"))
 
 (defn stop-backends!
   []
-  (apply p/exec (concat ["docker" "compose"  "--progress" "quiet" "down"]
-                        backend-services)))
+  (p/exec "docker" "compose"  "--progress" "quiet" "down" "db" "index"))
 
 (defn backends
   [f]
