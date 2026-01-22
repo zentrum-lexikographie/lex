@@ -390,6 +390,22 @@ def hook_aktuelles_lexikon(e, modify=False):
 
     return found
 
+def hook_brockhaus(e, modify=False):
+    found = False
+    
+    for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
+        if len(f) == 0:
+            t = wb.text(f)
+            m = re.match('(?P<head>.*)(?P<title>Brockhaus[\'’] Kleines Konversations-Lexikon)[.,](?P<bibl>.+)', t)
+            if m is not None and (m.group('head') != '' or '\'' in m.group('title')):
+                found = True
+
+                if modify:
+                    title = m.group('title').replace('\'', '’')
+                    f.text = f'{title}. {m.group("bibl")}'
+                    wb.report(e, None, f'Trimming metadata for lexikon: {f.text}')
+
+    return found
 
 def hook_typography(e, modify=False):    
 
@@ -463,6 +479,7 @@ HOOKS = (
         hook_directmedia1,
         hook_directmedia2,
         hook_aktuelles_lexikon,
+        hook_brockhaus,
 )
 
 counter = 0
