@@ -380,8 +380,8 @@ def hook_aktuelles_lexikon(e, modify=False):
     for f in e.findall('.//%(Fundstelle)s' % wb.TAGS):
         if len(f) == 0:
             t = wb.text(f)
-            m = re.match('.*(?P<title>Aktuelles Lexikon 1974[-–]2000)[.,] (?P<bibl>München: DIZ 2000 \[\d\d\d\d\]).*', t)
-            if m is not None:
+            m = re.match('(?P<head>.*)(?P<title>Aktuelles Lexikon 1974[-–]2000)[.,] (?P<bibl>München: DIZ 2000 \[\d\d\d\d\]).*', t)
+            if m is not None and m.group('head') != '':
                 found = True
 
                 if modify:
