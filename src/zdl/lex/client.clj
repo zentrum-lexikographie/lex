@@ -8,16 +8,15 @@
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.article.qa :as qa]
-   [zdl.lex.env :as env]
+   [zdl.lex.client.repl :as client.repl]
+   [zdl.lex.client.socket :as client.socket]
+   [zdl.lex.env :refer [getenv]]
    [seesaw.bind :as uib])
   (:import
    (java.io ByteArrayInputStream)
    (java.net Authenticator PasswordAuthentication)
    (java.util UUID)
    (ro.sync.exml.plugin.lock LockException)))
-
-(def active-user
-  (atom nil))
 
 (def id
   (let [sys-prop #(System/getProperty %)]
@@ -27,10 +26,36 @@
       :os-name      (sys-prop "os.name")
       :os-version   (sys-prop "os.version")})))
 
+(def active-user
+  (atom nil))
+
 (uib/bind
  active-user
  (uib/filter some?)
  (uib/b-do* #(swap! id assoc :user %)))
+
+(def server-url
+  (getenv "SERVER_URL" "https://labor.dwds.de"))
+
+(def http-client
+  (delay
+    (let [server-user     (getenv "SERVER_USER")
+          server-password (getenv "SERVER_PASSWORD")]
+      (hc/build-http-client
+       {:authenticator (or (when (and server-user server-password)
+                             (proxy [Authenticator] []
+                               (getPasswordAuthentication []
+                                 (PasswordAuthentication.
+                                  server-user (char-array server-password)))))
+                           (Authenticator/getDefault))
+        :version       :http-1.1}))))
+
+(def config
+  (let [repl-port (some->> (getenv "REPL_PORT") parse-long)]
+    (cond-> {::client.socket/connection {:server-url  server-url
+                                         :http-client http-client
+                                         :active-user active-user}}
+      repl-port (assoc ::client.repl/server {:port repl-port}))))
 
 (def active-article
   (atom nil))
@@ -51,15 +76,12 @@
 (def links
   (agent* {}))
 
-(def server-base
-  (uri/uri env/server-url))
-
-(def url-base
-  (assoc server-base :scheme "lex"))
-
 (defn lex?
   [uri]
   (-> uri :scheme (= "lex")))
+
+(def url-base
+  (assoc (uri/uri server-url) :scheme "lex"))
 
 (defn id->url
   [id]
@@ -108,25 +130,13 @@
 (def lock-token
   (-> (UUID/randomUUID) str str/lower-case))
 
-(def http-client
-  (delay
-    (hc/build-http-client
-     {:authenticator (or (when env/server-auth
-                           (proxy [Authenticator] []
-                             (getPasswordAuthentication []
-                               (let [[user password] env/server-auth]
-                                 (PasswordAuthentication.
-                                  user (char-array password))))))
-                         (Authenticator/getDefault))
-      :version       :http-1.1})))
-
 (defn http-request
   [req & {:keys [lock?]}]
   (->
    req
    (assoc :http-client @http-client :throw-exceptions? false)
    (update :method #(or % :get))
-   (update :url #(str (uri/join env/server-url %)))
+   (update :url #(str (uri/join server-url %)))
    (update-in [:headers "Accept"] #(or % "application/edn"))
    (update :as #(or % :clojure))
    (cond-> lock? (assoc-in [:query-params :token] lock-token))
@@ -162,7 +172,7 @@
 (defn http-get-article
   [id]
   (-> {:method  :get
-       :url     (uri/join "article/" id)
+       :url     (uri/join "git/" id)
        :headers {"Accept" "text/xml, application/edn"}
        :as      :byte-array}
       (http-request :lock? true)
@@ -171,7 +181,7 @@
 (defn http-post-article
   [id xml-bytes]
   (-> {:method  :post
-       :url     (uri/join "article/" id)
+       :url     (uri/join "git/" id)
        :headers {"Content-Type" "text/xml"
                  "Accept"       "text/xml, application/edn"}
        :as      :byte-array
@@ -183,7 +193,7 @@
   [form pos]
   (->
    {:method       :put
-    :url          "article/"
+    :url          "git/"
     :query-params {:form form
                    :pos  pos}
     :as           :byte-array}
@@ -223,7 +233,7 @@
 (defn http-get-issues
   [forms]
   (->
-   {:url          "mantis"
+   {:url          "index/issues"
     :query-params {:q forms}}
    (http-request)
    (get-in [:body :result])))

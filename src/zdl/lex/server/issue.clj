@@ -2,35 +2,26 @@
   (:require
    [clojure.string :as str]
    [honey.sql :as sql]
+   [integrant.core :as ig]
    [lambdaisland.uri :as uri]
    [next.jdbc :as jdbc]
    [next.jdbc.connection :as jdbc.con]
    [next.jdbc.result-set :as jdbc.result-set]
    [taoensso.telemere :as tm]
-   [zdl.lex.env :as env]
+   [zdl.lex.metrics :as metrics]
    [zdl.lex.server.index :as index]
    [tick.core :as t])
   (:import
    (com.zaxxer.hikari HikariDataSource)))
 
-(def ^:dynamic db
-  nil)
+(defmethod ig/init-key ::connection
+  [_ {:keys [db]}]
+  (tm/log! {:id ::connect :level :info :data db})
+  (jdbc.con/->pool HikariDataSource db))
 
-(defn close-db
-  []
-  (when db (.close db) (alter-var-root #'db (constantly nil))))
-
-(defn open-db
-  []
-  (close-db)
-  (tm/log! :info (format "Opened %s:%s/%s"
-                         (:dbtype env/mantis-db)
-                         (:host env/mantis-db)
-                         (:dbname env/mantis-db)))
-  (->> (jdbc.con/->pool HikariDataSource env/mantis-db)
-       (constantly)
-       (alter-var-root #'db)))
-
+(defmethod ig/halt-key! ::connection
+  [_ connection]
+  (.close connection))
 
 (defn issue-id->uri
   [id]
@@ -98,11 +89,11 @@
          :resolution (some-> resolution str resolution-descs)))
 
 (def sync-timer
-  (env/timer "mantis.sync"))
+  (metrics/timer "mantis.sync"))
 
 (defn sync!
-  []
-  (with-open [_ (env/timed! sync-timer)]
+  [db]
+  (with-open [_ (metrics/timed! sync-timer)]
    (let [threshold (System/currentTimeMillis)]
      (transduce
       (comp (map parse-issue) (filter :form) (map index/issue->doc)

@@ -4,11 +4,9 @@
    :implements [ro.sync.exml.plugin.workspace.WorkspaceAccessPluginExtension])
   (:require
    [clojure.string :as str]
-   [nrepl.server :as repl]
+   [integrant.core :as ig]
    [taoensso.telemere :as tm]
    [zdl.lex.client :as client]
-   [zdl.lex.client.socket :as client.socket]
-   [zdl.lex.env :as env]
    [zdl.lex.oxygen.workspace :as workspace]
    [zdl.lex.ui.issue :as issue]
    [zdl.lex.ui.links :as links]
@@ -20,19 +18,15 @@
    (ro.sync.exml.workspace.api.standalone ToolbarComponentsCustomizer ViewComponentCustomizer)
    (ro.sync.exml.workspace.api.util EditorVariableDescription EditorVariablesResolver)))
 
-(def ^:dynamic repl-server
-  nil)
+(def system
+  (atom nil))
 
 (defn -applicationStarted
   [_ workspace]
   (try
     (alter-var-root #'workspace/instance (constantly workspace))
     (swap! client/id assoc :oxygen-version (.getVersion workspace))
-    (client.socket/start)
-    (some->> env/repl-port
-             (repl/start-server :port)
-             (constantly)
-             (alter-var-root #'repl-server))
+    (reset! system (ig/init client/config))
     (.addViewComponentCustomizer
      workspace
      (proxy [ViewComponentCustomizer] []
@@ -89,10 +83,9 @@
 (defn -applicationClosing
   [_]
   (try
+    (ig/halt! @system)
+    (reset! system nil)
     (workspace/unbind-editor-change-listener)
-    (client.socket/stop)
-    (some->> repl-server (repl/stop-server))
-    (alter-var-root #'repl-server (constantly nil))
     (alter-var-root #'workspace/instance (constantly nil))
     (catch Throwable t (tm/error! t)))
   true)

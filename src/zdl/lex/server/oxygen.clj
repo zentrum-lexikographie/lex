@@ -4,6 +4,8 @@
    [clojure.java.io :as io]
    [clojure.walk]
    [gremid.xml :as gx]
+   [ring.util.io :as ring.io]
+   [ring.util.response :as resp]
    [taoensso.telemere :as tm]
    [tick.core :as t])
   (:import
@@ -77,3 +79,16 @@
         (write-tree-to-zip (partial write-to-zip "zdl-lex-client/lib/")
                            (fs/path "oxygen" "plugin" "lib"))))
     (catch Exception e (tm/error! e))))
+
+(def handlers
+  [""
+   ["/updateSite.xml"
+    (constantly
+     (->  (resp/response update-descriptor)
+          (resp/content-type "application/xml")))]
+   ["/zdl-lex-framework.zip"
+    (fn [_]
+      (resp/response (ring.io/piped-input-stream download-framework)))]
+   ["/zdl-lex-plugin.zip"
+    (fn [_]
+      (resp/response (ring.io/piped-input-stream download-plugin)))]])

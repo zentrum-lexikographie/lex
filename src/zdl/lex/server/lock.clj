@@ -3,7 +3,7 @@
    [pg.core :as pg]
    [pg.honey :as pgh]
    [ring.util.response :as resp]
-   [zdl.lex.server.db :refer [db q]]
+   [zdl.lex.server.db :refer [q]]
    [taoensso.telemere :as tm]))
 
 (def ^:dynamic *context*
@@ -70,16 +70,16 @@
                                   [:= :token token]]})
     *context*))
 
-(defmacro with-lock
-  [& forms]
-  `(pg/with-transaction [tx# db {:isolation :serializable}]
-     (assert-unlocked tx#)
-     (let [active-lock# (select-active-lock tx#)]
-       (try
-         (when-not active-lock# (merge-lock tx#))
-         ~@forms
-         (finally
-           (when-not active-lock# (delete-lock tx#)))))))
+(defn with-lock
+  [db f]
+  (pg/with-transaction [tx db {:isolation :serializable}]
+    (assert-unlocked tx)
+    (let [active-lock# (select-active-lock tx)]
+      (try
+        (when-not active-lock# (merge-lock tx))
+        (f)
+        (finally
+          (when-not active-lock# (delete-lock tx)))))))
 
 ;; # HTTP API
 
@@ -102,7 +102,7 @@
   (resp/not-found *context*))
 
 (defn handle-read-locks
-  [_]
+  [db _]
   (pg/with-transaction [tx db {:read-only? true}]
     (resp/response
      (q tx {:select   [:resource :owner :expires]
@@ -111,21 +111,21 @@
             :order-by [:resource :owner :expires]}))))
 
 (defn handle-read-lock
-  [_req]
+  [db _req]
   (pg/with-transaction [tx db {:read-only? true}]
     (if-let [active (select-active-lock tx)]
       (resp/response active)
       (response-not-found))))
 
 (defn handle-create-lock
-  [_req]
+  [db _req]
   (pg/with-transaction [tx db {:isolation :serializable}]
     (if-let [other-lock (first (select-other-locks tx))]
       (-> other-lock (resp/response) (resp/status 423))
       (-> (merge-lock tx) (resp/response)))))
 
 (defn handle-remove-lock
-  [_req]
+  [db _req]
   (pg/with-transaction [tx db]
     (if (select-active-lock tx)
       (resp/response (delete-lock tx))
@@ -134,7 +134,33 @@
 ;; # Periodic Lock Cleanup
 
 (defn cleanup!
-  []
+  [db]
   (pg/with-transaction [tx db]
     (pgh/execute tx {:delete-from :lock
                      :where       [:<= :expires (System/currentTimeMillis)]})))
+
+(defn handlers
+  [db]
+  [""
+   [""
+    {:summary "Retrieve list of active locks"
+     :tags    ["Lock" "Query"]
+     :handler (partial handle-read-locks db)}]
+   ["/*resource"
+    {:get    {:summary    "Read a resource lock"
+              :tags       ["Lock" "Query" "Resource"]
+              :parameters {:path  [:map [:resource :string]]
+                           :query [:map [:token :string]]}
+              :handler (partial handle-read-lock db)}
+     :post   {:summary    "Set a resource lock"
+              :tags       ["Lock" "Resource"]
+              :parameters {:path  [:map [:resource :string]]
+                           :query [:map
+                                   [:token :string]
+                                   [:ttl [:int {:min 1}]]]}
+              :handler (partial handle-create-lock db)}
+     :delete {:summary    "Remove a resource lock."
+              :tags       ["Lock" "Resource"]
+              :parameters {:path  [:map [:resource :string]]
+                           :query [:map [:token :string]]}
+              :handler (partial handle-remove-lock db)}}]])

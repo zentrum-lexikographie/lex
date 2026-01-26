@@ -12,9 +12,13 @@
    [taoensso.telemere :as tm]
    [tick.core :as t]
    [zdl.lex.article :as article]
-   [zdl.lex.env :as env]
+   [zdl.lex.env :refer [getenv]]
    [zdl.lex.lucene :as lucene]
+   [zdl.lex.metrics :as metrics]
    [zdl.lex.server.qa :as qa]))
+
+(def solr-url
+  (str (getenv "SOLR_URL" "http://index:8983/solr/") "articles/"))
 
 (defn http-request
   [req]
@@ -25,28 +29,28 @@
 
 (def query-request
   {:method :post
-   :url    (str (uri/join env/solr-url "query"))})
+   :url    (str (uri/join solr-url "query"))})
 
 (def query-timer
-  (env/timer "index.query"))
+  (metrics/timer "index.query"))
 
 (defn query
   [query-params]
-  (with-open [_ (env/timed! query-timer)]
+  (with-open [_ (metrics/timed! query-timer)]
     (http-request (assoc query-request :form-params query-params))))
 
 (def update-request
   {:request-method :post
-   :url            (str (uri/join env/solr-url "update"))
+   :url            (str (uri/join solr-url "update"))
    :query-params   {"wt" "json"}
    :headers        {"Content-Type" "text/xml"}})
 
 (def update-timer
-  (env/timer "index.update"))
+  (metrics/timer "index.update"))
 
 (defn update!
   [xml-node]
-  (with-open [_ (env/timed! update-timer)]
+  (with-open [_ (metrics/timed! update-timer)]
    (->
     update-request
     (assoc :body (with-out-str (gx/write-node *out* (gx/sexp->node xml-node))))
@@ -396,3 +400,43 @@
      (query)
      (parse-issue-response)
      (resp/response))))
+
+(def handlers
+  [""
+   [""
+    {:get {:summary    "Query the full-text index"
+           :tags       ["Index" "Query"]
+           :parameters {:query [:map
+                                [:q {:optional true} :string]
+                                [:offset {:optional true} [:int {:min 0}]]
+                                [:limit {:optional true} [:int {:min 0}]]]}
+           :handler    handle-article-query}}]
+   ["/export"
+    {:summary    "Export index metadata in CSV format"
+     :tags       ["Index" "Query" "Export"]
+     :parameters {:query [:map
+                          [:q {:optional true} :string]
+                          [:limit {:optional true} :int]]}
+     :handler    handle-export}]
+   ["/issues"
+    {:get
+     {:summary    "Retrieve Mantis issues for a given set of surface forms"
+      :tags       ["Mantis" "Issue"]
+      :parameters {:query [:map [:q [:or :string [:sequential :string]]]]}
+      :handler    handle-issue-query}}]
+   ["/links"
+    {:summary    "Retrieve articles based on anchors and links"
+     :tags       ["Index" "Query" "Links"]
+     :parameters {:query [:map
+                          [:anchors
+                           {:optional true}
+                           [:or :string [:sequential :string]]]
+                          [:links
+                           {:optional true}
+                           [:or :string [:sequential :string]]]]}
+     :handler    handle-links-query}]
+   ["/suggest"
+    {:get {:summary    "Suggest articles by form"
+           :tags       ["Index" "Query" "Auto-Complete"]
+           :parameters {:query [:map [:q :string]]}
+           :handler    handle-article-suggest}}]])
