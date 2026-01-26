@@ -1,12 +1,13 @@
 (ns zdl.lex.dev
   (:require
+   [integrant.core :as ig]
+   [seesaw.bind :as uib]
    [seesaw.core :as ui]
    [zdl.lex.ui.issue :as issue]
    [zdl.lex.ui.links :as links]
    [zdl.lex.ui.search :as search]
    [zdl.lex.ui.toolbar :as toolbar]
    [zdl.lex.ui.util :as util]
-   [seesaw.bind :as uib]
    [zdl.lex.client :as client]
    [zdl.lex.article :as article]))
 
@@ -17,14 +18,6 @@
            :multi-line? true
            :editable? false))
 
-(uib/bind
- (uib/funnel client/active-article client/articles)
- (uib/transform
-  (fn [_]
-    (let [active-article @client/active-article
-          articles       @client/articles]
-      (some-> active-article articles ::client/xml article/->str))))
- (uib/value editor))
 
 (def article-panel
   (ui/border-panel
@@ -50,17 +43,44 @@
    :size    (util/clip-to-screen-size)
    :content article-panel #_(ui/scrollable examples/table)))
 
-(defn show!
-  []
-  (-> frame ui/show! ui/invoke-now))
+(defmethod ig/init-key ::console
+  [_ _]
+  (ui/invoke-now (ui/show! frame))
+  frame)
 
-(defn dispose!
-  []
+(defmethod ig/halt-key! ::console
+  [_ frame]
   (ui/dispose! frame))
 
-(uib/subscribe
- search/opened-article-id
- (fn [id]
-   (client/dissoc-article @client/active-article)
-   (client/update-article id #(client/http-get-article id))
-   (reset! client/active-article id)))
+(defmethod ig/init-key ::search->article
+  [_ _]
+  (uib/subscribe
+   search/opened-article-id
+   (fn [id]
+     (client/dissoc-article @client/active-article)
+     (client/update-article id #(client/http-get-article id))
+     (reset! client/active-article id))))
+
+(defmethod ig/halt-key! ::search->article
+  [_ subscription]
+  (subscription))
+
+(defmethod ig/init-key ::article->editor
+  [_ _]
+  (uib/bind
+   (uib/funnel client/active-article client/articles)
+   (uib/transform
+    (fn [_]
+      (let [active-article @client/active-article
+            articles       @client/articles]
+        (some-> active-article articles ::client/xml article/->str))))
+   (uib/value editor)))
+
+(defmethod ig/halt-key! ::article->editor
+  [_ subscription]
+  (subscription))
+
+(def config
+  {::console         {}
+   ::search->article {}
+   ::article->editor {}})

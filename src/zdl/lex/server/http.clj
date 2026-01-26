@@ -3,6 +3,7 @@
    [buddy.auth.accessrules]
    [buddy.auth.backends]
    [buddy.auth.middleware]
+   [integrant.core :as ig]
    [muuntaja.core :as m]
    [org.httpkit.server :as http-kit]
    [reitit.coercion.malli]
@@ -13,16 +14,14 @@
    [reitit.swagger :as swagger]
    [reitit.swagger-ui :as swagger-ui]
    [ring.middleware.defaults]
-   [ring.util.io :as ring.io]
    [ring.util.response :as resp]
    [taoensso.telemere :as tm]
-   [zdl.lex.env :as env]
    [zdl.lex.server.git :as git]
    [zdl.lex.server.html :as html]
    [zdl.lex.server.index :as index]
-   [zdl.lex.server.issue :as issue]
    [zdl.lex.server.lock :as lock]
    [zdl.lex.server.oxygen :as oxygen]
+   [zdl.lex.server.schedule :as schedule]
    [zdl.lex.server.socket :as server.socket]))
 
 (def handler-defaults
@@ -44,10 +43,6 @@
       (assoc :reitit.ring.middleware.exception/wrap log-exceptions)
       (reitit.ring.middleware.exception/create-exception-middleware)))
 
-(defn authenticate
-  [_request {:keys [username password] :as _auth-data}]
-  (get env/userbase [username password]))
-
 (defn handle-unauthorized
   [request {:keys [realm] :as _auth-data}]
   (if (:identity request)
@@ -57,24 +52,23 @@
         (resp/header "WWW-Authenticate" (format "Basic realm=\"%s\"" realm))
         (resp/status 401))))
 
-(def auth-backend
-  (buddy.auth.backends/basic {:realm                "ZDL-Lex-Server"
-                              :authfn               authenticate
-                              :unauthorized-handler handle-unauthorized}))
+(defn auth-backend
+  [userbase]
+  (buddy.auth.backends/basic
+   {:realm                "ZDL-Lex-Server"
+    :authfn               (fn [_request {:keys [username password] :as _auth}]
+                            (get userbase [username password]))
+    :unauthorized-handler handle-unauthorized}))
 
 (def access-rules
   (letfn [(authenticated? [{id :identity :as _req}] (some? id))
           (admin? [{{:keys [user]} :identity :as _req}] (= "admin" user))
           (public? [_req] true)]
-    {:rules [{:pattern #"^/article.*" :handler authenticated?}
-             {:pattern #"^/client.*" :handler authenticated?}
-             {:pattern #"^/git.*" :handler admin?}
-             {:pattern #"^/index.*" :request-method :get :handler authenticated?}
-             {:pattern #"^/index.*" :handler admin?}
+    {:rules [{:pattern #"^/git.*" :handler authenticated?}
+             {:pattern #"^/socket.*" :handler authenticated?}
+             {:pattern #"^/index.*" :handler authenticated?}
              {:pattern #"^/lock.*" :handler authenticated?}
-             {:pattern #"^/mantis.*" :request-method :get :handler authenticated?}
-             {:pattern #"^/mantis.*" :handler admin?}
-             {:pattern #"^/status.*" :handler authenticated?}
+             {:pattern #"^/schedule.*" :handler admin?}
              {:pattern #"^/.*" :handler public?}]}))
 
 (def auth-context-middleware
@@ -83,177 +77,61 @@
            (fn [{{:keys [user]} :identity :as req}]
              (cond-> (handler req) user (resp/header "X-Lex-User" user))))})
 
-(def handler-options
-  {:muuntaja   m/instance
-   :coercion   reitit.coercion.malli/coercion
-   :middleware [#(buddy.auth.middleware/wrap-authentication % auth-backend)
-                #(buddy.auth.middleware/wrap-authorization % auth-backend)
-                #(buddy.auth.accessrules/wrap-access-rules % access-rules)
-                defaults-middleware
-                reitit.ring.middleware.muuntaja/format-middleware
-                exception-middleware
-                reitit.ring.coercion/coerce-exceptions-middleware
-                reitit.ring.coercion/coerce-request-middleware
-                reitit.ring.coercion/coerce-response-middleware
-                auth-context-middleware
-                lock/context-middleware]})
+(def html-handlers
+  [""
+   ["/"
+    (constantly (-> (html/install "/")
+                    (resp/response)
+                    (resp/content-type "text/html")))]
+   ["/styles.css"
+    (constantly (-> html/css (resp/response) (resp/content-type "text/css")))]])
 
-(defn trigger-task
-  [task]
-  (fn [_]
-    (future (try (task) (catch Throwable t (tm/error! t))))
-    (resp/response {:triggered true})))
+(def swagger-handlers
+  [""
+   ["/docs/api/*"
+    {:no-doc  true
+     :handler (swagger-ui/create-swagger-ui-handler)}]
+   ["/swagger.json"
+    {:no-doc  true
+     :handler (swagger/create-swagger-handler)}]])
 
-(def handler
+(defmethod ig/init-key ::handler
+  [_ {:keys [db gpt-queue issue-db repo userbase]}]
   (reitit.ring/ring-handler
    (reitit.ring/router
-    ["" handler-options
-     ["/"
-      (constantly (resp/redirect "/install" 307))]
-     ["/article"
-      ["/"
-       {:put {:handler    git/handle-create
-              :parameters {:query [:map
-                                   [:form :string]
-                                   [:pos :string]]}}
-        :patch {:summary     "Edits article data"
-                :tags        ["Article", "Git", "Admin"]
-                :handler     (trigger-task git/qa!)}}]
-      ["/*resource"
-       {:get  {:handler    git/handle-read
-               :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    git/handle-write
-               :parameters {:path  [:map [:resource :string]]
-                            :query [:map [:token :string]]}}}]]
+    [""
+     (let [auth-backend (auth-backend userbase)]
+       {:muuntaja   m/instance
+        :coercion   reitit.coercion.malli/coercion
+        :middleware [#(buddy.auth.middleware/wrap-authentication % auth-backend)
+                     #(buddy.auth.middleware/wrap-authorization % auth-backend)
+                     #(buddy.auth.accessrules/wrap-access-rules % access-rules)
+                     defaults-middleware
+                     reitit.ring.middleware.muuntaja/format-middleware
+                     exception-middleware
+                     reitit.ring.coercion/coerce-exceptions-middleware
+                     reitit.ring.coercion/coerce-request-middleware
+                     reitit.ring.coercion/coerce-response-middleware
+                     auth-context-middleware
+                     lock/context-middleware]})
      ["/client" server.socket/handle-client]
-     ["/docs/api/*"
-      {:no-doc  true
-       :handler (swagger-ui/create-swagger-ui-handler)}]
-     ["/git"
-      {:patch {:summary     "Commit pending changes on the server's branch"
-               :tags        ["Article" "Git" "Admin"]
-               :handler     (trigger-task git/commit!)}}]
-     ["/git/ff/:ref"
-      {:post  {:summary     "Fast-forwards the server's branch to the given ref"
-               :tags        ["Article" "Git" "Admin"]
-               :parameters  {:path [:map [:ref :string]]}
-               :handler     git/handle-fast-forward}
-       :patch {:summary     "Rebases the server's branch to the given ref"
-               :tags        ["Article" "Git" "Admin"]
-               :parameters  {:path [:map [:ref :string]]}
-               :handler     git/handle-rebase}}]
-     ["/install"
-      (constantly (-> (html/install "/")
-                      (resp/response)
-                      (resp/content-type "text/html")))]
-     ["/index"
-      [""
-       {:get   {:summary    "Query the full-text index"
-                :tags       ["Index" "Query"]
-                :parameters {:query [:map
-                                     [:q {:optional true} :string]
-                                     [:offset {:optional true} [:int {:min 0}]]
-                                     [:limit {:optional true} [:int {:min 0}]]]}
-                :handler    index/handle-article-query}
-        :patch {:summary     "Refreshes all article data in index"
-                :tags        ["Index", "Admin"]
-                :handler     (trigger-task git/sync-index!)
-                ::roles #{:admin}}}]
-      ["/export"
-       {:summary    "Export index metadata in CSV format"
-        :tags       ["Index" "Query" "Export"]
-        :parameters {:query [:map
-                             [:q {:optional true} :string]
-                             [:limit {:optional true} :int]]}
-        :handler    index/handle-export}]
-      ["/links"
-       {:summary    "Retrieve articles based on anchors and links"
-        :tags       ["Index" "Query" "Links"]
-        :parameters {:query [:map
-                             [:anchors
-                              {:optional true}
-                              [:or :string [:sequential :string]]]
-                             [:links
-                              {:optional true}
-                              [:or :string [:sequential :string]]]]}
-        :handler    index/handle-links-query}]
-      ["/suggest"
-       {:get   {:summary    "Suggest articles by form"
-                :tags       ["Index" "Query" "Auto-Complete"]
-                :parameters {:query [:map [:q :string]]}
-                :handler    index/handle-article-suggest}}]]
-     ["/lock"
-      [""
-       {:summary "Retrieve list of active locks"
-        :tags    ["Lock" "Query"]
-        :handler lock/handle-read-locks}]
-      ["/*resource"
-       {:get    {:summary    "Read a resource lock"
-                 :tags       ["Lock" "Query" "Resource"]
-                 :parameters {:path  [:map [:resource :string]]
-                              :query [:map [:token :string]]}
-                 :handler    lock/handle-read-lock}
-        :post   {:summary    "Set a resource lock"
-                 :tags       ["Lock" "Resource"]
-                 :parameters {:path  [:map [:resource :string]]
-                              :query [:map
-                                      [:token :string]
-                                      [:ttl [:int {:min 1}]]]}
-                 :handler    lock/handle-create-lock}
-        :delete {:summary    "Remove a resource lock."
-                 :tags       ["Lock" "Resource"]
-                 :parameters {:path  [:map [:resource :string]]
-                              :query [:map [:token :string]]}
-                 :handler    lock/handle-remove-lock}}]]
-     ["/mantis"
-      {:get
-       {:summary    "Retrieve Mantis issues for a given set of surface forms"
-        :tags       ["Mantis" "Issue"]
-        :parameters {:query [:map [:q [:or :string [:sequential :string]]]]}
-        :handler    index/handle-issue-query}
-       :delete
-       {:summary     "Clears the internal Mantis issue index and re-synchronizes it"
-        :tags        ["Mantis" "Admin"]
-        :handler     (trigger-task issue/sync!)}}]
-     ["/oxygen"
-      ["/updateSite.xml"
-       (constantly
-        (->  (resp/response oxygen/update-descriptor)
-             (resp/content-type "application/xml")))]
-      ["/zdl-lex-framework.zip"
-       (fn [_]
-         (resp/response (ring.io/piped-input-stream oxygen/download-framework)))]
-      ["/zdl-lex-plugin.zip"
-       (fn [_]
-         (resp/response (ring.io/piped-input-stream oxygen/download-plugin)))]]
-     ["/status"
-      {:summary "Provides status information, e.g. logged-in user"
-       :tags    ["Status"]
-       :handler (comp resp/response :identity)}]
-     ["/swagger.json"
-      {:no-doc  true
-       :handler (swagger/create-swagger-handler)}]
-     ["/styles.css"
-      (constantly (-> html/css (resp/response) (resp/content-type "text/css")))]])
+     ["/git" (git/handlers db repo)]
+     ["/index" index/handlers]
+     ["/lock" (lock/handlers db)]
+     ["/oxygen" oxygen/handlers]
+     ["/schedule" (schedule/handlers db issue-db repo)]
+     ["/socket" (server.socket/handlers gpt-queue)]
+     html-handlers
+     swagger-handlers])
    (reitit.ring/routes
     (reitit.ring/redirect-trailing-slash-handler)
     (reitit.ring/create-resource-handler {:path "/assets"})
     (reitit.ring/create-default-handler))))
 
-(def ^:dynamic server
-  nil)
+(defmethod ig/init-key ::server
+  [_ {:keys [handler] :as opts}]
+  (http-kit/run-server handler (dissoc opts :handler)))
 
-(defn stop-server
-  []
-  (try
-    (when server (server))
-    (finally
-      (alter-var-root #'server (constantly nil)))))
-
-(defn start-server
-  []
-  (stop-server)
-  (->>
-   (http-kit/run-server handler {:port env/http-port})
-   (constantly)
-   (alter-var-root #'server)))
+(defmethod ig/halt-key! ::server
+  [_ server]
+  (server))

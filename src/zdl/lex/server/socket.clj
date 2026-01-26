@@ -19,45 +19,36 @@
   [user client-id])
 
 (defn reply
-  [message reply]
-  (if-let [ch (@sockets (message->socket-key message))]
-    (ws/send ch (pr-edn-str reply)
-             (fn [] (tm/log! {:id    ::reply-success
-                              :level :info
-                              :data  {:message message
-                                      :reply   reply}}))
-             (fn [e] (tm/error! {:id ::reply-failure
-                                 :data {:message message
-                                        :reply   reply}}
-                                e)))
-    (tm/log! {:id    ::reply-discarded
-              :level :info
-              :data  {:message message
-                      :reply   reply}})))
+  [req response]
+  (let [data {:request req :response response}]
+    (if-let [ch (@sockets (message->socket-key req))]
+      (ws/send ch (pr-edn-str response)
+               (fn [] (tm/log! {:id ::reply-success :level :info :data data}))
+               (fn [e] (tm/error! {:id ::reply-failure :data data} e)))
+      (tm/log! {:id ::reply-discarded :level :info :data data}))))
 
 
-(defmulti handle-message :content-type)
+(defmulti handle-request
+  (fn [_gpt_queue {:keys [content-type]}] content-type))
 
-(defmethod handle-message :gpt [{{:keys [id messages]} :content :as message}]
+(defmethod handle-request :gpt [gpt-queue {{:keys [id messages]} :content :as req}]
   (a/go
-    (let [gpt-exchange (gpt/->Exchange (str (random-uuid)) messages)
-          completion   (a/<! (gpt/async-complete gpt-exchange))]
-      (reply message {:content-type :gpt
-                      :content      (merge completion {:id id})}))))
+    (let [gpt-exchange (gpt/->exchange messages)
+          completion   (a/<! (gpt/async-complete gpt-queue gpt-exchange))
+          gpt-reply    (merge {:id id} (or completion {:error :timeout}))]
+      (reply req {:content-type :gpt :content gpt-reply}))))
 
 
-(defmethod handle-message :default [message]
-  (tm/log! {:id    ::message
-            :level :info
-            :data  {:content message}}))
+(defmethod handle-request :default [_gpt-queue req]
+  (tm/log! {:id ::request :level :info :data {:request req}}))
 
 (defn on-message
-  [user ch message]
+  [gpt-queue user ch message]
   (let [message     (assoc (read-string message) :user user)
         fingerprint (dissoc message :content-type :content)]
     (swap! clients assoc ch fingerprint)
     (swap! sockets assoc-in (message->socket-key message) ch)
-    (handle-message message)))
+    (handle-request gpt-queue message)))
 
 (defn on-close
   [ch _status _reason]
@@ -66,7 +57,12 @@
     (swap! sockets dissoc-in (message->socket-key fingerprint))))
 
 (defn handle-client
-  [{:keys [websocket?] {:keys [user]} :identity :as _req}]
+  [gpt-queue {:keys [websocket?] {:keys [user]} :identity :as _req}]
   (if websocket?
-    {::ws/listener {:on-message (partial on-message user) :on-close on-close}}
+    {::ws/listener {:on-message (partial on-message gpt-queue user)
+                    :on-close   on-close}}
     (resp/status 400)))
+
+(defn handlers
+  [gpt-queue]
+  ["" (partial handle-client gpt-queue)])

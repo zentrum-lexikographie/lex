@@ -1,6 +1,8 @@
 (ns zdl.lex.server.schedule
   (:require
    [chime.core :as chime]
+   [integrant.core :as ig]
+   [ring.util.response :as resp]
    [taoensso.telemere :as tm]
    [tick.core :as t]
    [zdl.lex.server.git :as git]
@@ -45,36 +47,62 @@
      (fn [ts] (tm/event! {:data {::timestamp ts}}) (f))
      {:error-handler task-error-handler})))
 
-(def ^:dynamic tasks
-  nil)
+(defmethod ig/init-key ::tasks
+  [_ {:keys [db issue-db repo]}]
+  [(schedule "Lock Database Cleanup"
+             (after-every (t/of-minutes 5))
+             #(lock/cleanup! db))
+   (schedule "Git Commit"
+             (after-every (t/of-minutes 15))
+             #(git/commit! repo))
+   (schedule "Mantis Issue Sync"
+             (after-every (t/of-minutes 15))
+             #(issue/sync! issue-db))
+   (schedule "Article QA"
+             (at-hour 1)
+             (partial git/qa! db repo))
+   (schedule "Git/Index Sync"
+             (at-hour 3)
+             #(git/sync-index! repo))
+   (schedule "Git Garbage Collection"
+             (at-hour 5)
+             #(git/gc! repo))])
 
-(defn stop
-  []
-  (when tasks
-    (doseq [task (vals tasks)] (.close task))
-    (alter-var-root #'tasks (constantly nil))))
+(defmethod ig/halt-key! ::tasks
+  [_ tasks]
+  (doseq [task tasks] (.close task)))
 
-(defn start
-  []
-  (stop)
-  (->>
-   {:lock-cleanup (schedule "Lock Database Cleanup"
-                            (after-every (t/of-minutes 5))
-                            lock/cleanup!)
-    :git-commit   (schedule "Git Commit"
-                            (after-every (t/of-minutes 15))
-                            git/commit!)
-    :issue-sync   (schedule "Mantis Issue Sync"
-                            (after-every (t/of-minutes 15))
-                            issue/sync!)
-    :article-edit (schedule "Article QA"
-                            (at-hour 1)
-                            git/qa!)
-    :git-refresh  (schedule "Git/Index Sync"
-                            (at-hour 3)
-                            git/sync-index!)
-    :git-gc       (schedule "Git Garbage Collection"
-                            (at-hour 5)
-                            git/gc!)}
-   (constantly)
-   (alter-var-root #'tasks)))
+(defn trigger-task
+  [task]
+  (fn [_]
+    (future (try (task) (catch Throwable t (tm/error! t))))
+    (resp/response {:triggered true})))
+
+(defn handlers
+  [db issue-db repo]
+  [""
+   ["/commit"
+    {:patch {:summary "Commit pending changes on the server's branch"
+             :tags    ["Article" "Git" "Admin"]
+             :handler (trigger-task (partial git/commit! repo))}}]
+   ["/git/:ref"
+    {:post  {:summary    "Fast-forwards the server's branch to the given ref"
+             :tags       ["Article" "Git" "Admin"]
+             :parameters {:path [:map [:ref :string]]}
+             :handler    (partial git/handle-fast-forward repo)}
+     :patch {:summary    "Rebases the server's branch to the given ref"
+             :tags       ["Article" "Git" "Admin"]
+             :parameters {:path [:map [:ref :string]]}
+             :handler    (partial git/handle-rebase repo)}}]
+   ["/qa"
+    {:patch {:summary "Edits article data"
+             :tags    ["Article", "Git", "Admin"]
+             :handler (trigger-task (partial git/qa! db repo))}}]
+   ["/index"
+    {:patch {:summary "Refreshes all article data in index"
+             :tags    ["Index", "Admin"]
+             :handler (trigger-task (partial git/sync-index! repo))}}]
+   ["/issues"
+    {:patch {:summary "Clears the Mantis issue index and re-synchronizes it"
+             :tags    ["Mantis" "Admin"]
+             :handler (trigger-task (partial issue/sync! issue-db))}}]])

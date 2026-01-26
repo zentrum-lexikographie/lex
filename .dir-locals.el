@@ -1,6 +1,7 @@
 ((python-mode .((python-test-runner pytest)))
  (clojure-mode . ((cider-preferred-build-tool . "clojure-cli")
                   (cider-clojure-cli-aliases . ":build:dev:test:client:server:oxygen")
+                  (cider-ns-code-reload-tool . 'clj-reload)
                   (cider-ns-refresh-before-fn . "user/halt")
                   (cider-ns-refresh-after-fn . "user/go")
                   (cider-ns-refresh-show-log-buffer . t))))

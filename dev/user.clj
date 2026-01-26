@@ -1,37 +1,22 @@
 (ns user
   (:require
-   [clojure.tools.namespace.repl :as repl :refer [set-refresh-dirs]]
-   [zdl.lex.client.socket :as client.socket]
+   [integrant.repl :refer [clear go halt prep init reset reset-all]]
+   [zdl.lex.client :as client]
    [zdl.lex.dev :as dev]
    [zdl.lex.fixtures :as fixtures]
    [zdl.lex.oxygen.url-handler :as url-handler]
    [zdl.lex.server :as server]))
 
-(set-refresh-dirs "dev" "src" "test")
-
 (url-handler/install-stream-handler!)
 
-(defn go
-  []
-  (server/start)
-  (client.socket/start)
-  (dev/show!))
+(def config
+  (dissoc (merge client/config
+                 server/config
+                 dev/config)
+          :zdl.lex.metrics/reporter
+          :zdl.lex.server.schedule/tasks))
 
-(defn halt
-  []
-  (dev/dispose!)
-  (client.socket/stop)
-  (server/stop))
-
-(defn reset
-  []
-  (halt)
-  (repl/refresh :after 'user/go))
-
-(defn reset-all
-  []
-  (halt)
-  (repl/refresh-all :after 'user/go))
+(integrant.repl/set-prep! (constantly config))
 
 (defn backends!
   []
