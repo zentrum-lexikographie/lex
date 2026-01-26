@@ -8,7 +8,8 @@
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.article.qa :as qa]
-   [zdl.lex.env :as env])
+   [zdl.lex.env :as env]
+   [seesaw.bind :as uib])
   (:import
    (java.io ByteArrayInputStream)
    (java.net Authenticator PasswordAuthentication)
@@ -17,6 +18,19 @@
 
 (def active-user
   (atom nil))
+
+(def id
+  (let [sys-prop #(System/getProperty %)]
+    (atom
+     {:client-id    (str (random-uuid))
+      :java-version (sys-prop "java.version")
+      :os-name      (sys-prop "os.name")
+      :os-version   (sys-prop "os.version")})))
+
+(uib/bind
+ active-user
+ (uib/filter some?)
+ (uib/b-do* #(swap! id assoc :user %)))
 
 (def active-article
   (atom nil))
@@ -117,8 +131,8 @@
    (update :as #(or % :clojure))
    (cond-> lock? (assoc-in [:query-params :token] lock-token))
    (hc/request)
-   (handle-auth-context)
    (handle-http-errors)
+   (handle-auth-context)
    (handle-http-locked-response)))
 
 

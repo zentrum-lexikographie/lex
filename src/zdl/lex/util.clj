@@ -1,4 +1,4 @@
-(ns zdl.lex.server.util
+(ns zdl.lex.util
   (:require
    [clojure.core.async :as a]
    [clojure.java.io :as io]

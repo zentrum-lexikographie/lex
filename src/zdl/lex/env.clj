@@ -52,7 +52,7 @@
   (when (and server-user server-password) [server-user server-password]))
 
 (def repl-port
-  (parse-long (getenv "REPL_PORT" "3001")))
+  (some->> (getenv "REPL_PORT") parse-long))
 
 (def git-origin
   (getenv "GIT_ORIGIN" "git@git.zdl.org:zdl/dict.git"))

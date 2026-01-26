@@ -123,7 +123,7 @@
              :handler (fn [_] (workspace/preview-article))))
 
 (def components
-  [(ui/label :icon "zdl/lex/ui/logo.png" :border 6 :size [32 :by 32])
+  [(ui/label :icon "zdl/lex/ui/logo.png" :size [32 :by 32])
    status-label
    search/input
    (ToolbarButton. search/action false)

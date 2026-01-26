@@ -4,6 +4,7 @@
              com.github.strojure/parsesso        {:mvn/version "1.2.2+295"}
              com.potetm/fusebox                  {:mvn/version "1.0.11"}
              com.taoensso/telemere               {:mvn/version "1.1.0"}
+             dev.weavejester/medley              {:mvn/version "1.8.1"}
              io.dropwizard.metrics/metrics-core  {:mvn/version "4.2.0"}
              io.github.cdimascio/dotenv-java     {:mvn/version "3.2.0"}
              io.github.gremid/clj-xml            {:git/sha "ffcf1d87cf9eca8a6055edb0cd61ae88e8763589"}
@@ -19,8 +20,7 @@
                        :extra-deps  {org.clojure/tools.namespace {:mvn/version "1.5.0"}
                                      clj-commons/clj-yaml        {:mvn/version "1.0.29"}}}
              :test    {:extra-paths ["test"]
-                       :extra-deps  {lambdaisland/kaocha    {:mvn/version "1.91.1392"}
-                                     dev.weavejester/medley {:mvn/version "1.8.1"}}
+                       :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
                        :exec-fn     kaocha.runner/exec-fn}
              :client  {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.58.0"}
                                     com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}

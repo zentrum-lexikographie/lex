@@ -7,6 +7,7 @@
    [nrepl.server :as repl]
    [taoensso.telemere :as tm]
    [zdl.lex.client :as client]
+   [zdl.lex.client.socket :as client.socket]
    [zdl.lex.env :as env]
    [zdl.lex.oxygen.workspace :as workspace]
    [zdl.lex.ui.issue :as issue]
@@ -26,8 +27,12 @@
   [_ workspace]
   (try
     (alter-var-root #'workspace/instance (constantly workspace))
-    (->> (constantly (repl/start-server :port env/repl-port))
-         (alter-var-root #'repl-server))
+    (swap! client/id assoc :oxygen-version (.getVersion workspace))
+    (client.socket/start)
+    (some->> env/repl-port
+             (repl/start-server :port)
+             (constantly)
+             (alter-var-root #'repl-server))
     (.addViewComponentCustomizer
      workspace
      (proxy [ViewComponentCustomizer] []
@@ -85,7 +90,8 @@
   [_]
   (try
     (workspace/unbind-editor-change-listener)
-    (repl/stop-server repl-server)
+    (client.socket/stop)
+    (some->> repl-server (repl/stop-server))
     (alter-var-root #'repl-server (constantly nil))
     (alter-var-root #'workspace/instance (constantly nil))
     (catch Throwable t (tm/error! t)))

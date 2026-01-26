@@ -42,7 +42,7 @@
   (tm/with-ctx+ {::schedule desc}
     (chime/chime-at
      times
-     (fn [ts] (tm/event! {::timestamp ts}) (f))
+     (fn [ts] (tm/event! {:data {::timestamp ts}}) (f))
      {:error-handler task-error-handler})))
 
 (def ^:dynamic tasks
