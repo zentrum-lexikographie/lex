@@ -7,13 +7,17 @@
   (:import
    (com.rabbitmq.client AMQP$BasicProperties$Builder CancelCallback ConnectionFactory DeliverCallback)))
 
-(defrecord Exchange [id messages])
+(defrecord Exchange [id messages timeout])
+
+(defn ->exchange
+  [messages & {:keys [timeout] :or {timeout 30000}}]
+  (->Exchange (str (random-uuid)) messages timeout))
 
 (def exchanges*
   (a/chan (a/sliding-buffer 1)))
 
 (def exchanges
-  (a/mult exchanges*))
+  (a/pub exchanges* :id))
 
 (def ^:dynamic mq-connection
   nil)
@@ -36,6 +40,21 @@
          (replyTo mq-reply-queue)
          (build))
      (json/write-value-as-bytes messages))))
+
+(def completion-timeout
+  30000)
+
+(defn async-complete
+  [{:keys [id timeout] :as exchange}]
+  (a/go
+    (let [ch (a/chan)]
+      (try
+        (a/sub exchanges id (a/chan))
+        (a/thread (complete exchange))
+        (a/alt! ch (a/timeout timeout))
+        (finally
+          (a/unsub exchanges id ch)
+          (a/close! ch))))))
 
 (defn disconnect
   []
@@ -88,7 +107,7 @@
            (handle [_this _consumer-tag delivery]
              (let [id       (.. delivery (getProperties) (getCorrelationId))
                    response (json/read-value (.. delivery (getBody)))
-                   exchange (->Exchange id response)]
+                   exchange (->Exchange id response 0)]
                (tm/log! {:id    ::response
                          :level :debug
                          :data  {:exchange exchange}})

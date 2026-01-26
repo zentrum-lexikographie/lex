@@ -1,6 +1,7 @@
 (ns user
   (:require
    [clojure.tools.namespace.repl :as repl :refer [set-refresh-dirs]]
+   [zdl.lex.client.socket :as client.socket]
    [zdl.lex.dev :as dev]
    [zdl.lex.fixtures :as fixtures]
    [zdl.lex.oxygen.url-handler :as url-handler]
@@ -13,11 +14,13 @@
 (defn go
   []
   (server/start)
+  (client.socket/start)
   (dev/show!))
 
 (defn halt
   []
   (dev/dispose!)
+  (client.socket/stop)
   (server/stop))
 
 (defn reset
