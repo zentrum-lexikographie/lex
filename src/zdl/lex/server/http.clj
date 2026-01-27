@@ -43,14 +43,6 @@
       (assoc :reitit.ring.middleware.exception/wrap log-exceptions)
       (reitit.ring.middleware.exception/create-exception-middleware)))
 
-(defn handle-unauthorized
-  [request {:keys [realm] :as _auth-data}]
-  (if (:identity request)
-    (-> (resp/response "Permission denied")
-        (resp/status 403))
-    (-> (resp/response "Unauthorized")
-        (resp/header "WWW-Authenticate" (format "Basic realm=\"%s\"" realm))
-        (resp/status 401))))
 
 (defn auth-backend
   [userbase]
@@ -58,17 +50,24 @@
    {:realm                "ZDL-Lex-Server"
     :authfn               (fn [_request {:keys [username password] :as _auth}]
                             (get userbase [username password]))
-    :unauthorized-handler handle-unauthorized}))
+    :unauthorized-handler (fn [request {:keys [realm] :as _auth-data}]
+                            (if (:identity request)
+                              (-> (resp/response "Permission denied")
+                                  (resp/status 403))
+                              (-> (resp/response "Unauthorized")
+                                  (resp/header "WWW-Authenticate"
+                                               (format "Basic realm=\"%s\"" realm))
+                                  (resp/status 401))))}))
 
 (def access-rules
   (letfn [(authenticated? [{id :identity :as _req}] (some? id))
           (admin? [{{:keys [user]} :identity :as _req}] (= "admin" user))
           (public? [_req] true)]
     {:rules [{:pattern #"^/git.*" :handler authenticated?}
-             {:pattern #"^/socket.*" :handler authenticated?}
              {:pattern #"^/index.*" :handler authenticated?}
              {:pattern #"^/lock.*" :handler authenticated?}
              {:pattern #"^/schedule.*" :handler admin?}
+             {:pattern #"^/socket.*" :handler authenticated?}
              {:pattern #"^/.*" :handler public?}]}))
 
 (def auth-context-middleware
@@ -114,7 +113,6 @@
                      reitit.ring.coercion/coerce-response-middleware
                      auth-context-middleware
                      lock/context-middleware]})
-     ["/client" server.socket/handle-client]
      ["/git" (git/handlers db repo)]
      ["/index" index/handlers]
      ["/lock" (lock/handlers db)]

@@ -9,7 +9,8 @@
    [zdl.lex.ui.toolbar :as toolbar]
    [zdl.lex.ui.util :as util]
    [zdl.lex.client :as client]
-   [zdl.lex.article :as article]))
+   [zdl.lex.article :as article]
+   [zdl.lex.ui.gpt :as gpt]))
 
 (def editor
   (ui/text :border 5
@@ -29,10 +30,15 @@
                                      :divider-location 0.75
                                      :resize-weight 0.75)
                         (ui/splitter :top-bottom
-                                     links/pane
-                                     issue/panel
-                                     :divider-location 0.6
-                                     :resize-weight 0.6)
+                                     (ui/splitter
+                                      :top-bottom
+                                      links/pane
+                                      issue/panel
+                                      :divider-location 0.5
+                                      :resize-weight 0.5)
+                                     gpt/panel
+                                     :divider-location 0.4
+                                     :resize-weight 0.4)
                         :divider-location 0.75
                         :resize-weight 0.75)))
 
