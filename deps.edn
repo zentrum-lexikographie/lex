@@ -4,6 +4,7 @@
              com.github.strojure/parsesso        {:mvn/version "1.2.2+295"}
              com.potetm/fusebox                  {:mvn/version "1.0.11"}
              com.taoensso/telemere               {:mvn/version "1.1.0"}
+             com.vladsch.flexmark/flexmark       {:mvn/version "0.64.8"}
              dev.weavejester/medley              {:mvn/version "1.8.1"}
              integrant/integrant                 {:mvn/version "1.0.1"}
              io.dropwizard.metrics/metrics-core  {:mvn/version "4.2.0"}
@@ -40,7 +41,6 @@
                                     com.github.igrishaev/pg2-migration {:mvn/version "0.1.41"}
                                     com.rabbitmq/amqp-client           {:mvn/version "5.27.0"}
                                     com.taoensso/telemere-slf4j        {:mvn/version "1.0.1"}
-                                    com.vladsch.flexmark/flexmark      {:mvn/version "0.64.8"}
                                     com.zaxxer/HikariCP                {:mvn/version "6.3.0"}
                                     dali/dali                          {:git/url "https://github.com/gremid/dali.git"
                                                                         :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}

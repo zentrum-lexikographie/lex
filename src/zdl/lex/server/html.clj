@@ -3,10 +3,8 @@
   (:require
    [clojure.java.io :as io]
    [lambdaisland.hiccup :as h]
-   [lambdaisland.ornament :as o :refer [defstyled]])
-  (:import
-   (com.vladsch.flexmark.html HtmlRenderer)
-   (com.vladsch.flexmark.parser Parser)))
+   [lambdaisland.ornament :as o :refer [defstyled]]
+   [zdl.lex.markdown :as md]))
 
 (o/set-tokens! {:tw-version 3
                 :fonts      {:sans  "PT Sans,sans-serif"
@@ -103,19 +101,9 @@
      [:main contents]
      [footer ctx-path]]]))
 
-(def md-parser
-  (.. (Parser/builder) (build)))
-
-(def md-renderer
-  (.. (HtmlRenderer/builder) (build)))
-
-(defn render-md
-  [s]
-  (.render md-renderer (.parse md-parser s)))
-
 (defstyled md :div
   ([k]
-   [::h/unsafe-html (-> (str "public/" k ".md") io/resource slurp render-md)]))
+   [::h/unsafe-html (-> (str "public/" k ".md") io/resource slurp md/render)]))
 
 (defstyled install-help :div
   :max-w-5xl :mx-auto :py-12 :px-4 :sm:px-6 :lg:px-8

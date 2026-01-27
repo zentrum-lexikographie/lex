@@ -1,6 +1,6 @@
 (ns user
   (:require
-   [integrant.repl :refer [clear go halt prep init reset reset-all]]
+   [integrant.repl :refer [go halt reset reset-all]]
    [zdl.lex.client :as client]
    [zdl.lex.dev :as dev]
    [zdl.lex.fixtures :as fixtures]
@@ -25,3 +25,9 @@
 
 (def init-with-test-data!
   fixtures/init-with-test-data!)
+
+(comment
+  (go)
+  (halt)
+  (reset)
+  (reset-all))

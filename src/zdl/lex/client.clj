@@ -11,7 +11,8 @@
    [zdl.lex.client.repl :as client.repl]
    [zdl.lex.client.socket :as client.socket]
    [zdl.lex.env :refer [getenv]]
-   [seesaw.bind :as uib])
+   [seesaw.bind :as uib]
+   [zdl.lex.markdown :as md])
   (:import
    (java.io ByteArrayInputStream)
    (java.net Authenticator PasswordAuthentication)
@@ -75,6 +76,9 @@
 
 (def links
   (agent* {}))
+
+(def gpt-chat
+  (agent* []))
 
 (defn lex?
   [uri]
@@ -313,3 +317,11 @@
 (defn dissoc-article
   [id]
   (send articles dissoc id))
+
+(defn append-to-gpt-chat
+  [message]
+  (send gpt-chat conj (update message "content" md/render)))
+
+(defn clear-gpt-chat
+  []
+  (send gpt-chat (constantly [])))
