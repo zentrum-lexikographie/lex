@@ -368,7 +368,7 @@ syntaktische_Relationen = (
 	| 'Stichwort_hat_Aktivsubjekt'
 	| 'Stichwort_hat_Apposition'
 	| 'Stichwort_hat_Dativobjekt'
-	| 'Stichwort_hat_Genitiv-/Akkusativ-/Dativobjekt'
+	| 'Stichwort_hat_Genitivobjekt'
 	| 'Stichwort_hat_Genitivattribut'
 	| 'Stichwort_hat_partitive_Apposition'
 	| 'Stichwort_hat_Passivsubjekt'
