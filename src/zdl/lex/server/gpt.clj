@@ -9,11 +9,11 @@
 
 (tm/set-min-level! nil "com.rabbitmq.client.TrustEverythingTrustManager" :error)
 
-(defrecord Exchange [id messages timeout])
+(defrecord Exchange [id message timeout])
 
 (defn ->exchange
-  [messages & {:keys [timeout] :or {timeout 30000}}]
-  (->Exchange (str (random-uuid)) messages timeout))
+  [message & {:keys [timeout] :or {timeout 30000}}]
+  (->Exchange (str (random-uuid)) message timeout))
 
 (def exchanges*
   (a/chan (a/sliding-buffer 1)))
@@ -22,21 +22,23 @@
   (a/pub exchanges* :id))
 
 (defn complete
-  [{:keys [channel send reply] :as _queue} {:keys [id messages] :as _exchange}]
-  (let [props   (.. (AMQP$BasicProperties$Builder.)
-                    (correlationId id) (replyTo reply)
-                    (build))
-        payload (json/write-value-as-bytes messages)]
-    (.basicPublish channel "" send props payload)))
+  [{:keys [channel send reply] :as _queue} {:keys [id message] :as exchange}]
+  (tm/log! {:id ::request :level :info :data exchange})
+  (.basicPublish channel ""
+                 send
+                 (.. (AMQP$BasicProperties$Builder.)
+                     (correlationId id) (replyTo reply)
+                     (build))
+                 (json/write-value-as-bytes message)))
 
 (defn async-complete
   [queue {:keys [id timeout] :as exchange}]
   (a/go
     (let [ch (a/chan)]
       (try
-        (a/sub exchanges id (a/chan))
-        (a/thread (complete queue exchange))
-        (a/alt! ch (a/timeout timeout))
+        (a/sub exchanges id ch)
+        (a/io-thread (complete queue exchange))
+        (a/alt! [ch (a/timeout timeout)] ([v _ch] v))
         (finally
           (a/unsub exchanges id ch)
           (a/close! ch))))))
@@ -71,8 +73,8 @@
                  response (json/read-value (.. delivery (getBody)))
                  exchange (->Exchange id response 0)]
              (tm/log! {:id    ::response
-                       :level :debug
-                       :data  {:exchange exchange}})
+                       :level :info
+                       :data  exchange})
              (a/>!! exchanges* exchange))))
        (reify CancelCallback
          (handle [_this _consumer-tag]

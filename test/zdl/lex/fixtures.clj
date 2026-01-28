@@ -8,7 +8,8 @@
    [pg.core :as pg]
    [zdl.lex.server :as server]
    [zdl.lex.server.index :as index]
-   [zdl.lex.server.git :as git]))
+   [zdl.lex.server.git :as git]
+   [taoensso.telemere :as tm]))
 
 (def backend-retry
   (retry/init {::retry/retry? (fn [n _ms _ex] (< n 20))
@@ -16,9 +17,10 @@
 
 (defn wait-for-backends!
   []
-  (with-retry backend-retry
-    (index/query {"q" "id:*" "rows" "0" "wt" "json"})
-    (pg/execute (server/config :zdl.lex.server.db/connection) "SELECT 1+1 AS n")))
+  (tm/with-min-level nil "com.potetm.fusebox.retry" :warn
+    (with-retry backend-retry
+      (index/query {"q" "id:*" "rows" "0" "wt" "json"})
+      (pg/execute (server/config :zdl.lex.server.db/connection) "SELECT 1+1 AS n"))))
 
 (defn start-backends!
   []

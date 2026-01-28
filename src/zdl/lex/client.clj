@@ -1,34 +1,39 @@
 (ns zdl.lex.client
   (:require
+   [chime.core :as chime]
    [clojure.java.io :as io]
    [clojure.string :as str]
    [hato.client :as hc]
+   [hato.websocket :as ws]
+   [integrant.core :as ig]
    [lambdaisland.uri :as uri]
+   [nrepl.server :as repl]
    [taoensso.telemere :as tm]
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.article.qa :as qa]
-   [zdl.lex.client.repl :as client.repl]
-   [zdl.lex.client.socket :as client.socket]
    [zdl.lex.env :refer [getenv]]
-   [seesaw.bind :as uib]
-   [zdl.lex.markdown :as md])
+   [zdl.lex.util :refer [pr-edn-str]]
+   [seesaw.bind :as uib])
   (:import
    (java.io ByteArrayInputStream)
    (java.net Authenticator PasswordAuthentication)
    (java.util UUID)
    (ro.sync.exml.plugin.lock LockException)))
 
-(def id
-  (let [sys-prop #(System/getProperty %)]
-    (atom
-     {:client-id    (str (random-uuid))
-      :java-version (sys-prop "java.version")
-      :os-name      (sys-prop "os.name")
-      :os-version   (sys-prop "os.version")})))
+(def config
+  (let [repl-port (some->> (getenv "REPL_PORT") parse-long)]
+    (cond-> {::socket {}} repl-port (assoc ::repl {:port repl-port}))))
 
 (def active-user
   (atom nil))
+
+(def id
+  (let [sys-prop #(System/getProperty %)]
+    (atom {:client-id    (str (random-uuid))
+           :java-version (sys-prop "java.version")
+           :os-name      (sys-prop "os.name")
+           :os-version   (sys-prop "os.version")})))
 
 (uib/bind
  active-user
@@ -37,6 +42,11 @@
 
 (def server-url
   (getenv "SERVER_URL" "https://labor.dwds.de"))
+
+(def ws-url
+  (-> (uri/uri server-url)
+      (update :scheme {"http" "ws" "https" "wss"})
+      (uri/join "socket") (str)))
 
 (def http-client
   (delay
@@ -50,13 +60,6 @@
                                   server-user (char-array server-password)))))
                            (Authenticator/getDefault))
         :version       :http-1.1}))))
-
-(def config
-  (let [repl-port (some->> (getenv "REPL_PORT") parse-long)]
-    (cond-> {::client.socket/connection {:server-url  server-url
-                                         :http-client http-client
-                                         :active-user active-user}}
-      repl-port (assoc ::client.repl/server {:port repl-port}))))
 
 (def active-article
   (atom nil))
@@ -78,7 +81,9 @@
   (agent* {}))
 
 (def gpt-chat
-  (agent* []))
+  (agent* {:persona "Du bist ein Lexikograph und gibst kurze, genaue Antworten!"
+           :history []
+           :prompt nil}))
 
 (defn lex?
   [uri]
@@ -318,10 +323,95 @@
   [id]
   (send articles dissoc id))
 
-(defn append-to-gpt-chat
-  [message]
-  (send gpt-chat conj (update message "content" md/render)))
+(def socket
+  (atom nil))
 
-(defn clear-gpt-chat
+(defn close-socket!
   []
-  (send gpt-chat (constantly [])))
+  (try
+    (some-> @socket (ws/close!) (deref))
+    (catch Throwable t
+      (tm/error! {:id ::socket-close} t))
+    (finally
+      (reset! socket nil))))
+
+(defmulti socket-message-received :content-type)
+
+(defmethod socket-message-received :gpt
+  [{{[{message "message"}] "choices"} :content}]
+  (send gpt-chat
+        (fn [{:keys [prompt] :as gpt-chat}]
+          (-> gpt-chat
+              (update :history conj {"role" "user" "content" prompt} message)
+              (assoc :prompt nil)))))
+
+(defmethod socket-message-received :default
+  [message]
+  (tm/log! {:id ::socket-message :level :info :data message}))
+
+(defn open-socket!
+  []
+  (or
+   @socket
+   (->>
+    {:on-message  (fn [_ws ^java.nio.CharBuffer msg last?]
+                    ;; FIXME: handle `last?`, concatenating chunks of
+                    ;; larger messages
+                    (assert (true? last?))
+                    (socket-message-received (read-string (str msg))))
+     :on-error    (fn [_ws error]
+                    (tm/error! {:id ::socket-error} error)
+                    (close-socket!))
+     :on-close    (fn [_ws status reason]
+                    (tm/log! {:id    ::socket-closing
+                              :level :info
+                              :data  {:status status
+                                      :reason reason}}))
+     :headers     {"X-Lex-Client-Id" (@id :client-id)}
+     :http-client @http-client}
+    (ws/websocket ws-url)
+    (deref)
+    (reset! socket))))
+
+(defn send->socket
+  [content-type content]
+  (let [data (assoc @id :content-type content-type :content content)]
+    (if-let [ws @socket]
+      (locking ws
+        (try
+          @(ws/send! ws (pr-edn-str data))
+          (catch Throwable t
+            (tm/error! {:id ::socket-send :data data} t)
+            (close-socket!))))
+      (tm/log! {:id    ::send-failed
+                :level :error
+                :data  data}))))
+
+(defn gpt-request->socket
+  [{:keys [history] :as gpt-chat} prompt persona]
+  (let [messages (cond->> (conj history {"role" "user" "content" prompt})
+                   persona (cons {"role" "system" "content" persona}))]
+    (send->socket :gpt {"messages" (vec messages)})
+    (assoc gpt-chat :prompt prompt :persona persona)))
+
+(defmethod ig/init-key ::socket
+  [_ _]
+  (chime/chime-at
+   (chime/periodic-seq (t/instant) (t/of-seconds 5))
+   (fn [_] (when @active-user (open-socket!) (send->socket :ping :ping)))
+   {:error-handler (fn [e]
+                     (tm/error! {:id ::socket-keep-alive} e)
+                     (not (instance? InterruptedException e)))}))
+
+(defmethod ig/halt-key! ::socket
+  [_ connection]
+  (.close connection)
+  (close-socket!))
+
+(defmethod ig/init-key ::repl
+  [_ {:keys [port]}]
+  (repl/start-server :port port))
+
+(defmethod ig/halt-key! ::repl
+  [_ server]
+  (repl/stop-server server))

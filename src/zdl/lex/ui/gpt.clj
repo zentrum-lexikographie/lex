@@ -1,10 +1,13 @@
 (ns zdl.lex.ui.gpt
-  (:require [seesaw.core :as ui]
-            [zdl.lex.ui.util :refer [icon]]
-            [seesaw.behave :as behave]
-            [clojure.string :as str]
-            [seesaw.bind :as uib]
-            [zdl.lex.client :as client])
+  (:require
+   [seesaw.core :as ui]
+   [zdl.lex.ui.util :refer [icon]]
+   [seesaw.behave :as behave]
+   [clojure.string :as str]
+   [seesaw.bind :as uib]
+   [zdl.lex.client :as client]
+   [zdl.lex.markdown :as md]
+   [zdl.lex.util :refer [norm-str]])
   (:import
    (java.awt Color)
    (java.awt.event KeyEvent)
@@ -14,19 +17,19 @@
 (def persona
   (doto (ui/text
          :border "Persona:"
-         :text "Du bist ein Lexikograph und gibst kurze, genaue Antworten!"
+         :text (@client/gpt-chat :persona)
          :multi-line? true
          :wrap-lines? true
          :rows 2)
     (behave/when-focused-select-all)))
 
-(defn message->html
+(defn gpt-message->html
   [{role "role" content "content"}]
-  (format "<div class=\"%s\">%s</div>" role content))
+  (format "<div class=\"%s\">%s</div>" role (md/render content)))
 
-(defn messages->html
-  [messages]
-  (or (not-empty (str/join (map message->html messages)))
+(defn render-gpt-chat-history
+  [history]
+  (or (->> (map gpt-message->html history) (str/join) (norm-str))
       (str "<div class=\"note\"><p>Bitte geben Sie eine Anweisung ein und "
            "bestätigen Sie die Eingabe mit <i>Strg+Enter</i>.</p></div>")))
 
@@ -49,7 +52,7 @@
                         :background :white
                         :margin 5)
     (.setEditorKit dialog-editor-kit)
-    (.setText (messages->html @client/gpt-chat))))
+    (.setText (render-gpt-chat-history (@client/gpt-chat :history)))))
 
 (def dialog-pane
   (doto (ui/scrollable dialog :hscroll :never)
@@ -61,18 +64,6 @@
    (let [scrollbar (.getVerticalScrollBar dialog-pane)]
      (.setValue scrollbar (.getMaximum scrollbar)))))
 
-(uib/bind
- client/gpt-chat
- (uib/tee
-  (uib/bind (uib/transform messages->html) (uib/notify-later)
-            (uib/property dialog :text))
-  (uib/b-do* scroll-dialog-to-end!)))
-
-(declare prompt)
-
-(defn is-ctrl-enter?
-  [^KeyEvent e]
-  (and (.isControlDown e) (= KeyEvent/VK_ENTER (.getKeyCode e))))
 
 (def prompt
   (doto (ui/text :border "Nächste Anweisung:"
@@ -81,61 +72,101 @@
                  :rows 2)
     (behave/when-focused-select-all)))
 
-(defn clear-prompt!
-  [& _]
-  (ui/text! prompt ""))
 
-(defn focus-prompt!
+(defn rollback-history
   [& _]
-  (ui/invoke-later (.requestFocus prompt)))
+  (let [{:keys [history]} @client/gpt-chat
+        interactions      (partition-all 2 history)
+        history           (vec (flatten (butlast interactions)))
+        prompt            (-> interactions last first (get "content"))]
+    (send client/gpt-chat assoc :history history :prompt nil)
+    (ui/invoke-later (ui/text! prompt prompt) (.requestFocus prompt))))
 
-(def rollback-action
-  (ui/action :name "Zurück"
-             :icon (icon :arrow-back)
-             :mnemonic \b
-             :handler (fn [_])))
+(defn clear-history
+  [& _]
+  (send client/gpt-chat assoc :history []))
+
+(defn prompt-gpt
+  [& _]
+  (when-let [prompt (norm-str (ui/text prompt))]
+    (send-off client/gpt-chat
+              client/gpt-request->socket
+              prompt
+              (norm-str (ui/text persona)))))
 
 (def clear-action
   (ui/action :name "Löschen"
              :icon (icon :delete)
              :mnemonic \l
-             :handler (fn [_]
-                        (client/clear-gpt-chat)
-                        (clear-prompt!)
-                        (focus-prompt!))))
+             :handler clear-history))
 
-(defn send-dialog
-  [& _]
-  (when-let [s (not-empty (str/trim (ui/text prompt)))]
-    (clear-prompt!)
-    (client/append-to-gpt-chat {"role" "user" "content" s})))
+(def rollback-action
+  (ui/action :name "Zurück"
+             :icon (icon :arrow-back)
+             :mnemonic \b
+             :handler rollback-history))
 
-(def send-action
+(def prompt-action
   (ui/action :name "Senden"
              :icon (icon :arrow-forward)
              :mnemonic \s
-             :handler send-dialog))
+             :handler prompt-gpt))
 
-(ui/listen prompt
-           :key-pressed (fn [e] (when (is-ctrl-enter? e) (send-dialog))))
+(defn on-prompt-input
+  [^KeyEvent e]
+  (when (.isControlDown e)
+    (condp = (.getKeyCode e)
+      KeyEvent/VK_ENTER (prompt-gpt)
+      KeyEvent/VK_LEFT  (rollback-history)
+      nil)))
 
-(def action-pane
-  (ui/flow-panel :items [(ui/button :action send-action)
-                         (ui/button :action clear-action)]
-                 :align :center))
+(ui/listen prompt :key-pressed on-prompt-input)
 
-(def toolbar
-  (ui/toolbar :floatable? false
-              :orientation :horizontal
-              :items [(ToolbarButton. rollback-action false)
-                      (ToolbarButton. send-action false)
-                      (ToolbarButton. clear-action false)
-                      (javax.swing.Box/createHorizontalGlue)
-                      (ui/progress-bar :indeterminate? false)]))
+(def prompt-progress
+  (ui/progress-bar :indeterminate? false))
 
-(def panel
+(uib/bind
+ client/gpt-chat
+ (uib/tee
+  (uib/bind (uib/transform :persona)
+            (uib/property persona :text))
+  (uib/bind (uib/transform (comp render-gpt-chat-history :history))
+            (uib/tee
+             (uib/property dialog :text)
+             (uib/b-do* scroll-dialog-to-end!)))
+  (uib/bind (uib/transform :prompt)
+            (uib/tee
+             (uib/property prompt :text)
+             (uib/bind (uib/transform nil?)
+                       (uib/tee
+                        (uib/property persona :enabled?)
+                        (uib/property prompt :enabled?)))
+             (uib/bind (uib/transform some?)
+                       (uib/property prompt-progress :indeterminate?))))))
+
+(def chat-panel
   (ui/border-panel
    :border 5
-   :north (ui/border-panel :hgap 5 :north persona :center toolbar)
+   :north (ui/border-panel
+           :hgap 5
+           :north persona
+           :center (ui/toolbar
+                    :floatable? false
+                    :orientation :horizontal
+                    :items [(ToolbarButton. clear-action false)
+                            (ToolbarButton. rollback-action false)
+                            (ToolbarButton. prompt-action false)
+                            (javax.swing.Box/createHorizontalGlue)
+                            prompt-progress]))
    :center dialog-pane
    :south prompt))
+
+(def login-panel
+  (ui/border-panel))
+
+(def panel
+  (ui/card-panel :items [[login-panel :login] [chat-panel :chat]]))
+
+(uib/bind
+ client/active-user
+ (uib/b-do* #(ui/show-card! panel (if % :chat :login))))
