@@ -239,6 +239,20 @@ def _replace(t, p, s):
     p2 = pos + 10 if pos < len(t) + 10 else len(t)
     return t.replace(p, s)
 
+def hook_missing_pron(e, modify=False):
+    found = False
+
+    for i in et.ETXPath('./%(Formangabe)s[not(%(Aussprache)s)]' % wb.TAGS)(e):
+        found = True
+
+        if modify:
+            a = et.Element(wb.TAGS['Aussprache'])
+            et.SubElement(a, wb.TAGS['IPA'])
+            s = i.findall('%(Schreibung)s' % wb.TAGS)[-1]
+            i.insert(i.index(s)+1, a)
+            wb.report(e, None, 'Supply missing //Aussprache')
+
+    return found
 
 def hook_ipa(e, modify=False):
     
@@ -468,6 +482,7 @@ HOOKS = (
         hook_schreibung_metadata,
         hook_minimalartikel_tranche,
         hook_typography,
+        hook_missing_pron,
         hook_ipa,
         hook_promote_gram_metadata,
         hook_add_anonymous_author,
