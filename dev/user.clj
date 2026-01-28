@@ -27,6 +27,7 @@
   fixtures/init-with-test-data!)
 
 (comment
+  (backends!)
   (go)
   (halt)
   (reset)
