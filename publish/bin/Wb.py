@@ -511,17 +511,6 @@ class Wb(object):
             else:
                 yield stimulus, wc[0]
 
-    def is_visible(self, element):
-
-        if element.get('class') == 'invisible':
-            return False
-        else:
-            parent = element.getparent()
-            if parent is None:
-                return True
-            else:
-                return self.is_visible(parent)
-
 
     def recently_modified(self, path):
 
