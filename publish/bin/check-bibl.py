@@ -97,6 +97,7 @@ ILLEGAL_SEQUENCES = (
         r'Ratgeberverl\.',        # → Bertelsmann Ratgeber
         r'Roland[\s\-]+Verl',     # → Roland
         r'Rotbuch[\s\-]+Verl',    # → Rotbuch
+        r'Ruhrkrimi[\s\-]?[vV]erl', # → Ruhrkrimi
         r'Savari[\s\-]+Verl',     # → Safari
         r'Siedler[\s\-]+Verl'     # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
