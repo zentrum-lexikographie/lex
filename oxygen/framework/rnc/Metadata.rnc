@@ -439,6 +439,7 @@ Orthografieregel = element Orthografieregel {
             | '65'
             | '66'
             | '66 (E)'
+	    | '71 (E2)'
             | '79 (2)'
 	    | '80 (4)'
 	    | '90'
