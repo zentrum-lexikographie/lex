@@ -227,6 +227,7 @@ class Wb(object):
         'Münchner Neueste Nachrichten',
         'Münchner Neueste Nachrichten (Vormittags-Ausgabe)',
         'Münchner Neueste Nachrichten (Morgen-Ausgabe)',
+        'National-Zeitung (3. Parlamentsausgabe)',
         'National-Zeitung (Abend-Ausgabe)',
         'National-Zeitung (Morgen-Ausgabe)',
         'Naumburger Kreisblatt', # … für Stadt und Kreis Naumburg

@@ -157,6 +157,7 @@ legal = (
         'Migrant:innenpartei',
         'Mitarbeiter:in',
         'Mitarbeiter:innen',
+        'Mitspieler:innen',
         'Mountainbiker:innen',
         'Musiker:innen',
         'Nachbar:innen',

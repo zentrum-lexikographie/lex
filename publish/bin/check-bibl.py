@@ -58,6 +58,7 @@ ILLEGAL_SEQUENCES = (
         r'Hg[^\.][^\)][^:]',
         r'[zZ]itiert nach',       # → ∅
         r'IDS-Archiv',            # → ∅
+        r'Aktuelles Lexikon 1974-',
         r'Aufbau[\s\-]+Verl',     # → Aufbau
         r'Aufbau[\s\-]+Taschenb.+[vV]erl', # → Aufbau Taschenbuch
         r'Berlin\s+Verl.+d.+Nation', # → Verlag der Nation
@@ -71,9 +72,12 @@ ILLEGAL_SEQUENCES = (
         r'Drei\s+Masken\s+Verl',  # → Drei Masken
         r'Dressler[\s\-]+Verl',   # → Cecilie Dressler
         r'Druck\.-',              # → Schweizer Druck- und Verlagshaus
+        r'Dt\.[-\s]Taschenb.+Verl', # → dtv
         r'Econ[\s\-]+Verl',       # → Econ
         r'Eichborn[\s\-]+Verl',   # → Eichborn
         r'Elektronische\s+Ressource', # → ∅
+        r'Europ.+Verl\.',         # → Europäische Verlagsanstalt
+        r'Europ.+Verl.+Anst',     # → Europäische Verlagsanstalt
         r'Fachbuchverl[^a\.]',    # → Fachbuchverlag
         r'Falken[\s\-]+Verl',     # → Falken
         r'Fischer[\s\-]+Taschenb.+[vV]erl', # → Fischer Taschenbuch
@@ -98,7 +102,7 @@ ILLEGAL_SEQUENCES = (
         r'Roland[\s\-]+Verl',     # → Roland
         r'Rotbuch[\s\-]+Verl',    # → Rotbuch
         r'Ruhrkrimi[\s\-]?[vV]erl', # → Ruhrkrimi
-        r'Savari[\s\-]+Verl',     # → Safari
+        r'Safari[\s\-]+Verl',     # → Safari
         r'Siedler[\s\-]+Verl'     # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
         r'Sportverl\.',           # → Sortverlag
@@ -118,6 +122,7 @@ ILLEGAL_SEQUENCES = (
         r'Verl\.\s+Volk\s+u',     # → Volk und Welt
         r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
+        r'Verl.+Gabler',          # → Gabler
         r'Verl.+Neues Leben',     # → Neues Leben
         r'Weltbild[\s\-]+Verl.+\d{4}', # → Weltbild
         r'Wunderlich[\s\-]+Verl', # → Wunderlich
