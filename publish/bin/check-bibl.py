@@ -55,7 +55,9 @@ ILLEGAL_SEQUENCES = (
         r'\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
         r'Hrsg',
         #r'Verl\.',
-        r'Hg[^\.][^\)][^:]',
+        r'Hg[^\.]',
+        r'Hg\.[^\)]',
+        r'Hg\.\)[^:]',
         r'[zZ]itiert nach',       # → ∅
         r'IDS-Archiv',            # → ∅
         r'Aktuelles Lexikon 1974-',
