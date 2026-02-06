@@ -13,7 +13,7 @@ zerlegungen = collections.defaultdict(set)
 
 VALID_CLASSES = (
     'a', 'as', 'ass',   # 1, 1 *, 1 * *
-    'al', 'als',        # 1 a, 1 a *
+    'al', 'als', 'alss',# 1 a, 1 a *, 1 a * *
     'alg',              # 1 a α
     'algs',             # 1 a α *
     'asg',              # 1 * α
