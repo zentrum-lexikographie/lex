@@ -71,6 +71,7 @@ ILLEGAL_SEQUENCES = (
         r'Dietz[\s\-]+Verl',      # → Dietz
         r'Drei\s+Masken\s+Verl',  # → Drei Masken
         r'Dressler[\s\-]+Verl',   # → Cecilie Dressler
+        r'Droste[\s\-]Verl',      # → Droste
         r'Druck\.-',              # → Schweizer Druck- und Verlagshaus
         r'Dt\.[-\s]Taschenb.+Verl', # → dtv
         r'Econ[\s\-]+Verl',       # → Econ
@@ -106,6 +107,7 @@ ILLEGAL_SEQUENCES = (
         r'Siedler[\s\-]+Verl'     # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
         r'Sportverl\.',           # → Sortverlag
+        r'Standesamtwesen',       # → Verlag für Standesamtswesen
         r'Suhrkamp[\s\-]+Verl',   # → Suhrkamp
         r'Südwest[\s\-]+Verl',    # → Südwest
         r'-Taschenbuch',          # → Taschenbuch
@@ -125,6 +127,7 @@ ILLEGAL_SEQUENCES = (
         r'Verl.+Gabler',          # → Gabler
         r'Verl.+Neues Leben',     # → Neues Leben
         r'Weltbild[\s\-]+Verl.+\d{4}', # → Weltbild
+        r'Wiss.+Verl.+[gG]esell', # → WVG
         r'Wunderlich[\s\-]+Verl', # → Wunderlich
         r'Zeitgeschichte[\s\-]+Verl', # → Zeitgeschichte
         r'Zsolnay[\s\-]*[vV]erl', # → Paul Zsolnay
