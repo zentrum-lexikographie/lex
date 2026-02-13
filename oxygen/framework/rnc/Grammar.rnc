@@ -124,6 +124,12 @@ Genitiv = element Genitiv {
 	, Diasystematik ?
 }
 
+Ersatzplural = element Ersatzplural {
+	element Wert { Flexionstoken }
+	, Frequenzangabe ?
+	, Diasystematik ?
+}
+
 Plural = element Plural {
 	attribute Typ {	'Mengenangabe' } ?
 	, element Wert {
@@ -229,7 +235,7 @@ grammatische_Angaben = (
 	# Substantive #####
 	# #################
 	, Genitiv *
-	, Plural *
+	, (Plural | Ersatzplural) *
 
 	# ###############
 	# Verben #######
