@@ -200,6 +200,7 @@ Metadaten.Artikel = (
 	, attribute Erstellungsdatum { xsd:date }
 	, attribute Redakteur { Mitarbeiterinnen } ?
 	, attribute Empfehlung { 'ja' } ?
+	, attribute Regioprüfung { 'ja' } ?
 	, attribute Goethe-Zertifikat { 'A1' | 'A2' | 'B1' } ?
 	, attribute Tranche {
 	    '45k-Minimalartikel'

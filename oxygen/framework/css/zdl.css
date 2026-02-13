@@ -15,6 +15,7 @@ DWDS {
 	font-family: Unifont, Arial, sans-serif;
 	font-weight: normal;
 }
+
 Artikel                                { border-left: 15px solid #fff; }
 Artikel[Status="Artikelrumpf"]         { border-left: 15px solid rgba(255, 0, 0, 0.5); }
 Artikel[Status="Lex-zurückgestellt"]   { border-left: 15px dashed rgba(255, 0, 0, 0.3); }
@@ -369,6 +370,9 @@ Artikel[Status]:before { -oxy-append-content:" ["attr(Status)"] "; }
 *:not(Schreibung)[Zeitstempel]:before { -oxy-append-content:" ["attr(Zeitstempel)"] "; }
 *:not(Schreibung)[Quelle]:before { -oxy-append-content:" ["attr(Quelle)"] "; }
 *:not(Schreibung)[Autor]:before { -oxy-append-content:" ["attr(Autor)"] "; }
+
+Artikel[Empfehlung]:before { -oxy-append-content: url("star.svg"); }
+Artikel[Regioprüfung]:before { -oxy-append-content: url("mapmarker.svg"); }
 
 Lesart[Glossar] { -oxy-append-content: " Glossar: "attr(Glossar)" "; }
 
