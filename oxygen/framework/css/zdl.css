@@ -41,7 +41,7 @@ Orthografie {
 
 /* untergeordnete Blöcke, die als schmalere »Kästen« dargestellt werden */
 
-Genitiv, Plural, Praesens, Praeteritum, Auxiliar, Partizip_II, Positivvariante, Komparativ, Superlativ {
+Genitiv, Plural, Praesens, Praeteritum, Auxiliar, Partizip_II, Positivvariante, Komparativ, Superlativ, Ersatzplural {
 	border-top: 1px dotted #999;
 	/*border-bottom: 1px dotted #999;*/
 	padding: 0em;
@@ -133,7 +133,8 @@ Wortbildung:before                                  { content: "Wortbildung: "; 
 Genus:before                                        { content: "Genus: "; }
 Genitiv:before                                      { content: "Gen. Sg.: "; }
 Plural:before                                       { content: "Nom. Pl.: "; }
-Plural[Typ="Mengenangabe"]:before                  { content: "Nom. Pl. bei Wert-/Mengenangabe: "; }
+Plural[Typ="Mengenangabe"]:before                   { content: "Nom. Pl. bei Wert-/Mengenangabe: "; }
+Ersatzplural:before                                 { content: "Nom. Pl. (Ersatzplural): "; }
 Artikelpraeferenz:before                            { content: "Artikelpräferenz: "; }
 Praesens:before                                     { content: "3. Pers. Präs.: "; }
 Praeteritum:before                                  { content: "3. Pers. Prät.: "; }
