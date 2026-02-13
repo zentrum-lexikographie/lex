@@ -58,7 +58,7 @@
       (str/replace #"[^\p{Alpha}\p{Digit}\-_]" "_")))
 
 (def ^:private new-article-collection
-  "Neuartikel/Neuartikel-007")
+  "Neuartikel/Neuartikel-001")
 
 (defn generate-id
   []
