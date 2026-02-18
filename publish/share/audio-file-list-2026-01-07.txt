@@ -78430,7 +78430,7 @@ audio/099/der_Recorder_1.mp3
 audio/099/der_Referenzkurs.mp3
 audio/099/der_Reiche.mp3
 audio/099/der_Relaunch_2.mp3
-audio/099/der_Renminbi.mp3
+audio/099/das_Renminbi.mp3
 audio/099/der_Reprint_2.mp3
 audio/099/der_Reset_1.mp3
 audio/099/der_Ruhrpott.mp3
