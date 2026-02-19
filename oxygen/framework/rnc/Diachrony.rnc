@@ -209,6 +209,7 @@ Sprachen = (
 	| 'fläm'
 	| 'flandr'
 	| 'florentin'
+	| 'fon'          # fon: Fon language
 	| 'fries'
 	| 'frk'          # frk: Frankish
 	| 'frühgalloroman'
@@ -236,6 +237,7 @@ Sprachen = (
 	| 'grönländ'
 	| 'guarani'      # grn: Guarani
 	| 'gujarati'
+	| 'haitian-kreol'# hat: Haitian Creole
 	| 'hamit'
 	| 'hans'         # hansisch
 	| 'hawai'        # hawaiisch
