@@ -37,11 +37,14 @@ ILLEGAL_SEQUENCES = (
         r'&(amp|quot|apos|lt|gt|#)',
         r'[<>]',
         #r'\d(-|--|—)\d', # URLS!
-        r'["\']',
+        r'["\'“”„‚‘´]',
         r'[^\s]\[',
+        r'\[\d\d\d\d\]\s\d\d\d\d', # [1930] 2001 → 2001 [1930]
         #r'http',
         r'Ztg',
         r'VEB',
+        r'E-Book\.',
+        r'\s(c)\s',
         r'd\.i\.',
         r'o\.A\.',
         r'o\.O\.',
@@ -49,10 +52,8 @@ ILLEGAL_SEQUENCES = (
         r'a\.M\.',
         r'u\.a\.',
         r'et\s+al\.',
-        r'\svon:',                # → DIN 1505 (Teil 2): von Nachname, Vorname
-        r'\svom:',                # → DIN 1505 (Teil 2): vom Nachname, Vorname
-        r'\sde:',                 # → DIN 1505 (Teil 2): de Nachname, Vorname
-        r'\sden:',                # → DIN 1505 (Teil 2): van den Nachname, Vorname
+        r'\s(von|vom|zu|zum|zur):', # → DIN 1505 (Teil 2): von|… Nachname, Vorname
+        r'\s(de|den):',             # → DIN 1505 (Teil 2): de|… Nachname, Vorname
         r'Hrsg',
         #r'Verl\.',
         r'Hg[^\.]',
@@ -75,10 +76,14 @@ ILLEGAL_SEQUENCES = (
         r'Dressler[\s\-]+Verl',   # → Cecilie Dressler
         r'Droste[\s\-]Verl',      # → Droste
         r'Druck\.-',              # → Schweizer Druck- und Verlagshaus
-        r'Dt\.[-\s]Taschenb.+Verl', # → dtv
+        r'Dt\.[-\s]Taschenb.+[Vv]erl', # → dtv
+        r'(Dt\.|Deut).+Verl.+[aA]nst', # → DVA
+        r'(Dt\.|Deut).+Verl.+(der|d\.).+Wiss', # → DVW
+        r'\sDTV',                 # → dtv
         r'Econ[\s\-]+Verl',       # → Econ
         r'Eichborn[\s\-]+Verl',   # → Eichborn
         r'Elektronische\s+Ressource', # → ∅
+        r'Enke[\s\-]Verl',        # → Enke
         r'Europ.+Verl\.',         # → Europäische Verlagsanstalt
         r'Europ.+Verl.+Anst',     # → Europäische Verlagsanstalt
         r'Fachbuchverl[^a\.]',    # → Fachbuchverlag
@@ -121,13 +126,15 @@ ILLEGAL_SEQUENCES = (
         r'Ullstein[\s\-]+Taschenb.+[vV]erl', # → Ullstein Taschenbuch
         r'Union[\s\-]+Verl',      # → Union
         r'Urania[\s\-]+Verl',     # → Urania
-        r'Verl.+\sTribüne',       # → Tribüne
-        r'Verlag\s+Volk\s+u',     # → Volk und Gesundheit
-        r'Verl\.\s+Volk\s+u',     # → Volk und Welt
         r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
+        r'Verl.+(f\.|für)\s+Sozialwiss', # → VS
         r'Verl.+Gabler',          # → Gabler
+        r'Verl.+Haus\s+zum\s+Falken', # → → Haus zum Falken
+        r'Verl.+Neuer Weg',       # → Neuer Weg
         r'Verl.+Neues Leben',     # → Neues Leben
+        r'Verl.+Tribüne',         # → Tribüne
+        r'(Verl\.|Verlag)\s+Volk\s+u', # → Volk und (Gesundheit|Welt)
         r'Weltbild[\s\-]+Verl.+\d{4}', # → Weltbild
         r'Wiss.+Verl.+[gG]esell', # → WVG
         r'Wunderlich[\s\-]+Verl', # → Wunderlich
