@@ -17,8 +17,6 @@ argument_parser.add_argument('-s', '--subset',
 arguments = argument_parser.parse_args()
 
 wb = Wb()
-wdg = set( [l.strip() for l in open('share/WDG-lemmas.txt', encoding='utf-8') ] )
-duden = set( [l.strip() for l in open('share/Duden-lemmas.txt', encoding='utf-8') ] )
 
 for entry, path in wb:
     for orth in entry.findall('.//%(Schreibung)s' % wb.TAGS):
