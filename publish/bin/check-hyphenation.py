@@ -21,12 +21,15 @@ wb = Wb()
 for entry, path in wb:
     for orth in entry.findall('.//%(Schreibung)s' % wb.TAGS):
         hyphenation = orth.get('Trennung')
+        text = wb.text(orth)
         if orth.get('Typ') not in (None, 'U_CH', 'U_AT') and hyphenation is not None:
             wb.report(entry, path, 'Hyphenation on marked headword', verbose=not(arguments.path))
         if hyphenation is None:
             pass
-        elif wb.text(orth).replace('-', '') != hyphenation.replace('-', ''):
-            wb.report(entry, path, f'Mismatched string after hyphenation: "{wb.text(orth)}" vs. "{hyphenation}"', verbose=not(arguments.path))
+        elif text.replace('-', '') != hyphenation.replace('-', ''):
+            wb.report(entry, path, f'Mismatched string after hyphenation: "{text}" vs. "{hyphenation}"', verbose=not(arguments.path))
+        elif len(text) > 1 and hyphenation[1] == '-' and not text[1] == '-' and text[0].isalpha():
+            wb.report(entry, path, f'Bogus first syllable in "{hyphenation}"')
 
 
 if arguments.path:
