@@ -51,6 +51,17 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
         'Fehlende Flexionsangabe(n) (Präsens, Präteritum, Auxiliar, Partizip II)'
       ]
     ]
+    sch:rule [
+      context = "//d:Lesart/d:Formangabe/d:Grammatik"
+      sch:assert [
+        test = "not(starts-with(normalize-space(string-join(d:Genitiv//text())), '-'))"
+	'Bei Formbeschränkungsangaben volle Eckformen angeben!'
+      ]
+      sch:assert [
+        test = "not(starts-with(normalize-space(string-join(d:Plural//text())), '-'))"
+	'Bei Formbeschränkungsangaben volle Eckformen angeben!'
+      ]
+    ]
   ]
 ]
 
