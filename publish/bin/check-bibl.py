@@ -44,7 +44,7 @@ ILLEGAL_SEQUENCES = (
         r'Ztg',
         r'VEB',
         r'E-Book\.',
-        r'\s(c)\s',
+        r'\s\(c\)\s',
         r'd\.i\.',
         r'o\.A\.',
         r'o\.O\.',
@@ -128,6 +128,7 @@ ILLEGAL_SEQUENCES = (
         r'Urania[\s\-]+Verl',     # → Urania
         r'Verl.+Das\s+Neue\s+Berlin', # → Das Neue Berlin
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
+        r'Verl\.+(f\.|für)\s.+Frau', # → Verlag für die Frau
         r'Verl.+(f\.|für)\s+Sozialwiss', # → VS
         r'Verl.+Gabler',          # → Gabler
         r'Verl.+Haus\s+zum\s+Falken', # → → Haus zum Falken
