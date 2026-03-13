@@ -95,6 +95,7 @@ ILLEGAL_SEQUENCES = (
         r'Greifenverl\.',         # → Greifenverlag
         r'Hanser[\s\-]+Verl',     # → Hanser
         r'Hans-Klaus[\s\-]+Verl', # → Hans Klaus
+        r'Hanseat\.',             # → Hanseatische Verlagsanstalt # HAVA
         r'Hippokrates[\s\-]+Verl',# → Hippokrates
         r'Insel[\s\-]+Verl',      # → Insel
         r'Kinderbuchverl\.',      # → Kinderbuchverlag
@@ -111,6 +112,7 @@ ILLEGAL_SEQUENCES = (
         r'Rotbuch[\s\-]+Verl',    # → Rotbuch
         r'Ruhrkrimi[\s\-]?[vV]erl', # → Ruhrkrimi
         r'Safari[\s\-]+Verl',     # → Safari
+        r'Schweiz.+Verl\.',       # → Schweizer Verlagshaus / Schweizer Spiegel
         r'Siedler[\s\-]+Verl'     # → Siedler
         r'Silberburg[\s\-]+Verl', # → Silberburg
         r'Sportverl\.',           # → Sortverlag
@@ -130,6 +132,7 @@ ILLEGAL_SEQUENCES = (
         r'Verl.+Die\s+Wirt',      # → Die Wirtschaft
         r'Verl\.+(f\.|für)\s.+Frau', # → Verlag für die Frau
         r'Verl.+(f\.|für)\s+Sozialwiss', # → VS
+        r'Verl.+f\..+Handel',     # → Verlag für Handel und Industrie
         r'Verl.+Gabler',          # → Gabler
         r'Verl.+Haus\s+zum\s+Falken', # → → Haus zum Falken
         r'Verl.+Neuer Weg',       # → Neuer Weg

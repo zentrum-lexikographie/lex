@@ -439,7 +439,7 @@ if __name__ == '__main__':
                         character
                         for character in unicodedata.normalize('NFC', unicode(headword))
                         if unicodedata.category(character) in ('Ll', 'Lu', 'Pd', 'Po', 'Zs', 'Nd', 'No', ) or character == u'’'
-                    ]).replace(u'’', "'")
+                    ])
 
                     # hooks for DWB2 where hidx is not explicitly marked (TODO: make class specific)
                     if arguments.dictionary_type == 'dwb2':
@@ -473,7 +473,7 @@ if __name__ == '__main__':
             if dictionary.USE_RELATIONS and article.get('Status') == 'Red-f':
                 for link in article.iterfind(dictionary.RELATION_PATH):
                     hidx = link[0].get('hidx')
-                    relation_index[(index, link.get('Typ'))].append((text_only(link[0]).replace(u'’', "'"), hidx))
+                    relation_index[(index, link.get('Typ'))].append((text_only(link[0]), hidx))
 
         else:  # not(dictionary.is_publishable(article))
             logging.debug('Cannot publish article "%s"', dictionary.first_lemma(article))
