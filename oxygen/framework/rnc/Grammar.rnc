@@ -61,6 +61,10 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
         test = "not(starts-with(normalize-space(string-join(d:Plural//text())), '-'))"
 	'Bei Formbeschränkungsangaben volle Eckformen angeben!'
       ]
+      sch:assert [
+        test = "not(d:Ersatzplural)"
+	'Bei Formbeschränkungsangaben //Plural anstelle von //Ersatzplural verwenden!'
+      ]
     ]
   ]
 ]
