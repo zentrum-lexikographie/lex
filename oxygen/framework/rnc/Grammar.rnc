@@ -45,6 +45,13 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
       ]
     ]
     sch:rule [
+      context = "//d:Ersatzplural/d:Frequenzangabe"
+      sch:assert [
+        test = "normalize-space(string-join(text())) = 'meist' or normalize-space(string-join(text())) = 'selten'"
+	"Als Frequenzangaben für //Ersatzplural nur 'meist' oder 'selten' nutzen!"
+      ]
+    ]
+    sch:rule [
       context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Verb']]"
       sch:assert [
         test = "d:Praesens and d:Praeteritum and d:Auxiliar and d:Partizip_II"
