@@ -221,8 +221,8 @@
 (defn status->color
   [status]
   (condp = (str/trim status)
-    "Artikelrumpf"       "#88acca"
-    "Lex-zurückgestellt" "#88acca"
+    "Artikelrumpf"       "#ff8080"
+    "Lex-zurückgestellt" "#ff8080"
     "Lex-zur_Abgabe"     "#ffbf7f"
     "Lex-Regioprüfung"   "#ffbf7f"
     "Red-1"              "#ffff7f"

@@ -17,8 +17,8 @@ DWDS {
 }
 
 Artikel                                { border-left: 15px solid  #ffffff; }
-Artikel[Status="Artikelrumpf"]         { border-left: 15px solid  #88acca; }
-Artikel[Status="Lex-zurückgestellt"]   { border-left: 15px dashed #88acca; }
+Artikel[Status="Artikelrumpf"]         { border-left: 15px solid  #ff8080; }
+Artikel[Status="Lex-zurückgestellt"]   { border-left: 15px dashed #ff8080; }
 Artikel[Status="Lex-zur_Abgabe"]       { border-left: 15px solid  #ffbf7f; }
 Artikel[Status="Lex-Regioprüfung"]     { border-left: 15px dashed #ffbf7f; }
 Artikel[Status="Red-1"]                { border-left: 15px solid  #ffff7f; }
