@@ -221,11 +221,15 @@
 (defn status->color
   [status]
   (condp = (str/trim status)
-    "Artikelrumpf"    "#ffcccc"
-    "Lex-zur_Abgabe"  "#ffff00"
-    "Red-1"           "#ffec8b"
-    "Red-f"           "#aeecff"
-    "wird_gestrichen" "#cccccc"
+    "Artikelrumpf"       "#88acca"
+    "Lex-zurückgestellt" "#88acca"
+    "Lex-zur_Abgabe"     "#ffbf7f"
+    "Lex-Regioprüfung"   "#ffbf7f"
+    "Red-1"              "#ffff7f"
+    "Red-2"              "#b2feb2"
+    "Red-f"              "#84aac9"
+    "Red-f-blockiert"    "#84aac9"
+    "wird_gestrichen"    "#acafb0"
     "#ffffff"))
 
 (comment
