@@ -368,7 +368,7 @@ class Wb(object):
         
         for root, _, files in sorted(os.walk(self.start, followlinks=True)):
             
-            if root in ('./.git', './sandbox', './scripts', './share', './stuff'):
+            if root in ('./.git', './scripts', './share', './stuff'):
                 continue
             
             for f in sorted(files):
