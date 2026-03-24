@@ -472,10 +472,17 @@ Schreibung = element Schreibung {
 [
     sch:pattern [
         sch:rule [
-            context = "//d:Schreibung[@Typ][@Trennung]"
+            context = "d:Schreibung[@Typ][@Trennung]"
             sch:assert [
-                test = "not(@Typ = ('U', 'U_Falschschreibung'))"
-                'Keine Trennstellen für ungültige Schreibungen angeben!'
+                test = "not(@Typ = ('U', 'U_Falschschreibung', 'R'))"
+                'Keine Trennstellen für ungültige oder unnormierte Schreibungen angeben!'
+            ]
+        ]
+        sch:rule [
+            context = "d:Artikel/d:Formangabe[not(d:Grammatik/d:Wortklasse/text() = ('Affix', 'Mehrwortausdruck'))]/d:Schreibung[not(@Typ) or @Typ = ('U_AT', 'U_CH')]"
+            sch:assert [
+                test = "@Trennung"
+                'Trennstellen für gültige Lemmazeichen angeben!'
             ]
         ]
     ]
