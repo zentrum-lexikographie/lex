@@ -479,7 +479,14 @@ Schreibung = element Schreibung {
             ]
         ]
         sch:rule [
-            context = "d:Artikel/d:Formangabe[not(d:Grammatik/d:Wortklasse/text() = ('Affix', 'Mehrwortausdruck'))]/d:Schreibung[not(@Typ) or @Typ = ('U_AT', 'U_CH')]"
+            context = "d:Formangabe[@Typ = ('Abkürzung', 'Symbol')]"
+            sch:assert [
+                test = "not(d:Schreibung/@Trennung)"
+                'Keine Trennstellen für Symbolangaben und orthografische Abkürzungen angeben!'
+            ]
+        ]
+        sch:rule [
+            context = "d:Artikel/d:Formangabe[not(@Typ = ('Abkürzung', 'Symbol'))][not(d:Grammatik/d:Wortklasse/text() = ('Affix', 'Mehrwortausdruck'))]/d:Schreibung[not(@Typ) or @Typ = ('U_AT', 'U_CH')]"
             sch:assert [
                 test = "@Trennung"
                 'Trennstellen für gültige Lemmazeichen angeben!'
