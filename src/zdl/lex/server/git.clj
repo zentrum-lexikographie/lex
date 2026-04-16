@@ -67,20 +67,16 @@
 (defn git!
   [{:keys [dir]} & args]
   (sh/with-sh-dir dir
-    (let [result (apply sh (concat ["git"] (map str args)))]
-      (if (= 0 (:exit result))
-        (do (tm/event! ::git {:level       :debug
-                              :msg         (format "git @ %s : %s" dir args)
-                              ::git-dir    dir
-                              ::git-args   args
-                              ::git-result result})
-            result)
-        (do (tm/event! ::git {:level       :error
-                              :msg         (format "git @ %s : %s" dir args)
-                              ::git-dir    dir
-                              ::git-args   args
-                              ::git-result result})
-            (throw (ex-info (str args) result)))))))
+    (let [result   (apply sh (concat ["git"] (map str args)))
+          success? (zero? (:exit result))
+          data     {::dir    dir
+                    ::args   args
+                    ::result result}]
+      (tm/log! {:id    ::git
+                :level (if success? :debug :error)
+                :data  data})
+      (when-not success? (throw (ex-info (str args) data)))
+      result)))
 
 (defmethod ig/init-key ::repository
   [_ {:keys [dir origin branch] :as repo}]
@@ -130,6 +126,10 @@
 (defn add!
   [repo f]
   (with-git (git! repo "add" (fs/path f))))
+
+(defn rm!
+  [repo f]
+  (with-git (git! repo "rm" (fs/path f))))
 
 (defn status->paths
   [status-line]

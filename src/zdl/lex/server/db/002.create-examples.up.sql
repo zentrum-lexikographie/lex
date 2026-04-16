@@ -1,12 +1,14 @@
+BEGIN NOT ATOMIC
+
 CREATE TABLE IF NOT EXISTS example_request (
     id SERIAL PRIMARY KEY,
-    lexemes TEXT[] NOT NULL,
-    requested TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    retrieved TIMESTAMP WITH TIME ZONE
+    lexemes TEXT NOT NULL,
+    requested TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    retrieved TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS example (
-    req_id INTEGER NOT NULL REFERENCES example_request (id) ON DELETE CASCADE,
+    req_id BIGINT UNSIGNED NOT NULL,
     n INTEGER NOT NULL,
     txt TEXT NOT NULL,
     gdex FLOAT NOT NULL,
@@ -16,11 +18,12 @@ CREATE TABLE IF NOT EXISTS example (
     ex_year SMALLINT,
     ex_date DATE,    
     embedding VECTOR(1024),
-    PRIMARY KEY (req_id, n)
+    PRIMARY KEY (req_id, n),
+    FOREIGN KEY (req_id) REFERENCES example_request (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS example_collocs (
-    req_id INTEGER NOT NULL,
+    req_id BIGINT UNSIGNED NOT NULL,
     n INTEGER NOT NULL,
     collocation VARCHAR(128) NOT NULL,
     PRIMARY KEY (req_id, n, collocation),
@@ -64,3 +67,5 @@ CREATE TABLE IF NOT EXISTS example_collocs (
 -- );
 
 -- CREATE INDEX IF NOT EXISTS text_class_query ON text_class (query, k);
+
+END;

@@ -91,17 +91,3 @@
       (str/replace " " "_")
       (str/replace #"[^\p{Alpha}\p{Digit}\-_]" "_")
       (str/replace #"_+" "_")))
-
-(defn merge-chs
-  [chs]
-  (let [ch (a/chan)]
-    (a/go-loop [chs chs]
-      (if (seq chs)
-        (let [[v ch*] (a/alts! chs)]
-          (if (nil? v)
-            (recur (filterv #(not= ch* %) chs))
-            (if (a/>! ch v)
-              (recur chs)
-              (run! a/close! (cons ch chs)))))
-        (a/close! ch)))
-    ch))

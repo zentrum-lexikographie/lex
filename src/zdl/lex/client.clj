@@ -41,7 +41,7 @@
  (uib/b-do* #(swap! id assoc :user %)))
 
 (def server-url
-  (getenv "SERVER_URL" "https://labor.dwds.de"))
+  (getenv "SERVER_URL" "http://localhost:3000"))
 
 (def ws-url
   (-> (uri/uri server-url)

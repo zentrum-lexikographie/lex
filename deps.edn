@@ -30,34 +30,33 @@
                                     hato/hato                                                   {:mvn/version "1.0.0"}
                                     nrepl/nrepl                                                 {:mvn/version "1.5.2"}
                                     seesaw/seesaw                                               {:mvn/version "1.5.0"}}}
-             :server  {:extra-deps {buddy/buddy-auth                   {:mvn/version "3.0.323"}
-                                    com.github.seancorfield/next.jdbc  {:mvn/version "1.3.1048"}
-                                    com.github.seancorfield/honeysql   {:mvn/version "2.7.1310"}
-                                    com.lambdaisland/ornament          {:mvn/version "1.12.107"}
-                                    com.lambdaisland/hiccup            {:mvn/version "0.0.33"}
-                                    com.mysql/mysql-connector-j        {:mvn/version "9.1.0"}
-                                    com.github.igrishaev/pg2-core      {:mvn/version "0.1.41"}
-                                    com.github.igrishaev/pg2-honey     {:mvn/version "0.1.41"}
-                                    com.github.igrishaev/pg2-migration {:mvn/version "0.1.41"}
-                                    com.rabbitmq/amqp-client           {:mvn/version "5.27.0"}
-                                    com.taoensso/telemere-slf4j        {:mvn/version "1.0.1"}
-                                    com.zaxxer/HikariCP                {:mvn/version "6.3.0"}
-                                    dali/dali                          {:git/url "https://github.com/gremid/dali.git"
-                                                                        :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
-                                    garden/garden                      {:git/url    "https://github.com/noprompt/garden.git"
-                                                                        :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
-                                                                        :exclusions [org.clojure/clojurescript]}
-                                    hickory/hickory                    {:mvn/version "0.7.1"
-                                                                        :exclusions  [org.clojure/clojurescript]}
-                                    http-kit/http-kit                  {:mvn/version "2.8.1"}
-                                    io.github.gremid/clj-xml-schema    {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
-                                    metosin/muuntaja                   {:mvn/version "0.6.11"}
-                                    metosin/reitit                     {:mvn/version "0.10.0"}
-                                    metosin/reitit-middleware          {:mvn/version "0.10.0"}
-                                    ring/ring-defaults                 {:mvn/version "0.5.0"}
-                                    selmer/selmer                      {:mvn/version "1.12.62"}}}
+             :server  {:extra-deps {buddy/buddy-auth                     {:mvn/version "3.0.323"}
+                                    com.github.seancorfield/next.jdbc    {:mvn/version "1.3.1048"}
+                                    com.github.seancorfield/honeysql     {:mvn/version "2.7.1310"}
+                                    com.lambdaisland/ornament            {:mvn/version "1.12.107"}
+                                    com.lambdaisland/hiccup              {:mvn/version "0.0.33"}
+                                    com.rabbitmq/amqp-client             {:mvn/version "5.27.0"}
+                                    com.taoensso/telemere-slf4j          {:mvn/version "1.0.1"}
+                                    com.zaxxer/HikariCP                  {:mvn/version "6.3.0"}
+                                    dev.weavejester/ragtime.next-jdbc    {:mvn/version "0.12.1"}
+                                    dali/dali                            {:git/url "https://github.com/gremid/dali.git"
+                                                                          :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
+                                    garden/garden                        {:git/url    "https://github.com/noprompt/garden.git"
+                                                                          :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
+                                                                          :exclusions [org.clojure/clojurescript]}
+                                    hickory/hickory                      {:mvn/version "0.7.1"
+                                                                          :exclusions  [org.clojure/clojurescript]}
+                                    http-kit/http-kit                    {:mvn/version "2.8.1"}
+                                    io.github.gremid/clj-xml-schema      {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
+                                    metosin/muuntaja                     {:mvn/version "0.6.11"}
+                                    metosin/reitit                       {:mvn/version "0.10.0"}
+                                    metosin/reitit-middleware            {:mvn/version "0.10.0"}
+                                    org.mariadb.jdbc/mariadb-java-client {:mvn/version "3.5.7"}
+                                    ring/ring-defaults                   {:mvn/version "0.5.0"}
+                                    selmer/selmer                        {:mvn/version "1.12.62"}}}
              :oxygen  {:extra-deps {com.oxygenxml/oxygen-sdk       {:mvn/version "26.0.0.2"}
                                     ch.qos.logback/logback-classic {:mvn/version "1.2.12"}}}
+             :python  {:extra-deps {clj-python/libpython-clj    {:mvn/version "2.026"}}}
              :build   {:extra-deps {babashka/fs                     {:mvn/version "0.5.26"}
                                     com.taoensso/telemere           {:mvn/version "1.0.1"}
                                     com.taoensso/telemere-slf4j     {:mvn/version "1.0.1"}

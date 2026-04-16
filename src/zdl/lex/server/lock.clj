@@ -1,10 +1,9 @@
 (ns zdl.lex.server.lock
   (:require
-   [pg.core :as pg]
-   [pg.honey :as pgh]
+   [next.jdbc :as jdbc]
    [ring.util.response :as resp]
-   [zdl.lex.server.db :refer [q]]
-   [taoensso.telemere :as tm]))
+   [taoensso.telemere :as tm]
+   [zdl.lex.server.db :refer [q]]))
 
 (def ^:dynamic *context*
   nil)
@@ -14,7 +13,7 @@
   (when-let [{:keys [resource owner token]} *context*]
     (first
      (q c {:select   :*
-           :from     :lock
+           :from     :resource-lock
            :where    [:and
                       [:> :expires (System/currentTimeMillis)]
                       [:= :resource resource]
@@ -26,7 +25,7 @@
   [c]
   (when-let [{:keys [resource owner token]} *context*]
     (q c {:select   :*
-          :from     :lock
+          :from     :resource-lock
           :where    [:and
                      [:> :expires (System/currentTimeMillis)]
                      [:= :resource resource]
@@ -47,32 +46,30 @@
   (* 60 1000))
 
 (def merge-sql-stmt
-  (str "INSERT INTO lock (resource, owner, token, expires) "
-       "VALUES ($1, $2, $3, $4) "
-       "ON CONFLICT (resource, owner, token) "
-       "DO UPDATE SET expires = EXCLUDED.expires"))
+  (str "INSERT INTO resource_lock (resource, owner, token, expires) "
+       "VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE expires = ?"))
 
 (defn merge-lock
   [c]
   (when-let [{:keys [resource owner token ttl] :or {ttl default-ttl}} *context*]
     (let [expires (+ (System/currentTimeMillis) ttl)]
-      (pg/execute c merge-sql-stmt {:params [resource owner token expires]})
+      (jdbc/execute! c [merge-sql-stmt resource owner token expires expires])
       {:resource resource :owner owner :token token :expires expires})))
 
 (defn delete-lock
   [c]
   (when-let [{:keys [resource owner token]} *context*]
-    (pgh/execute c {:delete-from :lock
-                    :where       [:and
-                                  [:> :expires (System/currentTimeMillis)]
-                                  [:= :resource resource]
-                                  [:= :owner owner]
-                                  [:= :token token]]})
+    (q c {:delete-from :resource-lock
+          :where       [:and
+                        [:> :expires (System/currentTimeMillis)]
+                        [:= :resource resource]
+                        [:= :owner owner]
+                        [:= :token token]]})
     *context*))
 
 (defn with-lock
   [db f]
-  (pg/with-transaction [tx db {:isolation :serializable}]
+  (jdbc/with-transaction [tx db {:isolation :serializable}]
     (assert-unlocked tx)
     (let [active-lock# (select-active-lock tx)]
       (try
@@ -103,30 +100,30 @@
 
 (defn handle-read-locks
   [db _]
-  (pg/with-transaction [tx db {:read-only? true}]
+  (jdbc/with-transaction [tx db {:read-only? true}]
     (resp/response
      (q tx {:select   [:resource :owner :expires]
-            :from     :lock
+            :from     :resource-lock
             :where    [:> :expires (System/currentTimeMillis)]
             :order-by [:resource :owner :expires]}))))
 
 (defn handle-read-lock
   [db _req]
-  (pg/with-transaction [tx db {:read-only? true}]
+  (jdbc/with-transaction [tx db {:read-only? true}]
     (if-let [active (select-active-lock tx)]
       (resp/response active)
       (response-not-found))))
 
 (defn handle-create-lock
   [db _req]
-  (pg/with-transaction [tx db {:isolation :serializable}]
+  (jdbc/with-transaction [tx db {:isolation :serializable}]
     (if-let [other-lock (first (select-other-locks tx))]
       (-> other-lock (resp/response) (resp/status 423))
       (-> (merge-lock tx) (resp/response)))))
 
 (defn handle-remove-lock
   [db _req]
-  (pg/with-transaction [tx db]
+  (jdbc/with-transaction [tx db]
     (if (select-active-lock tx)
       (resp/response (delete-lock tx))
       (response-not-found))))
@@ -135,9 +132,9 @@
 
 (defn cleanup!
   [db]
-  (pg/with-transaction [tx db]
-    (pgh/execute tx {:delete-from :lock
-                     :where       [:<= :expires (System/currentTimeMillis)]})))
+  (jdbc/with-transaction [tx db]
+    (q tx {:delete-from :resource-lock
+           :where       [:<= :expires (System/currentTimeMillis)]})))
 
 (defn handlers
   [db]

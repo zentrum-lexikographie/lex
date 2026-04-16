@@ -1,19 +1,34 @@
 (ns zdl.lex.server.db
   (:require
+   [honey.sql :as sql]
    [integrant.core :as ig]
-   [pg.core :as pg]
-   [pg.migration.core :as pmig]
-   [pg.honey :as pgh]))
+   [next.jdbc :as jdbc]
+   [next.jdbc.connection :as jdbc.con]
+   [next.jdbc.result-set :as jdbc.result-set]
+   [ragtime.core]
+   [ragtime.next-jdbc]
+   [ragtime.repl]
+   [taoensso.telemere :as tm])
+  (:import
+   (com.zaxxer.hikari HikariDataSource)))
 
 (defmethod ig/init-key ::connection
   [_ db]
-  (pmig/migrate-all db)
-  (pg/pool db))
+  (ragtime.repl/migrate
+   {:datastore  (ragtime.next-jdbc/sql-database db)
+    :migrations (ragtime.next-jdbc/load-resources "zdl/lex/server/db")
+    :reporter   (fn [_ op id]
+                  (tm/event! ::migrate {:level :info :data {:op op :id id}}))})
+  (tm/log! {:id ::connect :level :info :data db})
+  (jdbc.con/->pool HikariDataSource db))
 
 (defmethod ig/halt-key! ::connection
   [_ connection]
-  (pg/close connection))
+  (.close connection))
+
+(def query-opts
+  {:builder-fn jdbc.result-set/as-unqualified-kebab-maps})
 
 (defn q
   [c sql]
-  (pgh/query c sql {:honey {:inline true}}))
+  (jdbc/execute! c (sql/format sql) query-opts))

@@ -1,2 +1,0 @@
-{:lint-as {mount.core/defstate clojure.core/def
-           taoensso.tufte/defnp clojure.core/defn}}
