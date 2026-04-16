@@ -15,7 +15,7 @@
    (com.zaxxer.hikari HikariDataSource)))
 
 (defmethod ig/init-key ::connection
-  [_ {:keys [db]}]
+  [_ db]
   (tm/log! {:id ::connect :level :info :data db})
   (jdbc.con/->pool HikariDataSource db))
 

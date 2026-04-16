@@ -10,11 +10,12 @@
 .cpcache/
 .nrepl-port
 .env
+.envrc
 .htauth.csv
 
 /classes
-/data/
 /oxygen/framework/rng/
 /oxygen/plugin/lib/
 /oxygen/VERSION
 /publish/backup
+/wb/

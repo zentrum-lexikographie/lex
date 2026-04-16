@@ -18,7 +18,7 @@
    [zdl.lex.server.qa :as qa]))
 
 (def solr-url
-  (str (getenv "SOLR_URL" "http://index:8983/solr/") "articles/"))
+  (str (getenv "SOLR_URL" "http://localhost:8983/solr/") "articles/"))
 
 (defn http-request
   [req]

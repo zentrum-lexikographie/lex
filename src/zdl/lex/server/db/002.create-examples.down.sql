@@ -1,3 +1,5 @@
+BEGIN NOT ATOMIC
+
 DROP TABLE IF EXISTS example_collocs;
 DROP TABLE IF EXISTS example;
 DROP TABLE IF EXISTS example_request;
@@ -11,3 +13,5 @@ DROP TABLE IF EXISTS example_request;
 -- DROP INDEX IF EXISTS lexeme_ts;
 -- DROP INDEX IF EXISTS lexeme_ppm;
 -- DROP TABLE IF EXISTS lexeme;
+
+END;

@@ -167,41 +167,39 @@
                       :on-close   (partial socket-closing fingerprint)}})
     (resp/status 400)))
 
-(defmethod ig/init-key ::handler
-  [_ {:keys [db gpt-queue issue-db repo userbase]}]
-  (reitit.ring/ring-handler
-   (reitit.ring/router
-    [""
-     (let [auth-backend (auth-backend userbase)]
-       {:muuntaja   m/instance
-        :coercion   reitit.coercion.malli/coercion
-        :middleware [#(buddy.auth.middleware/wrap-authentication % auth-backend)
-                     #(buddy.auth.middleware/wrap-authorization % auth-backend)
-                     #(buddy.auth.accessrules/wrap-access-rules % access-rules)
-                     defaults-middleware
-                     reitit.ring.middleware.muuntaja/format-middleware
-                     exception-middleware
-                     reitit.ring.coercion/coerce-exceptions-middleware
-                     reitit.ring.coercion/coerce-request-middleware
-                     reitit.ring.coercion/coerce-response-middleware
-                     auth-context-middleware
-                     lock/context-middleware]})
-     ["/git" (git/handlers db repo)]
-     ["/index" index/handlers]
-     ["/lock" (lock/handlers db)]
-     ["/oxygen" oxygen/handlers]
-     ["/schedule" (schedule/handlers db issue-db repo)]
-     ["/socket" (partial handle-socket gpt-queue)]
-     html-handlers
-     swagger-handlers])
-   (reitit.ring/routes
-    (reitit.ring/redirect-trailing-slash-handler)
-    (reitit.ring/create-resource-handler {:path "/assets"})
-    (reitit.ring/create-default-handler))))
-
 (defmethod ig/init-key ::server
-  [_ {:keys [handler] :as opts}]
-  (http-kit/run-server handler (dissoc opts :handler)))
+  [_ {:keys [db gpt-queue issue-db port repo userbase]}]
+  (http-kit/run-server
+   (reitit.ring/ring-handler
+    (reitit.ring/router
+     [""
+      (let [auth-backend (auth-backend userbase)]
+        {:muuntaja   m/instance
+         :coercion   reitit.coercion.malli/coercion
+         :middleware [#(buddy.auth.middleware/wrap-authentication % auth-backend)
+                      #(buddy.auth.middleware/wrap-authorization % auth-backend)
+                      #(buddy.auth.accessrules/wrap-access-rules % access-rules)
+                      defaults-middleware
+                      reitit.ring.middleware.muuntaja/format-middleware
+                      exception-middleware
+                      reitit.ring.coercion/coerce-exceptions-middleware
+                      reitit.ring.coercion/coerce-request-middleware
+                      reitit.ring.coercion/coerce-response-middleware
+                      auth-context-middleware
+                      lock/context-middleware]})
+      ["/git" (git/handlers db repo)]
+      ["/index" index/handlers]
+      ["/lock" (lock/handlers db)]
+      ["/oxygen" oxygen/handlers]
+      ["/schedule" (schedule/handlers db issue-db repo)]
+      ["/socket" (partial handle-socket gpt-queue)]
+      html-handlers
+      swagger-handlers])
+    (reitit.ring/routes
+     (reitit.ring/redirect-trailing-slash-handler)
+     (reitit.ring/create-resource-handler {:path "/assets"})
+     (reitit.ring/create-default-handler)))
+   {:port port}))
 
 (defmethod ig/halt-key! ::server
   [_ server]
