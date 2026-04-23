@@ -102,6 +102,7 @@ legal = (
         'Akteur:innen',
         'Aktivist:innen',
         'Anleger:innen',
+        'Anwält:innen',
         'Anwohner:innen',
         'Arbeitnehmer:innen',
         'Ärzt:innen',
@@ -118,6 +119,7 @@ legal = (
         'Betrüger:innen',
         'Bürger:innen',
         'Christ:innen',
+        'Designer:innen',
         'Doktorand:innen',
         'Einzelspieler:innen',
         '-Expert:in',
@@ -203,6 +205,7 @@ legal = (
         'User:innen',
         'Züchter:innen',
         'Zuschauer:innen',
+        'Zusteller:innen',
         # stuff
         'verni’sa:z(e)',
         '(re’ve:r)',
