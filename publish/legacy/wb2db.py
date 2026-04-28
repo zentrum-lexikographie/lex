@@ -504,3 +504,8 @@ if __name__ == '__main__':
                     bucket_relation.update((article1, article2[0], relation_type))
         else:
             bucket_relation.flush()
+
+    # analyse the lemma_index
+    for (lemma, hidx), articles in lemma_index.items():
+        if len(articles) > 1:
+            logging.warning('Inconsistent homograph %s#%s (%i occurrences)' % (lemma, hidx, len(articles)))
