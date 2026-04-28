@@ -155,7 +155,7 @@ class Wortgeschichten(Dictionary):
 
     DATABASE_NAME = 'wortgeschichten_beta'
     ENTRY_ELEMENT = et.QName('http://www.zdl.org/ns/1.0', 'Artikel')
-    HEADWORD_PATH = './/{http://www.zdl.org/ns/1.0}Schreibung|//{http://www.zdl.org/ns/1.0}Verweise[@Typ="Wortfeld"]/*/{http://www.zdl.org/ns/1.0}Ziellemma'
+    HEADWORD_PATH = './/{http://www.zdl.org/ns/1.0}Lemma[@Typ]/{http://www.zdl.org/ns/1.0}Schreibung|//{http://www.zdl.org/ns/1.0}Verweise[@Typ="Wortfeld"]/*/{http://www.zdl.org/ns/1.0}Ziellemma'
     USE_RELATIONS = False
 
     def __init__(self, file_names):
