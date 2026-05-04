@@ -50,7 +50,7 @@ for entry, path in wb:
             if wb.get_wordclass(entry) == 'Mehrwortausdruck':
                 if analysis_type not in ('', 'Simplex', 'Konversion', 'Derivation', 'Kurzwortbildung'):
                     wb.report(entry, path, f'bogus analysis type for MWE: {analysis_type}', not(arguments.path))
-                if [True if _x.startswith('MWA-') else False for _x in constituent_types].count(False) != 0:
+                if [True if _x.startswith('MWA-') else False for _x in constituent_types].count(False) != 0 and not constituent_types == ['Grundform', ]:
                     wb.report(entry, path, f'bogus MWA constituent(s) "{constituent_types}"', not(arguments.path))
 
             if analysis_type == '':
