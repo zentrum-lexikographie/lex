@@ -91,6 +91,7 @@ class Wb(object):
         'Badische Zeitung',
         'Basler Zeitung',
         'Bauernzeitung',
+        'Berliner Arbeiterzeitung',
         'Berliner Illustrirte Zeitung',
         'Berliner Morgenpost',
         'Berliner Tageblatt',
