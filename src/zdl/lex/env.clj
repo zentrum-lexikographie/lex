@@ -2,7 +2,6 @@
   (:require
    [camel-snake-kebab.core :as csk]
    [clojure.string :as str]
-   [lambdaisland.uri :as uri]
    [taoensso.telemere :as tm]
    [taoensso.telemere.tools-logging :as tm.tools-logging]))
 

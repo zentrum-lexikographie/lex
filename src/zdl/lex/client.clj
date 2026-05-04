@@ -12,12 +12,13 @@
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.article.qa :as qa]
+   [zdl.lex.auth :as auth]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.util :refer [pr-edn-str]]
    [seesaw.bind :as uib])
   (:import
    (java.io ByteArrayInputStream)
-   (java.net Authenticator PasswordAuthentication)
+   (java.net Authenticator)
    (java.util UUID)
    (ro.sync.exml.plugin.lock LockException)))
 
@@ -50,16 +51,11 @@
 
 (def http-client
   (delay
-    (let [server-user     (getenv "SERVER_USER")
-          server-password (getenv "SERVER_PASSWORD")]
-      (hc/build-http-client
-       {:authenticator (or (when (and server-user server-password)
-                             (proxy [Authenticator] []
-                               (getPasswordAuthentication []
-                                 (PasswordAuthentication.
-                                  server-user (char-array server-password)))))
-                           (Authenticator/getDefault))
-        :version       :http-1.1}))))
+    (hc/build-http-client
+     {:authenticator (or (auth/create-authenticator (getenv "SERVER_USER")
+                                                    (getenv "SERVER_PASSWORD"))
+                         (Authenticator/getDefault))
+      :version       :http-1.1})))
 
 (def active-article
   (atom nil))
