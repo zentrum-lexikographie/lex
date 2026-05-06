@@ -52,7 +52,7 @@ for entry, path in wb:
         wb.report(entry, path, '@Erstfassung vs. @Erstellungsdatum (Duden_1999)', not(arguments.path))
     if not entry.get('Erstfassung') == 'Duden_1999' and entry.get('Erstellungsdatum') == '1999-01-01':
         wb.report(entry, path, '@Erstfassung vs. @Erstellungsdatum (Duden_1999)', not(arguments.path))
-    if not entry.get('Erstfassung') == 'Duden_1999' and entry.get(wb.TAGS['xml:id']).startswith('D99'):
+    if not (entry.get('Erstfassung') == 'Duden_1999' or 'Duden_1999' in entry.get('Quelle')) and entry.get(wb.TAGS['xml:id']).startswith('D99'):
        wb.report(entry, path, '@xml:id mismatch (Duden_1999)', not(arguments.path))
     if True in [ True if l in duden else False for l in headwords ] and not entry.get('Erstfassung') in ('Duden_1999', 'WDG', 'WDW_2011'):
         wb.report(entry, path, '@Erstfassung!=Duden_1999 but in Duden-Kauf', not(arguments.path))
