@@ -5,59 +5,21 @@
              com.potetm/fusebox                  {:mvn/version "1.0.11"}
              com.taoensso/telemere               {:mvn/version "1.1.0"}
              com.vladsch.flexmark/flexmark       {:mvn/version "0.64.8"}
-             dev.weavejester/medley              {:mvn/version "1.8.1"}
+             dev.weavejester/medley              {:mvn/version "1.9.0"}
+             http-kit/http-kit                   {:mvn/version "2.8.1"}
              integrant/integrant                 {:mvn/version "1.0.1"}
              io.dropwizard.metrics/metrics-core  {:mvn/version "4.2.0"}
              io.github.cdimascio/dotenv-java     {:mvn/version "3.2.0"}
              io.github.gremid/clj-xml            {:git/sha "ffcf1d87cf9eca8a6055edb0cd61ae88e8763589"}
              jarohen/chime                       {:mvn/version "0.3.3"}
              lambdaisland/uri                    {:mvn/version "1.19.155"}
-             metosin/jsonista                    {:mvn/version "0.3.13"}
+             metosin/jsonista                    {:mvn/version "0.3.14"}
              org.clojure/clojure                 {:mvn/version "1.12.1"}
              org.clojure/core.async              {:mvn/version "1.8.741"}
-             org.clojure/data.csv                {:mvn/version "1.1.0"}
+             org.clojure/data.csv                {:mvn/version "1.1.1"}
              org.slf4j/jcl-over-slf4j            {:mvn/version "2.0.17"}
              tick/tick                           {:mvn/version "1.0"}}
- :aliases   {:dev     {:extra-paths ["dev"]
-                       :extra-deps  {integrant/repl       {:mvn/version "0.5.0"}
-                                     clj-commons/clj-yaml {:mvn/version "1.0.29"}}}
-             :test    {:extra-paths ["test"]
-                       :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
-                       :exec-fn     kaocha.runner/exec-fn}
-             :client  {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.58.0"}
-                                    com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
-                                    com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
-                                    hato/hato                                                   {:mvn/version "1.0.0"}
-                                    nrepl/nrepl                                                 {:mvn/version "1.5.2"}
-                                    seesaw/seesaw                                               {:mvn/version "1.5.0"}}}
-             :server  {:extra-deps {buddy/buddy-auth                     {:mvn/version "3.0.323"}
-                                    com.github.seancorfield/next.jdbc    {:mvn/version "1.3.1048"}
-                                    com.github.seancorfield/honeysql     {:mvn/version "2.7.1310"}
-                                    com.lambdaisland/ornament            {:mvn/version "1.12.107"}
-                                    com.lambdaisland/hiccup              {:mvn/version "0.0.33"}
-                                    com.rabbitmq/amqp-client             {:mvn/version "5.27.0"}
-                                    com.taoensso/telemere-slf4j          {:mvn/version "1.0.1"}
-                                    com.zaxxer/HikariCP                  {:mvn/version "6.3.0"}
-                                    dev.weavejester/ragtime.next-jdbc    {:mvn/version "0.12.1"}
-                                    dali/dali                            {:git/url "https://github.com/gremid/dali.git"
-                                                                          :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
-                                    garden/garden                        {:git/url    "https://github.com/noprompt/garden.git"
-                                                                          :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
-                                                                          :exclusions [org.clojure/clojurescript]}
-                                    hickory/hickory                      {:mvn/version "0.7.1"
-                                                                          :exclusions  [org.clojure/clojurescript]}
-                                    http-kit/http-kit                    {:mvn/version "2.8.1"}
-                                    io.github.gremid/clj-xml-schema      {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
-                                    metosin/muuntaja                     {:mvn/version "0.6.11"}
-                                    metosin/reitit                       {:mvn/version "0.10.0"}
-                                    metosin/reitit-middleware            {:mvn/version "0.10.0"}
-                                    org.mariadb.jdbc/mariadb-java-client {:mvn/version "3.5.7"}
-                                    ring/ring-defaults                   {:mvn/version "0.5.0"}
-                                    selmer/selmer                        {:mvn/version "1.12.62"}}}
-             :oxygen  {:extra-deps {com.oxygenxml/oxygen-sdk       {:mvn/version "26.0.0.2"}
-                                    ch.qos.logback/logback-classic {:mvn/version "1.2.12"}}}
-             :python  {:extra-deps {clj-python/libpython-clj    {:mvn/version "2.026"}}}
-             :build   {:extra-deps {babashka/fs                     {:mvn/version "0.5.26"}
+ :aliases   {:build   {:extra-deps {babashka/fs                     {:mvn/version "0.5.26"}
                                     com.taoensso/telemere           {:mvn/version "1.0.1"}
                                     com.taoensso/telemere-slf4j     {:mvn/version "1.0.1"}
                                     io.github.gremid/clj-xml-schema {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
@@ -65,7 +27,53 @@
                                     org.slf4j/slf4j-api             {:mvn/version "2.0.17"}
                                     tick/tick                       {:mvn/version "1.0"}}
                        :ns-default build}
-             :classes {:extra-paths ["classes"]}}
+             :classes {:extra-paths ["classes"]}
+             :clerk   {:extra-deps {io.github.nextjournal/clerk {:git/sha "83248053c8a55234c64fa1899d4b1b55e65b0893"}}}
+             :client  {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.58.0"}
+                                    com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
+                                    com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
+                                    hato/hato                                                   {:mvn/version "1.0.0"}
+                                    nrepl/nrepl                                                 {:mvn/version "1.5.2"}
+                                    seesaw/seesaw                                               {:mvn/version "1.5.0"}}}
+             :corpora {:extra-deps {clj-http/clj-http                       {:mvn/version "3.13.1"
+                                                                             :exclusions  [commons-logging/commons-logging]}
+                                    hickory/hickory                         {:mvn/version "0.7.1"
+                                                                             :exclusions  [org.clojure/clojurescript]}
+                                    org.apache.logging.log4j/log4j-to-slf4j {:mvn/version "2.25.3"}
+                                    org.slf4j/jul-to-slf4j                  {:mvn/version "2.0.17"}
+                                    org.xerial/sqlite-jdbc                  {:mvn/version "3.49.1.0"}}}
+             :db      {:extra-deps {com.github.seancorfield/next.jdbc    {:mvn/version "1.3.1048"}
+                                    com.github.seancorfield/honeysql     {:mvn/version "2.7.1310"}
+                                    com.zaxxer/HikariCP                  {:mvn/version "6.3.0"}
+                                    dev.weavejester/ragtime.next-jdbc    {:mvn/version "0.12.1"}
+                                    org.mariadb.jdbc/mariadb-java-client {:mvn/version "3.5.7"}}}
+             :dev     {:extra-paths ["dev"]
+                       :extra-deps  {integrant/repl       {:mvn/version "0.5.0"}
+                                     clj-commons/clj-yaml {:mvn/version "1.0.29"}}}
+             :excel   {:extra-deps {org.clojars.mjdowney/excel-clj {:mvn/version "2.2.0"}}}
+             :oxygen  {:extra-deps {com.oxygenxml/oxygen-sdk       {:mvn/version "26.0.0.2"}
+                                    ch.qos.logback/logback-classic {:mvn/version "1.2.12"}}}
+             :python  {:extra-deps {clj-python/libpython-clj {:mvn/version "2.026"}}}
+             :server  {:extra-deps {buddy/buddy-auth                {:mvn/version "3.0.323"}
+                                    com.lambdaisland/ornament       {:mvn/version "1.12.107"}
+                                    com.lambdaisland/hiccup         {:mvn/version "0.0.33"}
+                                    com.rabbitmq/amqp-client        {:mvn/version "5.27.0"}
+                                    com.taoensso/telemere-slf4j     {:mvn/version "1.0.1"}
+                                    dali/dali                       {:git/url "https://github.com/gremid/dali.git"
+                                                                     :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
+                                    garden/garden                   {:git/url    "https://github.com/noprompt/garden.git"
+                                                                     :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
+                                                                     :exclusions [org.clojure/clojurescript]}
+                                    io.github.gremid/clj-xml-schema {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
+                                    metosin/muuntaja                {:mvn/version "0.6.11"}
+                                    metosin/reitit                  {:mvn/version "0.10.0"}
+                                    metosin/reitit-middleware       {:mvn/version "0.10.0"}
+                                    org.slf4j/jul-to-slf4j          {:mvn/version "2.0.17"}
+                                    ring/ring-defaults              {:mvn/version "0.5.0"}
+                                    selmer/selmer                   {:mvn/version "1.12.62"}}}
+             :test    {:extra-paths ["test"]
+                       :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
+                       :exec-fn     kaocha.runner/exec-fn}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
              "clojars" {:url "https://clojars.org/repo"}
              "oxygen"  {:url "https://www.oxygenxml.com/maven"}}}

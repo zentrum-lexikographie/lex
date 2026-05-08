@@ -1,6 +1,5 @@
 (ns zdl.lex.util
   (:require
-   [clojure.core.async :as a]
    [clojure.java.io :as io]
    [clojure.string :as str])
   (:import
@@ -91,3 +90,8 @@
       (str/replace " " "_")
       (str/replace #"[^\p{Alpha}\p{Digit}\-_]" "_")
       (str/replace #"_+" "_")))
+
+(defn lines-resource
+  [resource]
+  (with-open [r (io/reader (io/resource resource))]
+    (into [] (filter (comp not-empty str/trim) (line-seq r)))))

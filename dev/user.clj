@@ -26,4 +26,10 @@
   (go)
   (halt)
   (reset)
-  (reset-all))
+  (reset-all)
+
+  (do (require '[nextjournal.clerk :as clerk])
+      (clerk/serve! {:browse? true :watch-paths ["notebooks"]}))
+  (do (require '[nextjournal.clerk :as clerk])
+      (clerk/build! {:paths   ["notebooks/trend_word_detection.clj"]
+                     :package :single-file})))
