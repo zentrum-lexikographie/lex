@@ -6,6 +6,7 @@
 .*.swp
 *.temp
 
+.clerk/
 .clj-kondo/
 .cpcache/
 .nrepl-port
