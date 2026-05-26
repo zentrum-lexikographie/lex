@@ -198,6 +198,7 @@ Sprachen = (
 	| 'drawid'
 	| 'dschagata'
 	| 'dt'           # 
+	| 'duala'        # Duala
 	| 'elsäss'
 	| 'engadin'
 	| 'engl'         # eng: English
@@ -379,6 +380,7 @@ Sprachen = (
 	| 'nsächs'      # nds: Low Saxon
 	| 'nsorb'        # dsb: Lower Sorbian
 	| 'nub'
+	| 'nzema'        # Nzema
 	| 'obd'
 	| 'obelsäss'
 	| 'obfrk'
