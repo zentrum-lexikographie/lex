@@ -3,7 +3,7 @@
 _A client/server application implementing an authoring environment for
 lexicographic articles at the [ZDL](https://www.zdl.org/)_
 
-![Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/640px-Schreibtisch_eines_Philologen.jpg)
+![Schreibtisch eines Philologen by Die.keimzelle / Wikimedia Commons / CC-BY-3.0](https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Schreibtisch_eines_Philologen.jpg/960px-Schreibtisch_eines_Philologen.jpg)
 
 ## Prerequisites
 

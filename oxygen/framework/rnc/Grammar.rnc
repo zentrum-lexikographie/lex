@@ -278,6 +278,7 @@ grammatische_Angaben = (
 			string 'ohne Steigerung'
 			| string 'Steigerung selten'
 			| string 'ohne Komparativ'
+			| string 'ohne Superlativ'
 			| string 'meist im Superlativ'
 			| string 'nur im Superlativ'
 			| string 'Komparativ selten'
