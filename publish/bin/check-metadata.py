@@ -98,7 +98,7 @@ for entry, path in wb:
     
     # other checks
 
-    if entry.get('Erstellungsdatum') and entry.get('Erstellungsdatum') > entry.get('Zeitstempel'):
+    if entry.get('Erstellungsdatum') > entry.get('Zeitstempel'):
         wb.report(entry, path, '@Zeitstempel < @Erstellungsdatum', not(arguments.path))
 
 
