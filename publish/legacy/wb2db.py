@@ -396,7 +396,7 @@ if __name__ == '__main__':
     relation_index = collections.defaultdict(list)
 
     # to speed up MySQL INSERTs we use a bucket and executemany()
-    bucket_article = Bucket('article', cursor, 'INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s);', max_size=1000)
+    bucket_article = Bucket('article', cursor, 'INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s);', max_size=200)
     bucket_lemma = Bucket('lemma', cursor, 'INSERT INTO lemma VALUES (%s, %s, %s, %s, %s);', max_size=20000)
     bucket_token = Bucket('token', cursor, 'INSERT INTO token VALUES (%s, %s);', max_size=50000)
     bucket_relation = Bucket('relation', cursor, 'INSERT INTO relation VALUES (%s, %s, %s);', max_size=50000)
