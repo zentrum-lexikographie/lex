@@ -216,6 +216,9 @@ check-constraints:
 check-duplicates:
 	python3 $(bin_dir)/check-duplicates.py
 
+check-first-recording:
+	python3 $(bin_dir)/check-first-recording.py
+
 check-hyphenation:
 	python3 $(bin_dir)/check-hyphenation.py
 
@@ -232,4 +235,4 @@ check-typography:
 	@echo "Typographic checks restricted to Artikel[@Status=\"Red-f\"]"
 	python3 $(bin_dir)/check-typography.py -f
 
-check: check-typography check-bibl check-links check-audio check-constraints check-duplicates check-metadata check-morphology check-hyphenation
+check: check-typography check-bibl check-links check-audio check-first-recording check-constraints check-duplicates check-metadata check-morphology check-hyphenation
