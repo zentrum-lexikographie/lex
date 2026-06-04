@@ -1,5 +1,7 @@
-(ns zdl.lex.server.index
+(ns zdl.lex.index
   (:require
+   [babashka.fs :as fs]
+   [clojure.core.async :as a]
    [clojure.data.csv :as csv]
    [clojure.java.io :as io]
    [clojure.string :as str]
@@ -9,13 +11,15 @@
    [org.httpkit.client :as hc]
    [ring.util.io :as rio]
    [ring.util.response :as resp]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.env :refer [getenv]]
+   [zdl.lex.git :as git]
    [zdl.lex.lucene :as lucene]
    [zdl.lex.metrics :as metrics]
-   [zdl.lex.server.qa :as qa]))
+   [zdl.lex.qa :as qa]
+   [integrant.core :as ig]))
 
 (def solr-url
   (str (getenv "SOLR_URL" "http://localhost:8983/solr/") "articles/"))
@@ -80,6 +84,23 @@
 (defn clear!
   [doc-type]
   (update! [:delete [:query (format "doc_type_s:%s" doc-type)]]))
+
+(defn generate-id
+  []
+  (loop [n 0]
+    (let [id        (str "E_" (rand-int 10000000))
+          id-query  [:query
+                     [:clause
+                      [:field [:term "id"]]
+                      [:value [:pattern (str "*" id "*")]]]]
+          request   {:q (lucene/->str id-query) :rows 0}
+          response  (query request)
+          num-found (get-in response [:body "response" "numFound"] 1)]
+      (cond
+        (= 0 num-found) id
+        (= 10 n)        (throw (ex-info (str "Maximum number of article id "
+                                             "generations exceeded") {}))
+        :else           (recur (inc n))))))
 
 ;; # Fields
 
@@ -151,17 +172,45 @@
 
 (defn parse-article-file
   [{:keys [file id] :as desc}]
-  (tm/with-ctx+ {::id id}
+  (tel/with-ctx+ {::id id}
     (try
       (let [xml     (article/read-xml file)
             article (article/metadata xml)
             errors  (qa/check-for-errors xml file)]
         (assoc (merge desc article errors) :xml xml))
-      (catch Throwable t (tm/error! t) desc))))
+      (catch Throwable t (tel/error! t) desc))))
 
 (defn upsert-articles!
   [descs]
   (add! (pmap (comp article->doc parse-article-file) descs)))
+
+(defn sync-articles!
+  []
+  (let [threshold (System/currentTimeMillis)]
+    (upsert-articles! (git/article-descs))
+    (purge! "article" threshold)))
+
+(defmethod ig/init-key ::git-sync
+  [_ _]
+  (let [ch (a/chan)]
+    (a/go-loop []
+      (when-let [files (a/<! ch)]
+        (let [existing (into [] (filter fs/regular-file?) files)
+              removed  (into [] (remove fs/regular-file?) files)]
+          (tel/with-ctx+ {::git-sync {:existing existing :removed removed}}
+            (try
+              (upsert-articles! (map git/file->desc existing))
+              (remove! (map git/file->id removed))
+              (tel/event! ::git-sync :debug)
+              (catch Throwable t (tel/error! ::git-sync-error t))))
+          (recur))))
+    (a/tap git/changes-mult ch)
+    ch))
+
+(defmethod ig/halt-key! ::git-sync
+  [_ ch]
+  (a/close! ch)
+  (a/untap git/changes-mult ch))
 
 (def issue->doc
   (comp fields->doc issue->fields))
@@ -400,43 +449,3 @@
      (query)
      (parse-issue-response)
      (resp/response))))
-
-(def handlers
-  [""
-   [""
-    {:get {:summary    "Query the full-text index"
-           :tags       ["Index" "Query"]
-           :parameters {:query [:map
-                                [:q {:optional true} :string]
-                                [:offset {:optional true} [:int {:min 0}]]
-                                [:limit {:optional true} [:int {:min 0}]]]}
-           :handler    handle-article-query}}]
-   ["/export"
-    {:summary    "Export index metadata in CSV format"
-     :tags       ["Index" "Query" "Export"]
-     :parameters {:query [:map
-                          [:q {:optional true} :string]
-                          [:limit {:optional true} :int]]}
-     :handler    handle-export}]
-   ["/issues"
-    {:get
-     {:summary    "Retrieve Mantis issues for a given set of surface forms"
-      :tags       ["Mantis" "Issue"]
-      :parameters {:query [:map [:q [:or :string [:sequential :string]]]]}
-      :handler    handle-issue-query}}]
-   ["/links"
-    {:summary    "Retrieve articles based on anchors and links"
-     :tags       ["Index" "Query" "Links"]
-     :parameters {:query [:map
-                          [:anchors
-                           {:optional true}
-                           [:or :string [:sequential :string]]]
-                          [:links
-                           {:optional true}
-                           [:or :string [:sequential :string]]]]}
-     :handler    handle-links-query}]
-   ["/suggest"
-    {:get {:summary    "Suggest articles by form"
-           :tags       ["Index" "Query" "Auto-Complete"]
-           :parameters {:query [:map [:q :string]]}
-           :handler    handle-article-suggest}}]])

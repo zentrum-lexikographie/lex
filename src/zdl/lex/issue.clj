@@ -1,27 +1,21 @@
-(ns zdl.lex.server.issue
+(ns zdl.lex.issue
   (:require
    [clojure.string :as str]
-   [honey.sql :as sql]
-   [integrant.core :as ig]
    [lambdaisland.uri :as uri]
    [next.jdbc :as jdbc]
-   [next.jdbc.connection :as jdbc.con]
    [next.jdbc.result-set :as jdbc.result-set]
-   [taoensso.telemere :as tm]
-   [zdl.lex.metrics :as metrics]
-   [zdl.lex.server.index :as index]
-   [tick.core :as t])
-  (:import
-   (com.zaxxer.hikari HikariDataSource)))
+   [tick.core :as t]
+   [zdl.lex.env :refer [getenv]]
+   [zdl.lex.index :as index]
+   [zdl.lex.metrics :as metrics]))
 
-(defmethod ig/init-key ::connection
-  [_ db]
-  (tm/log! {:id ::connect :level :info :data db})
-  (jdbc.con/->pool HikariDataSource db))
-
-(defmethod ig/halt-key! ::connection
-  [_ connection]
-  (.close connection))
+(def db
+  {:dbtype   "mysql"
+   :host     (getenv "MANTIS_DB_HOST" "localhost")
+   :port     (parse-long (getenv "MANTIS_DB_PORT" "3306"))
+   :dbname   (getenv "MANTIS_DB_NAME" "mantis_bugtracker")
+   :username (getenv "MANTIS_DB_USER" "mantis")
+   :password (getenv "MANTIS_DB_PASSWORD" "mantis")})
 
 (defn issue-id->uri
   [id]
@@ -58,26 +52,6 @@
    "40" "unable to reproduce"})
 
 
-(def issue-query
-  (sql/format
-   {:select    [[:bug.id            :id]
-                [:bug.summary       :summary]
-                [:bug.last-updated  :updated]
-                [:category.name     :category]
-                [:bug.status        :status]
-                [:bug.severity      :severity]
-                [:reporter.realname :reporter]
-                [:handler.realname  :handler]
-                [:bug.resolution    :resolution]]
-    :from      [[:mantis-bug-table :bug]]
-    :left-join [[:mantis-user-table :reporter]     [:= :bug.reporter-id :reporter.id]
-                [:mantis-user-table :handler]      [:= :bug.handler-id :handler.id]
-                [:mantis-category-table :category] [:= :bug.category-id :category.id]]
-    :where     [:= :bug.project-id 5]}))
-
-(def issue-query-opts
-  {:builder-fn jdbc.result-set/as-unqualified-kebab-maps})
-
 (defn parse-issue
   [{:keys [id summary status severity resolution updated] :as issue}]
   (assoc issue
@@ -92,7 +66,7 @@
   (metrics/timer "mantis.sync"))
 
 (defn sync!
-  [db]
+  []
   (with-open [_ (metrics/timed! sync-timer)]
    (let [threshold (System/currentTimeMillis)]
      (transduce
@@ -100,5 +74,22 @@
             (partition-all 10000))
       (completing (fn [n batch] (index/add! batch) (+ n (count batch))))
       0
-      (jdbc/plan db issue-query issue-query-opts))
+      (jdbc/plan
+       db
+       "SELECT
+          bug.id as id,
+          bug.summary as summary,
+          bug.last_updated as updated,
+          category.name as category,
+          bug.status as status,
+          bug.severity as severity,
+          reporter.realname as reporter,
+          handler.realname as handler,
+          bug.resolution as resolution
+        FROM mantis_bug_table bug
+        LEFT JOIN mantis_user_table reporter ON bug.reporter_id = reporter.id
+        LEFT JOIN mantis_user_table handler ON bug.handler_id = handler.id
+        LEFT JOIN mantis_category_table category ON bug.category_id = category.id
+        WHERE bug.project_id = 5"
+       {:builder-fn jdbc.result-set/as-unqualified-kebab-maps}))
      (index/purge! "issue" threshold))))

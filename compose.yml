@@ -8,16 +8,25 @@ services:
       - "8983:8983"
     command: [ "solr-precreate", "articles" ]
   db:
-    image: mariadb:11.8
+    image: ${CI_REGISTRY_IMAGE:-zdl}/db:${CI_COMMIT_SHORT_SHA:-latest}
+    build:
+      context: .
+      dockerfile_inline: |
+          FROM pgvector/pgvector:pg18-trixie
+          RUN localedef -i de_DE -c -f UTF-8 -A /usr/share/locale/locale.alias de_DE.UTF-8
+          ENV LANG de_DE.utf8
+    command: ["postgres", "-c", "config_file=/etc/postgresql/postgresql.conf" ]
+    configs:
+      - source: db_config
+        target: /etc/postgresql/postgresql.conf
     environment:
-      - "MARIADB_DATABASE=lex"
-      - "MARIADB_USER=lex"
-      - "MARIADB_PASSWORD=lex"
-      - "MARIADB_RANDOM_ROOT_PASSWORD=1"
+      - "POSTGRES_USER=lex"
+      - "POSTGRES_PASSWORD=lex"
+      - "POSTGRES_INITDB_ARGS=--locale-provider=icu --icu-locale=de-DE"
     volumes:
-      - db:/var/lib/mysql
+      - db:/var/lib/postgresql
     ports:
-      - "3306:3306"
+      - "5432:5432"
   queue:
     image: rabbitmq:4.1
     environment:
@@ -64,6 +73,11 @@ volumes:
   queue:
   server:
 configs:
+  db_config:
+    content: |
+      listen_addresses = '*'
+      shared_buffers = 512MB
+      synchronous_commit = off
   rabbitmq_config:
     content: |
       listeners.ssl.default  = 5671

@@ -1,8 +1,7 @@
-(ns zdl.lex.article.qa
+(ns zdl.lex.article.typography
   (:require
    [clojure.string :as str]
-   [zdl.lex.article :as article]
-   [gremid.xml :as gx])
+   [zdl.lex.article :as article])
   (:import (java.text Normalizer Normalizer$Form)))
 
 ;; # Validate
@@ -159,14 +158,13 @@
     (when-let [s (first (article/texts node))]
       (map #(assoc % :ctx node) (remove nil? (map #(% s) check-fns))))))
 
-(defn check-typography
+(defn check
   [node]
   (when (map? node)
     (let [{:keys [tag content]} node]
       (concat
-       (when-let [checks (checks-by-element tag)]
-         (check-node node checks))
-       (mapcat check-typography content)))))
+       (when-let [checks (checks-by-element tag)] (check-node node checks))
+       (mapcat check content)))))
 
 ;; # Fix Typography
 
@@ -183,14 +181,14 @@
       (str/replace " -- ", " – ")
       (str/replace #"\s([\.,;])\s" "$1 ")))
 
-(defn fix-typography
+(defn fix
   ([node]
-   (fix-typography (gloss? node) node))
+   (fix (gloss? node) node))
   ([in-gloss? node]
    (if (string? node)
      (cond-> node in-gloss? (fix-typography'))
      (update node :content
-             (partial map (partial fix-typography (or in-gloss? (gloss? node))))))))
+             (partial map (partial fix (or in-gloss? (gloss? node))))))))
 
 ;; # Enumerate senses
 
@@ -234,25 +232,3 @@
                             (partial
                              enumerate-senses
                              (cond-> level (sense? node) (inc))))))))
-
-;; # Red-1 to Red-2
-
-(defn red-1->red-2
-  [node]
-  (if (= :Artikel (:tag node))
-    (assoc-in node [:attrs :Status] "Red-2")
-    (if (string? node)
-      node
-      (update node :content (partial map red-1->red-2)))))
-
-(defn edit
-  [file]
-  (try
-    (let [xml     (article/read-xml file)
-          article (gx/element :Artikel xml)]
-      (when (= "Red-1" (gx/attr :Status article))
-        (let [wdg?   (str/includes? (or (gx/attr :Quelle article) "") "WDG")
-              edited (cond-> (fix-typography xml) (not wdg?) (enumerate-senses))
-              edited (red-1->red-2 edited)]
-          (when-not (= xml edited) edited))))
-    (catch Throwable _)))

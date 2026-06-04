@@ -78,9 +78,9 @@
   (let [{:keys [history]} @client/gpt-chat
         interactions      (partition-all 2 history)
         history           (vec (flatten (butlast interactions)))
-        prompt            (-> interactions last first (get "content"))]
+        prompt-text       (-> interactions last first (get "content"))]
     (send client/gpt-chat assoc :history history :prompt nil)
-    (ui/invoke-later (ui/text! prompt prompt) (.requestFocus prompt))))
+    (ui/invoke-later (ui/text! prompt prompt-text) (.requestFocus prompt))))
 
 (defn clear-history
   [& _]

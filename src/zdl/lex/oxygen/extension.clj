@@ -5,7 +5,7 @@
   (:require
    [clojure.string :as str]
    [integrant.core :as ig]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.client :as client]
    [zdl.lex.oxygen.workspace :as workspace]
    [zdl.lex.ui.issue :as issue]
@@ -77,7 +77,7 @@
                   user (or user (System/getProperty "user.name") "")]
               (str/replace s #"\$\{zdl\.user\}" user)))))))
     (workspace/bind-editor-change-listener)
-    (catch Throwable t (tm/error! t)))
+    (catch Throwable t (tel/error! ::application t)))
   nil)
 
 (defn -applicationClosing
@@ -87,5 +87,5 @@
     (reset! system nil)
     (workspace/unbind-editor-change-listener)
     (alter-var-root #'workspace/instance (constantly nil))
-    (catch Throwable t (tm/error! t)))
+    (catch Throwable t (tel/error! ::application t)))
   true)

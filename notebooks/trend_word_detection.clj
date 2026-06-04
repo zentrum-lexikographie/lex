@@ -23,7 +23,7 @@
    [next.jdbc.sql :as jdbc.sql]
    [nextjournal.clerk :as clerk]
    [org.httpkit.client :as hc]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t]
    [zdl.lex.article :as article]
    [zdl.lex.corpora.webmonitor :as webmonitor]
@@ -66,11 +66,10 @@
   Trends encodes scaled frequency values between 0 and 1 as `<0`
   which this fn maps to zero; so it does for parsing errors."
   [s]
-  (try
-    (Long/parseLong (get {"<1" "0"} s s))
-    (catch NumberFormatException _
-      (tm/log! {:id ::parse-freq :level :warn :data {:s s}})
-      0)))
+  (tel/with-ctx+ {::parse-freq s}
+    (try
+      (Long/parseLong (get {"<1" "0"} s s))
+      (catch NumberFormatException e (tel/error! e) 0))))
 
 (defn http-error?
   "Predicate for failed httpkit requests."
@@ -303,7 +302,7 @@
         [t f token-total timestamp feed url]))))
 
 (when-not (.exists webmonitor-frequencies-file)
-  (tm/with-min-level nil "zdl.lex.corpora.http" :debug
+  (tel/with-min-level nil "zdl.lex.corpora.http" :debug
     (with-open [w (io/writer webmonitor-frequencies-file)]
       (let [ch (webmonitor/crawl->ch (shuffle webmonitor/feeds) (a/chan 32))]
         (try

@@ -3,7 +3,7 @@
    :name de.zdl.oxygen.URLHandler
    :implements [ro.sync.exml.plugin.urlstreamhandler.URLStreamHandlerWithLockPluginExtension])
   (:require
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.client :as client])
   (:import
    (java.io ByteArrayOutputStream IOException)
@@ -20,21 +20,21 @@
             (comment "No-Op"))
           (getInputStream
             []
-            (tm/log! {:level :debug :id ::read :data id})
+            (tel/log! :debug (str "< " id))
             (try
               (client/http-get-article id)
               (catch LockException e
-                (tm/error! e)
+                (tel/error! ::lock e)
                 (throw (IOException. e)))))
           (getOutputStream
             []
-            (tm/log! {:level :debug :id ::write :data id})
+            (tel/log! :debug (str "> " id))
             (proxy [ByteArrayOutputStream] []
               (close []
                 (try
                   (client/http-post-article id (.toByteArray this))
                   (catch LockException e
-                    (tm/error! e)
+                    (tel/error! ::lock e)
                     (throw (IOException. e))))))))))))
 
 
@@ -60,17 +60,16 @@
       [url timeout]
       (try
         (let [id (client/url->id url)]
-          (tm/log! {:level :debug :id ::lock :data {:id      id
-                                                    :timeout timeout}})
+          (tel/log! :debug (str "+ " id " <" timeout ">"))
           (client/http-lock id timeout))
-        (catch IOException e (tm/error! e) nil)))
+        (catch IOException e (tel/error! e) nil)))
     (unlock
       [url]
       (try
         (let [id (client/url->id url)]
-          (tm/log! {:level :debug :id ::unlock :data id})
+          (tel/log! :debug (str "- " id))
           (client/http-unlock id))
-        (catch IOException e (tm/error! e) nil)))))
+        (catch IOException e (tel/error! e) nil)))))
 
 (defn -getURLStreamHandler
   [_ protocol]

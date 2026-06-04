@@ -2,12 +2,11 @@
   (:require
    [camel-snake-kebab.core :as csk]
    [clojure.string :as str]
-   [taoensso.telemere :as tm]
-   [taoensso.telemere.tools-logging :as tm.tools-logging]))
+   [taoensso.telemere :as tel]
+   [taoensso.telemere.tools-logging :as tel.tools-logging]))
 
-(tm.tools-logging/tools-logging->telemere!)
-(tm/uncaught->error!)
-(tm/set-min-level! :info)
+(tel.tools-logging/tools-logging->telemere!)
+(tel/uncaught->error!)
 
 (defn getenv
   ([k]
@@ -15,3 +14,5 @@
   ([k df]
    (let [k (str "ZDL_LEX_" (csk/->SCREAMING_SNAKE_CASE_STRING k))]
      (or (some-> (System/getenv k) str/trim not-empty) df))))
+
+(when (getenv "DEBUG") (tel/set-min-level! :debug))

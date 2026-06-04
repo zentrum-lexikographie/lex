@@ -6,7 +6,7 @@
    [clojure.tools.build.api :as b]
    [clojure.tools.build.tasks.copy :as copy]
    [gremid.xml-schema :as gxs]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t]))
 
 (def oxygen-dir
@@ -33,7 +33,7 @@
 
 (defn timestamp
   [& _]
-  (tm/log! {:level :info :id ::timestamp :data current-timestamp})
+  (tel/log! :info (str "[T]: " current-timestamp))
   (spit (fs/file "oxygen" "VERSION") current-timestamp))
 
 (defn schema
@@ -42,9 +42,7 @@
         rnc           (fs/file framework-dir "rnc" "DWDSWB.rnc")
         rng           (fs/file framework-dir "rng" "DWDSWB.rng")
         sch           (fs/file framework-dir "rng" "DWDSWB.sch.xsl")]
-    (tm/log! {:level :info :id ::schema :data {:rnc (str rnc)
-                                               :rng (str rng)
-                                               :sch (str sch)}})
+    (tel/log! :info (str rnc " > " rng " > " sch))
     (doseq [f [rnc rng sch]] (-> f fs/parent fs/create-dirs))
     (gxs/rnc->rng (str rnc) (str rng))
     (gxs/rng->sch-xsl rng sch)))
@@ -65,7 +63,7 @@
                                        :aliases #{:client :classes}})
         classes-dir   "classes"
         jar-file      "oxygen/plugin/lib/org.zdl.lex.client.jar"]
-    (tm/log! {:level :info :id ::client :data jar-file})
+    (tel/log! :info jar-file)
     (b/delete {:path jar-file})
     (b/delete {:path classes-dir})
     (b/copy-dir {:src-dirs   ["src"]
@@ -88,8 +86,7 @@
 (defn editor
   [& _]
   (assert oxygen-home "$OXYGEN_HOME not found")
-  (tm/log! {:level :info :id ::editor :data {:home (str oxygen-home)
-                                             :dir (str oxygen-dir)}})
+  (tel/log! :info (str oxygen-home " | " oxygen-dir))
   (p/exec
    {:dir    (fs/file oxygen-dir)
     :stdout :inherit
