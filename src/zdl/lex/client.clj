@@ -8,10 +8,10 @@
    [integrant.core :as ig]
    [lambdaisland.uri :as uri]
    [nrepl.server :as repl]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t]
    [zdl.lex.article :as article]
-   [zdl.lex.article.qa :as qa]
+   [zdl.lex.article.typography :as article.typography]
    [zdl.lex.auth :as auth]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.util :refer [pr-edn-str]]
@@ -62,7 +62,7 @@
 
 (defn agent*
   [state]
-  (agent state :error-handler (fn [_ t] (tm/error! t) nil)))
+  (agent state :error-handler (fn [_ t] (tel/error! ::agent t) nil)))
 
 (def articles
   (agent* {}))
@@ -168,7 +168,7 @@
      (http-request :lock? true))
     (catch Throwable t
       (when (not= 404 (-> t ex-data :status))
-        (tm/error! {:id ::unlock :data {:id id}} t)))))
+        (tel/with-ctx+ {::id id} (tel/error! ::unlock t))))))
 
 (defn http-response->input-stream
   [{:keys [body]}]
@@ -292,24 +292,24 @@
               missing (into #{} (remove anchors) links)]
           {:links   (vec (sort-by (comp article/collation-key :form) result))
            :missing (vec (sort-by article/collation-key missing))})
-        (catch Throwable t (tm/error! t) nil)))))
+        (catch Throwable t (tel/error! ::links t) nil)))))
 
 (defn xml->article
   [_ id xml-stream-fn]
-  (tm/with-ctx+ {::id id}
+  (tel/with-ctx+ {::id id}
     (try
       (with-open [is (xml-stream-fn)]
         (let [xml     (article/read-xml is)
               article (article/metadata xml)
               links   (future (get-links article id))
               issues  (future (get-issues article))
-              errors  (future (qa/check-typography xml))]
+              errors  (future (article.typography/check xml))]
           (assoc article
                  ::xml xml
                  ::links @links
                  ::issues @issues
                  ::qa @errors)))
-      (catch Throwable t (tm/error! t) nil))))
+      (catch Throwable t (tel/error! ::article-xml t) nil))))
 
 (defn update-article
   [id xml-stream-fn]
@@ -327,7 +327,7 @@
   (try
     (some-> @socket (ws/close!) (deref))
     (catch Throwable t
-      (tm/error! {:id ::socket-close} t))
+      (tel/error! ::socket-close t))
     (finally
       (reset! socket nil))))
 
@@ -343,7 +343,7 @@
 
 (defmethod socket-message-received :default
   [message]
-  (tm/log! {:id ::socket-message :level :info :data message}))
+  (tel/with-ctx+ {::message message} (tel/event! ::socket-message :info)))
 
 (defn open-socket!
   []
@@ -356,13 +356,10 @@
                     (assert (true? last?))
                     (socket-message-received (read-string (str msg))))
      :on-error    (fn [_ws error]
-                    (tm/error! {:id ::socket-error} error)
+                    (tel/error! ::socket-error error)
                     (close-socket!))
-     :on-close    (fn [_ws status reason]
-                    (tm/log! {:id    ::socket-closing
-                              :level :info
-                              :data  {:status status
-                                      :reason reason}}))
+     :on-close    (fn [_ws _status _reason]
+                    (tel/event! ::socket-closing :info))
      :headers     {"X-Lex-Client-Id" (@id :client-id)}
      :http-client @http-client}
     (ws/websocket ws-url)
@@ -372,16 +369,15 @@
 (defn send->socket
   [content-type content]
   (let [data (assoc @id :content-type content-type :content content)]
-    (if-let [ws @socket]
-      (locking ws
-        (try
-          @(ws/send! ws (pr-edn-str data))
-          (catch Throwable t
-            (tm/error! {:id ::socket-send :data data} t)
-            (close-socket!))))
-      (tm/log! {:id    ::send-failed
-                :level :error
-                :data  data}))))
+    (tel/with-ctx+ data
+      (if-let [ws @socket]
+        (locking ws
+          (try
+            @(ws/send! ws (pr-edn-str data))
+            (catch Throwable t
+              (tel/error! ::socket-send t)
+              (close-socket!))))
+        (tel/event! ::send-failed :error)))))
 
 (defn gpt-request->socket
   [{:keys [history] :as gpt-chat} prompt persona]
@@ -396,7 +392,7 @@
    (chime/periodic-seq (t/instant) (t/of-seconds 5))
    (fn [_] (when @active-user (open-socket!) (send->socket :ping :ping)))
    {:error-handler (fn [e]
-                     (tm/error! {:id ::socket-keep-alive} e)
+                     (tel/error! ::socket-keep-alive e)
                      (not (instance? InterruptedException e)))}))
 
 (defmethod ig/halt-key! ::socket

@@ -4,7 +4,7 @@
    [seesaw.bind :as uib]
    [seesaw.forms :as forms]
    [seesaw.core :as ui]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.ui.search :as search]
    [zdl.lex.ui.util :as util]
    [zdl.lex.ui.qa :as qa]
@@ -52,7 +52,7 @@
   [form pos]
   (try
     (-> (client/http-create-article form pos) (workspace/open-article))
-    (catch Throwable t (tm/error! t))))
+    (catch Throwable t (tel/error! t))))
 
 (defn open-create-dialog
   [& args]

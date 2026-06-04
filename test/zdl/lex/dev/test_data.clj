@@ -1,4 +1,4 @@
-(ns zdl.lex.test-data
+(ns zdl.lex.dev.test-data
   (:require
    [babashka.fs :as fs]
    [clojure.java.io :as io]
@@ -6,7 +6,7 @@
    [gremid.xml :as gx]
    [medley.core :refer [distinct-by]]
    [clojure.string :as str]
-   [taoensso.telemere :as tm]))
+   [taoensso.telemere :as tel]))
 
 (defn parse-article
   [dir f]
@@ -70,7 +70,7 @@
                         (fs/create-dirs))]
     (doseq [{::keys [xml path]} (sample (io/file dir))]
       (let [test-data-path (fs/path test-data-dir path)]
-        (tm/log! {:level :info :id ::create :data (str test-data-path)})
+        (tel/log! :info (str "+ " test-data-path))
         (-> test-data-path fs/parent fs/create-dirs)
         (with-open [os (io/output-stream (fs/file test-data-path))]
           (gx/write-events os (gx/node->events xml)))))))

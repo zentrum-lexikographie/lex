@@ -110,7 +110,7 @@ $ clojure -T:build start-editor
 
 ### Extracting random test data from DWDS sources
 
-    clojure -M:test:log -m zdl.lex.test-data $DWDS_WB_GIT_DIR
+    clojure -M:test -m zdl.lex.dev.test-data $DWDS_WB_GIT_DIR
 
 ## License
 

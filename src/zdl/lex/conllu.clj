@@ -1,4 +1,4 @@
-(ns zdl.lex.server.conllu
+(ns zdl.lex.conllu
   "Parses and serializes annotated sentences in CoNLL-U format."
   (:require
    [camel-snake-kebab.core :as csk]

@@ -1,4 +1,4 @@
-(ns zdl.lex.server.html
+(ns zdl.lex.html
   {:clj-kondo/config '{:linters {:unresolved-symbol {:level :off}}}}
   (:require
    [clojure.java.io :as io]

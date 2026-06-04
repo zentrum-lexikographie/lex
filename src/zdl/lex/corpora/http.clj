@@ -6,7 +6,7 @@
    [hickory.core :as h]
    [hickory.select :as hs]
    [lambdaisland.uri :as uri]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.auth :as auth]
    [zdl.lex.env :refer [getenv]])
   (:import
@@ -18,7 +18,7 @@
 (SLF4JBridgeHandler/removeHandlersForRootLogger)
 (SLF4JBridgeHandler/install)
 
-(tm/set-min-level! nil "org.apache.http.*" :error)
+(tel/set-min-level! nil "org.apache.http.*" :error)
 
 (Authenticator/setDefault
  (auth/create-authenticator (getenv "SOCKS_PROXY_USER" "webmonitor")
@@ -43,7 +43,7 @@
 
 (defn request
   [req]
-  (tm/log! {:level :debug :id ::request :msg (req :url)})
+  (tel/log! :debug (req :url))
   (-> req
       (assoc-in [:headers "User-Agent"] (rand-nth user-agents))
       (assoc :connection-manager (proxy-connection-manager)

@@ -1,4 +1,4 @@
-(ns zdl.lex.server.nlp-vis
+(ns zdl.lex.nlp.vis
   (:require
    [babashka.fs :as fs]
    [clojure.java.browse :refer [browse-url]]

@@ -1,9 +1,14 @@
 (ns zdl.lex.client-test
-  (:require [zdl.lex.client :as client]
-            [clojure.test :refer [deftest is use-fixtures]]
-            [zdl.lex.fixtures :as fixtures]))
-
-(use-fixtures :once fixtures/all)
+  (:require
+   [clojure.test :refer [deftest is]]
+   [integrant.core :as ig]
+   [zdl.lex.client :as client]
+   [zdl.lex.dev :as dev]
+   [zdl.lex.server :as server]))
 
 (deftest query
-  (is (some? (client/http-search "id:*"))))
+  (let [system (ig/init (dev/assoc-backend-config server/config))]
+    (try
+      (is (some? (client/http-search "id:*")))
+      (finally
+        (ig/halt! system)))))

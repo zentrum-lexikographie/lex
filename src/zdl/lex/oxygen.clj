@@ -1,14 +1,13 @@
-(ns zdl.lex.server.oxygen
+(ns zdl.lex.oxygen
   (:require
    [babashka.fs :as fs]
    [clojure.java.io :as io]
    [clojure.walk]
    [gremid.xml :as gx]
-   [ring.util.io :as ring.io]
-   [ring.util.response :as resp]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t])
   (:import
+   (java.io FileNotFoundException)
    (java.nio.charset Charset)
    (java.util.zip ZipEntry ZipOutputStream)
    (javax.xml.stream XMLInputFactory)))
@@ -18,7 +17,10 @@
 
 (def version
   (or
-   (try (slurp (fs/file "oxygen" "VERSION")) (catch Throwable t (tm/error! t) nil))
+   (try (slurp (fs/file "oxygen" "VERSION"))
+        (catch FileNotFoundException e
+          (tel/error! {:id ::version-not-found :level :debug} e)
+          nil))
    (t/format "yyyyMM.dd.HHmm" (t/in (t/now) "UTC"))))
 
 (def update-descriptor
@@ -66,7 +68,7 @@
     (with-open [zip (ZipOutputStream. stream zip-charset)]
       (write-tree-to-zip (partial write-to-zip zip "zdl-lex-client/")
                          (fs/path "oxygen" "framework")))
-    (catch Exception e (tm/error! e))))
+    (catch Exception e (tel/error! e))))
 
 (defn download-plugin
   [stream]
@@ -78,17 +80,4 @@
           (write-to-zip "zdl-lex-client/" "plugin.xml" stream))
         (write-tree-to-zip (partial write-to-zip "zdl-lex-client/lib/")
                            (fs/path "oxygen" "plugin" "lib"))))
-    (catch Exception e (tm/error! e))))
-
-(def handlers
-  [""
-   ["/updateSite.xml"
-    (constantly
-     (->  (resp/response update-descriptor)
-          (resp/content-type "application/xml")))]
-   ["/zdl-lex-framework.zip"
-    (fn [_]
-      (resp/response (ring.io/piped-input-stream download-framework)))]
-   ["/zdl-lex-plugin.zip"
-    (fn [_]
-      (resp/response (ring.io/piped-input-stream download-plugin)))]])
+    (catch Exception e (tel/error! e))))

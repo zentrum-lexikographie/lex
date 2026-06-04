@@ -11,7 +11,7 @@
    [seesaw.forms :as forms]
    [seesaw.swingx :as uix]
    [seesaw.util :refer [to-dimension]]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.article :as article]
    [zdl.lex.lucene :as lucene]
    [zdl.lex.oxygen.workspace :as workspace]
@@ -73,8 +73,10 @@
 
 (defn suggest
   [q]
-  (tm/with-ctx+ {::suggest-query q}
-    (try (client/http-suggest q) (catch Throwable t (tm/error! t) []))))
+  (tel/with-ctx+ {::suggest-query q}
+    (try
+      (client/http-suggest q)
+      (catch Throwable t (tel/error! ::suggest t) []))))
 
 (proxy [AbstractListIntelliHints] [input]
   (createList []

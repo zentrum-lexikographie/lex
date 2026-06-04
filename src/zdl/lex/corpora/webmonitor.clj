@@ -4,7 +4,7 @@
    [clojure.string :as str]
    [com.potetm.fusebox.rate-limit :as rl]
    [gremid.xml :as gx]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [tick.core :as t]
    [zdl.lex.corpora.http :as http]
    [zdl.lex.corpora.webmonitor.justext :as justext]
@@ -176,6 +176,6 @@
   (keys @host-rate-limits)
   (reset-host-rate-limits!)
 
-  (tm/with-min-level nil "zdl.lex.corpora.http" :debug
+  (tel/with-min-level nil "zdl.lex.corpora.http" :debug
     (a/<!! (a/into [] (crawl->ch (take 20 (shuffle feeds))
                                  (a/chan 1 (take 5)))))))

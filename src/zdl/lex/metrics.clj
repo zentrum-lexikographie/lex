@@ -1,6 +1,7 @@
 (ns zdl.lex.metrics
   (:require
-   [integrant.core :as ig])
+   [integrant.core :as ig]
+   [zdl.lex.env :refer [getenv]])
   (:import
    (com.codahale.metrics Meter MetricRegistry Slf4jReporter Timer)
    (java.util.concurrent TimeUnit)))
@@ -9,11 +10,14 @@
 (def ^MetricRegistry metrics-registry
   (MetricRegistry.))
 
+(def report-interval
+  (parse-long (getenv "METRICS_REPORTER_INTERVAL" "5")))
+
 (defmethod ig/init-key ::reporter
-  [_ {:keys [interval]}]
-  (when (pos? interval)
+  [_ _]
+  (when (pos? report-interval)
     (doto (.build (Slf4jReporter/forRegistry metrics-registry))
-      (.start interval TimeUnit/MINUTES))))
+      (.start report-interval TimeUnit/MINUTES))))
 
 (defmethod ig/halt-key! ::reporter
   [_ reporter]

@@ -3,7 +3,7 @@
    [clojure.string :as str]
    [lambdaisland.uri :as uri]
    [seesaw.core :as ui]
-   [taoensso.telemere :as tm]
+   [taoensso.telemere :as tel]
    [zdl.lex.client :as client])
   (:import
    (java.net URL)
@@ -23,7 +23,7 @@
 
 (defn update-article
   [url id]
-  (tm/with-ctx+ {::url url}
+  (tel/with-ctx+ {::url url}
     (client/update-article id #(open-editor-xml url))))
 
 (defn editor-listener
