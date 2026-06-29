@@ -421,6 +421,21 @@ def hook_brockhaus(e, modify=False):
 
     return found
 
+def hook_whitespace_in_comments(e, modify=False):
+    found = False
+
+    for i in e.findall('.//%(Kommentar)s/%(Orthografieregel)s' % wb.TAGS):
+        tail = i.tail or ''
+        if len(tail) > 0 and tail[0].isalpha():
+            found = True
+
+            if modify:
+                i.tail = ' '+tail
+                wb.report(e, None, 'Inserting missing whitespace after //Orthografieregel')
+
+    return found
+
+
 def hook_typography(e, modify=False):    
 
     found = False
@@ -495,6 +510,7 @@ HOOKS = (
         hook_directmedia2,
         hook_aktuelles_lexikon,
         hook_brockhaus,
+        hook_whitespace_in_comments,
 )
 
 counter = 0
