@@ -113,10 +113,31 @@ class Dictionary(object):
                         ) ENGINE=MyISAM;
                 ''')
 
+
+    def _add_lower_case_virtual_index(self, cursor):
+        logging.info('Creating virtual lower case lemma index')
+        if cursor is not None:
+            cursor.execute('''
+                    ALTER TABLE lemma
+                        ADD COLUMN lemma_lower VARCHAR(128)
+                        GENERATED ALWAYS AS (LOWER(lemma)) VIRTUAL;
+            ''')
+            cursor.execute('''
+                    ALTER TABLE lemma
+                        ADD INDEX idx_lemma_lower (lemma_lower);
+            ''')
+
+
+    def finalize(self, cursor):
+        '''Hooks to run after tables are populated.'''
+        pass
+
+
     def prune(self, article):
         '''
         '''
-        raise NotImplementedError
+        pass
+
 
     def is_publishable(self, article):
         '''This can be used as a hook for certain dictionaries.
@@ -145,9 +166,6 @@ class Neologismen(Dictionary):
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
 
-    def prune(self, article):
-        pass
-
 
 class Wortgeschichten(Dictionary):
     '''
@@ -161,9 +179,6 @@ class Wortgeschichten(Dictionary):
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
 
-    def prune(self, article):
-        pass
-
 
 class Wortgeschichten_preprint(Dictionary):
     '''
@@ -176,9 +191,6 @@ class Wortgeschichten_preprint(Dictionary):
 
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
-
-    def prune(self, article):
-        pass
 
 
 class DWDSWB(Dictionary):
@@ -221,9 +233,6 @@ class VarWB(Dictionary):
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
 
-    def prune(self, article):
-        pass
-
 
 class EtymWB(Dictionary):
     '''
@@ -237,8 +246,9 @@ class EtymWB(Dictionary):
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
 
-    def prune(self, article):
-        pass
+
+    def finalize(self, cursor):
+        self._add_lower_case_virtual_index(cursor)
 
 
 class WDG(Dictionary):
@@ -255,8 +265,9 @@ class WDG(Dictionary):
 
     # TODO: overload __iter__() to return comp1 initial data and comp2 nests
 
-    def prune(self, article):
-        pass
+
+    def finalize(self, cursor):
+        self._add_lower_case_virtual_index(cursor)
 
 
 class DWB1(Dictionary):
@@ -273,8 +284,9 @@ class DWB1(Dictionary):
 
     # TODO: overload __iter__() to also catch <re> as separate entries?
 
-    def prune(self, article):
-        pass
+
+    def finalize(self, cursor):
+        self._add_lower_case_virtual_index(cursor)
 
 
 class DWB2(Dictionary):
@@ -289,8 +301,9 @@ class DWB2(Dictionary):
     def __init__(self, file_names):
         Dictionary.__init__(self, file_names)
 
-    def prune(self, article):
-        pass
+
+    def finalize(self, cursor):
+        self._add_lower_case_virtual_index(cursor)
 
 
 class Bucket(object):
@@ -504,8 +517,11 @@ if __name__ == '__main__':
                     bucket_relation.update((article1, article2[0], relation_type))
         else:
             bucket_relation.flush()
-
+    
     # analyse the lemma_index
     for (lemma, hidx), articles in lemma_index.items():
         if len(articles) > 1:
             logging.warning('Inconsistent homograph %s#%s (%i occurrences)' % (lemma, hidx, len(articles)))
+
+    # run final hooks
+    dictionary.finalize(cursor)
