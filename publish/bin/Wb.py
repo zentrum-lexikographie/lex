@@ -88,6 +88,7 @@ class Wb(object):
         'ATV',
         'Augustin',
         'Badener Zeitung',
+        'Badische Neueste Nachrichten',
         'Badische Zeitung',
         'Basler Zeitung',
         'Bauernzeitung',
