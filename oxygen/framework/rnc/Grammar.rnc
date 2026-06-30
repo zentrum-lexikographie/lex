@@ -8,6 +8,13 @@ namespace sch = 'http://purl.oclc.org/dsdl/schematron'
 [
   sch:pattern [
     sch:rule [
+      context = "//d:Formangabe[@Typ='Abkürzung' or @Typ='Symbol']//d:Wortklasse"
+      sch:assert [
+        test = "normalize-space(string-join(text()))=''"
+        'Keine Wortklasse angeben für Abkürzungen und Symbole!'
+      ]
+    ]
+    sch:rule [
       context = "//d:Formangabe/d:Grammatik[d:Wortklasse[text() = 'Substantiv']][not(d:Numeruspraeferenz[text() = 'nur im Singular'])][not(d:Numeruspraeferenz[text() = 'nur im Plural'])][not(d:Genus[text() = 'ohne erkennbares Genus'])]"
       sch:assert [
         test = "d:Genus"
