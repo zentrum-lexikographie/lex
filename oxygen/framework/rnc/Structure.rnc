@@ -420,7 +420,7 @@ Rechtschreibstatus = attribute Typ {
       context = "//d:Artikel//d:Formangabe/d:Frequenzangabe"
       sch:assert [
         test = "count(ancestor::d:Artikel//d:Formangabe) > 1"
-        'Keine Frequenzangabe für einzelne Formangaben'
+        'Keine Frequenzangabe für einzelne Formangaben, bitte in der Lesart angeben!'
       ]
     ]
   ]

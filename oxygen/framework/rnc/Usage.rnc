@@ -17,7 +17,11 @@ Frequenzangaben = (
 	| 'nicht'
 )
 
-Frequenzangabe = element Frequenzangabe { Frequenzangaben }
+Frequenzangabe = element Frequenzangabe {
+    Metadaten.allgemein ?
+    , Frequenzangaben
+}
+
 Frequenzbeschraenkung = attribute Frequenz { Frequenzangaben }
 
 Sprachareal = element Sprachareal {
