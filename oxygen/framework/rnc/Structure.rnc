@@ -293,6 +293,7 @@ semantischer_Verweis = element Verweis {
 		| 'Assoziation'
 		| 'vgl'
 		| 'mehr_sv' # Weiterverweis, nur in Etymologie sinnvoll
+		| 'Terminologie' # metasprachlicher Verweis auf (sprachwissenschaftliche) Terminologie
 	}
 	, attribute class { 'invisible' } ?
 	, Verweisziel
