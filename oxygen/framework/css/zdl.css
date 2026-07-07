@@ -21,6 +21,7 @@ Artikel[Status="Artikelrumpf"]         { border-left: 15px solid  #ff8080; }
 Artikel[Status="Lex-zurückgestellt"]   { border-left: 15px dashed #ff8080; }
 Artikel[Status="Lex-zur_Abgabe"]       { border-left: 15px solid  #ffbf7f; }
 Artikel[Status="Lex-Regioprüfung"]     { border-left: 15px dashed #ffbf7f; }
+Artikel[Status="Lex-Revision-R"]       { border-left: 15px dashed #ffbf7f; }
 Artikel[Status="Red-1"]                { border-left: 15px solid  #ffff7f; }
 Artikel[Status="Red-2"]                { border-left: 15px solid  #b2feb2; }
 Artikel[Status="Red-f"]                { border-left: 15px solid  #84aac9; }

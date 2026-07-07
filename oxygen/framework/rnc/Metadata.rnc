@@ -190,6 +190,7 @@ Metadaten.Artikel = (
 		| 'Lex-Wiedervorlage'
 		| 'Lex-zurückgestellt'
 		| 'Lex-Regioprüfung'
+                | 'Lex-Revision-R'
 		| 'Red-1'
 		| 'Red-2'
 		| 'Red-2-zurückgewiesen'
