@@ -11,21 +11,22 @@
            java.time.LocalDateTime))
 
 (def csv-header
-  ["Status" "Quelle" "Schreibung" "Definition" "Typ"
-   "Ersterfassung" "Datum" "Autor" "Redakteur" "ID"])
+  ["Status" "Quelle" "Datum" "Stichwort" "Definition"
+   "Typ" "Autor" "Redakteur" "Erstfassung" "Fehler" "ID"])
 
 (defn- doc->csv
   [d]
   (let [d (solr.fields/doc->abstract d)]
     [(d :status)
      (d :source)
+     (d :timestamp)
      (some->> d :forms (str/join ", "))
      (some->> d :definitions first)
      (d :type)
-     (d :provenance)
-     (d :timestamp)
      (d :author)
      (d :editor)
+     (d :provenance)
+     (d :errors)
      (d :id)]))
 
 (defn csv-content-disposition

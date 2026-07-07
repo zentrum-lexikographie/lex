@@ -23,13 +23,13 @@
 (def ^:private result-table-columns
   [{:key :status :text "Status"}
    {:key :source :text "Quelle"}
-   {:key :form :text "Schreibung"}
+   {:key :timestamp :text "Datum"}
+   {:key :form :text "Stichwort"}
    {:key :definition :text "Definition"}
    {:key :type :text "Typ"}
-   {:key :provenance :text "Ersterfassung"}
-   {:key :timestamp :text "Datum"}
    {:key :author :text "Autor"}
    {:key :editor :text "Redakteur"}
+   {:key :provenance :text "Erstfassung"}
    {:key :errors :text "Fehler"}])
 
 (defn- open-article

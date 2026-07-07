@@ -104,7 +104,7 @@
    "status" "status"
    "tranche" "tranche"
    "typ" "type"
-   "ersterfassung" "provenance"
+   "erstfassung" "provenance"
    "volltext" "text"})
 
 (defn translate-fields
