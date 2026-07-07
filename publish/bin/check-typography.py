@@ -125,6 +125,7 @@ legal = (
         'Einwohner:innen',
         'Einzelspieler:innen',
         '-Expert:in',
+        'Entwickler:innen',
         'Expert:innen',
         'Fahrzeughalter:innen',
         'Festivalbesucher:innen',
