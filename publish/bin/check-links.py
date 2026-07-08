@@ -90,7 +90,7 @@ def check_structuring(root):
     
     allowed_ranges = (
         '#',
-        '*',
+        '*', '**', '***', '****', '*****', '******',
         '1.2.3.4.5.6.7.8.9.10.11.12.13.14.15.16.17.18.19.20.21.22.23.24.25.26',
         'a)b)c)d)e)f)g)h)i)j)k)l)m)n)o)p)q)r)s)t)u)v)w)x)y)z)',
         'α)β)γ)δ)ε)ζ)η)θ)ι)κ)λ)μ)ν)ξ)ο)π)ρ)σ)τ)υ)φ)χ)ψ)ω)',
@@ -110,8 +110,8 @@ def check_structuring(root):
         if allowed.startswith(n):
             if n == '#' or n == '':
                 break # no sub-senses
-            elif n == '*':
-                break # one anonymous sub-sense
+            elif n.replace('*', '') == '':
+                break # one or several anonymous sub-sense
             elif len(n) > 2:
                 break # several sub-senses (each with a two-char headmark)
     else:
