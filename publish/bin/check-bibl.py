@@ -21,6 +21,10 @@ argument_parser.add_argument('-f', '--Red-f',
         action='store_true',
         default=False,
         help='only check finally released entries (Red-f)')
+argument_parser.add_argument('-g', '--good-examples',
+        action='store_true',
+        default=False,
+        help='do not skip automatically added good examples')
 arguments = argument_parser.parse_args()
 
 status = ('Red-f',) if arguments.Red_f else ('Red-f', 'Red-f-blockiert', 'Red-f-Sammelbecken', 'Red-2')
@@ -189,7 +193,8 @@ for entry, path in wb:
                 else:
                     wb.report(entry, path, 'mismatch: '+t, not(arguments.path))
 
-        for i in entry.findall('.//%(Lesart)s//%(Beleg)s/%(Fundstelle)s' % wb.TAGS):
+        citations = './/%(Beleg)s/%(Fundstelle)s' if arguments.good_examples else './/%(Lesart)s//%(Beleg)s/%(Fundstelle)s'
+        for i in entry.findall(citations % wb.TAGS):
             for u in i.findall('.//%(URL)s' % wb.TAGS):
                 u.text = 'URL'
                 for _u in u:
