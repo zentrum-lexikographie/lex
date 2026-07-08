@@ -125,6 +125,7 @@ legal = (
         'Einwohner:innen',
         'Einzelspieler:innen',
         '-Expert:in',
+        'Entwickler:innen',
         'Expert:innen',
         'Fahrzeughalter:innen',
         'Festivalbesucher:innen',
@@ -381,9 +382,6 @@ for entry, path in wb:
                 p = d.getprevious()
                 t2 = d.getparent().text or '' if p is None else p.tail or ''
             
-                if t2 and not t2[-1].isspace() and not t[0] in '.,-':
-                    #wb.report(entry, path, 'Missing space before Paraphrase or Autorenzusatz', not(arguments.path))
-                    pass
 
         for w in entry.findall('.//%(Belegtext)s' % wb.TAGS):
             
@@ -406,7 +404,7 @@ for entry, path in wb:
         for e in entry.findall('.//%(Loeschung)s' % wb.TAGS) + entry.findall('.//%(Streichung)s' % wb.TAGS):
             t = wb.text(e, normalize=False)
             if len(t) == 0:
-                wb.report(entry, path, f'Empty element {wb.tagname(e.tag)}')
+                wb.report(entry, path, f'Empty element {wb.tagname(e.tag)}', not(arguments.path))
             elif t[0].isspace() or t[-1].isspace():
                 wb.report(entry, path, f'Leading/trailing space in //{wb.tagname(e.tag)}', not(arguments.path))
 

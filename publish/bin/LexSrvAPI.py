@@ -251,7 +251,7 @@ if __name__ == '__main__':
     
     #print('Tickets for "Schwein":', len(lex.get_tickets('Schwein')))
     #print('New entry:', lex.create_new_entry('elastisch', 'Adjektiv'))
-    #r = lex.query('datum:[2019-01-01 TO 2019-12-31] AND status:Red-f AND quelle:(DWDS OR Wahrig/DWDS) AND typ:(Vollartikel OR Verweisartikel) AND NOT(klasse:Mehrwortausdruck) AND NOT(ersterfassung:(WDG OR Duden_1999))')
+    #r = lex.query('datum:[2019-01-01 TO 2019-12-31] AND status:Red-f AND quelle:(DWDS OR Wahrig/DWDS) AND typ:(Vollartikel OR Verweisartikel) AND NOT(klasse:Mehrwortausdruck) AND NOT(erstfassung:(WDG OR Duden_1999))')
     
     #print('Query results:', r['total'], len(r['result']))
 

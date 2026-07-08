@@ -166,6 +166,8 @@ ILLEGAL_SEQUENCES = (
         r'Seite\s*\d+\s*$',
         r'S\.\s+\d\d\d\d\d',
         r'\.$',
+        r'\[\d\d\d\d\]\s+\d\d\d\d', # [1988] 2007 → 2007 [1988]
+        r'(\d\d\d\d)\s+\[\1]',    # 1988 [1988] → 1988
 )
 
 for entry, path in wb:

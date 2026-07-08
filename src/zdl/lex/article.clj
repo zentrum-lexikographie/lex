@@ -225,6 +225,7 @@
     "Lex-zurückgestellt" "#ff8080"
     "Lex-zur_Abgabe"     "#ffbf7f"
     "Lex-Regioprüfung"   "#ffbf7f"
+    "Lex-Revision-R"     "#ffbf7f"
     "Red-1"              "#ffff7f"
     "Red-2"              "#b2feb2"
     "Red-f"              "#84aac9"

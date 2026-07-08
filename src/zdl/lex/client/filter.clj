@@ -16,7 +16,7 @@
    :source "Quelle"
    :type "Typ"
    :tranche "Tranche"
-   :provenance "Ersterfassung"
+   :provenance "Erstfassung"
    :timestamp "Zeitstempel"})
 
 (def facet-field
@@ -27,7 +27,7 @@
    :source "quelle"
    :type "typ"
    :tranche "tranche"
-   :provenance "ersterfassung"
+   :provenance "erstfassung"
    :timestamp "datum"})
 
 (def ^:private german-date-formatter
