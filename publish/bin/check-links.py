@@ -20,6 +20,7 @@ VALID_CLASSES = (
     'g',                # α
     'l', 'ls',          # a
     'lg',               # a α
+    'lgs',              # a α *
     'r',                # I
     'ra',               # I 1
     'ral',              # I 1 a
