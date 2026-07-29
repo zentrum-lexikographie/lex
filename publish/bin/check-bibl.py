@@ -84,6 +84,9 @@ ILLEGAL_SEQUENCES = (
         r'(Dt\.|Deut).+Verl.+[aA]nst', # → DVA
         r'(Dt\.|Deut).+Verl.+(der|d\.).+Wiss', # → DVW
         r'\sDTV',                 # → dtv
+        r'Du[mM]ont.+Lit.*Kunst', # → DuMont
+        r'Du[mM]ont.+[vV]erl',    # → DuMont
+        r'Dumont\s',              # → DuMont
         r'Econ[\s\-]+Verl',       # → Econ
         r'Eichborn[\s\-]+Verl',   # → Eichborn
         r'Elektronische\s+Ressource', # → ∅
