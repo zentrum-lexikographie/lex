@@ -29,7 +29,7 @@
                          :ns-default build}
              :classes   {:extra-paths ["classes"]}
              :clerk     {:extra-deps {io.github.nextjournal/clerk {:git/sha "83248053c8a55234c64fa1899d4b1b55e65b0893"}}}
-             :client    {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.58.0"}
+             :client    {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.61.0"}
                                       com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
                                       com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
                                       hato/hato                                                   {:mvn/version "1.0.0"}
@@ -73,6 +73,8 @@
                          :extra-deps  {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
                          :exec-fn     kaocha.runner/exec-fn}
              :wikimedia {:extra-deps {io.github.gremid/julesratte         {:git/sha "edd6752b26b58b6448c816ae89715350c9e14fff"}
+                                      ont-app/igraph-jena                 {:mvn/version "0.3.1"
+                                                                           :exclusions  [org.slf4j/slf4j-simple]}
                                       org.apache.commons/commons-compress {:mvn/version "1.27.1"}
                                       org.tukaani/xz                      {:mvn/version "1.10"}}}}
  :mvn/repos {"central" {:url "https://repo1.maven.org/maven2/"}
