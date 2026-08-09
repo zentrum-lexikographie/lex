@@ -58,7 +58,7 @@ services:
       - "ZDL_LEX_QUEUE_PASSWORD=${ZDL_LEX_QUEUE_PASSWORD}"
       - "ZDL_LEX_GIT_ORIGIN="
       - "ZDL_LEX_USERBASE_FILE=/run/secrets/userbase"
-      - "ZDL_LEX_MANTIS_DB_PASSWORD=${ZDL_LEX_MANTIS_DB_PASSWORD}"
+      - "ZDL_LEX_MANTIS_API_PASSWORD=${ZDL_LEX_MANTIS_API_PASSWORD}"
     volumes:
       - server:/data
     restart: unless-stopped
