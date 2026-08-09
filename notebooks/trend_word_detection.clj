@@ -283,7 +283,7 @@
 {::clerk/visibility {:code :show :result :hide}}
 
 (def data-dir
-  (doto (io/file (System/getenv "HOME") "data" "zdl" "lex") (.mkdirs)))
+  (doto (io/file (System/getenv "HOME") "data" "zdl" "lex" "webmonitor-trends-202606") (.mkdirs)))
 
 (def webmonitor-frequencies-file
   (io/file data-dir "webmonitor-freqs.csv"))
@@ -382,10 +382,10 @@
          sum(f) as tf,
          count(distinct feed) / (sqrt(sum(f)) + count(distinct url)) as score
        from freqs
-       where published like ?
+       where published like '2026-07-%' or published like '2026-06-%'
        group by lemma
        having 3 < ff and ff < df and (? * df) < tf
-       order by score desc, lemma" "2026-04-%" 3]
+       order by score desc, lemma" 3]
        (jdbc/execute! webmonitor-frequencies-db)))
 
 ^{::clerk/visibility {:code :show :result :show}}
@@ -447,8 +447,7 @@
 (def trend-word-xlsx-file
   (io/file data-dir "webmonitor-trends.xlsx"))
 
-(when-not (.exists trend-word-xlsx-file)
-  (excel/write!
+(excel/write!
    {"Trend Words"
     (excel/table-grid
      ["Lemma"
@@ -478,4 +477,4 @@
           "DWDSwb Status"    (xls-cell (str/join ", " status) (not online?))
           "DWDSwb Source"    (str/join ", " source)
           "DWDSwb Timestamp" (xls-cell timestamp (not recent?))})))}
-   trend-word-xlsx-file))
+   trend-word-xlsx-file)
