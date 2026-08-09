@@ -29,7 +29,7 @@
                          :ns-default build}
              :classes   {:extra-paths ["classes"]}
              :clerk     {:extra-deps {io.github.nextjournal/clerk {:git/sha "83248053c8a55234c64fa1899d4b1b55e65b0893"}}}
-             :client    {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.61.0"}
+             :client    {:extra-deps {cider/cider-nrepl                                           {:mvn/version "0.62.2"}
                                       com.github.jiconfont/jiconfont-swing                        {:mvn/version "1.0.1"}
                                       com.github.jiconfont/jiconfont-google_material_design_icons {:mvn/version "2.2.0.2"}
                                       hato/hato                                                   {:mvn/version "1.0.0"}
