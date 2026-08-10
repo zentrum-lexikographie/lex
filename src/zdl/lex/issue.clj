@@ -1,6 +1,8 @@
 (ns zdl.lex.issue
   (:require
    [clojure.string :as str]
+   [com.potetm.fusebox.rate-limit :as rl :refer [with-rate-limit]]
+   [com.potetm.fusebox.retry :as retry :refer [with-retry]]
    [gremid.xml :as gx]
    [lambdaisland.uri :as uri]
    [medley.core :refer [distinct-by]]
@@ -8,7 +10,8 @@
    [tick.core :as t]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.index :as index]
-   [zdl.lex.metrics :as metrics]))
+   [zdl.lex.metrics :as metrics]
+   [taoensso.telemere :as tel]))
 
 (def api-url
   "https://mantis.dwds.de/mantis/api/soap/mantisconnect.php")
@@ -21,6 +24,16 @@
 
 (def api-password
   (getenv "MANTIS_API_PASSWORD"))
+
+(def api-retry
+  (retry/init
+   {::retry/retry? (fn [n _ms _ex]  (< n 2))
+    ::retry/delay  (fn [n _ms _ex] (* (inc n) 1000))}))
+
+(def api-rate-limit
+  (rl/init {::rl/bucket-size     1
+            ::rl/period-ms       2000
+            ::rl/wait-timeout-ms 20000}))
 
 (defn xml-property
   [node property]
@@ -46,33 +59,44 @@
      :handler    (xml-ref-property item-xml :handler :real_name)
      :resolution (xml-ref-property item-xml :resolution :name)}))
 
+(defn page->soap-message
+  [page]
+  (->>
+   [:SOAP-ENV:Envelope
+    {:xmlns:SOAP-ENV "http://schemas.xmlsoap.org/soap/envelope/"
+     :xmlns:mantis   "http://futureware.biz/mantisconnect"
+     :xmlns:xsd      "http://www.w3.org/2001/XMLSchema"
+     :xmlns:xsi      "http://www.w3.org/2001/XMLSchema-instance"}
+    [:SOAP-ENV:Body
+     [:mantis:mc_project_get_issues
+      [:username {:xsi:type "xsd:string"} api-user]
+      [:password {:xsi:type "xsd:string"} api-password]
+      [:project_id {:xsi:type "xsd:integer"} "5"]
+      [:page_number {:xsi:type "xsd:integer"} (str page)]
+      [:per_page {:xsi:type "xsd:integer"} "500"]]]]
+   (gx/sexp->node) (gx/write-node *out*) (with-out-str)))
+
 (defn request-issues
   [page]
-  (let [soap-msg (->>
-                  [:SOAP-ENV:Envelope
-                   {:xmlns:SOAP-ENV         "http://schemas.xmlsoap.org/soap/envelope/"
-                    :xmlns:soap             "http://schemas.xmlsoap.org/wsdl/soap/"
-                    :xmlns:mantis           "http://futureware.biz/mantisconnect"
-                    :xmlns:xsd              "http://www.w3.org/2001/XMLSchema"
-                    :xmlns:xsi              "http://www.w3.org/2001/XMLSchema-instance"
-                    :SOAP-ENV:encodingStyle "http://schemas.xmlsoap.org/soap/encoding/"}
-                   [:SOAP-ENV:Body
-                    [:mantis:mc_project_get_issues
-                     [:username {:xsi:type "xsd:string"} api-user]
-                     [:password {:xsi:type "xsd:string"} api-password]
-                     [:project_id {:xsi:type "xsd:integer"} "5"]
-                     [:page_number {:xsi:type "xsd:integer"} (str page)]
-                     [:per_page {:xsi:type "xsd:integer"} "500"]]]]
-                  (gx/sexp->node) (gx/write-node *out*) (with-out-str))
-        resp     @(hc/request {:method  :post
-                               :url     api-url
-                               :headers {"Content-Type" "text/xml"
-                                         "SOAPAction"   api-soap-action}
-                               :body    soap-msg})]
-    (when (resp :error) (throw (resp :error)))
-    (when (not= (resp :status) 200) (throw (ex-info "Mantis API error" resp)))
-    (some->> resp :body gx/read-events gx/events->node
-             (gx/element :return) :content (map xml->issue))))
+  (tel/with-ctx+ {::page page}
+    (with-retry api-retry
+      (with-rate-limit api-rate-limit
+        (tel/event! ::request :debug)
+        (let [resp @(hc/request {:method  :post
+                                 :url     api-url
+                                 :headers {"Content-Type" "text/xml"
+                                           "SOAPAction"   api-soap-action}
+                                 :body    (page->soap-message page)})]
+          (when (resp :error)
+            (throw (tel/error! ::response (resp :error))))
+          (when (not= (resp :status) 200)
+            (throw (tel/error! ::response (ex-info "Mantis API error" resp))))
+          (tel/with-ctx+ {::response (dissoc resp :body)}
+            (tel/event! ::response :debug))
+          (some->> resp :body gx/read-events gx/events->node
+                   (gx/element :return) :content
+                   (filter (gx/tag-pred :item))
+                   (map xml->issue)))))))
 
 (defn issues
   ([]
