@@ -164,24 +164,35 @@
   (fetch!)
   (commit!))
 
-(defn init
+(defn init-repo!
+  []
+  (when-not (fs/directory? *dir* ".git")
+    (tel/event! ::init :info)
+    (fs/create-dirs *dir*)
+    (git! "init" "--quiet")
+    (when (and *origin* *user* *password*)
+      (git! "config" "credential.helper"
+            (format
+             "!f() { echo 'username=%s'; echo 'password=%s'; }; f"
+             *user* *password*))
+      (git! "remote" "add" "origin" *origin*)
+      (fetch!))))
+
+(defn checkout-branch!
+  []
+  (when-not (= *branch* (git! "symbolic-ref" "--short" "-q" "HEAD"))
+    (tel/event! ::checkout :info)
+    (if *origin*
+      (git! "checkout" "--track" (str "origin/" *branch*))
+      (git! "checkout" "-b" *branch*))))
+
+(defn init!
   []
   (with-git
     (tel/with-ctx+ {::dir *dir* ::origin *origin* ::branch *branch*}
-      (tel/event! ::init :info)
-      (when-not (fs/directory? *dir* ".git")
-        (fs/create-dirs *dir*)
-        (git! "init" "--quiet")
-        (when (and *origin* *user* *password*)
-          (git! "config" "credential.helper"
-                (format "!f() { echo 'username=%s'; echo 'password=%s'; }; f"
-                        *user* *password*))
-          (git! "remote" "add" "origin" *origin*)
-          (fetch!)))
-      (when-not (= *branch* (git! "symbolic-ref" "--short" "-q" "HEAD"))
-        (if *origin*
-          (git! "checkout" "--track" (str "origin/" *branch*))
-          (git! "checkout" "-b" *branch*))))))
+      (let [init?     (init-repo!)
+            checkout? (checkout-branch!)]
+        (or init? checkout?)))))
 
 (defn get-article-file
   [path]
