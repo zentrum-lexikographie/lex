@@ -23,9 +23,8 @@
   [_ _]
   (tel/with-ctx+ {::db db}
     (tel/event! ::connect)
-    (tel/with-streams->telemere
-      (pmig/migrate-all spec)
-      (alter-var-root #'db (constantly (pg/pool spec))))))
+    (tel/with-streams->telemere (pmig/migrate-all spec))
+    (alter-var-root #'db (constantly (pg/pool spec)))))
 
 (defmethod ig/halt-key! ::pool
   [_ _]
