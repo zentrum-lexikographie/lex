@@ -16,16 +16,20 @@
    :migrations-path "zdl/lex/db"
    :pool-max-size   8})
 
-(defmethod ig/init-key ::connection
-  [_ _]
-  (tel/with-ctx+ {::spec spec} (tel/event! ::connect))
-  (tel/with-streams->telemere
-    (pmig/migrate-all spec)
-    (pg/pool spec)))
+(def ^:dynamic db
+  spec)
 
-(defmethod ig/halt-key! ::connection
-  [_ connection]
-  (pg/close connection))
+(defmethod ig/init-key ::pool
+  [_ _]
+  (tel/with-ctx+ {::db db}
+    (tel/event! ::connect)
+    (tel/with-streams->telemere
+      (pmig/migrate-all spec)
+      (alter-var-root #'db (constantly (pg/pool spec))))))
+
+(defmethod ig/halt-key! ::pool
+  [_ _]
+  (alter-var-root #'db (constantly spec)))
 
 (defn q
   [c sql]

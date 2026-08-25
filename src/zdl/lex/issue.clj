@@ -7,11 +7,11 @@
    [lambdaisland.uri :as uri]
    [medley.core :refer [distinct-by]]
    [org.httpkit.client :as hc]
+   [taoensso.telemere :as tel]
    [tick.core :as t]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.index :as index]
-   [zdl.lex.metrics :as metrics]
-   [taoensso.telemere :as tel]))
+   [zdl.lex.metrics :as metrics]))
 
 (def api-url
   "https://mantis.dwds.de/mantis/api/soap/mantisconnect.php")

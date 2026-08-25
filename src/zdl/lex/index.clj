@@ -171,46 +171,51 @@
   (comp fields->doc article->fields))
 
 (defn parse-article-file
-  [{:keys [file id] :as desc}]
-  (tel/with-ctx+ {::id id}
+  [path]
+  (tel/with-ctx+ {::path path}
     (try
-      (let [xml     (article/read-xml file)
+      (let [file    (fs/file git/*dir* path)
+            xml     (article/read-xml file)
             article (article/metadata xml)
             errors  (qa/check-for-errors xml file)]
-        (assoc (merge desc article errors) :xml xml))
-      (catch Throwable t (tel/error! t) desc))))
+        (merge {:id path :file file :xml xml} article errors))
+      (catch Throwable t (tel/error! t) {:id path}))))
 
 (defn upsert-articles!
-  [descs]
-  (add! (pmap (comp article->doc parse-article-file) descs)))
+  [paths]
+  (add! (pmap (comp article->doc parse-article-file) paths)))
 
 (defn sync-articles!
   []
   (let [threshold (System/currentTimeMillis)]
-    (upsert-articles! (git/article-descs))
+    (upsert-articles! (git/xml-paths))
     (purge! "article" threshold)))
+
+(defn git-path-exists?
+  [path]
+  (fs/regular-file? (fs/file git/*dir* path)))
 
 (defmethod ig/init-key ::git-sync
   [_ _]
   (let [ch (a/chan)]
     (a/go-loop []
-      (when-let [files (a/<! ch)]
-        (let [existing (into [] (filter fs/regular-file?) files)
-              removed  (into [] (remove fs/regular-file?) files)]
+      (when-let [paths (a/<! ch)]
+        (let [existing (into [] (filter git-path-exists?) paths)
+              removed  (into [] (remove git-path-exists?) paths)]
           (tel/with-ctx+ {::git-sync {:existing existing :removed removed}}
             (try
-              (upsert-articles! (map git/file->desc existing))
-              (remove! (map git/file->id removed))
               (tel/event! ::git-sync :debug)
+              (upsert-articles! existing)
+              (remove! removed)
               (catch Throwable t (tel/error! ::git-sync-error t))))
           (recur))))
-    (a/tap git/changes-mult ch)
+    (a/tap git/changed-paths-mult ch)
     ch))
 
 (defmethod ig/halt-key! ::git-sync
   [_ ch]
   (a/close! ch)
-  (a/untap git/changes-mult ch))
+  (a/untap git/changed-paths-mult ch))
 
 (def issue->doc
   (comp fields->doc issue->fields))

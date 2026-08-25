@@ -9,7 +9,7 @@
    (java.text Collator Normalizer Normalizer$Form)
    (java.util Locale)))
 
-(def collator
+(def ^Collator collator
   (doto (Collator/getInstance Locale/GERMAN)
     (.setStrength Collator/PRIMARY)))
 

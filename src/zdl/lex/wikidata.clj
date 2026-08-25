@@ -11,6 +11,7 @@
    [pg.core :as pg]
    [ring.util.io :as ring.io]
    [taoensso.telemere :as tel]
+   [zdl.lex.db :as db]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.util :refer [pr-edn-str]])
   (:import
@@ -471,7 +472,5 @@
           :token   csrf-token}))
 
 (comment
-  (let [db (integrant.repl.state/system :zdl.lex.db/connection)]
-    (query db (comp (mapcat lexeme->edit-data) (random-sample 0.01)) conj []))
-  (binding [jr/*url* api-endpoint]
-    (jr/with-login api-login (jr/info))))
+  (query db/spec (comp (mapcat lexeme->edit-data) (random-sample 0.01)) conj [])
+  (binding [jr/*url* api-endpoint] (jr/with-login api-login (jr/info))))

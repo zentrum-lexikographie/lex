@@ -298,7 +298,7 @@
   [_ id xml-stream-fn]
   (tel/with-ctx+ {::id id}
     (try
-      (with-open [is (xml-stream-fn)]
+      (with-open [^java.io.Closeable is (xml-stream-fn)]
         (let [xml     (article/read-xml is)
               article (article/metadata xml)
               links   (future (get-links article id))
@@ -396,7 +396,7 @@
                      (not (instance? InterruptedException e)))}))
 
 (defmethod ig/halt-key! ::socket
-  [_ connection]
+  [_ ^java.lang.AutoCloseable connection]
   (.close connection)
   (close-socket!))
 

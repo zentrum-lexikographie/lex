@@ -50,25 +50,25 @@
      {:error-handler task-error-handler})))
 
 (defmethod ig/init-key ::tasks
-  [_ {:keys [db repo]}]
+  [_ _]
   [(schedule "Lock Database Cleanup"
              (after-every (t/of-minutes 5))
-             #(lock/cleanup! db))
+             lock/cleanup!)
    (schedule "Git Commit"
              (after-every (t/of-minutes 15))
-             #(git/commit! repo))
+             git/commit!)
    (schedule "Mantis Issue Sync"
              (after-every (t/of-minutes 15))
-             #(issue/sync!))
+             issue/sync!)
    (schedule "Article QA"
              (at-hour 1)
-             (partial qa/edit-articles! db))
+             qa/edit-articles!)
    (schedule "Git/Index Sync"
              (at-hour 3)
              index/sync-articles!)
    (schedule "Git Garbage Collection"
              (at-hour 5)
-             #(git/gc! repo))])
+             git/gc!)])
 
 (defmethod ig/halt-key! ::tasks
   [_ tasks]

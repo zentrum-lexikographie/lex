@@ -62,7 +62,7 @@
 
 (def pane
   (ui/border-panel
-   :north missing-anchors-label
+   :north  missing-anchors-label
    :center (ui/scrollable link-list)))
 
 (uib/bind

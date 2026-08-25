@@ -92,6 +92,7 @@
     :stdout :inherit
     :stderr :inherit}
    (str (fs/file oxygen-home "jre" "bin" "java"))
+   "-Djava.security.manager=allow"
    "--add-opens=java.base/java.lang=ALL-UNNAMED"
    "--add-opens=java.base/java.net=ALL-UNNAMED"
    "--add-opens=java.base/java.util=ALL-UNNAMED"
@@ -107,7 +108,7 @@
    "--add-opens=java.xml/com.sun.org.apache.xerces.internal.xni=ALL-UNNAMED"
    "--add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED"
    "--add-opens=javafx.web/javafx.scene.web=ALL-UNNAMED"
-   "-Xmx1g"
+   "--add-opens=javafx.web/com.sun.javafx.webkit=ALL-UNNAMED"
    "-XX:-OmitStackTraceInFastThrow"
    "-XX:SoftRefLRUPolicyMSPerMB=10"
    "-Dcom.oxygenxml.editor.plugins.dir=."

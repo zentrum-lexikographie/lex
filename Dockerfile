@@ -17,16 +17,16 @@ RUN clojure -A:client:oxygen -P && clojure -A:build -P
 COPY ./ /build
 
 RUN Xvfb :99 -screen 0 800x600x8 -nolisten tcp &\
-    clojure -T:build client
+    clojure -T:build:slf4j client
 
-FROM clojure:temurin-24-tools-deps
+FROM clojure:tools-deps
 
 RUN mkdir -p /service
 WORKDIR /service
 
 COPY deps.edn /service/
 
-RUN clojure -A:server -P
+RUN clojure -A:corpora:db:queue:server:slf4j:wikimedia -P
 
 COPY ./ /service
 
@@ -34,7 +34,6 @@ COPY --from=builder\
     /build/oxygen/plugin/lib/org.zdl.lex.client.jar\
     /service/oxygen/plugin/lib/org.zdl.lex.client.jar
 
-RUN clojure -T:build server
+RUN clojure -T:build:slf4j server
 
-
-ENTRYPOINT ["clojure", "-M:server", "-m", "zdl.lex.server"]
+ENTRYPOINT ["clojure", "-M:corpora:db:queue:server:slf4j:wikimedia", "-m", "zdl.lex.server"]

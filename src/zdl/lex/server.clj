@@ -100,9 +100,9 @@
     (resp/not-found resource)))
 
 (defn handle-article-write
-  [db {:keys [body] {{:keys [resource]} :path} :parameters}]
+  [{:keys [body] {{:keys [resource]} :path} :parameters}]
   (try
-    (with-lock db
+    (with-lock
       (fn []
         (if-not (git/get-article-file resource)
           (resp/not-found resource)
@@ -136,16 +136,16 @@
       (tel/event! ::socket-response-discarded))))
 
 (defn handle-gpt-message
-  [rpc-client {req :content :as message}]
+  [{req :content :as message}]
   (a/go
-    (let [resp (a/<! (queue/rpc rpc-client "gpt" req))
+    (let [resp (a/<! (queue/rpc "gpt" req))
           resp (or (some-> resp :message) {:error :timeout})]
       (a/<!
        (a/io-thread
         (socket-reply message {:content-type :gpt :content resp}))))))
 
 (defn handle-socket
-  [rpc-client {:keys [websocket?] :as req}]
+  [{:keys [websocket?] :as req}]
   (if websocket?
     (let [user        (get-in req [:identity :user])
           client-id   (get-in req [:headers "x-lex-client-id"])
@@ -162,7 +162,7 @@
                         (tel/with-ctx+ {::socket-message message}
                           (condp = (message :content-type)
                             :ping (tel/event! ::socket-ping :debug)
-                            :gpt  (handle-gpt-message rpc-client message)
+                            :gpt  (handle-gpt-message message)
                             (tel/event! ::socket-message)))))}})
     (resp/status 400)))
 
@@ -209,7 +209,7 @@
                   (handler req)))))}])
 
 (defmethod ig/init-key ::server
-  [_ {:keys [db rpc-client]}]
+  [_ _]
   (http-kit/run-server
    (reitit.ring/ring-handler
     (reitit.ring/router
@@ -230,7 +230,7 @@
       ["/git/*resource"
        {:get  {:handler    handle-article-read
                :parameters {:path [:map [:resource :string]]}}
-        :post {:handler    (partial handle-article-write db)
+        :post {:handler    handle-article-write
                :parameters {:path  [:map [:resource :string]]
                             :query [:map [:token :string]]}}}]
       ["/index"
@@ -273,25 +273,25 @@
       ["/lock"
        {:summary "Retrieve list of active locks"
         :tags    ["Lock" "Query"]
-        :handler (partial lock/handle-read-locks db)}]
+        :handler lock/handle-read-locks}]
       ["/lock/*resource"
        {:get    {:summary    "Read a resource lock"
                  :tags       ["Lock" "Query" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    (partial lock/handle-read-lock db)}
+                 :handler    lock/handle-read-lock}
         :post   {:summary    "Set a resource lock"
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map
                                       [:token :string]
                                       [:ttl [:int {:min 1}]]]}
-                 :handler    (partial lock/handle-create-lock db)}
+                 :handler    lock/handle-create-lock}
         :delete {:summary    "Remove a resource lock."
                  :tags       ["Lock" "Resource"]
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
-                 :handler    (partial lock/handle-remove-lock db)}}]
+                 :handler    lock/handle-remove-lock}}]
       ["/oxygen/updateSite.xml"
        (constantly
         (->  (resp/response oxygen/update-descriptor)
@@ -310,15 +310,15 @@
        {:post  {:summary    "Fast-forwards the server's branch to the given ref"
                 :tags       ["Article" "Git" "Admin"]
                 :parameters {:path [:map [:ref :string]]}
-                :handler    (partial git/handle-fast-forward)}
+                :handler    git/handle-fast-forward}
         :patch {:summary    "Rebases the server's branch to the given ref"
                 :tags       ["Article" "Git" "Admin"]
                 :parameters {:path [:map [:ref :string]]}
-                :handler    (partial git/handle-rebase)}}]
+                :handler    git/handle-rebase}}]
       ["/schedule/qa"
        {:patch {:summary "Edits article data"
                 :tags    ["Article", "Git", "Admin"]
-                :handler (schedule/trigger-task (partial qa/edit-articles! db))}}]
+                :handler (schedule/trigger-task qa/edit-articles!)}}]
       ["/schedule/index"
        {:patch {:summary "Refreshes all article data in index"
                 :tags    ["Index", "Admin"]
@@ -328,7 +328,7 @@
                 :tags    ["Mantis" "Admin"]
                 :handler (schedule/trigger-task issue/sync!)}}]
       ["/socket"
-       (partial handle-socket rpc-client)]
+       handle-socket]
       ["/styles.css"
        (constantly
         (-> html/css
@@ -351,21 +351,19 @@
   (server))
 
 (def config
-  {::git/repository   {}
-   ::db/connection    {}
-   ::queue/connection {}
-   ::queue/rpc-client {:queue (ig/ref ::queue/connection)}
+  {::db/pool          {}
+   ::queue/rpc-client {}
    ::index/git-sync   {}
-   ::server           {:db         (ig/ref ::db/connection)
-                       :rpc-client (ig/ref ::queue/rpc-client)}})
+   ::server           {}})
 
 (def schedule-config
   {::metrics/reporter {}
-   ::schedule/tasks   {:db   (ig/ref ::db/connection)
-                       :repo (ig/ref ::git/repository)}})
+   ::schedule/tasks   {}})
 
 (defn -main
   [& _]
+  (git/init)
   (let [system (ig/init (merge config schedule-config))]
-    (. (Runtime/getRuntime) (addShutdownHook (Thread. #(ig/halt! system))))
-    @(promise)))
+    (. (Runtime/getRuntime)
+       (addShutdownHook (Thread. #(ig/halt! system)))))
+  @(promise))
