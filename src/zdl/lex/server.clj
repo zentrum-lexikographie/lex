@@ -362,8 +362,9 @@
 
 (defn -main
   [& _]
-  (git/init)
   (let [system (ig/init (merge config schedule-config))]
     (. (Runtime/getRuntime)
-       (addShutdownHook (Thread. #(ig/halt! system)))))
+       (addShutdownHook (Thread. #(ig/halt! system))))
+    (future
+      (tel/catch->error! ::init (when (git/init!) (index/sync-articles!)))))
   @(promise))

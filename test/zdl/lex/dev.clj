@@ -60,7 +60,7 @@
 
 (defn init-test-data
   []
-  (git/init)
+  (git/init!)
   (when-let [existing (seq (git/xml-paths))]
     (run! git/rm! existing)
     (git/commit!))
