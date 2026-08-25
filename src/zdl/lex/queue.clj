@@ -6,12 +6,9 @@
    [taoensso.telemere :as tel]
    [zdl.lex.env :refer [getenv]])
   (:import
-   (com.rabbitmq.client AMQP$BasicProperties$Builder CancelCallback ConnectionFactory DeliverCallback)))
+   (com.rabbitmq.client AMQP$BasicProperties$Builder CancelCallback Channel Connection ConnectionFactory DeliverCallback)))
 
 (tel/set-min-level! nil "com.rabbitmq.client.TrustEverythingTrustManager" :error)
-
-(def rpc-queues
-  ["gpt" "nlp"])
 
 (def spec
   {:host     (getenv "QUEUE_HOST" "localhost")
@@ -19,7 +16,7 @@
    :user     (getenv "QUEUE_USER" "lex")
    :password (getenv "QUEUE_PASSWORD" "lex")})
 
-(def connection-factory
+(def ^ConnectionFactory connection-factory
   (doto (ConnectionFactory.)
     (.setHost (spec :host))
     (.setPort (spec :port))
@@ -30,96 +27,129 @@
     (.setHandshakeTimeout 10000)
     (.setShutdownTimeout 10000)))
 
+(def ^:dynamic ^Connection connection
+  nil)
+
+(def ^:dynamic ^Channel channel
+  nil)
+
+(defn connect
+  []
+  (when-not (and connection channel)
+    (tel/with-ctx+ {::spec spec}
+      (tel/event! ::connect)
+      (alter-var-root #'connection (constantly (.newConnection connection-factory)))
+      (alter-var-root #'channel (constantly (.createChannel connection))))))
+
+(defn disconnect
+  []
+  (when (and connection channel)
+    (tel/with-ctx+ {::spec spec}
+      (tel/event! ::disconnect)
+      (try
+        (.close channel)
+        (.close connection)
+        (finally
+          (alter-var-root #'channel (constantly nil))
+          (alter-var-root #'connection (constantly nil)))))))
+
 (def messages
   (a/chan))
 
 (def broadcast
-  (a/pub messages (juxt :queue :id)))
+  (a/pub messages (juxt :id :queue)))
 
-(defn rpc-request
-  [{:keys [channel rpc-responses] :as _client} queue id message]
-  (tel/with-ctx+ {::message {:queue queue :id id :message message}}
-    (tel/event! ::rpc-request :debug)
-    (.basicPublish channel "" queue
-                   (.. (AMQP$BasicProperties$Builder.)
-                       (correlationId id)
-                       (replyTo (rpc-responses queue))
-                       (build))
-                   (json/write-value-as-bytes message))))
+(def rpc-queues
+  #{"gpt" "nlp"})
+
+(def ^:dynamic rpc-responses
+  nil)
 
 (defn rpc
-  ([client queue message]
-   (rpc client queue message 30000))
-  ([client queue message timeout]
+  ([queue message]
+   (rpc queue message 30000))
+  ([queue message timeout]
    (let [id (str (random-uuid))]
      (a/go
        (let [ch (a/chan)]
          (try
-           (a/sub broadcast [queue id] ch)
-           (a/io-thread (rpc-request client queue id message))
+           (a/sub broadcast [id queue] ch)
+           (a/io-thread
+            (tel/with-ctx+ {::message {:id id :queue queue :message message}}
+              (tel/event! ::rpc-request :debug)
+              (.basicPublish channel "" queue
+                             (.. (AMQP$BasicProperties$Builder.)
+                                 (correlationId id)
+                                 (replyTo (rpc-responses queue))
+                                 (build))
+                             (json/write-value-as-bytes message))))
            (a/alt! [ch (a/timeout timeout)] ([v _ch] v))
            (finally
-             (a/unsub broadcast [queue id] ch)
+             (a/unsub broadcast id ch)
              (a/close! ch))))))))
 
-(defmethod ig/init-key ::connection
-  [_ _]
-  (tel/with-ctx+ {::spec spec}
-    (tel/event! ::connect)
-    (let [connection (.newConnection connection-factory)
-          channel    (.createChannel connection)]
-      {:connection connection :channel channel})))
-
-(defmethod ig/halt-key! ::connection
-  [_ {:keys [connection channel]}]
-  (tel/with-ctx+ {::spec spec}
-    (tel/event! ::disconnect)
-    (.close channel)
-    (.close connection)))
+(defn rpc-subscribe
+  [queue]
+  (let [responses (.. channel (queueDeclare) (getQueue))]
+    (doto channel
+      (.queueDeclare queue true false false nil)
+      (.basicQos 1)
+      (.basicConsume
+       responses true
+       (reify DeliverCallback
+         (handle [_this _consumer-tag delivery]
+           (let [id      (.. delivery (getProperties) (getCorrelationId))
+                 body    (json/read-value (.. delivery (getBody)))
+                 message {:id id :queue queue :message body}]
+             (tel/with-ctx+ {::message message}
+               (tel/event! ::rpc-response :debug)
+               (a/>!! messages message)))))
+       (reify CancelCallback
+         (handle [_this _consumer-tag] (tel/error! ::cancel)))))
+    [queue responses]))
 
 (defmethod ig/init-key ::rpc-client
-  [_  {{:keys [channel] :as queue} :queue}]
-  (let [responses (transient {})]
-    (doseq [q rpc-queues :let [r (.. channel (queueDeclare) (getQueue))]]
-      (tel/with-ctx+ {::queue queue}
-        (doto channel
-          (.queueDeclare q true false false nil)
-          (.basicQos 1)
-          (.basicConsume
-           r true
-           (reify DeliverCallback
-             (handle [_this _consumer-tag delivery]
-               (let [message {:queue   q
-                              :id      (.. delivery
-                                           (getProperties)
-                                           (getCorrelationId))
-                              :message (json/read-value
-                                        (.. delivery (getBody)))}]
-                 (tel/with-ctx+ {::message message}
-                   (tel/event! ::rpc-response :debug)
-                   (a/>!! messages message)))))
-           (reify CancelCallback
-             (handle [_this _consumer-tag] (tel/error! ::cancel)))))
-        (assoc! responses q r)))
-    (assoc queue :rpc-responses (persistent! responses))))
+  [_  _]
+  (when-not rpc-responses
+    (connect)
+    (->> (into {} (map rpc-subscribe) rpc-queues)
+         (constantly) (alter-var-root #'rpc-responses))))
 
-(defn rpc-server
-  [rpc-queue {:keys [on-request on-cancel] {:keys [channel]} :queue}]
-  (doto channel
-    (.queueDeclare rpc-queue true false false nil)
-    (.basicQos 1)
-    (.basicConsume
-     rpc-queue false
-     (reify DeliverCallback
-       (handle [_this _consumer-tag delivery] (on-request channel delivery)))
-     (reify CancelCallback
-       (handle [_this _consumer-tag] (on-cancel channel))))))
+(defmethod ig/halt-key! ::rpc-client
+  [_ _]
+  (when rpc-responses
+    (disconnect)
+    (alter-var-root #'rpc-responses (constantly nil))))
 
+(defmethod ig/init-key ::rpc-server
+  [_ {:keys [on-cancel] rpc-handle :handle queue-name :queue :or {on-cancel (fn [])}}]
+  (tel/with-ctx+ {::queue queue-name}
+    (connect)
+    (doto ^Channel channel
+      (.queueDeclare queue-name true false false nil)
+      (.basicQos 1)
+      (.basicConsume
+       ^String queue-name false
+       (reify DeliverCallback
+         (handle [_this _consumer-tag delivery]
+           (let [delivery-tag   (.. delivery (getEnvelope) (getDeliveryTag))
+                 ack!           (fn [] (.. channel (basicAck delivery-tag false)))
+                 delivery-props (.. delivery (getProperties))
+                 correlation-id (.. delivery-props (getCorrelationId))
+                 reply-to       (.. delivery-props (getReplyTo))
+                 reply-props    (.. (AMQP$BasicProperties$Builder.)
+                                     (correlationId correlation-id)
+                                     (build))
+                 req            (.. delivery (getBody))]
+             (try
+               (.basicPublish channel "" reply-to reply-props (rpc-handle req))
+               (catch Throwable t (tel/error! ::rpc-handle t))
+               (finally (ack!))))))
+       (reify CancelCallback
+         (handle [_this _consumer-tag]
+           (tel/event! ::cancel)
+           (on-cancel)))))))
 
-(defmethod ig/init-key ::gpt-rpc-server
-  [_ opts]
-  (rpc-server "gpt" opts))
-
-(defmethod ig/init-key ::nlp-rpc-server
-  [_ opts]
-  (rpc-server "nlp" opts))
+(defmethod ig/halt-key! ::rpc-server
+  [_ _]
+  (disconnect))

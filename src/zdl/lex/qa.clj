@@ -40,9 +40,9 @@
       (update node :content (partial map red-1->red-2)))))
 
 (defn edit
-  [file]
+  [path]
   (try
-    (let [xml     (article/read-xml file)
+    (let [xml     (article/read-xml (fs/file git/*dir* path))
           article (gx/element :Artikel xml)]
       (when (= "Red-1" (gx/attr :Status article))
         (let [wdg?   (str/includes? (or (gx/attr :Quelle article) "") "WDG")
@@ -53,19 +53,19 @@
     (catch Throwable _)))
 
 (defn edit-article!
-  [db {:keys [file id]}]
+  [path]
   (try
     (binding [lock/*context* {:owner    "zdl-lex-server"
-                              :resource id
+                              :resource path
                               :token    (str (random-uuid))}]
-      (with-lock db
+      (with-lock
         (fn []
-          (when-let [edited (edit file)]
-            (git/write-article-file id #(article/write-xml edited %))))))
+          (when-let [edited (edit path)]
+            (git/write-article-file path #(article/write-xml edited %))))))
     (catch Throwable t
       ;; Skip locked articles
       (if (lock/locked? t) (tel/error! t) (throw t)))))
 
 (defn edit-articles!
-  [db]
-  (run! #(edit-article! db %) (git/article-descs git/*dir*)))
+  []
+  (run! edit-article! (git/xml-paths)))

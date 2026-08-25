@@ -149,7 +149,7 @@
    :border 5
    :north (ui/border-panel
            :hgap 5
-           :north persona
+           :north (ui/scrollable persona :hscroll :never)
            :center (ui/toolbar
                     :floatable? false
                     :orientation :horizontal
@@ -159,7 +159,7 @@
                             (javax.swing.Box/createHorizontalGlue)
                             prompt-progress]))
    :center dialog-pane
-   :south prompt))
+   :south (ui/scrollable prompt :hscroll :never)))
 
 (def login-panel
   (ui/border-panel))

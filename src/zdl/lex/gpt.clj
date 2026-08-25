@@ -9,7 +9,6 @@
    [zdl.lex.metrics :as metrics]
    [zdl.lex.queue :as queue])
   (:import
-   (com.rabbitmq.client AMQP$BasicProperties$Builder Channel Delivery)
    (org.httpkit.client ClientSslEngineFactory)))
 
 (def gpt-api-url
@@ -75,83 +74,32 @@
    (complete {"messages" [{"role" "user" "content" q}]})
    deref (get-in [:body "choices" 0 "message" "content"])))
 
-(defn complete-on-request
-  [^Channel channel ^Delivery delivery]
-  (let [delivery-tag   (.. delivery (getEnvelope) (getDeliveryTag))
-        ack!           (fn [] (.. channel (basicAck delivery-tag false)))
-        delivery-props (.. delivery (getProperties))
-        correlation-id (.. delivery-props (getCorrelationId))
-        reply-to       (.. delivery-props (getReplyTo))
-        reply-props    (.. (AMQP$BasicProperties$Builder.)
-                           (correlationId correlation-id)
-                           (build))
-        completion-time (metrics/timed! completion-timer)]
-    (try
-      (let [req (json/read-value (.. delivery (getBody)))]
-        (tel/with-ctx+ {::request req}
-          (tel/event! ::request :debug)
-          (complete
-           req
-           (fn [{:keys [error body] :as resp}]
-             (try
-               (.close completion-time)
-               (tel/with-ctx+ {::request req ::response resp}
-                 (tel/event! ::response :debug)
-                 (cond
-                   error (do (metrics/metered! error-meter)
-                             (tel/error! ::completion-error error))
-                   body  (.basicPublish channel "" reply-to reply-props
-                                        (.getBytes ^String body "UTF-8"))))
-               (finally
-                 (ack!)))))))
-      (catch Throwable t
-        (tel/error! ::request t)
-        (ack!)))))
+(defn echo
+  [req]
+  (json/write-value-as-bytes (json/read-value req)))
 
-(defn echo-on-request
-  [^Channel channel ^Delivery delivery]
-  (let [delivery-tag    (.. delivery (getEnvelope) (getDeliveryTag))
-        ack!            (fn [] (.. channel (basicAck delivery-tag false)))
-        delivery-props  (.. delivery (getProperties))
-        correlation-id  (.. delivery-props (getCorrelationId))
-        reply-to        (.. delivery-props (getReplyTo))
-        reply-props     (.. (AMQP$BasicProperties$Builder.)
-                           (correlationId correlation-id)
-                           (build))
-        completion-time (metrics/timed! completion-timer)]
-    (try
-      (let [req  (json/read-value (.. delivery (getBody)))
-            resp req]
-        (tel/with-ctx+ {::request req ::response resp}
-          (tel/event! ::echo :debug)
-          (.close completion-time)
-          (.basicPublish channel "" reply-to reply-props
-                         (json/write-value-as-bytes resp))))
-      (catch Throwable t
-        (tel/error! ::echo t))
-      (finally
-        (ack!)))))
+(defn handle
+  [req]
+  (with-open [_ (metrics/timed! completion-timer)]
+    (let [req  (json/read-value req)
+          resp @(complete req)]
+      (tel/with-ctx+ {::request req ::response resp}
+        (tel/event! ::complete :debug)
+        (when-let [error (resp :error)]
+          (metrics/metered! error-meter)
+          (throw (tel/error! ::completion-error error)))
+        (.getBytes ^String (resp :body) "UTF-8")))))
 
-(defn log-on-cancel
-  [_channel]
-  (tel/event! ::canceled :error))
-
-(defn exit-on-cancel
-  [& _]
+(defn exit
+  []
   (System/exit 1))
 
 (def dev-config
-  {::queue/connection     {}
-   ::queue/gpt-rpc-server {:queue      (ig/ref ::queue/connection)
-                           :on-request echo-on-request
-                           :on-cancel  log-on-cancel}})
+  {::queue/rpc-server {:queue "gpt" :handle echo}})
 
 (def main-config
-  {::metrics/reporter     {}
-   ::queue/connection     {}
-   ::queue/gpt-rpc-server {:queue      (ig/ref ::queue/connection)
-                           :on-request complete-on-request
-                           :on-cancel  (comp exit-on-cancel log-on-cancel)}})
+  {::metrics/reporter {}
+   ::queue/rpc-server {:queue "gpt" :handle handle :on-cancel exit}})
 
 (defn -main
   [& _]

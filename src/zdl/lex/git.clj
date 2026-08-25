@@ -3,9 +3,8 @@
    [babashka.fs :as fs]
    [clojure.core.async :as a]
    [clojure.java.io :as io]
-   [clojure.java.shell :as sh :refer [sh]]
+   [clojure.java.process :as p]
    [clojure.string :as str]
-   [integrant.core :as ig]
    [ring.util.response :as resp]
    [taoensso.telemere :as tel]
    [zdl.lex.env :refer [getenv]]
@@ -23,41 +22,41 @@
 (def ^:dynamic *branch*
   (getenv "GIT_BRANCH" "dev"))
 
-(defn article-file?
+(def ^:dynamic *user*
+  (getenv "GIT_USER"))
+
+(def ^:dynamic *password*
+  (getenv "GIT_PASSWORD"))
+
+(def ^:dynamic *author-name*
+  (getenv "GIT_AUTHOR_NAME" "ZDL-Lex"))
+
+(def ^:dynamic *author-email*
+  (getenv "GIT_AUTHOR_EMAIL" "noreply@dwds.de"))
+
+(def ^:dynamic *push?*
+  (getenv "GIT_PUSH"))
+
+(defn xml-file?
   [f]
-  (let [name (fs/file-name f)]
-    (and (.endsWith name ".xml")
-         (not (.startsWith name "."))
-         (not (some #{".git"} (->> f fs/absolutize fs/components (map str)))))))
+  (let [^String name (fs/file-name f)]
+    (and (. name (endsWith ".xml")) (not (. name (startsWith "."))))))
 
-(defn file->id
-  [f]
-  (str (fs/relativize *dir* f)))
+(defn xml-files
+  []
+  (->> (file-seq (fs/file *dir*)) (filter xml-file?)))
 
-(defn id->file
-  [id]
-  (fs/file *dir* id))
+(defn xml-paths
+  []
+  (map #(str (fs/relativize *dir* %)) (xml-files)))
 
-(defn file->desc
-  [f]
-  {:file f
-   :id   (file->id f)})
+(def changed-paths-ch
+  (a/chan 16))
 
-(defn article-descs
-  ([]
-   (article-descs *dir*))
-  ([dir]
-   (->> (file-seq (fs/file dir))
-        (filter article-file?)
-        (map #(file->desc %)))))
+(def changed-paths-mult
+  (a/mult changed-paths-ch))
 
-(def changes
-  (a/chan 16 (map #(into [] (map id->file) %))))
-
-(def changes-mult
-  (a/mult changes))
-
-(def lock
+(def ^ReentrantLock lock
   (ReentrantLock.))
 
 (def lock-timeout
@@ -73,33 +72,18 @@
 
 (defn git!
   [& args]
-  (sh/with-sh-dir *dir*
-    (let [result   (apply sh (concat ["git"] (map str args)))
-          success? (zero? (:exit result))
-          ctx      {::dir    *dir*
-                    ::args   args
-                    ::result result}]
-      (tel/with-ctx+ {::git ctx}
-        (tel/event! ::sh (if success? :debug :error))
-        (when-not success? (throw (ex-info (str args) ctx)))
-        result))))
-
-(defmethod ig/init-key ::repository
-  [_ _]
-  (let [ctx {::dir *dir* ::origin *origin* ::branch *branch*}]
-    (with-git
-      (tel/with-ctx+ ctx
-        (tel/event! ::init :info)
-        (when-not (fs/directory? *dir* ".git")
-          (if *origin*
-            (git! "clone" "--quiet" *origin* ".")
-            (do (fs/create-dirs *dir*) (git! "init" "--quiet"))))
-        (let [head (->> (git! "symbolic-ref" "--short" "-q" "HEAD") :out str/trim)]
-          (when-not (= *branch* head)
-            (if *origin*
-              (git! "checkout" "--track" (str "origin/" *branch*))
-              (git! "checkout" "-b" *branch*))))
-        ctx))))
+  (tel/with-ctx+ {::dir *dir* ::args args}
+    (try
+      (let [opts {:dir *dir*
+                  :env {"GIT_AUTHOR_NAME"     *author-name*
+                        "GIT_AUTHOR_EMAIL"    *author-email*
+                        "GIT_COMMITTER_NAME"  *author-name*
+                        "GIT_COMMITTER_EMAIL" *author-email*}}
+            out  (-> (apply p/exec (concat (list opts "git") (map str args)))
+                     (str/trim) (not-empty))]
+        (tel/with-ctx+ {::out out} (tel/event! ::git :debug) out))
+      (catch Throwable t
+        (throw (tel/error! ::git t))))))
 
 (def gc-timer
   (metrics/timer "git.gc"))
@@ -123,7 +107,7 @@
 
 (defn push!
   []
-  (when *origin*
+  (when (and *origin* *push?*)
     (with-open [_ (metrics/timed! push-timer)]
       (git! "push" "--quiet" "origin" *branch*))))
 
@@ -144,15 +128,18 @@
 (def status-timer
   (metrics/timer "git.status"))
 
-(defn changed-ids
+(defn changed-paths
   []
   (with-open [_ (metrics/timed! status-timer)]
-    (->> (git! "status" "-s" "--porcelain") :out str/split-lines
-         (into [] (comp (map not-empty) (remove nil?) (mapcat status->paths))))))
+    (some->> (git! "status" "-s" "--porcelain")
+             str/split-lines
+             (into [] (comp (map not-empty)
+                            (remove nil?)
+                            (mapcat status->paths))))))
 
 (defn dirty?
   []
-  (seq (changed-ids)))
+  (seq (changed-paths)))
 
 (defn assert-clean
   []
@@ -163,47 +150,65 @@
 
 (defn commit!
   []
-  (when-let [ids (with-git
-                   (let [ids (changed-ids)]
-                     (when (seq ids)
-                       (with-open [_ (metrics/timed! commit-timer)]
-                         (git! "commit" "-a" "-m" "zdl-lex-server"))
-                       ids)))]
-    (a/>!! changes ids)
-    (push!)))
+  (and (some->> (with-git
+                  (let [paths (changed-paths)]
+                    (when (seq paths)
+                      (with-open [_ (metrics/timed! commit-timer)]
+                        (git! "commit" "-a" "-m" "zdl-lex-server"))
+                      paths)))
+                (a/>!! changed-paths-ch))
+       (push!)))
 
 (defn sync!
   []
   (fetch!)
   (commit!))
 
+(defn init
+  []
+  (with-git
+    (tel/with-ctx+ {::dir *dir* ::origin *origin* ::branch *branch*}
+      (tel/event! ::init :info)
+      (when-not (fs/directory? *dir* ".git")
+        (fs/create-dirs *dir*)
+        (git! "init" "--quiet")
+        (when (and *origin* *user* *password*)
+          (git! "config" "credential.helper"
+                (format "!f() { echo 'username=%s'; echo 'password=%s'; }; f"
+                        *user* *password*))
+          (git! "remote" "add" "origin" *origin*)
+          (fetch!)))
+      (when-not (= *branch* (git! "symbolic-ref" "--short" "-q" "HEAD"))
+        (if *origin*
+          (git! "checkout" "--track" (str "origin/" *branch*))
+          (git! "checkout" "-b" *branch*))))))
+
 (defn get-article-file
-  [id]
-  (let [f (fs/file *dir* id)]
-    (when (fs/regular-file? f) f)))
+  [path]
+  (let [f (fs/file *dir* path)] (when (fs/regular-file? f) f)))
 
 (defn write-article-file
-  [id write-fn]
-  (let [f (fs/file *dir* id)]
+  [path write-fn]
+  (let [f (fs/file *dir* path)]
     (with-git
       (let [exists? (fs/regular-file? f)]
         (when-not exists? (-> f fs/parent fs/create-dirs))
         (with-open [output (io/output-stream f)] (write-fn output))
-        (when-not exists? (add! id))))
-    (a/>!! changes (list (file->id f)))
+        (when-not exists? (add! path))))
+    (a/>!! changed-paths-ch (list path))
     f))
 
 (defn head-rev
   []
-  (->> (git! "rev-parse" "HEAD") :out str/trim))
+  (git! "rev-parse" "HEAD"))
 
-(defn diff-changed-ids
+(defn diff-changed-paths
   [prev-head]
-  (->> (git! "diff" "--numstat" (str prev-head ".." "HEAD"))
-       :out (str/split-lines)
-       (into [] (comp (map not-empty) (remove nil?)
-                      (map #(str/split % #"\t"))
-                      (map #(nth % 2))))))
+  (some->> (git! "diff" "--numstat" (str prev-head ".." "HEAD"))
+           (str/split-lines)
+           (into [] (comp (map not-empty) (remove nil?)
+                          (map #(str/split % #"\t"))
+                          (map #(nth % 2))))))
 
 (defn handle-fast-forward
   [{{{:keys [ref]} :path} :parameters}]
@@ -213,7 +218,7 @@
       (let [prev-head (head-rev)]
         (assert-clean)
         (git! "merge" "--ff-only" "-q" ref)
-        (a/>!! changes (diff-changed-ids prev-head))))
+        (a/>!! changed-paths-ch (diff-changed-paths prev-head))))
     (push!)
     (resp/response {:ff ref})
     (catch Throwable t
@@ -227,7 +232,7 @@
     (let [prev-head (head-rev)]
       (try
         (git! "rebase" ref)
-        (a/>!! changes (diff-changed-ids prev-head))
+        (a/>!! changed-paths-ch (diff-changed-paths prev-head))
         (push!)
         (resp/response {:ff ref})
         (catch Throwable t

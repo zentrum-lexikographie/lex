@@ -3,7 +3,7 @@
    [integrant.core :as ig]
    [zdl.lex.env :refer [getenv]])
   (:import
-   (com.codahale.metrics Meter MetricRegistry Slf4jReporter Timer)
+   (com.codahale.metrics Meter MetricRegistry Slf4jReporter Timer Timer$Context)
    (java.util.concurrent TimeUnit)))
 
 
@@ -20,7 +20,7 @@
       (.start report-interval TimeUnit/MINUTES))))
 
 (defmethod ig/halt-key! ::reporter
-  [_ reporter]
+  [_ ^Slf4jReporter reporter]
   (when reporter (.close reporter)))
 
 (defn meter
@@ -36,5 +36,5 @@
   (.mark meter))
 
 (defn timed!
-  [^Timer timer]
+  [^Timer timer] ^Timer$Context
   (.time timer))
