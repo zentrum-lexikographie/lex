@@ -283,7 +283,7 @@
 {::clerk/visibility {:code :show :result :hide}}
 
 (def data-dir
-  (doto (io/file (System/getenv "HOME") "data" "zdl" "lex" "webmonitor-trends-202606") (.mkdirs)))
+  (doto (io/file (System/getenv "HOME") "data" "zdl" "lex" "webmonitor-trends-202608") (.mkdirs)))
 
 (def webmonitor-frequencies-file
   (io/file data-dir "webmonitor-freqs.csv"))
@@ -382,7 +382,7 @@
          sum(f) as tf,
          count(distinct feed) / (sqrt(sum(f)) + count(distinct url)) as score
        from freqs
-       where published like '2026-07-%' or published like '2026-06-%'
+       where published like '2026-08-%'
        group by lemma
        having 3 < ff and ff < df and (? * df) < tf
        order by score desc, lemma" 3]
