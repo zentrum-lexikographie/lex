@@ -1,12 +1,10 @@
-default:
-  image: docker:26.1.0
-  services:
-    - docker:26.1.0-dind
-  before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-
 build:
   stage: build
+  image: docker:29
+  services:
+    - docker:29-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
     - docker compose build
     - docker compose push
@@ -18,6 +16,11 @@ build:
 
 deploy-labor:
   stage: deploy
+  image: docker:29
+  services:
+    - docker:29-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
     - docker compose -f compose.labor.yml pull
     - docker compose -f compose.labor.yml down --remove-orphans
@@ -30,6 +33,11 @@ deploy-labor:
 
 deploy-gpt:
   stage: deploy
+  image: docker:29
+  services:
+    - docker:29-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
     - docker compose -f compose.gpt.yml pull
     - docker compose -f compose.gpt.yml down --remove-orphans
@@ -39,3 +47,15 @@ deploy-gpt:
   tags:
     - zdl-gpu01.bbaw.de
     - shell
+
+dwdswb:
+  stage: deploy
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: python:3.13
+  script:
+    - pip install --root-user-action ignore -r requirements.txt
+    - python -m zdl_lex.wb.package
+  tags:
+    - zdl
+    - build
