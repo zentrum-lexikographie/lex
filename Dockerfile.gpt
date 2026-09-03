@@ -1,0 +1,12 @@
+FROM clojure:tools-deps
+
+RUN mkdir -p /service
+WORKDIR /service
+
+COPY deps.edn /service/
+
+RUN clojure -A:queue:server:slf4j -P
+
+COPY ./ /service
+
+ENTRYPOINT ["clojure", "-M:queue:server:slf4j", "-m", "zdl.lex.gpt"]
