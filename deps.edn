@@ -9,7 +9,6 @@
              http-kit/http-kit                   {:mvn/version "2.8.1"}
              integrant/integrant                 {:mvn/version "1.0.1"}
              integrant/repl                      {:mvn/version "0.5.1"}
-             io.dropwizard.metrics/metrics-core  {:mvn/version "4.2.0"}
              io.github.cdimascio/dotenv-java     {:mvn/version "3.2.0"}
              io.github.gremid/clj-xml            {:git/sha "ffcf1d87cf9eca8a6055edb0cd61ae88e8763589"}
              jarohen/chime                       {:mvn/version "0.3.3"}
@@ -51,21 +50,23 @@
                                       ch.qos.logback/logback-classic {:mvn/version "1.2.12"}}}
              :python    {:extra-deps {clj-python/libpython-clj {:mvn/version "2.026"}}}
              :queue     {:extra-deps {com.rabbitmq/amqp-client {:mvn/version "5.27.0"}}}
-             :server    {:extra-deps {buddy/buddy-auth                {:mvn/version "3.0.323"}
-                                      com.lambdaisland/ornament       {:mvn/version "1.12.107"}
-                                      com.lambdaisland/hiccup         {:mvn/version "0.0.33"}
-                                      dali/dali                       {:git/url "https://github.com/gremid/dali.git"
-                                                                       :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
-                                      garden/garden                   {:git/url    "https://github.com/noprompt/garden.git"
-                                                                       :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
-                                                                       :exclusions [org.clojure/clojurescript]}
-                                      io.github.gremid/clj-xml-schema {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
-                                      metosin/muuntaja                {:mvn/version "0.6.11"}
-                                      metosin/reitit                  {:mvn/version "0.10.0"}
-                                      metosin/reitit-middleware       {:mvn/version "0.10.0"}
-                                      org.slf4j/jul-to-slf4j          {:mvn/version "2.0.17"}
-                                      ring/ring-defaults              {:mvn/version "0.5.0"}
-                                      selmer/selmer                   {:mvn/version "1.12.62"}}}
+             :server    {:extra-deps {buddy/buddy-auth                   {:mvn/version "3.0.323"}
+                                      clj-commons/iapetos                {:mvn/version "0.1.15"}
+                                      com.lambdaisland/ornament          {:mvn/version "1.12.107"}
+                                      com.lambdaisland/hiccup            {:mvn/version "0.0.33"}
+                                      dali/dali                          {:git/url "https://github.com/gremid/dali.git"
+                                                                          :git/sha "75db26ceaffee4eb852dc88796c5edbd99a6567a"}
+                                      garden/garden                      {:git/url    "https://github.com/noprompt/garden.git"
+                                                                          :git/sha    "05590ecb5f6fa670856f3d1ab400aa4961047480"
+                                                                          :exclusions [org.clojure/clojurescript]}
+                                      io.github.gremid/clj-xml-schema    {:git/sha "a70ad7a98ded2c6879dfb95f77dc1c29134c0ee0"}
+                                      io.prometheus/simpleclient_hotspot {:mvn/version "0.12.0"}
+                                      metosin/muuntaja                   {:mvn/version "0.6.11"}
+                                      metosin/reitit                     {:mvn/version "0.10.0"}
+                                      metosin/reitit-middleware          {:mvn/version "0.10.0"}
+                                      org.slf4j/jul-to-slf4j             {:mvn/version "2.0.17"}
+                                      ring/ring-defaults                 {:mvn/version "0.5.0"}
+                                      selmer/selmer                      {:mvn/version "1.12.62"}}}
              :slf4j     {:extra-deps {com.taoensso/telemere-slf4j             {:mvn/version "1.0.1"}
                                       org.apache.logging.log4j/log4j-to-slf4j {:mvn/version "2.25.3"}
                                       org.slf4j/jul-to-slf4j                  {:mvn/version "2.0.17"}}}

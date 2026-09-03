@@ -19,7 +19,8 @@
    [zdl.lex.lucene :as lucene]
    [zdl.lex.metrics :as metrics]
    [zdl.lex.qa :as qa]
-   [integrant.core :as ig]))
+   [integrant.core :as ig]
+   [iapetos.core :as prometheus]))
 
 (def solr-url
   (str (getenv "SOLR_URL" "http://localhost:8983/solr/") "articles/"))
@@ -35,12 +36,9 @@
   {:method :post
    :url    (str (uri/join solr-url "query"))})
 
-(def query-timer
-  (metrics/timer "index.query"))
-
 (defn query
   [query-params]
-  (with-open [_ (metrics/timed! query-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/index {:action "query"})
     (http-request (assoc query-request :form-params query-params))))
 
 (def update-request
@@ -49,12 +47,9 @@
    :query-params   {"wt" "json"}
    :headers        {"Content-Type" "text/xml"}})
 
-(def update-timer
-  (metrics/timer "index.update"))
-
 (defn update!
   [xml-node]
-  (with-open [_ (metrics/timed! update-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/index {:action "update"})
    (->
     update-request
     (assoc :body (with-out-str (gx/write-node *out* (gx/sexp->node xml-node))))

@@ -5,8 +5,10 @@
    [buddy.auth.backends]
    [buddy.auth.middleware]
    [clojure.core.async :as a]
-   [clojure.java.io :as io]
    [clojure.data.csv :as csv]
+   [clojure.java.io :as io]
+   [clojure.string :as str]
+   [iapetos.collector.ring :as prometheus.ring]
    [integrant.core :as ig]
    [medley.core :refer [dissoc-in]]
    [muuntaja.core :as m]
@@ -23,6 +25,7 @@
    [ring.util.response :as resp]
    [ring.websocket :as ws]
    [taoensso.telemere :as tel]
+   [zdl.lex.article :as article]
    [zdl.lex.db :as db]
    [zdl.lex.env :as env :refer [getenv]]
    [zdl.lex.git :as git]
@@ -35,8 +38,7 @@
    [zdl.lex.qa :as qa]
    [zdl.lex.queue :as queue]
    [zdl.lex.schedule :as schedule]
-   [zdl.lex.util :refer [pr-edn-str]]
-   [zdl.lex.article :as article]))
+   [zdl.lex.util :refer [pr-edn-str]]))
 
 (def userbase
   (let [userbase-file (fs/file (getenv "USERBASE_FILE" ".htauth.csv"))]
@@ -169,8 +171,15 @@
 (def http-port
   (parse-long (getenv "HTTP_PORT" "3000")))
 
+(defn req->prometheus-path-label
+  [{:keys [uri]}]
+  (let [second-slash-idx (str/index-of uri "/" 1)]
+    (cond-> uri second-slash-idx (subs 0 second-slash-idx))))
+
 (def middleware
-  [#(buddy.auth.middleware/wrap-authentication % auth-backend)
+  [#(prometheus.ring/wrap-instrumentation % metrics/registry
+                                          {:path-fn req->prometheus-path-label})
+   #(buddy.auth.middleware/wrap-authentication % auth-backend)
    #(buddy.auth.middleware/wrap-authorization % auth-backend)
    #(buddy.auth.accessrules/wrap-access-rules % access-rules)
    {:name ::defaults
@@ -210,6 +219,7 @@
 
 (defmethod ig/init-key ::server
   [_ _]
+  (tel/with-ctx+ {::port http-port} (tel/event! ::http-server))
   (http-kit/run-server
    (reitit.ring/ring-handler
     (reitit.ring/router
@@ -292,6 +302,8 @@
                  :parameters {:path  [:map [:resource :string]]
                               :query [:map [:token :string]]}
                  :handler    lock/handle-remove-lock}}]
+      ["/metrics"
+       (fn [_] (prometheus.ring/metrics-response metrics/registry))]
       ["/oxygen/updateSite.xml"
        (constantly
         (->  (resp/response oxygen/update-descriptor)

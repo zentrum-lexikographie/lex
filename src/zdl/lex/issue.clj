@@ -11,7 +11,8 @@
    [tick.core :as t]
    [zdl.lex.env :refer [getenv]]
    [zdl.lex.index :as index]
-   [zdl.lex.metrics :as metrics]))
+   [zdl.lex.metrics :as metrics]
+   [iapetos.core :as prometheus]))
 
 (def api-url
   "https://mantis.dwds.de/mantis/api/soap/mantisconnect.php")
@@ -104,12 +105,9 @@
   ([page]
    (some-> (request-issues page) (seq) (lazy-cat (issues (inc page))))))
 
-(def sync-timer
-  (metrics/timer "mantis.sync"))
-
 (defn sync!
   []
-  (with-open [_ (metrics/timed! sync-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/mantis {:action "sync"})
    (let [threshold (System/currentTimeMillis)]
      (transduce
       (comp (filter :form) (map index/issue->doc) (partition-all 10000))

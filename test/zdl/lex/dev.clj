@@ -2,7 +2,7 @@
   (:require
    [babashka.fs :as fs]
    [clojure.java.process :as p]
-   [com.potetm.fusebox.retry :as retry :refer [with-retry delay-exp]]
+   [com.potetm.fusebox.retry :as retry :refer [delay-exp with-retry]]
    [integrant.core :as ig]
    [integrant.repl :as ig.repl]
    [nextjournal.clerk :as clerk]
@@ -18,12 +18,12 @@
    [zdl.lex.index :as index]
    [zdl.lex.oxygen.url-handler :as url-handler]
    [zdl.lex.server :as server]
+   [zdl.lex.ui.gpt :as gpt]
    [zdl.lex.ui.issue :as issue]
    [zdl.lex.ui.links :as links]
    [zdl.lex.ui.search :as search]
    [zdl.lex.ui.toolbar :as toolbar]
-   [zdl.lex.ui.util :as util]
-   [zdl.lex.ui.gpt :as gpt]))
+   [zdl.lex.ui.util :as util]))
 
 (def backend-start-retry
   (retry/init
