@@ -1,12 +1,19 @@
 name: zdl_lex
 services:
   index:
-    image: solr:9
+    image: ${CI_REGISTRY_IMAGE:-zdl}/index:${CI_COMMIT_SHORT_SHA:-latest}
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM solr:9
+        ADD --chown=8983:8983\
+            solr/managed-schema.xml\
+            /opt/solr/server/solr/configsets/_default/conf/managed-schema.xml
+        CMD ["solr-precreate", "articles"]
     volumes:
       - index:/var/solr
     ports:
       - "8983:8983"
-    command: [ "solr-precreate", "articles" ]
   db:
     image: ${CI_REGISTRY_IMAGE:-zdl}/db:${CI_COMMIT_SHORT_SHA:-latest}
     build:
@@ -45,14 +52,26 @@ services:
         target: /etc/rabbitmq/key.pem
     ports:
       - "5671:5671"
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus:/prometheus
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
   server:
     image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
     build:
-      context: .
+      dockerfile: Dockerfile.server
     environment:
       - "ZDL_LEX_SERVER_URL=http://localhost:3000"
       - "ZDL_LEX_SERVER_USER=admin"
       - "ZDL_LEX_SERVER_PASSWORD=admin"
+      - "ZDL_LEX_DB_HOST=db"
+      - "ZDL_LEX_QUEUE_HOST=queue"
+      - "ZDL_LEX_SOLR_URL=http://index:8983/solr/"
     volumes:
       - server:/data
     ports:
@@ -67,10 +86,25 @@ services:
       - '443:443'
       - '443:443/udp'
     tty: true
+  gpt:
+    image: ${CI_REGISTRY_IMAGE:-zdl}/gpt:${CI_COMMIT_SHORT_SHA:-latest}
+    build:
+      dockerfile: Dockerfile.gpt
+    environment:
+      - "ZDL_LEX_QUEUE_HOST=queue"
+  nlp:
+    image: ${CI_REGISTRY_IMAGE:-zdl}/nlp:${CI_COMMIT_SHORT_SHA:-latest}
+    build:
+      dockerfile: Dockerfile.nlp
+      secrets:
+        - source: gitup-netrc
+          target: gitup-netrc
+          mode: 0400
 volumes:
   index:
   db:
   queue:
+  prometheus:
   server:
 configs:
   db_config:
@@ -210,6 +244,20 @@ configs:
       cFWIf4LF8QEuTy+6/l4cnm1wibE+zZC1kdlmwT4i9eQ1jH36MK/C7lEPgUNQMWVV
       lesD3gsf/kz+T4WmnnHYaQbzLJy3neAdohtNPgIm0XFItMc94nOPMtW9V1e1
       -----END RSA PRIVATE KEY-----
+  prometheus_config:
+    content: |
+      global:
+        scrape_interval: 15s
+      scrape_configs:
+        - job_name: prometheus
+          scrape_interval: 5s
+          static_configs:
+            - targets:
+                - "localhost:9090"
+        - job_name: zdl_lex
+          static_configs:
+            - targets:
+                - "server:3000"
   caddy_config:
     content: |
       localhost {
@@ -217,3 +265,6 @@ configs:
               reverse_proxy server:3000
           }
       }
+secrets:
+  gitup-netrc:
+    environment: GITUP_NETRC

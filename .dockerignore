@@ -5,4 +5,7 @@
 oxygen/framework/rng/
 oxygen/plugin/lib/org.zdl.lex.client.jar
 oxygen/VERSION
+!requirements.nlp.txt
+!solr
 !src/
+!zdl_lex
