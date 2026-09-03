@@ -8,7 +8,8 @@
    [ring.util.response :as resp]
    [taoensso.telemere :as tel]
    [zdl.lex.env :refer [getenv]]
-   [zdl.lex.metrics :as metrics])
+   [zdl.lex.metrics :as metrics]
+   [iapetos.core :as prometheus])
   (:import
    (java.util.concurrent TimeUnit)
    (java.util.concurrent.locks ReentrantLock)))
@@ -85,30 +86,21 @@
       (catch Throwable t
         (throw (tel/error! ::git t))))))
 
-(def gc-timer
-  (metrics/timer "git.gc"))
-
 (defn gc!
   []
-  (with-open [_ (metrics/timed! gc-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/git {:action "gc"})
     (git! "gc" "--aggressive")))
-
-(def fetch-timer
-  (metrics/timer "git.fetch"))
 
 (defn fetch!
   []
   (when *origin*
-    (with-open [_ (metrics/timed! fetch-timer)]
+    (prometheus/with-duration (metrics/registry :zdl_lex/git {:action "fetch"})
       (git! "fetch" "--quiet" "origin" "--tags"))))
-
-(def push-timer
-  (metrics/timer "git.push"))
 
 (defn push!
   []
   (when (and *origin* *push?*)
-    (with-open [_ (metrics/timed! push-timer)]
+    (prometheus/with-duration (metrics/registry :zdl_lex/git {:action "push"})
       (git! "push" "--quiet" "origin" *branch*))))
 
 (defn add!
@@ -125,12 +117,9 @@
        (map #(str/replace % #"\"" ""))
        (map not-empty) (remove nil?)))
 
-(def status-timer
-  (metrics/timer "git.status"))
-
 (defn changed-paths
   []
-  (with-open [_ (metrics/timed! status-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/git {:action "status"})
     (some->> (git! "status" "-s" "--porcelain")
              str/split-lines
              (into [] (comp (map not-empty)
@@ -145,15 +134,13 @@
   []
   (when (dirty?) (throw (IllegalStateException. "Git dir is dirty."))))
 
-(def commit-timer
-  (metrics/timer "git.commit"))
-
 (defn commit!
   []
   (and (some->> (with-git
                   (let [paths (changed-paths)]
                     (when (seq paths)
-                      (with-open [_ (metrics/timed! commit-timer)]
+                      (prometheus/with-duration
+                          (metrics/registry :zdl_lex/git {:action "commit"})
                         (git! "commit" "-a" "-m" "zdl-lex-server"))
                       paths)))
                 (a/>!! changed-paths-ch))

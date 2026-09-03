@@ -61,8 +61,6 @@ in the sample file for a documentation of the available options. Example:
 # disconnect test setup from production origin
 ZDL_LEX_GIT_ORIGIN=
 
-ZDL_LEX_METRICS_REPORT_INTERVAL=1440
-
 ZDL_LEX_SERVER_URL=http://localhost:3000/
 ZDL_LEX_SERVER_USER=admin
 ZDL_LEX_SERVER_PASSWORD=admin

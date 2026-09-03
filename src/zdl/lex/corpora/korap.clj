@@ -25,7 +25,8 @@
      norm-str-set
      parse-date
      parse-year
-     pr-edn]])
+     pr-edn]]
+   [iapetos.core :as prometheus])
   (:import
    (de.ids_mannheim.korap.tokenizer DerekoDfaTokenizer_de)
    (opennlp.tools.util Span)))
@@ -105,13 +106,6 @@
         (assoc* :topics (norm-str-set (str->vals (match "textClass"))))
         (assoc* :availability (norm-str (match "availability"))))))
 
-(def timer
-  (metrics/timer "korap"))
-
-(def corpus-timer
-  {:dereko (metrics/timer "korap.dereko")
-   :deliko (metrics/timer "korap.deliko")})
-
 (def user-agent
   "zdl-lex/1.0 (https://www.dwds.de/)")
 
@@ -137,8 +131,8 @@
      (tel/with-ctx+ {::request req}
        (with-retry gateway-error-retry
          (with-rate-limit (rate-limit corpus)
-           (with-open [_ (metrics/timed! timer)
-                       _ (metrics/timed! (corpus-timer corpus))]
+           (prometheus/with-duration (metrics/registry :zdl_lex/korap
+                                                       {:corpus corpus})
              (tel/event! ::request :debug)
              (let [response @(hc/request req)]
                (tel/with-ctx+ {::response response}
@@ -405,7 +399,7 @@
 (comment
   (count (filter second lemma-terms))
   (tel/with-min-level :debug
-    (let [terms   (rand-nth (filter second lemma-terms))
+    (let [terms   ["Dach" "Welt"] #_(rand-nth (filter second lemma-terms))
           results (a/chan 1 (take 100))]
       (a/pipe (multi-term-query terms) results)
       (->>

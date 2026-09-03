@@ -1,6 +1,7 @@
 (ns zdl.lex.gpt
   (:require
    [clojure.string :as str]
+   [iapetos.core :as prometheus]
    [integrant.core :as ig]
    [jsonista.core :as json]
    [org.httpkit.client :as hc]
@@ -19,12 +20,6 @@
 
 (def gpt-model
   (getenv "MODEL" "llama33"))
-
-(def error-meter
-  (metrics/meter "gpt.errors"))
-
-(def completion-timer
-  (metrics/timer "gpt.completion"))
 
 (defn log-api-request
   [{:keys [error] :as response}]
@@ -80,13 +75,13 @@
 
 (defn handle
   [req]
-  (with-open [_ (metrics/timed! completion-timer)]
+  (prometheus/with-duration (metrics/registry :zdl_lex/gpt)
     (let [req  (json/read-value req)
           resp @(complete req)]
       (tel/with-ctx+ {::request req ::response resp}
         (tel/event! ::complete :debug)
         (when-let [error (resp :error)]
-          (metrics/metered! error-meter)
+          (prometheus/inc metrics/registry :zdl_lex/errors {:source "gpt"})
           (throw (tel/error! ::completion-error error)))
         (.getBytes ^String (resp :body) "UTF-8")))))
 
@@ -98,8 +93,7 @@
   {::queue/rpc-server {:queue "gpt" :handle echo}})
 
 (def main-config
-  {::metrics/reporter {}
-   ::queue/rpc-server {:queue "gpt" :handle handle :on-cancel exit}})
+  {::queue/rpc-server {:queue "gpt" :handle handle :on-cancel exit}})
 
 (defn -main
   [& _]
