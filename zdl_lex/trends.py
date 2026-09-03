@@ -3,11 +3,9 @@ from collections import Counter
 
 import numpy
 import scipy.stats
-
 from zdl_nlp.annotate import create_pipe
 from zdl_nlp.conllu import lemma_text
 from zdl_nlp.segment import segment
-
 
 nlp = create_pipe(batch_size=8, n_procs=2)
 
@@ -17,7 +15,7 @@ def extract_tokens(chunks):
     token_freqs = Counter()
     for s in nlp(segment(*chunks)):
         entities = json.loads(s.metadata.get("entities", "[]"))
-        entities = set((id for e in entities for id in e[1:]))
+        entities = {id for e in entities for id in e[1:]}
         for t in s:
             token_count += 1
             if t["id"] in entities:
@@ -33,9 +31,4 @@ def metrics(freqs):
     y = numpy.array(freqs)
     slope, intercept, *_ = scipy.stats.theilslopes(y, x)
     tau, p_value = scipy.stats.kendalltau(x, y)
-    return {
-        "slope": slope,
-        "intercept": intercept,
-        "tau": tau,
-        "p-value": p_value
-    }
+    return {"slope": slope, "intercept": intercept, "tau": tau, "p-value": p_value}
