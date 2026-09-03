@@ -11,7 +11,7 @@ build:
     - docker compose build
     - docker compose push
   only:
-    - main
+    - production
   tags:
     - zdl
     - build
@@ -23,7 +23,7 @@ deploy-labor:
     - docker compose -f compose.labor.yml down --remove-orphans
     - docker compose -f compose.labor.yml up -d
   only:
-    - main
+    - production
   tags:
     - labor.dwds.de
     - shell
@@ -35,7 +35,7 @@ deploy-gpt:
     - docker compose -f compose.gpt.yml down --remove-orphans
     - docker compose -f compose.gpt.yml up -d
   only:
-    - main
+    - production
   tags:
     - zdl-gpu01.bbaw.de
     - shell
