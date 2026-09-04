@@ -54,7 +54,7 @@ dwdswb:
     - if: $CI_PIPELINE_SOURCE == "schedule"
   image: python:3.13
   script:
-    - pip install --root-user-action ignore -r requirements.txt
+    - pip install --root-user-action ignore -r requirements/dwdswb.txt
     - python -m zdl_lex.wb.package
   tags:
     - zdl
