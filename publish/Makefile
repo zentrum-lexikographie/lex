@@ -133,6 +133,9 @@ dwdswb-update: dwdswb-backup
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.lemma;"
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.relation;"
 	$(mysql) -e "SELECT COUNT(*) FROM dwdswb_beta.token;"
+	# additional indexes
+	$(mysql) -e "ALTER TABLE lemma ADD COLUMN lemma_ci VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci GENERATED ALWAYS AS (lemma) VIRTUAL, ADD INDEX idx_lemma_ci (lemma_ci);" dwdswb_beta
+	$(mysql) -e "ALTER TABLE token ADD COLUMN token_ci VARCHAR(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci GENERATED ALWAYS AS (token) VIRTUAL, ADD INDEX idx_token_ci (token_ci);" dwdswb_beta
 	# determine lemma difference
 	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb > backup/dwdswb.current
 	$(mysql) -B -N -e "SELECT lemma, hidx FROM dwdswb_beta.lemma ORDER BY lemma, BINARY(lemma), hidx;" dwdswb_beta > backup/dwdswb.new
