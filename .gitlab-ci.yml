@@ -1,8 +1,24 @@
+cuda:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: docker:29.6.2
+  services:
+    - docker:29.6.2-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+  script:
+    - docker build -f Dockerfile.cuda -t ${CI_REGISTRY_IMAGE}/cuda:debian13-cuda13 .
+    - docker push ${CI_REGISTRY_IMAGE}/cuda:debian13-cuda13
+  tags:
+    - zdl
+    - build
+
 build:
   stage: build
-  image: docker:29
+  image: docker:29.6.2
   services:
-    - docker:29-dind
+    - docker:29.6.2-dind
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
@@ -16,9 +32,9 @@ build:
 
 deploy-labor:
   stage: deploy
-  image: docker:29
+  image: docker:29.6.2
   services:
-    - docker:29-dind
+    - docker:29.6.2-dind
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
@@ -33,9 +49,9 @@ deploy-labor:
 
 deploy-gpt:
   stage: deploy
-  image: docker:29
+  image: docker:29.6.2
   services:
-    - docker:29-dind
+    - docker:29.6.2-dind
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
