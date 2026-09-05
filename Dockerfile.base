@@ -1,0 +1,58 @@
+FROM debian:trixie AS cuda
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg curl ca-certificates && \
+    curl -fsSLO  https://developer.download.nvidia.com/compute/cuda/repos/debian13/x86_64/cuda-keyring_1.1-1_all.deb && \
+    dpkg -i cuda-keyring_1.1-1_all.deb && \
+    apt-get purge --autoremove -y curl \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cuda-cudart-13-3 \
+    cuda-compat-13-3 \
+    && rm -rf /var/lib/apt/lists/*
+
+ENV PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/local/cuda/lib64
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+FROM cuda AS python
+
+RUN apt-get update && \
+    apt-get install -y \
+    git \
+    python3-full \
+    python3-pip \
+    python3-dev \
+    python-is-python3 && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN python3 -m venv /venv
+
+ENV PATH="/venv/bin:$PATH"
+
+FROM python AS clojure
+
+# https://github.com/Quantisan/docker-clojure/blob/master/target/debian-trixie-slim-26/tools-deps/Dockerfile
+
+ENV JAVA_HOME=/opt/java/openjdk
+COPY --from=eclipse-temurin:26 $JAVA_HOME $JAVA_HOME
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+ENV CLOJURE_VERSION=1.12.5.1664
+
+WORKDIR /tmp
+
+RUN \
+    apt-get update && \
+    apt-get install -y curl make git rlwrap && \
+    rm -rf /var/lib/apt/lists/* && \
+    curl -fsSLO https://download.clojure.org/install/linux-install-$CLOJURE_VERSION.sh && \
+    sha256sum linux-install-$CLOJURE_VERSION.sh && \
+    echo "fb2f0ce23373d64bb4f13fce2ce2924c54ee0c033755357900808a1250621d82 *linux-install-$CLOJURE_VERSION.sh" | sha256sum -c - && \
+    chmod +x linux-install-$CLOJURE_VERSION.sh && \
+    ./linux-install-$CLOJURE_VERSION.sh && \
+    rm linux-install-$CLOJURE_VERSION.sh && \
+    clojure -e "(clojure-version)" && \
+    apt-get purge -y --auto-remove curl

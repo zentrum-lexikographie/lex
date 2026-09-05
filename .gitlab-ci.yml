@@ -1,4 +1,4 @@
-cuda:
+base:
   stage: build
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
@@ -8,8 +8,11 @@ cuda:
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
-    - docker build -f Dockerfile.cuda -t ${CI_REGISTRY_IMAGE}/cuda:debian13-cuda13 .
-    - docker push ${CI_REGISTRY_IMAGE}/cuda:debian13-cuda13
+    - >
+      for target in "cuda" "python" "clojure"; do
+          docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
+          docker push ${CI_REGISTRY_IMAGE}/$target:debian13
+      done
   tags:
     - zdl
     - build
