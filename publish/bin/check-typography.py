@@ -100,6 +100,8 @@ legal = (
         'Jede:r',
         'seine:n',
         '[A-ZÖÜÄ][^\s]+:in(nen)?', # Journalist:innen
+        'Sinti:ze',
+        'Rom:nja',
         # stuff
         'verni’sa:z\(e\)',
         '\(re’ve:r\)',
