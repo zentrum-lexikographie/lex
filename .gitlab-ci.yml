@@ -10,12 +10,49 @@ base:
   script:
     - >
       for target in "cuda" "python" "clojure"; do
-          docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
-          docker push ${CI_REGISTRY_IMAGE}/$target:debian13
+        docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
+        docker push ${CI_REGISTRY_IMAGE}/$target:debian13
       done
   tags:
     - zdl
     - build
+
+dwdswb:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: python:3.13
+  script:
+    - pip install --root-user-action ignore -r requirements/dwdswb.txt
+    - python -m zdl_lex.wb.package
+  tags:
+    - zdl
+    - build
+
+spacy-models:
+  stage: build
+  needs:
+    - base
+    - dwdswb
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: ${CI_REGISTRY_IMAGE}/python:debian13
+  variables:
+    TWINE_REPO: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi"
+    TWINE_USERNAME: "gitlab-ci-token"
+    TWINE_PASSWORD: "${CI_JOB_TOKEN}"
+  before_script:
+    - echo -e "machine gitup.uni-potsdam.de login gitlab-ci-token password ${CI_JOB_TOKEN}" > ~/.netrc
+  script:
+    - >
+      for module in "dwdsmor" "dwdswb" "spacy" "spacy-gpu" "spacy-models-build"; do
+        pip install --root-user-action ignore -r requirements/${module}.txt
+      done
+    - python -m zdl_lex.spacy.models.build
+  tags:
+    - zdl
+    - build
+    - gpu
 
 build:
   stage: build
@@ -66,15 +103,3 @@ deploy-gpt:
   tags:
     - zdl-gpu01.bbaw.de
     - shell
-
-dwdswb:
-  stage: deploy
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-  image: python:3.13
-  script:
-    - pip install --root-user-action ignore -r requirements/dwdswb.txt
-    - python -m zdl_lex.wb.package
-  tags:
-    - zdl
-    - build

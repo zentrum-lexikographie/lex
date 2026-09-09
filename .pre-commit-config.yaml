@@ -18,3 +18,4 @@ repos:
   rev: v2.3.1
   hooks:
     - id: mypy
+exclude: ner-d\.[a-z]+\.tsv.bz2

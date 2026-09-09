@@ -1,0 +1,2 @@
+spacy_transformers
+cupy-cuda13x

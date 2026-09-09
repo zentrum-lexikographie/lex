@@ -1,0 +1,2 @@
+--extra-index-url https://gitup.uni-potsdam.de/api/v4/projects/21585/packages/pypi/simple
+dwdsmor-dwds

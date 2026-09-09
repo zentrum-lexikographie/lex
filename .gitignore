@@ -21,3 +21,8 @@
 /public/
 /publish/backup
 /wb/
+
+zdl_lex/spacy/models/build/configs/
+zdl_lex/spacy/models/build/packages/
+zdl_lex/spacy/models/build/training/
+zdl_lex/spacy/models/datasets/*.spacy
