@@ -1,14 +1,15 @@
 import gzip
+import re
 import tarfile
 from functools import cache
 from io import BytesIO
-from os import environ
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 import requests
-from gitlab import Gitlab
 from lxml import etree as ET
+
+from ..env import dwdswb_project, dwdswb_project_id, dwdswb_token, gitup_url
 
 ns = "http://www.dwds.de/ns/1.0"
 ns_mapping = {"d": ns}
@@ -42,16 +43,10 @@ def rename_xml_id_attr(el):
         del el.attrib[xml_id]
 
 
-env_gitup_url = environ.get("ZDL_LEX_GITUP_URL", "https://gitup.uni-potsdam.de")
-env_project_id = int(environ.get("ZDL_LEX_GITUP_DWDSWB_PROJECT_ID", "21451"))
-env_private_token = environ.get("ZDL_LEX_GITUP_DWDSWB_TOKEN")
-env_job_token = environ.get("CI_JOB_TOKEN") if env_private_token is None else None
-
-
 def git(sha=None, all=False, raw_data=False):
-    url = f"{env_gitup_url}/api/v4/projects/{env_project_id}/repository/archive"
+    url = f"{gitup_url}/api/v4/projects/{dwdswb_project_id}/repository/archive"
     params = {"sha": sha} if sha else {}
-    headers = {"PRIVATE-TOKEN": env_private_token}
+    headers = {"PRIVATE-TOKEN": dwdswb_token}
     r = requests.get(url, params=params, headers=headers, stream=True)
     r.raise_for_status()
     temp_archive_file = None
@@ -84,22 +79,19 @@ def git(sha=None, all=False, raw_data=False):
             Path(temp_archive_file).unlink()
 
 
-def project():
-    gitup = Gitlab(
-        env_gitup_url, private_token=env_private_token, job_token=env_job_token
-    )
-    return gitup.projects.get(env_project_id, lazy=True)
+version_tag_re = re.compile(r"^\d{4}-\d{2}-\d{2}[a-z]*$")
 
 
 def tags():
-    tags = project().tags.list(get_all=True)
+    tags = dwdswb_project().tags.list(get_all=True)
     tags = (t.get_id() for t in tags)
+    tags = (t for t in tags if version_tag_re.match(t))
     tags = sorted(tags, reverse=True)
     return tags
 
 
 def versions():
-    packages = project().packages.list(package_type="generic", get_all=True)
+    packages = dwdswb_project().packages.list(package_type="generic", get_all=True)
     versions = (
         p.attributes["version"] for p in packages if p.attributes["name"] == "dwdswb"
     )
@@ -108,7 +100,7 @@ def versions():
 
 
 def upload(version, path):
-    project().generic_packages.upload(
+    dwdswb_project().generic_packages.upload(
         package_name="dwdswb",
         package_version=version,
         file_name="dwdswb.xml.gz",
@@ -119,7 +111,7 @@ def upload(version, path):
 def download(version=None):
     if version is None:
         version, *_ = versions()
-    content = project().generic_packages.download(
+    content = dwdswb_project().generic_packages.download(
         package_name="dwdswb", package_version=version, file_name="dwdswb.xml.gz"
     )
     with gzip.open(BytesIO(content)) as gf:
