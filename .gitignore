@@ -22,7 +22,12 @@
 /publish/backup
 /wb/
 
-zdl_lex/spacy/models/build/configs/
-zdl_lex/spacy/models/build/packages/
-zdl_lex/spacy/models/build/training/
-zdl_lex/spacy/models/datasets/*.spacy
+zdl_lex/sbert/model/build/
+zdl_lex/sbert/model/de_zdl_sbert/
+zdl_lex/sbert/model/de_zdl_sbert.egg-info/
+zdl_lex/sbert/model/dist/
+
+zdl_lex/spacy/build/configs/
+zdl_lex/spacy/build/packages/
+zdl_lex/spacy/build/training/
+zdl_lex/spacy/datasets/*.spacy

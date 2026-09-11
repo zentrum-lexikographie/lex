@@ -1,21 +1,21 @@
-base:
-  stage: build
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-  image: docker:29.6.2
-  services:
-    - docker:29.6.2-dind
-  before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-  script:
-    - >
-      for target in "cuda" "python" "clojure"; do
-        docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
-        docker push ${CI_REGISTRY_IMAGE}/$target:debian13
-      done
-  tags:
-    - zdl
-    - build
+# base:
+#   stage: build
+#   rules:
+#     - if: $CI_PIPELINE_SOURCE == "schedule"
+#   image: docker:29.6.2
+#   services:
+#     - docker:29.6.2-dind
+#   before_script:
+#     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+#   script:
+#     - >
+#       for target in "cuda" "python" "clojure"; do
+#         docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
+#         docker push ${CI_REGISTRY_IMAGE}/$target:debian13
+#       done
+#   tags:
+#     - zdl
+#     - build
 
 dwdswb:
   stage: build
@@ -32,7 +32,7 @@ dwdswb:
 spacy-models:
   stage: build
   needs:
-    - base
+    # - base
     - dwdswb
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
@@ -45,10 +45,36 @@ spacy-models:
     - echo -e "machine gitup.uni-potsdam.de login gitlab-ci-token password ${CI_JOB_TOKEN}" > ~/.netrc
   script:
     - >
-      for module in "dwdsmor" "dwdswb" "spacy" "spacy-gpu" "spacy-models-build"; do
+      for module in "build" "dwdsmor" "dwdswb" "spacy" "spacy-gpu"; do
         pip install --root-user-action ignore -r requirements/${module}.txt
       done
-    - python -m zdl_lex.spacy.models.build
+    - python -m zdl_lex.spacy.build
+  tags:
+    - zdl
+    - build
+    - gpu
+
+sbert-model:
+  stage: build
+  needs:
+    # - base
+    - dwdswb
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: ${CI_REGISTRY_IMAGE}/python:debian13
+  variables:
+    CUDA_VISIBLE_DEVICES: "1"
+    TWINE_REPO: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi"
+    TWINE_USERNAME: "gitlab-ci-token"
+    TWINE_PASSWORD: "${CI_JOB_TOKEN}"
+  before_script:
+    - echo -e "machine gitup.uni-potsdam.de login gitlab-ci-token password ${CI_JOB_TOKEN}" > ~/.netrc
+  script:
+    - >
+      for module in "build" "dwdswb" "sbert" "sbert-train"; do
+        pip install --root-user-action ignore -r requirements/${module}.txt
+      done
+    - python -m zdl_lex.sbert.build
   tags:
     - zdl
     - build

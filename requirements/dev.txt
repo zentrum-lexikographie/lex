@@ -1,3 +1,5 @@
 mypy
 pre-commit
+rassumfrassum
 ruff
+ty

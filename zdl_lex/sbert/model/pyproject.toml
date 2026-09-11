@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "de-zdl-sbert"
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+version = {attr = "de_zdl_sbert.version.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+de_zdl_sbert = ["data/*", "data/*/*"]
