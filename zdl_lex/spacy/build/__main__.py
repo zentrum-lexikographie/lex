@@ -12,14 +12,15 @@ from spacy.cli.init_config import init_config
 from spacy.cli.package import package
 from spacy.cli.train import train
 
-import zdl_lex.spacy.models.datasets.dwdswb
-import zdl_lex.spacy.models.datasets.hdt
-import zdl_lex.spacy.models.datasets.ner_d
+import zdl_lex.spacy.datasets.dwdswb
+import zdl_lex.spacy.datasets.hdt
+import zdl_lex.spacy.datasets.ner_d
 import zdl_lex.wb
 from zdl_lex.env import lex_project, logger
+from zdl_lex.util import monthly_release
 
 dwdswb_version, *_ = zdl_lex.wb.versions()
-version = dwdswb_version[:7].replace("-", ".")
+version = monthly_release(dwdswb_version)
 packages = lex_project().packages.list(package_type="pypi")
 for p in packages:
     if p.attributes["name"] not in {"de-zdl-dist", "de-zdl-lg"}:
@@ -66,7 +67,7 @@ def configure_base(gpu, component_names, base_model):
 
 def configure_lemmatizer(gpu, component_names, base_model):
     nlp = spacy.load(base_model)
-    zdl_lex.spacy.models.datasets.dwdswb.prepare(dwdswb_version, nlp)
+    zdl_lex.spacy.datasets.dwdswb.prepare(dwdswb_version, nlp)
 
     if not gpu:
         # retrain lemmatizer with CPU-optimized defaults
@@ -152,8 +153,8 @@ except OSError:
     logger.info(f"spaCy base model '{base_model}' downloaded")
 
 logger.info("Preparing datasets")
-zdl_lex.spacy.models.datasets.hdt.prepare()
-zdl_lex.spacy.models.datasets.ner_d.prepare()
+zdl_lex.spacy.datasets.hdt.prepare()
+zdl_lex.spacy.datasets.ner_d.prepare()
 
 for gpu in (True, False):
     model_type = "GPU" if gpu else "CPU"
@@ -173,12 +174,8 @@ for gpu in (True, False):
             continue
 
         config = stage.configure(gpu, component_names, model)
-        config["paths"]["train"] = (
-            f"zdl_lex/spacy/models/datasets/{stage.corpus}.train.spacy"
-        )
-        config["paths"]["dev"] = (
-            f"zdl_lex/spacy/models/datasets/{stage.corpus}.dev.spacy"
-        )
+        config["paths"]["train"] = f"zdl_lex/spacy/datasets/{stage.corpus}.train.spacy"
+        config["paths"]["dev"] = f"zdl_lex/spacy/datasets/{stage.corpus}.dev.spacy"
         config["training"]["max_steps"] = max_steps
         if model:
             config["initialize"]["before_init"] = {
