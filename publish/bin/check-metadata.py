@@ -34,6 +34,10 @@ for entry, path in wb:
     if arguments.subset == 'recent' and not wb.recently_modified(path):
         continue
 
+    # entry level metadata
+    if entry.get('Autor', '') == entry.get('Redakteur', '') != '':
+        wb.report(entry, path, "@Autor == @Redakteur", not(arguments.path))
+
     headwords = wb.get_headwords(entry)
 
     # Wahrig … special
