@@ -163,7 +163,9 @@ Bedeutungsgeschichte:before                         { content: "Bedeutungsgeschi
 Diachronie>Verweise:before                          { content: "Querverweise: "; }
 Verweise>Verweis[Typ="EtymWB"]:before               { content: "im EtymWB als ↗"; }
 Verweise>Verweis[Typ="eWDG"]:before                 { content: "im (e)WDG als ↗"; }
-Verweise>Verweis[Typ="WGd"]:before                  { content: "bei Wortgeschichte digital als ↗"; }
+Verweise>Verweis[Typ="WGd"]:before                  { content: "in Wortgeschichte digital als ↗"; }
+Verweise>Verweis[Typ="Wahrig"]:before               { content: "in Wahrig als ↗"; }
+Verweise>Verweis[Typ="Sprachlehre"]:before          { content: "siehe auch Wahrigs Sprachlehre ↗"; }
 Verweise>Verweis[Typ="Assoziation"]:before          { content: "assoziativ verbunden mit ↗"; }
 Verweise>Verweis[Typ="MWA"]:before                  { content: "auch in MWA ↗"; }
 Verweise>Verweis[Typ="MWA-Zentralartikel"]:before   { content: "MWA-Zentralartikel ↗"; }
