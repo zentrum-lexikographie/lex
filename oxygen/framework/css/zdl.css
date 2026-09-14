@@ -42,7 +42,9 @@ Orthografie {
 
 /* untergeordnete Blöcke, die als schmalere »Kästen« dargestellt werden */
 
-Genitiv, Plural, Praesens, Praeteritum, Auxiliar, Partizip_II, Positivvariante, Komparativ, Superlativ, Ersatzplural {
+Genitiv, Plural, Ersatzplural,
+Praesens, Praeteritum, Auxiliar, Partizip_II, 
+Positivvariante, Komparativ, Ersatzkomparativ, Superlativ, Ersatzsuperlativ {
 	border-top: 1px dotted #999;
 	/*border-bottom: 1px dotted #999;*/
 	padding: 0em;
@@ -146,7 +148,9 @@ Kasuspraeferenz:before                              { content: "Kasuspräferenz:
 reflexiv:before                                     { content: "reflexiv"; }
 Positivvariante:before                              { content: "Positivvariante: "; }
 Komparativ:before                                   { content: "Komparativ: "; }
+Ersatzkomparativ:before                             { content: "Ersatzkomparativ: "; }
 Superlativ:before                                   { content: "Superlativ: "; }
+Ersatzsuperlativ:before                             { content: "Ersatzsuperlativ: "; }
 Komparationspraeferenz:before                       { content: "Komparationspräferenz: "; }
 indeklinabel:before                                 { content: "indeklinabel"; }
 Funktionspraeferenz:before                          { content: "Funktionspräferenz: "; }

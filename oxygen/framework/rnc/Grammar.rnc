@@ -252,6 +252,24 @@ Superlativ = element Superlativ {
         , Diasystematik ?
 }
 
+Ersatzkomparativ = element Ersatzkomparativ {
+	element Wert {
+		Rechtschreibstatus ?
+		, Lemmatoken
+	}
+	,Frequenzangabe ?
+        , Diasystematik ?
+}
+
+Ersatzsuperlativ = element Ersatzsuperlativ {
+	element Wert {
+		Rechtschreibstatus ?
+		, Lemmatoken
+	}
+	,Frequenzangabe ?
+        , Diasystematik ?
+}
+
 grammatische_Angaben = (
 	element indeklinabel { empty } ?
 	, element Genus {
@@ -280,7 +298,9 @@ grammatische_Angaben = (
 	, (
         	Positivvariante ?
 		, Komparativ *
+		, Ersatzkomparativ *
 		, Superlativ *
+		, Ersatzsuperlativ *
 		, element Komparationspraeferenz {
 			'ohne Steigerung'
 			| 'Steigerung selten'
