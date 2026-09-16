@@ -124,7 +124,8 @@
                              "offset"       (str offset)
                              "count"        "50"
                              "fields"       "@all"
-                             "show-snippet" "true"}}
+                             "show-snippet" "true"}
+              :idle-timeout 300000}
          req (cond-> req
                cq (assoc-in [:query-params "cq"] cq)
                at (assoc :oauth-token at))]
@@ -199,12 +200,12 @@
   [{:keys [text] :as match}]
   (let [segments  (map-indexed vector (str/split text #"</?t>"))
         [s hit?]  (reduce
-                  (fn [[s hit?] [n segment]]
-                    [(str s segment)
-                     (cond-> hit?
-                       (odd? n) (into (range (count s)
-                                             (+ (count s) (count segment)))))])
-                  ["" #{}] segments)
+                   (fn [[s hit?] [n segment]]
+                     [(str s segment)
+                      (cond-> hit?
+                        (odd? n) (into (range (count s)
+                                              (+ (count s) (count segment)))))])
+                   ["" #{}] segments)
         sentences (locking tokenizer
                     (->> (.sentPosDetect tokenizer s)
                          (partition-all 2 1)
@@ -397,9 +398,27 @@
               (a/close! examples))))))))
 
 (comment
+  (->>
+   @(hc/request {:method       :get
+                 :url          "https://korap.dnb.de/api/v1.0/search"
+                 :headers      {"User-Agent" "zdl-lex/1.0 (https://www.dwds.de/)"}
+                 :query-params {"ql"           "cosmas2"
+                                "q"            "(&Haufen or Haufen) /s0 (&machen or machen)"
+                                "context"      "sentence"
+                                "offset"       "0"
+                                "count"        "50"
+                                "fields"       "@all"
+                                "show-snippet" "true"}
+                 :idle-timeout 300000})
+   (time) (with-out-str))
+  ;; => "\"Elapsed time: 264371.217671 msecs\"\n"
+
+
   (count (filter second lemma-terms))
   (tel/with-min-level :debug
-    (let [terms   ["Dach" "Welt"] #_(rand-nth (filter second lemma-terms))
+    (take 100 (request :deliko "(&Haufen or Haufen) /s0 (&machen or machen)")))
+  (tel/with-min-level :debug
+    (let [terms   (rand-nth (filter second lemma-terms))
           results (a/chan 1 (take 100))]
       (a/pipe (multi-term-query terms) results)
       (->>
