@@ -106,6 +106,10 @@ $ clojure -T:build start-editor
 
     clojure -M:test -m zdl.lex.dev.test-data $DWDS_WB_GIT_DIR
 
+### Analyze TEI schema
+
+    clojure -X:tei-schema >src/zdl/lex/corpora/tei-schema.json
+
 # Custom spaCy Models
 
 _German spaCy models trained on UD-HDT and custom datasets for NER and lemmatization_

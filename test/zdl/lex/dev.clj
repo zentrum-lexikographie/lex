@@ -12,6 +12,7 @@
    [taoensso.telemere :as tel]
    [zdl.lex.article :as article]
    [zdl.lex.client :as client]
+   [zdl.lex.corpora.sources :as corpora.sources]
    [zdl.lex.db :as db]
    [zdl.lex.git :as git]
    [zdl.lex.gpt]
@@ -80,6 +81,18 @@
     (f)
     (finally
       (index/clear!))))
+
+(defn mount-corpus-sources
+  []
+  (when-not (.isDirectory corpora.sources/dir) (fs/create-dirs corpora.sources/dir))
+  (when-not (seq (fs/list-dir corpora.sources/dir))
+    (p/exec "sshfs" "nlp@ddc-build.bbaw.de:/home/ddc-dstar/dstar/sources"
+            (str corpora.sources/dir) "-o" "ro")))
+
+(defn umount-corpus-sources
+  []
+  (when (seq (fs/list-dir corpora.sources/dir))
+    (p/exec "umount" (str corpora.sources/dir))))
 
 (url-handler/install-stream-handler!)
 
