@@ -1,7 +1,5 @@
 --extra-index-url https://gitup.uni-potsdam.de/api/v4/projects/21675/packages/pypi/simple
-conllu
-de_zdl_lg
-lingua-language-detector
-SoMaJo
-scikit-learn
-spacy
+de_zdl_dist
+de_zdl_sbert
+spacy_transformers
+cupy-cuda13x

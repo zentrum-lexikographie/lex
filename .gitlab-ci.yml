@@ -1,21 +1,21 @@
-# base:
-#   stage: build
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == "schedule"
-#   image: docker:29.6.2
-#   services:
-#     - docker:29.6.2-dind
-#   before_script:
-#     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
-#   script:
-#     - >
-#       for target in "cuda" "python" "clojure"; do
-#         docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
-#         docker push ${CI_REGISTRY_IMAGE}/$target:debian13
-#       done
-#   tags:
-#     - zdl
-#     - build
+base:
+  stage: build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  image: docker:29.6.2
+  services:
+    - docker:29.6.2-dind
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+  script:
+    - >
+      for target in "cuda" "python" "clojure"; do
+        docker build -f Dockerfile.base --target $target -t ${CI_REGISTRY_IMAGE}/$target:debian13 .
+        docker push ${CI_REGISTRY_IMAGE}/$target:debian13
+      done
+  tags:
+    - zdl
+    - build
 
 dwdswb:
   stage: build
@@ -32,7 +32,7 @@ dwdswb:
 spacy-models:
   stage: build
   needs:
-    # - base
+    - base
     - dwdswb
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
@@ -57,7 +57,7 @@ spacy-models:
 sbert-model:
   stage: build
   needs:
-    # - base
+    - base
     - dwdswb
   rules:
     - if: $CI_PIPELINE_SOURCE == "schedule"
