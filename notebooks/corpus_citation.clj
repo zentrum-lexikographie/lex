@@ -12,7 +12,12 @@
 (defn parse-cite-ref
   [s]
   (when (str/starts-with? s "dwds:")
-    (some-> s (str/split #":") (second) (str/replace #"_regional$" "") (list))))
+    (some-> s (str/split #":") (second)
+            (str/replace #"_((regional)|(primarily)|(secondarily))$" "")
+            (str/replace #"^korpus21$" "kernbasis")
+            (str/replace #"^spiegel_print$" "spie")
+            (str/replace #"^tagesspiegel$" "tsp")
+            (list))))
 
 (def citations
   (binding [git/*dir* (fs/file (System/getProperty "user.home") "data" "zdl" "wb")]
@@ -37,20 +42,10 @@
 (def corpus-infos
   (into (sorted-map) (v/pmap! corpus-info (dstar/corpora))))
 
-(def norm-corpus
-  {"apa"                   "at_nachrichten"
-   "kernbasis"             "kernbasis"
-   "kernbasis_secondarily" "kernbasis"
-   "kernbasis_primarily"   "kernbasis"
-   "korpus21"              "kernbasis"
-   "tagesspiegel"          "tsp"
-   "spiegel_print"         "spie"})
-
 (->> citations
      (keep (fn [[corpus citations]]
-            (let [corpus (get norm-corpus corpus corpus)]
-              (when-let [info (get corpus-infos corpus)]
-                [(info :desc) (float (/ (* citations 1000000) (info :ntokens)))]))))
+             (when-let [info (get corpus-infos corpus)]
+               [(info :desc) (float (/ (* citations 1000000) (info :ntokens)))])))
      (sort-by (comp - last))
      (cons ["Corpus" "Citations per Million Tokens"])
      (clerk/use-headers)
