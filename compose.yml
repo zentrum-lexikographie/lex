@@ -4,12 +4,7 @@ services:
     image: ${CI_REGISTRY_IMAGE:-zdl}/index:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
-      dockerfile_inline: |
-        FROM solr:9
-        ADD --chown=8983:8983\
-            solr/managed-schema.xml\
-            /opt/solr/server/solr/configsets/_default/conf/managed-schema.xml
-        CMD ["solr-precreate", "articles"]
+      dockerfile: Dockerfile.index
     volumes:
       - index:/var/solr
     ports:

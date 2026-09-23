@@ -88,10 +88,10 @@ build:
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
   script:
-    - docker compose build
-    - docker compose push
+    - docker compose build index server
+    - docker compose push index server
   only:
-    - production
+    - main
   tags:
     - zdl
     - build
