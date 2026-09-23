@@ -47,7 +47,7 @@ services:
     ports:
       - "5671:5671"
   server:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/server:${CI_COMMIT_SHORT_SHA:-latest}
     environment:
       # - "GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -i /data/.ssh/id_rsa"
       - "ZDL_LEX_DB_PASSWORD=${ZDL_LEX_DB_PASSWORD}"

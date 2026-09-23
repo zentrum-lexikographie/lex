@@ -22,7 +22,7 @@ services:
               count: 1
               capabilities: [gpu]
   gateway:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/gpt:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/gpt:${CI_COMMIT_SHORT_SHA:-latest}
     restart: unless-stopped
     environment:
       - "ZDL_LEX_DEBUG=1"

@@ -1,7 +1,7 @@
 name: zdl_lex
 services:
   index:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/index:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/index:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
       dockerfile: Dockerfile.index
@@ -10,7 +10,7 @@ services:
     ports:
       - "8983:8983"
   db:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/db:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/db:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       context: .
       dockerfile_inline: |
@@ -57,7 +57,7 @@ services:
     ports:
       - "9090:9090"
   server:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/lex:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/server:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       dockerfile: Dockerfile.server
     environment:
@@ -82,13 +82,13 @@ services:
       - '443:443/udp'
     tty: true
   gpt:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/gpt:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/gpt:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       dockerfile: Dockerfile.gpt
     environment:
       - "ZDL_LEX_QUEUE_HOST=queue"
   nlp:
-    image: ${CI_REGISTRY_IMAGE:-zdl}/nlp:${CI_COMMIT_SHORT_SHA:-latest}
+    image: ${CI_REGISTRY_IMAGE:-lex}/nlp:${CI_COMMIT_SHORT_SHA:-latest}
     build:
       dockerfile: Dockerfile.nlp
       secrets:
